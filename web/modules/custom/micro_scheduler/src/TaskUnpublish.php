@@ -68,6 +68,8 @@ class TaskUnpublish {
       if($siteOutdated->setUnpublished()->save()) {
         $negotiator->setActiveSite($siteOutdated);
         $langcode = 'fr';
+        $microAdminTo = $this->_getMicroSiteAdminMailTo($siteOutdated);
+
         \Drupal::logger('micro_scheduler')->info('The micro_site named : @site_name has been unpublished because is outdated',
           ['@site_name' => $siteOutdated->getName()]);
 
@@ -75,7 +77,7 @@ class TaskUnpublish {
         $langcode,
         ['message' => \Drupal::token()->replace($adminMailMessage), 'subject' => \Drupal::token()->replace($adminMailSubject)]);
 
-        \Drupal::service('plugin.manager.mail')->mail('micro_scheduler', 'site_unpublished', $adminTo ,
+        \Drupal::service('plugin.manager.mail')->mail('micro_scheduler', 'site_unpublished', $microAdminTo ,
           $langcode,
           ['message' => \Drupal::token()->replace($siteAdminMailMessage), 'subject' => \Drupal::token()->replace($siteAdminMailSubject)]);
       }
