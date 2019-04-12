@@ -1,0 +1,55 @@
+uuid: 7974a34b-8ae4-4917-abb8-55ac69a4070c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media.type.file
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - views
+_core:
+  default_config_hash: UoGZLPH_DEy28wDjCYqiBKYsKoHlf6l6deygJjqdgPc
+name: media_entity_browser
+label: 'Document Browser'
+display: modal
+display_configuration:
+  width: '1070'
+  height: '840'
+  link_text: 'Select entities'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  6586703a-6976-4124-8a49-cbb07ceaa3b1:
+    settings:
+      view: media_entity_browser
+      view_display: document
+      submit_text: Sélectionner
+      auto_select: false
+    uuid: 6586703a-6976-4124-8a49-cbb07ceaa3b1
+    weight: 1
+    label: 'Liste des documents'
+    id: view
+  f128d2a4-05fa-4fcd-bd27-ecdba5a98360:
+    settings:
+      form_mode: default
+      media_type: file
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Déposer les fichiers ici pour les téléverser'
+      max_filesize: 5M
+      extensions: 'txt doc docx xls xlsx pdf ppt pptx pps odt ods odp'
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: Sélectionner
+    uuid: f128d2a4-05fa-4fcd-bd27-ecdba5a98360
+    weight: 2
+    label: 'Ajouter un nouveau média'
+    id: dropzonejs_media_entity_inline_entity_form

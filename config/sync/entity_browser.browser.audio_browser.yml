@@ -1,0 +1,53 @@
+uuid: 439e96f5-2de8-4606-a31f-5de0c1731aa6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media.type.audio
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - views
+name: audio_browser
+label: 'Audio Browser'
+display: modal
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select entities'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  69a7bcdd-a2d5-4ce7-b00c-0a249fe6011f:
+    settings:
+      view: media_entity_browser
+      view_display: audio
+      submit_text: Sélectionner
+      auto_select: false
+    uuid: 69a7bcdd-a2d5-4ce7-b00c-0a249fe6011f
+    weight: 1
+    label: 'Sélectionner un fichier'
+    id: view
+  21d74e6e-4434-451f-bc0c-2ef7d5d31580:
+    settings:
+      form_mode: default
+      media_type: audio
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Déposer le fichier ici pour le téléverser'
+      max_filesize: 10M
+      extensions: mp3
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: Sélectionner
+    uuid: 21d74e6e-4434-451f-bc0c-2ef7d5d31580
+    weight: 2
+    label: 'Ajouter un nouveau média'
+    id: dropzonejs_media_entity_inline_entity_form
