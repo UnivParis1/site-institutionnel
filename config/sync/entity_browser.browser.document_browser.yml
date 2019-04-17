@@ -1,0 +1,53 @@
+uuid: 59e586ea-a124-4093-ab2d-700a007574eb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media.type.file
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - views
+name: document_browser
+label: 'document browser'
+display: modal
+display_configuration:
+  width: '1070'
+  height: '840'
+  link_text: 'Sélectionner ou téléverser un document'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  7c5e5c12-7ab5-4267-a8e8-a8a5ef6b65b6:
+    settings:
+      view: media_entity_browser
+      view_display: document_browser
+      submit_text: Sélectionner
+      auto_select: false
+    uuid: 7c5e5c12-7ab5-4267-a8e8-a8a5ef6b65b6
+    weight: 1
+    label: 'Liste des documents'
+    id: view
+  82fbf3dc-1a6a-4684-9347-a10eb219da7b:
+    settings:
+      form_mode: default
+      media_type: file
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Déposer vos fichiers ici pour les téléverser'
+      max_filesize: 100M
+      extensions: 'txt doc xls pdf ppt pptx docx xlsx matlab'
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: Enregistrer
+    uuid: 82fbf3dc-1a6a-4684-9347-a10eb219da7b
+    weight: 3
+    label: 'Téléverser des fichiers'
+    id: dropzonejs_media_entity_inline_entity_form

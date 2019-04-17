@@ -1,9 +1,10 @@
-uuid: 63f95176-52c1-446c-90dc-720ee14a3312
+uuid: 25f9b1c4-504d-45ee-aad2-2083dadc6f41
 langcode: fr
 status: true
 dependencies:
   config:
     - field.field.media.audio.field_media_audio_file
+    - field.field.media.audio.field_transcription_textuelle
     - media.type.audio
   module:
     - file
@@ -24,6 +25,13 @@ content:
       loop: false
       multiple_file_display_type: tags
     third_party_settings: {  }
+    region: content
+  field_transcription_textuelle:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_url_plain
     region: content
 hidden:
   created: true

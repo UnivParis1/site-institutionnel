@@ -1,53 +1,52 @@
-uuid: c4c36806-8fd5-424a-83f5-ec0d809e939b
+uuid: e3c7a710-cf69-4128-a3e9-3167a59019a9
 langcode: fr
 status: true
 dependencies:
   config:
-    - media.type.remote_video
     - views.view.media_entity_browser
   module:
-    - dropzonejs_eb_widget
-    - media
+    - entity_browser_entity_form
     - views
 name: video_browser
-label: 'Video browser'
+label: 'Video Browser'
 display: modal
 display_configuration:
-  width: '650'
-  height: '500'
-  link_text: 'Select entities'
+  width: '1070'
+  height: '840'
+  link_text: 'Sélectionner une vidéo ou saisir une URL'
   auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
-  75dbd862-a07a-4d95-b673-5a07164a7578:
+  a3117f1f-681a-411f-a35f-c1ea3f0bb4e4:
     settings:
       view: media_entity_browser
-      view_display: video
+      view_display: video_browser
       submit_text: Sélectionner
       auto_select: false
-    uuid: 75dbd862-a07a-4d95-b673-5a07164a7578
+    uuid: a3117f1f-681a-411f-a35f-c1ea3f0bb4e4
     weight: 1
     label: 'Liste des vidéos'
     id: view
-  cdd50c5c-8dfa-4507-946d-1bf1b569ab18:
+  2c416373-de61-4682-9758-d7899a859694:
     settings:
+      entity_type: media
+      bundle: remote_video
       form_mode: default
-      media_type: remote_video
-      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
-      dropzone_description: 'Déposer votre fichier ici pour le téléverser'
-      max_filesize: 102M
-      extensions: ''
-      clientside_resize: false
-      resize_width: null
-      resize_height: null
-      resize_quality: !!float 1
-      resize_method: contain
-      thumbnail_method: contain
-      submit_text: Sélectionner
-    uuid: cdd50c5c-8dfa-4507-946d-1bf1b569ab18
+      submit_text: 'Ajouter cette vidéo a la bibliothèque'
+    uuid: 2c416373-de61-4682-9758-d7899a859694
     weight: 2
-    label: 'Ajouter un nouveau média'
-    id: dropzonejs_media_entity_inline_entity_form
+    label: 'URL Youtube'
+    id: entity_form
+  fc68f45b-6ac8-4bdc-a326-827ad8506c32:
+    settings:
+      entity_type: media
+      bundle: mediatheque
+      form_mode: default
+      submit_text: 'Ajouter cette vidéo a la bibliothèque'
+    uuid: fc68f45b-6ac8-4bdc-a326-827ad8506c32
+    weight: 3
+    label: 'URL Médiathèque Paris1'
+    id: entity_form

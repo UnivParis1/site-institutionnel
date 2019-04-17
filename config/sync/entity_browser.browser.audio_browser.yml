@@ -1,4 +1,4 @@
-uuid: 439e96f5-2de8-4606-a31f-5de0c1731aa6
+uuid: 1dd6c366-df64-41c9-9cdd-ea9882799783
 langcode: fr
 status: true
 dependencies:
@@ -10,35 +10,35 @@ dependencies:
     - media
     - views
 name: audio_browser
-label: 'Audio Browser'
+label: 'audio browser'
 display: modal
 display_configuration:
-  width: '650'
-  height: '500'
-  link_text: 'Select entities'
+  width: '1070'
+  height: '840'
+  link_text: 'Sélectionner ou téléverser un fichier audio'
   auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
-  69a7bcdd-a2d5-4ce7-b00c-0a249fe6011f:
+  4cc63c98-dda5-43b0-a111-d0f7a461adf1:
     settings:
       view: media_entity_browser
-      view_display: audio
+      view_display: audio_browser
       submit_text: Sélectionner
       auto_select: false
-    uuid: 69a7bcdd-a2d5-4ce7-b00c-0a249fe6011f
+    uuid: 4cc63c98-dda5-43b0-a111-d0f7a461adf1
     weight: 1
-    label: 'Sélectionner un fichier'
+    label: 'Liste des fichiers audio'
     id: view
-  21d74e6e-4434-451f-bc0c-2ef7d5d31580:
+  8bb37d1a-5e79-4be8-9709-54757ef02eef:
     settings:
       form_mode: default
       media_type: audio
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
-      dropzone_description: 'Déposer le fichier ici pour le téléverser'
-      max_filesize: 10M
+      dropzone_description: 'Déposer vos fichiers ici pour les téléverser'
+      max_filesize: 100M
       extensions: mp3
       clientside_resize: false
       resize_width: null
@@ -46,8 +46,8 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
-      submit_text: Sélectionner
-    uuid: 21d74e6e-4434-451f-bc0c-2ef7d5d31580
-    weight: 2
-    label: 'Ajouter un nouveau média'
+      submit_text: Enregistrer
+    uuid: 8bb37d1a-5e79-4be8-9709-54757ef02eef
+    weight: 3
+    label: 'Téléverser des fichiers'
     id: dropzonejs_media_entity_inline_entity_form

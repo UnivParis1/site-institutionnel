@@ -1,9 +1,10 @@
-uuid: a2894a5d-a12e-4650-bc5e-bac264472e9a
+uuid: 3b6cfa20-956b-4c49-a072-811729e5df7d
 langcode: fr
 status: true
 dependencies:
   config:
     - field.field.media.audio.field_media_audio_file
+    - field.field.media.audio.field_transcription_textuelle
     - media.type.audio
   module:
     - file
@@ -21,9 +22,16 @@ content:
     third_party_settings: {  }
     type: file_generic
     region: content
+  field_transcription_textuelle:
+    weight: 26
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 3
     region: content
     settings:
       include_locked: true

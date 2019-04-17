@@ -1,0 +1,27 @@
+uuid: 688bca20-1366-4cfc-ac2f-21e922fb5733
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_transcription_textuelle
+    - media.type.audio
+  module:
+    - file
+id: media.audio.field_transcription_textuelle
+field_name: field_transcription_textuelle
+entity_type: media
+bundle: audio
+label: 'Transcription textuelle'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: txt
+  max_filesize: '1 MB'
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

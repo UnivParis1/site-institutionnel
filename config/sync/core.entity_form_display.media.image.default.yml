@@ -1,4 +1,4 @@
-uuid: 8987626e-1bc2-4e6d-ba8b-841f3ebc5434
+uuid: 584612cd-f947-467c-8d6a-caa507bd7c0b
 langcode: fr
 status: true
 dependencies:
@@ -7,7 +7,7 @@ dependencies:
     - image.style.thumbnail
     - media.type.image
   module:
-    - image
+    - focal_point
 _core:
   default_config_hash: nZlttO4YMwMCpkhYMz7bQ1ZMjABGc59YY1us3eSfvTY
 id: media.image.default
@@ -17,10 +17,12 @@ mode: default
 content:
   field_media_image:
     settings:
-      progress_indicator: throbber
       preview_image_style: thumbnail
+      progress_indicator: throbber
+      preview_link: true
+      offsets: '50,50'
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
     weight: 1
     region: content
   langcode:
