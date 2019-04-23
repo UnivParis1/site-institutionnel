@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_mediatheque_source.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function up1_mediatheque_source_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_mediatheque_source module.
+    case 'help.page.up1_mediatheque_source':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Ajout de mediatheque paris1 en tant que source de media') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function up1_mediatheque_source_theme() {
+    return [
+        'media_mediatheque_video' => [
+            'variables' => [
+                'url' => NULL,
+                'title' => NULL,
+                'attributes' => []],
+        ],
+    ];
+}
