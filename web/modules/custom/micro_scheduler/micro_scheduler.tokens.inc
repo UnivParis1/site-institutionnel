@@ -24,7 +24,10 @@ function micro_scheduler_token_info_alter(&$data)
     'name' => t("Administrator List"),
     'description' => t("List of Site Administrator."),
   ];
-
+  $data['tokens']['micro_site']['remaining-days'] = [
+    'name' => t("Remaining Days"),
+    'description' => t("Remaining days before unpublishing."),
+  ];
 }
 
 
@@ -57,6 +60,9 @@ function micro_scheduler_tokens($type, $tokens, array $data, array $options, Bub
         case 'administrator-list':
           $site_administrators = $site->getUsers();
           $replacements[$original] = micro_scheduler_site_admin_list($site_administrators);
+          break;
+        case 'remaining-days':
+          $replacements[$original] = $data['remaining_days'];
           break;
       }
     }

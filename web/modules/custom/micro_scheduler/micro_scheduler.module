@@ -100,7 +100,7 @@ function micro_scheduler_mail($key, &$message, $params)
       break;
     case 'site_unpublish_notication':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('A micro_site will be unpublished in @days days', ['@day' => $params['days']]);
+      $message['subject'] = $params['subject'];
       $message['body'][] = $params['message'];
       break;
   }
