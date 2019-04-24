@@ -1,0 +1,51 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.media_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: video_browser
+label: 'Video Browser'
+display: modal
+display_configuration:
+  width: '1070'
+  height: '840'
+  link_text: 'Sélectionner une vidéo ou saisir une URL'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  a3117f1f-681a-411f-a35f-c1ea3f0bb4e4:
+    settings:
+      view: media_entity_browser
+      view_display: video_browser
+      submit_text: Sélectionner
+      auto_select: false
+    uuid: a3117f1f-681a-411f-a35f-c1ea3f0bb4e4
+    weight: 1
+    label: 'Liste des vidéos'
+    id: view
+  2c416373-de61-4682-9758-d7899a859694:
+    settings:
+      entity_type: media
+      bundle: remote_video
+      form_mode: default
+      submit_text: 'Ajouter cette vidéo a la bibliothèque'
+    uuid: 2c416373-de61-4682-9758-d7899a859694
+    weight: 2
+    label: 'URL Youtube'
+    id: entity_form
+  fc68f45b-6ac8-4bdc-a326-827ad8506c32:
+    settings:
+      entity_type: media
+      bundle: mediatheque
+      form_mode: default
+      submit_text: 'Ajouter cette vidéo a la bibliothèque'
+    uuid: fc68f45b-6ac8-4bdc-a326-827ad8506c32
+    weight: 3
+    label: 'URL Médiathèque Paris1'
+    id: entity_form

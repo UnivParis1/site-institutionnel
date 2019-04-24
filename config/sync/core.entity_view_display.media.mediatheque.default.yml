@@ -1,0 +1,26 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.mediatheque.field_media_mediatheque
+    - media.type.mediatheque
+  module:
+    - up1_mediatheque_source
+id: media.mediatheque.default
+targetEntityType: media
+bundle: mediatheque
+mode: default
+content:
+  field_media_mediatheque:
+    weight: 0
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: mediatheque_embed
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

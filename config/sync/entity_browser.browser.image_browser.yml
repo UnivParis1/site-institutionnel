@@ -1,0 +1,52 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media.type.image
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - views
+name: image_browser
+label: 'image browser'
+display: modal
+display_configuration:
+  width: '1070'
+  height: '840'
+  link_text: 'Sélectionner ou téléverser une image'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  546a8bfd-68bc-43e8-988d-939bff06026f:
+    settings:
+      view: media_entity_browser
+      view_display: image_browser
+      submit_text: Sélectionner
+      auto_select: false
+    uuid: 546a8bfd-68bc-43e8-988d-939bff06026f
+    weight: 1
+    label: 'Liste des images'
+    id: view
+  c6c978cd-8e13-45cf-ad55-ad47ebf8f96d:
+    settings:
+      form_mode: default
+      media_type: image
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Déposer vos fichiers ici pour les téléverser'
+      max_filesize: 5M
+      extensions: 'jpg jpeg gif png'
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: Enregistrer
+    uuid: c6c978cd-8e13-45cf-ad55-ad47ebf8f96d
+    weight: 3
+    label: 'Téléverser des fichiers'
+    id: dropzonejs_media_entity_inline_entity_form

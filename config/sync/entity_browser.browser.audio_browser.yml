@@ -1,0 +1,52 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media.type.audio
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - views
+name: audio_browser
+label: 'audio browser'
+display: modal
+display_configuration:
+  width: '1070'
+  height: '840'
+  link_text: 'Sélectionner ou téléverser un fichier audio'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  4cc63c98-dda5-43b0-a111-d0f7a461adf1:
+    settings:
+      view: media_entity_browser
+      view_display: audio_browser
+      submit_text: Sélectionner
+      auto_select: false
+    uuid: 4cc63c98-dda5-43b0-a111-d0f7a461adf1
+    weight: 1
+    label: 'Liste des fichiers audio'
+    id: view
+  8bb37d1a-5e79-4be8-9709-54757ef02eef:
+    settings:
+      form_mode: default
+      media_type: audio
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Déposer vos fichiers ici pour les téléverser'
+      max_filesize: 100M
+      extensions: mp3
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: Enregistrer
+    uuid: 8bb37d1a-5e79-4be8-9709-54757ef02eef
+    weight: 3
+    label: 'Téléverser des fichiers'
+    id: dropzonejs_media_entity_inline_entity_form
