@@ -1,4 +1,4 @@
-uuid: c20320a1-4e85-4aba-960d-9006b27f2b79
+uuid: a083a52e-f2fa-4d86-88cb-f2dbb2b805a4
 langcode: fr
 status: true
 dependencies:
@@ -8,9 +8,9 @@ dependencies:
 _core:
   default_config_hash: cCq1vjj1qmyd39oBIUyOe8YPDsobJ5fZRhp2Xy5O7lA
 id: comment
-label: Commentaires
+label: Comments
 module: comment
-description: 'Trouver et gérer les commentaires.'
+description: 'Find and manage comments.'
 tag: default
 base_table: comment_field_data
 base_field: cid
@@ -55,10 +55,10 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: "‹\_précédent"
-            next: "suivant\_›"
-            first: "«\_premier"
-            last: "dernier\_»"
+            previous: '‹ previous'
+            next: 'next ›'
+            first: '« first'
+            last: 'last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -194,7 +194,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Objet
+          label: Subject
           exclude: false
           alter:
             alter_text: false
@@ -388,7 +388,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Posté sur'
+          label: 'Posted in'
           exclude: false
           alter:
             alter_text: false
@@ -681,7 +681,7 @@ display:
           exposed: true
           expose:
             operator_id: subject_op
-            label: Objet
+            label: Subject
             description: ''
             use_operator: false
             operator: subject_op
@@ -721,7 +721,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: 'Nom de l''auteur'
+            label: 'Author name'
             description: ''
             use_operator: false
             operator: combine_op
@@ -806,7 +806,7 @@ display:
           entity_type: comment
           entity_field: changed
           plugin_id: date
-      title: Commentaires
+      title: Comments
       header: {  }
       footer: {  }
       empty:
@@ -819,13 +819,13 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: 'Aucun commentaire disponible.'
+          content: 'No comments available.'
           plugin_id: text_custom
       arguments: {  }
       display_extenders: {  }
       use_more: false
       use_more_always: true
-      use_more_text: plus
+      use_more_text: more
       use_ajax: false
       hide_attachment_summary: false
       show_admin_links: true
@@ -860,19 +860,19 @@ display:
   page_published:
     display_plugin: page
     id: page_published
-    display_title: 'Commentaires publiés'
+    display_title: 'Published comments'
     position: 1
     display_options:
       path: admin/content/comment
       menu:
         type: tab
-        title: Commentaires
-        description: 'Commentaires publiés'
+        title: Comments
+        description: 'Comments published'
         parent: ''
         weight: 0
         context: '0'
         menu_name: admin
-      display_description: 'La liste des commentaires approuvés.'
+      display_description: 'The approved comments listing.'
       display_extenders: {  }
       exposed_block: false
       display_comment: ''
@@ -889,19 +889,19 @@ display:
   page_unapproved:
     display_plugin: page
     id: page_unapproved
-    display_title: 'Commentaires non aprouvés'
+    display_title: 'Unapproved comments'
     position: 2
     display_options:
       path: admin/content/comment/approval
       menu:
         type: tab
-        title: 'Commentaires non aprouvés'
-        description: 'Commentaires non-approuvés'
+        title: 'Unapproved comments'
+        description: 'Comments unapproved'
         parent: ''
         weight: 1
         context: '0'
         menu_name: admin
-      display_description: 'La liste des commentaires non-approuvés.'
+      display_description: 'The unapproved comments listing.'
       filters:
         status:
           id: status
@@ -954,7 +954,7 @@ display:
           exposed: true
           expose:
             operator_id: subject_op
-            label: Objet
+            label: Subject
             description: ''
             use_operator: false
             operator: subject_op
@@ -994,7 +994,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: 'Nom de l''auteur'
+            label: 'Author Name'
             description: ''
             use_operator: false
             operator: combine_op
@@ -1131,7 +1131,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Objet
+          label: Subject
           exclude: false
           alter:
             alter_text: false
@@ -1325,7 +1325,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Posté sur'
+          label: 'Posted in'
           exclude: false
           alter:
             alter_text: false

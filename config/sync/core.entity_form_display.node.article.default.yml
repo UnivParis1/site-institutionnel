@@ -1,4 +1,4 @@
-uuid: cec10c34-f53e-49c0-abe4-ecae7e448114
+uuid: 48492f30-3aed-4e6d-9872-aa40ca1f2449
 langcode: fr
 status: true
 dependencies:
@@ -7,11 +7,9 @@ dependencies:
     - field.field.node.article.comment
     - field.field.node.article.field_image
     - field.field.node.article.field_tags
-    - image.style.thumbnail
     - node.type.article
   module:
     - comment
-    - image
     - path
     - text
 _core:
@@ -32,23 +30,15 @@ content:
     third_party_settings: {  }
   comment:
     type: comment_default
-    weight: 20
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 5
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_image:
-    type: image_image
-    weight: 4
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
@@ -68,7 +58,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -76,21 +66,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 6
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 10
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 7
     region: content
     third_party_settings: {  }
   title:
@@ -103,11 +93,12 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_image: true

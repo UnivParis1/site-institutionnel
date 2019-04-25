@@ -1,70 +1,63 @@
-uuid: 6ff90a8d-3af1-490f-85e8-2fe840f85a5b
+uuid: 5270403b-54f8-4902-b68b-f0bc6a68fea9
 langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
     - field.field.media.image.field_media_image
     - image.style.thumbnail
     - media.type.image
   module:
-    - image
-    - path
-_core:
-  default_config_hash: nZlttO4YMwMCpkhYMz7bQ1ZMjABGc59YY1us3eSfvTY
+    - focal_point
 id: media.image.default
 targetEntityType: media
 bundle: image
 mode: default
 content:
-  created:
-    type: datetime_timestamp
-    weight: 10
-    region: content
-    settings: {  }
+  field_credits:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_legende:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_media_image:
     settings:
-      progress_indicator: throbber
       preview_image_style: thumbnail
+      progress_indicator: throbber
+      preview_link: true
+      offsets: '50,50'
     third_party_settings: {  }
-    type: image_image
-    weight: 0
+    type: image_focal_point
+    weight: 1
     region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 4
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  path:
-    type: path
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 100
-    region: content
-    third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 5
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    region: content
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  created: true
+  path: true
+  status: true
+  uid: true

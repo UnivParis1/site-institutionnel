@@ -1,14 +1,13 @@
-uuid: 2fc5df93-0444-4e35-b875-ecf484bdb098
+uuid: 51fee447-bac4-45a8-96f3-baea7abec122
 langcode: fr
 status: true
 dependencies:
   config:
     - field.field.media.audio.field_media_audio_file
+    - field.field.media.audio.field_transcription_textuelle
     - media.type.audio
   module:
     - file
-_core:
-  default_config_hash: SWf3MLdbEKvlx4Vs6iPwDHu5pr1aKT0SJmgp8no73-k
 id: media.audio.default
 targetEntityType: media
 bundle: audio
@@ -24,6 +23,13 @@ content:
       loop: false
       multiple_file_display_type: tags
     third_party_settings: {  }
+    region: content
+  field_transcription_textuelle:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_url_plain
     region: content
 hidden:
   created: true
