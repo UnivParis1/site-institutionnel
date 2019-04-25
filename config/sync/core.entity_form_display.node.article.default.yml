@@ -5,7 +5,10 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.comment
+    - field.field.node.article.field_disable_canonical_url
     - field.field.node.article.field_image
+    - field.field.node.article.field_sites
+    - field.field.node.article.field_sites_all
     - field.field.node.article.field_tags
     - node.type.article
   module:
@@ -40,6 +43,29 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
+    region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    third_party_settings: {  }
+    region: content
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 3
@@ -67,6 +93,15 @@ content:
     settings:
       display_label: true
     weight: 6
+    region: content
+    third_party_settings: {  }
+  site_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
     region: content
     third_party_settings: {  }
   status:

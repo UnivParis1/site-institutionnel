@@ -1,0 +1,69 @@
+label: 'Site content'
+description: 'Contents linked on a site entity'
+display:
+  default:
+    display_title: Master
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+      fields:
+        node_bulk_form:
+          label: 'Node operations'
+          action_title: Action
+        timestamp:
+          label: 'Has new content'
+        title:
+          label: Title
+          alter:
+            text: "{{ title }}\n<div class=\"\"new\">{{ timestamp }}</div>"
+          separator: ', '
+        status:
+          label: 'Publishing status'
+          separator: ', '
+        promote:
+          label: 'Promoted to front page'
+          separator: ', '
+        uid:
+          label: 'Authored by'
+          separator: ', '
+        created:
+          label: 'Authored on'
+          separator: ', '
+        changed:
+          label: Changed
+          separator: ', '
+        langcode:
+          label: Translation
+          separator: ', '
+        operations:
+          label: Operations
+        name:
+          label: Name
+          separator: ', '
+      title: Content
+      arguments:
+        site_id:
+          exception:
+            title: All
+          title: '{{ name }} content'
+  tab:
+    display_title: Page
+    display_options:
+      menu:
+        title: Content

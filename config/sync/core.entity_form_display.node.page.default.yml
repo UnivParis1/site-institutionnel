@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_sites
+    - field.field.node.page.field_sites_all
     - node.type.page
   module:
     - path
@@ -30,6 +33,29 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
+    region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    third_party_settings: {  }
+    region: content
   langcode:
     type: language_select
     weight: 2
@@ -48,6 +74,15 @@ content:
     settings:
       display_label: true
     weight: 15
+    region: content
+    third_party_settings: {  }
+  site_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
     region: content
     third_party_settings: {  }
   status:

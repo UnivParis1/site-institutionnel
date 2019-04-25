@@ -1,0 +1,21 @@
+uuid: 9242a9b1-1d62-4645-a06a-7fb1a95f5d45
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_disable_canonical_url
+    - node.type.article
+id: node.article.field_disable_canonical_url
+field_name: field_disable_canonical_url
+entity_type: node
+bundle: article
+label: 'Disable main site canonical url'
+description: 'If you publish a content on several sites, the content''''s canonical url will always be the canonical url on the content on the main site it has been published. Check this option to disable this unique canonical url behavior and then the content will be display on each site instead to be redirected to the main site. Be carrefully with this option, this can generate some duplicate content.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

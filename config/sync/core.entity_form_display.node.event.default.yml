@@ -6,11 +6,14 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_address_map
     - field.field.node.event.field_categories
+    - field.field.node.event.field_disable_canonical_url
     - field.field.node.event.field_event_address
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_type
     - field.field.node.event.field_image
     - field.field.node.event.field_label_color
+    - field.field.node.event.field_sites
+    - field.field.node.event.field_sites_all
     - field.field.node.event.field_subtitle
     - image.style.medium
     - node.type.event
@@ -522,6 +525,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
+    region: content
   field_event_address:
     weight: 7
     settings:
@@ -558,6 +568,22 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    third_party_settings: {  }
+    region: content
   field_subtitle:
     weight: 2
     settings:
@@ -586,6 +612,15 @@ content:
     weight: 13
     third_party_settings: {  }
     region: content
+  site_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
