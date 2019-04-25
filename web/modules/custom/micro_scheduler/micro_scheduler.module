@@ -94,11 +94,8 @@ function micro_scheduler_mail($key, &$message, $params)
 {
   switch ($key) {
     case 'site_unpublished':
-      $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = $params['subject'];
-      $message['body'][] = $params['message'];
-      break;
     case 'site_unpublish_notication':
+      $message['headers']['From'] = \Drupal::config('system.site')->get('mail');
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = $params['subject'];
       $message['body'][] = $params['message'];

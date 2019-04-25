@@ -1,0 +1,28 @@
+uuid: d6d8cc68-af82-4faa-b562-2f2cbbfab762
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.site.field_site_contributor
+    - micro_site.site_type.mini_site
+id: site.mini_site.field_site_contributor
+field_name: field_site_contributor
+entity_type: site
+bundle: mini_site
+label: 'Site contributor'
+description: 'The site contributor can create content and update or delete own content (and has the rights of a site member).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

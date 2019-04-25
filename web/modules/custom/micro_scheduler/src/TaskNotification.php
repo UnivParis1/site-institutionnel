@@ -26,9 +26,9 @@ class TaskNotification extends Task {
     $adminTo = $this->_getAdminMailTo();
 
 
-    foreach ($notificationTiming as $remainigTiming) {
-      if (!empty($remainigTiming)) {
-        $inDays = new DrupalDateTime('+' . $remainigTiming . 'days');
+    foreach ($notificationTiming as $remainingTiming) {
+      if (!empty($remainingTiming)) {
+        $inDays = new DrupalDateTime('+' . $remainingTiming . 'days');
         $siteOutdatedIds = $siteStorage->getQuery()
           ->condition('status', TRUE)
           ->condition('schedule_end', $inDays->format('Y-m-d'), '=' )
@@ -41,20 +41,18 @@ class TaskNotification extends Task {
 
           \Drupal::service('plugin.manager.mail')->mail('micro_scheduler', 'site_unpublish_notication', $adminTo ,
             $langcode,
-            ['message' => \Drupal::token()->replace($adminMailMessage, ['remaining_days' => $remainigTiming]), 'subject' =>
+            ['message' => \Drupal::token()->replace($adminMailMessage, ['remaining_days' => $remainingTiming]), 'subject' =>
               \Drupal::token()
               ->replace
-            ($adminMailSubject, ['remaining_days' => $remainigTiming])]);
+            ($adminMailSubject, ['remaining_days' => $remainingTiming])]);
 
           \Drupal::service('plugin.manager.mail')->mail('micro_scheduler', 'site_unpublish_notication', $microAdminTo ,
             $langcode,
-            ['message' => \Drupal::token()->replace($siteAdminMailMessage, ['remaining_days' => $remainigTiming]), 'subject' => \Drupal::token()->replace
-            ($siteAdminMailSubject,['remaining_days' => $remainigTiming])]);
+            ['message' => \Drupal::token()->replace($siteAdminMailMessage, ['remaining_days' => $remainingTiming]), 'subject' => \Drupal::token()->replace
+            ($siteAdminMailSubject,['remaining_days' => $remainingTiming])]);
         }
       }
-
     }
-
   }
 
 }

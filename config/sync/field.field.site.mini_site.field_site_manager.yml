@@ -1,0 +1,28 @@
+uuid: 2aadfba2-e8f2-4c85-a7df-108b06a3f8a8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.site.field_site_manager
+    - micro_site.site_type.mini_site
+id: site.mini_site.field_site_manager
+field_name: field_site_manager
+entity_type: site
+bundle: mini_site
+label: 'Site manager'
+description: 'The site manager can create, update and delete any content on the site, and of course view any unpublished content'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

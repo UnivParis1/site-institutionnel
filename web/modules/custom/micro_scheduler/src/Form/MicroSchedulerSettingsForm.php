@@ -84,7 +84,7 @@ class MicroSchedulerSettingsForm extends ConfigFormBase {
       '#default_value' => t(($this->config('micro_scheduler.settings')->get('unpublish_mail_admin.message') ?
         $this->config('micro_scheduler.settings')->get('unpublish_mail_admin.message') : 'Without action on your part, the site [micro_site:name] was automatically unpublished.
 Webmaster (s):
-[micro_site:admininistrator_list]]')),
+[micro_site:administrator_list]]')),
       '#require' => TRUE,
     ];
     $form['mail_to_admin']['notification_mail_admin'] = [
@@ -107,7 +107,7 @@ Webmaster (s):
       '#default_value' => t(($this->config('micro_scheduler.settings')->get('notification_mail_admin.message') ?
         $this->config('micro_scheduler.settings')->get('notification_mail_admin.message') : 'Warning, the site [micro_site:name] will be automatically put out of service in [micro_site:remaining-days] days.
 Webmaster (s):
-[micro_site:admininistrator-list]')),
+[micro_site:administrator-list]')),
       '#require' => TRUE,
     ];
     $form['mail_to_admin']['token_tree'] = [
