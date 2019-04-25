@@ -1,7 +1,10 @@
+uuid: 0ba75baf-d0eb-46d1-9b3c-49fc30107a3f
 langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
     - field.field.media.image.field_media_image
     - media.type.image
   module:
@@ -11,6 +14,22 @@ targetEntityType: media
 bundle: image
 mode: default
 content:
+  field_credits:
+    weight: 3
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_legende:
+    weight: 2
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_media_image:
     label: visually_hidden
     settings:

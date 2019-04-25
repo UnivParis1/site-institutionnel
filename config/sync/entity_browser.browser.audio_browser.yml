@@ -1,3 +1,4 @@
+uuid: 3dfd0166-2e00-4041-bc08-5041b776aec0
 langcode: fr
 status: true
 dependencies:
@@ -6,6 +7,7 @@ dependencies:
     - views.view.media_entity_browser
   module:
     - dropzonejs_eb_widget
+    - entity_browser_entity_form
     - media
     - views
 name: audio_browser
@@ -48,5 +50,15 @@ widgets:
       submit_text: Enregistrer
     uuid: 8bb37d1a-5e79-4be8-9709-54757ef02eef
     weight: 3
-    label: 'Téléverser des fichiers'
+    label: 'Téléverser un fichier local'
     id: dropzonejs_media_entity_inline_entity_form
+  ac8a72f5-1099-4a8b-8747-587601bb5704:
+    settings:
+      entity_type: media
+      bundle: mediatheque_audio
+      form_mode: default
+      submit_text: 'Ajouter cet audio a la bibliothèque'
+    uuid: ac8a72f5-1099-4a8b-8747-587601bb5704
+    weight: 3
+    label: 'URL mediatheque Paris 1'
+    id: entity_form

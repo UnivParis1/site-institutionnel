@@ -1,7 +1,10 @@
+uuid: 5270403b-54f8-4902-b68b-f0bc6a68fea9
 langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
     - field.field.media.image.field_media_image
     - image.style.thumbnail
     - media.type.image
@@ -12,6 +15,22 @@ targetEntityType: media
 bundle: image
 mode: default
 content:
+  field_credits:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_legende:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_media_image:
     settings:
       preview_image_style: thumbnail
@@ -24,7 +43,7 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 4
     region: content
     settings:
       include_locked: true

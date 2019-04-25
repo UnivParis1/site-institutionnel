@@ -1,0 +1,42 @@
+uuid: 24c5c443-a61b-4e9a-8bec-e304a19efb7b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.mediatheque_audio.field_media_mediatheque
+    - media.type.mediatheque_audio
+  module:
+    - link
+id: media.mediatheque_audio.default
+targetEntityType: media
+bundle: mediatheque_audio
+mode: default
+content:
+  field_media_mediatheque:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  status: true
+  uid: true
