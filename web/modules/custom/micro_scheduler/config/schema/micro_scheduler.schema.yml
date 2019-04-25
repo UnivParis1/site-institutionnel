@@ -1,0 +1,60 @@
+micro_scheduler.settings:
+  type: config_object
+  label: 'Micro Scheduler Settings'
+  mapping:
+    default_life_time:
+      label: 'Default life time'
+      type: integer
+    unpublish_mail_admin:
+      label: 'Unpublish Mail Admin'
+      type: mapping
+      mapping:
+        admin_roles:
+          type: sequence
+          label: 'Unpublish Admin Roles'
+        subject:
+          type: string
+          label: 'Unpublish Mail Admin Subject'
+        message:
+          type: text
+          label: 'Unpublish Mail Admin Message'
+          translatable: true
+    unpublish_mail_micro_site_admin:
+      label: 'Unpublish Mail Site Admin'
+      type: mapping
+      mapping:
+        subject:
+          label: 'Unpublish Mail Site Admin Subject'
+          type: string
+        message:
+          label: 'Unpublish Mail Site Admin Message'
+          type: text
+    notification_timing:
+      label: 'Notification Timing'
+      type: sequence
+    notification_mail_admin:
+      label: 'Notification Mail Admin'
+      type: mapping
+      mapping:
+        admin_roles:
+          label: 'Notification Admin Roles'
+          type: sequence
+        subject:
+          label: 'Notification Mail Admin Subject'
+          type: string
+        message:
+          label: 'Notification Mail Admin Message'
+          type: text
+    notification_site_admin_mail:
+      label: 'Notification Mail Site Admin'
+      type: mapping
+      mapping:
+        subject:
+          label: 'Notification Mail Site Admin Subject'
+          type: string
+        message:
+          label: 'Notification Mail Site Admin Message'
+          type: text
+    langcode:
+      label: 'Language code'
+      type: string

@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_scheduler.module.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_scheduler_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_scheduler module.
+    case 'help.page.micro_scheduler':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provide possibility to schedule unpublishing micro_site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function micro_scheduler_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'site') {
+    $fields['schedule_end'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Schedule end date'))
+      ->setDescription(t('Select the date of automatic unpublishing of the site'))
+      ->setRevisionable(FALSE)
+      ->setSettings([
+        'datetime_type' => 'date',
+      ])
+      ->setDefaultValueCallback('micro_scheduler_schedule_end_default_value')
+      ->setDisplayOptions('form', [
+        'type' => 'datetime_default',
+        'weight' => -9,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+  }
+
+  return $fields;
+}
+
+function micro_scheduler_form_site_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+  $form['micro_scheduler'] = [
+    '#type' => 'details',
+    '#title' => t('Schedule'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-schedule'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
+
+  if (isset($form['schedule_end'])) {
+    $form['schedule_end']['#group'] = 'micro_scheduler';
+  }
+}
+
+
+function micro_scheduler_schedule_end_default_value() {
+  $config = Drupal::config('micro_scheduler.settings');
+  $default_life_time = $config->get('default_life_time');
+  $default_date = Drupal\Core\Datetime\DrupalDateTime::createFromTimestamp(strtotime('+' . $default_life_time . ' days'));
+
+  return $default_date->format('Y-m-d');
+}
+
+/**
+ * Implements hook_cron().
+ */
+function micro_scheduler_cron()
+{
+  Drupal::service('micro_scheduler.task.unpublish')->execute();
+  Drupal::service('micro_scheduler.task.notification')->execute();
+
+}
+
+/**
+ * Implements hook_mail().
+ */
+function micro_scheduler_mail($key, &$message, $params)
+{
+  switch ($key) {
+    case 'site_unpublished':
+    case 'site_unpublish_notication':
+      $message['headers']['From'] = \Drupal::config('system.site')->get('mail');
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['message'];
+      break;
+  }
+}

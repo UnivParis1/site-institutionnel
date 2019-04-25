@@ -1,0 +1,8 @@
+services:
+  micro_scheduler.task.unpublish:
+    class: Drupal\micro_scheduler\TaskUnpublish
+    arguments: ['@config.factory', '@entity_type.manager']
+
+  micro_scheduler.task.notification:
+    class: Drupal\micro_scheduler\TaskNotification
+    arguments: ['@config.factory', '@entity_type.manager']
