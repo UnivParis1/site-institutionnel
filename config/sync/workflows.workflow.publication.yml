@@ -1,0 +1,82 @@
+uuid: 3105c8a3-86bd-43c2-9a26-665fee434009
+langcode: fr
+status: true
+dependencies:
+  module:
+    - content_moderation
+id: publication
+label: Publication
+type: content_moderation
+type_settings:
+  states:
+    archive:
+      published: false
+      default_revision: true
+      label: Archivé
+      weight: 2
+    draft:
+      published: false
+      default_revision: false
+      label: Brouillon
+      weight: -2
+    en_attente_de_publication:
+      published: false
+      default_revision: false
+      label: 'En attente de publication'
+      weight: 0
+    en_relecture:
+      published: false
+      default_revision: false
+      label: 'En relecture'
+      weight: -1
+    published:
+      published: true
+      default_revision: true
+      label: Publié
+      weight: 1
+  transitions:
+    archiver:
+      label: Archiver
+      from:
+        - archive
+        - published
+      to: archive
+      weight: 2
+    create_new_draft:
+      label: 'Enregistrer en brouillon'
+      to: draft
+      weight: -3
+      from:
+        - draft
+    mettre_en_relecture:
+      label: 'Mettre en relecture'
+      from:
+        - draft
+        - en_relecture
+      to: en_relecture
+      weight: -1
+    programmer_la_publication:
+      label: 'Programmer la publication'
+      from:
+        - en_attente_de_publication
+        - en_relecture
+      to: en_attente_de_publication
+      weight: 0
+    publish:
+      label: Publier
+      to: published
+      weight: 1
+      from:
+        - archive
+        - en_attente_de_publication
+        - en_relecture
+        - published
+    remettre_en_brouillon:
+      label: 'Remettre en brouillon'
+      from:
+        - archive
+        - en_relecture
+        - published
+      to: draft
+      weight: -2
+  entity_types: {  }
