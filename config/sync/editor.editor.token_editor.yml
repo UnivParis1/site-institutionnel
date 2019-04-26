@@ -1,55 +1,42 @@
-uuid: 51929d68-44e3-4072-9fea-821066993495
+uuid: e34060d7-0b4a-4e8c-acb9-55095e57679a
 langcode: fr
 status: true
 dependencies:
   config:
-    - filter.format.full_html
+    - filter.format.token_editor
   module:
     - ckeditor
-_core:
-  default_config_hash: 967ijj7p6i7rwrYl7r08WQFeCY_c23YAh0h8u-w_CXM
-format: full_html
+format: token_editor
 editor: ckeditor
 settings:
   toolbar:
     rows:
       -
         -
-          name: Formatting
+          name: Formats
           items:
             - Bold
             - Italic
-            - Strike
-            - Superscript
-            - Subscript
-            - '-'
-            - RemoveFormat
         -
-          name: Linking
+          name: Liens
           items:
             - DrupalLink
             - DrupalUnlink
         -
-          name: Lists
+          name: Listes
           items:
             - BulletedList
             - NumberedList
         -
-          name: Media
+          name: Média
           items:
             - Blockquote
             - DrupalImage
-            - Table
-            - HorizontalRule
         -
-          name: 'Block Formatting'
+          name: Outils
           items:
-            - Format
-        -
-          name: Tools
-          items:
-            - ShowBlocks
             - Source
+            - tokenbrowser
   plugins:
     language:
       language_list: un
@@ -58,7 +45,7 @@ settings:
     tokenbrowser:
       token_types: {  }
 image_upload:
-  status: true
+  status: false
   scheme: public
   directory: inline-images
   max_size: ''
