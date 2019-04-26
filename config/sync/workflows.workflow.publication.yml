@@ -2,6 +2,8 @@ uuid: 3105c8a3-86bd-43c2-9a26-665fee434009
 langcode: fr
 status: true
 dependencies:
+  config:
+    - node.type.event
   module:
     - content_moderation
 id: publication
@@ -79,4 +81,6 @@ type_settings:
         - published
       to: draft
       weight: -2
-  entity_types: {  }
+  entity_types:
+    node:
+      - event
