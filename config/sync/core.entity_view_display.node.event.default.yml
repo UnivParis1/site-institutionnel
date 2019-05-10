@@ -10,8 +10,8 @@ dependencies:
     - field.field.node.event.field_event_address
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_type
-    - field.field.node.event.field_image
     - field.field.node.event.field_label_color
+    - field.field.node.event.field_media
     - field.field.node.event.field_sites
     - field.field.node.event.field_sites_all
     - field.field.node.event.field_subtitle
@@ -19,7 +19,6 @@ dependencies:
   module:
     - datetime_range
     - geolocation
-    - image
     - options
     - text
     - user
@@ -83,21 +82,21 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_image:
-    weight: 104
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
   field_label_color:
     weight: 103
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    weight: 110
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
     region: content
   field_subtitle:
     weight: 102
