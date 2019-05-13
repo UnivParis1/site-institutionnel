@@ -1,0 +1,28 @@
+uuid: a9d1d863-0227-4ff7-9a99-f1d7939573dc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media
+    - media.type.image
+    - node.type.news2018
+id: node.news2018.field_media
+field_name: field_media
+entity_type: node
+bundle: news2018
+label: Média
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference
