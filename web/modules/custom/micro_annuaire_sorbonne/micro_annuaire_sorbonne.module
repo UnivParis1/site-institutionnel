@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_annuaire_sorbonne.module.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_annuaire_sorbonne_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_annuaire_sorbonne module.
+    case 'help.page.micro_annuaire_sorbonne':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('annuaire contextualisé par mini site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function micro_annuaire_sorbonne_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'site') {
+    $fields['groups'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('LDAP Group(s)'))
+      ->setDescription(t('List of LDAP Groups that can access to the site. Separated by ;'))
+      ->setRevisionable(FALSE)
+      ->setSettings([
+        'text_type' => 'text',
+      ])
+      ->setDefaultValueCallback('micro_annuaire_sorbonne_set_groups')
+      ->setDisplayOptions('form', [
+        'weight' => -8,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+  }
+
+  return $fields;
+}
+
+function micro_annuaire_sorbonne_form_site_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+  $form['micro_annuaire_sorbonne'] = [
+    '#type' => 'details',
+    '#title' => t('LDAP Directory'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-annuaire'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
+
+  if (isset($form['groups'])) {
+    $form['groups']['#group'] = 'micro_annuaire_sorbonne';
+  }
+}
+
+function micro_annuaire_sorbonne_set_groups() {
+  $config = Drupal::config('micro_annuaire_sorbonne.settings');
+  $default_groups = $config->get('groups');
+
+  return $default_groups;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function micro_annuaire_sorbonne_theme() {
+  return [
+    'micro_annuaire_sorbonne' => [
+      'variables' => [
+        'users' => [],
+        'site' => NULL,
+        ]
+    ],
+  ];
+}
