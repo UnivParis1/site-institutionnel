@@ -37,19 +37,23 @@ function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormSt
 
   // Themes disponibles pour le micro site en cours
   $themes = \Drupal::service('theme_handler')->listInfo();
+//  dump($themes);
   foreach ($themes as $key => $theme) {
     $theme_enable = theme_get_setting('micro_theme_enable', $key);
     if ($theme_enable) {
       $limit_site_type = array_filter(theme_get_setting('micro_theme_site_type', $key));
       $limit_site_entity = array_filter(theme_get_setting('micro_theme_site_entity', $key));
       if (empty($limit_site_type) && empty($limit_site_entity)) {
-        $options[$key] = $theme->info['name'];
+//        $options[$key] = $theme->info['name'];
+          $options[$key] = _get_theme_markup($theme->info);
       }
       elseif (!empty($limit_site_type) && in_array($entity->bundle(), $limit_site_type)) {
-        $options[$key] = $theme->info['name'];
+//        $options[$key] = $theme->info['name'];
+          $options[$key] = _get_theme_markup($theme->info);
       }
       elseif (!empty($limit_site_entity) && in_array($entity->id(), $limit_site_entity)) {
-        $options[$key] = $theme->info['name'];
+//        $options[$key] = $theme->info['name'];
+          $options[$key] = _get_theme_markup($theme->info);
       }
     }
   }
@@ -73,7 +77,16 @@ function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormSt
     '#multiple' => FALSE,
     '#default_value' => $default_theme,
   ];
-
+  $form['#attached']['library'] = ['micro_theme_library/theme_library'];
   $form['#submit'][] = 'Drupal\micro_theme_library\Controller\MicroThemeLibraryController::form_submit';
+}
+
+function _get_theme_markup($theme_info){
+//  dump($theme_info);
+  $markup = '<div class="theme">
+                <img class="screenshot" src="/'. $theme_info['screenshot'] .'" typeof="foaf:Image">
+                <div class="theme-name">' . $theme_info['name'] . '</div>
+             </div>';
+  return $markup;
 }
 
