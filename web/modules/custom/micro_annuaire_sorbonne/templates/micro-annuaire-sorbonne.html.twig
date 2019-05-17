@@ -1,0 +1,47 @@
+<!-- Add you custom twig html here -->
+{#{{  kint(users)  }}#}
+{% if site is empty %}
+    <p>Pas d'annuaire pour le site Général</p>
+{% else %}
+    {% if users|length < 1 %}
+        <p>Il n'y a personne a cette lettre dans cet annuaire</p>
+    {% else %}
+        {% if users|length == 1 %}
+            <ul class="lone_user">
+        {% else %}
+            <ul class="user">
+        {% endif %}
+        {% for user in users %}
+            <li>
+                <div>
+                    <p><b>
+                           {% if user.labeledURI is empty %}
+                                {{ user.sn|upper }} {{ user.givenName }}
+                           {% else %}
+                                <a href="{{ url(user.labeledURI) }}">
+                                    {{ user.sn|upper }} {{ user.givenName }}
+                                </a>
+                           {% endif %}
+                    </b></p>
+                    <p>{{ user.postalAddress|nl2br }}</p>
+                    <p>{{ user.telephoneNumber[0] }}</p>
+                    <p>{{ user.mail }}</p>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="pager">
+        {% for letter in 'a'|upper .. 'z'|upper %}
+            {% if loop.last %}
+                <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_list',
+                {'letter': letter}
+                )}}">{{ letter }}</a>
+            {% else %}
+                <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_list',
+                {'letter': letter}
+                )}}">{{ letter }} |</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

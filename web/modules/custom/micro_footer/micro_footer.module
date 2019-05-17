@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_footer.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_footer_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_footer module.
+    case 'help.page.micro_footer':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Block affichant le champ footer du mini site associe') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function micro_footer_theme() {
+  return [
+    'micro_footer' => [
+      'template' => 'micro-footer',
+      'variables' => ['liens' => []],
+    ],
+  ];
+}

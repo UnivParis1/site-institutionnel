@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_theme_library.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_theme_library_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_theme_library module.
+    case 'help.page.micro_theme_library':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Ajout de la possibilité de sélectionner un theme pour son mini site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormStateInterface $form_state, $form_id){
+
+  $form['theme'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Theme'),
+    '#tree' => TRUE,
+  ];
+
+  $options = [];
+  $entity = $form_state->getBuildInfo()['args'][0];
+
+  // Themes disponibles pour le micro site en cours
+  $themes = \Drupal::service('theme_handler')->listInfo();
+  foreach ($themes as $key => $theme) {
+    $theme_enable = theme_get_setting('micro_theme_enable', $key);
+    if ($theme_enable) {
+      $limit_site_type = array_filter(theme_get_setting('micro_theme_site_type', $key));
+      $limit_site_entity = array_filter(theme_get_setting('micro_theme_site_entity', $key));
+      if (empty($limit_site_type) && empty($limit_site_entity)) {
+        $options[$key] = $theme->info['name'];
+      }
+      elseif (!empty($limit_site_type) && in_array($entity->bundle(), $limit_site_type)) {
+        $options[$key] = $theme->info['name'];
+      }
+      elseif (!empty($limit_site_entity) && in_array($entity->id(), $limit_site_entity)) {
+        $options[$key] = $theme->info['name'];
+      }
+    }
+  }
+  $options = ['_none' => t('None')] + $options;
+
+  if (empty($entity->get('theme')[0])){
+    $default_theme = '_none';
+  }
+  else {
+    $default_theme = $entity->get('theme')[0]->value;
+  }
+
+
+
+  $form['theme']['general_theme'] = [
+    '#type' => 'radios',
+    '#title' => t('Micro site Theme'),
+    '#description' => t('Select theme used for the site. If "None" selected parent theme will be applied'),
+    '#options' => $options,
+    '#size' => 1,
+    '#multiple' => FALSE,
+    '#default_value' => $default_theme,
+  ];
+
+  $form['#submit'][] = 'Drupal\micro_theme_library\Controller\MicroThemeLibraryController::form_submit';
+}
+
