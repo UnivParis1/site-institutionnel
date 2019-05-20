@@ -1,0 +1,92 @@
+uuid: 8c446b4e-0ccd-4e44-af2f-4ecc96e8793e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.news2018.body
+    - field.field.node.news2018.field_categories
+    - field.field.node.news2018.field_label_color
+    - field.field.node.news2018.field_lead
+    - field.field.node.news2018.field_media
+    - field.field.node.news2018.field_news_date
+    - field.field.node.news2018.field_news_topic
+    - node.type.news2018
+  module:
+    - datetime
+    - options
+    - text
+    - user
+id: node.news2018.default
+targetEntityType: node
+bundle: news2018
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_categories:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_label_color:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_lead:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_media:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_news_date:
+    weight: 105
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_news_topic:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  site_id:
+    label: hidden
+    type: entity_reference_label
+    weight: 0
+    region: content
+    settings:
+      link: true
+    third_party_settings: {  }
+hidden:
+  langcode: true
