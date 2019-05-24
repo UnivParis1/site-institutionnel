@@ -1,0 +1,33 @@
+uuid: 5edc403f-cffb-4807-82b7-24769ac671cc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - search_api.index.index_de_contenu
+    - views.view.recherche_de_contenu
+  module:
+    - views
+    - search_api_autocomplete
+id: recherche_de_contenu
+label: 'Recherche de contenu'
+index_id: index_de_contenu
+suggester_settings:
+  server:
+    fields:
+      - rendered_item
+suggester_weights:
+  server: 0
+suggester_limits:
+  server: 10
+search_settings:
+  'views:recherche_de_contenu':
+    displays:
+      default: true
+      selected: {  }
+options:
+  limit: 10
+  min_length: 3
+  show_count: true
+  autosubmit: true
+  submit_button_selector: ':submit'
+  delay: null

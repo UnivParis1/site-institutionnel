@@ -1,0 +1,190 @@
+uuid: 71a9ccf1-db79-4cc5-8ce8-9437e13a273b
+langcode: fr
+status: true
+dependencies:
+  module:
+    - elasticsearch_connector
+    - taxonomy
+    - node
+    - search_api
+  config:
+    - field.storage.node.field_categories
+    - field.storage.node.field_event_type
+    - search_api.server.elasticsearch
+third_party_settings:
+  elasticsearch_connector:
+    ngram_filter_enabled: 0
+    ngram_config:
+      ngram_type: edge_ngram
+      min_gram: '3'
+      max_gram: '3'
+id: index_de_contenu
+name: 'Index de contenu'
+description: ''
+read_only: false
+field_settings:
+  name:
+    label: 'Catégories » Terme de taxonomie » Nom'
+    datasource_id: 'entity:node'
+    property_path: 'field_categories:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_categories
+      module:
+        - taxonomy
+        - taxonomy
+  name_1:
+    label: 'Type d''événement » Terme de taxonomie » Nom'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+      module:
+        - taxonomy
+        - taxonomy
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          article: default
+          event: default
+          news: default
+          news2018: default
+          page: default
+  title:
+    label: Titre
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Type de contenu'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: text
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - article
+        - event
+        - news
+        - news2018
+        - page
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  highlight:
+    highlight: always
+    highlight_partial: false
+    excerpt: true
+    excerpt_length: 256
+    exclude_fields: {  }
+    prefix: '<strong>'
+    suffix: '</strong>'
+    weights:
+      postprocess_query: 0
+  html_filter:
+    all_fields: false
+    fields:
+      - rendered_item
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      em: 1
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+      u: 1
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  ignorecase:
+    all_fields: false
+    fields:
+      - rendered_item
+      - title
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  rendered_item: {  }
+  reverse_entity_references: {  }
+  stopwords:
+    all_fields: false
+    fields:
+      - rendered_item
+      - title
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+    weights:
+      preprocess_index: -5
+      preprocess_query: -2
+  transliteration:
+    all_fields: false
+    fields:
+      - rendered_item
+      - title
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: elasticsearch
