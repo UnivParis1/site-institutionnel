@@ -1,71 +1,52 @@
 <?php
 
-
 namespace Drupal\up1_theses\Service;
 
-
-use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslationInterface;
+use Drupal\node\Entity\Node;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\up1_theses\Service\ThesesService;
 
 class ThesesHelper {
 
   /**
-   * Stores settings object.
+   * The theses service.
    *
-   * @var \Drupal\Core\Config\Config
+   * @var \Drupal\up1_theses\Service\ThesesService
    */
-  protected $settings;
+  protected $thesesService;
+
+  use StringTranslationTrait;
 
   /**
-   * Array with data from json.
+   * Constructs a MyClass object.
    *
-   * @var array
+   * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
+   *   The string translation service.
+   * @param \Drupal\up1_theses\Service\ThesesService $theses_service
    */
-  protected $jsonData = [];
-
-
-  public function __construct(ConfigFactoryInterface $configFactory) {
-    $this->settings = $configFactory->get('up1_theses.settings');
+  public function __construct(ThesesService $theses_service, TranslationInterface $string_translation) {
+    $this->thesesService = $theses_service;
+    $this->stringTranslation = $string_translation;
   }
 
   /**
-   * Construct the base URL to the Thèses webservice.
-   *
-   * @return string
-   *   The base URL.
+   * {@inheritdoc}
    */
-  public function getWebServiceUrl() {
-    $protocol = $this->settings->get('webservice.protocol');
-    $hostname = $this->settings->get('webservice.hostname');
-
-    if (!isset($hostname) || empty($hostname)) {
-      \Drupal::logger('up1_theses')
-        ->error('You must define the hostname of the web service');
-      return FALSE;
-    }
-    else {
-      return "$protocol://$hostname";
-    }
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('theses.service')
+    );
   }
-
   /**
-   * Gets Json data from url
-   *
-   * @param string $webservice
-   * return void
-   */
-  public function getJsonDataFromUrl() {
-    $this->jsonData = file_get_contents($this->getWebServiceUrl());
-  }
-
-
-  /**
-   * Transform Json data to array
+   * Transform Json data to array.
    *
    * return void
    */
   public function transformJsonDataToArray() {
     try {
-      $json = file_get_contents($this->getWebServiceUrl());
+      $json = file_get_contents($this->thesesService->getWebServiceUrl());
       $dataArray = json_decode($json, TRUE);
       if (!empty($dataArray)) {
         return $dataArray;
@@ -78,7 +59,84 @@ class ThesesHelper {
   }
 
   /**
-   * Gets the DataArray
+   * Create nodes event from json.
+   *
+   * @return int $createdNodes
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function createNodesFromJson() {
+    $createdNodes = 0;
+
+    $taxonomyEntity = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term');
+    $termType = $taxonomyEntity->loadByProperties([
+      'name' => 'Soutenance de thèse'
+    ]);
+    $type = reset($termType);
+    $termCategory = $taxonomyEntity->loadByProperties([
+      'name' => 'Recherche'
+    ]);
+    $category = reset($termCategory);
+
+    $data = $this->transformJsonDataToArray();
+
+    foreach ($data as $key => $these) {
+      $existingTheses = $this->thesesService->getExistingTheses();
+      if (!in_array($these['COD_THS'], $existingTheses)  &&
+        !empty($these['LIB_THS']) && !empty($these['DAT_SOU_THS']) &&
+        !empty($these['HH_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
+        !empty($these['LIB_PR1_IND']) && !empty($these['LIB_NOM_PAT_IND']) &&
+        !empty($these['PNOMDIR']) && !empty($these['NOMPDIR']) ) {
+
+        $address = $this->formatAddress($these['LIB_CMT_LEU_SOU_THS']);
+        $newNode = [
+          'title' => $these['LIB_THS'],
+          'type' => 'event',
+          'langcode' => 'fr',
+          'uid' => '1',
+          'status' => 1,
+          'field_subtitle' => $this->t('By') . " " . ucfirst($these['LIB_PR1_IND'])
+            . " " . ucfirst($these['LIB_NOM_PAT_IND']),
+          'body' => $this->t('Directeur de thèse : ') . " "
+            . ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']),
+          'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
+          'field_event_date' => [[
+            'value' => $this->formatDate($these['DAT_SOU_THS'],
+              $these['HH_SOU_THS'], $these['MM_SOU_THS']),
+            'end_value' => $this->formatDate($these['DAT_SOU_THS'],
+              ($these['HH_SOU_THS']+2), $these['MM_SOU_THS'])
+          ]],
+          'field_address_map' => [
+            [
+              'lat' => isset($address['lat'])? $address['lat'] : 0,
+              'lng' => isset($address['lon'])? $address['lon'] : 0,
+            ]
+          ],
+        ];
+
+        $node = Node::create($newNode);
+        $node->set('field_event_type', [$type]);
+        $node->set('field_categories', [$category]);
+        $node->save();
+        /**
+         * If the node is created, add it in the "up1_theses_import" table
+         * to prevent duplication.
+         */
+        if ($node) {
+          $this->thesesService->populateImportTable($these['COD_THS'],
+            $node->id(), $node->getCreatedTime());
+          $createdNodes++;
+        }
+      }
+    }
+    return $createdNodes;
+
+  }
+
+  /**
+   * Gets latitude and longitude from the address field of the web service.
    *
    * @param string $address
    * @return array The array of json data
@@ -90,10 +148,11 @@ class ThesesHelper {
     ];
 
     $baseUrl = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=';
+    $url = "$baseUrl$address&limit=1";
 
-    $url = "$baseUrl$address&format=json&limit=1";
-
-    $response = \Drupal::httpClient()->get($url, array('headers' => array('Accept' => 'text/plain')));
+    $response = \Drupal::httpClient()->get($url, [
+      'headers' => ['Accept' => 'text/plain']
+    ]);
     $data = $response->getBody();
 
     $json = json_decode($data, TRUE);
@@ -107,19 +166,55 @@ class ThesesHelper {
   }
 
   /**
-   * Gets the DataArray
+   * Obtains latitude and longitude from the address field of the web service.
+   * @param string $address
    *
-   * @return array The array of json data
+   * @return array $addressData
    */
-  public function getJsonDataArray() {
-    return $this->jsonData;
+  public function formatAddress($address) {
+    $formattedAddress = $address;
+    if(preg_match('/Paris/i', $address)) {
+
+      preg_match('/^\D*(?=\d)/', $address, $m);
+      if (isset($m[0])) {
+        $formattedAddress = substr($address, strlen($m[0]));
+      }
+      if (!empty($formattedAddress)) {
+        if (preg_match('/Paris(.*)?/i', $formattedAddress)) {
+          $formattedAddress = preg_replace('/Paris(.*)?/i', '$2 Paris', $formattedAddress);
+        }
+        $formattedAddress = preg_replace("/(\s-\s)|(\s\s)|(\s)/i", "+", $formattedAddress);
+        //$formattedAddress = str_replace("-", "", $formattedAddress);
+        //$formattedAddress = str_replace("", "", $formattedAddress);
+        //$formattedAddress = str_replace(" ", "+", $formattedAddress);
+        //$formattedAddress = str_replace("++", "+", $formattedAddress);
+      }
+    }
+
+    $addressData = $this->getLatLongFromAddress($formattedAddress);
+    return $addressData;
+
   }
 
-  public function getExistingTheses() {
-    $query = \Drupal::database()->select('up1_theses_import', 't')
-      ->fields('t', ['cod_ths']);
+  /**
+   * Get Drupal formatted date from date field of the web service.
+   *
+   * @param string $date
+   * @param string $hours
+   * @param string $minutes
+   *
+   * @return string $formattedDate
+   */
+  public function formatDate($date, $hours, $minutes) {
+    $fullDate = $date . " " . ($hours - 2).":";
+    $fullDate .= ($minutes == 0)? "00" : $minutes;
 
-    return $query->execute()->fetchCol();
+    $newDate = \DateTime::createFromFormat('d/m/y H:i', $fullDate);
+
+    $formattedDate = \Drupal::service('date.formatter')
+      ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
+    $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
+
+    return $formattedDate;
   }
-
 }
