@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_keywords.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function up1_keywords_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_keywords module.
+    case 'help.page.up1_keywords':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Nuage de mots clé de recherche') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function up1_keywords_theme() {
+  return [
+    'up1_keywords' => [
+      'template' => 'up1-keywords',
+      'variables' => [
+        'keywords' => [],
+        'url' => NULL],
+    ],
+  ];
+}
