@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the up1_theses module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema().
+ */
+function up1_theses_schema() {
+
+  return [
+    'up1_theses_import' => [
+      'description' => 'Trace all imported theses during crons.',
+      'fields' => [
+        'cod_ths' => [
+          'description' => 'The code of the "these" from web service.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'nid' => [
+          'description' => 'The {node}.nid of the "these" created on Drupal.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'created' => [
+          'description' => 'The timestamp when this node was created.',
+          'type' => 'int',
+          'length' => 11,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['cod_ths'],
+      'foreign keys' => [
+        'associated_node' => [
+          'table' => 'node',
+          'columns' => ['nid' => 'nid'],
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Creates table if module already installed.
+ */
+function up1_theses_update_8100() {
+  $schema = Database::getConnection()->schema();
+  if (!$schema->tableExists('up1_theses_import')) {
+    $import = [
+      'description' => 'Trace all imported theses during crons.',
+      'fields' => [
+        'cod_ths' => [
+          'description' => 'The code of the "these" from web service.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'nid' => [
+          'description' => 'The {node}.nid of the "these" created on Drupal.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'created' => [
+          'description' => 'The timestamp when this node was created.',
+          'type' => 'int',
+          'length' => 11,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['cod_ths'],
+      'foreign keys' => [
+        'associated_node' => [
+          'table' => 'node',
+          'columns' => ['nid' => 'nid'],
+        ],
+      ],
+    ];
+
+    $schema->createTable('up1_theses_import', $import);
+  }
+}

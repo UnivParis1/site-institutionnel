@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_global.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function up1_global_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_global module.
+    case 'help.page.up1_global':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Defines global functions to be reused in other UP1 modules') . '</p>';
+      return $output;
+
+    default:
+  }
+}

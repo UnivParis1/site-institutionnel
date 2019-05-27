@@ -1,0 +1,14 @@
+up1_theses.settings:
+  path: '/admin/config/services/up1/theses'
+  defaults:
+    _form: '\Drupal\up1_theses\Form\Up1ThesesSettings'
+    _title: 'Agenda des soutenances de thèse'
+  requirements:
+    _permission: 'configure up1 settings'
+up1_theses.liste:
+  path: '/liste-theses'
+  defaults:
+    _controller: '\Drupal\up1_theses\Controller\ThesesController::listeTheses'
+    _title: 'Agenda des soutenances de thèse'
+  requirements:
+    _permission: 'access content'

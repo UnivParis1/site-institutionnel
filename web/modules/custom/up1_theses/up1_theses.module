@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_theses.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function up1_theses_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_theses module.
+    case 'help.page.up1_theses':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('&quot;Import de l&#039;agenda des soutenances de thèse&quot;') . '</p>';
+      return $output;
+
+    default:
+  }
+}
