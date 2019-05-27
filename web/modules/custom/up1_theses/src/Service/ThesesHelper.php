@@ -35,8 +35,16 @@ class ThesesHelper {
    */
   public function getWebServiceUrl() {
     $protocol = $this->settings->get('webservice.protocol');
+    $hostname = $this->settings->get('webservice.hostname');
 
-    return $protocol . "://" . $this->settings->get('webservice.hostname');
+    if (!isset($hostname) || empty($hostname)) {
+      \Drupal::logger('up1_theses')
+        ->error('You must define the hostname of the web service');
+      return FALSE;
+    }
+    else {
+      return "$protocol://$hostname";
+    }
   }
 
   /**
@@ -105,6 +113,13 @@ class ThesesHelper {
    */
   public function getJsonDataArray() {
     return $this->jsonData;
+  }
+
+  public function getExistingTheses() {
+    $query = \Drupal::database()->select('up1_theses_import', 't')
+      ->fields('t', ['cod_ths']);
+
+    return $query->execute()->fetchCol();
   }
 
 }

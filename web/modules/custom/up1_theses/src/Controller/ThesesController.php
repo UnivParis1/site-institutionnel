@@ -78,8 +78,12 @@ class ThesesController extends ControllerBase {
     $category = reset($term);
     $data = $this->thesesHelper->transformJsonDataToArray();
 
+    $existingTheses = $this->thesesHelper->getExistingTheses();
+
+    \Drupal::logger('up1_theses')->info(print_r($existingTheses, 1));
+
     foreach ($data as $key => $these) {
-      if (!isset($this->theses[$these['COD_THS']]) &&
+      if (!in_array($these['COD_THS'], $existingTheses)  && !isset($this->theses[$these['COD_THS']]) &&
         !empty($these['LIB_THS']) && !empty($these['DAT_SOU_THS']) &&
         !empty($these['HH_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
         !empty($these['LIB_PR1_IND']) && !empty($these['LIB_NOM_PAT_IND']) &&
@@ -117,35 +121,47 @@ class ThesesController extends ControllerBase {
    */
   public function createNodesFromData() {
     $theses = $this->prepareDataBeforeImport();
-
-    foreach ($theses as $key => $these) {
-      $newNode = [
-        'type' => 'event',
-        'langcode' => 'fr',
-        'uid' => '1',
-        'status' => 1,
-        'title' => $these['title'],
-        'field_subtitle' => $these['field_subtitle'],
-        'body' => $these['body'],
-        'field_event_address' => $these['field_event_address'],
-        'field_event_date' => [[
-          'value' => $these['event_start_date'],
-          'end_value' => $these['event_end_date'],
-        ]],
-      ];
-      if (!empty($these['address_latitude']) && !empty($these['address_longitude'])) {
-        $newNode['field_address_map'] = [
-          [
-            'lat' => $these['address_latitude'],
-            'lng' => $these['address_longitude'],
-          ]
+    if (!empty($theses) ) {
+      foreach ($theses as $key => $these) {
+        $newNode = [
+          'type' => 'event',
+          'langcode' => 'fr',
+          'uid' => '1',
+          'status' => 1,
+          'title' => $these['title'],
+          'field_subtitle' => $these['field_subtitle'],
+          'body' => $these['body'],
+          'field_event_address' => $these['field_event_address'],
+          'field_event_date' => [
+            [
+              'value' => $these['event_start_date'],
+              'end_value' => $these['event_end_date'],
+            ]
+          ],
         ];
-      }
+        if (!empty($these['address_latitude']) && !empty($these['address_longitude'])) {
+          $newNode['field_address_map'] = [
+            [
+              'lat' => $these['address_latitude'],
+              'lng' => $these['address_longitude'],
+            ]
+          ];
+        }
 
-      $node = Node::create($newNode);
-      $node->set('field_event_type', [$these['field_event_type']]);
-      $node->set('field_categories', [$these['field_categories']]);
-      $node->save();
+        $node = Node::create($newNode);
+        $node->set('field_event_type', [$these['field_event_type']]);
+        $node->set('field_categories', [$these['field_categories']]);
+        $node->save();
+        if ($node) {
+          \Drupal::database()->merge('up1_theses_import')
+            ->keys([
+              'cod_ths' => $key,
+              'nid' => $node->id(),
+              'created' => $node->getCreatedTime(),
+            ])
+            ->execute();
+        }
+      }
     }
 
   }
@@ -184,15 +200,16 @@ class ThesesController extends ControllerBase {
    * @return string $formattedDate
    */
   public function formatDate($date, $heures, $minutes) {
-    $fullDate = $date . " " . $heures.":";
+    $fullDate = $date . " " . ($heures-2).":";
     $fullDate .= ($minutes == 0)? "00" : $minutes;
 
-    $newDate = \DateTime::createFromFormat('d/m/y H:i', $fullDate,
-      new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+    $newDate = \DateTime::createFromFormat('d/m/y H:i', $fullDate);
 
     $formattedDate = \Drupal::service('date.formatter')
       ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
+    \Drupal::logger('up1_theses')->info(print_r($formattedDate, 1));
     $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
+    \Drupal::logger('up1_theses')->info(print_r($formattedDate, 1));
 
     return $formattedDate;
   }
