@@ -72,7 +72,7 @@ class AnnuaireController extends ControllerBase {
       '#users' => $filtered_users,
       //'#users' => $users,
       '#site' => $currentSiteId,
-//      '#Trusted' => (),
+      '#Trusted' => (Settings::get('search') == 'searchUserTrusted?' ? TRUE:FALSE),
       '#attached' => [
         'library' => [
           'micro_annuaire_sorbonne/annuaire'
