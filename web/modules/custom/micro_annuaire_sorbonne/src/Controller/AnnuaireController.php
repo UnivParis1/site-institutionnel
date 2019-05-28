@@ -2,6 +2,7 @@
 
 namespace Drupal\micro_annuaire_sorbonne\Controller;
 
+use Drupal\Core\Config\Config;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Site\Settings;
 
@@ -72,7 +73,7 @@ class AnnuaireController extends ControllerBase {
       '#users' => $filtered_users,
       //'#users' => $users,
       '#site' => $currentSiteId,
-      '#Trusted' => (Settings::get('search') == 'searchUserTrusted?' ? TRUE:FALSE),
+      '#Trusted' => (\Drupal::config('micro_annuaire_sorbonne.annuaireconfig')->get('type_de_recherche') == 'searchUserTrusted?' ? TRUE:FALSE),
       '#attached' => [
         'library' => [
           'micro_annuaire_sorbonne/annuaire'
