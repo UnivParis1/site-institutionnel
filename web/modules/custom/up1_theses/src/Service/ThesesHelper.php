@@ -4,9 +4,8 @@ namespace Drupal\up1_theses\Service;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\up1_theses\Service\ThesesService;
+
 
 class ThesesHelper {
 
@@ -35,8 +34,9 @@ class ThesesHelper {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
+    /** @noinspection PhpParamsInspection */
     return new static(
-      $container->get('theses.service')
+      $container->get("theses.service")
     );
   }
   /**
@@ -66,9 +66,7 @@ class ThesesHelper {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function createNodesFromJson() {
-    $createdNodes = 0;
-
+  public function formatDataFromJson() {
     $taxonomyEntity = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term');
     $termType = $taxonomyEntity->loadByProperties([
@@ -79,28 +77,48 @@ class ThesesHelper {
       'name' => 'Recherche'
     ]);
     $category = reset($termCategory);
-
+    $nodes = [];
     $data = $this->transformJsonDataToArray();
 
     foreach ($data as $key => $these) {
+      $ok = FALSE;
       $existingTheses = $this->thesesService->getExistingTheses();
-      if (!in_array($these['COD_THS'], $existingTheses)  &&
-        !empty($these['LIB_THS']) && !empty($these['DAT_SOU_THS']) &&
+      $cod_ths = $these['COD_THS'];
+
+      if (!empty($nodes)) {
+        foreach ($nodes as $node) {
+          if ($cod_ths == $node['cod_ths']) {
+            $ok = TRUE;
+            break;
+          }
+        }
+      }
+
+      if (!$ok && !in_array($cod_ths, $existingTheses)
+        && !empty($these['LIB_THS']) && !empty($these['DAT_SOU_THS']) &&
         !empty($these['HH_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
         !empty($these['LIB_PR1_IND']) && !empty($these['LIB_NOM_PAT_IND']) &&
         !empty($these['PNOMDIR']) && !empty($these['NOMPDIR']) ) {
 
         $address = $this->formatAddress($these['LIB_CMT_LEU_SOU_THS']);
-        $newNode = [
+        $thesard = $this->t('By') . " " . ucfirst($these['LIB_PR1_IND'])
+          . " " . ucfirst($these['LIB_NOM_PAT_IND']);
+        $dir_ths = $this->t('Directeur de thèse : ') . " "
+          . ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
+
+
+        $nodes[] = [
+          'cod_ths' => $cod_ths,
           'title' => $these['LIB_THS'],
           'type' => 'event',
           'langcode' => 'fr',
           'uid' => '1',
           'status' => 1,
-          'field_subtitle' => $this->t('By') . " " . ucfirst($these['LIB_PR1_IND'])
-            . " " . ucfirst($these['LIB_NOM_PAT_IND']),
-          'body' => $this->t('Directeur de thèse : ') . " "
-            . ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']),
+          'field_subtitle' => $thesard,
+          'body' => [
+            'value' => $dir_ths,
+            'format' => 'full_html',
+          ],
           'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
           'field_event_date' => [[
             'value' => $this->formatDate($these['DAT_SOU_THS'],
@@ -114,24 +132,30 @@ class ThesesHelper {
               'lng' => isset($address['lon'])? $address['lon'] : 0,
             ]
           ],
+          'field_event_type' => $type,
+          'field_categories' => $category,
         ];
 
-        $node = Node::create($newNode);
-        $node->set('field_event_type', [$type]);
-        $node->set('field_categories', [$category]);
-        $node->save();
         /**
-         * If the node is created, add it in the "up1_theses_import" table
-         * to prevent duplication.
-         */
-        if ($node) {
-          $this->thesesService->populateImportTable($these['COD_THS'],
+         * $createdNodes = 0;
+         * $node = Node::create($newNode);
+         * $node->set('field_event_type', [$type]);
+         * $node->set('field_categories', [$category]);
+         * $node->save();
+         *
+         *
+          // If the node is created, add it in the "up1_theses_import" table
+          // to prevent duplication.
+         * if ($node) {
+         * $this->thesesService->populateImportTable($these['COD_THS'],
             $node->id(), $node->getCreatedTime());
-          $createdNodes++;
-        }
+         * $createdNodes++;
+          }
+         */
       }
     }
-    return $createdNodes;
+
+    return $nodes;
 
   }
 
