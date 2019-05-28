@@ -39,7 +39,6 @@ function micro_annuaire_sorbonne_entity_base_field_info(EntityTypeInterface $ent
       ->setSettings([
         'text_type' => 'text',
       ])
-      ->setDefaultValueCallback('micro_annuaire_sorbonne_set_groups')
       ->setDisplayOptions('form', [
         'weight' => -8,
       ])
@@ -67,12 +66,12 @@ function micro_annuaire_sorbonne_form_site_form_alter(&$form, \Drupal\Core\Form\
   }
 }
 
-function micro_annuaire_sorbonne_set_groups() {
-  $config = Drupal::config('micro_annuaire_sorbonne.settings');
-  $default_groups = $config->get('groups');
-
-  return $default_groups;
-}
+//function micro_annuaire_sorbonne_set_groups() {
+//  $config = Drupal::config('micro_annuaire_sorbonne.settings');
+//  $default_groups = $config->get('groups');
+//
+//  return $default_groups;
+//}
 
 /**
  * Implements hook_theme().

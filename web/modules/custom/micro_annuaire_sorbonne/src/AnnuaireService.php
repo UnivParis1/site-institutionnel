@@ -40,13 +40,17 @@ class AnnuaireService implements AnnuaireServiceInterface {
     $siteStorage = $this->entityTypeManager->getStorage('site');
     $currentSite = $siteStorage->load($siteId);
 
+//    dump($currentSite->get('groups')->value);
     if (!empty($currentSite->get('groups')->value)){
       $groups = explode(';', $currentSite->get('groups')->value);
 //      dump($groups);
 
-      $ws = Settings::get('ws');
-      $search = Settings::get('search');
+      $config = \Drupal::config('micro_annuaire_sorbonne.annuaireconfig');
+      $ws = $config->get('url_ws');
+      $search = $config->get('type_de_recherche');
+
       $searchUser = $ws . $search;
+//      dump($searchUser);
       $filter_member_of_group = '';
 
       foreach ($groups as $group) {
