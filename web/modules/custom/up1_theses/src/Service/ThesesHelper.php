@@ -79,6 +79,7 @@ class ThesesHelper {
     $category = reset($termCategory);
     $nodes = [];
     $data = $this->transformJsonDataToArray();
+    $uid = $this->thesesService->getWebmestreUid();
 
     foreach ($data as $key => $these) {
       $ok = FALSE;
@@ -106,13 +107,12 @@ class ThesesHelper {
         $dir_ths = $this->t('Directeur de thèse : ') . " "
           . ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
 
-
         $nodes[] = [
           'cod_ths' => $cod_ths,
           'title' => $these['LIB_THS'],
           'type' => 'event',
           'langcode' => 'fr',
-          'uid' => '1',
+          'uid' => $uid,
           'status' => 1,
           'field_subtitle' => $thesard,
           'body' => [
@@ -134,27 +134,10 @@ class ThesesHelper {
           ],
           'field_event_type' => $type,
           'field_categories' => $category,
+          'cod_edo' => $these['COD_EDO'],
         ];
-
-        /**
-         * $createdNodes = 0;
-         * $node = Node::create($newNode);
-         * $node->set('field_event_type', [$type]);
-         * $node->set('field_categories', [$category]);
-         * $node->save();
-         *
-         *
-          // If the node is created, add it in the "up1_theses_import" table
-          // to prevent duplication.
-         * if ($node) {
-         * $this->thesesService->populateImportTable($these['COD_THS'],
-            $node->id(), $node->getCreatedTime());
-         * $createdNodes++;
-          }
-         */
       }
     }
-
     return $nodes;
 
   }
@@ -208,10 +191,6 @@ class ThesesHelper {
           $formattedAddress = preg_replace('/Paris(.*)?/i', '$2 Paris', $formattedAddress);
         }
         $formattedAddress = preg_replace("/(\s-\s)|(\s\s)|(\s)/i", "+", $formattedAddress);
-        //$formattedAddress = str_replace("-", "", $formattedAddress);
-        //$formattedAddress = str_replace("", "", $formattedAddress);
-        //$formattedAddress = str_replace(" ", "+", $formattedAddress);
-        //$formattedAddress = str_replace("++", "+", $formattedAddress);
       }
     }
 

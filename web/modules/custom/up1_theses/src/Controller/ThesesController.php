@@ -70,10 +70,10 @@ class ThesesController extends ControllerBase {
   /**
    * {@inheritDoc}
    */
-  public function listeTheses() {
+  public function getThesesList() {
     $data = $this->thesesHelper->formatDataFromJson();
     if (!$data) {
-      \Drupal::logger('up1_theses')->log('No new data to import.');
+      \Drupal::logger('up1_theses')->warning('No new data to import.');
     }
 
     $queue = $this->queueFactory->get('up1_theses_queue_import');

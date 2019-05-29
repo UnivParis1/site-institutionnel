@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   cron = {"time" = 30}
  *  )
  */
-class thesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
@@ -49,7 +49,7 @@ class thesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
    * @param \Drupal\up1_theses\Service\ThesesService
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition,
-                              EntityTypeManagerInterface $etmi, LoggerChannelFactoryInterface $lcfi, ThesesService $thesesService) {
+      EntityTypeManagerInterface $etmi, LoggerChannelFactoryInterface $lcfi, ThesesService $thesesService) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityTypeManager = $etmi;
     $this->loggerChannelFactory = $lcfi;
@@ -82,17 +82,17 @@ class thesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
         'title' => $item['title'],
         'type' => 'event',
         'langcode' => 'fr',
-        'uid' => '1',
+        'uid' => $item['uid'],
         'status' => 1,
         'field_subtitle' => $item['field_subtitle'],
         'body' => $item['body'],
         'field_event_address' => $item['field_event_address'],
         'field_event_date' => $item['field_event_date'],
         'field_address_map' => $item['field_address_map'],
-
       ]);
       $node->set('field_event_type', [$item['field_event_type']]);
       $node->set('field_categories', [$item['field_categories']]);
+      $node->set('moderation_state', 'published');
 
       $node->save();
 
