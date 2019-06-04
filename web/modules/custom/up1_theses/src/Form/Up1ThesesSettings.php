@@ -43,16 +43,16 @@ class Up1ThesesSettings extends ConfigFormBase {
       '#tree' => TRUE,
       '#description' => $this->t('Enter the details of "Agenda des soutenances de thèse".'),
     ];
-    $form['webservice']['protocol'] = array(
+    $form['webservice']['protocol'] = [
       '#type' => 'radios',
       '#title' => $this->t('HTTP Protocol'),
-      '#options' => array(
+      '#options' => [
         'http' => $this->t('HTTP (non-secure)'),
         'https' => $this->t('HTTPS (secure)'),
-      ),
+      ],
       '#default_value' => ($config->get('webservice.protocol'))? $config->get('webservice.protocol') : 'http',
       '#description' => $this->t('HTTP protocol type of the  webservice. '),
-    );
+    ];
     $form['webservice']['hostname'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Hostname'),

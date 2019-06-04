@@ -34,9 +34,8 @@ class ThesesHelper {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /** @noinspection PhpParamsInspection */
     return new static(
-      $container->get("theses.service")
+      $container->get('theses.service')
     );
   }
   /**
@@ -61,10 +60,8 @@ class ThesesHelper {
   /**
    * Create nodes event from json.
    *
-   * @return int $createdNodes
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function formatDataFromJson() {
     $taxonomyEntity = \Drupal::entityTypeManager()
