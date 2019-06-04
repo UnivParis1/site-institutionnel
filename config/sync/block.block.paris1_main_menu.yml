@@ -5,6 +5,8 @@ dependencies:
   config:
     - system.menu.main
   module:
+    - ctools
+    - micro_site
     - system
   theme:
     - paris1
@@ -13,7 +15,7 @@ _core:
 id: paris1_main_menu
 theme: paris1
 region: header
-weight: 0
+weight: -5
 provider: null
 plugin: 'system_menu_block:main'
 settings:
@@ -24,4 +26,18 @@ settings:
   level: 1
   depth: 1
   expand_all_items: false
-visibility: {  }
+visibility:
+  site:
+    id: site
+    sites:
+      1: '1'
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    bundles:
+      mini_site: mini_site
+    negate: true
+    context_mapping:
+      site: '@micro_site.current_site_context:site'
