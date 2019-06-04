@@ -1,0 +1,94 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\Core\Access\AccessResult;
+
+function micro_media_entity_base_field_info(EntityTypeInterface $entity_type)
+{
+  $fields = [];
+
+  if ($entity_type->id() === 'media') {
+    $fields['site_id'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Site'))
+      ->setDescription(t('The site on which the media is created'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'site')
+      ->setSetting('handler', 'default')
+      ->setSetting('handler_settings', [
+        'target_bundles' => NULL,
+        'auto_create' => FALSE,
+      ])
+      ->setDefaultValueCallback('Drupal\micro_node\MicroNodeManager::getCurrentSiteId')
+      ->setTranslatable(FALSE)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'entity_reference_label',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'hidden',
+        'weight' => 5,
+        'settings' => [
+          'size' => '60',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['is_global'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Visible for all'))
+      ->setDescription(t('Check this to share this media with other sites'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('form', array(
+        'type' => 'boolean_checkbox',
+        'settings' => array(
+          'display_label' => TRUE,
+        ),
+      ))
+      ->setDisplayConfigurable('form', TRUE);
+
+  }
+
+  return $fields;
+}
+
+
+/**
+ * adding site_id condition in views query
+ * @param ViewExecutable $view
+ * @param QueryPluginBase $query
+ */
+function micro_media_views_query_alter(ViewExecutable $view, Drupal\views\Plugin\views\query\Sql $query) {
+  if ($view->id() == 'media_entity_browser' || $view->id() == "media") {
+    $microSiteId = Drupal\micro_node\MicroNodeManager::getCurrentSiteId();
+    $operator = "=";
+    if(empty($microSiteId)){
+      $microSiteId[0] = NULL;
+      $operator = "is";
+    }
+    $argument = array(":site_id" => $microSiteId[0]);
+    $query->addWhereExpression('', "site_id ".$operator." :site_id OR is_global = 1", $argument);
+  }
+}
+
+/**
+ * Checking permission to share global media
+ * @param $operation
+ * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+ * @param \Drupal\Core\Session\AccountInterface $account
+ * @param \Drupal\Core\Field\FieldItemListInterface|NULL $items
+ * @return \Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
+ */
+function micro_media_entity_field_access($operation, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, \Drupal\Core\Session\AccountInterface $account, \Drupal\Core\Field\FieldItemListInterface $items = NULL){
+  if($field_definition->getFieldStorageDefinition()->getTargetEntityTypeId() == "media" && $field_definition->getName() == "is_global"){
+    if(\Drupal::currentUser()->hasPermission("add global media") == false){
+      return AccessResult::forbidden();
+    }
+  }
+  return AccessResult::neutral();
+}

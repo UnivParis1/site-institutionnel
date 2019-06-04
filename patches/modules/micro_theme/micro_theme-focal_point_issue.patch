@@ -1,0 +1,29 @@
+diff --git a/micro_theme.module b/micro_theme.module
+index 9b67587..de948f5 100644
+--- a/micro_theme.module
++++ b/micro_theme.module
+@@ -242,14 +242,16 @@ function micro_theme_preprocess_image_widget(&$variables) {
+       }
+     }
+ 
+-    $element['preview'] = array(
+-      '#weight' => -10,
+-      '#theme' => 'image_style',
+-      '#width' => $file_variables['width'],
+-      '#height' => $file_variables['height'],
+-      '#style_name' => $file_variables['style_name'],
+-      '#uri' => $file_variables['uri'],
+-    );
++    if (empty($element['preview'])){
++      $element['preview'] = array(
++        '#weight' => -10,
++        '#theme' => 'image_style',
++        '#width' => $file_variables['width'],
++        '#height' => $file_variables['height'],
++        '#style_name' => $file_variables['style_name'],
++        '#uri' => $file_variables['uri'],
++      );
++    } 
+ 
+     // Store the dimensions in the form so the file doesn't have to be
+     // accessed again. This is important for remote files.

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_cas_affiliation.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\user\UserInterface;
+use \Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_cas_affiliation_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_cas_affiliation module.
+    case 'help.page.micro_cas_affiliation':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Assigner un role et un sous site a un utilisateur') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
