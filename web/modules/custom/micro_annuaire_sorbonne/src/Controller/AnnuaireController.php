@@ -2,7 +2,9 @@
 
 namespace Drupal\micro_annuaire_sorbonne\Controller;
 
+use Drupal\Core\Config\Config;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Site\Settings;
 
 
 /**
@@ -28,6 +30,7 @@ class AnnuaireController extends ControllerBase {
    *   Contenant la liste des utilisateurs sous forme de tableau (JSON_decode).
    */
   public function list($letter) {
+//    dump($letter);
     $cache = \Drupal::cache();
     $filtered_users = [];
     $currentSiteId = '';
@@ -51,15 +54,18 @@ class AnnuaireController extends ControllerBase {
         }
       }
 
-      foreach ($users as $user) {
-        if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
-          $filtered_users[] = $user;
+//      dump($users);
+      if (!empty($users)) {
+        foreach ($users as $user) {
+          if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
+            $filtered_users[] = $user;
+          }
         }
+        // on trie les utilisateurs par ordre alphabetique des cn
+        $sortedUsers = usort($filtered_users, function ($a, $b) {
+          return strnatcasecmp($a['sn'], $b['sn']);
+        });
       }
-      // on trie les utilisateurs par ordre alphabetique des cn
-      $sortedUsers = usort($filtered_users, function ($a, $b) {
-        return strnatcasecmp($a['sn'], $b['sn']);
-      });
     }
 
     $build['item_list'] = [
@@ -67,6 +73,7 @@ class AnnuaireController extends ControllerBase {
       '#users' => $filtered_users,
       //'#users' => $users,
       '#site' => $currentSiteId,
+      '#Trusted' => (\Drupal::config('micro_annuaire_sorbonne.annuaireconfig')->get('type_de_recherche') == 'searchUserTrusted?' ? TRUE:FALSE),
       '#attached' => [
         'library' => [
           'micro_annuaire_sorbonne/annuaire'

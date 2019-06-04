@@ -39,40 +39,40 @@ class KeywordsBlock extends BlockBase {
       '#type' => 'textfield',
       '#title' => $this->t('Keyword 1'),
       '#default_value' => (empty($this->configuration['mot_cle_1'])?'':$this->configuration['mot_cle_1']),
-      '#maxlength' => 30,
-      '#size' => 30,
+      '#maxlength' => 100,
+      '#size' => 100,
       '#weight' => '0',
     ];
     $form['nuage']['mot_cle_2'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Keyword 2'),
       '#default_value' => (empty($this->configuration['mot_cle_2'])?'':$this->configuration['mot_cle_2']),
-      '#maxlength' => 30,
-      '#size' => 30,
+      '#maxlength' => 100,
+      '#size' => 100,
       '#weight' => '0',
     ];
     $form['nuage']['mot_cle_3'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Keyword 3'),
       '#default_value' => (empty($this->configuration['mot_cle_3'])?'':$this->configuration['mot_cle_3']),
-      '#maxlength' => 30,
-      '#size' => 30,
+      '#maxlength' => 100,
+      '#size' => 100,
       '#weight' => '0',
     ];
     $form['nuage']['mot_cle_4'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Keyword 4'),
       '#default_value' => (empty($this->configuration['mot_cle_4'])?'':$this->configuration['mot_cle_4']),
-      '#maxlength' => 30,
-      '#size' => 30,
+      '#maxlength' => 100,
+      '#size' => 100,
       '#weight' => '0',
     ];
     $form['nuage']['mot_cle_5'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Keyword 5'),
       '#default_value' => (empty($this->configuration['mot_cle_5'])?'':$this->configuration['mot_cle_5']),
-      '#maxlength' => 30,
-      '#size' => 30,
+      '#maxlength' => 100,
+      '#size' => 100,
       '#weight' => '0',
     ];
 

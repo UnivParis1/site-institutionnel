@@ -1,0 +1,6 @@
+<?php
+
+function micro_media_install() {
+  \Drupal::entityTypeManager()->clearCachedDefinitions();
+  \Drupal::service('entity.definition_update_manager')->applyUpdates();
+}
