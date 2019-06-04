@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for micro_multilingue module.
+ *
+ * @DCG
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function micro_multilingue_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'site') {
+    $fields['active_language'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Active_language'))
+      ->setDescription(t('Language activated on this micro site'))
+      ->setSettings([
+        'target_type' => 'configurable_language',
+        'handler' => 'default',
+      ])
+      ->setCardinality(-1)
+      ->setDisplayOptions('form', [
+        'type' => 'options_buttons',
+        'weight' => 0,
+      ]);
+
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function micro_multilingue_form_site_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+  $form['micro_multilingue'] = [
+    '#type' => 'details',
+    '#title' => t('Language'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-language'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
+
+  if (isset($form['micro_multilingue'])) {
+    $form['active_language']['#group'] = 'micro_multilingue';
+  }
+}
+
+
+/**
+ * Implements hook_block_build_alter().
+ */
+function micro_multilingue_language_switch_links_alter(&$variables) {
+  $variablesFiltered = [];
+  $valableLanguage = [];
+  $microSite = \Drupal::service('micro_site.negotiator')->getActiveSite();
+
+  if(!empty($microSite)) {
+    foreach($microSite->get('active_language') as $value)
+      $valableLanguage[] = $value->get('target_id')->getValue();
+  }
+  else {
+    $valableLanguage = \Drupal::config('micro_multilingue.settings')->get('host_active_language');
+  }
+
+
+  if(!empty($valableLanguage)) {
+    foreach($valableLanguage as $value) {
+      if(!empty($value) && key_exists($value, $variables))
+        $variablesFiltered[$value] = $variables[$value];
+    }
+    if(!empty($variablesFiltered))
+      $variables = $variablesFiltered;
+  }
+
+}

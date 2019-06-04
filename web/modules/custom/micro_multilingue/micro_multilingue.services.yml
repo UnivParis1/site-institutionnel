@@ -1,0 +1,6 @@
+services:
+  micro_multilingue.event_subscriber:
+    class: Drupal\micro_multilingue\EventSubscriber\MicroMultilingueSubscriber
+    arguments: ['@current_user', '@language_manager']
+    tags:
+      - { name: event_subscriber }
