@@ -1,7 +1,7 @@
-diff --git a/modules/contrib/cas/cas.services.yml b/modules/contrib/cas/cas.services.yml
+diff --git a/cas.services.yml b/cas.services.yml
 index f440318..64f54c5 100644
---- a/modules/contrib/cas/cas.services.yml
-+++ b/modules/contrib/cas/cas.services.yml
+--- a/cas.services.yml
++++ b/cas.services.yml
 @@ -12,7 +12,7 @@ services:
      arguments: ['@cas.helper', '@event_dispatcher', '@url_generator.non_bubbling']
    cas.validator:
@@ -11,14 +11,14 @@ index f440318..64f54c5 100644
    cas.user_manager:
      class: Drupal\cas\Service\CasUserManager
      arguments: ['@externalauth.externalauth', '@externalauth.authmap', '@config.factory', '@session', '@database', '@event_dispatcher', '@cas.helper']
-diff --git a/modules/contrib/cas/src/Form/._CasSettings.php b/modules/contrib/cas/src/Form/._CasSettings.php
+diff --git a/src/Form/._CasSettings.php b/src/Form/._CasSettings.php
 deleted file mode 100755
 index ac6475c..0000000
-Binary files a/modules/contrib/cas/src/Form/._CasSettings.php and /dev/null differ
-diff --git a/modules/contrib/cas/src/Form/CasSettings.php b/modules/contrib/cas/src/Form/CasSettings.php
+Binary files a/src/Form/._CasSettings.php and /dev/null differ
+diff --git a/src/Form/CasSettings.php b/src/Form/CasSettings.php
 index 947bbc4..0027357 100755
---- a/modules/contrib/cas/src/Form/CasSettings.php
-+++ b/modules/contrib/cas/src/Form/CasSettings.php
+--- a/src/Form/CasSettings.php
++++ b/src/Form/CasSettings.php
 @@ -95,7 +95,8 @@ public function buildForm(array $form, FormStateInterface $form_state) {
        '#options' => array(
          '1.0' => $this->t('1.0'),
@@ -29,10 +29,10 @@ index 947bbc4..0027357 100755
        ),
        '#default_value' => $config->get('server.version'),
        '#description' => $this->t('The CAS protocol version your CAS server supports. If unsure, ask your CAS server administrator.'),
-diff --git a/modules/contrib/cas/src/Service/CasValidator.php b/modules/contrib/cas/src/Service/CasValidator.php
+diff --git a/src/Service/CasValidator.php b/src/Service/CasValidator.php
 index ac30eec..597511a 100644
---- a/modules/contrib/cas/src/Service/CasValidator.php
-+++ b/modules/contrib/cas/src/Service/CasValidator.php
+--- a/src/Service/CasValidator.php
++++ b/src/Service/CasValidator.php
 @@ -8,6 +8,8 @@
  use Drupal\Component\Utility\UrlHelper;
  use Drupal\Core\Config\ConfigFactoryInterface;

@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_theses.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+/**
+ * Implements hook_help().
+ */
+function up1_theses_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_theses module.
+    case 'help.page.up1_theses':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('&quot;Import de l&#039;agenda des soutenances de thèse&quot;') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ * @param EntityInterface $entity
+ */
+function up1_theses_entity_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'event') {
+
+    $select = Drupal::database()
+      ->select('up1_theses_import', 't')
+      ->fields('t', ['nid'])
+      ->condition('t.nid', $entity->id())
+      ->execute()
+      ->fetchField();
+
+    if ($select && $select == $entity->id()) {
+      $query = Drupal::database()->delete('up1_theses_import')
+        ->condition('nid', $entity->id());
+      if ($query->execute()) {
+        Drupal::logger('up1_theses')
+          ->info('"' . $entity->label() . '" supprimé de la table up1_theses_import.');
+      }
+      else {
+        Drupal::logger('up1_theses')
+          ->warning('"' . $entity->label() . '" inconnu dans la table up1_theses_import ou non supprimé.');
+      }
+    }
+  }
+
+}

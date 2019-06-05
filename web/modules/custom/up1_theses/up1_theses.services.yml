@@ -1,0 +1,7 @@
+services:
+  theses.service:
+    class: Drupal\up1_theses\Service\ThesesService
+    arguments: ['@config.factory']
+  theses.helper:
+    class: Drupal\up1_theses\Service\ThesesHelper
+    arguments: ['@theses.service', '@string_translation']
