@@ -1,0 +1,59 @@
+uuid: b0760242-be1e-44ac-b1f4-877cfca9d286
+langcode: fr
+status: true
+dependencies:
+  config:
+    - up1_pages_persos.page_perso_entity_type.page_perso
+  module:
+    - link
+    - text
+    - user
+id: page_perso_entity.page_perso.default
+targetEntityType: page_perso_entity
+bundle: page_perso
+mode: default
+content:
+  id_hal:
+    label: hidden
+    type: string
+    weight: 1
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  name:
+    label: above
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  page_perso_link:
+    type: link
+    weight: 4
+    region: content
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  research_project:
+    label: hidden
+    type: text_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
