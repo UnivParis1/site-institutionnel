@@ -25,9 +25,8 @@ class ThesesHelper {
    *   The string translation service.
    * @param \Drupal\up1_theses\Service\ThesesService $theses_service
    */
-  public function __construct(ThesesService $theses_service, TranslationInterface $string_translation) {
+  public function __construct(ThesesService $theses_service) {
     $this->thesesService = $theses_service;
-    $this->stringTranslation = $string_translation;
   }
 
   /**
