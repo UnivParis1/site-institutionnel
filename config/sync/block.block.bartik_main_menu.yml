@@ -5,6 +5,8 @@ dependencies:
   config:
     - system.menu.main
   module:
+    - ctools
+    - micro_site
     - system
   theme:
     - bartik
@@ -18,10 +20,23 @@ provider: null
 plugin: 'system_menu_block:main'
 settings:
   id: 'system_menu_block:main'
-  label: 'Navigation principale'
+  label: 'Main navigation'
   provider: system
   label_display: '0'
   level: 1
   depth: 1
   expand_all_items: false
-visibility: {  }
+visibility:
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    bundles:
+      mini_site: mini_site
+    negate: true
+    context_mapping:
+      site: '@micro_site.current_site_context:site'
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
