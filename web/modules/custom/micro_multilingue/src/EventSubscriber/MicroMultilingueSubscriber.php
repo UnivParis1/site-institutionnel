@@ -2,8 +2,10 @@
 
 namespace Drupal\micro_multilingue\EventSubscriber;
 
+use Drupal\Console\Bootstrap\Drupal;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\micro_multilingue\LanguageValidatorInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -31,15 +33,22 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
    */
   protected $languageManager;
 
+  /**
+   * @var LanguageValidatorInterface
+   */
+  protected $languageValidator;
+
 
   /**
    * Constructs event subscriber.
    *
    *
    */
-  public function __construct(AccountInterface $currentUser, LanguageManagerInterface $languageManager ) {
+  public function __construct(AccountInterface $currentUser, LanguageManagerInterface $languageManager,
+                              LanguageValidatorInterface $languageValidator ) {
     $this->currentUser = $currentUser;
     $this->languageManager = $languageManager;
+    $this->languageValidator = $languageValidator;
   }
 
   /**
@@ -51,29 +60,37 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
   public function onKernelRequest(GetResponseEvent $event) {
     $request = $event->getRequest();
 
-    if ($this->currentUser->hasPermission('access non default language pages')) {
-      return;
-    }
-
     $default_language = $this->languageManager->getDefaultLanguage();
-    $active_language = $this->languageManager->getCurrentLanguage();
-
-    if( \Drupal::service('path.matcher')->isFrontPage() )
 
 
-    /**
-     * @var $node Node;
-     */
-    $node = $request->get('node');
-
-    if (!empty($node) && !$node->hasTranslation($active_language->getId())) {
+    if(!$this->languageValidator->isAvailableLanguage()) {
       $route_match = RouteMatch::createFromRequest($request);
       $route_name = $route_match->getRouteName();
       $parameters = $route_match->getRawParameters()->all();
-      $url = Url::fromRoute($route_name, $parameters, ['language' => $default_language]);
+
+      if(\Drupal::service('path.matcher')->isFrontPage()) {
+        $url = Url::fromRoute('<front>', [], ['language' => $default_language]);
+      }
+      else {
+        $url = Url::fromRoute($route_name, $parameters, ['language' => $default_language]);
+      }
       $new_response = new RedirectResponse($url->toString(), '302');
       $event->setResponse($new_response);
     }
+
+//    /**
+//     * @var $node Node;
+//     */
+//    $node = $request->get('node');
+//
+//    if (!empty($node) && !$node->hasTranslation($active_language->getId())) {
+//      $route_match = RouteMatch::createFromRequest($request);
+//      $route_name = $route_match->getRouteName();
+//      $parameters = $route_match->getRawParameters()->all();
+//      $url = Url::fromRoute($route_name, $parameters, ['language' => $default_language]);
+//      $new_response = new RedirectResponse($url->toString(), '302');
+//      $event->setResponse($new_response);
+//    }
 
   }
 

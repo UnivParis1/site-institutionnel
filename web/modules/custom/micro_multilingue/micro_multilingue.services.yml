@@ -1,6 +1,10 @@
 services:
+  micro_multilingue.language_validator:
+    class: Drupal\micro_multilingue\LanguageValidator
+    arguments: ['@language_manager', '@micro_site.negotiator', '@config.factory']
   micro_multilingue.event_subscriber:
     class: Drupal\micro_multilingue\EventSubscriber\MicroMultilingueSubscriber
-    arguments: ['@current_user', '@language_manager']
+    arguments: ['@current_user', '@language_manager', '@micro_multilingue.language_validator']
     tags:
       - { name: event_subscriber }
+
