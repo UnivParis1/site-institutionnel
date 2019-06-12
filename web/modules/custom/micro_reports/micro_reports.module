@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_reports.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\piwik_reports\PiwikData;
+
+/**
+ * Implements hook_help().
+ */
+function micro_reports_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_reports module.
+    case 'help.page.micro_reports':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Rapports piwik specifiques a chaque mini-site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function micro_reports_form_piwik_reports_form_alter(&$form, FormStateInterface $formState, $form_id){
+  /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+  $negotiator = \Drupal::service('micro_site.negotiator');
+  if (!empty($negotiator->getActiveSite())) {
+    $currentSiteId = $negotiator->getActiveId();
+    $piwik_id = get_piwik_id($currentSiteId);
+
+    unset($form['piwik_filters']['site']);
+    $form['piwik_filters']['site']['#type'] = 'hidden';
+    $form['piwik_filters']['site']['#value'] = $piwik_id->value;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function micro_reports_preprocess_piwik_reports(&$variables) {
+
+//  dump($variables);
+  /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+  $negotiator = \Drupal::service('micro_site.negotiator');
+  $iframe_url_parts = parse_url($variables['data_url'][0]['url']);
+  if (!empty($negotiator->getActiveSite())) {
+    $currentSiteId = $negotiator->getActiveId();
+
+    if (!empty($currentSiteId)) {
+      $piwik_id = get_piwik_id($currentSiteId);
+
+      if (!empty($piwik_id->value)) {
+        $updatedQuery = update_url($piwik_id->value, $iframe_url_parts);
+        $variables['data_url'][0]['url'] = $iframe_url_parts['scheme'] . '://' . $iframe_url_parts['host'] . $iframe_url_parts['path'] .
+          '?' . $updatedQuery;
+      }
+      else {
+        $variables['data_url'][0]['empty_text'] = t("Pas de rapport pour ce site");
+      }
+    }
+  }
+  else {
+    $token_auth = PiwikData::getToken();
+
+    if (!$token_auth) {
+      $_SESSION['piwik_reports_site'] = '';
+      $variables['data_url'][0]['empty_text'] = t('You cannot access any data on the selected Piwik server. Please check authentication string and permissions with your Piwik server administrator.');
+    }
+    else {
+      $sites = PiwikData::getSites($token_auth);
+      if (!$sites) {
+        $variables['data_url'][0]['empty_text'] = t('You cannot access any data on the selected Piwik server. Please check with your Drupal administrator for allowed sites.');
+      }
+      else {
+//        dump($sites);
+        $updatedQuery = update_url($sites[0]['idsite'], $iframe_url_parts);
+        $variables['data_url'][0]['url'] = $iframe_url_parts['scheme'] . '://' . $iframe_url_parts['host'] . $iframe_url_parts['path'] .
+          '?' . $updatedQuery;
+      }
+    }
+  }
+}
+
+function get_piwik_id($siteId){
+  $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
+  $currentSite = $siteStorage->load($siteId);
+
+  return $currentSite->get('piwik_id');
+}
+
+function update_url($piwik_id, $iframe_url_parts){
+//  dump($piwik_id);
+  $query = $iframe_url_parts['query'];
+  $arguments = explode('&', $query);
+  $updatedQuery = '';
+  foreach ($arguments as $argument) {
+    if (substr($argument, 0, 7) == 'idSite=') {
+      $updatedQuery .= 'idSite=' . $piwik_id . '&';
+    }
+    else {
+      $updatedQuery .= $argument . '&';
+    }
+  }
+  $updatedQuery = substr($updatedQuery, 0, -1);
+
+  return $updatedQuery;
+
+}
