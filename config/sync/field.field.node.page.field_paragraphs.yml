@@ -1,0 +1,79 @@
+uuid: c3adb4f0-ccec-4104-b298-142234657c14
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - node.type.page
+    - paragraphs.paragraphs_type.key_figures_section
+  module:
+    - entity_reference_revisions
+id: node.page.field_paragraphs
+field_name: field_paragraphs
+entity_type: node
+bundle: page
+label: 'Blocs éditoriaux'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      key_figures_section: key_figures_section
+    target_bundles_drag_drop:
+      key_figures_section:
+        enabled: true
+        weight: 18
+      bp_accordion:
+        weight: 19
+        enabled: false
+      bp_accordion_section:
+        weight: 20
+        enabled: false
+      bp_blank:
+        weight: 21
+        enabled: false
+      bp_block:
+        weight: 22
+        enabled: false
+      bp_carousel:
+        weight: 23
+        enabled: false
+      bp_column_wrapper:
+        weight: 24
+        enabled: false
+      bp_columns:
+        weight: 25
+        enabled: false
+      bp_columns_three_uneven:
+        weight: 26
+        enabled: false
+      bp_columns_two_uneven:
+        weight: 27
+        enabled: false
+      bp_image:
+        weight: 28
+        enabled: false
+      bp_modal:
+        weight: 29
+        enabled: false
+      bp_simple:
+        weight: 30
+        enabled: false
+      bp_tab_section:
+        weight: 31
+        enabled: false
+      bp_tabs:
+        weight: 32
+        enabled: false
+      bp_view:
+        weight: 33
+        enabled: false
+      key_figure:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions
