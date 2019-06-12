@@ -5,11 +5,13 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_paragraphs
     - field.field.node.page.field_sites
     - field.field.node.page.field_sites_all
     - node.type.page
   module:
     - content_moderation
+    - paragraphs
     - path
     - text
 _core:
@@ -39,6 +41,18 @@ content:
     settings:
       display_label: true
     weight: 42
+    third_party_settings: {  }
+    region: content
+  field_paragraphs:
+    type: entity_reference_paragraphs
+    weight: 121
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
     region: content
   field_sites:
