@@ -1,0 +1,20 @@
+uuid: e710a49d-f767-48a9-9398-7ab2f1651267
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media.type.mediatheque_audio
+id: media.mediatheque_audio.uid
+field_name: uid
+entity_type: media
+bundle: mediatheque_audio
+label: 'Écrit par'
+description: 'L''identifiant (ID) de l''auteur.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\media\Entity\Media::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference
