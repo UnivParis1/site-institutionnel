@@ -1,0 +1,13 @@
+up1_pages_perso.settings:
+  path: '/admin/config/services/up1/pages-perso'
+  defaults:
+    _form: '\Drupal\up1_pages_perso\Form\PagePersoSettings'
+    _title: 'Page Personnelle'
+  requirements:
+    _permission: 'configure up1 settings'
+up1_pages_perso.page_perso.public_view:
+  path: '/page-perso/{page_perso}'
+  defaults:
+    _entity_view: 'page_perso'
+  requirements:
+    _permission: 'access content'
