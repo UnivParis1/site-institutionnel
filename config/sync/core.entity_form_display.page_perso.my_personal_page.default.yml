@@ -1,0 +1,316 @@
+uuid: c860d64b-dc33-499f-bc6b-633688500bd8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_entity_browser
+    - field.field.page_perso.my_personal_page.field_audios
+    - field.field.page_perso.my_personal_page.field_epi_link
+    - field.field.page_perso.my_personal_page.field_facebook
+    - field.field.page_perso.my_personal_page.field_hal_data
+    - field.field.page_perso.my_personal_page.field_hal_sort
+    - field.field.page_perso.my_personal_page.field_id_hal
+    - field.field.page_perso.my_personal_page.field_linkedin
+    - field.field.page_perso.my_personal_page.field_pdf_resume
+    - field.field.page_perso.my_personal_page.field_profession
+    - field.field.page_perso.my_personal_page.field_publications
+    - field.field.page_perso.my_personal_page.field_publications_hal
+    - field.field.page_perso.my_personal_page.field_research_project
+    - field.field.page_perso.my_personal_page.field_research_themes
+    - field.field.page_perso.my_personal_page.field_text_resume
+    - field.field.page_perso.my_personal_page.field_twitter
+    - field.field.page_perso.my_personal_page.field_viadeo
+    - up1_pages_perso.page_perso_type.my_personal_page
+  module:
+    - entity_browser
+    - file
+    - link
+    - text
+id: page_perso.my_personal_page.default
+targetEntityType: page_perso
+bundle: my_personal_page
+mode: default
+content:
+  epi_link:
+    type: link_default
+    region: content
+    weight: 7
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_audios:
+    weight: 5
+    settings:
+      entity_browser: media_entity_browser
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_epi_link:
+    weight: 11
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_facebook:
+    weight: 14
+    settings:
+      placeholder_url: 'Exemple : https://www.facebook.com/UnivParis1PantheonSorbonne'
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_hal_data:
+    weight: 8
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        b2118e65-934d-4391-8c0c-a7683f0b2512:
+          dependee: field_publications_hal
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: 1
+            effect: slide
+            effect_options:
+              fade:
+                speed: '400'
+              slide:
+                speed: '400'
+            selector: ''
+          entity_type: page_perso
+          bundle: my_personal_page
+    type: options_select
+    region: content
+  field_hal_sort:
+    weight: 9
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        65fbb54a-6394-460b-a2c1-fa9356bfbeea:
+          dependee: field_publications_hal
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: 1
+            effect: slide
+            effect_options:
+              fade:
+                speed: '400'
+              slide:
+                speed: '400'
+            selector: ''
+          entity_type: page_perso
+          bundle: my_personal_page
+    type: options_select
+    region: content
+  field_id_hal:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        9986c1df-97a2-4f23-80b8-79a1880d3545:
+          dependee: field_publications_hal
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: 1
+            effect: slide
+            effect_options:
+              fade:
+                speed: '400'
+              slide:
+                speed: '400'
+            selector: ''
+          entity_type: page_perso
+          bundle: my_personal_page
+    type: string_textfield
+    region: content
+  field_linkedin:
+    weight: 15
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_pdf_resume:
+    weight: 13
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_profession:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_publications:
+    weight: 10
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        1e5ef478-8237-4fda-bcfa-cdf03bfec529:
+          dependee: field_publications_hal
+          settings:
+            state: '!visible'
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: 1
+            effect: slide
+            effect_options:
+              fade:
+                speed: '400'
+              slide:
+                speed: '400'
+            selector: ''
+          entity_type: page_perso
+          bundle: my_personal_page
+    type: text_textarea
+    region: content
+  field_publications_hal:
+    weight: 6
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_research_project:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_research_themes:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_text_resume:
+    weight: 12
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_twitter:
+    weight: 16
+    settings:
+      placeholder_url: 'Exemple : https://twitter.com/SorbonneParis1'
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_viadeo:
+    weight: 17
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  hal_publications:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  id_hal:
+    type: string_textfield
+    region: content
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  page_perso_link:
+    type: link_default
+    region: content
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  research_project:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  research_themes:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 18
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }
