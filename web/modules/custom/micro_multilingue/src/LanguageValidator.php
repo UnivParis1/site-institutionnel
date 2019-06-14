@@ -1,6 +1,7 @@
 <?php
 namespace Drupal\micro_multilingue;
 
+use Drupal\Console\Bootstrap\Drupal;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\micro_site\SiteNegotiatorInterface;
@@ -24,7 +25,7 @@ class LanguageValidator implements LanguageValidatorInterface
   public function isAvailableLanguage (){
     $default_language = $this->languageManager->getDefaultLanguage();
     $active_language = $this->languageManager->getCurrentLanguage();
-
+    $availableLanguage = [];
     if($this->negotiator->isHostUrl()){
       $availableLanguage = array_values(\Drupal::config('micro_multilingue.settings')->get('host_active_language'));
     }
@@ -34,7 +35,10 @@ class LanguageValidator implements LanguageValidatorInterface
         $availableLanguage[] =$language->entity->getID();
       }
     }
+    if(empty($availableLanguage)) {
+      $availableLanguage[] = $default_language->getID();
+    }
 
-    return in_array($active_language->getId(), $availableLanguage, true);
+    return in_array($active_language->getID(), $availableLanguage, true);
     }
 }

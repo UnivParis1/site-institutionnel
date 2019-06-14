@@ -114,28 +114,33 @@ function micro_multilingue_language_switch_links_alter(&$variables) {
 }
 
 function micro_multilingue_preprocess_table(&$variables) {
-  $negotiator = Drupal::service('micro_site.negotiator');
-  $langcode = '';
-  $availableLanguage = [];
-  if($negotiator->isHostUrl()){
-    $availableLanguage = array_values(\Drupal::config('micro_multilingue.settings')->get('host_active_language'));
-  }
-  else {
-    $site = $negotiator->getActiveSite();
-    $activeLanguages = $site->get('active_language');
-    foreach ($activeLanguages as $activeLanguage) {
-      $availableLanguage[] = $activeLanguage->entity->getID();
+  $routeAvailable = ['entity.node.content_translation_overview'];
+  $routeName = Drupal::routeMatch()->getRouteName();
+  if(in_array($routeName, $routeAvailable, true)) {
+    $negotiator = Drupal::service('micro_site.negotiator');
+    $langcode = '';
+    $availableLanguage = [];
+    if($negotiator->isHostUrl()){
+      $availableLanguage = array_values(\Drupal::config('micro_multilingue.settings')->get('host_active_language'));
+    }
+    else {
+      $site = $negotiator->getActiveSite();
+      $activeLanguages = $site->get('active_language');
+      foreach ($activeLanguages as $activeLanguage) {
+        $availableLanguage[] = $activeLanguage->entity->getID();
+      }
+    }
+    foreach($variables['rows'] as $key => $row) {
+      if(key_exists('edit', $row['cells'][3]['content']['#links'])) {
+        $langcode = $row['cells'][3]['content']['#links']['edit']['language']->getID();
+      }
+      if(key_exists('add', $row['cells'][3]['content']['#links'])) {
+        $langcode = $row['cells'][3]['content']['#links']['add']['url']->getOption('language')->getID();
+      }
+      if(!in_array($langcode, $availableLanguage, true)){
+        unset($variables['rows'][$key]);
+      }
     }
   }
-  foreach($variables['rows'] as $key => $row) {
-    if(key_exists('edit', $row['cells'][3]['content']['#links'])) {
-      $langcode = $row['cells'][3]['content']['#links']['edit']['language']->getID();
-    }
-    if(key_exists('add', $row['cells'][3]['content']['#links'])) {
-      $langcode = $row['cells'][3]['content']['#links']['add']['url']->getOption('language')->getID();
-    }
-    if(!in_array($langcode, $availableLanguage, true)){
-      unset($variables['rows'][$key]);
-    }
-  }
+
 }
