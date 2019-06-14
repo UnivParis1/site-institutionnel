@@ -61,8 +61,6 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
     $request = $event->getRequest();
 
     $default_language = $this->languageManager->getDefaultLanguage();
-
-
     if(!$this->languageValidator->isAvailableLanguage()) {
       $route_match = RouteMatch::createFromRequest($request);
       $route_name = $route_match->getRouteName();
