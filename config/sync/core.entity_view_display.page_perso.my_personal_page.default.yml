@@ -1,0 +1,231 @@
+uuid: 4b74883c-0b0d-40d1-b394-d641ffb6d971
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.page_perso.my_personal_page.field_audios
+    - field.field.page_perso.my_personal_page.field_epi_link
+    - field.field.page_perso.my_personal_page.field_facebook
+    - field.field.page_perso.my_personal_page.field_hal_data
+    - field.field.page_perso.my_personal_page.field_hal_sort
+    - field.field.page_perso.my_personal_page.field_id_hal
+    - field.field.page_perso.my_personal_page.field_linkedin
+    - field.field.page_perso.my_personal_page.field_pdf_resume
+    - field.field.page_perso.my_personal_page.field_profession
+    - field.field.page_perso.my_personal_page.field_publications
+    - field.field.page_perso.my_personal_page.field_publications_hal
+    - field.field.page_perso.my_personal_page.field_research_project
+    - field.field.page_perso.my_personal_page.field_research_themes
+    - field.field.page_perso.my_personal_page.field_text_resume
+    - field.field.page_perso.my_personal_page.field_twitter
+    - field.field.page_perso.my_personal_page.field_viadeo
+    - up1_pages_perso.page_perso_type.my_personal_page
+  module:
+    - file
+    - link
+    - options
+    - text
+id: page_perso.my_personal_page.default
+targetEntityType: page_perso
+bundle: my_personal_page
+mode: default
+content:
+  epi_link:
+    type: link
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_audios:
+    type: entity_reference_entity_view
+    weight: 6
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_epi_link:
+    weight: 11
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_facebook:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_hal_data:
+    weight: 14
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_hal_sort:
+    weight: 15
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_id_hal:
+    weight: 7
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_linkedin:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_pdf_resume:
+    weight: 13
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_profession:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_publications:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_research_project:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_research_themes:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_text_resume:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_twitter:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_viadeo:
+    weight: 5
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  hal_publications:
+    label: hidden
+    type: text_default
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  id_hal:
+    label: hidden
+    type: string
+    weight: 1
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  page_perso_link:
+    type: link
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  research_project:
+    label: hidden
+    type: text_default
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  research_themes:
+    label: hidden
+    type: text_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_publications_hal: true
+  langcode: true
+  user_id: true

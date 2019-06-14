@@ -1,0 +1,42 @@
+uuid: 88ff4f1b-caa2-4db6-b583-44e895aeffe2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.key_figures_section.field_column_number
+    - field.field.paragraph.key_figures_section.field_key_figure
+    - field.field.paragraph.key_figures_section.field_title
+    - paragraphs.paragraphs_type.key_figures_section
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.key_figures_section.default
+targetEntityType: paragraph
+bundle: key_figures_section
+mode: default
+content:
+  field_column_number:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_key_figure:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

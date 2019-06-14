@@ -1,0 +1,45 @@
+uuid: ddd9e986-2b2d-4a99-b18c-4284213556a7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.key_figures_section.field_column_number
+    - field.field.paragraph.key_figures_section.field_key_figure
+    - field.field.paragraph.key_figures_section.field_title
+    - paragraphs.paragraphs_type.key_figures_section
+  module:
+    - paragraphs
+id: paragraph.key_figures_section.default
+targetEntityType: paragraph
+bundle: key_figures_section
+mode: default
+content:
+  field_column_number:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_key_figure:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Paragraphe
+      title_plural: Paragraphes
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: key_figure
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

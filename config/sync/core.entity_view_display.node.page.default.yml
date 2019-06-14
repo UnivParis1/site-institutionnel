@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_paragraphs
     - field.field.node.page.field_sites
     - field.field.node.page.field_sites_all
     - node.type.page
   module:
+    - entity_reference_revisions
     - text
     - user
 _core:
@@ -25,9 +27,20 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 102
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   links:
     weight: 101
     region: content
+    settings: {  }
+    third_party_settings: {  }
   site_id:
     label: hidden
     type: entity_reference_label

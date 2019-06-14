@@ -1,0 +1,34 @@
+uuid: 3e637b29-f37e-4e7c-a260-23a78c6eb6f2
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - language
+    - up1_pages_perso
+id: page_perso
+label: 'Page Perso'
+type: 'canonical_entities:page_perso'
+pattern: 'page-perso/[page_perso:name]'
+selection_criteria:
+  104b3ded-e608-42ee-a05f-cecc46e98f4b:
+    id: 'entity_bundle:page_perso'
+    bundles:
+      my_personal_page: my_personal_page
+    negate: false
+    context_mapping:
+      page_perso: page_perso
+    uuid: 104b3ded-e608-42ee-a05f-cecc46e98f4b
+  74336bf2-815e-4d96-90f1-6602d531022f:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: 'page_perso:langcode:language'
+    uuid: 74336bf2-815e-4d96-90f1-6602d531022f
+selection_logic: and
+weight: -10
+relationships:
+  'page_perso:langcode:language':
+    label: Language

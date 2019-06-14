@@ -52,12 +52,36 @@ class ThesesService {
   }
 
   /**
+   * @return int $uid
+   */
+  public function getWebmestreUid() {
+    $user_storage = \Drupal::service('entity_type.manager')->getStorage('user');
+    $uids = $user_storage->getQuery()
+      ->condition('status', 1)
+      ->condition('roles', 'webmestre_general')
+      ->execute();
+    $users = $user_storage->loadMultiple($uids);
+
+    if ($users) {
+      $webmestre = reset($users);
+      $uid = $webmestre->id();
+    }
+    else {
+      $uid = 1;
+    }
+    return $uid;
+
+  }
+
+  /**
    * Add $cod_ths & $nid in "up1_theses_import" table to prevent
    * duplications during "theses" imports.
    *
    * @param $cod_ths
    * @param $nid
    * @param $created
+   *
+   * @throws \Exception
    */
   public function populateImportTable($cod_ths, $nid, $created) {
     \Drupal::database()->merge('up1_theses_import')
