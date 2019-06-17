@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @Block(
  *  id = "keywords_block",
- *  admin_label = @Translation("Nuage de mots cle"),
+ *  admin_label = @Translation("Mots-clés saisonniers"),
  * )
  */
 class KeywordsBlock extends BlockBase {
