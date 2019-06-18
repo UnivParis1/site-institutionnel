@@ -1,0 +1,11 @@
+services:
+  micro_homepage.event_subscriber:
+    class: Drupal\micro_homepage\EventSubscriber\MicroHomepageSubscriber
+    arguments: ['@micro_site.negotiator']
+    tags:
+      - { name: event_subscriber }
+  micro_homepage.route_subscriber:
+    class: Drupal\micro_homepage\Routing\MicroRouteSubscriber
+    arguments: ['@micro_site.negotiator']
+    tags:
+      - { name: event_subscriber }
