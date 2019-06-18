@@ -1,0 +1,59 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * @file
+ * Primary module hooks for Micro Homepage module.
+ *
+ * @DCG
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
+ */
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function micro_homepage_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'site') {
+    $fields['homepage'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Homepage'))
+      ->setDescription(t('Node selected for homepage on this micro site'))
+      ->setSettings([
+        'target_type' => 'node',
+        'handler' => 'default',
+      ])
+      ->setCardinality(1)
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 0,
+      ]);
+
+  }
+  return $fields;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function micro_homepage_form_site_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+  $form['micro_homepage'] = [
+    '#type' => 'details',
+    '#title' => t('Homepage'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-homepage'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
+
+  if (isset($form['micro_homepage'])) {
+    $form['homepage']['#group'] = 'micro_homepage';
+  }
+}
