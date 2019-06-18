@@ -60,6 +60,7 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
   public function onKernelRequest(GetResponseEvent $event) {
     $request = $event->getRequest();
 
+
     $default_language = $this->languageManager->getDefaultLanguage();
     if(!$this->languageValidator->isAvailableLanguage()) {
       $route_match = RouteMatch::createFromRequest($request);
@@ -76,20 +77,6 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
       $event->setResponse($new_response);
     }
 
-//    /**
-//     * @var $node Node;
-//     */
-//    $node = $request->get('node');
-//
-//    if (!empty($node) && !$node->hasTranslation($active_language->getId())) {
-//      $route_match = RouteMatch::createFromRequest($request);
-//      $route_name = $route_match->getRouteName();
-//      $parameters = $route_match->getRawParameters()->all();
-//      $url = Url::fromRoute($route_name, $parameters, ['language' => $default_language]);
-//      $new_response = new RedirectResponse($url->toString(), '302');
-//      $event->setResponse($new_response);
-//    }
-
   }
 
 
@@ -98,7 +85,7 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      KernelEvents::REQUEST => ['onKernelRequest'],
+      KernelEvents::REQUEST => ['onKernelRequest', 10],
     ];
   }
 
