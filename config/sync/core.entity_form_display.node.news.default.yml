@@ -6,12 +6,15 @@ dependencies:
     - entity_browser.browser.media_entity_browser
     - field.field.node.news.comment
     - field.field.node.news.field_categories
+    - field.field.node.news.field_disable_canonical_url
     - field.field.node.news.field_label_color
     - field.field.node.news.field_lead
     - field.field.node.news.field_media
     - field.field.node.news.field_news_date
     - field.field.node.news.field_news_topic
     - field.field.node.news.field_signature
+    - field.field.node.news.field_sites
+    - field.field.node.news.field_sites_all
     - field.field.node.news.field_tag
     - node.type.news
   module:
@@ -49,6 +52,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
+    region: content
   field_label_color:
     type: options_select
     weight: 6
@@ -100,6 +110,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    third_party_settings: {  }
     region: content
   field_tag:
     weight: 5
