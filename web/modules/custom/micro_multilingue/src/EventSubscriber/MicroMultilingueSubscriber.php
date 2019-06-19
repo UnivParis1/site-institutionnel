@@ -60,13 +60,11 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
   public function onKernelRequest(GetResponseEvent $event) {
     $request = $event->getRequest();
 
-
     $default_language = $this->languageManager->getDefaultLanguage();
     if(!$this->languageValidator->isAvailableLanguage()) {
       $route_match = RouteMatch::createFromRequest($request);
       $route_name = $route_match->getRouteName();
       $parameters = $route_match->getRawParameters()->all();
-
       if(\Drupal::service('path.matcher')->isFrontPage()) {
         $url = Url::fromRoute('<front>', [], ['language' => $default_language]);
       }
@@ -78,6 +76,7 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
     }
 
   }
+
 
 
   /**
