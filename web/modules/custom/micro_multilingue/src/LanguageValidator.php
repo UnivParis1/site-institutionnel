@@ -31,14 +31,15 @@ class LanguageValidator implements LanguageValidatorInterface
     }
     else {
       $site = $this->negotiator->getActiveSite();
-      foreach ($site->get('active_language') as $language) {
-        $availableLanguage[] =$language->entity->getID();
+      if(!empty($site)) {
+        foreach ($site->get('active_language') as $language) {
+          $availableLanguage[] =$language->entity->getID();
+        }
       }
     }
     if(empty($availableLanguage)) {
-      $availableLanguage[] = $default_language->getID();
+      $availableLanguage[] = $active_language->getID();
     }
-
     return in_array($active_language->getID(), $availableLanguage, true);
     }
 }
