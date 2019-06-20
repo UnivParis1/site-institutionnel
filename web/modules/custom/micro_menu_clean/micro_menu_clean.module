@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_menu_clean.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_menu_clean_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_menu_clean module.
+    case 'help.page.micro_menu_clean':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('affichage des menus de mini site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function micro_menu_clean_menu_links_discovered_alter(&$links) {
+
+
+  foreach ($links as $key => $link){
+    if (strpos($key, 'edit_form.site-') !== false){
+//      dump($link);
+      $links[$key]['parent'] = 'micro_menu_clean.mini_sites';
+    }
+  }
+
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function micro_menu_clean_form_node_type_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $menu_options = $form['menu']['menu_options']['#options'];
+//  dump(array_keys($menu_options));
+  foreach ($menu_options as $key => $option){
+//    dump($key);
+    if (strpos($key, 'site-')!== FALSE){
+      unset($form['menu']['menu_options']['#options'][$key]);
+    }
+  }
+}
