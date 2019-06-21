@@ -100,10 +100,10 @@ class ThesesController extends ControllerBase {
       '#type' => 'table',
       '#caption' => $finalMessage,
       '#header' => $tableVariables['header'],
-      '#rows' => $tableVariables['rows'],
+      '#rows' => isset($tableVariables['rows'])? $tableVariables['rows'] : [],
       '#attributes' => $tableVariables['attributes'],
       '#sticky' => $tableVariables['sticky'],
-      'empty' => $this->t('No items.'),
+      '#empty' => $this->t('No items.'),
     ];
 
   }
