@@ -3,7 +3,6 @@
 namespace Drupal\up1_theses\Service;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\StringTranslation\TranslationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -142,28 +141,48 @@ class ThesesHelper {
    * Gets latitude and longitude from the address field of the web service.
    *
    * @param string $address
+   * @param bool $french
+   *
    * @return array The array of json data
    */
-  public function getLatLongFromAddress($address) {
+  public function getLatLongFromAddress($address, $french = TRUE) {
     $latLon = [
       'lat' => '',
       'lon' => '',
     ];
 
-    $baseUrl = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=';
-    $url = "$baseUrl$address&limit=1";
+    if ($french) {
+      $baseUrl = $this->thesesService->getFrenchAddressUrl();
+      $url = "$baseUrl$address&limit=1";
 
-    $response = \Drupal::httpClient()->get($url, [
-      'headers' => ['Accept' => 'text/plain']
-    ]);
-    $data = $response->getBody();
+      $response = \Drupal::httpClient()->get($url, [
+        'headers' => ['Accept' => 'text/plain']
+      ]);
+      $data = $response->getBody();
+      $json = json_decode($data, TRUE);
 
-    $json = json_decode($data, TRUE);
-
-    if ($json) {
-      $latLon['lat'] = $json[0]['lat'];
-      $latLon['lon'] = $json[0]['lon'];
+      if ($json) {
+        $coord = $json['features'][0]['geometry']['coordinates'];
+        $latLon['lat'] = $coord[1];
+        $latLon['lon'] = $coord[0];
+      }
     }
+    else {
+      $baseUrl = $this->thesesService->getWorldwideAddressUrl();
+      $url = "$baseUrl$address&limit=1";
+
+      $response = \Drupal::httpClient()->get($url, [
+        'headers' => ['Accept' => 'text/plain']
+      ]);
+      $data = $response->getBody();
+      $json = json_decode($data, TRUE);
+
+      if ($json) {
+        $latLon['lat'] = $json[0]['lat'];
+        $latLon['lon'] = $json[0]['lon'];
+      }
+    }
+
     return $latLon;
 
   }
@@ -176,8 +195,9 @@ class ThesesHelper {
    */
   public function formatAddress($address) {
     $formattedAddress = $address;
+    $french = FALSE;
     if(preg_match('/Paris/i', $address)) {
-
+      $french = TRUE;
       preg_match('/^\D*(?=\d)/', $address, $m);
       if (isset($m[0])) {
         $formattedAddress = substr($address, strlen($m[0]));
@@ -190,7 +210,7 @@ class ThesesHelper {
       }
     }
 
-    $addressData = $this->getLatLongFromAddress($formattedAddress);
+    $addressData = $this->getLatLongFromAddress($formattedAddress, $french);
     return $addressData;
 
   }
@@ -207,13 +227,15 @@ class ThesesHelper {
   public function formatDate($date, $hours, $minutes) {
     $fullDate = $date . " " . ($hours - 2).":";
     $fullDate .= ($minutes == 0)? "00" : $minutes;
-
     $newDate = \DateTime::createFromFormat('d/m/y H:i', $fullDate);
-
-    $formattedDate = \Drupal::service('date.formatter')
-      ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
-    $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
+    $formattedDate = "";
+    if ($newDate) {
+      $formattedDate = \Drupal::service('date.formatter')
+        ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
+      $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
+    }
 
     return $formattedDate;
+
   }
 }

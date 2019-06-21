@@ -42,6 +42,38 @@ class ThesesService {
   }
 
   /**
+   * @return bool|string
+   */
+  public function getFrenchAddressUrl() {
+    $hostname = $this->settings->get('address.french');
+
+    if (!isset($hostname) || empty($hostname)) {
+      \Drupal::logger('up1_theses')
+        ->error('You must define the hostname of the addresses web service');
+      return FALSE;
+    }
+    else {
+      return "$hostname?q=";
+    }
+  }
+
+  /**
+   * @return bool|string
+   */
+  public function getWorldwideAddressUrl() {
+    $hostname = $this->settings->get('address.french');
+
+    if (!isset($hostname) || empty($hostname)) {
+      \Drupal::logger('up1_theses')
+        ->error('You must define the hostname of the addresses web service');
+      return FALSE;
+    }
+    else {
+      return "$hostname?format=json&addressdetails=1&q=";
+    }
+  }
+
+  /**
    * @return mixed
    */
   public function getExistingTheses() {
