@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_title_size.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_title_size_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_title_size module.
+    case 'help.page.micro_title_size':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Champ alternatif pour le nom complet des mini sites') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function micro_title_size_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'preprocess_block__system_branding_block'){
+    $group = $implementations['micro_title_size'];
+    unset($implementations['micro_title_size']);
+    $implementations['micro_title_size'] = $group;
+  }
+}
+
+function micro_title_size_preprocess_block__system_branding_block(&$variables){
+  /** @var \Drupal\micro_site\SiteNegotiatorInterface $negotiator */
+  $negotiator = \Drupal::service('micro_site.negotiator');
+  if ($site = $negotiator->getActiveSite()) {
+    $site = \Drupal::service('entity.repository')->getTranslationFromContext($site);
+    // Override the site logo.
+    $variables['site_logo'] = '';
+    /** @var \Drupal\file\FileInterface $file */
+    if ($file = $site->getLogo()) {
+      /** @var \Drupal\Core\Image\Image $image */
+      $image = \Drupal::service('image.factory')->get($file->getFileUri());
+      if ($image->isValid()) {
+        $variables['site_logo'] = file_url_transform_relative(file_create_url($image->getSource()));
+      }
+    }
+    // Override the site name and slogan.
+    $variables['site_name'] = (empty($site->get('field_complete_name')->value)?$site->getName():$site->get('field_complete_name')->value);
+    $variables['site_slogan'] = $site->getSlogan();
+  }
+
+}
