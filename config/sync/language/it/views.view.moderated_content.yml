@@ -1,5 +1,4 @@
 label: 'Contenuto moderato'
-description: 'Trouver et modérer du contenu.'
 display:
   default:
     display_title: Principale
@@ -9,6 +8,7 @@ display:
           submit_button: Filtra
           reset_button_label: Ripristina
           exposed_sorts_label: 'Ordina per'
+          sort_asc_label: Asc
           sort_desc_label: Disc
       pager:
         options:
@@ -24,14 +24,18 @@ display:
       fields:
         title:
           label: Titolo
+          separator: ', '
         type:
           label: 'Tipo di contenuto'
+          separator: ', '
         name:
           label: Autore
+          separator: ', '
         moderation_state:
-          label: 'État de modération'
+          separator: ', '
         changed:
           label: Aggiornato
+          separator: ', '
         operations:
           label: Operazioni
       filters:
@@ -41,15 +45,9 @@ display:
         type:
           expose:
             label: 'Tipo di contenuto'
-        moderation_state:
-          expose:
-            label: 'État de modération'
         langcode:
           expose:
             label: Lingua
       title: 'Contenuto moderato'
-      empty:
-        area_text_custom:
-          content: 'Aucun contenu modéré disponible. Seules les versions de contenu en attente, telles que ''Brouillon'', sont listées ici.'
   moderated_content:
     display_title: 'Contenuto moderato'
