@@ -3,7 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - entity_browser.browser.media_entity_browser
+    - entity_browser.browser.image_browser
     - field.field.node.event.body
     - field.field.node.event.field_address_map
     - field.field.node.event.field_categories
@@ -75,7 +75,7 @@ content:
       leaflet_settings:
         height: 400px
         width: 100%
-        zoom: '10'
+        zoom: '14'
         map_features:
           leaflet_control_geocoder:
             enabled: true
@@ -468,7 +468,7 @@ content:
             enabled: true
             weight: 0
             settings:
-              position: topright
+              position: topleft
           leaflet_control_recenter:
             weight: 0
             settings:
@@ -563,13 +563,13 @@ content:
   field_media:
     weight: 9
     settings:
-      entity_browser: media_entity_browser
+      entity_browser: image_browser
       field_widget_display: label
       field_widget_edit: true
       field_widget_remove: true
+      open: true
       selection_mode: selection_append
       field_widget_replace: false
-      open: false
       field_widget_display_settings: {  }
     third_party_settings: {  }
     type: entity_browser_entity_reference
@@ -657,9 +657,9 @@ content:
     region: content
   translation:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 14
