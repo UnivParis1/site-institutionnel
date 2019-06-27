@@ -61,7 +61,7 @@ class ThesesService {
    * @return bool|string
    */
   public function getWorldwideAddressUrl() {
-    $hostname = $this->settings->get('address.french');
+    $hostname = $this->settings->get('address.worldwide');
 
     if (!isset($hostname) || empty($hostname)) {
       \Drupal::logger('up1_theses')

@@ -208,7 +208,11 @@ class ThesesHelper {
   public function formatAddress($address) {
     $formattedAddress = $address;
     $french = FALSE;
-    if(preg_match('/Paris/i', $address) || preg_match('/Panthéon/i', $address)) {
+    if (preg_match('/centre Panthéon/i', $address) && !preg_match('/Paris/i', $address)) {
+      $formattedAddress = "12+place+du+Pantheon+75005+Paris";
+      $french = TRUE;
+    }
+    if(preg_match('/Paris/i', $address)) {
       $french = TRUE;
       preg_match('/^\D*(?=\d)/', $address, $m);
       if (isset($m[0])) {
