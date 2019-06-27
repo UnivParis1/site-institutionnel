@@ -40,15 +40,17 @@ function micro_menu_clean_menu_links_discovered_alter(&$links) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_alter().
  */
-function micro_menu_clean_form_node_type_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $menu_options = $form['menu']['menu_options']['#options'];
-//  dump(array_keys($menu_options));
-  foreach ($menu_options as $key => $option){
-//    dump($key);
-    if (strpos($key, 'site-')!== FALSE){
-      unset($form['menu']['menu_options']['#options'][$key]);
+function micro_menu_clean_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'node_type_edit_form' || $form_id == 'node_type_add_form'){
+    $menu_options = $form['menu']['menu_options']['#options'];
+    //  dump(array_keys($menu_options));
+    foreach ($menu_options as $key => $option){
+      //    dump($key);
+      if (strpos($key, 'site-')!== FALSE){
+        unset($form['menu']['menu_options']['#options'][$key]);
+      }
     }
   }
 }

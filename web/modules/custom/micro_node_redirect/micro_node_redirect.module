@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_node_redirect.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function micro_node_redirect_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_node_redirect module.
+    case 'help.page.micro_node_redirect':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('redirection des noeuds vers un mini site depuis le site principal') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function micro_node_redirect_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    $form['actions']['submit']['#submit'][] = 'micro_node_redirect_form_submit';
+}
+
+function micro_node_redirect_form_submit($form, $form_state){
+  $negotiator = \Drupal::service('micro_site.negotiator');
+  $values = $form_state->getValues();
+  if (empty($negotiator->getActiveSite()) & !empty($values['site_id'][0]['target_id'])) {
+    $node = $form_state->getFormObject()->getEntity();
+    $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()]);
+    $form_state->setResponse(new TrustedRedirectResponse($url->toString()));
+  }
+}
