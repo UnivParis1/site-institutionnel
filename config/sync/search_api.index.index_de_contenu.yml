@@ -5,8 +5,10 @@ dependencies:
   module:
     - elasticsearch_connector
     - taxonomy
+    - micro_node
     - node
     - search_api
+    - search_api_elasticsearch_attachments
   config:
     - field.storage.node.field_categories
     - field.storage.node.field_event_type
@@ -23,6 +25,13 @@ name: 'Index de contenu'
 description: ''
 read_only: false
 field_settings:
+  es_attachment:
+    label: 'Search API Elasticsearch attachments'
+    property_path: es_attachment
+    type: object
+    indexed_locked: true
+    type_locked: true
+    hidden: true
   name:
     label: 'Catégories » Terme de taxonomie » Nom'
     datasource_id: 'entity:node'
@@ -38,7 +47,7 @@ field_settings:
     label: 'Type d''événement » Terme de taxonomie » Nom'
     datasource_id: 'entity:node'
     property_path: 'field_event_type:entity:name'
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_event_type
@@ -59,6 +68,14 @@ field_settings:
           news: default
           news2018: default
           page: default
+  site_id:
+    label: Site
+    datasource_id: 'entity:node'
+    property_path: site_id
+    type: integer
+    dependencies:
+      module:
+        - micro_node
   title:
     label: Titre
     datasource_id: 'entity:node'
@@ -78,19 +95,24 @@ field_settings:
 datasource_settings:
   'entity:node':
     bundles:
-      default: false
+      default: true
       selected:
-        - article
-        - event
-        - news
-        - news2018
-        - page
+        - test
     languages:
       default: true
       selected: {  }
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  elasticsearch_attachments:
+    boost: '1.0'
+    excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv jpg jpeg'
+    max_filesize: '0'
+    excluded_private: 1
+    excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv image/jpeg'
+    weights:
+      preprocess_index: -20
+  entity_status: {  }
   highlight:
     highlight: always
     highlight_partial: false
@@ -110,12 +132,10 @@ processor_settings:
     alt: true
     tags:
       b: 2
-      em: 1
       h1: 5
       h2: 3
       h3: 2
       strong: 2
-      u: 1
     weights:
       preprocess_index: -15
       preprocess_query: -15

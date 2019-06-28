@@ -5,7 +5,10 @@ dependencies:
   config:
     - entity_browser.browser.video_browser
     - field.field.node.test.body
+    - field.field.node.test.field_disable_canonical_url
     - field.field.node.test.field_media
+    - field.field.node.test.field_sites
+    - field.field.node.test.field_sites_all
     - node.type.test
   module:
     - content_moderation
@@ -32,6 +35,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
+    region: content
   field_media:
     weight: 122
     settings:
@@ -46,6 +56,22 @@ content:
       field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
+    region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    third_party_settings: {  }
     region: content
   langcode:
     type: language_select

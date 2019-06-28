@@ -63,7 +63,7 @@ function micro_media_entity_base_field_info(EntityTypeInterface $entity_type)
  * @param ViewExecutable $view
  * @param QueryPluginBase $query
  */
-function micro_media_views_query_alter(ViewExecutable $view, Drupal\views\Plugin\views\query\Sql $query) {
+function micro_media_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   if ($view->id() == 'media_entity_browser' || $view->id() == "media") {
     $microSiteId = Drupal\micro_node\MicroNodeManager::getCurrentSiteId();
     $operator = "=";
@@ -72,6 +72,7 @@ function micro_media_views_query_alter(ViewExecutable $view, Drupal\views\Plugin
       $operator = "is";
     }
     $argument = array(":site_id" => $microSiteId[0]);
+    /** @var Drupal\views\Plugin\views\query\Sql $query */
     $query->addWhereExpression('', "site_id ".$operator." :site_id OR is_global = 1", $argument);
   }
 }
