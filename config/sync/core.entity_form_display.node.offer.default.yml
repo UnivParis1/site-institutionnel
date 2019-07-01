@@ -1,0 +1,882 @@
+uuid: bddc4792-a48a-4888-819d-d45ad825ca69
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.offer.body
+    - field.field.node.offer.field_address
+    - field.field.node.offer.field_address_map
+    - field.field.node.offer.field_application_deadline
+    - field.field.node.offer.field_bap
+    - field.field.node.offer.field_category
+    - field.field.node.offer.field_contract_duration
+    - field.field.node.offer.field_contract_type
+    - field.field.node.offer.field_grade
+    - field.field.node.offer.field_job_type
+    - field.field.node.offer.field_offer_type
+    - field.field.node.offer.field_position_details
+    - field.field.node.offer.field_profile
+    - field.field.node.offer.field_salary_range
+    - node.type.offer
+  module:
+    - conditional_fields
+    - content_moderation
+    - datetime
+    - geolocation_leaflet
+    - path
+    - text
+id: node.offer.default
+targetEntityType: node
+bundle: offer
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 9
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        5c0f1e96-dde1-4651-9d39-86a685735eb5:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_address:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        4d49ab88-4d1a-47f0-8c2f-10ec4ac288d2:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 3
+            value: ''
+            values: "3\r\n4"
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+            field_offer_type:
+              -
+                target_id: '4'
+          entity_type: node
+          bundle: offer
+    type: string_textfield
+    region: content
+  field_address_map:
+    weight: 14
+    settings:
+      centre:
+        fit_bounds:
+          enable: true
+          weight: 0
+          map_center_id: fit_bounds
+          settings:
+            reset_zoom: false
+        freeogeoip:
+          weight: 0
+          enable: false
+          map_center_id: location_plugins
+        fixed_value:
+          settings:
+            latitude: null
+            longitude: null
+          weight: 0
+          enable: false
+          map_center_id: location_plugins
+        client_location:
+          weight: 0
+          enable: false
+          map_center_id: client_location
+      leaflet_settings:
+        height: 400px
+        width: 100%
+        zoom: '13'
+        map_features:
+          leaflet_control_geocoder:
+            enabled: true
+            weight: -100
+            settings:
+              position: topright
+              geocoder: photon
+              settings:
+                label: Adresse
+                description: 'Saisir l''adresse à localiser.'
+          leaflet_control_layer:
+            weight: 0
+            settings:
+              position: topright
+              default_label: Default
+              tile_layer_providers:
+                OpenStreetMap:
+                  'OpenStreetMap Mapnik':
+                    label: ''
+                    checkbox: 0
+                  'OpenStreetMap BlackAndWhite':
+                    label: ''
+                    checkbox: 0
+                  'OpenStreetMap DE':
+                    label: ''
+                    checkbox: 0
+                  'OpenStreetMap CH':
+                    label: ''
+                    checkbox: 0
+                  'OpenStreetMap France':
+                    label: ''
+                    checkbox: 0
+                  'OpenStreetMap HOT':
+                    label: ''
+                    checkbox: 0
+                  'OpenStreetMap BZH':
+                    label: ''
+                    checkbox: 0
+                OpenTopoMap:
+                  OpenTopoMap:
+                    label: ''
+                    checkbox: 0
+                Thunderforest:
+                  'Thunderforest OpenCycleMap':
+                    label: ''
+                    checkbox: 0
+                  'Thunderforest Transport':
+                    label: ''
+                    checkbox: 0
+                  'Thunderforest TransportDark':
+                    label: ''
+                    checkbox: 0
+                  'Thunderforest SpinalMap':
+                    label: ''
+                    checkbox: 0
+                  'Thunderforest Landscape':
+                    label: ''
+                    checkbox: 0
+                  'Thunderforest Outdoors':
+                    label: ''
+                    checkbox: 0
+                  'Thunderforest Pioneer':
+                    label: ''
+                    checkbox: 0
+                OpenMapSurfer:
+                  'OpenMapSurfer Roads':
+                    label: ''
+                    checkbox: 0
+                  'OpenMapSurfer Grayscale':
+                    label: ''
+                    checkbox: 0
+                Hydda:
+                  'Hydda Full':
+                    label: ''
+                    checkbox: 0
+                  'Hydda Base':
+                    label: ''
+                    checkbox: 0
+                MapBox:
+                  MapBox:
+                    label: ''
+                    checkbox: 0
+                Stamen:
+                  'Stamen Toner':
+                    label: ''
+                    checkbox: 0
+                  'Stamen TonerBackground':
+                    label: ''
+                    checkbox: 0
+                  'Stamen TonerLite':
+                    label: ''
+                    checkbox: 0
+                  'Stamen Watercolor':
+                    label: ''
+                    checkbox: 0
+                  'Stamen Terrain':
+                    label: ''
+                    checkbox: 0
+                  'Stamen TerrainBackground':
+                    label: ''
+                    checkbox: 0
+                  'Stamen TopOSMRelief':
+                    label: ''
+                    checkbox: 0
+                Esri:
+                  'Esri WorldStreetMap':
+                    label: ''
+                    checkbox: 0
+                  'Esri DeLorme':
+                    label: ''
+                    checkbox: 0
+                  'Esri WorldTopoMap':
+                    label: ''
+                    checkbox: 0
+                  'Esri WorldImagery':
+                    label: ''
+                    checkbox: 0
+                  'Esri WorldTerrain':
+                    label: ''
+                    checkbox: 0
+                  'Esri WorldShadedRelief':
+                    label: ''
+                    checkbox: 0
+                  'Esri WorldPhysical':
+                    label: ''
+                    checkbox: 0
+                  'Esri OceanBasemap':
+                    label: ''
+                    checkbox: 0
+                  'Esri NatGeoWorldMap':
+                    label: ''
+                    checkbox: 0
+                  'Esri WorldGrayCanvas':
+                    label: ''
+                    checkbox: 0
+                HERE:
+                  'HERE normalDay':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalDayCustom':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalDayGrey':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalDayMobile':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalDayGreyMobile':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalDayTransit':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalDayTransitMobile':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalNight':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalNightMobile':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalNightGrey':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalNightGreyMobile':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalNightTransit':
+                    label: ''
+                    checkbox: 0
+                  'HERE normalNightTransitMobile':
+                    label: ''
+                    checkbox: 0
+                  'HERE redcuedDay':
+                    label: ''
+                    checkbox: 0
+                  'HERE redcuedNight':
+                    label: ''
+                    checkbox: 0
+                  'HERE basicMap':
+                    label: ''
+                    checkbox: 0
+                  'HERE mapLabels':
+                    label: ''
+                    checkbox: 0
+                  'HERE trafficFlow':
+                    label: ''
+                    checkbox: 0
+                  'HERE carnavDayGrey':
+                    label: ''
+                    checkbox: 0
+                  'HERE hybridDayMobile':
+                    label: ''
+                    checkbox: 0
+                  'HERE hybridDayTransit':
+                    label: ''
+                    checkbox: 0
+                  'HERE hybridDayGrey':
+                    label: ''
+                    checkbox: 0
+                  'HERE pedestrianDay':
+                    label: ''
+                    checkbox: 0
+                  'HERE pedestrianNight':
+                    label: ''
+                    checkbox: 0
+                  'HERE satelliteDay':
+                    label: ''
+                    checkbox: 0
+                  'HERE terrainDay':
+                    label: ''
+                    checkbox: 0
+                  'HERE terrainDayMobile':
+                    label: ''
+                    checkbox: 0
+                FreeMapSK:
+                  FreeMapSK:
+                    label: ''
+                    checkbox: 0
+                MtbMap:
+                  MtbMap:
+                    label: ''
+                    checkbox: 0
+                CartoDB:
+                  'CartoDB Positron':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB PositronNoLabels':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB PositronOnlyLabels':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB DarkMatter':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB DarkMatterNoLabels':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB DarkMatterOnlyLabels':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB Voyager':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB VoyagerNoLabels':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB VoyagerOnlyLabels':
+                    label: ''
+                    checkbox: 0
+                  'CartoDB VoyagerLabelsUnder':
+                    label: ''
+                    checkbox: 0
+                HikeBike:
+                  HikeBike:
+                    label: ''
+                    checkbox: 0
+                  'HikeBike HillShading':
+                    label: ''
+                    checkbox: 0
+                BasemapAT:
+                  'BasemapAT basemap':
+                    label: ''
+                    checkbox: 0
+                  'BasemapAT grau':
+                    label: ''
+                    checkbox: 0
+                  'BasemapAT overlay':
+                    label: ''
+                    checkbox: 0
+                  'BasemapAT highdpi':
+                    label: ''
+                    checkbox: 0
+                  'BasemapAT orthofoto':
+                    label: ''
+                    checkbox: 0
+                NLS:
+                  NLS:
+                    label: ''
+                    checkbox: 0
+                Wikimedia:
+                  Wikimedia:
+                    label: ''
+                    checkbox: 0
+                GeoportailFrance:
+                  'GeoportailFrance parcels':
+                    label: ''
+                    checkbox: 0
+                  'GeoportailFrance ignMaps':
+                    label: ''
+                    checkbox: 0
+                  'GeoportailFrance maps':
+                    label: ''
+                    checkbox: 0
+                  'GeoportailFrance orthos':
+                    label: ''
+                    checkbox: 0
+              tile_providers_options:
+                Thunderforest:
+                  apikey: ''
+                MapBox:
+                  accessToken: ''
+                HERE:
+                  app_id: ''
+                  app_code: ''
+                GeoportailFrance:
+                  apikey: ''
+            enabled: false
+          leaflet_tile_layer:
+            weight: 0
+            settings:
+              tile_layer_provider: 'OpenStreetMap Mapnik'
+              tile_provider_options:
+                Thunderforest:
+                  apikey: ''
+                MapBox:
+                  accessToken: ''
+                HERE:
+                  app_id: ''
+                  app_code: ''
+                GeoportailFrance:
+                  apikey: ''
+            enabled: false
+          leaflet_custom_tile_layer:
+            weight: 0
+            settings:
+              tile_layer_url: '//{s}.tile.osm.org/{z}/{x}/{y}.png'
+              tile_layer_attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+              tile_layer_subdomains: abc
+              tile_layer_zoom: '18'
+            enabled: false
+          leaflet_max_bounds:
+            weight: 0
+            settings:
+              north: ''
+              south: ''
+              east: ''
+              west: ''
+            enabled: false
+          leaflet_marker_zoom_and_animate:
+            weight: 0
+            settings:
+              marker_zoom_anchor_id: ''
+            enabled: false
+          geolocation_marker_scroll_to_id:
+            weight: 0
+            settings:
+              scroll_target_id: ''
+            enabled: false
+          leaflet_marker_popup:
+            enabled: true
+            weight: 0
+            settings:
+              info_auto_display: false
+          leaflet_marker_icon:
+            weight: 0
+            settings:
+              marker_icon_path: ''
+              icon_size:
+                width: ''
+                height: ''
+              icon_anchor:
+                x: ''
+                'y': ''
+              popup_anchor:
+                x: '0'
+                'y': '0'
+              marker_shadow_path: ''
+              shadow_size:
+                width: ''
+                height: ''
+              shadow_anchor:
+                x: ''
+                'y': ''
+            enabled: false
+          leaflet_marker_clusterer:
+            weight: 0
+            enabled: false
+            settings:
+              cluster_settings:
+                show_coverage_on_hover: 0
+                zoom_to_bounds_on_click: 0
+          leaflet_control_zoom:
+            enabled: true
+            weight: 0
+            settings:
+              position: topright
+          leaflet_control_recenter:
+            weight: 0
+            settings:
+              position: topright
+            enabled: false
+          leaflet_control_scale:
+            weight: 0
+            settings:
+              position: topright
+              metric: '1'
+              imperial: '1'
+            enabled: false
+          leaflet_control_locate:
+            weight: 0
+            settings:
+              position: topright
+            enabled: false
+          leaflet_control_fullscreen:
+            weight: 0
+            settings:
+              position: topright
+            enabled: false
+          leaflet_gesture_handling:
+            weight: 0
+            enabled: false
+          leaflet_disable_user_interaction:
+            weight: 0
+            enabled: false
+          leaflet_client_location_indicator:
+            weight: 0
+            enabled: false
+          leaflet_wms:
+            weight: 0
+            settings:
+              url: ''
+              version: 1.1.1
+              layers: ''
+              styles: ''
+              srs: ''
+              format: image/jpeg
+              transparent: 0
+              identify: 0
+            enabled: false
+      auto_client_location_marker: '0'
+      allow_override_map_settings: 0
+      auto_client_location: ''
+    third_party_settings:
+      conditional_fields:
+        b07c3c77-4e5d-414d-90e4-cdc6ebdc587a:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 3
+            value: ''
+            values: "3\r\n4"
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: geolocation_leaflet
+    region: content
+  field_application_deadline:
+    weight: 4
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        b8fe5a9b-adb4-4f0d-98ff-4bd9e413ebac:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: datetime_default
+    region: content
+  field_bap:
+    weight: 12
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        2feead82-00b4-4445-ba41-eb7c75743cfb:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '4'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: options_select
+    region: content
+  field_category:
+    weight: 5
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        3ed7ddf3-b303-4282-afa2-f2167c949b5f:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 3
+            value: ''
+            values: "3\r\n4"
+            value_form: null
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: options_select
+    region: content
+  field_contract_duration:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        ba72b0e4-de80-47e4-b1f7-6f743396c10a:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: string_textfield
+    region: content
+  field_contract_type:
+    weight: 6
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        265d438e-83f5-44d0-9af2-81c0087ed081:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: options_select
+    region: content
+  field_grade:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_job_type:
+    weight: 3
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        b6f3b02a-e678-4f2b-b482-c6f6233340d9:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: options_select
+    region: content
+  field_offer_type:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_position_details:
+    weight: 10
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        3bda50b8-5a06-4b5e-9170-c36b422f6357:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: text_textarea
+    region: content
+  field_profile:
+    weight: 11
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        fe8f6bbb-7dae-4c26-966a-be498c6e6626:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: text_textarea
+    region: content
+  field_salary_range:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        5af73a11-7193-4c85-9cc4-a35b844cadb6:
+          dependee: field_offer_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '3'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: offer
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 22
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 21
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 19
+    region: content
+    third_party_settings: {  }
+  site_id:
+    type: entity_reference_autocomplete
+    weight: 15
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 23
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 20
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 16
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }

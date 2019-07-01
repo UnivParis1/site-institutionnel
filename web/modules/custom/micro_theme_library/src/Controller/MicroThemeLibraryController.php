@@ -18,8 +18,6 @@ class MicroThemeLibraryController extends ControllerBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    */
   public static function form_submit(&$form, FormStateInterface $form_state) {
-//    dump($form_state);
-//    die();
     $theme = $form_state->getUserInput()['theme']['general_theme'];
     if (!empty($theme)) {
       $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
