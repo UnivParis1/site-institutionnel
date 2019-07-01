@@ -25,10 +25,5 @@ class MicroRouteSubscriber extends RouteSubscriberBase {
   /**
    * {@inheritdoc}
    */
-  protected function alterRoutes(RouteCollection $collection) {
-
-   // $collection->add('entity.site.canonical', $collection->get('entity.node.canonical'));
-
-    //dump($collection->get('entity.site.canonical'));die;
-  }
+  protected function alterRoutes(RouteCollection $collection) {}
 }

@@ -27,7 +27,6 @@ class KeywordsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
-//    dump($this->configuration);
     $form['nuage'] = [
       '#type' => 'fieldset',
       '#title' => t('Cloud'),
@@ -83,8 +82,6 @@ class KeywordsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-//    dump($form_state->getValue('nuage'));
-//    die();
     $fs = $form_state->getValue('nuage');
     $this->configuration['mot_cle_1'] = $fs['mot_cle_1'];
     $this->configuration['mot_cle_2'] = $fs['mot_cle_2'];

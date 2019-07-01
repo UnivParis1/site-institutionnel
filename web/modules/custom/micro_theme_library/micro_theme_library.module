@@ -24,7 +24,7 @@ function micro_theme_library_help($route_name, RouteMatchInterface $route_match)
   }
 }
 
-function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormStateInterface $form_state, $form_id){
+function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   $form['theme'] = [
     '#type' => 'fieldset',
@@ -34,10 +34,8 @@ function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormSt
 
   $options = [];
   $entity = $form_state->getBuildInfo()['args'][0];
-
   // Themes disponibles pour le micro site en cours
   $themes = \Drupal::service('theme_handler')->listInfo();
-//  dump($themes);
   foreach ($themes as $key => $theme) {
     $theme_enable = theme_get_setting('micro_theme_enable', $key);
     if ($theme_enable) {
@@ -59,7 +57,7 @@ function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormSt
   }
   $options = ['_none' => t('None')] + $options;
 
-  if (empty($entity->get('theme')[0])){
+  if (empty($entity->get('theme')[0])) {
     $default_theme = '_none';
   }
   else {
@@ -81,8 +79,7 @@ function micro_theme_library_form_micro_theme_form_settings_alter(&$form, FormSt
   $form['#submit'][] = 'Drupal\micro_theme_library\Controller\MicroThemeLibraryController::form_submit';
 }
 
-function _get_theme_markup($theme_info){
-//  dump($theme_info);
+function _get_theme_markup($theme_info) {
   $markup = '<div class="theme">
                 <img class="screenshot" src="/'. $theme_info['screenshot'] .'" typeof="foaf:Image">
                 <div class="theme-name">' . $theme_info['name'] . '</div>

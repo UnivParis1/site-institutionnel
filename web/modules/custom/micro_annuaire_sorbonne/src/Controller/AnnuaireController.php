@@ -30,14 +30,12 @@ class AnnuaireController extends ControllerBase {
    *   Contenant la liste des utilisateurs sous forme de tableau (JSON_decode).
    */
   public function list($letter) {
-//    dump($letter);
     $cache = \Drupal::cache();
     $filtered_users = [];
     $currentSiteId = '';
 
     /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
-//    dump($negotiator->getActiveSite());
     if (!empty($negotiator->getActiveSite())) {
       $currentSiteId = $negotiator->getActiveId();
 
@@ -54,7 +52,6 @@ class AnnuaireController extends ControllerBase {
         }
       }
 
-//      dump($users);
       if (!empty($users)) {
         foreach ($users as $user) {
           if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
@@ -71,7 +68,6 @@ class AnnuaireController extends ControllerBase {
     $build['item_list'] = [
       '#theme' => 'micro_annuaire_sorbonne',
       '#users' => $filtered_users,
-      //'#users' => $users,
       '#site' => $currentSiteId,
       '#Trusted' => (\Drupal::config('micro_annuaire_sorbonne.annuaireconfig')->get('type_de_recherche') == 'searchUserTrusted?' ? TRUE:FALSE),
       '#attached' => [
