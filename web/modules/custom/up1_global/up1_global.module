@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -21,4 +22,28 @@ function up1_global_help($route_name, RouteMatchInterface $route_match) {
 
     default:
   }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function up1_global_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == "node_offer_form") {
+    $form['field_type']['#autocomplete_route_name'] = 'up1_global.referens';
+    $form['field_type']['#autocomplete_route_parameters'] = [
+      'bap' => 'bap',
+    ];
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function up1_global_theme($existing, $type, $theme, $path) {
+  return [
+   'date_range_formatter' => [
+     'variables' => [],
+     'template' => 'date-range-formatter',
+   ],
+  ];
 }
