@@ -51,11 +51,10 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
         /** @var \Drupal\Core\Datetime\DrupalDateTime $start_date */
         $start_date = $item->start_date;
         $start_date->setTimezone(timezone_open(drupal_get_user_timezone()));
-        \Drupal::logger('up1_datetime_range')->info(print_r($start_date, 1));
+
         /** @var \Drupal\Core\Datetime\DrupalDateTime $end_date */
         $end_date = $item->end_date;
         $end_date->setTimezone(timezone_open(drupal_get_user_timezone()));
-        \Drupal::logger('up1_datetime_range')->info(print_r($end_date, 1));
 
         $start_hour = $start_date->format('H:i');
         $end_hour = $end_date->format('H:i');
@@ -64,15 +63,15 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
           $elements[$delta] = [
             'date' => [
               '#markup' => "<div><span>$prefix</span>" .
-                $start_date->format('j/m/Y') . "</div><div><span>$separator</span>" .
-                $end_date->format('j/m/Y') . "</div>",
+                $start_date->format('d/m/Y') . "</div><div><span>$separator</span>" .
+                $end_date->format('d/m/Y') . "</div>",
             ],
           ];
         }
         else {
           $elements[$delta] = [
             'date' => [
-              '#markup' => "<div>" . $start_date->format('l j F Y') . "</div>
+              '#markup' => "<div>" . $start_date->format('d/m/Y') . "</div>
               <div><span>$start_hour</span>
               <i class='fa fa-$icon'></i>
               <span>$end_hour</span></div>",
