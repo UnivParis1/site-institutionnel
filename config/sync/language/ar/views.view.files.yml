@@ -1,4 +1,5 @@
 label: الملفات
+description: 'Trouver et gérer les fichiers.'
 display:
   default:
     display_title: الرئيسي
@@ -12,9 +13,16 @@ display:
           sort_desc_label: تنازلي
       pager:
         options:
+          tags:
+            previous: '‹ Précédent'
+            next: 'Suivant ›'
           expose:
+            items_per_page_label: 'Éléments par page'
             items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
       fields:
+        fid:
+          label: 'Identifiant (FID)'
         filename:
           label: الاسم
         filemime:
@@ -23,6 +31,12 @@ display:
           label: الحجم
         status:
           label: الحالة
+          settings:
+            format_custom_false: Temporaire
+        created:
+          label: 'Date de transfert'
+        changed:
+          label: 'Date de modification'
         count:
           label: 'مستخدمة في'
       filters:
@@ -36,22 +50,38 @@ display:
           expose:
             label: الحالة
       title: الملفات
+      empty:
+        area_text_custom:
+          content: 'Aucun fichier disponible.'
   page_1:
+    display_title: 'Vue d''ensemble des fichiers'
     display_options:
       menu:
         title: الملفات
   page_2:
+    display_title: 'Utilisation du fichier'
     display_options:
       pager:
         options:
+          tags:
+            previous: '‹ Précédent'
+            next: 'Suivant ›'
           expose:
+            items_per_page_label: 'Éléments par page'
             items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
       fields:
         entity_label:
           label: الكيان
         type:
           label: 'نوع الكيان'
+        module:
+          label: 'Enregistrement du module'
+        count:
+          label: 'Nombre d''utilisations'
+      title: 'Utilisation du fichier'
       arguments:
         fid:
           exception:
             title: الكل
+          title: 'Information d''utilisation du fichier {{ arguments.fid }}'

@@ -1,8 +1,6 @@
 <!-- Add you custom twig html here -->
-{#{{ kint(users) }}#}
-{% if site is empty %}
-    <p>Pas d'annuaire pour le site Général</p>
-{% else %}
+{#{{ dump(users) }}#}
+
     {% if users|length < 1 %}
         <p>Il n'y a personne a cette lettre dans cet annuaire</p>
     {% else %}
@@ -46,4 +44,3 @@
             {% endif %}
         {% endfor %}
     </div>
-{% endif %}

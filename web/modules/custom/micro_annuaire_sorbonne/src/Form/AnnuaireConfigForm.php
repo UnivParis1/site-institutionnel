@@ -39,14 +39,14 @@ class AnnuaireConfigForm extends ConfigFormBase {
       '#size' => 64,
       '#default_value' => $config->get('url_ws'),
     ];
-    $form['type_de_recherche'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Type de recherche'),
-      '#description' => $this->t('Doit être du type "searchUser?"'),
-      '#maxlength' => 64,
-      '#size' => 64,
-      '#default_value' => $config->get('type_de_recherche'),
+
+    $form['filtre_site_principal'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("Type de recherche et filtre a appliquer pour recupérer les personnes de l'annuaire du site principal"),
+      '#description' => $this->t('Doit être du type "searchUser?filter_member_of_group=..."'),
+      '#default_value' => $config->get('filtre_site_principal'),
     ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -66,7 +66,7 @@ class AnnuaireConfigForm extends ConfigFormBase {
 
     $this->config('micro_annuaire_sorbonne.annuaireconfig')
       ->set('url_ws', $form_state->getValue('url_ws'))
-      ->set('type_de_recherche', $form_state->getValue('type_de_recherche'))
+      ->set('filtre_site_principal', $form_state->getValue('filtre_site_principal'))
       ->save();
   }
 
