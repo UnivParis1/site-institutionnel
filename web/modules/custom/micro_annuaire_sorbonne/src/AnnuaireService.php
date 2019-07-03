@@ -36,42 +36,45 @@ class AnnuaireService implements AnnuaireServiceInterface {
    */
   public function getUserList($siteId) {
     $users = [];
-    $siteStorage = $this->entityTypeManager->getStorage('site');
-    $currentSite = $siteStorage->load($siteId);
+    $filter = '';
+    $config = \Drupal::config('micro_annuaire_sorbonne.annuaireconfig');
 
-    if (!empty($currentSite->get('groups')->value)){
-      $groups = explode(';', $currentSite->get('groups')->value);
+    if (!empty($siteId)) {
 
-      $config = \Drupal::config('micro_annuaire_sorbonne.annuaireconfig');
-      $ws = $config->get('url_ws');
-      $search = $config->get('type_de_recherche');
 
-      $searchUser = $ws . $search;
-      $filter_member_of_group = '';
+      $siteStorage = $this->entityTypeManager->getStorage('site');
+      $currentSite = $siteStorage->load($siteId);
 
-      foreach ($groups as $group) {
-        $filter_member_of_group .= 'structures-' . $group . '|';
+      if (!empty($currentSite->get('filtre')->value)) {
+        $filter = $currentSite->get('filtre')->value;
       }
-
-      $params = [
-        // on enleve le dernier '|'
-        'filter_member_of_group' => substr($filter_member_of_group,0, -1),
-        'filter_labeledURI' => '*',
-        'attrs' => 'sn,givenName,mail,telephoneNumber,labeledURI,supannEntiteAffectation,postalAddress,supannListeRouge',
-        'maxRows' => '500'
-      ];
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $searchUser . http_build_query($params));
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-
-      $users = json_decode(curl_exec($ch), TRUE);
-
-      curl_close($ch);
-
+    }
+    else {
+      $filter = $config->get('filtre_site_principal');
     }
 
-    return $users;
+    $ws = $config->get('url_ws');
+    $searchUser = $ws . $filter;
+    $Trusted = (strpos($filter, 'searchUserTrusted') !== false ? true : false);
+
+    $params = [
+      'attrs' => 'sn,givenName,mail,telephoneNumber,labeledURI,supannEntiteAffectation,postalAddress,supannListeRouge',
+      'maxRows' => '500'
+    ];
+    $ch = curl_init();
+//    dump($searchUser . '&' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+    $users = json_decode(curl_exec($ch), TRUE);
+
+    curl_close($ch);
+
+    $reponse['users'] = $users;
+    $reponse['trusted'] = $Trusted;
+
+    return $reponse;
 
   }
 

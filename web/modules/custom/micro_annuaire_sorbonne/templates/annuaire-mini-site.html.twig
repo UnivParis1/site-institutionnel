@@ -1,0 +1,28 @@
+
+{% if users|length == 1 %}
+    <ul class="lone_user">
+{% else %}
+    <ul class="user">
+{% endif %}
+
+{% for user in users %}
+    {% if (Trusted and user.supannListeRouge == FALSE) or (not Trusted and user.sn != 'supannListeRouge') %}
+        <li>
+            <div>
+                <p><b>
+                        {% if user.labeledURI is empty %}
+                            {{ user.sn|upper }} {{ user.givenName }}
+                        {% else %}
+                            <a href="{{ user.labeledURI[0] }}">
+                                {{ user.sn|upper }} {{ user.givenName }}
+                            </a>
+                        {% endif %}
+                    </b></p>
+                <p>{{ user.postalAddress|nl2br }}</p>
+                <p>{{ user.telephoneNumber[0] }}</p>
+                <p>{{ user.mail }}</p>
+            </div>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>

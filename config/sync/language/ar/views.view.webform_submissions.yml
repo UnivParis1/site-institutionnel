@@ -1,3 +1,4 @@
+label: 'Soumissions de webform'
 display:
   default:
     display_title: الرئيسي
@@ -11,8 +12,13 @@ display:
           sort_desc_label: تنازلي
       pager:
         options:
+          tags:
+            first: '« Premier'
+            last: 'Dernier »'
           expose:
+            items_per_page_label: 'Éléments par page'
             items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
       fields:
         created:
           label: الإنشاء
@@ -21,12 +27,20 @@ display:
         view_webform_submission:
           label: عمليات
           text: عرض
+      empty:
+        area_text_custom:
+          content: 'Aucune soumission n''est disponible.'
       arguments:
         in_draft:
           exception:
             title: الكل
+      title: 'Soumissions de webform'
+  embed_default:
+    display_options:
+      display_description: 'Afficher les soumissions.'
   embed_administer:
     display_options:
+      display_description: 'Administrer les soumissions.'
       fields:
         webform_submission_bulk_form:
           action_title: إجراء
@@ -41,11 +55,15 @@ display:
         operations:
           label: عمليات
       filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
         locked:
           expose:
             label: مقفل
   embed_manage:
     display_options:
+      display_description: 'Gérer les soumissions.'
       fields:
         webform_submission_bulk_form:
           action_title: إجراء
@@ -64,6 +82,9 @@ display:
           label: عمليات
           text: تحرير
       filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
         locked:
           expose:
             label: مقفل
@@ -82,6 +103,9 @@ display:
           label: عمليات
           text: عرض
       filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
         locked:
           expose:
             label: مقفل

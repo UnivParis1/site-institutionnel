@@ -1,3 +1,4 @@
+label: 'Soumissions de webform'
 display:
   default:
     display_title: Máster
@@ -7,13 +8,9 @@ display:
           submit_button: Aplicar
           reset_button_label: Restablecer
           exposed_sorts_label: 'Ordenar por'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
       pager:
         options:
           tags:
-            previous: ‹‹
-            next: ››
             first: '« Primero'
             last: 'Último »'
           expose:
@@ -23,55 +20,55 @@ display:
       fields:
         sid:
           label: Nº
-          separator: ', '
         in_draft:
           label: Borrador
-          separator: ', '
         created:
           label: Creado
-          separator: ', '
         remote_addr:
           label: 'Direccion(es) IP'
-          separator: ', '
         view_webform_submission:
           label: Operaciones
           text: vista
       header:
         result:
           content: 'Mostrando @start - @end de @total'
+      empty:
+        area_text_custom:
+          content: 'Aucune soumission n''est disponible.'
       arguments:
         in_draft:
           exception:
             title: Todo(s)
+      title: 'Soumissions de webform'
+  embed_default:
+    display_options:
+      display_description: 'Afficher les soumissions.'
   embed_administer:
     display_options:
+      display_description: 'Administrer les soumissions.'
       fields:
         webform_submission_bulk_form:
           action_title: Acción
         sid:
           label: Nº
-          separator: ', '
         in_draft:
           label: Borrador
-          separator: ', '
         sticky:
           label: 'Fijo en cabeza de las listas'
-          separator: ', '
         locked:
           label: Bloqueado
-          separator: ', '
         created:
           label: Creado
-          separator: ', '
         completed:
           label: Completado
-          separator: ', '
         remote_addr:
           label: 'Direccion(es) IP'
-          separator: ', '
         operations:
           label: Operaciones
       filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
         sticky:
           expose:
             label: 'Fijo en cabeza de las listas'
@@ -80,30 +77,24 @@ display:
             label: Bloqueado
   embed_manage:
     display_options:
+      display_description: 'Gérer les soumissions.'
       fields:
         webform_submission_bulk_form:
           action_title: Acción
         sid:
           label: Nº
-          separator: ', '
         in_draft:
           label: Borrador
-          separator: ', '
         sticky:
           label: 'Fijo en cabeza de las listas'
-          separator: ', '
         locked:
           label: Bloqueado
-          separator: ', '
         created:
           label: Creado
-          separator: ', '
         completed:
           label: Completado
-          separator: ', '
         remote_addr:
           label: 'Direccion(es) IP'
-          separator: ', '
         view_webform_submission:
           label: Operaciones
           text: vista
@@ -111,6 +102,9 @@ display:
           label: Operaciones
           text: editar
       filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
         sticky:
           expose:
             label: 'Fijo en cabeza de las listas'
@@ -122,29 +116,25 @@ display:
       fields:
         sid:
           label: Nº
-          separator: ', '
         in_draft:
           label: Borrador
-          separator: ', '
         sticky:
           label: 'Fijo en cabeza de las listas'
-          separator: ', '
         locked:
           label: Bloqueado
-          separator: ', '
         created:
           label: Creado
-          separator: ', '
         completed:
           label: Completado
-          separator: ', '
         remote_addr:
           label: 'Direccion(es) IP'
-          separator: ', '
         view_webform_submission:
           label: Operaciones
           text: vista
       filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
         sticky:
           expose:
             label: 'Fijo en cabeza de las listas'

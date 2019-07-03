@@ -24,6 +24,7 @@ class AnnuaireController extends ControllerBase {
   /**
    * Retourne une listre triée par ordre alphabétique et filtrée en fonction de la lettre
    * de l'alphabet demandée.
+   * Ou la liste de tous les utilisateurs si on est sur un mini site
    *
    * @param $letter lettre de l'alphabet dont on veut la page d'annuaire
    * @return render array
@@ -33,23 +34,52 @@ class AnnuaireController extends ControllerBase {
     $cache = \Drupal::cache();
     $filtered_users = [];
     $currentSiteId = '';
+    $theme = '';
 
     /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $currentSiteId = $negotiator->getActiveId();
 
-      $users = [];
       if (!empty($currentSiteId)) {
+        $theme = 'annuaire_mini_site';
         // On verifie si l'annuaire est dans le cache
-        $cachedUser = $cache->get('users_ldap');
+        $cachedUser = $cache->get('users_ldap'.$currentSiteId);
+//        dump($cachedUser);
         if ($cachedUser) {
-          $users = $cachedUser->data;
+          $reponse = $cachedUser->data;
+          $filtered_users = $reponse['users'];
         }
         else {
-          $users = $this->annuaireService->getUserList($currentSiteId);
-          $cache->set('users_ldap', $users, time() + 60 * 60);
+          $reponse = $this->annuaireService->getUserList($currentSiteId);
+          $filtered_users = $reponse['users'];
+          $cache->set('users_ldap'.$currentSiteId, $reponse, time() + 60 * 60);
         }
+
+        if (!empty($filtered_users)){
+          // on trie les utilisateurs par ordre alphabetique des cn
+          $sortedUsers = usort($filtered_users, function ($a, $b) {
+            return strnatcasecmp($a['sn'], $b['sn']);
+          });
+        }
+
+
+
+      }
+//      dump($users);
+    }
+    else {
+      $theme = 'micro_annuaire_sorbonne';
+      $cachedUser = $cache->get('users_ldap_principal');
+//      dump($cachedUser);
+      if ($cachedUser){
+        $reponse = $cachedUser->data;
+        $users = $reponse['users'];
+      }
+      else {
+        $reponse = $this->annuaireService->getUserList('');
+        $users = $reponse['users'];
+        $cache->set('users_ldap_principal', $reponse, time() + 60 * 60);
       }
 
       if (!empty($users)) {
@@ -58,18 +88,21 @@ class AnnuaireController extends ControllerBase {
             $filtered_users[] = $user;
           }
         }
+
         // on trie les utilisateurs par ordre alphabetique des cn
         $sortedUsers = usort($filtered_users, function ($a, $b) {
           return strnatcasecmp($a['sn'], $b['sn']);
         });
+
+
+
       }
     }
 
     $build['item_list'] = [
-      '#theme' => 'micro_annuaire_sorbonne',
+      '#theme' => $theme,
       '#users' => $filtered_users,
-      '#site' => $currentSiteId,
-      '#Trusted' => (\Drupal::config('micro_annuaire_sorbonne.annuaireconfig')->get('type_de_recherche') == 'searchUserTrusted?' ? TRUE:FALSE),
+      '#Trusted' => (empty($reponse['trusted']) ? false : $reponse['trusted']),
       '#attached' => [
         'library' => [
           'micro_annuaire_sorbonne/annuaire'
