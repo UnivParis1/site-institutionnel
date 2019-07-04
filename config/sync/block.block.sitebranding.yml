@@ -1,0 +1,44 @@
+uuid: 1ce679c1-e389-4c9b-bb3b-ae94fdb29dee
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - micro_path
+    - micro_site
+    - system
+  theme:
+    - PARIS12018
+id: sitebranding
+theme: PARIS12018
+region: navigation
+weight: -9
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: Logo
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility:
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    bundles:
+      mini_site: mini_site
+    negate: false
+    context_mapping:
+      site: '@micro_site.current_site_context:site'

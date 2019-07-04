@@ -75,70 +75,30 @@
   'clearfix',
 ]
 %}
-{% if content.field_couleur_slide.0 is not empty %}
-  {%  set color = content.field_couleur_slide.0 %}
-{% else %}
-  {% set color = 'fondor' %}
-{% endif %}
-{% set debut = node.field_event_date.start_date|date('U') %}
-{% set fin = node.field_event_date.end_date|date('U') %}
 
 <article{{ attributes.addClass(classes) }}>
-  <header class="metadata">
-    <div class="tag cwhite">
-      <div id="tag-title" class="{{ color }}">
-        {{ content.field_type_evenement.0 }}
-      </div>
-    </div>
-    {{ title_prefix }}
-    <h1{{ title_attributes }}>
-      {{ label }}
-    </h1>
-    {{ title_suffix }}
-    {{ content.social_simple_buttons }}
-  </header>
   <div{{ content_attributes.addClass('content') }}>
+    <div class="tag"> {{ content.field_event_type }} </div>
+    {{ title_prefix }}
+    <h2{{ title_attributes }}>
+      {{ label }}
+    </h2>
+    {{ title_suffix }}
     <section id="event-content" class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
-      {{ content.field_accroche }}
-      {{ content.field_image }}
+      {{ content.field_subtitle }}
+      {{ content.field_media }}
     </section>
     <aside id="event-sidebar" class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
       <div class="event-details">
         <h3>{{ 'Date'|t }}</h3>
-        <div class="event-date">
-          <span>{{'Début : '|t }}</span>
-          {{ content.field_date_debut_evenement }}
-        </div>
-        <div class="event-date">
-          <span>{{'Fin : '|t }}</span>
-          {{ content.field_date_fin_evenement }}
-        </div>
-        {#   <div class="event-date a2c">
-          <span class="calendar">
-           {{ content.field_ics }}
-          </span>
-         </div> #}
+        {{ content.field_event_date }}
       </div>
-      {% if (content.field_texte_adresse.0 is not empty) or (content.field_adresse_evenement.0 is not empty) %}
-        <div class="event-details">
-          <h3>{{ 'Lieu'|t }}</h3>
-          <span>{{'Adresse : '|t }}</span>
-          {{ content.field_texte_adresse }}
-          {{ content.field_adresse_evenement }}
-        </div>
-      {% endif %}
-      {% if content.field_lien_inscription.0 is not empty %}
-        <div class="event-details inscription">
-          <h3>{{ 'Informations'|t }}</h3>
-          {{ content.field_lien_inscription }}
-        </div>
-      {% endif %}
+      <div class="event-details">
+        <h3>{{ 'Lieu'|t }}</h3>
+        <span>{{'Adresse : '|t }}</span>
+        {{ content.field_event_address }}
+        {{ content.field_address_map }}
+      </div>
     </aside>
-    <section id="event-content" class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
-      {{ content.body }}
-      <div class="share">
-        {{ content.social_simple_buttons }}
-      </div>
-    </section>
   </div>
 </article>
