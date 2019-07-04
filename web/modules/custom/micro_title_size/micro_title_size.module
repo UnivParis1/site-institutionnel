@@ -52,6 +52,10 @@ function micro_title_size_preprocess_block__system_branding_block(&$variables){
     // Override the site name and slogan.
     $variables['site_name'] = (empty($site->get('field_complete_name')->value)?$site->getName():$site->get('field_complete_name')->value);
     $variables['site_slogan'] = $site->getSlogan();
+
+    if (empty($variables['site_logo'])){
+      $variables['site_logo'] = file_url_transform_relative(file_create_url(theme_get_setting('logo.url')));
+    }
   }
 
 }
