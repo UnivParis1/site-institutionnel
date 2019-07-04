@@ -67,38 +67,46 @@
 #}
 {%
   set classes = [
-  node.bundle|clean_class,
-  node.isPromoted() ? 'is-promoted',
-  node.isSticky() ? 'is-sticky',
-  not node.isPublished() ? 'is-unpublished',
-  view_mode ? view_mode|clean_class,
-  'clearfix',
-]
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+  ]
 %}
 
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('content') }}>
-    <div class="tag"> {{ content.field_event_type }} </div>
+    <div class="views-field views-field-field-image">
+      <div class="field-content">
+        {{ content.field_image }}
+      </div>
+    </div>
     {{ title_prefix }}
-    <h2{{ title_attributes }}>
-      {{ label }}
-    </h2>
+    <div class="views-field views-field-title">
+      <span class="field-content actualite-contenu">
+        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
+      </span>
+    </div>
     {{ title_suffix }}
-    <section id="event-content" class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
-      {{ content.field_subtitle }}
-      {{ content.field_media }}
-    </section>
-    <aside id="event-sidebar" class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
-      <div class="event-details">
-        <h3>{{ 'Date'|t }}</h3>
-        {{ content.field_event_date }}
-      </div>
-      <div class="event-details">
-        <h3>{{ 'Lieu'|t }}</h3>
-        <span>{{'Adresse : '|t }}</span>
-        {{ content.field_event_address }}
-        {{ content.field_address_map }}
-      </div>
-    </aside>
+    <div class="views-field views-field-field-date-debut-evenement">
+      <div class="field-content actualite-contenu">
+        {% if event_prefix_date is not empty %}
+          <span>{{ event_prefix_date }}</span>
+          {% if event_start_date is not empty %}
+            <span class="event_date">{{ event_start_date }}</span>
+          {% endif %}
+          {% if event_suffix_date is not empty %}
+            <span>{{ event_suffix_date }}</span>
+          {% endif %}
+          {% if event_end_date is not empty %}
+            <span class="event_date">{{ event_end_date }}</span>
+          {% endif %}
+        {% else %}
+            <span>{{ event_start_date }}</span>
+        {% endif %}
+      </div> 
+    </div>
   </div>
 </article>

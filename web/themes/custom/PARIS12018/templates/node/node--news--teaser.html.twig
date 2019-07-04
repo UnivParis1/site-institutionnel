@@ -65,40 +65,38 @@
  *   in different view modes.
  */
 #}
+
+{% if content.field_couleur_slide.0 is not empty %}
+    {%  set color = content.field_couleur_slide.0 %}
+    {% else %}
+    {% set color = 'fondor' %}
+{% endif %}
 {%
-  set classes = [
-  node.bundle|clean_class,
-  node.isPromoted() ? 'is-promoted',
-  node.isSticky() ? 'is-sticky',
-  not node.isPublished() ? 'is-unpublished',
-  view_mode ? view_mode|clean_class,
-  'clearfix',
+    set classes = [
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
 ]
 %}
-
-<article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('content') }}>
-    <div class="tag"> {{ content.field_event_type }} </div>
-    {{ title_prefix }}
-    <h2{{ title_attributes }}>
-      {{ label }}
-    </h2>
-    {{ title_suffix }}
-    <section id="event-content" class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
-      {{ content.field_subtitle }}
-      {{ content.field_media }}
-    </section>
-    <aside id="event-sidebar" class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
-      <div class="event-details">
-        <h3>{{ 'Date'|t }}</h3>
-        {{ content.field_event_date }}
-      </div>
-      <div class="event-details">
-        <h3>{{ 'Lieu'|t }}</h3>
-        <span>{{'Adresse : '|t }}</span>
-        {{ content.field_event_address }}
-        {{ content.field_address_map }}
-      </div>
-    </aside>
-  </div>
-</article>
+<a href="{{ url }}">
+  <article{{ attributes.addClass(classes) }}>
+    <div class="{{ color }} content">
+      <section id="tuile-actu">
+        <div class="tag"> {{ content.field_type_actualite }} </div>
+        <div class="date">
+            {{ content.field_date_de_l_evenement }}
+        </div>
+          {{ title_prefix }}
+          {% if not page %}
+            <h3{{ title_attributes }}>
+                {{ label }}
+            </h3>
+          {% endif %}
+          {{ title_suffix }}
+      </section>
+    </div>
+  </article>
+</a>

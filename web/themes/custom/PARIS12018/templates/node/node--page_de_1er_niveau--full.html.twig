@@ -67,38 +67,31 @@
 #}
 {%
   set classes = [
-  node.bundle|clean_class,
-  node.isPromoted() ? 'is-promoted',
-  node.isSticky() ? 'is-sticky',
-  not node.isPublished() ? 'is-unpublished',
-  view_mode ? view_mode|clean_class,
-  'clearfix',
-]
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+  ]
 %}
-
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('content') }}>
-    <div class="tag"> {{ content.field_event_type }} </div>
-    {{ title_prefix }}
-    <h2{{ title_attributes }}>
-      {{ label }}
-    </h2>
-    {{ title_suffix }}
-    <section id="event-content" class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
-      {{ content.field_subtitle }}
-      {{ content.field_media }}
+    <section id="content">
+      <div class="img-header-page">
+        {{ content.field_image }}
+        {{ title_prefix }}
+          <h1{{ title_attributes }}>
+            {{ label }}
+          </h1>
+        {{ title_suffix }}
+        {{ content.body }}
+      </div>
+      <div class="content">
+        {{ content.field_paragraphs }}
+        {{ content.field_recherche_formation }}
+      </div>
     </section>
-    <aside id="event-sidebar" class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
-      <div class="event-details">
-        <h3>{{ 'Date'|t }}</h3>
-        {{ content.field_event_date }}
-      </div>
-      <div class="event-details">
-        <h3>{{ 'Lieu'|t }}</h3>
-        <span>{{'Adresse : '|t }}</span>
-        {{ content.field_event_address }}
-        {{ content.field_address_map }}
-      </div>
-    </aside>
+
   </div>
 </article>
