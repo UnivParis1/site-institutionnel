@@ -1,0 +1,88 @@
+uuid: b7dbdb55-e402-4270-b2d2-901f2ce2cd41
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - node.type.news
+    - paragraphs.paragraphs_type.bp_accordion_section
+    - paragraphs.paragraphs_type.bp_carousel
+    - paragraphs.paragraphs_type.bp_columns_two_uneven
+    - paragraphs.paragraphs_type.bp_simple
+  module:
+    - entity_reference_revisions
+id: node.news.field_paragraphs
+field_name: field_paragraphs
+entity_type: node
+bundle: news
+label: 'Blocs éditoriaux'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      bp_accordion_section: bp_accordion_section
+      bp_carousel: bp_carousel
+      bp_columns_two_uneven: bp_columns_two_uneven
+      bp_simple: bp_simple
+    target_bundles_drag_drop:
+      bp_accordion:
+        weight: 19
+        enabled: false
+      bp_accordion_section:
+        enabled: true
+        weight: 20
+      bp_blank:
+        weight: 21
+        enabled: false
+      bp_block:
+        weight: 22
+        enabled: false
+      bp_carousel:
+        enabled: true
+        weight: 23
+      bp_columns:
+        weight: 24
+        enabled: false
+      bp_columns_three_uneven:
+        weight: 25
+        enabled: false
+      bp_columns_two_uneven:
+        enabled: true
+        weight: 26
+      bp_column_wrapper:
+        weight: 27
+        enabled: false
+      bp_image:
+        weight: 28
+        enabled: false
+      bp_modal:
+        weight: 29
+        enabled: false
+      bp_simple:
+        enabled: true
+        weight: 30
+      bp_tabs:
+        weight: 31
+        enabled: false
+      bp_tab_section:
+        weight: 32
+        enabled: false
+      bp_view:
+        weight: 33
+        enabled: false
+      bp_webform:
+        weight: 34
+        enabled: false
+      key_figure:
+        weight: 35
+        enabled: false
+      key_figures_section:
+        weight: 36
+        enabled: false
+field_type: entity_reference_revisions

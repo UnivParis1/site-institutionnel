@@ -85,7 +85,7 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
         'uid' => $item['uid'],
         'status' => 1,
         'field_subtitle' => $item['field_subtitle'],
-        'body' => $item['body'],
+        'field_thesis_supervisor' => $item['field_thesis_supervisor'],
         'field_event_address' => $item['field_event_address'],
         'field_event_date' => $item['field_event_date'],
         'field_address_map' => $item['field_address_map'],

@@ -68,6 +68,13 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
             ],
           ];
         }
+        elseif ($start_date->getTimestamp() === $end_date->getTimestamp()) {
+          $elements[$delta] = [
+            'date' => [
+              '#markup' => "<div>" . $start_date->format('d/m/Y') . "</div>",
+            ],
+          ];
+        }
         else {
           $elements[$delta] = [
             'date' => [

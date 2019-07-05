@@ -15,10 +15,10 @@ dependencies:
     - field.field.node.event.field_media
     - field.field.node.event.field_sites
     - field.field.node.event.field_sites_all
-    - field.field.node.event.field_subtitle
+    - field.field.node.event.field_tag
     - node.type.event
   module:
-    - datetime_range
+    - up1_global
     - user
 _core:
   default_config_hash: oSDlwZi_72aOkj16Fr7DYryO5TS7WIg5Kjf6ESTy5Jw
@@ -28,14 +28,14 @@ bundle: event
 mode: teaser
 content:
   field_event_date:
-    type: daterange_default
+    type: daterange_up1
     weight: 0
     region: content
     label: visually_hidden
     settings:
-      timezone_override: ''
-      format_type: medium
-      separator: ' au'
+      prefix: Du
+      separator: au
+      icon: arrow-right
     third_party_settings: {  }
   field_media:
     type: entity_reference_entity_view
@@ -58,7 +58,7 @@ hidden:
   field_label_color: true
   field_sites: true
   field_sites_all: true
-  field_subtitle: true
+  field_tag: true
   langcode: true
   links: true
   site_id: true

@@ -112,10 +112,7 @@ class ThesesHelper {
             'uid' => $uid,
             'status' => 1,
             'field_subtitle' => $thesard,
-            'body' => [
-              'value' => $dir_ths,
-              'format' => 'full_html',
-            ],
+            'field_thesis_supervisor' => $dir_ths,
             'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
             'field_event_date' => [
               [

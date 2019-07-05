@@ -15,13 +15,15 @@ dependencies:
     - field.field.node.event.field_sites
     - field.field.node.event.field_sites_all
     - field.field.node.event.field_subtitle
+    - field.field.node.event.field_tag
+    - field.field.node.event.field_thesis_supervisor
     - filter.format.restricted_html
     - node.type.event
   module:
-    - datetime_range
     - geolocation
     - options
     - text
+    - up1_global
     - user
 _core:
   default_config_hash: 0ExIAG0-2MLVxXSyQwD7_Lxf_g4l8XabO-OlXyT4Kyo
@@ -537,11 +539,11 @@ content:
     weight: 6
     label: hidden
     settings:
-      separator: '-'
-      format_type: medium
-      timezone_override: ''
+      prefix: Du
+      separator: au
+      icon: arrow-right
     third_party_settings: {  }
-    type: daterange_default
+    type: daterange_up1
     region: content
   field_event_type:
     weight: 5
@@ -568,8 +570,24 @@ content:
     third_party_settings: {  }
     region: content
   field_subtitle:
-    weight: 3
-    label: hidden
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_tag:
+    weight: 12
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_thesis_supervisor:
+    weight: 14
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
