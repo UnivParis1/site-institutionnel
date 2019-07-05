@@ -5,12 +5,12 @@ dependencies:
   config:
     - field.field.node.event.body
     - field.field.node.event.field_address_map
+    - field.field.node.event.field_blocs_medias
     - field.field.node.event.field_categories
     - field.field.node.event.field_disable_canonical_url
     - field.field.node.event.field_event_address
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_type
-    - field.field.node.event.field_label_color
     - field.field.node.event.field_media
     - field.field.node.event.field_sites
     - field.field.node.event.field_sites_all
@@ -20,8 +20,8 @@ dependencies:
     - filter.format.restricted_html
     - node.type.event
   module:
+    - entity_reference_revisions
     - geolocation
-    - options
     - text
     - up1_global
     - user
@@ -519,6 +519,15 @@ content:
     third_party_settings: {  }
     type: geolocation_map
     region: content
+  field_blocs_medias:
+    type: entity_reference_revisions_entity_view
+    weight: 15
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_categories:
     weight: 9
     label: visually_hidden
@@ -552,13 +561,6 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  field_label_color:
-    weight: 4
-    label: visually_hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
     region: content
   field_media:
     type: entity_reference_entity_view

@@ -1,0 +1,99 @@
+uuid: a1e755bb-a6a1-472b-ac46-4bc3575d1824
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blocs_medias
+    - node.type.event
+    - paragraphs.paragraphs_type.bp_simple
+    - paragraphs.paragraphs_type.medias
+  module:
+    - entity_reference_revisions
+id: node.event.field_blocs_medias
+field_name: field_blocs_medias
+entity_type: node
+bundle: event
+label: 'Médias relatifs à l''évènement'
+description: 'Ajouter des visuels, un programme, une vidéo de présentation dudit évènement. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      bp_simple: bp_simple
+      medias: medias
+    target_bundles_drag_drop:
+      files_media:
+        weight: 24
+        enabled: false
+      audio_media:
+        weight: 25
+        enabled: false
+      bp_accordion:
+        weight: 26
+        enabled: false
+      bp_accordion_section:
+        weight: 27
+        enabled: false
+      bp_blank:
+        weight: 28
+        enabled: false
+      bp_block:
+        weight: 29
+        enabled: false
+      bp_carousel:
+        weight: 30
+        enabled: false
+      bp_column_wrapper:
+        weight: 31
+        enabled: false
+      bp_columns:
+        weight: 32
+        enabled: false
+      bp_columns_three_uneven:
+        weight: 33
+        enabled: false
+      bp_columns_two_uneven:
+        weight: 34
+        enabled: false
+      bp_image:
+        weight: 35
+        enabled: false
+      bp_modal:
+        weight: 36
+        enabled: false
+      bp_simple:
+        enabled: true
+        weight: 37
+      bp_tab_section:
+        weight: 38
+        enabled: false
+      bp_tabs:
+        weight: 39
+        enabled: false
+      bp_view:
+        weight: 40
+        enabled: false
+      bp_webform:
+        weight: 41
+        enabled: false
+      image_media:
+        weight: 42
+        enabled: false
+      key_figure:
+        weight: 43
+        enabled: false
+      key_figures_section:
+        weight: 44
+        enabled: false
+      medias:
+        enabled: true
+        weight: 45
+      video_media:
+        weight: 46
+        enabled: false
+field_type: entity_reference_revisions

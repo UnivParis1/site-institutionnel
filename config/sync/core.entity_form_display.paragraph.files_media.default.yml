@@ -1,0 +1,33 @@
+uuid: 678fcc0c-7ae5-45f9-86e6-12e82e09054a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.document_browser
+    - field.field.paragraph.files_media.field_media_fichier
+    - paragraphs.paragraphs_type.files_media
+  module:
+    - entity_browser
+id: paragraph.files_media.default
+targetEntityType: paragraph
+bundle: files_media
+mode: default
+content:
+  field_media_fichier:
+    weight: 0
+    settings:
+      entity_browser: document_browser
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: default
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_replace: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+hidden:
+  created: true
+  status: true

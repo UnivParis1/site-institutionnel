@@ -1,0 +1,30 @@
+uuid: 0c4fbc13-2136-4f2f-ac80-d05a5bf8db3b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_fichier
+    - media.type.file
+    - media.type.mediatheque
+    - paragraphs.paragraphs_type.files_media
+id: paragraph.files_media.field_media_fichier
+field_name: field_media_fichier
+entity_type: paragraph
+bundle: files_media
+label: 'Média Fichier'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+      mediatheque: mediatheque
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: file
+field_type: entity_reference

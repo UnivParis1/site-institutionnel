@@ -1,0 +1,30 @@
+uuid: 8295c5fd-8e28-4113-82e9-4c900f59e2f5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_audio
+    - media.type.audio
+    - media.type.mediatheque_audio
+    - paragraphs.paragraphs_type.audio_media
+id: paragraph.audio_media.field_media_audio
+field_name: field_media_audio
+entity_type: paragraph
+bundle: audio_media
+label: 'Média audio'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      audio: audio
+      mediatheque_audio: mediatheque_audio
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: audio
+field_type: entity_reference

@@ -1,0 +1,32 @@
+uuid: 9d0813a8-c4b0-4a6f-8a5f-a1d386b29bc3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_video
+    - media.type.mediatheque
+    - media.type.remote_video
+    - media.type.video
+    - paragraphs.paragraphs_type.video_media
+id: paragraph.video_media.field_media_video
+field_name: field_media_video
+entity_type: paragraph
+bundle: video_media
+label: 'Média Vidéo'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      mediatheque: mediatheque
+      remote_video: remote_video
+      video: video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: mediatheque
+field_type: entity_reference

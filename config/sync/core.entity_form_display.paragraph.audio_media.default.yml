@@ -1,0 +1,33 @@
+uuid: dfd440cc-1a8c-47f6-b30b-507da2fc06fb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.audio_browser
+    - field.field.paragraph.audio_media.field_media_audio
+    - paragraphs.paragraphs_type.audio_media
+  module:
+    - entity_browser
+id: paragraph.audio_media.default
+targetEntityType: paragraph
+bundle: audio_media
+mode: default
+content:
+  field_media_audio:
+    weight: 0
+    settings:
+      entity_browser: audio_browser
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: default
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_replace: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+hidden:
+  created: true
+  status: true

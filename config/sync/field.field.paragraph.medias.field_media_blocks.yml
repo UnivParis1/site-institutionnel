@@ -1,0 +1,103 @@
+uuid: 6ac4da40-a3ff-4f70-bfa7-0ad11b95a06a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_blocks
+    - paragraphs.paragraphs_type.audio_media
+    - paragraphs.paragraphs_type.files_media
+    - paragraphs.paragraphs_type.image_media
+    - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.video_media
+  module:
+    - entity_reference_revisions
+id: paragraph.medias.field_media_blocks
+field_name: field_media_blocks
+entity_type: paragraph
+bundle: medias
+label: 'Blocs médias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      files_media: files_media
+      audio_media: audio_media
+      image_media: image_media
+      video_media: video_media
+    target_bundles_drag_drop:
+      medias:
+        weight: 23
+        enabled: false
+      files_media:
+        enabled: true
+        weight: 24
+      audio_media:
+        enabled: true
+        weight: 24
+      bp_accordion:
+        weight: 25
+        enabled: false
+      bp_accordion_section:
+        weight: 26
+        enabled: false
+      bp_blank:
+        weight: 27
+        enabled: false
+      bp_block:
+        weight: 28
+        enabled: false
+      bp_carousel:
+        weight: 29
+        enabled: false
+      bp_column_wrapper:
+        weight: 30
+        enabled: false
+      bp_columns:
+        weight: 31
+        enabled: false
+      bp_columns_three_uneven:
+        weight: 32
+        enabled: false
+      bp_columns_two_uneven:
+        weight: 33
+        enabled: false
+      bp_image:
+        weight: 34
+        enabled: false
+      bp_modal:
+        weight: 35
+        enabled: false
+      bp_simple:
+        weight: 36
+        enabled: false
+      bp_tab_section:
+        weight: 37
+        enabled: false
+      bp_tabs:
+        weight: 38
+        enabled: false
+      bp_view:
+        weight: 39
+        enabled: false
+      bp_webform:
+        weight: 40
+        enabled: false
+      image_media:
+        enabled: true
+        weight: 41
+      key_figure:
+        weight: 42
+        enabled: false
+      key_figures_section:
+        weight: 43
+        enabled: false
+      video_media:
+        enabled: true
+        weight: 44
+field_type: entity_reference_revisions

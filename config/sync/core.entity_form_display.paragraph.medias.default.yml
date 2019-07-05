@@ -1,0 +1,29 @@
+uuid: 5d6c20db-c787-471d-8261-c7d28368d2bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.medias.field_media_blocks
+    - paragraphs.paragraphs_type.medias
+  module:
+    - paragraphs
+id: paragraph.medias.default
+targetEntityType: paragraph
+bundle: medias
+mode: default
+content:
+  field_media_blocks:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Paragraphe
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
