@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_paragraphs
     - node.type.page
     - paragraphs.paragraphs_type.key_figures_section
+    - paragraphs.paragraphs_type.medias
   module:
     - entity_reference_revisions
 id: node.page.field_paragraphs
@@ -24,6 +25,7 @@ settings:
     negate: 0
     target_bundles:
       key_figures_section: key_figures_section
+      medias: medias
     target_bundles_drag_drop:
       key_figures_section:
         enabled: true
@@ -43,10 +45,16 @@ settings:
       bp_carousel:
         weight: 23
         enabled: false
+      files_media:
+        weight: 24
+        enabled: false
       bp_column_wrapper:
         weight: 24
         enabled: false
       bp_columns:
+        weight: 25
+        enabled: false
+      audio_media:
         weight: 25
         enabled: false
       bp_columns_three_uneven:
@@ -75,5 +83,17 @@ settings:
         enabled: false
       key_figure:
         weight: 34
+        enabled: false
+      bp_webform:
+        weight: 41
+        enabled: false
+      image_media:
+        weight: 42
+        enabled: false
+      medias:
+        enabled: true
+        weight: 45
+      video_media:
+        weight: 46
         enabled: false
 field_type: entity_reference_revisions
