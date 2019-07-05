@@ -101,8 +101,7 @@ class ThesesHelper {
           $address = $this->formatAddress($these['LIB_CMT_LEU_SOU_THS']);
           $thesard = $this->t('By') . " " . ucfirst($these['LIB_PR1_IND'])
             . " " . ucfirst($these['LIB_NOM_PAT_IND']);
-          $dir_ths = $this->t('Directeur de thèse : ') . " "
-            . ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
+          $dir_ths = ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
 
           $nodes[] = [
             'cod_ths' => $cod_ths,
