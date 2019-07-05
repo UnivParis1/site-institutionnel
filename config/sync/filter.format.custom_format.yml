@@ -1,0 +1,24 @@
+uuid: 8f534724-2b47-481a-a503-54d85115e20e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - token_filter
+name: 'Édito simple'
+format: custom_format
+weight: 0
+filters:
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: true
+    weight: 0
+    settings:
+      filter_url_length: 72
+  token_filter:
+    id: token_filter
+    provider: token_filter
+    status: false
+    weight: 0
+    settings:
+      replace_empty: '0'
