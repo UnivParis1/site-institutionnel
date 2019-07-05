@@ -1,27 +1,29 @@
-uuid: b5c14b91-6f22-45ea-8b61-505e950c0471
-langcode: en
+uuid: 4e1be82d-c610-4c58-824a-e8b01f0b0f0f
+langcode: fr
 status: true
 dependencies:
   config:
-    - facets.facet.categorie
+    - system.menu.main
   module:
-    - facets
     - micro_path
     - micro_site
+    - system
   theme:
     - paris1
-id: categories_2
+id: mainnavigation
 theme: paris1
-region: content
-weight: -6
+region: header
+weight: 0
 provider: null
-plugin: 'facet_block:categorie'
+plugin: 'system_menu_block:main'
 settings:
-  id: 'facet_block:categorie'
-  label: Catégories
-  provider: facets
-  label_display: visible
-  block_id: categories_2
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
 visibility:
   site_type:
     id: site_type
