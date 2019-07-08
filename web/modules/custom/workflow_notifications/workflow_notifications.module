@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Contains workflow_notifications.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\micro_site\SiteUsers;
+
+/**
+ * Implements hook_help().
+ */
+function workflow_notifications_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the workflow_notifications module.
+    case 'help.page.workflow_notifications':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Envoi de mail aux personnes specifiques a un mini site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_mail_alter().
+ */
+function workflow_notifications_mail_alter(&$message) {
+
+  if ($message['key'] == 'content_moderation_notification'){
+    $params = $message['params'];
+    $node = $params['context']['node'];
+    $siteid = $node->get('site_id')->target_id;
+    if (!empty($siteid) &&
+      $node->get('moderation_state')->value == 'en_relecture'){
+      $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
+      $site = $siteStorage->load($siteid);
+      $users = $site->getUsers(SiteUsers::MICRO_SITE_MANAGER);
+      foreach ($users as $user){
+        $data['to'][] = $user->getEmail();
+      }
+
+      // Remove any null values that have crept in.
+      $data['to'] = array_filter($data['to']);
+
+      // Remove any duplicates.
+      $data['to'] = array_unique($data['to']);
+
+      $message['params']['headers']['Bcc'] = implode(',', $data['to']);
+      $message['headers']['Bcc'] = implode(',', $data['to']);
+      $message['to'] = '';
+//      dump($message);
+//      die();
+    }
+
+  }
+}
