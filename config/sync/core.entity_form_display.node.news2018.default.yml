@@ -6,12 +6,16 @@ dependencies:
     - entity_browser.browser.image_browser
     - field.field.node.news2018.body
     - field.field.node.news2018.field_categories
+    - field.field.node.news2018.field_disable_canonical_url
     - field.field.node.news2018.field_label_color
     - field.field.node.news2018.field_lead
     - field.field.node.news2018.field_media
     - field.field.node.news2018.field_news_date
     - field.field.node.news2018.field_news_topic
+    - field.field.node.news2018.field_sites
+    - field.field.node.news2018.field_sites_all
     - node.type.news2018
+    - workflows.workflow.publication
   module:
     - content_moderation
     - datetime
@@ -46,6 +50,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
     region: content
   field_label_color:
     weight: 6
@@ -90,6 +101,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    third_party_settings: {  }
     region: content
   langcode:
     type: language_select

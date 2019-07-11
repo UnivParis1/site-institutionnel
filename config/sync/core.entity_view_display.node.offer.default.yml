@@ -11,12 +11,15 @@ dependencies:
     - field.field.node.offer.field_category
     - field.field.node.offer.field_contract_duration
     - field.field.node.offer.field_contract_type
+    - field.field.node.offer.field_disable_canonical_url
     - field.field.node.offer.field_grade
     - field.field.node.offer.field_job_type
     - field.field.node.offer.field_offer_type
     - field.field.node.offer.field_position_details
     - field.field.node.offer.field_profile
     - field.field.node.offer.field_salary_range
+    - field.field.node.offer.field_sites
+    - field.field.node.offer.field_sites_all
     - node.type.offer
   module:
     - datetime
@@ -33,6 +36,11 @@ content:
     label: hidden
     type: text_default
     weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -147,4 +155,7 @@ content:
       link: true
     third_party_settings: {  }
 hidden:
+  field_disable_canonical_url: true
+  field_sites: true
+  field_sites_all: true
   langcode: true
