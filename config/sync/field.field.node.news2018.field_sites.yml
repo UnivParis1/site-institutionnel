@@ -1,0 +1,25 @@
+uuid: 505dba5d-1213-4f19-aa05-c26453f2a590
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sites
+    - node.type.news2018
+id: node.news2018.field_sites
+field_name: field_sites
+entity_type: node
+bundle: news2018
+label: 'Others sites'
+description: 'Publish the content on others sites.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:site'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: id
+      direction: ASC
+field_type: entity_reference

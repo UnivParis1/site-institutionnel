@@ -11,13 +11,17 @@ dependencies:
     - field.field.node.offer.field_category
     - field.field.node.offer.field_contract_duration
     - field.field.node.offer.field_contract_type
+    - field.field.node.offer.field_disable_canonical_url
     - field.field.node.offer.field_grade
     - field.field.node.offer.field_job_type
     - field.field.node.offer.field_offer_type
     - field.field.node.offer.field_position_details
     - field.field.node.offer.field_profile
     - field.field.node.offer.field_salary_range
+    - field.field.node.offer.field_sites
+    - field.field.node.offer.field_sites_all
     - node.type.offer
+    - workflows.workflow.publication
   module:
     - conditional_fields
     - content_moderation
@@ -694,6 +698,13 @@ content:
           bundle: offer
     type: options_select
     region: content
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
+    region: content
   field_grade:
     weight: 26
     settings: {  }
@@ -825,6 +836,22 @@ content:
           entity_type: node
           bundle: offer
     type: string_textfield
+    region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    third_party_settings: {  }
     region: content
   langcode:
     type: language_select

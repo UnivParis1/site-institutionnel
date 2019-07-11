@@ -5,11 +5,14 @@ dependencies:
   config:
     - field.field.node.news2018.body
     - field.field.node.news2018.field_categories
+    - field.field.node.news2018.field_disable_canonical_url
     - field.field.node.news2018.field_label_color
     - field.field.node.news2018.field_lead
     - field.field.node.news2018.field_media
     - field.field.node.news2018.field_news_date
     - field.field.node.news2018.field_news_topic
+    - field.field.node.news2018.field_sites
+    - field.field.node.news2018.field_sites_all
     - node.type.news2018
   module:
     - datetime
@@ -25,6 +28,11 @@ content:
     label: hidden
     type: text_default
     weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -89,4 +97,7 @@ content:
       link: true
     third_party_settings: {  }
 hidden:
+  field_disable_canonical_url: true
+  field_sites: true
+  field_sites_all: true
   langcode: true
