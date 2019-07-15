@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_dashboard.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_help().
+ */
+function micro_dashboard_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_dashboard module.
+    case 'help.page.micro_dashboard':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A dashboard for micro sites') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function micro_dashboard_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() == 'contenus_en_relecture' ||
+    $view->id() == 'control_content_panes'){
+//    dump($view);
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if (!empty($negotiator->getActiveSite())) {
+      $currentSiteId = $negotiator->getActiveId();
+      if (!empty($currentSiteId)) {
+        $args[0] = $currentSiteId;
+      }
+    }
+  }
+}
