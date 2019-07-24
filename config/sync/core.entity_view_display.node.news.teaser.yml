@@ -11,6 +11,8 @@ dependencies:
     - field.field.node.news.field_media
     - field.field.node.news.field_news_date
     - field.field.node.news.field_news_topic
+    - field.field.node.news.field_paragraphs
+    - field.field.node.news.field_related_news
     - field.field.node.news.field_signature
     - field.field.node.news.field_sites
     - field.field.node.news.field_sites_all
@@ -26,17 +28,36 @@ bundle: news
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
+  field_media:
+    type: entity_reference_entity_view
+    weight: 1
     region: content
+    label: hidden
+    settings:
+      view_mode: thumbnail_news
+      link: false
+    third_party_settings: {  }
+  field_news_topic:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
   links:
-    weight: 100
+    weight: 4
     region: content
+    settings: {  }
+    third_party_settings: {  }
   site_id:
     label: hidden
     type: entity_reference_label
-    weight: 0
+    weight: 3
     region: content
     settings:
       link: true
@@ -46,9 +67,7 @@ hidden:
   field_categories: true
   field_disable_canonical_url: true
   field_lead: true
-  field_media: true
   field_news_date: true
-  field_news_topic: true
   field_paragraphs: true
   field_related_news: true
   field_signature: true

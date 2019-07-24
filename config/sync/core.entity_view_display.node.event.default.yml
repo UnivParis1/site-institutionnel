@@ -51,7 +51,7 @@ content:
       set_marker: '1'
       title: ''
       info_text:
-        value: "<p>[node:title]</p>\r\n"
+        value: "<p><strong>[node:title]&nbsp;</strong></p>\r\n\r\n<p><em>[node:field_event_date:value]</em></p>\r\n\r\n<p>[node:field_event_address]</p>\r\n"
         format: token_editor
       centre:
         fit_bounds:
@@ -130,10 +130,10 @@ content:
               scroll_target_id: ''
             enabled: false
           leaflet_marker_popup:
+            enabled: true
             weight: 0
-            enabled: false
             settings:
-              info_auto_display: false
+              info_auto_display: true
           leaflet_marker_icon:
             weight: 0
             settings:
@@ -616,3 +616,4 @@ hidden:
   field_sites: true
   field_sites_all: true
   langcode: true
+  search_api_excerpt: true

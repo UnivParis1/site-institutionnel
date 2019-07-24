@@ -1,0 +1,70 @@
+label: 'Soumissions de webform'
+display:
+  default:
+    display_title: Master
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+      pager:
+        options:
+          tags:
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+      fields:
+        view_webform_submission:
+          label: Actions
+      empty:
+        area_text_custom:
+          content: 'Aucune soumission n''est disponible.'
+      arguments:
+        in_draft:
+          exception:
+            title: Tout
+      title: 'Soumissions de webform'
+  embed_default:
+    display_options:
+      display_description: 'Afficher les soumissions.'
+  embed_administer:
+    display_options:
+      display_description: 'Administrer les soumissions.'
+      fields:
+        completed:
+          label: Terminé
+        operations:
+          label: Actions
+      filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
+  embed_manage:
+    display_options:
+      display_description: 'Gérer les soumissions.'
+      fields:
+        completed:
+          label: Terminé
+        view_webform_submission:
+          label: Actions
+        edit_webform_submission:
+          label: Actions
+      filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
+  embed_review:
+    display_options:
+      fields:
+        completed:
+          label: Terminé
+        view_webform_submission:
+          label: Actions
+      filters:
+        in_draft:
+          expose:
+            label: 'Est un brouillon'
