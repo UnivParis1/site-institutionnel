@@ -22,11 +22,15 @@ class EntSearchBlock extends BlockBase implements BlockPluginInterface {
    * {@inheritDoc}
    */
   public function build() {
+    global $base_url;
+    $theme = \Drupal::theme()->getActiveTheme();
+
     $config = $this->getConfiguration();
 
     return [
       '#theme' => 'up1_ent_search_block',
       '#url' => $config['ent_url'],
+      '#theme_url' => "$base_url/" . $theme->getPath(),
       ];
   }
 
