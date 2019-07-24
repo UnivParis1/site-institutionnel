@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @Block(
  *  id = "keywords_block",
  *  admin_label = @Translation("Mots-clés saisonniers"),
+ *  category = @Translation("Panthéon-Sorbonne"),
  * )
  */
 class KeywordsBlock extends BlockBase {
