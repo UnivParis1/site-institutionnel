@@ -1,0 +1,76 @@
+uuid: 54a53f93-239b-4794-b63a-5ba1d4da4ae6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.paris1_2019_block_medias
+    - entity_browser.browser.video_browser
+    - field.field.block_content.paris1_2019_block_medias.field_block_media_image
+    - field.field.block_content.paris1_2019_block_medias.field_block_media_video
+    - field.field.block_content.paris1_2019_block_medias.field_block_medias_title
+  module:
+    - entity_browser
+id: block_content.paris1_2019_block_medias.default
+targetEntityType: block_content
+bundle: paris1_2019_block_medias
+mode: default
+content:
+  field_block_media_image:
+    weight: 27
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: thumbnail_news
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_block_media_video:
+    weight: 28
+    settings:
+      entity_browser: video_browser
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: thumbnail_news
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_block_medias_title:
+    weight: 26
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

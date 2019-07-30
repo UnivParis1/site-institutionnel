@@ -1,0 +1,47 @@
+uuid: aa9cfb2c-be52-47ad-979c-e45d3ebae75a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.tile.bp_link
+    - field.field.paragraph.tile.field_media_image
+    - field.field.paragraph.tile.field_title
+    - paragraphs.paragraphs_type.tile
+  module:
+    - link
+id: paragraph.tile.default
+targetEntityType: paragraph
+bundle: tile
+mode: default
+content:
+  bp_link:
+    weight: 1
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_separate
+    region: content
+  field_media_image:
+    weight: 2
+    label: visually_hidden
+    settings:
+      view_mode: tile
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_title:
+    weight: 0
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  search_api_excerpt: true

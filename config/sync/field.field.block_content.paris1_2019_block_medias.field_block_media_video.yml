@@ -1,0 +1,32 @@
+uuid: 41278d64-e804-4535-a76c-ec26a3947915
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.paris1_2019_block_medias
+    - field.storage.block_content.field_block_media_video
+    - media.type.mediatheque
+    - media.type.remote_video
+    - media.type.video
+id: block_content.paris1_2019_block_medias.field_block_media_video
+field_name: field_block_media_video
+entity_type: block_content
+bundle: paris1_2019_block_medias
+label: 'Média Vidéo'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      mediatheque: mediatheque
+      remote_video: remote_video
+      video: video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: remote_video
+field_type: entity_reference

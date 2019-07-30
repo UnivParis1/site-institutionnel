@@ -3,17 +3,34 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.key_figure.field_icon
+    - field.field.paragraph.key_figure.field_icon_position
     - field.field.paragraph.key_figure.field_indicator
     - field.field.paragraph.key_figure.field_number
     - field.field.paragraph.key_figure.field_text
     - paragraphs.paragraphs_type.key_figure
   module:
+    - options
     - text
 id: paragraph.key_figure.default
 targetEntityType: paragraph
 bundle: key_figure
 mode: default
 content:
+  field_icon:
+    weight: 3
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_icon_position:
+    weight: 4
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
   field_indicator:
     weight: 0
     label: hidden
@@ -36,4 +53,5 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-hidden: {  }
+hidden:
+  search_api_excerpt: true

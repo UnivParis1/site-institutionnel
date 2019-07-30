@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.key_figures_section.bp_background
     - field.field.paragraph.key_figures_section.field_column_number
     - field.field.paragraph.key_figures_section.field_key_figure
     - field.field.paragraph.key_figures_section.field_title
@@ -15,6 +16,13 @@ targetEntityType: paragraph
 bundle: key_figures_section
 mode: default
 content:
+  bp_background:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   field_column_number:
     weight: 2
     label: hidden
@@ -39,4 +47,5 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-hidden: {  }
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,86 @@
+uuid: d81dc715-a91b-4c62-91eb-c292ab15fb0c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.hit_list.bp_link
+    - field.field.paragraph.hit_list.bp_width
+    - field.field.paragraph.hit_list.field_column_number
+    - field.field.paragraph.hit_list.field_cta_icon
+    - field.field.paragraph.hit_list.field_media_image
+    - field.field.paragraph.hit_list.field_ranking
+    - field.field.paragraph.hit_list.field_title
+    - paragraphs.paragraphs_type.hit_list
+  module:
+    - entity_browser
+    - link
+    - paragraphs
+id: paragraph.hit_list.default
+targetEntityType: paragraph
+bundle: hit_list
+mode: default
+content:
+  bp_link:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  bp_width:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_column_number:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cta_icon:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_media_image:
+    weight: 2
+    settings:
+      entity_browser: image_browser
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_ranking:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraphe
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

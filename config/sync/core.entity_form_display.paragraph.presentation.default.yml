@@ -1,0 +1,48 @@
+uuid: 14fc95ae-5634-4276-8133-8f3a6cc8acf6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.presentation.bp_text
+    - field.field.paragraph.presentation.field_icon
+    - field.field.paragraph.presentation.field_icon_position
+    - field.field.paragraph.presentation.field_title
+    - paragraphs.paragraphs_type.presentation
+  module:
+    - text
+id: paragraph.presentation.default
+targetEntityType: paragraph
+bundle: presentation
+mode: default
+content:
+  bp_text:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_icon:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_icon_position:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

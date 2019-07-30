@@ -5,8 +5,16 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.page
+    - paragraphs.paragraphs_type.bp_carousel
+    - paragraphs.paragraphs_type.bp_column_wrapper
+    - paragraphs.paragraphs_type.bp_tab_section
+    - paragraphs.paragraphs_type.bp_tabs
+    - paragraphs.paragraphs_type.bp_view
+    - paragraphs.paragraphs_type.hit_list
     - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.section_presentation
+    - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
 id: node.page.field_paragraphs
@@ -25,7 +33,15 @@ settings:
     negate: 0
     target_bundles:
       key_figures_section: key_figures_section
+      bp_carousel: bp_carousel
+      bp_column_wrapper: bp_column_wrapper
+      bp_tab_section: bp_tab_section
+      bp_tabs: bp_tabs
+      bp_view: bp_view
       medias: medias
+      hit_list: hit_list
+      section_presentation: section_presentation
+      tiles: tiles
     target_bundles_drag_drop:
       key_figures_section:
         enabled: true
@@ -43,14 +59,14 @@ settings:
         weight: 22
         enabled: false
       bp_carousel:
+        enabled: true
         weight: 23
-        enabled: false
       files_media:
         weight: 24
         enabled: false
       bp_column_wrapper:
+        enabled: true
         weight: 24
-        enabled: false
       bp_columns:
         weight: 25
         enabled: false
@@ -73,14 +89,17 @@ settings:
         weight: 30
         enabled: false
       bp_tab_section:
+        enabled: true
+        weight: 31
+      presentation:
         weight: 31
         enabled: false
       bp_tabs:
+        enabled: true
         weight: 32
-        enabled: false
       bp_view:
+        enabled: true
         weight: 33
-        enabled: false
       key_figure:
         weight: 34
         enabled: false
@@ -95,5 +114,23 @@ settings:
         weight: 45
       video_media:
         weight: 46
+        enabled: false
+      hit_list:
+        enabled: true
+        weight: 50
+      section_presentation:
+        enabled: true
+        weight: 55
+      tile:
+        weight: 56
+        enabled: false
+      tile_with_text:
+        weight: 57
+        enabled: false
+      tiles:
+        enabled: true
+        weight: 58
+      title_and_subtitle:
+        weight: 59
         enabled: false
 field_type: entity_reference_revisions

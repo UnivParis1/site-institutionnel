@@ -1,0 +1,37 @@
+uuid: f5b58ca9-30a7-498a-be74-686f7a7a84dc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.palmares
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - image.style.hit_list
+    - media.type.image
+  module:
+    - image
+id: media.image.palmares
+targetEntityType: media
+bundle: image
+mode: palmares
+content:
+  field_media_image:
+    label: visually_hidden
+    settings:
+      image_style: hit_list
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_credits: true
+  field_legende: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

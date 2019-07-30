@@ -1,8 +1,10 @@
 uuid: f485b947-a15d-408a-8c12-3d466eb59747
 langcode: fr
-status: false
+status: true
 dependencies:
   module:
+    - micro_path
+    - micro_site
     - system
   theme:
     - paris1_2019
@@ -19,4 +21,20 @@ settings:
   label: Breadcrumbs
   provider: system
   label_display: '0'
-visibility: {  }
+visibility:
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }

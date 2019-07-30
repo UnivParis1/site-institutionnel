@@ -3,6 +3,8 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.key_figure.field_icon
+    - field.field.paragraph.key_figure.field_icon_position
     - field.field.paragraph.key_figure.field_indicator
     - field.field.paragraph.key_figure.field_number
     - field.field.paragraph.key_figure.field_text
@@ -14,16 +16,20 @@ targetEntityType: paragraph
 bundle: key_figure
 mode: default
 content:
-  field_indicator:
-    weight: 0
-    settings:
-      size: 60
-      placeholder: ''
+  field_icon:
+    weight: 3
+    settings: {  }
     third_party_settings: {  }
-    type: string_textfield
+    type: options_select
+    region: content
+  field_icon_position:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_number:
-    weight: 1
+    weight: 0
     settings:
       rows: 5
       placeholder: ''
@@ -31,13 +37,19 @@ content:
     type: text_textarea
     region: content
   field_text:
-    weight: 2
+    weight: 1
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
     region: content
+  translation:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
+  field_indicator: true
   status: true

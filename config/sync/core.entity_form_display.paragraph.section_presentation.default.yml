@@ -1,0 +1,45 @@
+uuid: b1a7230c-d695-4520-9da6-67465ffaf82e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section_presentation.field_column_number
+    - field.field.paragraph.section_presentation.field_presentations
+    - field.field.paragraph.section_presentation.field_title
+    - paragraphs.paragraphs_type.section_presentation
+  module:
+    - paragraphs
+id: paragraph.section_presentation.default
+targetEntityType: paragraph
+bundle: section_presentation
+mode: default
+content:
+  field_column_number:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_presentations:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Paragraphe
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

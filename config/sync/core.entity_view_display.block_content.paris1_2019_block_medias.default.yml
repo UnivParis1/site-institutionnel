@@ -1,0 +1,42 @@
+uuid: e4ce7e35-5c43-4fa7-9c3f-dfab953f4c9e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.paris1_2019_block_medias
+    - field.field.block_content.paris1_2019_block_medias.field_block_media_image
+    - field.field.block_content.paris1_2019_block_medias.field_block_media_video
+    - field.field.block_content.paris1_2019_block_medias.field_block_medias_title
+id: block_content.paris1_2019_block_medias.default
+targetEntityType: block_content
+bundle: paris1_2019_block_medias
+mode: default
+content:
+  field_block_media_image:
+    type: entity_reference_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: homepage
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_block_media_video:
+    type: entity_reference_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: homepage
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_block_medias_title:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
