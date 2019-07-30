@@ -22,7 +22,9 @@ class EntSearchBlock extends BlockBase implements BlockPluginInterface {
    * {@inheritDoc}
    */
   public function build() {
-    global $base_url;
+
+    $host = \Drupal::request()->getSchemeAndHttpHost();
+
     $theme = \Drupal::theme()->getActiveTheme();
 
     $config = $this->getConfiguration();
@@ -30,7 +32,7 @@ class EntSearchBlock extends BlockBase implements BlockPluginInterface {
     return [
       '#theme' => 'up1_ent_search_block',
       '#url' => $config['ent_url'],
-      '#theme_url' => "$base_url/" . $theme->getPath(),
+      '#theme_url' => "//" . \Drupal::request()->getHost() . "/" . $theme->getPath(),
       ];
   }
 
