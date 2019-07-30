@@ -38,30 +38,25 @@
  * @ingroup themeable
  */
 #}
-{% if content.bp_background|render %}
-  {% set layout_background = content.bp_background['#items'].getString() %}
-{% endif %}
+{% set icon = "icon-" ~ content.field_icon['#items'].getString() %}
+{% set icon_position = "icon-" ~ content.field_icon_position['#items'].getString() %}
+
 {%
     set classes = [
-    paragraph.bundle|clean_class,
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    layout_background,
+    'icon-presentation',
+    icon,
+    icon_position,
 ]
 %}
-{% set nbCols = content.field_column_number.0 %}
+
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
-            <div class="paragraph__column">
-                <h2 class="titre">{{ content.field_title.0 }}</h2>
-                {% for key, item in  content.field_key_figure if key|first != '#' %}
-                    <div class="groupeinfo col-md-{{ nbCols }} col-sm-6 col-xs-12">
-                        {{ item }}
-                    </div>
-                {% endfor %}
-            </div>
+            <h5>{{ content.field_title }}</h5>
+            <div> {{ content.bp_text.0 }} </div>
         {% endblock %}
     </div>
 {% endblock paragraph %}

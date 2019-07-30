@@ -1,18 +1,16 @@
 {#
 /**
  * @file
- * Default theme implementation to display a paragraph.
+ * Default theme implementation to display a paragraph in Bootstrap Paragraphs.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
- *   Only method names starting with "get", "has", or "is" and a few common
- *   methods such as "id", "label", and "bundle" are available. For example:
- *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
- *   - paragraph.id(): The paragraph ID.
- *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
- *   - paragraph.getOwnerId(): The user ID of the paragraph author.
- *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
- *   and methods for the paragraph object.
+ *   - id: The paragraph ID.
+ *   - bundle: The type of the paragraph, for example, "image" or "text".
+ *   - authorid: The user ID of the paragraph author.
+ *   - createdtime: Formatted creation date. Preprocess functions can
+ *     reformat it by calling format_date() with the desired parameters on
+ *     $variables['paragraph']->getCreatedTime().
  * - content: All paragraph items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
  *   {{ content|without('field_example') }} to temporarily suppress the printing
@@ -38,23 +36,14 @@
  * @ingroup themeable
  */
 #}
-{% set icon = "icon-" ~ content.field_icon['#items'].getString() %}
-{% set icon_position = "icon-" ~ content.field_icon_position['#items'].getString() %}
-{%
-    set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    'icon-presentation',
-    icon,
-    icon_position,
-]
-%}
-{% block paragraph %}
-    <div{{ attributes.addClass(classes) }}>
-        {% block content %}
-          <div class="chiffre"> {{ content.field_number.0 }} </div>
-          <div class="legende"> {{ content.field_text.0 }} </div>
-        {% endblock %}
-    </div>
-{% endblock paragraph %}
+
+<div{{ attributes.addClass(classes) }}>
+  <div class="paragraph__column">
+      {{ content.field_media_image }}
+      <h5>{{ content.field_title.0 }}</h5>
+      <div>{{ content.bp_text.0 }}</div>
+    <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+      {{ content.bp_link.0['#title'] }}
+    </a>
+  </div>
+</div>
