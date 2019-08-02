@@ -67,30 +67,29 @@
 #}
 {%
   set classes = [
-    node.bundle|clean_class,
-    node.isPromoted() ? 'is-promoted',
-    node.isSticky() ? 'is-sticky',
-    not node.isPublished() ? 'is-unpublished',
-    view_mode ? view_mode|clean_class,
-    'clearfix',
-  ]
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'clearfix',
+]
 %}
+{% set title = label.0 %}
 
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('content') }}>
-    <div class="tag"> {{ content.field_event_type }} </div>
-    {{ title_prefix }}
-    <div class="views-field views-field-title">
-      <span class="field-content actualite-contenu">
-        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
-      </span>
+    <div class="event-image">
+      {{ content.field_media }}
     </div>
-    {{ title_suffix }}
-    <div class="views-field views-field-field-date-debut-evenement">
-      <div class="field-content actualite-contenu">
-        {{ content.field_event_date }}
-      </div> 
-    </div>
-    {{ content.links }}
+    <section id="event-content" class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      {{ title_prefix }}
+        <h2><a href="{{ url }}" rel="bookmark">{{ title }}</a></h2>
+      {{ title_suffix }}
+      {{ content.field_event_date }}
+      {{ content.body }}
+      {{ content.field_thesis_supervisor }}
+    </section>
   </div>
 </article>
+
