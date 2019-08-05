@@ -1,0 +1,102 @@
+diff --git a/src/CalendarProperty/CalendarPropertyProcessor.php b/src/CalendarProperty/CalendarPropertyProcessor.php
+index aafa736..7cffd84 100644
+--- a/src/CalendarProperty/CalendarPropertyProcessor.php
++++ b/src/CalendarProperty/CalendarPropertyProcessor.php
+@@ -131,12 +131,15 @@ class CalendarPropertyProcessor {
+       foreach ($contentEntity->get($this->dateFieldReference)
+                              ->getValue() as $dateVal) {
+         // TODO: Remove the check for DrupalDateTime,should be a string-ed date.
+-        if ($dateVal['value'] instanceof DrupalDateTime) {
++        if ($dateVal['value'] instanceof DrupalDateTime &&
++          $dateVal['end_value'] instanceof DrupalDateTime) {
+           $calendarProperties[] = $dateVal['value']->render();
++          $calendarProperties[] = $dateVal['end_value']->render();
+         }
+         // Add only in 'value' is not empty.
+         elseif ($dateVal['value']) {
+           $calendarProperties[] = $dateVal['value'];
++          $calendarProperties[] = $dateVal['end_value'];
+         }
+       }
+     }
+diff --git a/src/ICalFactory.php b/src/ICalFactory.php
+index 898a408..fce18d1 100644
+--- a/src/ICalFactory.php
++++ b/src/ICalFactory.php
+@@ -129,29 +129,50 @@ class ICalFactory {
+                                       $this->request->getScheme(),
+                                       $this->request->getSchemeAndHttpHost()) :
+       '';
++    // Initiate the switch.
++    $switch = FALSE;
+     foreach ($datesList as $dateIdx => $date) {
+       // We need this eventUniqId to be the same on
+       // following versions of the generated file, in
+       // order to be able to update existing events,
+       // e.g. by reimporting the ics file into our calendar.
+-      $eventUniqId = md5($this->getCalendarProperty('uuid') . $dateIdx);
+-      $iCalendarEvent = new Event($eventUniqId);
++      // Do this only once.
++      if ($switch === FALSE) {
++        $eventUniqId = md5($this->getCalendarProperty('uuid') . $dateIdx);
++        $iCalendarEvent = new Event($eventUniqId);
++        $iCalendarEvent
++          ->setSummary($this->getCalendarProperty('summary'))
++          ->setDescription($html2Text->getText())
++          ->setDescriptionHTML($this->getCalendarProperty('description'));
++        if (!empty($eventUrl)) {
++          $iCalendarEvent->setUrl($eventUrl);
++        }
++        $iCalendarEvent->setUseTimezone(TRUE);
++        $iCalendarEvent->setUseUtc(FALSE);
++        $iCalendar->addComponent($iCalendarEvent);
++      }
+       // Create a datetime object from the stored date value
+       // using UTC as timezone.
+-      $datetime = new \DateTime($date, new \DateTimeZone('UTC'));
++      $datetimes[] = new \DateTime($date, new \DateTimeZone('UTC'));
+       // Set the datetime object using user's timezone.
+       // This way the correct time offset will be applied.
+-      $datetime->setTimezone($this->userDatetimezone);
+-      $iCalendarEvent
+-        ->setDtStart($datetime)
+-        ->setSummary($this->getCalendarProperty('summary'))
+-        ->setDescription($html2Text->getText())
+-        ->setDescriptionHTML($this->getCalendarProperty('description'));
+-      if (!empty($eventUrl)) {
+-        $iCalendarEvent->setUrl($eventUrl);
++      if (count($datetimes) > 1) {
++        $count = FALSE;
++        foreach ($datetimes as $datetime) {
++          $datetime->setTimezone($this->userDatetimezone);
++          if ($count === FALSE) {
++            $iCalendarEvent->setDtStart($datetime);
++          }
++          if ($count === TRUE) {
++            $iCalendarEvent->setDtEnd($datetime);
++          }
++          $count = TRUE;
++        }
++      }
++      else {
++        $iCalendarEvent->setDtStart($datetimes[0]);
+       }
+-      $iCalendarEvent->setUseTimezone(TRUE);
+-      $iCalendar->addComponent($iCalendarEvent);
++      $switch = TRUE;
+     }
+     return $iCalendar;
+   }
+diff --git a/src/Plugin/Field/FieldType/CalendarDownloadType.php b/src/Plugin/Field/FieldType/CalendarDownloadType.php
+index 012f8da..1f03490 100644
+--- a/src/Plugin/Field/FieldType/CalendarDownloadType.php
++++ b/src/Plugin/Field/FieldType/CalendarDownloadType.php
+@@ -229,7 +229,7 @@ class CalendarDownloadType extends FieldItemBase {
+     $fieldDefinitions = $this->getEntity()->getFieldDefinitions();
+     $dateFields = [];
+     foreach ($fieldDefinitions as $fieldName => $fieldDefinition) {
+-      if ($fieldDefinition->getType() === 'datetime') {
++      if ($fieldDefinition->getType() === 'datetime' || $fieldDefinition->getType() === 'daterange') {
+         $dateFields[$fieldName] = $fieldDefinition->getLabel();
+       }
+     }
