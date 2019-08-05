@@ -5,6 +5,7 @@ dependencies:
   config:
     - entity_browser.browser.image_browser
     - field.field.node.event.body
+    - field.field.node.event.field_add_to_cal
     - field.field.node.event.field_address_map
     - field.field.node.event.field_blocs_medias
     - field.field.node.event.field_categories
@@ -25,6 +26,7 @@ dependencies:
     - datetime_range
     - entity_browser
     - geolocation_leaflet
+    - ics_field
     - paragraphs
     - path
 _core:
@@ -36,9 +38,15 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 16
+    weight: 17
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_add_to_cal:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: calendar_download_default_widget
     region: content
   field_address_map:
     weight: 12
@@ -536,7 +544,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 42
+    weight: 24
     third_party_settings: {  }
     region: content
   field_event_address:
@@ -576,7 +584,7 @@ content:
     region: content
   field_sites:
     type: entity_reference_autocomplete
-    weight: 40
+    weight: 22
     settings:
       match_operator: CONTAINS
       size: 60
@@ -587,7 +595,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 41
+    weight: 23
     third_party_settings: {  }
     region: content
   field_subtitle:
@@ -660,13 +668,13 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 20
+    weight: 21
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 19
+    weight: 20
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -674,7 +682,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 17
+    weight: 18
     third_party_settings: {  }
     region: content
   site_id:
@@ -690,14 +698,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 14
+    weight: 15
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 18
+    weight: 19
     third_party_settings: {  }
     region: content
   title:
@@ -709,13 +717,13 @@ content:
     third_party_settings: {  }
     region: content
   translation:
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 16
     settings:
       match_operator: CONTAINS
       size: 60

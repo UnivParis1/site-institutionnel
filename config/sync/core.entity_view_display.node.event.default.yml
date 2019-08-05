@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.event.body
+    - field.field.node.event.field_add_to_cal
     - field.field.node.event.field_address_map
     - field.field.node.event.field_blocs_medias
     - field.field.node.event.field_categories
@@ -22,6 +23,7 @@ dependencies:
   module:
     - entity_reference_revisions
     - geolocation
+    - ics_field
     - text
     - up1_global
     - user
@@ -38,6 +40,13 @@ content:
     weight: 6
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_add_to_cal:
+    weight: 11
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: calendar_download_default_formatter
     region: content
   field_address_map:
     type: geolocation_map
@@ -586,7 +595,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
   links:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -597,6 +606,11 @@ content:
     region: content
     settings:
       link: true
+    third_party_settings: {  }
+  social_simple_buttons:
+    weight: 13
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
