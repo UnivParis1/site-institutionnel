@@ -1,27 +1,29 @@
-uuid: 99d250ee-1e29-4ce2-af5f-bfea4ba1886d
-langcode: en
+uuid: 8cce2c9a-3d7f-485c-87e5-dc425cb4b542
+langcode: fr
 status: true
 dependencies:
   config:
-    - facets.facet.categorie
+    - system.menu.reseaux-sociaux
   module:
-    - facets
     - micro_path
     - micro_site
+    - system
   theme:
     - paris1_2019
-id: paris1_2019_categories_2
+id: reseauxsociaux
 theme: paris1_2019
-region: header
-weight: -8
+region: footer
+weight: -12
 provider: null
-plugin: 'facet_block:categorie'
+plugin: 'system_menu_block:reseaux-sociaux'
 settings:
-  id: 'facet_block:categorie'
-  label: Catégories
-  provider: facets
+  id: 'system_menu_block:reseaux-sociaux'
+  label: 'Université Paris 1 Panthéon-Sorbonne'
+  provider: system
   label_display: visible
-  block_id: categories_2
+  level: 1
+  depth: 0
+  expand_all_items: false
 visibility:
   site_type:
     id: site_type

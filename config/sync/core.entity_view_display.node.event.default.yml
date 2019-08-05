@@ -35,23 +35,20 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 2
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     region: content
-  content_moderation_control:
-    weight: 11
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_address_map:
-    weight: 8
+    type: geolocation_map
+    weight: 3
+    region: content
     label: visually_hidden
     settings:
       set_marker: '1'
-      title: ''
+      title: '[node:title]'
       info_text:
-        value: "<p><strong>[node:title]&nbsp;</strong></p>\r\n\r\n<p><em>[node:field_event_date:value]</em></p>\r\n\r\n<p>[node:field_event_address]</p>\r\n"
+        value: "<p><strong>[node:title]</strong></p>\r\n\r\n<p><em>[node:field_event_date:start_date:short]</em></p>\r\n\r\n<p>[node:field_event_address]</p>\r\n"
         format: token_editor
       centre:
         fit_bounds:
@@ -520,36 +517,34 @@ content:
       common_map: '1'
       data_provider_settings: {  }
     third_party_settings: {  }
-    type: geolocation_map
-    region: content
   field_blocs_medias:
     type: entity_reference_revisions_entity_view
-    weight: 15
-    label: hidden
+    weight: 10
+    region: content
+    label: visually_hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
   field_categories:
-    weight: 9
+    type: entity_reference_label
+    weight: 8
+    region: content
     label: visually_hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_event_address:
-    weight: 7
+    type: string
+    weight: 9
+    region: content
     label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
   field_event_date:
-    weight: 6
-    label: hidden
+    weight: 2
+    label: visually_hidden
     settings:
       prefix: Du
       separator: au
@@ -558,8 +553,8 @@ content:
     type: daterange_up1
     region: content
   field_event_type:
-    weight: 5
-    label: hidden
+    weight: 1
+    label: visually_hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -567,53 +562,47 @@ content:
     region: content
   field_media:
     type: entity_reference_entity_view
-    weight: 10
+    weight: 0
     label: visually_hidden
     settings:
-      view_mode: default
+      view_mode: full
       link: false
     third_party_settings: {  }
     region: content
   field_subtitle:
-    weight: 13
-    label: hidden
+    type: string
+    weight: 5
+    region: content
+    label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
-  field_tag:
-    weight: 12
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_thesis_supervisor:
-    weight: 14
+    type: string
+    weight: 7
+    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
   links:
-    weight: 1
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
-    label: hidden
+    label: visually_hidden
     type: entity_reference_label
-    weight: 0
+    weight: 4
     region: content
     settings:
       link: true
     third_party_settings: {  }
 hidden:
+  content_moderation_control: true
   field_disable_canonical_url: true
   field_sites: true
   field_sites_all: true
+  field_tag: true
   langcode: true
   search_api_excerpt: true

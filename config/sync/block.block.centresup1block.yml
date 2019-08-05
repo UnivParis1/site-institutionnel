@@ -1,27 +1,25 @@
-uuid: 99d250ee-1e29-4ce2-af5f-bfea4ba1886d
-langcode: en
+uuid: 3ccc2249-8a41-4a9f-98e4-5611256e6e1c
+langcode: fr
 status: true
 dependencies:
-  config:
-    - facets.facet.categorie
   module:
-    - facets
     - micro_path
     - micro_site
+    - system
+    - up1_global
   theme:
     - paris1_2019
-id: paris1_2019_categories_2
+id: centresup1block
 theme: paris1_2019
-region: header
+region: content
 weight: -8
 provider: null
-plugin: 'facet_block:categorie'
+plugin: centres_up1_block
 settings:
-  id: 'facet_block:categorie'
-  label: Catégories
-  provider: facets
-  label_display: visible
-  block_id: categories_2
+  id: centres_up1_block
+  label: 'Rechercher un centre'
+  provider: up1_global
+  label_display: '0'
 visibility:
   site_type:
     id: site_type
@@ -32,5 +30,10 @@ visibility:
     id: site
     sites: {  }
     sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: '<front>'
     negate: false
     context_mapping: {  }

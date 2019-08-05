@@ -249,6 +249,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
+        footer: false
       pager:
         type: some
         options:
@@ -324,6 +325,20 @@ display:
         groups:
           1: AND
       rendering_language: '***LANGUAGE_entity_translation***'
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<a href="[view:url]" class="btn btn-primary">Voir toutes les actualités</a>'
+            format: full_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:

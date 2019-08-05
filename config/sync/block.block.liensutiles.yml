@@ -1,27 +1,29 @@
-uuid: 99d250ee-1e29-4ce2-af5f-bfea4ba1886d
-langcode: en
+uuid: 6761f64f-b43a-4d90-9d14-2b3b5d924667
+langcode: fr
 status: true
 dependencies:
   config:
-    - facets.facet.categorie
+    - system.menu.liens-utiles
   module:
-    - facets
     - micro_path
     - micro_site
+    - system
   theme:
     - paris1_2019
-id: paris1_2019_categories_2
+id: liensutiles
 theme: paris1_2019
-region: header
-weight: -8
+region: footer
+weight: -10
 provider: null
-plugin: 'facet_block:categorie'
+plugin: 'system_menu_block:liens-utiles'
 settings:
-  id: 'facet_block:categorie'
-  label: Catégories
-  provider: facets
-  label_display: visible
-  block_id: categories_2
+  id: 'system_menu_block:liens-utiles'
+  label: 'Liens utiles'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
 visibility:
   site_type:
     id: site_type
