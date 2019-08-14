@@ -1,0 +1,37 @@
+uuid: 5e30326b-6f6f-4f4b-b64b-1b2bfb6a4fd4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.tile_wo_image.bp_background
+    - field.field.paragraph.tile_wo_image.bp_link
+    - paragraphs.paragraphs_type.tile_wo_image
+  module:
+    - link
+    - options
+id: paragraph.tile_wo_image.default
+targetEntityType: paragraph
+bundle: tile_wo_image
+mode: default
+content:
+  bp_background:
+    weight: 0
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  bp_link:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden:
+  search_api_excerpt: true

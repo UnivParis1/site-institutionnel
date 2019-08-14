@@ -1,0 +1,133 @@
+uuid: c3e57856-4be6-487b-bdd6-bcc707b3c862
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_editorial_blocks
+    - node.type.second_level_pages
+    - paragraphs.paragraphs_type.bp_accordion
+    - paragraphs.paragraphs_type.bp_carousel
+    - paragraphs.paragraphs_type.bp_simple
+    - paragraphs.paragraphs_type.bp_tabs
+    - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.rich_content
+    - paragraphs.paragraphs_type.tiles
+  module:
+    - entity_reference_revisions
+id: node.second_level_pages.field_editorial_blocks
+field_name: field_editorial_blocks
+entity_type: node
+bundle: second_level_pages
+label: 'Blocs éditoriaux'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      rich_content: rich_content
+      bp_accordion: bp_accordion
+      bp_carousel: bp_carousel
+      bp_simple: bp_simple
+      bp_tabs: bp_tabs
+      medias: medias
+      tiles: tiles
+    target_bundles_drag_drop:
+      audio_media:
+        weight: 31
+        enabled: false
+      rich_content:
+        enabled: true
+        weight: 32
+      bp_accordion:
+        enabled: true
+        weight: 32
+      bp_accordion_section:
+        weight: 33
+        enabled: false
+      bp_blank:
+        weight: 34
+        enabled: false
+      bp_block:
+        weight: 35
+        enabled: false
+      bp_carousel:
+        enabled: true
+        weight: 36
+      bp_columns:
+        weight: 37
+        enabled: false
+      bp_columns_three_uneven:
+        weight: 38
+        enabled: false
+      bp_columns_two_uneven:
+        weight: 39
+        enabled: false
+      bp_column_wrapper:
+        weight: 40
+        enabled: false
+      bp_image:
+        weight: 41
+        enabled: false
+      bp_modal:
+        weight: 42
+        enabled: false
+      bp_simple:
+        enabled: true
+        weight: 43
+      bp_tabs:
+        enabled: true
+        weight: 44
+      bp_tab_section:
+        weight: 45
+        enabled: false
+      bp_view:
+        weight: 46
+        enabled: false
+      bp_webform:
+        weight: 47
+        enabled: false
+      files_media:
+        weight: 48
+        enabled: false
+      hit_list:
+        weight: 49
+        enabled: false
+      image_media:
+        weight: 50
+        enabled: false
+      key_figure:
+        weight: 51
+        enabled: false
+      key_figures_section:
+        weight: 52
+        enabled: false
+      medias:
+        enabled: true
+        weight: 53
+      presentation:
+        weight: 54
+        enabled: false
+      section_presentation:
+        weight: 55
+        enabled: false
+      tile:
+        weight: 56
+        enabled: false
+      tiles:
+        enabled: true
+        weight: 57
+      tile_with_text:
+        weight: 58
+        enabled: false
+      title_and_subtitle:
+        weight: 59
+        enabled: false
+      video_media:
+        weight: 60
+        enabled: false
+field_type: entity_reference_revisions

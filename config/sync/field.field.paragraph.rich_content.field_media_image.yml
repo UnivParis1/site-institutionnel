@@ -1,0 +1,30 @@
+uuid: 5f1abc4b-31b0-4334-ac45-39eed57c87bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_image
+    - media.type.image
+    - media.type.mediatheque
+    - paragraphs.paragraphs_type.rich_content
+id: paragraph.rich_content.field_media_image
+field_name: field_media_image
+entity_type: paragraph
+bundle: rich_content
+label: Image
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      mediatheque: mediatheque
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

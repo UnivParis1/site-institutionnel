@@ -1,24 +1,29 @@
-uuid: 4fe4f313-bedc-4ee0-b1a8-8fd3d9b6d658
-langcode: en
+uuid: 5e96bc9e-c6e9-4458-86e8-9e06df9131cf
+langcode: fr
 status: true
 dependencies:
+  config:
+    - system.menu.menu-liens-utiles-haut
   module:
-    - language
     - micro_path
     - micro_site
+    - system
   theme:
     - paris1_2019
-id: paris1_2019_languageswitcher
+id: menuliensutileshaut
 theme: paris1_2019
 region: navigation
-weight: -9
+weight: -13
 provider: null
-plugin: 'language_block:language_interface'
+plugin: 'system_menu_block:menu-liens-utiles-haut'
 settings:
-  id: 'language_block:language_interface'
-  label: 'Language switcher'
-  provider: language
+  id: 'system_menu_block:menu-liens-utiles-haut'
+  label: 'Menu liens utiles haut'
+  provider: system
   label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
 visibility:
   site_type:
     id: site_type

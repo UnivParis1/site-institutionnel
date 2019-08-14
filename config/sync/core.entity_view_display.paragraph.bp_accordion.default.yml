@@ -8,6 +8,7 @@ dependencies:
     - field.field.paragraph.bp_accordion.bp_background
     - field.field.paragraph.bp_accordion.bp_show_indicators
     - field.field.paragraph.bp_accordion.bp_width
+    - field.field.paragraph.bp_accordion.field_title
     - paragraphs.paragraphs_type.bp_accordion
   module:
     - entity_reference_revisions
@@ -56,6 +57,15 @@ content:
     third_party_settings: {  }
     type: list_key
     region: content
+  field_title:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
 hidden:
   created: true
+  search_api_excerpt: true
   uid: true

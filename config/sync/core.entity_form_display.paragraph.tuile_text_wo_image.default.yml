@@ -1,0 +1,42 @@
+uuid: c79e3c77-41cb-4f2c-b5d9-4bd2979c729f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.tuile_text_wo_image.bp_background
+    - field.field.paragraph.tuile_text_wo_image.bp_link
+    - field.field.paragraph.tuile_text_wo_image.field_text
+    - paragraphs.paragraphs_type.tuile_text_wo_image
+  module:
+    - link
+    - text
+id: paragraph.tuile_text_wo_image.default
+targetEntityType: paragraph
+bundle: tuile_text_wo_image
+mode: default
+content:
+  bp_background:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  bp_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_text:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  created: true
+  status: true

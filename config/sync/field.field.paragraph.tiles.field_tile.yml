@@ -6,7 +6,9 @@ dependencies:
     - field.storage.paragraph.field_tile
     - paragraphs.paragraphs_type.tile
     - paragraphs.paragraphs_type.tile_with_text
+    - paragraphs.paragraphs_type.tile_wo_image
     - paragraphs.paragraphs_type.tiles
+    - paragraphs.paragraphs_type.tuile_text_wo_image
   module:
     - entity_reference_revisions
 id: paragraph.tiles.field_tile
@@ -26,16 +28,18 @@ settings:
     target_bundles:
       tile: tile
       tile_with_text: tile_with_text
+      tile_wo_image: tile_wo_image
+      tuile_text_wo_image: tuile_text_wo_image
     target_bundles_drag_drop:
       tile:
         enabled: true
         weight: 28
-      tile_with_text:
-        enabled: true
-        weight: 29
       audio_media:
         weight: 29
         enabled: false
+      tile_with_text:
+        enabled: true
+        weight: 29
       bp_accordion:
         weight: 30
         enabled: false
@@ -48,6 +52,9 @@ settings:
       bp_block:
         weight: 33
         enabled: false
+      tile_wo_image:
+        enabled: true
+        weight: 33
       bp_carousel:
         weight: 34
         enabled: false
@@ -111,4 +118,16 @@ settings:
       video_media:
         weight: 54
         enabled: false
+      presentation:
+        weight: 57
+        enabled: false
+      rich_content:
+        weight: 58
+        enabled: false
+      section_presentation:
+        weight: 59
+        enabled: false
+      tuile_text_wo_image:
+        enabled: true
+        weight: 65
 field_type: entity_reference_revisions

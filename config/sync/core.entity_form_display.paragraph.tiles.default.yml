@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.tiles.bp_width
+    - field.field.paragraph.tiles.field_column_number
     - field.field.paragraph.tiles.field_tile
     - field.field.paragraph.tiles.field_title
     - paragraphs.paragraphs_type.tiles
@@ -20,9 +21,15 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_column_number:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_tile:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
     settings:
       title: Paragraphe
       title_plural: Paragraphs
@@ -33,7 +40,7 @@ content:
     third_party_settings: {  }
     region: content
   field_title:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
