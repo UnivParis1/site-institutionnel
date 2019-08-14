@@ -38,47 +38,42 @@
 #}
 
 {{ attach_library('bootstrap_paragraphs/bootstrap-paragraphs') }}
-{% if paragraph.bundle == 'bp_columns' %}
-  {{ attach_library('bootstrap_paragraphs/bp-columns') }}
-{% endif %}
 
-{# Renders Width field. #}
+{# Renders Background field. #}
 {# Sets class name from values in database. #}
-{% if content.bp_width|render %}
-  {% set layout_width = content.bp_width['#items'].getString() %}
-  {% set layout_width_classes = [
-    'paragraph--width--tiny' == layout_width ? 'paragraph--width--tiny',
-    'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
-    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
-    'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
-    'paragraph--width--full' == layout_width ? 'paragraph--width--full',
+{% if content.bp_background|render %}
+  {% set layout_background = content.bp_background['#items'].getString() %}
+  {% set layout_background_classes = [
+    'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
   ]
   %}
 {% endif %}
-
+{% set img_position = content.field_image_position['#items'].getString() ~ "-position" %}
 {%
   set classes = [
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
-  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.bundle|clean_class,
+  img_position,
 ]
 %}
 
-{# Merges Width field with classes. #}
-{% set width_field = content.bp_width|render %}
-{% if width_field %}
-  {% set classes = classes|merge(layout_width_classes) %}
+{# Merges Background field with classes. #}
+{% set background_field = content.bp_background|render %}
+{% if background_field %}
+  {% set classes = classes|merge(layout_background_classes) %}
 {% endif %}
 
-{% set nbCols = content.field_column_number.0 %}
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column">
-    <h2 class="titre">{{ content.field_title.0 }}</h2>
-    {% for key, item in  content.field_tile if key|first != '#' %}
-      <div class="col-md-{{ nbCols }} col-sm-6 col-xs-12">
-        {{ item }}
-      </div>
-    {% endfor %}
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    {{ content.field_media_image }}
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    <h2>{{ content.field_title.0 }}</h2>
+    {{ content.field_text }}
+    <a class="btn btn-inverse btn-primary" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+      {{ content.bp_link.0['#title'] }}
+    </a>
   </div>
 </div>
