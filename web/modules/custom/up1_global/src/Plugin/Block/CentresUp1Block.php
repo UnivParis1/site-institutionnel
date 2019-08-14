@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Drupal\up1_global\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
