@@ -1,0 +1,814 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > Mixins
+    Par Ebizproduction
+*/
+
+/* Ebizproduction : Couleurs > Backgrounds */
+$colors-list: (
+
+  $light-pink light-pink $main-color,
+  $light-green light-green $green,
+  $light-blue light-blue $blue,
+  $light-yellow light-yellow $yellow,
+
+  $white white $black,
+  $light-blue light-blue $black,
+  $medium-gray medium-gray $black,
+  $gray gray $black,
+  $gray1 gray1 $black,
+
+  $gray2 gray2 $white,
+  $dark-gray dark-gray $white,
+  $black black $white,
+  $blue blue $white,
+  $green green $white,
+  $yellow yellow $white,
+  $main-color turquoise $white,
+  $red red $white,
+  $turquoise turquoise $white,
+
+);
+
+
+@mixin colWidth ($size:'small', $tableGrid:12) {
+  @for $i from 1 through $tableGrid {
+    .#{$size}-col-#{$i} {
+      width: percentage($i/$tableGrid);
+    }
+  }
+}
+
+@mixin responsiveColWidth(){
+  @each $breakpointName, $breakpoint  in $breakpoints {
+    @include breakpoint($breakpoint) {
+      @include colWidth(#{$breakpointName});
+    }
+  }
+}
+
+@mixin bg-color($bg-color, $txt-color: $white, $noHover : true){
+  background-color: $bg-color !important;
+  color: $txt-color !important;
+  *{color: inherit;}
+  &.transparent{
+    background-color: rgba($bg-color, .7) !important;
+  }
+  &[class*='-before']{
+    background-color:transparent;
+    &:hover{
+      background-color:transparent;
+      &:before{background-color: darken($bg-color, 5%) !important;}
+    }
+    &:before{
+      background-color: $bg-color !important; color: $txt-color !important;
+    }
+  }
+
+  @if $noHover == true{
+    &:not(.no-hover){
+      &:hover:not(div):not(section):not(header):not(footer):not(ul),
+      &:focus:not(div):not(section):not(header):not(footer):not(ul),
+      &:active:not(div):not(section):not(header):not(footer):not(ul),
+      &.active{
+        background-color: darken($bg-color, 5%) !important;
+      }
+    }
+  }
+}
+
+@each $color, $color-name, $txt-color in $colors-list {
+    .bg-#{$color-name} {
+        @include bg-color($color, $txt-color);
+    }
+    .bg-#{$color-name}-before{
+      &:before{
+        background-color: $color !important;
+      }
+    }
+
+    .txt-#{$color-name} {
+        color: $color !important;
+        &:not(.no-hover):hover{
+          color: darken($color, 5%) !important;
+        }
+    }
+
+   .calendar-#{$color-name}{
+    //======== CALENDAR ================
+    &.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_today{color:$color;}
+    &.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div.xdsoft_current,
+    &.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default,
+    &.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current{
+      background-color: $color; box-shadow: 0 1px 3px 0 $color inset; color:$txt-color;
+    }
+
+    &.xdsoft_datetimepicker .xdsoft_calendar td:hover,
+    &.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div:hover{
+      background-color:darken($color,5%) !important;
+    }
+    //======== CALENDAR end ================
+  }
+}
+
+
+
+@mixin font-size($font-size, $important: false){
+  @if $important == true{
+    font-size: $font-size !important;
+      font-size: ($font-size / $base-font-size)*1rem !important;
+  } @else{
+    font-size: $font-size;
+      font-size: ($font-size / $base-font-size)*1rem;
+  }
+}
+
+/*@mixin btn-style($bg-color: $black, $color: $white, $taille: normal, $mandatory: false){
+  //@if $mandatory
+  background-color: $bg-color;
+  color: $color ; font-size: rem-calc(22px);
+  @include responsiveVal(font-size, $gutter*0.375, null, xlarge);
+
+  line-height: 1.2; display:inline-block;
+  @include setFont($fontType-bold);
+  @include responsiveVal(padding,$gutter/2.6 $gutter);
+  @extend .hand-cursor;
+  //===== CONTROLE TAILLE ======
+  @if $taille == small{
+    @include responsiveVal(padding, $gutter/4 $gutter/1.5);
+    font-size: rem-calc(18px);
+  }
+
+  @if $taille == medium{
+    font-size: rem-calc(18px);
+    @include responsiveVal(padding, $gutter/4 $gutter/1.5);
+  }
+
+  @if $taille == xsmall{
+    @include responsiveVal(padding,$gutter/4.8 $gutter/1.5);
+    line-height: 1.55; font-size:rem-calc(18px);
+  }
+  &:hover{
+    background-color:darken($bg-color, 3%);
+    color:$white;
+  }
+}*/
+
+
+@mixin dropdownStyle{
+  display: block; position: absolute;
+  //z-index: 2;
+  z-index: 700;
+  &:before{
+    content:"";
+    position: absolute;
+    @include responsiveVal(left,$gutter*0.5625);
+    top: -8px;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px;
+    border-color: transparent transparent $gray transparent;
+  }
+  li{
+    display: inline-block; width: 100%;
+    &:before{display:none;}
+    a{
+      @include responsiveVal(padding,$gutter/6 $gutter*0.5625);
+      display: block;
+      line-height:2;
+      background-color:$gray;
+      color:$black; @include setFont($fontType-bold);
+      &:hover{
+        background-color: $black;
+        color: $white;
+        b{color:$white;}
+      }
+    }
+  }
+}
+
+
+@mixin vertical-align($position: relative, $top: 50%, $translate: -50%) {
+  position: $position;
+  top: $top;
+  -webkit-transform: translateY($translate);
+  -ms-transform: translateY($translate);
+  transform: translateY($translate);
+}
+
+@mixin vh-align($position: relative, $top: 50%, $left:50%, $translateX: -50%, $translateY: -50%) {
+  position: $position;
+  top: $top;
+  left: $left;
+  -webkit-transform:translateX($translateX) translateY($translateY);
+  -ms-transform: translateX($translateX) translateY($translateY);
+  transform: translateX($translateX) translateY($translateY);
+}
+
+
+@mixin clear {
+  &:before, &:after {
+    content: "\0020";
+    display: table;
+  }
+  &:after { clear: both; }
+}
+
+
+@mixin remove-circle-effect{
+  width: auto; height: auto; border:0; padding:0;
+  line-height: 1;
+}
+
+@mixin box-shadow($val:0.16, $blur: 32px, $verticalH:2px,  $color:$black, $mandatory: false){
+  @if $mandatory == true {
+    box-shadow: 0 $verticalH $blur 0 rgba($black, $val) !important;
+  } @else {
+    box-shadow: 0 $verticalH $blur 0 rgba($black, $val);
+  }
+}
+
+@mixin box-border($border-width: 2px, $color: $black){
+  box-shadow: 0 0 0 $border-width rgba($color, 1);
+}
+
+
+@mixin responsiveVal($property, $values, $mandatory: null, $breakpointVal: $grid-column-responsive-gutter) {
+  $breakpointCount: length($breakpointVal);
+
+  //it's an array loop the breakpoints / this is the default behavior of the mixin
+  @if($breakpointCount > 1){
+    $i : 0;
+    //value per breakpoint
+    @each $breakpoint, $gutterVal in $breakpointVal {
+      @if($i > 0){
+        @include responsiveValInner($property, $values, $mandatory, $breakpoint, $gutterVal);
+      } @else{
+        //set default value because the breakpoints are max-with
+        @include responsiveValInnerDefault($property, $values, $mandatory, $gutterVal);
+      }
+      $i: $i+1;
+    }
+
+  //One breakpoint value
+  } @else{
+    $gutterVal: getGutterVal($breakpointVal);
+    @include responsiveValInner($property, $values, $mandatory, $breakpointVal, $gutterVal);
+  }
+}
+
+@mixin responsiveValInnerDefault($property, $values, $mandatory, $gutterVal){
+  //check if values is array or one val
+  $myArrayOfVal:();
+  $count: length($values);
+  @if($count > 1){
+    @for $i from 1 through $count {
+      $theVal : nth($values, $i);
+      //check if value is fix
+      @if is_numeric($theVal){
+        $myArrayOfVal: append($myArrayOfVal, $theVal * $gutterVal);
+      } @else {
+        $myArrayOfVal: append($myArrayOfVal, $theVal);
+      }
+    }
+    @if $mandatory == true {
+      #{$property} : rem-calc($myArrayOfVal) !important;
+    } @else {
+      #{$property} : rem-calc($myArrayOfVal);
+    }
+  } @else {
+    $theVal : $values;
+    @if is_numeric($values){
+      $theVal : ($values * $gutterVal);
+    }
+    @if $mandatory == true {
+      #{$property} : rem-calc($theVal) !important;
+    } @else{
+      #{$property} : rem-calc($theVal);
+    }
+  }
+}
+
+@mixin responsiveValInner($property, $values, $mandatory, $breakpointVal, $gutterVal){
+  //for each breakpoint get gutter value
+  @include breakpoint($breakpointVal down) {
+    @include responsiveValInnerDefault($property, $values, $mandatory, $gutterVal);
+  }
+}
+
+
+@mixin responsiveValCalc($property, $value, $staticVal: 0, $percentage: 100%, $mandatory: null, $array: $grid-column-responsive-gutter) {
+  $gutterVal: getGutterVal();
+  @include responsiveValCalcInner($property, $value, $staticVal, $percentage, $mandatory, $gutterVal);
+
+  //$i : 0 !default;
+  //loop the breakpoints
+  @each $breakpoint, $gutterValue in $array {
+    //@if($i > 0) {
+      //for each breakpoint get gutter value
+      @include breakpoint($breakpoint down) {
+        @include responsiveValCalcInner($property, $value, $staticVal, $percentage, $mandatory, $gutterValue);
+      }
+      //$i: $i+1;
+    //}
+  }
+}
+
+
+@mixin responsiveValCalcInner($property, $value, $staticVal, $percentage, $mandatory, $gutterVal){
+  @if $staticVal == 0 {
+    @if $mandatory == true {
+      #{$property} : calc(#{$percentage} - #{rem-calc($value*$gutterVal)}) !important;
+    } @else {
+      #{$property} : calc(#{$percentage} - #{rem-calc($value*$gutterVal)});
+    }
+  }@else{
+    @if $mandatory == true {
+      #{$property} : calc(#{$percentage} - (#{rem-calc($value*$gutterVal)} + #{rem-calc($staticVal)})) !important;
+    } @else {
+      #{$property} : calc(#{$percentage} - (#{rem-calc($value*$gutterVal)} + #{rem-calc($staticVal)}));
+    }
+  }
+}
+@mixin responsiveValCalcStat($property, $value, $staticVal,$mandatory: null, $array: $grid-column-responsive-gutter) {
+  //loop the breakpoints
+  @each $breakpoint, $gutterVal in $array {
+    //for each breakpoint get gutter value
+    @include breakpoint($breakpoint down) {
+      @if $mandatory == true {
+        #{$property} : calc(#{rem-calc($value*$gutterVal)} + #{rem-calc($staticVal)}) !important;
+      } @else {
+        #{$property} : calc(#{rem-calc($value*$gutterVal)} + #{rem-calc($staticVal)});
+      }
+    }
+  }
+}
+@mixin square($dim) {
+  width: $dim; height: $dim;
+}
+
+
+@mixin maskBackground($color, $opacity: 0.1, $opacityHover: 0.2, $blendMode : false){
+  position: relative;
+  &:before{
+    background-color: rgba($color, $opacity);
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: block; content: "";
+    @include transitionEffect();
+    @if $blendMode == true{
+      mix-blend-mode: multiply;
+    }
+  }
+  //@if $blendMode == true {
+    &:not(.no-hover):hover{
+      &:before{
+        background-color: rgba($color, $opacity + $opacityHover);
+      }
+    }
+  //}
+}
+
+@mixin rotate-element($val) {
+  -webkit-transform: rotate($val);
+  -moz-transform: rotate($val);
+  -ms-transform: rotate($val);
+  -o-transform: rotate($val);
+  transform: rotate($val);
+}
+@mixin applyOpacity($opacity){
+   /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity*100})";
+  /* IE 5-7 */
+  filter: alpha(opacity=#{$opacity*100});
+  /* Netscape */
+  -moz-opacity: $opacity;
+  /* Safari 1.x */
+  -khtml-opacity: $opacity;
+  /* Good browsers */
+  opacity: $opacity;
+}
+
+@mixin responsiveMarginBottom($value, $marginBoolArray: $apply-responsive-margin, $mandatory: null, $array: $grid-column-responsive-gutter){
+
+  $marginBreakpoint: 0;
+  //set default value
+  $gutterValDefault:map-get($array, 'small');
+
+  //loop the margin breakpoints
+  @each $breakpoint, $marginBreakpoint in $apply-responsive-margin{
+    //$gutterVal : map-get($array, $breakpoint);
+    $gutterVal : getGutterVal($breakpoint);
+    @if($gutterVal == null) {
+      $gutterVal : $gutterValDefault
+    } @else {
+      $gutterValDefault : $gutterVal;
+    }
+    @include breakpoint($breakpoint) {
+      @if $mandatory == true {
+        margin-bottom : rem-calc($marginBreakpoint*$value*$gutterVal) !important;
+      } @else{
+        margin-bottom : rem-calc($marginBreakpoint*$value*$gutterVal);
+      }
+    }
+  }
+}
+
+
+@mixin brightnessStyle($percentage: 100%){
+  -webkit-filter: brightness($percentage);
+  -moz-filter: brightness($percentage);
+  -o-filter: brightness($percentage);
+  -ms-filter: brightness($percentage);
+  filter: brightness($percentage);
+}
+
+
+@mixin responsiveWidthJustify($rowElement, $elementPerRowArray, $customSpace, $marginBottomValue : $customSpace){
+  $elementPrevRow : 0;
+  //@include flex-grid-row(collapse, expanded);
+  display:flex;
+  flex-wrap:wrap;
+  flex: 1 1 auto;
+  &:before{display: none;}
+  #{$rowElement}{
+    //flex: 0 auto;
+    padding: 0; display: inline-block;
+  }
+
+  //loop the breakpoints
+  //@if isArray($elementPerRowArray) ==  true {
+  @if length($elementPerRowArray) > 1 {
+    @each $breakpoint, $elementPerRow in $elementPerRowArray {
+      @include createBreakpoint($breakpoint, $rowElement, $elementPerRow, $customSpace, $marginBottomValue, $grid-column-responsive-gutter);
+      $elementPrevRow : $elementPerRow;
+    }
+  }@else {
+    @include createBreakpoint(small, $rowElement, $elementPerRowArray, $customSpace, $marginBottomValue, $grid-column-responsive-gutter);
+  }
+}
+
+
+@mixin createBreakpoint($breakpoint, $rowElement, $elementPerRow, $customSpace, $marginBottomValue, $array){
+  $gutterVal : getGutterVal($breakpoint, $array);
+  //for each breakpoint get gutter value
+  @include breakpoint($breakpoint) {
+
+    @if $elementPerRow > 1{
+      $flexVal : calc(((100% - ((#{$elementPerRow} - 1) * (#{$customSpace} * #{$gutterVal}))) / #{$elementPerRow}));
+
+      #{$rowElement}{
+        flex : $flexVal;
+        max-width : $flexVal;
+        //reset margins
+        &:nth-child(n){#{$margin-right} : 0;}
+
+        &:not(:nth-child(#{$elementPerRow}n)){
+          #{$margin-right} :  rem-calc($customSpace*$gutterVal);
+        }
+      }
+
+    } @else {
+      #{$rowElement}{
+        max-width : 100%; flex: 100%;
+        #{$margin-right} : 0;
+      }
+    }//close elementPerRow
+
+
+    @if $elementPerRow > 1{
+      //apply margin all elements unless last elementPerRow
+      @if $marginBottomValue > 0 {
+        #{$rowElement}{
+          &:not(:nth-last-child(-n+#{$elementPerRow})){
+            margin-bottom: rem-calc($marginBottomValue*$gutterVal);
+          }
+          &:nth-last-child(#{$elementPerRow}){
+            margin-bottom: 0;
+          }
+        }
+      }
+    } @else {
+      //on per row => apply margin bottom unless last element
+      #{$rowElement}{
+        &:not(:last-child()){
+          margin-bottom: rem-calc($marginBottomValue*$gutterVal);
+        }
+      }
+    }
+  }//close breakpoint
+}
+
+
+//a revoir
+@mixin last-row-flexbox($num-columns, $width-items){
+
+  $filled-space: $width-items * $num-columns;
+  $margin: calc((100% - #{$filled-space}) / (#{$num-columns} - 1));
+
+  $num-cols-1 : $num-columns - 1;
+
+  &:nth-child(#{$num-columns}n+1):nth-last-child(-n+#{$num-cols-1}) ~ & {
+    margin-left: $margin;
+  }
+  @for $i from 1 through $num-columns - 2 {
+    $index: $num-columns - $i;
+    &:nth-child(#{$num-columns}n+#{$index}):last-child{
+      margin-right: auto;
+    }
+  }
+}
+
+
+@mixin setFont($fontType : $fontType-regular){
+  @if ($fontType == $fontType-bold) {
+    font-weight: $bold;
+  } @else if ($fontType == $fontType-medium) {
+    font-weight: $mediumfont;
+  } @else if ($fontType == $fontType-light) {
+    font-weight: $light;
+  } @else if ($fontType == $fontType-italic) {
+    font-style: $italic;
+  } @else if ($fontType == $fontType-boldItalic) {
+    font-weight: $bold;
+    font-style: $italic;
+  } @else if ($fontType == $fontType-mediumItalic) {
+    font-weight: $mediumfont;
+    font-style: $italic;
+  } @else if ($fontType == $fontType-lightItalic) {
+    font-weight: $light;
+    font-style: $italic;
+  } @else {
+    font-weight: $regular;
+    font-style: $normal;
+  }
+}
+
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+@mixin checkboxStyle(){
+  @include clear; @extend .hand-cursor;
+  display: inline-block;
+
+  &.clicked, &.active{
+    label, .label-style{
+      color: $main-color;
+      span{
+        &:before{background-color: $main-color;}
+        &:after{color: $white;}
+      }
+    }
+  }
+
+  &:hover, &:focus{
+    &:not(.active):not(.clicked){
+      label, .label-style{
+        color: $black;
+        span{
+          &:before{
+            background-color: $light-pink;
+          }
+          &:after{
+            color: $main-color;
+          }
+        }
+      }//close label
+    }
+  }
+  &.disabled{
+    label, .label-style{
+      background-color: transparent !important;
+      color: $medium-gray;
+    }
+  }
+
+  label, .label-style{
+    display: inline-block; cursor: pointer; /*position: relative;
+    margin:0; #{$padding-left} : rem-calc(48px);
+    //font-size: rem-calc(16px); line-height: 2;*/
+    span{
+      @extend .icon-after;
+      position: relative;
+      margin:0; #{$padding-left} : rem-calc(48px);
+      font-size: rem-calc(16px); line-height: 2;
+      &:before {
+        content: "";
+        display: inline-block;
+        width: rem-calc(32px); height: rem-calc(32px);
+        border-radius: 100%; background-color: $medium-gray;
+        position: absolute; top:0; left: 0;
+      }
+
+      &:after{
+        content: '\e92a'; font-size: rem-calc(13px);
+        background-color: transparent ;
+        display: inline-block;
+        width: rem-calc(16px); height: rem-calc(16px); border-radius: 100%;
+        position:absolute; top:10px; left: 10px;
+
+      }
+    }
+  }//close label / label-style
+
+  &.small{
+    label, .label-style{
+      font-size: rem-calc(16px); line-height: 1.5;
+      span{
+        #{$padding-left} : rem-calc(40px);
+        &:before {
+          width: rem-calc(24px); height: rem-calc(24px);
+        }
+
+        &:after{
+          width: rem-calc(12px); height: rem-calc(12px);
+          top:7px; left: 6px;
+          font-size: rem-calc(11px);
+        }
+      }
+    }
+  }
+}
+
+
+@mixin generateTriangle($width, $height, $color: $medium-gray){
+  &:before{
+    content:"";
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 $width/2 $height $width/2;
+    border-color: transparent transparent $color transparent;
+  }
+}
+
+@mixin linkUnderline($hoverColor: inherit){
+  /*position: relative; font-size:rem-calc(16px); line-height: 2;
+  @include responsiveVal(font-size, $gutter/2, null, medium);
+  @include responsiveVal(line-height, $gutter/1.2, null, medium);
+  text-decoration: underline;
+
+  &:hover, &:focus{
+    color: $hoverColor;
+    &:before{display: none;}
+  }*/
+}
+
+@mixin responsiveShrink($breakpointsArray: $breakpoints){
+  @each $breakpointName, $breakpointVal in $breakpointsArray{
+      @include breakpoint($breakpointVal){
+        .#{$breakpointName}-shrink {
+          flex: 0 0 auto;
+          max-width: 100%;
+        }
+        .#{$breakpointName}-expand {
+          flex: 1 1 0;
+          max-width: 100%;
+        }
+      }
+  }
+}
+
+
+@mixin flexDisplay($mandatory: false, $wrap: true, $direction: 'row'){
+  @if $mandatory == true {
+    display: -webkit-box !important;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox !important;  /* TWEENER - IE 10 */
+    display: -webkit-flex !important; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex !important;         /* NEW, Spec - Firefox, Chrome, Opera */
+  } @else {
+    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  }
+
+  //flex-wrap: wrap;
+  @if $wrap == true {
+    flex-wrap: wrap;
+  } @else {
+    flex-wrap: nowrap;
+  }
+
+  flex-direction: #{$direction};
+
+}//close flexDisplay
+
+@mixin flexDisplayAlign($align, $mandatory: false){
+
+      //Horizontal
+      @if $align == 'start'{
+        -webkit-box-pack: flex-start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: flex-start;
+        justify-content: flex-start;
+      }
+
+      @if $align == 'end'{
+        -webkit-box-pack: flex-end;
+        -webkit-justify-content: flex-end;
+        -ms-flex-pack: flex-end;
+        justify-content: flex-end;
+      }
+
+      @if $align == 'center'{
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+      }
+
+      @if $align == 'space-between'{
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+      }
+
+      @if $align == 'space-around'{
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+      }
+
+      //Vertical
+      @if $align == 'vstart'{
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+      }
+
+      @if $align == 'vend'{
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+      }
+
+
+      @if $align == 'vspace-between'{
+        -webkit-align-content: space-between;
+        align-content: space-between;
+      }
+
+      @if $align == 'vcenter'{
+        -webkit-align-content: center;
+        align-content: center;
+        align-items: center;
+      }
+
+
+      @if $align == 'vstretch'{
+        -webkit-align-content: stretch;
+        align-content: stretch;
+      }
+
+
+      @if $align == 'vstart-items'{
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+      }
+
+      @if $align == 'vend-items'{
+        -webkit-align-items: flex-end;
+        align-items: flex-end;
+      }
+
+
+      //both
+      @if $align == 'center-middle'{
+        -webkit-align-content: center;
+        align-content: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+      }
+}//close flexDisplayAlign
+
+@mixin transitionEffect($speed: 150ms, $type: ease){
+  transition:all $speed $type 0s;
+}
+
+
+@mixin changeTrianglePos(){
+  right: 0; left: auto; top: calc(100% + 5px);
+  &:before{
+    right:rem-calc(28px);
+    transform: none;
+    left: auto;
+  }
+}

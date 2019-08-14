@@ -1,0 +1,65 @@
+$responsive-card-table-bottom-gap: 1.5rem;
+$responsive-card-table-stack-point: 640px;
+
+.responsive-card-table {
+  border-collapse: collapse;
+
+thead tr{
+  th {
+    font-weight: normal; line-height: 1.43;
+  }
+}
+
+tbody tr{
+  td {
+    line-height: 1.71;
+  }
+}
+tr{
+  th,td{font-size: rem-calc(14px);}
+}
+
+
+  @media screen and (max-width: $responsive-card-table-stack-point) {
+    thead tr {
+      position: absolute;
+      top: -9999em;
+      left: -9999em;
+    }
+
+    tr {
+      display: block;
+    }
+
+    /* Get table cells to act like rows */
+
+    td {
+      border: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 50%;
+      position: relative;
+
+      &:before {
+        content: attr(data-label);
+        display: inline-block;
+        font-weight: normal; line-height: 1.43;
+        margin-left: -100%;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 45%;
+        height: 95%;
+        left: 1px;
+        top: 1px;
+        z-index: 0;
+      }
+    }
+  }
+}
