@@ -8,17 +8,17 @@
  * @param $form_state
  *   The form state.
  */
-function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
+function p1ps2019_form_system_theme_settings_alter(&$form, &$form_state) {
   $form['theme_ui'] = array(
     '#type' => 'details',
     '#title' => t('UI Elements'),
   );
 
-  $form['theme_ui']['bluedrop_status_in_reveal'] = array(
+  $form['theme_ui']['p1ps2019_status_in_reveal'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display status messages in Reveal'),
     '#description' => t('This will display status messages in a Foundation Reveal modal instead of print them into the page output.'),
-    '#default_value' => theme_get_setting('bluedrop_status_in_reveal'),
+    '#default_value' => theme_get_setting('p1ps2019_status_in_reveal'),
   );
 
   $form['theme_javascript'] = array(
@@ -26,11 +26,11 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#title' => t('Javascript Files'),
   );
 
-  $form['theme_javascript']['bluedrop_use_respondjs'] = array(
+  $form['theme_javascript']['p1ps2019_use_respondjs'] = array(
     '#type' => 'checkbox',
     '#title' => t('Implement Respond.js'),
     '#description' => t('Foundation 4.x does not support IE8, but you can include Respond.js to add additional support for Internet Explorer.'),
-    '#default_value' => theme_get_setting('bluedrop_use_respondjs'),
+    '#default_value' => theme_get_setting('p1ps2019_use_respondjs'),
   );
 
   $form['region_settings'] = array(
@@ -38,11 +38,11 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#title' => t('Region Settings'),
   );
 
-  $form['region_settings']['bluedrop_meta_header_grid'] = array(
+  $form['region_settings']['p1ps2019_meta_header_grid'] = array(
     '#type' => 'checkbox',
     '#title' => t('Contain Meta Header Region to Grid'),
     '#description' => t('Uncheck this setting if you would like blocks in the Meta Header region to be full width.'),
-    '#default_value' => theme_get_setting('bluedrop_meta_header_grid'),
+    '#default_value' => theme_get_setting('p1ps2019_meta_header_grid'),
   );
 
   /*
@@ -54,7 +54,7 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#description' => t('The Foundation Top Bar gives you a great way to display a complex navigation bar on small or large screens.')
   );
 
-  $form['topbar']['bluedrop_top_bar_enable'] = array(
+  $form['topbar']['p1ps2019_top_bar_enable'] = array(
     '#type' => 'select',
     '#title' => t('Enable'),
     '#description' => t('If enabled, the site name and main menu will appear in a bar along the top of the page.'),
@@ -63,35 +63,35 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
       1 => t('Always'),
       2 => t('Mobile only'),
     ),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_enable'),
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_enable'),
   );
 
-  $form['topbar']['container']['bluedrop_top_bar_grid'] = array(
+  $form['topbar']['container']['p1ps2019_top_bar_grid'] = array(
     '#type' => 'checkbox',
     '#title' => t('Contain to grid'),
     '#description' => t('Check this for your top bar to be set to your grid width.'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_grid'),
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_grid'),
   );
 
-  $form['topbar']['container']['bluedrop_top_bar_sticky'] = array(
+  $form['topbar']['container']['p1ps2019_top_bar_sticky'] = array(
     '#type' => 'checkbox',
     '#title' => t('Sticky'),
     '#description' => t("Check this for your top bar to stick to the top of the screen when the user scrolls down. If you're using the Admin Menu module and have it set to 'Keep menu at top of page', you'll need to check this option to maintain compatibility."),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_sticky'),
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_sticky'),
   );
 
-  $form['topbar']['container']['bluedrop_top_bar_scrolltop'] = array(
+  $form['topbar']['container']['p1ps2019_top_bar_scrolltop'] = array(
     '#type' => 'checkbox',
     '#title' => t('Scroll to top on click'),
     '#description' => t('Jump to top when sticky nav menu toggle is clicked.'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_scrolltop')
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_scrolltop')
   );
 
-  $form['topbar']['container']['bluedrop_top_bar_is_hover'] = array(
+  $form['topbar']['container']['p1ps2019_top_bar_is_hover'] = array(
     '#type' => 'checkbox',
     '#title' => t('Hover to expand menu'),
     '#description' => t('Set this to false to require the user to click to expand the dropdown menu.'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_is_hover'),
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_is_hover'),
   );
 
   // Menu settings.
@@ -100,32 +100,32 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#title' => t('Dropdown Menu')
   );
 
-  $form['topbar']['container']['menu']['bluedrop_top_bar_menu_text'] = array(
+  $form['topbar']['container']['menu']['p1ps2019_top_bar_menu_text'] = array(
     '#type' => 'textfield',
     '#title' => t('Menu text'),
     '#description' => t('Specify text to go beside the mobile menu icon or leave blank for none.'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_menu_text'),
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_menu_text'),
   );
 
-  $form['topbar']['container']['menu']['bluedrop_top_bar_custom_back_text'] = array(
+  $form['topbar']['container']['menu']['p1ps2019_top_bar_custom_back_text'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable custom back text'),
     '#description' => t('This is the text that appears to navigate back one level in the dropdown menu. Set this to false and it will pull the top level link name as the back text.'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_custom_back_text'),
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_custom_back_text'),
   );
 
-  $form['topbar']['container']['menu']['bluedrop_top_bar_back_text'] = array(
+  $form['topbar']['container']['menu']['p1ps2019_top_bar_back_text'] = array(
     '#type' => 'textfield',
     '#title' => t('Custom back text'),
     '#description' => t('Define what you want your custom back text to be.'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_back_text')
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_back_text')
   );
 
-  $form['topbar']['container']['menu']['bluedrop_top_bar_mobile_show_parent_link'] = array(
+  $form['topbar']['container']['menu']['p1ps2019_top_bar_mobile_show_parent_link'] = array(
     '#type' => 'checkbox',
     '#title' => t('Repeat parent link on mobile'),
     '#description' => t('This provides an extra link for users to tap on the sub-menu for mobile'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_mobile_show_parent_link'),
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_mobile_show_parent_link'),
   );
 
   // Search settings.
@@ -134,11 +134,11 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#title' => t('Search Menu')
   );
 
-  $form['topbar']['container']['search']['bluedrop_top_bar_search'] = array(
+  $form['topbar']['container']['search']['p1ps2019_top_bar_search'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Search Menu'),
     '#description' => t('Displays the Search menu in the Top Bar.'),
-    '#default_value' => theme_get_setting('bluedrop_top_bar_search')
+    '#default_value' => theme_get_setting('p1ps2019_top_bar_search')
   );
 
   /*
@@ -150,25 +150,25 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#description' => t('Contains settings to toggle hard-coded elements in the page template.')
   );
 
-  $form['page_elements']['bluedrop_page_site_name'] = array(
+  $form['page_elements']['p1ps2019_page_site_name'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show site name'),
     '#description' => t('Determines if the hard-coded site name should be displayed.'),
-    '#default_value' => theme_get_setting('bluedrop_page_site_name'),
+    '#default_value' => theme_get_setting('p1ps2019_page_site_name'),
   );
 
-  $form['page_elements']['bluedrop_page_site_logo'] = array(
+  $form['page_elements']['p1ps2019_page_site_logo'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show site logo'),
     '#description' => t('Determines if the hard-coded site logo should be displayed.'),
-    '#default_value' => theme_get_setting('bluedrop_page_site_logo'),
+    '#default_value' => theme_get_setting('p1ps2019_page_site_logo'),
   );
 
-  $form['page_elements']['bluedrop_page_account_info'] = array(
+  $form['page_elements']['p1ps2019_page_account_info'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show Login/Signup information'),
     '#description' => t('Determines if the hard-coded login block should be displayed.'),
-    '#default_value' => theme_get_setting('bluedrop_page_account_info'),
+    '#default_value' => theme_get_setting('p1ps2019_page_account_info'),
   );
 
   /*
@@ -180,17 +180,17 @@ function bluedrop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#collapsible' => TRUE,
   );
 
-  $form['styles_scripts']['bluedrop_disable_base_css'] = array(
+  $form['styles_scripts']['p1ps2019_disable_base_css'] = array(
     '#type' => 'checkbox',
     '#title' => t('Disable Base Theme CSS'),
     '#description' => t('Disabling the base theme CSS is useful for using SASS in a sub-theme.<br><strong>If you select this option, uncomment the relevant CSS includes in your sub-theme\'s .info file.</strong>'),
-    '#default_value' => theme_get_setting('bluedrop_disable_base_css'),
+    '#default_value' => theme_get_setting('p1ps2019_disable_base_css'),
   );
 
-  $form['styles_scripts']['bluedrop_disable_base_js'] = array(
+  $form['styles_scripts']['p1ps2019_disable_base_js'] = array(
     '#type' => 'checkbox',
     '#title' => t('Disable Base Theme JavaScript'),
     '#description' => t('Disabling the base theme JavaScript when using a sub-theme is also recommended for more flexibility over which components get included.<br><strong>If you select this option, uncomment the relevant JS includes in your sub-theme\'s .info file.</strong>'),
-    '#default_value' => theme_get_setting('bluedrop_disable_base_js'),
+    '#default_value' => theme_get_setting('p1ps2019_disable_base_js'),
   );
 }

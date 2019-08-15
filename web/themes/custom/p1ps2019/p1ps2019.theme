@@ -1,20 +1,20 @@
 <?php
 
-  function bluedrop_preprocess_field_collection_item__field_slider_body_(&$vars){
+  function p1ps2019_preprocess_field_collection_item__field_slider_body_(&$vars){
   //kint($vars);
   }
 
   /**
   * Implements hook_preprocess_HOOK() for html.twig.
   */
-  function bluedrop_preprocess_html(&$variables) {
+  function p1ps2019_preprocess_html(&$variables) {
     $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
   }
 
   /**
   * Implements hook_preprocess_HOOK() for page.html.twig.
   */
-  function bluedrop_preprocess_page(&$vars) {
+  function p1ps2019_preprocess_page(&$vars) {
     $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $vars['#attached']['drupalSettings']['language'] = $language;
   }
@@ -22,7 +22,7 @@
   /**
   * Implements hook_preprocess_HOOK() for menu.html.twig.
   */
-  function bluedrop_preprocess_menu(&$variables) {
+  function p1ps2019_preprocess_menu(&$variables) {
     $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
     try {
       $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
@@ -37,7 +37,7 @@
    * @param array $suggestions
    * @param array $variables
    */
-  function bluedrop_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $variables) {
     // Block suggestions for custom block bundles.
     if (isset($variables['elements']['content']['#block_content'])) {
       array_splice($suggestions, 1, 0, 'block__' . $variables['elements']['content']['#block_content']->bundle());
@@ -45,7 +45,7 @@
   }
 
 
-  function bluedrop_preprocess_block(&$variables) {
+  function p1ps2019_preprocess_block(&$variables) {
       if (isset($variables["elements"]["#id"])) {
           $block_id = $variables["elements"]["#id"];
           $block = \Drupal\block\Entity\Block::load($block_id);
@@ -63,12 +63,12 @@
 
   // add a template suggestion based on region name
   // http://kristiankaa.dk/article/drupal8-region-specific-menu-theme-hook-suggestion
-  function bluedrop_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
       if (isset($variables["attributes"]["region"])) {
           $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
       }
   }
-  function bluedrop_preprocess_block__welcome_message_block(&$variables){
+  function p1ps2019_preprocess_block__welcome_message_block(&$variables){
       $variables['isHome']=\Drupal::service('path.matcher')->isFrontPage();
   }
 
@@ -76,7 +76,7 @@
   * template_preprocess_image
   *
   */
-  function bluedrop_preprocess_image(&$variables){
+  function p1ps2019_preprocess_image(&$variables){
    if (!isset($variables['alt'])) {
      $variables['attributes']['alt'] = "";
    }
@@ -86,7 +86,7 @@
   /**
    * Implements hook_theme_suggestions_container_alter().
    */
-  function bluedrop_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $variables) {
     $name='';
     $display_id = '';
     if(isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
@@ -102,7 +102,7 @@
   /**
    * Implements hook_theme_suggestions_alter().
    */
-  function bluedrop_theme_suggestions_alter(array &$suggestions, array $variables, $hook)
+  function p1ps2019_theme_suggestions_alter(array &$suggestions, array $variables, $hook)
   {
     if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
       $original_theme_hook = $variables['theme_hook_original'];
@@ -113,7 +113,7 @@
   /**
    * Implements hook_theme_suggestions_HOOK_alter().
    */
-  function bluedrop_theme_suggestions_user_alter(array &$suggestions, array $variables) {
+  function p1ps2019_theme_suggestions_user_alter(array &$suggestions, array $variables) {
 
     // Define the view mode.
     $mode = $variables['elements']['#view_mode'];
@@ -137,7 +137,7 @@
   * Implements template_preprocess_views_view()
   * @param array $vars
   */
-  function bluedrop_preprocess_views_view(&$vars){
+  function p1ps2019_preprocess_views_view(&$vars){
      if($vars['more']){
       $vars['more']['#options']['attributes']['class'] = array(
         'link-style', 'with-arrow'
