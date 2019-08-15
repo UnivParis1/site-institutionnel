@@ -1,0 +1,126 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > Header
+    Par Ebizproduction
+*/
+
+
+
+/* Ebizproduction : Entete de page */
+#region-header {
+
+	@include responsiveVal(padding, $gutter/1.6 $gutter*1.5);
+	position: fixed; top: 0; width: 100%; z-index: 10;
+	.header-inner >.row{@include flexDisplay(); align-items: center;}
+	.header-left{
+		padding: 0;
+		.header-left-inner{
+			img{ width: rem-calc(70px);}
+		}
+	}// fin header left
+	.header-right{
+		padding-right:0;
+		.header-right-inner{
+			#block-headerrightmenu{
+				>ul {
+					>li{
+						@extend .hand-cursor;
+						ul{
+							flex-direction: column;
+							width: 200px; margin: 0; left: 0;
+							@include transitionEffect(350ms);
+							position: absolute;
+							@include box-shadow();
+							li{
+								padding: 0;
+								a{
+									width: 100%; padding: rem-calc(24px);
+									pointer-events: none; text-align: left;
+									@include transitionEffect(); display: block;
+									text-transform: uppercase; text-decoration: none;
+									line-height: 1.23; font-size: rem-calc(13px);
+									@include setFont($fontType-bold);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.header-conter{
+		.header-center-inner{
+			width:100%;
+			@include flexDisplay(); @include flexDisplayAlign('center-middle');
+		}
+	}
+	#block-mainnavigation{
+		text-align:center;
+		height:100%;
+		.icon-menu{display: none;}
+		> .menu{
+			display: flex;
+			justify-content:center;
+			> li {
+				position: relative;
+				&:not(:last-of-type){margin-right: rem-calc(32px);}
+				span , a{
+					text-transform: uppercase; text-decoration: none;
+					line-height: 1.23;
+					font-size: rem-calc(13px);
+					@include setFont($fontType-bold);
+				}
+				.li-menu-wrapper{
+					position: relative;
+					> span, > a{
+						padding: 16px 0;
+						&:hover:not([class*="icon-"]){
+							cursor: pointer;
+						}
+					}
+				}
+				> span, > a{
+					padding: 16px 0;
+					&:hover:not([class*="icon-"]){
+						cursor: pointer;
+					}
+				}
+
+				.flyout-toggle{display: none;}
+				&.has-children{
+					ul{
+							opacity: 0; top: rem-calc(64px); flex-direction: column;
+							width: 200px; visibility:hidden; margin: 0; left: 0;
+							@include transitionEffect(350ms);
+							position: absolute;
+							@include box-shadow();
+						li{
+							padding: 0;
+							a{
+								width: 100%; padding: rem-calc(24px);
+								pointer-events: none; text-align: left;
+								@include transitionEffect();
+							}
+						}
+					}
+					[class*="icon-"]:before{display: none;}
+				}
+
+				&:hover {
+					 ul {
+						opacity: 1; visibility: visible;
+						top: rem-calc(64px);
+						li{
+							a{
+								pointer-events: auto;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	&.no-border{
+		border-bottom:none;
+	}
+}//close region header

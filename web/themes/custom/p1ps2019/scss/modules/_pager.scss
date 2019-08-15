@@ -1,0 +1,39 @@
+/* Ebizproduction : Pagination */
+.pager {
+  @include responsiveVal(margin-top, $gutter*2);
+  .pagination{
+    @include setFont($fontType-bold);
+    .current{padding: 0;}
+    text-align: center;
+    margin: 0;
+  	&:before{display: none;}
+  	.pager__item{
+          margin: 0;
+  	    background-color: transparent;
+  	    a, a:hover{
+      	    background-color: transparent;
+  		    font-size: rem-calc(14px); line-height: 1.72; @include setFont($fontType-regular);
+  		    padding: 0 12px;
+  		    @include responsiveVal(padding, 0 $gutter*0.375);
+  		    position: relative;
+  		    &:before{display: none;}
+  	    }
+  	    &:hover{
+  	    	a{
+  		    	&:after{
+  	    		    content: "";
+  				    width: 24px; height: 24px;
+  				    border-radius: 32px;
+  				    position: absolute;
+  				    top: 0; left: 50%;
+  				    transform: translateX(-50%);
+  				    z-index: -1;
+  		    	}
+  	    	}
+  	    }
+  	    &.pager__item--previous, &.pager__item--next{
+  	    	span:after{font-size: rem-calc(12px);}
+  	    }
+  	}
+  }
+}

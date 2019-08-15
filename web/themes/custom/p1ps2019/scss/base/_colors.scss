@@ -1,0 +1,522 @@
+//======================= BASE =================//
+hr {
+	background: $black;
+}
+
+::-moz-selection {
+	color: $white;
+  background: $black;
+}
+
+::selection {
+	color: $white;
+  background: $black;
+}
+
+h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .h3-style, .h4-style, .h5-style, .h6-style{
+	color: $black;
+}
+
+.mask-effect{@include maskBackground($black);}
+.mask-effect2{@include maskBackground($black, 0.1, 0.4);}
+.mask-effect-3{@include maskBackground($black, 0.3);}
+.mask-effect-4{@include maskBackground($black, 0.4);}
+.mask-effect-5{@include maskBackground($black, 0.5);}
+.mask-effect-7{@include maskBackground($black, 0.7);}
+
+.mask-effect-blend{
+	@include maskBackground($gray2, 1, 0, true);
+}
+
+.m-txt-message, .message{
+	*{color: inherit;}
+	background-color: $light-blue;
+	&.valid{
+		color: $green;
+		background-color: $light-green;
+	}
+	&.error{
+		color: $pink;
+		background-color: $light-pink;
+	}
+	&.warning{
+		color: $yellow;
+		background-color: $light-yellow;
+	}
+}
+ul.list-style {
+	li{
+		&:before{
+			background-color: $main-color;
+		}
+	}
+}
+.circle{
+  color:$white; background-color:$gray;
+  &.outline{
+  	border: solid 1px $gray; background-color: transparent;
+  }
+}
+
+.txt{
+	color: $gray2;
+}
+
+.date-style{
+	color: $gray2;
+}
+.categ-style{
+	color: $main-color;
+}
+
+//====================FIN BASE ==================//
+
+
+// ================ FORM =======================//
+textarea,
+select,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="button"],
+input[type="password"],
+input[type="url"],
+input[type="file"],
+input[type="search"], .form-date,
+.file-widget {
+	@include transitionEffect();
+  background-color: $white; color: $black;
+  border:2px solid $medium-gray;
+  .field-error &{border-color:$main-color !important;}
+  &.error{border-color:$main-color !important;}
+  ::-webkit-input-placeholder {
+    color: $gray2;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+    color: $gray2;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+    color: $gray2;
+  }
+
+  :-ms-input-placeholder {
+    color: $gray2;
+  }
+	&:focus{border: 2px solid $gray; outline: 0;}
+}
+
+.user-is-tabbing{
+  textarea, select,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="button"],
+  input[type="password"],
+  input[type="url"],
+  input[type="file"],
+  input[type="search"],
+  [type="submit"],
+  [type="date"],
+  [type="datetime"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="time"],
+  [type="color"],
+  .file-widget{
+    &:focus{
+      border: 2px solid $gray;
+			outline: 0;
+    }
+  }
+}
+
+ //==== CHECKBOXES et RADIO====
+ .form-type-radio, .form-type-checkbox,
+ [class*="form-type-checkbox"], [class*="form-type-radio"]{
+   input{
+     &:checked + label{
+       span{
+         &:before{background-color:$main-color;}
+         &:after{background-color:$white;}
+       }
+     }
+
+     &:focus + label{
+       .user-is-tabbing &{
+         border: solid 2px $black;
+				 outline: 0;
+       }
+     }
+   }//close input
+
+   label, .label-style{
+     &.disabled{
+       background-color: transparent !important;
+       color: $medium-gray;
+     }
+     &:hover{
+       color: $black;
+       span{
+         &:before{
+           background-color: $light-blue;
+         }
+         &:after{
+           background-color: $main-color;
+         }
+       }
+     }
+     span{
+       &:before {
+         background-color: $medium-gray;
+       }
+       &:after{
+         //background-color: $black;
+       }
+     }
+   }//close label / label-style
+ }//close .form-type-radio, .form-type-checkbox
+
+ [class*="form-type-checkbox"]{
+	 input{
+		 &:checked + label, &:hover + label{
+			 span{
+				 &:after{background-color:transparent;}
+			 }
+		 }
+	 }
+ }
+
+ //CSS label
+ label, .label-style{
+   color: $gray2;
+   span{
+     &:before{
+       color: $gray2;
+     }
+   }
+ }
+
+ // ================== SELECT STYLE =================== //
+ .form-type-select, .select-wrapper{
+   &.focus, &:focus{
+     &:before{color:$black;}
+     select{
+       color:$black;
+     }
+   }
+   &:hover{
+     color:$black;
+     select{color:$black;}
+   }
+   select{
+     background-color: $white;
+     &.horaires-select{
+       background-color:$gray;
+       border-color:$gray;
+       &:hover{
+         //background-color: $medium-gray;
+         //background-color: $white;
+       }
+     }
+   }
+ }
+ // ======== SELECT STYLE END ======== //
+// ================= FIN FORM ==================//
+
+//================== RESET ==================//
+mark {
+	background: #ff0;
+	color: #000;
+}
+
+fieldset {
+	border: 1px solid #c0c0c0;
+}
+
+
+.password-strength__meter{background-color: $medium-gray;}
+.password-strength__indicator{background-color: $main-color;}
+//=============== FIN RESET ================ //
+
+//=============== TABLE =================== //
+.responsive-card-table {
+thead tr{
+  background-color: $medium-gray;
+  th {
+    font-weight: normal; line-height: 1.43;
+  }
+}
+
+tbody tr{
+  background-color: $light-blue;
+  td {
+    @extend .txt-black;
+  }
+}
+tr{
+  border: 1px solid $white;
+}
+  /*@media screen and (max-width: $responsive-card-table-stack-point) {
+    td {
+      &:before {
+        color: $gray2;
+      }
+      &:after {
+        background: $medium-gray;
+      }
+    }
+  }*/
+}
+//=============== FIN TABLE ================ //
+
+//================ FOOTER =================== //
+#region-footer{
+	.footer-center-inner{
+		li{
+			a{
+				&:hover{
+					color:$white;
+					&:before{
+						background-color: $white;
+					}
+				}
+			}
+		}
+	}
+	.footer-right-inner{
+		ul{
+			li{
+				a{
+					&:hover{color:$white;}
+				}
+			}
+		}
+	}
+}
+//================ FIN FOOTER =============== //
+
+//================ HEADER =================== //
+#region-header {
+  background-color: $white;
+	.header-right{
+		.header-right-inner{
+			#block-headerrightmenu{
+				>ul {
+					>li{
+						span, a{color: $dark-gray;}
+						ul{
+							background-color: $white;
+							li{
+								a{
+									&:hover{background-color: $light-gray2;}
+								}
+								&:not(:last-of-type){
+									border-bottom: 1px solid $medium-gray;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	#block-mainnavigation{
+		> .menu{
+			> li {
+				span , a{
+					color: $dark-gray;
+				}
+				.li-menu-wrapper{
+					> span, > a{
+						&:hover:not([class*="icon-"]){
+							color: $main-color;
+						}
+					}
+				}
+				> span, > a{
+					&:hover:not([class*="icon-"]){
+						color: $main-color;
+					}
+				}
+				&.has-children{
+					ul{
+							background-color: $white;
+						li{
+							a{
+								&:hover{
+									background-color: $light-gray2;
+								}
+							}
+							&:not(:last-of-type){
+								border-bottom: 1px solid $medium-gray;
+							}
+						}
+					}
+				}
+			}
+    }
+	}
+	border-bottom:2px solid $medium-gray;
+}//close region header
+
+//================ FIN HEADER ================ //
+
+// =============== MAIN ================= //
+.pagination{
+	.pager__item{
+	    background-color: transparent;
+	    a, a:hover{
+    	  background-color: transparent;
+		    color: $black;
+	    }
+	    &.is-active{
+	    	a{background-color: transparent;}
+	    }
+	    &.current{
+	    	a{color: $gray2;}
+	    }
+	    &:hover{
+	    	a{
+		    	&:after{
+				    background-color: $light-blue;
+		    	}
+	    	}
+	    }
+	    &.pager__item--previous, &.pager__item--next{
+	    	&:hover{
+	    		span:after{color: $white;}
+	    		a:after{
+	    			background-color: $main-color-darken;
+	    		}
+	    	}
+	    }
+	    &.pager__item--first,&.pager__item--last{
+	    	&:hover{
+	    		span:after{color: $white;}
+	    		a{
+	    			color:$white;
+	    			&:after{
+		    			background-color: $main-color-darken;
+		    		}
+	    		}
+	    	}
+	    }
+	}
+}
+
+.breadcrumbs{
+	a{
+		&:before{
+			background-color: #212529;
+		}
+	}
+}
+
+// ================ FIN MAIN ============ //
+
+// ============= BTN ================ //
+
+.site-content-wrapper{
+    .btn, .button--primary, button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container), input[type="submit"].button {
+        color: $white; background-color: $main-color;
+
+        &:hover:not(.outline):not(.with-image):not(.with-icon){
+            background-color: $main-color-darken; text-decoration: none;
+            @include box-shadow(0.16, 16px, 4px, $black);
+        }
+
+        &.btn-secondary{
+            color: $black; background-color: transparent;
+            //border: solid 2px $gray;
+            box-shadow: inset 0 0 0 2px $gray;
+            &:hover{
+              box-shadow: inset 0 0 0 2px $black;
+							color: $white;
+            }
+        }
+        &.with-icon{
+            .icon-container{
+                [class*="icon-"]{
+                  background-color: $medium-gray; color: $gray;
+                }
+            }
+        }
+    }//close btn
+}//close .site-content-wrapper
+
+.link-style, button.link-style{
+    color: $main-color;
+    &:not(.with-arrow):not(.with-icon){
+      @include linkUnderline($main-color);
+    }
+}//close link-style
+
+// ============= FIN BTN ============//
+
+//=========== PAGER ============ //
+.pager {
+  .is-active a{background-color: $black;}
+  a{
+    background-color: $light-blue;
+    &:hover{
+      color: $white;
+    }
+  }
+}
+//========== FIN PAGER =========//
+
+//==========  RESPONSIVE =========== //
+@include breakpoint($large - 1 down) {
+	#region-header{
+		.header-right{
+			.header-right-inner{
+				#block-headerrightmenu{
+					>ul {
+						>li{
+							ul{
+								li{
+									border-bottom: 1px solid $medium-gray;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.header-conter{
+			.header-center-inner{
+				#block-mainnavigation{
+					.icon-menu{
+						span.toggle-container{
+  						>span{
+  							background: $dark-gray;
+  						}
+					  }
+					}
+					> .menu{
+						 background-color: $white;
+						  li {
+							a, span:not([class*="icon-"]){
+								border-bottom: 1px solid $medium-gray;
+							}
+							&.has-children{
+								.menu-wrapper{
+									ul{
+										background-color: $light-gray2;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}//==== fin header center
+	} // fin region header
+	//fin menu
+}//close media - large
+//============= FIN RESPONSIVE =========//
