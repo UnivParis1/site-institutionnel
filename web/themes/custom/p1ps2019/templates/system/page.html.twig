@@ -51,41 +51,35 @@
  * @see html.html.twig
  */
 #}
-{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+
+{# Header #}
+{% if page.header or page.header_center or page.header_right %}
+  <div class="row align-justify">
+    {% if page.header %}
+      <div class="cell header-left" role="heading">
+        {{ page.header }}
+      </div>
+    {% endif %}
+    {% if page.header %}
+      <div class="cell header-center" role="heading">
+        {{ page.header_center }}
+      </div>
+    {% endif %}
+    {% if page.header %}
+      <div class="cell header-right" role="heading">
+        {{ page.header_right }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+
 {# Navbar #}
-{% if page.navigation or page.navigation_collapsible %}
+{% if page.navigation %}
   {% block navbar %}
-    {%
-      set navbar_classes = [
-        'navbar',
-        theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : container,
-      ]
-    %}
-    <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
-      {% if not navbar_attributes.hasClass(container) %}
-        <div class="{{ container }}">
-      {% endif %}
+    <header id="navbar" role="banner">
       <div class="navbar-header">
         {{ page.navigation }}
-        {# .btn-navbar is used as the toggle for collapsed navbar content #}
-        {% if page.navigation_collapsible %}
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-            <span class="sr-only">{{ 'Toggle navigation'|t }}</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        {% endif %}
       </div>
-
-      {# Navigation (collapsible) #}
-      {% if page.navigation_collapsible %}
-        <div id="navbar-collapse" class="navbar-collapse collapse">
-          {{ page.navigation_collapsible }}
-        </div>
-      {% endif %}
-      {% if not navbar_attributes.hasClass(container) %}
-        </div>
       {% endif %}
     </header>
   {% endblock %}
@@ -93,50 +87,38 @@
 
 {# Main #}
 {% block main %}
-  <div role="main" class="main-container {{ container }} js-quickedit-main-content">
-    <div class="row">
+  <div role="main" class="main-container"> 
+    {# Content #}
+    {%
+      set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'small-6',
+        page.sidebar_first and page.sidebar_second is empty ? 'small-9',
+        page.sidebar_second and page.sidebar_first is empty ? 'small-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'small-12'
+      ]
+    %}
+    <section{{ content_attributes.addClass(content_classes) }}>
 
-      {# Header #}
-      {% if page.header %}
-        {% block header %}
-          <div class="col-sm-12" role="heading">
-            {{ page.header }}
-          </div>
+      {# Highlighted #}
+      {% if page.highlighted %}
+        {% block highlighted %}
+          <div class="highlighted">{{ page.highlighted }}</div>
+        {% endblock %}
+      {% endif %}
+
+      {# Help #}
+      {% if page.help %}
+        {% block help %}
+          {{ page.help }}
         {% endblock %}
       {% endif %}
 
       {# Content #}
-      {%
-        set content_classes = [
-          page.sidebar_first and page.sidebar_second ? 'col-sm-6',
-          page.sidebar_first and page.sidebar_second is empty ? 'col-sm-9',
-          page.sidebar_second and page.sidebar_first is empty ? 'col-sm-9',
-          page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12'
-        ]
-      %}
-      <section{{ content_attributes.addClass(content_classes) }}>
-
-        {# Highlighted #}
-        {% if page.highlighted %}
-          {% block highlighted %}
-            <div class="highlighted">{{ page.highlighted }}</div>
-          {% endblock %}
-        {% endif %}
-
-        {# Help #}
-        {% if page.help %}
-          {% block help %}
-            {{ page.help }}
-          {% endblock %}
-        {% endif %}
-
-        {# Content #}
-        {% block content %}
-          <a id="main-content"></a>
-          {{ page.content }}
-        {% endblock %}
-      </section>
-    </div>
+      {% block content %}
+        <a id="main-content"></a>
+        {{ page.content }}
+      {% endblock %}
+    </section>
   </div>
 {% endblock %}
 
