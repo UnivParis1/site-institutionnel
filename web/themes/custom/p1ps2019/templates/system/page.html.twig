@@ -53,25 +53,33 @@
 #}
 
 {# Header #}
-{% if page.header or page.header_center or page.header_right %}
+{% if page.header or page.header_left or page.header_center or page.header_right %}
   <header id="navbar" role="banner">
-    <div class="grid-x align-justify">
+    
       {% if page.header %}
-        <div class="cell header-left" role="heading">
-          {{ page.header }}
+        <div class="grid-x">
+          <div class="cell small-12">{{ page.header }}</div>
         </div>
       {% endif %}
-      {% if page.header_center %}
-        <div class="cell header-center" role="heading">
-          {{ page.header_center }}
+    {% if page.header_left or page.header_center or page.header_right %}
+        <div id="top-header" class="grid-x align-justify">
+          {% if page.header_left %}
+            <div class="cell header-left" role="heading">
+              {{ page.header_left }}
+            </div>
+          {% endif %}
+          {% if page.header_center %}
+            <div class="cell header-center" role="heading">
+              {{ page.header_center }}
+            </div>
+          {% endif %}
+          {% if page.header_right %}
+            <div class="cell header-right" role="heading">
+              {{ page.header_right }}
+            </div>
+          {% endif %}
         </div>
-      {% endif %}
-      {% if page.header_right %}
-        <div class="cell header-right" role="heading">
-          {{ page.header_right }}
-        </div>
-      {% endif %}
-    </div>
+    {% endif %}
   </header>
 {% endif %}
 
