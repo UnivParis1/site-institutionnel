@@ -54,35 +54,32 @@
 
 {# Header #}
 {% if page.header or page.header_center or page.header_right %}
-  <div class="row align-justify">
-    {% if page.header %}
-      <div class="cell header-left" role="heading">
-        {{ page.header }}
-      </div>
-    {% endif %}
-    {% if page.header %}
-      <div class="cell header-center" role="heading">
-        {{ page.header_center }}
-      </div>
-    {% endif %}
-    {% if page.header %}
-      <div class="cell header-right" role="heading">
-        {{ page.header_right }}
-      </div>
-    {% endif %}
-  </div>
+  <header id="navbar" role="banner">
+    <div class="grid-x align-justify">
+      {% if page.header %}
+        <div class="cell header-left" role="heading">
+          {{ page.header }}
+        </div>
+      {% endif %}
+      {% if page.header_center %}
+        <div class="cell header-center" role="heading">
+          {{ page.header_center }}
+        </div>
+      {% endif %}
+      {% if page.header_right %}
+        <div class="cell header-right" role="heading">
+          {{ page.header_right }}
+        </div>
+      {% endif %}
+    </div>
+  </header>
 {% endif %}
 
 {# Navbar #}
 {% if page.navigation %}
-  {% block navbar %}
-    <header id="navbar" role="banner">
-      <div class="navbar-header">
-        {{ page.navigation }}
-      </div>
-      {% endif %}
-    </header>
-  {% endblock %}
+  <div class="navbar-header">
+    {{ page.navigation }}
+  </div>
 {% endif %}
 
 {# Main #}
@@ -97,7 +94,7 @@
         page.sidebar_first is empty and page.sidebar_second is empty ? 'small-12'
       ]
     %}
-    <section{{ content_attributes.addClass(content_classes) }}>
+    <section {{ content_attributes.addClass(content_classes) }}>
 
       {# Highlighted #}
       {% if page.highlighted %}
