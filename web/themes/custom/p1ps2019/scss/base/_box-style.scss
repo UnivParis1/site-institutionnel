@@ -1,1 +1,18 @@
 
+.box-style{
+  border: 1px solid $gray; height: 100%; 
+  @include flexDisplay();
+  flex-direction: column;
+	.box-content{
+	  padding: rem-calc(36px 20px); 
+	  background-color: $light-gray;
+	  @include flexDisplay(); @include flexDisplayAlign('space-between');
+	  flex: 1 0 auto; flex-direction: column;
+	  .title{
+	  	font-size:rem-calc(24px); 
+	  	@include setFont($fontType-bold);
+	  	margin-top: 0;
+	  }
+	}
+	.img-container{flex: 0 0 auto;}
+}
