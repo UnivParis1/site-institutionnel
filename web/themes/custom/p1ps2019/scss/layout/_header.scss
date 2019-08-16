@@ -1,6 +1,7 @@
 #top-header {
 	position: fixed; top: 0; left: 0;
 	width: 100%; padding: rem-calc(40px 120px);
+	@include transitionEffect(300ms, ease-in-out);
 
 	.scroll &{
 		background-color: $white;
@@ -33,10 +34,17 @@
 	>span{
 		display: block; position: absolute;
 		height: rem-calc(2px); width: 100%;
-		background: $dark-gray; border-radius: rem-calc(9px);
+		background: $blue; border-radius: rem-calc(9px);
 		opacity: 1; left: 0;
 		-ms-transform: rotate(0deg); transform: rotate(0deg);
 		@include transitionEffect(250ms, ease-in-out);
+
+		.transparent &{
+			background-color: $white;
+			.scroll &{
+				background-color: $blue;
+			}
+		}
 	}
 		span:nth-child(1){top:0;}
 		span:nth-child(2), span:nth-child(3){
