@@ -122,38 +122,6 @@ $colors-list: (
   }
 }
 
-/*@mixin btn-style($bg-color: $black, $color: $white, $taille: normal, $mandatory: false){
-  //@if $mandatory
-  background-color: $bg-color;
-  color: $color ; font-size: rem-calc(22px);
-  @include responsiveVal(font-size, $gutter*0.375, null, xlarge);
-
-  line-height: 1.2; display:inline-block;
-  @include setFont($fontType-bold);
-  @include responsiveVal(padding,$gutter/2.6 $gutter);
-  @extend .hand-cursor;
-  //===== CONTROLE TAILLE ======
-  @if $taille == small{
-    @include responsiveVal(padding, $gutter/4 $gutter/1.5);
-    font-size: rem-calc(18px);
-  }
-
-  @if $taille == medium{
-    font-size: rem-calc(18px);
-    @include responsiveVal(padding, $gutter/4 $gutter/1.5);
-  }
-
-  @if $taille == xsmall{
-    @include responsiveVal(padding,$gutter/4.8 $gutter/1.5);
-    line-height: 1.55; font-size:rem-calc(18px);
-  }
-  &:hover{
-    background-color:darken($bg-color, 3%);
-    color:$white;
-  }
-}*/
-
-
 @mixin dropdownStyle{
   display: block; position: absolute;
   //z-index: 2;
@@ -375,6 +343,7 @@ $colors-list: (
   -o-transform: rotate($val);
   transform: rotate($val);
 }
+
 @mixin applyOpacity($opacity){
    /* IE 8 */
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity*100})";
@@ -499,26 +468,6 @@ $colors-list: (
 }
 
 
-//a revoir
-@mixin last-row-flexbox($num-columns, $width-items){
-
-  $filled-space: $width-items * $num-columns;
-  $margin: calc((100% - #{$filled-space}) / (#{$num-columns} - 1));
-
-  $num-cols-1 : $num-columns - 1;
-
-  &:nth-child(#{$num-columns}n+1):nth-last-child(-n+#{$num-cols-1}) ~ & {
-    margin-left: $margin;
-  }
-  @for $i from 1 through $num-columns - 2 {
-    $index: $num-columns - $i;
-    &:nth-child(#{$num-columns}n+#{$index}):last-child{
-      margin-right: auto;
-    }
-  }
-}
-
-
 @mixin setFont($fontType : $fontType-regular){
   @if ($fontType == $fontType-bold) {
     font-weight: $bold;
@@ -540,25 +489,6 @@ $colors-list: (
   } @else {
     font-weight: $regular;
     font-style: $normal;
-  }
-}
-
-
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%, 80% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  30%, 50%, 70% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -646,28 +576,6 @@ $colors-list: (
   }
 }
 
-
-@mixin generateTriangle($width, $height, $color: $medium-gray){
-  &:before{
-    content:"";
-    width: 0; height: 0;
-    border-style: solid;
-    border-width: 0 $width/2 $height $width/2;
-    border-color: transparent transparent $color transparent;
-  }
-}
-
-@mixin linkUnderline($hoverColor: inherit){
-  /*position: relative; font-size:rem-calc(16px); line-height: 2;
-  @include responsiveVal(font-size, $gutter/2, null, medium);
-  @include responsiveVal(line-height, $gutter/1.2, null, medium);
-  text-decoration: underline;
-
-  &:hover, &:focus{
-    color: $hoverColor;
-    &:before{display: none;}
-  }*/
-}
 
 @mixin responsiveShrink($breakpointsArray: $breakpoints){
   @each $breakpointName, $breakpointVal in $breakpointsArray{
@@ -800,14 +708,4 @@ $colors-list: (
 
 @mixin transitionEffect($speed: 150ms, $type: ease){
   transition:all $speed $type 0s;
-}
-
-
-@mixin changeTrianglePos(){
-  right: 0; left: auto; top: calc(100% + 5px);
-  &:before{
-    right:rem-calc(28px);
-    transform: none;
-    left: auto;
-  }
 }
