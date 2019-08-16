@@ -24,7 +24,10 @@
 		if( $('.language-switcher-language-url').length > 0){
 			$('.language-switcher-language-url .block-title')
 			.wrapInner('<span class="visually-hidden"></span>')
-			.append($('.language-switcher-language-url .language-link.is-active').html());
+			.append($('.language-switcher-language-url .language-link.is-active').html())
+			.click(function(){
+				$(this).next('ul').toggleClass('show');
+			});
 		}
 
       $(window).resize(function(e) {

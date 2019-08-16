@@ -77,4 +77,15 @@
 			@include xy-cell(shrink);
 		}
 	}
+	.language-switcher-language-url {
+		position: relative;
+		ul{
+			position: absolute; top:0; left: 0;
+			height: 0; opacity: 0;
+			@include transitionEffect();
+			&.show{
+				height: auto; opacity: 1;
+			}
+		}
+	}
 }//close header-right
