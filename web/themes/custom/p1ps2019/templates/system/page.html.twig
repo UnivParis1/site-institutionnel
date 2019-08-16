@@ -55,16 +55,24 @@
 {# Header #}
 {% if page.header or page.header_left or page.header_center or page.header_right %}
   <header id="navbar" role="banner">
-    
-      {% if page.header %}
-        <div class="grid-x">
-          <div class="cell small-12">{{ page.header }}</div>
-        </div>
-      {% endif %}
+    {% if page.header %}
+      <div class="grid-x">
+        <div class="cell small-12">{{ page.header }}</div>
+      </div>
+    {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
         <div id="top-header" class="grid-x align-justify">
           {% if page.header_left %}
             <div class="cell shrink header-left" role="heading">
+              <a href="#" class="icon-menu">
+                <span class="visually-hidden">Navigation principale</span>
+                <span class="toggle-container">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </a>
               {{ page.header_left }}
             </div>
           {% endif %}
