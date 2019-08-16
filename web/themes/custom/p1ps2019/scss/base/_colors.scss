@@ -417,32 +417,15 @@ tr{
 // ================ FIN MAIN ============ //
 
 // ============= BTN ================ //
-
 .site-content-wrapper{
     .btn, .button--primary, button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container), input[type="submit"].button {
-        color: $white; background-color: $main-color;
-
-        &:hover:not(.outline):not(.with-image):not(.with-icon){
-            background-color: $main-color-darken; text-decoration: none;
-            @include box-shadow(0.16, 16px, 4px, $black);
+        color: $blue;
+        background-color: $white; border: 1px solid $blue;
+        &:hover{
+        	color: $white; background-color: $blue;
         }
 
-        &.btn-secondary{
-            color: $black; background-color: transparent;
-            //border: solid 2px $gray;
-            box-shadow: inset 0 0 0 2px $gray;
-            &:hover{
-              box-shadow: inset 0 0 0 2px $black;
-							color: $white;
-            }
-        }
-        &.with-icon{
-            .icon-container{
-                [class*="icon-"]{
-                  background-color: $medium-gray; color: $gray;
-                }
-            }
-        }
+        &.outline{background: transparent; border: 1px solid $white;}
     }//close btn
 }//close .site-content-wrapper
 
