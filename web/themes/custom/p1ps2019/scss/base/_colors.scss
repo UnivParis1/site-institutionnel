@@ -422,12 +422,18 @@ tr{
     button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container),
     input[type="submit"].button {
         color: $blue;
-        background-color: $white; border: 1px solid $blue;
+        background-color: $white; 
+        border-color: $blue;
         &:hover{
         	color: $white; background-color: $blue;
         }
 
-        &.outline{background: transparent; border: 1px solid $white;}
+        &.outline{
+        	border-color: $white;
+        	&:hover{
+        		border-color: $blue;
+        	}
+        }
     }//close btn
 }//close .site-content-wrapper
 
