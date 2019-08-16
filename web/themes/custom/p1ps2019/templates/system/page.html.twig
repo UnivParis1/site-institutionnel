@@ -52,6 +52,8 @@
  */
 #}
 
+{% set statusClass = is_front?'transparent':'' %}
+  
 {# Header #}
 {% if page.header or page.header_left or page.header_center or page.header_right %}
   <header id="navbar" role="banner">
@@ -61,7 +63,7 @@
       </div>
     {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
-        <div id="top-header" class="grid-x align-justify">
+        <div id="top-header" class="grid-x align-justify {{ statusClass }}">
           {% if page.header_left %}
             <div class="cell shrink header-left" role="heading">
               <a href="#" class="icon-menu">

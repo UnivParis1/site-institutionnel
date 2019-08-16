@@ -51,10 +51,6 @@
           $block = \Drupal\block\Entity\Block::load($block_id);
           $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-          /*echo '$block_id: '.$block_id;
-          $blockRegion = $block->getRegion();
-          echo '$blockRegion: '.$blockRegion;*/
-
           if ($block) {
               $variables["content"]["#attributes"]["region"] = $block->getRegion();
           }
@@ -62,7 +58,6 @@
   }
 
   // add a template suggestion based on region name
-  // http://kristiankaa.dk/article/drupal8-region-specific-menu-theme-hook-suggestion
   function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
       if (isset($variables["attributes"]["region"])) {
           $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
@@ -81,7 +76,6 @@
      $variables['attributes']['alt'] = "";
    }
   }
-
 
   /**
    * Implements hook_theme_suggestions_container_alter().
@@ -145,5 +139,4 @@
       $vars["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
     }
   }
-
 ?>
