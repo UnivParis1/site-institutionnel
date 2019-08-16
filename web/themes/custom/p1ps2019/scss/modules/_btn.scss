@@ -5,35 +5,35 @@
 */
 /* Ebizproduction : Boutons */
 
-
 .site-content-wrapper{
 
     .btn, .button--primary, button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container), input[type="submit"].button {
 
         @extend .hand-cursor;
-        @include setFont($fontType-medium);
-        @include responsiveVal(padding, $gutter/2 $gutter*1.25);
+        @include setFont($fontType-bold);
+        //@include responsiveVal(padding, $gutter/2 $gutter*1.25);
 
-        text-decoration: none; //border: solid 2px $main-color;
-        border: 0;
+        text-decoration: none;
+
         font-size: rem-calc(16px); line-height: 1.5;
-
+        padding: rem-calc(4px 24px); text-transform: uppercase; 
+        margin-top: rem-calc(48px);
+        color: $blue; @include setFont($fontType-bold); 
+        background: $white; border: 1px solid $blue; 
+        border-radius: 0;
+        
         @extend .transition-effect;
 
-        &.small{
-            @include responsiveVal(padding, $gutter/2.67 $gutter);
+        &.outline{
+            background: transparent; border: 1px solid $white;
         }
-
-        &.big {
-            font-size: rem-calc(18px); line-height: 1.7;
-        }
-
-        &.with-arrow{
-            @extend .icon-after;
-            &:after{
-                content: "\e937";
-                #{$margin-left}: rem-calc($fgutter/2);
-                @include transitionEffect();
+        
+        &.with-icon{
+            //@extend .icon-after;
+            display: inline-flex; align-items: center;
+            padding: rem-calc(8px 16px);
+            [class*="icon-"]{
+                #{$margin-right}: rem-calc(12px);
             }
         }
 
