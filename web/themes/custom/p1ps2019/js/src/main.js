@@ -8,6 +8,7 @@
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
+    	//ADD SCROLL CLASS
     	if ($(window).width() > 1024){
 			$(document).scroll(function() {
 				var top=$(this).scrollTop();
@@ -17,6 +18,13 @@
 					setTimeout(function(){ $("body").removeClass("scroll"); }, 100);
 				}
 			});
+		}//close scroll
+
+		//language-switcher set current lang
+		if( $('.language-switcher-language-url').length > 0){
+			$('.language-switcher-language-url .block-title')
+			.wrapInner('<span class="visually-hidden"></span>')
+			.append($('.language-switcher-language-url .language-link.is-active').html());
 		}
 
       $(window).resize(function(e) {
