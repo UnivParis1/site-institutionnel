@@ -56,3 +56,32 @@
 }
 
 .add-link{ @include setFont($fontType-bold);}
+
+
+
+/* tabs */
+.nav-tabs {
+	> li{
+  		width: calc(100% / 4);
+	  	> a{
+		  font-size: rem-calc(22px); line-height: 1.18;
+		  color: $main-color; background: $light-gray;
+		  padding: rem-calc(24px); @extend .hand-cursor;
+		  text-transform: uppercase; text-align: center;
+		  #{$margin-right}: 0; border-radius: 0; border: 0;
+			&:hover{
+			  background-color: $main-color;
+			  color: #light-gray;
+			  border: 0;
+			}
+		}//close a
+		&.active a{
+		  background-color: $main-color;
+		  color: $light-gray; border: 0;
+		  /*&:hover{
+			  background-color: #00326E;
+			  color: #F6F0ED; border: 0;
+			}*/
+		}
+	}
+}//close nav-tabs
