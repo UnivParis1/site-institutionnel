@@ -39,8 +39,6 @@
  */
 #}
 
-LABEL HIDDEN : {{ label_hidden }}
-LABEL DISPLAY : {{ label_display }}
 {%
   set classes = [
     'field',
@@ -49,18 +47,13 @@ LABEL DISPLAY : {{ label_display }}
     'field--label-' ~ label_display,
   ]
 %}
-{#{%
-  set title_classes = [
-    'field--label',
-    label_display == 'visually-hidden' ? 'sr-only',
-  ]
-%}#}
 {%
   set title_classes = [
     'field--label',
-    label_display
+    label_display == 'visually-hidden' ? 'visually-hidden sr-only',
   ]
 %}
+
 
 {% if label_hidden %}
   {% if multiple %}
