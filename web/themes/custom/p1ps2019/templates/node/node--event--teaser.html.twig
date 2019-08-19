@@ -72,25 +72,29 @@
     node.isSticky() ? 'is-sticky',
     not node.isPublished() ? 'is-unpublished',
     view_mode ? view_mode|clean_class,
-    'clearfix',
+    'clearfix', 'box-style',
   ]
 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('content') }}>
-    <div class="tag"> {{ content.field_event_type }} </div>
-    {{ title_prefix }}
-    <div class="views-field views-field-title">
-      <span class="field-content actualite-contenu">
-        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
-      </span>
+  {#<div{{ content_attributes.addClass('content') }}>#}
+  <div class="box-content same-height">
+    <div class="top-infos">
+      <div class="inline space-between block-sep">
+        {# <div class="categ-wrapper"> #}<div class="categ-style"> {{ content.field_event_type }} </div>{# </div> #}
+        <div class="date-style">{{ content.field_event_date }}</div>
+      </div>
+        {{ title_prefix }}
+          <h2 class="title block-sep">
+              <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
+          </h2>
+        {{ title_suffix }}
     </div>
-    {{ title_suffix }}
-    <div class="views-field views-field-field-date-debut-evenement">
+    {#<div class="views-field views-field-field-date-debut-evenement">
       <div class="field-content actualite-contenu">
         {{ content.field_event_date }}
       </div> 
-    </div>
-    {{ content.links }}
+    </div>#}
+    <div class="bottom-infos">{{ content.links }}</div>
   </div>
 </article>
