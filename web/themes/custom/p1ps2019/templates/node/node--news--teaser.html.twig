@@ -67,7 +67,7 @@
 #}
 {%
     set classes = [
-    node.bundle|clean_class,
+    node.bundle|clean_class, 'box-style',
     node.isPromoted() ? 'is-promoted',
     node.isSticky() ? 'is-sticky',
     not node.isPublished() ? 'is-unpublished',
@@ -90,17 +90,20 @@
 #}
 
 <article{{ attributes.addClass(classes) }}>
-
-    <div{{ content_attributes.addClass('content') }}>
-        {{ content.field_media }}
-        <span> {{ content.field_news_topic }} </span>
-        {{ title_prefix }}
-        <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-        {{ title_suffix }}
-        <div>
-            {{ content.links|without('comment-add') }}
+    {# <div{{ content_attributes.addClass('content') }}> #}
+    <div class="img-container">{{ content.field_media }}</div>
+    <div class="box-content same-height">
+        <div class="top-infos">
+            <span class="categ-style field-sep"> {{ content.field_news_topic }} </span>
+            {{ title_prefix }}
+            <h2{{ title_attributes.addClass('title field-sep') }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+            {{ title_suffix }}
+        </div>
+        <div class="bottom-infos">
+            {{ content.links|without('comment-add').addClass('more-link') }}
         </div>
     </div>
+    {# </div> #}
 </article>
