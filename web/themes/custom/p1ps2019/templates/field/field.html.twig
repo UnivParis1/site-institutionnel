@@ -49,10 +49,16 @@ LABEL DISPLAY : {{ label_display }}
     'field--label-' ~ label_display,
   ]
 %}
+{#{%
+  set title_classes = [
+    'field--label',
+    label_display == 'visually-hidden' ? 'sr-only',
+  ]
+%}#}
 {%
   set title_classes = [
     'field--label',
-    label_display == 'visually_hidden' ? 'sr-only',
+    label_display
   ]
 %}
 
