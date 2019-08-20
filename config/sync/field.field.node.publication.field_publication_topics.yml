@@ -1,0 +1,29 @@
+uuid: b66c152e-c731-4018-85bf-0c67d698cb55
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_topics
+    - node.type.publication
+    - taxonomy.vocabulary.publication_topics
+id: node.publication.field_publication_topics
+field_name: field_publication_topics
+entity_type: node
+bundle: publication
+label: 'Thèmes de publication'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      publication_topics: publication_topics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

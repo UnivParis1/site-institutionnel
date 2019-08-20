@@ -1,0 +1,129 @@
+uuid: 1f998879-05f8-45c1-9db3-4b2372f898db
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.publication.body
+    - field.field.node.publication.field_author_name
+    - field.field.node.publication.field_back_cover
+    - field.field.node.publication.field_isbn
+    - field.field.node.publication.field_media
+    - field.field.node.publication.field_publication_link
+    - field.field.node.publication.field_publication_topics
+    - field.field.node.publication.field_publication_type
+    - field.field.node.publication.field_publisher
+    - field.field.node.publication.field_publishing_year
+    - field.field.node.publication.field_tags
+    - node.type.publication
+  module:
+    - link
+    - user
+id: node.publication.default
+targetEntityType: node
+bundle: publication
+mode: default
+content:
+  field_author_name:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_back_cover:
+    type: entity_reference_entity_view
+    weight: 7
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_isbn:
+    weight: 5
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_media:
+    weight: 6
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_publication_link:
+    weight: 8
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_publication_topics:
+    weight: 1
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_publication_type:
+    weight: 2
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_publisher:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_publishing_year:
+    weight: 4
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_tags:
+    weight: 9
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  site_id:
+    label: hidden
+    type: entity_reference_label
+    weight: 10
+    region: content
+    settings:
+      link: true
+    third_party_settings: {  }
+hidden:
+  body: true
+  langcode: true
+  search_api_excerpt: true

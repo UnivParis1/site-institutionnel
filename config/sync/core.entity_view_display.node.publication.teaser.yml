@@ -1,0 +1,64 @@
+uuid: 145dfb61-58aa-4be5-931c-c349d016c71d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.publication.body
+    - field.field.node.publication.field_author_name
+    - field.field.node.publication.field_back_cover
+    - field.field.node.publication.field_media
+    - field.field.node.publication.field_publication_link
+    - field.field.node.publication.field_publication_topics
+    - field.field.node.publication.field_publication_type
+    - field.field.node.publication.field_publisher
+    - field.field.node.publication.field_publishing_year
+    - field.field.node.publication.field_tags
+    - node.type.publication
+  module:
+    - user
+id: node.publication.teaser
+targetEntityType: node
+bundle: publication
+mode: teaser
+content:
+  field_author_name:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_publication_topics:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_publication_type:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  links:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_back_cover: true
+  field_media: true
+  field_publication_link: true
+  field_publisher: true
+  field_publishing_year: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  site_id: true

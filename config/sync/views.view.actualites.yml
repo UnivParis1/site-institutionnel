@@ -11,7 +11,6 @@ dependencies:
     - node
     - taxonomy
     - user
-    - views_bootstrap
 id: actualites
 label: Actualités
 module: views
@@ -71,16 +70,11 @@ display:
             previous: ‹‹
             next: ››
       style:
-        type: views_bootstrap_grid
+        type: default
         options:
-          row_class: ''
+          row_class: 'cell small-12 medium-6'
           default_row_class: true
           uses_fields: false
-          alignment: horizontal
-          col_xs: col-12
-          col_sm: col-sm-12
-          col_md: col-md-4
-          col_lg: col-lg-4
       row:
         type: 'entity:node'
         options:
@@ -225,6 +219,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      css_class: 'grid-x grid-margin-x grid-margin-y'
     cache_metadata:
       max-age: -1
       contexts:
@@ -250,6 +245,7 @@ display:
         filters: false
         filter_groups: false
         footer: false
+        css_class: false
       pager:
         type: some
         options:
@@ -339,6 +335,7 @@ display:
             value: '<a href="[view:url]" class="btn btn-primary">Voir toutes les actualités</a>'
             format: full_html
           plugin_id: text
+      css_class: 'grid-x grid-margin-x full-height'
     cache_metadata:
       max-age: -1
       contexts:

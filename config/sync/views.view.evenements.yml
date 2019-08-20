@@ -17,7 +17,6 @@ dependencies:
     - taxonomy
     - up1_global
     - user
-    - views_bootstrap
     - views_infinite_scroll
 id: evenements
 label: Évènements
@@ -81,16 +80,11 @@ display:
             offset_label: Décalage
           quantity: 9
       style:
-        type: views_bootstrap_grid
+        type: default
         options:
-          row_class: ''
+          row_class: 'cell small-12'
           default_row_class: true
           uses_fields: false
-          alignment: horizontal
-          col_xs: col-12
-          col_sm: col-sm-12
-          col_md: col-md-4
-          col_lg: col-lg-4
       row:
         type: 'entity:node'
         options:
@@ -427,6 +421,7 @@ display:
         operator: AND
         groups:
           1: AND
+      css_class: 'grid-x full-height same-height'
     cache_metadata:
       max-age: -1
       contexts:
