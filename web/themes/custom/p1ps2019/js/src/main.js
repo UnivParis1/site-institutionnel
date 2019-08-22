@@ -34,7 +34,7 @@
 		//social media footer
 		if( $('.block-system-menu-blockreseaux-sociaux').length > 0){
 			$('.block-system-menu-blockreseaux-sociaux li').each(function(){
-				$(this).wrapInner('<span class="visually-hidden"></span>');
+				$(this).find('a').wrapInner('<span class="visually-hidden"></span>');
 			});
 		}
 
