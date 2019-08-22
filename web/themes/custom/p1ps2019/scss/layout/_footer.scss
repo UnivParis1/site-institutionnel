@@ -36,7 +36,17 @@ form#centres-up1-form {
 }
 
 .footer{
-
+  .cell{
+    padding-top: rem-calc(24px); padding-bottom: rem-calc(24px);
+    &:not(:last-child){
+      position: relative;
+      &:after{
+        content:""; width: 1px; height: 100%;
+        position: absolute; top: 0; #{$right}: 0;
+        background-color: $gold;
+      }
+    }
+  }
   //social media footer
   .block-system-menu-blockreseaux-sociaux{
     .block-title{
