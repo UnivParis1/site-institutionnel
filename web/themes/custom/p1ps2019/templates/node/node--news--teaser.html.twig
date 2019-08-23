@@ -76,21 +76,7 @@
 ]
 %}
 
-{#
-    liste des fields :
-    - field_categories
-    - field_lead
-    - comment
-    - field_label_color
-    - field_news_date
-    - field_media
-    - field_signature
-    - field_news_topic
-    - field_tag
-#}
-
 <article{{ attributes.addClass(classes) }}>
-    {# <div{{ content_attributes.addClass('content') }}> #}
     <div class="img-container">{{ content.field_media }}</div>
     <div class="box-content same-height">
         <div class="top-infos">
@@ -102,8 +88,9 @@
             {{ title_suffix }}
         </div>
         <div class="bottom-infos">
-            {{ content.links|without('comment-add') }}
+           <div class="node-readmore">
+             <a href="{{ url }}" title="readmore">{{ "Read more"|t }}</a>
+           </div>
         </div>
     </div>
-    {# </div> #}
 </article>
