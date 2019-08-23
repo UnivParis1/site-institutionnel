@@ -72,24 +72,31 @@
   node.isSticky() ? 'is-sticky',
   not node.isPublished() ? 'is-unpublished',
   view_mode ? view_mode|clean_class,
+  'box-style',
   'clearfix',
 ]
 %}
 {% set title = label.0 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('content') }}>
-    <div class="event-image">
-      {{ content.field_media }}
-    </div>
-    <section id="event-content" class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+  <div class="img-container">{{ content.field_media }}</div>
+  <div class="box-content same-height">
+    <div class="top-infos">
+      <div class="categ-style field-sep">{{ content.field_event_type }}</div>
+      <div class="date-style">{{ content.field_event_date }}</div>
       {{ title_prefix }}
-        <h2><a href="{{ url }}" rel="bookmark">{{ title }}</a></h2>
+      <h2{{ title_attributes.addClass('title field-sep') }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
       {{ title_suffix }}
-      {{ content.field_event_date }}
-      {{ content.body }}
-      {{ content.field_thesis_supervisor }}
-    </section>
+      {{ conte }}
+    </div>
+    <div class="bottom-infos">
+      <div class="node-readmore">
+        <a href="{{ url }}" title="readmore">{{ "Read more"|t }}</a>
+      </div>
+      {{ content.field_add_to_cal }}
+    </div>
   </div>
 </article>
 
