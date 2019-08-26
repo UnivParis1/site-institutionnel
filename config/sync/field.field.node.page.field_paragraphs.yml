@@ -5,14 +5,17 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.page
+    - paragraphs.paragraphs_type.bp_accordion
     - paragraphs.paragraphs_type.bp_carousel
     - paragraphs.paragraphs_type.bp_column_wrapper
+    - paragraphs.paragraphs_type.bp_simple
     - paragraphs.paragraphs_type.bp_tab_section
     - paragraphs.paragraphs_type.bp_tabs
     - paragraphs.paragraphs_type.bp_view
     - paragraphs.paragraphs_type.hit_list
     - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.rich_content
     - paragraphs.paragraphs_type.section_presentation
     - paragraphs.paragraphs_type.tiles
   module:
@@ -33,22 +36,25 @@ settings:
     negate: 0
     target_bundles:
       key_figures_section: key_figures_section
+      bp_accordion: bp_accordion
       bp_carousel: bp_carousel
       bp_column_wrapper: bp_column_wrapper
+      bp_simple: bp_simple
       bp_tab_section: bp_tab_section
       bp_tabs: bp_tabs
       bp_view: bp_view
       medias: medias
       hit_list: hit_list
       section_presentation: section_presentation
+      rich_content: rich_content
       tiles: tiles
     target_bundles_drag_drop:
       key_figures_section:
         enabled: true
         weight: 18
       bp_accordion:
+        enabled: true
         weight: 19
-        enabled: false
       bp_accordion_section:
         weight: 20
         enabled: false
@@ -61,16 +67,16 @@ settings:
       bp_carousel:
         enabled: true
         weight: 23
-      files_media:
-        weight: 24
-        enabled: false
       bp_column_wrapper:
         enabled: true
         weight: 24
-      bp_columns:
-        weight: 25
+      files_media:
+        weight: 24
         enabled: false
       audio_media:
+        weight: 25
+        enabled: false
+      bp_columns:
         weight: 25
         enabled: false
       bp_columns_three_uneven:
@@ -86,8 +92,8 @@ settings:
         weight: 29
         enabled: false
       bp_simple:
+        enabled: true
         weight: 30
-        enabled: false
       bp_tab_section:
         enabled: true
         weight: 31
@@ -127,10 +133,19 @@ settings:
       tile_with_text:
         weight: 57
         enabled: false
+      rich_content:
+        enabled: true
+        weight: 58
       tiles:
         enabled: true
         weight: 58
       title_and_subtitle:
         weight: 59
+        enabled: false
+      tile_wo_image:
+        weight: 62
+        enabled: false
+      tuile_text_wo_image:
+        weight: 65
         enabled: false
 field_type: entity_reference_revisions

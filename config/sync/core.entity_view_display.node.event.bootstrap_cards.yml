@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.bootstrap_cards
     - field.field.node.event.body
+    - field.field.node.event.field_add_to_cal
     - field.field.node.event.field_address_map
     - field.field.node.event.field_blocs_medias
     - field.field.node.event.field_categories
@@ -20,6 +21,7 @@ dependencies:
     - field.field.node.event.field_thesis_supervisor
     - node.type.event
   module:
+    - ics_field
     - text
     - up1_global
     - user
@@ -31,13 +33,20 @@ bundle: event
 mode: bootstrap_cards
 content:
   body:
-    label: hidden
     type: text_summary_or_trimmed
     weight: 3
-    settings:
-      trim_length: 250
-    third_party_settings: {  }
     region: content
+    label: hidden
+    settings:
+      trim_length: 150
+    third_party_settings: {  }
+  field_add_to_cal:
+    type: calendar_download_default_formatter
+    weight: 6
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_event_date:
     weight: 1
     label: hidden
@@ -61,7 +70,7 @@ content:
     weight: 0
     label: visually_hidden
     settings:
-      view_mode: default
+      view_mode: thumbnail_news
       link: false
     third_party_settings: {  }
     region: content
@@ -81,6 +90,11 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  links:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   content_moderation_control: true
   field_address_map: true
@@ -92,6 +106,6 @@ hidden:
   field_sites_all: true
   field_tag: true
   langcode: true
-  links: true
   search_api_excerpt: true
   site_id: true
+  social_simple_buttons: true

@@ -6,6 +6,8 @@ dependencies:
     - field.field.paragraph.bp_simple.bp_background
     - field.field.paragraph.bp_simple.bp_text
     - field.field.paragraph.bp_simple.bp_width
+    - field.field.paragraph.bp_simple.field_column_number
+    - field.field.paragraph.bp_simple.field_title
     - paragraphs.paragraphs_type.bp_simple
   module:
     - text
@@ -23,7 +25,7 @@ content:
     type: options_select
     region: content
   bp_text:
-    weight: 2
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -36,6 +38,25 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_column_number:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_title:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  translation:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   status: true

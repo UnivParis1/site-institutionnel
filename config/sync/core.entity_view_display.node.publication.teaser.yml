@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.publication.body
     - field.field.node.publication.field_author_name
     - field.field.node.publication.field_back_cover
+    - field.field.node.publication.field_isbn
     - field.field.node.publication.field_media
     - field.field.node.publication.field_publication_link
     - field.field.node.publication.field_publication_topics
@@ -36,7 +37,7 @@ content:
     region: content
     label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
   field_publication_type:
     type: entity_reference_label
@@ -44,21 +45,18 @@ content:
     region: content
     label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
-  links:
-    weight: 3
-    region: content
-    settings: {  }
+      link: false
     third_party_settings: {  }
 hidden:
   body: true
   field_back_cover: true
+  field_isbn: true
   field_media: true
   field_publication_link: true
   field_publisher: true
   field_publishing_year: true
   field_tags: true
   langcode: true
+  links: true
   search_api_excerpt: true
   site_id: true
