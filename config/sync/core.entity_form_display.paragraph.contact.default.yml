@@ -1,0 +1,48 @@
+uuid: 49fa13fb-2654-4e72-9b80-865380be730d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact.field_centre
+    - field.field.paragraph.contact.field_email_address
+    - field.field.paragraph.contact.field_offices
+    - field.field.paragraph.contact.field_service
+    - paragraphs.paragraphs_type.contact
+id: paragraph.contact.default
+targetEntityType: paragraph
+bundle: contact
+mode: default
+content:
+  field_centre:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_email_address:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_offices:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_service:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
