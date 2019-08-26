@@ -54,14 +54,18 @@
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
-            <div class="paragraph__column">
+          <div class="paragraph__column">
+            <div class="grid-container">
+              <div class="grid-x grid-margin-x">
                 <h2 class="titre">{{ content.field_title.0 }}</h2>
                 {% for key, item in  content.field_key_figure if key|first != '#' %}
-                    <div class="groupeinfo col-md-{{ nbCols }} col-sm-6 col-xs-12">
+                    <div class="groupeinfo large-{{ nbCols }} medium-6 small-12">
                         {{ item }}
                     </div>
                 {% endfor %}
+              </div>
             </div>
+          </div>
         {% endblock %}
     </div>
 {% endblock paragraph %}
