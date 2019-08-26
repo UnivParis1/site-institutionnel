@@ -35,9 +35,10 @@
  *
  * @ingroup themeable
  */
+ {{ attach_library('bootstrap_paragraphs/bootstrap-paragraphs') }}
 #}
 
-{{ attach_library('bootstrap_paragraphs/bootstrap-paragraphs') }}
+
 
 {% if content.bp_width|render %}
   {% set layout_width = content.bp_width['#items'].getString() %}
@@ -72,16 +73,18 @@
   {# Prints div with classes, and content without Width and Background. #}
   <div{{ attributes.addClass(classes) }}>
     <div class="paragraph__column">
-      <h5>{{ content.field_title.0 }}</h5>
-      {{ content.field_media_image }}
-      {% for key, item in  content.field_ranking if key|first != '#' %}
-        <div class="col-md-{{ nbCols }} col-sm-6 col-xs-12">
-          {{ item }}
+      <div class="overlay-infos container">
+        <h5>{{ content.field_title.0 }}</h5>
+        {{ content.field_media_image }}
+        {% for key, item in  content.field_ranking if key|first != '#' %}
+          <div class="col-md-{{ nbCols }} col-sm-6 col-xs-12">
+            {{ item }}
+          </div>
+        {% endfor %}
+        <div>
+          <span class="{{ content.field_cta_icon.0 }}">{{ content.field_cta_icon.0 }}</span>
+          {{ content.bp_link }}
         </div>
-      {% endfor %}
-      <div>
-        <span class="{{ content.field_cta_icon.0 }}">{{ content.field_cta_icon.0 }}</span>
-        {{ content.bp_link }}
       </div>
     </div>
   </div>
