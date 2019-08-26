@@ -81,10 +81,12 @@
             </div>
         </div>
     </div>
-    {% for key, item in  content.field_tile if key|first != '#' %}
-      <div class="large-{{ nbCols }} medium-6 small-12">
-        {{ item }}
-      </div>
-    {% endfor %}
+    <div class="grid-x">
+      {% for key, item in  content.field_tile if key|first != '#' %}
+        <div class="large-{{ nbCols }} medium-6 small-12">
+          {{ item }}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
