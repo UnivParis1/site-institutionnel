@@ -5,26 +5,24 @@
   height: auto;
   display: block;
   padding-bottom: 40px;
-}
-.key-figures-section h2 {
-  position: relative;
-  width: 100%;
-  margin: 40px 0;
-}
-.key-figures-section .chiffre p {
-  font-size: 6em;
-  text-align: center;
-  text-transform: uppercase;
-  color: $blue;
-  margin: 0;
-  line-height: 60px;
-}
-.key-figures-section .legende p {
-  font-size: 1.2em;
-  text-align: center;
-  color: #171717;
-  text-transform: uppercase;
-  font-weight: 900;
+  h2 {
+    position: relative;
+    width: 100%;
+    margin: 40px 0;
+  }
+  .chiffre, .legende{
+    text-align: center;
+    @include setFont($fontType-bold);
+  }
+  .chiffre{
+    font-size: rem-calc(70px);
+    margin: 0; line-height: 60px;
+  }
+  .legende{
+    font-size: rem-calc(18px);
+    color: $dark-gray2;
+    text-transform: uppercase;
+  }
 }
 
 .paragraph.rich-content {
