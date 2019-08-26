@@ -73,9 +73,9 @@
   {# Prints div with classes, and content without Width and Background. #}
   <div{{ attributes.addClass(classes) }}>
     <div class="paragraph__column">
+      {{ content.field_media_image }}
       <div class="overlay-infos container">
-        <h5>{{ content.field_title.0 }}</h5>
-        {{ content.field_media_image }}
+        <h5>{{ content.field_title.0 }}</h5>        
         {% for key, item in  content.field_ranking if key|first != '#' %}
           <div class="col-md-{{ nbCols }} col-sm-6 col-xs-12">
             {{ item }}
