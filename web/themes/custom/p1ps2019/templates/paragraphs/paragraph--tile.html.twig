@@ -38,10 +38,12 @@
 #}
 
 <div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column">
-    <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-      {{content.field_title }}
-      {{ content.field_media_image }}
-    </a>
+  <div class="paragraph__column mask relative-wrapper">
+    {{ content.field_media_image }}
+    <div class="absolute-infos">
+      <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+        {{content.field_title }}
+      </a>
+    </div>
   </div>
 </div>

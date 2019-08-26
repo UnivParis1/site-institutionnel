@@ -74,9 +74,15 @@
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
   <div class="paragraph__column">
-    <h2 class="titre">{{ content.field_title.0 }}</h2>
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="cell small-12">
+              <h2 class="titre">{{ content.field_title.0 }}</h2>
+            </div>
+        </div>
+    </div>
     {% for key, item in  content.field_tile if key|first != '#' %}
-      <div class="col-md-{{ nbCols }} col-sm-6 col-xs-12">
+      <div class="large-{{ nbCols }} medium-6 small-12">
         {{ item }}
       </div>
     {% endfor %}
