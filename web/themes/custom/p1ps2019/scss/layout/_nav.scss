@@ -30,15 +30,16 @@
     #block-p1ps2019-megamenu{
       flex: 0 0 78%; max-width: 78%;
       padding: rem-calc(72px 116px);
-         ul {
+         ul li ul {
            li {
-             @include flexDisplay();
+             @include flexDisplay(); position: relative;
             a{
               font-size: rem-calc(20px); line-height: 1.2;
               color: $white; @include setFont($fontType-bold);
               &.blocfirstlevel{display: none;}
             }
             ul{
+              position: absolute; left: 25%;
               li{
                 a{
                   @include setFont($fontType-regular);
