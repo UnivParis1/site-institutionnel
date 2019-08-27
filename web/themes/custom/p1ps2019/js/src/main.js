@@ -38,6 +38,9 @@
       });
     }
 
+    if($('#region-header').length > 0 && $('.toggle-container').length > 0){
+      $('.toggle-container').toggleClass('menu-expanded');
+    }
 		//social media footer
 		if( $('.block-system-menu-blockreseaux-sociaux').length > 0){
 			$('.block-system-menu-blockreseaux-sociaux li').each(function(){

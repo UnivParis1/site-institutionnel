@@ -6,8 +6,9 @@
 /* Ebizproduction : Navigation */
 
 #navbar-header{
+  width: 0; @include transitionEffect(350ms);
   position: absolute; @include flexDisplay();
-  top: rem-calc(142px); width: 100%;
+  top: rem-calc(142px);
   background-color: $blue;
   .navigation-right-region{
     display: inline-flex; justify-content: center; align-items: center;
@@ -57,5 +58,9 @@
         }
       }
      }
+    }
+    &.menu-expanded{
+      max-width: rem-calc(2500px);
+      width: 100%;
     }
 }
