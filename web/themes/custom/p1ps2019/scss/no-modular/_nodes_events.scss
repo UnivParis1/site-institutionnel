@@ -1,34 +1,40 @@
 .event {
   font-family: 'Brandon Grotesque';
-}
-.event .social-and-calendar {
-  background: #f6f0ed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.event .field-add-to-cal, .event .field-add-to-cal a {
-  color: #171717;
-}
-.event .field-add-to-cal a {
-  font-family: $font-second;
-  font-size: rem-calc(20px);
-}
-.event .field-add-to-cal .fa-plus {
-}
-.event .social-buttons .links {
-  margin: 0;
-}
-.event .social-buttons-links a {
-  background: transparent;
-  font-size: 2rem;
-}
-.event .social-buttons-links .facebook a {
-  color: #3b5998;
-}
-.event .social-buttons-links .twitter a {
-  color: #55acee;
-}
-.event .social-buttons-links .linkedin a {
-  color: #0274b3;
+  .bottom-infos{
+    @include flexDisplay(); @include flexDisplayAlign('center-middle');
+    @include flexDisplayAlign('space-between');
+  }
+  .social-and-calendar {
+    background: #f6f0ed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .field-add-to-cal{
+    color: $dark-gray2; @include setFont($fontType-bold);
+    max-width: 50%; text-align: right;
+    a{
+      color: $dark-gray2;
+      font-family: $font-second;
+      font-size: rem-calc(18px); line-height: 1.22;
+    }
+  }
+  .social-buttons .links {
+    margin: 0;
+    a{
+      background: transparent;
+      font-size: 2rem;
+    }
+  }
+  .social-buttons-links{
+    .facebook a {
+      color: #3b5998;
+    }
+    .twitter a {
+      color: #55acee;
+    }
+    .linkedin a {
+      color: #0274b3;
+    }
+  }
 }
