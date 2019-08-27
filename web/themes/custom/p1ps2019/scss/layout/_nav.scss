@@ -13,7 +13,7 @@
     @include flexDisplay();
     #block-p1ps2019-menuliensutileshaut{
       display: inline-flex; justify-content: center; align-items: center;
-      flex: 0 0 22%; max-width: 22%;
+      flex: 0 0 22%; max-width: 22%; background-color: $white;
       ul{
         li{
           a{
@@ -32,15 +32,17 @@
       padding: rem-calc(72px 116px);
       >ul{
         >li{
-          >a{
-            font-size: rem-calc(20px); line-height: 1.3;
-            color: $white; @include setFont($fontType-bold);
-            &.blocfirstlevel{display: none;}
-          }
-          ul{
-            li{
-              a{
-                font-family: $font-second;
+          > ul > li > {
+            >a{
+              font-size: rem-calc(20px); line-height: 1.3;
+              color: $white; @include setFont($fontType-bold);
+              &.blocfirstlevel{display: none;}
+            }
+            ul{
+              li{
+                a{
+                  font-family: $font-second;
+                }
               }
             }
           }
