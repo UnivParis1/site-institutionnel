@@ -38,12 +38,14 @@
 #}
 
 <div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column">
+  <div class="paragraph__column mask relative-wrapper">
       {{ content.field_media_image }}
-      <h5>{{ content.field_title.0 }}</h5>
-      <div>{{ content.bp_text.0 }}</div>
-    <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-      {{ content.bp_link.0['#title'] }}
-    </a>
+      <div class="overlay-infos">
+        <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
+        <div class="parag-title-sep">{{ content.bp_text.0 }}</div>
+        <a class="btn outline" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+          {{ content.bp_link.0['#title'] }}
+        </a>
+      </div>
   </div>
 </div>
