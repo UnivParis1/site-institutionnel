@@ -40,7 +40,7 @@
 
     if($('#navbar-header').length > 0 && $('.toggle-container').length > 0){
       $('.toggle-container').click(function() {
-        $('#navbar-header').toggleClass('expanded');
+        $('#navbar-header').toggleClass('.menu-expanded');
       });
     }
 		//social media footer
