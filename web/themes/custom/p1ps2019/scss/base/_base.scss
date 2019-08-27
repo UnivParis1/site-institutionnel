@@ -243,9 +243,13 @@ ul.list-style {
 .paragraph--type--hit-list{
   .paragraph__column{
     padding: 0 !important;
-    *{
+    .paragraph__column{
       font-size: rem-calc(20px); line-height: 1.2;
       @include setFont($fontType-bold);
+      *{
+        font-size: rem-calc(20px); line-height: 1.2;
+        @include setFont($fontType-bold);
+      }
      }
      .field--name-field-subtitle{
        @include setFont($fontType-regular);
@@ -277,7 +281,10 @@ ul.list-style {
     .title{
       width: 100%; height: 100%; margin: 0;
       @include flexDisplay(); @include flexDisplayAlign('center-middle');
-      a span{max-width: rem-calc(332px); text-align: center; display: block;}
+      a{
+        width: 100%; height: 100%;
+        span{max-width: rem-calc(332px); text-align: center; display: block;}
+      }
     }
   }
 }
