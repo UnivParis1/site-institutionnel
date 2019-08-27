@@ -6,56 +6,53 @@
 /* Ebizproduction : Navigation */
 
 #navbar-header{
-  position: absolute;
+  position: absolute; @include flexDisplay();
   top: rem-calc(142px); width: 100%;
   background-color: $blue;
-  > div {
-    @include flexDisplay();
-    .navigation-right-region{
-      display: inline-flex; justify-content: center; align-items: center;
-      flex: 0 0 22%; max-width: 22%; background-color: $white;
-      ul{
-        li{
-          a{
-            text-transform: uppercase; color: $black;
-            font-size: rem-calc(18px); line-height: 1.2;
-            @include setFont($fontType-bold);
-          }
-          &:not(:last-of-type){
-            margin-bottom: rem-calc(8px);
-          }
+  .navigation-right-region{
+    display: inline-flex; justify-content: center; align-items: center;
+    flex: 0 0 22%; max-width: 22%; background-color: $white;
+    ul{
+      li{
+        a{
+          text-transform: uppercase; color: $black;
+          font-size: rem-calc(18px); line-height: 1.2;
+          @include setFont($fontType-bold);
+        }
+        &:not(:last-of-type){
+          margin-bottom: rem-calc(8px);
         }
       }
     }
-    .navigation-region{
-      flex: 0 0 78%; max-width: 78%;
-      padding: rem-calc(72px 116px);
-       ul {
-         li {
-           @include flexDisplay(); position: relative;
-          a{
-            font-size: rem-calc(20px); line-height: 1.2;
-            color: $white; @include setFont($fontType-bold);
-
-          }
-          ul{
-            position: absolute; left: 25%;
-            z-index: -1; opacity: 0; visibility: hidden;
-            li{
-              a{
-                @include setFont($fontType-regular);
-                font-family: $font-second;
-                pointer-events: none;
-              }
-            }
-            &.expanded{
-              opacity: 1; visibility: visible; z-index: 2;
-              a{pointer-events: auto;}
-            }
-          }
-          &:not(:last-of-type){margin-bottom: rem-calc(12px);}
-        }
-       }
-      }
   }
+  .navigation-region{
+    flex: 0 0 78%; max-width: 78%;
+    padding: rem-calc(72px 116px);
+     ul {
+       li {
+         @include flexDisplay(); position: relative;
+        a{
+          font-size: rem-calc(20px); line-height: 1.2;
+          color: $white; @include setFont($fontType-bold);
+
+        }
+        ul{
+          position: absolute; left: 25%;
+          z-index: -1; opacity: 0; visibility: hidden;
+          li{
+            a{
+              @include setFont($fontType-regular);
+              font-family: $font-second;
+              pointer-events: none;
+            }
+          }
+          &.expanded{
+            opacity: 1; visibility: visible; z-index: 2;
+            a{pointer-events: auto;}
+          }
+        }
+        &:not(:last-of-type){margin-bottom: rem-calc(12px);}
+      }
+     }
+    }
 }
