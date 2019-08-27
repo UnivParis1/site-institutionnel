@@ -30,6 +30,8 @@
 			});
 		}
 
+    //menulevel2
+
 
 		//social media footer
 		if( $('.block-system-menu-blockreseaux-sociaux').length > 0){
