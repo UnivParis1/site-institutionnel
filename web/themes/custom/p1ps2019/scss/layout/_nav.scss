@@ -32,12 +32,14 @@
       padding: rem-calc(72px 116px);
          ul {
            li {
+             @include flexDisplay();
             a{
               font-size: rem-calc(20px); line-height: 1.2;
               color: $white; @include setFont($fontType-bold);
               &.blocfirstlevel{display: none;}
             }
             ul{
+              position: absolute; left: 25%;
               li{
                 a{
                   @include setFont($fontType-regular);
