@@ -4,3 +4,49 @@
     Par Ebizproduction
 */
 /* Ebizproduction : Navigation */
+
+.navbar-header{
+  position: absolute;
+  top: rem-calc(142px); width: 100%;
+  background-color: $blue;
+  > div {
+    @include flexDisplay();
+    #block-p1ps2019-menuliensutileshaut{
+      display: inline-flex; justify-content: center; align-items: center;
+      flex: 0 0 22%; max-width: 22%;
+      ul{
+        li{
+          a{
+            text-transform: uppercase; color: $black;
+            font-size: rem-calc(18px); line-height: 1.3;
+            @include setFont($fontType-bold);
+          }
+          &:not(:last-of-type){
+            margin-bottom: rem-calc(12px);
+          }
+        }
+      }
+    }
+    #block-p1ps2019-megamenu{
+      flex: 0 0 78%; max-width: 78%;
+      padding: rem-calc(72px 116px);
+      >ul{
+        >li{
+          >a{
+            font-size: rem-calc(20px); line-height: 1.3;
+            color: $white; @include setFont($fontType-bold);
+            &.blocfirstlevel{display: none;}
+          }
+          ul{
+            li{
+              a{
+                font-family: $font-second;
+              }
+            }
+          }
+        }
+        li:not(:last-of-type){margin-bottom: rem-calc(12px);}
+      }
+    }
+  }
+}
