@@ -34,7 +34,7 @@
     if($('.secondlevel').length > 0){$('.secondlevel').parent('li').parent('ul').parent('li').addClass('has-dropdown');}
     if($('li.has-dropdown').length > 0){
       $('li.has-dropdown').click(function() {
-        $(this).addClass('expanded');
+        $(this).toggleClass('expanded');
       });
     }
 
