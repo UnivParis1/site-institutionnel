@@ -30,25 +30,28 @@
     #block-p1ps2019-megamenu{
       flex: 0 0 78%; max-width: 78%;
       padding: rem-calc(72px 116px);
-         ul li ul {
-           li {
-             @include flexDisplay(); position: relative;
-            a{
-              font-size: rem-calc(20px); line-height: 1.2;
-              color: $white; @include setFont($fontType-bold);
-              &.blocfirstlevel{display: none;}
-            }
-            ul{
-              position: absolute; left: 25%;
-              li{
-                a{
-                  @include setFont($fontType-regular);
-                  font-family: $font-second;
+         ul li{
+           a.blocfirstlevel{display: none;}
+           ul {
+             li {
+               @include flexDisplay(); position: relative;
+              a{
+                font-size: rem-calc(20px); line-height: 1.2;
+                color: $white; @include setFont($fontType-bold);
+
+              }
+              ul{
+                position: absolute; left: 25%;
+                li{
+                  a{
+                    @include setFont($fontType-regular);
+                    font-family: $font-second;
+                  }
                 }
               }
+              &:not(:last-of-type){margin-bottom: rem-calc(12px);}
             }
-            &:not(:last-of-type){margin-bottom: rem-calc(12px);}          
-          }
+           }
          }
       }
   }
