@@ -238,9 +238,13 @@ ul.list-style {
 .paragraph--type--hit-list{
   .paragraph__column{
     padding: 0 !important;
-    *:not(.field--name-field-subtitle):not(.field--name-field-subtitle *){
+    *{
       font-size: rem-calc(20px); line-height: 1.2;
       @include setFont($fontType-bold);
+     }
+     .field--name-field-subtitle{
+       @include setFont($fontType-regular);
+       *{@include setFont($fontType-regular);}
      }
   }
 }
