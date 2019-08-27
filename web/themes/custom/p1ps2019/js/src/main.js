@@ -33,8 +33,8 @@
     //menulevel2
     if($('.secondlevel').length > 0){$('.secondlevel').parent('li').parent('ul').parent('li').addClass('has-dropdown');}
     if($('li.has-dropdown').length > 0){
-      $(this).click(function() {
-        $(this).children('ul').addClass('expanded');
+      $('li.has-dropdown').click(function() {
+        $(this).addClass('expanded');
       });
     }
 
