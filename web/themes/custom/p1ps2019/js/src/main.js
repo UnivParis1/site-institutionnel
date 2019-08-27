@@ -38,9 +38,9 @@
       });
     }
 
-    if($('#region-header').length > 0 && $('.toggle-container').length > 0){
+    if($('#navbar-header').length > 0 && $('.toggle-container').length > 0){
       $('.toggle-container').click(function() {
-        $('#region-header').toggleClass('expanded');
+        $('#navbar-header').toggleClass('expanded');
       });
     }
 		//social media footer
