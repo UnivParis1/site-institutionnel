@@ -39,7 +39,9 @@
     }
 
     if($('#region-header').length > 0 && $('.toggle-container').length > 0){
-      $('.toggle-container').toggleClass('menu-expanded');
+      $('.toggle-container').click(function() {
+        $('#region-header').toggleClass('expanded');
+      });
     }
 		//social media footer
 		if( $('.block-system-menu-blockreseaux-sociaux').length > 0){
