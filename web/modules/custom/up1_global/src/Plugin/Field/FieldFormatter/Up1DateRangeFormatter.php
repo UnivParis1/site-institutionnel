@@ -62,8 +62,8 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
         if ($start_date->format('d-m-Y') !== $end_date->format('d-m-Y')) {
           $elements[$delta] = [
             'date' => [
-              '#markup' => "<div><span>$prefix </span>" .
-                $start_date->format('d/m/Y') . "</div><div><span>$separator </span>" .
+              '#markup' => "<div class='date-day-entry'><span>$prefix </span>" .
+                $start_date->format('d/m/Y') . "</div><div class='date-day-entry'><span>$separator </span>" .
                 $end_date->format('d/m/Y') . "</div>",
             ],
           ];
@@ -71,15 +71,15 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
         elseif ($start_date->getTimestamp() === $end_date->getTimestamp()) {
           $elements[$delta] = [
             'date' => [
-              '#markup' => "<div>" . $start_date->format('d/m/Y') . "</div>",
+              '#markup' => "<div class='date-day-entry'>" . $start_date->format('d/m/Y') . "</div>",
             ],
           ];
         }
         else {
           $elements[$delta] = [
             'date' => [
-              '#markup' => "<div>" . $start_date->format('d/m/Y') . "</div>
-              <div><span>$start_hour</span>
+              '#markup' => "<div class='date-day-entry'>" . $start_date->format('d/m/Y') . "</div>
+              <div class='date-hours-wrapper'><span>$start_hour</span>
               <i class='fa fa-$icon'></i>
               <span>$end_hour</span></div>",
             ],
