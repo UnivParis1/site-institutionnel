@@ -30,10 +30,9 @@
     #block-p1ps2019-megamenu{
       flex: 0 0 78%; max-width: 78%;
       padding: rem-calc(72px 116px);
-      >ul{
-        >li{
-          > ul > li {
-            >a{
+         ul {
+           li {
+            a{
               font-size: rem-calc(20px); line-height: 1.2;
               color: $white; @include setFont($fontType-bold);
               &.blocfirstlevel{display: none;}
@@ -41,14 +40,14 @@
             ul{
               li{
                 a{
+                  @include setFont($fontType-regular);
                   font-family: $font-second;
                 }
               }
             }
+            li:not(:last-of-type){margin-bottom: rem-calc(12px);}
           }
-        }
-        li:not(:last-of-type){margin-bottom: rem-calc(12px);}
+         }
       }
-    }
   }
 }
