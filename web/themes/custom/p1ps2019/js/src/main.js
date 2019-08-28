@@ -27,14 +27,22 @@
         $('#accessibility-container').toggleClass('acc-visible');
       });
     }
-    if($('#contrast-default').length > 0){
+    if($('#contraste-normal').length > 0){
       if($('body.accessibility-mode').length > 0){
         $('body.accessibility-mode').removeClass('accessibility-mode');
+        if($('#contraste-normal.is-active').length <= 0){
+          $('#contraste-normal').addClass('is-active');
+          $('#contraste-renforce').removeClass('is-active');
+        }
       }
     }
-    if($('#contrast-increase').length > 0){
+    if($('#contraste-renforce').length > 0){
       if($('body.accessibility-mode').length <= 0){
         $('body.accessibility-mode').addClass('accessibility-mode');
+        if($('#contraste-renforce.is-active').length <= 0){
+          $('#contraste-renforce').addClass('is-active');
+          $('#contraste-normal').removeClass('is-active');
+        }
       }
     }
 
