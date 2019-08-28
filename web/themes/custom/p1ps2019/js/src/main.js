@@ -39,8 +39,8 @@
       });
     }
 
-    if($('#navbar-header').length > 0 && $('.toggle-container').length > 0){
-      $('.toggle-container').click(function() {
+    if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
+      $('.icon-menu').click(function() {
         $('#navbar-header, .icon-menu').toggleClass('menu-expanded');
         $('body').toggleClass('noscroll');
       });
