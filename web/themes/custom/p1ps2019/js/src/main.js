@@ -35,7 +35,10 @@
     if($('li.has-dropdown').length > 0){
       $('li.has-dropdown').click(function() {
         $('li.has-dropdown.expanded').removeClass('expanded');
-        $(this).toggleClass('expanded');
+        if($(this).hasClass('expanded')){
+          $(this).removeClass('expanded');
+        }
+        else{$(this).toggleClass('expanded');}    
       });
     }
 
