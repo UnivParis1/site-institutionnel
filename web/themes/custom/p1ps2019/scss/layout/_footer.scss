@@ -53,10 +53,8 @@ form#centres-up1-form {
           background-color: $gold;
         }
       }
-      &:not(.two-columns-wrapper){
-        > div {
+      > div {
         height: 100%; @include flexDisplay(); @include flexDisplayAlign('center-middle');
-        }
       }
     }
 
@@ -91,11 +89,14 @@ form#centres-up1-form {
       }
     }
     .two-columns-wrapper{
-      li{
-        margin: rem-calc(0 64px);
-        a{
-          font-family: $font-second;
-          @include setFont($fontType-bold);
+      >div {
+        @extend .two-columns;
+        li{
+          margin: rem-calc(0 64px);
+          a{
+            font-family: $font-second;
+            @include setFont($fontType-bold);
+          }
         }
       }
     }
