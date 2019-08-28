@@ -144,23 +144,35 @@
   {% block footer %}
     <footer class="footer {{ container }}" role="contentinfo">
       <div class="footer-wrapper">
-        <div class="grid-x grid-margin-x align-justify align-middle">
+        <div class="grid-x grid-margin-x align-justify align-middle" data-equalizer data-equalize-on="medium">
           <div class="cell small-12 medium-2 logo-wrapper">
-            <div class="logo-footer">
+            <div class="logo-footer" data-equalizer-watch>
               <img src="/{{ directory }}/logo.svg" width="116" height="103" />
             </div>
           </div>
           {% if page.footer %}
-            <div class="cell small-12 medium-3">{{ page.footer }}</div>
+            <div class="cell small-12 medium-3">
+              <div data-equalizer-watch>
+                {{ page.footer }}
+              </div>
+            </div>
           {% endif %}
           {% if page.footer_left %}
-            <div class="cell small-12 medium-4 two-columns">{{ page.footer_left }}</div>
+            <div class="cell small-12 medium-4 two-columns">
+              <div data-equalizer-watch>
+                {{ page.footer_left }}
+              </div>
+            </div>
           {% endif %}
           {#{% if page.footer_center %}
             <div class="cell small-12 medium-shrink">{{ page.footer_center }}</div>
           {% endif %}#}
           {% if page.footer_right %}
-            <div class="cell small-12 medium-3 txt-gold">{{ page.footer_right }}</div>
+            <div class="cell small-12 medium-3 txt-gold">
+              <div data-equalizer-watch>
+                {{ page.footer_right }}
+              </div>
+            </div>
           {% endif %}
         </div>
       </div>
