@@ -13,7 +13,7 @@
 			width: rem-calc($fgutter); height: rem-calc($fgutter/1.71);
 			display: block; position: relative;
 			-ms-transform: rotate(0deg); transform: rotate(0deg);
-			@include transitionEffect(500ms, ease-in-out); cursor: pointer;
+			@include transitionEffect(500ms, ease-in-out); @extend .hand-cursor;
 		>span{
 			display: block; position: absolute;
 			height: rem-calc(2px); width: 100%;
@@ -59,7 +59,7 @@
 			h2{
 				font-size: rem-calc(15px); line-height: 1.6;
 				text-transform: uppercase;
-				margin: 0; cursor: pointer;
+				margin: 0; @extend .hand-cursor;
 				@include setFont($fontType-regular);
 			}
 			ul{
