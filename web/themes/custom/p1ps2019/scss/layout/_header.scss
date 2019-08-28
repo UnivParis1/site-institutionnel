@@ -1,91 +1,95 @@
-#top-header {
-	position: fixed; top: 0; left: 0;
-	width: 100%; padding: rem-calc(40px 120px);
-	@include transitionEffect(300ms, ease-in-out);
-
-	.scroll &{
-		background-color: $white;
-	}
-
-	&.transparent {
-		svg{
-			fill: $white;
-			*{fill: inherit;}
-		}
+#navbar{
+	z-index: 10;
+	position: relative;
+	#top-header {
+		position: fixed; top: 0; left: 0;
+		width: 100%; padding: rem-calc(40px 120px);
+		@include transitionEffect(300ms, ease-in-out);
 
 		.scroll &{
-			svg{
-				fill: $gold;
-			}
-		}
-	}
-
-}//close top header
-
-
-.icon-menu{
-	display: block;	right: rem-calc(24px);
-	padding: rem-calc(12px);
-	span.toggle-container{
-		width: rem-calc($fgutter); height: rem-calc($fgutter/1.71);
-		display: block; position: relative;
-		-ms-transform: rotate(0deg); transform: rotate(0deg);
-		@include transitionEffect(500ms, ease-in-out); cursor: pointer;
-	>span{
-		display: block; position: absolute;
-		height: rem-calc(2px); width: 100%;
-		background: $blue; border-radius: rem-calc(9px);
-		opacity: 1; left: 0;
-		-ms-transform: rotate(0deg); transform: rotate(0deg);
-		@include transitionEffect(250ms, ease-in-out);
-
-		.transparent &{
 			background-color: $white;
+		}
+
+		&.transparent {
+			svg{
+				fill: $white;
+				*{fill: inherit;}
+			}
+
 			.scroll &{
-				background-color: $blue;
+				svg{
+					fill: $gold;
+				}
 			}
 		}
-	}
-		span:nth-child(1){top:0;}
-		span:nth-child(2), span:nth-child(3){
-			top:rem-calc(6px);
-		}
-		span:nth-child(4){
-			top:rem-calc(12px);
-		}
-	}
 
-	&.menu-expanded{
+	}//close top header
+
+
+	.icon-menu{
+		display: block;	right: rem-calc(24px);
+		padding: rem-calc(12px);
 		span.toggle-container{
-			span:nth-child(2){transform: rotate(45deg);}
-			span:nth-child(3){transform: rotate(-45deg);}
-			span:nth-child(1), span:nth-child(4){
-				top: rem-calc(6px); width: 0%; opacity: 0;
-			}
-			span:nth-child(1){ left: 50%; }
-			span:nth-child(4){ right: 50%; }
-		}
-	}//menu expanded
-}//close icon-menu
+			width: rem-calc($fgutter); height: rem-calc($fgutter/1.71);
+			display: block; position: relative;
+			-ms-transform: rotate(0deg); transform: rotate(0deg);
+			@include transitionEffect(500ms, ease-in-out); cursor: pointer;
+		>span{
+			display: block; position: absolute;
+			height: rem-calc(2px); width: 100%;
+			background: $blue; border-radius: rem-calc(9px);
+			opacity: 1; left: 0;
+			-ms-transform: rotate(0deg); transform: rotate(0deg);
+			@include transitionEffect(250ms, ease-in-out);
 
-
-//.header-right
-.header-right{
-	&>div{
-		@include xy-grid();
-		section{
-			@include xy-cell(shrink);
-		}
-	}
-	.language-switcher-language-url {
-		position: relative;
-		ul{
-			position: absolute; top:54px; left: 0;
-			height: 0; opacity: 0; overflow: hidden;
-			@include transitionEffect();
-			&.show{
-				height: auto; opacity: 1;
+			.transparent &{
+				background-color: $white;
+				.scroll &{
+					background-color: $blue;
+				}
 			}
 		}
-	}
-}//close header-right
+			span:nth-child(1){top:0;}
+			span:nth-child(2), span:nth-child(3){
+				top:rem-calc(6px);
+			}
+			span:nth-child(4){
+				top:rem-calc(12px);
+			}
+		}
+
+		&.menu-expanded{
+			span.toggle-container{
+				span:nth-child(2){transform: rotate(45deg);}
+				span:nth-child(3){transform: rotate(-45deg);}
+				span:nth-child(1), span:nth-child(4){
+					top: rem-calc(6px); width: 0%; opacity: 0;
+				}
+				span:nth-child(1){ left: 50%; }
+				span:nth-child(4){ right: 50%; }
+			}
+		}//menu expanded
+	}//close icon-menu
+
+
+	//.header-right
+	.header-right{
+		&>div{
+			@include xy-grid();
+			section{
+				@include xy-cell(shrink);
+			}
+		}
+		.language-switcher-language-url {
+			position: relative;
+			ul{
+				position: absolute; top:54px; left: 0;
+				height: 0; opacity: 0; overflow: hidden;
+				@include transitionEffect();
+				&.show{
+					height: auto; opacity: 1;
+				}
+			}
+		}
+	}//close header-right
+}
