@@ -20,6 +20,14 @@
 			});
 		}//close scroll
 
+
+    //accessibility toggler
+    if($('#accessibility-toggle').length > 0){
+      $('#accessibility-toggle').click(function(){
+        $('#accessibility-container').toggleClass('acc-visible');
+      });
+    }
+
 		//language-switcher set current lang
 		if( $('.language-switcher-language-url').length > 0){
 			$('.language-switcher-language-url .block-title')
