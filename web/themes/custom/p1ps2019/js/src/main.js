@@ -38,7 +38,7 @@
     }
     if($('#contraste-renforce').length > 0){
       if($('body.accessibility-mode').length <= 0){
-        $('body.accessibility-mode').addClass('accessibility-mode');
+        $('body').addClass('accessibility-mode');
         if($('#contraste-renforce.is-active').length <= 0){
           $('#contraste-renforce').addClass('is-active');
           $('#contraste-normal').removeClass('is-active');
