@@ -40,7 +40,7 @@
 
     if($('#navbar-header').length > 0 && $('.toggle-container').length > 0){
       $('.toggle-container').click(function() {
-        $('#navbar-header').toggleClass('menu-expanded');
+        $('#navbar-header, .icon-menu').toggleClass('menu-expanded');
         $('body').toggleClass('noscroll');
       });
     }
