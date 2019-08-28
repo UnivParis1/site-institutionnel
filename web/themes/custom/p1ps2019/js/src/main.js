@@ -52,7 +52,7 @@
 
 		//language-switcher set current lang
 		if( $('.language-switcher-language-url').length > 0){
-			$('.language-switcher-language-url .block-title .reset-btn')
+			$('.language-switcher-language-url .block-title')
       .addClass('circle')
 			.wrapInner('<span class="visually-hidden"></span>')
 			.append($('.language-switcher-language-url .language-link.is-active').attr('hreflang'))
