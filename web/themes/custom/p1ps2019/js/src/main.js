@@ -36,9 +36,10 @@
       $('li.has-dropdown').click(function() {
         $('li.has-dropdown.expanded').removeClass('expanded');
         if($(this).hasClass('expanded')){
+          console.log('close');
           $(this).removeClass('expanded');
         }
-        else{$(this).toggleClass('expanded');}    
+        else{$(this).toggleClass('expanded');}
       });
     }
 
