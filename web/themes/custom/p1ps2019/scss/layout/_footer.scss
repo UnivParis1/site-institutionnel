@@ -53,8 +53,10 @@ form#centres-up1-form {
           background-color: $gold;
         }
       }
-      > div {
+      &:not(.two-columns-wrapper){
+        > div {
         height: 100%; @include flexDisplay(); @include flexDisplayAlign('center-middle');
+        }
       }
     }
 
@@ -90,7 +92,7 @@ form#centres-up1-form {
     }
     .two-columns-wrapper{
       >div {
-        @extend .two-columns;
+        
         li{
           margin: rem-calc(0 64px);
           a{
