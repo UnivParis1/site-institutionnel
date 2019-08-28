@@ -44,10 +44,15 @@
 		}//menu expanded
 	}//close icon-menu
 
+	.header-center{
+		position: absolute;
+		left: 50%; transform: translateX(-50%);
+	}
 
 	//.header-right
 	.header-right{
 		@include flexDisplay();
+		align-items: center;
 		&>div{
 			@include xy-grid();
 			section{
@@ -58,7 +63,7 @@
 			position: relative;
 			button{
 				font-size: rem-calc(15px); line-height: 1.6;
-				text-transform: uppercase; color: $white;
+				text-transform: uppercase;
 				margin: 0; @extend .hand-cursor;
 				@include setFont($fontType-regular);
 				&:focus{outline: none;}
