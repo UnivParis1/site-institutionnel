@@ -27,6 +27,16 @@
         $('#accessibility-container').toggleClass('acc-visible');
       });
     }
+    if($('#contrast-default').length > 0){
+      if($('body.accessibility-mode').length > 0){
+        $('body.accessibility-mode').removeClass('accessibility-mode');
+      }
+    }
+    if($('#contrast-increase').length > 0){
+      if($('body.accessibility-mode').length <= 0){
+        $('body.accessibility-mode').addClass('accessibility-mode');
+      }
+    }
 
 		//language-switcher set current lang
 		if( $('.language-switcher-language-url').length > 0){
