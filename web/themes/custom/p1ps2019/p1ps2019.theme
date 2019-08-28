@@ -82,20 +82,28 @@ use \Drupal\paragraphs\Entity\Paragraph;
   function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $variables) {
     $name='';
     $display_id = '';
+    $pieces = [];
+
     if(isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
     if(isset($variables['element']['#display_id']) && $variables['element']['#display_id']) $display_id = $variables['element']['#display_id'];
-    $pieces = [
-      $variables['element']['#type'],
-      $name,
-      $display_id,
-    ];
-    $suggestions[] = 'container__' . implode('_', $pieces);
+
+    if (isset($variables['element']['#type']) && !empty($variables['element']['#type'])) {
+      $pieces[] = $variables['element']['#type'];
+    }
+    if ($name != '') $pieces[] = $name;
+    if ($display_id != '') $pieces[] = $display_id;
+
+    if (!empty($pieces)) $suggestions[] = 'container__' . implode('_', $pieces);
   }
 
-  /**
-   * Implements hook_theme_suggestions_alter().
-   */
-  function p1ps2019_theme_suggestions_alter(array &$suggestions, array $variables, $hook)
+/**
+ * Implements hook_theme_suggestions_alter().
+ *
+ * @param $suggestions
+ * @param $variables
+ * @param $hook
+ */
+  function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
   {
     if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
       $original_theme_hook = $variables['theme_hook_original'];
@@ -103,10 +111,13 @@ use \Drupal\paragraphs\Entity\Paragraph;
     }
   }
 
-  /**
-   * Implements hook_theme_suggestions_HOOK_alter().
-   */
-  function p1ps2019_theme_suggestions_user_alter(array &$suggestions, array $variables) {
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * @param $suggestions
+ * @param $variables
+ */
+  function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
 
     // Define the view mode.
     $mode = $variables['elements']['#view_mode'];
@@ -139,6 +150,7 @@ use \Drupal\paragraphs\Entity\Paragraph;
     }
   }
 
+
   function p1ps2019_preprocess_paragraph(&$variables) {
     $paragraph = $variables['paragraph'];
 
@@ -150,8 +162,5 @@ use \Drupal\paragraphs\Entity\Paragraph;
       $key = array_search($paragraph->field_centre->value, array_column($dataArray, 'Code'));
       $centre = $dataArray[$key];
       \Drupal::logger('centre')->info(print_r($centre, 1));
-
-
     }
-
   }
