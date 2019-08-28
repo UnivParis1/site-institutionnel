@@ -64,11 +64,19 @@
 			}
 			ul{
 				position: absolute; top: rem-calc(54px); left: 0;
-				height: 0; opacity: 0; overflow: hidden;
+				opacity: 0; overflow: hidden; padding: rem-calc(24px);
 				width: rem-calc(100px);
 				@include transitionEffect();
+				&:before{
+		      content: "";
+		      width: rem-calc(16px); height: rem-calc(4px);
+		      position: absolute; top: rem-calc(-5px);
+		      border-left: solid rem-calc(12px) transparent;
+		      border-right: solid rem-calc(12px) transparent;
+		      transform: translateX(-50%); left: 50%;
+		    }
 				&.show{
-					height: auto; opacity: 1;
+					opacity: 1;
 				}
 			}
 		}
