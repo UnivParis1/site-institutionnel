@@ -34,12 +34,8 @@
     if($('.secondlevel').length > 0){$('.secondlevel').parent('li').parent('ul').parent('li').addClass('has-dropdown');}
     if($('li.has-dropdown').length > 0){
       $('li.has-dropdown').click(function() {
-        $('li.has-dropdown.expanded').removeClass('expanded');
-        if($(this).hasClass('expanded')){
-          console.log('close');
-          $(this).removeClass('expanded');
-        }
-        else{$(this).toggleClass('expanded');}
+        $('li.has-dropdown.expanded').not(this).removeClass('expanded');
+        $(this).toggleClass('expanded');
       });
     }
 
