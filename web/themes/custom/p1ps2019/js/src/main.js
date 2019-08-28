@@ -28,22 +28,26 @@
       });
     }
     if($('#contraste-normal').length > 0){
-      if($('body.accessibility-mode').length > 0){
-        $('body.accessibility-mode').removeClass('accessibility-mode');
-        if($('#contraste-normal.is-active').length <= 0){
-          $('#contraste-normal').addClass('is-active');
-          $('#contraste-renforce').removeClass('is-active');
+      $('#contraste-normal').click(function(){
+        if($('body.accessibility-mode').length > 0){
+          $('body.accessibility-mode').removeClass('accessibility-mode');
+          if($('#contraste-normal.is-active').length <= 0){
+            $('#contraste-normal').addClass('is-active');
+            $('#contraste-renforce').removeClass('is-active');
+          }
         }
-      }
+      });
     }
     if($('#contraste-renforce').length > 0){
-      if($('body.accessibility-mode').length <= 0){
-        $('body').addClass('accessibility-mode');
-        if($('#contraste-renforce.is-active').length <= 0){
-          $('#contraste-renforce').addClass('is-active');
-          $('#contraste-normal').removeClass('is-active');
+      $('#contraste-renforce').click(function(){
+        if($('body.accessibility-mode').length <= 0){
+          $('body').addClass('accessibility-mode');
+          if($('#contraste-renforce.is-active').length <= 0){
+            $('#contraste-renforce').addClass('is-active');
+            $('#contraste-normal').removeClass('is-active');
+          }
         }
-      }
+      });    
     }
 
 		//language-switcher set current lang
