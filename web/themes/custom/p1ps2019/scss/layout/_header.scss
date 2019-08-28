@@ -1,5 +1,5 @@
 #navbar{
-	z-index: 10;
+	z-index: 1;
 	position: relative;
 	#top-header {
 		position: fixed; top: 0; left: 0;
@@ -41,7 +41,9 @@
 			opacity: 1; left: 0;
 			-ms-transform: rotate(0deg); transform: rotate(0deg);
 			@include transitionEffect(250ms, ease-in-out);
-
+			.scroll &{
+				background-color: $blue;
+			}
 			.transparent &{
 				background-color: $white;
 				.scroll &{
@@ -51,10 +53,10 @@
 		}
 			span:nth-child(1){top:0;}
 			span:nth-child(2), span:nth-child(3){
-				top:rem-calc(7px);
+				top:rem-calc(8px);
 			}
 			span:nth-child(4){
-				top:rem-calc(14px);
+				top:rem-calc(16px);
 			}
 		}
 
