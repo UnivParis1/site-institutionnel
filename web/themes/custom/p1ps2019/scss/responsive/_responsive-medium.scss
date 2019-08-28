@@ -125,4 +125,36 @@
 			display: none;
 		}
 	}
+
+	//footer
+	.footer{
+	  .footer-wrapper{
+	    padding: rem-calc(16px 32px);
+	    .cell{
+	      padding-top: 0; padding-bottom: 0;
+	      &:not(:last-child){
+	        &:after{
+	          display: none;
+	        }
+	      }
+	    }
+
+	    //social media footer
+	    .block-system-menu-blockreseaux-sociaux{
+	      max-width: none;
+				@include flexDisplay(); @include flexDisplayAlign('center-middle');
+	      .block-title{
+	        margin-bottom: 0;
+	      }
+	      li{
+	        a{
+	          height: rem-calc(12px); width: rem-calc(12px);
+	          font-size: rem-calc(12px);
+	        }
+	      }
+	    }
+	  }
+
+	}//close .foooter
+
 }//close media - large
