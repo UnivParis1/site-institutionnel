@@ -54,14 +54,20 @@ ul.list-style {
 		@include box-border(1px, $blue);
 	}
 }
-#accessibility-toggle{
-  &:before{
+.vsc__accessibility{
+	#accessibility-toggle{
+	  &:before{
+	    background-color: $white;
+	  }
+		.scroll &{
+			background-color: $blue;
+		}
+	}
+  #accessibility-container{
     background-color: $white;
   }
-	.scroll &{
-		background-color: $blue;
-	}
 }
+
 .categ-style{color: $white; background-color: $main-color;}
 .more-link, .load-more{color: $main-color;}
 
@@ -83,6 +89,12 @@ ul.list-style {
   }
 }
 
+button.semi-oval{
+  background-color: $light-gray; color: $blue;
+  &.is-active{
+    background-color: $blue; color: $white;
+  }
+}
 //====================FIN BASE ==================//
 
 
