@@ -88,15 +88,25 @@ ul.list-style {
   }
 }
 #search-toggle{
-	.fa:before{
-		color: $white;
-		&:hover{color: $text-main-color;}
+	.fa{
+		&:before{
+			color: $white;
+		}
+		&:hover{
+			&:before{
+				color: $text-main-color;
+			}
+		}
 	}
 	.scroll &{
-		.fa:before{
-			color: $text-main-color;
+		.fa{
+			&:before{
+				color: $text-main-color;
+			}
 			&:hover{
-				color: $white;
+				&:before{
+					color: $white;
+				}
 			}
 		}
 	}
