@@ -14,10 +14,10 @@ hr {
 }
 
 h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .h3-style, .h4-style, .h5-style, .h6-style{
-	color: $main-color;
+	color: $text-main-color;
 }
 
-.mask{@include maskBackground($main-color, 0.6);}
+.mask{@include maskBackground($background-main-color, 0.6);}
 .mask-effect{@include maskBackground($black);}
 .mask-effect2{@include maskBackground($black, 0.1, 0.4);}
 .mask-effect-3{@include maskBackground($black, 0.3);}
@@ -44,7 +44,7 @@ h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .h3-style, .h4-style, .h5-style, .
 ul.list-style {
 	li{
 		&:before{
-			background-color: $main-color;
+			background-color: $background-main-color;
 		}
 	}
 }
@@ -128,8 +128,8 @@ input[type="search"], .form-date,
 	@include transitionEffect();
   background-color: $white; color: $black;
   border:2px solid $medium-gray;
-  .field-error &{border-color:$main-color !important;}
-  &.error{border-color:$main-color !important;}
+  .field-error &{border-color:$background-main-color !important;}
+  &.error{border-color:$background-main-color !important;}
   ::-webkit-input-placeholder {
     color: $gray2;
   }
@@ -181,7 +181,7 @@ input[type="search"], .form-date,
    input{
      &:checked + label{
        span{
-         &:before{background-color:$main-color;}
+         &:before{background-color:$background-main-color;}
          &:after{background-color:$white;}
        }
      }
@@ -206,7 +206,7 @@ input[type="search"], .form-date,
            background-color: $light-blue;
          }
          &:after{
-           background-color: $main-color;
+           background-color: $background-main-color;
          }
        }
      }
@@ -280,7 +280,7 @@ fieldset {
 
 
 .password-strength__meter{background-color: $medium-gray;}
-.password-strength__indicator{background-color: $main-color;}
+.password-strength__indicator{background-color: $background-main-color;}
 //=============== FIN RESET ================ //
 
 //=============== TABLE =================== //
@@ -453,13 +453,13 @@ tr{
 				.li-menu-wrapper{
 					> span, > a{
 						&:hover:not([class*="icon-"]){
-							color: $main-color;
+							color: $text-main-color;
 						}
 					}
 				}
 				> span, > a{
 					&:hover:not([class*="icon-"]){
-						color: $main-color;
+						color: $text-main-color;
 					}
 				}
 				&.has-children{
@@ -543,11 +543,11 @@ tr{
     .btn, .button--primary,
     button:not(.reset-btn):not(.semi-oval):not(#accessibility-toggle):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
     input[type="submit"].button {
-        color: $main-color;
+        color: $text-main-color;
         background-color: $white;
-        border-color: $main-color;
+        border-color: $background-main-color;
         &:hover{
-        	color: $white; background-color: $main-color;
+        	color: $white; background-color: $background-main-color;
         }
 
         &.outline{
@@ -556,8 +556,8 @@ tr{
 					background-color: transparent;
         	&:hover{
         		background-color: $white;
-						color: $main-color;
-						*{color: $main-color;}
+						color: $text-main-color;
+						*{color: $text-main-color;}
         	}
         }
     }//close btn
@@ -581,7 +581,7 @@ tr{
 .block-system-menu-blockreseaux-sociaux{
   li{
     a{
-      color: $main-color;
+      color: $text-main-color;
     }
   }
 }
@@ -590,14 +590,14 @@ tr{
 .nav-tabs {
 	> li{
 	  	> a{
-		  color: $main-color; background: $light-gray;
+		  color: $text-main-color; background: $light-gray;
 			&:hover{
-			  background-color: $main-color;
+			  background-color: $background-main-color;
 			  color: #light-gray;
 			}
 		}//close a
 		&.active a{
-		  background-color: $main-color;
+		  background-color: $background-main-color;
 		  color: $light-gray;
 		  /*&:hover{
 			  background-color: #00326E;
@@ -609,7 +609,7 @@ tr{
 //_box-style.scss END ====================
 
 .link-style, button.link-style{
-    color: $main-color;
+    color: $text-main-color;
     /*&:not(.with-arrow):not(.with-icon){
       @include linkUnderline($main-color);
     }*/
