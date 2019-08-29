@@ -50,15 +50,19 @@ ul.list-style {
 }
 .circle{
   @include box-border(1px, $white);
+	*{color: $white;}
 	.scroll &{
 		@include box-border(1px, $background-main-color);
+		*{color: $text-main-color;}
 		&.overlay-show, &:hover{
 			background-color: $background-main-color;
+			*{color: $white;}
 		}
 	}
 	&.overlay-show, &:hover{
 		@include box-border(1px, $background-main-color);
 		background-color: $white;
+		*{color: $text-main-color;}
 	}
 }
 .accessibility-wrapper{
@@ -88,32 +92,32 @@ ul.list-style {
   }
 }
 #search-toggle{
-	.fa{
-		&:before{
-			color: $white;
-		}
-	}
-	.scroll &{
-		.fa{
-			&:before{
-				color: $text-main-color;
-			}
-		}
-		&:hover, &.overlay-show{
-			.fa{
-				&:before{
-					color: $white;
-				}
-			}
-		}
-	}
-	&:hover, &.overlay-show{
-		.fa{
-			&:before{
-				color: $text-main-color;
-			}
-		}
-	}
+	// .fa{
+	// 	&:before{
+	// 		color: $white;
+	// 	}
+	// }
+	// .scroll &{
+	// 	.fa{
+	// 		&:before{
+	// 			color: $text-main-color;
+	// 		}
+	// 	}
+	// 	&:hover, &.overlay-show{
+	// 		.fa{
+	// 			&:before{
+	// 				color: $white;
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// &:hover, &.overlay-show{
+	// 	.fa{
+	// 		&:before{
+	// 			color: $text-main-color;
+	// 		}
+	// 	}
+	// }
 }
 .categ-style{color: $white; background-color: $background-main-color;}
 .more-link, .load-more{color: $text-main-color;}
@@ -418,17 +422,17 @@ tr{
 	//.header-right
 	.header-right{
 		.language-switcher-language-url {
-			button{
-				color: $white;
-				.scroll &{
-					color: $text-main-color;
-					&:hover{
-						background-color: $background-main-color;
-						color: $white;
-					}
-				}
-				&.overlay-show, &:hover{color: $text-main-color;}
-			}
+			// button{
+			// 	color: $white;
+			// 	&.overlay-show, &:hover{color: $text-main-color;}
+			// 	.scroll &{
+			// 		color: $text-main-color;
+			// 		&:hover{
+			// 			background-color: $background-main-color;
+			// 			color: $white;
+			// 		}
+			// 	}
+			// }
 			ul {
 				background-color: $white;
 				&:before{
