@@ -87,11 +87,12 @@
       $('.icon-menu').click(function() {
         if($('#navbar-header.overlay-show').length > 0){
           overlayClose();
+          $('body').removeClass('noscroll');
         }
         else{
           overlayClose();
           $('#navbar-header, .icon-menu').addClass('overlay-show');
-          $('body').addClass('noscroll');
+          $('body').addClass('noscroll');         
         }
       });
     }
