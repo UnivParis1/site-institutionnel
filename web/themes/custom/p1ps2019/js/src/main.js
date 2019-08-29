@@ -29,7 +29,7 @@
         }
         else{
           overlayClose();
-          $('#accessibility-container').addClass('overlay-show');
+          $('#accessibility-container, #accessibility-toggle').addClass('overlay-show');
         }
       });
     }
