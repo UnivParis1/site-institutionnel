@@ -31,7 +31,6 @@
  */
 #}
 
-<div{{ attributes }}>
   {{ title_prefix }}
   {{ title }}
   {{ title_suffix }}
@@ -46,10 +45,9 @@
   {{ attachment_before }}
 
   {% if rows -%}
-  <div class="infos-top grow-1">
-    <div class="grid-x grid-margin-x full-height">
-      {{ rows }}
-    </div>
+
+  <div {{ attributes }}>
+    {{ rows }}
   </div>
   {% elseif empty -%}
     {{ empty }}
@@ -70,5 +68,3 @@
   {% endif %}
 
   {{ feed_icons }}
-
-</div>
