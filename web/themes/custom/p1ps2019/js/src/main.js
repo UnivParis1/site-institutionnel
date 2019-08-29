@@ -92,7 +92,7 @@
         else{
           overlayClose();
           $('#navbar-header, .icon-menu').addClass('overlay-show');
-          $('body').addClass('noscroll');         
+          $('body').addClass('noscroll');
         }
       });
     }
@@ -112,6 +112,9 @@
   function overlayClose(){
     if($('.overlay-show').length > 0){
       $('.overlay-show').removeClass('overlay-show');
+      if($('body.noscroll').length > 0){
+        $('body').removeClass('noscroll');
+      }
     }
   }
 })(jQuery);
