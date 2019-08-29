@@ -7,13 +7,11 @@
       if($('.swiper-container').length > 0){
 				var instaSwiper = new Swiper('.swiper-container', {
 					slidesPerView: 3,
-					mousewheel: true,
-					mousewheel: {
-				      forceToAxis: true,
-				      releaseOnEdges: true,
-				      invert: true
-				    },
-					spaceBetween: 20,
+          spaceBetween: 20,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },				
 			  });
 			}
 
