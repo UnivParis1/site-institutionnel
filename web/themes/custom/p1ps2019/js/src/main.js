@@ -85,14 +85,14 @@
 
     if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
       $('.icon-menu').click(function() {
-        if($('#navbar.overlay-show').length > 0){
+        if($('#navbar-header.overlay-show').length > 0){
           overlayClose();
         }
         else{
           overlayClose();
           $('#navbar-header, .icon-menu').addClass('overlay-show');
           $('body').toggleClass('noscroll');
-        }	
+        }
       });
     }
 		//social media footer
