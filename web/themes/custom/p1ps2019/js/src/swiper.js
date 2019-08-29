@@ -45,7 +45,7 @@
 //=============================================== FUNCTIONS =================================================
 function reinitSwiper(swiper) {
     setTimeout(function () {
-        swiper.init();
+        swiper.update();
     }, 400);
 }
 // function checkOnSwipers(){
