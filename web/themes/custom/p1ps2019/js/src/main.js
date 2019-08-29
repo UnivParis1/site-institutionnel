@@ -20,21 +20,7 @@
 			});
 		}//close scroll
 
-    $('body').click(function(event){
-			if ($('.overlay-show').length > 0){
-				var langClass = $(event.target).attr('class');
-				if(typeof langClass != 'undefined'){
-					if(langClass.toLowerCase().indexOf("overlay") <= 0){
-						$(".overlay-show").removeClass('overlay-show');
-            $('.overlay-show').removeClass('overlay-show');
-					}
-				}
-				if(typeof langClass == 'undefined'){
-					$(".overlay-show").removeClass('overlay-show');
-          $('.overlay-show').removeClass('overlay-show');
-				}
-			}
-		});
+
 
     //accessibility toggler
     if($('#accessibility-toggle').length > 0){
