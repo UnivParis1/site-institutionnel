@@ -1,11 +1,11 @@
 (function($) {
-  $(document).ready(function(){
-    initSwiper();
-  });
+
   Drupal.behaviors.bluedropSwiper = {
     attach: function (context, settings) {
 
-
+      $(document).ready(function(){
+        initSwiper();
+      });
 
       function initSwiper(){
         if($('.swiper-container').length > 0){
