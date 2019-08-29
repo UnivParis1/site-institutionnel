@@ -70,7 +70,7 @@
         else{
           overlayClose();
           $(this).next('ul').addClass('overlay-show');
-        }				
+        }
 			});
 		}
 
@@ -85,9 +85,14 @@
 
     if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
       $('.icon-menu').click(function() {
-        overlayClose();
-        $('#navbar-header, .icon-menu').toggleClass('overlay-show');
-        $('body').toggleClass('noscroll');
+        if($('#navbar.overlay-show').length > 0){
+          overlayClose();
+        }
+        else{
+          overlayClose();
+          $('#navbar-header, .icon-menu').addClass('overlay-show');
+          $('body').toggleClass('noscroll');
+        }	
       });
     }
 		//social media footer
