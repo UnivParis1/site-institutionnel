@@ -64,8 +64,13 @@
 			.wrapInner('<span class="visually-hidden"></span>')
 			.append($('.language-switcher-language-url .language-link.is-active').attr('hreflang'))
 			.click(function(){
-        overlayClose();
-				$(this).next('ul').toggleClass('overlay-show');
+        if($(this).next('ul.overlay-show').length > 0){
+          overlayClose();
+        }
+        else{
+          overlayClose();
+          $(this).next('ul').addClass('overlay-show');
+        }				
 			});
 		}
 
