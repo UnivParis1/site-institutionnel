@@ -25,8 +25,13 @@
     //accessibility toggler
     if($('#accessibility-toggle').length > 0){
       $('#accessibility-toggle').click(function(){
-        overlayClose();
-        $('#accessibility-container').addClass('overlay-show');
+        if($('#accessibility-container.overlay-show').length > 0){
+          overlayClose();
+        }
+        else{
+          overlayClose();
+          $('#accessibility-container').addClass('overlay-show');
+        }
       });
     }
     if($('#contraste-normal').length > 0){
