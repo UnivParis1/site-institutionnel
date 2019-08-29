@@ -52,6 +52,9 @@ ul.list-style {
   @include box-border(1px, $white);
 	.scroll &{
 		@include box-border(1px, $background-main-color);
+		&.overlay-show, &:hover{
+			background-color: $background-main-color;
+		}
 	}
 	&.overlay-show, &:hover{
 		@include box-border(1px, $background-main-color);
@@ -66,6 +69,7 @@ ul.list-style {
 		.scroll &{
 			&:before{
 				background-color: $background-main-color;
+				&:hover{background-color: $white;}
 			}
 		}
 		&.overlay-show, &:hover{
@@ -84,10 +88,14 @@ ul.list-style {
 #search-toggle{
 	.fa:before{
 		color: $white;
+		&:hover{color: $text-main-color;}
 	}
 	.scroll &{
 		.fa:before{
 			color: $text-main-color;
+			&:hover{
+				color: $white;
+			}
 		}
 	}
 }
@@ -398,6 +406,10 @@ tr{
 				color: $white;
 				.scroll &{
 					color: $text-main-color;
+					&:hover{
+						background-color: $background-main-color;
+						color: $white;
+					}
 				}
 				&.overlay-show, &:hover{color: $text-main-color;}
 			}
