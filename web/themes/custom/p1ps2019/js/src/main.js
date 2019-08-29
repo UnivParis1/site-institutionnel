@@ -20,6 +20,13 @@
 			});
 		}//close scroll
 
+    //swiper-buttons
+    if($('.swiper-button-next').length > 0){
+      $('.swiper-button-next').addClass('fa fa-chevron-right');
+    }
+    if($('.swiper-button-prev').length > 0){
+      $('.swiper-button-prev').addClass('fa fa-chevron-left');
+    }
 
     //accessibility toggler
     if($('#accessibility-toggle').length > 0){
