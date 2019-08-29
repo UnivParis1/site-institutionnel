@@ -4,15 +4,10 @@
     attach: function (context, settings) {
 
 
-      var divSwiper = null;
       if($('.swiper-container').length > 0){
-        divSwiper = new Swiper('.swiper-container', {
-          slidesPerView: '3',
-          spaceBetween: 20,
-          navigation: {
-			      nextEl: '.swiper-button-next',
-			      prevEl: '.swiper-button-prev',
-			    },
+        var mySwiper = new Swiper('.swiper-container', {
+            speed: 400,
+            spaceBetween: 100
         });
       }
 
