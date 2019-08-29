@@ -91,7 +91,7 @@
         else{
           overlayClose();
           $('#navbar-header, .icon-menu').addClass('overlay-show');
-          $('body').toggleClass('noscroll');
+          $('body').addClass('noscroll');
         }
       });
     }
