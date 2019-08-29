@@ -5,13 +5,13 @@
 
 
       if($('.swiper-container').length > 0){
-				var instaSwiper = new Swiper('.swiper-container', {
+				var mySwiper = new Swiper('.swiper-container', {
 					slidesPerView: 3,
           spaceBetween: 20,
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
-          },				
+          },
 			  });
 			}
 
