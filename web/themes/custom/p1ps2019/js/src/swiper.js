@@ -4,7 +4,7 @@
     attach: function (context, settings) {
 
 
-      var tabsSwiper = null;
+      var divSwiper = null;
       if($('.swiper-container').length > 0){
         divSwiper = new Swiper('.swiper-container', {
           slidesPerView: '3',
