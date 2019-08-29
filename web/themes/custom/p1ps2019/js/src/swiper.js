@@ -28,7 +28,7 @@
 
 
 
-      if($('tabs').length > 0){
+      if($('.tabs').length > 0){
         $(".tabs li").on("click",function(){
           if($('.tabs li .swiper-container').length > 0){
             reinitSwiper(mySwiper);
@@ -43,7 +43,7 @@
 //=============================================== FUNCTIONS =================================================
 function reinitSwiper(swiper) {
     setTimeout(function () {
-        swiper.update();
+        swiper.init();
     }, 400);
 }
 // function checkOnSwipers(){
