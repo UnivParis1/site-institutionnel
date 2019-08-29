@@ -3,11 +3,9 @@
   Drupal.behaviors.bluedropSwiper = {
     attach: function (context, settings) {
 
-      $(document).ready(function(){
-        initSwiper();
-      });
 
-      function initSwiper(){
+
+
         if($('.swiper-container').length > 0){
   				var mySwiper = new Swiper('.swiper-container', {
   					slidesPerView: 3,
@@ -19,8 +17,6 @@
   			  });
   			}
 
-      }
-
       $(window).resize(function() {
       //  setTimeout(checkOnSwipers, 2000);
         var windowW = $(window).outerWidth();
@@ -30,12 +26,26 @@
         }
       });//close resize
 
+
+
+      if($('tabs').length > 0){
+        $(".tabs li").on("click",function(){
+          if($('.tabs li .swiper-container').length > 0){
+            reinitSwiper(mySwiper);
+          }
+        });
+      }
     }
   }
 
   //setTimeout(checkOnSwipers, 2000);
 
 //=============================================== FUNCTIONS =================================================
+function reinitSwiper(swiper) {
+    setTimeout(function () {
+        swiper.update();
+    }, 400);
+}
 // function checkOnSwipers(){
 //   if($('.swiper-container:not(.one-slide) .swiper-wrapper').length > 0){
 //     $('.swiper-wrapper').each(function(){
