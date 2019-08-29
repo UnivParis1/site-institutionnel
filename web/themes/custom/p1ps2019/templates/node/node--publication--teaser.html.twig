@@ -76,7 +76,10 @@
   'box-style',
 ]
 %}
-
+{% set publi = '' %}
+{% set publi %}
+{{ content.field_publication_topics }}
+{% endset %}
 <article{{ attributes.addClass(classes) }}>
   <div class="box-content same-height">
     <div class="top-infos">
@@ -91,9 +94,11 @@
       {{ title_suffix }}
     </div>
     <div class="bottom-infos">
-      <div>
-        {{ content.field_publication_topics }}
-      </div>
+      {% if publi|striptags|trim %}
+        <div>
+          {{ content.field_publication_topics }}
+        </div>
+      {% endif %}
       <div class="node-readmore">
         <a href="{{ url }}" title="readmore">{{ "Read more"|t }}</a>
       </div>
