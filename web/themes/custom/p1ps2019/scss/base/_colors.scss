@@ -50,18 +50,20 @@ ul.list-style {
 }
 .circle{
   @include box-border(1px, $white);
+	color: $white;
 	*{color: $white;}
 	.scroll &{
 		@include box-border(1px, $background-main-color);
+		color: $text-main-color;
 		*{color: $text-main-color;}
 		&.overlay-show, &:hover{
 			background-color: $background-main-color;
-			*{color: $white;}
+			*{color: $white;} color: $white;
 		}
 	}
 	&.overlay-show, &:hover{
 		@include box-border(1px, $background-main-color);
-		background-color: $white;
+		background-color: $white; color: $text-main-color;
 		*{color: $text-main-color;}
 	}
 }
