@@ -5,12 +5,17 @@
 
 
       if($('.swiper-container').length > 0){
-        var mySwiper = new Swiper('.swiper-container', {
-            speed: 400,
-            spaceBetween: 100
-        });
-      }
-
+				var instaSwiper = new Swiper('.swiper-container', {
+					slidesPerView: 3,
+					mousewheel: true,
+					mousewheel: {
+				      forceToAxis: true,
+				      releaseOnEdges: true,
+				      invert: true
+				    },
+					spaceBetween: 20,
+			  });
+			}
 
       $(window).resize(function() {
         setTimeout(checkOnSwipers, 2000);
