@@ -614,7 +614,24 @@ tr{
       @include linkUnderline($main-color);
     }*/
 }//close link-style
-
+#tabs-style {
+	> li{
+	  	> a{
+		  color: $text-main-color; background: $light-gray;
+			&:hover{
+			  background-color: $background-main-color; color: $light-gray;
+			}
+		}//close a
+		&.is-active a{
+		  background-color: $background-main-color;
+		  color: $light-gray;
+		  /*&:hover{
+			  background-color: #00326E;
+			  color: #F6F0ED; border: 0;
+			}*/
+		}
+	}
+}//close nav-tabs
 // ============= FIN BTN ============//
 
 //=========== PAGER ============ //
