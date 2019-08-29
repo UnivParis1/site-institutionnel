@@ -30,7 +30,7 @@
 
       if($('.tabs').length > 0){
         $(".tabs li").on("click",function(){
-          if($('.tabs li .swiper-container').length > 0){
+          if($('.tabs-content .tabs-panel .swiper-container').length > 0){
             reinitSwiper(mySwiper);
           }
         });
