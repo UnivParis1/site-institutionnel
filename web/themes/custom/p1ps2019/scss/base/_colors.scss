@@ -92,21 +92,25 @@ ul.list-style {
 		&:before{
 			color: $white;
 		}
-		&:hover{
-			&:before{
-				color: $text-main-color;
-			}
-		}
 	}
 	.scroll &{
 		.fa{
 			&:before{
 				color: $text-main-color;
 			}
-			&:hover{
+		}
+		&:hover, &.overlay-show{
+			.fa{
 				&:before{
 					color: $white;
 				}
+			}
+		}
+	}
+	&:hover, &.overlay-show{
+		.fa{
+			&:before{
+				color: $text-main-color;
 			}
 		}
 	}
