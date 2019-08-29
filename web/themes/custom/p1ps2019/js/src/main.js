@@ -20,8 +20,7 @@
 			});
 		}//close scroll
 
-    initSwiper();
-    
+
     //accessibility toggler
     if($('#accessibility-toggle').length > 0){
       $('#accessibility-toggle').click(function(){
