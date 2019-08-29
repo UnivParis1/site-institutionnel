@@ -29,8 +29,10 @@
 
 
       if($('.tabs').length > 0){
-        $(".tabs li").on("click",function(){
+        $(".tabs li a").on("click",function(){
+          console.log('li a');
           if($('.tabs-content .tabs-panel .swiper-container').length > 0){
+            console.log('swiper');
             reinitSwiper(mySwiper);
           }
         });
