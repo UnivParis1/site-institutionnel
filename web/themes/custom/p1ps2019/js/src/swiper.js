@@ -9,7 +9,7 @@
         if($('.swiper-container').length > 0){
   				var mySwiper = new Swiper('.swiper-container', {
   					slidesPerView: 3,
-            spaceBetween: 20,
+            spaceBetween: 24,
             navigation: {
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
