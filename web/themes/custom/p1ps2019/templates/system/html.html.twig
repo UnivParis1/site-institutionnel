@@ -69,8 +69,9 @@ db_offline ? 'db-offline',
   {%- endif -%}
 
   </head>
+  {% set statusClass = is_front?'transparent':'' %}
   <body{{ attributes.addClass(body_classes) }}>
-  <a href="#main-content" class="visually-hidden focusable skip-link">
+  <a href="#main-content" class="visually-hidden focusable skip-link {{ statusClass }}">
     {{ 'Skip to main content'|t }}
   </a>
   {{ page_top }}
