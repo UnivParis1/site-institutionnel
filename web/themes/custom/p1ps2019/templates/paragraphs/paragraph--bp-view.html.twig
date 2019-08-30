@@ -148,7 +148,8 @@
 
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
-    {% if content.bp_view|length > 10 %}
+    {% if content.bp_view|length > 1 %}
+    {{ content.bp_view|length }}
         {% for key, item in content.bp_view if key|first != '#' %}
             {% set rowClass = key is even ? 'medium-8 same-height':'medium-4 same-height' %}
             <div class="cell small-12 {{ rowClass }}">
