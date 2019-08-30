@@ -86,9 +86,10 @@
     if($('li.has-dropdown .fa').length > 0){
       $('li.has-dropdown .fa').click(function() {
         if($(this).closest('li.expanded').length > 0){
-          $('li.has-dropdown').removeClass('expanded');
+          $('.expanded').removeClass('expanded');
         }
         else{
+          $('.expanded').removeClass('expanded');
           $(this).closest('li.has-dropdown').addClass('expanded');
         }
       });
