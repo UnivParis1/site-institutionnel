@@ -85,7 +85,7 @@
     if($('.secondlevel').length > 0){$('.secondlevel').parent('li').parent('ul').parent('li').addClass('has-dropdown');}
     if($('li.has-dropdown .fa').length > 0){
       $('li.has-dropdown .fa').click(function() {
-        if($('li.has-dropdown.expanded').length > 0){
+        if($(this).closest('li.expanded').length > 0){
           $('li.has-dropdown').removeClass('expanded');
         }
         else{
