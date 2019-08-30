@@ -11,14 +11,14 @@
   top: rem-calc(114px); left: rem-calc(-24px);
   opacity: 0; height: calc(100vh - 114px);
   overflow: hidden;
-  background-color: $blue;
-  .navigation-right-region{
+  .navigation-right-region, .navigation-region{
     display: inline-flex; justify-content: center; align-items: center;
-    background-color: $white;
+  }
+  .navigation-right-region{
     ul{
       li{
         a{
-          text-transform: uppercase; color: $black;
+          text-transform: uppercase;
           font-size: rem-calc(18px); line-height: 1.2;
           @include setFont($fontType-bold);
         }
@@ -29,7 +29,6 @@
     }
   }
   .navigation-region{
-  
     padding: rem-calc(72px 116px);
      ul {
        position: relative;
@@ -38,7 +37,7 @@
          align-items: center;
         a,span{
           font-size: rem-calc(20px); line-height: 1.2;
-          color: $white; @include setFont($fontType-bold);
+          @include setFont($fontType-bold);
           @extend .hand-cursor;
         }
         .fa:before{
