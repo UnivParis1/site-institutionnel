@@ -25,9 +25,10 @@
  * @see template_preprocess_html()
  */
 #}
+{% set statusClass = is_front?'transparent':'' %}
 {%
 set body_classes = [
-logged_in ? 'user-logged-in', 'site-content-wrapper', is_front ? 'transparent' : '',
+logged_in ? 'user-logged-in', 'site-content-wrapper',
 not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
 node_type ? 'node--type-' ~ node_type|clean_class,
 db_offline ? 'db-offline',
@@ -68,7 +69,7 @@ db_offline ? 'db-offline',
   {%- endif -%}
 
   </head>
-  <body{{ attributes.addClass(body_classes) }}>
+  <body{{ attributes.addClass(body_classes).addClass(statusClass) }}>
   <a href="#main-content" class="visually-hidden focusable skip-link">
     {{ 'Skip to main content'|t }}
   </a>
