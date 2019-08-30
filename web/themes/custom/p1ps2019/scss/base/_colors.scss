@@ -437,24 +437,24 @@ tr{
 				ul {
 					#ent{
 						a{
-							@include box-border(1px, $white);
-							color: $white;
-							.fa{
-								color: $white;
-							}
-							.scroll &{
-								@include box-border(1px, $background-main-color);
-								color: $text-main-color;
-								.fa{color: $text-main-color;}
-							}
+							@include box-border(1px, $background-main-color);
+							color: $text-main-color;
+							.fa{color: $text-main-color;}
 							&:hover{
-								background-color: $white;
-								color: $text-main-color;
-								.fa{color: $text-main-color;}
-								.scroll &{
-									background-color: $background-main-color;
+								background-color: $background-main-color;
+								color: $white;
+								.fa{color: $white;}
+							}						
+							.transparent:not(.scroll) &{
+								@include box-border(1px, $white);
+								color: $white;
+								.fa{
 									color: $white;
-									.fa{color: $white;}
+								}
+								&:hover{
+									background-color: $white;
+									color: $text-main-color;
+									.fa{color: $text-main-color;}
 								}
 							}
 						}
