@@ -66,9 +66,9 @@ db_offline ? 'db-offline',
   {% elseif html_attributes['dir'] == 'rtl' %}
     {{ attach_library('p1ps2019/styles_rtl') }}
   {%- endif -%}
-
+  {% set statusClass = is_front?'transparent':'' %}
   </head>
-  <body{{ attributes.addClass(body_classes) }}>
+  <body{{ attributes.addClass(body_classes).addClass('{{ statusClass }}') }}>
   <a href="#main-content" class="visually-hidden focusable skip-link">
     {{ 'Skip to main content'|t }}
   </a>
