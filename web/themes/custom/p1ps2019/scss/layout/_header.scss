@@ -96,14 +96,15 @@
 					}
 					#ent{
 						a{
-							padding: rem-calc(9px 24px);
-							@include transitionEffect(); 
+							padding: rem-calc(9px 24px); @include transitionEffect();
 							font-size: rem-calc(15px); line-height: 1.46;
 							text-transform: uppercase; @include setFont($fontType-bold);
-							border-radius: rem-calc(24px);
+							border-radius: rem-calc(24px); display: inline-block;
 							&:hover{text-decoration: none;}
+							span{display: inline-block; vertical-align: middle;}
 							.fa{
 								#{$margin-right} : rem-calc(8px);
+								&:before{font-size: rem-calc(20px);}
 							}
 						}
 					}
