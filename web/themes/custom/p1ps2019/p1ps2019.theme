@@ -7,6 +7,12 @@ use \Drupal\paragraphs\Entity\Paragraph;
   */
   function p1ps2019_preprocess_html(&$variables) {
     $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    try {
+      $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+    }
+    catch (Exception $e) {
+      $variables['is_front'] = FALSE;
+    }
   }
 
   /**
