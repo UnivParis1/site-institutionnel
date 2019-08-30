@@ -10,8 +10,8 @@
   				var mySwiper = new Swiper('.swiper-container', {
   					slidesPerView: 3,
             spaceBetween: 20,
-            slidesOffsetBefore: 300,
-            slidesOffsetAfter: 300,
+            slidesOffsetBefore: (screen.width - 1184) / 2,
+  					slidesOffsetAfter: (screen.width - 1184) / 2,
             navigation: {
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
