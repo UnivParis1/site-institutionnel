@@ -8,7 +8,7 @@
 
         if($('.swiper-container').length > 0){
   				var mySwiper = new Swiper('.swiper-container', {
-  					slidesPerView: 3,
+  					slidesPerView: 1,
             centeredSlides: true,
             spaceBetween: 20,
             navigation: {
