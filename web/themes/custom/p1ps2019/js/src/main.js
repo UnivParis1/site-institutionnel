@@ -83,10 +83,14 @@
 
     //menulevel2
     if($('.secondlevel').length > 0){$('.secondlevel').parent('li').parent('ul').parent('li').addClass('has-dropdown');}
-    if($('li.has-dropdown').length > 0){
-      $('li.has-dropdown').click(function() {
-        $('li.has-dropdown.expanded').not(this).removeClass('expanded');
-        $(this).toggleClass('expanded');
+    if($('li.has-dropdown .fa').length > 0){
+      $('li.has-dropdown .fa').click(function() {
+        if($('li.has-dropdown.expanded').length > 0){
+          $('li.has-dropdown').removeClass('expanded');
+        }
+        else{
+          $(this).closest('li.has-dropdown').addClass('expanded');
+        }
       });
     }
 
