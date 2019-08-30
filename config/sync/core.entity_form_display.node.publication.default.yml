@@ -19,7 +19,7 @@ dependencies:
   module:
     - content_moderation
     - entity_browser
-    - link
+    - link_attributes
     - path
 id: node.publication.default
 targetEntityType: node
@@ -83,8 +83,15 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+      enabled_attributes:
+        id: false
+        name: false
+        target: true
+        rel: true
+        class: true
+        accesskey: false
     third_party_settings: {  }
-    type: link_default
+    type: link_attributes
     region: content
   field_publication_topics:
     weight: 3

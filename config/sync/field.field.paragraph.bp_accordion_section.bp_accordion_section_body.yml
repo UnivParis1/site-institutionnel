@@ -14,6 +14,8 @@ dependencies:
     - paragraphs.paragraphs_type.bp_modal
     - paragraphs.paragraphs_type.bp_simple
     - paragraphs.paragraphs_type.bp_view
+    - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
 _core:
@@ -31,6 +33,7 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
+    negate: 0
     target_bundles:
       bp_simple: bp_simple
       bp_image: bp_image
@@ -41,6 +44,8 @@ settings:
       bp_block: bp_block
       bp_modal: bp_modal
       bp_view: bp_view
+      medias: medias
+      tiles: tiles
     target_bundles_drag_drop:
       bp_simple:
         enabled: true
@@ -83,5 +88,65 @@ settings:
         enabled: false
       bp_tab_section:
         weight: -18
+        enabled: false
+      audio_media:
+        weight: 35
+        enabled: false
+      bp_column_wrapper:
+        weight: 41
+        enabled: false
+      bp_webform:
+        weight: 51
+        enabled: false
+      contact:
+        weight: 52
+        enabled: false
+      files_media:
+        weight: 53
+        enabled: false
+      hit_list:
+        weight: 54
+        enabled: false
+      image_media:
+        weight: 55
+        enabled: false
+      key_figure:
+        weight: 56
+        enabled: false
+      key_figures_section:
+        weight: 57
+        enabled: false
+      medias:
+        enabled: true
+        weight: 58
+      presentation:
+        weight: 59
+        enabled: false
+      rich_content:
+        weight: 60
+        enabled: false
+      section_presentation:
+        weight: 61
+        enabled: false
+      tile:
+        weight: 62
+        enabled: false
+      tile_with_text:
+        weight: 63
+        enabled: false
+      tile_wo_image:
+        weight: 64
+        enabled: false
+      tiles:
+        enabled: true
+        weight: 65
+      title_and_subtitle:
+        weight: 66
+        enabled: false
+      tuile_text_wo_image:
+        weight: 67
+        enabled: false
+      video_media:
+        weight: 68
         enabled: false
 field_type: entity_reference_revisions
