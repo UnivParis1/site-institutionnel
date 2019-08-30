@@ -156,8 +156,10 @@
             </div>
         {% endfor %}
     {% else %}
+      {% for key, item in content.bp_view if key|first != '#' %}
         <div class="cell small-12">
             {{ item }}
         </div>
+      {% endfor %}
     {% endif %}
 </div>
