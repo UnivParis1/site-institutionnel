@@ -6,7 +6,8 @@
 /* Ebizproduction : Navigation */
 
 #navbar-header{
-  width: 0; @include transitionEffect(350ms);
+  width: 100%; @include transitionEffect(350ms);
+  transform: translateX(-150%);
   position: absolute; @include flexDisplay();
   top: rem-calc(114px); left: rem-calc(-24px);
   opacity: 0; height: calc(100vh - 114px);
@@ -69,7 +70,7 @@
      }
     }
     &.overlay-show{
-      max-width: rem-calc(2500px); z-index: 2;
-      width: 100%; left: 0; opacity: 1;
+      z-index: 2; transform: translateX(0);
+      left: 0; opacity: 1;
     }
 }
