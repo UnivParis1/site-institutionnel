@@ -28,7 +28,7 @@
 
 {%
 set body_classes = [
-logged_in ? 'user-logged-in', 'site-content-wrapper',
+logged_in ? 'user-logged-in', 'site-content-wrapper', is_front ? 'transparent',
 not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
 node_type ? 'node--type-' ~ node_type|clean_class,
 db_offline ? 'db-offline',
@@ -69,9 +69,8 @@ db_offline ? 'db-offline',
   {%- endif -%}
 
   </head>
-  {% set statusClass = is_front?'transparent':'' %}
   <body{{ attributes.addClass(body_classes) }}>
-  <a href="#main-content" class="visually-hidden focusable skip-link {{ statusClass }}">
+  <a href="#main-content" class="visually-hidden focusable skip-link">
     {{ 'Skip to main content'|t }}
   </a>
   {{ page_top }}
