@@ -94,6 +94,15 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
       $node->set('field_categories', [$item['field_categories']]);
       $node->set('moderation_state', 'published');
 
+      $node->set('field_add_to_cal',
+        [
+          'summary' => $item['title'],
+          'description' => $item['field_subtitle'] . '<br /> Directeur de thèse :  '
+            . $item['field_thesis_supervisor'] . '.<br />Adresse : ' . $item['field_event_address'],
+          'url' => \Drupal::request()->getHost() . '/evenements',
+        ]);
+
+      $node->save();
       $node->save();
 
       if ($node) {

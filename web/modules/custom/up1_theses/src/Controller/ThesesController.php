@@ -5,6 +5,7 @@ namespace Drupal\up1_theses\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
+use Drupal\node\Entity\Node;
 use Drupal\up1_theses\Service\ThesesHelper;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -71,41 +72,42 @@ class ThesesController extends ControllerBase {
    * {@inheritDoc}
    */
   public function getThesesList() {
+    \Drupal::logger('node_load')->info(print_r(Node::load(414), 1));
     $data = $this->thesesHelper->formatDataFromJson();
     if (!$data) {
       \Drupal::logger('up1_theses')->warning('No new data to import.');
     }
+    else {
+      $queue = $this->queueFactory->get('up1_theses_queue_import');
+      $totalItemsInQueue = $queue->numberOfItems();
 
-    $queue = $this->queueFactory->get('up1_theses_queue_import');
-    $totalItemsInQueue = $queue->numberOfItems();
+      foreach ($data as $element) {
+        $queue->createItem($element);
+      }
+      // 4. Get the total of item in the Queue.
+      $totalItemsAfter = $queue->numberOfItems();
 
-    foreach ($data as $element) {
-      $queue->createItem($element);
-    }
-    // 4. Get the total of item in the Queue.
-    $totalItemsAfter = $queue->numberOfItems();
+      // 5. Get what's in the queue now.
+      $tableVariables = $this->getItemList($queue);
 
-    // 5. Get what's in the queue now.
-    $tableVariables = $this->getItemList($queue);
-
-    $finalMessage = $this->t('The Queue had @totalBefore items. 
+      $finalMessage = $this->t('The Queue had @totalBefore items. 
     We should have added @count items in the Queue. Now the Queue has @totalAfter items.',
-      [
-        '@count' => count($data),
-        '@totalAfter' => $totalItemsAfter,
-        '@totalBefore' => $totalItemsInQueue,
-      ]);
+        [
+          '@count' => count($data),
+          '@totalAfter' => $totalItemsAfter,
+          '@totalBefore' => $totalItemsInQueue,
+        ]);
 
-    return [
-      '#type' => 'table',
-      '#caption' => $finalMessage,
-      '#header' => $tableVariables['header'],
-      '#rows' => isset($tableVariables['rows'])? $tableVariables['rows'] : [],
-      '#attributes' => $tableVariables['attributes'],
-      '#sticky' => $tableVariables['sticky'],
-      '#empty' => $this->t('No items.'),
-    ];
-
+      return [
+        '#type' => 'table',
+        '#caption' => $finalMessage,
+        '#header' => $tableVariables['header'],
+        '#rows' => isset($tableVariables['rows']) ? $tableVariables['rows'] : [],
+        '#attributes' => $tableVariables['attributes'],
+        '#sticky' => $tableVariables['sticky'],
+        '#empty' => $this->t('No items.'),
+      ];
+    }
   }
 
   /**

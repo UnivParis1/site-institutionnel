@@ -153,14 +153,10 @@ use \Drupal\paragraphs\Entity\Paragraph;
 
   function p1ps2019_preprocess_paragraph(&$variables) {
     $paragraph = $variables['paragraph'];
-
     if ($paragraph->bundle() == 'contact') {
-      $url = "http://ws-theses.univ-paris1.fr/centres_up1";
-      $json = file_get_contents($url);
-      $dataArray = json_decode($json, TRUE);
+      $service = \Drupal::service('up1_global.centres');
+      $centre = $service->getACentre("http://ws-theses.univ-paris1.fr/centres_up1", $paragraph->field_centre->value);
 
-      $key = array_search($paragraph->field_centre->value, array_column($dataArray, 'Code'));
-      $centre = $dataArray[$key];
       \Drupal::logger('centre')->info(print_r($centre, 1));
     }
   }

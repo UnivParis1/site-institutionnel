@@ -19,9 +19,6 @@ class ThesesHelper {
 
   /**
    * Constructs a MyClass object.
-   *
-   * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
-   *   The string translation service.
    * @param \Drupal\up1_theses\Service\ThesesService $theses_service
    */
   public function __construct(ThesesService $theses_service) {
