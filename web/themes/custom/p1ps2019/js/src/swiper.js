@@ -8,8 +8,7 @@
 
         if($('.swiper-container').length > 0){
   				var mySwiper = new Swiper('.swiper-container', {
-  					slidesPerView: 1,
-            centeredSlides: true,
+  					slidesPerView: 3,
             spaceBetween: 20,
             navigation: {
               nextEl: '.swiper-button-next',
