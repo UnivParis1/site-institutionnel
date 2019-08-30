@@ -33,11 +33,15 @@
     padding: rem-calc(72px 116px);
      ul {
        li {
-         display: inline-block; position: relative;
+         @include flexDisplay(); position: relative;
+         align-items: center;
         a,span{
           font-size: rem-calc(20px); line-height: 1.2;
           color: $white; @include setFont($fontType-bold);
           @extend .hand-cursor;
+        }
+        &:before{
+          #{$margin-left} : rem-calc(12px);
         }
         ul{
           position: absolute; left: 25%;
