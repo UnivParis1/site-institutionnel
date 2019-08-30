@@ -49,41 +49,41 @@ ul.list-style {
 	}
 }
 .circle{
-  @include box-border(1px, $white);
-	color: $white;
-	*{color: $white;}
-	.scroll &{
-		@include box-border(1px, $background-main-color);
-		color: $text-main-color;
-		*{color: $text-main-color;}
-		&.overlay-show, &:hover{
-			background-color: $background-main-color;
-			*{color: $white;} color: $white;
-		}
-	}
+	@include box-border(1px, $background-main-color);
+	color: $text-main-color;
+	*{color: $text-main-color;}
 	&.overlay-show, &:hover{
-		@include box-border(1px, $background-main-color);
-		background-color: $white; color: $text-main-color;
-		*{color: $text-main-color;}
+		background-color: $background-main-color;
+		*{color: $white;} color: $white;
+	}
+	.transparent:not(.scroll) &{
+		@include box-border(1px, $white);
+		color: $white;
+		*{color: $white;}
+		&.overlay-show, &:hover{
+			@include box-border(1px, $background-main-color);
+			background-color: $white; color: $text-main-color;
+			*{color: $text-main-color;}
+		}
 	}
 }
 .accessibility-wrapper{
 	#accessibility-toggle{
-	  &:before{
-	    background-color: $white;
-	  }
-		.scroll &{
-			&:before{
-				background-color: $background-main-color;
-			}
-			&.overlay-show, &:hover{
-				&:before{background-color: $white;}
-			}
+		&:before{
+			background-color: $background-main-color;
 		}
 		&.overlay-show, &:hover{
+			&:before{background-color: $white;}
+		}
+		.transparent:not(.scroll) &{
 			&:before{
-		    background-color: $background-main-color;
+		    background-color: $white;
 		  }
+			&.overlay-show, &:hover{
+				&:before{
+			    background-color: $background-main-color;
+			  }
+			}
 		}
 	}
   #accessibility-container{
