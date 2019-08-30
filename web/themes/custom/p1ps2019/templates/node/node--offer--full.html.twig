@@ -77,32 +77,41 @@
 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('content') }}>
-    <div class="tag"> {{ content.field_offer_type }} </div>
-    {{ title_prefix }}
-    <h2{{ title_attributes }}>
-      {{ label }}
-    </h2>
-    {{ title_suffix }}
-    <section id="event-content" class="large-9 medium-12 small-12">
-      {{ content.field_subtitle }}
-      {{ content.field_thesis_supervisor }}
-      {{ content.field_media }}
-      {{ content.field_blocs_medias }}
+  {{ title_prefix }}
+  <h2{{ title_attributes }}>
+    {{ label }}
+  </h2>
+  {{ title_suffix }}
+  <div class="categ-style semi-infos-sep"> {{ content.field_offer_type }} </div>
+  <div class="categ-style semi-infos-sep"> {{ content.field_service }} </div>
+  <div{{ content_attributes.addClass('content grid-x  grid-margin-x') }}>
+    <section id="event-content" class="large-8 medium-12 small-12 grid-x grid-margin-x full-height">
+      {{ content.body }}
+      {{ content.field_position_details }}
+      {{ content.field_profile }}
     </section>
-    <aside id="event-sidebar" class="large-3 medium-12 small-12">
+    <aside id="event-sidebar" class="large-4 medium-12 small-12 grid-x full-height same-height">
       <div class="event-details">
-        <h3>{{ 'Date'|t }}</h3>
+        <h3>{{ "More information"|t }}</h3>
+        {{ content.field_job_type }}
+        {{ content.field_category }}
+        {{ content.field_bap }}
+        {{ content.field_grade }}
+      <div class="event-details">
+        <h3>{{ "Job details"|t }}</h3>
         {{ content.field_application_deadline }}
+        {{ content.field_contract_duration }}
+        {{ content.field_salary_range }}
+      </div>
+        <div class="event-details">
+        <h3>{{ "To apply"|t }}</h3>
+        {{ content.field_email_address }}
+        {{ content.field_reference_offer }}
       </div>
       <div class="event-details">
         <h3>{{ 'Lieu'|t }}</h3>
-        {{ content.field_event_address }}
+        {{ content.field_address }}
         {{ content.field_address_map }}
-      </div>
-      <div class="social-and-calendar">
-        {{ content.field_add_to_cal }}
-        {{ content.social_simple_buttons }}
       </div>
     </aside>
   </div>
