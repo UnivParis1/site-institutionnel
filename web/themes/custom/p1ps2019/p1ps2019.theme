@@ -2,105 +2,105 @@
 
 use \Drupal\paragraphs\Entity\Paragraph;
 
-  /**
-  * Implements hook_preprocess_HOOK() for html.twig.
-  */
-  function p1ps2019_preprocess_html(&$variables) {
+/**
+ * Implements hook_preprocess_HOOK() for html.twig.
+ */
+function p1ps2019_preprocess_html(&$variables) {
+  $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    $variables['is_front'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ */
+function p1ps2019_preprocess_page(&$variables) {
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['#attached']['drupalSettings']['language'] = $language;
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK() for menu.html.twig.
+ */
+function p1ps2019_preprocess_menu(&$variables) {
+  $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    $variables['is_front'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  // Block suggestions for custom block bundles.
+  if (isset($variables['elements']['content']['#block_content'])) {
+    array_splice($suggestions, 1, 0, 'block__' . $variables['elements']['content']['#block_content']->bundle());
+  }
+}
+
+
+function p1ps2019_preprocess_block(&$variables) {
+  if (isset($variables["elements"]["#id"])) {
+    $block_id = $variables["elements"]["#id"];
+    $block = \Drupal\block\Entity\Block::load($block_id);
     $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    try {
-      $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-    }
-    catch (Exception $e) {
-      $variables['is_front'] = FALSE;
+
+    if ($block) {
+      $variables["content"]["#attributes"]["region"] = $block->getRegion();
     }
   }
+}
 
-  /**
-  * Implements hook_preprocess_HOOK() for page.html.twig.
-  */
-  function p1ps2019_preprocess_page(&$vars) {
-    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $vars['#attached']['drupalSettings']['language'] = $language;
+// add a template suggestion based on region name
+function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  if (isset($variables["attributes"]["region"])) {
+    $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
   }
+}
+function p1ps2019_preprocess_block__welcome_message_block(&$variables){
+  $variables['isHome']=\Drupal::service('path.matcher')->isFrontPage();
+}
 
-
-  /**
-  * Implements hook_preprocess_HOOK() for menu.html.twig.
-  */
-  function p1ps2019_preprocess_menu(&$variables) {
-    $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    try {
-      $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-    }
-    catch (Exception $e) {
-      $variables['is_front'] = FALSE;
-    }
+/*
+* template_preprocess_image
+*
+*/
+function p1ps2019_preprocess_image(&$variables){
+  if (!isset($variables['alt'])) {
+    $variables['attributes']['alt'] = "";
   }
+}
 
-  /**
-   * Implements hook_theme_suggestions_HOOK_alter() for form templates.
-   * @param array $suggestions
-   * @param array $variables
-   */
-  function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-    // Block suggestions for custom block bundles.
-    if (isset($variables['elements']['content']['#block_content'])) {
-      array_splice($suggestions, 1, 0, 'block__' . $variables['elements']['content']['#block_content']->bundle());
-    }
+/**
+ * Implements hook_theme_suggestions_container_alter().
+ */
+function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  $name='';
+  $display_id = '';
+  $pieces = [];
+
+  if(isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
+  if(isset($variables['element']['#display_id']) && $variables['element']['#display_id']) $display_id = $variables['element']['#display_id'];
+
+  if (isset($variables['element']['#type']) && !empty($variables['element']['#type'])) {
+    $pieces[] = $variables['element']['#type'];
   }
+  if ($name != '') $pieces[] = $name;
+  if ($display_id != '') $pieces[] = $display_id;
 
-
-  function p1ps2019_preprocess_block(&$variables) {
-      if (isset($variables["elements"]["#id"])) {
-          $block_id = $variables["elements"]["#id"];
-          $block = \Drupal\block\Entity\Block::load($block_id);
-          $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-          if ($block) {
-              $variables["content"]["#attributes"]["region"] = $block->getRegion();
-          }
-      }
-  }
-
-  // add a template suggestion based on region name
-  function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
-      if (isset($variables["attributes"]["region"])) {
-          $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
-      }
-  }
-  function p1ps2019_preprocess_block__welcome_message_block(&$variables){
-      $variables['isHome']=\Drupal::service('path.matcher')->isFrontPage();
-  }
-
-  /*
-  * template_preprocess_image
-  *
-  */
-  function p1ps2019_preprocess_image(&$variables){
-   if (!isset($variables['alt'])) {
-     $variables['attributes']['alt'] = "";
-   }
-  }
-
-  /**
-   * Implements hook_theme_suggestions_container_alter().
-   */
-  function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $variables) {
-    $name='';
-    $display_id = '';
-    $pieces = [];
-
-    if(isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
-    if(isset($variables['element']['#display_id']) && $variables['element']['#display_id']) $display_id = $variables['element']['#display_id'];
-
-    if (isset($variables['element']['#type']) && !empty($variables['element']['#type'])) {
-      $pieces[] = $variables['element']['#type'];
-    }
-    if ($name != '') $pieces[] = $name;
-    if ($display_id != '') $pieces[] = $display_id;
-
-    if (!empty($pieces)) $suggestions[] = 'container__' . implode('_', $pieces);
-  }
+  if (!empty($pieces)) $suggestions[] = 'container__' . implode('_', $pieces);
+}
 
 /**
  * Implements hook_theme_suggestions_alter().
@@ -109,13 +109,13 @@ use \Drupal\paragraphs\Entity\Paragraph;
  * @param $variables
  * @param $hook
  */
-  function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
-  {
-    if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
-      $original_theme_hook = $variables['theme_hook_original'];
-      array_unshift($suggestions, $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']));
-    }
+function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
+{
+  if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
+    $original_theme_hook = $variables['theme_hook_original'];
+    array_unshift($suggestions, $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']));
   }
+}
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -123,46 +123,51 @@ use \Drupal\paragraphs\Entity\Paragraph;
  * @param $suggestions
  * @param $variables
  */
-  function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
+function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
 
-    // Define the view mode.
-    $mode = $variables['elements']['#view_mode'];
+  // Define the view mode.
+  $mode = $variables['elements']['#view_mode'];
 
-    // Create a theme hook suggestion which has the view mode name in it.
-    $suggestions[] = 'user__' . $mode;
+  // Create a theme hook suggestion which has the view mode name in it.
+  $suggestions[] = 'user__' . $mode;
 
-    // Get current user.
-    $current_user = $variables['elements']['#user'];
+  // Get current user.
+  $current_user = $variables['elements']['#user'];
 
-    // Get current user's roles.
-    $roles = $current_user->getRoles();
+  // Get current user's roles.
+  $roles = $current_user->getRoles();
 
-    // Add suggestion per role.
-    foreach ($roles as $role) {
-      $suggestions[] = 'user__' . $mode . '__' . $role;
-    }
+  // Add suggestion per role.
+  foreach ($roles as $role) {
+    $suggestions[] = 'user__' . $mode . '__' . $role;
   }
+}
 
-  /*
-  * Implements template_preprocess_views_view()
-  * @param array $vars
-  */
-  function p1ps2019_preprocess_views_view(&$vars){
-     if($vars['more']){
-      $vars['more']['#options']['attributes']['class'] = array(
-        'link-style', 'with-arrow'
-      );
-      $vars["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
-    }
+/*
+* Implements template_preprocess_views_view()
+* @param array $variables
+*/
+function p1ps2019_preprocess_views_view(&$variables) {
+  $variables['is_listing_page'] = FALSE;
+  if ($variables['id'] == 'listings') {
+    $variables['is_listing_page'] = TRUE;
+    $variables['view_title'] = $variables['view']->getTitle();
   }
-
-
-  function p1ps2019_preprocess_paragraph(&$variables) {
-    $paragraph = $variables['paragraph'];
-    if ($paragraph->bundle() == 'contact') {
-      $service = \Drupal::service('up1_global.centres');
-      $centre = $service->getACentre("http://ws-theses.univ-paris1.fr/centres_up1", $paragraph->field_centre->value);
-
-      \Drupal::logger('centre')->info(print_r($centre, 1));
-    }
+  if($variables['more']) {
+    $variables['more']['#options']['attributes']['class'] = array(
+      'link-style', 'with-arrow'
+    );
+    $variables["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
   }
+}
+
+
+function p1ps2019_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  if ($paragraph->bundle() == 'contact') {
+    $service = \Drupal::service('up1_global.centres');
+    $centre = $service->getACentre("http://ws-theses.univ-paris1.fr/centres_up1", $paragraph->field_centre->value);
+
+    \Drupal::logger('centre')->info(print_r($centre, 1));
+  }
+}
