@@ -195,5 +195,24 @@
 }
 
 #breadcrumbs{
-	padding-top: rem-calc(114px);
+	margin-top: rem-calc(114px);
+	padding: rem-calc(40px 0);
+	ol{
+		margin: 0;
+		@include flexDisplay();
+		li{
+			color: $text-main-color;
+			a{
+				color: $dark-gray3;
+			}
+			&:not(:last-of-type){
+				padding-right: rem-calc(4px);
+				&:after{
+					content: "/";
+					color: $dark-gray3;
+					margin-right: rem-calc(4px);
+				}
+			}
+		}
+	}
 }
