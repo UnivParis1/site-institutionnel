@@ -148,9 +148,9 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
 * @param array $variables
 */
 function p1ps2019_preprocess_views_view(&$variables) {
-  $variables['exposed_form_color'] = FALSE;
+  $variables['is_listing_page'] = FALSE;
   if ($variables['id'] == 'listings')
-    $variables['exposed_form_color'] = TRUE;
+    $variables['is_listing_page'] = TRUE;
 
   if($variables['more']) {
     $variables['more']['#options']['attributes']['class'] = array(
