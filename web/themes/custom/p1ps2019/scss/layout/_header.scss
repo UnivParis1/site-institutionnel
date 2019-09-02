@@ -151,4 +151,17 @@
 		  }
 		}
 	}//close header-right
+
+	.block-views-exposed-filter-blockrecherche-de-contenu-page-1{
+		position: fixed; top: rem-calc(114px);
+		padding: rem-calc(48px 24px);
+		background-color: $white; overflow: hidden;
+		opacity: 0; visibility: hidden;
+		width: 100%; @include transitionEffect(350ms);
+	  transform: translateX(-150%);
+		&.overlay-show{
+			transform: translateX(0);
+			opacity: 1; visibility: visible;
+		}
+	}
 }
