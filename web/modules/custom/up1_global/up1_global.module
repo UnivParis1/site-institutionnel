@@ -34,12 +34,11 @@ function up1_global_form_alter(&$form, FormStateInterface $form_state, $form_id)
       'bap' => 'bap',
     ];
   }
-  if ($form['#id'] == "views-exposed-form-recherche-de-contenu-page-1"){
-    $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
-  }
-  echo 'tesssssssst' . $form_id . 'fin';
   if($form_id == "centres_up1_form"){
     $form["actions"]['submit']['#value'] = html_entity_decode('&#xf002;');
+  }
+  if ($form['#id'] == "views-exposed-form-recherche-de-contenu-page-1"){
+    $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
   }
 
 }
