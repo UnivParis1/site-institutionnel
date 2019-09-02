@@ -34,8 +34,8 @@ function up1_global_form_alter(&$form, FormStateInterface $form_state, $form_id)
       'bap' => 'bap',
     ];
   }
-  echo 'id ' . $form_id;
-  
+  print_r($form);
+
   if ($form_id == "block_p1ps2019_exposedformrecherche_de_contenupage_1"){
     $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
     $form['search']['#attributes']['placeholder'] = t("Chercher une recette");
