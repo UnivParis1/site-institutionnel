@@ -160,13 +160,12 @@
 	.block-views-exposed-filter-blockrecherche-de-contenu-page-1{
 		position: fixed; top: rem-calc(114px);
 		padding: rem-calc(48px 24px);
-		overflow: hidden;
+		overflow: hidden; z-index: -1;
 		opacity: 0; visibility: hidden;
-		width: 100%; @include transitionEffect(350ms);
-	  transform: translateX(-150%);
+		width: 100%; @include transitionEffect();
 		&.overlay-show{
-			transform: translateX(0);
 			opacity: 1; visibility: visible;
+			z-index: 1;
 		}
 		#views-exposed-form-recherche-de-contenu-page-1{
 			@include flexDisplay(); @include flexDisplayAlign('center-middle');
