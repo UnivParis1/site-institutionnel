@@ -238,7 +238,6 @@ class ThesesHelper {
     $fullDate = $date . " " . ($hours - 2).":";
     $fullDate .= ($minutes == 0)? "00" : $minutes;
 
-    \Drupal::logger('date')->info(print_r($fullDate, 1));
     $newDate = \DateTime::createFromFormat($format, $fullDate);
     $formattedDate = "";
 
