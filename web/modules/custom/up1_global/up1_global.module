@@ -28,17 +28,18 @@ function up1_global_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_form_alter().
  */
 function up1_global_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == "block_p1ps2019_exposedformrecherche_de_contenupage_1"){
+    $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
+    $form['search']['#attributes']['placeholder'] = t("Chercher une recette");
+  }
+  
   if ($form_id == "node_offer_form") {
     $form['field_type']['#autocomplete_route_name'] = 'up1_global.referens';
     $form['field_type']['#autocomplete_route_parameters'] = [
       'bap' => 'bap',
     ];
   }
-  echo 'id ' . $form_id;
-  if ($form_id == "block_p1ps2019_exposedformrecherche_de_contenupage_1"){
-    $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
-    $form['search']['#attributes']['placeholder'] = t("Chercher une recette");
-  }
+
 }
 
 /**

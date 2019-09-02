@@ -49,12 +49,6 @@ use \Drupal\paragraphs\Entity\Paragraph;
     }
   }
 
-  function p1ps2019_form_alter(&$form, &$form_state, $form_id) {
-    if ($form_id == "block_p1ps2019_exposedformrecherche_de_contenupage_1"){
-      $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
-      $form['search']['#attributes']['placeholder'] = t("recherche");
-    }
-  }
 
   function p1ps2019_preprocess_block(&$variables) {
       if (isset($variables["elements"]["#id"])) {
