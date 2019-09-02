@@ -49,6 +49,10 @@ use \Drupal\paragraphs\Entity\Paragraph;
     }
   }
 
+  function p1ps2019_form_search_block_form_alter(&$form, &$form_state) {
+    $form['keys']['#attributes']['placeholder'][] = t('');
+    $form['actions']['submit']['#value'] = html_entity_decode('&#xf139;');
+  }
 
   function p1ps2019_preprocess_block(&$variables) {
       if (isset($variables["elements"]["#id"])) {
