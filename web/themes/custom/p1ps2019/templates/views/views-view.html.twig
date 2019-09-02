@@ -40,20 +40,22 @@
   {{ title }}
   {{ title_suffix }}
 
+  {% if is_listing_page %}
+    <div class="view-header-color">
+      <h2 class="title"> {{ view_title }} </h2>
+      {{ exposed }}
+    </div>
+  {% else %}
+    {{ title }}
+    {{ exposed }}
+  {% endif %}
+  {{ title_suffix }}
+
   {% if header %}
     <header>
       {{ header }}
     </header>
   {% endif %}
-
-  {% if exposed_form_color %}
-  <div class="exposed-form-color">
-    {% endif %}
-    {{ exposed }}
-    {% if exposed_form_color %}
-  </div>
-  {% endif  %}
-
   {{ attachment_before }}
 
   {% if rows -%}

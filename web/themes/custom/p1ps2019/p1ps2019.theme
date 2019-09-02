@@ -149,9 +149,10 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
 */
 function p1ps2019_preprocess_views_view(&$variables) {
   $variables['is_listing_page'] = FALSE;
-  if ($variables['id'] == 'listings')
+  if ($variables['id'] == 'listings') {
     $variables['is_listing_page'] = TRUE;
-
+    $variables['view_title'] = $variables['view']->getTitle();
+  }
   if($variables['more']) {
     $variables['more']['#options']['attributes']['class'] = array(
       'link-style', 'with-arrow'
