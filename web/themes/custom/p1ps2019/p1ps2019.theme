@@ -50,8 +50,9 @@ use \Drupal\paragraphs\Entity\Paragraph;
   }
 
   function p1ps2019_form_search_block_form_alter(&$form, &$form_state) {
-    $form['keys']['#attributes']['placeholder'][] = t('');
-    $form['actions']['submit']['#value'] = html_entity_decode('&#xf139;');
+    $form['keys']['#attributes']['placeholder'][] = t('Search');
+    $form['actions']['submit']['#value'] = html_entity_decode('&#xf138;');
+    $form['actions']['submit']['#attributes']['class'][] = 'search-button';
   }
 
   function p1ps2019_preprocess_block(&$variables) {
