@@ -34,6 +34,11 @@ function up1_global_form_alter(&$form, FormStateInterface $form_state, $form_id)
       'bap' => 'bap',
     ];
   }
+
+  if ($form_id == "block-p1ps2019-exposedformrecherche-de-contenupage-1"){
+    $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
+    $form['search']['#attributes']['placeholder'] = t("Chercher une recette");
+  }
 }
 
 /**

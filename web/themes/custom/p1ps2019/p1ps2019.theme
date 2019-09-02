@@ -49,11 +49,6 @@ use \Drupal\paragraphs\Entity\Paragraph;
     }
   }
 
-  function p1ps2019_form_alter(&$form, &$form_state) {
-    $form["actions"]['submit']['#value'] = html_entity_decode('&#xf054;');
-    $form['search']['#attributes']['placeholder'] = t("Chercher une recette");
-  }
-
   function p1ps2019_preprocess_block(&$variables) {
       if (isset($variables["elements"]["#id"])) {
           $block_id = $variables["elements"]["#id"];
