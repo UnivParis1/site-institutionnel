@@ -32,8 +32,8 @@
 #}
 {%
   set classes = [
-    dom_id ? 'js-view-dom-id-' ~ dom_id,
-  ]
+  dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
 %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
@@ -47,8 +47,13 @@
   {% endif %}
 
   {% if exposed_form_color %}
-  <div class="exposed-form-color"></div>
-  {{ exposed }}
+  <div class="exposed-form-color">
+    {% endif %}
+    {{ exposed }}
+    {% if exposed_form_color %}
+  </div>
+  {% endif  %}
+
   {{ attachment_before }}
 
   {% if rows -%}

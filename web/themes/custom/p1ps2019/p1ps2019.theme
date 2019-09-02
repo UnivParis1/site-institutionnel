@@ -148,10 +148,11 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
 * @param array $variables
 */
 function p1ps2019_preprocess_views_view(&$variables) {
-  \Drupal::logger('p1ps_views')->info(print_r($variables['id'], 1));
+  $variables['exposed_form_color'] = FALSE;
   if ($variables['id'] == 'listings')
     $variables['exposed_form_color'] = TRUE;
-  if($variables['more']){
+
+  if($variables['more']) {
     $variables['more']['#options']['attributes']['class'] = array(
       'link-style', 'with-arrow'
     );
