@@ -68,6 +68,18 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
       });
     }
 
+    //search toggle
+    if($('#search-toggle').length > 0){
+      $('#search-toggle').click(function(){
+        if($('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length > 0){
+          overlayClose();
+        }
+        else{
+          overlayClose();
+          $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1, #search-toggle').addClass('overlay-show');
+        }
+      });
+    }
 		//language-switcher set current lang
 		if( $('.language-switcher-language-url').length > 0){
 			$('.language-switcher-language-url .block-title')
