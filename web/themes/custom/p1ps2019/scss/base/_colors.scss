@@ -201,28 +201,31 @@ input[type="url"],
 input[type="file"],
 input[type="search"], .form-date,
 .file-widget {
-  border: 3px solid $background-main-color;
-  background-color: $white;
-  ::-webkit-input-placeholder {
-    color: $dark-gray3;
-  }
-  :-moz-placeholder { /* Firefox 18- */
-    color: $dark-gray3;
-  }
-  ::-moz-placeholder {  /* Firefox 19+ */
-    color: $dark-gray3;
-  }
-  :-ms-input-placeholder {
-    color: $dark-gray3;
-  }
-  &:before{
-    background-color: $background-main-color;
-  }
-	&:focus{
-		border: 3px solid $background-main-color;
-	}
+  @include inputStyle();
 }
-
+.chosen-container-single{
+  .chosen-single{
+    &:after{
+      color: $text-main-color;
+    }
+    span{
+      color: $dark-gray3;
+    }
+  }
+  .chosen-drop{
+    .chosen-search{
+      color: $text-main-color;
+    }
+    ul.chosen-results{
+      li{
+        color: $text-main-color;
+				&.highlighted. &.result-selected{
+					background-color: $background-main-color;
+				}
+      }
+    }
+  }
+}
 .user-is-tabbing{
   textarea, select,
   input[type="text"],
