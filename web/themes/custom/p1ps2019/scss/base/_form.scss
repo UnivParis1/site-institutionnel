@@ -314,18 +314,21 @@ label, .label-style{
 .chosen-container-single .chosen-single{
   border-radius: 0; background-image: none;
   background-color: $white; padding: rem-calc(24px);
-  border: 3px solid $blue;
+  border: 3px solid $blue; min-height: rem-calc(71px);
+  &:before, &:after{
+    top: 50%; transform: translateY(-50%);
+    position: absolute;
+  }
   &:before{
     content: "";
     width: 3px; height: 55%;
-    top: 50%; transform: translateY(-50%);
     background-color: $background-main-color;
-    position: absolute;
   }
   &:after{
     content: "\fa078";
     font: normal normal normal 14px/1 FontAwesome;
     color: $text-main-color; font-size: inherit;
+    right: rem-calc(24px);
   }
   >div {display: none;}
   span{
