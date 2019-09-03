@@ -21,8 +21,8 @@
 		}//close scroll
 
     //map submit button
-    if($('.map-center').length > 0){
-      $('#edit-submit').addClass('reset-btn search-btn').removeClass('button button--primary js-form-submit form-submit');
+    if($('.center-form #edit-submit').length > 0){
+      $('.center-form #edit-submit').addClass('reset-btn search-btn').removeClass('button button--primary js-form-submit form-submit');
     }
 
     //swiper-buttons
