@@ -117,6 +117,7 @@
         if($('#navbar-header.overlay-show').length > 0){
           overlayClose();
           $('body').removeClass('noscroll');
+          $('.expanded').removeClass('expanded');
         }
         else{
           overlayClose();
