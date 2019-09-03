@@ -24,28 +24,39 @@ input[type="file"],
 input[type="search"], .form-date,
 .file-widget {
   -webkit-appearance: none; display: block;
-  font-family: $font-regular;
+  font-family: $font-second;
   @extend .hand-cursor;
-  width: 100%; max-height: $fgutter*2;
-  margin: 0; box-shadow: none; max-width: 100%;
-  font-size: rem-calc(18px); line-height: 1.78;
-  height: auto;
+  font-size: rem-calc(20px); line-height: 1.3;
+  border-radius: 0; background-image: none; position: relative;
+  background-color: $white; padding: rem-calc(24px);
+  border: 3px solid $blue; min-height: rem-calc(71px);
   @include responsiveVal(padding, $gutter/2 $gutter*0.75);
   ::-webkit-input-placeholder {
     opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px);
+    font-size: rem-calc(20px); font-style: italic;
+    color: $dark-gray3;
   }
   :-moz-placeholder { /* Firefox 18- */
     opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px);
+    font-size: rem-calc(20px); font-style: italic;
+    color: $dark-gray3;
   }
   ::-moz-placeholder {  /* Firefox 19+ */
     opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px);
+    font-size: rem-calc(20px); font-style: italic;
+    color: $dark-gray3;
   }
   :-ms-input-placeholder {
     opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px);
+    font-size: rem-calc(20px); font-style: italic;
+    color: $dark-gray3;
+  }
+  &:before{
+    content: "";
+    top: 50%; transform: translateY(-50%);
+    position: absolute;
+    width: 3px; height: 55%;
+    background-color: $background-main-color;
   }
 }
 
@@ -245,20 +256,10 @@ label, .label-style{
 
 
 [class*="form-type-select"]:not(.form-item-centre-name), .select-wrapper{
-  border-radius: 0; background-image: none; position: relative;
-  background-color: $white; padding: rem-calc(24px);
-  border: 3px solid $blue; min-height: rem-calc(71px);
-  &:before, &:after{
-    top: 50%; transform: translateY(-50%);
-    position: absolute;
-  }
-  &:before{
-    content: "";
-    width: 3px; height: 55%;
-    background-color: $background-main-color;
-  }
   &:after{
     content: "\f078";
+    top: 50%; transform: translateY(-50%);
+    position: absolute;
     font: normal normal normal 14px/1 FontAwesome;
     color: $text-main-color; font-size: rem-calc(24px);
     right: rem-calc(24px);
