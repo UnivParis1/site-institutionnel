@@ -56,16 +56,19 @@ ul.list-style {
 		background-color: $background-main-color;
 		*{color: $white;} color: $white;
 	}
-	.transparent:not(.scroll) &, &:not(.white){
-		@include box-border(1px, $white);
-		color: $white;
-		*{color: $white;}
-		&.overlay-show, &:hover{
-			@include box-border(1px, $background-main-color);
-			background-color: $white; color: $text-main-color;
-			*{color: $text-main-color;}
+	&:not(.white){
+		.transparent:not(.scroll) &{
+			@include box-border(1px, $white);
+			color: $white;
+			*{color: $white;}
+			&.overlay-show, &:hover{
+				@include box-border(1px, $background-main-color);
+				background-color: $white; color: $text-main-color;
+				*{color: $text-main-color;}
+			}
 		}
 	}
+
 	&.blue{
 		background-color: $background-main-color;
 		color: $white;
