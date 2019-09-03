@@ -7595,20 +7595,6 @@ input[type="search"], .form-date,
 .noscroll {
   overflow: hidden; }
 
-.center-form {
-  width: 40%;
-  z-index: 401; }
-  .center-form #edit_centre_name_chosen {
-    width: 100% !important; }
-  .center-form .centre-up1 {
-    font-size: 1.25rem;
-    font-family: "Montserrat"; }
-    .center-form .centre-up1 * {
-      font-family: "Montserrat"; }
-    .center-form .centre-up1 .fa:before {
-      font-size: inherit;
-      margin-right: 0.5rem; }
-
 .swiper-container {
   padding: 2px; }
   .swiper-container .swiper-slide {
@@ -8431,6 +8417,17 @@ ul.list-style li:before {
     .circle.blue:hover, .blue.search-btn:hover, #navbar .header-right .accessibility-wrapper .blue#accessibility-toggle:hover, #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input:hover {
       background-color: #fff;
       color: #00326e; }
+  .circle.white, .white.search-btn, #navbar .header-right .accessibility-wrapper .white#accessibility-toggle, #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input.white {
+    border: 0;
+    background-color: #fff;
+    color: #00326e; }
+    .circle.white *, .white.search-btn *, #navbar .header-right .accessibility-wrapper .white#accessibility-toggle *, #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input.white * {
+      color: #00326e; }
+    .circle.white:hover, .white.search-btn:hover, #navbar .header-right .accessibility-wrapper .white#accessibility-toggle:hover, #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input.white:hover {
+      background-color: #00326e;
+      color: #fff; }
+      .circle.white:hover *, .white.search-btn:hover *, #navbar .header-right .accessibility-wrapper .white#accessibility-toggle:hover *, #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input.white:hover * {
+        color: #fff; }
 
 .accessibility-wrapper #accessibility-toggle:before {
   background-color: #00326e; }
@@ -9005,11 +9002,21 @@ fieldset {
   display: flex;
   -ms-flex-direction: row-reverse;
       flex-direction: row-reverse; }
-
-.centre-up1 {
-  height: inherit;
-  color: #fff;
-  padding: 15px; }
+  .map-centre .center-form {
+    width: 40%;
+    z-index: 401; }
+    .map-centre .center-form #edit_centre_name_chosen {
+      width: 100% !important; }
+    .map-centre .center-form .centre-up1 {
+      font-size: 1.25rem;
+      font-family: "Montserrat"; }
+      .map-centre .center-form .centre-up1 * {
+        font-family: "Montserrat"; }
+      .map-centre .center-form .centre-up1 .fa:before {
+        font-size: inherit;
+        margin-right: 0.5rem; }
+    .map-centre .center-form input.search-btn {
+      font: normal normal normal 14px/1 FontAwesome; }
 
 /* Ebizproduction : Maquette et tout ce qui n'est pas modulaire */
 #navbar #top-header {
@@ -9113,9 +9120,11 @@ fieldset {
     #navbar .header-right .language-switcher-language-url ul {
       position: absolute;
       top: 3.375rem;
+      visibility: hidden;
       left: 50%;
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
+      z-index: -1;
       opacity: 0;
       padding: 1.5rem;
       width: 7.5rem;
@@ -9135,7 +9144,9 @@ fieldset {
             transform: translateX(-50%);
         left: 50%; }
       #navbar .header-right .language-switcher-language-url ul.overlay-show {
-        opacity: 1; }
+        opacity: 1;
+        z-index: 402;
+        visibility: visible; }
         #navbar .header-right .language-switcher-language-url ul.overlay-show a {
           pointer-events: auto; }
   #navbar .header-right .block-up1-ent-search-block nav ul {
@@ -9234,7 +9245,7 @@ fieldset {
   #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show {
     opacity: 1;
     visibility: visible;
-    z-index: 1; }
+    z-index: 402; }
   #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 {
     /* OLD - iOS 6-, Safari 3.1-6, BB7 */
     display: -ms-flexbox;
@@ -9399,7 +9410,7 @@ fieldset {
             #navbar-header .navigation-region ul li.expanded ul a {
               pointer-events: auto; }
   #navbar-header.overlay-show {
-    z-index: 1;
+    z-index: 402;
     -ms-transform: translateX(0);
         transform: translateX(0);
     left: 0;
