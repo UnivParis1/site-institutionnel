@@ -69,4 +69,49 @@ class CentresService {
       return FALSE;
     }
   }
+
+  public function renderCentre($url, $code) {
+    $centre = $this->getACentre($url, $code);
+    $htmlCentre = '';
+
+    if ($centre) {
+      $htmlCentre .= '<div class="centre-up1">';
+      $htmlCentre .= '<h4>' . $centre['LibWeb'] . '</h4>';
+      $htmlCentre .= '<address><i class="fa fa-map-marker"></i>' . $centre['Adresse'] . '</address>';
+      if (!empty($centre['Tel']) || $centre['Fax']) {
+        $htmlCentre .= '<div class="centre-phone-fax" >';
+        if (!empty($centre['Tel'])) {
+          $htmlCentre .= '<div class="centre-phone">
+          <span>' . t('Phone : ') . '</span>
+          <a href = "tel:' . $centre['Tel'] . '">' . $centre['Tel'] . '</a >
+          </div >';
+        }
+        if (!empty($centre['Fax'])) {
+          $htmlCentre .= '<div class="centre-fax">
+          <span>' . t('Fax : ') . '</span>' . $centre['Fax'] . '</div >';
+        }
+        $htmlCentre .= '</div >';
+      }
+      if (!empty($centre['Metro']) || $centre['Rer'] || $centre['Bus']) {
+        $htmlCentre .= '<div class="centre-itineraire">';
+        if (!empty($centre['Metro'])) {
+          $htmlCentre .= '<div class="centre-metro">
+          <i class="fa fa-subway"></i>' . $centre['Metro'] . '</div>';
+        }
+        if (!empty($centre['Rer'])) {
+          $htmlCentre .= '<div class="centre-rer" >
+          <i class="fa fa-train" ></i >' . $centre['Rer'] . '</div >';
+        }
+        if (!empty($centre['Bus'])) {
+          $htmlCentre .= '<div class="centre-bus" >
+          <i class="fa fa-bus" ></i >' . $centre['Bus'] . '</div >';
+        }
+        $htmlCentre .= '</div>';
+      }
+    }
+
+    $htmlCentre .= '</div>';
+
+    return $htmlCentre;
+  }
 }
