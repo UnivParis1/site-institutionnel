@@ -14,7 +14,7 @@ form{
   label{display: none;}
 }
 textarea,
-[class*="form-type-select"]:not(.form-item-centre-name), .select-wrapper,
+.chosen-container-single .chosen-single,
 input[type="text"], input[type="submit"]:not(.search-btn),
 input[type="email"],
 input[type="tel"],
@@ -255,22 +255,7 @@ label, .label-style{
 [class*="form-type-select"]:not(.form-item-centre-name), .select-wrapper{
   padding: 0;
 }
-[class*="form-type-select"]:not(.form-item-centre-name), .select-wrapper, .form-date{
-  &:after{
-    content: "\f078";
-    top: 50%; transform: translateY(-50%);
-    position: absolute;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: rem-calc(24px);
-    right: rem-calc(24px);
-  }
-  select{
-    border: 0; margin: 0; min-height: rem-calc(71px); background-image: none;
-    font-size: rem-calc(20px); padding: rem-calc(24px 24px 24px 72px);
-    font-family: $font-second; font-style: italic;
-  }
-  label{display: none;}
-}
+
 .form-type-select, .select-wrapper{
   position: relative; @extend .hand-cursor;
   @extend .icon;
