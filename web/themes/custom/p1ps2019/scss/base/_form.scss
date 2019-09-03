@@ -245,7 +245,7 @@ label, .label-style{
 
 
 [class*="form-type-select"]:not(.form-item-centre-name), .select-wrapper{
-  border-radius: 0; background-image: none;
+  border-radius: 0; background-image: none; position: relative;
   background-color: $white; padding: rem-calc(24px);
   border: 3px solid $blue; min-height: rem-calc(71px);
   &:before, &:after{
@@ -262,6 +262,10 @@ label, .label-style{
     font: normal normal normal 14px/1 FontAwesome;
     color: $text-main-color; font-size: rem-calc(24px);
     right: rem-calc(24px);
+  }
+  select{
+    border: 0; padding: 0;
+    #{$padding-left} : rem-calc(48px);
   }
 }
 .form-type-select, .select-wrapper{
