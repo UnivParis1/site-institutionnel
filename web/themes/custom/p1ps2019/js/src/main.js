@@ -20,6 +20,11 @@
 			});
 		}//close scroll
 
+    //map submit button
+    if($('.map-center').length > 0){
+      $('#edit-submit').addClass('reset-btn search-btn').removeClass('button button--primary js-form-submit form-submit');
+    }
+
     //swiper-buttons
     if($('.swiper-button-next').length > 0){
       $('.swiper-button-next').addClass('fa fa-chevron-right');
