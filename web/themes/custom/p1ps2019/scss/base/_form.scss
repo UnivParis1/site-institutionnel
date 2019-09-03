@@ -245,11 +245,23 @@ label, .label-style{
 
 
 [class*="form-type-select"], .select-wrapper{
-  @extend .icon;
-  @extend .icon-navigation-down;
+  border-radius: 0; background-image: none;
+  background-color: $white; padding: rem-calc(24px);
+  border: 3px solid $blue; min-height: rem-calc(71px);
+  &:before, &:after{
+    top: 50%; transform: translateY(-50%);
+    position: absolute;
+  }
   &:before{
-    @include vertical-align(absolute);
-    right:rem-calc(24px);
+    content: "";
+    width: 3px; height: 55%;
+    background-color: $background-main-color;
+  }
+  &:after{
+    content: "\f078";
+    font: normal normal normal 14px/1 FontAwesome;
+    color: $text-main-color; font-size: rem-calc(24px);
+    right: rem-calc(24px);
   }
 }
 .form-type-select, .select-wrapper{
