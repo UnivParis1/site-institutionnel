@@ -189,7 +189,7 @@ button.semi-oval{
 
 // ================ FORM =======================//
 textarea,
-select,
+[class*="form-type-select"]:not(.form-item-centre-name), .select-wrapper,
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -200,27 +200,23 @@ input[type="url"],
 input[type="file"],
 input[type="search"], .form-date,
 .file-widget {
-	@include transitionEffect();
-  background-color: $white; color: $black;
-  border:2px solid $medium-gray;
-  .field-error &{border-color:$background-main-color !important;}
-  &.error{border-color:$background-main-color !important;}
+  border: 3px solid $background-main-color;
+  background-color: $white;
   ::-webkit-input-placeholder {
-    color: $gray2;
+    color: $dark-gray3;
   }
-
   :-moz-placeholder { /* Firefox 18- */
-    color: $gray2;
+    color: $dark-gray3;
   }
-
   ::-moz-placeholder {  /* Firefox 19+ */
-    color: $gray2;
+    color: $dark-gray3;
   }
-
   :-ms-input-placeholder {
-    color: $gray2;
+    color: $dark-gray3;
   }
-	&:focus{border: 2px solid $gray; outline: 0;}
+  &:before{
+    background-color: $background-main-color;
+  }
 }
 
 .user-is-tabbing{
@@ -247,6 +243,14 @@ input[type="search"], .form-date,
       border: 2px solid $gray;
 			outline: 0;
     }
+  }
+}
+[class*="form-type-select"]:not(.form-item-centre-name), .select-wrapper{
+  &:after{
+    color: $text-main-color;
+  }
+  select{
+    color: $dark-gray3;
   }
 }
 
