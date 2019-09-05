@@ -13,8 +13,7 @@ form{
 .form-item:not(.form-item-centre-name){
   label{display: none;}
 }
-textarea,
-.chosen-container-single .chosen-single,
+.chosen-container-single .chosen-single, textarea,
 input[type="text"], input[type="submit"]:not(.search-btn),
 input[type="email"],
 input[type="tel"],
@@ -25,38 +24,7 @@ input[type="url"],
 input[type="file"],
 input[type="search"], .form-date,
 .file-widget {
-  -webkit-appearance: none; display: block;
-  @extend .hand-cursor;
-  font-size: rem-calc(20px); line-height: 1.3;
-  border-radius: 0; background-image: none; position: relative;
-  padding: rem-calc(24px 24px 24px 72px);
-  min-height: rem-calc(71px); max-height: rem-calc(71px);
-  ::-webkit-input-placeholder {
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); font-style: italic;
-    #{$padding-left} : rem-calc(48px);
-  }
-  :-moz-placeholder { /* Firefox 18- */
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); font-style: italic;
-    #{$padding-left} : rem-calc(48px);
-  }
-  ::-moz-placeholder {  /* Firefox 19+ */
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); font-style: italic;
-    color: $dark-gray3; #{$padding-left} : rem-calc(48px);
-  }
-  :-ms-input-placeholder {
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); font-style: italic;
-    #{$padding-left} : rem-calc(48px);
-  }
-  &:before{
-    content: "";
-    top: 50%; transform: translateY(-50%);
-    position: absolute; left: rem-calc(24px);
-    width: 3px; height: 55%;
-  }
+  @include inputStyle();
 }
 
 textarea,
@@ -311,19 +279,36 @@ label, .label-style{
     }
   }
 }
-.chosen-container-single .chosen-single{
-  &:after{
-    content: "\f078";
-    top: 50%; transform: translateY(-50%);
-    position: absolute;
-    font: normal normal normal 14px/1 FontAwesome;
-    color: $text-main-color; font-size: rem-calc(24px);
-    right: rem-calc(24px);
+.chosen-container-single{
+  .chosen-single{
+    &:after{
+      content: "\f078";
+      top: 50%; transform: translateY(-50%);
+      position: absolute;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: rem-calc(24px);
+      right: rem-calc(24px);
+    }
+    >div {display: none;}
+    span{
+      font-family: $font-second; font-style: italic;
+      font-size: rem-calc(20px);
+      line-height: 1.3;
+    }
   }
-  >div {display: none;}
-  span{
-    font-family: $font-second; font-style: italic;
-    font-size: rem-calc(20px);
-    line-height: 1.3; color: $dark-gray3;
+  .chosen-drop{
+    .chosen-search{
+      min-height: 0;
+    }
+    ul.chosen-results{
+      padding: 0;
+      li{
+        padding: rem-calc(12px);
+        font-size: rem-calc(16px);
+        &.highlighted. &.result-selected{
+					background-image: none;
+        }
+      }
+    }
   }
 }

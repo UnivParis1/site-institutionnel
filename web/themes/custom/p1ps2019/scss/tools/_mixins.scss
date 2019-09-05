@@ -709,3 +709,44 @@ $colors-list: (
 @mixin transitionEffect($speed: 150ms, $type: ease){
   transition:all $speed $type 0s;
 }
+
+@mixin inputStyle(){
+  border: 3px solid $background-main-color;
+  background-color: $white;
+  -webkit-appearance: none; display: block;
+  @extend .hand-cursor;
+  font-size: rem-calc(20px); line-height: 1.3;
+  border-radius: 0; background-image: none; position: relative;
+  padding: rem-calc(24px 24px 24px 72px);
+  min-height: rem-calc(71px); max-height: rem-calc(71px);
+  ::-webkit-input-placeholder {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); font-style: italic;
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); font-style: italic;
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  ::-moz-placeholder {  /* Firefox 19+ */
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); font-style: italic;
+    color: $dark-gray3; #{$padding-left} : rem-calc(48px);
+    color: $dark-gray3;
+  }
+  :-ms-input-placeholder {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); font-style: italic;
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  &:before{
+    content: "";
+    top: 50%; transform: translateY(-50%);
+    position: absolute; left: rem-calc(24px);
+    width: 3px; height: 55%; background-color: $background-main-color;
+  }
+  &:focus{
+		border: 3px solid $background-main-color;
+	}
+}
