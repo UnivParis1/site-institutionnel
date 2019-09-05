@@ -25,6 +25,11 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 			});
 		}//close scroll
 
+    //map submit button
+    if($('.center-form #edit-submit').length > 0){
+      $('.center-form #edit-submit').addClass('reset-btn search-btn white').removeClass('button button--primary js-form-submit form-submit');
+    }
+
     //swiper-buttons
     if($('.swiper-button-next').length > 0){
       $('.swiper-button-next').addClass('fa fa-chevron-right');

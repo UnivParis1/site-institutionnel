@@ -75,9 +75,6 @@ class CentresUp1Form extends FormBase {
       $centre = $dataArray[$key];
 
     $htmlCentre = '<script>
-       if (this.leafletMap) {
-         this.leafletMap.remove();
-       }
       var osmUrl = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png";
       var osmAttr = "&copy; Openstreetmap France";
       osmLayer = new L.tileLayer(osmUrl, {

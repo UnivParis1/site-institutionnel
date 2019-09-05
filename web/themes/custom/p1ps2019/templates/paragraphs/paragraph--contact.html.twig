@@ -38,13 +38,18 @@
 #}
 
 {% block paragraph %}
+  {{ attach_library('leaflet/leaflet') }}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <i class="fa fa-map-marker"></i>
-      <div class="service">{{ content.field_service }}</div>
-      <div class="offices">{{ content.field_offices }}</div>
-      <div class="centre">{{ content.field_centre }}</div>
-      <div class="mailto">{{ content.field_email_address }}</div>
+      <div class="map-centre">
+      {{ content.field_address_map }}
+        <div class="details-centre">
+          <div class="service">{{ content.field_service }}</div>
+          {{ centre|raw }}
+          <div class="offices">{{ content.field_offices }}</div>
+          <div class="mailto">{{ content.field_email_address }}</div>
+        </div>
+      </div>
 
     {% endblock %}
   </div>
