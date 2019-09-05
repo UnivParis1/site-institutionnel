@@ -1,0 +1,65 @@
+uuid: 1173b178-b56d-4e4f-b3f4-7ae73d2fd09d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.jumbotron.bp_background
+    - field.field.paragraph.jumbotron.bp_link
+    - field.field.paragraph.jumbotron.bp_text
+    - field.field.paragraph.jumbotron.bp_width
+    - field.field.paragraph.jumbotron.field_cta_icon
+    - field.field.paragraph.jumbotron.field_title
+    - paragraphs.paragraphs_type.jumbotron
+  module:
+    - link
+    - text
+id: paragraph.jumbotron.default
+targetEntityType: paragraph
+bundle: jumbotron
+mode: default
+content:
+  bp_background:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  bp_link:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  bp_text:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  bp_width:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cta_icon:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

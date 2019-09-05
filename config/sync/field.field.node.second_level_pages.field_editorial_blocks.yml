@@ -9,8 +9,12 @@ dependencies:
     - paragraphs.paragraphs_type.bp_carousel
     - paragraphs.paragraphs_type.bp_simple
     - paragraphs.paragraphs_type.bp_tabs
+    - paragraphs.paragraphs_type.hit_list
+    - paragraphs.paragraphs_type.jumbotron
+    - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
     - paragraphs.paragraphs_type.rich_content
+    - paragraphs.paragraphs_type.section_presentation
     - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
@@ -31,10 +35,14 @@ settings:
     target_bundles:
       rich_content: rich_content
       bp_accordion: bp_accordion
+      jumbotron: jumbotron
       bp_carousel: bp_carousel
       bp_simple: bp_simple
       bp_tabs: bp_tabs
+      hit_list: hit_list
+      key_figures_section: key_figures_section
       medias: medias
+      section_presentation: section_presentation
       tiles: tiles
     target_bundles_drag_drop:
       audio_media:
@@ -55,6 +63,9 @@ settings:
       bp_block:
         weight: 35
         enabled: false
+      jumbotron:
+        enabled: true
+        weight: 36
       bp_carousel:
         enabled: true
         weight: 36
@@ -95,8 +106,8 @@ settings:
         weight: 48
         enabled: false
       hit_list:
+        enabled: true
         weight: 49
-        enabled: false
       image_media:
         weight: 50
         enabled: false
@@ -104,17 +115,20 @@ settings:
         weight: 51
         enabled: false
       key_figures_section:
+        enabled: true
         weight: 52
-        enabled: false
       medias:
         enabled: true
         weight: 53
       presentation:
         weight: 54
         enabled: false
-      section_presentation:
-        weight: 55
+      contact:
+        weight: 54
         enabled: false
+      section_presentation:
+        enabled: true
+        weight: 55
       tile:
         weight: 56
         enabled: false
@@ -129,5 +143,11 @@ settings:
         enabled: false
       video_media:
         weight: 60
+        enabled: false
+      tile_wo_image:
+        weight: 66
+        enabled: false
+      tuile_text_wo_image:
+        weight: 69
         enabled: false
 field_type: entity_reference_revisions
