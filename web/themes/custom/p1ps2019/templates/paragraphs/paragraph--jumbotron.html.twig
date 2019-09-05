@@ -36,6 +36,28 @@
  * @ingroup themeable
  */
 #}
+
+{{ attach_library('bootstrap_paragraphs/bootstrap-paragraphs') }}
+{% if paragraph.bundle == 'bp_columns' %}
+  {{ attach_library('bootstrap_paragraphs/bp-columns') }}
+{% endif %}
+
+{# Renders Width field. #}
+{# Sets class name from values in database. #}
+{% if content.bp_width|render %}
+  {% set layout_width = content.bp_width['#items'].getString() %}
+  {% set layout_width_classes = [
+    'paragraph--width--tiny' == layout_width ? 'paragraph--width--tiny',
+    'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
+    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
+    'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
+    'paragraph--width--full' == layout_width ? 'paragraph--width--full',
+  ]
+  %}
+{% endif %}
+
+{# Renders Background field. #}
+{# Sets class name from values in database. #}
 {% if content.bp_background|render %}
   {% set layout_background = content.bp_background['#items'].getString() %}
   {% set layout_background_classes = [
@@ -45,6 +67,7 @@
   %}
 {% endif %}
 
+{# The template default set classes. #}
 {%
   set classes = [
   'paragraph',
@@ -53,14 +76,36 @@
 ]
 %}
 
+{# Merges Width field with classes. #}
+{% set width_field = content.bp_width|render %}
+{% if width_field %}
+  {% set classes = classes|merge(layout_width_classes) %}
+{% endif %}
+
+{# Test if user chose an icon #}
+{% set icon = content.field_cta_icon['#items'].getString() %}
+{% if icon is not empty %}
+  {% set cta_classes = 'with-icon fa fa-' ~ icon %}
+{% endif %}
+
 {# Merges Background field with classes. #}
 {% set background_field = content.bp_background|render %}
 {% if background_field %}
   {% set classes = classes|merge(layout_background_classes) %}
 {% endif %}
 
+{# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
-  <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-    {{ content.bp_link.0['#title'] }}
-  </a>
+  <div class="grid-container">
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-12">
+        <h2 class="titre">{{ content.field_title.0 }}</h2>
+        <div>{{ content.bp_text }}</div>
+        {% if content.bp_link is not empty %}
+        <span class="{{ content.field_cta_icon.0 }}">{{ icon }}</span>
+        {{ content.bp_link }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
