@@ -153,7 +153,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 <div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }} role="tablist" aria-multiselectable="true">
 <ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
   {% for key, item in content.bp_tab_section if key|first != '#' %}
-    <li role="presentation" class="accordion-item {% if loop.first %}is-active{% endif %}">
+    <li role="presentation" class="accordion-item {% if loop.first %}is-active{% endif %}" data-accordion-item>
       <a href="#{{ paragraph_id }}-{{ key + 1 }}" aria-controls="{{ item['#paragraph'].bp_tab_section_title.value }}" role="tab" data-toggle="tab">
         {{ item['#paragraph'].bp_tab_section_title.value }}
       </a>
