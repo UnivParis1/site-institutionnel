@@ -151,35 +151,37 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
 {# Prints Tabs template. #}
 <div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }} role="tablist" aria-multiselectable="true">
-	<ul class="tabs" data-tabs id="tabs-style">
-	  {# Loops through the tab sections to print the tab section titles. #}
-	  {% for key, item in content.bp_tab_section if key|first != '#' %}
-	    <li role="presentation" class="tabs-title {% if loop.first %}is-active{% endif %}"><a href="#{{ paragraph_id }}-{{ key + 1 }}" aria-controls="{{ item['#paragraph'].bp_tab_section_title.value }}" role="tab" data-toggle="tab">{{ item['#paragraph'].bp_tab_section_title.value }}</a></li>
-	  {% endfor %}
-	</ul>
-	<div class="tabs-content" data-tabs-content="tabs-style">
-	  {# Loops through the tab sections again to print the tab section bodies. #}
-	  {% for key, item in content.bp_tab_section if key|first != '#' %}
-	    <div role="tabpanel" class="tabs-panel{% if loop.first %} is-active{% endif %}" id="{{ paragraph_id }}-{{ key + 1 }}">
-	      {% for body_key, body_item in item['#paragraph'].bp_tab_section_body %}
-	        {# Use the same render array as item and set the '#paragraph'. #}
-	        {% set section_body = item %}
-	        {% set lang = section_body['#paragraph'].langcode[0].value %}
-	        {# Check if a translation exists #}
-	        {% if section_body['#paragraph'].bp_tab_section_body[body_key].entity.hasTranslation(lang) %}
-	          {# Load the entity for the current translation #}
-	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity.getTranslation(lang) %}
-	        {% else %}
-	          {# Load the source entity #}
-	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity %}
-	        {% endif %}
-	        {% set section_body = section_body|merge({'#paragraph': section_translation}) %}
-	        {# Remove the cache keys so it doesn't repeat the first value. #}
-	        {% set section_body = section_body|merge({'#cache': {}}) %}
-	        {# Print the compiled section body. #}
-	        {{ section_body }}
-	      {% endfor %}
-	    </div>
-	  {% endfor %}
-	</div>
+<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
+  {% for key, item in content.bp_tab_section if key|first != '#' %}
+    <li role="presentation" class="accordion-item {% if loop.first %}is-active{% endif %}">
+      <a href="#{{ paragraph_id }}-{{ key + 1 }}" aria-controls="{{ item['#paragraph'].bp_tab_section_title.value }}" role="tab" data-toggle="tab">
+        {{ item['#paragraph'].bp_tab_section_title.value }}
+      </a>
+      <div class="accordion-content" data-tab-content >
+        {% for key, item in content.bp_tab_section if key|first != '#' %}
+    	    <div role="tabpanel" class="tabs-panel{% if loop.first %} is-active{% endif %}" id="{{ paragraph_id }}-{{ key + 1 }}">
+    	      {% for body_key, body_item in item['#paragraph'].bp_tab_section_body %}
+    	        {# Use the same render array as item and set the '#paragraph'. #}
+    	        {% set section_body = item %}
+    	        {% set lang = section_body['#paragraph'].langcode[0].value %}
+    	        {# Check if a translation exists #}
+    	        {% if section_body['#paragraph'].bp_tab_section_body[body_key].entity.hasTranslation(lang) %}
+    	          {# Load the entity for the current translation #}
+    	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity.getTranslation(lang) %}
+    	        {% else %}
+    	          {# Load the source entity #}
+    	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity %}
+    	        {% endif %}
+    	        {% set section_body = section_body|merge({'#paragraph': section_translation}) %}
+    	        {# Remove the cache keys so it doesn't repeat the first value. #}
+    	        {% set section_body = section_body|merge({'#cache': {}}) %}
+    	        {# Print the compiled section body. #}
+    	        {{ section_body }}
+    	      {% endfor %}
+    	    </div>
+    	  {% endfor %}
+      </div>
+    </li>
+  {% endfor %}
+</ul>
 </div>
