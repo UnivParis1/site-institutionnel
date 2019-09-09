@@ -159,7 +159,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
       </a>
       <div class="accordion-content" data-tab-content >
         {% for key, item in content.bp_tab_section if key|first != '#' %}
-    	    <div role="tabpanel" class="tabs-panel{% if loop.first %} is-active{% endif %}" id="{{ paragraph_id }}-{{ key + 1 }}">
+    	    <div role="tabpanel" class="tabs-panel" id="{{ paragraph_id }}-{{ key + 1 }}">
     	      {% for body_key, body_item in item['#paragraph'].bp_tab_section_body %}
     	        {# Use the same render array as item and set the '#paragraph'. #}
     	        {% set section_body = item %}
