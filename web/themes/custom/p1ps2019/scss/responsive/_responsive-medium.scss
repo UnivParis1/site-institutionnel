@@ -169,6 +169,54 @@
 	}
 
 
+	#navbar-header{
+	  position: fixed;
+	  top: rem-calc(64px); left: rem-calc(-24px);
+	  opacity: 0; height: calc(100vh - 114px);
+	  overflow: hidden;
+	  .navigation-right-region, .navigation-region{
+	    display: inline-flex; align-items: center;
+	  }
+	  .navigation-right-region{
+	    display: none;
+	  }
+	  .navigation-region{
+	    padding: rem-calc(56px 64px);
+	     ul {
+	       li {
+	        a,span{
+	          font-size: rem-calc(20px); line-height: 1.2;
+	          @include setFont($fontType-bold);
+	          @extend .hand-cursor;
+	        }
+	        .fa:before{
+	          #{$margin-left} : rem-calc(12px);
+	        }
+	        ul{
+	          position: relative; left: 0; top: 0;
+	          opacity: 0; visibility: hidden;
+	          @include transitionEffect();
+	          li{
+	            a{
+	              @include setFont($fontType-regular);
+	              font-family: $font-second;
+	              pointer-events: none;
+	            }
+	          }
+	        }
+	        &.expanded{
+	          text-decoration: underline;
+	        }
+	      }
+	     }
+	    }
+	    &.overlay-show{
+	      transform: translateX(0);
+	      left: 0; opacity: 1;
+	    }
+	}
+
+
 	.paragraph--type--tiles.paragraph{
 	  .paragraph__column{
 	    .tiles-layout{
@@ -176,7 +224,7 @@
 	      .cell{
 	        max-width: 100%;
 	        width: 100%;
-	        
+
 	      }
 	    }
 	  }
