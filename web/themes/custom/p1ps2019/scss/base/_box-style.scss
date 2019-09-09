@@ -87,8 +87,8 @@
 				text-decoration: none;
 			}
 		}//close a
-		&.is-active a{
-		  color: $light-gray; border: 0;
+		&.is-active > a{
+		  border: 0;
 			text-decoration: none;
 		  /*&:hover{
 			  background-color: #00326E;
@@ -101,3 +101,10 @@
 		}
 	}
 }//close nav-tabs
+.tabs{
+	@include flexDisplay();
+	li{
+		display: inline-flex; justify-content: center;
+		a{@include flexDisplay(); @include flexDisplayAlign('center');}
+	}
+}
