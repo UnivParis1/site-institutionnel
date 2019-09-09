@@ -19,11 +19,6 @@
 
       $(window).resize(function() {
       //  setTimeout(checkOnSwipers, 2000);
-        var windowW = $(window).outerWidth();
-        if(windowW < 801 && tabsSwiper != null){
-          tabsSwiper.params.slidesOffsetBefore = 48;
-          tabsSwiper.update();
-        }
       });//close resize
 
 
