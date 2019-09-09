@@ -112,6 +112,24 @@
       });
     }
 
+    if($('.has-dropdown').length > 0 && $(window).width() < 1024){
+      $('.has-dropdown > span').click(function(){
+        $(this).closest(".has-dropdown").toggleClass('expanded');
+        var count = $(this).parent().siblings('.menu-wrapper').find('li').length;
+        console.log(count);
+        var li_height = $(this).parent().siblings('ul').find('li').outerHeight();
+        console.log(li_height);
+        var max_height = count*li_height;
+        console.log(max_height);
+        if($(this).closest(".has-dropdown.expanded").length > 0){
+          $(this).parent().siblings('ul').css('max-height', max_height + 'px');
+        }
+        else{
+          $(this).parent().siblings('ul').css('max-height', 0);
+        }
+      });
+    }
+
     if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
       $('.icon-menu').click(function() {
         if($('#navbar-header.overlay-show').length > 0){

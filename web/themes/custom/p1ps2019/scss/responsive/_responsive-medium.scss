@@ -170,13 +170,10 @@
 
 
 	#navbar-header{
-	  position: fixed;
+	  position: absolute;
 	  top: rem-calc(64px); left: rem-calc(-24px);
-	  opacity: 0; height: calc(100vh - 114px);
+	  opacity: 0; height: auto;
 	  overflow: hidden;
-	  .navigation-right-region, .navigation-region{
-	    display: inline-flex; align-items: center;
-	  }
 	  .navigation-right-region{
 	    display: none;
 	  }
@@ -192,7 +189,7 @@
 	        }
 	        ul{
 	          position: relative; left: 0; top: 0;
-	          opacity: 0; visibility: hidden;
+	          opacity: 1; visibility: visible; overflow: hidden;
 	          @include transitionEffect();
 	          li{
 	            a{
@@ -205,6 +202,12 @@
 	        &.expanded{
 	          text-decoration: underline;
 	        }
+					&.has-dropdown{
+						.fa{
+							position: absolute;
+							top: 0; right: 0;
+						}
+					}
 	      }
 	     }
 	    }
