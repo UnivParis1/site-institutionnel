@@ -193,17 +193,20 @@
 		background-image: none; margin-bottom: rem-calc(12px);
 	}
 	.reset-mask-mobile{
-		.mask:before{
-			display: none;
-			.overlay-infos{
-				position: relative; padding: rem-calc(32px);
-				h2{color: $text-main-color;}
+		.mask{
+			&:before{
+				display: none;
+				.overlay-infos{
+					position: relative; padding: rem-calc(32px);
+					h2{color: $text-main-color;}
+				}
 			}
 		}
 	}
 	.key-figures-section {
 	  .chiffre, .legende{
 	    font-size: rem-calc(18px); line-height: 1.44;
+			color: $text-white;
 	  }
 	}
 	.paragraph--type--key-figures-section{
@@ -222,7 +225,7 @@
 	}
 	.icon-presentation {
 	  &:not(.paragraph--type--presentation){
-	    padding: 0;
+	    padding: rem-calc(12px);
 	  }
 	}
 /* fin paragraphs */
