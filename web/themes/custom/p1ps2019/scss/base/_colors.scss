@@ -52,7 +52,7 @@ ul.list-style {
 	}
 }
 .circle{
-	@include box-border(1px, $background-main-color);
+	@include box-border(1px, $text-main-color);
 	color: $text-main-color;
 	*{color: $text-main-color;}
 	&.overlay-show, &:hover{
@@ -61,11 +61,11 @@ ul.list-style {
 	}
 	&:not(.white){
 		.transparent:not(.scroll) &{
-			@include box-border(1px, $background-white);
+			@include box-border(1px, $text-white);
 			color: $text-white;
 			*{color: $text-white;}
 			&.overlay-show, &:hover{
-				@include box-border(1px, $background-main-color);
+				@include box-border(1px, $text-main-color);
 				background-color: $background-white; color: $text-main-color;
 				*{color: $text-main-color;}
 			}
@@ -119,8 +119,10 @@ ul.list-style {
 	}
   #accessibility-container{
     background-color: $background-white;
+		@include box-shadow();
+		span{color: $text-black;}
 		&:before{
-			border-bottom: solid rem-calc(6px) $background-white;
+			border-bottom: solid rem-calc(6px) $text-white;
 		}
   }
 }
@@ -152,9 +154,9 @@ ul.list-style {
 	// 	}
 	// }
 }
-.categ-style{color: $text-white; background-color: $background-main-color;}
+.categ-style{color: $background-white; background-color: $text-main-color;}
 .more-link, .load-more{color: $text-main-color;}
-
+.date-style{color: $text-black;}
 .paragraph--type--section-presentation{
   .paragraph--type--presentation{
     color: $dark-gray2;
@@ -175,6 +177,7 @@ ul.list-style {
 
 button.semi-oval{
   background-color: $background-light-gray; color: $text-main-color;
+	border: 1px solid $text-white;
   &.is-active{
     background-color: $background-main-color; color: $text-white;
   }
@@ -271,7 +274,7 @@ input[type="search"], .form-date,
 
      &:focus + label{
        .user-is-tabbing &{
-         border: solid 2px $background-black;
+         border: solid 2px $text-black;
 				 outline: 0;
        }
      }
@@ -382,7 +385,7 @@ tbody tr{
   }
 }
 tr{
-  border: 1px solid $background-white;
+  border: 1px solid $text-white;
 }
   /*@media screen and (max-width: $responsive-card-table-stack-point) {
     td {
@@ -472,9 +475,9 @@ tr{
 			// 	}
 			// }
 			ul {
-				background-color: $background-white;
+				background-color: $background-white; @include box-shadow();
 				&:before{
-					border-bottom: solid rem-calc(6px) $background-white;
+					border-bottom: solid rem-calc(6px) $text-white;
 				}
 			}
 		}
@@ -483,7 +486,7 @@ tr{
 				ul {
 					#ent{
 						a{
-							@include box-border(1px, $background-main-color);
+							@include box-border(1px, $text-main-color);
 							color: $text-main-color;
 							.fa{color: $text-main-color;}
 							&:hover{
@@ -492,7 +495,7 @@ tr{
 								.fa{color: $text-white;}
 							}
 							.transparent:not(.scroll) &{
-								@include box-border(1px, $background-white);
+								@include box-border(1px, $text-white);
 								color: $text-white;
 								.fa{
 									color: $text-white;
@@ -515,7 +518,7 @@ tr{
 		#views-exposed-form-recherche-de-contenu-page-1{
 			.form-item{
 				input{
-					border-bottom: 2px solid $background-light-gray;
+					border-bottom: 2px solid $text-light-gray;
 				}
 			}
 		}
@@ -667,13 +670,13 @@ tr{
     input[type="submit"].button {
         color: $text-main-color;
         background-color: $background-white;
-        border-color: $background-main-color;
+        border-color: $text-main-color;
         &:hover{
         	color: $text-white; background-color: $background-main-color;
         }
 
         &.outline{
-        	border-color: $background-white;
+        	border-color: $text-white;
 					color: $text-white;
 					background-color: transparent;
         	&:hover{
