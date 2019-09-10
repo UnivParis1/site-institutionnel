@@ -27,7 +27,7 @@
 		font-size: rem-calc(22px); line-height: 1.18;
 	}
 	h3, .h3-style{
-		font-size: rem-calc(14px); line-height: 1.71;
+		font-size: rem-calc(18px); line-height: 1.44;
 	}
 	h4, .h4-style{
 		font-size: rem-calc(14px);  line-height: 1.5;
@@ -171,12 +171,26 @@
 			}
 		}
 	}
+
+	.overlay-infos{
+	  &.equal-height{
+		  padding: 48px 32px; width: 100%;
+		}
+	  &.with-padding{
+	    padding: rem-calc(48px 32px);
+	    max-width: 100%;
+			h3{
+				font-size: rem-calc(30px);
+			}
+	  }
+	}
 	/* paragraphs */
+
 	.box-mobile{
-		background-color: $background-main-color;
+		background-color: $background-main-color; color: $text-white;
 		text-align: center; padding: rem-calc(12px);
 		font-size: rem-calc(18px); line-height: 1.44;
-		background-image: none;
+		background-image: none; margin-bottom: rem-calc(12px);
 	}
 	.reset-mask-mobile{
 		.mask:before{
@@ -190,6 +204,25 @@
 	.key-figures-section {
 	  .chiffre, .legende{
 	    font-size: rem-calc(18px); line-height: 1.44;
+	  }
+	}
+	.paragraph--type--key-figures-section{
+	  h2{
+	    margin-bottom: rem-calc(16px);
+	  }
+	}
+	.paragraph--type--section-presentation{
+	  h2{margin-bottom: rem-calc(16px);}
+	  .paragraph--type--presentation{
+	    width: 100%;
+	    h3{
+	      font-size: rem-calc(18px); line-height: 1.44;
+	    }
+	  }
+	}
+	.icon-presentation {
+	  &:not(.paragraph--type--presentation){
+	    padding: 0;
 	  }
 	}
 /* fin paragraphs */
