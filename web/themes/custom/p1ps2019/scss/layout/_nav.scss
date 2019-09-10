@@ -34,32 +34,36 @@
   .navigation-region{
     padding: rem-calc(72px 116px);
     > div {width: 100%;}
-     ul {
+     ul.menu.medium-vertical {
        position: relative;
        li {
          //@include flexDisplay();
-         position: static;
+         position: unset;
          //align-items: center;
         a,span{
           font-size: rem-calc(20px); line-height: 1.2;
           @include setFont($fontType-bold);
-          @extend .hand-cursor;
+          @extend .hand-cursor; max-width: 40%;
         }
         // .fa:before{
         //   #{$margin-left} : rem-calc(12px);
         // }
-        ul{
-          // /position: absolute; left: 25%; top: 0;
-          //z-index: 401; opacity: 0; visibility: hidden;
-          // /@include transitionEffect();
-          li{
-            a{
-              @include setFont($fontType-regular);
-              font-family: $font-second;
-            //  pointer-events: none;
+        &.opens-right{
+          ul.is-dropdown-submenu{
+            left: 40% !important;
+            // /position: absolute; left: 25%; top: 0;
+            //z-index: 401; opacity: 0; visibility: hidden;
+            // /@include transitionEffect();
+            li{
+              a{
+                @include setFont($fontType-regular);
+                font-family: $font-second;
+              //  pointer-events: none;
+              }
             }
           }
         }
+
         &:not(:last-of-type){margin-bottom: rem-calc(12px);}
         // &.expanded{
         //   text-decoration: underline;

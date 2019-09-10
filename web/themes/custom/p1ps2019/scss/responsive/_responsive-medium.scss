@@ -170,10 +170,9 @@
 
 
 	#navbar-header{
-	  position: absolute;
+	  position: absolute; overflow-y: scroll;
 	  top: rem-calc(64px); left: rem-calc(-24px);
-	  opacity: 0; height: auto;
-	  overflow: hidden;
+	  opacity: 0; height: calc(100vh - 64px);
 	  .navigation-right-region{
 	    display: none;
 	  }
@@ -211,7 +210,7 @@
 								content: '\f078'; border: 0;
 								font: normal normal normal 14px/1 FontAwesome;
 								width: rem-calc(16px); height: rem-calc(16px);
-								transform: translateY(-50%);
+								transform: translateY(-50%); text-decoration: none;
 							}
 						}
 						&[aria-expanded="true"]{
