@@ -132,15 +132,22 @@
 
     if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
       $('.icon-menu').click(function() {
+        var scrollTop = $(window).scrollTop();
         if($('#navbar-header.overlay-show').length > 0){
           overlayClose();
           $('body').removeClass('noscroll');
           $('.expanded').removeClass('expanded');
+          if(scrollTop <= 0){
+            $('body').removeClass('scroll');
+          }
         }
         else{
           overlayClose();
           $('#navbar-header, .icon-menu').addClass('overlay-show');
           $('body').addClass('noscroll');
+          if(scrollTop <= 0){
+            $('body').addClass('scroll');
+          }
         }
       });
     }
