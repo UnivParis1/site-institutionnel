@@ -15,16 +15,8 @@ h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, h5, h6 {
 }
 h1, .h1-style{font-size: rem-calc(100px);}
 h2, .h2-style{font-size: rem-calc(45px);}
-h3, .h3-style{
-	font-size: rem-calc(30px);
-	&.big{
-	  	font-size: rem-calc(35px);
-	}
-}
-
-h4, .h4-style{
-	font-size: rem-calc(20px); line-height: 1.5;
-}
+h3, .h3-style{font-size: rem-calc(30px);}
+h4, .h4-style{font-size: rem-calc(20px);}
 h5, .h5-style{font-size: rem-calc(18px);}
 h6, .h6-style{font-size: rem-calc(16px);}
 /* TYPOGRAPHY -- END */
@@ -42,8 +34,8 @@ h6, .h6-style{font-size: rem-calc(16px);}
 *{@extend .no-transition;}
 /* TRANSITION -- END */
 
-.paris1-bg-blue{background-color: #00326e;}
-.paris1-bg-soft-grey{background-color: #f6f0ed;}
+
+
 /* Ebizproduction : Alignement */
 #main{padding-top: rem-calc(100px);}
 
@@ -58,19 +50,11 @@ h6, .h6-style{font-size: rem-calc(16px);}
 .semi-infos-sep{margin-bottom: rem-calc($fgutter/2);}//16px
 .block-title-sep{@include responsiveVal(margin-bottom, $gutter*0.5625);} //18px
 .semi-field-sep, .semi-field-sep-val{margin-bottom: rem-calc($fgutter*0.75);}//24px
-
-.title-sep, .parag-sep, .infos-sep{
-	margin-bottom: rem-calc($fgutter); //32px
-}
-
+.title-sep, .parag-sep, .infos-sep{margin-bottom: rem-calc($fgutter);} //32px
 .field-sep, .title-sep.big{margin-bottom: rem-calc($fgutter*1.5);} //48px
-
 .page-title-sep{@include responsiveVal(margin-bottom, $gutter*1.75);} //56px}
-
-.block-sep{
-	margin-bottom: rem-calc($fgutter*2); //64px
-}
-
+.block-sep{margin-bottom: rem-calc($fgutter*2); //64px}
+.section-sep{margin-bottom: rem-calc($fgutter*2.5);} //80px
 .padding-top-bottom{
   padding-top: rem-calc($fgutter*1.75); //56px
   padding-bottom: rem-calc($fgutter*1.75); //56px
@@ -78,33 +62,6 @@ h6, .h6-style{font-size: rem-calc(16px);}
     padding-top: rem-calc(90px);
     padding-bottom: rem-calc(96px);
   }
-}
-
-.section-padding-bottom{
-	padding-bottom: rem-calc($fgutter*2.5); //80px
-	&.big{
-		padding-bottom: rem-calc($fgutter*4); //128px
-	}
-	&.double{
-		padding-bottom: rem-calc($fgutter*4.5); //144px
-	}
-}
-
-.section-title-sep, .section-sep{
-	margin-bottom: rem-calc($fgutter*2.5); //80px
-	&.big{
-		margin-bottom: rem-calc($fgutter*4); //128px
-	}
-	&.double{
-		@include responsiveVal(margin-bottom, $gutter*4.5); //144px
-	}
-}
-
-.block-padding{
-	@include responsiveVal(padding, $gutter*2.5); //80px
-}
-.block-padding-top-bottom{
-	padding: rem-calc($fgutter*2.5 0);//80px 0
 }
 /* Ebizproduction : Alignement END*/
 

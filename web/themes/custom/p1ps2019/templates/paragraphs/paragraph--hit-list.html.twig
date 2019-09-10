@@ -55,7 +55,7 @@
 
 {%
   set classes = [
-  'paragraph',
+  'paragraph', 'reset-mask-mobile',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
@@ -76,7 +76,7 @@
 {% block paragraph %}
   {# Prints div with classes, and content without Width and Background. #}
   <div{{ attributes.addClass(classes) }}>
-    <div class="paragraph__column mask no-hover relative-wrapper">
+    <div class="paragraph__column mask no-hover relative-wrapper box-mobile">
       {{ content.field_media_image }}
       <div class="overlay-infos">
         <div class="grid-container">
@@ -85,7 +85,7 @@
               <h2 class="section-sep">{{ content.field_title.0 }}</h2>
             </div>
             {% for key, item in  content.field_ranking if key|first != '#' %}
-              <div class="cell large-{{ nbCols }} medium-6 small-12">
+              <div class="cell large-{{ nbCols }} small-6">
                 {{ item }}
               </div>
             {% endfor %}

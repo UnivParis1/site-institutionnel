@@ -137,7 +137,7 @@
           overlayClose();
           $('body').removeClass('noscroll');
           $('.expanded').removeClass('expanded');
-          if(scrollTop <= 0){
+          if(scrollTop <= 0 || $(window.width() < 1024)){
             $('body').removeClass('scroll');
           }
         }
@@ -145,7 +145,7 @@
           overlayClose();
           $('#navbar-header, .icon-menu').addClass('overlay-show');
           $('body').addClass('noscroll');
-          if(scrollTop <= 0){
+          if(scrollTop <= 0 || $(window.width() < 1024)){
             $('body').addClass('scroll');
           }
         }

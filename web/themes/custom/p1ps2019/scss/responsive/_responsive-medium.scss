@@ -6,7 +6,11 @@
 
 //large up
 @include breakpoint($large){
-
+	.paragraph--type--hit-list{
+	  .paragraph__column{
+	    padding: 0 !important;
+	  }
+	}
 }
 
 //large down
@@ -20,7 +24,7 @@
 	}
 
 	h2, .h2-style{
-		font-size: rem-calc(18px); line-height: 1.55;
+		font-size: rem-calc(22px); line-height: 1.18;
 	}
 	h3, .h3-style{
 		font-size: rem-calc(14px); line-height: 1.71;
@@ -167,8 +171,28 @@
 			}
 		}
 	}
-
-
+	/* paragraphs */
+	.box-mobile{
+		background-color: $background-main-color;
+		text-align: center; padding: rem-calc(12px);
+		font-size: rem-calc(18px); line-height: 1.44;
+		background-image: none;
+	}
+	.reset-mask-mobile{
+		.mask:before{
+			display: none;
+			.overlay-infos{
+				position: relative; padding: rem-calc(32px);
+				h2{color: $text-main-color;}
+			}
+		}
+	}
+	.key-figures-section {
+	  .chiffre, .legende{
+	    font-size: rem-calc(18px); line-height: 1.44;
+	  }
+	}
+/* fin paragraphs */
 	#navbar-header{
 	  position: absolute; overflow-y: scroll;
 	  top: rem-calc(64px); left: rem-calc(-24px);
