@@ -11,18 +11,18 @@ $colors-list: (
   $light-green light-green $green,
   $light-blue light-blue $blue,
   $light-yellow light-yellow $yellow,
-  $light-gray light-gray $blue,
-  $white white $black,
-  $light-blue light-blue $black,
-  $medium-gray medium-gray $black,
-  $gray gray $black,
-  $black black $white,
-  $blue blue $white,
-  $green green $white,
-  $yellow yellow $white,
-  $background-main-color turquoise $white,
-  $red red $white,
-  $gold gold $black,
+  $background-light-gray light-gray $blue,
+  $white white $text-black,
+  $light-blue light-blue $text-black,
+  $medium-gray medium-gray $text-black,
+  $gray gray $text-black,
+  $black black $text-white,
+  $blue blue $text-white,
+  $green green $text-white,
+  $yellow yellow $text-white,
+  $background-main-color turquoise $text-white,
+  $red red $text-white,
+  $gold gold $text-black,
 );
 
 
@@ -42,7 +42,7 @@ $colors-list: (
   }
 }
 
-@mixin bg-color($bg-color, $txt-color: $white, $noHover : true){
+@mixin bg-color($bg-color, $txt-color: $text-white, $noHover : true){
   background-color: $bg-color !important;
   color: $txt-color !important;
   *{color: inherit;}
@@ -140,11 +140,11 @@ $colors-list: (
       display: block;
       line-height:2;
       background-color:$gray;
-      color:$black; @include setFont($fontType-bold);
+      color:$text-black; @include setFont($fontType-bold);
       &:hover{
-        background-color: $black;
-        color: $white;
-        b{color:$white;}
+        background-color: $background-black;
+        color: $text-white;
+        b{color:$text-white;}
       }
     }
   }
@@ -183,15 +183,15 @@ $colors-list: (
   line-height: 1;
 }
 
-@mixin box-shadow($val:0.16, $blur: 32px, $verticalH:2px,  $color:$black, $mandatory: false){
+@mixin box-shadow($val:0.16, $blur: 32px, $verticalH:2px,  $color:$text-black, $mandatory: false){
   @if $mandatory == true {
-    box-shadow: 0 $verticalH $blur 0 rgba($black, $val) !important;
+    box-shadow: 0 $verticalH $blur 0 rgba($background-black, $val) !important;
   } @else {
-    box-shadow: 0 $verticalH $blur 0 rgba($black, $val);
+    box-shadow: 0 $verticalH $blur 0 rgba($background-black, $val);
   }
 }
 
-@mixin box-border($border-width: 2px, $color: $black){
+@mixin box-border($border-width: 2px, $color: $background-black){
   box-shadow: 0 0 0 $border-width rgba($color, 1) inset;
 }
 
@@ -498,7 +498,7 @@ $colors-list: (
       color: $text-main-color;
       span{
         &:before{background-color: $background-main-color;}
-        &:after{color: $white;}
+        &:after{color: $text-white;}
       }
     }
   }
@@ -506,7 +506,7 @@ $colors-list: (
   &:hover, &:focus{
     &:not(.active):not(.clicked){
       label, .label-style{
-        color: $black;
+        color: $text-black;
         span{
           &:before{
             background-color: $light-pink;
@@ -708,7 +708,7 @@ $colors-list: (
 
 @mixin inputStyle(){
   border: 3px solid $background-main-color;
-  background-color: $white;
+  background-color: $background-white;
   -webkit-appearance: none; display: block;
   //@extend .hand-cursor;
   font-size: rem-calc(20px); line-height: 1.3;

@@ -1,16 +1,16 @@
 //======================= BASE =================//
 hr {
-	background: $black;
+	background: $background-black;
 }
 
 ::-moz-selection {
-	color: $white;
-  background: $black;
+	color: $text-white;
+  background: $background-black;
 }
 
 ::selection {
-	color: $white;
-  background: $black;
+	color: $text-white;
+  background: $background-black;
 }
 
 h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .h3-style, .h4-style, .h5-style, .h6-style{
@@ -18,15 +18,15 @@ h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .h3-style, .h4-style, .h5-style, .
 }
 
 .paris1-bg-blue{background-color: $background-main-color;}
-.paris1-bg-soft-grey{background-color: $light-gray;}
+.paris1-bg-soft-grey{background-color: $background-light-gray;}
 
 .mask{@include maskBackground($background-main-color, 0.6);}
-.mask-effect{@include maskBackground($black);}
-.mask-effect2{@include maskBackground($black, 0.1, 0.4);}
-.mask-effect-3{@include maskBackground($black, 0.3);}
-.mask-effect-4{@include maskBackground($black, 0.4);}
-.mask-effect-5{@include maskBackground($black, 0.5);}
-.mask-effect-7{@include maskBackground($black, 0.7);}
+.mask-effect{@include maskBackground($background-black);}
+.mask-effect2{@include maskBackground($background-black, 0.1, 0.4);}
+.mask-effect-3{@include maskBackground($background-black, 0.3);}
+.mask-effect-4{@include maskBackground($background-black, 0.4);}
+.mask-effect-5{@include maskBackground($background-black, 0.5);}
+.mask-effect-7{@include maskBackground($breakpointCountblack, 0.7);}
 
 .m-txt-message, .message{
 	*{color: inherit;}
@@ -57,16 +57,16 @@ ul.list-style {
 	*{color: $text-main-color;}
 	&.overlay-show, &:hover{
 		background-color: $background-main-color;
-		*{color: $white;} color: $white;
+		*{color: $text-white;} color: $text-white;
 	}
 	&:not(.white){
 		.transparent:not(.scroll) &{
-			@include box-border(1px, $white);
-			color: $white;
-			*{color: $white;}
+			@include box-border(1px, $background-white);
+			color: $text-white;
+			*{color: $text-white;}
 			&.overlay-show, &:hover{
 				@include box-border(1px, $background-main-color);
-				background-color: $white; color: $text-main-color;
+				background-color: $background-white; color: $text-main-color;
 				*{color: $text-main-color;}
 			}
 		}
@@ -74,21 +74,21 @@ ul.list-style {
 
 	&.blue{
 		background-color: $background-main-color;
-		color: $white;
+		color: $text-white;
 		&:hover{
-			background-color: $white;
+			background-color: $background-white;
 			color: $text-main-color;
 		}
 	}
 	&.white{
 		border: 0;
-		background-color: $white;
+		background-color: $background-white;
 		color: $text-main-color;
 		*{color: $text-main-color;}
 		&:hover{
 			background-color: $background-main-color;
-			color: $white;
-			*{color: $white;}
+			color: $text-white;
+			*{color: $text-white;}
 		}
 	}
 }
@@ -104,11 +104,11 @@ ul.list-style {
 			background-color: $background-main-color;
 		}
 		&.overlay-show, &:hover{
-			&:before{background-color: $white;}
+			&:before{background-color: $background-white;}
 		}
 		.transparent:not(.scroll) &{
 			&:before{
-		    background-color: $white;
+		    background-color: $background-white;
 		  }
 			&.overlay-show, &:hover{
 				&:before{
@@ -118,16 +118,16 @@ ul.list-style {
 		}
 	}
   #accessibility-container{
-    background-color: $white;
+    background-color: $background-white;
 		&:before{
-			border-bottom: solid rem-calc(6px) $white;
+			border-bottom: solid rem-calc(6px) $background-white;
 		}
   }
 }
 #search-toggle{
 	// .fa{
 	// 	&:before{
-	// 		color: $white;
+	// 		color: $text-white;
 	// 	}
 	// }
 	// .scroll &{
@@ -139,7 +139,7 @@ ul.list-style {
 	// 	&:hover, &.overlay-show{
 	// 		.fa{
 	// 			&:before{
-	// 				color: $white;
+	// 				color: $text-white;
 	// 			}
 	// 		}
 	// 	}
@@ -152,7 +152,7 @@ ul.list-style {
 	// 	}
 	// }
 }
-.categ-style{color: $white; background-color: $background-main-color;}
+.categ-style{color: $text-white; background-color: $background-main-color;}
 .more-link, .load-more{color: $text-main-color;}
 
 .paragraph--type--section-presentation{
@@ -174,16 +174,16 @@ ul.list-style {
 }
 
 button.semi-oval{
-  background-color: $light-gray; color: $text-main-color;
+  background-color: $background-light-gray; color: $text-main-color;
   &.is-active{
-    background-color: $background-main-color; color: $white;
+    background-color: $background-main-color; color: $text-white;
   }
 }
 
 .swiper-container{
   .swiper-button-prev, .swiper-button-next{
     &:before{
-      color: $black;
+      color: $text-black;
     }
   }
 }
@@ -224,7 +224,7 @@ input[type="search"], .form-date,
         color: $text-main-color;
 				&.highlighted, &.result-selected{
 					background-color: $background-main-color;
-					color: $white;
+					color: $text-white;
 				}
       }
     }
@@ -265,13 +265,13 @@ input[type="search"], .form-date,
      &:checked + label{
        span{
          &:before{background-color:$background-main-color;}
-         &:after{background-color:$white;}
+         &:after{background-color:$text-white;}
        }
      }
 
      &:focus + label{
        .user-is-tabbing &{
-         border: solid 2px $black;
+         border: solid 2px $background-black;
 				 outline: 0;
        }
      }
@@ -283,7 +283,7 @@ input[type="search"], .form-date,
        color: $medium-gray;
      }
      &:hover{
-       color: $black;
+       color: $text-black;
        span{
          &:before{
            background-color: $light-blue;
@@ -298,7 +298,7 @@ input[type="search"], .form-date,
          background-color: $medium-gray;
        }
        &:after{
-         //background-color: $black;
+         //background-color: $background-black;
        }
      }
    }//close label / label-style
@@ -327,23 +327,23 @@ input[type="search"], .form-date,
  // ================== SELECT STYLE =================== //
  .form-type-select, .select-wrapper{
    &.focus, &:focus{
-     &:before{color:$black;}
+     &:before{color:$text-black;}
      select{
-       color:$black;
+       color:$text-black;
      }
    }
    &:hover{
-     color:$black;
-     select{color:$black;}
+     color:$text-black;
+     select{color:$text-black;}
    }
    select{
-     background-color: $white;
+     background-color: $background-white;
      &.horaires-select{
        background-color:$gray;
        border-color:$gray;
        &:hover{
          //background-color: $medium-gray;
-         //background-color: $white;
+         //background-color: $background-white;
        }
      }
    }
@@ -382,7 +382,7 @@ tbody tr{
   }
 }
 tr{
-  border: 1px solid $white;
+  border: 1px solid $background-white;
 }
   /*@media screen and (max-width: $responsive-card-table-stack-point) {
     td {
@@ -403,9 +403,9 @@ tr{
 		li{
 			a{
 				&:hover{
-					color:$white;
+					color:$text-white;
 					&:before{
-						background-color: $white;
+						background-color: $background-white;
 					}
 				}
 			}
@@ -415,7 +415,7 @@ tr{
 		ul{
 			li{
 				a{
-					&:hover{color:$white;}
+					&:hover{color:$text-white;}
 				}
 			}
 		}
@@ -426,8 +426,8 @@ tr{
 //================ HEADER =================== //
 #navbar{
 	#top-header {
-		background-color: $white;
-		@include box-shadow(0.25, 2px, 0, $black);
+		background-color: $background-white;
+		@include box-shadow(0.25, 2px, 0, $background-black);
 		svg{
 			fill: $gold;
 		}
@@ -436,7 +436,7 @@ tr{
 			background-color: transparent;
 			box-shadow: none;
 			svg{
-				fill: $white;
+				fill: $background-white;
 				*{fill: inherit;}
 			}
 		}
@@ -449,7 +449,7 @@ tr{
 		>span{
 			background: $background-main-color;
 			.transparent:not(.scroll) &{
-				background-color: $white;
+				background-color: $background-white;
 			}
 		}
 		}
@@ -461,20 +461,20 @@ tr{
 	.header-right{
 		.language-switcher-language-url {
 			// button{
-			// 	color: $white;
+			// 	color: $text-white;
 			// 	&.overlay-show, &:hover{color: $text-main-color;}
 			// 	.scroll &{
 			// 		color: $text-main-color;
 			// 		&:hover{
 			// 			background-color: $background-main-color;
-			// 			color: $white;
+			// 			color: $text-white;
 			// 		}
 			// 	}
 			// }
 			ul {
-				background-color: $white;
+				background-color: $background-white;
 				&:before{
-					border-bottom: solid rem-calc(6px) $white;
+					border-bottom: solid rem-calc(6px) $background-white;
 				}
 			}
 		}
@@ -488,17 +488,17 @@ tr{
 							.fa{color: $text-main-color;}
 							&:hover{
 								background-color: $background-main-color;
-								color: $white;
-								.fa{color: $white;}
+								color: $text-white;
+								.fa{color: $text-white;}
 							}
 							.transparent:not(.scroll) &{
-								@include box-border(1px, $white);
-								color: $white;
+								@include box-border(1px, $background-white);
+								color: $text-white;
 								.fa{
-									color: $white;
+									color: $text-white;
 								}
 								&:hover{
-									background-color: $white;
+									background-color: $background-white;
 									color: $text-main-color;
 									.fa{color: $text-main-color;}
 								}
@@ -510,19 +510,19 @@ tr{
 		}
 	}//close header-right
 	.block-views-exposed-filter-blockrecherche-de-contenu-page-1{
-		background-color: $white;
-		@include box-shadow(0.25, 2px, 0, $black);
+		background-color: $background-white;
+		@include box-shadow(0.25, 2px, 0, $background-black);
 		#views-exposed-form-recherche-de-contenu-page-1{
 			.form-item{
 				input{
-					border-bottom: 2px solid $light-gray;
+					border-bottom: 2px solid $background-light-gray;
 				}
 			}
 		}
 	}
 }
 #region-header {
-  background-color: $white;
+  background-color: $background-white;
 	.header-right{
 		.header-right-inner{
 			#block-headerrightmenu{
@@ -530,10 +530,10 @@ tr{
 					>li{
 						span, a{color: $text-main-color;}
 						ul{
-							background-color: $white;
+							background-color: $background-white;
 							li{
 								a{
-									&:hover{background-color: $light-gray;}
+									&:hover{background-color: $background-light-gray;}
 								}
 								&:not(:last-of-type){
 									border-bottom: 1px solid $medium-gray;
@@ -565,11 +565,11 @@ tr{
 				}
 				&.has-children{
 					ul{
-							background-color: $white;
+							background-color: $background-white;
 						li{
 							a{
 								&:hover{
-									background-color: $light-gray;
+									background-color: $background-light-gray;
 								}
 							}
 							&:not(:last-of-type){
@@ -586,11 +586,11 @@ tr{
 #navbar-header{
   background-color: $background-main-color;
   .navigation-right-region{
-    background-color: $white;
+    background-color: $background-white;
     ul{
       li{
         a{
-          color: $black;
+          color: $text-black;
         }
       }
     }
@@ -599,7 +599,7 @@ tr{
      ul {
        li {
         a,span{
-          color: $white;
+          color: $text-white;
         }
       }
      }
@@ -613,7 +613,7 @@ tr{
 	    background-color: transparent;
 	    a, a:hover{
     	  background-color: transparent;
-		    color: $black;
+		    color: $text-black;
 	    }
 	    &.is-active{
 	    	a{background-color: transparent;}
@@ -630,7 +630,7 @@ tr{
 	    }
 	    &.pager__item--previous, &.pager__item--next{
 	    	&:hover{
-	    		span:after{color: $white;}
+	    		span:after{color: $text-white;}
 	    		a:after{
 	    			background-color: $main-color-darken;
 	    		}
@@ -638,9 +638,9 @@ tr{
 	    }
 	    &.pager__item--first,&.pager__item--last{
 	    	&:hover{
-	    		span:after{color: $white;}
+	    		span:after{color: $text-white;}
 	    		a{
-	    			color:$white;
+	    			color:$text-white;
 	    			&:after{
 		    			background-color: $main-color-darken;
 		    		}
@@ -666,18 +666,18 @@ tr{
     button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
     input[type="submit"].button {
         color: $text-main-color;
-        background-color: $white;
+        background-color: $background-white;
         border-color: $background-main-color;
         &:hover{
-        	color: $white; background-color: $background-main-color;
+        	color: $text-white; background-color: $background-main-color;
         }
 
         &.outline{
-        	border-color: $white;
-					color: $white;
+        	border-color: $background-white;
+					color: $text-white;
 					background-color: transparent;
         	&:hover{
-        		background-color: $white;
+        		background-color: $background-white;
 						color: $text-main-color;
 						*{color: $text-main-color;}
         	}
@@ -691,7 +691,7 @@ tr{
 .box-style{
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
 	.box-content{
-	  background-color: $light-gray;
+	  background-color: $background-light-gray;
 		h2{
 			color: $dark-gray2;
 			*{color: $dark-gray2;}
@@ -712,7 +712,7 @@ tr{
 .nav-tabs {
 	> li{
 	  	> a{
-		  color: $text-main-color; background: $light-gray;
+		  color: $text-main-color; background: $background-light-gray;
 			&:hover{
 			  background-color: $background-main-color;
 			  color: #light-gray;
@@ -720,7 +720,7 @@ tr{
 		}//close a
 		&.active a{
 		 // background-color: $background-main-color;
-		  color: $light-gray;
+		  color: $text-light-gray;
 		  /*&:hover{
 			  background-color: #00326E;
 			  color: #F6F0ED; border: 0;
@@ -739,14 +739,14 @@ tr{
 #tabs-style, .tabs, .accordion {
 	> li{
 	  	> a{
-		  color: $text-main-color; background: $light-gray;
+		  color: $text-main-color; background-color: $background-light-gray;
 			&:hover{
-			  background-color: $background-main-color; color: $light-gray;
+			  background-color: $background-main-color; color: $text-light-gray;
 			}
 		}//close a
 		&.is-active > a{
 		  background-color: $background-main-color;
-		  color: $light-gray;
+		  color: $text-light-gray;
 		  /*&:hover{
 			  background-color: #00326E;
 			  color: #F6F0ED; border: 0;
@@ -758,11 +758,11 @@ tr{
 
 //=========== PAGER ============ //
 .pager {
-  .is-active a{background-color: $black;}
+  .is-active a{background-color: $background-black;}
   a{
     background-color: $light-blue;
     &:hover{
-      color: $white;
+      color: $text-white;
     }
   }
 }
@@ -797,7 +797,7 @@ tr{
 					  }
 					}
 					> .menu{
-						 background-color: $white;
+						 background-color: $background-white;
 						  li {
 							a, span:not([class*="icon-"]){
 								border-bottom: 1px solid $medium-gray;
@@ -805,7 +805,7 @@ tr{
 							&.has-children{
 								.menu-wrapper{
 									ul{
-										background-color: $light-gray;
+										background-color: $background-light-gray;
 									}
 								}
 							}
