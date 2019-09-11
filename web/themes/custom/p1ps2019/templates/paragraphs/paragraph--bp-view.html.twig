@@ -128,6 +128,7 @@
 {%
     set classes = [
     'paragraph', 'grid-x', content.bp_view['#items']|length > 1 ? 'grid-margin-x section-sep',
+    content.bp_view['#items']|length == 1 ? 'grid-container', content.bp_view['#items']|length == 1 ? 'padding-top-bottom big',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     'paragraph--id--' ~ paragraph.id.value,
@@ -135,11 +136,7 @@
 ]
 %}
 
-{%
-    set grid_class = [
-      content.bp_view['#items']|length == 1 ? 'grid-container', content.bp_view['#items']|length == 1 ? 'padding-top-bottom big'
-    ]
-%}
+
 
 {# Merges Width field with classes. #}
 {% set width_field = content.bp_width|render %}
@@ -154,7 +151,6 @@
 {% endif %}
 
 {# Prints div with classes, and content without Width and Background. #}
-<div{{ attributes.addClass(grid_class) }}>
   <div{{ attributes.addClass(classes) }}>
       {% if content.bp_view['#items']|length > 1 %}
           {% for key, item in content.bp_view if key|first != '#' %}
@@ -172,4 +168,3 @@
           {% endfor %}
       {% endif %}
   </div>
-</div>
