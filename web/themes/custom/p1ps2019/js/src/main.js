@@ -130,12 +130,6 @@
     //   });
     // }
 
-    boxMobileMargin();
-    if($('.tabs, .accordion').length > 0){
-      $(".tabs li a, .accordion li a").on("click",function(){
-        boxMobileMargin();
-      });
-    }
 
 
     if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
@@ -182,9 +176,4 @@
     }
   }
 
-  function boxMobileMargin(){
-    if($('.box-mobile').length > 0){
-      $('.box-mobile').closest('.cell').addClass('semi-infos-sep-mobile');
-    }
-  }
 })(jQuery);
