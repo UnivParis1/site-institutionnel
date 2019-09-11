@@ -17,7 +17,7 @@
 /* Ebizproduction : Responsive > Phablette */
 @include breakpoint($large - 1 down) {
 	$fgutter : 24px;
-	.padding-mobile{padding: rem-calc(0 24px);}
+	.padding-mobile{padding: rem-calc(0 20px);}
 	/* TYPOGRAPHY -- BEGIN */
 	h1, .h1-style{
 		font-size: rem-calc(24px); line-height: 1.33;
@@ -40,7 +40,6 @@
 	}
 	/* TYPOGRAPHY -- END */
 
-	.grid-container:not(.mobile-keep-padding){padding: 0;}
 	.section-sep, .semi-infos-sep-mobile, .title-sep.big{margin-bottom: rem-calc(16px);}
 	.padding-top-bottom{
 	  padding-top: rem-calc($fgutter*1.75); //56px
@@ -51,7 +50,14 @@
 	  }
 	}
 
-
+	.box-style{
+		.box-content{
+		  padding: rem-calc(36px 32px);
+		  .title{
+		  	font-size:rem-calc(18px); line-height: 1.22;
+		  }
+		}
+	}
 
 	label, .label-style{
 		line-height:1.67; font-size: rem-calc(12px);
