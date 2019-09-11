@@ -6,17 +6,16 @@
 
 
 
-        if($('.swiper-container:not(#swiper-tiles)').length > 0){
-          console.log('my swiper');
-  				var mySwiper = new Swiper('.swiper-container:not(#swiper-tiles)', {
-  					slidesPerView: 3,
-            spaceBetween: 24,
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
-  			  });
-  			}
+        // if($('.swiper-container:not(#swiper-tiles)').length > 0){
+  			// 	var mySwiper = new Swiper('.swiper-container:not(#swiper-tiles)', {
+  			// 		slidesPerView: 3,
+        //     spaceBetween: 24,
+        //     navigation: {
+        //       nextEl: '.swiper-button-next',
+        //       prevEl: '.swiper-button-prev',
+        //     },
+  			//   });
+  			// }
         if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
           console.log('tiles swiper');
   				var tilesSwiper = new Swiper('#swiper-tiles', {
