@@ -7,6 +7,7 @@
 
 
         if($('.swiper-container:not(#swiper-tiles)').length > 0){
+          console.log('my swiper');
   				var mySwiper = new Swiper('.swiper-container:not(#swiper-tiles)', {
   					slidesPerView: 3,
             spaceBetween: 24,
