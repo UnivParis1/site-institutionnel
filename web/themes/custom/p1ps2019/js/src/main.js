@@ -130,6 +130,14 @@
     //   });
     // }
 
+    boxMobileMargin();
+    if($('.tabs, .accordion').length > 0){
+      $(".tabs li a, .accordion li a").on("click",function(){
+        boxMobileMargin();
+      });
+    }
+
+
     if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
       $('.icon-menu').click(function() {
         var scrollTop = $(window).scrollTop();
@@ -151,7 +159,7 @@
         }
       });
     }
-    
+
 		//social media footer
 		if( $('.block-system-menu-blockreseaux-sociaux').length > 0){
 			$('.block-system-menu-blockreseaux-sociaux li').each(function(){
@@ -171,6 +179,12 @@
       if($('body.noscroll').length > 0){
         $('body').removeClass('noscroll');
       }
+    }
+  }
+
+  function boxMobileMargin(){
+    if($('.box-mobile').length > 0){
+      $('.box-mobile').closest('.cell').addClass('semi-infos-sep-mobile');
     }
   }
 })(jQuery);

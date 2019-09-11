@@ -41,7 +41,7 @@
 	/* TYPOGRAPHY -- END */
 
 
-	.section-sep{margin-bottom: rem-calc(16px);}
+	.section-sep, .semi-infos-sep-mobile{margin-bottom: rem-calc(16px);}
 	.padding-top-bottom{
 	  padding-top: rem-calc($fgutter*1.75); //56px
 	  padding-bottom: rem-calc($fgutter*1.75); //56px
@@ -214,6 +214,11 @@
 			.overlay-infos{
 				position: relative; padding: rem-calc(32px);
 				h2{color: $text-main-color;}
+				.btn.outline.fa{
+					color: $text-main-color; border-color: $text-main-color;
+					&:before{color: $text-main-color;}
+					width: 100%; justify-content: center;
+				}
 			}
 		}
 	}
@@ -340,7 +345,8 @@
 	.centres-up1-form {
 	  .overlay-infos{
 	    padding: rem-calc(24px 32px);
-	    .form-item{
+			position: relative;
+	    .form .form-item{
 				&:last-of-type{margin-bottom: 0;}
 	    }
 	  }

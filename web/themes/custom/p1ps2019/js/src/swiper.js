@@ -23,11 +23,9 @@
 
 
 
-      if($('.tabs').length > 0){
-        $(".tabs li a").on("click",function(){
-          console.log('li a');
+      if($('.tabs, .accordion').length > 0){
+        $(".tabs li a, .accordion li a").on("click",function(){
           if($('.tabs-content .tabs-panel .swiper-container').length > 0){
-            console.log('swiper');
             reinitSwiper(mySwiper);
           }
         });
