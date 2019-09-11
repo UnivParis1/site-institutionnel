@@ -28,6 +28,8 @@
 
       $(window).resize(function() {
       //  setTimeout(checkOnSwipers, 2000);
+        reinitSwiper(mySwiper);
+        reinitSwiper(tilesSwiper);
       });//close resize
 
 
@@ -36,6 +38,7 @@
         $(".tabs li a, .accordion li a").on("click",function(){
           if($('.tabs-content .tabs-panel .swiper-container').length > 0){
             reinitSwiper(mySwiper);
+            reinitSwiper(tilesSwiper);
           }
         });
       }
