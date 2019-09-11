@@ -130,8 +130,6 @@
     //   });
     // }
 
-
-
     if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
       $('.icon-menu').click(function() {
         var scrollTop = $(window).scrollTop();
