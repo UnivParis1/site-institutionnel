@@ -17,6 +17,7 @@
   			  });
   			}
         if($('#swiper-tiles').length > 0 && window.width() < 1024){
+          console.log('tiles swiper');
   				var tilesSwiper = new Swiper('#swiper-tiles', {
   					slidesPerView: 1,
             pagination: {

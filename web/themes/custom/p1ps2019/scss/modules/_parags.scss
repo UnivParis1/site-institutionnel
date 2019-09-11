@@ -4,6 +4,7 @@
   width: 100%;
   height: auto;
   display: block;
+  font-family: $font-second;
   h2 {
     position: relative;
     width: 100%;
@@ -35,11 +36,12 @@
     }
   }
   .field--name-field-publication-topics{
-    font-family: $font-second;
+    font-style: rem-calc(18px); line-height: 1.33;
   }
 }
 
 .paragraph--type--hit-list{
+  font-family: $font-second;
   .paragraph__column{
     .paragraph__column{
       font-size: rem-calc(20px); line-height: 1.2;
@@ -62,9 +64,8 @@
     width: 80%;
     h3{
       font-size: rem-calc(40px); line-height: 1.325;
-      font-family: $font-second;
     }
-    p{font-size: rem-calc(20px); font-family: $font-second; line-height: 1.35;}
+    p{font-size: rem-calc(20px); line-height: 1.35;}
   }
 }
 
@@ -80,7 +81,10 @@
       width: 100%; height: 100%; margin: 0;
       a{
         width: 100%; height: 100%; @include flexDisplay(); @include flexDisplayAlign('center-middle');
-        span{max-width: rem-calc(332px); text-align: center; display: block;}
+        span{
+          max-width: rem-calc(425px); text-align: center;
+          display: block; line-height: 1.23;
+        }
       }
     }
     .tiles-layout{
@@ -121,7 +125,11 @@
     }
   }
 }
-
+#swiper-tiles{
+  .swiper-slide{
+    box-sizing: border-box;
+  }
+}
 .paragraph.rich-content {
   display: flex;
 }
