@@ -211,9 +211,11 @@
 
 	.box-mobile{
 		background-color: $background-main-color; color: $text-white;
-		text-align: center; padding: rem-calc(12px);
+		text-align: center; padding: rem-calc(24px 12px);
 		font-size: rem-calc(18px); line-height: 1.44;
 		background-image: none; height: 100%;
+		@include flexDisplay(); @include flexDisplayAlign('center-middle');
+		flex-direction: column;
 	}
 	.reset-mask-mobile{
 		&.mask, .mask{
@@ -222,7 +224,7 @@
 			}
 		}
 		.overlay-infos{
-			position: relative; padding: rem-calc(32px);
+			position: relative;
 			h2{color: $text-main-color;}
 			.btn.outline.fa{
 				color: $text-main-color; border-color: $text-main-color;
