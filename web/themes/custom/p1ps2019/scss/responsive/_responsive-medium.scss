@@ -130,6 +130,7 @@
 	    button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
 	    input[type="submit"].button {
 	        font-size: rem-calc(14px); line-height: 1.71;
+					margin-top: rem-calc(16px);
 	        &.big {
 	            font-size: rem-calc(14px); line-height: 1.71;
 	        }
@@ -207,7 +208,7 @@
 		background-image: none; height: 100%;
 	}
 	.reset-mask-mobile{
-		.mask{
+		&.mask, .mask{
 			&:before{
 				display: none;
 			}
@@ -307,13 +308,14 @@
 
 	.paragraph--type--tiles.paragraph{
 	  .paragraph__column{
+			h2{margin-bottom: rem-calc(16px);}
 	    .tiles-layout{
 	      .cell{
 	        max-width: 100%;
 	        width: 100%;
 					&:nth-child(odd), &:nth-child(even){
-	          #{$margin-right}: rem-calc(12px);
-	          #{$margin-left}: rem-calc(12px);
+	          #{$margin-right}: 0;
+	          #{$margin-left}: 0;
 	        }
 	        &:nth-last-child(n+3), &:nth-child(n+3){
 	          margin-bottom: rem-calc(12px);
@@ -325,8 +327,8 @@
 	          max-width: 100%;
 	          width: 100%;
 	          &:nth-child(odd), &:nth-child(even){
-	            #{$margin-right}: rem-calc(12px);
-							#{$margin-left}: rem-calc(12px);
+	            #{$margin-right}: 0;
+							#{$margin-left}: 0;
 	          }
 	        }
 	      }
