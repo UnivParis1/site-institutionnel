@@ -127,7 +127,7 @@
 {# Sets Paragraph ID as class. #}
 {%
     set classes = [
-    'paragraph', 'padding-top-bottom big', 'grid-x grid-margin-x',
+    'paragraph', 'padding-top-bottom big', 'grid-x', content.bp_view['#items']|length > 1 ? 'grid-margin-x', 
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     'paragraph--id--' ~ paragraph.id.value,
