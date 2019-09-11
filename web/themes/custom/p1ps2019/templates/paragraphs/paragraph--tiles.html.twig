@@ -87,12 +87,16 @@
           </div>
       </div>
     {% endif %}
-    <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
-      {% for key, item in  content.field_tile if key|first != '#' %}
-        <div class="cell large-{{ nbCols }} medium-6 small-12">
-          {{ item }}
-        </div>
-      {% endfor %}
-    </div>
+    {% if content.field_tile['#items']|length > 2 %}
+      <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
+    {% else %}
+      <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements">
+    {% endif %}
+        {% for key, item in  content.field_tile if key|first != '#' %}
+          <div class="cell large-{{ nbCols }} medium-6 small-12">
+            {{ item }}
+          </div>
+        {% endfor %}
+      </div>
   </div>
 </div>

@@ -151,6 +151,7 @@
         }
       });
     }
+    
 		//social media footer
 		if( $('.block-system-menu-blockreseaux-sociaux').length > 0){
 			$('.block-system-menu-blockreseaux-sociaux li').each(function(){
