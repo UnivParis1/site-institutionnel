@@ -80,8 +80,7 @@
 {% if content.field_tile['#items']|length > 2 %}
   <div class="paragraph__column mobile-sep">
 {% else %}
-  <div class="paragraph__column mobile-sep swiper-container" id="swiper-tiles">
-    <div class="swiper-pagination"></div>
+  <div class="paragraph__column mobile-sep">
 {% endif %}
     {% if title|striptags|trim %}
       <div class="grid-container">
@@ -95,13 +94,20 @@
     {% if content.field_tile['#items']|length > 2 %}
       <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
     {% else %}
-      <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements swiper-wrapper">
+      <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements">
+        <div class="swiper-container" id="swiper-tiles">
+            <div class="swiper-wrapper">
     {% endif %}
         {% for key, item in  content.field_tile if key|first != '#' %}
           <div class="swiper-slide cell large-{{ nbCols }} small-6">
             {{ item }}
           </div>
         {% endfor %}
+        {% if content.field_tile['#items']|length < 2 %}
+            </div>
+            <div class="swiper-pagination swiper-pagination-bullets"></div>
+        </div>
+        {% endif %}
       </div>
   </div>
 </div>
