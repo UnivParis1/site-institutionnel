@@ -17,7 +17,8 @@
 /* Ebizproduction : Responsive > Phablette */
 @include breakpoint($large - 1 down) {
 	$fgutter : 24px;
-	.padding-mobile{padding: rem-calc(0 20px);}
+	.padding-mobile{padding: rem-calc(0 32px);}
+	.grid-container{padding-left: rem-calc(32px); padding-right: rem-calc(32px);}
 	/* TYPOGRAPHY -- BEGIN */
 	h1, .h1-style{
 		font-size: rem-calc(24px); line-height: 1.33;
@@ -198,6 +199,24 @@
 			}
 		}
 	}
+	/* tabs */
+	#tabs-style, .tabs, .accordion {
+		> li{
+		  	> a{
+			  font-size: rem-calc(18px); line-height: 1.22;
+			  padding: rem-calc(24px 32px);
+				&:before{
+					content: "\f078";
+					font: normal normal normal 14px/1 FontAwesome;
+				}
+			}//close a
+			&.is-active > a{
+				&:before{
+					transform: rotate(180deg);
+				}
+			}
+		}
+	}//close nav-tabs
 
 	.overlay-infos{
 	  &.equal-height{
