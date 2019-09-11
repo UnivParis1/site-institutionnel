@@ -20,9 +20,10 @@
   				var tilesSwiper = new Swiper('#swiper-tiles', {
   					slidesPerView: 1,
             pagination: {
-              el: '.swiper-pagination',
-              type: 'bullets',
-            },
+  				    el: '.swiper-pagination',
+  				    type: 'bullets',
+  						clickable: true,
+  				  },
   			  });
   			}
 
