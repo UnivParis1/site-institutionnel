@@ -16,7 +16,7 @@
             },
   			  });
   			}
-        if($('#swiper-tiles').length > 0){
+        if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
           console.log('tiles swiper');
   				var tilesSwiper = new Swiper('#swiper-tiles', {
   					slidesPerView: 1,
@@ -38,7 +38,7 @@
 
       if($('.tabs, .accordion').length > 0){
         $(".tabs li a, .accordion li a").on("click",function(){
-          if($('.tabs-content .tabs-panel .swiper-container').length > 0){
+          if($('.tabs .swiper-container, .accordion .swiper-container').length > 0){
             reinitSwiper(mySwiper);
             reinitSwiper(tilesSwiper);
           }

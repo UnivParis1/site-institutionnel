@@ -126,13 +126,23 @@
   }
 }
 #swiper-tiles{
-  .swiper-slide{
+  .swiper-wrapper{
     box-sizing: border-box;
     .swiper-slide{
       .paragraph__column{
         height: rem-calc(400px);
         *{height: 100%;}
         img{object-fit: cover;}
+      }
+    }
+  }
+  .swiper-pagination{
+    bottom: rem-calc(32px);
+    .swiper-pagination-bullet{
+      width: rem-calc(12px); height: rem-calc(12px);
+      border: 2px solid $text-white;
+      &.swiper-pagination-bullet-active{
+        background: $background-white;
       }
     }
   }
