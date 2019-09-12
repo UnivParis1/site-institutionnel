@@ -45,18 +45,18 @@
                {#field:{{ field }}#}
                    {% for content in column.content %}
                       {% if field == "field-media" %}
-                        {% set image = content.field_media %}
+                        {% set image = content.field_output %}
                       {% elseif field == "title" %}
                         {% set title %}
-                          {{  content.title }}
-                          {% endset %}
+                          {{  content.field_output }}
+                        {% endset %}
                        {% elseif field == "field-sub-title" %}
                          {% set subtitle %}
-                           {{  content.field_sub_title }}
+                           {{  content.field_output }}
                        {% endset %}
                        {% elseif field == "field-short-desc" %}
                          {% set description %}
-                           {{  content.field_short_desc }}
+                           {{  content.field_output }}
                        {% endset %}
                        {% endif %}
 
