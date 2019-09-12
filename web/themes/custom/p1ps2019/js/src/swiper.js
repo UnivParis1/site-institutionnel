@@ -40,7 +40,7 @@
         console.log('accordion');
         $(".tabs li a, .accordion li a").on("click",function(){
           console.log('accordion a');
-          if($('.tabs .swiper-container, .accordion .swiper-container').length > 0){
+          if($('.tabs-content .swiper-container, .accordion .swiper-container').length > 0){
             console.log('init');
             reinitSwiper(mySwiper);
             reinitSwiper(tilesSwiper);
@@ -56,7 +56,7 @@
 function reinitSwiper(swiper) {
     setTimeout(function () {
         swiper.update();
-    }, 400);
+    });
 }
 // function checkOnSwipers(){
 //   if($('.swiper-container:not(.one-slide) .swiper-wrapper').length > 0){
