@@ -154,27 +154,7 @@ accordion_active ? 'paragraph--accordion_active--',
         <h2 class="titre">{{ content.field_title }}</h2>
         <ul class="accordion" data-accordion>
           <li class="accordion-item is-active" data-accordion-item>
-            <a href="#" class="accordion-title">{{ item['#paragraph'].bp_accordion_section_title.value }}</a>
-            <div class="accordion-content" data-tab-content>
-              {% for body_key, body_item in item['#paragraph'].bp_accordion_section_body %}
-                {# Use the same render array as item and set the '#paragraph'. #}
-                {% set section_body = item %}
-                {% set lang = section_body['#paragraph'].langcode[0].value %}
-                {# Check if a translation exists #}
-                {% if section_body['#paragraph'].bp_accordion_section_body[body_key].entity.hasTranslation(lang) %}
-                  {# Load the entity for the current translation #}
-                  {% set section_translation= section_body['#paragraph'].bp_accordion_section_body[body_key].entity.getTranslation(lang) %}
-                {% else %}
-                  {# Load the source entity #}
-                  {% set section_translation= section_body['#paragraph'].bp_accordion_section_body[body_key].entity %}
-                {% endif %}
-                {% set section_body = section_body|merge({'#paragraph': section_translation}) %}
-                {# Remove the cache keys so it doesn't repeat the first value. #}
-                {% set section_body = section_body|merge({'#cache': {}}) %}
-                {# Print the compiled section body. #}
-                {{ section_body }}
-              {% endfor %}
-            </div>
+            {{ content.bp_accordion_section }}
           </li>
           <!-- ... -->
         </ul>
