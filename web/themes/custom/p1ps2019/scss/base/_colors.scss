@@ -200,10 +200,16 @@ button.semi-oval{
 }
 .accordion{
   .accordion-wrapper &{
-    .accordion-title{
-      color: $text-main-color;
-      border: 2px solid $text-main-color; @include box-shadow();
-    }
+		li{
+			border: 2px solid $text-main-color; @include box-shadow();
+			.accordion-title{
+	      color: $text-main-color; background-color: $background-white;	      
+				&:hover{color: $text-main-color; background-color: $background-white;}
+	    }
+			&.is-active{
+				.accordion-title{color: $text-main-color; background-color: $background-white;}
+			}
+		}
   }
 }
 //====================FIN BASE ==================//
