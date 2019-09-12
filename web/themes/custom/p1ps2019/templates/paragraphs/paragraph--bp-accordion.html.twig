@@ -154,21 +154,6 @@ accordion_active ? 'paragraph--accordion_active--',
         <h2 class="titre">{{ content.field_title }}</h2>
         <ul class="accordion" data-accordion>
           <li class="accordion-item is-active" data-accordion-item>
-            {% if content.bp_show_indicators['#items'].getString() %}
-              {% set indicator_class = 'display' %}
-            {% else %}
-              {% set indicator_class = 'normal' %}
-            {%  endif %}
-            {# Loop through all of the accordion sections. #}
-            {% for key, item in content.bp_accordion_section if key|first != '#' %}
-              {# Set variables if accordion should be shown. #}
-              {% if item['#paragraph'].bp_show_button.value %}
-                {% set show_accordion = ' in' %}
-                {% set aria = 'true' %}
-              {% else %}
-                {% set show_accordion = '' %}
-                {% set aria = 'false' %}
-              {% endif %}
             {{ item['#paragraph'].bp_accordion_section_title.value }}
           </li>
           <!-- ... -->
