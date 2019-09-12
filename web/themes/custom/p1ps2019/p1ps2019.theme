@@ -159,6 +159,9 @@ function p1ps2019_preprocess_views_view(&$variables) {
     );
     $variables["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
   }
+}
+
+function template_preprocess_views_view_table(&$variables) {
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
   }
@@ -166,6 +169,7 @@ function p1ps2019_preprocess_views_view(&$variables) {
     $variables['is_front'] = FALSE;
   }
 }
+
 
 function p1ps2019_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
