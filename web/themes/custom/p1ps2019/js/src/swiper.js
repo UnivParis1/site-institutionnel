@@ -8,7 +8,7 @@
 
         if($('.swiper-container:not(#swiper-tiles)').length > 0){
   				var mySwiper = new Swiper('.swiper-container:not(#swiper-tiles)', {
-  					slidesPerView: 'auto',
+  					slidesPerView: 3,
             spaceBetween: 24,
             navigation: {
               nextEl: '.swiper-button-next',
@@ -37,8 +37,11 @@
 
 
       if($('.tabs, .accordion').length > 0){
+        console.log('accordion');
         $(".tabs li a, .accordion li a").on("click",function(){
+          console.log('accordion a');
           if($('.tabs .swiper-container, .accordion .swiper-container').length > 0){
+            console.log('init');
             reinitSwiper(mySwiper);
             reinitSwiper(tilesSwiper);
           }

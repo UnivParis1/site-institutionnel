@@ -191,15 +191,19 @@ ul.list-style {
 
 
 .swiper-container:not(#swiper-tiles){
-  padding: 2px;
+  padding: rem-calc(2px 100px);
   .swiper-slide{
     height: auto;
-    max-width: calc(calc(100% - 48px) / 3);
+    max-width: calc(calc(1200 - 48px) / 3);
   }
   .swiper-button-prev, .swiper-button-next{
     background-image: none;
-    width: auto; height: auto;
+    width: rem-calc(98px); height: 100%;
+    top: 0; @include flexDisplay(); @include flexDisplayAlign('center-middle');
+    &:before{font-size: rem-calc(48px);}
   }
+  .swiper-button-prev{left: 0;}
+  .swiper-button-next{right: 0;}
 }
 
 .view-header-color{
