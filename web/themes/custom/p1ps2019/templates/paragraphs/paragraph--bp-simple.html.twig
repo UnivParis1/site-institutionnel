@@ -153,10 +153,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     <div class="cell small-12">
       <div class="padding-top-bottom medium">
         <h2 class="titre field-sep">{{ content.field_title }}</h2>
-        {% if content.field_column_number.0 == 2 %}
-        2 columns
-        {% endif %}
-        <div class="txt">{{ content.bp_text }}</div>
+        <div class="txt {% if content.field_column_number.0 == '2' %} two-columns-content {% endif %}" >{{ content.bp_text }}</div>
       </div>
     </div>
   </div>
