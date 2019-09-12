@@ -51,7 +51,7 @@
     'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
     'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
     'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
-    'paragraph--width--full' == layout_width ? 'paragraph--width--full',
+    'paragraph--width--full' == layout_width ? 'paragraph--width--full grid-container',
   ]
   %}
 {% endif %}
@@ -127,7 +127,7 @@
 {# Sets Paragraph ID as class. #}
 {%
 set classes = [
-'paragraph', 'grid-container',
+'paragraph',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 'paragraph--id--' ~ paragraph.id.value,
