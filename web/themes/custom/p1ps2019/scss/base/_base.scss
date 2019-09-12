@@ -104,6 +104,14 @@ ul.list-style {
 	}
 }//close icon-container
 
+.field--type-text-long{
+  ul, div, p, h1, h1, h3, h4, h5, img, embed, picture{
+    ~ ul, div, p, h1, h1, h3, h4, h5, img, embed, picture{
+      margin-bottom: rem-calc(16px);
+    }
+  }
+}
+
 .m-txt-message, .message{
 	@include responsiveVal(padding, $gutter*0.75 $gutter*0.75 $gutter*0.75 $gutter*2);
 	@include setFont($fontType-regular); width: 100%;
@@ -262,9 +270,6 @@ ul.list-style {
           &:hover{text-decoration: none;}
         }
         padding: rem-calc(24px 48px);
-        p, ul, h3, h4{
-          &:not(:last-child){margin-bottom: rem-calc(16px);}
-        }
       }
     }
   }
