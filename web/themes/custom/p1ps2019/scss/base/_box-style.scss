@@ -74,14 +74,13 @@
 	@extend .more-link;
 }
 
-.date-style{
+.date-style, .author{
   font-size: rem-calc(18px); line-height: 1.6;
-  font-family: $font-second; text-align: center;
-	&.author{
-		font-style: italic;
-		text-transform: uppercase;
-		color: $text-main-color;
-	}
+  font-family: $font-second;
+}
+.author{
+	font-style: italic; text-transform: uppercase;
+	color: $text-main-color; text-align: center;
 }
 
 .add-link{ @include setFont($fontType-bold);}
@@ -89,7 +88,7 @@
 
 
 /* tabs */
-#tabs-style, .tabs, .accordion {
+#tabs-style, .tabs, .accordion-tabs {
 	> li{
   		width: calc(100% / 4);
 	  	> a{

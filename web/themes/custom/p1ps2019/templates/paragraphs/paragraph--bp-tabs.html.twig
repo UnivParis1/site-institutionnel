@@ -151,7 +151,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
 {# Prints Tabs template. #}
 <div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }} role="tablist" aria-multiselectable="true">
-<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
+<ul class="accordion-tabs" data-responsive-accordion-tabs="accordion large-tabs">
   {% for key, item in content.bp_tab_section if key|first != '#' %}
     <li role="presentation" class="accordion-item {% if loop.first %}is-active{% endif %}" data-accordion-item>
       <a class="accordion-title" href="#">
