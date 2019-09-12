@@ -230,6 +230,7 @@ ul.list-style {
       &:before{
         content: "\f078";
         font: normal normal normal 14px/1 FontAwesome;
+        margin: 0; top: 50%; transform: translateY(-50%);
       }
     }
     &.is-active{
@@ -242,16 +243,20 @@ ul.list-style {
     }
   }
   .accordion-wrapper &{
-    li{
-      padding: rem-calc(24px 48px);
+    > li{
       .accordion-title{
         font-family: $font-second; @include setFont($fontType-medium);
         font-size: rem-calc(24px); line-height: 1.2;
+        padding: rem-calc(24px 48px);
+        &:hover{text-decoration: none;}
+        &:before{
+          font-size: rem-calc(24px);
+        }
       }
       &:last-of-type{margin-bottom: 0;}
       .accordion-content{
-        padding-top: rem-calc(48px);
         a{font-family: $font-regular;}
+        padding: rem-calc(24px 48px);
       }
     }
   }
