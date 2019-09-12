@@ -134,6 +134,11 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
 %}
 
+{% set title = "" %}
+{% set title %}
+{{ content.field_title }}
+{% endset %}
+
 {% set nbCols = content.field_column_number.0 %}
 
 {# Merges Width field with classes. #}
@@ -153,7 +158,9 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   <div class="paragraph__column grid-x grid-margin-x">
     <div class="cell small-12">
       <div class="padding-top-bottom medium">
-        <h2 class="titre field-sep">{{ content.field_title }}</h2>
+        {% if title|striptags|trim %}
+          <h2 class="titre field-sep">{{ content.field_title }}</h2>
+        {% endif %}
         <div class="txt column-number-{{nbCols}}">{{ content.bp_text }}</div>
       </div>
     </div>
