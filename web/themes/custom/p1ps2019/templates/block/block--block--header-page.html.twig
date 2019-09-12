@@ -57,9 +57,11 @@
   {% block content %}
   <div class="mask no-hover relative-wrapper">
     {{ content }}
-    <div class="section-sep-top big">
-      
-    </div>
+    {% if is_front %}
+      <div class="section-sep-top big">
+        block
+      </div>
+    {% endif  %}
   </div>
   {% endblock %}
 </section>
