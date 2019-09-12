@@ -36,10 +36,13 @@
  * @ingroup themeable
  */
 #}
+{# Renders Background field. #}
+{# Sets class name from values in database. #}
 {% if content.bp_background|render %}
   {% set layout_background = content.bp_background['#items'].getString() %}
   {% set layout_background_classes = [
     'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
+    'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
   ]
   %}
 {% endif %}
