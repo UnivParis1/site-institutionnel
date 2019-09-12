@@ -140,6 +140,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% endset %}
 
 {% set nbCols = content.field_column_number.0 %}
+{% set bgColor = content.bp_background.0 %}
 
 {# Merges Width field with classes. #}
 {% set width_field = content.bp_width|render %}
@@ -154,13 +155,15 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% endif %}
 
 {# Prints div with classes, and content without Width and Background. #}
-<div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column grid-x grid-margin-x">
-    <div class="cell small-12">
-      {% if title|striptags|trim %}
-        <h2 class="titre field-sep">{{ content.field_title }}</h2>
-      {% endif %}
-      <div class="txt column-number-{{nbCols}}">{{ content.bp_text }}</div>
+<div class="{{bgColor}}">
+  <div{{ attributes.addClass(classes) }}>
+    <div class="paragraph__column grid-x grid-margin-x">
+      <div class="cell small-12">
+        {% if title|striptags|trim %}
+          <h2 class="titre field-sep">{{ content.field_title }}</h2>
+        {% endif %}
+        <div class="txt column-number-{{nbCols}}">{{ content.bp_text }}</div>
+      </div>
     </div>
-  </div>
+  </div>  
 </div>
