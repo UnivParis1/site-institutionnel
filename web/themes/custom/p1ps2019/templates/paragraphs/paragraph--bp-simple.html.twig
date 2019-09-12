@@ -136,7 +136,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
 {%
 set column_class = [
- content.field_column_number.0 == 2 ? 'two-columns-content',
+ content.field_column_number.0 == 2 ? 'two-columns-content', 'txt'
 ]
 %}
 
@@ -158,7 +158,7 @@ set column_class = [
     <div class="cell small-12">
       <div class="padding-top-bottom medium">
         <h2 class="titre field-sep">{{ content.field_title }}</h2>
-        <div class="txt ">{{ content.bp_text }}</div>
+        <div{{ attributes.addClass(column_class) }}>{{ content.bp_text }}</div>
       </div>
     </div>
   </div>
