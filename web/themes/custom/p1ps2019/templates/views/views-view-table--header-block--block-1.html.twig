@@ -1,0 +1,95 @@
+{#
+/**
+* @file
+* Default theme implementation for displaying a view as a table.
+*
+* Available variables:
+* - attributes: Remaining HTML attributes for the element.
+*   - class: HTML classes that can be used to style contextually through CSS.
+* - title : The title of this group of rows.
+* - header: The table header columns.
+*   - attributes: Remaining HTML attributes for the element.
+*   - content: HTML classes to apply to each header cell, indexed by
+*   the header's key.
+*   - default_classes: A flag indicating whether default classes should be
+*     used.
+* - caption_needed: Is the caption tag needed.
+* - caption: The caption for this table.
+* - accessibility_description: Extended description for the table details.
+* - accessibility_summary: Summary for the table details.
+* - rows: Table row items. Rows are keyed by row number.
+*   - attributes: HTML classes to apply to each row.
+*   - columns: Row column items. Columns are keyed by column number.
+*     - attributes: HTML classes to apply to each column.
+*     - content: The column content.
+*   - default_classes: A flag indicating whether default classes should be
+*     used.
+* - responsive: A flag indicating whether table is responsive.
+* - sticky: A flag indicating whether table header is sticky.
+*
+* @see template_preprocess_views_view_table()
+*
+* @ingroup themeable
+*/
+#}
+
+
+
+   {% for row in rows %}
+       {% set image = "" %}
+       {% set title = "" %}
+       {% set subtitle = "" %}
+       {% set description = "" %}
+           {% for key, column in row.columns %}
+               {% for field in column.fields %}
+               {#field:{{ field }}#}
+                   {% for content in column.content %}
+                      {% if field == "field-media" %}
+                        {% set image = content.field_media %}
+                      {% elseif field == "title" %}
+                        {% set title %}
+                          {{  content.title }}
+                          {% endset %}
+                       {% elseif field == "field-sub-title" %}
+                         {% set subtitle %}
+                           {{  content.field_sub_title }}
+                       {% endset %}
+                       {% elseif field == "field-short-desc" %}
+                         {% set description %}
+                           {{  content.field_short_desc }}
+                       {% endset %}
+                       {% endif %}
+
+                   {% endfor %}
+               {% endfor %}
+           {% endfor %}
+
+           <div class="mask no-hover relative-wrapper">
+           {% if image %}
+            <div class="img-container">
+                {{ image }}
+            </div>
+           {% endif %}
+           <div class="overlay-infos">
+             <div class="grid-container padding-mobile">
+                 <div class="grid-x">
+                     <div class="cell small-12">
+                       <h1>{{ title }}</h1>
+                       {% if is_front %}
+                        <div class="section-sep-top big">
+
+                        </div>
+                       {% else %}
+                         {% if subtitle %}
+                          <div class="subtitle semi-field-sep">{{ subtitle }}</div>
+                         {% endif %}
+                         {% if description %}
+                          <div class="txt big">{{ description }}</div>
+                         {% endif %}
+                       {% endif %}
+                     </div>
+                 </div>
+             </div>
+           </div>
+         </div>
+   {% endfor %}
