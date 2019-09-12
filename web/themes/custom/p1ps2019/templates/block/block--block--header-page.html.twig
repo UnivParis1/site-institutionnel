@@ -55,8 +55,30 @@
 %}
 <section{{ attributes.addClass(classes) }}>
   {% block content %}
-    {{ content }}
+    <div class="mask no-hover relative-wrapper">
+      {% if content.field_block_media_image %}
+        <div class="img-container">
+            {{ content.field_block_media_image }}
+        </div>
+      {% endif %}
+
+      {% if content.field_block_media_video %}
+        <div class="video-container">
+            {{ content.field_block_media_video }}
+        </div>
+      {% endif %}
+
+      <div class="overlay-infos">
+        <div class="grid-container padding-mobile">
+            <div class="grid-x">
+                <div class="cell small-12">
+                  <h1 class="block-sep">
+                    {{ content.field_block_medias_title }}
+                  </h1>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
   {% endblock %}
 </section>
-
-
