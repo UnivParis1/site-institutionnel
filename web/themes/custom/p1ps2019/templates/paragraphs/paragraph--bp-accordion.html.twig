@@ -148,12 +148,12 @@ accordion_active ? 'paragraph--accordion_active--',
 {% set paragraph_id = 'accordion-' ~ paragraph.id.value %}
 
 {# Prints Accordion template. #}
-<div class="paragraph--bp-accordion-container grid-container">
+<div class="paragraph--bp-accordion-container grid-container section-sep big">
   <div class="grid-x grid-margin-x">
       <div class="cell small-12 accordion-wrapper">
         <h2 class="titre page-title-sep">{{ content.field_title }}</h2>
         <ul class="accordion" data-accordion>
-          {{ content|without('field_title') }}
+          {{ content|without('field_title, 	bp_accordion_expand, 	bp_show_indicators') }}
         </ul>
       </div>
     </div>

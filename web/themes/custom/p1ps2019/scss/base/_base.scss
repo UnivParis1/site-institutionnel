@@ -34,7 +34,7 @@ h6, .h6-style{font-size: rem-calc(16px);}
 *{@extend .no-transition;}
 /* TRANSITION -- END */
 
-
+.inline-block{display: inline-block;}
 
 /* Ebizproduction : Alignement */
 #main{padding-top: rem-calc(100px);}
@@ -56,6 +56,9 @@ h6, .h6-style{font-size: rem-calc(16px);}
 .block-sep{margin-bottom: rem-calc($fgutter*2);} //64px
 .section-sep{
   margin-bottom: rem-calc($fgutter*2.5);//80px
+  &.big{
+    margin-bottom: rem-calc($fgutter*3); //96px
+  }
 }
 .section-sep-top.big{
   margin-top: rem-calc($fgutter*3);//96px
@@ -63,9 +66,15 @@ h6, .h6-style{font-size: rem-calc(16px);}
 .padding-top-bottom{
   padding-top: rem-calc($fgutter*1.75); //56px
   padding-bottom: rem-calc($fgutter*1.75); //56px
+  &.medium{
+    padding: rem-calc(72px 0);
+  }
   &.big{
     padding-top: rem-calc(90px);
     padding-bottom: rem-calc(96px);
+  }
+  &.uneven{
+    padding: rem-calc(56px 88px 64px 88px);
   }
 }
 /* Ebizproduction : Alignement END*/
@@ -103,7 +112,10 @@ ul.list-style {
 		}
 	}
 }//close icon-container
-
+.full-height-all-children *{
+  height: 100%;
+  img{object-fit: cover;}
+}
 .field--type-text-long{
   ul, div, p, h1, h2, h3, h4, h5, img, embed, picture{
     ~ ul, ~ div, ~ p, ~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ img, ~ embed, ~ picture{
@@ -111,7 +123,10 @@ ul.list-style {
     }
   }
 }
-
+.two-columns{
+  columns: 2;
+  column-gap: rem-calc(96px);
+}
 .m-txt-message, .message{
 	@include responsiveVal(padding, $gutter*0.75 $gutter*0.75 $gutter*0.75 $gutter*2);
 	@include setFont($fontType-regular); width: 100%;
