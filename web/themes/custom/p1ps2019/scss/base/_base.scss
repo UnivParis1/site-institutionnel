@@ -221,3 +221,32 @@ ul.list-style {
 .view-header-color{
   padding: rem-calc(70px 0);
 }
+
+.accordion{
+  li{
+    .accordion-title{
+      &:before{
+        content: "\f078";
+        font: normal normal normal 14px/1 FontAwesome;
+      }
+    }
+    &.is-active{
+      .accordion-title{
+        &:before{
+          content: "\f078";
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  .accordion-wrapper &{
+    li{
+      .accordion-title{
+        padding: rem-calc(24px 48px);
+        font-family: $font-second; @include setFont($fontType-medium);
+        font-size: rem-calc(24px); line-height: 1.2;
+      }
+      &:last-of-type{margin-bottom: 0;}
+    }
+  }
+}
