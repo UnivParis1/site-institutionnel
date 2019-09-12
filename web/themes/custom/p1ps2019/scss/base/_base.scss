@@ -248,9 +248,10 @@ ul.list-style {
         font-family: $font-second; @include setFont($fontType-medium);
         font-size: rem-calc(24px); line-height: 1.2;
         padding: rem-calc(24px 48px);
-        &:hover{text-decoration: none;}
+        &:hover, &:focus{text-decoration: none;}
         &:before{
           font-size: rem-calc(24px);
+          #{$right}: rem-calc(48px);
         }
       }
       &:last-of-type{margin-bottom: 0;}
