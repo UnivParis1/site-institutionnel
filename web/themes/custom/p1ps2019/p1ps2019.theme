@@ -60,12 +60,6 @@ function p1ps2019_preprocess_block(&$variables) {
       $variables["content"]["#attributes"]["region"] = $block->getRegion();
     }
   }
-  try {
-    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  }
-  catch (Exception $e) {
-    $variables['is_front'] = FALSE;
-  }
 }
 
 // add a template suggestion based on region name
@@ -164,6 +158,12 @@ function p1ps2019_preprocess_views_view(&$variables) {
       'link-style', 'with-arrow'
     );
     $variables["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
+  }
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    $variables['is_front'] = FALSE;
   }
 }
 
