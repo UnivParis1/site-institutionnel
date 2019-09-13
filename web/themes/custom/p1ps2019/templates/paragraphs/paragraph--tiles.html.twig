@@ -73,7 +73,9 @@
 {% set nbCols = content.field_column_number.0 %}
 
 {% set layout_tiles = [
-  'paragraph--width--tiny' == layout_width ? 'tiles-layout'
+  'paragraph--width--tiny' == layout_width ? 'tiles-layout',
+  'grid-x grid-margin-x grid-margin-y',
+  content.field_tile['#items']|length <= 2 ? 'two-elements',
 ]
 %}
 
@@ -97,10 +99,8 @@
           </div>
       </div>
     {% endif %}
-    {% if content.field_tile['#items']|length > 2 %}
-      <div class="grid-x grid-margin-x grid-margin-y tiles-layout {{ layout_tiles }}">
-    {% else %}
-      <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements {{ layout_tiles }}">
+      <div class="{{ layout_tiles }}">
+    {% if content.field_tile['#items']|length <= 2 %}
         <div class="swiper-container" id="swiper-tiles">
             <div class="swiper-wrapper">
     {% endif %}
