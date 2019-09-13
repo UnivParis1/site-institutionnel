@@ -46,7 +46,7 @@
 
 {%
   set classes = [
-  'paragraph',
+  'paragraph', 'box-content txt',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   paragraph.bundle|clean_class,
 ]
@@ -57,9 +57,10 @@
 {% if background_field %}
   {% set classes = classes|merge(layout_background_classes) %}
 {% endif %}
-
-<div{{ attributes.addClass(classes) }}>
-  <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-    {{ content.bp_link.0['#title'] }}
-  </a>
+<div class="box-style txt-center">
+  <div{{ attributes.addClass(classes) }}>
+    <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+      {{ content.bp_link.0['#title'] }}
+    </a>
+  </div>
 </div>
