@@ -13,6 +13,15 @@ form{
 .form-item:not(.form-item-centre-name){
   label{display: none;}
 }
+.form-item{
+	position: relative;
+	&:before{
+		content: "";
+		top: 50%; transform: translateY(-50%);
+		position: absolute; left: rem-calc(24px);
+		width: 3px; height: 55%;
+	}
+}
 .chosen-container-single .chosen-single, textarea,
 input[type="text"], input[type="submit"]:not(.search-btn):not(.reset-btn),
 input[type="email"],
