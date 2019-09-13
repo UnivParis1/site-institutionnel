@@ -71,12 +71,19 @@
     //search toggle
     if($('#search-toggle').length > 0){
       $('#search-toggle').click(function(){
+        var scrollTop = $(window).scrollTop();
         if($('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length > 0){
           overlayClose();
+          if(scrollTop <= 0 || $(window.width() < 1024)){
+            $('body').removeClass('scroll');
+          }
         }
         else{
           overlayClose();
           $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1, #search-toggle').addClass('overlay-show');
+          if(scrollTop <= 0 || $(window.width() < 1024)){
+            $('body').addClass('scroll');
+          }
         }
       });
     }
