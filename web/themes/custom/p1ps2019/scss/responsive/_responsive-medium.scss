@@ -22,7 +22,12 @@
 /* Ebizproduction : Responsive > Phablette */
 @include breakpoint($large - 1 down) {
 	$fgutter : 24px;
-	.padding-mobile{padding: rem-calc(0 32px);}
+	.padding-mobile{
+		padding: rem-calc(0 32px);
+		.grid-container &{
+			padding: 0;
+		}
+	}
 	.grid-container{padding-left: rem-calc(32px); padding-right: rem-calc(32px);}
 	/* TYPOGRAPHY -- BEGIN */
 	h1, .h1-style{
