@@ -231,6 +231,15 @@ input[type="search"], .form-date,
 .file-widget {
   @include inputStyle();
 }
+.form-item{
+	position: relative;
+	&:before{
+		content: "";
+		top: 50%; transform: translateY(-50%);
+		position: absolute; left: rem-calc(24px);
+		width: 3px; height: 55%;
+	}
+}
 .chosen-container-single{
   .chosen-single{
     &:after{
