@@ -16,8 +16,8 @@
             },
   			  });
   			}
-        if($('.tiles-full #swiper-tiles').length > 0 && $(window).width() < 1024){
-  				var tilesSwiper = new Swiper('.tiles-full #swiper-tiles', {
+        if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
+  				var tilesSwiper = new Swiper('#swiper-tiles', {
   					slidesPerView: 1,
             pagination: {
   				    el: '.swiper-pagination',
