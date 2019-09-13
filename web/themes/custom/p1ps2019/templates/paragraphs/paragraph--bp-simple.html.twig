@@ -61,20 +61,13 @@
 {# Sets class name from values in database. #}
 {% if content.bp_background|render %}
   {% set layout_background = content.bp_background['#items'].getString() %}
-  {% set layout_background_classes = [
-    'paragraph--color paragraph--color--rgba-black-slight' == layout_background ? 'paragraph--color paragraph--color--rgba-black-slight',
-    'paragraph--color paragraph--color--rgba-black-light' == layout_background ? 'paragraph--color paragraph--color--rgba-black-light',
-  ]
-  %}
 {% endif %}
 
 {# The template default set classes. #}
-
-{% set bgColor = content.bp_background['#items'].getString() %}
 {# Sets Paragraph ID as class. #}
 {%
 set classes = [
-'paragraph', bgColor,
+'paragraph', layout_background,
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 'paragraph--id--' ~ paragraph.id.value
@@ -93,12 +86,6 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% set width_field = content.bp_width|render %}
 {% if width_field %}
   {% set classes = classes|merge(layout_width_classes) %}
-{% endif %}
-
-{# Merges Background field with classes. #}
-{% set background_field = content.bp_background|render %}
-{% if background_field %}
-  {% set classes = classes|merge(layout_background_classes) %}
 {% endif %}
 
 {# Prints div with classes, and content without Width and Background. #}
