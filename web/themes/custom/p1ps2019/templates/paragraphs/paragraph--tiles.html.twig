@@ -101,7 +101,7 @@
             <div class="swiper-wrapper">
     {% endif %}
         {% for key, item in  content.field_tile if key|first != '#' %}
-        {% if content.field_tile['#items']|length <= 2 %}
+        {% if content.field_tile['#items']|length <= 2 && layout_width == 'paragraph--width--full' %}
           <div class="swiper-slide cell large-{{ nbCols }} small-6">
         {% else %}
           <div class="cell large-{{ nbCols }} small-6">
