@@ -87,38 +87,42 @@
         }
       }
     }
-    .tiles-layout{
-      margin: 0;
-      .cell{
-        max-width: calc(50% - 12px);
-        width: calc(50% - 12px);
-        &:nth-child(odd){
-          #{$margin-right}: rem-calc(12px);
-          margin-left: 0;
-        }
-        &:nth-child(even){
-          #{$margin-left}: rem-calc(12px);
-          margin-right: 0;
-        }
-        &:nth-last-child(n+3){
-          margin-bottom: rem-calc(12px);
-          margin-top: 0;
-        }
-        &:nth-child(n+3){
-          margin-top: rem-calc(12px);
-          margin-bottom: 0;
-        }
-      }
-      &.two-elements{
+  }
+  &.tiles-full{
+    .paragraph__column{
+      .tiles-layout{
+        margin: 0;
         .cell{
-          margin-bottom: 0; margin-top: 0;
-          max-width: calc(50% - 4px);
-          width: calc(50% - 4px);
+          max-width: calc(50% - 12px);
+          width: calc(50% - 12px);
           &:nth-child(odd){
-            #{$margin-right}: rem-calc(2px);
+            #{$margin-right}: rem-calc(12px);
+            margin-left: 0;
           }
           &:nth-child(even){
-            #{$margin-left}: rem-calc(2px);
+            #{$margin-left}: rem-calc(12px);
+            margin-right: 0;
+          }
+          &:nth-last-child(n+3){
+            margin-bottom: rem-calc(12px);
+            margin-top: 0;
+          }
+          &:nth-child(n+3){
+            margin-top: rem-calc(12px);
+            margin-bottom: 0;
+          }
+        }
+        &.two-elements{
+          .cell{
+            margin-bottom: 0; margin-top: 0;
+            max-width: calc(50% - 4px);
+            width: calc(50% - 4px);
+            &:nth-child(odd){
+              #{$margin-right}: rem-calc(2px);
+            }
+            &:nth-child(even){
+              #{$margin-left}: rem-calc(2px);
+            }
           }
         }
       }

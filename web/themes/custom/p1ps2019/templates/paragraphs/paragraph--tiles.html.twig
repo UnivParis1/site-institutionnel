@@ -51,7 +51,7 @@
     'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
     'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
     'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
-    'paragraph--width--full' == layout_width ? 'paragraph--width--full',
+    'paragraph--width--full' == layout_width ? 'paragraph--width--full tiles-full',
   ]
   %}
 {% endif %}
@@ -72,12 +72,6 @@
 
 {% set nbCols = content.field_column_number.0 %}
 
-{% set layout_tiles = [
-  'paragraph--width--tiny' == layout_width ? 'tiles-layout',
-  'grid-x grid-margin-x grid-margin-y',
-  content.field_tile['#items']|length <= 2 ? 'two-elements',
-]
-%}
 
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
@@ -99,8 +93,10 @@
           </div>
       </div>
     {% endif %}
-      <div class="{{ layout_tiles }}">
-    {% if content.field_tile['#items']|length <= 2 %}
+    {% if content.field_tile['#items']|length > 2 %}
+      <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
+    {% else %}
+      <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements">
         <div class="swiper-container" id="swiper-tiles">
             <div class="swiper-wrapper">
     {% endif %}
