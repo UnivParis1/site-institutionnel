@@ -49,7 +49,7 @@
 
 {%
   set classes = [
-  'paragraph',
+  'paragraph', 'box-style',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   paragraph.bundle|clean_class,
 ]
@@ -61,6 +61,8 @@
   {% set classes = classes|merge(layout_background_classes) %}
 {% endif %}
 
-<div{{ attributes.addClass(classes) }}>
-  {{ content|without('bp_background') }}
+<div class="box-style">
+  <div{{ attributes.addClass(classes) }}>
+    {{ content|without('bp_background') }}
+  </div>
 </div>
