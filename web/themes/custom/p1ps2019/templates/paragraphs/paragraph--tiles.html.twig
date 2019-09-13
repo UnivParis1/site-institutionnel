@@ -72,6 +72,11 @@
 
 {% set nbCols = content.field_column_number.0 %}
 
+{%
+  set width_class = [
+    'paragraph--width--full' != layout_width ? 'grid-container'
+  ]
+%}
 
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
@@ -85,7 +90,7 @@
   <div class="paragraph__column mobile-sep">
 {% endif %}
     {% if title|striptags|trim %}
-      <div class="grid-container">
+      <div class="{{ width_class }}">
           <div class="grid-x grid-margin-x">
               <div class="cell small-12">
                 <h2 class="titre">{{ content.field_title.0 }}</h2>
