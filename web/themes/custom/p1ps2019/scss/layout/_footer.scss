@@ -37,18 +37,18 @@ form#centres-up1-form {
 
 .footer{
   .footer-wrapper{
-    padding: rem-calc(40px 120px);
+    padding: rem-calc(48px 120px);
     box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.05);
     a{
       display: block; font-size: rem-calc(18px); line-height: 1.62;
       margin-bottom: rem-calc(4px);
     }
     .cell{
-      padding-top: rem-calc(24px); padding-bottom: rem-calc(24px);
+      // padding-top: rem-calc(24px); padding-bottom: rem-calc(24px);
       &:not(:last-child){
         position: relative;
         &:after{
-          content:""; width: 1px; height: 62%;
+          content:""; width: 1px; height: rem-calc(156px);
           position: absolute; top: 50%;
           #{$right}: 0; transform: translateY(-50%);
           background-color: $gold;
@@ -56,6 +56,17 @@ form#centres-up1-form {
       }
       > div {
         height: 100%; @include flexDisplay(); @include flexDisplayAlign('center-middle');
+      }
+    }
+
+    .two-columns{
+      position: relative;
+      column-rule: none;
+      &:after{
+        content:""; width: 1px; height: rem-calc(156px);
+        position: absolute; top: 50%;
+        #{$right}: 50%; transform: translateY(-50%);
+        background-color: $gold;
       }
     }
 
