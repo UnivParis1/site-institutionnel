@@ -4,7 +4,7 @@
         {% if lien.uri starts with 'http' %}
                 <a href="{{ lien.uri }}">{{ lien.title }}</a> {% if not loop.last %}|{% endif %}
         {% else %}
-                {{ link(lien.title, lien.uri) }} {% if not loop.last %}|{% endif %}
+                {{ link(lien.title, lien.uri) }} {# % if not loop.last %}|{ % endif % #}
         {% endif %}
     {% endfor %}
 </div>
