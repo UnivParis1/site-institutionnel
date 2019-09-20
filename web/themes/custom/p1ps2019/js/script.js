@@ -76,12 +76,19 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     //search toggle
     if($('#search-toggle').length > 0){
       $('#search-toggle').click(function(){
+        var scrollTop = $(window).scrollTop();
         if($('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length > 0){
           overlayClose();
+          if(scrollTop <= 0 || $(window.width() < 1024)){
+            $('body').removeClass('scroll');
+          }
         }
         else{
           overlayClose();
           $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1, #search-toggle').addClass('overlay-show');
+          if(scrollTop <= 0 || $(window.width() < 1024)){
+            $('body').addClass('scroll');
+          }
         }
       });
     }
@@ -263,7 +270,6 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
   			  });
   			}
         if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
-          console.log('tiles swiper');
   				var tilesSwiper = new Swiper('#swiper-tiles', {
   					slidesPerView: 1,
             pagination: {

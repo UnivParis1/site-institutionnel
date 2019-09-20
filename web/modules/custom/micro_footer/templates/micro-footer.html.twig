@@ -1,10 +1,10 @@
 <!-- Add you custom twig html here -->
-<div class="footer">
+<div class="footer"><ul>
     {% for lien in liens %}
         {% if lien.uri starts with 'http' %}
-                <a href="{{ lien.uri }}">{{ lien.title }}</a> {% if not loop.last %}|{% endif %}
+                <li><a href="{{ lien.uri }}">{{ lien.title }}</a></li> {% if not loop.last %}|{% endif %}
         {% else %}
-                {{ link(lien.title, lien.uri) }} {% if not loop.last %}|{% endif %}
+                <li> {{ link(lien.title, lien.uri) }} </li> {% if not loop.last %}|{% endif %}
         {% endif %}
     {% endfor %}
-</div>
+</ul></div>
