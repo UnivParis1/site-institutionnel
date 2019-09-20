@@ -2,17 +2,9 @@
 <div class="footer"><ul>
     {% for lien in liens %}
         {% if lien.uri starts with 'http' %}
-                <li><a href="{{ lien.uri }}">{{ lien.title }}</a></li> {% if not loop.last %}|{% endif %}
+                <li><a href="{{ lien.uri }}">{{ lien.title }}</a></li> {# % if not loop.last %}|{ % endif % #}
         {% else %}
-<<<<<<< HEAD
-                <li> {{ link(lien.title, lien.uri) }} </li> {% if not loop.last %}|{% endif %}
-=======
-                {{ link(lien.title, lien.uri) }} {# % if not loop.last %}|{ % endif % #}
->>>>>>> 2da0614b77ddcce7cc5b07a40e56fc8c01a4a87b
+		<li>{{ link(lien.title, lien.uri) }} {# % if not loop.last %}|{ % endif % #}</li>
         {% endif %}
     {% endfor %}
-<<<<<<< HEAD
 </ul></div>
-=======
-</div>
->>>>>>> f55033b46f1acfecdb75bd4ac0c75965a0d73d42
