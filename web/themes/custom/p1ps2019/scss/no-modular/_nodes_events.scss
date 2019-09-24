@@ -29,9 +29,15 @@
   }
   .social-buttons-links{
     @include flexDisplay();
-    .facebook, .twitter, .linkedin{
-      a{
-        color: $text-main-color;
+    li{
+      .facebook, .twitter, .linkedin{
+        a{
+          color: $text-main-color;
+          i:before{font-size: rem-calc(32px);}
+        }
+      }
+      &:not(:last-of-type){
+        margin-right: rem-calc(16px);
       }
     }
   }
