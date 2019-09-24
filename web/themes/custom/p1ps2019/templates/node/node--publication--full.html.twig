@@ -163,10 +163,10 @@
                     {{ content.field_tags }}
                   </div>
                 {% endif %}
-                {% if topics|striptags|trim %}          
+                {% if topics|striptags|trim %}
                   <div>
                     <span class="txt-bold" >{{ "Thèmes"|t }} : </span>
-                    {% for key, item in  content.field_publication_topics if key|first != '#' %}
+                    {% for key, item in  content.field_publication_topics if key|first != '#' and key|last != '#' %}
                       <span>{{ item }}</span> /
                     {% endfor %}
                   </div>
