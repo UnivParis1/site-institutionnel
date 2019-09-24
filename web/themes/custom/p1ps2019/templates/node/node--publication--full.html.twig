@@ -131,21 +131,21 @@
               <label>{{ 'Auteur & éditeur'|t }}</label>
               {{ content.field_back_cover }}
               {% if author|striptags|trim %}
-                <div>
+                <div class="txt-second">
                   <span class="txt-bold">{{ "Author"|t }} : </span>
-                  <span class="txt-second"> {{ content.field_author_name.0 }}</span>
+                  <span> {{ content.field_author_name.0 }}</span>
                 </div>
               {% endif %}
               {% if publisher|striptags|trim %}
-                <div>
+                <div class="txt-second">
                   <span class="txt-bold">{{ "Publisher"|t }} : </span>
-                  <span class="txt-second"> {{ content.field_publisher.0 }}</span>
+                  <span> {{ content.field_publisher.0 }}</span>
                 </div>
               {% endif %}
               {% if isbn|striptags|trim %}
-                <div>
+                <div class="txt-second">
                   <span class="txt-bold">{{ "ISBN/ISSN/ESSN"|t }} : </span>
-                  <span class="txt-second"> {{ content.field_isbn.0 }}</span>
+                  <span> {{ content.field_isbn.0 }}</span>
                 </div>
               {% endif %}
               <div>
@@ -158,19 +158,19 @@
               <div class="details">
                 <label>{{ 'Méta-données'|t }}</label>
                 {% if publicationTags|striptags|trim %}
-                  <div>
+                  <div class="txt-second">
                     <span class="txt-bold"> {{ "Mots-clés"|t }} : </span>
-                    <span class="txt-second">{{ content.field_tags }}</span>
+                    <span>{{ content.field_tags }}</span>
                   </div>
                 {% endif %}
                 {% if topics|striptags|trim %}
-                  <div>
+                  <div  class="txt-second">
                     <span class="txt-bold" >{{ "Thèmes"|t }} : </span>
                     {% for key, item in  content.field_publication_topics if key|first != '#' %}
                       {% if key == 0 %}
-                        <span class="txt-second">{{ item }}</span>
+                        <span>{{ item }}</span>
                       {% else %}
-                        / <span class="txt-second">{{ item }}</span>
+                        / <span>{{ item }}</span>
                       {% endif %}
                     {% endfor %}
                   </div>
