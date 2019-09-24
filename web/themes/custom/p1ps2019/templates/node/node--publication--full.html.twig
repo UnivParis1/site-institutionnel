@@ -157,9 +157,6 @@
             {% if tags|striptags|trim or topics|striptags|trim %}
               <div class="details">
                 <label>{{ 'Méta-données'|t }}</label>
-                {% for key, item in  content.field_publication_topics if key|first != '#' %}
-                  <span>{{ item }}</span> /
-                {% endfor %}
                   <span class="txt-bold"> {{ "Mots-clés"|t }} : </span>
                   {{ content.field_tags }}
 
