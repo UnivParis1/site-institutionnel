@@ -36,9 +36,10 @@
   .social-buttons-links{
     @include flexDisplay();
     li{
+      display: inline-flex; align-items: center;
       a{
         color: $text-main-color; width: auto;
-        padding: 0;
+        padding: 0; @include flexDisplay();
         i:before{font-size: rem-calc(32px);}
       }
       &:not(:last-of-type){
