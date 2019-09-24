@@ -157,10 +157,10 @@
             {% if tags|striptags|trim or topics|striptags|trim %}
               <div class="details">
                 <label>{{ 'Méta-données'|t }}</label>
-                {% if tags|striptags|trim %}
+
                   <span class="txt-bold"> {{ "Mots-clés"|t }} : </span>
                   {{ content.field_tags }}
-                {% endif %}
+              
                 {% if topics|striptags|trim %}
                   {% for key, item in  content.field_publication_topics if key|first != '#' %}
                     <span>{{ item }}</span> /
