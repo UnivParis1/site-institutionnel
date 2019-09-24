@@ -167,7 +167,11 @@
                   <div>
                     <span class="txt-bold" >{{ "Thèmes"|t }} : </span>
                     {% for key, item in  content.field_publication_topics if key|first != '#' %}
-                      <span>{{ item }}</span> /
+                      {% if key == 0 %}
+                        <span>{{ item }}</span>
+                      {% else %}
+                        / <span>{{ item }}</span>
+                      {% endif %}
                     {% endfor %}
                   </div>
                 {% endif %}
