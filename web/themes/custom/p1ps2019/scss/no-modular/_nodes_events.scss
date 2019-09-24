@@ -19,22 +19,22 @@
       font-size: rem-calc(18px); line-height: 1.22;
     }
   }
-  .social-buttons .links {
-    margin: 0;
-    a{
-      background: transparent;
-      font-size: 2rem;
+  .social-buttons{
+    flex: 0 0 50%;
+    @include flexDisplay(); @include flexDisplayAlign('center-middle');
+    .links {
+      margin: 0;
+      a{
+        background: transparent;
+      }
     }
   }
   .social-buttons-links{
-    .facebook a {
-      color: #3b5998;
-    }
-    .twitter a {
-      color: #55acee;
-    }
-    .linkedin a {
-      color: #0274b3;
+    @include flexDisplay();
+    .facebook, .twitter, .linkedin{
+      a{
+        color: $text-main-color;
+      }
     }
   }
   &.bootstrap-cards{

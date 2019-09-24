@@ -80,7 +80,7 @@
   <div class="img-container section-sep small">
       {{ content.field_media }}
   </div>
-  <div class="grid-container">
+  <div class="grid-container field-sep">
     <div{{ content_attributes.addClass('content grid-x grid-margin-x') }}>
       <div class="tag"> {{ content.field_offer_type }} </div>
       {{ title_prefix }}
@@ -99,11 +99,13 @@
         <div class="box-style no-shadow auto-height semi-field-sep">
           <div class="box-content">
             <div class="event-details field-sep">
-              <h3 class="txt medium txt-black txt-bold">{{ 'Date'|t }}</h3>
-              {{ content.field_application_deadline }}
+              <h3 class="txt medium txt-black txt-bold">{{ 'Date : '|t }}</h3>
+              <div class="txt medium">
+                {{ content.field_application_deadline }}
+              </div>
             </div>
             <div class="event-details semi-field-sep">
-              <h3 class="txt medium txt-black txt-bold">{{ 'Lieu'|t }}</h3>
+              <h3 class="txt medium txt-black txt-bold">{{ 'Lieu : '|t }}</h3>
               <div class="txt medium">
                 {{ content.field_event_address }}
               </div>
