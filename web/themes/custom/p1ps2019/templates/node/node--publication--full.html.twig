@@ -91,8 +91,8 @@
 {% set isbn %}
   {{ content.field_isbn.0 }}
 {% endset %}
-{% set tags = '' %}
-{% set tags %}
+{% set publicationTags = '' %}
+{% set publicationTags %}
   {{ content.field_tags }}
 {% endset %}
 {% set topics = '' %}
@@ -157,7 +157,7 @@
             {% if tags|striptags|trim or topics|striptags|trim %}
               <div class="details">
                 <label>{{ 'Méta-données'|t }}</label>
-                {% if tags|striptags|trim %}
+                {% if publicationTags|striptags|trim %}
                   <div>
                     <span class="txt-bold"> {{ "Mots-clés"|t }} : </span>
                     {{ content.field_tags }}
@@ -170,7 +170,7 @@
                   <div>
                     <span class="txt-bold" >{{ "Thèmes"|t }} : </span>
                     {{ content.field_publication_topics }}
-                  </div>                  
+                  </div>
                 {% endif %}
               </div>
             {% endif %}
