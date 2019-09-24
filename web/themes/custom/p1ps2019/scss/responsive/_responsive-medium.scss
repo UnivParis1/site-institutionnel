@@ -260,6 +260,9 @@
 				font-size: rem-calc(30px);
 			}
 	  }
+		&.align-bottom{
+	    padding-bottom: rem-calc(32px);
+	  }
 	}
 	/* paragraphs */
 
@@ -313,7 +316,18 @@
 	    padding: rem-calc(12px);
 	  }
 	}
-
+	.field--type-text-long{
+	  ul, div, p, img, embed, picture{
+	    ~ ul, ~ div, ~ p, ~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ img, ~ embed, ~ picture{
+	      margin-top: rem-calc(24px);
+	    }
+	  }
+	  h1, h2, h3, h4, h5{
+	    + ul, + div, + p, + h1, + h2, + h3, + h4, + h5, + img, + embed, + picture{
+	      margin-top: rem-calc(16px);
+	    }
+	  }
+	}
 	.accordion{
 	  .accordion-wrapper &{
 	    > li{
