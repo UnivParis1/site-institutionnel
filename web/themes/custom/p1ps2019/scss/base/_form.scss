@@ -75,10 +75,9 @@ textarea{max-height: 100%;}
 }
 
 fieldset{
-  border:0 none;
-  padding:0;
-  margin: 0;
+  border:0 none; padding:0;margin: 0;
 }
+
 .form-checkboxes{
   .fieldset-wrapper{
     @extend .display-flex;
@@ -297,5 +296,12 @@ label, .label-style{
   }
   &.chosen-container-active.chosen-with-drop{
     background-image: none; box-shadow: none;
+  }
+}
+
+.views-exposed-form{
+  @include flexDisplay(); @include flexDisplayAlign('space-between');
+  .form-item:not(.form-actions){
+    width: auto;
   }
 }
