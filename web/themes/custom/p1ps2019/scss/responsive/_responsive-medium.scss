@@ -281,7 +281,7 @@
 		font-size: rem-calc(18px); line-height: 1.44;
 		background-image: none; height: 100%;
 		@include flexDisplay(); flex-direction: column;
-		&:not(.text-align-left){@include flexDisplayAlign('center-middle');}
+		@include flexDisplayAlign('center-middle');
 	}
 	.reset-mask-mobile{
 		&.mask, .mask{
@@ -295,7 +295,8 @@
 			.btn.outline.fa{
 				color: $text-main-color; border-color: $text-main-color;
 				&:before{color: $text-main-color;}
-				width: 100%; justify-content: center;
+				width: 100%;
+				&:not(.text-align-left){justify-content: center;}
 			}
 		}
 	}
