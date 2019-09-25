@@ -50,7 +50,7 @@
   {% set layout_width_classes = [
     'paragraph--width--tiny' == layout_width ? 'paragraph--width--tiny',
     'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
-    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium grid-container',
+    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
     'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
     'paragraph--width--full' == layout_width ? 'paragraph--width--full'
   ]
@@ -90,11 +90,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
 {# Prints div with classes, and content without Width and Background. #}
   <div{{ attributes.addClass(classes) }}>
-      {% if content.bp_background|render %}
-        <div class="box-content-padding">
-      {% else %}
-        <div class="grid-container">
-      {% endif %}
+      <div class="grid-container">
         <div class="paragraph__column grid-x grid-margin-x">
           <div class="cell small-12">
             {% if title|striptags|trim %}
