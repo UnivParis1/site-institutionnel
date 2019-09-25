@@ -10,13 +10,16 @@
 //   }
 // }
 .paragraph{
-  &:not(.paragraph--type--bp-column-wrapper):not(.paragraph--type--hit-list):not(.paragraph--type--bp-tabs):not(.tiles-full):not(.paragraph--type--rich-content):not(.paragraph--type--tuile-text-wo-image):not(.paragraph--type--tile-wo-image):not(.paragraph--type--key-figure):not(.paragraph--type--presentation){
+  &:not(.paragraph--type--bp-column-wrapper):not(.paragraph--type--hit-list):not(.paragraph--type--bp-tabs):not(.tiles-full):not(.paragraph--type--rich-content):not(.paragraph--type--tuile-text-wo-image):not(.paragraph--type--tile-wo-image):not(.paragraph--type--key-figure):not(.paragraph--type--presentation):not(.paragraph--type--bp-columns){
     padding-top: rem-calc(72px);
     padding-bottom: rem-calc(72px);
     &.paragraph--type--bp-view:not(.full){
       padding-top: 0;
       padding-bottom: 0;
     }
+  }
+  .no-padding-top-bottom &, .node--type-event &{
+    padding-top: 0 !important; padding-bottom: 0 !important;
   }
 }
 
