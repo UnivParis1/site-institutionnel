@@ -65,7 +65,7 @@
 
 .grow-1{flex: 1 0 auto;}
 .same-height{
-  display: flex; justify-content: space-between;
+	@include flexDisplay(); @include flexDisplayAlign('space-between');
   flex-direction: column;
 }
 
@@ -73,7 +73,10 @@
 	img{width: 100%;}
 }
 
-
+.equal-height{
+	@include flexDisplay();
+	> div {height: 100%;}
+}
 .label-style{
   font-size: rem-calc(22px); line-height: 1.6;
   @include setFont($fontType-bold);
