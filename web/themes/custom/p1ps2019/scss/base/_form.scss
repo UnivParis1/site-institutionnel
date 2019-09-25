@@ -23,7 +23,7 @@ form{
 	}
 }
 .chosen-container-single .chosen-single, textarea,
-input[type="text"], input[type="submit"]:not(.search-btn):not(.reset-btn),
+input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="number"],
@@ -32,6 +32,7 @@ input[type="password"],
 input[type="url"],
 input[type="file"],
 input[type="search"], .form-date,
+//input[type="submit"]:not(.search-btn):not(.reset-btn),
 .file-widget {
   @include inputStyle();
 }
@@ -48,13 +49,10 @@ input[type="password"]{
 
 textarea{max-height: 100%;}
 
-
-.form-actions{
-  //@extend .btn-arrow;
-  input[type="submit"]{
-    width: 100%; display: block;
-    -webkit-appearance: none;
-  }
+input[type="submit"]:not(.search-btn):not(.reset-btn){
+  @extend .btn; border: 3px solid $background-main-color;
+  width: 100%; display: block;
+  -webkit-appearance: none;
 }
 
 
