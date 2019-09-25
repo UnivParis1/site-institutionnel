@@ -236,6 +236,15 @@
 			}
 		}
 	}//close nav-tabs
+	#swiper-tiles{
+	  .swiper-wrapper{
+	    .swiper-slide{
+	      .paragraph__column{
+	        height: auto;
+	      }
+	    }
+	  }
+	}//close #swiper-tiles
 	.swiper-container:not(#swiper-tiles){
 	  padding: rem-calc(2px);
 	  min-width: 100%;
@@ -271,8 +280,8 @@
 		text-align: center; padding: rem-calc(24px 12px);
 		font-size: rem-calc(18px); line-height: 1.44;
 		background-image: none; height: 100%;
-		@include flexDisplay(); @include flexDisplayAlign('center-middle');
-		flex-direction: column;
+		@include flexDisplay(); flex-direction: column;
+		&:not(.text-align-left){@include flexDisplayAlign('center-middle');}
 	}
 	.reset-mask-mobile{
 		&.mask, .mask{
