@@ -90,14 +90,24 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
 {# Prints div with classes, and content without Width and Background. #}
   <div{{ attributes.addClass(classes) }}>
+      {% if layout_width == 'paragraph--width--full' and content.bp_background|render %}
       <div class="grid-container">
+      {% endif %}
         <div class="paragraph__column grid-x grid-margin-x">
           <div class="cell small-12">
-            {% if title|striptags|trim %}
-              <h2 class="titre field-sep">{{ content.field_title }}</h2>
+            {% if layout_width != 'paragraph--width--full' and content.bp_background|render %}
+            <div class="box-content-padding">
             {% endif %}
-            <div class="txt medium column-number-{{nbCols}}">{{ content.bp_text }}</div>
+              {% if title|striptags|trim %}
+                <h2 class="titre field-sep">{{ content.field_title }}</h2>
+              {% endif %}
+              <div class="txt medium column-number-{{nbCols}}">{{ content.bp_text }}</div>
+            {% if layout_width != 'paragraph--width--full' and content.bp_background|render %}
+            </div>
+            {% endif %}
           </div>
         </div>
+      {% if layout_width == 'paragraph--width--full' and content.bp_background|render %}
       </div>
+      {% endif %}
   </div>
