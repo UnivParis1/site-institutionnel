@@ -36,11 +36,8 @@
 
 
       if($('.tabs, .accordion').length > 0){
-        console.log('accordion');
         $(".tabs li a, .accordion li a").on("click",function(){
-          console.log('accordion a');
           if($('.tabs-content .swiper-container, .accordion .swiper-container').length > 0){
-            console.log('init');
             reinitSwiper(mySwiper);
             reinitSwiper(tilesSwiper);
           }
