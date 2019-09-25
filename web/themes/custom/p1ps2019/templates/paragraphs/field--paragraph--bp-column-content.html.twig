@@ -36,9 +36,10 @@
  * @see template_preprocess_field()
  */
 #}
-
-{%- for item in items -%}
-  <div class="paragraph--type--bp-columns__{{ loop.length }}col">
-    <div{{ item.attributes }}>{{ item.content }}</div>
-  </div>
-{%- endfor -%}
+<div class="grid-x grid-margin-x">
+  {%- for item in items -%}
+    <div class="cell small-12 large-6">
+      <div{{ item.attributes }}>{{ item.content }}</div>
+    </div>
+  {%- endfor -%}
+</div>
