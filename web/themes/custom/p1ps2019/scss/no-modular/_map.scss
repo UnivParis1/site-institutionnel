@@ -1,0 +1,48 @@
+.centres-up1-form, .center-wrapper {
+  .map-centre {
+    width: 100%;
+    background: url('../images/bg-map.png') 0 0 transparent;
+    background-size: cover;
+    height: rem-calc(450px);
+    display: flex;
+    flex-direction: row-reverse;
+    .center-form{
+      width: 40%; z-index: 401;
+      #edit_centre_name_chosen{
+        width: 100% !important;
+      }
+      .centre-up1{
+        font-size: rem-calc(20px);
+        .fa{
+          &:before{
+            font-size: inherit;
+            margin-right: rem-calc(8px);
+          }
+        }
+      }
+      input.search-btn{
+        font: normal normal normal 14px/1 FontAwesome;
+      }
+      select{margin: 0;}
+    }
+    .overlay-infos{
+      padding: rem-calc(70px 122px);
+      @include flexDisplay(); align-items: flex-end;
+      @include flexDisplayAlign('space-between');
+      .details-centre{
+        margin-top: rem-calc(16px);
+        > div:not(:last-of-type){
+          margin-bottom: rem-calc(16px);
+        }
+      }
+      .form-item{
+        flex: 0 0 89%;
+        max-width: 89%;
+        label{
+          @extend .h2-style; margin-bottom: rem-calc(16px);
+          color: $white !important;
+        }
+      }
+    }
+  }
+}
