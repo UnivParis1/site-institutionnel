@@ -303,5 +303,9 @@ label, .label-style{
   @include flexDisplay(); @include flexDisplayAlign('space-between');
   .form-item:not(.form-actions){
     width: auto; flex-grow: 1;
+    &+ .form-item:not(.form-actions){
+      #{$margin-right}: rem-calc(24px);
+    }
+    .chosen-container{width: 100% !important;}
   }
 }
