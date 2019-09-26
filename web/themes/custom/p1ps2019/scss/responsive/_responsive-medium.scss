@@ -25,10 +25,13 @@
 	.padding-mobile{
 		padding: rem-calc(0 32px);
 		.grid-container:not(.full) &{
-			padding: 0;
+			padding-left: 0; padding-right: 0;
 		}
 	}
-	.grid-container{padding-left: rem-calc(32px); padding-right: rem-calc(32px);}
+	.grid-container{
+		padding-left: rem-calc(32px); padding-right: rem-calc(32px);
+		.padding-mobile &{padding-left: 0; padding-right: 0;}
+	}
 	/* TYPOGRAPHY -- BEGIN */
 	h1, .h1-style{
 		font-size: rem-calc(24px); line-height: 1.33;
@@ -55,6 +58,11 @@
 	.section-sep.big{margin-bottom: rem-calc(32px);}
 	.field-sep-mobile{margin-bottom: rem-calc(24px);}
 	.mobile-sep .grid-x .cell:not(:last-of-type){margin-bottom: rem-calc(16px) !important;}
+	.padding-all{
+		&.uneven{
+			padding: rem-calc(40px 32px);
+		}
+	}
 	.padding-top-bottom{
 	  padding-top: rem-calc($fgutter*1.75); //56px
 	  padding-bottom: rem-calc($fgutter*1.75); //56px
@@ -62,15 +70,9 @@
 	    padding-top: rem-calc(36px);
 	    padding-bottom: rem-calc(40px);
 	  }
-		&.uneven{
-			padding: rem-calc(40px 32px);
-		}
 		&.medium{
 			padding: rem-calc(32px 0);
 		}
-		&.uneven{
-	    padding: rem-calc(40px 20px);
-	  }
 	}
 	.padding-top-bottom-mobile{
 		padding-top: rem-calc(36px);
