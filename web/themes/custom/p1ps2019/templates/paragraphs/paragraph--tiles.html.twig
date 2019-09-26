@@ -56,15 +56,14 @@
     'paragraph--width--full' == layout_width ? 'paragraph--width--full tiles-full',
   ]
   %}
-  {% set parag_col_classes = [
-    'paragraph--width--full' == layout_width ? 'paragraph__column mobile-sep' : 'paragraph__column mobile-sep padding-mobile',
-  ]
-  %}
 
-  {% set layout_width_classes_tiles = [
-    'paragraph--width--full' == layout_width ? 'full',
-  ]
-%}
+  {% if 'paragraph--width--full' == layout_width %}
+    {% set parag_col_classes = 'paragraph__column mobile-sep' %}
+    {% set layout_width_classes_tiles = 'full' %}
+  {% else %}
+    {% set parag_col_classes = 'paragraph__column mobile-sep padding-mobile' %}
+  {% endif %} 
+   
 {% endif %}
 
 
