@@ -14,6 +14,11 @@
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             },
+            breakpoints: {
+              1024: {
+                slidesPerView: 1
+              }
+            }
   			  });
   			}
         if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
