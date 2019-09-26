@@ -74,7 +74,9 @@
 
 
 {% set nbCols = content.field_column_number.0 %}
-{% set nbCols2 = content.field_column_number %}
+{% set nbCols2 %}
+  {{ content.field_column_number }}
+{% endset %}
 
 {% if layout_width == 'paragraph--width--full' %}
   {% set layout_width_classes_tiles = 'full' %}
