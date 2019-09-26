@@ -315,17 +315,29 @@ ul.list-style {
   display: inline-block;
 }
 
-a{
+
+//Anchor style ==========
+.link-style, .link{
   font-size: rem-calc(18px); line-height: 1.3;
+  text-decoration: underline; color: $text-main-color;
+  &:hover{
+    text-decoration: none;
+  }
   .add-link-style &{
-    @include setFont($fontType-bold); text-decoration: none;
+    text-decoration: none; color: $text-black;
+    @include setFont($fontType-bold);
     &:hover{
       text-decoration: underline;
     }
   }
-  // if field class is parent font-size: inherit; line-height: inherit;
-
 }
+
+.field--type-text-long a{
+  @extend .link-style; font-size: inherit; line-height: inherit;
+}
+
+
+//Anchor style END ===========
 
 .date-style, .author{
   font-size: rem-calc(18px); line-height: 1.6;
