@@ -49,12 +49,13 @@
   {% set layout_width_classes = [
     'paragraph--width--tiny' == layout_width ? 'paragraph--width--tiny',
     'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
-    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium grid-container',
+    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
     'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
     'paragraph--width--full' == layout_width ? 'paragraph--width--full tiles-full',
   ]
   %}
 {% endif %}
+
 
 {%
   set classes = [
@@ -63,6 +64,21 @@
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
 %}
+
+{%
+  set parag_col_classes = [
+  'paragraph__column', 'mobile-sep',
+  layout_width_classes == 'paragraph--width--full tiles-full' ? '' : 'padding-mobile',
+]
+%}
+
+{%
+  set layout_width_classes_tiles = [
+  layout_width_classes == 'paragraph--width--full tiles-full' ? 'full' : '',
+]
+%}
+
+
 
 {# Merges Width field with classes. #}
 {% set width_field = content.bp_width|render %}
@@ -75,15 +91,13 @@
 
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
-{% set title = '' %}
-{% set title %}
-{{ content.field_title.0 }}
-{% endset %}
-{% if content.field_tile['#items']|length > 2 %}
-  <div class="paragraph__column mobile-sep padding-mobile field-sep-mobile">
-{% else %}
-  <div class="paragraph__column mobile-sep">
-{% endif %}
+  {% set title = '' %}
+  {% set title %}
+    {{ content.field_title.0 }}
+  {% endset %}
+
+    <div class="{{ parag_col_classes }}">
+
     {% if title|striptags|trim %}
       <div class="grid-container">
           <div class="grid-x grid-margin-x">
@@ -93,29 +107,11 @@
           </div>
       </div>
     {% endif %}
-    {% if content.field_tile['#items']|length > 2 or layout_width == 'paragraph--width--medium' %}
-      <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
-    {% elseif layout_width == 'paragraph--width--full' %}
-      <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements">
-        <div class="swiper-container" id="swiper-tiles">
-            <div class="swiper-wrapper">
-    {% endif %}
-        {% for key, item in  content.field_tile if key|first != '#' %}
-        {% if content.field_tile['#items']|length <= 2 and layout_width == 'paragraph--width--full' %}
-          <div class="swiper-slide cell large-{{ nbCols }} small-6">
-        {% elseif layout_width == 'paragraph--width--medium' %}
-        <div class="cell large-{{ nbCols }} small-12">
-        {% else %}
-          <div class="cell large-{{ nbCols }} small-6">
-        {% endif %}
-            {{ item }}
-          </div>
-        {% endfor %}
-        {% if content.field_tile['#items']|length <= 2 %}
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-        {% endif %}
-      </div>
-  </div>
+
+    <div class="grid-container {{ layout_width_classes_tiles }}">
+
+    JE SUIS LA
+
+    </div><!-- grid container -->
+  </div> <!-- col parags -->
 </div>
