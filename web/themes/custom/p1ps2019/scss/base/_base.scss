@@ -317,19 +317,16 @@ ul.list-style {
 
 
 //Anchor style ==========
-.link-style, .link{
+.link-style {
   font-size: rem-calc(18px); line-height: 1.3;
   text-decoration: underline; color: $text-main-color;
   &:hover{
     text-decoration: none;
   }
-  .add-link-style &{
-    text-decoration: none; color: $text-black;
-    @include setFont($fontType-bold);
-    &:hover{
-      text-decoration: underline;
-    }
-  }
+}
+
+.add-link-style-wrapper a{
+  color: $text-black; @include setFont($fontType-bold);
 }
 
 .field--type-text-long a{
