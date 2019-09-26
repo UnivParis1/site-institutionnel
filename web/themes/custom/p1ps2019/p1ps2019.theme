@@ -177,9 +177,8 @@ function p1ps2019_preprocess_paragraph(&$variables) {
     $service = \Drupal::service('up1_global.centres');
     $variables['centre'] = $service->renderCentre("http://ws-theses.univ-paris1.fr/centres_up1", $paragraph->field_centre->value);
   }
+
+  echo 'parag Field name: '.$variables['element']['#field_name'].'<br>';
+  $variables['attributes']['class'][] = $variables['element']['#field_name'];
 }
 
-/*function p1ps2019_preprocess_field(&$variables, $hook) {
-  echo 'Field NAME: '.$variables['element']['#field_name'].'<br>';
-  $variables['attributes']['class'][] = $variables['element']['#field_name'];
-}*/
