@@ -73,8 +73,7 @@
 {% endif %}
 
 
-{% set nbCols = content.field_column_number.0 %}
-{% set nbCols2 %}
+{% set nbCols %}
   {{ content.field_column_number.0 }}
 {% endset %}
 
@@ -97,13 +96,13 @@
   {% set two_elements = 'two-elements' %}
 
   {% if layout_width == 'paragraph--width--full' %}
-    {% set element_class = ' swiper-slide cell large-' ~ nbCols2|trim %}
+    {% set element_class = 'swiper-slide cell large-' ~ nbCols|trim %}
   {% else %}
-    {% set element_class = ' cell small-12 large-' ~ nbCols2|trim %}
+    {% set element_class = 'cell small-12 large-' ~ nbCols|trim %}
   {% endif %}
 
 {% else %}
-  {% set element_class = ' cell small-6 large-' ~ nbCols2|trim %}
+  {% set element_class = 'cell small-6 large-' ~ nbCols|trim %}
 {% endif %}
 
 
