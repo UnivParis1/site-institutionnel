@@ -319,7 +319,7 @@ ul.list-style {
 //Anchor style ==========
 .link-style {
   font-size: rem-calc(18px); line-height: 1.3;
-  text-decoration: underline;
+  text-decoration: underline; display: inline-block;
   &:hover{
     text-decoration: none;
   }
@@ -329,7 +329,7 @@ ul.list-style {
   @include setFont($fontType-bold);
 }
 
-.field--type-text-long {
+.field--type-text-long, .link-style-wrapper, .paragraph--type--tile-wo-image {
   a{
     @extend .link-style;
     font-size: inherit; line-height: inherit;
