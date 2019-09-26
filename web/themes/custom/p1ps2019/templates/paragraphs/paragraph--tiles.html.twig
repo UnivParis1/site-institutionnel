@@ -72,17 +72,16 @@
   {% set classes = classes|merge(layout_width_classes) %}
 {% endif %}
 
-{#
-{% set nbCols = content.field_column_number.0 %}
-#}
 
 {% set nbCols = content.field_column_number.0 %}
+{% set nbCols2 = content.field_column_number | raw %}
 
 {% if layout_width == 'paragraph--width--full' %}
   {% set layout_width_classes_tiles = 'full' %}
   {% if content.field_tile['#items']|length == 2 %}
     {% set parag_col_classes = 'paragraph__column mobile-sep' %}
   {% else %}
+    {% set layout_width_classes_tiles = 'full' %}
     {% set parag_col_classes = 'paragraph__column mobile-sep padding-mobile' %}
   {% endif %} 
 
@@ -96,13 +95,13 @@
   {% set two_elements = 'two-elements' %}
 
   {% if layout_width == 'paragraph--width--full' %}
-    {% set element_class = 'swiper-slide cell large-' %}
+    {% set element_class = nbCols2~' swiper-slide cell large-' %}
   {% else %}
-    {% set element_class = 'cell small-12 large-' %}
+    {% set element_class = nbCols2~' cell small-12 large-' %}
   {% endif %}
 
 {% else %}
-  {% set element_class = 'cell small-6 large-' %}
+  {% set element_class = nbCols2~' cell small-6 large-' %}
 {% endif %}
 
 
