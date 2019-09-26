@@ -44,6 +44,7 @@
 
 {# Renders Width field. #}
 {# Sets class name from values in database. #}
+
 {% if content.bp_width|render %}
   {% set layout_width = content.bp_width['#items'].getString() %}
   {% set layout_width_classes = [
@@ -54,6 +55,15 @@
     'paragraph--width--full' == layout_width ? 'paragraph--width--full tiles-full',
   ]
   %}
+  {% set parag_col_classes = [
+    'paragraph--width--full' == layout_width ? 'paragraph__column mobile-sep' : 'paragraph__column mobile-sep padding-mobile',
+  ]
+  %}
+
+  {% set layout_width_classes_tiles = [
+    'paragraph--width--full' == layout_width ? 'full',
+  ]
+%}
 {% endif %}
 
 
@@ -64,20 +74,6 @@
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
 %}
-
-{%
-  set parag_col_classes = [
-  'paragraph__column', 'mobile-sep',
-  layout_width == 'paragraph--width--full' ? '' : 'padding-mobile',
-]
-%}
-
-{%
-  set layout_width_classes_tiles = [
-  layout_width == 'paragraph--width--full' ? 'full' : '',
-]
-%}
-
 
 
 {# Merges Width field with classes. #}
