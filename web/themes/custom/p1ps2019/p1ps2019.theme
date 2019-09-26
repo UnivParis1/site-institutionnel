@@ -180,5 +180,6 @@ function p1ps2019_preprocess_paragraph(&$variables) {
 }
 
 function p1ps2019_preprocess_field(&$variables, $hook) {
+  echo 'Field NAME: '.$variables['element']['#field_name'].'<br>';
   $variables['attributes']['class'][] = $variables['element']['#field_name'];
 }
