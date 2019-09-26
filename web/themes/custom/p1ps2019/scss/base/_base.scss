@@ -319,14 +319,14 @@ ul.list-style {
 //Anchor style ==========
 .link-style {
   font-size: rem-calc(18px); line-height: 1.3;
-  text-decoration: underline; color: $text-main-color;
+  text-decoration: underline;
   &:hover{
     text-decoration: none;
   }
 }
 
 .add-link-style-wrapper a{
-  color: $text-black; @include setFont($fontType-bold);
+  @include setFont($fontType-bold);
 }
 
 .field--type-text-long {
@@ -335,15 +335,17 @@ ul.list-style {
     font-size: inherit; line-height: inherit;
     @include setFont($fontType-bold);
   }
+
   .reset-style, h1, h2, h3, h4, h5, h6{
-    font-weight: inherit; text-decoration: none;
-    &:hover{
-      text-decoration: underline;
+    a{
+      font-weight: inherit; text-decoration: none;
+      &:hover{
+        text-decoration: underline;
+      }
     }
   }
-  li{
-    font-weight: inherit;
-  }
+
+  li{font-weight: inherit;}
 }
 
 
