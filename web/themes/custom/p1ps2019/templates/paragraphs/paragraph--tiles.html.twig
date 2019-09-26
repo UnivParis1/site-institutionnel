@@ -129,9 +129,7 @@
         {% endif %}
 
           {% for key, item in  content.field_tile if key|first != '#' %}
-            {% if content.field_tile['#items']|length <= 2 and layout_width == 'paragraph--width--full' %}
-              <div class="{{ element_class }}">{{ item }}</div>
-            {% endif %}    
+            <div class="{{ element_class }}">{{ item }}</div>
           {% endfor %}
 
         {% if two_elements and layout_width == 'paragraph--width--full' %}
