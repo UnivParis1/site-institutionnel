@@ -329,8 +329,15 @@ ul.list-style {
   color: $text-black; @include setFont($fontType-bold);
 }
 
-.field--type-text-long a{
-  @extend .link-style; font-size: inherit; line-height: inherit;
+.field--type-text-long {
+  a{
+    @extend .link-style;
+    font-size: inherit; line-height: inherit;
+    @include setFont($fontType-bold);  
+  }
+  li a{
+    font-weight: inherit;
+  }
 }
 
 
