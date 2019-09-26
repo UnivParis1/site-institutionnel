@@ -55,14 +55,6 @@
     'paragraph--width--full' == layout_width ? 'paragraph--width--full tiles-full',
   ]
   %}
-
-  {% if 'paragraph--width--full' == layout_width %}
-    {% set parag_col_classes = 'paragraph__column mobile-sep' %}
-    {% set layout_width_classes_tiles = 'full' %}
-  {% else %}
-    {% set parag_col_classes = 'paragraph__column mobile-sep padding-mobile' %}
-  {% endif %} 
-
 {% endif %}
 
 
@@ -74,7 +66,6 @@
 ]
 %}
 
-
 {# Merges Width field with classes. #}
 {% set width_field = content.bp_width|render %}
 {% if width_field %}
@@ -82,6 +73,33 @@
 {% endif %}
 
 {% set nbCols = content.field_column_number.0 %}
+
+{% if layout_width == 'paragraph--width--full' %}
+  {% set layout_width_classes_tiles = 'full' %}
+  {% if content.field_tile['#items']|length == 2 %}
+    {% set parag_col_classes = 'paragraph__column mobile-sep padding-mobile' %}
+  {% else %}
+    {% set parag_col_classes = 'paragraph__column mobile-sep' %}
+  {% endif %} 
+
+{% else %}
+  {# NOT FULL #}
+  {% set parag_col_classes = 'paragraph__column mobile-sep padding-mobile' %}  
+{% endif %}
+
+
+{% if content.field_tile['#items']|length == 2 %}
+  {% set two_elements = 'two-elements' %}
+
+  {% if layout_width == 'paragraph--width--full' %}
+    {% set element_class = 'swiper-slide cell' %}
+  {% else %}
+    {% set element_class = 'cell large-{{ nbCols }} small-12' %}
+  {% endif %}
+
+{% else %}
+  {% set element_class = 'cell large-{{ nbCols }} small-6' %}
+{% endif %}
 
 
 {# Prints div with classes, and content without Width and Background. #}
@@ -104,9 +122,25 @@
     {% endif %}
 
     <div class="grid-container {{ layout_width_classes_tiles }}">
+      <div class="grid-x grid-margin-x grid-margin-y tiles-layout {{ two_elements }}">
+        {% if two_elements and layout_width == 'paragraph--width--full' %}
+          <div class="swiper-container" id="swiper-tiles">
+              <div class="swiper-wrapper">
+        {% endif %}
 
-    JE SUIS LA
+          {% for key, item in  content.field_tile if key|first != '#' %}
+            {% if content.field_tile['#items']|length <= 2 and layout_width == 'paragraph--width--full' %}
+              <div class="{{ element_class }}">{{ item }}</div>
+            {% endif %}    
+          {% endfor %}
 
+        {% if two_elements and layout_width == 'paragraph--width--full' %}
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+
+      </div>
     </div><!-- grid container -->
   </div> <!-- col parags -->
 </div>
