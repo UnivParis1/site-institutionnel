@@ -76,14 +76,6 @@
 		padding-top: rem-calc(36px);
 		padding-bottom: rem-calc(40px);
 	}
-	.paragraph{
-	  ~ .paragraph{
-	    padding-top: rem-calc(32px);
-	    &[class*="bg"]{
-	      margin-top: rem-calc(32px);
-	    }
-	  }
-	}
 	.paragraph--type--key-figures-section, .paragraph--type--section-presentation, .paragraph--type--hit-list{
 	  h2{
 	    margin-bottom: rem-calc(16px);
@@ -254,6 +246,9 @@
 			font-size: rem-calc(18px);
 			p{font-size: rem-calc(18px); line-height: 1.33;}
 		}
+		&.big{
+			font-size: rem-calc(18px);
+		}
 	}
 	label, .label-style{
 	  font-size: rem-calc(18px);
@@ -310,9 +305,11 @@
 	/* tabs */
 	#tabs-style, .tabs, .accordion {
 		> li{
+			 border: 1px solid $text-light-gray;
 		  	> a{
 			  font-size: rem-calc(18px); line-height: 1.22;
 			  padding: rem-calc(24px 32px);
+				@include flexDisplayAlign('start');
 			}
 		}
 	}//close nav-tabs
