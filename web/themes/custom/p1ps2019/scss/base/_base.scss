@@ -333,9 +333,15 @@ ul.list-style {
   a{
     @extend .link-style;
     font-size: inherit; line-height: inherit;
-    @include setFont($fontType-bold);  
+    @include setFont($fontType-bold);
   }
-  li a{
+  .reset-style, h1, h2, h3, h4, h5, h6{
+    font-weight: inherit; text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  li{
     font-weight: inherit;
   }
 }
