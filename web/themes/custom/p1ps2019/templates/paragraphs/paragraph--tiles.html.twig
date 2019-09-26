@@ -93,8 +93,10 @@
           </div>
       </div>
     {% endif %}
-    {% if content.field_tile['#items']|length > 2 or layout_width == 'paragraph--width--medium' %}
+    {% if content.field_tile['#items']|length > 2 and layout_width == 'paragraph--width--medium' %}
     <div class="grid-container">
+    {% endif %}
+    {% if content.field_tile['#items']|length > 2 or layout_width == 'paragraph--width--medium' %}
       <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
     {% elseif layout_width == 'paragraph--width--full' %}
       <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements">
@@ -119,5 +121,7 @@
         {% endif %}
       </div>
   </div>
-  {% if content.field_tile['#items']|length > 2 or layout_width == 'paragraph--width--medium' %} </div> {% endif %}
+  {% if content.field_tile['#items']|length > 2 and layout_width == 'paragraph--width--medium' %}
+</div>
+  {% endif %}
 </div>
