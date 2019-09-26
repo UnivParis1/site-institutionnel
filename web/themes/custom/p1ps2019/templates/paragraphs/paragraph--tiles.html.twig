@@ -49,7 +49,7 @@
   {% set layout_width_classes = [
     'paragraph--width--tiny' == layout_width ? 'paragraph--width--tiny',
     'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
-    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium grid-container',
+    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
     'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
     'paragraph--width--full' == layout_width ? 'paragraph--width--full tiles-full',
   ]
@@ -94,6 +94,7 @@
       </div>
     {% endif %}
     {% if content.field_tile['#items']|length > 2 or layout_width == 'paragraph--width--medium' %}
+    <div class="grid-container">
       <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
     {% elseif layout_width == 'paragraph--width--full' %}
       <div class="grid-x grid-margin-x grid-margin-y tiles-layout two-elements">
@@ -118,4 +119,5 @@
         {% endif %}
       </div>
   </div>
+  {% if content.field_tile['#items']|length > 2 or layout_width == 'paragraph--width--medium' %} </div> {% endif %}
 </div>
