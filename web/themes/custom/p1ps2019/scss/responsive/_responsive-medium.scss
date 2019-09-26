@@ -345,9 +345,15 @@
 	  }
 	  .swiper-button-prev, .swiper-button-next{
 	    width: auto; height: auto; background-color: transparent;
-	    &:before{font-size: rem-calc(32px);}
+			top: rem-calc(12px);
+	    &:before{font-size: rem-calc(24px);}
 	  }
-	  .swiper-button-prev,.swiper-button-next{right: 0;}
+	  .swiper-button-prev{
+			#{$right}: rem-calc(48px); #{$left} : auto;
+		}
+		.swiper-button-next{
+			#{$right}: rem-calc(12px);
+		}
 	}
 
 	.overlay-infos{
