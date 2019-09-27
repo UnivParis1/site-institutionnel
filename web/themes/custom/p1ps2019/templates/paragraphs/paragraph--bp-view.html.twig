@@ -127,7 +127,7 @@
 {# Sets Paragraph ID as class. #}
 {%
     set classes = [
-    'paragraph', 'grid-x', content.bp_view['#items']|length > 1 ? 'grid-margin-x',
+    'paragraph', 'grid-x', content.bp_view['#items']|length > 1 ? 'grid-margin-x mobile-sep',
     content.bp_view['#items']|length == 1 ? 'grid-container full', content.bp_view['#items']|length == 1 ? 'big',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
@@ -165,7 +165,7 @@
             <div class="cell small-12">
               <div class="padding-mobile">
                   {{ item }}
-              </div>          
+              </div>
             </div>
           {% endfor %}
       {% endif %}
