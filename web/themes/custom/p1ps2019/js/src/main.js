@@ -151,6 +151,9 @@
         else{
           overlayClose();
           $('#navbar-header, .icon-menu').addClass('overlay-show');
+          if($(window).width < 1024){
+            $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+          }
           $('body').addClass('noscroll');
           if(scrollTop <= 0 || $(window.width() < 1024)){
             $('body').addClass('scroll');
