@@ -99,8 +99,11 @@
     {% endif %}
     {{ title_suffix }}
 
-    <div{{ content_attributes.addClass('content padding-mobile') }}>
-        {{ content }}
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content.field_media }}
+        <div class="padding-mobile">
+          {{ content|without('field_media') }}
+        </div>
     </div>
 
 </article>
