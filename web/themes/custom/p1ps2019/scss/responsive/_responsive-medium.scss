@@ -66,6 +66,11 @@
 			&:not(:last-of-type){
 				margin-bottom: rem-calc(16px) !important;
 			}
+			&.medium-6.small-12{
+				&:not(:nth-last-of-type(1)):not(:nth-last-of-type(2)){
+					margin-bottom: rem-calc(16px) !important;
+				}
+			}
 		}
 		&.all{
 			margin-bottom: rem-calc(32px);
@@ -335,6 +340,7 @@
 				@include flexDisplayAlign('start');
 				@include box-shadow(0.25, 2px, 0, $text-black);
 				&:before{ #{$right} : rem-calc(32px);}
+				span{width: calc(100% - 32px);}
 			}
 		}
 	}//close nav-tabs
@@ -347,7 +353,7 @@
 		        height: 100%;
 						.overlay-infos{
 							text-align: left; height: 100%;
-							h3{margin-right: 0;}
+							h3{margin-right: auto;}
 							h3, > div, > a {height: auto;}
 						}
 		      }
