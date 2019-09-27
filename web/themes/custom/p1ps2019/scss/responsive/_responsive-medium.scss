@@ -35,6 +35,14 @@
 		padding-left: rem-calc(32px); padding-right: rem-calc(32px);
 		.padding-mobile &{padding-left: 0; padding-right: 0;}
 	}
+	body{
+	  &:not(.transparent){
+	    padding-top: rem-calc(64px);
+	  }
+	}
+	#breadcrumbs{
+		padding: rem-calc(16px 0);
+	}
 	/* TYPOGRAPHY -- BEGIN */
 	h1, .h1-style{
 		font-size: rem-calc(24px); line-height: 1.33;
@@ -342,7 +350,7 @@
 		        height: 100%;
 						.overlay-infos{
 							text-align: left; height: 100%;
-							h3{margin-right: auto;}
+							h3, > a{#{$margin-right}: auto;}
 							h3, > div, > a {height: auto;}
 						}
 		      }
