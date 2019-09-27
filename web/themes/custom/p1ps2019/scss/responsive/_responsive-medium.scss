@@ -335,11 +335,14 @@
 		.block-views-exposed-filter-blockrecherche-de-contenu-page-1{
 			top: rem-calc(64px); padding: rem-calc(16px 32px);
 			background-color: $background-main-color;
+			.grid-container{
+				padding: 0;}
+			}
 			#views-exposed-form-recherche-de-contenu-page-1{
 				display: block;
 				.form-item{
-					flex: 0 0 92%;
-					max-width: 92%;
+					flex: 0 0 100%;
+					max-width: 100%;
 					&:before{
 						display: none;
 					}
@@ -349,21 +352,24 @@
 						padding: rem-calc(16px 24px); height: rem-calc(40px);
 						::-webkit-input-placeholder {
 					    color: $text-white; padding: rem-calc(16px 24px);
+							opacity: 1;
 					  }
 					  :-moz-placeholder { /* Firefox 18- */
 					    color: $text-white; padding: rem-calc(16px 24px);
+							opacity: 1;
 					  }
 					  ::-moz-placeholder {  /* Firefox 19+ */
 					    color: $text-white; padding: rem-calc(16px 24px);
+							opacity: 1;
 					  }
 					  :-ms-input-placeholder {
 					    color: $text-white; padding: rem-calc(16px 24px);
+							opacity: 1;
 					  }
 					}
 				}
 				.form-actions{
-					flex: 0 0 5%;
-					max-width: 5%;
+					display: none;
 				}
 			}
 		}
@@ -532,7 +538,7 @@
 /* fin paragraphs */
 	#navbar-header{
 	  position: absolute; overflow-y: scroll;
-	  top: rem-calc(64px); left: rem-calc(-24px);
+	  top: rem-calc(136px); left: rem-calc(-24px);
 	  opacity: 0; height: calc(100vh - 64px);
 		.navigation-region{display: none;}
 	  .navigation-left-region{
