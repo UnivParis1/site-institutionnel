@@ -5,6 +5,7 @@
 */
 
 /* Ebizproduction : Responsive > Mobile */
+
 @include breakpoint($medium - 1 down) {
 	$fgutter: 24px;
 	.video-subtitle{
@@ -62,3 +63,30 @@
 	}
 
 }//close media - medium
+
+@include breakpoint($small-medium){
+	.padding-mobile{
+		padding: rem-calc(0 16px);
+	}
+	.grid-container{
+		#{$padding-left}: rem-calc(16px); #{$padding-right}: rem-calc(16px);
+	}
+
+	#tabs-style, .tabs, .accordion {
+		> li{
+		  	> a{
+			  padding: rem-calc(24px 16px);
+				&:before{ #{$right} : rem-calc(16px);}
+			}
+		}
+	}//close nav-tabs
+
+	.overlay-infos{
+	  &.equal-height{
+		  padding: rem-calc(48px 16px);
+		}
+	  &.with-padding{
+	    padding: rem-calc(48px 16px);
+	  }
+	}
+}
