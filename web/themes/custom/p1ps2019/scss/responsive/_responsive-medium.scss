@@ -121,6 +121,7 @@
         font: normal normal normal 14px/1 FontAwesome;
         margin: 0; top: 50%; transform: translateY(-50%);
       }
+			span{width: calc(100% - 32px);}
     }
     &.is-active{
       .accordion-title{
@@ -172,8 +173,8 @@
 				}
       }
       .form-item{
-        flex: 0 0 89%;
-        max-width: 89%;
+        flex: 0 0 80%;
+        max-width: 80%;
       }
     }
   }
@@ -340,11 +341,20 @@
 	#swiper-tiles{
 	  .swiper-wrapper{
 	    .swiper-slide{
-	      .paragraph__column{
-	        height: auto;
-	      }
+				> div {
+					height: 100%;
+					.paragraph__column{
+		        height: 100%;
+						.overlay-infos{
+							text-align: left; height: 100%;
+							h3{margin-right: 0;}
+							h3, > div, > a {height: auto;}
+						}
+		      }
+				}
 	    }
 	  }
+		.swiper-pagination{bottom: rem-calc(16px);}
 	}//close #swiper-tiles
 	.swiper-container:not(#swiper-tiles){
 	  padding: rem-calc(2px);
