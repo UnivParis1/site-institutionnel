@@ -190,7 +190,8 @@ ul.list-style {
 button.semi-oval{
   background-color: $background-light-gray; color: $text-main-color;
 	border: 1px solid $text-white;
-  &.is-active{
+	@include transitionEffect();
+  &.is-active, &:hover{
     background-color: $background-main-color; color: $text-white;
   }
 }
