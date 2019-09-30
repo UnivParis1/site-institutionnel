@@ -18,7 +18,7 @@ form{
 	&:before{
 		content: "";
 		top: 50%; transform: translateY(-50%);
-		position: absolute; left: rem-calc(24px);
+		position: absolute; #{$left}: rem-calc(24px);
 		width: 3px; height: 45%; z-index: 1;
 	}
 }
@@ -120,7 +120,7 @@ fieldset{
         display: inline-block;
         width: rem-calc(32px); height: rem-calc(32px);
         border-radius: 100%;
-        position: absolute; top:0; left: 0;
+        position: absolute; top:0; #{$left}: 0;
       }
 
       &:after{
@@ -128,7 +128,7 @@ fieldset{
         display: inline-block;
         width: rem-calc(16px); height: rem-calc(16px);
         border-radius: 100%;
-        position:absolute; top:8px; left: 8px;
+        position:absolute; top: rem-calc(8px); #{$left}: rem-calc(8px);
       }
     }
   }//close label / label-style
@@ -144,7 +144,7 @@ fieldset{
 
         &:after{
           width: rem-calc(12px); height: rem-calc(12px);
-          top:6px; left: 6px;
+          top:rem-calc(6px); #{$left}: rem-calc(6px);
         }
       }//close span
     }
@@ -181,7 +181,7 @@ fieldset{
       &:after{
         content: '\e92a'; font-size: rem-calc(13px);
         background-color: transparent ;
-        top:10px; left: 10px;
+        top:rem-calc(10px); #{$left}: rem-calc(10px);
       }
     }//span
 
@@ -267,7 +267,7 @@ label, .label-style{
       position: absolute;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: rem-calc(24px);
-      right: rem-calc(24px);
+      #{$right}: rem-calc(24px);
     }
     >div {display: none;}
     span{

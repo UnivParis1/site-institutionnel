@@ -130,11 +130,11 @@
           width: calc(50% - 16px);
           &:nth-child(odd){
             #{$margin-right}: rem-calc(16px);
-            margin-left: 0;
+            #{$margin-left}: 0;
           }
           &:nth-child(even){
             #{$margin-left}: rem-calc(16px);
-            margin-right: 0;
+            #{$margin-right}: 0;
           }
           &:nth-child(n+3){
             margin-bottom: 0;
@@ -159,7 +159,7 @@
 }//close paragraph--type--tiles
 .swiper-container{
    ul.swiper-wrapper{
-     margin-left: 0;
+     #{$margin-left}: 0;
    }
 }
 #swiper-tiles{
@@ -176,7 +176,7 @@
           height: 100%; max-width: 80%; * {height: auto;}
           @include flexDisplay(); @include flexDisplayAlign('space-between');
           flex-direction: column;
-          .bottom-infos{margin-right: auto;}
+          .bottom-infos{#{$margin-right}: auto;}
         }
       }
     }

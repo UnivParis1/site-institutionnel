@@ -90,10 +90,10 @@ h6, .h6-style{font-size: rem-calc(16px);}
 
 ul.list-style {
 	li{
-		position: relative; padding-left: rem-calc(24px);
+		position: relative; #{$padding-left}: rem-calc(24px);
 		&:before{
 			content: ""; display: block;
-			position: absolute; left: 0;
+			position: absolute; #{$left}: 0;
 			width: rem-calc(8px); height: rem-calc(8px);
 			border-radius: 100%;
 			top: 50%; transform: translateY(-50%);
@@ -154,7 +154,7 @@ ul.list-style {
 	@extend .icon-info;
 	&:before{
 		color: inherit; font-size: rem-calc(20px);
-		@include vertical-align(absolute); left: rem-calc(24px);
+		@include vertical-align(absolute); #{$left}: rem-calc(24px);
 	}
 	/*default*/
 
@@ -227,11 +227,11 @@ ul.list-style {
 
 .main-overlay-infos{
   position: absolute; @include responsiveVal(bottom, $gutter*3);
-  left: 0; height: auto; width: 100%;color: $text-white;
+  #{$left}: 0; height: auto; width: 100%;color: $text-white;
   *{color: $text-white;}
 }
 .overlay-infos{
-  position: absolute; top: 0; left: 0;
+  position: absolute; top: 0; #{$left}: 0;
   width: 100%; height: 100%;
   @include flexDisplay();
   @include flexDisplayAlign('center-middle');
@@ -265,8 +265,8 @@ ul.list-style {
     top: 0; @include flexDisplay(); @include flexDisplayAlign('center-middle');
     &:before{font-size: rem-calc(48px);}
   }
-  .swiper-button-prev{left: 0;}
-  .swiper-button-next{right: 0;}
+  .swiper-button-prev{#{$left}: 0;}
+  .swiper-button-next{#{$right}: 0;}
 }
 
 .view-header-color{

@@ -221,7 +221,7 @@
 	    span{
 	      &:after{
 	        font-size: rem-calc(12px);
-	        top:rem-calc(6px); left: rem-calc(6px);;
+	        top:rem-calc(6px); #{$left}: rem-calc(6px);;
 	      }
 	    }//span
 	  }//close label-style
@@ -238,7 +238,7 @@
 					}
 					&:after{
 						width: rem-calc(12px); height: rem-calc(12px);
-						top:rem-calc(6px); left:rem-calc(6px);
+						top:rem-calc(6px); #{$left}:rem-calc(6px);
 					}
 				}
 	  }//close label / label-style
@@ -318,14 +318,14 @@
 		}
 		.block-views-exposed-filter-blockrecherche-de-contenu-page-1{
 			top: rem-calc(64px); padding: rem-calc(16px 32px);
-			background-color: $background-main-color; left: rem-calc(-24px);
+			background-color: $background-main-color; #{$left}: rem-calc(-24px);
 			transform: translateX(-150%); overflow: hidden;
 			.grid-container{
 				padding: 0;
 			}
 			&.overlay-show{
 				transform: translateX(0);
-	      left: 0; opacity: 1;
+	      #{$left}: 0; opacity: 1;
 			}
 			#views-exposed-form-recherche-de-contenu-page-1{
 				display: block; position: relative;
@@ -372,7 +372,7 @@
 	.infos-row-wrapper{
 		&.nowrap-mobile{
 			display: block;
-			.author{text-align: left;}
+			.author{text-align: #{$left};}
 		}
 	}
 
@@ -401,7 +401,7 @@
 		        height: 100%;
 						.overlay-infos{
 							max-width: 100%;
-							text-align: left; height: 100%;
+							text-align: #{$left}; height: 100%;
 							h3, > a{#{$margin-right}: auto;}
 							h3, > div, > a {height: auto;}
 						}
@@ -537,7 +537,7 @@
 /* fin paragraphs */
 	#navbar-header{
 	  position: absolute; overflow-y: scroll;
-	  top: rem-calc(136px); left: rem-calc(-24px);
+	  top: rem-calc(136px); #{$left}: rem-calc(-24px);
 	  opacity: 0; height: calc(100vh - 64px);
 		.navigation-region{display: none;}
 	  .navigation-left-region{
@@ -551,10 +551,10 @@
 						padding: 0; color: $text-white;
 	        }
 					> a, > span{
-						max-width: 100%; text-align: left;
+						max-width: 100%; text-align: #{$left};
 					}
 	        ul{
-	          position: relative; left: 0; top: 0;
+	          position: relative; #{$left}: 0; top: 0;
 	          opacity: 1; visibility: visible; overflow: hidden;
 	          @include transitionEffect();
 	          li{
@@ -589,7 +589,7 @@
 	    }
 	    &.overlay-show{
 	      transform: translateX(0);
-	      left: 0; opacity: 1;
+	      #{$left}: 0; opacity: 1;
 	    }
 	}
 

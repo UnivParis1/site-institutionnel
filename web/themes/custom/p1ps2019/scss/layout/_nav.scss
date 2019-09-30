@@ -9,7 +9,7 @@
   width: 100%; @include transitionEffect(350ms);
   transform: translateX(-150%); z-index: 402;
   position: fixed; @include flexDisplay();
-  top: rem-calc(114px); left: rem-calc(-24px);
+  top: rem-calc(114px); #{$left}: rem-calc(-24px);
   opacity: 0; height: calc(100vh - 114px);
   overflow: hidden;
   .navigation-left-region, .navigation-region{
@@ -46,7 +46,7 @@
         > a, > span{
           font-size: rem-calc(24px); line-height: 1.2;
           max-width: 25%; font-family: $font-second;
-          @include setFont($fontType-bold); text-align: right;
+          @include setFont($fontType-bold); text-align: #{$right};
         }
         // .fa:before{
         //   #{$margin-left} : rem-calc(12px);
@@ -57,7 +57,7 @@
         + li {margin-top: rem-calc(20px);}
         &.opens-right{
           ul.is-dropdown-submenu{
-            left: 30% !important;
+            #{$left}: 30% !important;
             // /position: absolute; left: 25%; top: 0;
             //z-index: 401; opacity: 0; visibility: hidden;
             // /@include transitionEffect();
@@ -86,6 +86,6 @@
     }
     &.overlay-show{
       transform: translateX(0);
-      left: 0; opacity: 1;
+      #{$left}: 0; opacity: 1;
     }
 }

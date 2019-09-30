@@ -7,7 +7,7 @@
 
   .field-add-to-cal{
     @include setFont($fontType-bold);
-    max-width: rem-calc(150px); text-align: right;
+    max-width: rem-calc(150px); text-align: #{$right};
     a{
       font-family: $font-second;
       font-size: rem-calc(18px); line-height: 1.22;
@@ -17,11 +17,11 @@
     @include flexDisplay();
     @include flexDisplayAlign('center-middle');
     .field-add-to-cal{
-      padding-right: rem-calc(32px);
+      #{$padding-right}: rem-calc(32px);
     }
   }
   .social-buttons{
-    padding-left: rem-calc(32px);
+    #{$padding-left}: rem-calc(32px);
     @include flexDisplay(); @include flexDisplayAlign('start');
     @include flexDisplayAlign('vcenter'); width: rem-calc(150px);
     .social-buttons-title{display: none;}
@@ -42,7 +42,7 @@
         i:before{font-size: rem-calc(32px);}
       }
       &:not(:last-of-type){
-        margin-right: rem-calc(16px);
+        #{$margin-right}: rem-calc(16px);
       }
     }
   }
@@ -54,7 +54,7 @@
         *{font-size: rem-calc(20px); line-height: 1.2;}
       }
       .field--name-field-event-date{
-        text-align: right;
+        text-align: #{$right};
         .date-day-entry{
           display: inline-block;
         }
