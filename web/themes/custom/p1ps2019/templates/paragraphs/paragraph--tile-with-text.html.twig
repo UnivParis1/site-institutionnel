@@ -41,11 +41,15 @@
   <div class="paragraph__column mask no-hover relative-wrapper reset-mask-mobile">
       <div class="img-container show-for-large">{{ content.field_media_image }}</div>
       <div class="overlay-infos with-padding box-mobile text-align-left">
-        <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
-        <div class="parag-title-sep">{{ content.bp_text.0 }}</div>
-        <a class="btn outline" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-          {{ content.bp_link.0['#title'] }}
-        </a>
+        <div class="top-infos">
+          <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
+          <div class="parag-title-sep">{{ content.bp_text.0 }}</div>
+        </div>
+        <div class="bottom-infos">
+          <a class="btn outline" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+            {{ content.bp_link.0['#title'] }}
+          </a>
+        </div>              
       </div>
   </div>
 </div>
