@@ -21,7 +21,7 @@
             }
   			  });
   			}
-        if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
+        if($('#swiper-tiles').length > 0 ){
   				var tilesSwiper = new Swiper('#swiper-tiles', {
             breakpoints: {
               1024: {
