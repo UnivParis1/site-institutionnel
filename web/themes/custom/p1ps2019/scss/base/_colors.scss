@@ -821,51 +821,30 @@ tr{
 
 //==========  RESPONSIVE =========== //
 @include breakpoint($large - 1 down) {
-	// #region-header{
-	// 	.header-right{
-	// 		.header-right-inner{
-	// 			#block-headerrightmenu{
-	// 				>ul {
-	// 					>li{
-	// 						ul{
-	// 							li{
-	// 								border-bottom: 1px solid $medium-gray;
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// 	.header-conter{
-	// 		.header-center-inner{
-	// 			#block-mainnavigation{
-	// 				.icon-menu{
-	// 					span.toggle-container{
-  // 						>span{
-  // 							background-color: $text-main-color;
-  // 						}
-	// 				  }
-	// 				}
-	// 				> .menu{
-	// 					 background-color: $background-white;
-	// 					  li {
-	// 						a, span:not([class*="icon-"]){
-	// 							border-bottom: 1px solid $medium-gray;
-	// 						}
-	// 						&.has-children{
-	// 							.menu-wrapper{
-	// 								ul{
-	// 									background-color: $background-light-gray;
-	// 								}
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}//==== fin header center
-	// } // fin region header
-	//fin menu
+
+	#navbar{
+		.block-views-exposed-filter-blockrecherche-de-contenu-page-1{
+			background-color: $background-main-color;
+			#views-exposed-form-recherche-de-contenu-page-1{
+				.form-item{
+					input{
+						border: 1px solid $text-white; color: $text-white;
+						::-webkit-input-placeholder {
+							color: $text-white;
+						}
+						:-moz-placeholder { /* Firefox 18- */
+							color: $text-white;
+						}
+						::-moz-placeholder {  /* Firefox 19+ */
+							color: $text-white;
+						}
+						:-ms-input-placeholder {
+							color: $text-white;
+						}
+					}
+				}
+			}
+		}
+	}
 }//close media - large
 //============= FIN RESPONSIVE =========//
