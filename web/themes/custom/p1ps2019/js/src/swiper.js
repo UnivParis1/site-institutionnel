@@ -23,12 +23,16 @@
   			}
         if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
   				var tilesSwiper = new Swiper('#swiper-tiles', {
-  					slidesPerView: 1,
-            pagination: {
-  				    el: '.swiper-pagination',
-  				    type: 'bullets',
-  						clickable: true,
-  				  },
+            breakpoints: {
+              1024: {
+                slidesPerView: 1,
+                pagination: {
+      				    el: '.swiper-pagination',
+      				    type: 'bullets',
+      						clickable: true,
+      				  },
+              }
+            }
   			  });
   			}
 
