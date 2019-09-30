@@ -829,22 +829,79 @@ tr{
 				.form-item{
 					input{
 						border: 1px solid $text-white; color: $text-white;
-						::-webkit-input-placeholder {
+						&::-webkit-input-placeholder {
 							color: $text-white;
 						}
-						:-moz-placeholder { /* Firefox 18- */
+						&:-moz-placeholder { /* Firefox 18- */
 							color: $text-white;
 						}
-						::-moz-placeholder {  /* Firefox 19+ */
+						&::-moz-placeholder {  /* Firefox 19+ */
 							color: $text-white;
 						}
-						:-ms-input-placeholder {
+						&:-ms-input-placeholder {
 							color: $text-white;
 						}
 					}
 				}
 			}
 		}
+	}
+
+	/* tabs */
+	#tabs-style, .tabs, .accordion {
+		> li{
+		  	> a{
+				@include box-shadow(0.25, 2px, 0, $text-black);
+			}
+		}
+	}//close nav-tabs
+
+	#swiper-tiles{
+		background-color: $background-main-color;
+		.swiper-pagination{
+			background-color: $background-main-color;
+		}
+	}//close #swiper-tiles
+
+	.box-mobile{
+		background-color: $background-main-color; color: $text-white;
+	}
+
+	.reset-mask-mobile{
+		.overlay-infos{
+			h2{color: $text-main-color;}
+			.btn.outline.fa{
+				color: $text-main-color; border-color: $text-main-color;
+				&:before{color: $text-main-color;}
+			}
+		}
+	}
+
+	.key-figures-section {
+	  .chiffre, .legende{
+			color: $text-white;
+	  }
+	}
+
+	.paragraph--type--section-presentation{
+	  .paragraph--type--presentation{
+	    h3{
+				color: $text-white; margin-bottom: 0;
+	    }
+	  }
+	}
+
+	#navbar-header{
+		.navigation-left-region{
+			background-color: $background-main-color;
+			 ul.menu.large-vertical {
+				 li {
+					a,span{
+						padding: 0; color: $text-white;
+					}
+				}
+			 }
+		 }
 	}
 }//close media - large
 //============= FIN RESPONSIVE =========//

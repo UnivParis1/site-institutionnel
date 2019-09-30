@@ -170,7 +170,9 @@
 		}
 
       $(window).resize(function(e) {
-
+        if($(window).width() < 1024 && $('#navbar-header.overlay-show').length > 0){
+          $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+        }
       });//close resize
     }
   };//close myBehavior
