@@ -702,16 +702,34 @@ $colors-list: (
       }
 }//close flexDisplayAlign
 
+
 @mixin transitionEffect($speed: 150ms, $type: ease){
   transition:all $speed $type 0s;
 }
 
 
-@mixin placeholder {
-  ::-webkit-input-placeholder {@content}
-  :-moz-placeholder           {@content}
-  ::-moz-placeholder          {@content}
-  :-ms-input-placeholder      {@content}
+@mixin placeholder() {
+  ::-webkit-input-placeholder {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  :-moz-placeholder           {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  ::-moz-placeholder         {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  :-ms-input-placeholder      {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+
 }
 
 @mixin inputStyle(){
@@ -726,11 +744,7 @@ $colors-list: (
 
   padding: rem-calc(24px 24px 24px 72px); margin: 0;
   height: rem-calc(71px);
-  @include placeholder {
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); @include setFont($fontType-italic);
-    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  }
+  @include placeholder();
   // ::-webkit-input-placeholder {
   //   opacity: 1; line-height: 1.6;
   //   font-size: rem-calc(20px); @include setFont($fontType-italic);
