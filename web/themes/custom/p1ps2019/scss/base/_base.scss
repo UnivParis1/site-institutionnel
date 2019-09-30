@@ -243,8 +243,9 @@ ul.list-style {
 	}
   &.with-padding{
     padding: rem-calc(80px 126px);
-    @include flexDisplayAlign('start');
-    max-width: 80%;
+    @include flexDisplay(); @include flexDisplayAlign('space-between');
+    flex-direction: column; max-width: 80%; * {height: auto;}
+    .btn{margin-right: auto;}
   }
 }
 .noscroll{overflow: hidden;}
