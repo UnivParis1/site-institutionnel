@@ -12,7 +12,7 @@
 	h1, .h1-style{
 		font-size: rem-calc(24px); line-height: 1.33;
 	}
-	
+
 	.video-subtitle{
 		word-break: break-all;
 	}
@@ -107,5 +107,17 @@
 	}
 	.infos-row-wrapper{
 		display: block;
+	}
+	.date-style{
+	  .field--item{
+			@include flexDisplay();
+			> div:first-of-type{margin-right: rem-calc(8px);}
+			.date-hours-wrapper{
+				&:before{
+					content: "-";
+					padding-right: rem-calc(8px);
+				}
+			}
+		}
 	}
 }
