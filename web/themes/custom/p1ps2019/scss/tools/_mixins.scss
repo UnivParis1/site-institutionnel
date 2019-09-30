@@ -707,31 +707,6 @@ $colors-list: (
   transition:all $speed $type 0s;
 }
 
-
-@mixin placeholder() {
-  ::-webkit-input-placeholder {
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); @include setFont($fontType-italic);
-    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  }
-  :-moz-placeholder           {
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); @include setFont($fontType-italic);
-    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  }
-  ::-moz-placeholder         {
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); @include setFont($fontType-italic);
-    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  }
-  :-ms-input-placeholder      {
-    opacity: 1; line-height: 1.6;
-    font-size: rem-calc(20px); @include setFont($fontType-italic);
-    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  }
-
-}
-
 @mixin inputStyle(){
   border: 3px solid $background-main-color;
   background-color: $background-white;
@@ -744,27 +719,26 @@ $colors-list: (
 
   padding: rem-calc(24px 24px 24px 72px); margin: 0;
   height: rem-calc(71px);
-  @include placeholder();
-  // ::-webkit-input-placeholder {
-  //   opacity: 1; line-height: 1.6;
-  //   font-size: rem-calc(20px); @include setFont($fontType-italic);
-  //   #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  // }
-  // :-moz-placeholder { /* Firefox 18- */
-  //   opacity: 1; line-height: 1.6;
-  //   font-size: rem-calc(20px); @include setFont($fontType-italic);
-  //   #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  // }
-  // ::-moz-placeholder {  /* Firefox 19+ */
-  //   opacity: 1; line-height: 1.6;
-  //   font-size: rem-calc(20px); @include setFont($fontType-italic);
-  //   #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  // }
-  // :-ms-input-placeholder {
-  //   opacity: 1; line-height: 1.6;
-  //   font-size: rem-calc(20px); @include setFont($fontType-italic);
-  //   #{$padding-left} : rem-calc(48px); color: $dark-gray3;
-  // }
+  &::-webkit-input-placeholder {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  &::-moz-placeholder {  /* Firefox 19+ */
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
+  &:-ms-input-placeholder {
+    opacity: 1; line-height: 1.6;
+    font-size: rem-calc(20px); @include setFont($fontType-italic);
+    #{$padding-left} : rem-calc(48px); color: $dark-gray3;
+  }
   &:focus{
 		border: 3px solid $background-main-color;
 	}
