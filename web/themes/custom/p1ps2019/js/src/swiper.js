@@ -4,7 +4,7 @@
     attach: function (context, settings) {
 
 
-
+      noSwiping();
 
         if($('.swiper-container:not(#swiper-tiles)').length > 0){
   				var mySwiper = new Swiper('.swiper-container:not(#swiper-tiles)', {
@@ -34,6 +34,7 @@
 
       $(window).resize(function() {
       //  setTimeout(checkOnSwipers, 2000);
+        noSwiping();
         reinitSwiper(mySwiper);
         reinitSwiper(tilesSwiper);
       });//close resize
@@ -53,6 +54,18 @@
 
   //setTimeout(checkOnSwipers, 2000);
 
+function noSwiping(){
+  if($(window).width() > 1024){
+    if($('#swiper-tiles.swiper-no-swiping').length <= 0){
+      $('#swiper-tiles').addClass('swiper-no-swiping');
+    }
+  }
+  else{
+    if($('#swiper-tiles.swiper-no-swiping').length > 0){
+      $('#swiper-tiles').removeClass('swiper-no-swiping');
+    }
+  }
+}
 //=============================================== FUNCTIONS =================================================
 function reinitSwiper(swiper) {
     setTimeout(function () {
