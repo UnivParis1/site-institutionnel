@@ -21,7 +21,7 @@
             }
   			  });
   			}
-        if($('#swiper-tiles').length > 0 && $(window).width() < 1024){
+        if($('#swiper-tiles').length > 0){
   				var tilesSwiper = new Swiper('#swiper-tiles', {
   					slidesPerView: 1,
             pagination: {
@@ -29,11 +29,6 @@
   				    type: 'bullets',
   						clickable: true,
   				  },
-            breakpoints: {
-              1024: {
-                slidesPerView: 1
-              }
-            }
   			  });
   			}
 
