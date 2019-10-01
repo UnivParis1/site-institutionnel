@@ -8,6 +8,77 @@
 /* Ebizproduction : Responsive > Tablette */
 @include breakpoint($xlarge - 1 down) {
 	$rem-base: 10px;
+
+	h2, .h2-style{font-size: rem-calc(32px);}
+	h3, .h3-style{font-size: rem-calc(24px);}
+	h4, .h4-style{font-size: rem-calc(16px);}
+	h5, .h5-style{font-size: rem-calc(14px);}
+	h6, .h6-style{font-size: rem-calc(14px);}
+
+	.section-sep{
+		margin-bottom: rem-calc(56px);
+		&.small{margin-bottom: rem-calc(56px);}
+		&.big{margin-bottom: rem-calc(56px);}
+	}
+
+	.padding-all{
+	  &.uneven{
+	    padding: rem-calc(56px 48px);
+	  }
+	}
+
+	.padding-top-bottom{
+	  &.medium{
+	    padding: rem-calc(56px 0);
+	  }
+	  &.big{
+	    padding: rem-calc(56px 0);
+	  }
+	}
+
+	.column-number-2{
+	  column-gap: rem-calc(48px);
+	}
+
+
+	.accordion{
+	  li{
+	    .accordion-title{
+	      &:before{
+	        content: "\f078";
+	        font: normal normal normal 14px/1 FontAwesome;
+	        margin: 0; top: 50%; transform: translateY(-50%);
+	      }
+	    }
+	    &.is-active{
+	      .accordion-title{
+	        &:before{
+	          content: "\f078";
+	          transform: rotate(180deg);
+	        }
+	      }
+	    }
+	  }
+
+	  .accordion-wrapper &{
+	    .accordion-item{
+	      .accordion-title{
+	        font-size: rem-calc(22px);
+	        padding: rem-calc(24px 32px);
+	        > div {width: calc(100% - 32px);}
+	        &:before{
+	          font-size: rem-calc(22px);
+	          #{$right}: rem-calc(32px);
+	        }
+	      }
+	      .accordion-content{
+	        padding: rem-calc(24px 32px);
+	      }
+	    }//close .accordion-item
+	  }
+	}//close accordion
+
+
 	.site-content-wrapper{
 			.btn, .button--primary,
 			button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
@@ -21,6 +92,9 @@
 
 	.centres-up1-form, .center-wrapper {
 	  .map-centre {
+			.center-form{
+	      width: 60%;
+	    }
 	    .overlay-infos{
 	      padding: rem-calc(32px);
 	      .form-item{
@@ -30,6 +104,51 @@
 	    }
 	  }
 	}
+
+	.txt{
+		&.medium{
+			font-size: rem-calc(20px);
+			p{font-size: rem-calc(20px);}
+		}
+		&.big{
+			font-size: rem-calc(22px);
+		}
+	}
+
+	label, .label-style{
+	  font-size: rem-calc(20px);
+	}
+
+	#tabs-style, .tabs, .accordion {
+		> li{
+		  	> a{
+			  font-size: rem-calc(20px);
+			}
+		}
+	}//close nav-tabs
+
+	.field--type-text-long{
+	  ul, div:not(.visually-hidden), p, img, embed, picture{
+	    ~ ul, ~ div, ~ p, ~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ img, ~ embed, ~ picture{
+	      margin-top: rem-calc(32px);
+	    }
+	  }
+	}
+
+	.overlay-infos{
+	  &.equal-height{
+		  padding: 56px 48px;
+		}
+	  &.with-padding{
+	    padding: rem-calc(56px 56px 80px 56px);
+	  }
+	}
+
+	.key-figures-section {
+	  .chiffre{
+	    font-size: rem-calc(35px); line-height: 1.14;
+	  }
+	}//close .key-figures-section
 
 	.paragraph--type--hit-list{
 		.grid-container{
@@ -77,14 +196,6 @@
 	.padding-all{
 	  &.uneven{
 	    padding: rem-calc(32px);
-	  }
-	}
-
-	.centres-up1-form, .center-wrapper {
-	  .map-centre {
-	    .center-form{
-	      width: 60%;
-	    }
 	  }
 	}
 
