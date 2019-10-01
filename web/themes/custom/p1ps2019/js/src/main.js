@@ -20,6 +20,8 @@
 			});
 		}//close scroll
 
+    BrowserDetection();
+
     //map submit button
     if($('.center-form #edit-submit').length > 0){
       $('.center-form #edit-submit').addClass('reset-btn search-btn white').removeClass('button button--primary js-form-submit form-submit');
@@ -184,6 +186,20 @@
         $('body').removeClass('noscroll');
       }
     }
+  }
+
+  function BrowserDetection() {
+     var ua = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i),
+      browser;
+    if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) {
+      browser = "msie";
+    }
+    else {
+      browser = ua[1].toLowerCase();
+    }
+
+    if(browser == 'msie') $('body').addClass('browser-ie');
+    else $('body').addClass('browser-'+browser);
   }
 
 })(jQuery);
