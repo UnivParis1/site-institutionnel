@@ -59,11 +59,7 @@
 ]
 %}
 
-{% if (img_position == 'column-position' or img_position == 'column-reverse-position') %}
-  {% set col_num = 'large-12' %}
-{% else %}
-  {% set col_num = 'large-6' %}
-{% endif %}
+
 
 {# Merges Background field with classes. #}
 {% set background_field = content.bp_background|render %}
@@ -73,10 +69,10 @@
 
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes) }}>
-  <div class="cell small-12 {{col_num}} full-height-all-children">
+  <div class="cell small-12  full-height-all-children">
     <div class="img-container">{{ content.field_media_image }}</div>
   </div>
-  <div class="cell small-12 {{col_num}} padding-all uneven txt">
+  <div class="cell small-12  padding-all uneven txt">
     <h2>{{ content.field_title.0 }}</h2>
     {{ content.field_text }}
     <a class="btn btn-inverse btn-primary display-inline" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
