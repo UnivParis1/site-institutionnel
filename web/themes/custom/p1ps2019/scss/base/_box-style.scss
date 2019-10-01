@@ -9,13 +9,13 @@
 }
 .box-style{
   height: 100%;
-  @include flexDisplay();
+  display: inline-flex;
   flex-direction: column;
 	&.auto-height{height: auto;}
 	.box-content{
 	  padding: rem-calc(36px 20px);
 	  //background-color: $light-gray;
-	  display: inline-flex; @include flexDisplayAlign('space-between');
+	  @include flexDisplay(); @include flexDisplayAlign('space-between');
 	  flex: 1 0 auto; flex-direction: column;
 	  .title{
 	  	font-size:rem-calc(22px); line-height: 1.18;
