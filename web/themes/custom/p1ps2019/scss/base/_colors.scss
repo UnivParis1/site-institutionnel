@@ -51,6 +51,7 @@ ul.list-style {
 		}
 	}
 }
+
 .circle{
 	@include box-border(1px, $text-main-color);
 	color: $text-main-color;
@@ -104,7 +105,7 @@ ul.list-style {
 			background-color: $background-main-color;
 		}
 		&.overlay-show, &:hover{
-			&:before{background-color: $background-white;}
+			&:before{background-color: $text-white;}
 		}
 		.transparent:not(.scroll) &{
 			&:before{
@@ -271,6 +272,7 @@ input[type="search"], .form-date,
     }
     ul.chosen-results{
       li{
+				background-color: $background-white;
         color: $text-main-color;
 				&.highlighted, &.result-selected{
 					background-color: $background-main-color;
@@ -446,6 +448,25 @@ tr{
 //=============== FIN TABLE ================ //
 
 //================ FOOTER =================== //
+.footer{
+  .footer-wrapper{
+		background-color: $background-white;
+    .cell{
+      &:not(:last-child){
+        &:after{
+          background-color: $gold;
+        }
+      }
+    }
+    .two-columns{
+      &:after{
+        background-color: $gold;
+      }
+    }
+  }
+
+}//close .foooter
+
 #region-footer{
 	.footer-center-inner{
 		li{
