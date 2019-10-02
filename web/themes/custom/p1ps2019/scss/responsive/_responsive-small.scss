@@ -13,6 +13,23 @@
 		font-size: rem-calc(24px); line-height: 1.33;
 	}
 
+	.paragraph--type--bp-column-wrapper{
+		.no-padding-mobile{
+			.grid-x, .cell{
+				margin: 0; width: 100%;
+			}
+			.cell{
+				&:nth-child(odd) {
+				  #{$padding-right} : 0;
+				}
+
+				&:nth-child(even) {
+				  #{$padding-left} : 0;
+				}
+			}
+		}
+	}
+
 	.video-subtitle{
 		word-break: break-all;
 	}
