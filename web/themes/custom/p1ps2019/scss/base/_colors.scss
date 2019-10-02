@@ -51,13 +51,52 @@ ul.list-style {
 		}
 	}
 }
+.circle{
+	@include box-border(1px, $text-main-color);
+	color: $text-main-color;
+	*{color: $text-main-color;}
+	&.overlay-show, &:hover{
+		background-color: $background-main-color;
+		*{color: $text-white;} color: $text-white;
+	}
+	&:not(.white){
+		.transparent:not(.scroll) &{
+			@include box-border(1px, $text-white);
+			color: $text-white;
+			*{color: $text-white;}
+			&.overlay-show, &:hover{
+				@include box-border(1px, $text-main-color);
+				background-color: $background-white; color: $text-main-color;
+				*{color: $text-main-color;}
+			}
+		}
+	}
 
+	&.blue{
+		background-color: $background-main-color;
+		color: $text-white;
+		&:hover{
+			background-color: $background-white;
+			color: $text-main-color;
+		}
+	}
+	&.white{
+		border: 0;
+		background-color: $background-white;
+		color: $text-main-color;
+		*{color: $text-main-color;}
+		&:hover{
+			background-color: $background-main-color;
+			color: $text-white;
+			*{color: $text-white;}
+		}
+	}
+}
 .search-btn{
-  //@extend .circle;
-	@include circleStyle();
-	/*&.white{
+  @extend .circle;
+	&.white{
 		@extend .circle.white;
-	}*/
+	}
 }
 .accessibility-wrapper{
 	#accessibility-toggle{
@@ -65,7 +104,7 @@ ul.list-style {
 			background-color: $background-main-color;
 		}
 		&.overlay-show, &:hover{
-			&:before{background-color: $text-white;}
+			&:before{background-color: $background-white;}
 		}
 		.transparent:not(.scroll) &{
 			&:before{
@@ -232,7 +271,6 @@ input[type="search"], .form-date,
     }
     ul.chosen-results{
       li{
-				background-color: $background-white;
         color: $text-main-color;
 				&.highlighted, &.result-selected{
 					background-color: $background-main-color;
@@ -408,25 +446,6 @@ tr{
 //=============== FIN TABLE ================ //
 
 //================ FOOTER =================== //
-.footer{
-  .footer-wrapper{
-		background-color: $background-white;
-    .cell{
-      &:not(:last-child){
-        &:after{
-          background-color: $gold;
-        }
-      }
-    }
-    .two-columns{
-      &:after{
-        background-color: $gold;
-      }
-    }
-  }
-
-}//close .foooter
-
 #region-footer{
 	.footer-center-inner{
 		li{
