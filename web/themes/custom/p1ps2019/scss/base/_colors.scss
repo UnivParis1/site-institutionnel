@@ -54,45 +54,6 @@ ul.list-style {
 
 .circle{
 	@include circleStyle();
-	// @include box-border(1px, $text-main-color);
-	// color: $text-main-color;
-	// *{color: $text-main-color;}
-	// &.overlay-show, &:hover{
-	// 	background-color: $background-main-color;
-	// 	*{color: $text-white;} color: $text-white;
-	// }
-	// &:not(.white){
-	// 	.transparent:not(.scroll) &{
-	// 		@include box-border(1px, $text-white);
-	// 		color: $text-white;
-	// 		*{color: $text-white;}
-	// 		&.overlay-show, &:hover{
-	// 			@include box-border(1px, $text-main-color);
-	// 			background-color: $background-white; color: $text-main-color;
-	// 			*{color: $text-main-color;}
-	// 		}
-	// 	}
-	// }
-	//
-	// &.blue{
-	// 	background-color: $background-main-color;
-	// 	color: $text-white;
-	// 	&:hover{
-	// 		background-color: $background-white;
-	// 		color: $text-main-color;
-	// 	}
-	// }
-	// &.white{
-	// 	border: 0;
-	// 	background-color: $background-white;
-	// 	color: $text-main-color;
-	// 	*{color: $text-main-color;}
-	// 	&:hover{
-	// 		background-color: $background-main-color;
-	// 		color: $text-white;
-	// 		*{color: $text-white;}
-	// 	}
-	// }
 }
 .search-btn{
   @extend .circle;
@@ -509,7 +470,9 @@ tr{
 			fill: $gold;
 		}
 
-		.transparent:not(.scroll) &{
+	}//close top header
+	&.transparent:not(.scroll){
+		#top-header{
 			background-color: transparent;
 			box-shadow: none;
 			svg{
@@ -517,20 +480,63 @@ tr{
 				*{fill: inherit;}
 			}
 		}
-
-	}//close top header
-
+		.icon-menu{
+			span.toggle-container{
+				>span{
+						background-color: $background-white;
+				}
+			}
+		}
+	}
 
 	.icon-menu{
 		span.toggle-container{
-		>span{
-			background-color: $text-main-color;
-			.transparent:not(.scroll) &{
-				background-color: $background-white;
+			>span{
+				background-color: $text-main-color;
 			}
 		}
-		}
 
+		.header-right{
+			.language-switcher-language-url {
+				// button{
+				// 	color: $text-white;
+				// 	&.overlay-show, &:hover{color: $text-main-color;}
+				// 	.scroll &{
+				// 		color: $text-main-color;
+				// 		&:hover{
+				// 			background-color: $background-main-color;
+				// 			color: $text-white;
+				// 		}
+				// 	}
+				// }
+				ul {
+					background-color: $background-white; @include box-shadow();
+					&:before{
+						border-bottom: solid rem-calc(6px) $text-white;
+					}
+				}
+			}
+			.block-up1-ent-search-block{
+				nav {
+					ul {
+						#ent{
+							a{
+								@include box-border(1px, $text-white);
+								color: $text-white;
+								.fa{
+									color: $text-white;
+								}
+								&:hover{
+									background-color: $background-white;
+									color: $text-main-color;
+									.fa{color: $text-main-color;}
+								}
+							}
+						}
+					}
+				}
+			}
+		}//close header-right
 	}//close icon-menu
 
 
@@ -567,18 +573,6 @@ tr{
 								background-color: $background-main-color;
 								color: $text-white;
 								.fa{color: $text-white;}
-							}
-							.transparent:not(.scroll) &{
-								@include box-border(1px, $text-white);
-								color: $text-white;
-								.fa{
-									color: $text-white;
-								}
-								&:hover{
-									background-color: $background-white;
-									color: $text-main-color;
-									.fa{color: $text-main-color;}
-								}
 							}
 						}
 					}
