@@ -613,19 +613,16 @@
 					&.is-accordion-submenu-parent{
 						> a{
 							position: absolute; right: 0;
-							top: rem-calc(10px);
+							top: rem-calc(-3px);
 							&:before {
 								content: '\f078'; position: relative;
 								font: normal normal normal 14px/1 FontAwesome;
 							}
 						}
 						&[aria-expanded="true"]{
+							.acc-link a{text-align: underline;}
 							> a {
-								text-decoration: underline;
-								&:before{
-									transform: translateY(-50%) rotate(180deg);
-									text-decoration: none;
-								}
+								transform: rotate(180deg); top: rem-calc(3px);
 							}
 						}
 						ul{padding: rem-calc(12px 0 12px 48px);}
