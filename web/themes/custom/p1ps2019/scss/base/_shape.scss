@@ -7,31 +7,5 @@
 /* Ebizproduction : shape */
 
 .circle{
-    border-radius: 100%; position: relative;
-    //40px
-    width: rem-calc(40px); height: rem-calc(40px);
-    overflow: hidden;
-		@include flexDisplay(); @include flexDisplayAlign('center-middle');
-
-    //32px
-    &.small{
-        width: rem-calc($fgutter); height: rem-calc($fgutter);
-        font-size: rem-calc(14px);
-    }
-
-    //80px
-		&.medium{
-				width: rem-calc($fgutter*2.5); height: rem-calc($fgutter*2.5);
-    }
-
-    //116px
-    &.big{
-        width: rem-calc($fgutter*3.625); height: rem-calc($fgutter*3.625);
-        font-size: rem-calc(24px); line-height: 1.45;
-        @include setFont($fontType-bold);
-    }
-
-    &.remove-circle-effect{
-        @include remove-circle-effect;
-    }
+    @include circleStyle();
 }//close circle
