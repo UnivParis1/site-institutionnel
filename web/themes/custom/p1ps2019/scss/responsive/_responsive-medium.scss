@@ -593,19 +593,6 @@
 					> a, > span{
 						max-width: 100%; text-align: #{$left};
 					}
-					> a{
-						&:before{
-							content: "\f078"; position: absolute; right: 0;
-							font: normal normal normal 14px/1 FontAwesome;
-						}
-					}
-					&[aria-expanded="true"]{
-						> a{
-							&:before{
-								transform: rotate(180deg);
-							}
-						}
-					}
 	        ul{
 	          position: relative; #{$left}: 0; top: 0;
 	          opacity: 1; visibility: visible; overflow: hidden;
@@ -625,15 +612,20 @@
 					&.is-accordion-submenu-parent{
 						> a{
 							position: relative;
-							&:after {
-								content: '\f078'; border: 0;
+							&:before {
+								content: '\f078'; right: 0; position: absolute;
 								font: normal normal normal 14px/1 FontAwesome;
-								width: rem-calc(16px); height: rem-calc(16px);
-								transform: translateY(-50%); text-decoration: none;
+								top: 50%; transform: translateY(-50%);
 							}
 						}
 						&[aria-expanded="true"]{
-							> a {text-decoration: underline;}
+							> a {
+								text-decoration: underline;
+								&:before{
+									transform: translateY(-50%) rotate(180deg);
+									text-decoration: none;
+								}
+							}
 						}
 						ul{padding: rem-calc(12px 0 12px 48px);}
 					}
