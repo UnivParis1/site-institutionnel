@@ -590,8 +590,9 @@
 	          font-size: rem-calc(22px); line-height: 1.2;
 						padding: 0;
 	        }
-					> a, > span{
+					> a, > span, .acc-link{
 						max-width: 100%; text-align: #{$left};
+						a{max-width: 100%;}
 					}
 	        ul{
 	          position: relative; #{$left}: 0; top: 0;
@@ -611,9 +612,9 @@
 	        }
 					&.is-accordion-submenu-parent{
 						> a{
-							position: relative;
+							position: absolute;
 							&:before {
-								content: '\f078'; right: 0; position: absolute;
+								content: '\f078'; right: 0; position: relative;
 								font: normal normal normal 14px/1 FontAwesome;
 								top: 50%; transform: translateY(-50%);
 							}
