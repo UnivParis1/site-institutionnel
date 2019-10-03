@@ -21,6 +21,12 @@ function p1ps2019_preprocess_html(&$variables) {
 function p1ps2019_preprocess_page(&$variables) {
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['#attached']['drupalSettings']['language'] = $language;
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    $variables['is_front'] = FALSE;
+  }
 }
 
 
@@ -178,4 +184,3 @@ function p1ps2019_preprocess_paragraph(&$variables) {
     $variables['centre'] = $service->renderCentre("http://ws-theses.univ-paris1.fr/centres_up1", $paragraph->field_centre->value);
   }
 }
-

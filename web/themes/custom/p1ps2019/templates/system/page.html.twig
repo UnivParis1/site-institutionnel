@@ -52,10 +52,14 @@
  */
 #}
 
-
+{%
+set body_classes = [
+ is_front ? 'transparent',
+]
+%}
 {# Header #}
 {% if page.header or page.header_left or page.header_center or page.header_right %}
-  <header id="navbar" role="banner">
+  <header{{ attributes.addClass(body_classes) }} id="navbar" role="banner">
     {% if page.header %}
       <div class="grid-x">
         <div class="cell small-12">{{ page.header }}</div>
