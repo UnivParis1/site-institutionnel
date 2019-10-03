@@ -13,9 +13,9 @@
 			$(document).scroll(function() {
 				var top=$(this).scrollTop();
 				if(top>1) {
-					setTimeout(function(){ $("#navbar").addClass("scroll"); }, 100);
+					setTimeout(function(){ $("body").addClass("scroll"); }, 100);
 				} else {
-					setTimeout(function(){ $("#navbar").removeClass("scroll"); }, 100);
+					setTimeout(function(){ $("body").removeClass("scroll"); }, 100);
 				}
 			});
 		}//close scroll
