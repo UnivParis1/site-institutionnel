@@ -53,33 +53,7 @@ ul.list-style {
 }
 
 .circle{
-	@include box-border(1px, $text-main-color);
-	color: $text-main-color;
-	*{color: $text-main-color;}
-	&.overlay-show, &:hover{
-		background-color: $background-main-color;
-		*{color: $text-white;} color: $text-white;
-	}
-
-	&.blue{
-		background-color: $background-main-color;
-		color: $text-white;
-		&:hover{
-			background-color: $background-white;
-			color: $text-main-color;
-		}
-	}
-	&.white{
-		border: 0;
-		background-color: $background-white;
-		color: $text-main-color;
-		*{color: $text-main-color;}
-		&:hover{
-			background-color: $background-main-color;
-			color: $text-white;
-			*{color: $text-white;}
-		}
-	}
+	@include circleStyle();
 }
 #search-toggle{
 	// .fa{
