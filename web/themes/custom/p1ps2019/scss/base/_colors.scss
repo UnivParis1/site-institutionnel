@@ -492,11 +492,9 @@ tr{
 	}
 	.accessibility-wrapper{
 		#accessibility-toggle{
+			@include circleStyle();
 			&:before{
 				background-color: $background-main-color;
-			}
-			&.overlay-show, &:hover{
-				&:before{background-color: $text-white;}
 			}
 		}
 	  #accessibility-container{
@@ -507,6 +505,11 @@ tr{
 				border-bottom: solid rem-calc(6px) $background-white;
 			}
 	  }
+		&.overlay-show, &:hover{
+			#accessibility-toggle{
+				&:before{background-color: $text-white;}
+			}			
+		}
 	}
 }//close navbar
 
@@ -552,7 +555,6 @@ tr{
 	}//close header-right
 	.accessibility-wrapper{
 		#accessibility-toggle{
-			@include circleStyle();
 			&:before{
 				background-color: $text-white;
 			}
