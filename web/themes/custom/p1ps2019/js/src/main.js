@@ -24,7 +24,7 @@
 
     //map submit button
     if($('.center-form #edit-submit').length > 0){
-      $('.center-form #edit-submit').addClass('reset-btn search-btn white').removeClass('button button--primary js-form-submit form-submit');
+      $('.center-form #edit-submit').addClass('reset-btn circle white').removeClass('button button--primary js-form-submit form-submit');
     }
 
     //swiper-buttons
