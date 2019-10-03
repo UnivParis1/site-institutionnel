@@ -38,12 +38,12 @@
     //accessibility toggler
     if($('#accessibility-toggle').length > 0){
       $('#accessibility-toggle').click(function(){
-        if($('#accessibility-container.overlay-show').length > 0){
+        if($('#accessibility-wrapper.overlay-show').length > 0){
           overlayClose();
         }
         else{
           overlayClose();
-          $('#accessibility-container, #accessibility-toggle').addClass('overlay-show');
+          $('#accessibility-wrapper').addClass('overlay-show');
         }
       });
     }

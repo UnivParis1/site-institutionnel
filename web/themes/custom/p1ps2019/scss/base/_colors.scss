@@ -479,21 +479,10 @@ tr{
 	//.header-right
 	.header-right{
 		.language-switcher-language-url {
-			// button{
-			// 	color: $text-white;
-			// 	&.overlay-show, &:hover{color: $text-main-color;}
-			// 	.scroll &{
-			// 		color: $text-main-color;
-			// 		&:hover{
-			// 			background-color: $background-main-color;
-			// 			color: $text-white;
-			// 		}
-			// 	}
-			// }
 			ul {
 				background-color: $background-white; @include box-shadow();
 				&:before{
-					border-bottom: solid rem-calc(6px) $text-white;
+					border-bottom: solid rem-calc(6px) $background-white;
 				}
 			}
 		}
@@ -592,7 +581,9 @@ tr{
 			&:before{
 				background-color: $text-white;
 			}
-			&.overlay-show, &:hover{
+		}
+		&.overlay-show, &:hover{
+			#accessibility-toggle{
 				&:before{
 					background-color: $background-main-color;
 				}
