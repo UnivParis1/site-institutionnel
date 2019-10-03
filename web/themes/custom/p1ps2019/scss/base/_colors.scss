@@ -443,58 +443,6 @@ tr{
 		}
 
 	}//close top header
-	body:not(.scroll) &{
-		&.transparent{
-			#top-header{
-				background-color: transparent;
-				box-shadow: none;
-				svg{
-					fill: $background-white;
-					*{fill: inherit;}
-				}
-			}
-
-			.icon-menu{
-				span.toggle-container{
-					>span{
-						background-color: $background-white;
-					}
-				}
-			}
-			.header-right{
-				.block-up1-ent-search-block{
-					nav {
-						ul {
-							#ent{
-								@include box-border(1px, $text-white);
-								color: $text-white;
-								.fa{
-									color: $text-white;
-								}
-								&:hover{
-									background-color: $background-white;
-									color: $text-main-color;
-									.fa{color: $text-main-color;}
-								}
-							}
-						}
-					}
-				}
-			}//close header-right
-			.accessibility-wrapper{
-				#accessibility-toggle{
-					&:before{
-				    background-color: $text-white;
-				  }
-					&.overlay-show, &:hover{
-						&:before{
-					    background-color: $background-main-color;
-					  }
-					}
-				}
-			}
-		}
-	}
 
 	.icon-menu{
 		span.toggle-container{
@@ -573,6 +521,58 @@ tr{
 				border-bottom: solid rem-calc(6px) $background-white;
 			}
 	  }
+	}
+	body:not(.scroll) &{
+		&.transparent{
+			#top-header{
+				background-color: transparent;
+				box-shadow: none;
+				svg{
+					fill: $background-white;
+					*{fill: inherit;}
+				}
+			}
+
+			.icon-menu{
+				span.toggle-container{
+					>span{
+						background-color: $background-white;
+					}
+				}
+			}
+			.header-right{
+				.block-up1-ent-search-block{
+					nav {
+						ul {
+							#ent{
+								@include box-border(1px, $text-white);
+								color: $text-white;
+								.fa{
+									color: $text-white;
+								}
+								&:hover{
+									background-color: $background-white;
+									color: $text-main-color;
+									.fa{color: $text-main-color;}
+								}
+							}
+						}
+					}
+				}
+			}//close header-right
+			.accessibility-wrapper{
+				#accessibility-toggle{
+					&:before{
+						background-color: $text-white;
+					}
+					&.overlay-show, &:hover{
+						&:before{
+							background-color: $background-main-color;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 #region-header {
