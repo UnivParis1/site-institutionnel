@@ -508,7 +508,7 @@ tr{
 		&.overlay-show, &:hover{
 			#accessibility-toggle{
 				&:before{background-color: $text-white;}
-			}			
+			}
 		}
 	}
 }//close navbar
@@ -558,8 +558,13 @@ tr{
 			&:before{
 				background-color: $text-white;
 			}
+			 &:hover{
+				 &:before{
+ 					background-color: $background-main-color;
+ 				 }
+			 }
 		}
-		&.overlay-show, &:hover{
+		&.overlay-show{
 			#accessibility-toggle{
 				&:before{
 					background-color: $background-main-color;
@@ -567,7 +572,7 @@ tr{
 			}
 		}
 	}
-	.circle{
+	.circle, #accessibility-toggle{
 		&:not(.white){
 			@include box-border(1px, $text-white);
 			color: $text-white;
