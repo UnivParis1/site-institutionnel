@@ -593,6 +593,19 @@
 					> a, > span{
 						max-width: 100%; text-align: #{$left};
 					}
+					> a{
+						&:before{
+							content: "\f078"; position: absolute; right: 0;
+							font: normal normal normal 14px/1 FontAwesome;
+						}
+					}
+					&[aria-expanded="true"]{
+						> a{
+							&:before{
+								transform: rotate(180deg);
+							}
+						}
+					}
 	        ul{
 	          position: relative; #{$left}: 0; top: 0;
 	          opacity: 1; visibility: visible; overflow: hidden;
