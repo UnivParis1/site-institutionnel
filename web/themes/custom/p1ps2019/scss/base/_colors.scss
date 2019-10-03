@@ -554,6 +554,20 @@ tr{
 			}
 	  }
 	}
+	&.transparent{
+		.circle{
+			&:not(.white){
+				@include box-border(1px, $text-white);
+				color: $text-white;
+				*{color: $text-white;}
+				&.overlay-show, &:hover{
+					@include box-border(1px, $text-main-color);
+					background-color: $background-white; color: $text-main-color;
+					*{color: $text-main-color;}
+				}
+			}
+		}
+	}
 	body:not(.scroll) &{
 		&.transparent{
 			#top-header{
@@ -603,18 +617,6 @@ tr{
 						&:before{
 							background-color: $background-main-color;
 						}
-					}
-				}
-			}
-			.circle{
-				&:not(.white){
-					@include box-border(1px, $text-white);
-					color: $text-white;
-					*{color: $text-white;}
-					&.overlay-show, &:hover{
-						@include box-border(1px, $text-main-color);
-						background-color: $background-white; color: $text-main-color;
-						*{color: $text-main-color;}
 					}
 				}
 			}
