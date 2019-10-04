@@ -313,10 +313,10 @@ $colors-list: (
 
 @mixin maskBackground($color, $opacity: 0.1, $opacityHover: 0.2, $blendMode : false){
   position: relative;
-  &:before{
+  &:after{
     background-color: rgba($color, $opacity);
     position: absolute; top: 0; #{$left}: 0;
-    width: 100%; height: 100%;
+    width: 100%; height: 100%; z-index: 1;
     display: block; content: "";
     @include transitionEffect();
     @if $blendMode == true{
@@ -325,7 +325,7 @@ $colors-list: (
   }
   //@if $blendMode == true {
     &:not(.no-hover):hover{
-      &:before{
+      &:after{
         background-color: rgba($color, $opacity + $opacityHover);
       }
     }
