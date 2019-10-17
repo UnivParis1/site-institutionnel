@@ -35,7 +35,7 @@ class HomepageSearchForm extends FormBase {
     $homepage_search = $form_state->getValue('homepage_search');
     $config = \Drupal::config('up1_keywords.keywordsconfig');
 
-    $form_state->setRedirectUrl($config->get('url_resultat_de_recherche') . $homepage_search);
+    $form_state->setRedirectUrl(Url::fromUri($config->get('url_resultat_de_recherche') . $homepage_search));
 
   }
 }
