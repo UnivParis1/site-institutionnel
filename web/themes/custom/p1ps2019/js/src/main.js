@@ -49,7 +49,6 @@
     }
     if($('#contraste-normal').length > 0){
       $('#contraste-normal').click(function(){
-        console.log("test");
         $('.accessibility-wrapper').removeClass('overlay-show');
         if($('html.accessibility-mode').length > 0){
           $('html.accessibility-mode').removeClass('accessibility-mode');
@@ -61,8 +60,8 @@
       });
     }
     if($('#contraste-renforce').length > 0){
-      $('.accessibility-wrapper').removeClass('overlay-show');
       $('#contraste-renforce').click(function(){
+        $('.accessibility-wrapper').removeClass('overlay-show');
         if($('html.accessibility-mode').length <= 0){
           $('html').addClass('accessibility-mode');
           if($('#contraste-renforce.is-active').length <= 0){
