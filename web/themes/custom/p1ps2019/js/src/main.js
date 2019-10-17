@@ -46,6 +46,9 @@
           $('.accessibility-wrapper').addClass('overlay-show');
         }
       });
+      $('#accessibility-wrapper .btns-wrapper button').click(function(){
+        overlayClose();
+      });
     }
     if($('#contraste-normal').length > 0){
       $('#contraste-normal').click(function(){
