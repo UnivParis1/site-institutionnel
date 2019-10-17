@@ -1,4 +1,4 @@
-uuid: ec827103-c9fa-4db1-a463-317f90158083
+uuid: 34656555-6efe-40e7-b869-dda1c9ee408b
 langcode: fr
 status: true
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
     - views.view.recherche_de_contenu
   module:
     - search_api
-id: type_d_evenement_terme_de_taxonomie_nom
-name: 'Type d''événement'
-url_alias: type_d_evenement_terme_de_taxonomie_nom
-weight: 0
+id: sujet_d_actualite
+name: 'Sujet d''actualité'
+url_alias: sujet_d_actualite
+weight: -1
 min_count: 1
 show_only_one_result: false
-field_identifier: name_1
+field_identifier: news_topic
 facet_source_id: 'search_api:views_page__recherche_de_contenu__page_1'
 widget:
   type: checkbox
@@ -24,7 +24,7 @@ widget:
       show_less_label: 'Show less'
       show_more_label: 'Show more'
     show_reset_link: false
-    reset_text: 'Show all'
+    reset_text: 'Tout afficher'
     hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
@@ -34,6 +34,12 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
+  active_widget_order:
+    processor_id: active_widget_order
+    weights:
+      sort: 20
+    settings:
+      sort: DESC
   count_widget_order:
     processor_id: count_widget_order
     weights:
@@ -50,10 +56,25 @@ processor_configs:
         condition: null
         values: ''
         negate: false
+      event_type:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      publication_topic:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      publication_type:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
       type_de_contenu:
         enable: true
         condition: values
-        values: event
+        values: news
         negate: false
   display_value_widget_order:
     processor_id: display_value_widget_order
@@ -61,11 +82,6 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
-  list_item:
-    processor_id: list_item
-    weights:
-      build: 5
-    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:
@@ -74,4 +90,4 @@ processor_configs:
     settings: {  }
 empty_behavior:
   behavior: none
-show_title: false
+show_title: true

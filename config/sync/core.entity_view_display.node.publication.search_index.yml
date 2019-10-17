@@ -1,0 +1,79 @@
+uuid: 21b0e951-b0be-4e9c-a471-5a07cbeb0b5e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.publication.body
+    - field.field.node.publication.field_author_name
+    - field.field.node.publication.field_back_cover
+    - field.field.node.publication.field_isbn
+    - field.field.node.publication.field_media
+    - field.field.node.publication.field_publication_link
+    - field.field.node.publication.field_publication_topics
+    - field.field.node.publication.field_publication_type
+    - field.field.node.publication.field_publisher
+    - field.field.node.publication.field_publishing_year
+    - field.field.node.publication.field_tags
+    - node.type.publication
+  module:
+    - user
+id: node.publication.search_index
+targetEntityType: node
+bundle: publication
+mode: search_index
+content:
+  field_author_name:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_publication_topics:
+    weight: 0
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_publication_type:
+    weight: 1
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_publishing_year:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: number_unformatted
+    region: content
+  field_tags:
+    weight: 2
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_back_cover: true
+  field_isbn: true
+  field_media: true
+  field_publication_link: true
+  field_publisher: true
+  langcode: true
+  search_api_excerpt: true
+  site_id: true

@@ -1,52 +1,24 @@
-uuid: 71a9ccf1-db79-4cc5-8ce8-9437e13a273b
+uuid: 69437179-4104-4cea-890b-393e05f1f132
 langcode: fr
 status: true
 dependencies:
   module:
-    - elasticsearch_connector
-    - taxonomy
     - node
+    - taxonomy
     - search_api
     - search_api_elasticsearch_attachments
   config:
     - field.storage.node.field_categories
     - field.storage.node.field_news_topic
-    - field.storage.node.field_publication_topics
-    - field.storage.node.field_publication_type
     - field.storage.node.field_event_type
     - search_api.server.elasticsearch
-third_party_settings:
-  elasticsearch_connector:
-    ngram_filter_enabled: 0
-    ngram_config:
-      ngram_type: edge_ngram
-      min_gram: '3'
-      max_gram: '3'
-id: index_de_contenu
-name: 'Index de contenu'
+    - core.entity_view_mode.node.teaser
+id: es_p1ps
+name: es_p1ps
 description: ''
 read_only: false
 field_settings:
-  es_attachment:
-    label: 'Search API Elasticsearch attachments'
-    property_path: es_attachment
-    type: object
-    indexed_locked: true
-    type_locked: true
-    hidden: true
-  event_type:
-    label: 'type événement'
-    datasource_id: 'entity:node'
-    property_path: 'field_event_type:entity:name'
-    type: string
-    boost: !!float 13
-    dependencies:
-      config:
-        - field.storage.node.field_event_type
-      module:
-        - taxonomy
-        - taxonomy
-  name:
+  categories:
     label: Catégories
     datasource_id: 'entity:node'
     property_path: 'field_categories:entity:name'
@@ -57,12 +29,29 @@ field_settings:
       module:
         - taxonomy
         - taxonomy
+  es_attachment:
+    label: 'Search API Elasticsearch attachments'
+    property_path: es_attachment
+    type: object
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  event_type:
+    label: 'Type d''événement'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+      module:
+        - taxonomy
+        - taxonomy
   news_topic:
-    label: 'Sujet actualité'
+    label: 'Sujet d''actualité'
     datasource_id: 'entity:node'
     property_path: 'field_news_topic:entity:name'
     type: string
-    boost: !!float 3
     dependencies:
       config:
         - field.storage.node.field_news_topic
@@ -76,37 +65,23 @@ field_settings:
     indexed_locked: true
     type_locked: true
     hidden: true
-  publication_topic:
-    label: 'sujet de publication'
-    datasource_id: 'entity:node'
-    property_path: 'field_publication_topics:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_publication_topics
-      module:
-        - taxonomy
-        - taxonomy
-  publication_type:
-    label: 'Type publication'
-    datasource_id: 'entity:node'
-    property_path: 'field_publication_type:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_publication_type
-      module:
-        - taxonomy
-        - taxonomy
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
-    type: text
-    boost: !!float 13
+    type: string
     configuration:
       roles:
-        - anonymous
-      view_mode: {  }
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          article: ''
+          event: teaser
+          news: teaser
+          news2018: ''
+          offer: teaser
+          page: ''
+          publication: teaser
+          second_level_pages: ''
   status:
     label: status
     datasource_id: 'entity:node'
@@ -127,7 +102,7 @@ field_settings:
       module:
         - node
   type:
-    label: Type
+    label: 'Type de contenu'
     datasource_id: 'entity:node'
     property_path: type
     type: string
@@ -147,7 +122,7 @@ field_settings:
   url:
     label: URI
     property_path: search_api_url
-    type: text
+    type: string
 datasource_settings:
   'entity:node':
     bundles:
@@ -172,27 +147,23 @@ processor_settings:
       preprocess_index: -20
   elasticsearch_attachments_highlight:
     highlight: 'yes'
-    excerpt: 0
-    prefix: '<strong>'
-    suffix: '</strong>'
-    weights:
-      postprocess_query: 0
-  entity_status: {  }
-  highlight:
-    highlight: always
-    highlight_partial: false
-    excerpt: true
-    excerpt_length: 256
-    exclude_fields: {  }
+    excerpt: 1
     prefix: '<strong>'
     suffix: '</strong>'
     weights:
       postprocess_query: 0
   html_filter:
-    all_fields: false
-    fields: {  }
-    title: true
-    alt: true
+    all_fields: true
+    fields:
+      - categories
+      - event_type
+      - news_topic
+      - rendered_item
+      - title
+      - type
+      - url
+    title: false
+    alt: false
     tags:
       b: 2
       h1: 5
@@ -203,64 +174,36 @@ processor_settings:
       preprocess_index: -15
       preprocess_query: -15
   ignorecase:
-    all_fields: false
-    fields: {  }
+    all_fields: true
+    fields:
+      - categories
+      - event_type
+      - news_topic
+      - rendered_item
+      - title
+      - type
+      - url
     weights:
       preprocess_index: -20
       preprocess_query: -20
   rendered_item: {  }
   reverse_entity_references: {  }
-  stopwords:
-    all_fields: false
-    fields: {  }
-    stopwords:
-      - a
-      - an
-      - and
-      - are
-      - as
-      - at
-      - be
-      - but
-      - by
-      - for
-      - if
-      - in
-      - into
-      - is
-      - it
-      - 'no'
-      - not
-      - of
-      - 'on'
-      - or
-      - s
-      - such
-      - t
-      - that
-      - the
-      - their
-      - then
-      - there
-      - these
-      - they
-      - this
-      - to
-      - was
-      - will
-      - with
-    weights:
-      preprocess_index: -5
-      preprocess_query: -2
   transliteration:
-    all_fields: false
-    fields: {  }
+    all_fields: true
+    fields:
+      - categories
+      - event_type
+      - news_topic
+      - rendered_item
+      - title
+      - type
+      - url
     weights:
       preprocess_index: -20
       preprocess_query: -20
 tracker_settings:
   default:
-    indexing_order: fifo
+    indexing_order: lifo
 options:
   index_directly: true
   cron_limit: -1

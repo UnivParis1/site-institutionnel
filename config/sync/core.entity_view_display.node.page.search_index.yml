@@ -1,0 +1,57 @@
+uuid: dfa601c6-4cf3-4541-8ca7-51f78e7837c7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.page.body
+    - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_media
+    - field.field.node.page.field_paragraphs
+    - field.field.node.page.field_short_desc
+    - field.field.node.page.field_sites
+    - field.field.node.page.field_sites_all
+    - field.field.node.page.field_sub_title
+    - node.type.page
+  module:
+    - paragraphs
+    - text
+    - user
+_core:
+  default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
+id: node.page.search_index
+targetEntityType: node
+bundle: page
+mode: search_index
+content:
+  body:
+    label: hidden
+    type: text_trimmed
+    weight: 0
+    region: content
+    settings:
+      trim_length: 250
+    third_party_settings: {  }
+  field_paragraphs:
+    type: paragraph_summary
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  content_moderation_control: true
+  field_disable_canonical_url: true
+  field_media: true
+  field_short_desc: true
+  field_sites: true
+  field_sites_all: true
+  field_sub_title: true
+  langcode: true
+  search_api_excerpt: true
+  site_id: true

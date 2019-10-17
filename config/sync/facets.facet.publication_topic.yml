@@ -1,4 +1,4 @@
-uuid: 29c2027d-43f6-4652-983d-610923363cd3
+uuid: b780cbc3-af4a-4abb-81f0-9cb3af2a348a
 langcode: fr
 status: true
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
     - views.view.recherche_de_contenu
   module:
     - search_api
-id: type_de_contenu
-name: Type
-url_alias: type
-weight: -2
+id: publication_topic
+name: 'sujet de publication'
+url_alias: publication_topic
+weight: 1
 min_count: 1
 show_only_one_result: false
-field_identifier: type
+field_identifier: publication_topic
 facet_source_id: 'search_api:views_page__recherche_de_contenu__page_1'
 widget:
   type: checkbox
@@ -24,7 +24,7 @@ widget:
       show_less_label: 'Show less'
       show_more_label: 'Show more'
     show_reset_link: false
-    reset_text: 'Show all'
+    reset_text: 'Tout afficher'
     hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
@@ -34,40 +34,44 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
-  count_limit:
-    processor_id: count_limit
+  active_widget_order:
+    processor_id: active_widget_order
     weights:
-      build: 50
+      sort: 20
     settings:
-      minimum_items: 1
-      maximum_items: null
+      sort: DESC
   count_widget_order:
     processor_id: count_widget_order
     weights:
       sort: 30
     settings:
       sort: DESC
+  dependent_processor:
+    processor_id: dependent_processor
+    weights:
+      build: 5
+    settings:
+      categorie:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      sujet_d_actualite:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      type_de_contenu:
+        enable: true
+        condition: values
+        values: publication
+        negate: false
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:
       sort: 40
     settings:
       sort: ASC
-  hide_non_narrowing_result_processor:
-    processor_id: hide_non_narrowing_result_processor
-    weights:
-      build: 40
-    settings: {  }
-  list_item:
-    processor_id: list_item
-    weights:
-      build: 5
-    settings: {  }
-  translate_entity:
-    processor_id: translate_entity
-    weights:
-      build: 5
-    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:
@@ -76,4 +80,4 @@ processor_configs:
     settings: {  }
 empty_behavior:
   behavior: none
-show_title: false
+show_title: true
