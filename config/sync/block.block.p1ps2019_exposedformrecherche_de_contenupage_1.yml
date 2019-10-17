@@ -1,19 +1,20 @@
 uuid: 8260412c-835a-4863-ae75-5aa56b27ed85
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.recherche_de_contenu
   module:
     - micro_path
     - micro_site
+    - system
     - views
   theme:
     - p1ps2019
 id: p1ps2019_exposedformrecherche_de_contenupage_1
 theme: p1ps2019
 region: header
-weight: -11
+weight: -15
 provider: null
 plugin: 'views_exposed_filter_block:recherche_de_contenu-page_1'
 settings:
@@ -33,4 +34,9 @@ visibility:
     sites: {  }
     sites_front_page: 0
     negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: "/recherche\r\n/recherche*"
+    negate: true
     context_mapping: {  }

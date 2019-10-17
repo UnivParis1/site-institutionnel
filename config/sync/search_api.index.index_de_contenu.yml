@@ -5,12 +5,14 @@ dependencies:
   module:
     - elasticsearch_connector
     - taxonomy
-    - micro_node
     - node
     - search_api
     - search_api_elasticsearch_attachments
   config:
     - field.storage.node.field_categories
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_publication_topics
+    - field.storage.node.field_publication_type
     - field.storage.node.field_event_type
     - search_api.server.elasticsearch
 third_party_settings:
@@ -32,25 +34,67 @@ field_settings:
     indexed_locked: true
     type_locked: true
     hidden: true
+  event_type:
+    label: 'type événement'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_type:entity:name'
+    type: string
+    boost: !!float 13
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+      module:
+        - taxonomy
+        - taxonomy
   name:
-    label: 'Catégories » Terme de taxonomie » Nom'
+    label: Catégories
     datasource_id: 'entity:node'
     property_path: 'field_categories:entity:name'
-    type: text
+    type: string
     dependencies:
       config:
         - field.storage.node.field_categories
       module:
         - taxonomy
         - taxonomy
-  name_1:
-    label: 'Type d''événement » Terme de taxonomie » Nom'
+  news_topic:
+    label: 'Sujet actualité'
     datasource_id: 'entity:node'
-    property_path: 'field_event_type:entity:name'
-    type: text
+    property_path: 'field_news_topic:entity:name'
+    type: string
+    boost: !!float 3
     dependencies:
       config:
-        - field.storage.node.field_event_type
+        - field.storage.node.field_news_topic
+      module:
+        - taxonomy
+        - taxonomy
+  node_grants:
+    label: 'Information d''accès du nœud.'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  publication_topic:
+    label: 'sujet de publication'
+    datasource_id: 'entity:node'
+    property_path: 'field_publication_topics:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_publication_topics
+      module:
+        - taxonomy
+        - taxonomy
+  publication_type:
+    label: 'Type publication'
+    datasource_id: 'entity:node'
+    property_path: 'field_publication_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_publication_type
       module:
         - taxonomy
         - taxonomy
@@ -58,40 +102,52 @@ field_settings:
     label: 'Rendered HTML output'
     property_path: rendered_item
     type: text
+    boost: !!float 13
     configuration:
       roles:
-        anonymous: anonymous
-      view_mode:
-        'entity:node':
-          article: default
-          event: default
-          news: default
-          news2018: default
-          page: default
-  site_id:
-    label: Site
+        - anonymous
+      view_mode: {  }
+  status:
+    label: status
     datasource_id: 'entity:node'
-    property_path: site_id
-    type: integer
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
     dependencies:
       module:
-        - micro_node
+        - node
   title:
-    label: Titre
+    label: Title
     datasource_id: 'entity:node'
     property_path: title
     type: text
+    boost: !!float 21
     dependencies:
       module:
         - node
   type:
-    label: 'Type de contenu'
+    label: Type
     datasource_id: 'entity:node'
     property_path: type
-    type: text
+    type: string
     dependencies:
       module:
         - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: text
 datasource_settings:
   'entity:node':
     bundles:
@@ -103,6 +159,9 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
   elasticsearch_attachments:
     boost: '1.0'
     excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv jpg jpeg'
@@ -111,6 +170,13 @@ processor_settings:
     excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv image/jpeg'
     weights:
       preprocess_index: -20
+  elasticsearch_attachments_highlight:
+    highlight: 'yes'
+    excerpt: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    weights:
+      postprocess_query: 0
   entity_status: {  }
   highlight:
     highlight: always
@@ -124,9 +190,7 @@ processor_settings:
       postprocess_query: 0
   html_filter:
     all_fields: false
-    fields:
-      - rendered_item
-      - title
+    fields: {  }
     title: true
     alt: true
     tags:
@@ -140,9 +204,7 @@ processor_settings:
       preprocess_query: -15
   ignorecase:
     all_fields: false
-    fields:
-      - rendered_item
-      - title
+    fields: {  }
     weights:
       preprocess_index: -20
       preprocess_query: -20
@@ -150,9 +212,7 @@ processor_settings:
   reverse_entity_references: {  }
   stopwords:
     all_fields: false
-    fields:
-      - rendered_item
-      - title
+    fields: {  }
     stopwords:
       - a
       - an
@@ -194,9 +254,7 @@ processor_settings:
       preprocess_query: -2
   transliteration:
     all_fields: false
-    fields:
-      - rendered_item
-      - title
+    fields: {  }
     weights:
       preprocess_index: -20
       preprocess_query: -20
@@ -205,5 +263,5 @@ tracker_settings:
     indexing_order: fifo
 options:
   index_directly: true
-  cron_limit: 50
+  cron_limit: -1
 server: elasticsearch

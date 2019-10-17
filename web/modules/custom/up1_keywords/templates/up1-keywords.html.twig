@@ -1,3 +1,11 @@
-{% for keyword in keywords %}
+<div class="homepage-search-keywords">
+  <div class="hp-search-form">
+    {{ search }}
+  </div>
+  <div class="keywords">
+  <span class="keywords-title">{{ "Keywords"|t }}</span>
+  {% for keyword in keywords %}
     <a href="{{ url }}{{ keyword }}">{{ keyword }}</a>
-{% endfor %}
+  {% endfor %}
+  </div>
+</div>
