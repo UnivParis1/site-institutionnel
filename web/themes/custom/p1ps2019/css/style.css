@@ -9143,6 +9143,14 @@ ul.list-style li {
   .pager .pager__item .button {
     display: inline-block; }
 
+.search-wrapper .views-infinite-scroll-content-wrapper {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap; }
+  .search-wrapper .views-infinite-scroll-content-wrapper .cell + .cell {
+    margin-top: 2.5rem; }
+
 .accordion li .accordion-title:before {
   content: "\f078";
   font: normal normal normal 14px/1 FontAwesome;
@@ -9153,8 +9161,8 @@ ul.list-style li {
 
 .accordion li.is-active .accordion-title:before {
   content: "\f078";
-  -ms-transform: rotate(180deg);
-      transform: rotate(180deg); }
+  -ms-transform: rotate(180deg) translateY(-50%);
+      transform: rotate(180deg) translateY(-50%); }
 
 .accordion-wrapper .accordion .accordion-item .accordion-title {
   font-family: "Montserrat";
@@ -9695,6 +9703,41 @@ label, .label-style {
           top: 1px;
           z-index: 0; } }
 
+.facets-widget-checkbox h3 {
+  display: none; }
+
+.facets-widget-checkbox .js-facets-checkbox-links .facet-item input[type="checkbox"] {
+  display: none; }
+
+.facets-widget-checkbox .js-facets-checkbox-links .facet-item label {
+  padding: 0.25rem 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.22;
+  font-weight: normal; }
+  .facets-widget-checkbox .js-facets-checkbox-links .facet-item label:after {
+    display: none; }
+  .facets-widget-checkbox .js-facets-checkbox-links .facet-item label + label {
+    margin-top: 1.25rem; }
+
+.facets-widget-checkbox .js-facets-checkbox-links .facet-item input[checked="checked"] + label {
+  position: relative; }
+  .facets-widget-checkbox .js-facets-checkbox-links .facet-item input[checked="checked"] + label:after {
+    content: "⨉";
+    display: block;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    border-radius: 100%;
+    font-size: 0.75rem;
+    width: 1rem;
+    height: 1rem;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center; }
+
 hr {
   background: #333; }
 
@@ -9714,7 +9757,7 @@ h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .centres-up1-form .map-centre .ove
 .mask {
   position: relative; }
   .mask:after {
-    background-color: rgba(0, 50, 110, 0.6);
+    background-color: rgba(0, 50, 110, 0.3);
     position: absolute;
     top: 0;
     left: 0;
@@ -9725,7 +9768,7 @@ h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .centres-up1-form .map-centre .ove
     content: "";
     transition: all 150ms ease 0s; }
   .mask:not(.no-hover):hover:after {
-    background-color: rgba(0, 50, 110, 0.8); }
+    background-color: rgba(0, 50, 110, 0.5); }
 
 .mask-effect {
   position: relative; }
@@ -9907,6 +9950,18 @@ ul.list-style li:before {
     border: 0;
     padding: 0;
     line-height: 1; }
+
+.facets-widget-checkbox .js-facets-checkbox-links .facet-item label {
+  border: 1px solid #00326e;
+  background-color: transparent; }
+
+.facets-widget-checkbox .js-facets-checkbox-links .facet-item input[checked="checked"] + label {
+  background-color: #00326e;
+  color: #fff; }
+  .facets-widget-checkbox .js-facets-checkbox-links .facet-item input[checked="checked"] + label:after {
+    color: #00326e;
+    background-color: #fff;
+    border: 1px solid #00326e; }
 
 .categ-style {
   color: #fff;
@@ -10241,6 +10296,10 @@ fieldset {
     background-color: #BE8719; }
   .footer .footer-wrapper .two-columns:after {
     background-color: #BE8719; }
+  .footer .footer-wrapper .logo-footer svg {
+    fill: #BE8719; }
+    .footer .footer-wrapper .logo-footer svg * {
+      fill: inherit; }
 
 #region-footer .footer-center-inner li a:hover {
   color: #fff; }
@@ -10526,6 +10585,8 @@ fieldset {
       color: #171717; }
       .box-style .box-content h2 * {
         color: #171717; }
+    .box-style .box-content.white {
+      background-color: #fff; }
 
 .block-system-menu-blockreseaux-sociaux li a {
   color: #00326e; }
@@ -10549,6 +10610,9 @@ fieldset {
 
 .add-link-style-wrapper a {
   color: #333; }
+
+.field--type-text-long a {
+  color: #00326e; }
 
 #tabs-style > li > a, .tabs > li > a, .accordion-tabs > li > a {
   color: #00326e;
@@ -11490,6 +11554,9 @@ form#centres-up1-form {
     Par Ebizproduction
 */
 @media screen and (min-width: 64em) {
+  .logo-footer svg {
+    width: 50%;
+    height: 50%; }
   .paragraph--type--hit-list .paragraph__column {
     padding: 0 !important; }
     .paragraph--type--hit-list .paragraph__column .paragraph__column:before {

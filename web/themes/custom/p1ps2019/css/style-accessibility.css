@@ -622,7 +622,7 @@ $tab-content-padding: 1rem;*/
   .accessibility-mode .mask {
     position: relative; }
     .accessibility-mode .mask:after {
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.3);
       position: absolute;
       top: 0;
       left: 0;
@@ -633,7 +633,7 @@ $tab-content-padding: 1rem;*/
       content: "";
       transition: all 150ms ease 0s; }
     .accessibility-mode .mask:not(.no-hover):hover:after {
-      background-color: rgba(0, 0, 0, 0.8); }
+      background-color: rgba(0, 0, 0, 0.5); }
   .accessibility-mode .mask-effect {
     position: relative; }
     .accessibility-mode .mask-effect:after {
@@ -806,6 +806,16 @@ $tab-content-padding: 1rem;*/
       border: 0;
       padding: 0;
       line-height: 1; }
+  .accessibility-mode .facets-widget-checkbox .js-facets-checkbox-links .facet-item label {
+    border: 1px solid #000;
+    background-color: transparent; }
+  .accessibility-mode .facets-widget-checkbox .js-facets-checkbox-links .facet-item input[checked="checked"] + label {
+    background-color: #000;
+    color: #fff; }
+    .accessibility-mode .facets-widget-checkbox .js-facets-checkbox-links .facet-item input[checked="checked"] + label:after {
+      color: #fff;
+      background-color: #868483;
+      border: 1px solid #000; }
   .accessibility-mode .categ-style {
     color: #fff;
     background-color: #000; }
@@ -843,16 +853,16 @@ $tab-content-padding: 1rem;*/
       color: #000; }
     .accessibility-mode .swiper-container .swiper-button-prev.swiper-button-disabled, .accessibility-mode .swiper-container .swiper-button-next.swiper-button-disabled {
       background-color: transparent; }
-  .accordion-wrapper .accessibility-mode .accordion > li {
+  .accessibility-mode .accordion-wrapper .accordion > li {
     border: 2px solid #fff;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.25); }
-    .accordion-wrapper .accessibility-mode .accordion > li .accordion-title {
+    .accessibility-mode .accordion-wrapper .accordion > li .accordion-title {
       color: #fff;
       background-color: #868483; }
-      .accordion-wrapper .accessibility-mode .accordion > li .accordion-title:hover {
+      .accessibility-mode .accordion-wrapper .accordion > li .accordion-title:hover {
         color: #fff;
         background-color: #868483; }
-    .accordion-wrapper .accessibility-mode .accordion > li.is-active .accordion-title {
+    .accessibility-mode .accordion-wrapper .accordion > li.is-active .accordion-title {
       color: #fff;
       background-color: #868483; }
   .accessibility-mode .overlay-infos, .accessibility-mode .main-overlay-infos {
@@ -1098,6 +1108,10 @@ $tab-content-padding: 1rem;*/
       background-color: #fff; }
     .accessibility-mode .footer .footer-wrapper .two-columns:after {
       background-color: #fff; }
+    .accessibility-mode .footer .footer-wrapper .logo-footer svg {
+      fill: #fff; }
+      .accessibility-mode .footer .footer-wrapper .logo-footer svg * {
+        fill: inherit; }
   .accessibility-mode #region-footer .footer-center-inner li a:hover {
     color: #fff; }
     .accessibility-mode #region-footer .footer-center-inner li a:hover:before {
@@ -1355,6 +1369,8 @@ $tab-content-padding: 1rem;*/
         color: #000; }
         .accessibility-mode .box-style .box-content h2 * {
           color: #000; }
+      .accessibility-mode .box-style .box-content.white {
+        background-color: #868483; }
   .accessibility-mode .block-system-menu-blockreseaux-sociaux li a {
     color: #fff; }
   .accessibility-mode .nav-tabs > li > a {
@@ -1370,6 +1386,8 @@ $tab-content-padding: 1rem;*/
   .accessibility-mode .link-style, .accessibility-mode button.link-style {
     color: #fff; }
   .accessibility-mode .add-link-style-wrapper a {
+    color: #000; }
+  .accessibility-mode .field--type-text-long a {
     color: #000; }
   .accessibility-mode #tabs-style > li > a, .accessibility-mode .tabs > li > a, .accessibility-mode .accordion-tabs > li > a {
     color: #fff;
@@ -1428,3 +1446,24 @@ $tab-content-padding: 1rem;*/
         .accessibility-mode #navbar-header .navigation-left-region ul.menu.large-vertical li a, .accessibility-mode #navbar-header .navigation-left-region ul.menu.large-vertical li span {
           padding: 0;
           color: #fff; } }
+  .accessibility-mode .mask {
+    position: relative; }
+    .accessibility-mode .mask:after {
+      background-color: rgba(0, 0, 0, 0.75);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: block;
+      content: "";
+      transition: all 150ms ease 0s; }
+    .accessibility-mode .mask:not(.no-hover):hover:after {
+      background-color: rgba(0, 0, 0, 0.95); }
+  .accessibility-mode body {
+    color: #000; }
+    .accessibility-mode body [class*="paris1-bg"] {
+      color: #fff; }
+      .accessibility-mode body [class*="paris1-bg"] * {
+        color: inherit; }
