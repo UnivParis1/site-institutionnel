@@ -57,6 +57,19 @@ ul.list-style {
 .circle{
 	@include circleStyle();
 }
+.facets-widget-checkbox{
+  .js-facets-checkbox-links{
+    .facet-item{
+      input[checked="checked"] + label{
+        &:after{
+          color: $text-main-color;
+          background-color: $bg-white;
+          border: 1px solid $bg-main-color;
+        }
+      }
+    }
+  }
+}
 #search-toggle{
 	// .fa{
 	// 	&:before{
