@@ -77,25 +77,15 @@
 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="box-content same-height">
-    <div class="top-infos">
-      <div class="infos-row-wrapper space-between">
-        <div class="categ-wrapper semi-semi-infos-sep">
-          <div class="categ-style"> {{ content.field_event_type }} </div>
-          <div class="categ-style"> {{ content.field_categories }} </div>
-        </div>
-        <div class="date-style semi-semi-infos-sep">{{ content.field_event_date }}</div>
-      </div>
+  <div class="box-content">
       {{ title_prefix }}
       <h2 class="title semi-infos-sep">
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
       {{ title_suffix }}
-    </div>
-    <div class="bottom-infos">
-      <div class="node-readmore">
-        <a href="{{ url }}" class="link-style" title="readmore">{{ "Read more"|t }}</a>
-      </div>
+    <div class="categ-wrapper semi-semi-infos-sep">
+      <div class="categ-style"> {{ content.field_event_type }} </div>
+      <div class="categ-style"> {{ content.field_categories }} </div>
     </div>
   </div>
 </article>
