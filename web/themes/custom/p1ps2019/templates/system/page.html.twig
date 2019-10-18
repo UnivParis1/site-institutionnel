@@ -172,9 +172,19 @@
       {% block content %}
         <a id="main-content"></a>
         {% if page.content_left %}
-          <div class="content-left">{{ page.content_left }}</div>
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                <div class="cell small-3">
+                    <div class="content-left">{{ page.content_left }}</div>
+                </div>
+                <div class="cell small-9">
+                    {{ page.content }}
+                </div>
+            </div>
+        </div>
+        {% else %}
+          {{ page.content }}
         {% endif %}
-        {{ page.content }}
       {% endblock %}
 
       {% if page.after_content %}
