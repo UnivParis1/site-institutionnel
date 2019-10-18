@@ -1,0 +1,100 @@
+uuid: c937d19a-112c-4c01-bde4-5325848c563b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.offer.body
+    - field.field.node.offer.field_address
+    - field.field.node.offer.field_address_map
+    - field.field.node.offer.field_application_deadline
+    - field.field.node.offer.field_bap
+    - field.field.node.offer.field_category
+    - field.field.node.offer.field_contract_duration
+    - field.field.node.offer.field_contract_type
+    - field.field.node.offer.field_disable_canonical_url
+    - field.field.node.offer.field_email_address
+    - field.field.node.offer.field_grade
+    - field.field.node.offer.field_job_type
+    - field.field.node.offer.field_offer_type
+    - field.field.node.offer.field_position_details
+    - field.field.node.offer.field_profile
+    - field.field.node.offer.field_reference_offer
+    - field.field.node.offer.field_salary_range
+    - field.field.node.offer.field_service
+    - field.field.node.offer.field_sites
+    - field.field.node.offer.field_sites_all
+    - node.type.offer
+  module:
+    - datetime
+    - options
+    - user
+id: node.offer.search_index
+targetEntityType: node
+bundle: offer
+mode: search_index
+content:
+  field_application_deadline:
+    weight: 0
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: news_date
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_contract_type:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_job_type:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_offer_type:
+    weight: 2
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_service:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  content_moderation_control: true
+  field_address: true
+  field_address_map: true
+  field_bap: true
+  field_category: true
+  field_contract_duration: true
+  field_disable_canonical_url: true
+  field_email_address: true
+  field_grade: true
+  field_position_details: true
+  field_profile: true
+  field_reference_offer: true
+  field_salary_range: true
+  field_sites: true
+  field_sites_all: true
+  langcode: true
+  search_api_excerpt: true
+  site_id: true

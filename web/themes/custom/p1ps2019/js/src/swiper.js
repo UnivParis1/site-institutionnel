@@ -68,9 +68,11 @@ function noSwiping(){
 }
 //=============================================== FUNCTIONS =================================================
 function reinitSwiper(swiper) {
-    setTimeout(function () {
+    if (swiper !== undefined) {
+      setTimeout(function () {
         swiper.update();
-    });
+      });
+    }
 }
 // function checkOnSwipers(){
 //   if($('.swiper-container:not(.one-slide) .swiper-wrapper').length > 0){

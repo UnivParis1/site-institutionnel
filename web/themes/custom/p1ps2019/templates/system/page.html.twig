@@ -57,7 +57,10 @@
   <header id="navbar" role="banner">
     {% if page.header %}
       <div class="grid-x">
-        <div class="cell small-12">{{ page.header }}</div>
+        <div class="cell small-12">
+          {{ page.header }}
+          {{ content.keywords }}
+        </div>
       </div>
     {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
