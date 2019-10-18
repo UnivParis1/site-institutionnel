@@ -3,18 +3,20 @@
     .facet-item{
       input[type="checkbox"]{display: none;}
       label{
-        padding: rem-calc(0 24px);
+        padding: rem-calc(4px 24px);
         &:after{display: none;}
         font-size: rem-calc(18px); line-height: 1.22;
+        @include font-normal();
       }
       input[checked="checked"] + label{
         position: relative;
         &:after{
           content: "⨉";
-          display: block;
-          position: absolute;
+          display: block; position: absolute;
+          top: rem-calc(-8px); right: rem-calc(-8px);
           border-radius: 100%;
-          width: rem-calc(17px); height: rem-calc(17px);
+          width: rem-calc(16px); height: rem-calc(16px);
+          @include flex(); @include flex-align(center, middle);
         }
       }
     }
