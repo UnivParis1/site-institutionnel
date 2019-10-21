@@ -77,7 +77,7 @@
 %}
 {% set eventDate = '' %}
 {% set eventDate %}
-  {{ content.field_application_deadline }}
+  {{ content.field_event_date }}
 {% endset %}
 {% set eventPlace = '' %}
 {% set eventPlace %}
@@ -109,9 +109,8 @@
           <div class="box-content">
             {% if eventDate|striptags|trim %}
               <div class="details txt-second">
-                <label>{{ 'Date : '|t }}</label>
                 <div class="txt medium">
-                  {{ content.field_application_deadline }}
+                  {{ content.field_event_date }}
                 </div>
               </div>
             {% endif %}
