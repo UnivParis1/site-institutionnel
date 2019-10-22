@@ -159,7 +159,7 @@
             $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
           }
           $('body').addClass('noscroll');
-          if(scrollTop <= 0 || $(window.width() < 1024)){
+          if(scrollTop <= 0 || $(window).width() < 1024){
             $('body').addClass('scroll');
           }
         }
