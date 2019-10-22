@@ -40,6 +40,7 @@
       $('#accessibility-toggle').click(function(){
         if($('.accessibility-wrapper.overlay-show').length > 0){
           overlayClose();
+            console.log('removed');
         }
         else{
           overlayClose();
