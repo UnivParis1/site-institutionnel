@@ -5,6 +5,20 @@
 
 (function($) {
   $(document).foundation();
+    //accessibility toggler
+    if($('#accessibility-toggle').length > 0){
+      $('#accessibility-toggle').click(function(){
+        if($('.accessibility-wrapper.overlay-show').length > 0){
+          overlayClose();
+            console.log('removed');
+        }
+        else{
+          overlayClose();
+          $('.accessibility-wrapper').addClass('overlay-show');
+            console.log('clicked');
+        }
+      });
+    }
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
@@ -35,20 +49,7 @@
       $('.swiper-button-prev').addClass('fa fa-chevron-left');
     }
 
-    //accessibility toggler
-    if($('#accessibility-toggle').length > 0){
-      $('#accessibility-toggle').click(function(){
-        if($('.accessibility-wrapper.overlay-show').length > 0){
-          overlayClose();
-            console.log('removed');
-        }
-        else{
-          overlayClose();
-          $('.accessibility-wrapper').addClass('overlay-show');
-            console.log('clicked');
-        }
-      });
-    }
+    
     if($('#contraste-normal').length > 0){
       $('#contraste-normal').click(function(){
         $('.accessibility-wrapper').removeClass('overlay-show');
