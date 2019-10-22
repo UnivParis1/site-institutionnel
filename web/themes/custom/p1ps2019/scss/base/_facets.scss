@@ -3,6 +3,7 @@
       h3{display: none;}
       .js-facets-checkbox-links{
         .facet-item{
+          display: inline-block;
           input[type="checkbox"]{display: none;}
           label{
             padding: rem-calc(4px 24px);
@@ -21,12 +22,11 @@
               @include flex(); @include flex-align(center, middle);
             }
           }
-          +.facet-item{margin-top: rem-calc(20px);}
+            &:not(:last-of-type){
+                margin-bottom: rem-calc(20px);
+            }
         }
       }
-    }
-    + .block-facets-ajax{
-        margin-top: rem-calc(20px);
     }
 }
 
