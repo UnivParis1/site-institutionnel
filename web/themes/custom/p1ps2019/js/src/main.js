@@ -44,6 +44,7 @@
         else{
           overlayClose();
           $('.accessibility-wrapper').addClass('overlay-show');
+            console.log('clicked');
         }
       });
     }
