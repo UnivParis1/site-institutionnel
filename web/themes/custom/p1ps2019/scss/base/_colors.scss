@@ -715,21 +715,22 @@ tr{
 //================ FIN HEADER ================ //
 
 // =============== MAIN ================= //
+.pager a.button{background-color: $background-main-color;}
 .pagination{
 	.pager__item{
 	    background-color: transparent;
-	    a:not(.button), a:not(.button):hover{
+	    a, a:hover{
     	  background-color: transparent;
 		    color: $text-black;
 	    }
 	    &.is-active{
-	    	a:not(.button){background-color: transparent;}
+	    	a{background-color: transparent;}
 	    }
 	    &.current{
-	    	a:not(.button){color: $gray;}
+	    	a{color: $gray;}
 	    }
 	    &:hover{
-	    	a:not(.button){
+	    	a{
 		    	&:after{
 				    background-color: $light-blue;
 		    	}
@@ -738,7 +739,7 @@ tr{
 	    &.pager__item--previous, &.pager__item--next{
 	    	&:hover{
 	    		span:after{color: $text-white;}
-	    		a:not(.button):after{
+	    		a:after{
 	    			background-color: $background-main-color;
 	    		}
 	    	}
@@ -746,7 +747,7 @@ tr{
 	    &.pager__item--first,&.pager__item--last{
 	    	&:hover{
 	    		span:after{color: $text-white;}
-	    		a:not(.button){
+	    		a{
 	    			color:$text-white;
 	    			&:after{
 		    			background-color: $background-main-color;
