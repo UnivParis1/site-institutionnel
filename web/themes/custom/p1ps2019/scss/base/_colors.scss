@@ -718,18 +718,18 @@ tr{
 .pagination{
 	.pager__item{
 	    background-color: transparent;
-	    a, a:hover{
+	    a:not(.button), a:not(.button):hover{
     	  background-color: transparent;
 		    color: $text-black;
 	    }
 	    &.is-active{
-	    	a{background-color: transparent;}
+	    	a:not(.button){background-color: transparent;}
 	    }
 	    &.current{
-	    	a{color: $gray;}
+	    	a:not(.button){color: $gray;}
 	    }
 	    &:hover{
-	    	a{
+	    	a:not(.button){
 		    	&:after{
 				    background-color: $light-blue;
 		    	}
@@ -738,7 +738,7 @@ tr{
 	    &.pager__item--previous, &.pager__item--next{
 	    	&:hover{
 	    		span:after{color: $text-white;}
-	    		a:after{
+	    		a:not(.button):after{
 	    			background-color: $background-main-color;
 	    		}
 	    	}
@@ -746,7 +746,7 @@ tr{
 	    &.pager__item--first,&.pager__item--last{
 	    	&:hover{
 	    		span:after{color: $text-white;}
-	    		a{
+	    		a:not(.button){
 	    			color:$text-white;
 	    			&:after{
 		    			background-color: $background-main-color;
