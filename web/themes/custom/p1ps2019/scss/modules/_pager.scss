@@ -10,7 +10,7 @@
   	.pager__item{
           margin: 0;
   	    background-color: transparent;
-  	    a, a:hover{
+  	    a:not(.button), a:not(.button):hover{
       	    background-color: transparent;
   		    font-size: rem-calc(14px); line-height: 1.72; @include setFont($fontType-regular);
   		    padding: 0 12px;
@@ -19,7 +19,7 @@
   		    &:before{display: none;}
   	    }
   	    &:hover{
-  	    	a{
+  	    	a:not(.button){
   		    	&:after{
   	    		    content: "";
   				    width: 24px; height: 24px;
