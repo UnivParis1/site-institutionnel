@@ -25,7 +25,7 @@ class HomepageSearchForm extends FormBase {
     ];
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => $this->t('Search'),
+      '#value' => $this->t('OK'),
     );
 
     return $form;
