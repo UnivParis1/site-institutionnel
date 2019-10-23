@@ -37,7 +37,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Rechercher
+          submit_button: OK
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -436,7 +436,7 @@ display:
           expose:
             label: ''
           plugin_id: search_api
-      title: 'Recherche de contenu'
+      title: Recherche
       header:
         result:
           id: result
@@ -460,8 +460,8 @@ display:
           empty: true
           tokenize: false
           content:
-            value: 'Aucun résultat'
-            format: restricted_html
+            value: '<div>Vous avez visionné tous les résultats correspondant à vos filtres de recherche.</div>'
+            format: full_html
           plugin_id: text
       relationships: {  }
       arguments: {  }
@@ -470,7 +470,7 @@ display:
       use_more_always: false
       use_more_text: 'Voir plus'
       use_ajax: true
-      css_class: search-wrapper
+      css_class: 'search-wrapper semi-field-sep-top-mobile'
     cache_metadata:
       max-age: -1
       contexts:
@@ -482,7 +482,7 @@ display:
   page_1:
     display_plugin: page
     id: page_1
-    display_title: Page
+    display_title: Recherche
     position: 1
     display_options:
       display_extenders: {  }
@@ -492,6 +492,7 @@ display:
         type: none
       defaults:
         cache: false
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:

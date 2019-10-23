@@ -1,4 +1,4 @@
-uuid: e7c79b7d-2dbc-4cf4-b1be-b7930bb71365
+uuid: 8cdf5ff7-4e2f-40d1-9c7e-0fb70181bcdf
 langcode: fr
 status: true
 dependencies:
@@ -6,21 +6,25 @@ dependencies:
     - micro_path
     - micro_site
     - system
+    - up1_keywords
   theme:
     - p1ps2019
-_core:
-  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
-id: p1ps2019_breadcrumbs
+id: motsclessaisonniers
 theme: p1ps2019
-region: breadcrumbs
-weight: -16
+region: before_content
+weight: -15
 provider: null
-plugin: system_breadcrumb_block
+plugin: keywords_block
 settings:
-  id: system_breadcrumb_block
-  label: Breadcrumbs
-  provider: system
-  label_display: '0'
+  id: keywords_block
+  label: Recherche
+  provider: up1_keywords
+  label_display: visible
+  mot_cle_1: Formation
+  mot_cle_2: Inscription
+  mot_cle_3: Université
+  mot_cle_4: Fondation
+  mot_cle_5: 'Una Europa'
 visibility:
   site_type:
     id: site_type
@@ -35,6 +39,6 @@ visibility:
     context_mapping: {  }
   request_path:
     id: request_path
-    pages: '<front>'
-    negate: true
+    pages: "/recherche\r\n/recherche*"
+    negate: false
     context_mapping: {  }
