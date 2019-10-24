@@ -51,13 +51,9 @@
  * @see html.html.twig
  */
 #}
-<!--{% set image = '' %}
-{% set image %}
-    {{ page.hp_image }}
-{% endset %}
-{% if image|striptags|trim %}
+{% set header_region = page.header|render|striptags|trim is not empty %}
+{% set has_image = page.hp_image|render|striptags|trim is not empty %}
 
-{% endif %}-->
 {# Header #}
 {% if page.header or page.header_left or page.header_center or page.header_right %}
   <header id="navbar" role="banner">
@@ -78,7 +74,7 @@
       <div class="grid-x">
         <div class="cell small-12">
           <div class="mask no-hover relative-wrapper">
-            <div class="header-img img-container">{{ page.hp_image }}</div>
+            {% if has_image %} <div class="header-img img-container">{{ page.hp_image }}</div> {% endif %}
             <div class="main-overlay-infos">{{page.header}}</div>
             {# {{ content.keywords }} #}
           </div>
