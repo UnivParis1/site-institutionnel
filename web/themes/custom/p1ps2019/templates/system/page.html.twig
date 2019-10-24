@@ -51,7 +51,13 @@
  * @see html.html.twig
  */
 #}
+<!--{% set image = '' %}
+{% set image %}
+    {{ page.hp_image }}
+{% endset %}
+{% if image|striptags|trim %}
 
+{% endif %}-->
 {# Header #}
 {% if page.header or page.header_left or page.header_center or page.header_right %}
   <header id="navbar" role="banner">
