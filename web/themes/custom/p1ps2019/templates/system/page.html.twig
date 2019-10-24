@@ -51,7 +51,10 @@
  * @see html.html.twig
  */
 #}
-{% set header_region = page.header|render|striptags|trim %}
+{% set header_region %}
+  {% header_region = page.header|render|striptags|trim is not empty %}
+{% endset %}
+
 {% set has_image = page.hp_image|render|striptags|trim is not empty %}
 
 {# Header #}
