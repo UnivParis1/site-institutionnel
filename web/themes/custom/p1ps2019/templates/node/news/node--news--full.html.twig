@@ -86,6 +86,7 @@
   {% endif %}
   {{ title_suffix }}
 
+<<<<<<< HEAD
   <div{{ content_attributes.addClass('content') }}>
     {{ content.field_media }}
     <div class="padding-mobile grid-container">
@@ -99,6 +100,12 @@
               <div class="categ-style">{{ topic }}</div>
             {% endfor %}
           </div>
+=======
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content.field_media }}
+        <div class="padding-mobile grid-container block-sep">
+          {{ content|without('field_media') }}
+>>>>>>> d0db10238eb3ea730f28255b109bdd015537efdb
         </div>
       </div>
       {{ content|without('field_media', 'field_related_news', 'field_signature', 'field_categories', 'field_news_topic') }}
