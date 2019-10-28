@@ -90,24 +90,7 @@
   <div{{ content_attributes.addClass('content') }}>
     {{ content.field_media }}
     <div class="block-sep padding-mobile grid-container">
-      <div class="top-infos">
-        <div class="infos-row-wrapper nowrap-mobile valign-center">
-          <div class="categ-wrapper infos-entry">
-            {% for key, category in content.field_categories if key|first != '#' %}
-              <div class="categ-style">{{ category }}</div>
-            {% endfor %}
-            {% for key, topic in content.field_news_topic if key|first != '#' %}
-              <div class="categ-style">{{ topic }}</div>
-            {% endfor %}
-          </div>
-
-    <div{{ content_attributes.addClass('content') }}>
-        {{ content.field_media }}
-        
-      </div>
-      {{ content|without('field_media', 'field_related_news', 'field_signature', 'field_categories', 'field_news_topic') }}
-      <div class="">{{ content.field_signature }}</div>
-    </div>
+    
     <div class="grid-container">
       <h2>{{ content.field_related_news['#title'] }}</h2>
       <div class="grid-x grid-margin-x grid-margin-y">
