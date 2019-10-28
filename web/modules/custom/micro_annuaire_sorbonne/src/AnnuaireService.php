@@ -55,7 +55,7 @@ class AnnuaireService implements AnnuaireServiceInterface {
 
     $ws = $config->get('url_ws');
     $searchUser = $ws . $filter;
-    $Trusted = (strpos($filter, 'searchUserTrusted') !== false ? true : false);
+    //$Trusted = (strpos($filter, 'searchUserTrusted') !== false ? true : false);
 
     $params = [
       'attrs' => 'sn,givenName,mail,telephoneNumber,labeledURI,supannEntiteAffectation,postalAddress,supannListeRouge',
@@ -72,7 +72,7 @@ class AnnuaireService implements AnnuaireServiceInterface {
     curl_close($ch);
 
     $reponse['users'] = $users;
-    $reponse['trusted'] = $Trusted;
+   // $reponse['trusted'] = $Trusted;
 
     return $reponse;
 

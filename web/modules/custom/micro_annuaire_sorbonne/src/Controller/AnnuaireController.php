@@ -102,7 +102,7 @@ class AnnuaireController extends ControllerBase {
     $build['item_list'] = [
       '#theme' => $theme,
       '#users' => $filtered_users,
-      '#Trusted' => (empty($reponse['trusted']) ? false : $reponse['trusted']),
+      '#Trusted' => FALSE,
       '#attached' => [
         'library' => [
           'micro_annuaire_sorbonne/annuaire'
