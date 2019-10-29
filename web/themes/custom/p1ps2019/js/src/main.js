@@ -19,7 +19,7 @@
         }
       });
     }
-    
+
      //search toggle
     if($('#search-toggle').length > 0){
       $('#search-toggle').click(function(){
@@ -56,7 +56,7 @@
         }
 			});
 		}
-    
+
      if($('#contraste-normal').length > 0){
       $('#contraste-normal').click(function(){
         $('.accessibility-wrapper').removeClass('overlay-show');
@@ -81,7 +81,7 @@
         }
       });
     }
-    
+
      if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
       $('.icon-menu').click(function() {
         var scrollTop = $(window).scrollTop();
@@ -123,6 +123,16 @@
 
     BrowserDetection();
 
+    // Chosen touch support.
+    if ($('.chosen-container').length > 0) {
+      $('.chosen-container').on('touchstart', function(e){
+        e.stopPropagation(); e.preventDefault();
+        // Trigger the mousedown event.
+        $(this).trigger('mousedown');
+      });
+    }
+
+
     //map submit button
     if($('.center-form #edit-submit').length > 0){
       $('.center-form #edit-submit').addClass('reset-btn circle white').removeClass('button button--primary js-form-submit form-submit');
@@ -136,10 +146,10 @@
       $('.swiper-button-prev').addClass('fa fa-chevron-left');
     }
 
-    
-   
 
-   
+
+
+
 
     //menulevel2
     // if($('.secondlevel').length > 0){$('.secondlevel').parent('li').parent('ul').parent('li').addClass('has-dropdown');}
@@ -173,7 +183,7 @@
     //   });
     // }
 
-   
+
 
 		//social media footer
 		if( $('.block-system-menu-blockreseaux-sociaux').length > 0){
