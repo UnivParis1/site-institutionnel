@@ -20,12 +20,6 @@
       });
     }
 
-    if($('.path-recherche #search-toggle').length > 0){
-      $('#search-toggle').click(function(){
-        console.log('here');
-        $('#edit-homepage-search').focus();
-      });
-    }
 
      //search toggle
     if($('#search-toggle').length > 0){
@@ -139,6 +133,12 @@
       });
     }
 
+    if($('.path-recherche #search-toggle').length > 0){
+      $('#search-toggle').click(function(){
+        console.log('here');
+        $('#edit-homepage-search').focus();
+      });
+    }
 
     //map submit button
     if($('.center-form #edit-submit').length > 0){
