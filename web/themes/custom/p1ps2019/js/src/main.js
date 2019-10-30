@@ -20,6 +20,12 @@
       });
     }
 
+    if($('.path-recherche #search-toggle').length > 0){
+      $('#search-toggle').click(function(){
+        $('#edit-homepage-search').focus();
+      });
+    }
+
      //search toggle
     if($('#search-toggle').length > 0){
       $('#search-toggle').click(function(){
