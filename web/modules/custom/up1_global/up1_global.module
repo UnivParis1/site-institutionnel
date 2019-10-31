@@ -53,8 +53,7 @@ function up1_global_form_alter(&$form, FormStateInterface $form_state, $form_id)
 
 }
 
-function up1_global_contact_paragraph_submit($form, FormStateInterface $form_state) {
-}
+function up1_global_contact_paragraph_submit($form, FormStateInterface $form_state) {}
 
 /**
  * Implements hook_theme().
@@ -70,4 +69,18 @@ function up1_global_theme($existing, $type, $theme, $path) {
       'template' => 'up1-ent-search-block',
     ]
   ];
+}
+
+/**
+ * Implements hook_language_switch_links_alter().
+ */
+function up1_global_language_switch_links_alter(array &$links, $type, \Drupal\Core\Url $url) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    foreach ($links as $langcode => $link) {
+      if ($node && !array_key_exists($langcode, $node->getTranslationLanguages(TRUE))) {
+        //There is no translation in that language, unset the whole thing
+        unset($links[$langcode]);
+      }
+    }
+  }
 }

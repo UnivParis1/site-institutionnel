@@ -13,20 +13,26 @@ function p1ps2019_preprocess_html(&$variables) {
   catch (Exception $e) {
     $variables['is_front'] = FALSE;
   }
-  \Drupal::logger('path')->info(print_r(\Drupal::service('path.current')->getPath(), 1));
 }
 
 /**
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
 function p1ps2019_preprocess_page(&$variables) {
+  $variables['is_front_mini_site'] = FALSE;
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['#attached']['drupalSettings']['language'] = $language;
+
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+    $path = \Drupal::service('path.current')->getPath();
+
   }
   catch (Exception $e) {
     $variables['is_front'] = FALSE;
+  }
+  if (preg_match('/\/site\/*/', $path)) {
+    $variables['is_front_mini_site'] = TRUE;
   }
 }
 
@@ -51,14 +57,16 @@ function p1ps2019_preprocess_menu(&$variables) {
 function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $variables) {
   // Block suggestions for custom block bundles.
   if (isset($variables['elements']['content']['#block_content'])) {
-    array_splice($suggestions, 1, 0, 'block__' . $variables['elements']['content']['#block_content']->bundle());
+    array_splice($suggestions, 1, 0,
+      'block__' . $variables['elements']['content']['#block_content']->bundle());
   }
 }
-
 
 function p1ps2019_preprocess_block(&$variables) {
   if (isset($variables["elements"]["#id"])) {
     $block_id = $variables["elements"]["#id"];
+
+    $path = \Drupal::service('path.current')->getPath();
     $block = \Drupal\block\Entity\Block::load($block_id);
     $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
