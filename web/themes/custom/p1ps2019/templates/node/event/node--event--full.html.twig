@@ -83,6 +83,7 @@
 {% set eventPlace %}
   {{ content.field_event_address }}
 {% endset %}
+
 <article{{ attributes.addClass(classes) }}>
   <div class="img-container section-sep small">
       {{ content.field_media }}
@@ -115,7 +116,7 @@
               </div>
             {% endif %}
             {% if eventPlace|striptags|trim %}
-              <div class="details semi-field-sep txt-second">         
+              <div class="details semi-field-sep txt-second">
                 <div class="txt medium event-details">
                   <span>{{ 'Lieu : '|t }}</span>
                   {{ content.field_event_address }}
@@ -126,9 +127,11 @@
           </div>
         </div>
         <div class="box-style no-shadow auto-height semi-field-sep">
+          {% if content.field_subscription_link.0['#url'] is not empty %}
           <div class="social-and-calendar box-content">
-            <a href="#" class="link-style txt-upper txt-second txt-bold">{{ 'Inscription'|t }}</a>
+            <a href="{{ content.field_subscription_link.0['#url'] }}" class="link-style txt-upper txt-second txt-bold">{{ 'Inscription'|t }}</a>
           </div>
+          {% endif %}
         </div>
         <div class="box-style no-shadow auto-height">
           <div class="social-and-calendar box-content">
