@@ -30,6 +30,12 @@ $tab-content-background: $background-white;
 $tab-content-border: $light-blue;
 $tab-content-color: $body-font-color;
 $tab-content-padding: 1rem;*/
+  /**
+ * Foundation for Sites by ZURB
+ * Version 6.5.3
+ * foundation.zurb.com
+ * Licensed under MIT Open Source
+ */
   /*
     Feuille de style SCSS
     SMACSS : Responsive > Mixins
@@ -48,6 +54,36 @@ $tab-content-padding: 1rem;*/
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
+  .accessibility-mode .breadcrumbs {
+    margin: 0 0 0 0;
+    list-style: none; }
+    .accessibility-mode .breadcrumbs::before, .accessibility-mode .breadcrumbs::after {
+      display: table;
+      content: ' ';
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+      -ms-flex-order: 1;
+          order: 1; }
+    .accessibility-mode .breadcrumbs::after {
+      clear: both; }
+    .accessibility-mode .breadcrumbs li {
+      float: left;
+      font-size: 1.125rem;
+      color: #000;
+      cursor: default; }
+      .accessibility-mode .breadcrumbs li:not(:last-child)::after {
+        position: relative;
+        margin: 0 0.25rem;
+        opacity: 1;
+        content: "/";
+        color: #000; }
+    .accessibility-mode .breadcrumbs a {
+      color: #000; }
+      .accessibility-mode .breadcrumbs a:hover {
+        text-decoration: underline; }
+    .accessibility-mode .breadcrumbs .disabled {
+      color: #000;
+      cursor: not-allowed; }
   .accessibility-mode .bg-light-pink {
     background-color: #000 !important;
     color: #fff !important; }
@@ -1118,12 +1154,16 @@ $tab-content-padding: 1rem;*/
     background-color: #868483; }
     .accessibility-mode .footer .footer-wrapper .cell:not(:last-child):after {
       background-color: #fff; }
+    .accessibility-mode .footer .footer-wrapper .two-columns a {
+      color: #fff; }
     .accessibility-mode .footer .footer-wrapper .two-columns:after {
       background-color: #fff; }
     .accessibility-mode .footer .footer-wrapper .logo-footer svg {
       fill: #fff; }
       .accessibility-mode .footer .footer-wrapper .logo-footer svg * {
         fill: inherit; }
+    .accessibility-mode .footer .footer-wrapper .block-title {
+      color: #fff; }
   .accessibility-mode #region-footer .footer-center-inner li a:hover {
     color: #fff; }
     .accessibility-mode #region-footer .footer-center-inner li a:hover:before {
@@ -1484,6 +1524,8 @@ $tab-content-padding: 1rem;*/
       transition: all 150ms ease 0s; }
     .accessibility-mode .mask:not(.no-hover):hover:after {
       background-color: rgba(0, 0, 0, 0.95); }
+  .accessibility-mode .breadcrumbs li {
+    float: none; }
   .accessibility-mode body {
     color: #000; }
     .accessibility-mode body [class*="paris1-bg"] {
