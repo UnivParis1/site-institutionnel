@@ -6,7 +6,6 @@ dependencies:
     - field.field.media.image.field_credits
     - field.field.media.image.field_legende
     - field.field.media.image.field_media_image
-    - image.style.hit_list
     - media.type.image
   module:
     - image
@@ -16,7 +15,7 @@ bundle: image
 mode: default
 content:
   field_credits:
-    weight: 3
+    weight: 2
     label: hidden
     settings:
       link_to_entity: false
@@ -24,7 +23,7 @@ content:
     type: string
     region: content
   field_legende:
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       link_to_entity: false
@@ -34,24 +33,17 @@ content:
   field_media_image:
     label: visually_hidden
     settings:
-      image_style: hit_list
-      image_link: file
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
     type: image
-    weight: 1
-    region: content
-  site_id:
-    label: hidden
-    type: entity_reference_label
     weight: 0
     region: content
-    settings:
-      link: true
-    third_party_settings: {  }
 hidden:
   created: true
   langcode: true
   name: true
   search_api_excerpt: true
+  site_id: true
   thumbnail: true
   uid: true
