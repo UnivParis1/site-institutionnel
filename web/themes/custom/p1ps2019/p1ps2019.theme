@@ -191,3 +191,14 @@ function p1ps2019_preprocess_paragraph(&$variables) {
     $variables['centre'] = $service->renderCentre("http://ws-theses.univ-paris1.fr/centres_up1", $paragraph->field_centre->value);
   }
 }
+
+function p1ps2019_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
+    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
+    unset($form['name']['#title'], $form['name']['#description']);
+  }
+  if (isset($form['pass']) && $form['name']['#type'] == 'textfield') {
+    $form['pass']['#attributes']['placeholder'][] = $form['pass']['#title'] . ' *';
+    unset($form['pass']['#title'], $form['pass']['#description']);
+  }
+}
