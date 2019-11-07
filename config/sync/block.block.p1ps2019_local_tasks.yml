@@ -2,6 +2,10 @@ uuid: d7133ae3-5afa-4e9d-bb5c-317275b829a2
 langcode: fr
 status: true
 dependencies:
+  module:
+    - micro_path
+    - micro_site
+    - system
   theme:
     - p1ps2019
 _core:
@@ -19,4 +23,20 @@ settings:
   label_display: '0'
   primary: true
   secondary: true
-visibility: {  }
+visibility:
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: "/user\r\n/user/*"
+    negate: true
+    context_mapping: {  }
