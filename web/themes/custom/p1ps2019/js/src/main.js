@@ -21,9 +21,7 @@
     }
 
     if($('.path-recherche #search-toggle').length > 0){
-      console.log('here1');
       $('#search-toggle').click(function(){
-        console.log('here');
         $('#edit-homepage-search').focus();
       });
     }
