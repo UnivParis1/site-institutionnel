@@ -82,7 +82,7 @@
             <div class="main-overlay-infos">
               {{page.header}}
               {% if is_front %}
-                <div class="anchor-header"><span class="fas fa-chevron-down"></span></div>
+                <div class="anchor-header"><span href="#page-content" data-smooth-scroll class="fa fa-chevron-down"></span></div>
               {% endif %}
             </div>
           </div>
@@ -171,7 +171,7 @@
 
 {# Main #}
 {% block main %}
-  <div role="main" class="main-container">
+  <div role="main" class="main-container" id="page-content">
     {# Content #}
     {%
       set content_classes = [
