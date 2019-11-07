@@ -121,9 +121,9 @@
     	if ($(window).width() > 1024){
 			$(document).scroll(function() {
 				var top=$(this).scrollTop();
-				if(top>1) {
+				if(top>1 || $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length <= 0) {
 					setTimeout(function(){ $("body").addClass("scroll"); }, 100);
-				} if(top < 1 && $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length <= 0) {
+				} if(top < 1) {
 					setTimeout(function(){ $("body").removeClass("scroll"); }, 100);
 				}
 			});
