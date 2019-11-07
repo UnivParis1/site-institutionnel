@@ -25,13 +25,11 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
       });
     }
 
-    // if($('.path-recherche #search-toggle').length > 0){
-    //   console.log('here1');
-    //   $('#search-toggle').click(function(){
-    //     console.log('here');
-    //     $('#edit-homepage-search').focus();
-    //   });
-    // }
+    if($('.path-recherche #search-toggle').length > 0){
+      $('#search-toggle').click(function(){
+        $('#edit-homepage-search').focus();
+      });
+    }
 
      //search toggle
     if($('#search-toggle').length > 0){
@@ -39,14 +37,14 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
         var scrollTop = $(window).scrollTop();
         if($('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length > 0){
           overlayClose();
-          if(scrollTop <= 0 || $(window.width() < 1024)){
+          if(scrollTop <= 0 || $(window).width() < 1024){
             $('body').removeClass('scroll');
           }
         }
         else{
           overlayClose();
           $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1, #search-toggle').addClass('overlay-show');
-          if(scrollTop <= 0 || $(window.width() < 1024)){
+          if(scrollTop <= 0 || $(window).width() < 1024){
             $('body').addClass('scroll');
           }
         }
@@ -128,7 +126,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 				var top=$(this).scrollTop();
 				if(top>1) {
 					setTimeout(function(){ $("body").addClass("scroll"); }, 100);
-				} else {
+				} if(top < 1 && $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length <= 0) {
 					setTimeout(function(){ $("body").removeClass("scroll"); }, 100);
 				}
 			});

@@ -37,24 +37,15 @@
  */
 #}
 
-{{ attach_library('bootstrap_paragraphs/bootstrap-paragraphs') }}
-{% if paragraph.bundle == 'bp_columns' %}
-  {{ attach_library('bootstrap_paragraphs/bp-columns') }}
-{% endif %}
-
-{# Renders Width field. #}
-{# Sets class name from values in database. #}
-
 {% if content.bp_width|render %}
   {% set layout_width = content.bp_width['#items'].getString() %}
   {% set layout_width_classes = [
-    'paragraph--width--tiny' == layout_width ? 'paragraph--width--tiny',
-    'paragraph--width--narrow' == layout_width ? 'paragraph--width--narrow',
-    'paragraph--width--medium' == layout_width ? 'paragraph--width--medium',
-    'paragraph--width--wide' == layout_width ? 'paragraph--width--wide',
-    'paragraph--width--full' == layout_width ? 'paragraph--width--full'
+    'paragraph--width--tiny' == layout_width ? 'large-6 large-offset-3',
+    'paragraph--width--narrow' == layout_width ? 'large-8 large-offset-2',
+    'paragraph--width--medium' == layout_width ? 'large-10 large-offset-1'
   ]
   %}
+  {% set paragraph_width = ['cell',  'small-12']|merge(layout_width_classes) %}
 {% endif %}
 
 {# Renders Background field. #}
@@ -66,48 +57,31 @@
 {# The template default set classes. #}
 {# Sets Paragraph ID as class. #}
 {%
-set classes = [
-'paragraph', layout_background, content.bp_background|render ? 'medium',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
-view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-'paragraph--id--' ~ paragraph.id.value
+  set classes = [
+  'paragraph', layout_background, content.bp_background|render ? 'medium',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
 ]
 %}
 
 {% set title = "" %}
 {% set title %}
-{{ content.field_title }}
+  {{ content.field_title }}
 {% endset %}
 
 {% set nbCols = content.field_column_number.0 %}
 
-
-{# Merges Width field with classes. #}
-{% set width_field = content.bp_width|render %}
-{% if width_field %}
-  {% set classes = classes|merge(layout_width_classes) %}
-{% endif %}
-
 {# Prints div with classes, and content without Width and Background. #}
-  <div{{ attributes.addClass(classes) }}>
-      {% if layout_width == 'paragraph--width--full' %}
-      <div class="grid-container">
-      {% endif %}
-        <div class="paragraph__column grid-x grid-margin-x">
-          <div class="cell small-12">
-            {% if layout_width != 'paragraph--width--full' and content.bp_background|render %}
-            <div class="box-content-padding">
-            {% endif %}
-              {% if title|striptags|trim %}
-                <h2 class="titre field-sep">{{ content.field_title }}</h2>
-              {% endif %}
-              <div class="txt medium column-number-{{nbCols}}">{{ content.bp_text }}</div>
-            {% if layout_width != 'paragraph--width--full' and content.bp_background|render %}
-            </div>
-            {% endif %}
-          </div>
+<div{{ attributes.addClass(classes) }}>
+  <div class="grid-container">
+    <div class="paragraph__column grid-x grid-margin-x">
+      <div class="{{ paragraph_width|join(' ') }}">
+        <div class="box-content-padding">
+          {% if title|striptags|trim %}
+            <h2 class="titre field-sep">{{ content.field_title }}</h2>
+          {% endif %}
+          <div class="txt medium column-number-{{nbCols}}">{{ content.bp_text }}</div>
         </div>
-      {% if layout_width == 'paragraph--width--full'%}
       </div>
-      {% endif %}
+    </div>
   </div>
+</div>
