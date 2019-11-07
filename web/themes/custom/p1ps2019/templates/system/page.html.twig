@@ -79,7 +79,12 @@
         <div class="cell small-12 full-height">
           <div class="mask no-hover relative-wrapper full-height">
             <div class="header-img img-container full-height">{{ page.hp_image }}</div>
-            <div class="main-overlay-infos">{{page.header}}</div>
+            <div class="main-overlay-infos">
+              {{page.header}}
+              {% if is_front %}
+                <div class="anchor-header"><span class="fas fa-chevron-down"></span></div>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
