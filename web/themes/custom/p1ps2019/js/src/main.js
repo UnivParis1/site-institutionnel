@@ -20,13 +20,13 @@
       });
     }
 
-    // if($('.path-recherche #search-toggle').length > 0){
-    //   console.log('here1');
-    //   $('#search-toggle').click(function(){
-    //     console.log('here');
-    //     $('#edit-homepage-search').focus();
-    //   });
-    // }
+    if($('.path-recherche #search-toggle').length > 0){
+      console.log('here1');
+      $('#search-toggle').click(function(){
+        console.log('here');
+        $('#edit-homepage-search').focus();
+      });
+    }
 
      //search toggle
     if($('#search-toggle').length > 0){
@@ -121,7 +121,7 @@
     	if ($(window).width() > 1024){
 			$(document).scroll(function() {
 				var top=$(this).scrollTop();
-				if(top>1 ) {
+				if(top>1) {
 					setTimeout(function(){ $("body").addClass("scroll"); }, 100);
 				} if(top < 1 && $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length <= 0) {
 					setTimeout(function(){ $("body").removeClass("scroll"); }, 100);
