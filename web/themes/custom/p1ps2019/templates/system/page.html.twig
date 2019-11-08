@@ -51,41 +51,42 @@
  * @see html.html.twig
  */
 #}
-{% set header_region = page.header|render|striptags|trim %}
-{% set has_image = page.hp_image|render|striptags|trim is not empty %}
 
 {# Header #}
-{% if page.header or page.header_left or page.header_center or page.header_right %}
+{% if page.header or page.header_left or page.header_center or page.header_right or page.hp_image %}
+  {% if page.hp_image %}
+<header id="navbar" class="header-full" role="banner">
+  {% else %}
   <header id="navbar" role="banner">
-    {% if page.header %}
-      {% if is_front %}
-        <div class="grid-x screen-height full-height">
-          <div class="cell small-12 full-height">
-            <div class="mask no-hover relative-wrapper full-height">
-              <div class="header-img img-container full-height">{{ page.hp_image }}</div>
-              <div class="main-overlay-infos">
-                {{page.header}}
-                {% if is_front %}
-                  <div class="anchor-header"><a href="#page-content" data-smooth-scroll data-offset="80" class="fa fa-chevron-down"></a></div>
-                {% endif %}
+    {% endif %}
+    {% if page.header and page.hp_image %}
+      <div class="grid-x screen-height full-height">
+        <div class="cell small-12 full-height">
+          <div class="mask no-hover relative-wrapper full-height">
+            <div class="header-img img-container full-height">{{ page.hp_image }}</div>
+            <div class="main-overlay-infos">
+              {{page.header}}
+              {% if is_front %}
+                <div class="anchor-header"><a href="#page-content" data-smooth-scroll data-offset="80" class="fa fa-chevron-down"></a></div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% elseif not page.hp_image %}
+      <div class="grid-x">
+        <div class="cell small-12">
+          <div class="mask no-hover relative-wrapper">
+            <div class="main-overlay-infos">
+              <div class="header-content">
+                {{ page.header }}
               </div>
             </div>
           </div>
         </div>
-      {% else %}
-        <div class="grid-x">
-          <div class="cell small-12">
-            <div class="mask no-hover relative-wrapper">
-              <div class="main-overlay-infos">
-                <div class="header-content">
-                  {{ page.header }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
     {% endif %}
-    {% endif %}
+
     {% if page.header_left or page.header_center or page.header_right %}
       <div id="top-header" class="grid-x align-justify">
         {# {% if page.header_left %} #}
@@ -142,126 +143,126 @@
       </div>
     {% endif %}
   </header>
-{% endif %}
+  {% endif %}
 
-{# Navbar #}
-{% if page.navigation %}
-  <div id="navbar-header" class="navbar-header-region">
-    <div class="navigation-left-region cell small-12 large-6">
-      {{ page.navigation_left }}
+  {# Navbar #}
+  {% if page.navigation %}
+    <div id="navbar-header" class="navbar-header-region">
+      <div class="navigation-left-region cell small-12 large-6">
+        {{ page.navigation_left }}
+      </div>
+      <div class="navigation-region cell small-12 large-6">{{ page.navigation }}</div>
     </div>
-    <div class="navigation-region cell small-12 large-6">{{ page.navigation }}</div>
-  </div>
-{% endif %}
+  {% endif %}
 
-{% if page.breadcrumbs %}
-  <div id="breadcrumbs" class="breadcrumbs-region">
-    {{ page.breadcrumbs }}
-  </div>
-{% endif %}
+  {% if page.breadcrumbs %}
+    <div id="breadcrumbs" class="breadcrumbs-region">
+      {{ page.breadcrumbs }}
+    </div>
+  {% endif %}
 
-{% if page.before_content %}
-  <div id="before-content" class="before-content-region">
-    {{ page.before_content }}
-  </div>
-{% endif %}
+  {% if page.before_content %}
+    <div id="before-content" class="before-content-region">
+      {{ page.before_content }}
+    </div>
+  {% endif %}
 
-{# Main #}
-{% block main %}
-  <div role="main" class="main-container" id="page-content">
-    {# Content #}
-    {%
-      set content_classes = [
-      page.sidebar_first and page.sidebar_second ? 'small-6',
-      page.sidebar_first and page.sidebar_second is empty ? 'small-9',
-      page.sidebar_second and page.sidebar_first is empty ? 'small-9',
-      page.sidebar_first is empty and page.sidebar_second is empty ? 'small-12'
-    ]
-    %}
-    <section {{ content_attributes.addClass(content_classes) }}>
-
-      {# Highlighted #}
-      {% if page.highlighted %}
-        {% block highlighted %}
-          <div class="highlighted">{{ page.highlighted }}</div>
-        {% endblock %}
-      {% endif %}
-
-      {# Help #}
-      {% if page.help %}
-        {% block help %}
-          {{ page.help }}
-        {% endblock %}
-      {% endif %}
-
+  {# Main #}
+  {% block main %}
+    <div role="main" class="main-container" id="page-content">
       {# Content #}
-      {% block content %}
-        <a id="main-content"></a>
-        {% if page.content_left %}
-          <div class="grid-container">
-            <div class="grid-x grid-margin-x">
-              <div class="cell small-12 large-4">
-                <div class="txt medium infos-sep">{{ 'Filtres'|t }}</div>
-                <div class="content-left box-style auto-height">
-                  <div class="box-content white">
-                    {{ page.content_left }}
+      {%
+        set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'small-6',
+        page.sidebar_first and page.sidebar_second is empty ? 'small-9',
+        page.sidebar_second and page.sidebar_first is empty ? 'small-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'small-12'
+      ]
+      %}
+      <section {{ content_attributes.addClass(content_classes) }}>
+
+        {# Highlighted #}
+        {% if page.highlighted %}
+          {% block highlighted %}
+            <div class="highlighted">{{ page.highlighted }}</div>
+          {% endblock %}
+        {% endif %}
+
+        {# Help #}
+        {% if page.help %}
+          {% block help %}
+            {{ page.help }}
+          {% endblock %}
+        {% endif %}
+
+        {# Content #}
+        {% block content %}
+          <a id="main-content"></a>
+          {% if page.content_left %}
+            <div class="grid-container">
+              <div class="grid-x grid-margin-x">
+                <div class="cell small-12 large-4">
+                  <div class="txt medium infos-sep">{{ 'Filtres'|t }}</div>
+                  <div class="content-left box-style auto-height">
+                    <div class="box-content white">
+                      {{ page.content_left }}
+                    </div>
+                  </div>
+                </div>
+                <div class="cell small-12 large-8">
+                  {{ page.content }}
+                </div>
+              </div>
+            </div>
+          {% else %}
+            {{ page.content }}
+          {% endif %}
+        {% endblock %}
+
+        {% if page.after_content %}
+          {{ page.after_content }}
+        {% endif %}
+      </section>
+    </div>
+  {% endblock %}
+
+  {% if page.footer or page.footer_left or page.footer_center or page.footer_right %}
+    {% block footer %}
+      <footer class="footer {{ container }}" role="contentinfo">
+        <div class="footer-wrapper">
+          <div class="grid-x grid-margin-x align-justify">
+            <div class="cell small-3 large-2 logo-wrapper">
+              <div class="logo-footer">
+                <svg width="71" height="60" viewBox="0 0 71 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M35.4101 3.17285C36.2856 3.17285 36.9964 2.46203 36.9964 1.58651C36.9964 0.710981 36.2856 0.000158906 35.4101 0.000158906C34.5346 0.000158906 33.8237 0.710981 33.8237 1.58651C33.8237 2.46203 34.5346 3.17285 35.4101 3.17285Z" fill="#BE8719"/>
+                  <path d="M35.4093 45.2568L0 60.0002H70.8187L35.4093 45.2568Z" fill="#BE8719"/>
+                  <path d="M43.3664 31.6424V25.4283L41.1637 23.287V15.6889L42.2459 14.6144C42.0975 14.4507 38.4749 10.4342 37.2495 4.95685H33.5272C32.3504 10.2065 28.9709 14.1181 28.5641 14.576L28.5539 14.5939L29.6539 15.6889V23.287L27.4513 25.4283V31.6424C18.1672 34.7303 11.2803 43.0652 10.3184 53.1321L34.4968 43.0652L35.4075 42.684L36.3209 43.0652L60.4993 53.1321C59.5374 43.0652 52.6504 34.7303 43.3664 31.6424ZM37.7689 18.1807C37.7689 17.7713 37.9121 17.2008 38.6412 17.2008C39.3703 17.2008 39.5136 17.7816 39.5136 18.1807V24.4357C38.938 24.3436 38.3573 24.2694 37.7689 24.2157V18.1807ZM34.2333 17.7765C34.2333 17.206 34.4328 16.4103 35.451 16.4103C36.4692 16.4103 36.6688 17.2188 36.6688 17.7765V24.1415C36.2646 24.1236 35.8604 24.1108 35.451 24.1108C35.0417 24.1108 34.6375 24.121 34.2333 24.1415V17.7765ZM31.3271 18.1807C31.3271 17.7713 31.4703 17.2008 32.1994 17.2008C32.9286 17.2008 33.0718 17.7816 33.0718 18.1807V24.2234C32.4834 24.2771 31.9027 24.3513 31.3271 24.4459V18.1807Z" fill="#BE8719"/>
+                </svg>
+
+              </div>
+            </div>
+            {% if page.footer %}
+              <div class="cell small-9 medium-4 large-3">{{ page.footer }}</div>
+            {% endif %}
+            {% if page.footer_left %}
+              <div class="cell small-12 medium-4 two-columns-wrapper show-for-large">
+                <div class="two-columns-content">
+                  <div class="two-columns">
+                    {{ page.footer_left }}
                   </div>
                 </div>
               </div>
-              <div class="cell small-12 large-8">
-                {{ page.content }}
+            {% endif %}
+            {#{% if page.footer_center %}
+              <div class="cell small-12 medium-shrink">{{ page.footer_center }}</div>
+            {% endif %}#}
+            {% if page.footer_right %}
+              <div class="cell small-12 medium-2 large-3 txt-gold show-for-large">
+                {{ page.footer_right }}
               </div>
-            </div>
+            {% endif %}
           </div>
-        {% else %}
-          {{ page.content }}
-        {% endif %}
-      {% endblock %}
-
-      {% if page.after_content %}
-        {{ page.after_content }}
-      {% endif %}
-    </section>
-  </div>
-{% endblock %}
-
-{% if page.footer or page.footer_left or page.footer_center or page.footer_right %}
-  {% block footer %}
-    <footer class="footer {{ container }}" role="contentinfo">
-      <div class="footer-wrapper">
-        <div class="grid-x grid-margin-x align-justify">
-          <div class="cell small-3 large-2 logo-wrapper">
-            <div class="logo-footer">
-              <svg width="71" height="60" viewBox="0 0 71 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M35.4101 3.17285C36.2856 3.17285 36.9964 2.46203 36.9964 1.58651C36.9964 0.710981 36.2856 0.000158906 35.4101 0.000158906C34.5346 0.000158906 33.8237 0.710981 33.8237 1.58651C33.8237 2.46203 34.5346 3.17285 35.4101 3.17285Z" fill="#BE8719"/>
-                <path d="M35.4093 45.2568L0 60.0002H70.8187L35.4093 45.2568Z" fill="#BE8719"/>
-                <path d="M43.3664 31.6424V25.4283L41.1637 23.287V15.6889L42.2459 14.6144C42.0975 14.4507 38.4749 10.4342 37.2495 4.95685H33.5272C32.3504 10.2065 28.9709 14.1181 28.5641 14.576L28.5539 14.5939L29.6539 15.6889V23.287L27.4513 25.4283V31.6424C18.1672 34.7303 11.2803 43.0652 10.3184 53.1321L34.4968 43.0652L35.4075 42.684L36.3209 43.0652L60.4993 53.1321C59.5374 43.0652 52.6504 34.7303 43.3664 31.6424ZM37.7689 18.1807C37.7689 17.7713 37.9121 17.2008 38.6412 17.2008C39.3703 17.2008 39.5136 17.7816 39.5136 18.1807V24.4357C38.938 24.3436 38.3573 24.2694 37.7689 24.2157V18.1807ZM34.2333 17.7765C34.2333 17.206 34.4328 16.4103 35.451 16.4103C36.4692 16.4103 36.6688 17.2188 36.6688 17.7765V24.1415C36.2646 24.1236 35.8604 24.1108 35.451 24.1108C35.0417 24.1108 34.6375 24.121 34.2333 24.1415V17.7765ZM31.3271 18.1807C31.3271 17.7713 31.4703 17.2008 32.1994 17.2008C32.9286 17.2008 33.0718 17.7816 33.0718 18.1807V24.2234C32.4834 24.2771 31.9027 24.3513 31.3271 24.4459V18.1807Z" fill="#BE8719"/>
-              </svg>
-
-            </div>
-          </div>
-          {% if page.footer %}
-            <div class="cell small-9 medium-4 large-3">{{ page.footer }}</div>
-          {% endif %}
-          {% if page.footer_left %}
-            <div class="cell small-12 medium-4 two-columns-wrapper show-for-large">
-              <div class="two-columns-content">
-                <div class="two-columns">
-                  {{ page.footer_left }}
-                </div>
-              </div>
-            </div>
-          {% endif %}
-          {#{% if page.footer_center %}
-            <div class="cell small-12 medium-shrink">{{ page.footer_center }}</div>
-          {% endif %}#}
-          {% if page.footer_right %}
-            <div class="cell small-12 medium-2 large-3 txt-gold show-for-large">
-              {{ page.footer_right }}
-            </div>
-          {% endif %}
         </div>
-      </div>
-    </footer>
-  {% endblock %}
-{% endif %}
+      </footer>
+    {% endblock %}
+  {% endif %}

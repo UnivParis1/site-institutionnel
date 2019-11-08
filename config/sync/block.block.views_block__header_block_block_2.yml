@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.header_block
   module:
+    - ctools
     - micro_path
     - micro_site
     - views
@@ -36,3 +37,10 @@ visibility:
     sites_front_page: 0
     negate: false
     context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
