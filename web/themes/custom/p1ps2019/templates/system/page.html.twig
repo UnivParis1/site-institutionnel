@@ -149,12 +149,16 @@
   {% endif %}
 
   {# Navbar #}
-  {% if page.navigation %}
+  {% if page.navigation or page.navigation_left %}
     <div id="navbar-header" class="navbar-header-region">
-      <div class="navigation-left-region cell small-12 {{ colWidth }}">
-        {{ page.navigation_left }}
-      </div>
-      <div class="navigation-region cell small-12 {{ colWidth }}">{{ page.navigation }}</div>
+      {% if page.navigation_left %}
+        <div class="navigation-left-region cell small-12 {{ colWidth }}">
+          {{ page.navigation_left }}
+        </div>
+      {% endif %}
+      {% if page.navigation %}
+        <div class="navigation-region cell small-12 {{ colWidth }}">{{ page.navigation }}</div>
+      {% endif %}
     </div>
   {% endif %}
 
