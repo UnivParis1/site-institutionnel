@@ -617,7 +617,7 @@
 	#navbar-header{
 	  position: absolute; overflow-y: scroll;
 	  top: rem-calc(136px); #{$left}: rem-calc(-24px);
-	  opacity: 0; height: calc(100vh - 64px);
+	  opacity: 0; //height: calc(100vh - 64px);
 		.navigation-region{display: none;}
 	  .navigation-left-region{
 	    padding: rem-calc(40px 64px);
@@ -679,6 +679,9 @@
 					@include flex-align(left, null);
 	        > li{
 						@include xy-cell(4);
+						&:not(:nth-last-child(-n+3)){
+							margin-bottom: rem-calc(16px);
+						}
 	        }
 	      }
 	    }
