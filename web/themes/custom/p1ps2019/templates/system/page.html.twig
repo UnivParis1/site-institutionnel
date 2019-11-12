@@ -51,6 +51,9 @@
  * @see html.html.twig
  */
 #}
+{% if page.navigation and page.navigation_left %}
+ {% set colWidth = 'large-6' %}
+{% endif %}
 
 {# Header #}
 {% if page.header or page.header_left or page.header_center or page.header_right or page.hp_image %}
@@ -148,10 +151,10 @@
   {# Navbar #}
   {% if page.navigation %}
     <div id="navbar-header" class="navbar-header-region">
-      <div class="navigation-left-region cell small-12 large-6">
+      <div class="navigation-left-region cell small-12 {{ colWidth }}">
         {{ page.navigation_left }}
       </div>
-      <div class="navigation-region cell small-12 large-6">{{ page.navigation }}</div>
+      <div class="navigation-region cell small-12 {{ colWidth }}">{{ page.navigation }}</div>
     </div>
   {% endif %}
 
