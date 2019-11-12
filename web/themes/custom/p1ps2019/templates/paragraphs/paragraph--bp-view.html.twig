@@ -53,7 +53,7 @@
 {{ content.field_title }}
 {% endset %}
 {# Prints div with classes, and content without Width and Background. #}
-<div class="grid-container no-padding-mobile paragraph {% if content.bp_view['#items']|length > 1 %} column-wrapper {% endif %}">
+<div class="no-padding-mobile paragraph {% if content.bp_view['#items']|length > 1 %} grid-container column-wrapper {% endif %}">
   {% if paragTitle|striptags|trim %}<h2 class="title-sep big padding-mobile">{{ content.field_title }}</h2>{% endif %}
   <div{{ attributes.addClass(classes) }}>
     {% if content.bp_view['#items']|length > 1 %}
