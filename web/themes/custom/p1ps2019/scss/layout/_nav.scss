@@ -88,4 +88,27 @@
       transform: translateX(0);
       #{$left}: 0; opacity: 1;
     }
+    .site--type--mini-site &{
+      #navbar-header{
+        .block > ul{
+          @include xy-grid;
+          @include flex-align(justify, null);
+          > li{
+            > a, > span{
+              font-size: rem-calc(24px); line-height: 1.25;
+              @include font-bold(); font-family: $font-second;
+            }
+            ul{
+              margin-top: rem-calc(32px);
+              li{
+                a{
+                  font-size: rem-calc(20px); line-height: 1.5;
+                }
+                + li {margin-top: rem-calc(16px);}
+              }
+            }
+          }
+        }
+      }
+    }
 }
