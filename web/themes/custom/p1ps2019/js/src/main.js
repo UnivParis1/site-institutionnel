@@ -113,6 +113,12 @@
       });
     }
 
+    if($('.site--type--mini-site #navbar-header').length > 0){
+      var list = $('.site--type--mini-site #navbar-header .block > ul > li').length;
+      var listWidth = 100 / list;
+      $('.site--type--mini-site #navbar-header .block > ul > li').css('width', listWidth + '%');
+    }
+
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
     	//ADD SCROLL CLASS
