@@ -37,51 +37,62 @@
  */
 #}
 
-{% if content.bp_width|render %}
-  {% set layout_width = content.bp_width['#items'].getString() %}
-  {% set layout_width_classes = [
-    'paragraph--width--tiny' == layout_width ? 'large-6 large-offset-3',
-    'paragraph--width--narrow' == layout_width ? 'large-8 large-offset-2',
-    'paragraph--width--medium' == layout_width ? 'large-10 large-offset-1'
-  ]
-  %}
-  {% set paragraph_width = ['cell',  'small-12']|merge(layout_width_classes) %}
-{% endif %}
-
-{# Renders Background field. #}
-{# Sets class name from values in database. #}
-{% if content.bp_background|render %}
-  {% set layout_background = content.bp_background['#items'].getString() %}
-{% endif %}
-
 {# The template default set classes. #}
-{# Sets Paragraph ID as class. #}
 {%
   set classes = [
   'paragraph', layout_background, content.bp_background|render ? 'medium',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
 ]
 %}
+{# Set width of the paragraph #}
+{% if content.bp_width|render %}
+  {% set layout_width = content.bp_width['#items'].getString() %}
+  {% set layout_width_classes = [
+    'paragraph--width--tiny' == layout_width ? 'large-6 large-offset-3',
+    'paragraph--width--narrow' == layout_width ? 'large-8 large-offset-2',
+    'paragraph--width--medium' == layout_width ? 'large-10 large-offset-1',
+  ]
+  %}
+  {% set paragraph_width = ['cell',  'small-12']|merge(layout_width_classes) %}
+{% endif %}
 
-{% set title = "" %}
 {% set title %}
   {{ content.field_title }}
 {% endset %}
 
 {% set nbCols = content.field_column_number.0 %}
 
-{# Prints div with classes, and content without Width and Background. #}
-<div{{ attributes.addClass(classes) }}>
-  <div class="grid-container">
-    <div class="paragraph__column grid-x grid-margin-x">
-      <div class="{{ paragraph_width|join(' ') }}">
-        <div class="box-content-padding">
-          {% if title|striptags|trim %}
-            <h2 class="titre field-sep">{{ content.field_title }}</h2>
-          {% endif %}
-          <div class="txt medium column-number-{{nbCols}}">{{ content.bp_text }}</div>
+
+{# Merges Background field with classes. #}
+{% if content.bp_background|render %}
+  {% set background_field = content.bp_background|render %}
+
+  {% set layout_background = content.bp_background['#items'].getString() %}
+  {% set layout_background_classes = [
+    'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
+    'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
+  ]
+  %}
+{% endif %}
+
+
+{% if background_field %}
+<div class="{{ layout_background_classes|join(' ') }}">
+  {% endif %}
+  <div{{ attributes.addClass(classes) }}>
+    <div class="grid-container">
+      <div class="paragraph__column grid-x grid-margin-x">
+        <div class="{{ paragraph_width|join(' ') }}">
+          <div class="box-content-padding">
+            {% if title|striptags|trim %}
+              <h2 class="titre field-sep">{{ content.field_title }}</h2>
+            {% endif %}
+            <div class="txt medium column-number-{{nbCols}}">{{ content.bp_text }}</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  {% if background_field %}
 </div>
+{% endif %}
