@@ -1,4 +1,4 @@
-uuid: e21f068b-dc7e-4a88-bc79-57ccb8f7f18f
+uuid: a5670d57-28a3-47e8-82af-f20a0b227a8d
 langcode: fr
 status: true
 dependencies:
@@ -10,14 +10,14 @@ dependencies:
     - views
   theme:
     - p1ps2019
-id: block__header_page
+id: views_block__header_block_image_micro
 theme: p1ps2019
-region: header
-weight: -14
+region: hp_image
+weight: 0
 provider: null
-plugin: 'views_block:header_block-block_1'
+plugin: 'views_block:header_block-image_micro'
 settings:
-  id: 'views_block:header_block-block_1'
+  id: 'views_block:header_block-image_micro'
   label: ''
   provider: views
   label_display: '0'
@@ -33,6 +33,7 @@ visibility:
   site:
     id: site
     sites: {  }
-    sites_front_page: 0
+    sites_front_page: 1
     negate: false
-    context_mapping: {  }
+    context_mapping:
+      site: '@micro_site.current_site_context:site'

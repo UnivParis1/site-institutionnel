@@ -1056,6 +1056,7 @@ display:
         row: false
         pager: false
         css_class: false
+        header: false
       filters:
         status:
           value: '1'
@@ -1139,7 +1140,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<div class=\"swiper-button-prev\"></div>\r\n<div class=\"swiper-button-next\"></div>"
+            value: "<a class=\"btn btn-primary\" href=\"/publications\">Voir toutes les publications</a>\r\n<div class=\"swiper-button-prev\"></div>\r\n<div class=\"swiper-button-next\"></div>"
             format: full_html
           plugin_id: text
       style:
@@ -1161,6 +1162,20 @@ display:
         options:
           offset: 0
       css_class: swiper-container
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h2 class="title-sep big">Les dernières publications</h2>'
+            format: full_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
