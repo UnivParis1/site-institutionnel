@@ -4,19 +4,10 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.bp_slide_content
-    - paragraphs.paragraphs_type.bp_accordion
-    - paragraphs.paragraphs_type.bp_blank
-    - paragraphs.paragraphs_type.bp_block
     - paragraphs.paragraphs_type.bp_carousel
-    - paragraphs.paragraphs_type.bp_column_wrapper
-    - paragraphs.paragraphs_type.bp_columns
-    - paragraphs.paragraphs_type.bp_columns_three_uneven
-    - paragraphs.paragraphs_type.bp_columns_two_uneven
     - paragraphs.paragraphs_type.bp_image
-    - paragraphs.paragraphs_type.bp_modal
     - paragraphs.paragraphs_type.bp_simple
-    - paragraphs.paragraphs_type.bp_tabs
-    - paragraphs.paragraphs_type.bp_view
+    - paragraphs.paragraphs_type.medias
   module:
     - entity_reference_revisions
 _core:
@@ -34,19 +25,11 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
+    negate: 0
     target_bundles:
       bp_simple: bp_simple
       bp_image: bp_image
-      bp_blank: bp_blank
-      bp_accordion: bp_accordion
-      bp_column_wrapper: bp_column_wrapper
-      bp_columns: bp_columns
-      bp_columns_three_uneven: bp_columns_three_uneven
-      bp_columns_two_uneven: bp_columns_two_uneven
-      bp_block: bp_block
-      bp_modal: bp_modal
-      bp_tabs: bp_tabs
-      bp_view: bp_view
+      medias: medias
     target_bundles_drag_drop:
       bp_simple:
         enabled: true
@@ -55,35 +38,35 @@ settings:
         enabled: true
         weight: -30
       bp_blank:
-        enabled: true
         weight: -29
+        enabled: false
       bp_accordion:
-        enabled: true
         weight: -28
+        enabled: false
       bp_column_wrapper:
-        enabled: true
         weight: -27
+        enabled: false
       bp_columns:
-        enabled: true
         weight: -26
+        enabled: false
       bp_columns_three_uneven:
-        enabled: true
         weight: -25
+        enabled: false
       bp_columns_two_uneven:
-        enabled: true
         weight: -24
+        enabled: false
       bp_block:
-        enabled: true
         weight: -23
+        enabled: false
       bp_modal:
-        enabled: true
         weight: -22
+        enabled: false
       bp_tabs:
-        enabled: true
         weight: -21
+        enabled: false
       bp_view:
-        enabled: true
         weight: -20
+        enabled: false
       bp_accordion_section:
         weight: -19
         enabled: false
@@ -92,5 +75,65 @@ settings:
         enabled: false
       bp_tab_section:
         weight: -17
+        enabled: false
+      audio_media:
+        weight: 37
+        enabled: false
+      bp_webform:
+        weight: 52
+        enabled: false
+      contact:
+        weight: 53
+        enabled: false
+      files_media:
+        weight: 54
+        enabled: false
+      hit_list:
+        weight: 55
+        enabled: false
+      image_media:
+        weight: 56
+        enabled: false
+      jumbotron:
+        weight: 57
+        enabled: false
+      key_figure:
+        weight: 58
+        enabled: false
+      key_figures_section:
+        weight: 59
+        enabled: false
+      medias:
+        enabled: true
+        weight: 60
+      presentation:
+        weight: 61
+        enabled: false
+      rich_content:
+        weight: 62
+        enabled: false
+      section_presentation:
+        weight: 63
+        enabled: false
+      tile:
+        weight: 64
+        enabled: false
+      tile_with_text:
+        weight: 65
+        enabled: false
+      tile_wo_image:
+        weight: 66
+        enabled: false
+      tiles:
+        weight: 67
+        enabled: false
+      title_and_subtitle:
+        weight: 68
+        enabled: false
+      tuile_text_wo_image:
+        weight: 69
+        enabled: false
+      video_media:
+        weight: 70
         enabled: false
 field_type: entity_reference_revisions
