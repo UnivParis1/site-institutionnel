@@ -32,14 +32,14 @@
     {% if menu_level == 0 %}
       <ul class="accordion" data-accordion>
     {% else %}
-      <ul>
+      <ul class="accordion-content" data-tab-content>
     {% endif %}
     {% for item in items %}
       <li class="accordion-item" data-accordion-item>
         {{ link(item.title, item.url) }}
         {% if item.below %}
           <a href="#" class="accordion-title hide-for-large"></a>
-          <div class="accordion-content" data-tab-content>{{ menus.menu_links(item.below, attributes, menu_level + 1) }}</div>
+          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
       </li>
     {% endfor %}
