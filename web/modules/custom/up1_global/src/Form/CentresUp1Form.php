@@ -69,10 +69,67 @@ class CentresUp1Form extends FormBase {
     return $dataArray;
   }
 
-  public function renderCentre($code) {
+  public function renderCentre($code, $with_phone = TRUE, $with_fax = TRUE) {
     if (!empty($dataArray = $this->getCentresJson())) {
       $key = array_search($code, array_column($dataArray, 'Code'));
       $centre = $dataArray[$key];
+
+      $has_tel_fax = 0;
+      $has_transports = 0;
+      !empty($centre['LibWeb'])? $libWeb = $centre['LibWeb'] : $libWeb = "";
+      !empty($centre['Adresse'])? $adresse = $centre['Adresse'] : $adresse = "";
+      !empty($centre['Tel'] && $with_phone)? $tel = $centre['Tel'] : $tel = "";
+      !empty($centre['Tel'] && $with_phone)? $has_tel_fax++ : $has_tel_fax;
+      !empty($centre['Fax'] && $with_fax)? $fax = $centre['Fax'] : $fax = "";
+      !empty($centre['Fax'] && $with_fax)? $has_tel_fax++ : $has_tel_fax;
+      !empty($centre['Metro'])? $metro = $centre['Metro'] : $metro = "";
+      if (!empty($metro)) {
+        $metro = "<div>
+        <span><b>" . t('Métro : ') . "</b></span>
+        <span>" . preg_replace('/ ; /', ', ', $metro) . "</span>
+        </div>";
+        $has_transports++;
+      }
+      !empty($centre['Rer'])? $rer = $centre['Rer'] : $rer = "";
+      if (!empty($rer)) {
+        $rer = "<div>
+        <span><b>" . t('RER : ') . "</b></span>
+        <span>" . preg_replace('/ ; /', ', ', $rer) . "</span>
+        </div>";
+        $has_transports++;
+      }
+      !empty($centre['Bus'])? $bus = $centre['Bus'] : $bus = "";
+      if (!empty($bus)) {
+        $bus = "<div>
+        <span><b>" . t('Bus : ') . "</b></span>
+        <span>" . preg_replace('/ ; /', ', ', $bus) . "</span>
+        </div>";
+        $has_transports++;
+      }
+      if ($has_tel_fax > 0) {
+        $tel_fax = "<div class='centre-phone-fax'>";
+        if (!empty($tel)) {
+          $tel_fax .= "<div class='centre-phone'>
+            <span>" . t('Phone : ') . "</span>
+            <a href='tel:$tel'>$tel</a>  
+            </div>";
+        }
+        if (!empty($fax)) {
+          $tel_fax .= "<div class='centre-fax'>
+            <span>" . t('Fax : ') . "</span>
+            <span>$fax</span>  
+            </div>";
+        }
+        $tel_fax .= '</div>';
+      }
+      else { $tel_fax = ""; }
+      if ( $has_transports > 0 ) {
+        $transports = "<div class='centre-itineraire'>
+           <span>" . t('Accès transports : ') . "</span>
+           $metro $rer $bus
+           </div>";
+      }
+      else { $transports = ''; }
 
     $htmlCentre = '<script>
       var osmUrl = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png";
@@ -89,9 +146,22 @@ class CentresUp1Form extends FormBase {
       });
       leafletMap.addLayer(osmLayer);
       new L.marker([' . $centre['Lat'] . ', ' . $centre['Long'] .']).addTo(leafletMap);
-    </script>';
+        </script>';
 
-    $htmlCentre .= '<div class="centre-up1">';
+
+     $htmlCentre .=
+       "<div class='centre-up1'>
+            <div class='center-address'>
+               <i class='fa fa-map-marker'></i> 
+               <div>
+                <h4>$libWeb</h4>
+                <address>$adresse</address>
+                $tel_fax
+               </div>
+            </div>
+            $transports
+        </div>";
+    /*$htmlCentre .= '<div class="centre-up1">';
       $htmlCentre .= '<h4>' . $centre['LibWeb'] . '</h4>';
       $htmlCentre .= '<address><i class="fa fa-map-marker"></i>' . $centre['Adresse'] . '</address>';
       if (!empty($centre['Tel']) || $centre['Fax']) {
@@ -123,7 +193,7 @@ class CentresUp1Form extends FormBase {
           <i class="fa fa-bus" ></i >' . $centre['Bus'] . '</div >';
         }
         $htmlCentre .= '</div>';
-      }
+      }*/
     }
 
     $htmlCentre .= '</div>';
