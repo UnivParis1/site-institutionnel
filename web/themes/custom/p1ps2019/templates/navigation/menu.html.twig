@@ -38,7 +38,8 @@
       <li{{ item.attributes }} class="accordion-item" data-accordion-item>
         {{ link(item.title, item.url) }}
         {% if item.below %}
-          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          <a href="#" class="accordion-title hide-for-large"></a>
+          <div class="accordion-content" data-tab-content>{{ menus.menu_links(item.below, attributes, menu_level + 1) }}</div>
         {% endif %}
       </li>
     {% endfor %}
