@@ -13,26 +13,42 @@ function p1ps2019_preprocess_html(&$variables) {
   catch (Exception $e) {
     $variables['is_front'] = FALSE;
   }
+  $path = \Drupal::service('path.current')->getPath();
+
+  if (preg_match('/\/site\/*/', $path)) {
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if ($site = $negotiator->getActiveSite()) {
+      $node = $site->get('homepage')->entity;
+      \Drupal::logger('get_site_homepage')->info(print_r($node->id(), 1));
+      $variables['is_front_mini_site'] = TRUE;
+    }
+  }
 }
 
 /**
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
 function p1ps2019_preprocess_page(&$variables) {
-  $variables['is_front_mini_site'] = FALSE;
+
+  $path = \Drupal::service('path.current')->getPath();
+  if (preg_match('/\/site\/*/', $path)) {
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if ($site = $negotiator->getActiveSite()) {
+      $node = $site->get('homepage')->entity;
+      \Drupal::logger('get_site_homepage')->info(print_r($node->id(), 1));
+      $variables['is_front_mini_site'] = TRUE;
+
+    }
+  }
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['#attached']['drupalSettings']['language'] = $language;
 
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-    $path = \Drupal::service('path.current')->getPath();
 
   }
   catch (Exception $e) {
     $variables['is_front'] = FALSE;
-  }
-  if (preg_match('/\/site\/*/', $path)) {
-    $variables['is_front_mini_site'] = TRUE;
   }
 }
 
