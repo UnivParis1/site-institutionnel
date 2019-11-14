@@ -10145,7 +10145,7 @@ tbody {
 .paragraph--type--bp-simple p {
   color: #171717; }
 
-.paragraph--type--bp-simple.paris1-bg-blue p {
+.paris1-bg-blue .paragraph--type--bp-simple p {
   color: #fff; }
 
 .view-header-color {
@@ -11085,6 +11085,8 @@ body:not(.transparent) {
         align-items: flex-end;
     -ms-flex-pack: justify;
     justify-content: space-between; }
+    .centres-up1-form .map-centre .overlay-infos a, .center-wrapper .map-centre .overlay-infos a {
+      color: #fff; }
     .centres-up1-form .map-centre .overlay-infos .ajax-progress, .centres-up1-form .map-centre .overlay-infos .ajax-progress-throbber, .center-wrapper .map-centre .overlay-infos .ajax-progress, .center-wrapper .map-centre .overlay-infos .ajax-progress-throbber {
       display: none; }
     .centres-up1-form .map-centre .overlay-infos .details-centre, .center-wrapper .map-centre .overlay-infos .details-centre {
@@ -11102,6 +11104,17 @@ body:not(.transparent) {
         margin-bottom: 1rem; }
     .centres-up1-form .map-centre .overlay-infos input[type="submit"], .center-wrapper .map-centre .overlay-infos input[type="submit"] {
       margin-bottom: 1rem; }
+    .centres-up1-form .map-centre .overlay-infos .centre-itineraire, .center-wrapper .map-centre .overlay-infos .centre-itineraire {
+      margin-left: 57px; }
+    .centres-up1-form .map-centre .overlay-infos .details-service, .centres-up1-form .map-centre .overlay-infos .center-address, .center-wrapper .map-centre .overlay-infos .details-service, .center-wrapper .map-centre .overlay-infos .center-address {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center; }
+      .centres-up1-form .map-centre .overlay-infos .details-service .fa, .centres-up1-form .map-centre .overlay-infos .center-address .fa, .center-wrapper .map-centre .overlay-infos .details-service .fa, .center-wrapper .map-centre .overlay-infos .center-address .fa {
+        margin-right: 20px; }
+      .centres-up1-form .map-centre .overlay-infos .details-service .fa:before, .centres-up1-form .map-centre .overlay-infos .center-address .fa:before, .center-wrapper .map-centre .overlay-infos .details-service .fa:before, .center-wrapper .map-centre .overlay-infos .center-address .fa:before {
+        font-size: 3rem; }
 
 /*
     Feuille de style SCSS
@@ -11506,13 +11519,15 @@ body:not(.transparent) {
       font-size: 1.5rem;
       line-height: 1.25;
       font-weight: bold;
-      font-family: "Montserrat"; }
+      font-family: "Montserrat";
+      padding: 0; }
     .site--type--mini-site #navbar-header .block > ul > li ul {
       margin-top: 2rem;
       margin-left: 0; }
       .site--type--mini-site #navbar-header .block > ul > li ul li a {
         font-size: 1.25rem;
-        line-height: 1.5; }
+        line-height: 1.5;
+        padding: 0; }
       .site--type--mini-site #navbar-header .block > ul > li ul li + li {
         margin-top: 1rem; }
 
@@ -12484,6 +12499,36 @@ form#centres-up1-form {
     padding-right: 0; }
   .no-padding-mobile.column-wrapper .custom-padding .infos-top .cell:nth-child(even) {
     padding-left: 0; }
+  .site--type--mini-site #navbar-header .block > ul > li {
+    width: calc(100% - 1.5rem);
+    margin-right: 0.75rem;
+    margin-left: 0.75rem; }
+    .site--type--mini-site #navbar-header .block > ul > li > span, .site--type--mini-site #navbar-header .block > ul > li > a {
+      font-size: 1.375rem; }
+    .site--type--mini-site #navbar-header .block > ul > li:not(:last-of-type) {
+      margin-bottom: 1rem; }
+    .site--type--mini-site #navbar-header .block > ul > li ul {
+      margin-top: 1rem;
+      padding-left: 3rem; }
+      .site--type--mini-site #navbar-header .block > ul > li ul span, .site--type--mini-site #navbar-header .block > ul > li ul a {
+        font-size: 1.375rem; }
+    .site--type--mini-site #navbar-header .block > ul > li.is-accordion-submenu-parent > a {
+      position: relative; }
+      .site--type--mini-site #navbar-header .block > ul > li.is-accordion-submenu-parent > a:after {
+        content: '\f078';
+        width: 1rem;
+        height: 1rem;
+        margin-top: 0;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        position: absolute;
+        border: 0;
+        right: 0;
+        font: normal normal normal 14px/1 FontAwesome; }
+    .site--type--mini-site #navbar-header .block > ul > li.is-accordion-submenu-parent[aria-expanded="true"] > a:after {
+      -ms-transform: rotate(180deg) translateY(50%);
+          transform: rotate(180deg) translateY(50%); }
   .video-subtitle {
     word-break: break-all; }
   /*.form-item{

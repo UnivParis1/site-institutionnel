@@ -41,21 +41,29 @@
   {{ attach_library('leaflet/leaflet') }}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-    <div class="center-wrapper">
-      <div class="map-centre">
-        <div class="center-form mask no-hover relative-wrapper">
-          <div class="overlay-infos">
-            {{ content.field_address_map }}
-            <div class="details-centre">
-              <div class="service">{{ content.field_service }}</div>
-              {{ centre|raw }}
-              <div class="offices">{{ content.field_offices }}</div>
-              <div class="mailto txt-bold">{{ content.field_email_address }}</div>
+      <div class="center-wrapper">
+        <div class="map-centre">
+          <div class="center-form mask no-hover relative-wrapper">
+            <div class="overlay-infos">
+              {{ content.field_address_map }}
+              <div class="details-centre">
+                {{ centre|raw }}
+                <div class="details-service">
+                  <i class="fa fa-phone"></i>
+                  <div>
+                    <div class="service">{{ content.field_service }}</div>
+                    <div class="offices">{{ content.field_offices }}</div>
+                    <div class="offices"><span>{{ 'Phone : '|t }}</span>
+                      <a href="tel:{{ content.field_phone.0 }}">{{ content.field_phone.0 }}</a>
+                    </div>
+                    <div class="mailto txt-bold">{{ content.field_email_address }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}

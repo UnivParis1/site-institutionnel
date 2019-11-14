@@ -204,7 +204,8 @@ function p1ps2019_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   if ($paragraph->bundle() == 'contact') {
     $service = \Drupal::service('up1_global.centres');
-    $variables['centre'] = $service->renderCentre("http://ws-theses.univ-paris1.fr/centres_up1", $paragraph->field_centre->value);
+    $variables['centre'] = $service->renderCentre("http://ws-theses.univ-paris1.fr/centres_up1",
+      $paragraph->field_centre->value, FALSE, FALSE);
   }
 }
 
