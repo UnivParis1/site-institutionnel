@@ -35,11 +35,23 @@
 				.block > ul{
 					> li{
 						@include xy-cell(12);
+						> span, > a{font-size: rem-calc(22px);}
 						&:not(:last-of-type){
 							margin-bottom: rem-calc(16px);
 						}
 						ul{
-							margin-top: 16px;
+							margin-top: rem-calc(16px);
+							padding-left: rem-calc(48px);
+							> span, > a{font-size: rem-calc(22px);}
+						}
+						&.is-accordion-submenu-parent{
+							a{
+								&:after{
+									content: '\f078';
+							    position: relative;
+							    font: normal normal normal 14px/1 FontAwesome;
+								}
+							}
 						}
 					}
 				}
