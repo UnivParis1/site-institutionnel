@@ -462,9 +462,15 @@ table{
   }
   .play-pause-button{
     position: absolute; bottom: rem-calc(6px); left: 55%; z-index: 1;
+    .fa-pause-circle{display: block;}
+    .fa-play-circle{display: none;}
     span:before{
       font-size: rem-calc(30px);
       color: $background-main-color;
+    }
+    &.paused{
+      .fa-pause-circle{display: none;}
+      .fa-play-circle{display: block;}
     }
   }
 }

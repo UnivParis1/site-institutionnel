@@ -113,6 +113,12 @@
       });
     }
 
+    if($('.play-pause-button').length > 0){
+      $( ".play-pause-button" ).click(function() {
+        $('.play-pause-button').toggleClass('paused');
+      });
+    }
+
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
     	//ADD SCROLL CLASS
