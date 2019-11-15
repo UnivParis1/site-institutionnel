@@ -35,7 +35,9 @@
         if($('#swiper-carousel').length > 0){
   				var carouselSwiper = new Swiper('#swiper-carousel', {
   					slidesPerView: 1,
-            autoplay: true,
+            autoplay: {
+              delay: 5000,
+            },
             pagination: {
   				    el: '.swiper-pagination',
   				    type: 'bullets',
