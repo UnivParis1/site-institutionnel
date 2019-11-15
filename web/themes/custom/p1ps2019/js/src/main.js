@@ -113,12 +113,6 @@
       });
     }
 
-    if($('.play-pause-button').length > 0){
-      $( ".play-pause-button" ).click(function() {
-        $('.play-pause-button').toggleClass('paused');
-      });
-    }
-
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
     	//ADD SCROLL CLASS
@@ -134,6 +128,14 @@
 		}//close scroll
 
     BrowserDetection();
+
+    if($('.play-pause-button').length > 0){
+      console.log('found');
+      $( ".play-pause-button" ).click(function() {
+        console.log('clicked');
+        $('.play-pause-button').toggleClass('paused');
+      });
+    }
 
     // Chosen touch support.
     if ($('.chosen-container').length > 0) {
