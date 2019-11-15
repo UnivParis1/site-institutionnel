@@ -35,6 +35,7 @@
         if($('#swiper-carousel').length > 0){
   				var carouselSwiper = new Swiper('#swiper-carousel', {
   					slidesPerView: 1,
+            spaceBetween: 97,
             pagination: {
   				    el: '.swiper-pagination',
   				    type: 'bullets',
