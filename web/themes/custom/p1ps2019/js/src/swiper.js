@@ -32,6 +32,23 @@
   			  });
   			}
 
+        if($('#swiper-carousel').length > 0){
+  				var carouselSwiper = new Swiper('#swiper-carousel', {
+  					slidesPerView: 1,
+            pagination: {
+  				    el: '.swiper-pagination',
+  				    type: 'bullets',
+  						clickable: true,
+  				  },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+  			  });
+  			}
+
+
+
       $(window).resize(function() {
       //  setTimeout(checkOnSwipers, 2000);
         noSwiping();
