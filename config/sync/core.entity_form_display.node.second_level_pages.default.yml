@@ -4,7 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.second_level_pages.body
+    - field.field.node.second_level_pages.field_disable_canonical_url
     - field.field.node.second_level_pages.field_editorial_blocks
+    - field.field.node.second_level_pages.field_sites
+    - field.field.node.second_level_pages.field_sites_all
     - node.type.second_level_pages
   module:
     - content_moderation
@@ -31,6 +34,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    third_party_settings: {  }
+    region: content
   field_editorial_blocks:
     type: entity_reference_paragraphs
     weight: 122
@@ -41,6 +51,22 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
     third_party_settings: {  }
     region: content
   langcode:

@@ -3105,7 +3105,7 @@ hr {
   margin: 1.25rem auto;
   border-top: 0;
   border-right: 0;
-  border-bottom: 1px solid #f1f3f5;
+  border-bottom: 2px solid #f1f3f5;
   border-left: 0; }
 
 ul,
@@ -9137,6 +9137,7 @@ table {
   font-weight: 700; }
 
 .field--type-text-long a {
+  display: inline;
   font-size: inherit;
   line-height: inherit; }
 
@@ -9173,6 +9174,17 @@ table {
       flex-flow: row wrap; }
   .search-wrapper .views-infinite-scroll-content-wrapper .cell + .cell {
     margin-top: 2.5rem; }
+
+.field--name-field-credits {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 2; }
+
+.field--name-field-media-image {
+  position: relative; }
 
 .accordion li .accordion-title:before {
   content: "\f078";
@@ -10134,6 +10146,10 @@ tbody {
 .author {
   color: #00326e; }
 
+.field--name-field-credits {
+  background-color: rgba(51, 51, 51, 0.7);
+  color: #fff; }
+
 .paragraph--type--bp-view .field--name-field-publication-topics {
   color: #00326e; }
 
@@ -10434,6 +10450,14 @@ fieldset {
 
 .password-strength__indicator {
   background-color: #00326e; }
+
+.contextual-region.block-local-tasks-block {
+  background-color: #2d2d2d; }
+  .contextual-region.block-local-tasks-block ul li:not(:last-of-type):after {
+    color: #fff; }
+  .contextual-region.block-local-tasks-block ul li a {
+    color: #fff;
+    font-family: "Montserrat"; }
 
 .responsive-card-table {
   /*@media screen and (max-width: $responsive-card-table-stack-point) {
@@ -11041,10 +11065,26 @@ body:not(.transparent) {
   height: 100%;
   object-fit: cover; }
 
-.contextual-region.block-local-tasks-block ul li {
-  float: left; }
-  .contextual-region.block-local-tasks-block ul li:not(:last-of-type) {
-    margin-right: 1rem; }
+.contextual-region.block-local-tasks-block {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000; }
+  .contextual-region.block-local-tasks-block ul li {
+    float: left; }
+    .contextual-region.block-local-tasks-block ul li:not(:last-of-type) {
+      margin-right: 1rem; }
+      .contextual-region.block-local-tasks-block ul li:not(:last-of-type):after {
+        content: "|";
+        padding-left: 1rem; }
+    .contextual-region.block-local-tasks-block ul li a {
+      text-decoration: none; }
 
 .centres-up1-form .map-centre, .center-wrapper .map-centre {
   width: 100%;
@@ -11153,6 +11193,8 @@ body:not(.transparent) {
 
 #navbar .screen-height .header-img * {
   height: 100vh; }
+  #navbar .screen-height .header-img * .field--name-field-credits {
+    height: auto; }
 
 #navbar .anchor-header {
   text-align: center;
