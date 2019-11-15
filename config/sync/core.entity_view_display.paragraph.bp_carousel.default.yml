@@ -3,14 +3,12 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.paragraph.bp_carousel.bp_background
     - field.field.paragraph.bp_carousel.bp_slide_content
-    - field.field.paragraph.bp_carousel.bp_slide_interval
-    - field.field.paragraph.bp_carousel.bp_width
+    - field.field.paragraph.bp_carousel.field_images_carousel
+    - field.field.paragraph.bp_carousel.field_title
     - paragraphs.paragraphs_type.bp_carousel
   module:
     - entity_reference_revisions
-    - options
 _core:
   default_config_hash: '-64ufU5i6z27pD4G22OwkhCO4dkJicpngb1gNsGLwtw'
 id: paragraph.bp_carousel.default
@@ -18,36 +16,25 @@ targetEntityType: paragraph
 bundle: bp_carousel
 mode: default
 content:
-  bp_background:
-    weight: 0
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: list_key
-    region: content
-  bp_slide_content:
+  field_images_carousel:
     type: entity_reference_revisions_entity_view
-    weight: 3
-    label: hidden
+    weight: 1
+    label: visually_hidden
     settings:
-      view_mode: default
+      view_mode: carousel
       link: ''
     third_party_settings: {  }
     region: content
-  bp_slide_interval:
-    weight: 2
+  field_title:
+    weight: 0
     label: hidden
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: list_key
-    region: content
-  bp_width:
-    weight: 1
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: list_key
+    type: string
     region: content
 hidden:
+  bp_slide_content: true
   created: true
+  search_api_excerpt: true
   uid: true

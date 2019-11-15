@@ -3,10 +3,9 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.paragraph.bp_carousel.bp_background
     - field.field.paragraph.bp_carousel.bp_slide_content
-    - field.field.paragraph.bp_carousel.bp_slide_interval
-    - field.field.paragraph.bp_carousel.bp_width
+    - field.field.paragraph.bp_carousel.field_images_carousel
+    - field.field.paragraph.bp_carousel.field_title
     - paragraphs.paragraphs_type.bp_carousel
   module:
     - paragraphs
@@ -17,34 +16,37 @@ targetEntityType: paragraph
 bundle: bp_carousel
 mode: default
 content:
-  bp_background:
-    weight: 0
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   bp_slide_content:
     type: entity_reference_paragraphs
-    weight: 3
+    weight: 1
     settings:
       title: Paragraphe
       title_plural: Paragraphs
       edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
     region: content
-  bp_slide_interval:
+  field_images_carousel:
+    type: entity_reference_paragraphs
     weight: 2
-    settings: {  }
+    settings:
+      title: Paragraphe
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
-    type: options_select
     region: content
-  bp_width:
-    weight: 1
-    settings: {  }
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
 hidden:
   created: true
