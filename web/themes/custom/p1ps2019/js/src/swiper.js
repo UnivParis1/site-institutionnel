@@ -36,9 +36,7 @@
   				var carouselSwiper = new Swiper('#swiper-carousel', {
   					slidesPerView: 1,
             loop: true,
-            autoplay: {
-              delay: 5000,
-            },
+            autoplay: 5000,
             pagination: {
   				    el: '.swiper-pagination',
   				    type: 'bullets',
