@@ -48,9 +48,7 @@
             },
   			  });
           if($('.play-pause-button').length > 0){
-            console.log('found');
-            $( ".play-pause-button" ).click(function() {
-              console.log('clicked');
+            $('.play-pause-button').click(function() {
               $('.play-pause-button').toggleClass('paused');
             });
           }
@@ -62,6 +60,7 @@
         noSwiping();
         reinitSwiper(mySwiper);
         reinitSwiper(tilesSwiper);
+        reinitSwiper(carouselSwiper);
       });//close resize
 
 
