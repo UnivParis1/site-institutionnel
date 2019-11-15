@@ -170,7 +170,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {{ content|without('bp_slide_content', 'field_images_carousel') }}
 <div class="swiper-container test" id="swiper-carousel">
   <div class="swiper-wrapper">
-    {% for key, item in content.field_images_carousel %}
+    {% for key, item in content.bp_slide_content %}
       <div class="swiper-slide">{{ item }}</div>
     {% endfor %}
   </div>
