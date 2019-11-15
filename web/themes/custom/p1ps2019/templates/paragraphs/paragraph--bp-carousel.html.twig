@@ -170,19 +170,17 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {{ content|without('bp_slide_content', 'field_images_carousel') }}
 <div class="grid-container">
   <div class="grid-x">
-      <div class="cell small-12 large-10 large-offset-1">
-        <div class="swiper-container" id="swiper-carousel">
-          <div class="swiper-wrapper">
-              {% for key, item in content.bp_slide_content %}
-                <div class="swiper-slide">{{ item }}</div>
-              {% endfor %}
-              {{ content.field_images_carousel }}
-          </div>
-            <div class="swiper-pagination"></div>
-
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+      <div class="swiper-container" id="swiper-carousel">
+        <div class="swiper-wrapper">
+            {% for key, item in content.bp_slide_content %}
+              <div class="swiper-slide cell small-12 large-8 large-offset-2">{{ item }}</div>
+            {% endfor %}
+            {{ content.field_images_carousel }}
         </div>
+          <div class="swiper-pagination"></div>
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
       </div>
   </div>
 </div>
