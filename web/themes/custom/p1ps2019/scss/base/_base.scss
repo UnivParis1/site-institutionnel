@@ -424,25 +424,12 @@ table{
   .mini-site-circle{
     width: rem-calc(48px); height: rem-calc(48px); margin-right: rem-calc(32px);
     border-radius: 100%; display: inline-flex; @include flex-align(center,middle);
-    border: 1px solid $background-main-color; background-color: $background-main-color;
-    color: $text-white; @include transitionEffect();
+    @include transitionEffect();
     &:before{
       font-size: rem-calc(24px);
     }
   }
   &:hover{
     text-decoration: none;
-    .mini-site-circle{background-color: $background-white; color: $text-main-color;}
-  }
-  .transparent:not(.scroll) &{
-    .mini-site-circle{
-      background-color: transparent; border: 1px solid $background-white;
-    }
-    &:hover{
-      .mini-site-circle{
-        background-color: $white; color: $text-main-color;
-      }
-    }
-    h5{color: $text-white;}
   }
 }
