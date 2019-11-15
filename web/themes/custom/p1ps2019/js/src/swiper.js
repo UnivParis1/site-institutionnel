@@ -60,7 +60,6 @@
         noSwiping();
         reinitSwiper(mySwiper);
         reinitSwiper(tilesSwiper);
-        reinitSwiper(carouselSwiper);
       });//close resize
 
 
