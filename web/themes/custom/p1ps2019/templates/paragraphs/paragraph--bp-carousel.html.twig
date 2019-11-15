@@ -41,11 +41,8 @@
 {%
   set classes = [
   'paragraph',
-  'grid-x',
   'grid-container',
-  'full',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
-  'carousel',
 ]
 %}
 
@@ -53,12 +50,13 @@
 {% set paragraph_id = 'myCarousel-' ~ paragraph.id.value %}
 
 {# Prints Carousel template. #}
-<div class="grid-container">
+<div{{ attributes.addClass(classes) }}>
   <div class="grid-x">
     <h2 class="titre field-sep"> {{ content.field_title }} </h2>
     <div class="swiper-container" id="swiper-carousel">
       <div class="swiper-wrapper">
         {{ content.field_images_carousel }}
+        {{ content.field_simple_text }}
       </div>
       <div class="swiper-pagination"></div>
 

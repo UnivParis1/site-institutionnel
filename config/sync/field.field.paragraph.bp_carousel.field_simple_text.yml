@@ -1,22 +1,18 @@
-uuid: bb1eb6ea-a19a-46cc-bd2b-a79e48c3af3a
+uuid: a02fe1cd-e267-41c4-8e5d-69609ba5fb7d
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.bp_slide_content
+    - field.storage.paragraph.field_simple_text
     - paragraphs.paragraphs_type.bp_carousel
-    - paragraphs.paragraphs_type.bp_image
     - paragraphs.paragraphs_type.bp_simple
-    - paragraphs.paragraphs_type.medias
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: mbGs3NQcndMxh-q-lJm3QX3kyrYs7dubCeHSnte0Ezk
-id: paragraph.bp_carousel.bp_slide_content
-field_name: bp_slide_content
+id: paragraph.bp_carousel.field_simple_text
+field_name: field_simple_text
 entity_type: paragraph
 bundle: bp_carousel
-label: 'Slide Content'
+label: 'Texte simple'
 description: ''
 required: false
 translatable: false
@@ -28,56 +24,54 @@ settings:
     negate: 0
     target_bundles:
       bp_simple: bp_simple
-      bp_image: bp_image
-      medias: medias
     target_bundles_drag_drop:
-      bp_simple:
-        enabled: true
-        weight: -31
-      bp_image:
-        enabled: true
-        weight: -30
-      bp_blank:
-        weight: -29
+      audio_media:
+        weight: 36
         enabled: false
       bp_accordion:
-        weight: -28
-        enabled: false
-      bp_column_wrapper:
-        weight: -27
-        enabled: false
-      bp_columns:
-        weight: -26
-        enabled: false
-      bp_columns_three_uneven:
-        weight: -25
-        enabled: false
-      bp_columns_two_uneven:
-        weight: -24
-        enabled: false
-      bp_block:
-        weight: -23
-        enabled: false
-      bp_modal:
-        weight: -22
-        enabled: false
-      bp_tabs:
-        weight: -21
-        enabled: false
-      bp_view:
-        weight: -20
+        weight: 37
         enabled: false
       bp_accordion_section:
-        weight: -19
+        weight: 38
+        enabled: false
+      bp_blank:
+        weight: 39
+        enabled: false
+      bp_block:
+        weight: 40
         enabled: false
       bp_carousel:
-        weight: -18
+        weight: 41
         enabled: false
+      bp_column_wrapper:
+        weight: 42
+        enabled: false
+      bp_columns:
+        weight: 43
+        enabled: false
+      bp_columns_three_uneven:
+        weight: 44
+        enabled: false
+      bp_columns_two_uneven:
+        weight: 45
+        enabled: false
+      bp_image:
+        weight: 46
+        enabled: false
+      bp_modal:
+        weight: 47
+        enabled: false
+      bp_simple:
+        enabled: true
+        weight: 48
       bp_tab_section:
-        weight: -17
+        weight: 49
         enabled: false
-      audio_media:
-        weight: 37
+      bp_tabs:
+        weight: 50
+        enabled: false
+      bp_view:
+        weight: 51
         enabled: false
       bp_webform:
         weight: 52
@@ -104,8 +98,8 @@ settings:
         weight: 59
         enabled: false
       medias:
-        enabled: true
         weight: 60
+        enabled: false
       presentation:
         weight: 61
         enabled: false

@@ -3,8 +3,8 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.paragraph.bp_carousel.bp_slide_content
     - field.field.paragraph.bp_carousel.field_images_carousel
+    - field.field.paragraph.bp_carousel.field_simple_text
     - field.field.paragraph.bp_carousel.field_title
     - paragraphs.paragraphs_type.bp_carousel
   module:
@@ -25,6 +25,15 @@ content:
       link: ''
     third_party_settings: {  }
     region: content
+  field_simple_text:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: visually_hidden
+    settings:
+      view_mode: carousel
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_title:
     weight: 0
     label: hidden
@@ -34,7 +43,6 @@ content:
     type: string
     region: content
 hidden:
-  bp_slide_content: true
   created: true
   search_api_excerpt: true
   uid: true
