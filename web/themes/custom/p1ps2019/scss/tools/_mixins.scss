@@ -718,7 +718,7 @@ $colors-list: (
   //min-height: rem-calc(71px); max-height: rem-calc(71px);
     @include flex(); @include flex-align(null, middle);
   padding: rem-calc(0 24px 0 72px); margin: 0;
-  height: rem-calc(71px); 
+  height: rem-calc(71px);
   &::-webkit-input-placeholder {
     opacity: 1; line-height: 3; color: $dark-gray3;
     font-size: rem-calc(20px); @include setFont($fontType-italic);
@@ -753,6 +753,9 @@ $colors-list: (
     background-color: $background-main-color;
     *{color: $text-white;} color: $text-white;
   }
+  &.big{
+    width: rem-calc(48px); height: rem-calc(48px);
+  }
 
   &.blue{
     background-color: $background-main-color;
@@ -783,13 +786,6 @@ $colors-list: (
   //80px
   &.medium{
       width: rem-calc($fgutter*2.5); height: rem-calc($fgutter*2.5);
-  }
-
-  //116px
-  &.big{
-      width: rem-calc($fgutter*3.625); height: rem-calc($fgutter*3.625);
-      font-size: rem-calc(24px); line-height: 1.45;
-      @include setFont($fontType-bold);
   }
 
   &.remove-circle-effect{
