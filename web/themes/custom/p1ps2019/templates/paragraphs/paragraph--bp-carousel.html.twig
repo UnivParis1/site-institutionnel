@@ -53,17 +53,18 @@
 {% set paragraph_id = 'myCarousel-' ~ paragraph.id.value %}
 
 {# Prints Carousel template. #}
-<div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }}>
-  <div class="cell small-12">
-    <div class="padding-mobile">
-      <h2 class="titre field-sep"> {{ content.field_title }} </h2>
-      <div class="swiper-container swiper-container-horizontal">
-        <ul class="swiper-wrapper">
-          {% for key, item in content.field_images_carousel if key|first != '#' %}
-            <li class="swiper-slide">{{ item }}</li>
-          {% endfor %}
-        </ul>
+<div class="grid-container">
+  <div class="grid-x">
+    <h2 class="titre field-sep"> {{ content.field_title }} </h2>
+    <div class="swiper-container" id="swiper-carousel">
+      <div class="swiper-wrapper">
+        {{ content.field_images_carousel }}
       </div>
+      <div class="swiper-pagination"></div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </div>
 </div>
+
