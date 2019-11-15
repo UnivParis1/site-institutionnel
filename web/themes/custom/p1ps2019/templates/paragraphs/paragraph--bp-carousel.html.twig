@@ -53,6 +53,7 @@
 {% set paragraph_id = 'myCarousel-' ~ paragraph.id.value %}
 
 {# Prints Carousel template. #}
+<<<<<<< HEAD
 <div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }}>
   <div class="cell small-12">
     <div class="padding-mobile">
@@ -66,4 +67,17 @@
       </div>
     </div>
   </div>
+=======
+{{ content|without('bp_slide_content','bp_slide_interval', 'bp_width', 'bp_background') }}
+<div class="swiper-container test" id="swiper-carousel">
+  <div class="swiper-wrapper">
+    {% for key, item in content.bp_slide_content %}
+      <div class="swiper-slide">{{ item }}</div>
+    {% endfor %}
+  </div>
+    <div class="swiper-pagination"></div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+>>>>>>> b8ee7c9e704af7df5ea9acb71a96c0b80a898f27
 </div>
