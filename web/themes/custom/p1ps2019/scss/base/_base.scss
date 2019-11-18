@@ -447,8 +447,9 @@ table{
   &:not(#swiper-tiles){
     .swiper-button-prev, .swiper-button-next{
       background-image: none;
-      &:before{font-size: rem-calc(48px);}
       @include flex(); @include flex-align(center, middle);
+      &:before{font-size: rem-calc(48px);}
+      &:focus{outline:none;}
     }
     .swiper-button-prev{#{$left}: 0;}
     .swiper-button-next{#{$right}: 0;}
@@ -462,6 +463,8 @@ table{
   }
   .swiper-pagination{
     bottom: rem-calc(4px);
+    &:focus{outline:none;}
+    .swiper-pagination-bullet:focus{outline: none;}
   }
   .play-pause-button{
     position: absolute; bottom: 0; left: 55%; z-index: 10;
@@ -470,6 +473,7 @@ table{
     span:before{
       font-size: rem-calc(30px);
     }
+    &:focus{outline: none;}
     &.paused{
       .fa-pause-circle{display: none;}
       .fa-play-circle{display: block;}
