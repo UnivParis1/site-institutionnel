@@ -50,6 +50,12 @@
           if($('.play-pause-button').length > 0){
             $('.play-pause-button span').click(function() {
               $('.play-pause-button').toggleClass('paused');
+              if($('.play-pause-button.paused').length > 0){
+                carouselSwiper.autoplay.stop();
+              }
+              else{
+                carouselSwiper.autoplay.play();
+              }
             });
           }
   			}
