@@ -113,12 +113,6 @@
       });
     }
 
-    if($('#block-micromenublock .accordion-menu').length > 0 && $(window).width() > 1024){
-      if($('#block-micromenublock .accordion-menu .has-submenu-toggle').length > 0){
-        $('#block-micromenublock .accordion-menu .has-submenu-toggle').addClass('active');
-        $('#block-micromenublock .accordion-menu .has-submenu-toggle ul').addClass('active is-active');
-      }
-    }
 
 
   Drupal.behaviors.myBehavior = {
