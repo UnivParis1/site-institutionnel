@@ -170,17 +170,32 @@ button.semi-oval{
   }
 }
 
-.swiper-container:not(#swiper-carousel){
-  .swiper-button-prev, .swiper-button-next{
-		background-color: $white;
-    &:before{
-      color: $text-black;
-    }
-		&.swiper-button-disabled{
-			background-color: transparent;
+.swiper-container{
+	&:not(#swiper-carousel):not(#swiper-carousel){
+	  .swiper-button-prev, .swiper-button-next{
+			background-color: $white;
+	    &:before{
+	      color: $text-black;
+	    }
+			&.swiper-button-disabled{
+				background-color: transparent;
+			}
+	  }
+	}
+	&#swiper-carousel{
+		.swiper-pagination{
+			.swiper-pagination-bullet.swiper-pagination-bullet-active{
+				background-color: $background-main-color;
+			}
 		}
-  }
+		.play-pause-button{
+			span:before{
+				color: $background-main-color;
+			}
+		}
+	}
 }
+
 .accordion-wrapper{
   .accordion {
 		> li{
@@ -1032,19 +1047,6 @@ tr{
 			background-color: $background-main-color;
 		}
 	}//close #swiper-tiles
-
-	.swiper-container{
-	  .swiper-pagination{
-	    .swiper-pagination-bullet.swiper-pagination-bullet-active{
-	      background-color: $background-main-color;
-	    }
-	  }
-	  .play-pause-button{
-	    span:before{
-	      color: $background-main-color;
-	    }
-	  }
-	}
 
 	.box-mobile{
 		background-color: $background-main-color; color: $text-white;

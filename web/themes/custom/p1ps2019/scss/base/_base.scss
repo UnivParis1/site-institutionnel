@@ -439,12 +439,15 @@ table{
   &:not(#swiper-tiles):not(#swiper-carousel){
     width: rem-calc(1308px); padding: rem-calc(2px 70px);
     .swiper-slide{height: auto;}
-  }
-  &:not(#swiper-tiles){
     .swiper-button-prev, .swiper-button-next{
       height: 100%; top: 0;
       @include flex(); @include flex-align(center, middle);
-      background-image: none; width: rem-calc(70px);
+      width: rem-calc(70px);
+    }
+  }
+  &:not(#swiper-tiles){
+    .swiper-button-prev, .swiper-button-next{
+      background-image: none;
       &:before{font-size: rem-calc(48px);}
     }
     .swiper-button-prev{#{$left}: 0;}
