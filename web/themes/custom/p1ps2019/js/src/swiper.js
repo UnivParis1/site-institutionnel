@@ -54,7 +54,7 @@
                 carouselSwiper.autoplay.stop();
               }
               else{
-                carouselSwiper.autoplay.play();
+                carouselSwiper.autoplay.start();
               }
             });
           }
