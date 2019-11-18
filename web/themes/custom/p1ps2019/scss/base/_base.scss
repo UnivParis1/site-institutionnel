@@ -441,7 +441,6 @@ table{
     .swiper-slide{height: auto;}
     .swiper-button-prev, .swiper-button-next{
       height: 100%; top: 0;
-      @include flex(); @include flex-align(center, middle);
       width: rem-calc(70px);
     }
   }
@@ -449,6 +448,7 @@ table{
     .swiper-button-prev, .swiper-button-next{
       background-image: none;
       &:before{font-size: rem-calc(48px);}
+      @include flex(); @include flex-align(center, middle);
     }
     .swiper-button-prev{#{$left}: 0;}
     .swiper-button-next{#{$right}: 0;}
@@ -459,10 +459,9 @@ table{
       @include flex(); @include flex-align(null,middle);
       img{width: 100%; object-fit: cover;}
     }
-    .swiper-button-next{#{$right}: rem-calc(4px);}
   }
   .swiper-pagination{
-    bottom: 0;
+    bottom: rem-calc(4px);
   }
   .play-pause-button{
     position: absolute; bottom: 0; left: 55%; z-index: 10;
