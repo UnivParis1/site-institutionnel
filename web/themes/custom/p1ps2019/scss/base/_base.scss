@@ -454,16 +454,18 @@ table{
     .swiper-button-next{#{$right}: 0;}
   }
   &#swiper-carousel{
+    padding-bottom: rem-calc(48px);
     .swiper-slide{
+      @include flex(); @include flex-align(null,middle);
       img{width: 100%; object-fit: cover;}
     }
     .swiper-button-next{#{$right}: rem-calc(4px);}
   }
   .swiper-pagination{
-    bottom: rem-calc(36px);
+    bottom: 0;
   }
   .play-pause-button{
-    position: absolute; bottom: rem-calc(32px); left: 55%; z-index: 10;
+    position: absolute; bottom: 0; left: 55%; z-index: 10;
     .fa-pause-circle{display: block;}
     .fa-play-circle{display: none;}
     span:before{
