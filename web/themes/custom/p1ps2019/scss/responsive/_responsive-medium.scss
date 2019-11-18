@@ -347,6 +347,15 @@
 		bottom: 0; height: 100%;
 		@include flex(); @include flex-align(null, middle);
 	}
+
+	.mini-site-back-wrapper{
+	  .mini-site-circle{
+	    width: rem-calc(32px); height: rem-calc(32px); margin-right: rem-calc(16px);
+	    &:before{
+	      font-size: rem-calc(16px);
+	    }
+	  }
+	}
 	//header
 	#navbar{
 		img{object-fit: cover;
@@ -696,6 +705,8 @@
 	    }
 			//=============== menu mini site ==========//
 			.site--type--mini-site &{
+				height: calc(100vh - 116px);
+				top: rem-calc(116px);
 	      .block > ul{
 					@include flex-align(left, null);
 					flex-wrap: wrap !important;
