@@ -47,6 +47,11 @@
               prevEl: '.swiper-button-prev',
             },
   			  });
+          if($('.play-pause-button').length > 0){
+            $('.play-pause-button span').click(function() {
+              $('.play-pause-button').toggleClass('paused');
+            });
+          }
   			}
 
 
