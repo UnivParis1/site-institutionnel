@@ -221,21 +221,13 @@
 			}
 		}
 	}
-	.site--type--mini-site &{
+	.site--type--mini-site:not(.transparent) &{
 		margin-top: rem-calc(98px);
 		height: calc(100vh - 210px);
 		.screen-height{
 			.header-img *{
 				height: calc(100vh - 210px);
-			}
-		}
-		&.transparent{
-			margin-top: 0; height: 100vh;
-			.screen-height{
-				.header-img *{
-					height: 100vh;
-					.field--name-field-credits{height: auto;}
-				}
+				.field--name-field-credits{height: auto !important;}
 			}
 		}
 	}
