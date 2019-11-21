@@ -7,49 +7,64 @@ use \Drupal\paragraphs\Entity\Paragraph;
  */
 function p1ps2019_preprocess_html(&$variables) {
   $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
   }
   catch (Exception $e) {
     $variables['is_front'] = FALSE;
   }
-  $path = \Drupal::service('path.current')->getPath();
-
-  if (preg_match('/\/site\/*/', $path)) {
-    $negotiator = \Drupal::service('micro_site.negotiator');
-    if ($site = $negotiator->getActiveSite()) {
-      $node = $site->get('homepage')->entity;
-      \Drupal::logger('get_site_homepage')->info(print_r($node->id(), 1));
-      $variables['is_front_mini_site'] = TRUE;
-    }
+  if (preg_match('/site/',$variables['root_path']) && !isset($variables['node_type']) ) {
+    $variables['is_front_mini_site'] = TRUE;
   }
+  else $variables['is_front_mini_site'] = FALSE;
 }
 
 /**
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
 function p1ps2019_preprocess_page(&$variables) {
+  $page_mini_site = FALSE;
+  $is_front_mini_site = FALSE;
+  $print_hp_image = FALSE;
+  $node_type = FALSE;
+  $site_id = 0;
+  if (isset($variables['node'])) {$node = $variables['node'];}
+  else $node = FALSE;
 
-  $path = \Drupal::service('path.current')->getPath();
-  if (preg_match('/\/site\/*/', $path)) {
-    $negotiator = \Drupal::service('micro_site.negotiator');
-    if ($site = $negotiator->getActiveSite()) {
-      $node = $site->get('homepage')->entity;
-      \Drupal::logger('get_site_homepage')->info(print_r($node->id(), 1));
-      $variables['is_front_mini_site'] = TRUE;
-
-    }
-  }
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $system_path = \Drupal::service('path.current')->getPath();
+
   $variables['#attached']['drupalSettings']['language'] = $language;
 
-  try {
-    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  if ($variables['is_front']) {
+    $print_hp_image = TRUE;
+  }
 
+  $negotiator = \Drupal::service('micro_site.negotiator');
+  $site = $negotiator->getActiveSite();
+  if (isset($site) && !empty($site)) {
+    $site_id = $site->id();
   }
-  catch (Exception $e) {
-    $variables['is_front'] = FALSE;
+
+  if ($node) {
+    $node_type = $node->getType();
+    if ($node->hasField('field_media')
+      && !empty($node->get('field_media')->getValue())) {
+      $print_hp_image = TRUE;
+    }
+    if ($site_id != 0) {
+      $page_mini_site = TRUE;
+    }
   }
+  if ($variables['is_front'] && !$node && $site_id != 0) {
+    $is_front_mini_site = TRUE;
+  }
+
+  $variables['node_type'] = $node_type;
+  $variables['print_hp_image'] = $print_hp_image;
+  $variables['page_mini_site'] = $page_mini_site;
+  $variables['is_front_mini_site'] = $is_front_mini_site;
 }
 
 /**
