@@ -7,7 +7,7 @@ use \Drupal\paragraphs\Entity\Paragraph;
  */
 function p1ps2019_preprocess_html(&$variables) {
   $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  
+
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
   }
@@ -60,11 +60,16 @@ function p1ps2019_preprocess_page(&$variables) {
   if ($variables['is_front'] && !$node && $site_id != 0) {
     $is_front_mini_site = TRUE;
   }
+  if (preg_match('/user/', $system_path) && $site_id != 0) {
+    $page_mini_site = TRUE;
+  }
 
   $variables['node_type'] = $node_type;
   $variables['print_hp_image'] = $print_hp_image;
   $variables['page_mini_site'] = $page_mini_site;
   $variables['is_front_mini_site'] = $is_front_mini_site;
+  $variables['is_front_mini_site'] = $is_front_mini_site;
+
 }
 
 /**
