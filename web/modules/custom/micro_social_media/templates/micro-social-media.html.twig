@@ -1,0 +1,26 @@
+<div class="mini-site-social-media">
+  <ul>
+    {% for lien in liens %}
+      {% if "facebook" in lien.uri %}
+        {% set class = "fa-facebook-square" %}
+      {% elseif "twitter" in lien.uri %}
+        {% set class = "fa-twitter" %}
+      {% elseif "linkedin" in lien.uri %}
+        {% set class = "fa-linkedin-square" %}
+      {% elseif "youtube" in lien.uri %}
+        {% set class = "fa-youtube-play" %}
+      {% elseif "youtu.be" in lien.uri %}
+        {% set class = "fa-youtube-play" %}
+      {% elseif "instagram" in lien.uri %}
+        {% set class = "fa-instagram" %}
+      {% elseif "viadeo" in lien.uri %}
+        {% set class = "fa-viadeo" %}
+      {% endif %}
+      <li>
+        <span>
+          <a href="{{ lien.uri }}" class="fa {{ class }}" title="{{ lien.title }}"></a>
+        </span>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

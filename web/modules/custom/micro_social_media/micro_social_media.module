@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_social_media.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_social_media_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_social_media module.
+    case 'help.page.micro_social_media':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Bloc affichant le champ social media du mini site associé.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function micro_social_media_theme() {
+  return [
+    'micro_social_media' => [
+      'template' => 'micro-social-media',
+      'variables' => ['liens' => []],
+    ],
+  ];
+}
