@@ -111,7 +111,7 @@
         {% if page_mini_site or is_front_mini_site %} <div class="grid-x align-justify top-header-infos"> {% endif %}
           <div class="cell shrink header-left" role="heading">
             {% if page_mini_site %}
-              <a href="#" class="mini-site-back-wrapper">
+              <a href="{{ path('<front>') }}" class="mini-site-back-wrapper" title=" {{ site_name }}">
                 <span class="fa fa-chevron-left mini-site-circle"></span>
                 <h5>{{ 'Retour'|t }}</h5>
               </a>
@@ -154,6 +154,7 @@
                       </span>
                   </button>
                   {{ page.header_micro_left }}
+                  <div class="site-name"><h2 class="title">{{ site_name }}</h2></div>
                 </div>
                 <div class="micro-right">
                   {{ page.header_micro_right }}

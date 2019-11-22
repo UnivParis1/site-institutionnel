@@ -29,6 +29,8 @@ function p1ps2019_preprocess_page(&$variables) {
   $print_hp_image = FALSE;
   $node_type = FALSE;
   $site_id = 0;
+  $variables['site_name'] = "";
+
   if (isset($variables['node'])) {$node = $variables['node'];}
   else $node = FALSE;
 
@@ -43,8 +45,10 @@ function p1ps2019_preprocess_page(&$variables) {
 
   $negotiator = \Drupal::service('micro_site.negotiator');
   $site = $negotiator->getActiveSite();
+
   if (isset($site) && !empty($site)) {
     $site_id = $site->id();
+    $variables['site_name'] = $site->getName();
   }
 
   if ($node) {
@@ -108,6 +112,14 @@ function p1ps2019_preprocess_block(&$variables) {
 
     if ($block) {
       $variables["content"]["#attributes"]["region"] = $block->getRegion();
+    }
+    if ($block_id == 'p1ps2019_branding') {
+      $negotiator = \Drupal::service('micro_site.negotiator');
+      $site = $negotiator->getActiveSite();
+      if ($site) {
+        $variables['host_url'] = $site->getSiteScheme() . "://" . $site->getHostPublicUrl();
+      }
+      else $variables['host_url'] = '';
     }
   }
 }
