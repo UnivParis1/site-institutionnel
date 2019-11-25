@@ -380,6 +380,27 @@
 					padding: 16px;
 				}
 			}
+
+			.header-micro{
+				.micro-left{
+					@include flex-align(justify, middle); width: 100%;
+					.site-name{
+						order: -1;
+						#{$padding-left} : 0; #{$margin-left} : 0;
+						&:before{
+							display: none;
+						}
+						h2{
+							font-size: rem-calc(18px);
+							max-width: rem-calc(270px);
+						}
+					}
+				}
+				.micro-right{
+					display: none;
+				}
+			}
+
 		}//close top header
 		.icon-menu{
 			padding: 0;
@@ -460,7 +481,7 @@
 				}
 			}
 		}
-		.site--type--mini-site:not(.transparent) &{
+		.site--type--mini-site:not(.transparent):not(.path-user) &{
 			margin-top: rem-calc(51px);
 			height: calc(100vh - 115px);
 			.screen-height{
