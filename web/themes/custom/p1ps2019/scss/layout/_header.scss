@@ -38,13 +38,13 @@
 					&:before{
 						content: "";
 						position: absolute; left: 0;
-						transform: translate(-50%); top: 50%; height: 90%;
+						transform: translateY(-50%); top: 50%; height: 90%;
 						width: 1px;
 					}
 					h2{
-						font-size: rem-calc(25px);
+						font-size: rem-calc(25px); margin: 0;
 						@include setFont($fontType-medium);
-						@extend .txt-upper; max-width: rem-calc(215px);
+						@extend .txt-upper; max-width: rem-calc(250px);
 					}
 				}
 			}
@@ -55,13 +55,14 @@
 						ul{
 							display: inline-flex; align-items: center;
 							li{
+								height: rem-calc(24px);
 								a{
 									&:before{
 										font-size: rem-calc(24px);
 									}
 								}
 								+li{
-									margin-left: rem-calc(21px);
+									margin-left: rem-calc(16px);
 								}
 							}
 						}
