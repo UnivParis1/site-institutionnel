@@ -75,6 +75,7 @@
     'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
   ]
   %}
+  {% set btn_style = 'paris1-bg-soft-grey' == layout_background ? 'inline' : 'outline' %}
 {% endif %}
 
 {% if background_field %}
@@ -88,7 +89,9 @@
           <div>{{ content.bp_text }}</div>
           {% if content.bp_link is not empty %}
             <span class="{{ content.field_cta_icon.0 }}">{{ icon }}</span>
-            {{ content.bp_link }}
+            <a class=" btn {{ btn_style }} with-icon" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+              {{ content.bp_link.0['#title'] }}
+            </a>
           {% endif %}
         </div>
       </div>
