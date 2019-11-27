@@ -41,8 +41,7 @@
 {{ content.field_media_image.0 }}
 {% endset %}
 <div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column mask no-hover relative-wrapper reset-mask-mobile">
-      <div class="img-container show-for-large">{{ imgUrl|striptags|trim }}</div>
+  <div class="paragraph__column mask no-hover relative-wrapper reset-mask-mobile" style="background-image: url('{{ imgUrl|striptags|trim }}')">
       <div class="overlay-infos with-padding box-mobile text-align-left">
         <div class="top-infos">
           <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
