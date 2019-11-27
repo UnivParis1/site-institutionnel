@@ -155,7 +155,9 @@
                   </button>
                   {{ page.header_micro_left }}
                   <div class="site-name"><h2 class="title">{{ site_name }}</h2> {{ site_name|length }}</div>
-                  {{ site_name|length }}
+                  {% if site_name|length > 20 %}
+                  long text
+                  {% endif %}
                 </div>
                 <div class="micro-right">
                   {{ page.header_micro_right }}
