@@ -499,8 +499,14 @@
 			margin-top: rem-calc(76px);
 		}
 		&.long{
-			.site--type--mini-site.path-user &{
+			.site--type--mini-site:not(.transparent):not(.path-user) &{
 				margin-top: rem-calc(93px);
+				height: calc(100vh - 157px);
+				.screen-height{
+					.header-img *{
+						height: calc(100vh - 157px);
+					}
+				}
 			}
 		}
 	}
