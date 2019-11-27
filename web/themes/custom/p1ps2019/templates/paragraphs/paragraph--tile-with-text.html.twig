@@ -36,10 +36,10 @@
  * @ingroup themeable
  */
 
-#}{{file_url(content.field_media_image.0['#item'].entity.uri.value)}}
+#}
 <div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column mask no-hover relative-wrapper reset-mask-mobile">
-      <div class="img-container show-for-large">{{ content.field_media_image }}</div>
+  <div class="paragraph__column mask no-hover relative-wrapper reset-mask-mobile" style="background-image: url("{{ content.field_media_image|striptags }}")">
+      
       <div class="overlay-infos with-padding box-mobile text-align-left">
         <div class="top-infos">
           <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
