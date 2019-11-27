@@ -154,11 +154,8 @@
                       </span>
                   </button>
                   {{ page.header_micro_left }}
-                  {% if site_name|length > 20 %}
-                  {{ set siteNameClass = 'long' }}
-                  {{ siteNameClass }}
-                  {% endif %}
-                  <div class="site-name {{ siteNameClass }}"><h2 class="title">{{ site_name }}</h2></div>
+                  <div class="site-name"><h2 class="title">{{ site_name }}</h2> {{ site_name|length }}</div>
+
                 </div>
                 <div class="micro-right">
                   {{ page.header_micro_right }}
