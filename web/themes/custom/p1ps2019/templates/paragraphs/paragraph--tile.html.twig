@@ -36,11 +36,12 @@
  * @ingroup themeable
  */
 #}
-
+{% set imgUrl %}
+{{ content.field_media_image.0 }}
+{% endset %}
 <div class="full-height">
-  <div class="paragraph__column mask no-hover relative-wrapper box-mobile reset-mask-mobile">
-    <div class="show-for-large">{{ content.field_media_image }}</div>
-    <div class="overlay-infos">
+  <div class="paragraph__column mask no-hover relative-wrapper box-mobile reset-mask-mobile tuile-avec-titre" style="background-image: url('{{ imgUrl|striptags|trim }}')">
+    <div class="infos">
       <h3 class="title">
           <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
             <span>{{content.field_title }}</span>
