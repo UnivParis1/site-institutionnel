@@ -68,7 +68,11 @@
 <div class="grid-container padding-mobile">
   <div class="grid-x">
     <div class="cell small-12">
+      {% if subtitle|striptags|trim or description|striptags|trim %}
       <h1 class="section-sep">{{ title }}</h1>
+      {% else %}
+      <h1>{{ title }}</h1>
+      {% endif %}
       {% if subtitle|striptags|trim %}
         <div class="subtitle semi-field-sep">{{ subtitle }}</div>
       {% endif %}
