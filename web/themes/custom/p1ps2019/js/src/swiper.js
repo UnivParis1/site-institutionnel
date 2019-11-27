@@ -6,8 +6,8 @@
 
       noSwiping();
 
-        if($('.swiper-container:not(#swiper-tiles):not(#swiper-carousel)').length > 0){
-  				var mySwiper = new Swiper('.swiper-container:not(#swiper-tiles):not(#swiper-carousel)', {
+        if($('.swiper-container:not(.swiper-tiles):not(#swiper-carousel)').length > 0){
+  				var mySwiper = new Swiper('.swiper-container:not(.swiper-tiles):not(#swiper-carousel)', {
   					slidesPerView: 3,
             spaceBetween: 24,
             navigation: {
@@ -21,8 +21,8 @@
             }
   			  });
   			}
-        if($('#swiper-tiles').length > 0){
-  				var tilesSwiper = new Swiper('#swiper-tiles', {
+        if($('.swiper-tiles').length > 0){
+  				var tilesSwiper = new Swiper('.swiper-tiles', {
   					slidesPerView: 1,
             pagination: {
   				    el: '.swiper-pagination',
@@ -85,13 +85,13 @@
 
 function noSwiping(){
   if($(window).width() > 1024){
-    if($('#swiper-tiles.swiper-no-swiping').length <= 0){
-      $('#swiper-tiles').addClass('swiper-no-swiping');
+    if($('.swiper-tiles.swiper-no-swiping').length <= 0){
+      $('.swiper-tiles').addClass('swiper-no-swiping');
     }
   }
   else{
-    if($('#swiper-tiles.swiper-no-swiping').length > 0){
-      $('#swiper-tiles').removeClass('swiper-no-swiping');
+    if($('.swiper-tiles.swiper-no-swiping').length > 0){
+      $('.swiper-tiles').removeClass('swiper-no-swiping');
     }
   }
 }
