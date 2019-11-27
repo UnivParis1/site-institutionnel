@@ -169,13 +169,28 @@
    }
 }
 
+.tuile-avec-texte, .tuile-avec-titre{
+  background-repeat: no-repeat; background-size: cover;
+  height: 100%;
+  .infos{
+    color: $text-white; position: relative; z-index: 2;
+    h3, a{
+      color: $text-white;
+    }
+  }
+}
+
 .tuile-avec-titre{
   min-height: rem-calc(420px);
   @include flex(); @include flex-align(center,middle);
+}
+
+.tuile-avec-texte{
+  min-height: rem-calc(565px);
+  padding: rem-calc(80px 126px);
   .infos{
-    background-repeat: no-repeat; background-size: cover;
-    position: relative; z-index: 2;
-    a{color: $text-white;}
+    max-width: 80%;
+    height: 100%; @include flex(); flex-direction: column; @include flex-align(justify, null);
   }
 }
 
@@ -184,17 +199,6 @@
     box-sizing: border-box;
     .swiper-slide{
       > div {height: 100%;}
-      .tuile-avec-texte{
-        min-height: rem-calc(565px); height: 100%;
-        padding: rem-calc(80px 126px);
-        background-repeat: no-repeat; background-size: cover;
-        .infos{
-          max-width: 80%; color: $text-white;
-          position: relative; z-index: 2;
-          height: 100%; @include flex(); flex-direction: column; @include flex-align(justify, null);
-          h3{color: $text-white;}
-        }
-      }
     }
   }
   .swiper-pagination{
