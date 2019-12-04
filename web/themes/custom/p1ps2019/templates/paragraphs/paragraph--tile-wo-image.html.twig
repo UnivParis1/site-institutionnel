@@ -40,13 +40,14 @@
   {% set layout_background = content.bp_background['#items'].getString() %}
   {% set layout_background_classes = [
     'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
+    'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
   ]
   %}
 {% endif %}
 
 {%
   set classes = [
-  'paragraph', 'box-content txt',
+  'paragraph', 'box-content no-bg txt',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   paragraph.bundle|clean_class,
 ]
