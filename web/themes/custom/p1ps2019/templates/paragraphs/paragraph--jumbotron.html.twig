@@ -87,7 +87,7 @@
         <div class="cell small-12">
           <h2 class="titre">{{ content.field_title.0 }}</h2>
           <div>{{ content.bp_text }}</div>
-          {% if content.bp_link is not empty %}
+          {% if content.bp_link|render %}
             <span class="{{ content.field_cta_icon.0 }}">{{ icon }}</span>
             <a class=" btn {{ btn_style }} with-icon" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
               {{ content.bp_link.0['#title'] }}
