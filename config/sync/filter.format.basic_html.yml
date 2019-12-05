@@ -1,14 +1,15 @@
 uuid: 212299ec-8d9e-40f1-ba65-a071d48fece7
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - editor
+    - token_filter
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'HTML simple'
 format: basic_html
-weight: 0
+weight: -8
 filters:
   filter_html:
     id: filter_html
@@ -43,3 +44,10 @@ filters:
     status: true
     weight: 11
     settings: {  }
+  token_filter:
+    id: token_filter
+    provider: token_filter
+    status: false
+    weight: 0
+    settings:
+      replace_empty: '0'
