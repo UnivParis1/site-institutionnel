@@ -48,7 +48,14 @@ function p1ps2019_preprocess_page(&$variables) {
 
   if (isset($site) && !empty($site)) {
     $site_id = $site->id();
-    $variables['site_name'] = $site->getName();
+    \Drupal::logger('p1ps_theme')->info(print_r($site->get('field_complete_name')->getValue(), 1));
+    $complete_name = $site->get('field_complete_name')->getValue();
+    if (!empty($complete_name)) {
+      $variables['site_name'] = $complete_name[0]['value'];
+    }
+    else {
+      $variables['site_name'] = $site->getName();
+    }
   }
 
   if ($node) {
@@ -79,6 +86,13 @@ function p1ps2019_preprocess_page(&$variables) {
   $variables['is_front_mini_site'] = $is_front_mini_site;
   $variables['is_front_mini_site'] = $is_front_mini_site;
 
+}
+
+function p1ps2019_preprocess_node(&$variables) {
+  if (isset($site) && !empty($site)) {
+    $site_id = $site->id();
+    $variables['is_page_m'] = TRUE;
+  }
 }
 
 /**

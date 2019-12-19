@@ -4,7 +4,9 @@
 */
 
 (function($) {
-  $(document).foundation();
+  //$(document).foundation();
+  console.log('init js');
+   
     //accessibility toggler
     if($('#accessibility-toggle').length > 0){
       $('#accessibility-toggle').click(function(){
@@ -117,6 +119,11 @@
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
+      console.log('init behaviors');
+      $(document, context).once('foundation-init').each(function() {
+    console.log('foundation init');
+      $(document).foundation();
+    });
     	//ADD SCROLL CLASS
     	if ($(window).width() > 1024){
 			$(document).scroll(function() {
