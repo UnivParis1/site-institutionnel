@@ -67,6 +67,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     $memberOf = $account->get('field_group');
     if (!empty($memberOf)) {
       $CNs = explode('cn=', $memberOf[0]->value);
+      \Drupal::logger('cas_affiliation')->info(print_r($CNs, 1));
       // les cn sont de la forme cn=applications.www.webmestre.general,ou=groups,dc=univ-paris1,dc=fr
       // ou  cn=applications.www.redacteur.miniSite.ufr.sx5,ou=groups,dc=univ-paris1,dc=fr
       foreach ($CNs as $CN) {
@@ -74,14 +75,15 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
           $part = explode('.', $CN);
           $role = $part[2];
           $minisite = in_array('miniSite', $part);
-          // si on a miniSite dans le cn c'est qu'on veut affecté specifiquement l'utilisateur a un mini site
+          $general = in_array('general', $part);
+          // si on a miniSite dans le cn c'est qu'on veut affecter spécifiquement l'utilisateur a un mini site
           if ($minisite) {
             $group = explode(',', $part[5])[0];
             $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
             // on recherche les sites dont le champ groups contient le code recupéré dans le cn
             $siteIds = $siteStorage->getQuery()
               ->condition('status', TRUE)
-              // TODO s'assurer qu'on ne recupere pas de les mauvais groupes
+              // TODO s'assurer qu'on ne recupere pas de "mauvais" groupes
               ->condition('groups', $group, 'CONTAINS')
               ->execute();
             $sites = $siteStorage->loadMultiple($siteIds);
@@ -89,8 +91,8 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
             // pour chaque minisite on affecte un role drupal ainsi qu'un role pour le minisite
             switch ($role) {
               case 'redacteur':
-                $account->addRole('contributeur_sous_site');
                 if (!empty($sites)) {
+                  $account->addRole('contributeur_sous_site');
                   foreach ($sites as $site) {
                     $contributeurs = $site->get('field_site_contributor')->getValue();
                     if (!(in_array(['target_id' => $account->id()],$contributeurs))) {
@@ -102,8 +104,8 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
                 }
                 break;
               case 'webmestre':
-                $account->addRole('webmestre_sous_site');
                 if (!empty($sites)) {
+                  $account->addRole('webmestre_sous_site');
                   foreach ($sites as $site) {
                     $webmestres = $site->get('field_site_administrator')->getValue();
                     if (!in_array(['target_id' => $account->id()], $webmestres)) {
@@ -116,8 +118,8 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
                 break;
             }
           }
-          else {
-            // on affecte le role listé dans le cn au l'utilisateur
+          elseif($general) {
+            // on affecte le rôle listé dans le cn à l'utilisateur
             switch ($role) {
               case 'redacteur':
                 $account->addRole('contributeur');
@@ -126,6 +128,9 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
                 $account->addRole('webmestre_general');
                 break;
             }
+          }
+          else {
+            $account->addRole('authenticated');
           }
           $account->save();
         }
