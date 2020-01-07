@@ -7,13 +7,20 @@ dependencies:
     - field.field.node.publication.body
     - field.field.node.publication.field_author_name
     - field.field.node.publication.field_back_cover
+    - field.field.node.publication.field_collection
+    - field.field.node.publication.field_format
     - field.field.node.publication.field_isbn
+    - field.field.node.publication.field_issn
     - field.field.node.publication.field_media
+    - field.field.node.publication.field_nb_pages
+    - field.field.node.publication.field_price
+    - field.field.node.publication.field_pub_year
     - field.field.node.publication.field_publication_link
     - field.field.node.publication.field_publication_topics
     - field.field.node.publication.field_publication_type
     - field.field.node.publication.field_publisher
-    - field.field.node.publication.field_publishing_year
+    - field.field.node.publication.field_publishing_date
+    - field.field.node.publication.field_subtitle
     - field.field.node.publication.field_tags
     - node.type.publication
   module:
@@ -47,13 +54,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_publishing_year:
-    weight: 4
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: number_unformatted
-    region: content
   field_tags:
     weight: 2
     label: visually_hidden
@@ -70,10 +70,18 @@ content:
 hidden:
   body: true
   field_back_cover: true
+  field_collection: true
+  field_format: true
   field_isbn: true
+  field_issn: true
   field_media: true
+  field_nb_pages: true
+  field_price: true
+  field_pub_year: true
   field_publication_link: true
   field_publisher: true
+  field_publishing_date: true
+  field_subtitle: true
   langcode: true
   search_api_excerpt: true
   site_id: true
