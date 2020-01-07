@@ -7,32 +7,60 @@ dependencies:
     - field.field.node.publication.body
     - field.field.node.publication.field_author_name
     - field.field.node.publication.field_back_cover
+    - field.field.node.publication.field_collection
+    - field.field.node.publication.field_format
     - field.field.node.publication.field_isbn
+    - field.field.node.publication.field_issn
     - field.field.node.publication.field_media
+    - field.field.node.publication.field_nb_pages
+    - field.field.node.publication.field_price
+    - field.field.node.publication.field_pub_year
     - field.field.node.publication.field_publication_link
     - field.field.node.publication.field_publication_topics
     - field.field.node.publication.field_publication_type
     - field.field.node.publication.field_publisher
-    - field.field.node.publication.field_publishing_year
+    - field.field.node.publication.field_publishing_date
+    - field.field.node.publication.field_subtitle
     - field.field.node.publication.field_tags
     - node.type.publication
   module:
     - content_moderation
+    - datetime
     - entity_browser
     - link_attributes
     - path
+    - text
+    - yearonly
 id: node.publication.default
 targetEntityType: node
 bundle: publication
 mode: default
 content:
+  body:
+    type: text_textarea_with_summary
+    weight: 15
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
   field_author_name:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_collection:
     weight: 4
     settings:
       size: 60
@@ -40,23 +68,24 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_back_cover:
-    weight: 9
+  field_format:
+    weight: 14
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_display_settings:
-        view_mode: thumbnail_news
-      field_widget_edit: true
-      field_widget_remove: true
-      selection_mode: selection_append
-      field_widget_replace: false
-      open: false
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: entity_browser_entity_reference
+    type: string_textfield
     region: content
   field_isbn:
-    weight: 7
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_issn:
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -64,7 +93,7 @@ content:
     type: string_textfield
     region: content
   field_media:
-    weight: 8
+    weight: 3
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity
@@ -78,8 +107,28 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
+  field_nb_pages:
+    weight: 13
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_price:
+    weight: 16
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_pub_year:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
   field_publication_link:
-    weight: 10
+    weight: 17
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -93,39 +142,41 @@ content:
     third_party_settings: {  }
     type: link_attributes
     region: content
-  field_publication_topics:
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_publication_type:
-    weight: 2
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_publisher:
-    weight: 5
+    weight: 7
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_publishing_year:
-    weight: 6
+  field_publishing_date:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_subtitle:
+    weight: 2
     settings:
+      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: number
+    type: string_textfield
     region: content
   field_tags:
-    weight: 11
+    weight: 18
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
@@ -138,37 +189,38 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 16
+    weight: 23
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 15
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 19
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 19
+    weight: 26
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 18
+    weight: 25
     region: content
     third_party_settings: {  }
   title:
@@ -180,19 +232,21 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 13
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 24
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
 hidden:
-  body: true
+  field_back_cover: true
+  field_publication_topics: true
   promote: true

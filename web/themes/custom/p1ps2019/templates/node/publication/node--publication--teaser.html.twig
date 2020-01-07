@@ -76,27 +76,29 @@
   'box-style',
 ]
 %}
-{% set publi = '' %}
-{% set publi %}
-{{ content.field_publication_topics }}
+{% set year %}
+  {{ content.field_pub_year.0 }}
+{% endset %}
+{% set subtitle %}
+  {{ content.field_subtitle.0 }}
 {% endset %}
 <article{{ attributes.addClass(classes) }}>
   <div class="box-content same-height">
     <div class="top-infos">
-      <div class="infos-row-wrapper nowrap-mobile valign-center">
-        <div class="categ-wrapper infos-entry"><div class="categ-style"> {{ content.field_publication_type }} </div></div>
-        <div class="author infos-entry">{{ content.field_author_name }}</div>
-      </div>
       {{ title_prefix }}
-      <h2 class="title title-sep">
+      <h2 class="title">
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
       {{ title_suffix }}
+      {% if subtitle|striptags|trim %}
+        <em class="txt small">{{ subtitle }}</em>
+      {% endif %}
     </div>
+    <div class="author small">{{ content.field_author_name.0 }}</div>
     <div class="bottom-infos">
-      {% if publi|striptags|trim %}
-        <div>
-          {{ content.field_publication_topics }}
+      {% if year|striptags|trim %}
+        <div class="details txt-second">
+          <span>{{ year }}</span>
         </div>
       {% endif %}
     </div>
