@@ -129,9 +129,6 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
                 break;
             }
           }
-          else {
-            $account->addRole('authenticated');
-          }
           $account->save();
         }
       }
