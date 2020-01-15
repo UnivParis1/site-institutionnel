@@ -48,7 +48,7 @@ function p1ps2019_preprocess_page(&$variables) {
 
   if (isset($site) && !empty($site)) {
     $site_id = $site->id();
-    \Drupal::logger('p1ps_theme')->info(print_r($site->get('field_complete_name')->getValue(), 1));
+
     $complete_name = $site->get('field_complete_name')->getValue();
     if (!empty($complete_name)) {
       $variables['site_name'] = $complete_name[0]['value'];
@@ -60,8 +60,6 @@ function p1ps2019_preprocess_page(&$variables) {
 
   if ($node) {
     $node_type = $node->getType();
-
-    \Drupal::logger('theme')->info(print_r($node_type, 1));
     if (!in_array($node_type, ['news', 'event', 'publication'])
       && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
       $print_hp_image = TRUE;
@@ -79,9 +77,6 @@ function p1ps2019_preprocess_page(&$variables) {
 
   $variables['node_type'] = $node_type;
   $variables['print_hp_image'] = $print_hp_image;
-  \Drupal::logger('theme')->info(print_r($print_hp_image, 1
-
-  ));
   $variables['page_mini_site'] = $page_mini_site;
   $variables['is_front_mini_site'] = $is_front_mini_site;
   $variables['is_front_mini_site'] = $is_front_mini_site;
