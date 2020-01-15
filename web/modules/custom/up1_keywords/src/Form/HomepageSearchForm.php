@@ -5,6 +5,7 @@ namespace Drupal\up1_keywords\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Routing;
 
 class HomepageSearchForm extends FormBase {
 
@@ -16,12 +17,19 @@ class HomepageSearchForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $current_path = \Drupal::service('path.current')->getPath();
+
+    if (preg_match('/recherche/', $current_path)) {
+      $value = \Drupal::request()->query->get('text');
+    }
+
     $form['homepage_search'] = [
       '#type' => 'search',
       '#title' => t('Search'),
       '#attributes' => [
         'placeholder' => t('Search')
       ],
+      '#default_value' => isset($value)? $value : "",
     ];
     $form['submit'] = array(
       '#type' => 'submit',
