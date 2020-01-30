@@ -77,16 +77,6 @@
 %}
 
 <article{{ attributes.addClass(classes) }}>
-
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
-
   <div{{ content_attributes.addClass('content') }}>
     <div class="img-container field-sep">{{ content.field_media }}</div>
     <div class="block-sep padding-mobile grid-container">
@@ -101,6 +91,9 @@
             {% endfor %}
           </div>
         </div>
+        {{ title_prefix }}
+        <h2{{ title_attributes }}>{{ label }}</h2>
+        {{ title_suffix }}
         <div class="txt medium semi-semi-infos-sep">{{ content.field_news_date }}</div>
         <div class="txt medium">{{ content|without('field_media','field_news_date', 'field_related_news', 'field_signature', 'field_categories', 'field_news_topic') }}</div>
         <div class="">{{ content.field_signature }}</div>
