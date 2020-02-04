@@ -1,46 +1,46 @@
-<!-- Add you custom twig html here -->
-{#{{ dump(users) }}#}
-
-    {% if users|length < 1 %}
-        <p>Il n'y a personne a cette lettre dans cet annuaire</p>
-    {% else %}
-        {% if users|length == 1 %}
-            <ul class="lone_user">
-        {% else %}
-            <ul class="user">
-        {% endif %}
-        {% for user in users %}
-            {% if (Trusted and user.supannListeRouge == FALSE) or (not Trusted and user.sn != 'supannListeRouge') %}
-                <li>
-                    <div>
-                        <p><b>
-                                {% if user.labeledURI is empty %}
-                                    {{ user.sn|upper }} {{ user.givenName }}
-                                {% else %}
-                                    <a href="{{ user.labeledURI[0] }}">
-                                        {{ user.sn|upper }} {{ user.givenName }}
-                                    </a>
-                                {% endif %}
-                            </b></p>
-                        <p>{{ user.postalAddress|nl2br }}</p>
-                        <p>{{ user.telephoneNumber[0] }}</p>
-                        <p>{{ user.mail }}</p>
-                    </div>
-                </li>
-            {% endif %}
-        {% endfor %}
-        </ul>
-    {% endif %}
-    <div class="pager">
+<div id="liste-page-perso" class="cell small-12">
+  <div class="grid-x grid-margin-x grid-margin-y">
+    <div class="grid-container">
+      <div class="pager pager-top">
         {% for letter in 'a'|upper .. 'z'|upper %}
-            {% if loop.last %}
-                <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_list',
-                {'letter': letter}
-                )}}">{{ letter }}</a>
-            {% else %}
-                <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_list',
-                {'letter': letter}
-                )}}">{{ letter }} |</a>
-            {% endif %}
+            <span class="letter">
+              <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_list',
+              {'letter': letter}
+            )}}">{{ letter }}</a>
+            </span>
         {% endfor %}
+      </div>
+      <div class="annuaire-content">
+        {% if users|length < 1 %}
+          <h4>{{ "Il n'y a personne a cette lettre dans cet annuaire"|t }}</h4>
+        {% else %}
+          {% for user in users %}
+            {% if (Trusted and user.supannListeRouge == FALSE) or (not Trusted and user.sn != 'supannListeRouge') %}
+              <div class="annuaire-item">
+                <div><b>
+                    {% if user.labeledURI is empty %}
+                      {{ user.sn|upper }} {{ user.givenName }}
+                    {% else %}
+                      <a href="{{ user.labeledURI[0] }}">
+                        {{ user.sn|upper }} {{ user.givenName }}
+                      </a>
+                    {% endif %}
+                  </b>({{ user.eduPersonPrimaryAffiliation }})
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="pager pager-top">
+        {% for letter in 'a'|upper .. 'z'|upper %}
+          <span class="letter">
+              <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_list',
+                {'letter': letter}
+              )}}">{{ letter }}</a>
+            </span>
+        {% endfor %}
+      </div>
     </div>
+  </div>
+</div>
