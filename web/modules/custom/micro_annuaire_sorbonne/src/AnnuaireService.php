@@ -33,6 +33,8 @@ class AnnuaireService implements AnnuaireServiceInterface {
    * @param $siteId (int) ID du site dont on veut recuperer l'annuaire
    *
    * @return array|mixed
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function getUserList($siteId) {
     $users = [];
@@ -58,8 +60,7 @@ class AnnuaireService implements AnnuaireServiceInterface {
     //$Trusted = (strpos($filter, 'searchUserTrusted') !== false ? true : false);
 
     $params = [
-      'attrs' => 'sn,givenName,mail,telephoneNumber,labeledURI,supannEntiteAffectation,postalAddress,supannListeRouge',
-      'maxRows' => '500'
+      'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
     ];
     $ch = curl_init();
 //    dump($searchUser . '&' . http_build_query($params));

@@ -45,7 +45,7 @@ class AnnuaireController extends ControllerBase {
         $theme = 'annuaire_mini_site';
         // On verifie si l'annuaire est dans le cache
         $cachedUser = $cache->get('users_ldap'.$currentSiteId);
-//        dump($cachedUser);
+
         if ($cachedUser) {
           $reponse = $cachedUser->data;
           $filtered_users = $reponse['users'];
@@ -71,7 +71,7 @@ class AnnuaireController extends ControllerBase {
     else {
       $theme = 'micro_annuaire_sorbonne';
       $cachedUser = $cache->get('users_ldap_principal');
-//      dump($cachedUser);
+
       if ($cachedUser){
         $reponse = $cachedUser->data;
         $users = $reponse['users'];
