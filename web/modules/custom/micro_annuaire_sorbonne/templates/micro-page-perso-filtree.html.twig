@@ -1,0 +1,50 @@
+<div id="liste-page-perso" class="cell small-12">
+  <div class="grid-x grid-margin-x grid-margin-y">
+    <div class="grid-container">
+      <div class="pager pager-top">
+        {% for letter in 'a'|upper .. 'z'|upper %}
+          <span class="letter">
+              <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_filtered_list',
+                {'affiliation': affiliation,'letter': letter}
+              )}}">{{ letter }}</a>
+            </span>
+        {% endfor %}
+      </div>
+
+      <h3>{{ affiliation|upper }}</h3>
+      <hr />
+      <div class="annuaire-content mb-5">
+        {% if users|length < 1 %}
+          <h4>{{ "Il n'y a personne à cette lettre dans cet annuaire"|t }}</h4>
+        {% else %}
+          {% for user in users %}
+            {% if (Trusted and user.supannListeRouge == FALSE) or (not Trusted and user.sn != 'supannListeRouge') %}
+              <div class="annuaire-item">
+                <div>
+                  <b>
+                    {% if user.labeledURI is empty %}
+                      {{ user.sn|upper }} {{ user.givenName }}
+                    {% else %}
+                      <a href="{{ user.labeledURI[0] }}">
+                        {{ user.sn|upper }} {{ user.givenName }}
+                      </a>
+                    {% endif %}
+                  </b>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="pager pager-top">
+        {% for letter in 'a'|upper .. 'z'|upper %}
+          <span class="letter">
+              <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_filtered_list',
+                {'affiliation': affiliation,'letter': letter}) }}">{{ letter }}</a>
+            </span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

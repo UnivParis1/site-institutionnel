@@ -1,13 +1,28 @@
-
-micro_annuaire_sorbonne.annuaire_controller_list:
-  path: '/page-perso/{letter}'
+#micro_annuaire_sorbonne.annuaire_controller_list:
+#  path: '/page-perso/{letter}'
+#  defaults:
+#    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::list'
+#    _title: 'Pages personnelles'
+#    letter: 'A'
+#  requirements:
+#    _permission: 'view published site entities'
+#
+micro_annuaire_sorbonne.annuaire_controller_filtered_list_default:
+  path: '/page-perso/{affiliation}'
   defaults:
-    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::list'
-    _title: 'Pages personnelles'
+    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::filteredList'
+    _title_callback: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::getPageTitle'
     letter: 'A'
   requirements:
     _permission: 'view published site entities'
 
+micro_annuaire_sorbonne.annuaire_controller_filtered_list:
+  path: '/page-perso/{affiliation}/{letter}'
+  defaults:
+    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::filteredList'
+    _title_callback: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::getPageLetterTitle'
+  requirements:
+    _permission: 'view published site entities'
 
 micro_annuaire_sorbonne.annuaire_config_form:
   path: '/admin/config/micro_annuaire_sorbonne/annuaireconfig'
@@ -18,4 +33,3 @@ micro_annuaire_sorbonne.annuaire_config_form:
     _permission: 'access administration pages'
   options:
     _admin_route: TRUE
-

@@ -3,29 +3,57 @@
     <div class="grid-container">
       <div class="pager pager-top">
         {% for letter in 'a'|upper .. 'z'|upper %}
-            <span class="letter">
+          <span class="letter">
               <a href="{{ path('micro_annuaire_sorbonne.annuaire_controller_list',
-              {'letter': letter}
-            )}}">{{ letter }}</a>
+                {'letter': letter}
+              )}}">{{ letter }}</a>
             </span>
         {% endfor %}
       </div>
-      <div class="annuaire-content">
-        {% if users|length < 1 %}
-          <h4>{{ "Il n'y a personne a cette lettre dans cet annuaire"|t }}</h4>
+
+      <h3>{{ 'Enseignants-chercheurs'|t }}</h3>
+      <hr />
+      <div class="annuaire-content mb-5">
+        {% if teachers|length < 1 %}
+          <h4>{{ "Il n'y a personne à cette lettre dans cet annuaire"|t }}</h4>
         {% else %}
-          {% for user in users %}
-            {% if (Trusted and user.supannListeRouge == FALSE) or (not Trusted and user.sn != 'supannListeRouge') %}
+          {% for teacher in teachers %}
+            {% if (Trusted and teacher.supannListeRouge == FALSE) or (not Trusted and teacher.sn != 'supannListeRouge') %}
               <div class="annuaire-item">
                 <div><b>
-                    {% if user.labeledURI is empty %}
-                      {{ user.sn|upper }} {{ user.givenName }}
+                    {% if teacher.labeledURI is empty %}
+                      {{ teacher.sn|upper }} {{ teacher.givenName }}
                     {% else %}
-                      <a href="{{ user.labeledURI[0] }}">
-                        {{ user.sn|upper }} {{ user.givenName }}
+                      <a href="{{ teacher.labeledURI[0] }}">
+                        {{ teacher.sn|upper }} {{ teacher.givenName }}
                       </a>
                     {% endif %}
-                  </b>({{ user.eduPersonPrimaryAffiliation }})
+                  </b>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <h3>{{ 'Doctorants'|t }}</h3>
+      <hr/>
+      <div class="annuaire-content">
+        {% if students|length < 1 %}
+          <h4>{{ "Il n'y a personne à cette lettre dans cet annuaire"|t }}</h4>
+        {% else %}
+          {% for student in students %}
+            {% if (Trusted and student.supannListeRouge == FALSE) or (not Trusted and student.sn != 'supannListeRouge') %}
+              <div class="annuaire-item">
+                <div><b>
+                    {% if student.labeledURI is empty %}
+                      {{ student.sn|upper }} {{ student.givenName }}
+                    {% else %}
+                      <a href="{{ student.labeledURI[0] }}">
+                        {{ student.sn|upper }} {{ student.givenName }}
+                      </a>
+                    {% endif %}
+                  </b>
                 </div>
               </div>
             {% endif %}
