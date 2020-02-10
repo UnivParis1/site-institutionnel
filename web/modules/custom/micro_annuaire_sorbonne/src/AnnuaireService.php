@@ -57,13 +57,11 @@ class AnnuaireService implements AnnuaireServiceInterface {
 
     $ws = $config->get('url_ws');
     $searchUser = $ws . $filter;
-    //$Trusted = (strpos($filter, 'searchUserTrusted') !== false ? true : false);
 
     $params = [
       'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
     ];
     $ch = curl_init();
-//    dump($searchUser . '&' . http_build_query($params));
     curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
@@ -73,7 +71,6 @@ class AnnuaireService implements AnnuaireServiceInterface {
     curl_close($ch);
 
     $reponse['users'] = $users;
-   // $reponse['trusted'] = $Trusted;
 
     return $reponse;
 
