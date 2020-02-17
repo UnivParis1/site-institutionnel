@@ -24,6 +24,7 @@
         "drupal/adminimal_admin_toolbar": "^1.9",
         "drupal/adminimal_theme": "^1.4",
         "drupal/anchor_link": "^1.6",
+        "drupal/better_exposed_filters": "^4.0@alpha",
         "drupal/bootstrap": "^3.19",
         "drupal/bootstrap_paragraphs": "^2.0@beta",
         "drupal/cas": "1.5",
@@ -75,7 +76,6 @@
         "drupal/search_api_autocomplete": "^1.2",
         "drupal/search_api_elasticsearch_attachments": "^6.0",
         "drupal/similarterms": "^1.3",
-        "drupal/slick": "^1.1",
         "drupal/smtp": "^1.0",
         "drupal/social_simple": "^1.7",
         "drupal/token_filter": "^1.1",
@@ -83,7 +83,6 @@
         "drupal/views_bootstrap": "^4.1",
         "drupal/views_infinite_scroll": "^1.6",
         "drupal/webform": "^5.1",
-        "drupal/yearonly": "^1.3",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
@@ -126,7 +125,10 @@
             "drupal/micro_theme": ["patches/modules/micro_theme/micro_theme-focal_point_issue.patch"],
             "drupal/cas": ["https://www.drupal.org/files/issues/2018-11-25/cas-add-saml-2583325-33.patch"],
             "drupal/cas_attributes": ["patches/modules/cas_attributes/cas_attributes-mapping_textarea.patch"],
-            "drupal/ics_field": ["patches/modules/ics_field/ics_field-2852239-11.patch"]
+            "drupal/ics_field": ["patches/modules/ics_field/ics_field-2852239-11.patch"],
+	    "drupal/core": {
+		"views_date_filter": "https://www.drupal.org/files/issues/2018-12-11/views_date_filter_granularity_2868014-60.patch"
+	    }
         },
         "composer-exit-on-patch-failure": true,
         "patchLevel": {

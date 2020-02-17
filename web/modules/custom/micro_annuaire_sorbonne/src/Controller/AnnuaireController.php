@@ -149,7 +149,6 @@ class AnnuaireController extends ControllerBase {
   public function filteredList($affiliation, $letter) {
     $cache = \Drupal::cache();
     $filtered_users = [];
-
     if ($affiliation == 'doctorant') {
       $fonction = "student";
     }
@@ -211,7 +210,6 @@ class AnnuaireController extends ControllerBase {
       ];
 
       return $build;
-
     }
   }
 

@@ -15,6 +15,7 @@ micro_annuaire_sorbonne.annuaire_controller_filtered_list_default:
     letter: 'A'
   requirements:
     _permission: 'view published site entities'
+    affiliation: 'enseignant-chercheur|doctorant'
 
 micro_annuaire_sorbonne.annuaire_controller_filtered_list:
   path: '/page-perso/{affiliation}/{letter}'
@@ -23,6 +24,7 @@ micro_annuaire_sorbonne.annuaire_controller_filtered_list:
     _title_callback: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::getPageLetterTitle'
   requirements:
     _permission: 'view published site entities'
+    affiliation: 'enseignant-chercheur|doctorant'
 
 micro_annuaire_sorbonne.annuaire_config_form:
   path: '/admin/config/micro_annuaire_sorbonne/annuaireconfig'
