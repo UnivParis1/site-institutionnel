@@ -1,6 +1,6 @@
 uuid: 8e2f8370-18b7-43a3-a8d2-a4c88a762df5
 langcode: fr
-status: true
+status: false
 dependencies: {  }
 id: dev
 label: dev
@@ -8,22 +8,22 @@ description: ''
 folder: ../config/dev
 module:
   dblog: 0
+  elasticsearch_connector: 0
   devel: 0
   matomo: 0
   piwik_reports: 0
 theme: {  }
 blacklist:
   - cas.settings
-  - elasticsearch_connector.cluster.elasticsearch_server
   - micro_annuaire_sorbonne.annuaireconfig
   - micro_site.settings
   - smtp.settings
+  - system.site
   - up1_keywords.keywordsconfig
-  - 'system.menu.site-*'
+  - 'system.menu*'
   - block.block.nuagedemotscle
   - 'block.block.p1ps2019*'
-graylist:
-  - system.site
+graylist: {  }
 graylist_dependents: false
 graylist_skip_equal: true
 weight: 0

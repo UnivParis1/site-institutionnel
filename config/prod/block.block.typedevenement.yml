@@ -1,0 +1,42 @@
+uuid: 17d55191-f359-4a68-a629-8a5c601deb14
+langcode: fr
+status: true
+dependencies:
+  config:
+    - facets.facet.event_type
+  module:
+    - facets
+    - micro_path
+    - micro_site
+    - system
+  theme:
+    - p1ps2019
+id: typedevenement
+theme: p1ps2019
+region: content_left
+weight: -13
+provider: null
+plugin: 'facet_block:event_type'
+settings:
+  id: 'facet_block:event_type'
+  label: 'Type d''événement'
+  provider: facets
+  label_display: '0'
+  block_id: typedevenement
+visibility:
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: "/recherche\r\n/recherche*"
+    negate: false
+    context_mapping: {  }
