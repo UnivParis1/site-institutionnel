@@ -1,0 +1,265 @@
+uuid: 71a9ccf1-db79-4cc5-8ce8-9437e13a273b
+langcode: fr
+status: true
+dependencies:
+  module:
+    - elasticsearch_connector
+    - taxonomy
+    - micro_node
+    - node
+    - search_api
+    - search_api_elasticsearch_attachments
+  config:
+    - field.storage.node.field_categories
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_publication_type
+    - field.storage.node.field_event_type
+    - search_api.server.elasticsearch
+third_party_settings:
+  elasticsearch_connector:
+    ngram_filter_enabled: 0
+    ngram_config:
+      ngram_type: edge_ngram
+      min_gram: '3'
+      max_gram: '3'
+id: index_de_contenu
+name: 'Index de contenu'
+description: ''
+read_only: false
+field_settings:
+  es_attachment:
+    label: 'Search API Elasticsearch attachments'
+    property_path: es_attachment
+    type: object
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  event_type:
+    label: 'type événement'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_type:entity:name'
+    type: string
+    boost: !!float 13
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+      module:
+        - taxonomy
+        - taxonomy
+  name:
+    label: Catégories
+    datasource_id: 'entity:node'
+    property_path: 'field_categories:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_categories
+      module:
+        - taxonomy
+        - taxonomy
+  news_topic:
+    label: 'Sujet actualité'
+    datasource_id: 'entity:node'
+    property_path: 'field_news_topic:entity:name'
+    type: string
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_news_topic
+      module:
+        - taxonomy
+        - taxonomy
+  node_grants:
+    label: 'Information d''accès du nœud.'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  publication_type:
+    label: 'Type publication'
+    datasource_id: 'entity:node'
+    property_path: 'field_publication_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_publication_type
+      module:
+        - taxonomy
+        - taxonomy
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    boost: !!float 13
+    configuration:
+      roles:
+        - anonymous
+      view_mode: {  }
+  site_id:
+    label: Site
+    datasource_id: 'entity:node'
+    property_path: site_id
+    type: integer
+    dependencies:
+      module:
+        - micro_node
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 21
+    dependencies:
+      module:
+        - node
+  type:
+    label: Type
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: text
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  elasticsearch_attachments:
+    boost: '1.0'
+    excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv jpg jpeg'
+    max_filesize: '0'
+    excluded_private: 1
+    excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv image/jpeg'
+    weights:
+      preprocess_index: -20
+  elasticsearch_attachments_highlight:
+    highlight: 'yes'
+    excerpt: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    weights:
+      postprocess_query: 0
+  entity_status: {  }
+  highlight:
+    highlight: always
+    highlight_partial: false
+    excerpt: true
+    excerpt_length: 256
+    exclude_fields: {  }
+    prefix: '<strong>'
+    suffix: '</strong>'
+    weights:
+      postprocess_query: 0
+  html_filter:
+    all_fields: false
+    fields: {  }
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  ignorecase:
+    all_fields: false
+    fields: {  }
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  language_with_fallback: {  }
+  rendered_item: {  }
+  reverse_entity_references: {  }
+  stopwords:
+    all_fields: false
+    fields: {  }
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+    weights:
+      preprocess_index: -5
+      preprocess_query: -2
+  transliteration:
+    all_fields: false
+    fields: {  }
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: -1
+server: elasticsearch
