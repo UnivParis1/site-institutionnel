@@ -3,7 +3,9 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.media.file.field_extension
     - field.field.media.file.field_media_file
+    - field.field.media.file.field_size
     - media.type.file
   module:
     - file
@@ -12,6 +14,14 @@ targetEntityType: media
 bundle: file
 mode: default
 content:
+  field_extension:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_media_file:
     settings:
       progress_indicator: throbber
@@ -19,6 +29,20 @@ content:
     type: file_generic
     weight: 1
     region: content
+  field_size:
+    type: number
+    weight: 7
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  is_global:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    region: content
+    weight: 4
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -34,8 +58,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   path: true
+  site_id: true
   status: true
   uid: true

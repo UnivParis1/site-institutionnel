@@ -85,13 +85,13 @@
         font-family: $font-second;
         @include setFont($fontType-bold);
       }
-     }
-     .field--name-field-subtitle{
-       @include setFont($fontType-regular);
-       *{
-         @include setFont($fontType-regular);
-       }
-     }
+    }
+    .field--name-field-subtitle{
+      @include setFont($fontType-regular);
+      *{
+        @include setFont($fontType-regular);
+      }
+    }
   }
 }//close .paragraph--type--hit-list
 
@@ -101,7 +101,7 @@
     width: 80%;
     h3{
       font-size: rem-calc(40px); line-height: 1.325;
-        font-family: $font-regular;
+      font-family: $font-regular;
     }
     p{font-size: rem-calc(20px); line-height: 1.35;}
   }
@@ -164,9 +164,9 @@
   }
 }//close paragraph--type--tiles
 .swiper-container{
-   ul.swiper-wrapper{
-     #{$margin-left}: 0;
-   }
+  ul.swiper-wrapper{
+    #{$margin-left}: 0;
+  }
 }
 
 .tuile-avec-texte, .tuile-avec-titre{
@@ -245,7 +245,7 @@
 
 
 /** Icones **/
-  /* Positions */
+/* Positions */
 .icon-top-left {
   background-position: left top;
 }
@@ -277,11 +277,11 @@
   &:not(.paragraph--type--presentation){
     padding: rem-calc(48px 0);
   }
-    &.paragraph--type--presentation{
-        background-size: rem-calc(130px);
-    }
+  &.paragraph--type--presentation{
+    background-size: rem-calc(130px);
+  }
 }
-  /* svg */
+/* svg */
 .icon-argent {
   background-image: url('../svg/icons/argent.svg');
 }
@@ -317,4 +317,24 @@
 }
 .icon-recherche {
   background-image: url('../svg/icons/recherche.svg');
+}
+/* Paragraph media video */
+.paragraph--type--video-media {
+  .field--name-field-media-video {
+    max-width: 1072px;
+    margin: auto;
+    .field--name-field-media-oembed-video {
+      position: relative;
+      height: 0;
+      padding-bottom: 56.25%;
+
+      .media-oembed-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
