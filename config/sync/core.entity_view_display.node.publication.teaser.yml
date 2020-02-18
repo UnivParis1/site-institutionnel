@@ -32,15 +32,24 @@ mode: teaser
 content:
   field_author_name:
     type: string
-    weight: 1
+    weight: 2
     region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+  field_media:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: publication
+      link: false
+    third_party_settings: {  }
   field_publication_type:
     type: entity_reference_label
-    weight: 0
+    weight: 1
     region: content
     label: hidden
     settings:
@@ -48,7 +57,7 @@ content:
     third_party_settings: {  }
   field_subtitle:
     type: string
-    weight: 2
+    weight: 3
     region: content
     label: hidden
     settings:
@@ -61,7 +70,6 @@ hidden:
   field_format: true
   field_isbn: true
   field_issn: true
-  field_media: true
   field_nb_pages: true
   field_price: true
   field_pub_year: true

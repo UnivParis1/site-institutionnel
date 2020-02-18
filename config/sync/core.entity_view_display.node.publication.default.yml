@@ -27,7 +27,6 @@ dependencies:
     - link
     - text
     - user
-    - yearonly
 id: node.publication.default
 targetEntityType: node
 bundle: publication
@@ -110,11 +109,13 @@ content:
     type: number_decimal
     region: content
   field_pub_year:
-    weight: 5
-    label: hidden
-    settings: {  }
+    weight: 19
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: html_year
     third_party_settings: {  }
-    type: yearonly_default
+    type: datetime_default
     region: content
   field_publication_link:
     weight: 11
