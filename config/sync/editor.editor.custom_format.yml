@@ -6,6 +6,14 @@ dependencies:
     - filter.format.custom_format
   module:
     - ckeditor
+    - editor_file
+third_party_settings:
+  editor_file:
+    status: true
+    scheme: private
+    directory: inline-files
+    extensions: txt
+    max_size: ''
 format: custom_format
 editor: ckeditor
 settings:
@@ -24,8 +32,9 @@ settings:
         -
           name: Liens
           items:
-            - DrupalLink
+            - Linkit
             - DrupalUnlink
+            - DrupalFile
         -
           name: Tools
           items:
@@ -35,6 +44,8 @@ settings:
       styles: ''
     language:
       language_list: un
+    linkit:
+      linkit_profile: site_content
     tokenbrowser:
       token_types: {  }
 image_upload:
