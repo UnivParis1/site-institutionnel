@@ -1,15 +1,25 @@
 uuid: 79e8108d-7d61-4232-8457-bb58893f5f85
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - focal_point
 name: block_rich_im
 label: 'block rich image retinafy'
 effects:
-  b405ba6a-abbf-4342-a67a-8773281c960a:
-    uuid: b405ba6a-abbf-4342-a67a-8773281c960a
-    id: image_scale_and_crop
-    weight: 1
+  88e483e6-9f1d-4869-bda6-c6e8c46011f6:
+    uuid: 88e483e6-9f1d-4869-bda6-c6e8c46011f6
+    id: focal_point_scale_and_crop
+    weight: -9
     data:
       width: 1920
       height: 1708
-      anchor: center-center
+      crop_type: focal_point
+  7e1cecc5-22fe-4f1d-8739-089b72b6a8fa:
+    uuid: 7e1cecc5-22fe-4f1d-8739-089b72b6a8fa
+    id: image_scale
+    weight: -10
+    data:
+      width: 1920
+      height: null
+      upscale: false

@@ -1,13 +1,10 @@
-uuid: ca172258-40ed-4550-889e-1b61c7b3b6bd
+uuid: 4b799f4e-a1f3-4adf-ac50-bf80dfa92819
 langcode: fr
 status: true
 dependencies:
   config:
     - field.field.node.second_level_pages.body
-    - field.field.node.second_level_pages.field_disable_canonical_url
     - field.field.node.second_level_pages.field_editorial_blocks
-    - field.field.node.second_level_pages.field_sites
-    - field.field.node.second_level_pages.field_sites_all
     - node.type.second_level_pages
   module:
     - content_moderation
@@ -34,15 +31,21 @@ content:
   field_editorial_blocks:
     type: entity_reference_paragraphs
     weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_editorial_blocks:
+    type: entity_reference_paragraphs
+    weight: 4
+    region: content
     settings:
       title: Paragraphe
-      title_plural: Paragraphes
-      edit_mode: closed
+      title_plural: Paragraphs
+      edit_mode: open
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: _none
+      default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_sites:
     type: entity_reference_autocomplete
     weight: 9

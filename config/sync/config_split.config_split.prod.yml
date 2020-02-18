@@ -1,6 +1,6 @@
 uuid: 8140a6b7-f66e-40c6-b5d4-b0139632d1b2
 langcode: fr
-status: false
+status: true
 dependencies: {  }
 id: prod
 label: prod
@@ -8,8 +8,25 @@ description: ''
 folder: ../config/prod
 module:
   dblog: 0
+  elasticsearch_connector: 0
+  facets: 0
 theme: {  }
-blacklist: {  }
+blacklist:
+  - cas.settings
+  - micro_annuaire_sorbonne.annuaireconfig
+  - micro_site.settings
+  - smtp.settings
+  - system.site
+  - up1_keywords.keywordsconfig
+  - user.role.admin_dir_com
+  - user.role.contributeur
+  - user.role.contributeur_sous_site
+  - user.role.webmestre_general
+  - user.role.webmestre_sous_site
+  - 'system.menu.site-*'
+  - 'block.block.p1ps2019*'
+  - block.block.nuagedemotscle
+  - 'system.menu*'
 graylist: {  }
 graylist_dependents: false
 graylist_skip_equal: true

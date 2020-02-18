@@ -13,12 +13,11 @@ description: 'Affiche les noms des utilisateurs les plus actifs récemment et le
 tag: default
 base_table: users_field_data
 base_field: uid
-core: 8.x
 display:
   default:
     display_plugin: default
     id: default
-    display_title: Master
+    display_title: Maître
     position: 0
     display_options:
       access:
@@ -39,10 +38,10 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Filtrer
+          submit_button: Appliquer
           reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
@@ -105,6 +104,8 @@ display:
           id: status
           expose:
             operator: '0'
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
           plugin_id: boolean
           entity_type: user
@@ -138,6 +139,8 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
