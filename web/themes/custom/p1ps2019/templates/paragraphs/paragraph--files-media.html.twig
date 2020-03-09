@@ -41,11 +41,12 @@
 set classes = [
 'paragraph',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
+'cell small-12 medium-6 large-4',
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
 %}
 
+
 <div{{ attributes.addClass(classes) }}>
-  <span class="fa fa-file"></span>
-  {{ content.field_media_fichier }}
+    {{ content.field_media_fichier }}
 </div>

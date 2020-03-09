@@ -3112,7 +3112,7 @@ ul,
 ol,
 dl {
   margin-bottom: 1rem;
-  list-style-position: inside;
+  list-style-position: outside;
   line-height: 2; }
 
 li {
@@ -3120,7 +3120,7 @@ li {
 
 ul {
   margin-left: 1.25rem;
-  list-style-type: disc; }
+  list-style-type: none; }
 
 ol {
   margin-left: 1.25rem; }
@@ -7819,6 +7819,9 @@ button.semi-oval {
   padding-top: 0 !important;
   padding-bottom: 0 !important; }
 
+.paragraph.paragraph--type--files-media {
+  padding-top: 4.5rem !important; }
+
 .key-figures-section {
   position: relative;
   width: 100%;
@@ -8113,6 +8116,34 @@ button.semi-oval {
 .paragraph.no-padding-top-bottom {
   padding-top: 0;
   padding-bottom: 0; }
+
+.paragraph .paragraph--type--files-media {
+  border: 1px solid #005bc3;
+  text-align: center;
+  display: block;
+  background-color: #08366A;
+  color: #fff;
+  padding: 4.5rem 0.9375rem; }
+  .paragraph .paragraph--type--files-media span.fa::before {
+    font-size: 3.125rem;
+    color: #fff; }
+  .paragraph .paragraph--type--files-media .field--name-field-media-fichier span.fa {
+    width: 100%;
+    color: #fff; }
+  .paragraph .paragraph--type--files-media .field--name-field-media-fichier .mediafichierlien {
+    width: 100%;
+    display: block;
+    font-size: 1.5em;
+    color: #fff;
+    border-top: 1px solid #FFF;
+    margin-top: 0.9375rem;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 0.9375rem;
+    font-weight: bold; }
+  .paragraph .paragraph--type--files-media .field--name-field-media-fichier .mediafichiertype {
+    display: block; }
+  .paragraph .paragraph--type--files-media .field--name-field-media-fichier .mediafichierpoids {
+    display: block ruby; }
 
 /* Ebizproduction : Pagination */
 .pager {
@@ -11355,6 +11386,10 @@ body:not(.transparent) {
 
 .offer .blue-box .title {
   color: #fff; }
+
+article .paragraph .field--type-text-long ul, article .paragraph-color .field--type-text-long ul {
+  list-style-type: disc;
+  list-style-position: inside; }
 
 .centres-up1-form .map-centre, .center-wrapper .map-centre {
   width: 100%;

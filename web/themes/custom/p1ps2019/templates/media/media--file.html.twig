@@ -12,9 +12,30 @@
  * @ingroup themeable
  */
 #}
-  {% if content %}
-    {{ name }}
-    {{ content.field_media_file }}
-    {{ content.field_extension }}
-    {{ content.field_size }}
+{% if content %}
+  {% set ext = content.field_extension|render %}
+
+  {% if ext matches '/pdf/' %}
+    {% set type = "PDF" %}
+    {% set faType = "-pdf" %}
+  {% elseif ext matches '/word/' %}
+    {% set faType = "-word" %}
+    {% set type = "Word" %}
+  {% elseif ext matches '/excel/' %}
+    {% set faType = "-excel" %}
+    {% set type = "Excel" %}
+  {% elseif ext matches '/powerpoint/' %}
+    {% set faType = "-powerpoint" %}
+    {% set type = "Powerpoint" %}
+  {% else %}
+    {% set faType = "" %}
+    {% set type = "Fichier" %}
   {% endif %}
+
+  <div>
+    <span class="fa fa-file{{ faType }}"></span>
+    <a href="{{ content.field_media_file.0|render }}" target="_blank" title="Lien de téléchargement du fichier {{ name }}" class="mediafichierlien">{{ name }}</a>
+    <span class="mediafichiertype">{{ "Type de fichier : "|t }} {{ type }}</span>
+    <span class="mediafichierpoids">{{ "Poids du fichier : "|t }} {{ content.field_size }}</span>
+  </div>
+{% endif %}
