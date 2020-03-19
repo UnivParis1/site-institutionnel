@@ -77,24 +77,23 @@
 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="box-content same-height">
+  <div class="box-content blue-box same-height">
     <div class="top-infos">
+      {{ title_prefix }}
       <div class="infos-row-wrapper space-between">
         <div class="categ-wrapper infos-entry">
-          <div class="categ-style"> {{ content.field_offer_type }} </div>
           <div class="categ-style"> {{ content.field_job_type }} </div>
         </div>
-        <div class="date-style infos-entry">{{ content.field_application_deadline }}</div>
       </div>
-      {{ title_prefix }}
-      <h2 class="title semi-infos-sep">
-        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
-      </h2>
       {{ title_suffix }}
     </div>
     <div class="bottom-infos">
+      <h2 class="title semi-infos-sep">
+        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
+      </h2>
+      {{ content.field_fa_icon }}
       <div class="node-readmore">
-        <a href="{{ url }}" class="link-style" title="readmore">{{ "Read more"|t }}</a>
+        <a href="{{ url }}" class="btn outline" title="readmore">{{ "Read more"|t }}</a>
       </div>
     </div>
   </div>

@@ -10,7 +10,7 @@
 
 /* Heading TYPOGRAPHY -- BEGIN */
 h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, .h4-style, h5, h6 {
-  font-family: $font-second; @include setFont($fontType-bold);
+  font-family: $font-main; @include setFont($fontType-bold);
   line-height: 1.2;
 }
 h1, .h1-style{font-size: rem-calc(100px);}
@@ -155,14 +155,14 @@ table{
       margin-top: rem-calc(24px);
     }
   }
-  ul{
+  /*ul{
 
     li{
       &:before{
         content: "•"; padding-right: 6px;
       }
     }
-  }
+  }*/
 }
 .column-number-2{
   columns: 2;
@@ -215,7 +215,7 @@ table{
 }
 
 .txt-regular, .txt-regular *{@include setFont($fontType-regular);}
-.txt-second{font-family: $font-second;}
+.txt-second{font-family: $font-main;}
 .txt-bold{@include setFont($fontType-bold);}
 .toggler, .hand-cursor{cursor: pointer; cursor:hand;}
 .txt-upper-content, .txt-upper{text-transform: uppercase;}
@@ -306,7 +306,13 @@ table{
 
 .view-header-color{
   padding: rem-calc(70px 0);
+  .bef-exposed-form {
+    input[type="submit"].button.js-hide {
+      display: none;
+    }
+  }
 }
+
 
 .groupeinfo{text-align: center;}
 .infos-row-wrapper{
@@ -347,11 +353,11 @@ table{
 
 .subtitle{
 	font-size: rem-calc(16px); line-height: 1.25;
-	font-family: $font-second; @include setFont($fontType-lightItalic);
+	font-family: $font-main; @include setFont($fontType-lightItalic);
 }
 
 .categ-style{
-	font-family: $font-second; text-align: center;
+	font-family: $font-main; text-align: center;
   font-size: rem-calc(18px); line-height: 1.2;
   @include setFont($fontType-medium); padding: rem-calc(4px 12px);
   display: inline-block;
@@ -393,8 +399,8 @@ table{
 //Anchor style END ===========
 
 .date-style, .author{
-  font-size: rem-calc(18px); line-height: 1.6;
-  font-family: $font-second; @include setFont($fontType-medium);
+  font-size: rem-calc(20px); line-height: 1.6;
+  font-family: $font-main; @include setFont($fontType-medium);
   min-width: rem-calc(125px);
 }
 
