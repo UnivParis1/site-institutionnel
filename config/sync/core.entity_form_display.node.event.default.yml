@@ -17,9 +17,7 @@ dependencies:
     - field.field.node.event.field_sites
     - field.field.node.event.field_sites_all
     - field.field.node.event.field_subscription_link
-    - field.field.node.event.field_subtitle
     - field.field.node.event.field_tag
-    - field.field.node.event.field_thesis_supervisor
     - node.type.event
     - workflows.workflow.publication
   module:
@@ -539,6 +537,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
@@ -591,6 +590,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     region: content
   field_sites_all:
@@ -608,66 +608,15 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
-  field_subtitle:
-    weight: 5
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings:
-      conditional_fields:
-        86a3ee1a-6d0d-490b-95e8-3a094562dc24:
-          dependee: field_event_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                target_id: '2'
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: event
-    type: string_textfield
-    region: content
   field_tag:
     weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
-    region: content
-  field_thesis_supervisor:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings:
-      conditional_fields:
-        fe5fc2fa-fabd-4535-aea3-ec7e2157ea7f:
-          dependee: field_event_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                target_id: '2'
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: event
-    type: string_textfield
     region: content
   langcode:
     type: language_select
@@ -702,6 +651,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
   status:
@@ -738,6 +688,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     region: content
 hidden:
