@@ -71,83 +71,42 @@
   node.isPromoted() ? 'is-promoted',
   node.isSticky() ? 'is-sticky',
   not node.isPublished() ? 'is-unpublished',
-  view_mode ? view_mode|clean_class,
-  'clearfix'
+  'clearfix', 'box-style',
+  'bootstrap-cards',
+  'grid-x', 'grid-margin-x', 'grid-margin-y'
 ]
 %}
-{% set eventDate = '' %}
-{% set eventDate %}
-  {{ content.field_event_date }}
-{% endset %}
-{% set eventPlace = '' %}
-{% set eventPlace %}
-  {{ content.field_event_address }}
-{% endset %}
-
 <article{{ attributes.addClass(classes) }}>
-  <div class="img-container section-sep small">
-    {{ content.field_media }}
-  </div>
-  <div class="grid-container field-sep">
-    <div class="top-infos">
-      <div class="categ-wrapper infos-entry semi-infos-sep">
-        <div class="tag categ-style "> {{ content.field_event_type.0 }} </div>
-      </div>
-    </div>
-    <div{{ content_attributes.addClass('content grid-x grid-margin-x') }}>
-    {{ title_prefix }}
-    <div class="cell small-12">
-      <h1 class="title-sep">
-        {{ label.0 }}
-      </h1>
-    </div>
-    {{ title_suffix }}
-    <section id="event-content" class="cell small-12 large-8">
-      <div class="txt medium field-sep-mobile">
-        {{ content.field_blocs_medias }}
-      </div>
-    </section>
-    <aside id="event-sidebar" class="cell small-12 large-4 sidebar-map">
-      <div class="box-style no-shadow auto-height semi-field-sep">
-        <div class="box-content">
-          {% if eventDate|striptags|trim %}
-            <div class="details txt-second">
-              <div class="txt medium">
-                {{ content.field_event_date }}
-              </div>
-            </div>
-          {% endif %}
-          {% if eventPlace|striptags|trim %}
-            <div class="details semi-field-sep txt-second">
-              <div class="txt medium event-details">
-                <span>{{ 'Lieu : '|t }}</span>
-                {{ content.field_event_address }}
-              </div>
-              <div class="txt event-details">
-                <a href="https://www.google.com/maps/dir/?api=1&destination={{ content.field_event_address.0 }}"
-                   title="Ouvre Google Maps dans une nouvelle fenêtre" target="_blank">
-                  <i class="fa-3x fa fa-map-signs"></i>{{ 'Google Maps direction'|t }}
-                </a>
-              </div>
-            </div>
-          {% endif %}
-          {{ content.field_address_map }}
+  <div class="">
+    <div class="cell medium-4">
+      <div class="box-content same-height">
+        <div class="top-infos">
+          <div class="viva-title">{{ content.field_subtitle }}</div>
+          {{ title_prefix }}
+          <h2 class="title semi-infos-sep">
+            <span>{{ label.0 }}</span>
+            </a>
+          </h2>
+          {{ title_suffix }}
         </div>
-      </div>
-      <div class="box-style no-shadow auto-height semi-field-sep">
-        {% if content.field_subscription_link.0['#url'] is not empty %}
-          <div class="social-and-calendar box-content">
-            <a href="{{ content.field_subscription_link.0['#url'] }}" class="link-style txt-upper txt-second txt-bold">{{ 'Inscription'|t }}</a>
+        <div class="bottom-infos">
+          <div class="thesis-direction">{{ "Sous la direction de :"|t }}
+            <span class="direction-name">{{ content.field_thesis_supervisor.0}}</span>
           </div>
-        {% endif %}
-      </div>
-      <div class="box-style no-shadow auto-height">
-        <div class="social-and-calendar box-content">
-          {{ content.field_add_to_cal }}
-          {{ content.social_simple_buttons }}
+          <div class="date-style semi-field-sep">
+            {{ content.field_event_date }}
+          </div>
+          <div class="event-details">
+            <span>{{ 'Lieu : '|t }}</span>
+            <a href="https://www.google.com/maps/dir/?api=1&destination={{ content.field_event_address.0 }}"
+               title="Ouvre Google Maps dans une nouvelle fenêtre" target="_blank">
+
+              {{ content.field_event_address.0 }}
+            </a>
+          </div>
         </div>
+        {{ content.field_add_to_cal }}
       </div>
-    </aside>
-  </div>
+    </div>
   </div>
 </article>

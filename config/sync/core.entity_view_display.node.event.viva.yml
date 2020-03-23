@@ -1,9 +1,9 @@
-uuid: 2812d797-b4a1-4554-a2be-5b400faffc6f
+uuid: 7aaa8193-5f47-4354-b424-adc0c3104aba
 langcode: fr
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.bootstrap_cards
+    - core.entity_view_mode.node.viva
     - field.field.node.event.body
     - field.field.node.event.field_add_to_cal
     - field.field.node.event.field_address_map
@@ -21,75 +21,54 @@ dependencies:
     - node.type.event
   module:
     - ics_field
-    - text
     - up1_global
     - user
 _core:
   default_config_hash: 0ExIAG0-2MLVxXSyQwD7_Lxf_g4l8XabO-OlXyT4Kyo
-id: node.event.bootstrap_cards
+id: node.event.viva
 targetEntityType: node
 bundle: event
-mode: bootstrap_cards
+mode: viva
 content:
-  body:
-    type: text_summary_or_trimmed
-    weight: 3
-    region: content
-    label: hidden
-    settings:
-      trim_length: 150
-    third_party_settings: {  }
   field_add_to_cal:
-    type: calendar_download_default_formatter
-    weight: 6
-    region: content
-    label: hidden
+    weight: 4
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
+    type: calendar_download_default_formatter
+    region: content
+  field_event_address:
+    type: string
+    weight: 3
+    region: content
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
   field_event_date:
-    weight: 1
-    label: hidden
-    settings:
-      prefix: Du
-      separator: au
-      icon: arrow-right
-    third_party_settings: {  }
-    type: daterange_up1
-    region: content
-  field_event_type:
-    weight: 2
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_media:
-    type: entity_reference_entity_view
     weight: 0
     label: visually_hidden
     settings:
-      view_mode: thumbnail_news
-      link: false
+      date_format: 'Y-m-d\TH:i:s'
+      timezone_override: ''
     third_party_settings: {  }
+    type: up1_viva_format
     region: content
-  links:
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  body: true
   content_moderation_control: true
   field_address_map: true
   field_blocs_medias: true
   field_categories: true
   field_disable_canonical_url: true
-  field_event_address: true
+  field_event_type: true
+  field_media: true
   field_sites: true
   field_sites_all: true
   field_subscription_link: true
   field_tag: true
   langcode: true
+  links: true
   search_api_excerpt: true
   site_id: true
   social_simple_buttons: true
