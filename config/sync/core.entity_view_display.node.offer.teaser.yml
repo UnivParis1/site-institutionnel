@@ -14,7 +14,9 @@ dependencies:
     - field.field.node.offer.field_contract_type
     - field.field.node.offer.field_disable_canonical_url
     - field.field.node.offer.field_email_address
+    - field.field.node.offer.field_fa_icon
     - field.field.node.offer.field_grade
+    - field.field.node.offer.field_job_date
     - field.field.node.offer.field_job_type
     - field.field.node.offer.field_offer_type
     - field.field.node.offer.field_position_details
@@ -27,6 +29,7 @@ dependencies:
     - node.type.offer
   module:
     - datetime
+    - fontawesome
     - options
     - user
 id: node.offer.teaser
@@ -47,6 +50,14 @@ content:
     settings:
       timezone_override: ''
       format_type: news_date
+    third_party_settings: {  }
+  field_fa_icon:
+    type: fontawesome_icon_formatter
+    weight: 5
+    region: content
+    label: visually_hidden
+    settings:
+      layers: false
     third_party_settings: {  }
   field_job_type:
     type: list_default
@@ -72,14 +83,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
   links:
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
     label: hidden
     type: entity_reference_label
-    weight: 5
+    weight: 6
     region: content
     settings:
       link: false
@@ -95,6 +106,7 @@ hidden:
   field_disable_canonical_url: true
   field_email_address: true
   field_grade: true
+  field_job_date: true
   field_position_details: true
   field_profile: true
   field_reference_offer: true
