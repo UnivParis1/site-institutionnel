@@ -76,43 +76,49 @@
 ]
 %}
 
-<article{{ attributes.addClass(classes) }}>
-  {{ title_prefix }}
-  <h2{{ title_attributes }}>
-    {{ label }}
-  </h2>
-  {{ title_suffix }}
-  <div class="categ-style semi-infos-sep"> {{ content.field_offer_type }} </div>
-  <div class="categ-style semi-infos-sep"> {{ content.field_service }} </div>
-  <div{{ content_attributes.addClass('content grid-x  grid-margin-x') }}>
-    <section id="event-content" class="large-8 medium-12 small-12 grid-x grid-margin-x full-height">
-      {{ content.body }}
-      {{ content.field_position_details }}
-      {{ content.field_profile }}
-    </section>
-    <aside id="event-sidebar" class="large-4 medium-12 small-12 grid-x full-height same-height">
-      <div class="event-details">
-        <h3>{{ "More information"|t }}</h3>
-        {{ content.field_job_type }}
-        {{ content.field_category }}
-        {{ content.field_bap }}
-        {{ content.field_grade }}
-      <div class="event-details">
-        <h3>{{ "Job details"|t }}</h3>
-        {{ content.field_application_deadline }}
-        {{ content.field_contract_duration }}
-        {{ content.field_salary_range }}
-      </div>
-        <div class="event-details">
-        <h3>{{ "To apply"|t }}</h3>
-        {{ content.field_email_address }}
-        {{ content.field_reference_offer }}
-      </div>
-      <div class="event-details">
-        <h3>{{ 'Lieu'|t }}</h3>
-        {{ content.field_address }}
-        {{ content.field_address_map }}
-      </div>
-    </aside>
-  </div>
-</article>
+<div class="grid-container field-sep offre-emploi">
+  <article{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <h2{{ title_attributes }}>
+      {{ label }}
+    </h2>
+    {{ title_suffix }}
+    <div class="categ-style semi-infos-sep"> {{ content.field_offer_type }} </div>
+    <div class="categ-style semi-infos-sep"> {{ content.field_service }} </div>
+    <div{{ content_attributes.addClass('content grid-x  grid-margin-x') }}>
+      <section id="event-content" class="cell small-12 large-8">
+        <h3>{{ "Description of the employer"|t }}</h3>
+        {{ content.body }}
+        <h3>{{ "Job profiles"|t }}</h3>
+        {{ content.field_position_details }}
+        <h3>{{ "Desired profile"|t }}</h3>
+        {{ content.field_profile }}
+      </section>
+      <aside id="event-sidebar" class="large-4 medium-12 small-12 grid-x full-height same-height">
+        <div class="event-details jobinfo">
+          <span class="fas fa-info-circle"></span>
+          <h3>{{ "More information"|t }}</h3>
+          {{ content.field_job_type }}
+          {{ content.field_category }}
+          {{ content.field_bap }}
+          {{ content.field_grade }}
+          {{ content.field_application_deadline }}
+          {{ content.field_contract_duration }}
+          {{ content.field_salary_range }}
+        </div>
+        <div class="event-details toapp">
+          <span class="fa fa-envelope"></span>
+          <h3>{{ "To apply"|t }}</h3>
+          {{ content.field_email_address }}
+          {{ content.field_reference_offer }}
+        </div>
+        <div class="event-details location">
+          <span class="fas fa-map-signs"></span>
+          <h3>{{ 'Location'|t }}</h3>
+          {{ content.field_address }}
+          {{ content.field_address_map }}
+        </div>
+      </aside>
+    </div>
+  </article>
+</div>

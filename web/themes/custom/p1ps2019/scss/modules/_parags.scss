@@ -9,7 +9,7 @@
 //     }
 //   }
 // }
-.paragraph{
+.paragraph {
   &:not(.paragraph--type--hit-list):not(.tiles-full):not(.paragraph--type--rich-content):not(.paragraph--type--tuile-text-wo-image):not(.paragraph--type--tile-wo-image):not(.paragraph--type--key-figure):not(.paragraph--type--presentation):not(.paragraph--type--bp-columns){
     padding-bottom: rem-calc(72px);
     padding-top: rem-calc(72px);
@@ -28,13 +28,15 @@
     padding-top: 0 !important; padding-bottom: 0 !important;
   }
 }
-
+.paragraph.paragraph--type--files-media {
+  padding-top: rem-calc(72px)!important;
+}
 .key-figures-section {
   position: relative;
   width: 100%;
   height: auto;
   display: block;
-  font-family: $font-second;
+  font-family: $font-main;
   h2 {
     position: relative;
     width: 100%;
@@ -49,7 +51,7 @@
     p{line-height: 1;}
   }
   .legende{
-    font-size: rem-calc(18px);
+    font-size: rem-calc(20px);
     text-transform: uppercase;
   }
 }//close .key-figures-section
@@ -71,6 +73,9 @@
   }
 }
 
+//paragraph jumbotron
+
+
 .paragraph--type--tuile-text-wo-image, .paragraph--type--tile-wo-image{
   //a{@extend .link-underline;}
 }
@@ -78,11 +83,11 @@
   .paragraph__column{
     .paragraph__column{
       font-size: rem-calc(20px); line-height: 1.2;
-      font-family: $font-second; position: relative;
+      font-family: $font-main; position: relative;
       @include setFont($fontType-bold);
       *{
         font-size: rem-calc(20px); line-height: 1.2;
-        font-family: $font-second;
+        font-family: $font-main;
         @include setFont($fontType-bold);
       }
     }
@@ -100,10 +105,10 @@
   .paragraph--type--presentation{
     width: 80%;
     h3{
-      font-size: rem-calc(40px); line-height: 1.325;
-      font-family: $font-regular;
+      font-size: rem-calc(28px); line-height: 1.325;
+      font-family: $font-main;
     }
-    p{font-size: rem-calc(20px); line-height: 1.35;}
+    p{font-size: rem-calc(18px); line-height: 1.35;}
   }
 }//close .paragraph--type--section-presentation
 
@@ -342,3 +347,42 @@
   padding-top: 0;
   padding-bottom: 0;
 }
+.paragraph {
+  .paragraph--type--files-media {
+    border: 1px solid #005bc3;
+    text-align: center;
+    display: block;
+    background-color:#08366A;
+    color:#fff;
+    padding: 4.5rem rem-calc(15px);
+
+    span.fa::before {
+      font-size: 3.125rem;
+      color:#fff;
+    }
+    .field--name-field-media-fichier {
+      span.fa {
+        width: 100%;
+        color: #fff;
+      }
+      .mediafichierlien {
+        width: 100%;
+        display: block;
+        font-size: 1.5em;
+        color:#fff;
+        border-top: 1px solid #FFF;
+        margin-top: rem-calc(15px);
+        border-bottom: 1px solid #fff;
+        margin-bottom: rem-calc(15px);
+        font-weight: bold;
+      }
+      .mediafichiertype {
+        display: block;
+      }
+      .mediafichierpoids {
+        display: block ruby;
+      }
+    }
+  }
+}
+
