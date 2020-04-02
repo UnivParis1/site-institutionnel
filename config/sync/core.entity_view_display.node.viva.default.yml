@@ -1,0 +1,85 @@
+uuid: 0849e01c-4541-43ae-abb9-b55ee2ba22fe
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.viva.field_add_to_cal
+    - field.field.node.viva.field_categories
+    - field.field.node.viva.field_edo_code
+    - field.field.node.viva.field_edo_label
+    - field.field.node.viva.field_event_address
+    - field.field.node.viva.field_event_date
+    - field.field.node.viva.field_subtitle
+    - field.field.node.viva.field_thesis_supervisor
+    - node.type.viva
+  module:
+    - ics_field
+    - up1_global
+    - user
+id: node.viva.default
+targetEntityType: node
+bundle: viva
+mode: default
+content:
+  field_add_to_cal:
+    weight: 4
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: calendar_download_default_formatter
+    region: content
+  field_edo_code:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_edo_label:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_event_address:
+    weight: 3
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_event_date:
+    weight: 0
+    label: visually_hidden
+    settings:
+      timezone_override: ''
+      date_format: 'Y-m-d\TH:i:s'
+    third_party_settings: {  }
+    type: up1_viva_format
+    region: content
+  field_subtitle:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_thesis_supervisor:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_categories: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  site_id: true
