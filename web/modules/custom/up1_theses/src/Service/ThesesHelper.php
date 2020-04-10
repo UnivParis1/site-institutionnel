@@ -53,7 +53,7 @@ class ThesesHelper {
   }
 
   /**
-   * Create nodes event from json.
+   * Create nodes viva from json.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
@@ -65,16 +65,11 @@ class ThesesHelper {
     if (!empty($data)) {
       $taxonomyEntity = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term');
-      $termType = $taxonomyEntity->loadByProperties([
-        'name' => 'Soutenance de thèse'
-      ]);
-      $type = reset($termType);
       $termCategory = $taxonomyEntity->loadByProperties([
         'name' => 'Recherche'
       ]);
       $category = reset($termCategory);
       $uid = $this->thesesService->getWebmestreUid();
-
       foreach ($data as $key => $these) {
         $ok = FALSE;
         $existingTheses = $this->thesesService->getExistingTheses();
@@ -94,16 +89,15 @@ class ThesesHelper {
           !empty($these['HH_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
           !empty($these['LIB_PR1_IND']) && !empty($these['LIB_NOM_PAT_IND']) &&
           !empty($these['PNOMDIR']) && !empty($these['NOMPDIR'])) {
-
           $address = $this->formatAddress($these['LIB_CMT_LEU_SOU_THS']);
-          $thesard = $this->t('By') . " " . ucfirst($these['LIB_PR1_IND'])
-            . " " . ucfirst($these['LIB_NOM_PAT_IND']);
+          $thesard = ucfirst(strtolower($these['LIB_PR1_IND']))
+            . " " . ucfirst(strtolower($these['LIB_NOM_PAT_IND']));
           $dir_ths = ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
 
           $nodes[] = [
             'cod_ths' => $cod_ths,
             'title' => $these['LIB_THS'],
-            'type' => 'event',
+            'type' => 'viva',
             'langcode' => 'fr',
             'uid' => $uid,
             'status' => 1,
@@ -124,7 +118,6 @@ class ThesesHelper {
                 'lng' => isset($address['lon']) ? $address['lon'] : 0,
               ]
             ],
-            'field_event_type' => $type,
             'field_categories' => $category,
             'cod_edo' => $these['COD_EDO'],
           ];
@@ -235,7 +228,7 @@ class ThesesHelper {
    */
   public function formatDate($date, $hours, $minutes) {
     $format = 'd/m/Y H:i';
-    $fullDate = $date . " " . ($hours - 2).":";
+    $fullDate = $date . " " . ($hours - 1).":";
     $fullDate .= ($minutes == 0)? "00" : $minutes;
 
     $newDate = \DateTime::createFromFormat($format, $fullDate);
@@ -245,9 +238,10 @@ class ThesesHelper {
       $formattedDate = \Drupal::service('date.formatter')
         ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
       $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
+      $formattedDate = preg_replace('/CET/i', 'T', $formattedDate);
     }
     else {
-      \Drupal::logger('up1_theses')->notice("The date won't be created for this event.");
+      \Drupal::logger('up1_theses')->notice("The date won't be created for this viva.");
     }
 
     return $formattedDate;

@@ -80,7 +80,7 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
       $node = $storage->create([
         'cod_ths' => $item['cod_ths'],
         'title' => $item['title'],
-        'type' => 'event',
+        'type' => 'viva',
         'langcode' => 'fr',
         'uid' => $item['uid'],
         'status' => 1,
@@ -90,7 +90,6 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
         'field_event_date' => $item['field_event_date'],
         'field_address_map' => $item['field_address_map'],
       ]);
-      $node->set('field_event_type', [$item['field_event_type']]);
       $node->set('field_categories', [$item['field_categories']]);
       $node->set('moderation_state', 'published');
 

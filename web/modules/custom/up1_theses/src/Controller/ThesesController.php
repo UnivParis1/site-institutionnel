@@ -72,10 +72,14 @@ class ThesesController extends ControllerBase {
    * {@inheritDoc}
    */
   public function getThesesList() {
-    \Drupal::logger('node_load')->info(print_r(Node::load(414), 1));
     $data = $this->thesesHelper->formatDataFromJson();
     if (!$data) {
       \Drupal::logger('up1_theses')->warning('No new data to import.');
+      $finalMessage = $this->t('No new data to import.');
+      $header = [];
+      $rows = [];
+      $attributes = [];
+      $sticky = [];
     }
     else {
       $queue = $this->queueFactory->get('up1_theses_queue_import');
@@ -89,25 +93,29 @@ class ThesesController extends ControllerBase {
 
       // 5. Get what's in the queue now.
       $tableVariables = $this->getItemList($queue);
+      $header = $tableVariables['header'];
+      $rows = $tableVariables['rows'];
+      $attributes = $tableVariables['attributes'];
+      $sticky = $tableVariables['sticky'];
 
-      $finalMessage = $this->t('The Queue had @totalBefore items. 
+      $finalMessage = $this->t('The Queue had @totalBefore items.
     We should have added @count items in the Queue. Now the Queue has @totalAfter items.',
         [
           '@count' => count($data),
           '@totalAfter' => $totalItemsAfter,
           '@totalBefore' => $totalItemsInQueue,
         ]);
-
+    }
       return [
         '#type' => 'table',
         '#caption' => $finalMessage,
-        '#header' => $tableVariables['header'],
-        '#rows' => isset($tableVariables['rows']) ? $tableVariables['rows'] : [],
-        '#attributes' => $tableVariables['attributes'],
-        '#sticky' => $tableVariables['sticky'],
+        '#header' => $header,
+        '#rows' => isset($rows) ? $rows : [],
+        '#attributes' => $attributes,
+        '#sticky' => $sticky,
         '#empty' => $this->t('No items.'),
       ];
-    }
+
   }
 
   /**
