@@ -130,7 +130,7 @@ class WsGroupsController extends ControllerBase {
 
       $build['item_list'] = [
         '#theme' => 'liste_pages_persos_filtree',
-        '#users' => $sortedUsers,
+        '#users' => $filtered_users,
         '#affiliation' => 'student',
         '#Trusted' => FALSE,
         '#attached' => [

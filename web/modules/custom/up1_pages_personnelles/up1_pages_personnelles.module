@@ -97,9 +97,15 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
       $form['field_uid_ldap']['#disabled'] = TRUE;
 
+      $form['field_affiliation']['#disabled'] = TRUE;
+      $form['field_affiliation']['widget'][0]['value']['#default_value'] =
+        $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
+
       $info = '';
-      foreach ($userInformation['info'] as $datum) {
-        $info .= $datum;
+      if (isset($userInformation['info'])) {
+        foreach ($userInformation['info'] as $datum) {
+          $info .= $datum;
+        }
       }
       if (isset ($userInformation)) {
         $form['field_research_themes']['#default_value'] = $info;
@@ -127,13 +133,12 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
 }
 
 function up1_pages_personnelles_node_create(NodeInterface $node) {
-  switch ($node->getType()) {
-    case 'page_personnelle':
-      $owner = $node->getOwner();
-      $userInformation = up1_pages_personnelles_get_comptex_info($owner->getAccountName());
-
+  if ($node->getType() == 'page_personnelle') {
+    $owner = $node->getOwner();
+    $userInformation = up1_pages_personnelles_get_comptex_info($owner->getAccountName());
+    if (isset($userInformation) && !empty($userInformation)) {
       $node->title = $userInformation['supannCivilite'] . ' ' . $userInformation['displayName'];
-      break;
+    }
   }
 }
 
@@ -201,8 +206,10 @@ function up1_pages_personnelles_get_hal_publications($name) {
  */
 function up1_comptex_markup($data) {
   $info = "";
-  foreach ($data['info'] as $datum) {
-    $info .= '<div class="info">' . $datum . '</div>';
+  if (isset($data['info'])) {
+    foreach ($data['info'] as $datum) {
+      $info .= '<div class="info">' . $datum . '</div>';
+    }
   }
   if ($data['eduPersonPrimaryAffiliation'] == "student") {
     $type = 'doctorant';
@@ -236,6 +243,26 @@ function up1_comptex_markup($data) {
   if (isset($data['employeeType'])) {
     $employeeType = '<div class="employeeType">' . $data['employeeType'] . '</div>';
   }
+  $phone = '';
+  if (isset($data['telephoneNumber'])) {
+    $phone .= '<div class="phoneNumbers">
+      <div>
+        <i class="fa fa-phone"></i><span class="uneditable-input">'. $data['telephoneNumber'] . '</span>
+      </div>
+    </div>';
+  }
+  $address = '';
+  if (isset($data['buildingName']) || isset($data['postalAddress'])) {
+    $address .= '<div class="address">';
+    if (isset($data['buildingName'])) {
+      $address .= '
+        <label><i class="fa fa-map-marker"></i></label><span class="uneditable-input ">' . $data['buildingName']. '</span>';
+    }
+    if (isset($data['postalAddress'])) {
+     $address .= '<span class="postalAddress">' . $data['postalAddress']. '</span>';
+    }
+    $address .='</div>';
+  }
 
   $container .= '
     <div class="row">
@@ -255,16 +282,9 @@ function up1_comptex_markup($data) {
             </div>' . $activite . $info . '
           </div>
           <div class="col-md-5 contactInformation">
-            <div class="mail"><i class="fa fa-envelope"></i> ' . $data['mail']. '</div>
-            <div class="phoneNumbers">
-              <div>
-                <i class="fa fa-phone"></i><span class="uneditable-input">'. $data['telephoneNumber'] . '</span>
-              </div>
-            </div>
-            <div class="address">
-                <label><i class="fa fa-map-marker"></i></label><span class="uneditable-input ">' . $data['buildingName']. '</span>
-                <span class="postalAddress">' . $data['postalAddress']. '</span>
-            </div>
+            <div class="mail"><i class="fa fa-envelope"></i> ' . $data['mail']. '</div>'.
+    $phone
+     . $address . '
           </div>
       </div>
     </div>

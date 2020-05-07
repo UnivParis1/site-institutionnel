@@ -30,7 +30,7 @@ class ComptexManager implements ComptexInterface {
     $searchUser = "$ws?token=$username";
 
     $params = [
-      'attrs' => "supannCivilite,displayName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI"
+      'attrs' => "supannCivilite,displayName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation"
     ];
 
     $ch = curl_init();
@@ -89,6 +89,7 @@ class ComptexManager implements ComptexInterface {
     $config = \Drupal::config('up1_pages_personnelles.settings');
 
     if ($information && !empty($information)) {
+      \Drupal::logger('comptex')->info(count($information['uid']));
       if (isset($information['uid'])) {
         $information['userPhoto'] = $config->get('url_userphoto') . $information['uid'];
       }
@@ -129,7 +130,6 @@ class ComptexManager implements ComptexInterface {
 
       if (isset($information['supannEntiteAffectation-all']) && !empty($information['supannEntiteAffectation-all'])) {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
-
           $information['entites'][$key]['name'] = $supannEntiteAffectation['name'];
           $information['entites'][$key]['description'] = $supannEntiteAffectation['description'];
           if ($key == 0) {
