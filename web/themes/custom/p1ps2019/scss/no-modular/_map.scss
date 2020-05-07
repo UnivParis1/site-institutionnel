@@ -1,65 +1,109 @@
 .centres-up1-form, .center-wrapper {
   .map-centre {
     width: 100%;
-    background: url('../images/bg-map.png') 0 0 transparent;
-    background-size: cover;
-    height: rem-calc(450px);
+    height: rem-calc(250px);
     display: flex;
     flex-direction: row-reverse;
-    .center-form{
-      width: 40%; z-index: 401;
-      #edit_centre_name_chosen{
+
+    .center-form {
+      width: 100%;
+      z-index: 401;
+      #edit_centre_name_chosen {
         width: 100% !important;
       }
-      .centre-up1{
-        font-size: rem-calc(20px);
-        .fa{
-          &:before{
-            font-size: inherit;
-            #{$margin-right}: rem-calc(8px);
+      input.circle {
+        font: normal normal normal 20px/1 FontAwesome;
+      }
+      select {
+        margin: 0;
+      }
+      .overlay-infos {
+        a {
+          color: #fff
+        }
+        padding: rem-calc(70px 122px);
+        @include flexDisplay();
+        align-items: flex-end;
+        @include flexDisplayAlign('center');
+
+        .ajax-progress, .ajax-progress-throbber {
+          display: none;
+        }
+        .form-item{
+          flex: 0 0 70%;
+          max-width: 70%;
+          label{
+            @extend .h2-style; margin-bottom: rem-calc(16px);
           }
         }
-      }
-      input.circle{
-        font: normal normal normal 14px/1 FontAwesome;
-      }
-      select{margin: 0;}
-    }
-    .overlay-infos{
-      a {color: #fff}
-      padding: rem-calc(70px 122px);
-      @include flexDisplay(); align-items: flex-end;
-      @include flexDisplayAlign('space-between');
-      .ajax-progress, .ajax-progress-throbber{display: none;}
-      .details-centre{
-        margin-top: rem-calc(16px);
-        font-size: rem-calc(20px);
-        *{font-size: rem-calc(20px);}
-        > div:not(:last-of-type){
-          margin-bottom: rem-calc(16px);
-        }
-      }
-      .form-item{
-        flex: 0 0 89%;
-        max-width: 89%;
-        label{
-          @extend .h2-style; margin-bottom: rem-calc(16px);
-        }
-      }
-      input[type="submit"]{margin-bottom: rem-calc(16px);}
-      .centre-itineraire {
-        margin-left: 57px;
-      }
-      .details-service, .center-address {
-        display: flex;
-        align-items: center;
-        .fa {
-          margin-right: 20px;
-        }
-        .fa:before {
-          font-size: 3rem;
+        input[type="submit"]{
+          margin: 0 0 rem-calc(8px) rem-calc(16px);
+          &.circle{
+            width: 3.5rem;
+            height: 3.5rem;
+          }
         }
       }
     }
   }
+  .details-centre {
+    display: flex;
+    font-size: rem-calc(16px);
+    .image-centre {
+      width: 65%;
+      &:after {
+        background: rgba(0, 50, 110, 0.4);
+      }
+    }
+    .centre-up1 {
+      background: #00326e;
+      width: 35%;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      .centre-up1-info {
+        display: flex;
+        flex-direction: column;
+        .centre-name {
+          display: flex;
+          align-items: center;
+        }
+        .centre-phone {
+          display: flex;
+          align-items: center;
+          @include flexDisplayAlign('space-evenly');
+          .fa-phone {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+        }
+        h4, address, a, .centre-phone, .centre-email, .centre-info {
+          color: #fff;
+        }
+        a {
+          &:hover {
+            color: #fff;
+          }
+        }
+        .fa-envelope, .fa-info-circle, .fa-map-signs, .fa-phone {
+          margin: 1rem 1rem 1rem 0;
+          &:before {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+  .details-service, .center-address {
+    display: flex;
+    align-items: center;
+    .fa {
+      margin-right: 20px;
+    }
+    .fa:before {
+      font-size: 3rem;
+    }
+  }
+
 }

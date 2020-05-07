@@ -8718,7 +8718,7 @@ input[type="search"]::-webkit-search-cancel-button {
     max-width: 100%; } }
 
 /* Heading TYPOGRAPHY -- BEGIN */
-h1, .h1-style, h2, .h2-style, .centres-up1-form .map-centre .overlay-infos .form-item label, .center-wrapper .map-centre .overlay-infos .form-item label, h3, .h3-style, h4, .h4-style, h5, h6 {
+h1, .h1-style, h2, .h2-style, .centres-up1-form .map-centre .center-form .overlay-infos .form-item label, .center-wrapper .map-centre .center-form .overlay-infos .form-item label, h3, .h3-style, h4, .h4-style, h5, h6 {
   font-family: "Montserrat";
   font-weight: 700;
   line-height: 1.2; }
@@ -8726,7 +8726,7 @@ h1, .h1-style, h2, .h2-style, .centres-up1-form .map-centre .overlay-infos .form
 h1, .h1-style {
   font-size: 6.25rem; }
 
-h2, .h2-style, .centres-up1-form .map-centre .overlay-infos .form-item label, .center-wrapper .map-centre .overlay-infos .form-item label {
+h2, .h2-style, .centres-up1-form .map-centre .center-form .overlay-infos .form-item label, .center-wrapper .map-centre .center-form .overlay-infos .form-item label {
   font-size: 2.8125rem; }
 
 h3, .h3-style {
@@ -10092,7 +10092,7 @@ hr {
   color: #fff;
   background: #333; }
 
-h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .centres-up1-form .map-centre .overlay-infos .form-item label, .center-wrapper .map-centre .overlay-infos .form-item label, .h3-style, .h4-style, .h5-style, .h6-style {
+h1, h2, h3, h4, h5, h6, .h1-style, .h2-style, .centres-up1-form .map-centre .center-form .overlay-infos .form-item label, .center-wrapper .map-centre .center-form .overlay-infos .form-item label, .h3-style, .h4-style, .h5-style, .h6-style {
   color: #00326e; }
 
 .paris1-bg-blue {
@@ -11461,73 +11461,105 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
 
 .centres-up1-form .map-centre, .center-wrapper .map-centre {
   width: 100%;
-  background: url("../images/bg-map.png") 0 0 transparent;
-  background-size: cover;
-  height: 28.125rem;
+  height: 15.625rem;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: row-reverse;
       flex-direction: row-reverse; }
   .centres-up1-form .map-centre .center-form, .center-wrapper .map-centre .center-form {
-    width: 40%;
+    width: 100%;
     z-index: 401; }
     .centres-up1-form .map-centre .center-form #edit_centre_name_chosen, .center-wrapper .map-centre .center-form #edit_centre_name_chosen {
       width: 100% !important; }
-    .centres-up1-form .map-centre .center-form .centre-up1, .center-wrapper .map-centre .center-form .centre-up1 {
-      font-size: 1.25rem; }
-      .centres-up1-form .map-centre .center-form .centre-up1 .fa:before, .center-wrapper .map-centre .center-form .centre-up1 .fa:before {
-        font-size: inherit;
-        margin-right: 0.5rem; }
     .centres-up1-form .map-centre .center-form input.circle, .centres-up1-form .map-centre .center-form #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input, #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions .centres-up1-form .map-centre .center-form input, .center-wrapper .map-centre .center-form input.circle, .center-wrapper .map-centre .center-form #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input, #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions .center-wrapper .map-centre .center-form input {
-      font: normal normal normal 14px/1 FontAwesome; }
+      font: normal normal normal 20px/1 FontAwesome; }
     .centres-up1-form .map-centre .center-form select, .center-wrapper .map-centre .center-form select {
       margin: 0; }
-  .centres-up1-form .map-centre .overlay-infos, .center-wrapper .map-centre .overlay-infos {
-    padding: 4.375rem 7.625rem;
-    /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    .centres-up1-form .map-centre .center-form .overlay-infos, .center-wrapper .map-centre .center-form .overlay-infos {
+      padding: 4.375rem 7.625rem;
+      /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+      display: -ms-flexbox;
+      /* TWEENER - IE 10 */
+      /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+      display: flex;
+      /* NEW, Spec - Firefox, Chrome, Opera */
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      -ms-flex-direction: row;
+          flex-direction: row;
+      -ms-flex-align: end;
+          align-items: flex-end;
+      -ms-flex-pack: center;
+      justify-content: center; }
+      .centres-up1-form .map-centre .center-form .overlay-infos a, .center-wrapper .map-centre .center-form .overlay-infos a {
+        color: #fff; }
+      .centres-up1-form .map-centre .center-form .overlay-infos .ajax-progress, .centres-up1-form .map-centre .center-form .overlay-infos .ajax-progress-throbber, .center-wrapper .map-centre .center-form .overlay-infos .ajax-progress, .center-wrapper .map-centre .center-form .overlay-infos .ajax-progress-throbber {
+        display: none; }
+      .centres-up1-form .map-centre .center-form .overlay-infos .form-item, .center-wrapper .map-centre .center-form .overlay-infos .form-item {
+        -ms-flex: 0 0 70%;
+            flex: 0 0 70%;
+        max-width: 70%; }
+        .centres-up1-form .map-centre .center-form .overlay-infos .form-item label, .center-wrapper .map-centre .center-form .overlay-infos .form-item label {
+          margin-bottom: 1rem; }
+      .centres-up1-form .map-centre .center-form .overlay-infos input[type="submit"], .center-wrapper .map-centre .center-form .overlay-infos input[type="submit"] {
+        margin: 0 0 0.5rem 1rem; }
+        .centres-up1-form .map-centre .center-form .overlay-infos input[type="submit"].circle, .centres-up1-form .map-centre .center-form .overlay-infos #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input[type="submit"], #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions .centres-up1-form .map-centre .center-form .overlay-infos input[type="submit"], .center-wrapper .map-centre .center-form .overlay-infos input[type="submit"].circle, .center-wrapper .map-centre .center-form .overlay-infos #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions input[type="submit"], #navbar .block-views-exposed-filter-blockrecherche-de-contenu-page-1 #views-exposed-form-recherche-de-contenu-page-1 .form-actions .center-wrapper .map-centre .center-form .overlay-infos input[type="submit"] {
+          width: 3.5rem;
+          height: 3.5rem; }
+
+.centres-up1-form .details-centre, .center-wrapper .details-centre {
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 1rem; }
+  .centres-up1-form .details-centre .image-centre, .center-wrapper .details-centre .image-centre {
+    width: 65%; }
+    .centres-up1-form .details-centre .image-centre:after, .center-wrapper .details-centre .image-centre:after {
+      background: rgba(0, 50, 110, 0.4); }
+  .centres-up1-form .details-centre .centre-up1, .center-wrapper .details-centre .centre-up1 {
+    background: #00326e;
+    width: 35%;
+    padding: 2rem;
     display: -ms-flexbox;
-    /* TWEENER - IE 10 */
-    /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
     display: flex;
-    /* NEW, Spec - Firefox, Chrome, Opera */
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -ms-flex-direction: row;
-        flex-direction: row;
-    -ms-flex-align: end;
-        align-items: flex-end;
-    -ms-flex-pack: justify;
-    justify-content: space-between; }
-    .centres-up1-form .map-centre .overlay-infos a, .center-wrapper .map-centre .overlay-infos a {
-      color: #fff; }
-    .centres-up1-form .map-centre .overlay-infos .ajax-progress, .centres-up1-form .map-centre .overlay-infos .ajax-progress-throbber, .center-wrapper .map-centre .overlay-infos .ajax-progress, .center-wrapper .map-centre .overlay-infos .ajax-progress-throbber {
-      display: none; }
-    .centres-up1-form .map-centre .overlay-infos .details-centre, .center-wrapper .map-centre .overlay-infos .details-centre {
-      margin-top: 1rem;
-      font-size: 1.25rem; }
-      .centres-up1-form .map-centre .overlay-infos .details-centre *, .center-wrapper .map-centre .overlay-infos .details-centre * {
-        font-size: 1.25rem; }
-      .centres-up1-form .map-centre .overlay-infos .details-centre > div:not(:last-of-type), .center-wrapper .map-centre .overlay-infos .details-centre > div:not(:last-of-type) {
-        margin-bottom: 1rem; }
-    .centres-up1-form .map-centre .overlay-infos .form-item, .center-wrapper .map-centre .overlay-infos .form-item {
-      -ms-flex: 0 0 89%;
-          flex: 0 0 89%;
-      max-width: 89%; }
-      .centres-up1-form .map-centre .overlay-infos .form-item label, .center-wrapper .map-centre .overlay-infos .form-item label {
-        margin-bottom: 1rem; }
-    .centres-up1-form .map-centre .overlay-infos input[type="submit"], .center-wrapper .map-centre .overlay-infos input[type="submit"] {
-      margin-bottom: 1rem; }
-    .centres-up1-form .map-centre .overlay-infos .centre-itineraire, .center-wrapper .map-centre .overlay-infos .centre-itineraire {
-      margin-left: 57px; }
-    .centres-up1-form .map-centre .overlay-infos .details-service, .centres-up1-form .map-centre .overlay-infos .center-address, .center-wrapper .map-centre .overlay-infos .details-service, .center-wrapper .map-centre .overlay-infos .center-address {
+    -ms-flex-align: center;
+        align-items: center;
+    color: #fff; }
+    .centres-up1-form .details-centre .centre-up1 .centre-up1-info, .center-wrapper .details-centre .centre-up1 .centre-up1-info {
       display: -ms-flexbox;
       display: flex;
-      -ms-flex-align: center;
-          align-items: center; }
-      .centres-up1-form .map-centre .overlay-infos .details-service .fa, .centres-up1-form .map-centre .overlay-infos .center-address .fa, .center-wrapper .map-centre .overlay-infos .details-service .fa, .center-wrapper .map-centre .overlay-infos .center-address .fa {
-        margin-right: 20px; }
-      .centres-up1-form .map-centre .overlay-infos .details-service .fa:before, .centres-up1-form .map-centre .overlay-infos .center-address .fa:before, .center-wrapper .map-centre .overlay-infos .details-service .fa:before, .center-wrapper .map-centre .overlay-infos .center-address .fa:before {
-        font-size: 3rem; }
+      -ms-flex-direction: column;
+          flex-direction: column; }
+      .centres-up1-form .details-centre .centre-up1 .centre-up1-info .centre-name, .center-wrapper .details-centre .centre-up1 .centre-up1-info .centre-name {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+            align-items: center; }
+      .centres-up1-form .details-centre .centre-up1 .centre-up1-info .centre-phone, .center-wrapper .details-centre .centre-up1 .centre-up1-info .centre-phone {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+            align-items: center; }
+        .centres-up1-form .details-centre .centre-up1 .centre-up1-info .centre-phone .fa-phone, .center-wrapper .details-centre .centre-up1 .centre-up1-info .centre-phone .fa-phone {
+          font-size: 1.5rem;
+          margin: 1rem 1rem 1rem 0; }
+      .centres-up1-form .details-centre .centre-up1 .centre-up1-info h4, .centres-up1-form .details-centre .centre-up1 .centre-up1-info address, .centres-up1-form .details-centre .centre-up1 .centre-up1-info a, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .centre-phone, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .centre-email, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .centre-info, .center-wrapper .details-centre .centre-up1 .centre-up1-info h4, .center-wrapper .details-centre .centre-up1 .centre-up1-info address, .center-wrapper .details-centre .centre-up1 .centre-up1-info a, .center-wrapper .details-centre .centre-up1 .centre-up1-info .centre-phone, .center-wrapper .details-centre .centre-up1 .centre-up1-info .centre-email, .center-wrapper .details-centre .centre-up1 .centre-up1-info .centre-info {
+        color: #fff; }
+      .centres-up1-form .details-centre .centre-up1 .centre-up1-info a:hover, .center-wrapper .details-centre .centre-up1 .centre-up1-info a:hover {
+        color: #fff; }
+      .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-envelope, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-info-circle, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-map-signs, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-phone, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-envelope, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-info-circle, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-map-signs, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-phone {
+        margin: 1rem 1rem 1rem 0; }
+        .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-envelope:before, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-info-circle:before, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-map-signs:before, .centres-up1-form .details-centre .centre-up1 .centre-up1-info .fa-phone:before, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-envelope:before, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-info-circle:before, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-map-signs:before, .center-wrapper .details-centre .centre-up1 .centre-up1-info .fa-phone:before {
+          font-size: 1.5rem; }
+
+.centres-up1-form .details-service, .centres-up1-form .center-address, .center-wrapper .details-service, .center-wrapper .center-address {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center; }
+  .centres-up1-form .details-service .fa, .centres-up1-form .center-address .fa, .center-wrapper .details-service .fa, .center-wrapper .center-address .fa {
+    margin-right: 20px; }
+  .centres-up1-form .details-service .fa:before, .centres-up1-form .center-address .fa:before, .center-wrapper .details-service .fa:before, .center-wrapper .center-address .fa:before {
+    font-size: 3rem; }
 
 /*
     Feuille de style SCSS
@@ -11560,12 +11592,18 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
 #user-login-form .form-item, #user-login-form .form-actions {
   margin-bottom: 1rem; }
 
-.page_personnelle {
-  margin-top: 2rem; }
-  .page_personnelle ul {
+.page-personnelle:target {
+  display: block;
+  position: relative;
+  top: -236px;
+  visibility: hidden; }
+
+.page-personnelle .page_personnelle {
+  margin-top: 5.5rem; }
+  .page-personnelle .page_personnelle ul {
     list-style-type: initial;
     margin-left: 1rem; }
-  .page_personnelle .page_personnelle-name {
+  .page-personnelle .page_personnelle .page_personnelle-name {
     width: 100%;
     position: fixed;
     right: 0;
@@ -11574,29 +11612,30 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
     text-align: center;
     z-index: 5;
     box-shadow: 0 0 3px 0 rgba(51, 51, 51, 0.25); }
-    .page_personnelle .page_personnelle-name h1 {
+    .page-personnelle .page_personnelle .page_personnelle-name h1 {
       font-size: 2.5rem;
       margin: 1rem 0; }
-  .page_personnelle .left-fix-aside {
-    margin-top: 6.5rem; }
-    .page_personnelle .left-fix-aside .progress {
+  .page-personnelle .page_personnelle .left-fix-aside {
+    margin-top: 5.5rem; }
+    .page-personnelle .page_personnelle .left-fix-aside .progress {
       position: relative;
       float: none;
       text-align: center;
-      width: auto;
+      width: -webkit-max-content;
+      width: max-content;
       display: block;
       margin: 0;
       background-color: transparent;
       border-radius: unset;
       height: auto; }
-      .page_personnelle .left-fix-aside .progress .wrapper {
+      .page-personnelle .page_personnelle .left-fix-aside .progress .wrapper {
         position: absolute;
         width: inherit;
         left: 2rem; }
-        .page_personnelle .left-fix-aside .progress .wrapper.affix {
+        .page-personnelle .page_personnelle .left-fix-aside .progress .wrapper.affix {
           position: fixed;
           top: 234px; }
-      .page_personnelle .left-fix-aside .progress .bar {
+      .page-personnelle .page_personnelle .left-fix-aside .progress .bar {
         position: relative;
         display: block;
         width: 100%;
@@ -11606,7 +11645,7 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
         text-align: center;
         border: 1px solid #08366a;
         padding: 0 1rem; }
-        .page_personnelle .left-fix-aside .progress .bar span {
+        .page-personnelle .page_personnelle .left-fix-aside .progress .bar span {
           margin-left: -1rem;
           position: absolute;
           display: block;
@@ -11614,64 +11653,67 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
           height: 40px;
           z-index: 0;
           background-color: #08366a; }
-        .page_personnelle .left-fix-aside .progress .bar a {
+        .page-personnelle .page_personnelle .left-fix-aside .progress .bar a {
           line-height: 40px;
           position: relative;
           z-index: 1;
           color: #fff;
           mix-blend-mode: exclusion;
           text-transform: uppercase; }
-        .page_personnelle .left-fix-aside .progress .bar i {
+        .page-personnelle .page_personnelle .left-fix-aside .progress .bar i {
           position: absolute;
           right: -30px;
           height: 40px;
           line-height: 40px;
           color: #36a7f3;
           transition: color .3s; }
-  .page_personnelle .right-mov-content .colonnecentrale h2 {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale h2 {
     font-size: 1.875rem; }
-  .page_personnelle .right-mov-content .colonnecentrale h3 {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale h3 {
     font-size: 1.25rem; }
-  .page_personnelle .right-mov-content .colonnecentrale h4 {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale h4 {
     font-size: 1.1rem; }
-  .page_personnelle .right-mov-content .colonnecentrale .new-section {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale .new-section {
     margin: 2rem 0; }
-  .page_personnelle .right-mov-content .colonnecentrale ul.publications-list {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale ul.publications-list {
     font-size: 1rem;
     font-family: "Montserrat"; }
-  .page_personnelle .right-mov-content .colonnecentrale .accordion-item {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale .accordion-item {
     margin: 1rem 0; }
-  .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications .pub-title {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications .pub-title {
     color: #00326e;
     font-size: 1.1rem; }
-  .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script {
+  .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script {
     font-family: Montserrat; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .Rubrique {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .Rubrique {
       font-weight: bold;
       color: #00326e;
       padding: 1rem 0 0 1rem;
       border-bottom: 1px solid #00326e; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .SousRubrique {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .SousRubrique {
       border-bottom: 1px solid grey;
       margin: 0 1.1rem;
       padding: 1rem;
       text-transform: uppercase; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .NoticeRes {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .NoticeRes {
       padding-left: 2rem; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .NoticeRes::before {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .NoticeRes::before {
       content: "- ";
       font-weight: bold; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .ValeurRes {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .ValeurRes {
       display: inline; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .ChampRes {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .ChampRes {
       display: none; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .LienBibtex {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .LienBibtex {
       display: none; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .Type_de_document {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .Type_de_document {
       display: none; }
-    .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .Fichier_joint {
+    .page-personnelle .page_personnelle .right-mov-content .colonnecentrale #page-perso-publications #res_script .Fichier_joint {
       display: none; }
-  .page_personnelle .right-mov-content .colonnedroite .userImg {
+  .page-personnelle .page_personnelle .right-mov-content .colonnedroite a:hover {
+    color: #fff;
+    text-decoration: underline; }
+  .page-personnelle .page_personnelle .right-mov-content .colonnedroite .userImg {
     width: 100%;
     padding-top: 100%;
     position: relative;
@@ -11679,7 +11721,7 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
     overflow: hidden;
     margin-bottom: 0;
     z-index: -1; }
-    .page_personnelle .right-mov-content .colonnedroite .userImg img {
+    .page-personnelle .page_personnelle .right-mov-content .colonnedroite .userImg img {
       position: absolute;
       top: 0;
       left: 0;
@@ -11687,33 +11729,33 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
       right: 0;
       width: 100%;
       margin-top: -25%; }
-  .page_personnelle .right-mov-content .colonnedroite .infos-sep .details {
+  .page-personnelle .page_personnelle .right-mov-content .colonnedroite .infos-sep .details {
     text-align: center; }
-    .page_personnelle .right-mov-content .colonnedroite .infos-sep .details .display-inline {
+    .page-personnelle .page_personnelle .right-mov-content .colonnedroite .infos-sep .details .display-inline {
       margin-left: 0;
       margin-top: 1rem;
       border: 1px solid #fff; }
-    .page_personnelle .right-mov-content .colonnedroite .infos-sep .details .fa-3x {
+    .page-personnelle .page_personnelle .right-mov-content .colonnedroite .infos-sep .details .fa-3x {
       font-size: 2.5rem; }
-    .page_personnelle .right-mov-content .colonnedroite .infos-sep .details .social-link {
+    .page-personnelle .page_personnelle .right-mov-content .colonnedroite .infos-sep .details .social-link {
       padding: 0 5px; }
-  .page_personnelle .right-mov-content .colonnedroite .cell {
+  .page-personnelle .page_personnelle .right-mov-content .colonnedroite .cell {
     width: 100%;
     margin: 0;
     padding-top: 100%;
     /* 1:1 Aspect Ratio */
     position: relative; }
-    .page_personnelle .right-mov-content .colonnedroite .cell.resume {
+    .page-personnelle .page_personnelle .right-mov-content .colonnedroite .cell.resume {
       padding-top: 0; }
-    .page_personnelle .right-mov-content .colonnedroite .cell .cv {
+    .page-personnelle .page_personnelle .right-mov-content .colonnedroite .cell .cv {
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
       right: 0; }
-  .page_personnelle .right-mov-content .colonnedroite .fa-file-pdf::before {
+  .page-personnelle .page_personnelle .right-mov-content .colonnedroite .fa-file-pdf::before {
     font-size: 3vw; }
-  .page_personnelle .content {
+  .page-personnelle .page_personnelle .content {
     float: left;
     margin-bottom: 3rem;
     padding: 0 2rem; }
@@ -12364,7 +12406,7 @@ form#centres-up1-form {
   .footer .footer-wrapper {
     padding: 3rem 2rem; }
   .centres-up1-form .map-centre .center-form, .center-wrapper .map-centre .center-form {
-    width: 50%; }
+    width: 100%; }
   .centres-up1-form .map-centre .overlay-infos, .center-wrapper .map-centre .overlay-infos {
     padding: 2rem; } }
 
@@ -12394,7 +12436,7 @@ form#centres-up1-form {
 @media screen and (max-width: 74.9375em) {
   h1, .h1-style {
     font-size: 3rem; }
-  h2, .h2-style, .centres-up1-form .map-centre .overlay-infos .form-item label, .center-wrapper .map-centre .overlay-infos .form-item label {
+  h2, .h2-style, .centres-up1-form .map-centre .center-form .overlay-infos .form-item label, .center-wrapper .map-centre .center-form .overlay-infos .form-item label {
     font-size: 2rem; }
   h3, .h3-style {
     font-size: 1.5rem; }
@@ -12572,7 +12614,7 @@ form#centres-up1-form {
   h1, .h1-style {
     font-size: 2rem;
     line-height: 1.33; }
-  h2, .h2-style, .centres-up1-form .map-centre .overlay-infos .form-item label, .center-wrapper .map-centre .overlay-infos .form-item label, .event h1, .news h1 {
+  h2, .h2-style, .centres-up1-form .map-centre .center-form .overlay-infos .form-item label, .center-wrapper .map-centre .center-form .overlay-infos .form-item label, .event h1, .news h1 {
     font-size: 1.375rem;
     line-height: 1.18; }
   h3, .h3-style {
@@ -12689,11 +12731,15 @@ form#centres-up1-form {
         .centres-up1-form .map-centre .overlay-infos .details-centre > div:not(:last-of-type), .center-wrapper .map-centre .overlay-infos .details-centre > div:not(:last-of-type) {
           margin-bottom: 0.5rem; }
       .centres-up1-form .map-centre .overlay-infos .form-item, .center-wrapper .map-centre .overlay-infos .form-item {
-        -ms-flex: 0 0 80%;
-            flex: 0 0 80%;
-        max-width: 80%; }
-      .centres-up1-form .map-centre .overlay-infos input[type="submit"], .center-wrapper .map-centre .overlay-infos input[type="submit"] {
-        margin-bottom: 0; }
+        -ms-flex: 0 0 60%;
+            flex: 0 0 60%;
+        max-width: 65%; }
+        .centres-up1-form .map-centre .overlay-infos .form-item .chosen-container-single:before, .center-wrapper .map-centre .overlay-infos .form-item .chosen-container-single:before {
+          background: none; }
+        .centres-up1-form .map-centre .overlay-infos .form-item .chosen-container-single:after, .center-wrapper .map-centre .overlay-infos .form-item .chosen-container-single:after {
+          right: 0.5rem; }
+        .centres-up1-form .map-centre .overlay-infos .form-item .chosen-container-single .chosen-single, .center-wrapper .map-centre .overlay-infos .form-item .chosen-container-single .chosen-single {
+          padding: 0; }
   textarea,
   select,
   input[type="text"],
