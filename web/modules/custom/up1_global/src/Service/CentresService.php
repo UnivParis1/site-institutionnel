@@ -59,7 +59,7 @@ class CentresService {
    */
   public function getACentre($url, $code) {
     if (!empty($dataArray = $this->getCentresJson($url))) {
-      $key = array_search($code, array_column($dataArray, 'Code'));
+      $key = array_search($code, array_column($dataArray, 'code'));
       $centre = $dataArray[$key];
 
       return $centre;
@@ -70,77 +70,113 @@ class CentresService {
     }
   }
 
-  public function renderCentre($url, $code, $with_phone = TRUE, $with_fax = TRUE) {
+  public function getCentreByName($url, $title) {
+    if (!empty($dataArray = $this->getCentresJson($url))) {
+      $title = trim(strtolower(htmlspecialchars($title)));
+      $key = array_search($title, array_column($dataArray, 'intitule'));
+      $centre = $dataArray[$key];
+
+      return $centre;
+    }
+
+    else {
+      return FALSE;
+    }
+  }
+
+  public function getCentreImage($code) {
+    $url = $this->getWebServiceUrl();
+    \Drupal::logger('centreService')->logger("Webservice URL : $url");
+    $file = "$url$code.jpg";
+    \Drupal::logger('centreService')->logger("FILE : $file");
+    $file_headers = @get_headers($file);
+    \Drupal::logger('centreService')->logger($file_headers);
+    \Drupal::logger('centres')->info("JPG : " . print_r($file_headers, 1));
+    if (!empty($file_headers) && $file_headers[0] == 'HTTP/1.1 200 OK') {
+      $image_path = $file;
+    }
+    else {
+      $file = "$url$code.png";
+      $file_headers = @get_headers($file);
+      \Drupal::logger('centres')->info("PNG : " . print_r($file_headers, 1));
+      if (!empty($file_headers) && $file_headers[0] == 'HTTP/1.1 200 OK') {
+        $image_path = $file;
+      }
+      else {
+        $random = rand(0, 1) ? 'blue' : 'white';
+        $image_path = $url."default_$random.jpg";
+      }
+    }
+
+    return $image_path;
+  }
+
+  public function renderCentre($url, $code) {
+    $image_url = $this->getCentreImage($code);
+    \Drupal::logger('centreService')->logger("RenderCentre image url : $image_url");
     $centre = $this->getACentre($url, $code);
     if ($centre) {
-      $tel_fax = "";
-      $transports = "";
-      $has_tel_fax = 0;
-      $has_transports = 0;
-      !empty($centre['LibWeb'])? $libWeb = $centre['LibWeb'] : $libWeb = "";
-      !empty($centre['Adresse'])? $adresse = $centre['Adresse'] : $adresse = "";
-      !empty($centre['Tel'] && $with_phone)? $tel = $centre['Tel'] : $tel = "";
-      !empty($centre['Tel'] && $with_phone)? $has_tel_fax++ : $has_tel_fax;
-      !empty($centre['Fax'] && $with_fax)? $fax = $centre['Fax'] : $fax = "";
-      !empty($centre['Fax'] && $with_fax)? $has_tel_fax++ : $has_tel_fax;
-      !empty($centre['Metro'])? $metro = $centre['Metro'] : $metro = "";
-      if (!empty($metro)) {
-        $metro = "<div>
-        <span><b>" . t('Métro : ') . "</b></span>
-        <span>" . preg_replace('/ ; /', ', ', $metro) . "</span>
-        </div>";
-        $has_transports++;
-      }
-      !empty($centre['Rer'])? $rer = $centre['Rer'] : $rer = "";
-      if (!empty($rer)) {
-        $rer = "<div>
-        <span><b>" . t('RER : ') . "</b></span>
-        <span>" . preg_replace('/ ; /', ', ', $rer) . "</span>
-        </div>";
-        $has_transports++;
-      }
-      !empty($centre['Bus'])? $bus = $centre['Bus'] : $bus = "";
-      if (!empty($bus)) {
-        $bus = "<div>
-        <span><b>" . t('Bus : ') . "</b></span>
-        <span>" . preg_replace('/ ; /', ', ', $bus) . "</span>
-        </div>";
-        $has_transports++;
-      }
-      if ($has_tel_fax > 0) {
-        $tel_fax = "<div class='centre-phone-fax'>";
-        if (!empty($tel)) {
-          $tel_fax .= "<div class='centre-phone'>
-            <span>" . t('Phone : ') . "</span>
-            <a href='tel:$tel'>$tel</a>  
-            </div>";
-        }
-        if (!empty($fax)) {
-          $tel_fax .= "<div class='centre-fax'>
-            <span>" . t('Fax : ') . "</span>
-            <span>$fax</span>  
-            </div>";
-        }
-        $tel_fax .= '';
-      }
-      if ( $has_transports > 0 ) {
-        $transports = "<div class='centre-itineraire'>
-           <span>" . t('Accès transports : ') . "</span>
-           $metro $rer $bus
-           </div>";
-      }
+      $htmlCentre = "";
 
-      $htmlCentre =
+      $block_phone = "<div class='centre-phone'>";
+      $block_email = "<div class='centre-email'>";
+      $block_info = "<div class='centre-info'>";
+
+      $title = $centre['intitule'];
+      $address = $centre['adresse'];
+      $block_address = "
+      <i class='fa fa-map-signs'></i>
+      <a href='//maps.google.fr/maps?t=m&z=16&q=$address' target='_blank' title='$title'>
+        $address
+      </a>";
+      //telephone
+      !empty($centre['telephone']) ? $phone = $centre['telephone'] : $phone = "";
+
+      if (!empty($phone)) {
+        $block_phone .= "<i class='fas fa-phone'></i>";
+        $block_phone .= "<div>";
+        foreach ($phone as $item) {
+          $block_phone .= "<p><a href='tel:$item'>$item</a></p>";
+        }
+        $block_phone .= "</div>";
+      }
+      $block_phone .= "</div>";
+
+      //email
+      !empty($centre['email']) ? $email = $centre['email'] : $email = "";
+
+      if (!empty($email)) {
+        $block_email .= "<div class='centre-phone'>
+            <i class='fas fa-envelope'></i>
+            <a href='mailto:$email'>$email</a>
+            </div>";
+      }
+      $block_email .= "</div>";
+
+      //infos
+      !empty($centre['informations']) ? $info = $centre['informations'] : $info = "";
+
+      if (!empty($info)) {
+        $block_info .= "<div class='centre-more'>
+        <i class='fas fa-info-circle'></i>
+        <a href='$info'>$info</a>
+        </div>";
+      }
+      $block_info .= "</div>";
+      $img = file_create_url($image_url);
+      $htmlCentre .= "<div class='image-centre mask no-hover relative-wrapper'>
+        <img src='$img' />
+    </div>";
+
+      $htmlCentre .=
         "<div class='centre-up1'>
-            <div class='center-address'>
-               <i class='fa fa-map-marker'></i> 
-               <div>
-                <h4>$libWeb</h4>
-                <address>$adresse</address>
-                $tel_fax
-               </div>
-            </div>
-            $transports
+           <div class='centre-up1-info'>
+            <h4>$title</h4>
+            <address>$block_address</address>
+            $block_phone
+            $block_email
+            $block_info
+          </div>
         </div>";
 
       return $htmlCentre;

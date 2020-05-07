@@ -54,6 +54,13 @@ class Up1Settings extends ConfigFormBase {
       '#size' => 60,
       '#default_value' => $config->get('webservice_centres.hostname'),
     ];
+    $form['webservice_centres']['images_path'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Chemin du dossier image'),
+      '#description' => $this->t('Hostname or IP Address of the centres images folder.'),
+      '#size' => 60,
+      '#default_value' => $config->get('webservice_centres.images_path'),
+    ];
     return parent::buildForm($form, $form_state);
   }
 
@@ -66,6 +73,7 @@ class Up1Settings extends ConfigFormBase {
     $config
       ->set('webservice_centres.protocol', $webservice_data['protocol'])
       ->set('webservice_centres.hostname', $webservice_data['hostname'])
+      ->set('webservice_centres.images_path', $webservice_data['images_path'])
     ;
 
     $config->save();

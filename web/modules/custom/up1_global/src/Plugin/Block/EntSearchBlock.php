@@ -61,6 +61,6 @@ class EntSearchBlock extends BlockBase implements BlockPluginInterface {
     parent::blockSubmit($form, $form_state);
     $values = $form_state->getValues();
     $this->configuration['ent_url'] = $values['ent_url'];
-    $this->configuration['ent_label'] = $values['ent_label'];
+    //$this->configuration['ent_label'] = $values['ent_label'];
   }
 }
