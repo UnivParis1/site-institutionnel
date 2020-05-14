@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.event.field_subscription_link
     - field.field.node.event.field_tag
     - node.type.event
+    - workflows.workflow.publication
   module:
     - content_moderation
     - datetime_range
@@ -544,7 +545,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 25
+    weight: 42
     third_party_settings: {  }
     region: content
   field_event_address:
@@ -584,19 +585,19 @@ content:
     region: content
   field_sites:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 40
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
     region: content
   field_sites_all:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 24
+    weight: 41
     third_party_settings: {  }
     region: content
   field_subscription_link:

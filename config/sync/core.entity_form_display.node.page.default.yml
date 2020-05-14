@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.page.field_sites_all
     - field.field.node.page.field_sub_title
     - node.type.page
+    - workflows.workflow.publication
   module:
     - content_moderation
     - entity_browser
@@ -78,9 +79,9 @@ content:
     weight: 40
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
     region: content
   field_sites_all:
