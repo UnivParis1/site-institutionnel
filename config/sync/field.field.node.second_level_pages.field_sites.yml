@@ -1,0 +1,25 @@
+uuid: 7d0dbc92-331e-48a7-a2ab-05f5d302d9c1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sites
+    - node.type.second_level_pages
+id: node.second_level_pages.field_sites
+field_name: field_sites
+entity_type: node
+bundle: second_level_pages
+label: 'Others sites'
+description: 'Publish the content on others sites.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:site'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: id
+      direction: ASC
+field_type: entity_reference
