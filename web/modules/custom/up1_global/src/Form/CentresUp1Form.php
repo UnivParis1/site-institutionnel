@@ -1,16 +1,15 @@
 <?php
 
-
 namespace Drupal\up1_global\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
-
+use Drupal\up1_global\Controller\CentresController;
 
 class CentresUp1Form extends FormBase {
   /**
@@ -23,37 +22,52 @@ class CentresUp1Form extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['#prefix'] = '<div id="map-centre" class="map-centre">';
     $form['centre_name'] = [
+      '#prefix' => '<div class="overlay-infos">',
       '#type' => 'select',
       '#title' => t('Search a centre'),
       '#options' => $this->getCentresList(),
       '#required' => TRUE,
+      '#ajax' => [
+        'callback' => [$this, 'renderInfo'],
+        'event' => 'change',
+        'method' => 'html',
+        'wrapper' => 'center-wrapper-ajax'
+      ],
+      '#suffix' => '</div>',
     ];
 
-    $form['submit'] = array(
-      '#type' => 'submit',
-      '#value' => $this->t('Search'),
-      '#button_type' => 'primary',
-      '#ajax' => [
-        'callback' => '::renderInfo',
+    $form['my_ajax_container'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'id' => 'center-wrapper-ajax'
       ]
-    );
-    $form['#suffix'] = '</div>
-<div class="details-centre"></div>';
+    ];
+
+    if (!empty($form_state->getValues()) && !empty($form_state->getValue('centre_name'))) {
+      $displayCentre = new CentresController();
+      $content = $displayCentre->blockCentre($form_state->getValue('centre_name'));
+
+      $form['my_ajax_container']['my_response'] = [
+        '#markup' => \Drupal::service('renderer')->render($content),
+      ];
+    }
+
+    $form['#suffix'] = '</div>';
 
     return $form;
-
   }
+
   public function submitForm(array &$form, FormStateInterface $form_state) {}
 
+
   public function renderInfo(array $form, FormStateInterface $form_state) {
-    $content = $this->renderCentre($form_state->getValue('centre_name'));
-    $response = new AjaxResponse();
+
+
+    /*$response = new AjaxResponse();
     $response->addCommand(
-      new HtmlCommand(
-        '.details-centre',
-        '' . $content)
-    );
-    return $response;
+      new ReplaceCommand('.details-centre', $content)
+    );*/
+    return $form['my_ajax_container'];
   }
 
   public function getCentre($code) {
@@ -86,14 +100,14 @@ class CentresUp1Form extends FormBase {
 
     $file = "$url$code.jpg";
     $file_headers = @get_headers($file);
-    \Drupal::logger('centres')->info("JPG : " . print_r($file_headers, 1));
+
     if (!empty($file_headers) && $file_headers[0] == 'HTTP/1.1 200 OK') {
       $image_path = $file;
     }
     else {
       $file = "$url$code.png";
       $file_headers = @get_headers($file);
-      \Drupal::logger('centres')->info("PNG : " . print_r($file_headers, 1));
+
       if (!empty($file_headers) && $file_headers[0] == 'HTTP/1.1 200 OK') {
         $image_path = $file;
       }
@@ -184,7 +198,7 @@ class CentresUp1Form extends FormBase {
         $options[$code] = $centre['intitule'];
       }
     }
-    \Drupal::logger('centres')->info(print_r($options, 1));
+
     return $options;
   }
 }

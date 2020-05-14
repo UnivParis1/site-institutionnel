@@ -1,10 +1,9 @@
 .centres-up1-form, .center-wrapper {
   .map-centre {
     width: 100%;
-    height: rem-calc(250px);
+    min-height: rem-calc(250px);
     display: flex;
     flex-direction: row-reverse;
-
     .center-form {
       width: 100%;
       z-index: 401;
@@ -17,21 +16,27 @@
       select {
         margin: 0;
       }
+      .chosen-container-single {
+        .chosen-single {
+          &:after {
+            font-size: rem-calc(14px);
+          }
+          span{
+            font-size: rem-calc(15px);
+          }
+        }
+      }
       .overlay-infos {
         a {
           color: #fff
         }
-        padding: rem-calc(70px 122px);
         @include flexDisplay();
         align-items: flex-end;
         @include flexDisplayAlign('center');
-
         .ajax-progress, .ajax-progress-throbber {
           display: none;
         }
         .form-item{
-          flex: 0 0 70%;
-          max-width: 70%;
           label{
             @extend .h2-style; margin-bottom: rem-calc(16px);
           }
@@ -69,14 +74,38 @@
           display: flex;
           align-items: center;
         }
-        .centre-phone {
+        .centre-item {
           display: flex;
           align-items: center;
+          margin-bottom: rem-calc(8px);
           @include flexDisplayAlign('space-evenly');
           .fa-phone {
             font-size: 1.5rem;
             margin: 1rem 1rem 1rem 0;
           }
+          .fa-building {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+          .fa-envelope {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+          .fa-info-circle {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+        }
+        .centre-email {
+          display: flex;
+          align-items: center;
+          @include flexDisplayAlign('space-evenly');
+        }
+        .centre-info {
+          display: flex;
+          align-items: center;
+          @include flexDisplayAlign('space-evenly');
+
         }
         h4, address, a, .centre-phone, .centre-email, .centre-info {
           color: #fff;
@@ -93,16 +122,6 @@
           }
         }
       }
-    }
-  }
-  .details-service, .center-address {
-    display: flex;
-    align-items: center;
-    .fa {
-      margin-right: 20px;
-    }
-    .fa:before {
-      font-size: 3rem;
     }
   }
 
