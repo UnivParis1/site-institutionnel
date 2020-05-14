@@ -1,0 +1,334 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_pages_personnelles.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use \Drupal\up1_pages_personnelles\ComptexManager;
+use \Drupal\up1_pages_personnelles\HalManager;
+use \Drupal\User\UserInterface;
+use \Drupal\Node\NodeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * Implements hook_help().
+ */
+function up1_pages_personnelles_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_pages_personnelles module.
+    case 'help.page.up1_pages_personnelles':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Gestion des pages personnelles des EC et Doctorants de Paris 1.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'site') {
+    $fields['groups'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('LDAP Group(s)'))
+      ->setDescription(t('List of LDAP Groups that can access to the site. Separated by ; (Useful for CAS connection)'))
+      ->setRevisionable(FALSE)
+      ->setSettings([
+        'text_type' => 'text',
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => -10,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+  }
+
+  return $fields;
+}
+
+function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+  $form['pages_personnelles'] = [
+    '#type' => 'details',
+    '#title' => t('Directory and Groups'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-annuaire'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
+
+  if (isset($form['groups'])) {
+    $form['groups']['#group'] = 'pages_personnelles';
+  }
+  if (isset($form['filtre'])) {
+    $form['filtre']['#group'] = 'pages_personnelles';
+  }
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (in_array($form_id, ["node_page_personnelle_form", "node_page_personnelle_edit_form"]) ) {
+    if ($form_id == "node_page_personnelle_edit_form") {
+      $name = $form['field_uid_ldap']['widget'][0]['value']['#default_value'];
+    }
+    if ($form_id == "node_page_personnelle_form") {
+      $userCurrent = \Drupal::currentUser();
+
+      $user = \Drupal\user\Entity\User::load($userCurrent->id());
+      $name = $user->getUsername();
+    }
+    $userInformation = up1_pages_personnelles_get_comptex_info($name);
+
+    if ($userInformation) {
+      $form['title']['#disabled'] = TRUE;
+
+      $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
+      $form['field_uid_ldap']['#disabled'] = TRUE;
+
+      $form['field_affiliation']['#disabled'] = TRUE;
+      $form['field_affiliation']['widget'][0]['value']['#default_value'] =
+        $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
+
+      $info = '';
+      if (isset($userInformation['info'])) {
+        foreach ($userInformation['info'] as $datum) {
+          $info .= $datum;
+        }
+      }
+      if (isset ($userInformation)) {
+        $form['field_research_themes']['#default_value'] = $info;
+
+        $form['wrapper'] = [
+          '#type' => 'container',
+        ];
+        $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
+
+        $form['wrapper']['markup'] = [
+          '#type' => 'markup',
+          '#markup' => up1_comptex_markup($userInformation)
+        ];
+
+        $form['wrapper']['information'] = [
+          '#type' => 'markup',
+          '#markup' => '<div class="explications">
+            <div>Les informations ci-dessus sont récupérées de <a href="https://comptex.univ-paris1.fr/compte/donnees_perso">Mon compte Paris 1. </a></div>
+            <div>Elles apparaîtront telles quelles sur votre page personnelle. Pour modifier certaines informations, rendez-vous sur
+            <a href="https://comptex.univ-paris1.fr/compte/donnees_perso">Mon compte Paris 1. </a></div></div>'
+        ];
+      }
+    }
+  }
+}
+
+function up1_pages_personnelles_node_create(NodeInterface $node) {
+  if ($node->getType() == 'page_personnelle') {
+    $owner = $node->getOwner();
+    $userInformation = up1_pages_personnelles_get_comptex_info($owner->getAccountName());
+    if (isset($userInformation) && !empty($userInformation)) {
+      $node->title = $userInformation['supannCivilite'] . ' ' . $userInformation['displayName'];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function up1_pages_personnelles_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  $owner = $node->getOwner();
+
+  if ($node->getType() == 'page_personnelle') {
+    $userInformation = up1_pages_personnelles_get_comptex_info($owner->getAccountName());
+
+    if ($userInformation) {
+      foreach ($userInformation as $key => $information) {
+        $variables[$key] = $information;
+      }
+
+      $variables['publications'] = "";
+      $get_publications = $node->get('field_get_hal_publications')->getValue();
+      $hal_publications = $node->get('field_id_hal')->getValue();
+      if (!empty($get_publications) && $get_publications[0]['value']) {
+        \Drupal::logger('hal_publications')
+          ->info(print_r($hal_publications[0]['value'], 1));
+        $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
+
+        $variables['hal_publications'] = $publications;
+      }
+    }
+    else {
+
+    }
+  }
+}
+
+//Private functions
+/**
+ * @param $name
+ *
+ * @return array
+ */
+function up1_pages_personnelles_get_comptex_info($name) {
+  $comptex = new ComptexManager();
+  $userInformation = $comptex->getUserInformation($name);
+
+  return $userInformation;
+}
+
+/**
+ * @param $name
+ *
+ * @return array
+ */
+function up1_pages_personnelles_get_hal_publications($name) {
+  $hal = new HalManager();
+  $publications = $hal->getUserPublications($name);
+
+  return $publications;
+}
+
+/**
+ * @param $data
+ *
+ * @return string
+ */
+function up1_comptex_markup($data) {
+  $info = "";
+  if (isset($data['info'])) {
+    foreach ($data['info'] as $datum) {
+      $info .= '<div class="info">' . $datum . '</div>';
+    }
+  }
+  if ($data['eduPersonPrimaryAffiliation'] == "student") {
+    $type = 'doctorant';
+  }
+  else {
+    $type = "enseignant-chercheur";
+  }
+  $container = '';
+
+  $fullName = '';
+  if (isset($data['supannCivilite']) && isset ($data['displayName'])) {
+    $fullName = '<h2 class="cap">' . $data['supannCivilite']. ' '. $data['displayName'] . '</h2>';
+  }
+  $userPhoto = '';
+  if (isset($data['userPhoto'])) {
+    $userPhoto = '<div class="imgCircle">
+        <img class="imgCircle" src="' . $data['userPhoto'] . '"
+        style="width: 100%;height: auto;border: 0 none;margin: -20px 0 0 0px;max-height: none;max-width: none;padding: 0;"/>
+      </div>';
+  }
+  $role = '';
+  if (isset ($data['supannRole'])) {
+    $role = '<div class="supannRoleEntite">' . $data['supannRole']['name'] . ' ' . $data['supannRole']['structure'] . '</div>';
+  }
+
+  $activite = '';
+  if (isset($data['supannActivite'])) {
+    $activite = '<div class="supannActivite"><span>' . $data['supannActivite'] . '</span></div>';
+  }
+  $employeeType = '';
+  if (isset($data['employeeType'])) {
+    $employeeType = '<div class="employeeType">' . $data['employeeType'] . '</div>';
+  }
+  $phone = '';
+  if (isset($data['telephoneNumber'])) {
+    $phone .= '<div class="phoneNumbers">
+      <div>
+        <i class="fa fa-phone"></i><span class="uneditable-input">'. $data['telephoneNumber'] . '</span>
+      </div>
+    </div>';
+  }
+  $address = '';
+  if (isset($data['buildingName']) || isset($data['postalAddress'])) {
+    $address .= '<div class="address">';
+    if (isset($data['buildingName'])) {
+      $address .= '
+        <label><i class="fa fa-map-marker"></i></label><span class="uneditable-input ">' . $data['buildingName']. '</span>';
+    }
+    if (isset($data['postalAddress'])) {
+     $address .= '<span class="postalAddress">' . $data['postalAddress']. '</span>';
+    }
+    $address .='</div>';
+  }
+
+  $container .= '
+    <div class="row">
+    <div class="col-md-12">' . $fullName . '
+      </div>
+    </div>
+    <div class="boite">
+    <div class="row">' . $userPhoto . '
+
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-7">
+            <div>' . $employeeType .'</div>
+            ' . $role . '
+            <div class="affiliations">
+								<span>' . $type . '</span>
+            </div>' . $activite . $info . '
+          </div>
+          <div class="col-md-5 contactInformation">
+            <div class="mail"><i class="fa fa-envelope"></i> ' . $data['mail']. '</div>'.
+    $phone
+     . $address . '
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>';
+
+  return $container;
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function up1_pages_personnelles_user_login(UserInterface $account) {
+  if ($account->hasRole('enseignant_doctorant')) {
+    $query = \Drupal::entityQuery('node')
+      ->condition('uid', $account->id())
+      ->condition('type', 'page_personnelle');
+
+    $result = $query->execute();
+    if (!empty($result) && count($result) == 1) {
+      $nid = reset($result);
+      $goto = "/node/$nid/edit";
+    }
+    else {
+      $goto = "/node/add/page_personnelle";
+    }
+
+    $response = new Symfony\Component\HttpFoundation\RedirectResponse($goto);
+    $response->send();
+    return;
+  }
+}
+/**
+ * Implements hook_theme().
+ */
+function up1_pages_personnelles_theme() {
+  return [
+    'liste_pages_persos_filtree' => [
+      'variables' => [
+        'users' => [],
+        'affiliation' => NULL,
+        'Trusted' => FALSE,
+      ]
+    ]
+  ];
+}
+

@@ -36,9 +36,6 @@
  * @ingroup themeable
  */
 #}
-{% set offices = content.field_offices|render %}
-{% set service = content.field_service|render %}
-
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
@@ -56,19 +53,6 @@
                   {{ centre.adresse }}
                 </a>
               </address>
-              {% if offices or service %}
-                <div class='centre-item'>
-                  <i class='fas fa-building'></i>
-                  <div>
-                    {% if service %}
-                      <p>{{ content.field_service.0 }}</p>
-                    {% endif %}
-                    {% if offices %}
-                      <p>{{ content.field_offices.0 }}</p>
-                    {% endif %}
-                  </div>
-                </div>
-              {% endif %}
               {% if centre.telephone is not empty%}
                 <div class='centre-item'>
                   <i class='fas fa-phone'></i>
@@ -86,28 +70,22 @@
               {% if centre.email is not empty %}
                 <div class='centre-item'>
                   <i class='fas fa-envelope'></i>
-                  <div>
-                    {% for key, item in centre.email %}
-                      <p>
-                        <a href='mailto:{{ item }}' title="Adresse e-mail de contact du centre {{ centre.intitule }}">
-                          {{ item }}
-                        </a>
-                      </p>
-                    {% endfor %}
-                  </div>
+                  <p>
+                    <a href='mailto:{{ centre.email }}' title="Adresse e-mail de contact du centre {{ centre.intitule }}">
+                      {{ centre.email }}
+                    </a>
+                  </p>
                 </div>
               {% endif %}
               {% if centre.informations is not empty %}
                 <div class='centre-item'>
                   <i class='fas fa-info-circle'></i>
                   <div class='centre-more'>
-                    {% for key, item in centre.informations %}
-                      <p>
-                        <a href='{{ item }}' title="Lien vers le site internet du centre {{ centre.intitule }}">
-                          {{ item }}
-                        </a>
-                      </p>
-                    {% endfor %}
+                    <p>
+                      <a href='{{ centre.informations }}' title="Lien vers le site internet du centre {{ centre.intitule }}">
+                        {{ centre.informations }}
+                      </a>
+                    </p>
                   </div>
                 </div>
               {% endif %}

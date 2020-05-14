@@ -1,6 +1,7 @@
 <?php
 
 use \Drupal\paragraphs\Entity\Paragraph;
+use \Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_preprocess_HOOK() for html.twig.
@@ -127,7 +128,7 @@ function p1ps2019_preprocess_block(&$variables) {
     if ($block) {
       $variables["content"]["#attributes"]["region"] = $block->getRegion();
     }
-    if ($block_id == 'p1ps2019_branding') {
+    if ($block_id == 'p1ps2019_branding' || $block_id == 'p1ps2019_reseauxsociaux') {
       $negotiator = \Drupal::service('micro_site.negotiator');
       $site = $negotiator->getActiveSite();
       if ($site) {
@@ -135,6 +136,9 @@ function p1ps2019_preprocess_block(&$variables) {
       }
       else $variables['host_url'] = '';
     }
+    /*if ($block_id == 'p1ps2019_reseauxsociaux') {
+      $variables['host_url'] = base_path();
+    }*/
   }
 }
 
@@ -245,17 +249,33 @@ function p1ps2019_preprocess_views_view_table(&$variables) {
   }
 }
 
-
 function p1ps2019_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   if ($paragraph->bundle() == 'contact') {
     $service = \Drupal::service('up1_global.centres');
-    $variables['centre'] = $service->renderCentre("http://ws-theses.univ-paris1.fr/centres_up1",
-      $paragraph->field_centre->value, FALSE, FALSE);
+    $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
+
+    if(!empty($paragraph->field_phone->value))
+      array_unshift($variables['centre']['telephone'], $paragraph->field_phone->value);
+
+    $email = [];
+    if (!empty($variables['centre']['email'])) {
+      $email[] = $variables['centre']['email'];
+    }
+    if(!empty($paragraph->field_email_address->value)) {
+      array_unshift($email, $paragraph->field_email_address->value);
+    }
+    $variables['centre']['email'] = $email;
+
+    $infos = [];
+    if (!empty($variables['centre']['informations'])) {
+      $infos[] = $variables['centre']['informations'];
+    }
+    $variables['centre']['informations'] = $infos;
   }
 }
 
-function p1ps2019_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id) {
   if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
     $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
     unset($form['name']['#title'], $form['name']['#description']);

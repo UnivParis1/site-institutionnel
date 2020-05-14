@@ -1,0 +1,271 @@
+.page-personnelle {
+  &:target {
+    display: block;
+    position: relative;
+    top: -236px;
+    visibility: hidden;
+  }
+  .page_personnelle {
+    margin-top: 5.5rem;
+    ul {
+      list-style-type: initial;
+      margin-left: 1rem;
+    }
+    .page_personnelle-name {
+      width: 100%;
+      position: fixed;
+      right: 0;
+      top: 120px;
+      background-color: #fff;
+      text-align: center;
+      z-index: 5;
+      box-shadow: 0 0 3px 0 rgba(51, 51, 51, 0.25);
+
+      h1 {
+        font-size: 2.5rem;
+        margin: 1rem 0;
+      }
+    }
+    .left-fix-aside {
+      margin-top: 5.5rem;
+      .progress {
+        position: relative;
+        float: none;
+        text-align: center;
+        width: max-content;
+        display: block;
+        margin: 0;
+        background-color: transparent;
+        border-radius: unset;
+        height: auto;
+
+        .wrapper {
+          position: absolute;
+          width: inherit;
+          left: 2rem;
+
+          &.affix {
+            position: fixed;
+            top: 234px;
+          }
+        }
+
+        .bar {
+          position: relative;
+          display: block;
+          width: 100%;
+          height: 40px;
+          margin-bottom: 10px;
+          background-color: #fff;
+          text-align: center;
+          border: 1px solid #08366a;
+          padding: 0 1rem;
+
+          span {
+            margin-left: -1rem;
+            position: absolute;
+            display: block;
+            top: 0;
+            height: 40px;
+            z-index: 0;
+            background-color: #08366a;
+          }
+
+          a {
+            line-height: 40px;
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            mix-blend-mode: exclusion;
+            text-transform: uppercase;
+          }
+
+          i {
+            position: absolute;
+            right: -30px;
+            height: 40px;
+            line-height: 40px;
+            color: #36a7f3;
+
+            -webkit-transition: color .3s;
+            transition: color .3s;
+          }
+        }
+      }
+    }
+    .right-mov-content {
+      .colonnecentrale {
+        h2 {
+          font-size: 1.875rem;
+        }
+
+        h3 {
+          font-size: 1.25rem;
+        }
+
+        h4 {
+          font-size: 1.1rem;
+        }
+
+        .new-section {
+          margin: 2rem 0;
+        }
+
+        ul.publications-list {
+          font-size: 1rem;
+          font-family: "Montserrat";
+        }
+
+        .accordion-item {
+          margin: 1rem 0;
+        }
+
+        #page-perso-publications {
+          .pub-title {
+            color: #00326e;
+            font-size: 1.1rem;
+          }
+
+          .pub-author {
+          }
+
+          #res_script {
+            font-family: Montserrat;
+
+            .Rubrique {
+              font-weight: bold;
+              color: #00326e;
+              padding: 1rem 0 0 1rem;
+              border-bottom: 1px solid #00326e;
+            }
+
+            .SousRubrique {
+              border-bottom: 1px solid grey;
+              margin: 0 1.1rem;
+              padding: 1rem;
+              text-transform: uppercase;
+            }
+
+            .NoticeRes {
+              padding-left: 2rem;
+            }
+
+            .NoticeRes::before {
+              content: "- ";
+              font-weight: bold;
+            }
+
+            .ValeurRes {
+              display: inline;
+            }
+
+            .ChampRes {
+              display: none;
+            }
+
+            .LienBibtex {
+              display: none;
+            }
+
+            .Type_de_document {
+              display: none;
+            }
+
+            .Fichier_joint {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .colonnedroite {
+        a {
+          &:hover {
+            color: #fff;
+            text-decoration: underline;
+          }
+        }
+        .userImg {
+          width: 100%;
+          padding-top: 100%;
+          position: relative;
+          margin-top: 0;
+          overflow: hidden;
+          margin-bottom: 0;
+          z-index: -1;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            margin-top: -25%;
+          }
+        }
+
+        .infos-sep {
+          .details {
+            text-align: center;
+
+            .display-inline {
+              margin-left: 0;
+              margin-top: 1rem;
+              border: 1px solid #fff;
+            }
+
+            .fa-3x {
+              font-size: 2.5rem;
+            }
+
+            .social-link {
+              padding: 0 5px;
+            }
+          }
+        }
+
+        .cell {
+          width: 100%;
+          margin: 0;
+          padding-top: 100%; /* 1:1 Aspect Ratio */
+          position: relative;
+
+          &.resume {
+            padding-top: 0;
+          }
+
+          .cv {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+          }
+        }
+
+        .fa-file-pdf::before {
+          font-size: 3vw;
+        }
+      }
+    }
+
+    .content {
+      float: left;
+      margin-bottom: 3rem;
+      padding: 0 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .page_personnelle {
+    .left-fix-aside {
+      display: none;
+    }
+    .page_personnelle-name {
+      top: 60px;
+      position: absolute;
+    }
+  }
+}

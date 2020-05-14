@@ -147,7 +147,7 @@ table{
 .field--type-text-long{
   ul, div:not(.visually-hidden), p, img, embed, picture{
     ~ ul, ~ div, ~ p, ~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ img, ~ embed, ~ picture{
-      margin-top: rem-calc(56px);
+      margin-top: rem-calc(24px);
     }
   }
   h1, h2, h3, h4, h5{
@@ -168,6 +168,11 @@ table{
   columns: 2;
   column-gap: rem-calc(96px);
 }
+.column-number-3{
+  columns: 3;
+  column-gap: rem-calc(80px);
+}
+
 .m-txt-message, .message{
 	@include responsiveVal(padding, $gutter*0.75 $gutter*0.75 $gutter*0.75 $gutter*2);
 	@include setFont($fontType-regular); width: 100%;
@@ -259,7 +264,7 @@ table{
   #{$left}: 0; height: auto; width: 100%;z-index: 2;
 }
 .overlay-infos{
-  position: absolute; z-index: 2;
+  position: relative; z-index: 2;
   width: 100%; height: auto;
   a:hover{text-decoration: none;}
   &.equal-height{
