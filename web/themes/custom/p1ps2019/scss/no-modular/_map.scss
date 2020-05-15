@@ -33,8 +33,14 @@
         @include flexDisplay();
         align-items: flex-end;
         @include flexDisplayAlign('center');
-        .ajax-progress, .ajax-progress-throbber {
-          display: none;
+        .ajax-progress-throbber  {
+          .throbber {}
+          .message {
+            background: none;
+            &:before {
+              content: "";
+            }
+          }
         }
         .form-item{
           label{
