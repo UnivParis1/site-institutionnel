@@ -14,7 +14,6 @@
 #}
 {% if content %}
   {% set ext = content.field_extension|render %}
-
   {% if ext matches '/pdf/' %}
     {% set type = "PDF" %}
     {% set faType = "-pdf" %}
@@ -34,7 +33,8 @@
 
   <div>
     <span class="fa fa-file{{ faType }}"></span>
-    <a href="{{ content.field_media_file.0|render }}" target="_blank" title="Lien de téléchargement du fichier {{ name }}" class="mediafichierlien">{{ name }}</a>
+    <a href="{{ content.field_media_file.0|render }}" target="_blank" title="Lien de téléchargement du fichier"
+       class="mediafichierlien">{{ name }}</a>
     <span class="mediafichiertype">{{ "Type de fichier : "|t }} {{ type }}</span>
     <span class="mediafichierpoids">{{ "Poids du fichier : "|t }} {{ content.field_size }}</span>
   </div>
