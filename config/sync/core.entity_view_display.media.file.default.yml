@@ -9,6 +9,7 @@ dependencies:
     - media.type.file
   module:
     - file
+    - up1_global
 id: media.file.default
 targetEntityType: media
 bundle: file
@@ -24,10 +25,9 @@ content:
     region: content
   field_media_file:
     label: visually_hidden
-    settings:
-      use_description_as_link_text: true
+    settings: {  }
     third_party_settings: {  }
-    type: file_default
+    type: file_url_plain
     weight: 0
     region: content
   field_size:
@@ -35,9 +35,9 @@ content:
     label: hidden
     settings:
       thousand_separator: ''
-      prefix_suffix: true
+      prefix_suffix: 0
     third_party_settings: {  }
-    type: number_integer
+    type: filesize_up1
     region: content
 hidden:
   created: true
