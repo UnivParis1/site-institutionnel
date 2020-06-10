@@ -47,21 +47,27 @@
 #}
 {%
   set classes = [
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    'clearfix',
-  ]
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  'clearfix',
+]
 %}
-<section{{ attributes.addClass(classes) }}>
-  {{ title_prefix }}
-  {% if label %}
-    <div{{ title_attributes.addClass('block-title txt-upper h4-style') }}>{{ label }}</div>
-  {% endif %}
-  {{ title_suffix }}
 
-  {% block content %}
+{%  if host_url is empty %}
+  {% set host_url = path('<front>') %}
+{% endif %}
+{% block content %}
+  <section{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {% if label %}
+      <div{{ title_attributes.addClass('block-title txt-upper h4-style') }}>
+        <a href="{{ host_url }}" title="{{ label }}">{{ label }}</a>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
+
     {{ content }}
-  {% endblock %}
-</section>
+  </section>
+{% endblock %}
 
