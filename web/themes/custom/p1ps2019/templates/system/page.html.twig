@@ -83,7 +83,7 @@
 {% set siteNameClass = '' %}
 {# Header #}
 {% if site_name|length > 30 %}
-{% set siteNameClass = 'long' %}
+  {% set siteNameClass = 'long' %}
 {% endif %}
 {% if page.header or page.header_left or page.header_center or page.header_right or page.hp_image %}
   <header id="navbar" role="banner" {% if print_hp_image %} class="header-full {{ siteNameClass }}" {% endif %}>
@@ -94,9 +94,11 @@
             <div class="header-img img-container full-height">{{ page.hp_image }}</div>
             <div class="main-overlay-infos">
               {{ page.header }}
-                <div class="anchor-header">
-                  <a href="#page-content" data-smooth-scroll data-offset="80" class="fa fa-chevron-down"></a>
-                </div>
+              <div class="anchor-header">
+                <a href="#page-content" data-smooth-scroll="" data-offset="80" class="fa fa-chevron-down">
+                  <span class="sr-only">Chevron qui renvoi vers le contenu de cette page</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -163,7 +165,11 @@
                       </span>
                   </button>
                   {{ page.header_micro_left }}
-                  <div class="site-name {{ siteNameClass }}"><h2 class="title">{{ site_name }}</h2></div>
+                  <div class="site-name {{ siteNameClass }}">
+                    <a href="{{ path('<front>') }}" class="" title=" {{ site_name }}">
+                      <h2 class="title">{{ site_name }}</h2>
+                    </a>
+                  </div>
                 </div>
                 <div class="micro-right">
                   {{ page.header_micro_right }}
