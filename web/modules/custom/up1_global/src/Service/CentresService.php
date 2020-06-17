@@ -64,6 +64,7 @@ class CentresService {
       $path = \Drupal::config('up1.settings')->get('webservice_centres.images_path');
       $url_images = "$protocol://$path";
       $file = "$url_images$code.jpg";
+      if ($code == "0011_B") $file = $url_images . "0011_A.jpg";
       $file_headers = @get_headers($file);
       if (!empty($file_headers) && $file_headers[0] == 'HTTP/1.1 200 OK') {
         $centre['image_path'] = $file;
@@ -75,8 +76,7 @@ class CentresService {
           $centre['image_path'] = $file;
         }
         else {
-          $random = rand(0, 1) ? 'blue' : 'white';
-          $centre['image_path'] = file_create_url($url_images . "default_$random.jpg");
+          $centre['image_path'] = file_create_url($url_images . "default_white.jpg");
         }
       }
     }
