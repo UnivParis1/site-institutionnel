@@ -94,6 +94,15 @@ class ThesesHelper {
             . " " . ucfirst(strtolower($these['LIB_NOM_PAT_IND']));
           $dir_ths = ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
 
+          if (preg_match('/^[aeiouyh]/i', $these['LIB_EDO']) ||
+            preg_match('/^[É]/i', $these['LIB_EDO']) ||
+            preg_match('/^[é]/i', $these['LIB_EDO'])) {
+            $libedo = "École doctorale d'" . $these['LIB_EDO'];
+          }
+          else {
+            $libedo = "École doctorale de " . $these['LIB_EDO'];
+          }
+
           $nodes[] = [
             'cod_ths' => $cod_ths,
             'title' => $these['LIB_THS'],
@@ -119,7 +128,8 @@ class ThesesHelper {
               ]
             ],
             'field_categories' => $category,
-            'cod_edo' => $these['COD_EDO'],
+            'cod_edo' => "ED" . $these['COD_EDO'],
+            'lib_edo' => $libedo,
           ];
         }
       }
@@ -228,7 +238,7 @@ class ThesesHelper {
    */
   public function formatDate($date, $hours, $minutes) {
     $format = 'd/m/Y H:i';
-    $fullDate = $date . " " . ($hours - 1).":";
+    $fullDate = $date . " " . ($hours - 2).":";
     $fullDate .= ($minutes == 0)? "00" : $minutes;
 
     $newDate = \DateTime::createFromFormat($format, $fullDate);
