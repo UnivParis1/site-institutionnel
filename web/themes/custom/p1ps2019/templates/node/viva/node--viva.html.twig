@@ -80,15 +80,12 @@
   <div class="">
     <div class="cell medium-4">
       <div class="box-content same-height">
-        <div class="top-infos">
-          <div class="viva-title">{{ content.field_subtitle }}</div>
-          {{ title_prefix }}
-          <h2 class="title semi-infos-sep">
-            <span>{{ label.0 }}</span>
-            </a>
-          </h2>
-          {{ title_suffix }}
-        </div>
+        <div class="viva-title">{{ content.field_subtitle.0 }}</div>
+        {{ title_prefix }}
+        <h2 class="title semi-infos-sep">
+          {{ label.0 }}
+        </h2>
+        {{ title_suffix }}
         <div class="bottom-infos">
           <div class="thesis-direction">{{ "Sous la direction de :"|t }}
             <span class="direction-name">{{ content.field_thesis_supervisor.0}}</span>
@@ -98,11 +95,7 @@
           </div>
           <div class="event-details">
             <span>{{ 'Lieu : '|t }}</span>
-            <a href="https://www.google.com/maps/dir/?api=1&destination={{ content.field_event_address.0 }}"
-               title="Ouvre Google Maps dans une nouvelle fenêtre" target="_blank">
-
-              {{ content.field_event_address.0 }}
-            </a>
+            {{ destination|raw }}
           </div>
         </div>
         {{ content.field_add_to_cal }}
