@@ -190,12 +190,18 @@ class CentresUp1Form extends FormBase {
   }
 
   public function getCentresList() {
+    $object = [];
     $options = [];
 
     if (!empty($dataArray = $this->getCentresJson())) {
       foreach ($dataArray as $key => $centre) {
         $code = $centre['code'];
-        $options[$code] = $centre['intitule'];
+        $object[$code] = $centre['intitule'];
+      }
+      $obj = new \ArrayObject($object);
+      $obj->asort();
+      foreach ($obj as $key => $item) {
+        $options[$key] = $item;
       }
     }
 
