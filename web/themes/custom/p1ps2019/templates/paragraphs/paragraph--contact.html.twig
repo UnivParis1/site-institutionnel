@@ -55,6 +55,28 @@
                 <a href='//maps.google.fr/maps?t=m&z=16&q={{ centre.adresse }}' target='_blank' title='Adresse du centre {{ centre.intitule }}'>
                   {{ centre.adresse }}
                 </a>
+                <div class="come-to-centre">
+                  <a href='//www.google.com/maps/dir/?api=1&amp;travelmode=transit&amp;destination={{ centre.adresse }}'
+                     target='_blank' title='Se rendre au centre {{ centre.intitule }} en transports'>
+                    <i class="fas fa-subway"></i>
+                    <span class="sr-only">Se rendre au centre {{ centre.intitule }} en transports</span>
+                  </a>
+                  <a href='//www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;destination={{ centre.adresse }}'
+                     target='_blank' title='Se rendre au centre {{ centre.intitule }} à pied'>
+                    <i class="fas fa-walking"></i>
+                    <span class="sr-only">Se rendre au centre {{ centre.intitule }} à pied</span>
+                  </a>
+                  <a href='//www.google.com/maps/dir/?api=1&amp;travelmode=bicycling&amp;destination={{ centre.adresse }}'
+                     target='_blank' title='Se rendre au centre {{ centre.intitule }} à vélo'>
+                    <i class="fas fa-biking"></i>
+                    <span class="sr-only">Se rendre au centre {{ centre.intitule }} à vélo</span>
+                  </a>
+                  <a href='//www.google.com/maps/dir/?api=1&amp;travelmode=driving&amp;destination={{ centre.adresse }}'
+                     target='_blank' title='Se rendre au centre {{ centre.intitule }} en voiture'>
+                    <i class="fas fa-car"></i>
+                    <span class="sr-only">Se rendre au centre {{ centre.intitule }} en voiture</span>
+                  </a>
+                </div>
               </address>
               {% if offices or service %}
                 <div class='centre-item'>
