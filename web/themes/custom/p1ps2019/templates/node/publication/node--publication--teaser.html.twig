@@ -67,41 +67,32 @@
 #}
 {%
   set classes = [
-  node.bundle|clean_class,
-  node.isPromoted() ? 'is-promoted',
-  node.isSticky() ? 'is-sticky',
-  not node.isPublished() ? 'is-unpublished',
-  view_mode ? view_mode|clean_class,
-  'clearfix',
-  'box-style',
+  'sm-teaser'
 ]
 %}
-{% set year %}
-  {{ content.field_pub_year.0 }}
-{% endset %}
 {% set subtitle %}
   {{ content.field_subtitle.0 }}
 {% endset %}
+{% set author %}
+  {{ content.field_author_name.0 }}
+{% endset %}
 <article{{ attributes.addClass(classes) }}>
-  <div class="img-container">{{ content.field_media }}</div>
-  <div class="box-content same-height no-bg">
-    <div class="top-infos">
-      {{ title_prefix }}
-      <h2 class="title">
+  <a class="sm-teaser__img-link" href="{{ url }}" title="{{ label.0 }}">
+    {{ content.field_media }}
+  </a>
+  <div class="sm-teaser__block">
+    {{ title_prefix }}
+    <div class="sm-teaser__title">
+      <h2>
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
-      {{ title_suffix }}
       {% if subtitle|striptags|trim %}
         <em class="txt small">{{ subtitle }}</em>
       {% endif %}
     </div>
-    <div class="author small">{{ content.field_author_name.0 }}</div>
-    <div class="bottom-infos">
-      {% if year|striptags|trim %}
-        <div class="details txt-second">
-          <span>{{ year }}</span>
-        </div>
-      {% endif %}
-    </div>
+    {{ title_suffix }}
+    {% if author|striptags|trim %}
+      <div class="author small sm-teaser__title--author">{{ author }}</div>
+    {% endif %}
   </div>
 </article>
