@@ -26,13 +26,13 @@ h6, .h6-style{font-size: rem-calc(16px);}
 
 /* TRANSITION -- BEGIN */
 .transition-effect{
-	@include transitionEffect();
+  @include transitionEffect();
 }
 .no-transition{
-	-webkit-transition-property: none;
-	-moz-transition-property: none;
-	-o-transition-property: none;
-	transition-property: none;
+  -webkit-transition-property: none;
+  -moz-transition-property: none;
+  -o-transition-property: none;
+  transition-property: none;
 }
 *{@extend .no-transition;}
 /* TRANSITION -- END */
@@ -92,35 +92,35 @@ h6, .h6-style{font-size: rem-calc(16px);}
 .no-border{border:0;}
 
 ul.list-style {
-	li{
-		position: relative; #{$padding-left}: rem-calc(24px);
-		&:before{
-			content: ""; display: block;
-			position: absolute; #{$left}: 0;
-			width: rem-calc(8px); height: rem-calc(8px);
-			border-radius: 100%;
-			top: 50%; transform: translateY(-50%);
-		}
-	}
+  li{
+    position: relative; #{$padding-left}: rem-calc(24px);
+    &:before{
+      content: ""; display: block;
+      position: absolute; #{$left}: 0;
+      width: rem-calc(8px); height: rem-calc(8px);
+      border-radius: 100%;
+      top: 50%; transform: translateY(-50%);
+    }
+  }
 }
 .icon-container{
-	//for GUI ==============
-	.icons-list &{
-		display: inline-block; margin: 4px; border: solid 1px;
-	}
-	//for GUI END ==============
+  //for GUI ==============
+  .icons-list &{
+    display: inline-block; margin: 4px; border: solid 1px;
+  }
+  //for GUI END ==============
 
-	//32px
-	width: rem-calc($fgutter); height: rem-calc($fgutter);
-	font-size: 100%;
-	[class*="icon"]{
-		@extend .display-flex;
-		@extend .display-flex.align-center-middle;
-		width: 100%; height: 100%;
-		&:before{
-			font-size: rem-calc(32px);
-		}
-	}
+  //32px
+  width: rem-calc($fgutter); height: rem-calc($fgutter);
+  font-size: 100%;
+  [class*="icon"]{
+    @extend .display-flex;
+    @extend .display-flex.align-center-middle;
+    width: 100%; height: 100%;
+    &:before{
+      font-size: rem-calc(32px);
+    }
+  }
 }//close icon-container
 .full-height-all-children *{
   height: 100%;
@@ -128,7 +128,7 @@ ul.list-style {
 }
 
 table{
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .path-frontpage{
@@ -183,41 +183,41 @@ table{
 }
 
 .m-txt-message, .message{
-	@include responsiveVal(padding, $gutter*0.75 $gutter*0.75 $gutter*0.75 $gutter*2);
-	@include setFont($fontType-regular); width: 100%;
-	font-size: rem-calc(14px); line-height: 1.5;
-	position: relative;
-	//@include responsiveVal(margin,0 0 $gutter 0);
-	@extend .display-flex;
-    @extend .display-flex.valign-center;
-	*{color: inherit;}
+  @include responsiveVal(padding, $gutter*0.75 $gutter*0.75 $gutter*0.75 $gutter*2);
+  @include setFont($fontType-regular); width: 100%;
+  font-size: rem-calc(14px); line-height: 1.5;
+  position: relative;
+  //@include responsiveVal(margin,0 0 $gutter 0);
+  @extend .display-flex;
+  @extend .display-flex.valign-center;
+  *{color: inherit;}
 
-	/*default*/
-	@extend .icon;
-	@extend .icon-info;
-	&:before{
-		color: inherit; font-size: rem-calc(20px);
-		@include vertical-align(absolute); #{$left}: rem-calc(24px);
-	}
-	/*default*/
+  /*default*/
+  @extend .icon;
+  @extend .icon-info;
+  &:before{
+    color: inherit; font-size: rem-calc(20px);
+    @include vertical-align(absolute); #{$left}: rem-calc(24px);
+  }
+  /*default*/
 
-	&:before{
-		//padding: rem-calc(0 16px); color: inherit;
-	}
+  &:before{
+    //padding: rem-calc(0 16px); color: inherit;
+  }
 
-	&.valid{
-		@extend .icon-thumb-up;
-	}
+  &.valid{
+    @extend .icon-thumb-up;
+  }
 
-	&.error{
-		@extend .icon-ban;
-	}
+  &.error{
+    @extend .icon-ban;
+  }
 
-	&.warning{
-		@extend .icon-alert;
-	}
+  &.warning{
+    @extend .icon-alert;
+  }
 
-	a{text-decoration:underline; padding: rem-calc(0 4px);}
+  a{text-decoration:underline; padding: rem-calc(0 4px);}
 }
 
 .section-header-wrapper, .section-content-wrapper, .section-footer-wrapper{
@@ -225,7 +225,7 @@ table{
 }
 
 .section-footer-wrapper {
-	text-align: center;
+  text-align: center;
 }
 
 .txt-regular, .txt-regular *{@include setFont($fontType-regular);}
@@ -257,14 +257,14 @@ table{
 
 
 .relative-wrapper{
-	position: relative;
-	.absolute-infos{
-		position: absolute;
-		&.middle{top: 50%; transform: translateY(-50%);}
-		&.center{left: 50%; transform: translateX(-50%);}
-		&.top{top: 0;}
-		&.left{left: 0;}
-	}
+  position: relative;
+  .absolute-infos{
+    position: absolute;
+    &.middle{top: 50%; transform: translateY(-50%);}
+    &.center{left: 50%; transform: translateX(-50%);}
+    &.top{top: 0;}
+    &.left{left: 0;}
+  }
 }
 
 
@@ -277,9 +277,9 @@ table{
   width: 100%; height: auto;
   a:hover{text-decoration: none;}
   &.equal-height{
-	  flex-wrap: wrap; justify-content: flex-start;
-	  padding: 70px 128px; width: 80%;
-	}
+    flex-wrap: wrap; justify-content: flex-start;
+    padding: 70px 128px; width: 80%;
+  }
   &.with-padding{
     padding: rem-calc(80px 126px);
   }
@@ -335,28 +335,28 @@ table{
 
 .groupeinfo{text-align: center;}
 .infos-row-wrapper{
-	@include flexDisplay(false, false);
+  @include flexDisplay(false, false);
   @extend .semi-semi-infos-sep;
-	&> div:not(:last-of-type){
-		#{$margin-right}: rem-calc(8px);
-	}
-	&.space-between{
-		@include flexDisplayAlign('space-between');
-	}
-	&.valign-center{
-		@include flexDisplayAlign('vcenter');
-	}
-	&.wrap{flex-wrap: wrap;}
+  &> div:not(:last-of-type){
+    #{$margin-right}: rem-calc(8px);
+  }
+  &.space-between{
+    @include flexDisplayAlign('space-between');
+  }
+  &.valign-center{
+    @include flexDisplayAlign('vcenter');
+  }
+  &.wrap{flex-wrap: wrap;}
 }
 
 .same-height{
-	@include flexDisplay(); @include flexDisplayAlign('space-between');
+  @include flexDisplay(); @include flexDisplayAlign('space-between');
   flex-direction: column;
 }
 .flex-no-wrap{flex-wrap: nowrap !important;}
 .img-container{
   position: relative;
-	img{width: 100%;}
+  img{width: 100%;}
   .browser-ie &{
     background-repeat: no-repeat;
     background-size: cover;
@@ -364,7 +364,7 @@ table{
 }
 
 .equal-height{
-	> div {height: 100%;}
+  > div {height: 100%;}
 }
 .label-style{
   font-size: rem-calc(22px); line-height: 1.6;
@@ -372,12 +372,12 @@ table{
 }
 
 .subtitle{
-	font-size: rem-calc(16px); line-height: 1.25;
-	font-family: $font-main; @include setFont($fontType-lightItalic);
+  font-size: rem-calc(16px); line-height: 1.25;
+  font-family: $font-main; @include setFont($fontType-lightItalic);
 }
 
 .categ-style{
-	font-family: $font-main; text-align: center;
+  font-family: $font-main; text-align: center;
   font-size: rem-calc(18px); line-height: 1.2;
   @include setFont($fontType-medium); padding: rem-calc(4px 12px);
   display: inline-block;
@@ -425,9 +425,16 @@ table{
 }
 
 .author{
-	@include setFont($fontType-italic);
+  @include setFont($fontType-italic);
 }
-
+.sm-teaser {
+  .txt,.sm-teaser__title--author {
+    font-size: rem-calc(16px);
+  }
+  .sm-teaser__title--author {
+    @include setFont($fontType-regular);
+  }
+}
 .pager{
   .pager__item{
     text-align: center;
