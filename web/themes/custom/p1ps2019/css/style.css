@@ -9633,7 +9633,7 @@ input[type="button"],
 input[type="password"],
 input[type="url"],
 input[type="file"],
-input[type="search"], .form-date,
+input[type="search"], .form-date, select.form-select,
 .file-widget {
   border: 3px solid #00326e;
   background-color: #fff;
@@ -9662,7 +9662,7 @@ input[type="search"], .form-date,
   input[type="password"]::-webkit-input-placeholder,
   input[type="url"]::-webkit-input-placeholder,
   input[type="file"]::-webkit-input-placeholder,
-  input[type="search"]::-webkit-input-placeholder, .form-date::-webkit-input-placeholder,
+  input[type="search"]::-webkit-input-placeholder, .form-date::-webkit-input-placeholder, select.form-select::-webkit-input-placeholder,
   .file-widget::-webkit-input-placeholder {
     opacity: 1;
     line-height: 3;
@@ -9678,7 +9678,7 @@ input[type="search"], .form-date,
   input[type="password"]:-moz-placeholder,
   input[type="url"]:-moz-placeholder,
   input[type="file"]:-moz-placeholder,
-  input[type="search"]:-moz-placeholder, .form-date:-moz-placeholder,
+  input[type="search"]:-moz-placeholder, .form-date:-moz-placeholder, select.form-select:-moz-placeholder,
   .file-widget:-moz-placeholder {
     /* Firefox 18- */
     opacity: 1;
@@ -9695,7 +9695,7 @@ input[type="search"], .form-date,
   input[type="password"]::-moz-placeholder,
   input[type="url"]::-moz-placeholder,
   input[type="file"]::-moz-placeholder,
-  input[type="search"]::-moz-placeholder, .form-date::-moz-placeholder,
+  input[type="search"]::-moz-placeholder, .form-date::-moz-placeholder, select.form-select::-moz-placeholder,
   .file-widget::-moz-placeholder {
     /* Firefox 19+ */
     opacity: 1;
@@ -9712,7 +9712,7 @@ input[type="search"], .form-date,
   input[type="password"]:-ms-input-placeholder,
   input[type="url"]:-ms-input-placeholder,
   input[type="file"]:-ms-input-placeholder,
-  input[type="search"]:-ms-input-placeholder, .form-date:-ms-input-placeholder,
+  input[type="search"]:-ms-input-placeholder, .form-date:-ms-input-placeholder, select.form-select:-ms-input-placeholder,
   .file-widget:-ms-input-placeholder {
     opacity: 1;
     line-height: 3;
@@ -9728,7 +9728,7 @@ input[type="search"], .form-date,
   input[type="password"]:focus,
   input[type="url"]:focus,
   input[type="file"]:focus,
-  input[type="search"]:focus, .form-date:focus,
+  input[type="search"]:focus, .form-date:focus, select.form-select:focus,
   .file-widget:focus {
     border: 3px solid #00326e; }
 
@@ -10488,8 +10488,7 @@ input[type="button"],
 input[type="password"],
 input[type="url"],
 input[type="file"],
-input[type="search"], .form-date,
-.file-widget {
+input[type="search"], .form-date, select.form-select .file-widget {
   border: 3px solid #00326e;
   background-color: #fff;
   -webkit-appearance: none;
@@ -10519,8 +10518,7 @@ input[type="search"], .form-date,
   input[type="password"]::-webkit-input-placeholder,
   input[type="url"]::-webkit-input-placeholder,
   input[type="file"]::-webkit-input-placeholder,
-  input[type="search"]::-webkit-input-placeholder, .form-date::-webkit-input-placeholder,
-  .file-widget::-webkit-input-placeholder {
+  input[type="search"]::-webkit-input-placeholder, .form-date::-webkit-input-placeholder, select.form-select .file-widget::-webkit-input-placeholder {
     opacity: 1;
     line-height: 3;
     color: #828282;
@@ -10537,8 +10535,7 @@ input[type="search"], .form-date,
   input[type="password"]:-moz-placeholder,
   input[type="url"]:-moz-placeholder,
   input[type="file"]:-moz-placeholder,
-  input[type="search"]:-moz-placeholder, .form-date:-moz-placeholder,
-  .file-widget:-moz-placeholder {
+  input[type="search"]:-moz-placeholder, .form-date:-moz-placeholder, select.form-select .file-widget:-moz-placeholder {
     /* Firefox 18- */
     opacity: 1;
     line-height: 3;
@@ -10556,8 +10553,7 @@ input[type="search"], .form-date,
   input[type="password"]::-moz-placeholder,
   input[type="url"]::-moz-placeholder,
   input[type="file"]::-moz-placeholder,
-  input[type="search"]::-moz-placeholder, .form-date::-moz-placeholder,
-  .file-widget::-moz-placeholder {
+  input[type="search"]::-moz-placeholder, .form-date::-moz-placeholder, select.form-select .file-widget::-moz-placeholder {
     /* Firefox 19+ */
     opacity: 1;
     line-height: 3;
@@ -10575,8 +10571,7 @@ input[type="search"], .form-date,
   input[type="password"]:-ms-input-placeholder,
   input[type="url"]:-ms-input-placeholder,
   input[type="file"]:-ms-input-placeholder,
-  input[type="search"]:-ms-input-placeholder, .form-date:-ms-input-placeholder,
-  .file-widget:-ms-input-placeholder {
+  input[type="search"]:-ms-input-placeholder, .form-date:-ms-input-placeholder, select.form-select .file-widget:-ms-input-placeholder {
     opacity: 1;
     line-height: 3;
     color: #828282;
@@ -10593,8 +10588,7 @@ input[type="search"], .form-date,
   input[type="password"]:focus,
   input[type="url"]:focus,
   input[type="file"]:focus,
-  input[type="search"]:focus, .form-date:focus,
-  .file-widget:focus {
+  input[type="search"]:focus, .form-date:focus, select.form-select .file-widget:focus {
     border: 3px solid #00326e; }
 
 .form-item:not(.form-item-centre-name):before, .chosen-container-single:before {
@@ -11456,43 +11450,38 @@ article .paragraph .field--type-text-long ul, article .paragraph-color .field--t
   margin-bottom: 0.5rem;
   font-size: 1.15rem; }
 
-.viva .top-infos {
-  padding: 0 0.9375rem;
-  margin-top: 0.9375rem; }
-
-.viva .viva-title {
-  width: auto;
-  display: block;
-  text-transform: capitalize;
-  padding: 0.5rem;
-  background-color: #08366A;
-  color: #fff;
-  font-weight: bold;
-  margin-top: -0.9375rem;
-  font-size: 1.25em; }
-
-.viva .thesis-direction {
-  width: 100%;
-  display: block;
-  color: #000;
-  margin-bottom: 0.9375rem; }
-
-.viva .direction-name {
-  text-transform: capitalize; }
-
-.viva .edo {
-  margin: 2rem 0; }
-
-.viva div.date-style {
-  font-size: 1rem;
-  margin-bottom: 1rem; }
-
-.viva .event-details {
-  margin-bottom: 1rem; }
-
-.viva .field-add-to-cal {
-  max-width: none;
-  width: 100%; }
+.viva .box-content {
+  padding: 2rem 1.25rem; }
+  .viva .box-content .top-infos {
+    /*padding: rem-calc(0 15px);
+      margin-top: rem-calc(15px);*/ }
+  .viva .box-content .viva-title {
+    width: auto;
+    display: block;
+    text-transform: capitalize;
+    padding: 0.5rem;
+    background-color: #08366A;
+    color: #fff;
+    font-weight: bold;
+    margin-top: -0.9375rem;
+    font-size: 1.25em; }
+  .viva .box-content .thesis-direction {
+    width: 100%;
+    display: block;
+    color: #000;
+    margin-bottom: 0.9375rem; }
+  .viva .box-content .direction-name {
+    text-transform: capitalize; }
+  .viva .box-content .edo {
+    margin: 2rem 0; }
+  .viva .box-content div.date-style {
+    font-size: 1rem;
+    margin-bottom: 1rem; }
+  .viva .box-content .event-details {
+    margin-bottom: 1rem; }
+  .viva .box-content .field-add-to-cal {
+    max-width: none;
+    width: 100%; }
 
 .page-personnelle a.social-link:hover {
   color: #BE8719;
@@ -12871,7 +12860,7 @@ form#centres-up1-form {
   input[type="password"],
   input[type="url"],
   input[type="file"],
-  input[type="search"], .form-date,
+  input[type="search"], .form-date, select.form-select,
   .file-widget {
     line-height: 1.71;
     font-size: 0.875rem; }
@@ -12885,7 +12874,7 @@ form#centres-up1-form {
     input[type="password"] ::-webkit-input-placeholder,
     input[type="url"] ::-webkit-input-placeholder,
     input[type="file"] ::-webkit-input-placeholder,
-    input[type="search"] ::-webkit-input-placeholder, .form-date ::-webkit-input-placeholder,
+    input[type="search"] ::-webkit-input-placeholder, .form-date ::-webkit-input-placeholder, select.form-select ::-webkit-input-placeholder,
     .file-widget ::-webkit-input-placeholder {
       line-height: 1.71;
       font-size: 0.875rem; }
@@ -12899,7 +12888,7 @@ form#centres-up1-form {
     input[type="password"] :-moz-placeholder,
     input[type="url"] :-moz-placeholder,
     input[type="file"] :-moz-placeholder,
-    input[type="search"] :-moz-placeholder, .form-date :-moz-placeholder,
+    input[type="search"] :-moz-placeholder, .form-date :-moz-placeholder, select.form-select :-moz-placeholder,
     .file-widget :-moz-placeholder {
       /* Firefox 18- */
       line-height: 1.71;
@@ -12914,7 +12903,7 @@ form#centres-up1-form {
     input[type="password"] ::-moz-placeholder,
     input[type="url"] ::-moz-placeholder,
     input[type="file"] ::-moz-placeholder,
-    input[type="search"] ::-moz-placeholder, .form-date ::-moz-placeholder,
+    input[type="search"] ::-moz-placeholder, .form-date ::-moz-placeholder, select.form-select ::-moz-placeholder,
     .file-widget ::-moz-placeholder {
       /* Firefox 19+ */
       line-height: 1.71;
@@ -12929,7 +12918,7 @@ form#centres-up1-form {
     input[type="password"] :-ms-input-placeholder,
     input[type="url"] :-ms-input-placeholder,
     input[type="file"] :-ms-input-placeholder,
-    input[type="search"] :-ms-input-placeholder, .form-date :-ms-input-placeholder,
+    input[type="search"] :-ms-input-placeholder, .form-date :-ms-input-placeholder, select.form-select :-ms-input-placeholder,
     .file-widget :-ms-input-placeholder {
       line-height: 1.71;
       font-size: 0.875rem; }

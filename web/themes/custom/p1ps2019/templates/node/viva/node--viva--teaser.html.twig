@@ -78,7 +78,9 @@
 
 <article{{ attributes.addClass(classes) }}>
   <div class="box-content same-height">
-    <div class="viva-title cell medium-9">{{ content.field_subtitle.0 }}</div>
+    <div class="top-infos">
+      <div class="categ-style semi-infos-sep">{{ content.field_subtitle.0 }}</div>
+    </div>
     {{ title_prefix }}
     <h2 class="title semi-infos-sep">
       {{ label.0 }}
@@ -96,7 +98,7 @@
       </div>
       <div class="event-details">
         <span>{{ 'Lieu : '|t }}</span>
-        {{ destination|raw }}
+        <span>{{ content.field_event_address.0 }}</span>
       </div>
       {{ content.field_add_to_cal }}
     </div>
