@@ -89,22 +89,7 @@ function p1ps2019_preprocess_node(&$variables) {
     $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
   }
-  $node = $variables['node'];
-
-  if ($node->bundle() == 'viva') {
-    $event_address = $node->get('field_event_address')->getValue();
-    $address = $event_address[0]['value'];
-    if (preg_match("/visio|zoom/i", $address)) {
-      $variables['destination'] = "<span>$address</span>";
-    }
-    else {
-      $variables['destination'] = "<a href='https://www.google.com/maps/dir/?api=1&destination=$address'
-           title='Ouvre Google Maps dans une nouvelle fenêtre' target='_blank'>
-           $address
-        </a>";
-    }
-  }
-
+  //$node = $variables['node'];
 }
 
 /**

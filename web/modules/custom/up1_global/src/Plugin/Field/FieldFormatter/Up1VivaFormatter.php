@@ -49,8 +49,8 @@ class Up1VivaFormatter extends DateTimeCustomFormatter {
         $end_date = $item->end_date;
         $end_date->setTimezone(timezone_open(drupal_get_user_timezone()));
 
-        $start_hour = $start_date->format('H:i');
-        $end_hour = $end_date->format('H:i');
+        $start_hour = $start_date->format('H') . "h" . $start_date->format('i');
+        $end_hour = $end_date->format('H') . "h" . $end_date->format('i');
 
         if ($start_date->format('d-m-Y') !== $end_date->format('d-m-Y')) {
           $elements[$delta] = [
@@ -58,7 +58,7 @@ class Up1VivaFormatter extends DateTimeCustomFormatter {
               '#markup' => "<div class='event-date'>
               <div class='start-date'>
                 <span class=''>" . t("From: ") . "</span> " .
-                $start_date->format('d/m/Y') . "<i class='fa fa-arrow-right'>
+                $start_date->format('l j F Y ') . "<i class='fa fa-arrow-right'>
                 <span class='sr-only'>" . t( ' at ') . "</span></i> $start_hour
               </div>
               <div class='end-date'>
@@ -79,7 +79,7 @@ class Up1VivaFormatter extends DateTimeCustomFormatter {
           $elements[$delta] = [
             'date' => [
               '#markup' => "<div>
-              <span class=''>" . t("On ") . "</span> " . $start_date->format('d/m/Y') . "
+              <span class=''>" . t("On ") . "</span> " . $start_date->format('l j F Y') . "
               <span class='sr-only'>" .  $this->t(' from ') . "</span>
               <span>$start_hour</span>
               <i class='fa fa-arrow-right'><span class='sr-only'>" .  $this->t(' to ') . "</span></i>
