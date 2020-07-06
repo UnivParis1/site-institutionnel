@@ -6,6 +6,7 @@ use Drupal\Core\Config\Config;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Site\Settings;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class AnnuaireController.
@@ -37,7 +38,7 @@ class WsGroupsController extends ControllerBase {
       }
     }
     else {
-       $cachedUser = $cache->get('labeledURI_' . $affiliation);
+      $cachedUser = $cache->get('labeledURI_' . $affiliation);
 
       if ($cachedUser){
         $reponse = $cachedUser->data;
@@ -53,23 +54,42 @@ class WsGroupsController extends ControllerBase {
     return $users;
   }
 
-  public function facultyList($letter) {
-    $filtered_users = [];
-    $currentSiteId = '';
-    $sortedUsers = [];
-
+  private function getfieldEc() {
     /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
-      $currentSiteId = $negotiator->getActiveId();
-      if (!empty($currentSiteId)) {
-        $users = $this->getCachedUsers('faculty', $currentSiteId);
-      }
-    }
-    else {
-      $users = $this->getCachedUsers('faculty');
-    }
+      $site = $negotiator->loadById($negotiator->getActiveId());
 
+      return $site->get('ec_enabled')->value;
+    }
+  }
+  private function getfieldDoc() {
+    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if (!empty($negotiator->getActiveSite())) {
+      $site = $negotiator->loadById($negotiator->getActiveId());
+
+      return $site->get('doc_enabled')->value;
+    }
+  }
+
+  private function getSiteId() {
+    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if (!empty($negotiator->getActiveSite())) {
+      $siteId = $negotiator->getActiveId();
+      if (!empty($siteId)) {
+        return $siteId;
+      }
+      else return FALSE;
+    }
+  }
+
+  public function getList($type, $letter, $theme, $path, $siteId = NULL) {
+    $filtered_users = [];
+    $sortedUsers = [];
+
+    $users = $this->getCachedUsers($type, $siteId);
     if (!empty($users)) {
       foreach ($users as $user) {
         if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
@@ -84,9 +104,10 @@ class WsGroupsController extends ControllerBase {
     }
 
     $build['item_list'] = [
-      '#theme' => 'liste_pages_persos_filtree',
+      '#theme' => $theme,
       '#users' => $filtered_users,
-      '#affiliation' => 'faculty',
+      '#affiliation' => $type,
+      '#link' => $path,
       '#Trusted' => FALSE,
       '#attached' => [
         'library' => [
@@ -98,49 +119,32 @@ class WsGroupsController extends ControllerBase {
     return $build;
   }
 
-  public function studentList($letter) {
-    $filtered_users = [];
-    $sortedUsers = [];
-    $currentSiteId = '';
+  public function masterFacultyList($letter) {
+    return $this->getList('faculty', $letter, 'liste_pages_persos_filtree', 'up1_pages_personnelles.wsgroups_faculty_list');
+  }
 
+  public function masterStudentList($letter) {
+    return $this->getList('student', $letter, 'liste_pages_persos_filtree', 'up1_pages_personnelles.wsgroups_student_list');
+  }
 
-    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
-    $negotiator = \Drupal::service('micro_site.negotiator');
-    if (!empty($negotiator->getActiveSite())) {
-      $currentSiteId = $negotiator->getActiveId();
-      if (!empty($currentSiteId)) {
-        $users = $this->getCachedUsers('student', $currentSiteId);
-      }
+  public function microFacultyList($letter) {
+    $siteId = $this->getSiteId();
+    if (isset($siteId) && $this->getfieldEc()) {
+      return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list',  $siteId);
     }
     else {
-      $users = $this->getCachedUsers('student');
+      throw new NotFoundHttpException();
     }
+  }
 
-    if (!empty($users)) {
-      foreach ($users as $user) {
-        if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
-          $filtered_users[] = $user;
-        }
-      }
-      // on trie les utilisateurs par ordre alphabetique des cn
-      $sortedUsers = usort($filtered_users, function ($a, $b) {
-        return strnatcasecmp($a['sn'], $b['sn']);
-      });
-      }
-
-      $build['item_list'] = [
-        '#theme' => 'liste_pages_persos_filtree',
-        '#users' => $filtered_users,
-        '#affiliation' => 'student',
-        '#Trusted' => FALSE,
-        '#attached' => [
-          'library' => [
-            'up1_pages_personnelles/liste'
-          ]
-        ]
-      ];
-
-      return $build;
+  public function microStudentList($letter) {
+    $siteId = $this->getSiteId();
+    if (isset($siteId) && $this->getfieldDoc()) {
+      return $this->getList('student', $letter,'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $siteId);
+    }
+    else {
+      throw new NotFoundHttpException();
+    }
   }
 
   public function getPageTitle($affiliation) {

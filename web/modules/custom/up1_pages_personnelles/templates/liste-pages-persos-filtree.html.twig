@@ -11,14 +11,10 @@
         {% for letter in 'a'|upper .. 'z'|upper %}
           <span class="letter">
             {% if affiliation == 'faculty' %}
-              <a href="{{ path('up1_pages_personnelles.wsgroups_faculty_list',
-                {'letter': letter}
-              )}}">{{ letter }}</a>
+              <a href="{{ path(link, {'letter': letter}) }}">{{ letter }}</a>
               {% else %}
               {% set category = "Doctorants" %}
-              <a href="{{ path('up1_pages_personnelles.wsgroups_student_list',
-                {'letter': letter}
-              )}}">{{ letter }}</a>
+              <a href="{{ path(link, {'letter': letter}) }}">{{ letter }}</a>
             {% endif %}
           </span>
         {% endfor %}
@@ -38,7 +34,8 @@
                     {% if user.labeledURI is empty %}
                       {{ user.sn|upper }} {{ user.givenName }}
                     {% else %}
-                      <a href="{{ user.labeledURI[0] }}">
+                      <a href="{{ user.labeledURI[0] }}"  target="_blank"
+                         title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
                         {{ user.sn|upper }} {{ user.givenName }}
                       </a>
                     {% endif %}
@@ -54,13 +51,9 @@
         {% for letter in 'a'|upper .. 'z'|upper %}
           <span class="letter">
               {% if affiliation == 'faculty' %}
-                <a href="{{ path('up1_pages_personnelles.wsgroups_faculty_list',
-                  {'letter': letter}
-                )}}">{{ letter }}</a>
+                <a href="{{ path(link, {'letter': letter}) }}">{{ letter }}</a>
               {% else %}
-                <a href="{{ path('up1_pages_personnelles.wsgroups_student_list',
-                  {'letter': letter}
-                )}}">{{ letter }}</a>
+                <a href="{{ path(link, {'letter': letter}) }}">{{ letter }}</a>
               {% endif %}
             </span>
         {% endfor %}

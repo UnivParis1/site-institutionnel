@@ -48,6 +48,26 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
         'weight' => -10,
       ])
       ->setDisplayConfigurable('form', TRUE);
+
+    $fields['ec_enabled'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Enable page unité de recherche Enseignants-Chercheurs. '))
+      ->setDescription(t('Enables the list of all "Enseignants-Chercheurs" working in this structure. '))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['doc_enabled'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Enable page unité de recherche Doctorants. '))
+      ->setDescription(t('Enables the list of all "Doctorants" working in this structure. '))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
   }
 
   return $fields;
@@ -65,12 +85,25 @@ function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\F
     '#weight' => 100,
     '#optional' => TRUE,
   ];
+  $form['unites_recherche'] = [
+    '#type' => 'details',
+    '#title' => t('Unités de recherche'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-urecherche'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
 
   if (isset($form['groups'])) {
     $form['groups']['#group'] = 'pages_personnelles';
   }
-  if (isset($form['filtre'])) {
-    $form['filtre']['#group'] = 'pages_personnelles';
+  if (isset($form['ec_enabled'])) {
+    $form['ec_enabled']['#group'] = 'unites_recherche';
+  }
+  if (isset($form['doc_enabled'])) {
+    $form['doc_enabled']['#group'] = 'unites_recherche';
   }
 }
 
@@ -325,6 +358,15 @@ function up1_pages_personnelles_theme() {
     'liste_pages_persos_filtree' => [
       'variables' => [
         'users' => [],
+        'link' => NULL,
+        'affiliation' => NULL,
+        'Trusted' => FALSE,
+      ]
+    ],
+    'list_with_employee_type' => [
+      'variables' => [
+        'users' => [],
+        'link' => NULL,
         'affiliation' => NULL,
         'Trusted' => FALSE,
       ]

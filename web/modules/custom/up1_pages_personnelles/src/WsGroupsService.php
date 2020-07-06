@@ -47,7 +47,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
 
       if (!empty($currentSite->get('groups')->value)) {
         $structure = [
-          'filter_member_of_group' => $currentSite->get('groups')->value
+          'filter_member_of_group' => 'structures-' . $currentSite->get('groups')->value
         ];
       }
     }
@@ -65,6 +65,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     ];
     $ch = curl_init();
     if (isset($structure)) {
+      $params['attrs'] .= ',employeeType';
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params) . '&' . http_build_query($structure));
     }
     else {
@@ -78,7 +79,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     curl_close($ch);
 
     $reponse['users'] = $users;
-
+    \Drupal::logger('pp')->info(print_r($reponse['users'], 1));
     return $reponse;
   }
 

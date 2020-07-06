@@ -11,33 +11,85 @@ up1_pages_personnelles.pages_personnelles_settings_form:
 up1_pages_personnelles.wsgroups_faculty_list_default:
   path: '/page-perso/enseignant-chercheur'
   defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::facultyList'
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterFacultyList'
     _title: 'Pages Personnelles Enseignants-Chercheurs'
     letter: 'A'
   requirements:
-    _permission: 'view published site entities'
+    _permission: 'view published content'
+
+up1_pages_personnelles.wsgroups_pp_default:
+  path: '/page-perso'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterFacultyList'
+    _title: 'Pages Personnelles Enseignants-Chercheurs'
+    letter: 'A'
+  requirements:
+    _permission: 'view published content'
 
 up1_pages_personnelles.wsgroups_faculty_list:
   path: '/page-perso/enseignant-chercheur/{letter}'
   defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::facultyList'
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterFacultyList'
     _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
   requirements:
-    _permission: 'view published site entities'
+    _permission: 'view published content'
 
 up1_pages_personnelles.wsgroups_student_list_default:
   path: '/page-perso/doctorant'
   defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::studentList'
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterStudentList'
     _title: 'Pages Personnelles Doctorants'
     letter: 'A'
   requirements:
-    _permission: 'view published site entities'
+    _permission: 'view published content'
 
 up1_pages_personnelles.wsgroups_student_list:
   path: '/page-perso/doctorant/{letter}'
   defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::studentList'
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterStudentList'
+    _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
+  requirements:
+    _permission: 'view published content'
+
+up1_pages_personnelles.micro_faculty_list_default:
+  path: '/unites-de-recherche/enseignant-chercheur'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::microFacultyList'
+    _title: 'Nos Enseignants-Chercheurs'
+    letter: 'A'
+  requirements:
+    _permission: 'view published site entities'
+
+up1_pages_personnelles.micro_default:
+  path: '/unites-de-recherche'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::microFacultyList'
+    _title: 'Unités de recherche'
+    letter: 'A'
+  requirements:
+    _permission: 'view published site entities'
+
+up1_pages_personnelles.micro_faculty_list:
+  path: '/unites-de-recherche/enseignant-chercheur/{letter}'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::microFacultyList'
+    _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
+  requirements:
+    _permission: 'view published site entities'
+
+up1_pages_personnelles.micro_student_list_default:
+  path: '/unites-de-recherche/doctorant'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::microStudentList'
+    _title: 'Nos Doctorants'
+    letter: 'A'
+  requirements:
+    _permission: 'view published site entities'
+
+up1_pages_personnelles.micro_student_list:
+  path: '/unites-de-recherche/doctorant/{letter}'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::microStudentList'
     _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
   requirements:
     _permission: 'view published site entities'
