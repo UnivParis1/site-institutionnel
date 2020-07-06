@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * install up1_pages_personnelles.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
+/**
+ * Add new fields to micro site entity.
+ */
+function up1_pages_personnelles_update_8001(&$sandbox) {
+  $ec_enabled = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Enable page unité de recherche Enseignants-Chercheurs. '))
+    ->setDescription(t('Enables the list of all "Enseignants-Chercheurs" working in this structure. '))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $doc_enabled = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Enable page unité de recherche Doctorants. '))
+    ->setDescription(t('Enables the list of all "Doctorants" working in this structure. '))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $definition_manager->installFieldStorageDefinition('ec_enabled', 'site', 'site', $ec_enabled);
+  $definition_manager->installFieldStorageDefinition('doc_enabled', 'site', 'site', $doc_enabled);
+}
