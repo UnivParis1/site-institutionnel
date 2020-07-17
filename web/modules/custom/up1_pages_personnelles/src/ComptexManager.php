@@ -89,7 +89,6 @@ class ComptexManager implements ComptexInterface {
     $config = \Drupal::config('up1_pages_personnelles.settings');
 
     if ($information && !empty($information)) {
-      \Drupal::logger('comptex')->info(count($information['uid']));
       if (isset($information['uid'])) {
         $information['userPhoto'] = $config->get('url_userphoto') . $information['uid'];
       }

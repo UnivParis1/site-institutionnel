@@ -194,8 +194,6 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       $get_publications = $node->get('field_get_hal_publications')->getValue();
       $hal_publications = $node->get('field_id_hal')->getValue();
       if (!empty($get_publications) && $get_publications[0]['value']) {
-        \Drupal::logger('hal_publications')
-          ->info(print_r($hal_publications[0]['value'], 1));
         $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
 
         $variables['hal_publications'] = $publications;

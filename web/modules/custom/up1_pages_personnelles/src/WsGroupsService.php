@@ -79,7 +79,6 @@ class WsGroupsService implements WsGroupsServiceInterface {
     curl_close($ch);
 
     $reponse['users'] = $users;
-    \Drupal::logger('pp')->info(print_r($reponse['users'], 1));
     return $reponse;
   }
 
