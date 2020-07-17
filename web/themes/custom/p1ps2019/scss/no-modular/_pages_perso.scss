@@ -1,5 +1,5 @@
 .page-personnelle {
-  &:target {
+  :target {
     display: block;
     position: relative;
     top: -236px;
@@ -27,12 +27,12 @@
       }
     }
     .left-fix-aside {
-      margin-top: 5.5rem;
+      margin-top: 0.5rem;
       .progress {
         position: relative;
         float: none;
         text-align: center;
-        width: max-content;
+        width: 100%;
         display: block;
         margin: 0;
         background-color: transparent;
@@ -41,15 +41,25 @@
 
         .wrapper {
           position: absolute;
-          width: inherit;
-          left: 2rem;
+          left: 1rem;
+          width: 18vw;
 
           &.affix {
             position: fixed;
             top: 234px;
+            left: 1rem;
+            width: 18vw;
           }
         }
-
+        .btn.btn-primary {
+          font-size: 1rem;
+          &:hover {
+            background: $background-main-color;
+            a {
+              color: #fff;
+            }
+          }
+        }
         .bar {
           position: relative;
           display: block;
@@ -110,6 +120,22 @@
         .new-section {
           margin: 2rem 0;
         }
+        .new-section.about {
+          .infos-sep {
+            .btn {
+              display: inline-block;
+              text-transform: initial;
+              margin-top: 0;
+              font-size: 1rem;
+              &:hover {
+                a {
+                  color: #fff;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
 
         ul.publications-list {
           font-size: 1rem;
@@ -133,14 +159,14 @@
             .Rubrique {
               font-weight: bold;
               color: #00326e;
-              padding: 1rem 0 0 1rem;
+              padding-top: 1rem;
               border-bottom: 1px solid #00326e;
             }
 
             .SousRubrique {
               border-bottom: 1px solid grey;
               margin: 0 1.1rem;
-              padding: 1rem;
+              padding: 1rem 0;
               text-transform: uppercase;
             }
 
@@ -202,25 +228,77 @@
             margin-top: -25%;
           }
         }
-
         .infos-sep {
           .details {
             text-align: center;
-
             .display-inline {
               margin-left: 0;
               margin-top: 1rem;
               border: 1px solid #fff;
             }
-
             .fa-3x {
               font-size: 2.5rem;
             }
-
             .social-link {
               padding: 0 5px;
             }
           }
+        }
+        .details {
+          a {
+            &:hover {
+              text-decoration: none;
+            }
+          }
+          .img-svg {
+            width: 32px;
+          }
+          .epi {
+            img {
+              margin-top: -0.4rem;
+              margin-left: -2rem;
+            }
+          }
+          .academia {
+            img {
+              margin-top: -0.4rem;
+            }
+          }
+        }
+        .field--name-field-resume {
+          border: 1px solid #005bc3;
+          text-align: center;
+          display: block;
+          background-color:#08366A;
+          color:#fff;
+          padding: 4.5rem rem-calc(15px);
+
+          span.fa::before {
+            font-size: 3.125rem;
+            color:#fff;
+          }
+          span.fa {
+            width: 100%;
+            color: #fff;
+          }
+          .mediafichierlien {
+            width: 100%;
+            display: block;
+            font-size: 1.5em;
+            color:#fff;
+            border-top: 1px solid #FFF;
+            margin-top: rem-calc(15px);
+            border-bottom: 1px solid #fff;
+            margin-bottom: rem-calc(15px);
+            font-weight: bold;
+          }
+          .mediafichiertype {
+            display: block;
+          }
+          .mediafichierpoids {
+            display: block ruby;
+          }
+
         }
 
         .cell {
@@ -244,6 +322,15 @@
 
         .fa-file-pdf::before {
           font-size: 3vw;
+        }
+        .paragraph--type--medias {
+          padding:.5rem 0 1.5rem !important;
+          .paragraph--type--audio-media, .paragraph--type--video-media {
+            padding:.5rem 0 1.5rem !important;
+          }
+          .cell {
+            padding-top: 0;
+          }
         }
       }
     }
