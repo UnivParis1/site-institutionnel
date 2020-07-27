@@ -50,7 +50,7 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['ec_enabled'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('Enable page unité de recherche Enseignants-Chercheurs. '))
+      ->setLabel(t('Enable staff page Enseignants-Chercheurs. '))
       ->setDescription(t('Enables the list of all "Enseignants-Chercheurs" working in this structure. '))
       ->setDefaultValue(FALSE)
       ->setRevisionable(TRUE)
@@ -60,7 +60,7 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['doc_enabled'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('Enable page unité de recherche Doctorants. '))
+      ->setLabel(t('Enable staff page Doctorants. '))
       ->setDescription(t('Enables the list of all "Doctorants" working in this structure. '))
       ->setDefaultValue(FALSE)
       ->setRevisionable(TRUE)
@@ -85,12 +85,12 @@ function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\F
     '#weight' => 100,
     '#optional' => TRUE,
   ];
-  $form['unites_recherche'] = [
+  $form['staff'] = [
     '#type' => 'details',
-    '#title' => t('Unités de recherche'),
+    '#title' => t('Équipe'),
     '#group' => 'advanced',
     '#attributes' => [
-      'class' => ['site-form-urecherche'],
+      'class' => ['site-form-staff'],
     ],
     '#weight' => 100,
     '#optional' => TRUE,
@@ -100,10 +100,10 @@ function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\F
     $form['groups']['#group'] = 'pages_personnelles';
   }
   if (isset($form['ec_enabled'])) {
-    $form['ec_enabled']['#group'] = 'unites_recherche';
+    $form['ec_enabled']['#group'] = 'staff';
   }
   if (isset($form['doc_enabled'])) {
-    $form['doc_enabled']['#group'] = 'unites_recherche';
+    $form['doc_enabled']['#group'] = 'staff';
   }
 }
 
