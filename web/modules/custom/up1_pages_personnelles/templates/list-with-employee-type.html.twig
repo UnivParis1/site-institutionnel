@@ -27,17 +27,14 @@
       {% else %}
         <div class="annuaire-content mb-5">
           {% for user in users %}
-            {% if (Trusted and user.supannListeRouge == FALSE) or (not Trusted and user.sn != 'supannListeRouge') %}
+            {% if user.labeledURI is not empty and ((Trusted and user.supannListeRouge == FALSE) or
+              (not Trusted and user.sn != 'supannListeRouge')) %}
               <div class="annuaire-item">
                 <b>
-                  {% if user.labeledURI is empty %}
+                  <a href="{{ user.labeledURI[0] }}"  target="_blank"
+                     title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
                     {{ user.sn|upper }} {{ user.givenName }}
-                  {% else %}
-                    <a href="{{ user.labeledURI[0] }}"  target="_blank"
-                       title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
-                      {{ user.sn|upper }} {{ user.givenName }}
-                    </a>
-                  {% endif %}
+                  </a>
                 </b>
                 <span>
                   {{ user.employeeType|join(', ') }}
