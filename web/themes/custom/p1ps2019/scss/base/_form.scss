@@ -8,19 +8,19 @@
 
 form{
   width: 100%;
-  > div {width: 100%;}
+  /*> div {width: 100%;}*/
 }
 .form-item:not(.form-item-centre-name){
   label{display: none;}
 }
 .form-item:not(.form-item-centre-name), .chosen-container-single{
-	position: relative;
-	&:before{
-		content: "";
-		top: 50%; transform: translateY(-50%);
-		position: absolute; #{$left}: rem-calc(24px);
-		width: 3px; height: 45%; z-index: 1;
-	}
+  position: relative;
+  &:before{
+    content: "";
+    top: 50%; transform: translateY(-50%);
+    position: absolute; #{$left}: rem-calc(24px);
+    width: 3px; height: 45%; z-index: 1;
+  }
 }
 .chosen-container-single .chosen-single, textarea,
 input[type="text"],
@@ -42,23 +42,23 @@ input[type="email"],
 input[type="tel"],
 input[type="number"],
 input[type="password"]{
- cursor: text;
+  cursor: text;
 }
 
 .homepage-search-form{
-    position: relative;
-    @extend .semi-field-sep;
-    input[type="search"]{
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    #edit-submit, #edit-submit--2{
-        border: none;
-        background-color: transparent;
-        padding: 0; top: 0; right: rem-calc(24px);
-        position: absolute; width: auto;
-    }
+  position: relative;
+  @extend .semi-field-sep;
+  input[type="search"]{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  #edit-submit, #edit-submit--2{
+    border: none;
+    background-color: transparent;
+    padding: 0; top: 0; right: rem-calc(24px);
+    position: absolute; width: auto;
+  }
 }
 textarea{max-height: 100%;}
 
@@ -66,6 +66,7 @@ textarea{max-height: 100%;}
   @extend .btn;
   width: 100%; display: block; margin: 0;
   -webkit-appearance: none;
+  margin-left: 1rem;
 }
 
 
@@ -253,7 +254,7 @@ label, .label-style{
     //IE SUPPORT ----
     text-indent: 0.01px;
     text-overflow: "";
-     &::-ms-expand{
+    &::-ms-expand{
       display: none;
     }
     //IE SUPPORT END ----
@@ -300,7 +301,7 @@ label, .label-style{
         padding: rem-calc(12px);
         font-size: rem-calc(16px);
         &.highlighted, &.result-selected{
-					background-image: none;
+          background-image: none;
         }
       }
     }
@@ -311,15 +312,45 @@ label, .label-style{
 }
 
 .views-exposed-form{
-  @include flexDisplay(); @include flexDisplayAlign('space-between');
+  @include flexDisplay();
+  align-items: center;
   .form-item:not(.form-actions){
-    width: auto; flex-grow: 1;
+    width: auto; /*flex-grow: 1;*/
     &+ .form-item:not(.form-actions){
-      #{$margin-left}: rem-calc(24px);
+      #{$margin-left}: rem-calc(16px);
     }
     .chosen-container{width: 100% !important;}
   }
   .form-actions{
-    margin-top: rem-calc(16px);
+    /*margin-top: rem-calc(16px);*/
   }
+}
+
+//Webform
+.field--type-webform {
+  .form-item:not(.form-item-centre-name) {
+    margin: 1rem 0;
+    label {
+      display: initial;
+    }
+    &:before {
+      background-color: transparent;
+    }
+    textarea,  .chosen-container-single .chosen-single, input[type="text"], input[type="email"], input[type="tel"],
+    input[type="submit"]:not(.reset-btn), input[type="number"], input[type="button"], input[type="password"], input[type="url"], input[type="file"],
+    input[type="search"], .form-date, select.form-select .file-widget {
+      padding: 0 1rem;
+    }
+    input[type="number"] {
+      width: initial;
+    }
+  }
+  .chosen-container-single::before {
+    background-color: transparent;
+  }
+}
+.site-content-wrapper .field--type-webform input[type="submit"]:not(.reset-btn) {
+  margin-left: 0;
+  width: initial;
+  display: inline-block;
 }
