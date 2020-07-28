@@ -9609,9 +9609,8 @@ table {
 */
 /* Ebizproduction : Input */
 form {
-  width: 100%; }
-  form > div {
-    width: 100%; }
+  width: 100%;
+  /*> div {width: 100%;}*/ }
 
 .form-item:not(.form-item-centre-name) label {
   display: none; }
@@ -9640,7 +9639,7 @@ input[type="url"],
 input[type="file"],
 input[type="search"], .form-date, select.form-select,
 .file-widget {
-  border: 3px solid #00326e;
+  border: 2px solid #00326e;
   background-color: #fff;
   -webkit-appearance: none;
   display: block;
@@ -9657,7 +9656,7 @@ input[type="search"], .form-date, select.form-select,
       align-items: center;
   padding: 0 1.5rem 0 4.5rem;
   margin: 0;
-  height: 4.4375rem; }
+  height: 2.8125rem; }
   .chosen-container-single .chosen-single::-webkit-input-placeholder, textarea::-webkit-input-placeholder,
   input[type="text"]::-webkit-input-placeholder,
   input[type="email"]::-webkit-input-placeholder,
@@ -9735,7 +9734,7 @@ input[type="search"], .form-date, select.form-select,
   input[type="file"]:focus,
   input[type="search"]:focus, .form-date:focus, select.form-select:focus,
   .file-widget:focus {
-    border: 3px solid #00326e; }
+    border: 2px solid #00326e; }
 
 textarea,
 input[type="text"],
@@ -9765,7 +9764,8 @@ textarea {
   width: 100%;
   display: block;
   margin: 0;
-  -webkit-appearance: none; }
+  -webkit-appearance: none;
+  margin-left: 1rem; }
 
 .form-item.js-form-type-checkbox {
   position: relative; }
@@ -10034,18 +10034,38 @@ label, .label-style {
       flex-wrap: wrap;
   -ms-flex-direction: row;
       flex-direction: row;
-  -ms-flex-pack: justify;
-  justify-content: space-between; }
+  -ms-flex-align: center;
+      align-items: center; }
   .views-exposed-form .form-item:not(.form-actions) {
     width: auto;
-    -ms-flex-positive: 1;
-        flex-grow: 1; }
+    /*flex-grow: 1;*/ }
     .views-exposed-form .form-item:not(.form-actions) + .form-item:not(.form-actions) {
-      margin-left: 1.5rem; }
+      margin-left: 1rem; }
     .views-exposed-form .form-item:not(.form-actions) .chosen-container {
       width: 100% !important; }
   .views-exposed-form .form-actions {
-    margin-top: 1rem; }
+    /*margin-top: rem-calc(16px);*/ }
+
+.field--type-webform .form-item:not(.form-item-centre-name) {
+  margin: 1rem 0; }
+  .field--type-webform .form-item:not(.form-item-centre-name) label {
+    display: initial; }
+  .field--type-webform .form-item:not(.form-item-centre-name):before {
+    background-color: transparent; }
+  .field--type-webform .form-item:not(.form-item-centre-name) textarea, .field--type-webform .form-item:not(.form-item-centre-name) .chosen-container-single .chosen-single, .field--type-webform .form-item:not(.form-item-centre-name) input[type="text"], .field--type-webform .form-item:not(.form-item-centre-name) input[type="email"], .field--type-webform .form-item:not(.form-item-centre-name) input[type="tel"],
+  .field--type-webform .form-item:not(.form-item-centre-name) input[type="submit"]:not(.reset-btn), .field--type-webform .form-item:not(.form-item-centre-name) input[type="number"], .field--type-webform .form-item:not(.form-item-centre-name) input[type="button"], .field--type-webform .form-item:not(.form-item-centre-name) input[type="password"], .field--type-webform .form-item:not(.form-item-centre-name) input[type="url"], .field--type-webform .form-item:not(.form-item-centre-name) input[type="file"],
+  .field--type-webform .form-item:not(.form-item-centre-name) input[type="search"], .field--type-webform .form-item:not(.form-item-centre-name) .form-date, .field--type-webform .form-item:not(.form-item-centre-name) select.form-select .file-widget {
+    padding: 0 1rem; }
+  .field--type-webform .form-item:not(.form-item-centre-name) input[type="number"] {
+    width: initial; }
+
+.field--type-webform .chosen-container-single::before {
+  background-color: transparent; }
+
+.site-content-wrapper .field--type-webform input[type="submit"]:not(.reset-btn) {
+  margin-left: 0;
+  width: initial;
+  display: inline-block; }
 
 .responsive-card-table {
   border-collapse: collapse; }
@@ -10477,7 +10497,7 @@ button.semi-oval {
   color: #fff; }
 
 .site-content-wrapper input[type="submit"]:not(.reset-btn) {
-  border: 3px solid #00326e; }
+  border: 2px solid #00326e; }
 
 .centres-up1-form .map-centre .overlay-infos .form-item label, .center-wrapper .map-centre .overlay-infos .form-item label {
   color: #fff !important; }
@@ -10494,7 +10514,7 @@ input[type="password"],
 input[type="url"],
 input[type="file"],
 input[type="search"], .form-date, select.form-select .file-widget {
-  border: 3px solid #00326e;
+  border: 2px solid #00326e;
   background-color: #fff;
   -webkit-appearance: none;
   display: block;
@@ -10511,7 +10531,7 @@ input[type="search"], .form-date, select.form-select .file-widget {
       align-items: center;
   padding: 0 1.5rem 0 4.5rem;
   margin: 0;
-  height: 4.4375rem; }
+  height: 2.8125rem; }
   textarea::-webkit-input-placeholder,
   .chosen-container-single .chosen-single::-webkit-input-placeholder,
   input[type="text"]::-webkit-input-placeholder,
@@ -10594,7 +10614,7 @@ input[type="search"], .form-date, select.form-select .file-widget {
   input[type="url"]:focus,
   input[type="file"]:focus,
   input[type="search"]:focus, .form-date:focus, select.form-select .file-widget:focus {
-    border: 3px solid #00326e; }
+    border: 2px solid #00326e; }
 
 .form-item:not(.form-item-centre-name):before, .chosen-container-single:before {
   background-color: #00326e; }
@@ -10616,7 +10636,7 @@ input[type="search"], .form-date, select.form-select .file-widget {
     color: #fff; }
 
 .chosen-container-single .chosen-container-active.chosen-with-drop {
-  border: 3px solid #00326e !important; }
+  border: 2px solid #00326e !important; }
 
 .user-is-tabbing textarea:focus, .user-is-tabbing select:focus,
 .user-is-tabbing input[type="text"]:focus,
@@ -11390,6 +11410,16 @@ body.adminimal-admin-toolbar #admin-toolbar-search-tab .form-item.js-form-type-t
 
 .news h1 {
   font-size: 2.8125rem; }
+
+.news.teaser .box-content {
+  padding: 2.25rem 1.25rem .5rem; }
+  .news.teaser .box-content .title {
+    font-size: 1.25rem; }
+  .news.teaser .box-content .categ-style {
+    margin: 0; }
+  .news.teaser .box-content .txt.medium {
+    font-size: 1rem;
+    margin: 1.25rem 0rem; }
 
 .offre-emploi #event-content ul {
   margin-top: 0.5rem; }
