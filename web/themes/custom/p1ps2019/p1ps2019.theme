@@ -61,7 +61,7 @@ function p1ps2019_preprocess_page(&$variables) {
 
   if ($node) {
     $node_type = $node->getType();
-    if (!in_array($node_type, ['news', 'event', 'publication'])
+    if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
       && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
       $print_hp_image = TRUE;
     }
@@ -228,6 +228,11 @@ function p1ps2019_preprocess_views_view(&$variables) {
   $variables['is_listing_page'] = FALSE;
   if ($variables['id'] == 'listings') {
     $variables['is_listing_page'] = TRUE;
+    $variables['view_title'] = $variables['view']->getTitle();
+  }
+  $variables['is_master_view'] = FALSE;
+  if ($variables['id'] == 'actualite') {
+    $variables['is_master_view'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
   }
   if($variables['more']) {
