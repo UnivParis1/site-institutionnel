@@ -56,15 +56,15 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
         $end_date = $item->end_date;
         $end_date->setTimezone(timezone_open(drupal_get_user_timezone()));
 
-        $start_hour = $start_date->format('H:i');
-        $end_hour = $end_date->format('H:i');
+        $start_hour = $start_date->format('H\hi');
+        $end_hour = $end_date->format('H\hi');
 
         if ($start_date->format('d-m-Y') !== $end_date->format('d-m-Y')) {
           $elements[$delta] = [
             'date' => [
               '#markup' => "<div class='date-day-entry'><span>$prefix </span>" .
-                $start_date->format('d/m/Y') . "</div><div class='date-day-entry'><span>$separator </span>" .
-                $end_date->format('d/m/Y') . "</div>",
+                $start_date->format('j F Y') . "</div><div class='date-day-entry'><span>$separator </span>" .
+                $end_date->format('j F Y') . "</div>",
             ],
           ];
         }
@@ -78,7 +78,7 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
         else {
           $elements[$delta] = [
             'date' => [
-              '#markup' => "<div class='date-day-entry'>" . $start_date->format('d/m/Y') . "</div>
+              '#markup' => "<div class='date-day-entry'>" . t('Le') ." " . strtolower($start_date->format('l j F Y')) . "</div>
               <div class='date-hours-wrapper'><span>$start_hour</span>
               <i class='fa fa-$icon'></i>
               <span>$end_hour</span></div>",

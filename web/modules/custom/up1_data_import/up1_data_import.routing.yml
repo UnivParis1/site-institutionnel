@@ -1,0 +1,28 @@
+up1_data_import.settings:
+  path: '/admin/config/up1/data_import'
+  defaults:
+    _form: '\Drupal\up1_data_import\Form\Up1DataImportSettings'
+    _title: 'Configuration des imports'
+  requirements:
+    _permission: 'configure up1 settings'
+up1_data_import.news_list:
+  path: '/news-old-site'
+  defaults:
+    _controller: '\Drupal\up1_data_import\Controller\DataController::getNewsList'
+    _title: "Liste des actualités de l'ancien site"
+  requirements:
+    _permission: 'access content'
+up1_data_import.event_list:
+  path: '/events-old-site'
+  defaults:
+    _controller: '\Drupal\up1_data_import\Controller\DataController::getEventList'
+    _title: "Liste des évènements de l'ancien site"
+  requirements:
+    _permission: 'access content'
+up1_data_import.delete_liste:
+  path: '/delete-data-import-queue'
+  defaults:
+    _controller: '\Drupal\up1_data_import\Controller\DataController::deleteQueues'
+    _title: "Suppression des queues d'import"
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,7 @@
+services:
+  data.service:
+    class: Drupal\up1_data_import\Service\DataService
+    arguments: ['@config.factory']
+  data.helper:
+    class: Drupal\up1_data_import\Service\DataHelper
+    arguments: ['@data.service']

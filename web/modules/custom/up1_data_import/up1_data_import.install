@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the up1_theses module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema().
+ */
+function up1_data_import_schema() {
+
+  return [
+    'up1_data_import' => [
+      'description' => 'Trace all imported data during crons.',
+      'fields' => [
+        'old_nid' => [
+          'description' => 'The {node}.nid of the old node.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'old_uuid' => [
+          'description' => 'The uuid of the old node.',
+          'type' => 'varchar',
+          'length' => 128,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'nid' => [
+          'description' => 'The {node}.nid of the content created on the actual site.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'created' => [
+          'description' => 'The timestamp when this node was created.',
+          'type' => 'int',
+          'length' => 11,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['old_uuid'],
+      'foreign keys' => [
+        'associated_node' => [
+          'table' => 'node',
+          'columns' => ['nid' => 'nid'],
+        ],
+      ],
+    ],
+  ];
+}

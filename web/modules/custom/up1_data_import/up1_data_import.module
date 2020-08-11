@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_data_import.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_help().
+ */
+function up1_data_import_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_theses module.
+    case 'help.page.up1_import_old_content':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('&quot;Import contents from old Drupal 8 & Typo 3 sites') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ * @param EntityInterface $entity
+ */
+function up1_data_import_entity_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'news2018') {
+
+    $select = Drupal::database()
+      ->select('up1_data_import', 't')
+      ->fields('t', ['nid'])
+      ->condition('t.nid', $entity->id())
+      ->execute()
+      ->fetchField();
+
+    if ($select && $select == $entity->id()) {
+      $query = Drupal::database()->delete('up1_data_import')
+        ->condition('nid', $entity->id());
+      if ($query->execute()) {
+        Drupal::logger('up1_data_import')
+          ->info('"' . $entity->label() . '" supprimé de la table up1_data_import.');
+      }
+      else {
+        Drupal::logger('up1_data_import')
+          ->warning('"' . $entity->label() . '" inconnu dans la table up1_data_import ou non supprimé.');
+      }
+    }
+  }
+}

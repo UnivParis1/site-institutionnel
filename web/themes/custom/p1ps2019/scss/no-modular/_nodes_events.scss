@@ -6,7 +6,6 @@
 
   .field-add-to-cal{
     @include setFont($fontType-bold);
-    max-width: rem-calc(150px); text-align: #{$right};
     a{
       font-family: $font-main;
       font-size: rem-calc(18px); line-height: 1.22;
@@ -17,6 +16,7 @@
     @include flexDisplayAlign('center-middle');
     .field-add-to-cal{
       #{$padding-right}: rem-calc(32px);
+      max-width: rem-calc(152px);
     }
   }
   .social-buttons{
@@ -38,7 +38,15 @@
       a{
         width: auto;
         padding: 0; @include flexDisplay();
-        i:before{font-size: rem-calc(32px);}
+        i {
+          &.fa-facebook {
+            &:before {
+              content: "\f082";
+            }
+          }
+          &:before{font-size: rem-calc(32px);
+          }
+        }
       }
       &:not(:last-of-type){
         #{$margin-right}: rem-calc(16px);
@@ -46,10 +54,10 @@
     }
   }
   .event-date, .end-date, .event-details{
-      span{
-          @include font-bold();
-      }
-      i{margin-left: rem-calc(6px);}
+    span{
+      @include font-bold();
+    }
+    i{margin-left: rem-calc(6px);}
   }
   &.bootstrap-cards{
     .box-content{
