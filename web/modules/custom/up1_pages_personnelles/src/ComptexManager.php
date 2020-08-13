@@ -30,7 +30,7 @@ class ComptexManager implements ComptexInterface {
     $searchUser = "$ws?token=$username";
 
     $params = [
-      'attrs' => "supannCivilite,displayName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation"
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation"
     ];
 
     $ch = curl_init();
@@ -100,6 +100,12 @@ class ComptexManager implements ComptexInterface {
       }
       if (isset($information['displayName']) && is_array($information['displayName'])) {
         $information['displayName'] = reset($information['displayName']);
+      }
+      if (isset($information['sn']) && is_array($information['sn'])) {
+        $information['sn'] = reset($information['sn']);
+      }
+      if (isset($information['givenName']) && is_array($information['givenName'])) {
+        $information['givenName'] = reset($information['givenName']);
       }
       if (isset($information['mail']) && is_array($information['mail'])) {
         $information['mail'] = reset($information['mail']);

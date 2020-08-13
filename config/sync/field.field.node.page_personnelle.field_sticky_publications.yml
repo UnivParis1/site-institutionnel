@@ -1,0 +1,25 @@
+uuid: 3287917b-5590-4694-81ab-7d1d85ca5ce7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sticky_publications
+    - node.type.page_personnelle
+id: node.page_personnelle.field_sticky_publications
+field_name: field_sticky_publications
+entity_type: node
+bundle: page_personnelle
+label: 'Publications à la une'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_references
+      display_name: entity_reference_publications
+      arguments: {  }
+field_type: entity_reference

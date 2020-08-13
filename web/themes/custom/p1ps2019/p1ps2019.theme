@@ -2,6 +2,9 @@
 
 use \Drupal\paragraphs\Entity\Paragraph;
 use \Drupal\Core\Form\FormStateInterface;
+use \Drupal\taxonomy\Entity\Term;
+use \Drupal\user\Entity\User;
+use \Drupal\Core\Url;
 
 /**
  * Implements hook_preprocess_HOOK() for html.twig.
@@ -89,7 +92,66 @@ function p1ps2019_preprocess_node(&$variables) {
     $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
   }
-  //$node = $variables['node'];
+  $node = $variables['node'];
+
+  if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
+    $skills = $node->get('field_skills')->getValue();
+    if (!empty($skills)) {
+      foreach ($skills as $key => $skill) {
+        $tid = $skill['target_id'];
+        $term = Term::load($tid);
+        $arg = 'skills[' . $tid . ']';
+        $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
+        $expertises[$key] =
+          '<a href="'. $url->toString() .'"
+          title="'. t('Link to @term_name page', ['@term_name' => $term->getName()]) . '"
+          target="_blank">'
+          . $term->getName() . '</a>';
+      }
+    }
+    $variables['expertises'] = $expertises;
+  }
+  if ($node->getType() == 'page_personnelle' && $node->hasField('field_highlight_publications')) {
+    $publications = $node->get('field_highlight_publications')->getValue();
+    $col_length = 12;
+    switch (count($publications)) {
+      case 1:
+        $col_length = "8";
+        break;
+      case 2:
+      $col_length = "6";
+        break;
+      case 3:
+        $col_length = "4";
+        break;
+    }
+    $variables['col_length'] = $col_length;
+  }
+
+  if ($node->getType() == 'publication' && $node->hasField('field_publication_author')) {
+    $authors = $node->get('field_publication_author')->getValue();
+    if (!empty($authors)) {
+      $publication_authors = [];
+      foreach ($authors as $author) {
+        $uid = $author['target_id'];
+        $pp = \Drupal::entityTypeManager()
+          ->getStorage('node')
+          ->loadByProperties(['uid' => $uid]);
+        $page_perso = reset($pp);
+        if ($page_perso && $page_perso->getType() == 'page_personnelle') {
+          $nom = $page_perso->get('field_name')->getValue();
+          $prenom = $page_perso->get('field_firstname')->getValue();
+          $page_perso_url = Url::fromRoute('entity.node.canonical',
+            ['node' => $page_perso->id()])->toString();
+          $publication_authors[] =
+            '<a href="' . $page_perso_url . '" target="_blank"
+            title="Page personnelle de ' . $prenom[0]['value'] . ' ' . $nom[0]['value'] . '">
+            '. $prenom[0]['value'] . ' ' . $nom[0]['value'] . '</a>';
+        }
+      }
+      $variables['publication_authors'] = $publication_authors;
+    }
+  }
 }
 
 /**
@@ -226,13 +288,17 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
 */
 function p1ps2019_preprocess_views_view(&$variables) {
   $variables['is_listing_page'] = FALSE;
-  if ($variables['id'] == 'listings') {
+  $views = ['travailler_universite','listings'];
+  if (in_array($variables['id'], $views)) {
     $variables['is_listing_page'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
   }
   $variables['is_master_view'] = FALSE;
   if ($variables['id'] == 'actualite') {
     $variables['is_master_view'] = TRUE;
+    $variables['view_title'] = $variables['view']->getTitle();
+  }
+  if ($variables['id'] == 'skills') {
     $variables['view_title'] = $variables['view']->getTitle();
   }
   if($variables['more']) {
