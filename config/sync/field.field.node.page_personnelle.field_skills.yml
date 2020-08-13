@@ -1,0 +1,29 @@
+uuid: 8bed5c3f-a6b5-4799-a3e8-b05e1c58945e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_skills
+    - node.type.page_personnelle
+    - taxonomy.vocabulary.skills
+id: node.page_personnelle.field_skills
+field_name: field_skills
+entity_type: node
+bundle: page_personnelle
+label: 'Domaines d''expertise'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      skills: skills
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

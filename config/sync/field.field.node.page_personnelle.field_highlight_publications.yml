@@ -1,0 +1,25 @@
+uuid: aacc895d-8314-4a1a-af8f-c863611e9c59
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_highlight_publications
+    - node.type.page_personnelle
+id: node.page_personnelle.field_highlight_publications
+field_name: field_highlight_publications
+entity_type: node
+bundle: page_personnelle
+label: 'Publications mises en avant'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_references
+      display_name: entity_reference_publications
+      arguments: {  }
+field_type: entity_reference
