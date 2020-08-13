@@ -27,7 +27,7 @@ bundle: bp_tab_section
 label: 'Tab Body'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -47,21 +47,27 @@ settings:
       tiles: tiles
       section_presentation: section_presentation
     target_bundles_drag_drop:
-      bp_simple:
-        enabled: true
-        weight: -31
-      bp_image:
-        enabled: true
-        weight: -30
-      bp_blank:
-        weight: -29
+      audio_media:
+        weight: 24
         enabled: false
       bp_accordion:
         enabled: true
         weight: -28
+      bp_accordion_section:
+        weight: -20
+        enabled: false
+      bp_blank:
+        weight: -29
+        enabled: false
+      bp_block:
+        weight: -23
+        enabled: false
       bp_carousel:
         enabled: true
         weight: -27
+      bp_column_wrapper:
+        weight: 30
+        enabled: false
       bp_columns:
         weight: -26
         enabled: false
@@ -71,45 +77,33 @@ settings:
       bp_columns_two_uneven:
         weight: -24
         enabled: false
-      bp_block:
-        weight: -23
-        enabled: false
+      bp_image:
+        enabled: true
+        weight: -30
       bp_modal:
         enabled: true
         weight: -22
-      bp_view:
+      bp_simple:
         enabled: true
-        weight: -21
-      bp_accordion_section:
-        weight: -20
+        weight: -31
+      bp_tab_section:
+        weight: -18
         enabled: false
       bp_tabs:
         weight: -19
         enabled: false
-      bp_tab_section:
-        weight: -18
-        enabled: false
-      audio_media:
-        weight: 24
-        enabled: false
-      title_and_subtitle:
-        weight: 26
-        enabled: false
-      tile:
-        weight: 28
-        enabled: false
-      bp_column_wrapper:
-        weight: 30
-        enabled: false
-      presentation:
-        weight: 31
-        enabled: false
+      bp_view:
+        enabled: true
+        weight: -21
       bp_webform:
         weight: 40
         enabled: false
       files_media:
         weight: 41
         enabled: false
+      hit_list:
+        enabled: true
+        weight: 45
       image_media:
         weight: 42
         enabled: false
@@ -119,22 +113,28 @@ settings:
       key_figures_section:
         enabled: true
         weight: 44
-      hit_list:
-        enabled: true
-        weight: 45
       medias:
         enabled: true
         weight: 45
-      video_media:
-        weight: 46
+      presentation:
+        weight: 31
+        enabled: false
+      section_presentation:
+        enabled: true
+        weight: 55
+      tile:
+        weight: 28
+        enabled: false
+      tile_with_text:
+        weight: 57
         enabled: false
       tiles:
         enabled: true
         weight: 52
-      section_presentation:
-        enabled: true
-        weight: 55
-      tile_with_text:
-        weight: 57
+      title_and_subtitle:
+        weight: 26
+        enabled: false
+      video_media:
+        weight: 46
         enabled: false
 field_type: entity_reference_revisions
