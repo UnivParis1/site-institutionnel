@@ -91,8 +91,18 @@
       {% endif %}
     </div>
     {{ title_suffix }}
-    {% if author|striptags|trim %}
-      <div class="author small sm-teaser__title--author">{{ author }}</div>
+    {% if author|striptags|trim or publication_authors %}
+      <div class="author small sm-teaser__title--author">
+        {% if publication_authors %}
+          {{ publication_authors|join(', ')|raw }}
+        {% endif %}
+        {% if  author|striptags|trim and publication_authors %}
+          <span>, </span>
+        {% endif %}
+        {% if author|striptags|trim %}
+          {{ author }}
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 </article>

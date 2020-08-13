@@ -1,0 +1,25 @@
+uuid: 9810ae95-7cf0-48d9-86ea-f1852aeb3de0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_author
+    - node.type.publication
+id: node.publication.field_publication_author
+field_name: field_publication_author
+entity_type: node
+bundle: publication
+label: 'Auteur de la publication'
+description: 'S''il s''agit d''un Enseignant-chercheur ou d''un doctorant de Paris1, veuillez rechercher ses nom et/ou prénom dans la liste ci-dessous.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: publication_author
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

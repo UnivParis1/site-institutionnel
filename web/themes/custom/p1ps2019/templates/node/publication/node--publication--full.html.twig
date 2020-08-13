@@ -143,10 +143,18 @@
                 <span>{{ collection }}</span>
               </div>
             {% endif %}
-            {% if author|striptags|trim %}
+            {% if author|striptags|trim or publication_authors %}
               <div class="details txt-second">
-                <span class="txt-bold">{{ "Author"|t }} : </span>
-                <span>{{ author }}</span>
+                <span class="txt-bold">{{ "Author(s)"|t }} : </span>
+                {% if publication_authors %}
+                  {{ publication_authors|join(', ')|raw }}
+                {% endif %}
+                {% if  author|striptags|trim and publication_authors %}
+                  <span>, </span>
+                {% endif %}
+                {% if author|striptags|trim %}
+                  <span>{{ author }}</span>
+                {% endif %}
               </div>
             {% endif %}
             <div class="details txt-second">
@@ -195,28 +203,27 @@
                 <span> {{ format }}</span>
               </div>
             {% endif %}
+            {% if price|striptags|trim %}
+              <div class="details txt-second">
+                <span class="txt-bold">{{ "Price"|t }} : </span>
+                <span>{{ price }}</span>
+              </div>
+            {% endif %}
             {% if publicationTags|striptags|trim %}
               <div class="details txt-second">
-                <span class="txt-bold">{{ "Mots-clés"|t }} : </span>
                 {% for key, item in content.field_tags if key|first != '#' %}
-                  <span>{{ item }}</span>
+                  <div class="categ-style block-title-sep">{{ item }}</div>
                 {% endfor %}
               </div>
             {% endif %}
-            {% if price|striptags|trim %}
-            <div class="details txt-second">
-              <span class="txt-bold">{{ "Price"|t }} : </span>
-              <span>{{ price }}</span>
-            </div>
-            {% endif %}
             {% if link|striptags|trim %}
-            <div class="details txt-second">
+              <div class="details txt-second">
                 <span class="txt-bold">
                 <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
                   {{ "Acheter cet ouvrage"|t }}
                 </a>
                 </span>
-            </div>
+              </div>
             {% endif %}
           </div>
         </div>
