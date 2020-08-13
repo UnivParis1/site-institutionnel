@@ -322,36 +322,119 @@ label, .label-style{
     }
     .chosen-container{width: 100% !important;}
   }
-  .form-actions{
-    /*margin-top: rem-calc(16px);*/
+}
+.path-domaines-expertise {
+  .views-exposed-form {
+    .form-item:not(.form-actions) {
+      width: auto; /*flex-grow: 1;*/
+      & + .form-item:not(.form-actions) {
+        #{$margin-left}: 0;
+      }
+    }
+
+    .form-item-text.form-item:not(.form-item-centre-name) {
+      &:before {
+        left: .5rem;
+        top: 35%;
+      }
+
+      input[type="text"] {
+        padding-left: .5em;
+        margin-bottom: rem-calc(20px);
+
+        &::-webkit-input-placeholder {
+          font-size: rem-calc(14px);
+        }
+      }
+    }
+
+    fieldset.form-item:not(.form-item-centre-name) {
+      &:before {
+        background: none;
+      }
+
+      label {
+        display: initial;
+        padding: rem-calc(4px);
+
+        &:after {
+          display: none;
+        }
+
+        font-size: rem-calc(18px);
+        line-height: 1.22;
+        @include font-normal();
+        margin: rem-calc(0 11px 0 0);
+      }
+
+      .js-form-type-checkbox {
+        margin-bottom: rem-calc(20px);
+        input {
+          display: inline-block;
+          position: relative !important;
+          width: 20px;
+          height: 20px;
+          & + label {
+            position: relative;
+            background: none;
+
+            &:after {
+              content: none;
+            }
+          }
+        }
+
+        input[checked="checked"] + label {
+          position: relative;
+          background-color: $background-main-color;
+          color: $text-white;
+          &:after {
+            content: "⨉";
+            display: block;
+            position: absolute;
+            top: rem-calc(-8px);
+            right: rem-calc(-8px);
+            border-radius: 100%;
+            font-size: rem-calc(12px);
+            width: rem-calc(16px);
+            height: rem-calc(16px);
+            @include flex();
+            @include flex-align(center, middle);
+            color: $background-main-color;
+            background-color: $text-white;
+            border: 1px solid $background-main-color;
+          }
+        }
+      }
+    }
   }
 }
 
-//Webform
-.field--type-webform {
-  .form-item:not(.form-item-centre-name) {
-    margin: 1rem 0;
-    label {
-      display: initial;
+  //Webform
+  .field--type-webform {
+    .form-item:not(.form-item-centre-name) {
+      margin: 1rem 0;
+      label {
+        display: initial;
+      }
+      &:before {
+        background-color: transparent;
+      }
+      textarea,  .chosen-container-single .chosen-single, input[type="text"], input[type="email"], input[type="tel"],
+      input[type="submit"]:not(.reset-btn), input[type="number"], input[type="button"], input[type="password"], input[type="url"], input[type="file"],
+      input[type="search"], .form-date, select.form-select .file-widget {
+        padding: 0 1rem;
+      }
+      input[type="number"] {
+        width: initial;
+      }
     }
-    &:before {
+    .chosen-container-single::before {
       background-color: transparent;
     }
-    textarea,  .chosen-container-single .chosen-single, input[type="text"], input[type="email"], input[type="tel"],
-    input[type="submit"]:not(.reset-btn), input[type="number"], input[type="button"], input[type="password"], input[type="url"], input[type="file"],
-    input[type="search"], .form-date, select.form-select .file-widget {
-      padding: 0 1rem;
-    }
-    input[type="number"] {
-      width: initial;
-    }
   }
-  .chosen-container-single::before {
-    background-color: transparent;
+  .site-content-wrapper .field--type-webform input[type="submit"]:not(.reset-btn) {
+    margin-left: 0;
+    width: initial;
+    display: inline-block;
   }
-}
-.site-content-wrapper .field--type-webform input[type="submit"]:not(.reset-btn) {
-  margin-left: 0;
-  width: initial;
-  display: inline-block;
-}
