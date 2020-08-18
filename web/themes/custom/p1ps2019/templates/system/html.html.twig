@@ -35,7 +35,7 @@
   not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
   node_type ? 'node--type-' ~ node_type|clean_class,
   db_offline ? 'db-offline',
-  node_type and root_path and not is_front_mini_site and not is_front ? 'page-mini-site'
+  page_mini_site or (node_type and root_path and not is_front_mini_site and not is_front) ? 'page-mini-site'
 ]
 %}
 <!DOCTYPE html>
