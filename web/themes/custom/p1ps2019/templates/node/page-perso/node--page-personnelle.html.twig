@@ -1,0 +1,393 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_node()
+ *
+ * @todo Remove the id attribute (or make it a class), because if that gets
+ *   rendered twice on a page this is invalid CSS for example: two lists
+ *   in different view modes.
+ */
+#}
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'clearfix'
+]
+%}
+{{ attach_library('p1ps2019/match_height') }}
+{% set other_affiliation = content.field_other_affiliation|render %}
+{% set about_me = content.field_about_me|render %}
+{% set research_directions = content.field_research_directions|render %}
+{% set research_projects = content.field_research_projects|render %}
+{% set research_themes = content.field_research_themes|render %}
+{% set thesis_subject = content.field_thesis_subject|render %}
+{% set phd_supervisor = content.field_phd_supervisor|render %}
+{#{% set skills = content.field_skills|render %}#}
+{% if content.field_get_hal_publications.0 %}
+  {% set publications = hal_publications %}
+{% else %}
+  {% set publications = content.field_publications|render %}
+{% endif %}
+{% set resume_text = content.field_resume_text|render %}
+{% set resume = content.field_resume|render %}
+{% set resume_pdf = content.field_resume_pdf|render %}
+{% set email_address = content.field_other_email_address|render %}
+{% set scientific_resp = content.field_scientific_resp|render %}
+{% set thesis_directions = content.field_thesis_directions|render %}
+{% set facebook_link = content.field_facebook_link|render %}
+{% set twitter = content.field_twitter|render %}
+{% set linkedin_link = content.field_linkedin_link|render %}
+{% set viadeo_link = content.field_viadeo_link|render %}
+{% set epi = content.field_epi_link|render %}
+{% set hal = content.field_hal_link|render %}
+{% set academia = content.field_academia_link|render %}
+{% set my_medias = content.field_my_medias|render %}
+{% set skills = expertises %}
+{% set publis = content.field_highlight_publications|render %}
+{% set sticky_pub = content.field_sticky_publications|render %}
+
+{{ attach_library('up1_pages_personnelles/front') }}
+<article{{ attributes.addClass(classes) }}>
+  <div class="small-12 page_personnelle">
+    <div class="grid-x">
+      <div class="page_personnelle-name">
+        <h1 class="title display-inline">{{ label.0 }}</h1>
+      </div>
+      {#<!-- Side navigation -->#}
+      <aside class="left-fix-aside small-12 large-2">
+        <div class="progress">
+          <div class="wrapper">
+            <div class="btn btn-primary">
+              <a href="#page-perso-about">{{ 'About'|t }}</a>
+              <i class="icon-ok"></i>
+              <span></span>
+            </div>
+            <div class="btn btn-primary">
+              <a href="#page-perso-research">{{ 'Research'|t }}</a>
+              <i class="icon-ok"></i>
+              <span></span>
+            </div>
+            {% if publications %}
+              <div class="btn btn-primary">
+                <a href="#page-perso-publications">{{ 'Publications'|t }}</a>
+                <i class="icon-ok"></i>
+                <span></span>
+              </div>
+            {% endif %}
+            {% if resume_text %}
+              <div class="btn btn-primary">
+                <a href="#page-perso-cv">{{ 'Resume'|t }}</a>
+                <i class="icon-ok"></i>
+                <span></span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </aside>
+      {#<!-- Page content -->#}
+      <div class="right-mov-content content small-12 large-10">
+        <div class="colonnecentrale content small-12 large-8">
+          <section class="new-section about">
+            <a id="page-perso-about"></a>
+            <h2>{{ employeeType }}  {% if supannActivite %} ({{ supannActivite }}) {% endif %}</h2>
+            {% if supannRole %}
+              <div class="infos-sep">
+                <span>{{ supannRole.name }}</span>
+                <a href="{{ entites.0.labeledURI }}" title="{{ entites.0.name }}" target="_blank">
+                  {{ entites.0.description }}
+                </a>
+              </div>
+            {% endif %}
+
+            {# ----- Comptex Info ----- #}
+            {# Comptex Affectations #}
+            <div class="infos-sep">
+              <p class="txt-bold"> {{ "Assignment"|t }} </p>
+              {% for key, entite in entites %}
+                {% if key != 0 %}
+                  <span>{{ entite.description }}</span><br />
+                {% else %}
+                  <a href="{{ entites.0.labeledURI }}" title="{{ entites.0.name }}" target="_blank">{{ entites.0.description }}</a><br />
+                {% endif %}
+              {% endfor %}
+              {% if other_affiliation %}
+                <p>{{ content.field_other_affiliation.0 }}</p>
+              {% endif %}
+              {# ----- Comptex Affectations ----- #}
+              {# field skills #}
+              {% if skills %}
+                <p class="txt-bold">{{ content.field_skills['#title'] }}</p>
+                <p class="txt-second small infos-sep">
+                  {% for key, skill in skills if key|first != '#' %}
+                    <span class="btn btn-primary">
+                      {{ skill|raw }}
+                    </span>
+                  {% endfor %}
+                </p>
+              {% endif %}
+              {# field About me #}
+              {% if about_me  %}
+                <p class="txt-second small">
+                  <span class="txt-bold"> {{ content.field_about_me['#title'] }} </span>
+                  {{ content.field_about_me.0 }}
+                </p>
+              {% endif %}
+              {# ----- field About me ----- #}
+            </div>
+          </section>
+          <section class="new-section research">
+            <a id="page-perso-research"></a>
+            <h2>{{ "Research"|t }}</h2>
+            {# field Research directions #}
+            {% if research_directions %}
+              <h3>{{ content.field_research_directions['#title'] }}</h3>
+              {{ content.field_research_directions.0 }}
+            {% endif %}
+            {# ----- field Research directions ----- #}
+            {# field_thesis_directions #}
+            {% if thesis_directions %}
+              <h3>{{ content.field_thesis_directions['#title'] }}</h3>
+              {{ content.field_thesis_directions.0 }}
+            {% endif %}
+            {# ----- field_thesis_directions ----- #}
+            {# field_research_themes #}
+            {% if info or research_themes %}
+              <p class="txt-bold">{{ "Research themes"|t }}</p>
+              {% if info %}
+                <ul>
+                  {% for key, item in info %}
+                    <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% if research_themes %}
+                {{ content.field_research_themes.0 }}
+              {% endif %}
+            {% endif %}
+            {# ----- field_research_themes ----- #}
+            {# field_research_projects #}
+            {% if research_projects %}
+              <h3>{{ content.research_projects['#title'] }}</h3>
+              <p>{{ content.research_projects.0 }}</p>
+            {% endif %}
+            {# ----- field_research_projects ----- #}
+            {# field_scientific_resp #}
+            {% if scientific_resp %}
+              <h3>{{ content.field_scientific_resp['#title'] }}</h3>
+              <p>{{ content.field_scientific_resp.0 }}</p>
+              {# ----- field_scientific_resp ----- #}
+            {% endif %}
+            {% if thesis_subject or phd_supervisor %}
+              {% if thesis_subject %}
+                <h3>{{ content.field_thesis_subject['#title'] }}</h3>
+                {{ content.field_thesis_subject.0 }}
+              {% endif %}
+              {% if phd_supervisor %}
+                <h3>{{ content.field_phd_supervisor['#title'] }}</h3>
+                {{ content.field_phd_supervisor.0 }}
+              {% endif %}
+            {% endif %}
+          </section>
+          {% if publications or publis %}
+            <section class="new-section publications">
+              <a id="page-perso-publications"></a>
+              <h2>{{ "Publications"|t }}</h2>
+              {% if publis %}
+                <div class="box-style no-shadow auto-height semi-field-sep">
+                  <ul class="grid-x grid-margin-x grid-margin-y results__list">
+                    {% for key, pub in content.field_highlight_publications if key|first != '#' %}
+                      <li class="cell small-12 medium-6 large-{{ col_length }} results__default">{{ pub }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+              {% if publications %}
+                {{ publications|raw }}
+              {% endif %}
+            </section>
+          {% endif %}
+          {% if resume_text %}
+            <section class="new-section cv">
+              <a id="page-perso-cv"></a>
+              <h2>{{ content.field_resume_text['#title'] }}</h2>
+              <p class="txt-second small infos-sep">
+                {{ content.field_resume_text.0 }}
+              </p>
+            </section>
+          {% endif %}
+        </div>
+        <aside class="colonnedroite content small-12 large-4">
+          <div class="grid-x grid-margin-x">
+            <div class="userImg details">
+              <img src="{{ userPhoto }}" />
+            </div>
+            <div class="box-style no-shadow auto-height semi-field-sep">
+              <div class="box-content-padding paris1-bg-blue">
+                <div class="txt-second details">
+                  <span class="fa fa-envelope"> : </span> <a href="mailto:{{ mail }}">{{ mail }}</a>
+                </div>
+                {% if email_address %}
+                  <div class="txt-second details">
+                    <span class="fa fa-envelope"> : </span>
+                    <a href="mailto:{{ content.field_other_email_address.0['#url'] }}">{{ content.field_other_email_address.0 }}</a>
+                  </div>
+                {% endif %}
+                {% if telephoneNumber %}
+                  <div class="txt-second details">
+                    <span class="fa fa-phone"> : </span><a href="tel:{{ telephoneNumber }}">{{ telephoneNumber }}</a>
+                  </div>
+                {% endif %}
+                {% if content.field_other_page_perso.0 %}
+                  <div class="txt-second details">
+                    <span class="fa fa-at"> : </span>
+                    {% if content.field_other_page_perso.0['#title'].isempty %}
+                      {% set other_page_title = content.field_other_page_perso.0['#url'] %}
+                      {% set other_page_url = content.field_other_page_perso.0['#url'] %}
+                    {% else %}
+                      {% set other_page_title = content.field_other_page_perso.0['#title'] %}
+                      {% set other_page_url = content.field_other_page_perso.0['#url'] %}
+                    {% endif %}
+                    <a href="{{ other_page_url }}" title="{{ other_page_title }}" target="_blank">{{ other_page_title }}</a>
+                  </div>
+                {% endif %}
+                {% if postalAddress %}
+                  <div class='txt-second infos-sep'>
+                    <div class='txt-bold'>{{ buildingName }}</div>
+                    <span class='fa fa-map-signs'> : </span>
+                    <a href='//maps.google.fr/maps?t=m&z=16&q={{ postalAddress }}' target='_blank' title='{{ buildingName }}'>
+                      {{ postalAddress }}
+                    </a>
+                  </div>
+                {% endif %}
+                <div class="txt-second details">
+                  {% if facebook_link %}
+                    <a href="{{ content.field_facebook_link.0['#url'] }}" title="Facebook" class="social-link fab fa-facebook-square fa-2x">
+                      <span class="visually-hidden">Facebook</span>
+                    </a>
+                  {% endif %}
+                  {% if twitter %}
+                    <a href="{{ content.field_twitter.0['#url'] }}" class="social-link fab fa-twitter fa-2x"
+                       target="_blank" title="Twitter">
+                      <span class="visually-hidden">Twitter</span>
+                    </a>
+                  {% endif %}
+                  {% if linkedin_link %}
+                    <a href="{{ content.field_linkedin_link.0['#url'] }}" class="social-link fab fa-linkedin-square fa-2x"
+                       target="_blank" title="LinkedIn">
+                      <span class="visually-hidden">LinkedIn</span>
+                    </a>
+                  {% endif %}
+                  {% if viadeo_link %}
+                    <a href="{{ content.field_viadeo_link.0['#url'] }}"  class="social-link fab fa-viadeo-square fa-2x"
+                       target="_blank" title="Viadeo">
+                      <span class="visually-hidden">Viadeo</span>
+                    </a>
+                  {% endif %}
+                  {% if academia %}
+                    <a href="{{ content.field_academia_link.0['#url'] }}" class="social-link academia fa-2x"
+                       target="_blank" title="Academia.edu">
+                      <span class="visually-hidden">Academia.edu</span>
+                      <img src="/{{ directory }}/svg/icons/academia.svg" width="32px">
+                    </a>
+                  {% endif %}
+                  {% if hal %}
+                    <a href="{{ content.field_hal_link.0['#url'] }}"  class="social-link fa-2x"
+                       target="_blank" title="HAL archives ouvertes">
+                      <span class="visually-hidden">HAL</span>
+                      <img src="/{{ directory }}/svg/icons/HAL.svg" width="48">
+                    </a>
+                  {% endif %}
+                  {% if epi %}
+                    <a href="{{ content.field_epi_link.0['#url'] }}" title="EPI" class="social-link epi fa-2x"
+                       target="_blank">
+                      <span class="visually-hidden">EPI</span>
+                      <img src="/{{ directory }}/svg/icons/epi.svg" width="96">
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% if resume %}
+              <div class="box-style no-shadow auto-height semi-field-sep">
+                {{ resume }}
+              </div>
+            {% endif %}
+            {% if sticky_pub %}
+              <ul class="grid-x grid-margin-x grid-margin-y results__list">
+                {% for key, spub in content.field_sticky_publications if key|first != '#' %}
+                  <li class="cell small-12 medium-6 large-12 results__default">{{ spub }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if my_medias %}
+              <div class="box-style no-shadow auto-height semi-field-sep">
+                {{ content.field_my_medias }}
+              </div>
+            {% endif %}
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</article>
