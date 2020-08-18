@@ -10,10 +10,14 @@ module:
   dblog: 0
   elasticsearch_connector: 0
   facets: 0
+  matomo: 0
+  micro_reports: 0
+  piwik_reports: 0
+  smtp: 0
 theme: {  }
 blacklist:
   - cas.settings
-  - micro_annuaire_sorbonne.annuaireconfig
+  - core.extension
   - micro_site.settings
   - smtp.settings
   - system.site
@@ -23,11 +27,12 @@ blacklist:
   - user.role.contributeur_sous_site
   - user.role.webmestre_general
   - user.role.webmestre_sous_site
+  - micro_annuaire_sorbonne.annuaireconfig
   - 'system.menu.site-*'
   - 'block.block.p1ps2019*'
   - block.block.nuagedemotscle
   - 'system.menu*'
 graylist: {  }
-graylist_dependents: false
+graylist_dependents: true
 graylist_skip_equal: true
 weight: 0
