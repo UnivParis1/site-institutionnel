@@ -2,38 +2,8 @@
 
   Drupal.behaviors.bluedropSwiper = {
     attach: function (context, settings) {
-
-
-      noSwiping();
-
-      if($('.swiper-container:not(.swiper-tiles):not(#swiper-carousel)').length > 0){
-        var mySwiper = new Swiper('.swiper-container:not(.swiper-tiles):not(#swiper-carousel)', {
-          slidesPerView: 3,
-          spaceBetween: 24,
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-          breakpoints: {
-            1024: {
-              slidesPerView: 1
-            }
-          }
-        });
-      }
-      if($('.swiper-tiles').length > 0){
-        var tilesSwiper = new Swiper('.swiper-tiles', {
-          slidesPerView: 1,
-          pagination: {
-            el: '.swiper-pagination',
-            type: 'bullets',
-            clickable: true,
-          },
-        });
-      }
-
-      if($('#swiper-carousel').length > 0){
-        var carouselSwiper = new Swiper('#swiper-carousel', {
+      if($('.swiper-container').length > 0){
+        var carouselSwiper = new Swiper('.swiper-container', {
           slidesPerView: 1,
           loop: true,
           autoplay: true,
@@ -69,8 +39,7 @@
       $(window).resize(function() {
         //  setTimeout(checkOnSwipers, 2000);
         noSwiping();
-        reinitSwiper(mySwiper);
-        reinitSwiper(tilesSwiper);
+        reinitSwiper(carouselSwiper);
       });//close resize
 
 
@@ -78,8 +47,7 @@
       if($('.tabs, .accordion').length > 0){
         $(".tabs li a, .accordion li a").on("click",function(){
           if($('.tabs-content .swiper-container, .accordion .swiper-container').length > 0){
-            reinitSwiper(mySwiper);
-            reinitSwiper(tilesSwiper);
+            reinitSwiper(carouselSwiper);
           }
         });
       }
@@ -104,7 +72,7 @@
   function reinitSwiper(swiper) {
     if (swiper !== undefined) {
       setTimeout(function () {
-        swiper.onResize();
+        swiper.update();
       });
     }
   }
