@@ -1,0 +1,34 @@
+uuid: 81b2290d-74d3-4f3b-90b4-93e3d893c8fd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.news_events.field_news_events
+    - field.field.paragraph.news_events.field_title
+    - paragraphs.paragraphs_type.news_events
+  module:
+    - viewsreference
+id: paragraph.news_events.default
+targetEntityType: paragraph
+bundle: news_events
+mode: default
+content:
+  field_news_events:
+    weight: 1
+    label: hidden
+    settings:
+      plugin_types:
+        - block
+    third_party_settings: {  }
+    type: viewsreference_formatter
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  search_api_excerpt: true

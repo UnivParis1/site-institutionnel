@@ -30,31 +30,9 @@
  * @see template_preprocess_views_view()
  */
 #}
-{%
-  set classes = [
-  dom_id ? 'js-view-dom-id-' ~ dom_id,
-]
-%}
-<div{{ attributes.addClass(classes) }}>
+
   {{ title_prefix }}
   {{ title }}
-  {{ title_suffix }}
-
-  {% if is_listing_page or is_master_view %}
-    <div class="view-header-color">
-      <div class="grid-container">
-          <div class="grid-margin-x">
-              <div class="cell small-12">
-                  <h2 class="title semi-field-sep"> {{ view_title }} </h2>
-              </div>
-          </div>
-      </div>
-      {{ exposed }}
-    </div>
-  {% else %}
-    {{ title }}
-    {{ exposed }}
-  {% endif %}
   {{ title_suffix }}
 
   {% if header %}
@@ -62,10 +40,16 @@
       {{ header }}
     </header>
   {% endif %}
+
+  {{ exposed }}
   {{ attachment_before }}
 
   {% if rows -%}
-    {{ rows }}
+  <div class="infos-top flex-child-grow display-flex">
+    <div {{ attributes }}>
+      {{ rows }}
+    </div>
+  </div>
   {% elseif empty -%}
     {{ empty }}
   {% endif %}
@@ -75,10 +59,13 @@
   {{ more }}
 
   {% if footer %}
-    <footer class="cell small-12">
-      {{ footer }}
-    </footer>
+  <div class="infos-bottom padding-mobile">
+    <div class="grid-x grid-margin-x">
+      <footer class="cell small-12">
+        {{ footer }}
+      </footer>
+    </div>
+  </div>
   {% endif %}
 
   {{ feed_icons }}
-</div>
