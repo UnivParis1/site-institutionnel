@@ -365,7 +365,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
   function reinitSwiper(swiper) {
     if (swiper !== undefined) {
       setTimeout(function () {
-        swiper.update();
+        swiper.onResize();
       });
     }
   }

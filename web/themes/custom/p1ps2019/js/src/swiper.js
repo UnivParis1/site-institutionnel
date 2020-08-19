@@ -104,7 +104,7 @@
   function reinitSwiper(swiper) {
     if (swiper !== undefined) {
       setTimeout(function () {
-        swiper.update();
+        swiper.onResize();
       });
     }
   }
