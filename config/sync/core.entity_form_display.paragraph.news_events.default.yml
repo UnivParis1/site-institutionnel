@@ -1,0 +1,32 @@
+uuid: 3d17ac8a-0553-463a-8864-ddb17528c03e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.news_events.field_news_events
+    - field.field.paragraph.news_events.field_title
+    - paragraphs.paragraphs_type.news_events
+  module:
+    - viewsreference
+id: paragraph.news_events.default
+targetEntityType: paragraph
+bundle: news_events
+mode: default
+content:
+  field_news_events:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: viewsreference_select
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
