@@ -114,6 +114,9 @@
 {% set pages %}
   {{ content.field_nb_pages.0 }}
 {% endset %}
+{% set link_title %}
+  {{ content.field_link_title.0 }}
+{% endset %}
 
 <article{{ attributes.addClass(classes) }}>
   <div class="grid-container">
@@ -220,7 +223,11 @@
               <div class="details txt-second">
                 <span class="txt-bold">
                 <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
-                  {{ "Acheter cet ouvrage"|t }}
+                  {% if link_title|trim|striptags %}
+                    {{ link_title }}
+                    {% else %}
+                      {{ "Link to the book"|t }}
+                  {% endif %}
                 </a>
                 </span>
               </div>

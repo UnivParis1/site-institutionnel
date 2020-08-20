@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.publication.field_format
     - field.field.node.publication.field_isbn
     - field.field.node.publication.field_issn
+    - field.field.node.publication.field_link_title
     - field.field.node.publication.field_media
     - field.field.node.publication.field_nb_pages
     - field.field.node.publication.field_price
@@ -29,6 +30,7 @@ dependencies:
   module:
     - datetime
     - link
+    - options
     - text
     - user
 id: node.publication.default
@@ -60,7 +62,7 @@ content:
     type: string
     region: content
   field_format:
-    weight: 16
+    weight: 17
     label: hidden
     settings:
       link_to_entity: false
@@ -76,12 +78,19 @@ content:
     type: string
     region: content
   field_issn:
-    weight: 14
+    weight: 15
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_link_title:
+    weight: 10
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_media:
     weight: 8
@@ -93,7 +102,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_nb_pages:
-    weight: 15
+    weight: 16
     label: hidden
     settings:
       thousand_separator: ''
@@ -102,7 +111,7 @@ content:
     type: number_integer
     region: content
   field_price:
-    weight: 17
+    weight: 18
     label: hidden
     settings:
       thousand_separator: ''
@@ -113,7 +122,7 @@ content:
     type: number_decimal
     region: content
   field_pub_year:
-    weight: 18
+    weight: 19
     label: above
     settings:
       timezone_override: ''
@@ -129,7 +138,7 @@ content:
     type: entity_reference_entity_id
     region: content
   field_publication_link:
-    weight: 10
+    weight: 11
     label: hidden
     settings:
       trim_length: 80
@@ -174,7 +183,7 @@ content:
     type: string
     region: content
   field_tags:
-    weight: 11
+    weight: 12
     label: visually_hidden
     settings:
       link: false
@@ -182,14 +191,14 @@ content:
     type: entity_reference_label
     region: content
   links:
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
     label: hidden
     type: entity_reference_label
-    weight: 12
+    weight: 13
     region: content
     settings:
       link: false
