@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.publication.field_format
     - field.field.node.publication.field_isbn
     - field.field.node.publication.field_issn
+    - field.field.node.publication.field_link_title
     - field.field.node.publication.field_media
     - field.field.node.publication.field_nb_pages
     - field.field.node.publication.field_price
@@ -51,7 +52,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 21
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -75,7 +76,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 29
+    weight: 30
     third_party_settings: {  }
     region: content
   field_format:
@@ -101,6 +102,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_link_title:
+    weight: 17
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_media:
     weight: 3
@@ -148,7 +155,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_publication_link:
-    weight: 17
+    weight: 18
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -184,7 +191,7 @@ content:
     region: content
   field_sites:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 28
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -196,7 +203,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 28
+    weight: 29
     third_party_settings: {  }
     region: content
   field_subtitle:
@@ -208,7 +215,7 @@ content:
     type: string_textfield
     region: content
   field_tags:
-    weight: 18
+    weight: 19
     settings:
       match_operator: CONTAINS
       size: 60
@@ -226,19 +233,19 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 23
+    weight: 24
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 22
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
-    weight: 19
+    weight: 20
     settings:
       match_operator: CONTAINS
       size: 60
@@ -250,14 +257,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 26
+    weight: 27
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 25
+    weight: 26
     region: content
     third_party_settings: {  }
   title:
@@ -269,13 +276,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 20
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 24
+    weight: 25
     settings:
       match_operator: CONTAINS
       size: 60
