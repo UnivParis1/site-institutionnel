@@ -19,6 +19,7 @@ dependencies:
     - taxonomy.vocabulary.publication_topics
     - taxonomy.vocabulary.publication_type
   module:
+    - better_exposed_filters
     - datetime
     - geolocation
     - node
@@ -34,7 +35,6 @@ description: ''
 tag: ''
 base_table: node_field_data
 base_field: nid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -60,7 +60,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Valider
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -70,7 +70,7 @@ display:
       pager:
         type: infinite_scroll
         options:
-          items_per_page: 12
+          items_per_page: 3
           offset: 0
           id: 0
           total_pages: null
@@ -86,7 +86,7 @@ display:
             offset: false
             offset_label: Offset
           views_infinite_scroll:
-            button_text: 'Load More'
+            button_text: 'Plus d''évènements'
             automatically_load_content: false
       style:
         type: default
@@ -158,6 +158,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -185,6 +187,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -231,6 +235,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -287,6 +293,8 @@ display:
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -345,6 +353,234 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
+      path: actualite
+      rendering_language: '***LANGUAGE_language_interface***'
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12 medium-4'
+          default_row_class: true
+          uses_fields: false
+      defaults:
+        style: false
+        row: false
+        title: false
+        arguments: false
+        filters: false
+        filter_groups: false
+        pager: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      exposed_block: false
+      title: 'Les actualités'
+      arguments: {  }
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            news: news
+            news2018: news2018
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_news_topic_target_id:
+          id: field_news_topic_target_id
+          table: node__field_news_topic
+          field: field_news_topic_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_news_topic_target_id_op
+            label: 'Sujet d''actualité'
+            description: ''
+            use_operator: false
+            operator: field_news_topic_target_id_op
+            identifier: topic
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: news_topics
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        field_news_date_value:
+          id: field_news_date_value
+          table: node__field_news_date
+          field: field_news_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_news_date_value_op
+            label: 'Date de l''actualité'
+            description: ''
+            use_operator: false
+            operator: field_news_date_value_op
+            identifier: date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 12
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Plus d''actualités'
+            automatically_load_content: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_2:
+    display_plugin: page
+    id: page_2
+    display_title: 'Actualités mini-site'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      display_description: ''
       path: actualites
       rendering_language: '***LANGUAGE_language_interface***'
       style:
@@ -357,6 +593,10 @@ display:
         style: false
         row: false
         title: false
+        arguments: false
+        filters: false
+        filter_groups: false
+        pager: false
       row:
         type: 'entity:node'
         options:
@@ -364,6 +604,193 @@ display:
           view_mode: teaser
       exposed_block: false
       title: 'Les actualités'
+      arguments: {  }
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            news: news
+            news2018: news2018
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_news_topic_target_id:
+          id: field_news_topic_target_id
+          table: node__field_news_topic
+          field: field_news_topic_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_news_topic_target_id_op
+            label: 'Sujet d''actualité'
+            description: ''
+            use_operator: false
+            operator: field_news_topic_target_id_op
+            identifier: topic
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: news_topics
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        field_news_date_value:
+          id: field_news_date_value
+          table: node__field_news_date
+          field: field_news_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_news_date_value_op
+            label: 'Date de l''actualité'
+            description: ''
+            use_operator: false
+            operator: field_news_date_value_op
+            identifier: date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 12
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Plus d''actualités'
+            automatically_load_content: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -378,7 +805,7 @@ display:
     display_plugin: page
     id: page_3
     display_title: Évènements
-    position: 3
+    position: 4
     display_options:
       display_extenders: {  }
       display_description: ''
@@ -388,7 +815,9 @@ display:
         filters: false
         filter_groups: false
         sorts: false
-      path: evenements
+        arguments: false
+        exposed_form: false
+      path: evenement
       filters:
         status:
           value: '1'
@@ -400,6 +829,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -426,6 +857,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -472,6 +905,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -528,6 +963,8 @@ display:
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -571,6 +1008,8 @@ display:
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -602,198 +1041,47 @@ display:
             label: ''
           granularity: day
           plugin_id: datetime
+      arguments: {  }
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Valider
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Sélectionnez n''importe quel filtre et cliquez sur Appliquer pour voir les résultats'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: false
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_hide: true
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Options avancées'
+              secondary_open: false
+            filter:
+              field_event_type_target_id:
+                plugin_id: default
+                advanced:
+                  sort_options: false
+                  rewrite:
+                    filter_rewrite_values: ''
+                  collapsible: false
+                  is_secondary: false
+              field_event_date_value:
+                plugin_id: default
+                advanced:
+                  collapsible: false
+                  is_secondary: false
+      rendering_language: '***LANGUAGE_language_interface***'
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  page_4:
-    display_plugin: page
-    id: page_4
-    display_title: 'Archives actualités'
-    position: 2
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      title: 'Les actualités précédentes'
-      defaults:
-        title: false
-        style: false
-        row: false
-        filters: false
-        filter_groups: false
-      style:
-        type: default
-        options:
-          row_class: 'cell small-12 medium-4'
-          default_row_class: true
-          uses_fields: false
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            news: news
-            news2018: news2018
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-        field_news_topic_target_id:
-          id: field_news_topic_target_id
-          table: node__field_news_topic
-          field: field_news_topic_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_news_topic_target_id_op
-            label: 'Sujet d''actualité'
-            description: ''
-            use_operator: false
-            operator: field_news_topic_target_id_op
-            identifier: topic
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: news_topics
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_news_date_value:
-          id: field_news_date_value
-          table: node__field_news_date
-          field: field_news_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '<'
-          value:
-            min: ''
-            max: ''
-            value: now
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      path: actualites/archives
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
@@ -805,7 +1093,7 @@ display:
     display_plugin: page
     id: page_5
     display_title: 'Archives Évènements'
-    position: 3
+    position: 6
     display_options:
       display_extenders: {  }
       display_description: ''
@@ -817,6 +1105,7 @@ display:
         sorts: false
         style: false
         row: false
+        pager: false
       path: evenements/archives
       filters:
         status:
@@ -829,6 +1118,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -855,6 +1146,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -901,6 +1194,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -950,6 +1245,8 @@ display:
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -975,7 +1272,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
+          order: DESC
           exposed: false
           expose:
             label: ''
@@ -992,10 +1289,31 @@ display:
         options:
           relationship: none
           view_mode: bootstrap_cards
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 12
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Évènements précédents'
+            automatically_load_content: false
+      rendering_language: '***LANGUAGE_language_interface***'
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
@@ -1007,7 +1325,7 @@ display:
     display_plugin: page
     id: page_6
     display_title: 'Maps Évènements'
-    position: 3
+    position: 7
     display_options:
       display_extenders: {  }
       display_description: ''
@@ -1033,6 +1351,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -1059,6 +1379,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1105,6 +1427,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1161,6 +1485,8 @@ display:
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1234,8 +1560,8 @@ display:
                 weight: 0
                 settings:
                   position: topright
-                  metric: 0
-                  imperial: 0
+                  metric: false
+                  imperial: false
                 enabled: false
               leaflet_tile_layer:
                 weight: 0
@@ -1258,15 +1584,15 @@ display:
                   tile_layer_url: '//{s}.tile.osm.org/{z}/{x}/{y}.png'
                   tile_layer_attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
                   tile_layer_subdomains: abc
-                  tile_layer_zoom: '18'
+                  tile_layer_zoom: 18
                 enabled: false
               leaflet_max_bounds:
                 weight: 0
                 settings:
-                  north: ''
-                  south: ''
-                  east: ''
-                  west: ''
+                  north: null
+                  south: null
+                  east: null
+                  west: null
                 enabled: false
               leaflet_marker_zoom_and_animate:
                 weight: 0
@@ -1288,29 +1614,29 @@ display:
                 settings:
                   marker_icon_path: ''
                   icon_size:
-                    width: ''
-                    height: ''
+                    width: null
+                    height: null
                   icon_anchor:
-                    x: ''
-                    'y': ''
+                    x: null
+                    'y': null
                   popup_anchor:
-                    x: '0'
-                    'y': '0'
+                    x: 0
+                    'y': 0
                   marker_shadow_path: ''
                   shadow_size:
-                    width: ''
-                    height: ''
+                    width: null
+                    height: null
                   shadow_anchor:
-                    x: ''
-                    'y': ''
+                    x: null
+                    'y': null
                 enabled: false
               leaflet_marker_clusterer:
                 weight: 0
                 enabled: false
                 settings:
                   cluster_settings:
-                    show_coverage_on_hover: 0
-                    zoom_to_bounds_on_click: 0
+                    show_coverage_on_hover: false
+                    zoom_to_bounds_on_click: false
               leaflet_control_zoom:
                 weight: 0
                 settings:
@@ -1320,292 +1646,292 @@ display:
                 weight: 0
                 settings:
                   position: topright
-                  default_label: Default
+                  default_label: '1'
                   tile_layer_providers:
                     OpenStreetMap:
                       'OpenStreetMap Mapnik':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'OpenStreetMap BlackAndWhite':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'OpenStreetMap DE':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'OpenStreetMap CH':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'OpenStreetMap France':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'OpenStreetMap HOT':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'OpenStreetMap BZH':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     OpenTopoMap:
                       OpenTopoMap:
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     Thunderforest:
                       'Thunderforest OpenCycleMap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Thunderforest Transport':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Thunderforest TransportDark':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Thunderforest SpinalMap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Thunderforest Landscape':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Thunderforest Outdoors':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Thunderforest Pioneer':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     OpenMapSurfer:
                       'OpenMapSurfer Roads':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'OpenMapSurfer Grayscale':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     Hydda:
                       'Hydda Full':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Hydda Base':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     MapBox:
                       MapBox:
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     Stamen:
                       'Stamen Toner':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Stamen TonerBackground':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Stamen TonerLite':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Stamen Watercolor':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Stamen Terrain':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Stamen TerrainBackground':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Stamen TopOSMRelief':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     Esri:
                       'Esri WorldStreetMap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri DeLorme':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri WorldTopoMap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri WorldImagery':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri WorldTerrain':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri WorldShadedRelief':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri WorldPhysical':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri OceanBasemap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri NatGeoWorldMap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'Esri WorldGrayCanvas':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     HERE:
                       'HERE normalDay':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalDayCustom':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalDayGrey':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalDayMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalDayGreyMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalDayTransit':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalDayTransitMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalNight':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalNightMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalNightGrey':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalNightGreyMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalNightTransit':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE normalNightTransitMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE redcuedDay':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE redcuedNight':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE basicMap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE mapLabels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE trafficFlow':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE carnavDayGrey':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE hybridDayMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE hybridDayTransit':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE hybridDayGrey':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE pedestrianDay':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE pedestrianNight':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE satelliteDay':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE terrainDay':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HERE terrainDayMobile':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     FreeMapSK:
                       FreeMapSK:
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     MtbMap:
                       MtbMap:
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     CartoDB:
                       'CartoDB Positron':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB PositronNoLabels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB PositronOnlyLabels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB DarkMatter':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB DarkMatterNoLabels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB DarkMatterOnlyLabels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB Voyager':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB VoyagerNoLabels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB VoyagerOnlyLabels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'CartoDB VoyagerLabelsUnder':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     HikeBike:
                       HikeBike:
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'HikeBike HillShading':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     BasemapAT:
                       'BasemapAT basemap':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'BasemapAT grau':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'BasemapAT overlay':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'BasemapAT highdpi':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'BasemapAT orthofoto':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     NLS:
                       NLS:
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     Wikimedia:
                       Wikimedia:
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                     GeoportailFrance:
                       'GeoportailFrance parcels':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'GeoportailFrance ignMaps':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'GeoportailFrance maps':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                       'GeoportailFrance orthos':
                         label: ''
-                        checkbox: 0
+                        checkbox: false
                   tile_providers_options:
                     Thunderforest:
                       apikey: ''
@@ -1636,8 +1962,8 @@ display:
                     label: Adresse
                     description: 'Saisir l''adresse à localiser.'
                     location_priority:
-                      lat: ''
-                      lng: ''
+                      lat: null
+                      lng: null
                 enabled: false
               leaflet_control_fullscreen:
                 weight: 0
@@ -1662,8 +1988,8 @@ display:
                   styles: ''
                   srs: ''
                   format: image/jpeg
-                  transparent: 0
-                  identify: 0
+                  transparent: false
+                  identify: false
                 enabled: false
             height: 400px
             width: 100%
@@ -1919,6 +2245,7 @@ display:
         type: none
         options:
           offset: 0
+      enabled: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -1932,21 +2259,23 @@ display:
         - 'config:field.storage.node.field_address_map'
         - 'config:field.storage.node.field_event_address'
         - 'config:field.storage.node.field_event_date'
-  page_publications:
+  page_7:
     display_plugin: page
-    id: page_publications
-    display_title: Publications
-    position: 4
+    id: page_7
+    display_title: 'Évènements mini-sites'
+    position: 5
     display_options:
       display_extenders: {  }
       display_description: ''
-      title: 'Les publications'
+      title: 'Les évènements'
       defaults:
         title: false
         filters: false
         filter_groups: false
-        style: false
-        row: false
+        sorts: false
+        arguments: false
+        exposed_form: false
+      path: evenements
       filters:
         status:
           value: '1'
@@ -1958,6 +2287,297 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_event_type_target_id:
+          id: field_event_type_target_id
+          table: node__field_event_type
+          field: field_event_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_type_target_id_op
+            label: Type
+            description: ''
+            use_operator: false
+            operator: field_event_type_target_id_op
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: events_types
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_date_value_op
+            label: Date
+            description: ''
+            use_operator: false
+            operator: field_event_date_value_op
+            identifier: date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        field_event_date_end_value:
+          id: field_event_date_end_value
+          table: node__field_event_date
+          field: field_event_date_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '+1 hour +1 minute'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: day
+          plugin_id: datetime
+      arguments: {  }
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Valider
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Sélectionnez n''importe quel filtre et cliquez sur Appliquer pour voir les résultats'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: false
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_hide: true
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Options avancées'
+              secondary_open: false
+            filter:
+              field_event_type_target_id:
+                plugin_id: default
+                advanced:
+                  sort_options: false
+                  rewrite:
+                    filter_rewrite_values: ''
+                  collapsible: false
+                  is_secondary: false
+              field_event_date_value:
+                plugin_id: default
+                advanced:
+                  collapsible: false
+                  is_secondary: false
+      rendering_language: '***LANGUAGE_language_interface***'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_publications:
+    display_plugin: page
+    id: page_publications
+    display_title: Publications
+    position: 8
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Les publications'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        style: false
+        row: false
+        arguments: false
+        exposed_form: false
+        pager: false
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -1984,6 +2604,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2030,6 +2652,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2080,6 +2704,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2115,10 +2741,42 @@ display:
         options:
           relationship: none
           view_mode: teaser
+      arguments: {  }
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Appliquer
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 12
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Plus de publications'
+            automatically_load_content: false
+      rendering_language: '***LANGUAGE_language_interface***'
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
@@ -2130,7 +2788,7 @@ display:
     display_plugin: page
     id: page_recruitment
     display_title: Recrutement
-    position: 4
+    position: 9
     display_options:
       display_extenders: {  }
       display_description: ''
@@ -2142,6 +2800,7 @@ display:
         style: false
         row: false
         sorts: false
+        pager: false
       filters:
         status:
           value: '1'
@@ -2153,6 +2812,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -2179,6 +2840,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2225,6 +2888,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2270,6 +2935,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2320,6 +2987,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2364,10 +3033,31 @@ display:
             label: ''
           granularity: day
           plugin_id: datetime
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 12
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Plus d''offres'
+            automatically_load_content: false
+      rendering_language: '***LANGUAGE_language_interface***'
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
