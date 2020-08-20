@@ -320,7 +320,7 @@ function p1ps2019_preprocess_views_view(&$variables) {
       $variables['archives'] = TRUE;
     }
   }
-  if ($variables['id'] == 'skills') {
+  if (in_array($variables['id'], ['skills', 'annuaire_des_mini_sites'])) {
     $variables['view_title'] = $variables['view']->getTitle();
   }
   if ($variables['id'] == 'recent_contents') {

@@ -281,6 +281,20 @@ display:
             operator_limit_selection: false
             operator_list: {  }
       sorts:
+        name:
+          id: name
+          table: site_field_data
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: site
+          entity_field: name
+          plugin_id: standard
         field_complete_name_value:
           id: field_complete_name_value
           table: site__field_complete_name
@@ -360,7 +374,7 @@ display:
             offset: false
             offset_label: Décalage
           views_infinite_scroll:
-            button_text: 'Load More'
+            button_text: 'Afficher plus'
             automatically_load_content: false
       defaults:
         pager: false
@@ -394,10 +408,10 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        field_complete_name_value:
-          id: field_complete_name_value
-          table: site__field_complete_name
-          field: field_complete_name_value
+        combine:
+          id: combine
+          table: views
+          field: combine
           relationship: none
           group_type: group
           admin_label: ''
@@ -406,11 +420,11 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_complete_name_value_op
-            label: ''
+            operator_id: combine_op
+            label: 'Grouper le filtre des champs'
             description: ''
             use_operator: false
-            operator: field_complete_name_value_op
+            operator: combine_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: name
@@ -440,7 +454,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: string
+          fields:
+            name: name
+            field_complete_name: field_complete_name
+          plugin_id: combine
       filter_groups:
         operator: AND
         groups:
