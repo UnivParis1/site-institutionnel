@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.bootstrap_cards
     - core.entity_view_mode.node.teaser
     - node.type.event
     - node.type.news
@@ -321,6 +322,8 @@ display:
         footer: false
         css_class: false
         arguments: false
+        style: false
+        row: false
       filters:
         status:
           value: '1'
@@ -491,6 +494,17 @@ display:
           break_phrase: false
           not: false
           plugin_id: numeric
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12 medium-4'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: bootstrap_cards
     cache_metadata:
       max-age: -1
       contexts:
@@ -508,7 +522,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      title: 'Les évènements Paris 1'
+      title: 'Les évènements'
       defaults:
         title: false
         filters: false
@@ -517,6 +531,8 @@ display:
         footer: false
         css_class: false
         arguments: false
+        style: false
+        row: false
       filters:
         status:
           value: '1'
@@ -688,6 +704,17 @@ display:
           not: false
           plugin_id: numeric
       rendering_language: '***LANGUAGE_language_interface***'
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12 medium-4'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: bootstrap_cards
     cache_metadata:
       max-age: -1
       contexts:
@@ -911,7 +938,7 @@ display:
       style:
         type: default
         options:
-          row_class: 'cell small-12 medium-6'
+          row_class: 'cell small-12 medium-4'
           default_row_class: true
           uses_fields: false
       row:
