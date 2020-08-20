@@ -312,6 +312,15 @@ function p1ps2019_preprocess_views_view(&$variables) {
     $variables['is_master_view'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
   }
+  $variables['archives'] = TRUE;
+  if ($variables['id'] == 'listings') {
+    $view_display = $variables['view']->getDisplay();
+    if (in_array($view_display->display['display_title'],
+      ['Évènements mini-sites', 'Évènements'])) {
+      $variables['archives'] = TRUE;
+      $variables['archives_link'] = Url::fromRoute('view.listings.page_5')->toString();
+    }
+  }
   if ($variables['id'] == 'skills') {
     $variables['view_title'] = $variables['view']->getTitle();
   }
