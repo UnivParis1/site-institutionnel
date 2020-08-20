@@ -7,6 +7,7 @@ dependencies:
     - micro_site.site_type.mini_site
   module:
     - micro_site
+    - views_infinite_scroll
 id: annuaire_des_mini_sites
 label: 'Annuaire des mini sites'
 module: views
@@ -14,7 +15,6 @@ description: ''
 tag: ''
 base_table: site_field_data
 base_field: id
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -65,112 +65,23 @@ display:
             previous: ‹‹
             next: ››
       style:
-        type: table
+        type: default
         options:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            name: name
-            field_complete_name: field_complete_name
-          info:
-            name:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_complete_name:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: true
-              responsive: ''
-          default: '-1'
-          empty_table: false
       row:
         type: fields
       fields:
         name:
+          id: name
           table: site_field_data
           field: name
-          id: name
-          entity_type: null
-          entity_field: name
-          plugin_id: field
           relationship: none
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_complete_name:
-          id: field_complete_name
-          table: site__field_complete_name
-          field: field_complete_name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -224,7 +135,125 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: null
+          entity_field: name
           plugin_id: field
+        field_complete_name:
+          id: field_complete_name
+          table: site__field_complete_name
+          field: field_complete_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: '{{ name }} - {{ field_complete_name }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        view_site:
+          id: view_site
+          table: site
+          field: view_site
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<b>{{ name }} - {{ field_complete_name }}</b>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: false
+          absolute: false
+          entity_type: site
+          plugin_id: entity_link
       filters:
         status:
           value: '1'
@@ -236,6 +265,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -246,9 +277,34 @@ display:
           entity_type: site
           entity_field: type
           plugin_id: bundle
-      sorts: {  }
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+      sorts:
+        field_complete_name_value:
+          id: field_complete_name_value
+          table: site__field_complete_name
+          field: field_complete_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
       title: 'Annuaire des mini sites'
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          content: '<em>Nombre de résultats</em> : <b>@total</b>'
+          plugin_id: result
       footer: {  }
       empty: {  }
       relationships: {  }
@@ -285,11 +341,127 @@ display:
     display_options:
       display_extenders: {  }
       path: annuaire-mini-sites
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 12
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- Tout -'
+            offset: false
+            offset_label: Décalage
+          views_infinite_scroll:
+            button_text: 'Load More'
+            automatically_load_content: false
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        use_ajax: false
+        exposed_form: false
+      filters:
+        status:
+          value: '1'
+          table: site_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: site
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: site_field_data
+          field: type
+          value:
+            mini_site: mini_site
+          entity_type: site
+          entity_field: type
+          plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_complete_name_value:
+          id: field_complete_name_value
+          table: site__field_complete_name
+          field: field_complete_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_complete_name_value_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: field_complete_name_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+              enseignant_doctorant: '0'
+            placeholder: 'Nom du site'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      use_ajax: true
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filtrer
+          reset_button: false
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
       tags:
         - 'config:field.storage.site.field_complete_name'

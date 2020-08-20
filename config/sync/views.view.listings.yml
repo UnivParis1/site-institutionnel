@@ -70,7 +70,7 @@ display:
       pager:
         type: infinite_scroll
         options:
-          items_per_page: 3
+          items_per_page: 12
           offset: 0
           id: 0
           total_pages: null
@@ -345,6 +345,238 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  archives:
+    display_plugin: page
+    id: archives
+    display_title: 'Archives Évènements'
+    position: 6
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Les évènements précédents'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        sorts: false
+        style: false
+        row: false
+        pager: false
+      path: evenements/archives
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_event_type_target_id:
+          id: field_event_type_target_id
+          table: node__field_event_type
+          field: field_event_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_type_target_id_op
+            label: Type
+            description: ''
+            use_operator: false
+            operator: field_event_type_target_id_op
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: events_types
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        field_event_date_end_value:
+          id: field_event_date_end_value
+          table: node__field_event_date
+          field: field_event_date_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<'
+          value:
+            min: ''
+            max: ''
+            value: now
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: day
+          plugin_id: datetime
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12 medium-4'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: bootstrap_cards
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 12
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Évènements précédents'
+            automatically_load_content: false
+      rendering_language: '***LANGUAGE_language_interface***'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
   page_1:
     display_plugin: page
     id: page_1
@@ -563,6 +795,7 @@ display:
           views_infinite_scroll:
             button_text: 'Plus d''actualités'
             automatically_load_content: false
+      enabled: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -662,6 +895,55 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Titre
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+              enseignant_doctorant: '0'
+            placeholder: Rechercher
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
         field_news_topic_target_id:
           id: field_news_topic_target_id
           table: node__field_news_topic
@@ -1078,238 +1360,6 @@ display:
                 advanced:
                   collapsible: false
                   is_secondary: false
-      rendering_language: '***LANGUAGE_language_interface***'
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  page_5:
-    display_plugin: page
-    id: page_5
-    display_title: 'Archives Évènements'
-    position: 6
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      title: 'Les évènements précédents'
-      defaults:
-        title: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        style: false
-        row: false
-        pager: false
-      path: evenements/archives
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            event: event
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-        field_event_type_target_id:
-          id: field_event_type_target_id
-          table: node__field_event_type
-          field: field_event_type_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_event_type_target_id_op
-            label: Type
-            description: ''
-            use_operator: false
-            operator: field_event_type_target_id_op
-            identifier: type
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: events_types
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_event_date_end_value:
-          id: field_event_date_end_value
-          table: node__field_event_date
-          field: field_event_date_end_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '<'
-          value:
-            min: ''
-            max: ''
-            value: now
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      sorts:
-        field_event_date_value:
-          id: field_event_date_value
-          table: node__field_event_date
-          field: field_event_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          granularity: day
-          plugin_id: datetime
-      style:
-        type: default
-        options:
-          row_class: 'cell small-12 medium-4'
-          default_row_class: true
-          uses_fields: false
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: bootstrap_cards
-      pager:
-        type: infinite_scroll
-        options:
-          items_per_page: 12
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          views_infinite_scroll:
-            button_text: 'Évènements précédents'
-            automatically_load_content: false
       rendering_language: '***LANGUAGE_language_interface***'
     cache_metadata:
       max-age: -1
