@@ -315,6 +315,10 @@ function p1ps2019_preprocess_views_view(&$variables) {
   if ($variables['id'] == 'skills') {
     $variables['view_title'] = $variables['view']->getTitle();
   }
+  if ($variables['id'] == 'recent_contents') {
+    $view_display = $variables['view']->getDisplay();
+    $variables['view_display'] = $view_display->display['display_title'];
+  }
   if($variables['more']) {
     $variables['more']['#options']['attributes']['class'] = array(
       'link-style', 'with-arrow'

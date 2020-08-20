@@ -1,40 +1,21 @@
-uuid: 3851288c-c7c2-4e87-919d-c5c81d6aed65
+uuid: 19fbc5b7-42fc-4fd5-a3b7-9bf0e9842f59
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_news_events
-    - paragraphs.paragraphs_type.news_events
-    - views.view.news_events
+    - field.storage.paragraph.field_content_block
+    - paragraphs.paragraphs_type.content_block
   module:
     - viewsreference
-id: paragraph.news_events.field_news_events
-field_name: field_news_events
+id: paragraph.content_block.field_content_block
+field_name: field_content_block
 entity_type: paragraph
-bundle: news_events
-label: 'Actualités & évènements'
+bundle: content_block
+label: 'Bloc de contenu'
 description: ''
-required: true
+required: false
 translatable: false
-default_value:
-  -
-    options:
-      title: 0
-      argument: ''
-    display_id: news_micro
-    argument: null
-    title: 0
-    data: null
-    target_uuid: d48fd2a1-e3fe-433c-a73a-0904b5c6092c
-  -
-    options:
-      title: 0
-      argument: ''
-    display_id: events_micro
-    argument: null
-    title: 0
-    data: null
-    target_uuid: d48fd2a1-e3fe-433c-a73a-0904b5c6092c
+default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:view'
@@ -50,7 +31,7 @@ settings:
     entity_browser: 0
     embed: 0
   preselect_views:
-    news_events: news_events
+    recent_contents: recent_contents
     actualite: 0
     annuaire_des_mini_sites: 0
     block_content: 0
@@ -74,6 +55,7 @@ settings:
     media: 0
     media_entity_browser: 0
     moderated_content: 0
+    news_events: 0
     publication_author: 0
     recherche_de_contenu: 0
     sites_per_owner: 0

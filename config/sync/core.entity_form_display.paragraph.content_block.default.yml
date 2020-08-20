@@ -1,0 +1,32 @@
+uuid: 5d5ebe7f-269f-4f51-b618-ca55ebe0f19d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_block.field_content_block
+    - field.field.paragraph.content_block.field_title
+    - paragraphs.paragraphs_type.content_block
+  module:
+    - viewsreference
+id: paragraph.content_block.default
+targetEntityType: paragraph
+bundle: content_block
+mode: default
+content:
+  field_content_block:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: viewsreference_select
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
