@@ -168,6 +168,13 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
           $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
         }
       });//close resize
+      if (($('.bp-columns-three-uneven').length != 0) &&
+        ($('.bp-columns-three-uneven .paragraph--type--files-media').length != 0)) {
+        $('.bp-columns-three-uneven .paragraph--type--files-media')
+          .removeClass('medium-6')
+          .removeClass('large-4')
+          .addClass('medium-12');
+      }
     }
   };//close myBehavior
 
@@ -263,34 +270,6 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 
   Drupal.behaviors.bluedropSwiper = {
     attach: function (context, settings) {
-      //noSwiping();
-
-     /* if($('.swiper-container:not(.swiper-tiles):not(#swiper-carousel)').length > 0){
-        var mySwiper = new Swiper('.swiper-container:not(.swiper-tiles):not(#swiper-carousel)', {
-          slidesPerView: 3,
-          spaceBetween: 24,
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-          breakpoints: {
-            1024: {
-              slidesPerView: 1
-            }
-          }
-        });
-      }
-      if($('.swiper-tiles').length > 0){
-        var tilesSwiper = new Swiper('.swiper-tiles', {
-          slidesPerView: 1,
-          pagination: {
-            el: '.swiper-pagination',
-            type: 'bullets',
-            clickable: true,
-          },
-        });
-      }
-    */
       if($('.swiper-container').length > 0){
         var carouselSwiper = new Swiper('.swiper-container', {
           slidesPerView: 1,

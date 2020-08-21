@@ -421,23 +421,22 @@
     }
   }
 }
-.bp-columns-two-uneven {
+.bp-columns-two-uneven, .bp-columns-three-uneven {
   .column-uneven-wrapper {
     @include flexDisplay(false, false, 'row');
     @include flexDisplayAlign('space-between');
     .accordion {
       background: none;
     }
-    .large-4, .large-3 {
-      .tiles-layout {
-        .large-6 {
-          width: calc(100% - 2rem)!important;
-          max-width: 100%!important;
-        }
-        .tuile-avec-texte {
-          padding: 5rem;
-        }
-      }
+  }
+}
+.bp-columns-three-uneven {
+  .column-uneven-wrapper {
+    .paragraph--type--files-media {
+      width: calc(100% - 2rem)!important;
+    }
+    .paragraph--type--audio-media {
+      padding-top: 0 !important;
     }
   }
 }

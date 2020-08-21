@@ -163,6 +163,13 @@
           $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
         }
       });//close resize
+      if (($('.bp-columns-three-uneven').length != 0) &&
+        ($('.bp-columns-three-uneven .paragraph--type--files-media').length != 0)) {
+        $('.bp-columns-three-uneven .paragraph--type--files-media')
+          .removeClass('medium-6')
+          .removeClass('large-4')
+          .addClass('medium-12');
+      }
     }
   };//close myBehavior
 
