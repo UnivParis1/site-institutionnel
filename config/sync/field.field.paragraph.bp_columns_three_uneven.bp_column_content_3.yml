@@ -5,23 +5,11 @@ dependencies:
   config:
     - field.storage.paragraph.bp_column_content_3
     - paragraphs.paragraphs_type.bp_accordion
-    - paragraphs.paragraphs_type.bp_blank
-    - paragraphs.paragraphs_type.bp_block
-    - paragraphs.paragraphs_type.bp_carousel
-    - paragraphs.paragraphs_type.bp_column_wrapper
-    - paragraphs.paragraphs_type.bp_columns
     - paragraphs.paragraphs_type.bp_columns_three_uneven
-    - paragraphs.paragraphs_type.bp_columns_two_uneven
-    - paragraphs.paragraphs_type.bp_image
-    - paragraphs.paragraphs_type.bp_modal
     - paragraphs.paragraphs_type.bp_simple
-    - paragraphs.paragraphs_type.bp_tabs
-    - paragraphs.paragraphs_type.bp_view
-    - paragraphs.paragraphs_type.jumbotron
-    - paragraphs.paragraphs_type.key_figures_section
+    - paragraphs.paragraphs_type.image_media
     - paragraphs.paragraphs_type.medias
     - paragraphs.paragraphs_type.rich_content
-    - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
 _core:
@@ -42,23 +30,10 @@ settings:
     negate: 0
     target_bundles:
       bp_simple: bp_simple
-      bp_image: bp_image
-      bp_blank: bp_blank
       bp_accordion: bp_accordion
-      bp_carousel: bp_carousel
-      bp_column_wrapper: bp_column_wrapper
-      bp_columns: bp_columns
-      bp_columns_three_uneven: bp_columns_three_uneven
-      bp_columns_two_uneven: bp_columns_two_uneven
-      bp_block: bp_block
-      bp_modal: bp_modal
-      bp_tabs: bp_tabs
-      bp_view: bp_view
-      jumbotron: jumbotron
-      key_figures_section: key_figures_section
+      image_media: image_media
       medias: medias
       rich_content: rich_content
-      tiles: tiles
     target_bundles_drag_drop:
       audio_media:
         weight: 36
@@ -70,32 +45,32 @@ settings:
         weight: -18
         enabled: false
       bp_blank:
-        enabled: true
         weight: -29
+        enabled: false
       bp_block:
-        enabled: true
         weight: -22
+        enabled: false
       bp_carousel:
-        enabled: true
         weight: -27
+        enabled: false
       bp_column_wrapper:
-        enabled: true
         weight: -26
+        enabled: false
       bp_columns:
-        enabled: true
         weight: -25
+        enabled: false
       bp_columns_three_uneven:
-        enabled: true
         weight: -24
+        enabled: false
       bp_columns_two_uneven:
-        enabled: true
         weight: -23
+        enabled: false
       bp_image:
-        enabled: true
         weight: -30
+        enabled: false
       bp_modal:
-        enabled: true
         weight: -21
+        enabled: false
       bp_simple:
         enabled: true
         weight: -31
@@ -103,16 +78,19 @@ settings:
         weight: -17
         enabled: false
       bp_tabs:
-        enabled: true
         weight: -20
+        enabled: false
       bp_view:
-        enabled: true
         weight: -19
+        enabled: false
       bp_webform:
         weight: 52
         enabled: false
       contact:
         weight: 53
+        enabled: false
+      content_block:
+        weight: 56
         enabled: false
       files_media:
         weight: 54
@@ -121,20 +99,23 @@ settings:
         weight: 55
         enabled: false
       image_media:
-        weight: 56
-        enabled: false
-      jumbotron:
         enabled: true
+        weight: 56
+      jumbotron:
         weight: 57
+        enabled: false
       key_figure:
         weight: 58
         enabled: false
       key_figures_section:
-        enabled: true
         weight: 59
+        enabled: false
       medias:
         enabled: true
         weight: 60
+      news_events:
+        weight: 64
+        enabled: false
       presentation:
         weight: 61
         enabled: false
@@ -154,8 +135,8 @@ settings:
         weight: 66
         enabled: false
       tiles:
-        enabled: true
         weight: 67
+        enabled: false
       title_and_subtitle:
         weight: 68
         enabled: false

@@ -108,7 +108,7 @@
         {% endif %}
         <div class="cell small-12 column-uneven-wrapper">
           {% for key, column in content.bp_column_content_2 if key|first != '#' %}
-            <div class="{% if key is even %}{{ first_col }}{% else %}{{ sec_col }}{% endif %}">
+            <div class="{% if key == 0 %}{{ first_col }}{% else %}{{ sec_col }}{% endif %}">
               {{ column }}
             </div>
           {% endfor %}
