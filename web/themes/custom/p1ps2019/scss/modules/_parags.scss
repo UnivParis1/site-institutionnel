@@ -383,6 +383,7 @@
   padding-bottom: 0;
 }
 .paragraph {
+  //Files-media
   .paragraph--type--files-media {
     border: 1px solid #005bc3;
     text-align: center;
@@ -420,4 +421,23 @@
     }
   }
 }
-
+.bp-columns-two-uneven {
+  .column-uneven-wrapper {
+    @include flexDisplay(false, false, 'row');
+    @include flexDisplayAlign('space-between');
+    .accordion {
+      background: none;
+    }
+    .large-4, .large-3 {
+      .tiles-layout {
+        .large-6 {
+          width: calc(100% - 2rem)!important;
+          max-width: 100%!important;
+        }
+        .tuile-avec-texte {
+          padding: 5rem;
+        }
+      }
+    }
+  }
+}
