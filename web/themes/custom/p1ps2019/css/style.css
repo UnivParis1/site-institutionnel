@@ -8167,6 +8167,27 @@ button.semi-oval {
   .paragraph .paragraph--type--files-media .field--name-field-media-fichier .mediafichierpoids {
     display: block ruby; }
 
+.bp-columns-two-uneven .column-uneven-wrapper {
+  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;
+  /* NEW, Spec - Firefox, Chrome, Opera */
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+  .bp-columns-two-uneven .column-uneven-wrapper .accordion {
+    background: none; }
+  .bp-columns-two-uneven .column-uneven-wrapper .large-4 .tiles-layout .large-6, .bp-columns-two-uneven .column-uneven-wrapper .large-3 .tiles-layout .large-6 {
+    width: calc(100% - 2rem) !important;
+    max-width: 100% !important; }
+  .bp-columns-two-uneven .column-uneven-wrapper .large-4 .tiles-layout .tuile-avec-texte, .bp-columns-two-uneven .column-uneven-wrapper .large-3 .tiles-layout .tuile-avec-texte {
+    padding: 5rem; }
+
 /* Ebizproduction : Pagination */
 .pager {
   margin-top: 4rem; }
@@ -13024,6 +13045,8 @@ form#centres-up1-form {
   .paragraph:not(.paragraph--type--hit-list):not(.paragraph--type--bp-tabs):not(.tiles-full):not(.paragraph--type--rich-content):not(.paragraph--type--tuile-text-wo-image):not(.paragraph--type--tile-wo-image):not(.paragraph--type--key-figure):not(.paragraph--type--presentation):not(.paragraph--type--bp-columns) {
     padding-top: 2rem;
     padding-bottom: 2rem; }
+  .paragraph.bp-columns-two-uneven .column-uneven-wrapper {
+    display: block; }
   .path-frontpage .homepage-search-keywords {
     margin-bottom: 0;
     display: block; }
