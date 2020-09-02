@@ -93,14 +93,11 @@
 
 
 {% if content.field_tile['#items']|length == 2 %}
-  {% set two_elements = 'two-elements' %}
-
   {% if layout_width == 'paragraph--width--full' %}
-    {% set element_class = 'swiper-slide cell large-' ~ nbCols|trim %}
+    {% set element_class = 'cell large-' ~ nbCols|trim %}
   {% else %}
     {% set element_class = 'cell small-12 large-' ~ nbCols|trim %}
   {% endif %}
-
 {% else %}
   {% set element_class = 'cell small-12 medium-6 large-' ~ nbCols|trim %}
 {% endif %}
@@ -126,21 +123,10 @@
     {% endif %}
 
     <div class="grid-container {{ layout_width_classes_tiles }}">
-      <div class="grid-x grid-margin-x grid-margin-y tiles-layout {{ two_elements }}">
-        {% if two_elements and layout_width == 'paragraph--width--full' %}
-          <div class="swiper-container swiper-tiles">
-              <div class="swiper-wrapper">
-        {% endif %}
-
+      <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
           {% for key, item in  content.field_tile if key|first != '#' %}
             <div class="{{ element_class }}">{{ item }}</div>
           {% endfor %}
-
-        {% if two_elements and layout_width == 'paragraph--width--full' %}
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-        {% endif %}
 
       </div>
     </div><!-- grid container -->
