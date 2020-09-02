@@ -249,6 +249,8 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      use_ajax: true
+      css_class: ''
     cache_metadata:
       max-age: -1
       contexts:
@@ -268,10 +270,27 @@ display:
       pager:
         type: some
         options:
-          items_per_page: 5
+          items_per_page: 3
           offset: 0
       defaults:
         pager: false
+        css_class: false
+        footer: false
+      css_class: 'grid-x grid-margin-x full-height'
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<a href="/soutenances" class="btn btn-primary">Voir toutes les soutenances</a>'
+            format: full_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
@@ -307,8 +326,8 @@ display:
             offset: false
             offset_label: Offset
           views_infinite_scroll:
-            button_text: 'Load More'
-            automatically_load_content: true
+            button_text: 'Afficher plus'
+            automatically_load_content: false
       defaults:
         pager: false
       display_description: ''
@@ -348,8 +367,8 @@ display:
             offset: false
             offset_label: Offset
           views_infinite_scroll:
-            button_text: 'Load More'
-            automatically_load_content: true
+            button_text: 'Afficher plus'
+            automatically_load_content: false
       defaults:
         pager: false
         arguments: false
