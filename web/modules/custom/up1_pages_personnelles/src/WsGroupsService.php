@@ -8,7 +8,7 @@ use Drupal\Core\Site\Settings;
 /**
  * Class AnnuaireService.
  *
-*/
+ */
 class WsGroupsService implements WsGroupsServiceInterface {
 
   /**
@@ -71,6 +71,35 @@ class WsGroupsService implements WsGroupsServiceInterface {
     else {
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
     }
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+    $users = json_decode(curl_exec($ch), TRUE);
+
+    curl_close($ch);
+
+    $reponse['users'] = $users;
+    return $reponse;
+  }
+  public function getUsers($affiliation) {
+    $users = [];
+    $filter = '';
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+
+    $ws = $config->get('url_ws');
+    $searchUser = $config->get('search_user');
+    $filter_affiliation = $config->get("filtre_$affiliation");
+    $request = $ws . $searchUser . $filter_affiliation;
+    $labeledURI = $config->get('other_filters');
+    if (!empty($labeledURI)) {
+      $request .= $labeledURI;
+    }
+    $params = [
+      'attrs' => 'uid,displayName,supannCivilite,labeledURI,supannListeRouge'
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
+
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
