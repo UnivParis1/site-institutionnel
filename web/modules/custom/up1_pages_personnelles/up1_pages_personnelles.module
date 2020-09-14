@@ -182,13 +182,13 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
 }
 
 function up1_pages_personnelles_node_create(NodeInterface $node) {
-  if ($node->getType() == 'page_personnelle') {
+  /*if ($node->getType() == 'page_personnelle') {
     $owner = $node->getOwner();
     $userInformation = up1_pages_personnelles_get_comptex_info($owner->getAccountName());
     if (isset($userInformation) && !empty($userInformation)) {
       $node->title = $userInformation['supannCivilite'] . ' ' . $userInformation['displayName'];
     }
-  }
+  }*/
 }
 
 /**
