@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.news.field_tag
     - node.type.news
   module:
+    - micro_node
     - text
     - user
 _core:
@@ -56,6 +57,14 @@ content:
     settings:
       link: false
     third_party_settings: {  }
+  site_id:
+    type: entity_reference_label_site
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      link: 0
+    third_party_settings: {  }
 hidden:
   comment: true
   field_disable_canonical_url: true
@@ -70,4 +79,3 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
-  site_id: true
