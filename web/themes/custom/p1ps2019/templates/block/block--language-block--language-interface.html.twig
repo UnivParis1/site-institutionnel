@@ -47,7 +47,7 @@
 #}
 {%
   set classes = [
-    'block', 'show-for-large',
+    'block',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
     'clearfix',
@@ -56,7 +56,7 @@
 <section{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
-    <button{{ title_attributes.addClass('block-title reset-btn') }}>{{ label }}</button>
+    <button{{ title_attributes.addClass('block-title reset-btn circle') }}>{{ label }}</button>
   {% endif %}
   {{ title_suffix }}
 
