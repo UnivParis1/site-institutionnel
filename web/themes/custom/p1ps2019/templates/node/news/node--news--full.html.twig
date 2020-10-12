@@ -80,12 +80,12 @@
   <div{{ content_attributes.addClass('content') }}>
     <div class="img-container field-sep">{{ content.field_media }}</div>
     <div class="block-sep padding-mobile grid-container">
-     <div class="top-infos">
+      <div class="top-infos">
         <div class="infos-row-wrapper nowrap-mobile valign-center">
           <div class="categ-wrapper infos-entry semi-infos-sep">
-            {% for key, category in content.field_categories if key|first != '#' %}
+            {# {% for key, category in content.field_categories if key|first != '#' %}
               <div class="categ-style">{{ category }}</div>
-            {% endfor %}
+            {% endfor %} #}
             {% for key, topic in content.field_news_topic if key|first != '#' %}
               <div class="categ-style">{{ topic }}</div>
             {% endfor %}
@@ -94,8 +94,11 @@
         {{ title_prefix }}
         <h1{{ title_attributes }}>{{ label.0 }}</h1>
         {{ title_suffix }}
+        <div class="social-and-calendar box-content">
+          {{ content.social_simple_buttons }}
+        </div>
         <div class="txt medium semi-semi-infos-sep">{{ content.field_news_date }}</div>
-        <div class="txt medium">{{ content|without('field_media','field_news_date', 'field_related_news', 'field_signature', 'field_categories', 'field_news_topic') }}</div>
+        <div class="txt medium">{{ content|without('social_simple_buttons','field_tag', 'field_media','field_news_date', 'field_related_news', 'field_signature', 'field_categories', 'field_news_topic') }}</div>
         <div class="">{{ content.field_signature }}</div>
       </div>
     </div>
