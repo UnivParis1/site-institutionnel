@@ -136,6 +136,50 @@ body{
       }
     }
   }
+  .social-and-calendar {
+    @include flexDisplay();
+    @include flexDisplayAlign('center-middle');
+    justify-content: flex-end;
+  }
+  .social-buttons{
+    /*#{$padding-left}: rem-calc(32px);*/
+    @include flexDisplay(); @include flexDisplayAlign('start');
+    @include flexDisplayAlign('vcenter'); width: rem-calc(150px);
+    .social-buttons-title{display: none;}
+    .links {
+      margin: 0;
+      padding-right: 10px;
+      a{
+        background: transparent;
+      }
+    }
+  }
+  .social-buttons-links {
+    @include flexDisplay();
+    li{
+      display: inline-flex; align-items: center;
+      a{
+        width: auto;
+        padding: 0; @include flexDisplay();
+        color: #00326e;
+        &:hover {
+          text-decoration: none;
+        }
+        i {
+          &.fa-facebook {
+            &:before {
+              content: "\f082";
+            }
+          }
+          &:before{font-size: rem-calc(32px);
+          }
+        }
+      }
+      &:not(:last-of-type){
+        #{$margin-right}: rem-calc(16px);
+      }
+    }
+  }
 }
 //============ Offer ============
 //Full
