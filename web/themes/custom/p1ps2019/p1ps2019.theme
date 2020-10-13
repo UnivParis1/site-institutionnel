@@ -108,6 +108,31 @@ function p1ps2019_preprocess_node(&$variables) {
   }
   $node = $variables['node'];
 
+  if ($variables['elements']['#view_mode'] == 'search_index') {
+    switch ($node->getType()) {
+      case "news" :
+      case "news2018" :
+        $variables['node_type_text'] = t("Actualité");
+        break;
+        case "page_personnelle" :
+          $variables['node_type_text'] = t("Page Personnelle");
+        break;
+        case "event" :
+          $variables['node_type_text'] = t("Évènement");
+        break;
+        case "viva" :
+          $variables['node_type_text'] = t("Soutenance de thèse");
+        break;
+        case "offer" :
+          $variables['node_type_text'] = t("Offre d'emploi");
+        break;
+        case "page" :
+        case "second_level_pages" :
+          $variables['node_type_text'] = t("Page");
+        break;
+    }
+  }
+
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
     $skills = $node->get('field_skills')->getValue();
     if (!empty($skills)) {
