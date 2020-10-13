@@ -71,38 +71,31 @@
   node.isPromoted() ? 'is-promoted',
   node.isSticky() ? 'is-sticky',
   not node.isPublished() ? 'is-unpublished',
-  view_mode ? view_mode|clean_class,
-  'clearfix',
-  'box-style',
+  'clearfix', 'box-style',
+  'bootstrap-cards', 'viva'
 ]
 %}
+
 <article{{ attributes.addClass(classes) }}>
   <div class="box-content same-height">
     <div class="top-infos">
-      <div class="infos-row-wrapper nowrap-mobile valign-center">
-        <div class="node-type-search">{{ node_type_text }}</div>
-        <div class="categ-wrapper infos-entry">
-          <div class="categ-style"> {{ content.field_publication_type }} </div>
-          {% for key, topic in content.field_publication_topics if key|first != '#' %}
-            <div class="categ-style">{{ topic }}</div>
-          {% endfor %}
-        </div>
-      </div>
-      {{ title_prefix }}
-      <h2 class="title title-sep">
-        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
-      </h2>
-      {{ title_suffix }}
+      <div class="node-type-search">{{ node_type_text }}</div>
+      <div class="categ-style semi-infos-sep">{{ content.field_subtitle.0 }}</div>
     </div>
-    <div>
-      {{ content.field_author_name.0 }}
-      {% if content.field_publishing_year|render %}
-        - {{ content.field_publishing_year.0 }}
-      {% endif %}
+    {{ title_prefix }}
+    <h2 class="title semi-infos-sep">
+      {{ label.0 }}
+    </h2>
+    {{ title_suffix }}
+    <div class="thesis-direction">{{ "Sous la direction de "|t }}
+      <span class="direction-name">{{ content.field_thesis_supervisor.0}}</span>
     </div>
+
+    <div class="edo">{{ content.field_edo_label.0 }}</div>
+
     <div class="bottom-infos">
-      <div class="node-readmore">
-        <a href="{{ url }}" class="link-style" title="readmore">{{ "Read more"|t }}</a>
+      <div class="date-style semi-field-sep">
+        {{ content.field_event_date }}
       </div>
     </div>
   </div>
