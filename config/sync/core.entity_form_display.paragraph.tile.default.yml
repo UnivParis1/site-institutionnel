@@ -10,7 +10,7 @@ dependencies:
     - paragraphs.paragraphs_type.tile
   module:
     - entity_browser
-    - link
+    - link_attributes
 id: paragraph.tile.default
 targetEntityType: paragraph
 bundle: tile
@@ -21,8 +21,17 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+      enabled_attributes:
+        target: true
+        title: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
     third_party_settings: {  }
-    type: link_default
+    type: link_attributes
     region: content
   field_media_image:
     weight: 2
@@ -47,6 +56,11 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   status: true

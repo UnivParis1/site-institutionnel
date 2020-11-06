@@ -7,7 +7,7 @@ dependencies:
     - field.field.paragraph.tile_wo_image.bp_link
     - paragraphs.paragraphs_type.tile_wo_image
   module:
-    - link
+    - link_attributes
 id: paragraph.tile_wo_image.default
 targetEntityType: paragraph
 bundle: tile_wo_image
@@ -24,9 +24,23 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+      enabled_attributes:
+        target: true
+        title: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
     third_party_settings: {  }
-    type: link_default
+    type: link_attributes
     region: content
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   status: true
