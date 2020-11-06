@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_event_type
+    - field.storage.node.field_editorial_blocks
+    - field.storage.node.field_paragraphs
     - field.storage.node.field_sub_title
     - field.storage.node.field_subtitle
     - field.storage.node.field_categories
@@ -31,6 +33,24 @@ field_settings:
         - field.storage.node.field_event_type
       module:
         - taxonomy
+  field_editorial_blocks:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_editorial_blocks
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+  field_paragraphs:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_paragraphs
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
   field_sub_title:
     label: 'Sous-titre page'
     datasource_id: 'entity:node'
@@ -168,43 +188,10 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
-  ignorecase:
-    all_fields: false
-    fields:
-      - event_type
-      - field_sub_title
-      - field_subtitle
-      - langcode
-      - name
-      - news_topic
-      - publication_type
-      - title
-      - type
-      - url
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
-  transliteration:
-    all_fields: false
-    fields:
-      - event_type
-      - field_sub_title
-      - field_subtitle
-      - langcode
-      - name
-      - news_topic
-      - publication_type
-      - title
-      - type
-      - url
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
-  language_with_fallback: {  }
-  rendered_item: {  }
   content_access:
     weights:
       preprocess_query: -30
+  entity_status: {  }
   html_filter:
     all_fields: false
     fields:
@@ -229,6 +216,40 @@ processor_settings:
     weights:
       preprocess_index: -15
       preprocess_query: -15
+  ignorecase:
+    all_fields: false
+    fields:
+      - event_type
+      - field_sub_title
+      - field_subtitle
+      - langcode
+      - name
+      - news_topic
+      - publication_type
+      - title
+      - type
+      - url
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  language_with_fallback: {  }
+  rendered_item: {  }
+  transliteration:
+    all_fields: false
+    fields:
+      - event_type
+      - field_sub_title
+      - field_subtitle
+      - langcode
+      - name
+      - news_topic
+      - publication_type
+      - title
+      - type
+      - url
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
   type_boost:
     boosts:
       'entity:node':
@@ -238,7 +259,6 @@ processor_settings:
           news: !!float 2
     weights:
       preprocess_index: 0
-  entity_status: {  }
 tracker_settings:
   default:
     indexing_order: fifo

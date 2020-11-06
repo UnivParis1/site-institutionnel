@@ -13,7 +13,10 @@ label: 'Recherche de contenu'
 index_id: siri
 suggester_settings:
   server:
-    fields: {  }
+    fields:
+      - field_editorial_blocks
+      - field_paragraphs
+      - rendered_item
 suggester_weights:
   server: 0
 suggester_limits:
@@ -26,8 +29,8 @@ search_settings:
         - page_1
 options:
   limit: 10
-  min_length: 1
+  min_length: 2
   show_count: false
-  autosubmit: true
+  autosubmit: false
   submit_button_selector: ':submit'
   delay: null
