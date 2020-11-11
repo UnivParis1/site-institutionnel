@@ -39,14 +39,13 @@
  */
 #}
 {% for item in items %}
-{% set youtubepath = item.content %}
-{% set youtubepath = "https://youtu.be/" %}
+    {% set youtubepath = item.content %}
+    {% set youtubepath = "https://youtu.be/" %}
 
   <div id="background-video" class="loaded">
-
-  <iframe id="ytplayer" type="text/html" width="640" height="360"
-  src="https://www.youtube.com/embed/fpAZOiwOh2c?autoplay=1&origin={{ item.content }}"
-  frameborder="0"></iframe>   
-    
+    <div id="ytplayer-container1605098738082">
+        <iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/fpAZOiwOh2c?autoplay=1&origin={{ item.content }}" frameborder="0"></iframe>   
+    </div>
+    {# <div id="ytplayer-shield" class="ytplayer-shield"></div> #}
   </div>
 {% endfor %}
