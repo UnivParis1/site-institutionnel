@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% for item in items %}
+  <div id="background-video" class="loaded">
+    <div id="ytplayer-container1605098738082">
+        <iframe id="YTPlayer-ID-1605098738082" class="ytplayer-player" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="1864" height="1049" src="https://www.youtube.com/embed/Ygmyh_NoDOE?modestbranding=1&amp;autoplay=1&amp;controls=0&amp;showinfo=0&amp;wmode=transparent&amp;branding=0&amp;rel=0&amp;autohide=0&amp;loop=1&amp;enablejsapi=1&amp;origin={{ item.content }}&amp;widgetid=1"></iframe>
+    </div>
+    <div id="ytplayer-shield" class="ytplayer-shield"></div>
+  </div>
+{% endfor %}
