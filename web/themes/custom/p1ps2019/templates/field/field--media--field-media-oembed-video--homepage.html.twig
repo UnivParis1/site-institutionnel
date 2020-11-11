@@ -41,7 +41,8 @@
 {% for item in items %}
   <div id="background-video" class="loaded">
     <div id="ytplayer-container1605098738082">
-        <iframe allow="autoplay" frameborder="0" allowfullscreen="" src="https://www.youtube.com/embed/{{ item.content }}?autoplay=1&loop=1&mute=1&origin=https://OurWebsiteDomain" title="" height="278" data-ytbridge="vidSurrogate2" style="width: 100%;"></iframe>
+    {# <iframe allow="autoplay" frameborder="0" allowfullscreen="" src="https://www.youtube.com/embed/{{ item.content }}?autoplay=1&loop=1&mute=1&origin=https://OurWebsiteDomain" title="" height="278" data-ytbridge="vidSurrogate2" style="width: 100%;"></iframe> #}
+        <iframe allow="autoplay" frameborder="0" allowfullscreen="" src="{{ item.content }}&autoplay=1&loop=1&mute=1&origin=https://OurWebsiteDomain" title="" height="278" data-ytbridge="vidSurrogate2" style="width: 100%;"></iframe>
     </div>
     <div id="ytplayer-shield" class="ytplayer-shield"></div>
   </div>
