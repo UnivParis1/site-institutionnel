@@ -39,10 +39,15 @@
  */
 #}
 {% for item in items %}
+
+{% set videoIDArray = item.content|split('/') %}
+{% set videoID = videoIDArray[videoIDArray|length] %}
+VIDEO ID {{ playerID }}
+
   <div id="background-video" class="loaded">
     <div id="ytplayer-container1605098738082">
         {# <iframe id="YTPlayer-ID-1605098738082" class="ytplayer-player" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="1864" height="1049" src="https://www.youtube.com/embed/Ygmyh_NoDOE?modestbranding=1&amp;autoplay=1&amp;controls=0&amp;showinfo=0&amp;wmode=transparent&amp;branding=0&amp;rel=0&amp;autohide=0&amp;loop=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Flyceens.pantheonsorbonne.fr&amp;widgetid=1"></iframe> #}
-        <iframe allow="autoplay" frameborder="0" allowfullscreen="" src="https://www.youtube.com/embed/fpAZOiwOh2c?autoplay=1&loop=1&mute=1&origin=https://OurWebsiteDomain" title="" height="278" data-ytbridge="vidSurrogate2" style="width: 100%;"></iframe>
+        <iframe allow="autoplay" frameborder="0" allowfullscreen="" src="https://www.youtube.com/embed/{{playerID}}?autoplay=1&loop=1&mute=1&origin=https://OurWebsiteDomain" title="" height="278" data-ytbridge="vidSurrogate2" style="width: 100%;"></iframe>
     </div>
     <div id="ytplayer-shield" class="ytplayer-shield"></div>
   </div>
