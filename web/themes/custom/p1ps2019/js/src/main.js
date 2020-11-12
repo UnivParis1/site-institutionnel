@@ -110,6 +110,10 @@
     });
   }
 
+  if($('.media-oembed-content').length > 0){
+    $( "#frameDemo" ).contents().find( "iframe" ).css( "border", "10px solid red" );
+  }
+
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
       $(document, context).once('foundation-init').each(function() {
