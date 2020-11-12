@@ -112,7 +112,8 @@
 
   if($('.media-oembed-content').length > 0){
     console.log('iframe');
-    var iframeSRC = $( "#frameDemo" ).contents().find( "iframe" ).attr("src");
+    var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?autoplay=1&loop=1';
+    $('.media-oembed-content').contents().find('iframe').attr('src'.srcIframe);
   }
 
   Drupal.behaviors.myBehavior = {
