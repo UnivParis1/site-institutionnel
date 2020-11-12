@@ -415,13 +415,3 @@ function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables) {
     $variables['element']['#field_name'] . '__' . 
     $variables['element']['#view_mode'];
 }
-
-function p1ps2019_preprocess_media_oembed_iframe(array &$variables) {
-  /** @var \Drupal\media\OEmbed\Resource $resource */
-  $resource = $variables['resource'];
-  if ($resource->getProvider()->getName() === 'YouTube') {
-    // We are rendering a YouTube video, so modify the URL of the video so that it only shows related videos from the same channel.
-    // The video's markup is only available as a string, so we need to use str_replace() to modify the URL.
-    $variables['media'] = str_replace('?feature=oembed', '?feature=oembed&rel=0', (string) $variables['media']);
-  }
-}
