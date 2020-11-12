@@ -111,6 +111,7 @@
   }
 
   if($('.media-oembed-content').length > 0){
+    console.log('iframe');
     var iframeSRC = $( "#frameDemo" ).contents().find( "iframe" ).attr("src");
   }
 
