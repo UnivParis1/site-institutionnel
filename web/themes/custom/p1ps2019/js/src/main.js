@@ -114,6 +114,16 @@
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
+
+      if($('.media-oembed-content').length > 0){
+        if(replaceUrlIframe == false){
+          console.log('iframe');
+          var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '&autoplay=1&loop=1';
+          $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
+          replaceUrlIframe = true;
+        }
+      }
+
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
       });
@@ -129,14 +139,6 @@
         });
       }//close scroll
 
-      if($('.media-oembed-content').length > 0){
-        if(replaceUrlIframe == false){
-          console.log('iframe');
-          var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '&autoplay=1&loop=1';
-          $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
-          replaceUrlIframe = true;
-        }
-      }
 
       BrowserDetection();
 
