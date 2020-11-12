@@ -41,7 +41,7 @@
 
 {# <iframe allow="autoplay" frameborder="0" allowfullscreen="" src="https://www.youtube.com/embed/{{ item.content }}?autoplay=1&loop=1&mute=1&origin=https://OurWebsiteDomain" title="" height="278" data-ytbridge="vidSurrogate2" style="width: 100%;"></iframe> #}
 {% for item in items %}
-	
+  {{ item.content |raw}}
   {{ item.content|replace({ "?feature=oembed": "?autoplay=1&loop=1&feature=oembed"  })|raw }}
   {# <div id="background-video" class="loaded">
     <div id="ytplayer-container1605098738082">
