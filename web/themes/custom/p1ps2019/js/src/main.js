@@ -111,7 +111,7 @@
   }
 
   if($('.media-oembed-content').length > 0){
-    $( "#frameDemo" ).contents().find( "iframe" ).css( "border", "10px solid red" );
+    var iframeSRC = $( "#frameDemo" ).contents().find( "iframe" ).attr("src");
   }
 
   Drupal.behaviors.myBehavior = {
