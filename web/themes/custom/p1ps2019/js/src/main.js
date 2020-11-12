@@ -110,11 +110,7 @@
     });
   }
 
-  if($('.media-oembed-content').length > 0){
-    console.log('iframe');
-    var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?autoplay=1&loop=1';
-    $('.media-oembed-content').contents().find('iframe').attr('src'.srcIframe);
-  }
+  var replaceUrlIframe = false;
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
@@ -132,6 +128,15 @@
           }
         });
       }//close scroll
+
+      if($('.media-oembed-content').length > 0){
+        if(replaceUrlIframe == false){
+          console.log('iframe');
+          var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '&autoplay=1&loop=1';
+          $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
+          replaceUrlIframe = true;
+        }
+      }
 
       BrowserDetection();
 
