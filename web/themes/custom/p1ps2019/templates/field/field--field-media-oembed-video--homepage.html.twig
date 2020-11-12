@@ -43,9 +43,10 @@
 {% for item in items %}
 
 {% set myString = item.content|raw %}
+{% set myStringReplaced = myString|replace({ "oembed?": "oembed?autoplay=1&loop=1&"  }) %}
 VARIABLE: {{ myString }}
-IFRAME: 
-  {{ myString|replace({ "oembed?": "oembed?autoplay=1&loop=1&"  })}}
+IFRAME:
+  {{ myStringReplaced}}
   {# <div id="background-video" class="loaded">
     <div id="ytplayer-container1605098738082">
         <iframe allow="autoplay" frameborder="0" allowfullscreen="" src="{{ item.content }}&autoplay=1&loop=1&mute=1&origin=https://OurWebsiteDomain" title="" height="278" data-ytbridge="vidSurrogate2" style="width: 100%;"></iframe>
