@@ -1,4 +1,4 @@
-uuid: ca810756-2565-4229-a67c-01fcb9ecfeae
+uuid: 83e0d4cb-5279-450f-97c6-16034128571c
 langcode: fr
 status: true
 dependencies:
@@ -11,35 +11,28 @@ dependencies:
     - node.type.second_level_pages
   module:
     - entity_reference_revisions
-    - text
     - user
 id: node.second_level_pages.default
 targetEntityType: node
 bundle: second_level_pages
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 0
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_editorial_blocks:
     type: entity_reference_revisions_entity_view
-    weight: 1
-    label: hidden
+    weight: 0
+    region: content
+    label: visually_hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
   links:
-    weight: 2
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  body: true
   field_disable_canonical_url: true
   field_sites: true
   field_sites_all: true

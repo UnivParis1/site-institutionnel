@@ -13,7 +13,6 @@ description: ''
 tag: ''
 base_table: block_content_field_data
 base_field: nid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -153,6 +152,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         reusable:
           id: reusable
@@ -162,6 +163,9 @@ display:
           value: '1'
           entity_type: block_content
           entity_field: reusable
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: block_content_field_data
@@ -171,12 +175,16 @@ display:
           entity_type: block_content
           entity_field: type
           plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
       sorts: {  }
       header: {  }
       footer: {  }
       empty: {  }
       relationships: {  }
       arguments: {  }
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:

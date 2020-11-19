@@ -26,6 +26,13 @@ content:
     third_party_settings: {  }
     type: file_generic
     region: content
+  is_global:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    region: content
+    weight: 101
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -54,6 +61,11 @@ content:
     weight: 100
     region: content
     third_party_settings: {  }
+  translation:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 5
@@ -61,6 +73,8 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  site_id: true
