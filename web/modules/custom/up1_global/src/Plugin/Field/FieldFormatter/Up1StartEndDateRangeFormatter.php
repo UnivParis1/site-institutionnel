@@ -101,13 +101,13 @@ class Up1StartEndDateRangeFormatter extends DateTimeCustomFormatter {
       '#type' => 'textfield',
       '#title' => $this->t('Prefix'),
       '#description' => $this->t('The string to begin date range'),
-      '#default_value' => $this->getSetting('prefix'),
+      '#default_value' => $this->t($this->getSetting('prefix')),
     ];
     $form['separator'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date separator'),
       '#description' => $this->t('The string to separate the start and end dates'),
-      '#default_value' => $this->getSetting('separator'),
+      '#default_value' => $this->t($this->getSetting('separator')),
     ];
     $form['icon'] = [
       '#type' => 'select',
