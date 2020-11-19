@@ -62,7 +62,7 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
         if ($start_date->format('d-m-Y') !== $end_date->format('d-m-Y')) {
           $elements[$delta] = [
             'date' => [
-              '#markup' => "<div class='date-day-entry'><span>$prefix </span>" .
+              '#markup' => "$start_date <div class='date-day-entry'><span>$prefix </span>" .
                 $start_date->format('j F Y') . "</div><div class='date-day-entry'><span>$separator </span>" .
                 $end_date->format('j F Y') . "</div>",
             ],

@@ -95,6 +95,7 @@ class KeywordsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+
     $build = [];
     $config = \Drupal::config('up1_keywords.keywordsconfig');
     $keywords = [];
@@ -104,6 +105,11 @@ class KeywordsBlock extends BlockBase {
     $keywords['mot_cle_4'] = $this->configuration['mot_cle_4'];
     $keywords['mot_cle_5'] = $this->configuration['mot_cle_5'];
 
+    $current_path = \Drupal::service('path.current')->getPath();
+    //$search_form = [];
+    /*if (!preg_match('/resultats-recherche/', $current_path)) {
+      $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
+    }*/
     $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
 
     $build['up1_keywords'] = [

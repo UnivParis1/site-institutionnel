@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class AnnuaireController extends ControllerBase {
 
   /**
-   * @var \Drupal\micro_annuaire_sorbonne\AnnuaireService
+   * @var \Drupal\micro_annuaire_sorbonne\WsGroupsService
    */
   private $annuaireService;
 
@@ -22,109 +22,72 @@ class AnnuaireController extends ControllerBase {
     $this->annuaireService = \Drupal::service('micro_annuaire_sorbonne.annuaire');
   }
 
-  /**
-   * Retourne une liste triée par ordre alphabétique et filtrée en fonction de la lettre
-   * de l'alphabet demandée.
-   * Ou la liste de tous les utilisateurs si on est sur un mini site
-   *
-   * @param $letter "lettre de l'alphabet dont on veut la page d'annuaire"
-   *
-   * @return array
-   *   Contenant la liste des utilisateurs sous forme de tableau (JSON_decode).
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  public function list($letter) {
+  private function getCachedUsers( $affiliation = NULL, $siteId = NULL ) {
     $cache = \Drupal::cache();
-    $filtered_users = [];
-    $currentSiteId = '';
-    $theme = '';
 
-    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
-    $negotiator = \Drupal::service('micro_site.negotiator');
-    if (!empty($negotiator->getActiveSite())) {
-      $currentSiteId = $negotiator->getActiveId();
-
-      if (!empty($currentSiteId)) {
-        $theme = 'annuaire_mini_site';
-        // On verifie si l'annuaire est dans le cache
-        $cachedUser = $cache->get('users_ldap'.$currentSiteId);
-
-        if ($cachedUser) {
-          $reponse = $cachedUser->data;
-          $filtered_users = $reponse['users'];
-        }
-        else {
-          $reponse = $this->annuaireService->getUserList($currentSiteId);
-          $filtered_users = $reponse['users'];
-          $cache->set('users_ldap'.$currentSiteId, $reponse, time() + 60 * 60);
-        }
-
-        if (!empty($filtered_users)) {
-          $distinct_users = [];
-          // on trie les utilisateurs par ordre alphabetique des cn
-          $sortedUsers = usort($filtered_users, function ($a, $b) {
-            return strnatcasecmp($a['sn'], $b['sn']);
-          });
-          foreach ($filtered_users as $filtered_user) {
-            if ($filtered_user['eduPersonPrimaryAffiliation'] == 'student') {
-              $distinct_users['student'][] = $filtered_user;
-            }
-            else {
-              $distinct_users['teacher'][] = $filtered_user;
-            }
-          }
-        }
+    if ($siteId) {
+      $cachedUser = $cache->get('labeledURI_' . $siteId . '_' . $affiliation);
+      if ($cachedUser) {
+        $reponse = $cachedUser->data;
+        $users = $reponse['users'];
+      }
+      else {
+        $reponse = $this->annuaireService->getUserList($affiliation, $siteId);
+        $users = $reponse['users'];
+        $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $reponse, time() + 60 * 60);
       }
     }
     else {
-      $theme = 'micro_annuaire_sorbonne';
-      $cachedUser = $cache->get('users_ldap_principal');
+       $cachedUser = $cache->get('labeledURI_' . $affiliation);
 
       if ($cachedUser){
         $reponse = $cachedUser->data;
         $users = $reponse['users'];
       }
       else {
-        $reponse = $this->annuaireService->getUserList('');
+        $reponse = $this->annuaireService->getUserList($affiliation);
         $users = $reponse['users'];
-        $cache->set('users_ldap_principal', $reponse, time() + 60 * 60);
-      }
-
-      if (!empty($users)) {
-        foreach ($users as $user) {
-          if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
-            $filtered_users[] = $user;
-          }
-        }
-
-        // on trie les utilisateurs par ordre alphabetique des cn
-        $sortedUsers = usort($filtered_users, function ($a, $b) {
-          return strnatcasecmp($a['sn'], $b['sn']);
-        });
-
-        $distinct_users = [];
-        // on trie les utilisateurs par ordre alphabetique des cn
-        $sortedUsers = usort($filtered_users, function ($a, $b) {
-          return strnatcasecmp($a['sn'], $b['sn']);
-        });
-        foreach ($filtered_users as $filtered_user) {
-          if ($filtered_user['eduPersonPrimaryAffiliation'] == 'student') {
-            $distinct_users['student'][] = $filtered_user;
-          }
-          else {
-            $distinct_users['teacher'][] = $filtered_user;
-          }
-        }
-
+        $cache->set('labeledURI_' . $affiliation, $reponse, time() + 60 * 60);
       }
     }
 
+    return $users;
+  }
+
+  public function facultyList($letter) {
+    $filtered_users = [];
+    $currentSiteId = '';
+    $sortedUsers = [];
+
+    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if (!empty($negotiator->getActiveSite())) {
+      $currentSiteId = $negotiator->getActiveId();
+      if (!empty($currentSiteId)) {
+        $users = $this->getCachedUsers('faculty', $currentSiteId);
+      }
+    }
+    else {
+      $users = $this->getCachedUsers('faculty');
+    }
+
+    if (!empty($users)) {
+      foreach ($users as $user) {
+        if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
+          $filtered_users[] = $user;
+        }
+      }
+
+      // on trie les utilisateurs par ordre alphabetique des cn
+      $sortedUsers = usort($filtered_users, function ($a, $b) {
+        return strnatcasecmp($a['sn'], $b['sn']);
+      });
+    }
+
     $build['item_list'] = [
-      '#theme' => $theme,
-      '#users' => $distinct_users,
-      '#students' => $distinct_users['student'],
-      '#teachers' => $distinct_users['teacher'],
+      '#theme' => 'micro_page_perso_filtree',
+      '#users' => $filtered_users,
+      '#affiliation' => 'faculty',
       '#Trusted' => FALSE,
       '#attached' => [
         'library' => [
@@ -134,38 +97,24 @@ class AnnuaireController extends ControllerBase {
     ];
 
     return $build;
-
   }
 
-  /**
-   * Returns a filtered and ordered list depending on the user's affiliation
-   * @param $affiliation
-   * @param $letter
-   *
-   * @return mixed
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  public function filteredList($affiliation, $letter) {
-    $cache = \Drupal::cache();
+  public function studentList($letter) {
     $filtered_users = [];
-    if ($affiliation == 'doctorant') {
-      $fonction = "student";
-    }
-    elseif ($affiliation == "enseignant-chercheur") {
-      $fonction = "teacher";
-    }
+    $sortedUsers = [];
+    $currentSiteId = '';
 
-    $cachedUser = $cache->get('users_ldap_principal');
 
-    if ($cachedUser) {
-      $reponse = $cachedUser->data;
-      $users = $reponse['users'];
+    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if (!empty($negotiator->getActiveSite())) {
+      $currentSiteId = $negotiator->getActiveId();
+      if (!empty($currentSiteId)) {
+        $users = $this->getCachedUsers('student', $currentSiteId);
+      }
     }
     else {
-      $reponse = $this->annuaireService->getUserList('');
-      $users = $reponse['users'];
-      $cache->set('users_ldap_principal', $reponse, time() + 60 * 60);
+      $users = $this->getCachedUsers('student');
     }
 
     if (!empty($users)) {
@@ -178,29 +127,12 @@ class AnnuaireController extends ControllerBase {
       $sortedUsers = usort($filtered_users, function ($a, $b) {
         return strnatcasecmp($a['sn'], $b['sn']);
       });
-
-      $distinct_users = [];
-      // on trie les utilisateurs par ordre alphabetique des cn
-      $sortedUsers = usort($filtered_users, function ($a, $b) {
-        return strnatcasecmp($a['sn'], $b['sn']);
-      });
-      foreach ($filtered_users as $filtered_user) {
-        if ($fonction == "student") {
-          if ($filtered_user['eduPersonPrimaryAffiliation'] == 'student') {
-            $distinct_users[] = $filtered_user;
-          }
-        }
-        if ($fonction == "teacher") {
-          if ($filtered_user['eduPersonPrimaryAffiliation'] != 'student') {
-            $distinct_users[] = $filtered_user;
-          }
-        }
       }
 
       $build['item_list'] = [
         '#theme' => 'micro_page_perso_filtree',
-        '#users' => $distinct_users,
-        '#affiliation' => $affiliation,
+        '#users' => $sortedUsers,
+        '#affiliation' => 'student',
         '#Trusted' => FALSE,
         '#attached' => [
           'library' => [
@@ -210,7 +142,6 @@ class AnnuaireController extends ControllerBase {
       ];
 
       return $build;
-    }
   }
 
   public function getPageTitle($affiliation) {

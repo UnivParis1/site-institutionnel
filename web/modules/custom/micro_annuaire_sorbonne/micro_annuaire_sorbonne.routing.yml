@@ -1,30 +1,36 @@
-#micro_annuaire_sorbonne.annuaire_controller_list:
-#  path: '/page-perso/{letter}'
-#  defaults:
-#    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::list'
-#    _title: 'Pages personnelles'
-#    letter: 'A'
-#  requirements:
-#    _permission: 'view published site entities'
-#
-micro_annuaire_sorbonne.annuaire_controller_filtered_list_default:
-  path: '/page-perso/{affiliation}'
+micro_annuaire_sorbonne.annuaire_controller_faculty_list_default:
+  path: '/page-perso/enseignant-chercheur'
   defaults:
-    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::filteredList'
-    _title_callback: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::getPageTitle'
+    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::facultyList'
+    _title: 'Pages Personnelles Enseignants-Chercheurs'
     letter: 'A'
   requirements:
     _permission: 'view published site entities'
-    affiliation: 'enseignant-chercheur|doctorant'
 
-micro_annuaire_sorbonne.annuaire_controller_filtered_list:
-  path: '/page-perso/{affiliation}/{letter}'
+micro_annuaire_sorbonne.annuaire_controller_faculty_list:
+  path: '/page-perso/enseignant-chercheur/{letter}'
   defaults:
-    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::filteredList'
+    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::facultyList'
     _title_callback: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::getPageLetterTitle'
   requirements:
     _permission: 'view published site entities'
-    affiliation: 'enseignant-chercheur|doctorant'
+
+micro_annuaire_sorbonne.annuaire_controller_student_list_default:
+  path: '/page-perso/doctorant'
+  defaults:
+    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::studentList'
+    _title: 'Pages Personnelles Doctorants'
+    letter: 'A'
+  requirements:
+    _permission: 'view published site entities'
+
+micro_annuaire_sorbonne.annuaire_controller_student_list:
+  path: '/page-perso/doctorant/{letter}'
+  defaults:
+    _controller: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::studentList'
+    _title_callback: '\Drupal\micro_annuaire_sorbonne\Controller\AnnuaireController::getPageLetterTitle'
+  requirements:
+    _permission: 'view published site entities'
 
 micro_annuaire_sorbonne.annuaire_config_form:
   path: '/admin/config/micro_annuaire_sorbonne/annuaireconfig'

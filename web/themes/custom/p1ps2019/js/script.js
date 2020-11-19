@@ -115,8 +115,22 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     });
   }
 
+  var replaceUrlIframe = false;
+
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
+
+      if($('.media-oembed-content').length > 0){
+        if(replaceUrlIframe == false){
+          setTimeout(function(){
+            console.log('iframe');
+            var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '&autoplay=1&loop=1';
+            $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
+            replaceUrlIframe = true;
+           }, 100);
+        }
+      }
+
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
       });
@@ -131,6 +145,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
           }
         });
       }//close scroll
+
 
       BrowserDetection();
 

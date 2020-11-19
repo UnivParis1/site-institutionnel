@@ -3,6 +3,7 @@
 namespace Drupal\up1_pages_personnelles\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use GuzzleHttp\ClientInterface;
@@ -36,13 +37,17 @@ class WsGroupsController extends ControllerBase {
    * @var \GuzzleHttp\ClientInterface
    */
   protected $client;
-
+  /**
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
 
   public function __construct(QueueFactory $queue, MessengerInterface $messenger,
-                              ClientInterface $client) {
+                              ClientInterface $client, Connection $dataservice = null) {
     $this->queueFactory = $queue;
     $this->messenger = $messenger;
     $this->client = $client;
+    $this->database = $dataservice;
     $this->wsGroupsService = \Drupal::service('up1_pages_personnelles.wsgroups');
   }
   /**
@@ -53,6 +58,7 @@ class WsGroupsController extends ControllerBase {
       $container->get('queue'),
       $container->get('messenger'),
       $container->get('http_client'),
+      $container->get('up1_pages_personnelles.database'),
       $container->get('up1_pages_personnelles.wsgroups')
     );
   }
@@ -288,9 +294,132 @@ class WsGroupsController extends ControllerBase {
    */
   public function deleteTheQueue() {
     $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
+    $this->queueFactory->get('up1_typo3_data_queue')->deleteQueue();
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('The queue "up1_page_perso_queue" has been deleted'),
+      '#markup' => $this->t('The queues "up1_page_perso_queue" & "up1_typo3_data_queue" have been deleted'),
     ];
+  }
+
+  public function populatePagePersoUsers() {
+    $users = $this->wsGroupsService->getUsers('faculty');
+    $users = reset($users);
+    foreach ($users as $user) {
+      $data[] = $this->selectFeUsers($user['uid']);
+    }
+
+    $header = [];
+    $rows = [];
+    $attributes = [];
+    $sticky = [];
+    $finalMessage = "";
+    if (!$data) {
+      \Drupal::logger('up1_typo3_data_queue')->warning('No new data to import.');
+      $finalMessage = $this->t('No new data to import.');
+    }
+    else {
+      $queue = $this->queueFactory->get('up1_typo3_data_queue');
+      $totalItemsInQueue = $queue->numberOfItems();
+      foreach ($data as $element) {
+        $queue->createItem($element);
+      }
+
+      // 4. Get the total of item in the Queue.
+      $totalItemsAfter = $queue->numberOfItems();
+
+      // 5. Get what's in the queue now.
+      $tableVariables = $this->getItemTypo3($queue);
+      $header = $tableVariables['header'];
+      $rows = $tableVariables['rows'];
+      $attributes = $tableVariables['attributes'];
+      $sticky = $tableVariables['sticky'];
+
+      $finalMessage = $this->t('The Queue had @totalBefore items.
+    We should have added @count items in the Queue. Now the Queue has @totalAfter items.',
+        [
+          '@count' => count($data),
+          '@totalAfter' => $totalItemsAfter,
+          '@totalBefore' => $totalItemsInQueue,
+        ]);
+
+    }
+    return [
+      '#type' => 'table',
+      '#caption' => $finalMessage,
+      '#header' => $header,
+      '#rows' => isset($rows) ? $rows : [],
+      '#attributes' => $attributes,
+      '#sticky' => $sticky,
+      '#empty' => $this->t('No items.'),
+    ];
+  }
+
+  protected function getItemTypo3($queue) {
+    $retrieved_items = [];
+    $items = [];
+
+    // Claim each item in queue.
+    while ($item = $queue->claimItem()) {
+      $retrieved_items[] = [
+        'information' => [$item->data->username],
+      ];
+      // Track item to release the lock.
+      $items[] = $item;
+    }
+
+    // Release claims on items in queue.
+    foreach ($items as $item) {
+      $queue->releaseItem($item);
+    }
+
+    // Put the items in a table array for rendering.
+    $tableTheme = [
+      'header' => [$this->t('username')],
+      'rows'   => $retrieved_items,
+      'attributes' => [],
+      'caption' => '',
+      'colgroups' => [],
+      'sticky' => TRUE,
+      'empty' => $this->t('No items.'),
+    ];
+
+    return $tableTheme;
+  }
+
+  /**
+   * Delete the queue 'up1_typo3_data_queue'.
+   *
+   * Remember that the command drupal dq checks first for a queue worker
+   * and if it exists, DC suposes that a queue exists.
+   */
+  public function deleteQueueTypo3() {
+    $this->queueFactory->get('up1_typo3_data_queue')->deleteQueue();
+    return [
+      '#type' => 'markup',
+      '#markup' => $this->t('The queue "up1_typo3_data_queue" has been deleted'),
+    ];
+  }
+
+  private function selectFeUsers($username) {
+    $query = $this->database->select('fe_users', 'fu');
+    $fields = [
+      'username',
+      'tx_oxcspagepersonnel_courriel',
+      'tx_oxcspagepersonnel_responsabilites_scientifiques',
+      'tx_oxcspagepersonnel_sujet_these',
+      'tx_oxcspagepersonnel_projets_recherche',
+      'tx_oxcspagepersonnel_directeur_these',
+      'tx_oxcspagepersonnel_publications',
+      'tx_oxcspagepersonnel_epi',
+      'tx_oxcspagepersonnel_cv',
+      'tx_oxcspagepersonnel_cv2',
+      'tx_oxcspagepersonnel_directions_these',
+      'tx_oxcspagepersonnel_page_externe_url',
+    ];
+    $query->fields('fu', $fields);
+    $query->condition('username', $username, 'LIKE');
+    $result = $query->execute()->fetchObject();
+
+    return $result;
   }
 }

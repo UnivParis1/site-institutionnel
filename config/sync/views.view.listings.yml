@@ -16,7 +16,6 @@ dependencies:
     - taxonomy.vocabulary.events_types
     - taxonomy.vocabulary.news_topics
     - taxonomy.vocabulary.offers
-    - taxonomy.vocabulary.publication_topics
     - taxonomy.vocabulary.publication_type
   module:
     - better_exposed_filters
@@ -80,11 +79,9 @@ display:
               secondary_label: 'Options avancées'
               secondary_open: false
             filter:
-              field_publication_topics_target_id:
+              title:
                 plugin_id: default
                 advanced:
-                  rewrite:
-                    filter_rewrite_values: ''
                   collapsible: false
                   is_secondary: false
               field_publication_type_target_id:
@@ -92,6 +89,11 @@ display:
                 advanced:
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Thématique -'
+                  collapsible: false
+                  is_secondary: false
+              field_pub_year_value:
+                plugin_id: default
+                advanced:
                   collapsible: false
                   is_secondary: false
       pager:
@@ -2845,24 +2847,26 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-        field_publication_topics_target_id:
-          id: field_publication_topics_target_id
-          table: node__field_publication_topics
-          field: field_publication_topics_target_id
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: contains
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_publication_topics_target_id_op
-            label: Thèmes
+            operator_id: title_op
+            label: Titre
             description: ''
             use_operator: false
-            operator: field_publication_topics_target_id_op
-            identifier: field_publication_topics_target_id
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
             required: false
             remember: false
             multiple: false
@@ -2875,9 +2879,8 @@ display:
               webmestre_general: '0'
               admin_dir_com: '0'
               administrator: '0'
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
+              enseignant_doctorant: '0'
+            placeholder: Rechercher
           is_grouped: false
           group_info:
             label: ''
@@ -2890,13 +2893,9 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: publication_topics
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
+          entity_type: node
+          entity_field: title
+          plugin_id: string
         field_publication_type_target_id:
           id: field_publication_type_target_id
           table: node__field_publication_type
@@ -2949,6 +2948,60 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
+        field_pub_year_value:
+          id: field_pub_year_value
+          table: node__field_pub_year
+          field: field_pub_year_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_pub_year_value_op
+            label: 'Année de publication (field_pub_year)'
+            description: ''
+            use_operator: false
+            operator: field_pub_year_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: year
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+              enseignant_doctorant: '0'
+            placeholder: 'Année de publication'
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          granularity: year
+          plugin_id: datetime
       filter_groups:
         operator: AND
         groups:

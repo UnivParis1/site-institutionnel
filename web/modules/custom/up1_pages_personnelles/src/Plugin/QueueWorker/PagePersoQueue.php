@@ -79,7 +79,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * {@inheritDoc}
    */
   public function processItem($item) {
-    $cas_user_manager = \Drupal::service('cas.user_manager');
+    /*$cas_user_manager = \Drupal::service('cas.user_manager');
     $cas_username = $item['uid'];
     $existing_uid = $cas_user_manager->getUidForCasUsername($cas_username);
     if ($existing_uid) {
@@ -128,7 +128,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       ]);
 
       $node->save();
-    }
+    }*/
   }
 
 }

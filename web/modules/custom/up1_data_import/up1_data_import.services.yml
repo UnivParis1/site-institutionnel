@@ -5,3 +5,10 @@ services:
   data.helper:
     class: Drupal\up1_data_import\Service\DataHelper
     arguments: ['@data.service']
+  database.typo:
+    class: Drupal\up1_data_import\Service\TypoHelper
+    factory: 'Drupal\Core\Database\Database::getConnection'
+    arguments: ['default', 'external']
+  data.typo:
+    class: Drupal\up1_data_import\Service\TypoHelper
+    arguments: ['@config.factory']

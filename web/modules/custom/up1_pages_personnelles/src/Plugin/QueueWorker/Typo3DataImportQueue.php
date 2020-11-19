@@ -8,8 +8,10 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
+use Drupal\node\Entity\Node;
 use Drupal\up1_pages_personnelles\WsGroupsService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\node\Entity;
 
 /**
  * Executes users (enseignants & doctorants) import from web service.
@@ -79,56 +81,36 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
    * {@inheritDoc}
    */
   public function processItem($item) {
-    $cas_user_manager = \Drupal::service('cas.user_manager');
-    $cas_username = $item['uid'];
-    $existing_uid = $cas_user_manager->getUidForCasUsername($cas_username);
-    if ($existing_uid) {
-      return;
-    }
-    else {
-      $cas_settings = \Drupal::config('cas.settings');
-
-      $user_properties = [
-        'roles' => ['enseignant_doctorant'],
-      ];
-      $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
-      if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
-        $user_properties['mail'] = $item['mail'];
-      }
-
-      try {
-        $cas_user_manager->register($cas_username, $user_properties);
-      } catch (CasLoginException $e) {
-        \Drupal::logger('cas')->error('CasLoginException when
-        registering user with name %name: %e', [
-          '%name' => $cas_username,
-          '%e' => $e->getMessage()
-        ]);
-        return;
-      }
-    }
-
-    $user = user_load_by_name($item['uid']);
+    /*$user = user_load_by_name($item->username);
     if ($user) {
       $author = $user->id();
-    }
-    $values = \Drupal::entityQuery('node')
-      ->condition('type', 'page_personnelle')
-      ->condition('uid', $author)
-      ->execute();
-    if (empty($values)) {
-      $storage = $this->entityTypeManager->getStorage('node');
-      $node = $storage->create([
-        'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
-        'type' => 'page_personnelle',
-        'langcode' => 'fr',
-        'uid' => $author,
-        'status' => 1,
-        'field_uid_ldap' => $item['uid'],
-      ]);
+      $ids = \Drupal::entityQuery('node')
+        ->condition('type', 'page_personnelle')
+        ->condition('uid', $author)
+        ->execute();
+      $nodes = Node::loadMultiple($ids);
 
-      $node->save();
-    }
+      foreach ($nodes as $node) {
+        \Drupal::logger('pages_persos_node')->info(print_r($node, 1));
+        \Drupal::logger('pages_persos_node')->info(print_r($node->get('field_uid_ldap'), 1));
+      }
+       if (!empty($nodes)) {
+         $node = reset($nodes);
+         \Drupal::logger('pages_persos_node')->info(print_r($node, 1));
+         \Drupal::logger('pages_persos_item')->info(print_r($item, 1));
+       /*$node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
+         $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
+         $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;
+         $node->field_research_themes = $item->tx_oxcspagepersonnel_projets_recherche;
+         $node->field_phd_supervisor = $item->tx_oxcspagepersonnel_directeur_these;
+         $node->field_publications = strip_tags($item->tx_oxcspagepersonnel_publications, ['<p><a>']);
+         $node->field_resume_text = $item->tx_oxcspagepersonnel_cv2;
+         $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
+         $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
+
+         $node->save();
+    }*/
+
   }
 
 }
