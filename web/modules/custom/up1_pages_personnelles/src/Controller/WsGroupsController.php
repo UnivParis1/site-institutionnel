@@ -199,6 +199,9 @@ class WsGroupsController extends ControllerBase {
   }
 
   public function createPagePersoUsers() {
+    # [2020-09 PRI disable]
+    return;
+
     $data = $this->wsGroupsService->getUsers('faculty');
     $header = [];
     $rows = [];

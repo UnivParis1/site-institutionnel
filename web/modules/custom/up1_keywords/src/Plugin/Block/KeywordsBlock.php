@@ -104,7 +104,11 @@ class KeywordsBlock extends BlockBase {
     $keywords['mot_cle_4'] = $this->configuration['mot_cle_4'];
     $keywords['mot_cle_5'] = $this->configuration['mot_cle_5'];
 
-    $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
+    $current_path = \Drupal::service('path.current')->getPath();
+        $search_form = [];
+        if (!preg_match('/resultats-recherche/', $current_path)) {
+		      $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
+		          }
 
     $build['up1_keywords'] = [
       '#theme' => 'up1_keywords',
