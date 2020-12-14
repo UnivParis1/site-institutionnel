@@ -80,18 +80,25 @@ display:
               secondary_label: 'Options avancées'
               secondary_open: false
             filter:
-              field_publication_topics_target_id:
+              field_job_type_value:
                 plugin_id: default
                 advanced:
                   rewrite:
-                    filter_rewrite_values: ''
+                    filter_rewrite_values: '- Tout -|- Nature de l''emploi -'
                   collapsible: false
                   is_secondary: false
-              field_publication_type_target_id:
+              field_offer_type_target_id:
                 plugin_id: default
                 advanced:
                   rewrite:
-                    filter_rewrite_values: '- Tout -|- Thématique -'
+                    filter_rewrite_values: '- Tout -|- Type d''offre - '
+                  collapsible: false
+                  is_secondary: false
+              field_contract_type_value:
+                plugin_id: default
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: '- Tout -|- Type de contrat -'
                   collapsible: false
                   is_secondary: false
       pager:
@@ -1427,6 +1434,20 @@ display:
         groups:
           1: AND
       sorts:
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: node
+          entity_field: sticky
+          plugin_id: standard
         field_event_date_value:
           id: field_event_date_value
           table: node__field_event_date
@@ -2789,6 +2810,7 @@ display:
         arguments: false
         exposed_form: true
         pager: false
+        sorts: false
       filters:
         status:
           value: '1'
@@ -2988,6 +3010,20 @@ display:
             button_text: 'Plus de publications'
             automatically_load_content: false
       rendering_language: '***LANGUAGE_language_interface***'
+      sorts:
+        field_publishing_date_value:
+          id: field_publishing_date_value
+          table: node__field_publishing_date
+          field: field_publishing_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: day
+          plugin_id: datetime
     cache_metadata:
       max-age: -1
       contexts:

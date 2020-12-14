@@ -15,7 +15,7 @@ up1_pages_personnelles.wsgroups_faculty_list_default:
     _title: 'Pages Personnelles Enseignants-Chercheurs'
     letter: 'A'
   requirements:
-    _permission: 'view published content'
+    _permission: 'access content'
 
 up1_pages_personnelles.wsgroups_pp_default:
   path: '/page-perso'
@@ -24,7 +24,7 @@ up1_pages_personnelles.wsgroups_pp_default:
     _title: 'Pages Personnelles Enseignants-Chercheurs'
     letter: 'A'
   requirements:
-    _permission: 'view published content'
+    _permission: 'access content'
 
 up1_pages_personnelles.wsgroups_faculty_list:
   path: '/page-perso/enseignant-chercheur/{letter}'
@@ -32,7 +32,7 @@ up1_pages_personnelles.wsgroups_faculty_list:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterFacultyList'
     _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
   requirements:
-    _permission: 'view published content'
+    _permission: 'access content'
 
 up1_pages_personnelles.wsgroups_student_list_default:
   path: '/page-perso/doctorant'
@@ -41,7 +41,7 @@ up1_pages_personnelles.wsgroups_student_list_default:
     _title: 'Pages Personnelles Doctorants'
     letter: 'A'
   requirements:
-    _permission: 'view published content'
+    _permission: 'access content'
 
 up1_pages_personnelles.wsgroups_student_list:
   path: '/page-perso/doctorant/{letter}'
@@ -49,7 +49,7 @@ up1_pages_personnelles.wsgroups_student_list:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterStudentList'
     _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
   requirements:
-    _permission: 'view published content'
+    _permission: 'access content'
 
 up1_pages_personnelles.micro_faculty_list_default:
   path: '/equipe/enseignant-chercheur'
@@ -100,7 +100,7 @@ up1_pages_personnelles.get_users_ldap:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::createPagePersoUsers'
     _title: 'Update users from LDAP'
   requirements:
-    _permission: 'access content'
+    _permission: 'access administration pages'
 
 up1_pages_personnelles.delete_queue_users:
   path: '/pages-perso/maj/empty'
@@ -108,4 +108,4 @@ up1_pages_personnelles.delete_queue_users:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::deleteTheQueue'
     _title: 'Delete queue import users from LDAP'
   requirements:
-    _permission: 'access content'
+    _permission: 'access administration pages'
