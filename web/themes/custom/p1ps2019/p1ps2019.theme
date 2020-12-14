@@ -408,3 +408,10 @@ function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id) {
     unset($form['pass']['#title'], $form['pass']['#description']);
   }
 }
+
+
+function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables) {
+  $suggestions[] = 'field__' . 
+    $variables['element']['#field_name'] . '__' . 
+    $variables['element']['#view_mode'];
+}
