@@ -119,7 +119,7 @@
         if(replaceUrlIframe == false){
           setTimeout(function(){
             console.log('iframe');
-            var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '&autoplay=1&loop=1';
+            var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?enablejsapi=1&html5=1';
             $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
             replaceUrlIframe = true;
            }, 100);
