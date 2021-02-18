@@ -110,24 +110,23 @@
     });
   }
 
-  var replaceUrlIframe = false;
+  // var replaceUrlIframe = false;
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
 
-      if($('.media-oembed-content').length > 0){
-        console.log('media-oembed-content EXISTS and replaced: ' + replaceUrlIframe);
+      // if($('.media-oembed-content').length > 0){
+      //   console.log('media-oembed-content EXISTS and replaced: ' + replaceUrlIframe);
 
-        if(replaceUrlIframe == false){
-          setTimeout(function(){
-            console.log('iframe');
-            var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?enablejsapi=1&html5=1';
-            $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
-            replaceUrlIframe = true;
-           }, 100);
-        }
-      }
-      //&autoplay=1&loop=1&mute=1
+      //   if(replaceUrlIframe == false){
+      //     setTimeout(function(){
+      //       console.log('iframe');
+      //       var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?enablejsapi=1&html5=1';
+      //       $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
+      //       replaceUrlIframe = true;
+      //      }, 100);
+      //   }
+      // }
 
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
