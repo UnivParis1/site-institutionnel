@@ -131,14 +131,12 @@
       // }
 
       var vid = $("#bg-video video"); 
-
-      function playVid() { 
-        vid.play(); 
-      } 
-
-      function pauseVid() { 
-        vid.pause(); 
-      }
+      $('#play-button').click(function(){
+        vid.play();
+      });
+      $('#pause-button').click(function(){
+        vid.pause();
+      });
 
 
       $(document, context).once('foundation-init').each(function() {
