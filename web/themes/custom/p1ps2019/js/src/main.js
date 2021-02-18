@@ -130,27 +130,17 @@
       //   }
       // }
 
-      $('#play-button').click(function(){
-        var videoURL = $('.media-oembed-content iframe').attr('src');
-        console.log('videoURL: '+videoURL);
-        dataplay = $('.media-oembed-content').attr('data-play');
-    
-        //for check autoplay
-        //if not set autoplay=1
-        if(dataplay == 0 ){
-            $('.media-oembed-content').attr('src',videoURL+'?autoplay=1');
-            $('.media-oembed-content').attr('data-play',1);
-         }
-         else{
-            var videoURL = $('.media-oembed-content').attr('src');
-            videoURL = videoURL.replace("?autoplay=1", "");
-            $('.media-oembed-content').prop('src','');
-            $('.media-oembed-content').prop('src',videoURL);
-    
-            $('.media-oembed-content').attr('data-play',0);
-         }
-    
-    });
+      var vid = $("#bg-video video"); 
+
+      function playVid() { 
+        vid.play(); 
+      } 
+
+      function pauseVid() { 
+        vid.pause(); 
+      }
+
+
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
       });
