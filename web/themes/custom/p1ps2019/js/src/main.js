@@ -116,6 +116,8 @@
     attach: function (context, settings) {
 
       if($('.media-oembed-content').length > 0){
+        console.log('media-oembed-content EXISTS and replaced: ' + replaceUrlIframe);
+
         if(replaceUrlIframe == false){
           setTimeout(function(){
             console.log('iframe');
@@ -125,6 +127,7 @@
            }, 100);
         }
       }
+      //&autoplay=1&loop=1&mute=1
 
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
