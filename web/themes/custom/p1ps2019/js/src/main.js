@@ -114,7 +114,23 @@
 
 
 
-  // global variable for the player
+  Drupal.behaviors.myBehavior = {
+    attach: function (context, settings) {
+
+      // if($('.media-oembed-content').length > 0){
+      //   console.log('media-oembed-content EXISTS and replaced: ' + replaceUrlIframe);
+
+      //   if(replaceUrlIframe == false){
+      //     setTimeout(function(){
+      //       console.log('iframe');
+      //       var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?enablejsapi=1&html5=1';
+      //       $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
+      //       replaceUrlIframe = true;
+      //      }, 100);
+      //   }
+      // }
+
+      // global variable for the player
   var player;
 
   // this function gets called when API is ready to use
@@ -155,23 +171,6 @@
   var firstScriptTag = $('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-
-
-  Drupal.behaviors.myBehavior = {
-    attach: function (context, settings) {
-
-      // if($('.media-oembed-content').length > 0){
-      //   console.log('media-oembed-content EXISTS and replaced: ' + replaceUrlIframe);
-
-      //   if(replaceUrlIframe == false){
-      //     setTimeout(function(){
-      //       console.log('iframe');
-      //       var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?enablejsapi=1&html5=1';
-      //       $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
-      //       replaceUrlIframe = true;
-      //      }, 100);
-      //   }
-      // }
 
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
