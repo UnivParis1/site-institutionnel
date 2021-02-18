@@ -131,7 +131,7 @@
       // }
 
       $('#play-button').click(function(){
-        var videoURL = $('.media-oembed-content').attr('src');
+        var videoURL = $('.media-oembed-content iframe').attr('src');
         console.log('videoURL: '+videoURL);
         dataplay = $('.media-oembed-content').attr('data-play');
     
