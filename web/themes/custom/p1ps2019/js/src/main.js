@@ -132,10 +132,10 @@
 
       var vid = $("#bg-video video"); 
       $('#play-button').click(function(){
-        vid.play();
+        vid.get(0).play();
       });
       $('#pause-button').click(function(){
-        vid.pause();
+        vid.get(0).pause();
       });
 
 
