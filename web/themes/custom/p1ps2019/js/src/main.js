@@ -130,48 +130,26 @@
       //   }
       // }
 
-      // global variable for the player
-  var player;
-
-  // this function gets called when API is ready to use
-  function onYouTubePlayerAPIReady() {
-    console.log('youtube video player ready');
-      // create the global player from the specific iframe (#video)
-      player = new YT.Player('video', {
-          events: {
-              // call this function when player is ready to use
-              'onReady': onPlayerReady
-          }
-      });
-  }
-
-  function onPlayerReady(event) {
-
-      // bind events
-      var playButton = $("#play-button");
-      playButton.click(function() {
-          player.playVideo();
-      });
-
-      var pauseButton = $("#pause-button");
-      pauseButton.click(function() {
-          player.pauseVideo();
-      });
-
-      var stopButton = $("#stop-button");
-      stopButton.click(function() {
-          player.stopVideo();
-      });
-
-  }
-
-  // Inject YouTube API script
-  var tag = $('script');
-  tag.src = "https://www.youtube.com/player_api";
-  var firstScriptTag = $('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
+      $('#play-button').click(function(){
+        var videoURL = $('#VdoID').attr('src'),
+        dataplay = $('#VdoID').attr('data-play');
+    
+        //for check autoplay
+        //if not set autoplay=1
+        if(dataplay == 0 ){
+            $('#VdoID').attr('src',videoURL+'?autoplay=1');
+            $('#VdoID').attr('data-play',1);
+         }
+         else{
+            var videoURL = $('#VdoID').attr('src');
+            videoURL = videoURL.replace("?autoplay=1", "");
+            $('#VdoID').prop('src','');
+            $('#VdoID').prop('src',videoURL);
+    
+            $('#VdoID').attr('data-play',0);
+         }
+    
+    });
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
       });
