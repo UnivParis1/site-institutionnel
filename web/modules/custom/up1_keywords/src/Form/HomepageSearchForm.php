@@ -29,7 +29,7 @@ class HomepageSearchForm extends FormBase {
       '#attributes' => [
         'placeholder' => t('Search')
       ],
-      '#default_value' => isset($value)? $value : "",
+      '#default_value' => isset($value)? $value : "bbbb",
     ];
     $form['submit'] = array(
       '#type' => 'submit',
