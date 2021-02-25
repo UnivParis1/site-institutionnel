@@ -130,7 +130,7 @@ class KeywordsBlock extends BlockBase {
         if (!preg_match('/resultats-recherche/', $current_path)) {
 		      $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
 		          }
-	$menu =render_menu_navigation('mots-cles-page-d-accueil');
+	$menu =_up1_keywords_render_menu_navigation('mots-cles-page-d-accueil');
     $build['up1_keywords'] = [
       '#theme' => 'up1_keywords',
       '#keywords' => $keywords,
