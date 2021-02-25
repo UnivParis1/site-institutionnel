@@ -34,15 +34,28 @@ class KeywordsBlock extends BlockBase {
       '#description' => t('Enter generally used keywords for search'),
       '#tree' => TRUE,
     ];
+	for($i=1;$i<=5;$i++){
 
-    $form['nuage']['mot_cle_1'] = [
+    $form['nuage']['mot_cle_'.$i] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Keyword 1'),
-      '#default_value' => (empty($this->configuration['mot_cle_1'])?'':$this->configuration['mot_cle_1']),
+      '#title' => $this->t('Keyword '.$i),
+      '#default_value' => (empty($this->configuration['mot_cle_'.$i])?'':$this->configuration['mot_cle_'.$i]),
       '#maxlength' => 100,
       '#size' => 100,
       '#weight' => '0',
     ];
+	    $form['nuage']['lien_mot_cle_'.$i] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Lien Keyword '.$i),
+      '#default_value' => (empty($this->configuration['lien_mot_cle_'.$i])?'':$this->configuration['lien_mot_cle_'.$i]),
+      '#maxlength' => 100,
+      '#size' => 100,
+      '#weight' => '0',
+    ];
+	}
+	
+	
+	
     $form['nuage']['mot_cle_2'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Keyword 2'),
@@ -84,11 +97,15 @@ class KeywordsBlock extends BlockBase {
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $fs = $form_state->getValue('nuage');
-    $this->configuration['mot_cle_1'] = $fs['mot_cle_1'];
+	for($i=1;$i<=5;$i++){
+		$this->configuration['mot_cle_'.$i] = $fs['mot_cle_'.$i];
+		$this->configuration['lien_mot_cle_'.$i] = $fs['lien_mot_cle_'.$i];
+	}
+    /*$this->configuration['mot_cle_1'] = $fs['mot_cle_1'];
     $this->configuration['mot_cle_2'] = $fs['mot_cle_2'];
     $this->configuration['mot_cle_3'] = $fs['mot_cle_3'];
     $this->configuration['mot_cle_4'] = $fs['mot_cle_4'];
-    $this->configuration['mot_cle_5'] = $fs['mot_cle_5'];
+    $this->configuration['mot_cle_5'] = $fs['mot_cle_5'];*/
   }
 
   /**
@@ -98,22 +115,28 @@ class KeywordsBlock extends BlockBase {
     $build = [];
     $config = \Drupal::config('up1_keywords.keywordsconfig');
     $keywords = [];
-    $keywords['mot_cle_1'] = $this->configuration['mot_cle_1'];
+	for($i=1;$i<=5;$i++){
+		$keywords['mot_cle_'.$i] = $this->configuration['mot_cle_'.$i];
+		$keywordslinks['lien_mot_cle_'.$i] = $this->configuration['lien_mot_cle_'.$i];
+	}
+    /*$keywords['mot_cle_1'] = $this->configuration['mot_cle_1'];
     $keywords['mot_cle_2'] = $this->configuration['mot_cle_2'];
     $keywords['mot_cle_3'] = $this->configuration['mot_cle_3'];
     $keywords['mot_cle_4'] = $this->configuration['mot_cle_4'];
-    $keywords['mot_cle_5'] = $this->configuration['mot_cle_5'];
+    $keywords['mot_cle_5'] = $this->configuration['mot_cle_5'];*/
 
     $current_path = \Drupal::service('path.current')->getPath();
         $search_form = [];
         if (!preg_match('/resultats-recherche/', $current_path)) {
 		      $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
 		          }
-
+	$menu =render_menu_navigation('mots-cles-page-d-accueil');
     $build['up1_keywords'] = [
       '#theme' => 'up1_keywords',
       '#keywords' => $keywords,
+	  '#keywordslinks' => $keywordslinks,
       '#search' => $search_form,
+	  '#menu' =>$menu,
       '#url' => $config->get('url_resultat_de_recherche'),
     ];
 
