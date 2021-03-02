@@ -2,11 +2,18 @@
 <div class="homepage-search-keywords block-sep">
   <div class="hp-search-form">
     {{ search }}
-  </div>
+  </div> 
   <div class="keywords cell small-12 large-8">
   <span class="keywords-title">{{ "Keywords"|t }}</span>
-  {% for keyword in keywords %}
+  {{ menu }}
+  <!--{% for keyword in keywords %}
     <a href="{{ url }}{{ keyword }}">{{ keyword }}</a>
-  {% endfor %}
+  {% endfor %} -->
+  </div>
+    <div class="keywords cell small-12 large-8">
+  <span class="keywords-title">{{ "Keywords"|t }} ancien avec liens</span>
+  {% for i in 1..5 %}
+    <a href="{{ keywordslinks['lien_mot_cle_'~i] }}">{{ keywords['mot_cle_'~i] }}</a>
+{% endfor %}
   </div>
 </div>

@@ -1,3 +1,4 @@
+uuid: 6cc91c7c-e966-4b54-8e15-ba2402780137
 langcode: fr
 status: open
 dependencies:
@@ -12,23 +13,23 @@ template: false
 archive: false
 id: contact
 title: Contact
-description: 'Basic email contact webform.'
+description: 'Formulaire de contact'
 category: ''
-elements: "name:\n  '#title': 'Your Name'\n  '#type': textfield\n  '#required': true\n  '#default_value': '[current-user:display-name]'\nemail:\n  '#title': 'Your Email'\n  '#type': email\n  '#required': true\n  '#default_value': '[current-user:mail]'\nsubject:\n  '#title': Subject\n  '#type': textfield\n  '#required': true\n  '#test': 'Testing contact webform from [site:name]'\nmessage:\n  '#title': Message\n  '#type': textarea\n  '#required': true\n  '#test': 'Please ignore this email.'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Send message'\n"
+elements: "name:\n  '#type': textfield\n  '#title': 'Votre nom'\n  '#title_display': inline\n  '#placeholder': Dupont\n  '#required': true\n  '#required_error': 'Merci de compléter votre nom'\n  '#default_value': '[current-user:display-name]'\nvotre_prenom:\n  '#type': textfield\n  '#title': 'Votre prénom'\n  '#title_display': inline\n  '#placeholder': Marcel\n  '#required': true\nemail:\n  '#type': email\n  '#title': 'Votre courriel'\n  '#title_display': inline\n  '#placeholder': dupont@toto.org\n  '#required': true\n  '#required_error': 'Afin que nous puissions vous répondre, veuillez saisir votre adresse courriel.'\n  '#default_value': '[current-user:mail]'\nsubject:\n  '#type': textfield\n  '#title': Sujet\n  '#title_display': before\n  '#required': true\n  '#required_error': 'Merci de saisir un sujet'\n  '#test': 'Testing contact webform from [site:name]'\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#title_display': before\n  '#required': true\n  '#required_error': 'Le champ Message est obligatoire'\n  '#test': 'Please ignore this email.'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': Envoyer"
 css: ''
 javascript: ''
 settings:
-  ajax: false
+  ajax: true
   ajax_scroll_top: form
-  ajax_progress_type: ''
-  ajax_effect: ''
+  ajax_progress_type: fullscreen
+  ajax_effect: slide
   ajax_speed: null
   page: true
-  page_submit_path: ''
-  page_confirm_path: ''
-  page_theme_name: ''
+  page_submit_path: 'https://aide-siteweb.univ-paris1.fr/page-dexemple-tous-types-bloc-paragraphs'
+  page_confirm_path: 'https://aide-siteweb.univ-paris1.fr/page-dexemple-tous-types-bloc-paragraphs'
+  page_theme_name: p1ps2019
   form_title: source_entity_webform
-  form_submit_once: false
+  form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
@@ -46,10 +47,10 @@ settings:
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
+  form_unsaved: true
   form_disable_back: false
   form_submit_back: false
-  form_autofocus: false
+  form_autofocus: true
   form_details_toggle: false
   form_access_denied: default
   form_access_denied_title: ''
@@ -71,7 +72,7 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
+  submission_exception_message: '[none]'
   submission_locked_message: ''
   submission_excluded_elements: {  }
   submission_exclude_empty: false
@@ -87,6 +88,8 @@ settings:
   wizard_progress_link: false
   wizard_progress_states: false
   wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
@@ -94,7 +97,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -112,9 +115,9 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: url_message
+  confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: 'Your message has been sent.'
+  confirmation_message: 'Votre message a &eacute;t&eacute; envoy&eacute;.'
   confirmation_url: '<front>'
   confirmation_attributes: {  }
   confirmation_back: true
@@ -142,6 +145,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  serial_disabled: false
 access:
   create:
     roles:
@@ -150,49 +154,63 @@ access:
     users: {  }
     permissions: {  }
   view_any:
-    roles: {  }
+    roles:
+      - administrator
     users: {  }
     permissions: {  }
   update_any:
-    roles: {  }
+    roles:
+      - administrator
     users: {  }
     permissions: {  }
   delete_any:
-    roles: {  }
+    roles:
+      - administrator
     users: {  }
     permissions: {  }
   purge_any:
-    roles: {  }
+    roles:
+      - administrator
     users: {  }
     permissions: {  }
   view_own:
-    roles: {  }
+    roles:
+      - authenticated
     users: {  }
     permissions: {  }
   update_own:
-    roles: {  }
+    roles:
+      - authenticated
     users: {  }
     permissions: {  }
   delete_own:
-    roles: {  }
+    roles:
+      - webmestre_sous_site
+      - webmestre_general
+      - admin_dir_com
+      - administrator
     users: {  }
     permissions: {  }
   administer:
-    roles: {  }
+    roles:
+      - administrator
     users: {  }
     permissions: {  }
   test:
-    roles: {  }
+    roles:
+      - authenticated
     users: {  }
     permissions: {  }
   configuration:
-    roles: {  }
+    roles:
+      - administrator
     users: {  }
     permissions: {  }
 handlers:
   email_confirmation:
     id: email
     label: 'Courriel de confirmation'
+    notes: ''
     handler_id: email_confirmation
     status: true
     conditions: {  }
@@ -200,13 +218,13 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:email:raw]'
+      to_mail: lagadic@univ-paris1.fr
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: _default
+      from_mail: www@univ-paris1.fr
       from_options: {  }
       from_name: _default
       subject: '[webform_submission:values:subject:raw]'
@@ -229,6 +247,7 @@ handlers:
   email_notification:
     id: email
     label: 'Notification par courriel'
+    notes: ''
     handler_id: email_notification
     status: true
     conditions: {  }
@@ -260,9 +279,8 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      theme_name: ''
+      theme_name: p1ps2019
       parameters: {  }
 variants: {  }
-uuid: 6cc91c7c-e966-4b54-8e15-ba2402780137
 _core:
   default_config_hash: Db1CJM6FchEqqeVz5YJThCK0WB599y4NjQ4GkPcGF5g

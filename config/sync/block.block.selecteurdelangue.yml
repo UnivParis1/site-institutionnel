@@ -1,24 +1,24 @@
-uuid: 1fc9cec0-fd95-461e-a4de-211064e83fed
+uuid: 1ed52c5a-868c-42ba-916f-e90ce3f89afe
 langcode: fr
 status: true
 dependencies:
   module:
+    - language
     - micro_path
     - micro_site
-    - system
   theme:
     - p1ps2019
-id: messages
+id: selecteurdelangue
 theme: p1ps2019
-region: breadcrumbs
-weight: -15
+region: header_right
+weight: 0
 provider: null
-plugin: system_messages_block
+plugin: 'language_block:language_interface'
 settings:
-  id: system_messages_block
-  label: Messages
-  provider: system
-  label_display: '0'
+  id: 'language_block:language_interface'
+  label: 'Sélecteur de langue'
+  provider: language
+  label_display: visible
 visibility:
   site_type:
     id: site_type
@@ -27,7 +27,9 @@ visibility:
     context_mapping: {  }
   site:
     id: site
-    sites: {  }
+    sites:
+      4: '4'
+      59: '59'
     sites_front_page: 0
     negate: false
     context_mapping: {  }

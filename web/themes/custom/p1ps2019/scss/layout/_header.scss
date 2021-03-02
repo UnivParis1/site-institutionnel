@@ -11,10 +11,18 @@
     height: 100vh;
   }
 	.screen-height{
-		.header-img *{
-			height: 100vh;
-			iframe{width: 100%;}
-			.field--name-field-credits{height: auto !important;}
+		iframe{width: 100%;}
+		
+		.header-img {
+			*:not(button){
+				height: 100vh;
+				.field--name-field-credits{height: auto !important;}
+			}
+		}
+		.buttons{
+			position: absolute; bottom: 0; right: 0;
+			height: 32px !important; width: 100%; z-index: 5;
+			button{display: inline-block; margin: 0 0 0 12px;}
 		}
 	}
 	.anchor-header{
