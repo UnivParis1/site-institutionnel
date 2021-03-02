@@ -79,10 +79,10 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * {@inheritDoc}
    */
   public function processItem($item) {
-    /*$cas_user_manager = \Drupal::service('cas.user_manager');
+    $cas_user_manager = \Drupal::service('cas.user_manager');
     $cas_username = $item['uid'];
-    $existing_uid = $cas_user_manager->getUidForCasUsername($cas_username);
-    if ($existing_uid) {
+    $author = $cas_user_manager->getUidForCasUsername($cas_username);
+    if ($author) {
       return;
     }
     else {
@@ -95,7 +95,6 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
         $user_properties['mail'] = $item['mail'];
       }
-
       try {
         $cas_user_manager->register($cas_username, $user_properties);
       } catch (CasLoginException $e) {
@@ -106,11 +105,11 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
         ]);
         return;
       }
-    }
 
-    $user = user_load_by_name($item['uid']);
-    if ($user) {
-      $author = $user->id();
+      $user = user_load_by_name($item['uid']);
+      if ($user) {
+        $author = $user->id();
+      }
     }
     $values = \Drupal::entityQuery('node')
       ->condition('type', 'page_personnelle')
@@ -128,7 +127,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       ]);
 
       $node->save();
-    }*/
+    }
   }
 
 }

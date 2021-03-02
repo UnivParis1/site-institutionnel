@@ -80,33 +80,27 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
   /**
    * {@inheritDoc}
    */
-  public function processItem($item) {
+  public function processItem($item)
+  {
     $user = user_load_by_name($item->username);
     if ($user) {
       $author = $user->id();
       $ids = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
         ->condition('uid', $author)
-        ->limit(0,15)
+        ->limit(0, 15)
         ->execute();
-      $nodes = Node::loadMultiple($ids);
-
-      foreach ($nodes as $node) {
-        \Drupal::logger('pages_persos_node')->info(print_r($node, 1));
-        \Drupal::logger('pages_persos_node')
-          ->info(print_r($node->get('field_uid_ldap'), 1));
-
-        if (!empty($nodes)) {
-          $node = reset($nodes);
-          \Drupal::logger('pages_persos_node')->info(print_r($node, 1));
-          \Drupal::logger('pages_persos_item')->info(print_r($item, 1));
+      $pages = Node::loadMultiple($ids);
+      if (!empty($pages)) {
+        $nodes = reset($pages);
+        foreach ($nodes as $node) {
           $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
           $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
           $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;
           $node->field_research_themes = $item->tx_oxcspagepersonnel_projets_recherche;
           $node->field_phd_supervisor = $item->tx_oxcspagepersonnel_directeur_these;
-          $node->field_publications = strip_tags($item->tx_oxcspagepersonnel_publications, ['<p><a>']);
-          $node->field_resume_text = $item->tx_oxcspagepersonnel_cv2;
+          //$node->field_publications = strip_tags($item->tx_oxcspagepersonnel_publications, ['<p><a>']);
+          //$node->field_resume_text = $item->tx_oxcspagepersonnel_cv2;
           $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
           $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
 
@@ -114,5 +108,5 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
         }
       }
     }
-
   }
+}

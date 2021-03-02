@@ -37,10 +37,6 @@ class WsGroupsService implements WsGroupsServiceInterface {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function getUserList($affiliation, $siteId = '') {
-    $users = [];
-    $filter = '';
-    $config = \Drupal::config('up1_pages_personnelles.settings');
-
     if (!empty($siteId)) {
       $siteStorage = $this->entityTypeManager->getStorage('site');
       $currentSite = $siteStorage->load($siteId);
@@ -51,15 +47,8 @@ class WsGroupsService implements WsGroupsServiceInterface {
         ];
       }
     }
+    $request = $this->getRequest($affiliation);
 
-    $ws = $config->get('url_ws');
-    $searchUser = $config->get('search_user');
-    $filter_affiliation = $config->get("filtre_$affiliation");
-    $request = $ws . $searchUser . $filter_affiliation;
-    $labeledURI = $config->get('other_filters');
-    if (!empty($labeledURI)) {
-      $request .= $labeledURI;
-    }
     $params = [
       'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
     ];
@@ -72,7 +61,6 @@ class WsGroupsService implements WsGroupsServiceInterface {
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
     }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
     $users = json_decode(curl_exec($ch), TRUE);
 
@@ -81,11 +69,29 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $reponse['users'] = $users;
     return $reponse;
   }
-  public function getUsers($affiliation) {
-    $users = [];
-    $filter = '';
-    $config = \Drupal::config('up1_pages_personnelles.settings');
 
+  public function getUsers($affiliation) {
+
+    $request = $this->getRequest($affiliation);
+
+    $params = [
+      'attrs' => 'uid,displayName,supannCivilite,labeledURI,supannListeRouge'
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $users = json_decode(curl_exec($ch), TRUE);
+
+    curl_close($ch);
+
+    $reponse['users'] = $users;
+    return $reponse;
+  }
+
+  private function getRequest($affiliation) {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
     $ws = $config->get('url_ws');
     $searchUser = $config->get('search_user');
     $filter_affiliation = $config->get("filtre_$affiliation");
@@ -94,21 +100,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     if (!empty($labeledURI)) {
       $request .= $labeledURI;
     }
-    $params = [
-      'attrs' => 'uid,displayName,supannCivilite,labeledURI,supannListeRouge'
-    ];
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
 
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-
-    $users = json_decode(curl_exec($ch), TRUE);
-
-    curl_close($ch);
-
-    $reponse['users'] = $users;
-    return $reponse;
+    return $request;
   }
-
 }
