@@ -24,19 +24,19 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var EntityTypeManagerInterface
    */
   private $entityTypeManager;
   /**
    * Drupal\Core\Logger\LoggerChannelFactoryInterface definition.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   * @var LoggerChannelFactoryInterface
    */
   private $loggerChannelFactory;
   /**
    * The theses service.
    *
-   * @var \Drupal\up1_pages_personnelles\WsGroupsService;
+   * @var WsGroupsService;
    */
   protected $wsGroups;
 
@@ -46,9 +46,9 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * @param array $configuration
    * @param $plugin_id
    * @param $plugin_definition
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type
-   * @param \Drupal\up1_pages_personnelles\WsGroupsService $ws_groups
+   * @param LoggerChannelFactoryInterface $logger
+   * @param EntityTypeManagerInterface $entity_type
+   * @param WsGroupsService $ws_groups
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition,
                               EntityTypeManagerInterface $entity_type,

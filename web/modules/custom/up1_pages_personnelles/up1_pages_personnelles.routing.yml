@@ -95,12 +95,14 @@ up1_pages_personnelles.micro_student_list:
     _permission: 'view published site entities'
 
 up1_pages_personnelles.get_users_ecd:
-  path: '/pages-perso/get-users-ecd'
+  path: '/admin/pages-perso/get-users-ecd'
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchCreationOfUsers'
     _title: 'Update users from LDAP'
   requirements:
     _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
 
 up1_pages_personnelles.get_users_ldap:
   path: '/pages-perso/maj/ldap'
