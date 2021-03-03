@@ -241,7 +241,7 @@ class WsGroupsController extends ControllerBase {
     // Get the queue implementation for import_content_from_xml queue
     $queue = $queue_factory->get('up1_page_perso_queue');
     // Get the queue worker
-    $queue_worker = $queue_manager->createInstance('import_content_from_xml');
+    $queue_worker = $queue_manager->createInstance('up1_page_perso_queue');
 
     // Get the number of items
     $number_of_queue = ($queue->numberOfItems() < IMPORT_BATCH_SIZE) ? $queue->numberOfItems() : IMPORT_BATCH_SIZE;
