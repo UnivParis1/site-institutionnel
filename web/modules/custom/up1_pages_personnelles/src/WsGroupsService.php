@@ -87,6 +87,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     curl_close($ch);
 
     $reponse['users'] = $users;
+    \Drupal::logger('up1_pages_personnelles')->info("$affiliation : " . count($users));
     return $reponse;
   }
 
