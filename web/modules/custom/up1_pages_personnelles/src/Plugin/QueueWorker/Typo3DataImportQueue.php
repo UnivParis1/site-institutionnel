@@ -107,7 +107,8 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
           $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
           $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
           if (isset($item->tx_oxcspagepersonnel_cv) && !empty($item->tx_oxcspagepersonnel_cv)) {
-            $node->field_link_to_resume = Url::fromUri("https://www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv);
+            $url = Url::fromUri("https://www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv);
+            $node->field_link_to_resume = $url->toString();
           }
 
           $node->save();
