@@ -91,18 +91,25 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
         ->execute();
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
-          foreach ($pages as $node) {
+        foreach ($pages as $node) {
           $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
           $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
           $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;
-          $node->field_research_themes = $item->tx_oxcspagepersonnel_themes_recherche . "<hr />" .
-            $item->tx_oxcspagepersonnel_projets_recherche;
+          $node->field_research_themes = "";
+          if (isset($item->tx_oxcspagepersonnel_themes_recherche) && $item->tx_oxcspagepersonnel_themes_recherche != "") {
+            $node->field_research_themes .= $item->tx_oxcspagepersonnel_themes_recherche;
+          }
+          if (isset($item->tx_oxcspagepersonnel_projets_recherche) && $item->tx_oxcspagepersonnel_projets_recherche != "") {
+            $node->field_research_themes .= $item->tx_oxcspagepersonnel_projets_recherche;
+          }
           $node->field_phd_supervisor = $item->tx_oxcspagepersonnel_directeur_these;
           //$node->field_publications = strip_tags($item->tx_oxcspagepersonnel_publications, ['<p><a>']);
           //$node->field_resume_text = $item->tx_oxcspagepersonnel_cv2;
           $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
           $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
-          $node->field_link_to_resume = $item->tx_oxcspagepersonnel_cv;
+          if (isset($item->tx_oxcspagepersonnel_cv) && $item->tx_oxcspagepersonnel_cv != "") {
+            $node->field_link_to_resume = "//www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv;
+          }
 
           $node->save();
         }
