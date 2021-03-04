@@ -8,7 +8,8 @@ use Drupal\Core\Queue\QueueWorkerManager;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Database\Connection;
 
-define("IMPORT_BATCH_SIZE", 150);
+define("IMPORT_USER_SIZE", 150);
+define("IMPORT_DATA_SIZE", 50);
 /**
  * Class WsGroupsController.
  */
@@ -225,7 +226,7 @@ class WsGroupsController extends ControllerBase {
     $queue_factory = \Drupal::service('queue');
     $queue = $queue_factory->get('up1_page_perso_queue');
 
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_BATCH_SIZE); $i++) {
+    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_USER_SIZE); $i++) {
       $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchUsersProcess', []];
     }
     batch_set($batch);
@@ -242,7 +243,7 @@ class WsGroupsController extends ControllerBase {
     $queue_factory = \Drupal::service('queue');
     $queue = $queue_factory->get('up1_typo3_data_queue');
 
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_BATCH_SIZE); $i++) {
+    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
       $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosProcess', []];
     }
     batch_set($batch);
@@ -267,7 +268,7 @@ class WsGroupsController extends ControllerBase {
     $queue_worker = $queue_manager->createInstance('up1_page_perso_queue');
 
     // Get the number of items
-    $number_of_queue = ($queue->numberOfItems() < IMPORT_BATCH_SIZE) ? $queue->numberOfItems() : IMPORT_BATCH_SIZE;
+    $number_of_queue = ($queue->numberOfItems() < IMPORT_USER_SIZE) ? $queue->numberOfItems() : IMPORT_USER_SIZE;
 
     // Repeat $number_of_queue times
     for ($i = 0; $i < $number_of_queue; $i++) {
@@ -307,7 +308,7 @@ class WsGroupsController extends ControllerBase {
     $queue_worker = $queue_manager->createInstance('up1_typo3_data_queue');
 
     // Get the number of items
-    $number_of_items = ($queue->numberOfItems() < IMPORT_BATCH_SIZE) ? $queue->numberOfItems() : IMPORT_BATCH_SIZE;
+    $number_of_items = ($queue->numberOfItems() < IMPORT_DATA_SIZE) ? $queue->numberOfItems() : IMPORT_DATA_SIZE;
 
     // Repeat $number_of_queue times
     for ($i = 0; $i < $number_of_items; $i++) {
@@ -414,10 +415,10 @@ class WsGroupsController extends ControllerBase {
       'tx_oxcspagepersonnel_sujet_these',
       'tx_oxcspagepersonnel_projets_recherche',
       'tx_oxcspagepersonnel_directeur_these',
-      //'tx_oxcspagepersonnel_publications',
+      'tx_oxcspagepersonnel_publications',
       'tx_oxcspagepersonnel_epi',
       'tx_oxcspagepersonnel_cv',
-      //'tx_oxcspagepersonnel_cv2',
+      'tx_oxcspagepersonnel_cv2',
       'tx_oxcspagepersonnel_directions_these',
       'tx_oxcspagepersonnel_page_externe_url',
       'tx_oxcspagepersonnel_themes_recherche',
