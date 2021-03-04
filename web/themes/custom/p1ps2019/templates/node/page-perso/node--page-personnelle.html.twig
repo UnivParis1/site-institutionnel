@@ -92,6 +92,7 @@
 {% set resume_text = content.field_resume_text|render %}
 {% set resume = content.field_resume|render %}
 {% set resume_pdf = content.field_resume_pdf|render %}
+{% set link_to_resume = content.field_link_to_resume|render %}
 {% set email_address = content.field_other_email_address|render %}
 {% set scientific_resp = content.field_scientific_resp|render %}
 {% set thesis_directions = content.field_thesis_directions|render %}
@@ -372,6 +373,11 @@
             {% if resume %}
               <div class="box-style no-shadow auto-height semi-field-sep">
                 {{ resume }}
+              </div>
+              {% endif %}
+            {% if link_to_resume %}
+              <div class="box-style no-shadow auto-height semi-field-sep">
+                {{ link_to_resume }}
               </div>
             {% endif %}
             {% if sticky_pub %}

@@ -26,19 +26,19 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var EntityTypeManagerInterface
    */
   private $entityTypeManager;
   /**
    * Drupal\Core\Logger\LoggerChannelFactoryInterface definition.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   * @var LoggerChannelFactoryInterface
    */
   private $loggerChannelFactory;
   /**
    * The theses service.
    *
-   * @var \Drupal\up1_pages_personnelles\WsGroupsService;
+   * @var WsGroupsService;
    */
   protected $wsGroups;
 
@@ -48,9 +48,9 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
    * @param array $configuration
    * @param $plugin_id
    * @param $plugin_definition
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type
-   * @param \Drupal\up1_pages_personnelles\WsGroupsService $ws_groups
+   * @param LoggerChannelFactoryInterface $logger
+   * @param EntityTypeManagerInterface $entity_type
+   * @param WsGroupsService $ws_groups
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition,
                               EntityTypeManagerInterface $entity_type,
@@ -63,7 +63,7 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
   }
 
   /**
-   * {@inheritDoc}
+   * {@
    */
   public static function create(ContainerInterface $container,
                                 array $configuration, $plugin_id, $plugin_definition) {
@@ -84,7 +84,6 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
     $user = user_load_by_name($item->username);
 
     if ($user) {
-    \Drupal::logger('up1_pages_personnelles')->info(print_r($user->id(), 1));
       $author = $user->id();
       $ids = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
@@ -92,20 +91,18 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
         ->execute();
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
-        \Drupal::logger('up1_pages_personnelles')->info(print_r($pages, 1));
-       // $nodes = reset($pages);
-
-        foreach ($pages as $node) {
-          \Drupal::logger('up1_pages_personnelles')->info(print_r($node, 1));
+          foreach ($pages as $node) {
           $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
           $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
           $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;
-          $node->field_research_themes = $item->tx_oxcspagepersonnel_projets_recherche;
+          $node->field_research_themes = $item->tx_oxcspagepersonnel_themes_recherche . "<hr />" .
+            $item->tx_oxcspagepersonnel_projets_recherche;
           $node->field_phd_supervisor = $item->tx_oxcspagepersonnel_directeur_these;
           //$node->field_publications = strip_tags($item->tx_oxcspagepersonnel_publications, ['<p><a>']);
           //$node->field_resume_text = $item->tx_oxcspagepersonnel_cv2;
           $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
           $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
+          $node->field_link_to_resume = $item->tx_oxcspagepersonnel_cv;
 
           $node->save();
         }

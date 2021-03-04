@@ -95,6 +95,7 @@ class WsGroupsController extends ControllerBase {
 
       return $site->get('ec_enabled')->value;
     }
+    else return FALSE;
   }
 
   private function getfieldDoc() {
@@ -105,6 +106,7 @@ class WsGroupsController extends ControllerBase {
 
       return $site->get('doc_enabled')->value;
     }
+    else return FALSE;
   }
 
   private function getSiteId() {
@@ -115,10 +117,9 @@ class WsGroupsController extends ControllerBase {
       if (!empty($siteId)) {
         return $siteId;
       }
-      else {
-        return FALSE;
-      }
+      else return FALSE;
     }
+    else return FALSE;
   }
 
   public function getList($type, $letter, $theme, $path, $siteId = NULL) {
@@ -249,6 +250,10 @@ class WsGroupsController extends ControllerBase {
     return batch_process('<front>');
   }
 
+  /**
+   * Batch users process.
+   * @param $context
+   */
   public function batchUsersProcess(&$context){
 
     // We can't use here the Dependency Injection solution
@@ -285,6 +290,10 @@ class WsGroupsController extends ControllerBase {
     }
   }
 
+  /**
+   * Batch Pages persos process.
+   * @param $context
+   */
   public function batchPagesPersosProcess(&$context){
 
     // We can't use here the Dependency Injection solution
@@ -322,7 +331,9 @@ class WsGroupsController extends ControllerBase {
   }
 
   /**
-   * Batch finished callback.
+   * @param $success
+   * @param $results
+   * @param $operations
    */
   public static function batchUsersFinished($success, $results, $operations) {
     if ($success) {
@@ -336,6 +347,9 @@ class WsGroupsController extends ControllerBase {
 
   /**
    * Batch finished callback.
+   * @param $success
+   * @param $results
+   * @param $operations
    */
   public static function batchPagesPersosFinished($success, $results, $operations) {
     if ($success) {
@@ -348,44 +362,7 @@ class WsGroupsController extends ControllerBase {
   }
 
   /**
-   * Displays all new users to import.
-   * @param $queue
-   * @return array
-   */
-  protected function getItemList($queue) {
-    $retrieved_items = [];
-    $items = [];
-
-    // Claim each item in queue.
-    while ($item = $queue->claimItem()) {
-      $retrieved_items[] = [
-        'data' => [$item->data['uid'], $item->data['displayName']],
-      ];
-      // Track item to release the lock.
-      $items[] = $item;
-    }
-
-    // Release claims on items in queue.
-    foreach ($items as $item) {
-      $queue->releaseItem($item);
-    }
-
-    // Put the items in a table array for rendering.
-    $tableTheme = [
-      'header' => [$this->t('username'), $this->t('Name')],
-      'rows'   => $retrieved_items,
-      'attributes' => [],
-      'caption' => '',
-      'colgroups' => [],
-      'sticky' => TRUE,
-      'empty' => $this->t('No items.'),
-    ];
-
-    return $tableTheme;
-  }
-
-  /**
-   * Delete the queue 'up1_page_perso_queue'.
+   * Delete queues 'up1_page_perso_queue' & 'up1_typo3_data_queue'.
    *
    * Remember that the command drupal dq checks first for a queue worker
    * and if it exists, DC suposes that a queue exists.
@@ -399,16 +376,25 @@ class WsGroupsController extends ControllerBase {
     ];
   }
 
+  /**
+   * Get all Typo3 fields group by user and create queue items.
+   *
+   * @return array
+   */
   public function populatePagePersoUsers() {
     $faculty = $this->wsGroupsService->getUsers('faculty');
     $student = $this->wsGroupsService->getUsers('student');
 
     $users = array_merge($faculty['users'], $student['users']);
+
+    //Select all Typo3 fields by user.
     foreach ($users as $user) {
       $data[] = $this->selectFeUsers($user['uid']);
     }
 
     $queue = $this->queueFactory->get('up1_typo3_data_queue');
+
+    //Charge queue items.
     foreach ($data as $datum) {
       $queue->createItem($datum);
     }
@@ -416,52 +402,6 @@ class WsGroupsController extends ControllerBase {
     return [
       '#type' => 'markup',
       '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
-    ];
-  }
-
-  protected function getItemTypo3($queue) {
-    $retrieved_items = [];
-    $items = [];
-
-    // Claim each item in queue.
-    while ($item = $queue->claimItem()) {
-      $retrieved_items[] = [
-        'information' => [$item->data->username],
-      ];
-      // Track item to release the lock.
-      $items[] = $item;
-    }
-
-    // Release claims on items in queue.
-    foreach ($items as $item) {
-      $queue->releaseItem($item);
-    }
-
-    // Put the items in a table array for rendering.
-    $tableTheme = [
-      'header' => [$this->t('username')],
-      'rows'   => $retrieved_items,
-      'attributes' => [],
-      'caption' => '',
-      'colgroups' => [],
-      'sticky' => TRUE,
-      'empty' => $this->t('No items.'),
-    ];
-
-    return $tableTheme;
-  }
-
-  /**
-   * Delete the queue 'up1_typo3_data_queue'.
-   *
-   * Remember that the command drupal dq checks first for a queue worker
-   * and if it exists, DC suposes that a queue exists.
-   */
-  public function deleteQueueTypo3() {
-    $this->queueFactory->get('up1_typo3_data_queue')->deleteQueue();
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('The queue "up1_typo3_data_queue" has been deleted'),
     ];
   }
 
@@ -476,10 +416,11 @@ class WsGroupsController extends ControllerBase {
       'tx_oxcspagepersonnel_directeur_these',
       //'tx_oxcspagepersonnel_publications',
       'tx_oxcspagepersonnel_epi',
-      //'tx_oxcspagepersonnel_cv',
+      'tx_oxcspagepersonnel_cv',
       //'tx_oxcspagepersonnel_cv2',
       'tx_oxcspagepersonnel_directions_these',
       'tx_oxcspagepersonnel_page_externe_url',
+      'tx_oxcspagepersonnel_themes_recherche',
     ];
     $query->fields('fu', $fields);
     $query->condition('username', $username, 'LIKE');
