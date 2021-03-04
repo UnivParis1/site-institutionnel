@@ -80,8 +80,7 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
   /**
    * {@inheritDoc}
    */
-  public function processItem($item)
-  {
+  public function processItem($item) {
     $user = user_load_by_name($item->username);
     if ($user) {
       $author = $user->id();
@@ -92,6 +91,8 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
         $nodes = reset($pages);
+        \Drupal::logger('up1_pages_personnelles')->info("For user : " . $item->username . "; " . count($nodes) . " page(s) personnelle(s). ");
+
         foreach ($nodes as $node) {
           $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
           $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
