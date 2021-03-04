@@ -12,6 +12,7 @@ use Drupal\node\Entity\Node;
 use Drupal\up1_pages_personnelles\WsGroupsService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\Entity;
+use Drupal\Core\Url;
 
 /**
  * Executes users (enseignants & doctorants) import from web service.
@@ -19,7 +20,7 @@ use Drupal\node\Entity;
  * @QueueWorker(
  *   id = "up1_typo3_data_queue",
  *   title = @Translation("Page Perso populate"),
- *   cron = {"time" = 30}
+ *   cron = {"time" = 60}
  *  )
  */
 class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
@@ -109,7 +110,7 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
           $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
           $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
           if (isset($item->tx_oxcspagepersonnel_cv) && !empty($item->tx_oxcspagepersonnel_cv)) {
-            $node->field_link_to_resume = "//www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv;
+            $node->field_link_to_resume = Url::fromUri("www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv);
           }
 
           $node->save();
