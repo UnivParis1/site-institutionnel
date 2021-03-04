@@ -201,8 +201,8 @@ class WsGroupsController extends ControllerBase {
   public function createPagePersoUsers() {
     $faculty = $this->wsGroupsService->getUsers('faculty');
     $student = $this->wsGroupsService->getUsers('student');
+
     $data = array_merge($faculty['users'], $student['users']);
-    \Drupal::logger('up1_pages_personnelles')->info("nb users to import : " . count($data));
 
     $queue = $this->queueFactory->get('up1_page_perso_queue');
     foreach ($data as $datum) {
@@ -229,7 +229,24 @@ class WsGroupsController extends ControllerBase {
     }
     batch_set($batch);
 
-    return batch_process('<front');
+    return batch_process('<front>');
+  }
+
+  public function batchPopulatePagePerso() {
+    $batch = [
+      'title' => $this->t('Process populating pages persos with Typo3 data'),
+      'operations' => [],
+      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosFinished',
+    ];
+    $queue_factory = \Drupal::service('queue');
+    $queue = $queue_factory->get('up1_typo3_data_queue');
+
+    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_BATCH_SIZE); $i++) {
+      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosProcess', []];
+    }
+    batch_set($batch);
+
+    return batch_process('<front>');
   }
 
   public function batchUsersProcess(&$context){
@@ -268,12 +285,61 @@ class WsGroupsController extends ControllerBase {
     }
   }
 
+  public function batchPagesPersosProcess(&$context){
+
+    // We can't use here the Dependency Injection solution
+    // so we load the necessary services in the other way
+    $queue_factory = \Drupal::service('queue');
+    $queue_manager = \Drupal::service('plugin.manager.queue_worker');
+
+    // Get the queue implementation for import_content_from_xml queue
+    $queue = $queue_factory->get('up1_typo3_data_queue');
+    // Get the queue worker
+    $queue_worker = $queue_manager->createInstance('up1_typo3_data_queue');
+
+    // Get the number of items
+    $number_of_items = ($queue->numberOfItems() < IMPORT_BATCH_SIZE) ? $queue->numberOfItems() : IMPORT_BATCH_SIZE;
+
+    // Repeat $number_of_queue times
+    for ($i = 0; $i < $number_of_items; $i++) {
+      // Get a queued item
+      if ($item = $queue->claimItem()) {
+        try {
+          // Process it
+          $queue_worker->processItem($item->data);
+          // If everything was correct, delete the processed item from the queue
+          $queue->deleteItem($item);
+        }
+        catch (SuspendQueueException $e) {
+          // If there was an Exception trown because of an error
+          // Releases the item that the worker could not process.
+          // Another worker can come and process it
+          $queue->releaseItem($item);
+          break;
+        }
+      }
+    }
+  }
+
   /**
    * Batch finished callback.
    */
   public static function batchUsersFinished($success, $results, $operations) {
     if ($success) {
       drupal_set_message(t("The users have been successfully imported from Ws Groups."));
+    }
+    else {
+      $error_operation = reset($operations);
+      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+    }
+  }
+
+  /**
+   * Batch finished callback.
+   */
+  public static function batchPagesPersosFinished($success, $results, $operations) {
+    if ($success) {
+      drupal_set_message(t("The Typo3 data haved been successfully imported from Typo3 database."));
     }
     else {
       $error_operation = reset($operations);
@@ -334,55 +400,23 @@ class WsGroupsController extends ControllerBase {
   }
 
   public function populatePagePersoUsers() {
-    $users = $this->wsGroupsService->getUsers('faculty');
-    $users = reset($users);
+    $faculty = $this->wsGroupsService->getUsers('faculty');
+    $student = $this->wsGroupsService->getUsers('student');
+
+    $users = array_merge($faculty['users'], $student['users']);
     foreach ($users as $user) {
       $data[] = $this->selectFeUsers($user['uid']);
     }
-
-    $header = [];
-    $rows = [];
-    $attributes = [];
-    $sticky = [];
-    $finalMessage = "";
-    if (!$data) {
-      \Drupal::logger('up1_typo3_data_queue')->warning('No new data to import.');
-      $finalMessage = $this->t('No new data to import.');
+    \Drupal::logger('up1_pages_personnelles')->info("Count Fe Users : " . count($data));
+    
+    $queue = $this->queueFactory->get('up1_typo3_data_queue');
+    foreach ($data as $datum) {
+      $queue->createItem($datum);
     }
-    else {
-      $queue = $this->queueFactory->get('up1_typo3_data_queue');
-      $totalItemsInQueue = $queue->numberOfItems();
-      foreach ($data as $element) {
-        $queue->createItem($element);
-      }
 
-      // 4. Get the total of item in the Queue.
-      $totalItemsAfter = $queue->numberOfItems();
-
-      // 5. Get what's in the queue now.
-      $tableVariables = $this->getItemTypo3($queue);
-      $header = $tableVariables['header'];
-      $rows = $tableVariables['rows'];
-      $attributes = $tableVariables['attributes'];
-      $sticky = $tableVariables['sticky'];
-
-      $finalMessage = $this->t('The Queue had @totalBefore items.
-    We should have added @count items in the Queue. Now the Queue has @totalAfter items.',
-        [
-          '@count' => count($data),
-          '@totalAfter' => $totalItemsAfter,
-          '@totalBefore' => $totalItemsInQueue,
-        ]);
-
-    }
     return [
-      '#type' => 'table',
-      '#caption' => $finalMessage,
-      '#header' => $header,
-      '#rows' => isset($rows) ? $rows : [],
-      '#attributes' => $attributes,
-      '#sticky' => $sticky,
-      '#empty' => $this->t('No items.'),
+      '#type' => 'markup',
+      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
     ];
   }
 

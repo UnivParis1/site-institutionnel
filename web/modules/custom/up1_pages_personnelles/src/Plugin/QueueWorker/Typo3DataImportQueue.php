@@ -88,7 +88,6 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
       $ids = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
         ->condition('uid', $author)
-        ->limit(0, 15)
         ->execute();
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {

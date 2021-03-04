@@ -120,6 +120,16 @@ up1_pages_personnelles.populate_pages_persos:
   requirements:
     _permission: 'access content'
 
+up1_pages_personnelles.batch_populate_pages_persos:
+  path: '/admin/pages-perso/populate'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPopulatePagePerso'
+    _title: 'Populate pages persos from Typo3'
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: TRUE
+
 up1_pages_personnelles.delete_queue_users:
   path: '/pages-perso/maj/empty'
   defaults:
