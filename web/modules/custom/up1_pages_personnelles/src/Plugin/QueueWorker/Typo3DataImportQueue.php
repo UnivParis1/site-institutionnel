@@ -82,7 +82,9 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
    */
   public function processItem($item) {
     $user = user_load_by_name($item->username);
+
     if ($user) {
+    \Drupal::logger('up1_pages_personnelles')->info(print_r($user->id(), 1));
       $author = $user->id();
       $ids = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
@@ -90,10 +92,11 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
         ->execute();
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
-        $nodes = reset($pages);
-        \Drupal::logger('up1_pages_personnelles')->info("For user : " . $item->username . "; " . count($nodes) . " page(s) personnelle(s). ");
+        \Drupal::logger('up1_pages_personnelles')->info(print_r($pages, 1));
+       // $nodes = reset($pages);
 
-        foreach ($nodes as $node) {
+        foreach ($pages as $node) {
+          \Drupal::logger('up1_pages_personnelles')->info(print_r($node, 1));
           $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
           $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
           $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;

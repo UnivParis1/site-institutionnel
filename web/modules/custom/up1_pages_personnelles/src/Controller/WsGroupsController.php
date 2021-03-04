@@ -407,8 +407,6 @@ class WsGroupsController extends ControllerBase {
     foreach ($users as $user) {
       $data[] = $this->selectFeUsers($user['uid']);
     }
-    \Drupal::logger('up1_pages_personnelles')->info("Count Fe Users : " . count($data));
-    \Drupal::logger('up1_pages_personnelles')->info("First Fe User : " . print_r($data[0],1));
 
     $queue = $this->queueFactory->get('up1_typo3_data_queue');
     foreach ($data as $datum) {
