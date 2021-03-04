@@ -102,11 +102,13 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
             'format' => 'full_html'];
           $node->field_phd_supervisor = $item->tx_oxcspagepersonnel_directeur_these;
           $node->field_publications = [
-            'value' => strip_tags($item->tx_oxcspagepersonnel_publications, ['a']),
+            'value' => "<div>" . $item->tx_oxcspagepersonnel_publications ."</div>",
             'format' => 'full_html'];
-          $node->field_resume_text = [
-            'value' => strip_tags($item->tx_oxcspagepersonnel_cv2, ['a']),
-            'format' => 'full_html'];
+          if (isset($item->tx_oxcspagepersonnel_cv2) && !empty($item->tx_oxcspagepersonnel_cv2)) {
+            $node->field_resume_text = [
+              'value' => "<div>" . $item->tx_oxcspagepersonnel_cv2, ['a'] ."</div>",
+              'format' => 'full_html'];
+          }
           $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
           $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
           if (isset($item->tx_oxcspagepersonnel_cv) && !empty($item->tx_oxcspagepersonnel_cv)) {
