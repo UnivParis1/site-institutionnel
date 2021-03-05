@@ -201,10 +201,7 @@ class WsGroupsController extends ControllerBase {
    * @return array
    */
   public function createPagePersoUsers() {
-    $faculty = $this->wsGroupsService->getUsers('faculty');
-    $student = $this->wsGroupsService->getUsers('student');
-
-    $data = array_merge($faculty['users'], $student['users']);
+    $data = array_merge($this->wsGroupsService->getAllUsers());
 
     $queue = $this->queueFactory->get('up1_page_perso_queue');
     foreach ($data as $datum) {
@@ -228,23 +225,6 @@ class WsGroupsController extends ControllerBase {
 
     for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_USER_SIZE); $i++) {
       $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchUsersProcess', []];
-    }
-    batch_set($batch);
-
-    return batch_process('<front>');
-  }
-
-  public function batchPopulatePagePerso() {
-    $batch = [
-      'title' => $this->t('Process populating pages persos with Typo3 data'),
-      'operations' => [],
-      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosFinished',
-    ];
-    $queue_factory = \Drupal::service('queue');
-    $queue = $queue_factory->get('up1_typo3_data_queue');
-
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
-      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosProcess', []];
     }
     batch_set($batch);
 
@@ -292,6 +272,64 @@ class WsGroupsController extends ControllerBase {
   }
 
   /**
+   * @param $success
+   * @param $results
+   * @param $operations
+   */
+  public static function batchUsersFinished($success, $results, $operations) {
+    if ($success) {
+      drupal_set_message(t("The users have been successfully imported from Ws Groups."));
+    }
+    else {
+      $error_operation = reset($operations);
+      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+    }
+  }
+
+  /**
+   * Get all Typo3 fields group by user and create queue items.
+   *
+   * @return array
+   */
+  public function populatePagePersoUsers() {
+    $users = $this->wsGroupsService->getAllUsers();
+
+    //Select all Typo3 fields by user.
+    foreach ($users as $user) {
+      $data[] = $this->selectFeUsers($user['uid']);
+    }
+
+    $queue = $this->queueFactory->get('up1_typo3_data_queue');
+
+    //Charge queue items.
+    foreach ($data as $datum) {
+      $queue->createItem($datum);
+    }
+
+    return [
+      '#type' => 'markup',
+      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
+    ];
+  }
+
+  public function batchPopulatePagePerso() {
+    $batch = [
+      'title' => $this->t('Process populating pages persos with Typo3 data'),
+      'operations' => [],
+      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosFinished',
+    ];
+    $queue_factory = \Drupal::service('queue');
+    $queue = $queue_factory->get('up1_typo3_data_queue');
+
+    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
+      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosProcess', []];
+    }
+    batch_set($batch);
+
+    return batch_process('<front>');
+  }
+
+  /**
    * Batch Pages persos process.
    * @param $context
    */
@@ -332,21 +370,6 @@ class WsGroupsController extends ControllerBase {
   }
 
   /**
-   * @param $success
-   * @param $results
-   * @param $operations
-   */
-  public static function batchUsersFinished($success, $results, $operations) {
-    if ($success) {
-      drupal_set_message(t("The users have been successfully imported from Ws Groups."));
-    }
-    else {
-      $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
-    }
-  }
-
-  /**
    * Batch finished callback.
    * @param $success
    * @param $results
@@ -363,37 +386,19 @@ class WsGroupsController extends ControllerBase {
   }
 
   /**
-   * Delete queues 'up1_page_perso_queue' & 'up1_typo3_data_queue'.
-   *
-   * Remember that the command drupal dq checks first for a queue worker
-   * and if it exists, DC suposes that a queue exists.
-   */
-  public function deleteTheQueue() {
-    $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
-    $this->queueFactory->get('up1_typo3_data_queue')->deleteQueue();
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('The queues "up1_page_perso_queue" & "up1_typo3_data_queue" have been deleted'),
-    ];
-  }
-
-  /**
-   * Get all Typo3 fields group by user and create queue items.
+   * Get Typo3 publications field create queue items.
    *
    * @return array
    */
-  public function populatePagePersoUsers() {
-    $faculty = $this->wsGroupsService->getUsers('faculty');
-    $student = $this->wsGroupsService->getUsers('student');
-
-    $users = array_merge($faculty['users'], $student['users']);
+  public function importPublications() {
+    $users = $this->wsGroupsService->getAllUsers();
 
     //Select all Typo3 fields by user.
     foreach ($users as $user) {
-      $data[] = $this->selectFeUsers($user['uid']);
+      $data[] = $this->selectPublications($user['uid']);
     }
 
-    $queue = $this->queueFactory->get('up1_typo3_data_queue');
+    $queue = $this->queueFactory->get('up1_typo3_publications_queue');
 
     //Charge queue items.
     foreach ($data as $datum) {
@@ -406,6 +411,95 @@ class WsGroupsController extends ControllerBase {
     ];
   }
 
+  public function batchImportPublications() {
+    $batch = [
+      'title' => $this->t('Process pages persos publications field with Typo3'),
+      'operations' => [],
+      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPublicationsFinished',
+    ];
+    $queue_factory = \Drupal::service('queue');
+    $queue = $queue_factory->get('up1_typo3_publications_queue');
+
+    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
+      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPublicationsProcess', []];
+    }
+    batch_set($batch);
+
+    return batch_process('<front>');
+  }
+
+  /**
+   * Batch publications process.
+   * @param $context
+   */
+  public function batchPublicationsProcess(&$context){
+
+    // We can't use here the Dependency Injection solution
+    // so we load the necessary services in the other way
+    $queue_factory = \Drupal::service('queue');
+    $queue_manager = \Drupal::service('plugin.manager.queue_worker');
+
+    // Get the queue implementation for import_content_from_xml queue
+    $queue = $queue_factory->get('up1_typo3_publications_queue');
+    // Get the queue worker
+    $queue_worker = $queue_manager->createInstance('up1_typo3_publications_queue');
+
+    // Get the number of items
+    $number_of_items = ($queue->numberOfItems() < IMPORT_DATA_SIZE) ? $queue->numberOfItems() : IMPORT_DATA_SIZE;
+
+    // Repeat $number_of_queue times
+    for ($i = 0; $i < $number_of_items; $i++) {
+      // Get a queued item
+      if ($item = $queue->claimItem()) {
+        try {
+          // Process it
+          $queue_worker->processItem($item->data);
+          // If everything was correct, delete the processed item from the queue
+          $queue->deleteItem($item);
+        }
+        catch (SuspendQueueException $e) {
+          // If there was an Exception trown because of an error
+          // Releases the item that the worker could not process.
+          // Another worker can come and process it
+          $queue->releaseItem($item);
+          break;
+        }
+      }
+    }
+  }
+
+  /**
+   * Batch finished callback.
+   * @param $success
+   * @param $results
+   * @param $operations
+   */
+  public static function batchPublicationsFinished($success, $results, $operations) {
+    if ($success) {
+      drupal_set_message(t("The Typo3 publications haved been successfully imported from Typo3 database."));
+    }
+    else {
+      $error_operation = reset($operations);
+      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+    }
+  }
+
+  /**
+   * Delete queues 'up1_page_perso_queue', 'up1_typo3_data_queue' & 'up1_typo3_publications_queue'.
+   *
+   * Remember that the command drupal dq checks first for a queue worker
+   * and if it exists, DC suposes that a queue exists.
+   */
+  public function deleteTheQueue() {
+    $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
+    $this->queueFactory->get('up1_typo3_data_queue')->deleteQueue();
+    $this->queueFactory->get('up1_typo3_publications_queue')->deleteQueue();
+    return [
+      '#type' => 'markup',
+      '#markup' => $this->t('All Typo3 queues have been deleted'),
+    ];
+  }
+
   private function selectFeUsers($username) {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [
@@ -415,13 +509,26 @@ class WsGroupsController extends ControllerBase {
       'tx_oxcspagepersonnel_sujet_these',
       'tx_oxcspagepersonnel_projets_recherche',
       'tx_oxcspagepersonnel_directeur_these',
-      'tx_oxcspagepersonnel_publications',
+      //'tx_oxcspagepersonnel_publications',
       'tx_oxcspagepersonnel_epi',
       'tx_oxcspagepersonnel_cv',
-      'tx_oxcspagepersonnel_cv2',
+      //'tx_oxcspagepersonnel_cv2',
       'tx_oxcspagepersonnel_directions_these',
       'tx_oxcspagepersonnel_page_externe_url',
       'tx_oxcspagepersonnel_themes_recherche',
+    ];
+    $query->fields('fu', $fields);
+    $query->condition('username', $username, 'LIKE');
+    $result = $query->execute()->fetchObject();
+
+    return $result;
+  }
+
+  private function selectPublications($username) {
+    $query = $this->database->select('fe_users', 'fu');
+    $fields = [
+      'username',
+      'tx_oxcspagepersonnel_publications',
     ];
     $query->fields('fu', $fields);
     $query->condition('username', $username, 'LIKE');

@@ -15,15 +15,15 @@ use Drupal\node\Entity;
 use Drupal\Core\Url;
 
 /**
- * Executes users (enseignants & doctorants) import from web service.
+ * Executes publications field import from web service.
  *
  * @QueueWorker(
- *   id = "up1_typo3_data_queue",
- *   title = @Translation("Page Perso populate"),
+ *   id = "up1_typo3_publications_queue",
+ *   title = @Translation("Page Perso import publications field."),
  *   cron = {"time" = 60}
  *  )
  */
-class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
@@ -93,31 +93,12 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
         foreach ($pages as $node) {
-          $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
-          $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
-          $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;
-          $node->field_research_themes = [
-            'value' => $item->tx_oxcspagepersonnel_themes_recherche . "<br />" .
-              $item->tx_oxcspagepersonnel_projets_recherche,
-            'format' => 'full_html'];
-          $node->field_phd_supervisor = $item->tx_oxcspagepersonnel_directeur_these;
-          if (isset($item->tx_oxcspagepersonnel_publications) && !empty($item->tx_oxcspagepersonnel_publications)) {
+          if (isset($item->tx_oxcspagepersonnel_publications) && $item->tx_oxcspagepersonnel_publications != '') {
+            \Drupal::logger('publications_field')->info(print_r(strip_tags($item->tx_oxcspagepersonnel_publications, ['a']), 1));
             $node->field_publications = [
-              'value' => "<div>" . $item->tx_oxcspagepersonnel_publications . "</div>",
+              'value' => "<div>" . strip_tags($item->tx_oxcspagepersonnel_publications, ['a']) . "</div>",
               'format' => 'full_html'];
           }
-          if (isset($item->tx_oxcspagepersonnel_cv2) && !empty($item->tx_oxcspagepersonnel_cv2)) {
-            $node->field_resume_text = [
-              'value' => "<div>" . $item->tx_oxcspagepersonnel_cv2 ."</div>",
-              'format' => 'full_html'];
-          }
-          $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
-          $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
-          if (isset($item->tx_oxcspagepersonnel_cv) && !empty($item->tx_oxcspagepersonnel_cv)) {
-            $url = Url::fromUri("https://www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv);
-            $node->field_link_to_resume = $url->toString();
-          }
-
           $node->save();
         }
       }
