@@ -395,9 +395,12 @@ class WsGroupsController extends ControllerBase {
 
     //Select all Typo3 fields by user.
     foreach ($users as $user) {
-      $data[] = $this->selectPublications($user['uid']);
+      $publications= $this->selectPublications($user['uid']);
+      if ($publications) {
+        $data[] = $publications;
+      }
     }
-
+    \Drupal::logger('up1_pages_personnelles')->info(count($data) . " champs publications à importer");
     $queue = $this->queueFactory->get('up1_typo3_publications_queue');
 
     //Charge queue items.
@@ -608,10 +611,8 @@ class WsGroupsController extends ControllerBase {
       'tx_oxcspagepersonnel_sujet_these',
       'tx_oxcspagepersonnel_projets_recherche',
       'tx_oxcspagepersonnel_directeur_these',
-      //'tx_oxcspagepersonnel_publications',
       'tx_oxcspagepersonnel_epi',
       'tx_oxcspagepersonnel_cv',
-      //'tx_oxcspagepersonnel_cv2',
       'tx_oxcspagepersonnel_directions_these',
       'tx_oxcspagepersonnel_page_externe_url',
       'tx_oxcspagepersonnel_themes_recherche',
@@ -631,6 +632,7 @@ class WsGroupsController extends ControllerBase {
     ];
     $query->fields('fu', $fields);
     $query->condition('username', $username, 'LIKE');
+    $query->condition('tx_oxcspagepersonnel_publications', '', '<>');
     $result = $query->execute()->fetchObject();
 
     return $result;
@@ -644,6 +646,7 @@ class WsGroupsController extends ControllerBase {
     ];
     $query->fields('fu', $fields);
     $query->condition('username', $username, 'LIKE');
+    $query->condition('tx_oxcspagepersonnel_cv2', '', '<>');
     $result = $query->execute()->fetchObject();
 
     return $result;

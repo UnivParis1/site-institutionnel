@@ -154,6 +154,14 @@ up1_pages_personnelles.import_resume:
   requirements:
     _permission: 'access content'
 
+up1_pages_personnelles.batch_import_resume:
+  path: '/pages-perso/import-resume/batch'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportResume'
+    _title: 'Import field resume pages persos from Typo3'
+  requirements:
+    _permission: 'access content'
+
 up1_pages_personnelles.delete_queue_users:
   path: '/pages-perso/maj/empty'
   defaults:

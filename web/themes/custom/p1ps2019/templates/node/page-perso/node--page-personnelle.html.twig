@@ -104,7 +104,9 @@
 {% set hal = content.field_hal_link|render %}
 {% set academia = content.field_academia_link|render %}
 {% set my_medias = content.field_my_medias|render %}
-{% set skills = expertises %}
+{% if expertises %}
+  {% set skills = expertises %}
+{% endif %}
 {% set publis = content.field_highlight_publications|render %}
 {% set sticky_pub = content.field_sticky_publications|render %}
 
@@ -215,7 +217,7 @@
             {# field_research_themes #}
             {% if info or research_themes %}
               {% if info %}
-              <p class="txt-bold">{{ "Research themes"|t }}</p>
+                <p class="txt-bold">{{ "Research themes"|t }}</p>
                 <ul>
                   {% for key, item in info %}
                     <li>{{ item }}</li>
@@ -223,7 +225,7 @@
                 </ul>
               {% endif %}
               {% if research_themes %}
-                  <p class="txt-bold">{{ "Research projects"|t }}</p>
+                <p class="txt-bold">{{ "Research projects"|t }}</p>
                 {{ content.field_research_themes.0 }}
               {% endif %}
             {% endif %}
@@ -374,7 +376,7 @@
               <div class="box-style no-shadow auto-height semi-field-sep">
                 {{ resume }}
               </div>
-              {% endif %}
+            {% endif %}
             {% if link_to_resume %}
               <div class="box-style no-shadow auto-height semi-field-sep">
                 {{ link_to_resume }}

@@ -83,7 +83,7 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
    */
   public function processItem($item) {
     $user = user_load_by_name($item->username);
-
+    \Drupal::logger('publications_field')->info($item->username);
     if ($user) {
       $author = $user->id();
       $ids = \Drupal::entityQuery('node')
@@ -94,7 +94,6 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
       if (!empty($pages)) {
         foreach ($pages as $node) {
           if (isset($item->tx_oxcspagepersonnel_publications) && $item->tx_oxcspagepersonnel_publications != '') {
-            \Drupal::logger('publications_field')->info(print_r(strip_tags($item->tx_oxcspagepersonnel_publications, ['a']), 1));
             $node->field_publications = [
               'value' => "<div>" . strip_tags($item->tx_oxcspagepersonnel_publications, ['a']) . "</div>",
               'format' => 'full_html'];
