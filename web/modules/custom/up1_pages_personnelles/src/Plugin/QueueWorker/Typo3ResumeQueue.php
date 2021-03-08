@@ -93,7 +93,7 @@ class Typo3ResumeQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
         foreach ($pages as $node) {
-          $resume = preg_replace("/<h3\s(.+?)>(.+?)<\/h3>/is", "<h4>$2</h4>", $item->tx_oxcspagepersonnel_publications);
+          $resume = preg_replace("/<h3\s(.+?)>(.+?)<\/h3>/is", "<h4>$2</h4>", $item->tx_oxcspagepersonnel_cv2);
           $resume = preg_replace("/<h2\s(.+?)>(.+?)<\/h2>/is", "<h3>$2</h3>", $resume);
           $node->field_resume_text = [
             'value' => "<div>" . $resume . "</div>",

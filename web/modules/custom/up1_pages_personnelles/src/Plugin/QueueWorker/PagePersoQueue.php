@@ -79,7 +79,6 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * {@inheritDoc}
    */
   public function processItem($item) {
-    \Drupal::logger('up1_pages_personnelles')->info(print_r($item, 1));
     $cas_user_manager = \Drupal::service('cas.user_manager');
     $cas_username = $item['uid'];
     $author = $cas_user_manager->getUidForCasUsername($cas_username);

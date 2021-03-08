@@ -83,7 +83,6 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
    */
   public function processItem($item) {
     $user = user_load_by_name($item->username);
-    \Drupal::logger('publications_field')->info($item->username);
     if ($user) {
       $author = $user->id();
       $ids = \Drupal::entityQuery('node')

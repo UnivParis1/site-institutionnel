@@ -400,7 +400,7 @@ class WsGroupsController extends ControllerBase {
         $data[] = $publications;
       }
     }
-    \Drupal::logger('up1_pages_personnelles')->info(count($data) . " champs publications à importer");
+    
     $queue = $this->queueFactory->get('up1_typo3_publications_queue');
 
     //Charge queue items.
