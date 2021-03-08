@@ -93,11 +93,10 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
         foreach ($pages as $node) {
-          if (isset($item->tx_oxcspagepersonnel_publications) && $item->tx_oxcspagepersonnel_publications != '') {
             $node->field_publications = [
-              'value' => "<div>" . strip_tags($item->tx_oxcspagepersonnel_publications, ['a']) . "</div>",
-              'format' => 'full_html'];
-          }
+              'value' => "<div>" . $item->tx_oxcspagepersonnel_publications . "</div>",
+              'format' => 'full_html'
+            ];
           $node->save();
         }
       }
