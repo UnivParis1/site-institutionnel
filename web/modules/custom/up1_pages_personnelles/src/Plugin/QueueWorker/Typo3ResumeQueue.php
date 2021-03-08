@@ -93,12 +93,11 @@ class Typo3ResumeQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
         foreach ($pages as $node) {
-          if (isset($item->tx_oxcspagepersonnel_cv2) && $item->tx_oxcspagepersonnel_cv2 != '') {
-            \Drupal::logger('publications_field')->info(print_r(strip_tags($item->tx_oxcspagepersonnel_cv2, ['a']), 1));
-            $node->field_publications = [
-              'value' => "<div>" . strip_tags($item->tx_oxcspagepersonnel_cv2, ['a']) . "</div>",
-              'format' => 'full_html'];
-          }
+          $node->field_resume_text = [
+            'value' => "<div>" . $item->tx_oxcspagepersonnel_cv2 . "</div>",
+            'format' => 'full_html'
+          ];
+
           $node->save();
         }
       }

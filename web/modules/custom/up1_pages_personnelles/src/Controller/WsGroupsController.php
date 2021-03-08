@@ -496,7 +496,10 @@ class WsGroupsController extends ControllerBase {
 
     //Select all Typo3 fields by user.
     foreach ($users as $user) {
-      $data[] = $this->selectResume($user['uid']);
+      $resume = $this->selectResume($user['uid']);
+      if ($resume) {
+        $data[] = $resume;
+      }
     }
 
     $queue = $this->queueFactory->get('up1_typo3_resume_queue');
