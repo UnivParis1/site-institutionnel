@@ -92,8 +92,10 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
         foreach ($pages as $node) {
+          $publications = preg_replace("/<h3\s(.+?)>(.+?)<\/h3>/is", "<h4>$2</h4>", $item->tx_oxcspagepersonnel_publications);
+          $publications = preg_replace("/<h2\s(.+?)>(.+?)<\/h2>/is", "<h3>$2</h3>", $publications);
             $node->field_publications = [
-              'value' => "<div>" . $item->tx_oxcspagepersonnel_publications . "</div>",
+              'value' => "<div>" . $publications . "</div>",
               'format' => 'full_html'
             ];
           $node->save();
