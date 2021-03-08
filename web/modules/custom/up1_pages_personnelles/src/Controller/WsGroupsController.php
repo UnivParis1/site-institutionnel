@@ -400,7 +400,7 @@ class WsGroupsController extends ControllerBase {
         $data[] = $publications;
       }
     }
-    
+
     $queue = $this->queueFactory->get('up1_typo3_publications_queue');
 
     //Charge queue items.
