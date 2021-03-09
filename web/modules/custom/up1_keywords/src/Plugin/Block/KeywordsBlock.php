@@ -101,11 +101,11 @@ class KeywordsBlock extends BlockBase {
 		$this->configuration['mot_cle_'.$i] = $fs['mot_cle_'.$i];
 		$this->configuration['lien_mot_cle_'.$i] = $fs['lien_mot_cle_'.$i];
 	}
-    /*$this->configuration['mot_cle_1'] = $fs['mot_cle_1'];
-    $this->configuration['mot_cle_2'] = $fs['mot_cle_2'];
-    $this->configuration['mot_cle_3'] = $fs['mot_cle_3'];
-    $this->configuration['mot_cle_4'] = $fs['mot_cle_4'];
-    $this->configuration['mot_cle_5'] = $fs['mot_cle_5'];*/
+    //$this->configuration['mot_cle_1'] = $fs['mot_cle_1'];
+    //$this->configuration['mot_cle_2'] = $fs['mot_cle_2'];
+    //$this->configuration['mot_cle_3'] = $fs['mot_cle_3'];
+    //$this->configuration['mot_cle_4'] = $fs['mot_cle_4'];
+    //$this->configuration['mot_cle_5'] = $fs['mot_cle_5'];
   } */
 
   /**
