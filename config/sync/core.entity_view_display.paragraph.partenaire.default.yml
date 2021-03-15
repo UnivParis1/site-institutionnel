@@ -1,0 +1,56 @@
+uuid: 4d932b02-7cfb-4d1c-9754-49ecb8e3fb8d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.partenaire.bp_link
+    - field.field.paragraph.partenaire.field_media
+    - field.field.paragraph.partenaire.field_text
+    - field.field.paragraph.partenaire.field_title
+    - paragraphs.paragraphs_type.partenaire
+  module:
+    - link
+    - text
+id: paragraph.partenaire.default
+targetEntityType: paragraph
+bundle: partenaire
+mode: default
+content:
+  bp_link:
+    weight: 3
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_separate
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    weight: 1
+    label: visually_hidden
+    settings:
+      view_mode: thumbnail_news
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_text:
+    weight: 2
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_title:
+    weight: 0
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  search_api_excerpt: true
