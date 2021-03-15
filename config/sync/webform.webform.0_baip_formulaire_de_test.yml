@@ -1,0 +1,195 @@
+uuid: 6d1aac52-ea72-4b9c-9017-df50af656941
+langcode: fr
+status: open
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 54
+template: false
+archive: false
+id: 0_baip_formulaire_de_test
+title: '0 - BAIP - Formulaire de test'
+description: 'Formulaire de test'
+category: ''
+elements: "avez_vous_deja_pris_contact_avec_le_baip_:\n  '#type': select\n  '#title': 'Avez-vous déjà pris contact avec le BAIP ?'\n  '#options': yes_no\n  '#required': true\n  '#required_error': 'Le champ \"Avez-vous déjà pris contact avec le BAIP ? \" est requis.'\ncomment_avez_vous_connu_le_baip_:\n  '#type': textfield\n  '#title': 'Comment avez-vous connu le BAIP ?'\n  '#help_title': 'Indiquez par quel moyen avez-vous entendu parlé du BAIP'\n  '#help': 'Cela peut &ecirc;tre par un ami, par un courriel du BAIP, via le site internet de l&#39;universit&eacute;...'\n  '#placeholder': 'Par un ami'\n  '#states':\n    invisible:\n      ':input[name=\"avez_vous_deja_pris_contact_avec_le_baip_\"]':\n        value: Oui\nvotre_nom:\n  '#type': textfield\n  '#title': 'Votre nom'\n  '#help_title': 'Indiquez votre nom de famille'\n  '#placeholder': Dubois\n  '#required': true\n  '#required_error': 'Le champ \"Votre nom\" est requis.'\nvotre_prenom:\n  '#type': textfield\n  '#title': 'Votre prénom'\n  '#help_title': 'Indiquez votre prénom'\n  '#placeholder': Alice\n  '#required': true\n  '#required_error': 'Le champ \"Votre prénom\" est requis.'\nvotre_courriel:\n  '#type': email\n  '#title': 'Votre courriel'\n  '#help_title': 'Indiquez une adresse de messagerie valide'\n  '#placeholder': alice.dubois@nomdedomaine.fr\n  '#required': true\n  '#required_error': 'Le champ \"Votre courriel\" est requis. '\nvotre_site_internet:\n  '#type': url\n  '#title': 'Votre site internet'\n  '#help_title': 'Copiez le lien vers votre site : CV en ligne, book... '\nvous_souhaitez_en_savoir_plus_sur_:\n  '#type': checkboxes\n  '#title': 'Vous souhaitez en savoir plus sur : '\n  '#options':\n    'Les stages': 'Les stages'\n    'Les jobs étudiants': 'Les jobs étudiants'\n    'L''entrepreneuriat': 'L''entrepreneuriat'\n  '#options_all': true\n  '#options_all_text': 'Tout cela à la fois'\n  '#options_none': true\n  '#options_none_text': 'Rien de tout cela'\n  '#options__properties': ''\nvotre_message:\n  '#type': textfield\n  '#title': 'Votre message'\n  '#help_title': 'Indiquez le message que vous souhaitez faire parvenir au BAIP'\n  '#help': 'Cela peut &ecirc;tre une demande d&#39;information, d&#39;accompagnement...'\n  '#required': true\n  '#required_error': 'Le champ \"Votre message\" est requis. '\nen_majorite_sur_quel_centre_ont_lieu_vos_enseignements_:\n  '#type': webform_select_other\n  '#title': 'En majorité, sur quel centre ont lieu vos enseignements ?'\n  '#options':\n    'Centre Pierre-Mendès-France': 'Centre Pierre-Mendès-France'\n    'Campus Port-Royal': 'Campus Port-Royal'\n    'Centre Saint-Charles': 'Centre Saint-Charles'\n  '#other__placeholder': Autre...\navez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc:\n  '#type': select\n  '#title': 'Avez-vous déjà assisté à un événement (forum, job dating, conférence...) organisé par le BAIP ?'\n  '#options': yes_no\n  '#default_value': Non\nle_s_recommanderiez_vous_a_un_e_ami_e_:\n  '#type': webform_scale\n  '#title': 'Le(s) recommanderiez-vous à un-e ami-e ?'\n  '#help_title': 'Cochez la note correspondante à votre satisfaction'\n  '#help': 'Non = 1, Plut&ocirc;t non = 2, Plut&ocirc;t oui = 3, Oui = 4'\n  '#states':\n    invisible:\n      ':input[name=\"avez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc\"]':\n        value: Non\n  '#max': 4\n  '#min_text': Non\n  '#max_text': Oui\n  '#scale_type': square\nsi_oui_le_s_quel_s_:\n  '#type': textfield\n  '#title': 'Si oui le(s)quel(s) ? '\n  '#help_title': 'Indiquez les événements du BAIP auxquels vous avez participé'\n  '#placeholder': 'Forum Objectif Emploi, Conférences APEC, etc. '\n  '#states':\n    invisible:\n      ':input[name=\"avez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc[Oui]\"]':\n        '': ''\nquelle_note_donneriez_vous_a_ce_formulaire_test_:\n  '#type': webform_rating\n  '#title': 'Quelle note donneriez-vous à ce formulaire test ? '\n  '#help_title': 'Donnez le nombre d''étoiles correspondant à votre satisfaction'\nquel_s_jour_s_etes_vous_disponoible_pour_un_rendez_vous_:\n  '#type': datelist\n  '#title': 'Quel(s) jour(s) êtes vous disponible pour un rendez-vous ?'\n  '#date_date_min': 10-02-2021\n  '#date_date_max': 15-02-2021\n  '#date_days':\n    - '1'\n    - '2'\n    - '3'\n    - '4'\n    - '5'\n  '#date_part_order':\n    - day\n    - month\n    - year\n  '#date_year_range': '2021:2021'\nj_ai_compris_qu_il_fallait_selectionner_la_case_ci_contre:\n  '#type': checkbox\n  '#title': 'J''ai compris qu''il fallait sélectionner la case ci-contre'\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\n  '#captcha_admin_mode': true\nquel_s_jour_s_n_etes_vous_pas_disponible_pour_un_rendez_vous_:\n  '#type': checkboxes\n  '#title': 'Quel(s) jour(s) n''êtes vous pas disponible pour un rendez-vous ?'\n  '#options': days\n  '#options__properties': ''\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Envoyez votre demande'"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_remote_addr: true
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }
+variants: {  }

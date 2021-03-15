@@ -12,13 +12,13 @@ dependencies:
     - field.field.node.news.field_news_date
     - field.field.node.news.field_news_topic
     - field.field.node.news.field_paragraphs
+    - field.field.node.news.field_publish_master
     - field.field.node.news.field_related_news
     - field.field.node.news.field_signature
     - field.field.node.news.field_sites
     - field.field.node.news.field_sites_all
     - field.field.node.news.field_tag
     - node.type.news
-    - workflows.workflow.publication
   module:
     - comment
     - content_moderation
@@ -56,9 +56,9 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 42
-    third_party_settings: {  }
+    weight: 43
     region: content
+    third_party_settings: {  }
   field_lead:
     weight: 7
     settings:
@@ -107,11 +107,18 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
       features:
-        duplicate: duplicate
         collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
     third_party_settings: {  }
     type: paragraphs
     region: content
+  field_publish_master:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    region: content
+    third_party_settings: {  }
   field_related_news:
     weight: 10
     settings:
@@ -133,20 +140,20 @@ content:
   field_sites:
     type: entity_reference_autocomplete
     weight: 40
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   field_sites_all:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 41
-    third_party_settings: {  }
     region: content
+    third_party_settings: {  }
   field_tag:
     weight: 5
     settings: {  }

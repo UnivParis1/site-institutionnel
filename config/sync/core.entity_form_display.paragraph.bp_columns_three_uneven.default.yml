@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.bp_columns_three_uneven.bp_background
     - field.field.paragraph.bp_columns_three_uneven.bp_column_content_3
     - field.field.paragraph.bp_columns_three_uneven.bp_column_style_3
+    - field.field.paragraph.bp_columns_three_uneven.bp_header
     - field.field.paragraph.bp_columns_three_uneven.bp_width
     - field.field.paragraph.bp_columns_three_uneven.field_title
     - paragraphs.paragraphs_type.bp_columns_three_uneven
@@ -19,7 +20,7 @@ bundle: bp_columns_three_uneven
 mode: default
 content:
   bp_background:
-    weight: 1
+    weight: 0
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -28,7 +29,7 @@ content:
     type: entity_reference_paragraphs
     weight: 4
     settings:
-      title: Paragraphe
+      title: Paragraph
       title_plural: Paragraphs
       edit_mode: closed
       add_mode: dropdown
@@ -37,13 +38,21 @@ content:
     third_party_settings: {  }
     region: content
   bp_column_style_3:
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  bp_header:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   bp_width:
-    weight: 2
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_select

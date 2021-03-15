@@ -3,13 +3,14 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_event_type
-    - field.storage.node.field_editorial_blocks
-    - field.storage.node.field_paragraphs
-    - field.storage.node.field_sub_title
-    - field.storage.node.field_subtitle
     - field.storage.node.field_categories
+    - field.storage.node.field_lead
+    - field.storage.node.body
+    - field.storage.node.field_signature
+    - field.storage.node.field_subtitle
+    - field.storage.node.field_sub_title
     - field.storage.node.field_news_topic
+    - field.storage.node.field_event_type
     - field.storage.node.field_publication_type
     - search_api.server.ess
     - core.entity_view_mode.node.teaser
@@ -23,6 +24,14 @@ name: Siri
 description: ''
 read_only: false
 field_settings:
+  body:
+    label: Corps
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
   event_type:
     label: 'Type d''événement'
     datasource_id: 'entity:node'
@@ -33,29 +42,27 @@ field_settings:
         - field.storage.node.field_event_type
       module:
         - taxonomy
-  field_editorial_blocks:
-    label: 'Blocs éditoriaux'
+  field_lead:
+    label: Chapô
     datasource_id: 'entity:node'
-    property_path: field_editorial_blocks
+    property_path: field_lead
     type: text
-    boost: !!float 2
     dependencies:
       config:
-        - field.storage.node.field_editorial_blocks
-  field_paragraphs:
-    label: 'Blocs éditoriaux'
+        - field.storage.node.field_lead
+  field_signature:
+    label: Signature
     datasource_id: 'entity:node'
-    property_path: field_paragraphs
+    property_path: field_signature
     type: text
-    boost: !!float 2
     dependencies:
       config:
-        - field.storage.node.field_paragraphs
+        - field.storage.node.field_signature
   field_sub_title:
     label: 'Sous-titre page'
     datasource_id: 'entity:node'
     property_path: field_sub_title
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_sub_title
@@ -63,18 +70,10 @@ field_settings:
     label: 'Sous-titre evenement'
     datasource_id: 'entity:node'
     property_path: field_subtitle
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_subtitle
-  langcode:
-    label: Langue
-    datasource_id: 'entity:node'
-    property_path: langcode
-    type: string
-    dependencies:
-      module:
-        - node
   name:
     label: Catégories
     datasource_id: 'entity:node'
@@ -116,6 +115,7 @@ field_settings:
     label: 'Rendered HTML output'
     property_path: rendered_item
     type: text
+    boost: !!float 13
     configuration:
       roles:
         anonymous: anonymous
@@ -151,7 +151,8 @@ field_settings:
     label: Titre
     datasource_id: 'entity:node'
     property_path: title
-    type: string
+    type: text
+    boost: !!float 21
     dependencies:
       module:
         - node
@@ -176,7 +177,7 @@ field_settings:
   url:
     label: URI
     property_path: search_api_url
-    type: string
+    type: text
 datasource_settings:
   'entity:node':
     bundles:
@@ -198,7 +199,6 @@ processor_settings:
       - event_type
       - field_sub_title
       - field_subtitle
-      - langcode
       - name
       - news_topic
       - publication_type
@@ -222,7 +222,6 @@ processor_settings:
       - event_type
       - field_sub_title
       - field_subtitle
-      - langcode
       - name
       - news_topic
       - publication_type
@@ -240,7 +239,6 @@ processor_settings:
       - event_type
       - field_sub_title
       - field_subtitle
-      - langcode
       - name
       - news_topic
       - publication_type

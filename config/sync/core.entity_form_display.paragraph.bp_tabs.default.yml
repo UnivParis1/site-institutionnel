@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.bp_tabs.bp_background
+    - field.field.paragraph.bp_tabs.bp_header
     - field.field.paragraph.bp_tabs.bp_tab_section
     - field.field.paragraph.bp_tabs.bp_width
     - field.field.paragraph.bp_tabs.field_nb_tabs
@@ -17,11 +18,17 @@ targetEntityType: paragraph
 bundle: bp_tabs
 mode: default
 content:
+  bp_background:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   bp_tab_section:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
     settings:
-      title: Paragraphe
+      title: Paragraph
       title_plural: Paragraphs
       edit_mode: closed
       add_mode: dropdown
@@ -30,35 +37,24 @@ content:
     third_party_settings: {  }
     region: content
   bp_width:
-    third_party_settings:
-      conditional_fields:
-        4c0d27dd-5c1b-4ea8-b3ef-da692e2c39d3:
-          dependee: bp_background
-          settings:
-            state: visible
-            condition: '!empty'
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form: {  }
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: paragraph
-          bundle: bp_tabs
-    weight: 3
-    settings: {  }
-    type: options_select
-    region: content
-  field_nb_tabs:
-    weight: 0
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_nb_tabs:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  bp_background: true
+  bp_header: true
   created: true
   status: true
   uid: true
