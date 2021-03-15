@@ -11,6 +11,9 @@ dependencies:
     - search_api_elasticsearch_attachments
   config:
     - field.storage.node.field_categories
+    - field.storage.node.field_lead
+    - field.storage.node.body
+    - field.storage.node.field_signature
     - field.storage.node.field_news_topic
     - field.storage.node.field_publication_type
     - field.storage.node.field_event_type
@@ -27,6 +30,14 @@ name: 'Index de contenu'
 description: ''
 read_only: false
 field_settings:
+  body:
+    label: Corps
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
   es_attachment:
     label: 'Search API Elasticsearch attachments'
     property_path: es_attachment
@@ -45,7 +56,22 @@ field_settings:
         - field.storage.node.field_event_type
       module:
         - taxonomy
-        - taxonomy
+  field_lead:
+    label: Chapô
+    datasource_id: 'entity:node'
+    property_path: field_lead
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_lead
+  field_signature:
+    label: Signature
+    datasource_id: 'entity:node'
+    property_path: field_signature
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_signature
   name:
     label: Catégories
     datasource_id: 'entity:node'
@@ -55,7 +81,6 @@ field_settings:
       config:
         - field.storage.node.field_categories
       module:
-        - taxonomy
         - taxonomy
   news_topic:
     label: 'Sujet actualité'
@@ -67,7 +92,6 @@ field_settings:
       config:
         - field.storage.node.field_news_topic
       module:
-        - taxonomy
         - taxonomy
   node_grants:
     label: 'Information d''accès du nœud.'
@@ -86,7 +110,6 @@ field_settings:
         - field.storage.node.field_publication_type
       module:
         - taxonomy
-        - taxonomy
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
@@ -94,8 +117,19 @@ field_settings:
     boost: !!float 13
     configuration:
       roles:
-        - anonymous
-      view_mode: {  }
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          article: ''
+          event: ''
+          news: default
+          news2018: ''
+          offer: ''
+          page: ''
+          page_personnelle: ''
+          publication: ''
+          second_level_pages: ''
+          viva: ''
   site_id:
     label: Site
     datasource_id: 'entity:node'
@@ -200,8 +234,19 @@ processor_settings:
       preprocess_index: -15
       preprocess_query: -15
   ignorecase:
-    all_fields: false
-    fields: {  }
+    all_fields: true
+    fields:
+      - body
+      - event_type
+      - field_lead
+      - field_signature
+      - name
+      - news_topic
+      - publication_type
+      - rendered_item
+      - title
+      - type
+      - url
     weights:
       preprocess_index: -20
       preprocess_query: -20

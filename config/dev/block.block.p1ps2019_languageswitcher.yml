@@ -1,26 +1,24 @@
-uuid: 93b7a148-18e6-486e-8782-6a0449091d69
-langcode: fr
+uuid: 6ba2cf28-be76-44d8-8168-ba6867f0abc6
+langcode: en
 status: true
 dependencies:
   module:
-    - help
+    - language
     - micro_path
     - micro_site
   theme:
     - p1ps2019
-_core:
-  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
-id: p1ps2019_help
+id: p1ps2019_languageswitcher
 theme: p1ps2019
-region: content
-weight: -13
+region: header_right
+weight: -11
 provider: null
-plugin: help_block
+plugin: 'language_block:language_interface'
 settings:
-  id: help_block
-  label: Help
-  provider: help
-  label_display: '0'
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: visible
 visibility:
   site_type:
     id: site_type
