@@ -235,7 +235,7 @@ class WsGroupsController extends ControllerBase {
    * Batch users process.
    * @param $context
    */
-  public function batchUsersProcess(&$context){
+  public static function batchUsersProcess(&$context){
 
     // We can't use here the Dependency Injection solution
     // so we load the necessary services in the other way
@@ -435,7 +435,7 @@ class WsGroupsController extends ControllerBase {
    * Batch publications process.
    * @param $context
    */
-  public function batchPublicationsProcess(&$context){
+  public static function batchPublicationsProcess(&$context){
 
     // We can't use here the Dependency Injection solution
     // so we load the necessary services in the other way
@@ -536,7 +536,7 @@ class WsGroupsController extends ControllerBase {
    * Batch publications process.
    * @param $context
    */
-  public function batchResumeProcess(&$context){
+  public static function batchResumeProcess(&$context){
 
     // We can't use here the Dependency Injection solution
     // so we load the necessary services in the other way
