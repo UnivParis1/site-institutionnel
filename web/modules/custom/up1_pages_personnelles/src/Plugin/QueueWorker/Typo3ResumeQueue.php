@@ -93,14 +93,18 @@ class Typo3ResumeQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
         foreach ($pages as $node) {
-          $node->field_resume_text = [
-            'value' => "<div>" . $item->tx_oxcspagepersonnel_cv2 . "</div>",
-            'format' => 'full_html'
-          ];
-          \Drupal::logger('up1_pages_personnelles')->info(print_r($node->field_resume_text,1));
+          try {
+            $node->field_resume_text = [
+              'value' => "<div>" . $item->tx_oxcspagepersonnel_cv2 . "</div>",
+              'format' => 'full_html'
+            ];
 
-          $node->save();
-          \Drupal::logger('up1_pages_personnelles')->info('Resume ' . $item->username . ' ok');
+            $node->save();
+          } catch (\Exception $e) {
+            \Drupal::logger('up1_typo3_resume_queue')->error($this->t('La page personnelle de @username n\'a pas pu être créée.',
+              ['@username' => $item->username] ));
+            \Drupal::logger('up1_typo3_resume_queue')->error("@code : @Message" , [$e->getCode(), $e->getMessage()]);
+          }
         }
       }
     }
