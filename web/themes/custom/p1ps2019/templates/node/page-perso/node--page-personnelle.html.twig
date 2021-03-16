@@ -376,14 +376,19 @@
                 </div>
               </div>
             </div>
-            {% if resume %}
+            {% if not resume and link_to_resume %}
               <div class="box-style no-shadow auto-height semi-field-sep">
-                {{ resume }}
+                <div class="field--name-field-resume">
+                  <span class="fa fa-file-pdf"></span>
+                  <a href="{{ content.field_link_to_resume.0['#url'] }}" title="Lien vers le CV de {{ label.0 }}" class="mediafichierlien">
+                    {{ "CV"|t }}
+                  </a>
+                </div>
               </div>
             {% endif %}
-            {% if link_to_resume %}
+            {% elseif resume %}
               <div class="box-style no-shadow auto-height semi-field-sep">
-                {{ link_to_resume }}
+                {{ resume }}
               </div>
             {% endif %}
             {% if sticky_pub %}
