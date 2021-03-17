@@ -6,7 +6,6 @@ dependencies:
     - field.storage.node.field_editorial_blocks
     - node.type.second_level_pages
     - paragraphs.paragraphs_type.bp_accordion
-    - paragraphs.paragraphs_type.bp_block
     - paragraphs.paragraphs_type.bp_carousel
     - paragraphs.paragraphs_type.bp_column_wrapper
     - paragraphs.paragraphs_type.bp_columns
@@ -22,6 +21,7 @@ dependencies:
     - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
     - paragraphs.paragraphs_type.news_events
+    - paragraphs.paragraphs_type.partenaire_section
     - paragraphs.paragraphs_type.rich_content
     - paragraphs.paragraphs_type.section_presentation
     - paragraphs.paragraphs_type.tiles
@@ -51,7 +51,6 @@ settings:
       bp_columns_two_uneven: bp_columns_two_uneven
       bp_column_wrapper: bp_column_wrapper
       bp_accordion: bp_accordion
-      bp_block: bp_block
       bp_carousel: bp_carousel
       jumbotron: jumbotron
       bp_tabs: bp_tabs
@@ -62,6 +61,7 @@ settings:
       tiles: tiles
       content_block: content_block
       news_events: news_events
+      partenaire_section: partenaire_section
     target_bundles_drag_drop:
       audio_media:
         weight: -42
@@ -76,8 +76,8 @@ settings:
         weight: -61
         enabled: false
       bp_block:
-        enabled: true
         weight: -60
+        enabled: false
       bp_carousel:
         enabled: true
         weight: -59
@@ -144,6 +144,12 @@ settings:
       news_events:
         enabled: true
         weight: 62
+      partenaire:
+        weight: 67
+        enabled: false
+      partenaire_section:
+        enabled: true
+        weight: 68
       presentation:
         weight: -44
         enabled: false
