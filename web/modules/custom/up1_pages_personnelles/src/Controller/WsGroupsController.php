@@ -607,14 +607,16 @@ class WsGroupsController extends ControllerBase {
 
   public function editPagePerso($username) {
     $user = user_load_by_name($username);
-
+    \Drupal::logger('edit_page_perso')->info("$username; id : " . $user->id());
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
         ->condition('uid', $user->id());
         $result = $query->execute();
+      \Drupal::logger('edit_page_perso')->info(count($result) . " Page perso");
       if (!empty($result) && count($result) == 1) {
         $nid = reset($result);
+      \Drupal::logger('edit_page_perso')->info($nid);
         $goto = "/node/$nid/edit";
       }
       else {
