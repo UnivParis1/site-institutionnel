@@ -609,13 +609,22 @@ class WsGroupsController extends ControllerBase {
     $user = user_load_by_name($username);
 
     if ($user) {
-      $ids = \Drupal::entityQuery('node')
+      $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
-        ->condition('uid', $user->id())
-        ->execute();
-      $nid = reset($ids);
+        ->condition('uid', $user->id());
+        $result = $query->execute();
+      if (!empty($result) && count($result) == 1) {
+        $nid = reset($result);
+        $goto = "/node/$nid/edit";
+      }
+      else {
+        \Drupal::logger('page_perso_from_comptex')->warning("$username doesn't have any page perso.");
+        $goto = '<front>';
+      }
 
-
+      $response = new Symfony\Component\HttpFoundation\RedirectResponse($goto);
+      $response->send();
+      return;
     }
   }
 
