@@ -605,6 +605,20 @@ class WsGroupsController extends ControllerBase {
     ];
   }
 
+  public function editPagePerso($username) {
+    $user = user_load_by_name($username);
+
+    if ($user) {
+      $ids = \Drupal::entityQuery('node')
+        ->condition('type', 'page_personnelle')
+        ->condition('uid', $user->id())
+        ->execute();
+      $nid = reset($ids);
+
+
+    }
+  }
+
   private function selectFeUsers($username) {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [

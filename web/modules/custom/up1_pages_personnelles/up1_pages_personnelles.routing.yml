@@ -169,3 +169,10 @@ up1_pages_personnelles.delete_queue_users:
     _title: 'Delete queue import users from LDAP'
   requirements:
     _permission: 'access administration pages'
+
+up1_pages_personnelles.edit_page_perso:
+  path: '/modifier-ma-page-personnelle/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::editPagePerso'
+  requirements:
+    _permission: 'has labeled URI'
