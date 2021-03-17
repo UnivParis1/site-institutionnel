@@ -618,7 +618,6 @@ class WsGroupsController extends ControllerBase {
         $goto = "/node/$nid/edit";
       }
       else {
-        \Drupal::logger('page_perso_from_comptex')->warning("$username doesn't have any page perso.");
         $goto = '<front>';
       }
 
