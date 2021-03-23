@@ -99,6 +99,7 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
               'value' => "<div>" . $publications . "</div>",
               'format' => 'full_html'
             ];
+            $node->site_id = NULL;
             $node->save();
           }
           catch (\Exception $e) {

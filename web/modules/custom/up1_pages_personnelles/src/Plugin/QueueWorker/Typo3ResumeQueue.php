@@ -98,7 +98,7 @@ class Typo3ResumeQueue extends QueueWorkerBase implements ContainerFactoryPlugin
               'value' => "<div>" . $item->tx_oxcspagepersonnel_cv2 . "</div>",
               'format' => 'full_html'
             ];
-
+            $node->site_id = NULL;
             $node->save();
           } catch (\Exception $e) {
             \Drupal::logger('up1_typo3_resume_queue')->error($this->t('La page personnelle de @username n\'a pas pu être créée.',
