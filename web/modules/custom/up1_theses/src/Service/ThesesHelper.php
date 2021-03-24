@@ -4,6 +4,7 @@ namespace Drupal\up1_theses\Service;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\taxonomy\Entity\Term;
 
 
 class ThesesHelper {
@@ -50,6 +51,7 @@ class ThesesHelper {
       watchdog_exception('up1_theses', $e);
     }
 
+    return FALSE;
   }
 
   /**
@@ -72,7 +74,6 @@ class ThesesHelper {
       $uid = $this->thesesService->getWebmestreUid();
       foreach ($data as $key => $these) {
         $ok = FALSE;
-        $existingTheses = $this->thesesService->getExistingTheses();
         $cod_ths = $these['COD_THS'];
 
         if (!empty($nodes)) {
@@ -89,6 +90,9 @@ class ThesesHelper {
           !empty($these['HH_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
           !empty($these['LIB_PR1_IND']) && !empty($these['LIB_NOM_PAT_IND']) &&
           !empty($these['PNOMDIR']) && !empty($these['NOMPDIR'])) {
+          $codedo = "ED" . $these['COD_EDO'];
+
+          $existingTheses = $this->thesesService->getExistingTheses();
           $address = $this->formatAddress($these['LIB_CMT_LEU_SOU_THS']);
           $thesard = ucfirst(strtolower($these['LIB_PR1_IND']))
             . " " . ucfirst(strtolower($these['LIB_NOM_PAT_IND']));
@@ -98,6 +102,9 @@ class ThesesHelper {
             preg_match('/^[É]/i', $these['LIB_EDO']) ||
             preg_match('/^[é]/i', $these['LIB_EDO'])) {
             $libedo = "École doctorale d'" . $these['LIB_EDO'];
+          }
+          elseif (preg_match('/(de)/i')) {
+            $libedo = "École doctorale " . $these['LIB_EDO'];
           }
           else {
             $libedo = "École doctorale de " . $these['LIB_EDO'];
@@ -127,8 +134,10 @@ class ThesesHelper {
                 'lng' => isset($address['lon']) ? $address['lon'] : 0,
               ]
             ],
+            'field_ecole_doctorale' => $this->getEcoleDoctoraleTerm("ED" . $these['COD_EDO']) ?
+              $this->getEcoleDoctoraleTerm("ED" . $these['COD_EDO']) : NULL,
             'field_categories' => $category,
-            'cod_edo' => "ED" . $these['COD_EDO'],
+            'cod_edo' => $codedo,
             'lib_edo' => $libedo,
           ];
         }
@@ -136,6 +145,31 @@ class ThesesHelper {
     }
     return $nodes;
 
+  }
+
+  public function getEcoleDoctoraleTerm($code, $libelle) {
+    $vocabulary_name = "ecoles_doctorales";
+    $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_name);
+
+    $query = new EntityFieldQuery();
+    $query
+      ->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', $vocabulary_name)
+      ->propertyCondition('vid', $vocab->vid)
+      ->fieldCondition('field_code_edo', 'value', $code, '=');
+
+    $results = $query->execute();
+    if (!empty($results['taxonomy_term']) && count($results['taxonomy_term']) == 1) {
+      return reset($results['taxonomy_term']);
+    }
+    elseif (empty($results['taxonomy_term'])) {
+      $term = Term::create([
+        'name' => $libelle,
+        'vid' => $vocab->vid
+      ]);
+      $term->save();
+    }
+    else return FALSE;
   }
 
   /**
