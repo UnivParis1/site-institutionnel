@@ -4,6 +4,18 @@
 */
 
 (function($) {
+
+  var vid = $("#bg-video video");
+  $('#play-button').click(function(){
+    // vid.get(0).play();
+    console.log('trigger play');
+    $("#bg-video video").trigger('play');
+  });
+  $('#pause-button').click(function(){
+    // vid.get(0).pause();
+    console.log('trigger pause');
+    $("#bg-video video").get(0).pause();
+  });
   //accessibility toggler
   if($('#accessibility-toggle').length > 0){
     $('#accessibility-toggle').click(function(){
