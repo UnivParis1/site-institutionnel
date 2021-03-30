@@ -134,8 +134,8 @@ class ThesesHelper {
                 'lng' => isset($address['lon']) ? $address['lon'] : 0,
               ]
             ],
-            'field_ecole_doctorale' => $this->getEcoleDoctoraleTerm("ED" . $these['COD_EDO']) ?
-              $this->getEcoleDoctoraleTerm("ED" . $these['COD_EDO']) : NULL,
+            'field_ecole_doctorale' => $this->getEcoleDoctoraleTerm("ED" . $these['COD_EDO'], $these['LIB_EDO']) ?
+              $this->getEcoleDoctoraleTerm("ED" . $these['COD_EDO'], $these['LIB_EDO']) : NULL,
             'field_categories' => $category,
             'cod_edo' => $codedo,
             'lib_edo' => $libedo,
