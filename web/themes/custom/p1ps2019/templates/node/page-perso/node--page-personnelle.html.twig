@@ -84,14 +84,16 @@
 {% set thesis_subject = content.field_thesis_subject|render %}
 {% set phd_supervisor = content.field_phd_supervisor|render %}
 {#{% set skills = content.field_skills|render %}#}
-{% if content.field_get_hal_publications.0 %}
-  {% set publications = hal_publications %}
-{% else %}
-  {% set publications = content.field_publications|render %}
+{% if content.field_get_hal_publications %}
+  {% set hal_publications = hal_publications %}
+{% endif %}
+{% if content.field_publications|render %}
+  {% set publications = content.field_publications %}
 {% endif %}
 {% set resume_text = content.field_resume_text|render %}
 {% set resume = content.field_resume|render %}
 {% set resume_pdf = content.field_resume_pdf|render %}
+{% set link_to_resume = content.field_link_to_resume|render %}
 {% set email_address = content.field_other_email_address|render %}
 {% set scientific_resp = content.field_scientific_resp|render %}
 {% set thesis_directions = content.field_thesis_directions|render %}
@@ -103,7 +105,9 @@
 {% set hal = content.field_hal_link|render %}
 {% set academia = content.field_academia_link|render %}
 {% set my_medias = content.field_my_medias|render %}
-{% set skills = expertises %}
+{% if expertises %}
+  {% set skills = expertises %}
+{% endif %}
 {% set publis = content.field_highlight_publications|render %}
 {% set sticky_pub = content.field_sticky_publications|render %}
 
@@ -128,7 +132,7 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if publications %}
+            {% if publications or hal_publications %}
               <div class="btn btn-primary">
                 <a href="#page-perso-publications">{{ 'Publications'|t }}</a>
                 <i class="icon-ok"></i>
@@ -213,8 +217,8 @@
             {# ----- field_thesis_directions ----- #}
             {# field_research_themes #}
             {% if info or research_themes %}
-              <p class="txt-bold">{{ "Research themes"|t }}</p>
               {% if info %}
+                <p class="txt-bold">{{ "Research themes"|t }}</p>
                 <ul>
                   {% for key, item in info %}
                     <li>{{ item }}</li>
@@ -222,6 +226,7 @@
                 </ul>
               {% endif %}
               {% if research_themes %}
+                <p class="txt-bold">{{ "Research projects"|t }}</p>
                 {{ content.field_research_themes.0 }}
               {% endif %}
             {% endif %}
@@ -249,7 +254,7 @@
               {% endif %}
             {% endif %}
           </section>
-          {% if publications or publis %}
+          {% if publications or publis or hal_publications %}
             <section class="new-section publications">
               <a id="page-perso-publications"></a>
               <h2>{{ "Publications"|t }}</h2>
@@ -263,7 +268,10 @@
                 </div>
               {% endif %}
               {% if publications %}
-                {{ publications|raw }}
+                {{ content.field_publications.0 }}
+              {% endif %}
+              {% if hal_publications %}
+                {{ content.hal_publications }}
               {% endif %}
             </section>
           {% endif %}
@@ -368,7 +376,16 @@
                 </div>
               </div>
             </div>
-            {% if resume %}
+            {% if not resume and link_to_resume %}
+              <div class="box-style no-shadow auto-height semi-field-sep">
+                <div class="field--name-field-resume">
+                  <span class="fa fa-file-pdf"></span>
+                  <a href="{{ content.field_link_to_resume.0['#url'] }}" title="Lien vers le CV de {{ label.0 }}" class="mediafichierlien">
+                    {{ "CV"|t }}
+                  </a>
+                </div>
+              </div>
+            {% elseif resume %}
               <div class="box-style no-shadow auto-height semi-field-sep">
                 {{ resume }}
               </div>

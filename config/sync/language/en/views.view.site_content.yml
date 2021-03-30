@@ -1,13 +1,32 @@
 display:
   default:
+    display_title: Master
     display_options:
+      exposed_form:
+        options:
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+      pager:
+        options:
+          tags:
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
       fields:
         timestamp:
           label: 'Présente des contenus nouveaux'
+        title:
+          label: Title
         status:
           label: 'Statut de publication'
         promote:
           label: 'Promu en page d''accueil'
+        uid:
+          label: 'Authored by'
         created:
           label: 'Écrit le'
         changed:
@@ -16,7 +35,9 @@ display:
           label: Traduction
         operations:
           label: Actions
-      title: Contenu
+        name:
+          label: Name
+      title: Content
       arguments:
         site_id:
           exception:
@@ -24,4 +45,4 @@ display:
   tab:
     display_options:
       menu:
-        title: Contenu
+        title: Content

@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the up1_move_to_trash module.
+ */
+
+/**
+ * Deleted field "deleted" to delete module.
+ */
+function up1_move_to_trash_update_8001() {
+  $entity_type = 'node'; // or user or wherever the field appears
+  $bundles = ["news, page, event, news2018, viva, page_personnelle, second_level_pages, offer, publication, article"];
+  $field_machine_names = array('deleted', 'move_to_trash');
+  foreach($field_machine_names as $field_machine_name) {
+    foreach ($bundles as $bundle) {
+      $field = \Drupal::entityTypeManager()
+        ->getStorage('field_config')
+        ->load($entity_type . $bundle . $field_machine_name);
+      if ($field) {
+        \Drupal::entityTypeManager()
+          ->getStorage('node')
+          ->purgeFieldData($field_machine_name, 100);
+        $field->delete();
+        field_purge_field($field_machine_name);
+      }
+    }
+  }
+}
+
+/**
+ * Deleted fields "deleted" and "move_to_trash" to delete module.
+ */
+function up1_move_to_trash_update_8002() {
+  $entity_type = 'node'; // or user or wherever the field appears
+  $bundles = ["news, page, event, news2018, viva, page_personnelle, second_level_pages, offer, publication, article"];
+  $field_machine_names = array('deleted', 'move_to_trash');
+  foreach($field_machine_names as $field_machine_name) {
+    foreach ($bundles as $bundle) {
+      $field = \Drupal::entityTypeManager()
+        ->getStorage('field_config')
+        ->load($entity_type . $bundle . $field_machine_name);
+      if ($field) {
+        \Drupal::entityTypeManager()
+          ->getStorage('node')
+          ->purgeFieldData($field_machine_name, 100);
+        $field->delete();
+        field_purge_field($field_machine_name);
+      }
+    }
+  }
+}

@@ -40,11 +40,32 @@ class AnnuaireConfigForm extends ConfigFormBase {
       '#default_value' => $config->get('url_ws'),
     ];
 
+    $form['search_user'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t("Type de recherche"),
+      '#description' => $this->t('Doit être du type "searchUser, searchUserTrusted etc."'),
+      '#default_value' => $config->get('search_user'),
+    ];
+
     $form['filtre_site_principal'] = [
       '#type' => 'textarea',
-      '#title' => $this->t("Type de recherche et filtre a appliquer pour recupérer les personnes de l'annuaire du site principal"),
-      '#description' => $this->t('Doit être du type "searchUser?filter_member_of_group=..."'),
+      '#title' => $this->t("Filtre(s) à appliquer pour recupérer la liste des pages personnelles."),
+      '#description' => $this->t('Doit être du type "filter_member_of_group=..."'),
       '#default_value' => $config->get('filtre_site_principal'),
+    ];
+
+    $form['filtre_faculty'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("Filtre(s) à appliquer pour recupérer uniquement la liste des pages personnelles des enseignants-chercheurs"),
+      '#description' => $this->t('Doit être du type "filter_eduPersonAffiliation=..."'),
+      '#default_value' => $config->get('filtre_faculty'),
+    ];
+
+    $form['filtre_student'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("Filtre(s) a appliquer pour recupérer uniquement la liste des pages personnelles des doctorants"),
+      '#description' => $this->t('Doit être du type "filter_eduPersonAffiliation=..., filter_student="'),
+      '#default_value' => $config->get('filtre_student'),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -66,7 +87,10 @@ class AnnuaireConfigForm extends ConfigFormBase {
 
     $this->config('micro_annuaire_sorbonne.annuaireconfig')
       ->set('url_ws', $form_state->getValue('url_ws'))
+      ->set('search_user', $form_state->getValue('search_user'))
       ->set('filtre_site_principal', $form_state->getValue('filtre_site_principal'))
+      ->set('filtre_faculty', $form_state->getValue('filtre_faculty'))
+      ->set('filtre_student', $form_state->getValue('filtre_student'))
       ->save();
   }
 

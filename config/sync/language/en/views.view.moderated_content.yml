@@ -2,18 +2,31 @@ label: 'Contenu modéré'
 description: 'Trouver et modérer du contenu.'
 display:
   default:
+    display_title: Master
     display_options:
       exposed_form:
         options:
           submit_button: Filter
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
       pager:
         options:
           tags:
             previous: '‹ Précédent'
             next: 'Suivant ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
       fields:
+        title:
+          label: Title
         type:
           label: 'Type de contenu'
+        name:
+          label: Author
         moderation_state:
           label: 'État de modération'
         changed:
@@ -21,6 +34,9 @@ display:
         operations:
           label: Actions
       filters:
+        title:
+          expose:
+            label: Title
         type:
           expose:
             label: 'Type de contenu'

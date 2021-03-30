@@ -2,18 +2,27 @@ label: Fichiers
 description: 'Trouver et gérer les fichiers.'
 display:
   default:
+    display_title: Master
     display_options:
       exposed_form:
         options:
           submit_button: Filter
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
       pager:
         options:
           tags:
             previous: '‹ Précédent'
             next: 'Suivant ›'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
       fields:
         fid:
           label: 'Identifiant (FID)'
+        filename:
+          label: Name
         filemime:
           label: 'Type MIME'
         filesize:
@@ -55,6 +64,10 @@ display:
           tags:
             previous: '‹ Précédent'
             next: 'Suivant ›'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
       fields:
         entity_label:
           label: Entité
