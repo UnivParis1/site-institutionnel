@@ -55,7 +55,7 @@
 %}
 <section{{ attributes.addClass(classes) }}>
   {% block content %}
-    {% if content.field_video_couverture != 0 %}
+    {% if content.field_video_couverture is not empty %}
       <div id="bg-video">
         <video controls>
           <source src="{{ content.field_video_couverture }}" type="video/mp4">
