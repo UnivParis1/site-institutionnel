@@ -54,20 +54,20 @@
 ]
 %}
 <section{{ attributes.addClass(classes) }}>
-  {% if content.field_video_couverture %}
-    <div id="bg-video">
-      <video controls>
-        <source src="{{ content.field_video_couverture }}" type="video/mp4">
-      </video>
-    </div>
-    <div class="buttons">
-      <button class="button" id="play-button">PLAY</button>
-      <button class="button" id="pause-button">PAUSE</button>
-      {# <button class="button" id="stop-button">STOP</button> #}
-    </div>
-  {% else %}
-    {% block content %}
-        {{ content }}
-      {% endblock %}
-  {% endif %}
+  {% block content %}
+    {% if content.field_video_couverture %}
+      <div id="bg-video">
+        <video controls>
+          <source src="{{ content.field_video_couverture }}" type="video/mp4">
+        </video>
+      </div>
+      <div class="buttons">
+        <button class="button" id="play-button">PLAY</button>
+        <button class="button" id="pause-button">PAUSE</button>
+        {# <button class="button" id="stop-button">STOP</button> #}
+      </div>
+    {% else %}
+      {{ content }}
+    {% endif %}
+  {% endblock %}
 </section>
