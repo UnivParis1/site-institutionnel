@@ -54,14 +54,51 @@
 ]
 %}
 <section{{ attributes.addClass(classes) }}>
-  {% block content %}
+<<<<<<< HEAD
+<<<<<<< HEAD
+  {# {% block content %}
     {{ content }}
-  {% endblock %}
+  {% endblock %} #}
+  <div id="bg-video">{{ content }}</div>
   <div class="buttons">
     <button class="button" id="play-button">PLAY</button>
     <button class="button" id="pause-button">PAUSE</button>
     {# <button class="button" id="stop-button">STOP</button> #}
   </div>
-
-<div id="bg-video"></div>
+=======
+  {% if content.field_video_couverture %}
+    <div id="bg-video">
+      <video controls>
+        <source src="{{ content.field_video_couverture }}" type="video/mp4">
+      </video>
+    </div>
+    <div class="buttons">
+      <button class="button" id="play-button">PLAY</button>
+      <button class="button" id="pause-button">PAUSE</button>
+      {# <button class="button" id="stop-button">STOP</button> #}
+    </div>
+  {% else %}
+    {% block content %}
+        {{ content }}
+      {% endblock %}
+  {% endif %}
+>>>>>>> bugfix/video-home
+=======
+  {% block content %}
+    {% if content.field_video_couverture is not empty %}
+      <div id="bg-video">
+        <video controls>
+          <source src="{{ content.field_video_couverture }}" type="video/mp4">
+        </video>
+      </div>
+      <div class="buttons">
+        <button class="button" id="play-button">PLAY</button>
+        <button class="button" id="pause-button">PAUSE</button>
+        {# <button class="button" id="stop-button">STOP</button> #}
+      </div>
+    {% else %}
+      {{ content }}
+    {% endif %}
+  {% endblock %}
+>>>>>>> bugfix/video-home
 </section>

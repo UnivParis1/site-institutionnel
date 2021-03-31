@@ -78,12 +78,12 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
     try {
       $storage = $this->entityTypeManager->getStorage('node');
       $node = $storage->create([
-        'cod_ths' => $item['cod_ths'],
         'title' => $item['title'],
         'type' => 'viva',
         'langcode' => 'fr',
         'uid' => $item['uid'],
         'status' => 1,
+        'site_id' => NULL,
         'field_subtitle' => $item['field_subtitle'],
         'field_thesis_supervisor' => $item['field_thesis_supervisor'],
         'field_event_address' => $item['field_event_address'],
@@ -93,6 +93,7 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
         'field_edo_label' => $item['lib_edo'],
       ]);
       $node->set('field_categories', [$item['field_categories']]);
+      $node->set('field_ecole_doctorale', [$item['field_ecole_doctorale']]);
       $node->set('moderation_state', 'published');
 
       $node->save();

@@ -27,8 +27,8 @@ class KeywordsBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function blockForm($form, FormStateInterface $form_state) {
-    $form['nuage'] = [
+ /* public function blockForm($form, FormStateInterface $form_state) {
+    /*$form['nuage'] = [
       '#type' => 'fieldset',
       '#title' => t('Cloud'),
       '#description' => t('Enter generally used keywords for search'),
@@ -90,23 +90,23 @@ class KeywordsBlock extends BlockBase {
     ];
 
     return $form;
-  }
+  }  */
 
   /**
    * {@inheritdoc}
    */
-  public function blockSubmit($form, FormStateInterface $form_state) {
+ /* public function blockSubmit($form, FormStateInterface $form_state) {
     $fs = $form_state->getValue('nuage');
 	for($i=1;$i<=5;$i++){
 		$this->configuration['mot_cle_'.$i] = $fs['mot_cle_'.$i];
 		$this->configuration['lien_mot_cle_'.$i] = $fs['lien_mot_cle_'.$i];
 	}
-    /*$this->configuration['mot_cle_1'] = $fs['mot_cle_1'];
-    $this->configuration['mot_cle_2'] = $fs['mot_cle_2'];
-    $this->configuration['mot_cle_3'] = $fs['mot_cle_3'];
-    $this->configuration['mot_cle_4'] = $fs['mot_cle_4'];
-    $this->configuration['mot_cle_5'] = $fs['mot_cle_5'];*/
-  }
+    //$this->configuration['mot_cle_1'] = $fs['mot_cle_1'];
+    //$this->configuration['mot_cle_2'] = $fs['mot_cle_2'];
+    //$this->configuration['mot_cle_3'] = $fs['mot_cle_3'];
+    //$this->configuration['mot_cle_4'] = $fs['mot_cle_4'];
+    //$this->configuration['mot_cle_5'] = $fs['mot_cle_5'];
+  } */
 
   /**
    * {@inheritdoc}
@@ -133,8 +133,8 @@ class KeywordsBlock extends BlockBase {
 	$menu =_up1_keywords_render_menu_navigation('mots-cles-page-d-accueil');
     $build['up1_keywords'] = [
       '#theme' => 'up1_keywords',
-      '#keywords' => $keywords,
-	  '#keywordslinks' => $keywordslinks,
+      //'#keywords' => $keywords,
+	  //'#keywordslinks' => $keywordslinks,
       '#search' => $search_form,
 	  '#menu' =>$menu,
       '#url' => $config->get('url_resultat_de_recherche'),
