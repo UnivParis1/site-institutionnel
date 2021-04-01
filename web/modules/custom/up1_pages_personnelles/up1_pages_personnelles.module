@@ -216,8 +216,9 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
             $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
             break;
           case 'nomprenom':
-            $publications = up1_pages_personnelles_get_publications_rss($node->get('field_firstname')->getValue(),
-              $node->get('field_name')->getValue());
+            $firstname = $node->get('field_firstname')->getValue();
+            $name = $node->get('field_name')->getValue();
+            $publications = up1_pages_personnelles_get_publications_rss($firstname[0]['value'],$name[0]['value']);
             break;
           case 'nul':
             $publications = "";
