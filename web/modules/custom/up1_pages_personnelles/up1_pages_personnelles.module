@@ -208,7 +208,7 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
         $variables[$key] = $information;
       }
 
-      $get_publications = $node->get('field_get_hal_publications')->getValue();
+      $get_publications = $node->get('field_my_hal_publications')->getValue();
       if (!empty($get_publications) && $get_publications[0]['value']) {
         switch ($get_publications[0]['value']) {
           case 'idhal':
