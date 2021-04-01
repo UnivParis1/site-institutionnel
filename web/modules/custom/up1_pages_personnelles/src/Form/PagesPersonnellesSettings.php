@@ -50,6 +50,7 @@ class PagesPersonnellesSettings extends ConfigFormBase {
       ->set('other_filters', $form_state->getValue('other_filters'))
       ->set('search_user_page', $form_state->getValue('search_user_page'))
       ->set('url_hal_api', $form_state->getValue('url_hal_api'))
+      ->set('url_hal_rss', $form_state->getValue('url_hal_rss'))
       ->set('url_userphoto', $form_state->getValue('url_userphoto'))
       ->save();
   }
@@ -164,6 +165,14 @@ class PagesPersonnellesSettings extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('URL of the web service HAL'),
       '#default_value' => $config->get('url_hal_api'),
+      '#maxlength' => 255,
+      '#size' => 120,
+      '#required' => TRUE
+    ];
+    $form['single_page']['url_hal_rss'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('URL of the HAL RSS'),
+      '#default_value' => $config->get('url_hal_rss'),
       '#maxlength' => 255,
       '#size' => 120,
       '#required' => TRUE
