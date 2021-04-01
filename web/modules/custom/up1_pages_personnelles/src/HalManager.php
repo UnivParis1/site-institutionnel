@@ -47,6 +47,26 @@ class HalManager implements HalInterface {
   }
 
   /**
+   * @param $firstname (string) firstname
+   * @param $name (string) name
+   *
+   * @return array|mixed
+   */
+  public function getPublicationsRSS($firstname, $name) {
+    $publications = FALSE;
+
+    if (isset($firstname) && !empty($firstname) && isset($name) && !empty($name)) {
+      $config = \Drupal::config('up1_pages_personnelles.settings');
+      $ws = $config->get('url_hal_rss');
+
+      $url = "$ws\"$firstname+$name\"";
+      $publications = file_get_contents($url);
+    }
+
+    return $publications;
+  }
+
+  /**
    * @param $array
    *
    * @return mixed

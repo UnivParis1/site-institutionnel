@@ -136,6 +136,8 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_firstname']['widget'][0]['value']['#default_value'] = $userInformation['givenName'];
       $form['field_firstname']['#disabled'] = TRUE;
 
+      $form['field_other_affiliation']['#disabled'] = TRUE;
+
       $fonction = '';
       if (isset($userInformation['employeeType'])) {
         $fonction .= $userInformation['employeeType'];
@@ -206,17 +208,23 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
         $variables[$key] = $information;
       }
 
-      $variables['publications'] = "";
       $get_publications = $node->get('field_get_hal_publications')->getValue();
-      $hal_publications = $node->get('field_id_hal')->getValue();
       if (!empty($get_publications) && $get_publications[0]['value']) {
-        $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
-
+        switch ($get_publications[0]['value']) {
+          case 'idhal':
+            $hal_publications = $node->get('field_id_hal')->getValue();
+            $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
+            break;
+          case 'nomprenom':
+            $publications = up1_pages_personnelles_get_publications_rss($node->get('field_firstname')->getValue(),
+              $node->get('field_name')->getValue());
+            break;
+          case 'nul':
+            $publications = "";
+            break;
+        }
         $variables['hal_publications'] = $publications;
       }
-    }
-    else {
-
     }
   }
 }
@@ -242,6 +250,19 @@ function up1_pages_personnelles_get_comptex_info($name) {
 function up1_pages_personnelles_get_hal_publications($name) {
   $hal = new HalManager();
   $publications = $hal->getUserPublications($name);
+
+  return $publications;
+}
+
+/**
+ * @param $firstname
+ * @param $name
+ *
+ * @return array
+ */
+function up1_pages_personnelles_get_publications_rss($firstname, $name) {
+  $hal = new HalManager();
+  $publications = $hal->getPublicationsRSS($firstname, $name);
 
   return $publications;
 }
@@ -306,7 +327,7 @@ function up1_comptex_markup($data) {
         <label><i class="fa fa-map-marker"></i></label><span class="uneditable-input ">' . $data['buildingName']. '</span>';
     }
     if (isset($data['postalAddress'])) {
-     $address .= '<span class="postalAddress">' . $data['postalAddress']. '</span>';
+      $address .= '<span class="postalAddress">' . $data['postalAddress']. '</span>';
     }
     $address .='</div>';
   }
@@ -331,7 +352,7 @@ function up1_comptex_markup($data) {
           <div class="col-md-5 contactInformation">
             <div class="mail"><i class="fa fa-envelope"></i> ' . $data['mail']. '</div>'.
     $phone
-     . $address . '
+    . $address . '
           </div>
       </div>
     </div>
