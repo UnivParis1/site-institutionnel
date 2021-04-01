@@ -58,9 +58,11 @@ class HalManager implements HalInterface {
     if (isset($firstname) && !empty($firstname) && isset($name) && !empty($name)) {
       $config = \Drupal::config('up1_pages_personnelles.settings');
       $ws = $config->get('url_hal_rss');
-
+      \Drupal::logger('up1_pages_personnelles')->info(print_r($ws,1));
       $url = "$ws\"$firstname+$name\"";
+      \Drupal::logger('up1_pages_personnelles')->info(print_r($url,1));
       $publications = file_get_contents($url);
+      \Drupal::logger('up1_pages_personnelles')->info(print_r($publications,1));
     }
 
     return $publications;
