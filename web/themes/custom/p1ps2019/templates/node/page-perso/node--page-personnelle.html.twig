@@ -84,9 +84,7 @@
 {% set thesis_subject = content.field_thesis_subject|render %}
 {% set phd_supervisor = content.field_phd_supervisor|render %}
 {#{% set skills = content.field_skills|render %}#}
-{% if content.field_get_hal_publications %}
-  {% set hal_publications = hal_publications %}
-{% endif %}
+{% set hal_publications = hal_publications %}
 {% if content.field_publications|render %}
   {% set publications = content.field_publications %}
 {% endif %}
@@ -132,7 +130,7 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if publications or hal_publications %}
+            {% if publications or hal_publications or publis %}
               <div class="btn btn-primary">
                 <a href="#page-perso-publications">{{ 'Publications'|t }}</a>
                 <i class="icon-ok"></i>
@@ -271,7 +269,9 @@
                 {{ content.field_publications.0 }}
               {% endif %}
               {% if hal_publications %}
-                {{ content.hal_publications }}
+              <div>
+              {{ hal_publications }}
+              </div>
               {% endif %}
             </section>
           {% endif %}
