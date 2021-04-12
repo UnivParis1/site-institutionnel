@@ -149,27 +149,24 @@ class ThesesHelper {
 
   public function getEcoleDoctoraleTerm($code, $libelle) {
     $vocabulary_name = "ecoles_doctorales";
-    $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_name);
 
-    $query = new EntityFieldQuery();
-    $query
-      ->entityCondition('entity_type', 'taxonomy_term')
-      ->entityCondition('bundle', $vocabulary_name)
-      ->propertyCondition('vid', $vocab->vid)
-      ->fieldCondition('field_code_edo', 'value', $code, '=');
-
-    $results = $query->execute();
-    if (!empty($results['taxonomy_term']) && count($results['taxonomy_term']) == 1) {
-      return reset($results['taxonomy_term']);
+    $taxonomyEntity = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term');
+    $termEd = $taxonomyEntity->loadByProperties([
+      'name' => $code,
+      'vid' => $vocabulary_name
+    ]);
+    if (!empty($termEd)) {
+      $term = reset($termEd);
     }
-    elseif (empty($results['taxonomy_term'])) {
+    else {
       $term = Term::create([
         'name' => $libelle,
-        'vid' => $vocab->vid
+        'vid' => $vocabulary_name
       ]);
       $term->save();
     }
-    else return FALSE;
+    return $term;
   }
 
   /**
