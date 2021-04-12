@@ -269,7 +269,9 @@ class ThesesHelper {
    */
   public function formatDate($date, $hours, $minutes) {
     $format = 'd/m/Y H:i';
+    \Drupal::logger('up1_theses')->info(print_r("Y-m-dTH:i:s : $date", 1));
     $fullDate = $date . " " . ($hours - 2).":";
+
     $fullDate .= ($minutes == 0)? "00" : $minutes;
 
     $newDate = \DateTime::createFromFormat($format, $fullDate);
