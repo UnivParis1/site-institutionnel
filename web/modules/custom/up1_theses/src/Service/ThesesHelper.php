@@ -282,7 +282,9 @@ class ThesesHelper {
       $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
       \Drupal::logger('up1_theses')->info(print_r("CEST ? Y-m-dTH:i:s : $formattedDate", 1));
       $formattedDate = preg_replace('/CET/i', 'T', $formattedDate);
-      \Drupal::logger('up1_theses')->info(print_r("CEST ? Y-m-dTH:i:s : $formattedDate", 1));
+      \Drupal::logger('up1_theses')->info(print_r("CET ? Y-m-dTH:i:s : $formattedDate", 1));
+      $formattedDate = preg_replace('/LMT/i', 'T', $formattedDate);
+      \Drupal::logger('up1_theses')->info(print_r("LMT ? Y-m-dTH:i:s : $formattedDate", 1));
     }
     else {
       \Drupal::logger('up1_theses')->notice("The date won't be created for this viva.");
