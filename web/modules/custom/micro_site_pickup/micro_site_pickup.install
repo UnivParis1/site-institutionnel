@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_site_pickup.install.
+ */
+
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
+
+/**
+* Implements hook_install().
+*/
+function micro_site_pickup_install() {
+  // Grant permission to roles for pickup content.
+  $roles = [
+    'webmestre_sous_site',
+    'webmestre_general',
+    'admin_dir_com',
+  ];
+  foreach ($roles as $role_id) {
+    $role = Role::load($role_id);
+    if ($role instanceof RoleInterface) {
+      $role->grantPermission('pickup content micro sites');
+      $role->save();
+    }
+  }
+}
