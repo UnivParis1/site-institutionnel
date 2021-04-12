@@ -278,8 +278,11 @@ class ThesesHelper {
     if ($newDate instanceof \DateTime) {
       $formattedDate = \Drupal::service('date.formatter')
         ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
+      \Drupal::logger('up1_theses')->info(print_r("Y-m-dTH:i:s : $formattedDate", 1));
       $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
+      \Drupal::logger('up1_theses')->info(print_r("CEST ? Y-m-dTH:i:s : $formattedDate", 1));
       $formattedDate = preg_replace('/CET/i', 'T', $formattedDate);
+      \Drupal::logger('up1_theses')->info(print_r("CEST ? Y-m-dTH:i:s : $formattedDate", 1));
     }
     else {
       \Drupal::logger('up1_theses')->notice("The date won't be created for this viva.");
