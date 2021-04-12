@@ -103,7 +103,7 @@ class ThesesHelper {
             preg_match('/^[é]/i', $these['LIB_EDO'])) {
             $libedo = "École doctorale d'" . $these['LIB_EDO'];
           }
-          elseif (preg_match('/(de)/i')) {
+          elseif (preg_match('/(de)/i', $these['LIB_EDO'])) {
             $libedo = "École doctorale " . $these['LIB_EDO'];
           }
           else {
