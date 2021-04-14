@@ -237,8 +237,8 @@ class ThesesHelper {
    * @return string $formattedDate
    */
   public function formatDate($date, $hours, $minutes) {
-    $format = 'd/m/Y H:i';
-    $fullDate = $date . " " . ($hours - 2).":";
+	  $format = 'd/m/Y H:i';
+	  $fullDate = str_replace('/21', '/2021',$date) . " " . ($hours - 2).":";
     $fullDate .= ($minutes == 0)? "00" : $minutes;
 
     $newDate = \DateTime::createFromFormat($format, $fullDate);
@@ -249,6 +249,7 @@ class ThesesHelper {
         ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
       $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
       $formattedDate = preg_replace('/CET/i', 'T', $formattedDate);
+      $formattedDate = preg_replace('/LMT/i', 'T', $formattedDate);
     }
     else {
       \Drupal::logger('up1_theses')->notice("The date won't be created for this viva.");
