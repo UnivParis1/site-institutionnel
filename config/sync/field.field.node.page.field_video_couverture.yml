@@ -1,0 +1,30 @@
+uuid: 4dca1145-5cf8-44b8-af10-d84d37013bce
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_couverture
+    - media.type.mediatheque
+    - media.type.remote_video
+    - node.type.page
+id: node.page.field_video_couverture
+field_name: field_video_couverture
+entity_type: node
+bundle: page
+label: 'video couverture'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      mediatheque: mediatheque
+      remote_video: remote_video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: remote_video
+field_type: entity_reference
