@@ -128,15 +128,15 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['title']['#disabled'] = TRUE;
 
       $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
-      $form['field_uid_ldap']['#access'] = TRUE;
+      $form['field_uid_ldap']['#access'] = FALSE;
 
       $form['field_name']['widget'][0]['value']['#default_value'] = strtoupper($userInformation['sn']);
-      $form['field_name']['#access'] = TRUE;
+      $form['field_name']['#access'] = FALSE;
 
       $form['field_firstname']['widget'][0]['value']['#default_value'] = $userInformation['givenName'];
-      $form['field_firstname']['#access'] = TRUE;
+      $form['field_firstname']['#access'] = FALSE;
 
-      $form['field_other_affiliation']['#access'] = TRUE;
+      $form['field_other_affiliation']['#access'] = FALSE;
 
       $fonction = '';
       if (isset($userInformation['employeeType'])) {
