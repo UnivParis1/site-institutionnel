@@ -146,9 +146,9 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
         $fonction .= ' (' . $userInformation['supannActivite'] . ')';
       }
       $form['field_fonction']['widget'][0]['value']['#default_value'] = $fonction;
-      $form['field_fonction']['#disabled'] = TRUE;
+      $form['field_fonction']['#access'] = FALSE;
 
-      $form['field_affiliation']['#disabled'] = TRUE;
+      $form['field_affiliation']['#access'] = FALSE;
       $form['field_affiliation']['widget'][0]['value']['#default_value'] =
         $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
 
