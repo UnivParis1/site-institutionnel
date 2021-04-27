@@ -7,6 +7,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Queue\QueueWorkerManager;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Database\Connection;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 define("IMPORT_USER_SIZE", 150);
 define("IMPORT_DATA_SIZE", 50);
@@ -621,7 +622,7 @@ class WsGroupsController extends ControllerBase {
         $goto = '<front>';
       }
 
-      $response = new Symfony\Component\HttpFoundation\RedirectResponse($goto);
+      $response = new RedirectResponse($goto);
       $response->send();
       return;
     }
