@@ -378,8 +378,10 @@ function p1ps2019_preprocess_paragraph(&$variables) {
     $service = \Drupal::service('up1_global.centres');
     $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 
-    if(!empty($paragraph->field_phone->value))
-      array_unshift($variables['centre']['telephone'], $paragraph->field_phone->value);
+    if(!empty($paragraph->field_phone->value)) {
+      $variables['centre']['telephone'] = [];
+      $variables['centre']['telephone'][] = $paragraph->field_phone->value;
+    }
 
     $email = [];
     if (!empty($variables['centre']['email'])) {
@@ -411,7 +413,7 @@ function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id) {
 
 
 function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables) {
-  $suggestions[] = 'field__' . 
-    $variables['element']['#field_name'] . '__' . 
+  $suggestions[] = 'field__' .
+    $variables['element']['#field_name'] . '__' .
     $variables['element']['#view_mode'];
 }
