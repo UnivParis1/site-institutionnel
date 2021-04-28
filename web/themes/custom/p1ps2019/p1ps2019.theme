@@ -381,8 +381,10 @@ function p1ps2019_preprocess_paragraph(&$variables) {
     $service = \Drupal::service('up1_global.centres');
     $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 
-    if(!empty($paragraph->field_phone->value))
-      array_unshift($variables['centre']['telephone'], $paragraph->field_phone->value);
+    if(!empty($paragraph->field_phone->value)) {
+      $variables['centre']['telephone'] = [];
+      $variables['centre']['telephone'][] = $paragraph->field_phone->value;
+    }
 
     $email = [];
     if (!empty($variables['centre']['email'])) {
