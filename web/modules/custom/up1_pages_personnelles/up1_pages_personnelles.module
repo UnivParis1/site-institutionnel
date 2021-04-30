@@ -154,7 +154,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_affiliation']['#access'] = FALSE;
       $form['field_affiliation']['widget'][0]['value']['#default_value'] =
         $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
-      
+
       $nid = $form_state->getformObject()->getEntity()->id();
       $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
       $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
@@ -162,7 +162,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['wrapper']['information'] = [
         '#type' => 'markup',
         '#markup' => '<div class="explications">' .
-               Link::fromTextAndUrl(t('View my page personnelle'), $url->toString()) .
+               Link::fromTextAndUrxl(t('View my page personnelle'), Url::fromRoute('entity.node.canonical', ['node' => $nid], $options)) .
             '</div>',
       ];
 
