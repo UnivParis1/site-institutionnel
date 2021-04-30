@@ -159,7 +159,9 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $nid = $form_state->getformObject()->getEntity()->id();
       $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
 
-      $link = Link::fromTextAndUrl('View my page personnelle',Url::fromRoute('entity.node.canonical', ['node' => $nid], $options));
+      $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
+
+      $link = Link::fromTextAndUrl($url->toString(), $url);
 
       $html_link = $link->toString();
 
