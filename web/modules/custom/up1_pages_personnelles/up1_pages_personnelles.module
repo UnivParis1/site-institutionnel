@@ -13,6 +13,7 @@ use \Drupal\User\UserInterface;
 use \Drupal\Node\NodeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
+use \Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -153,6 +154,19 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_affiliation']['widget'][0]['value']['#default_value'] =
         $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
 
+      $node = $form_state->getFormObject()->getEntity();
+      $nid = $form_state->getformObject()->getEntity()->id();
+      $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
+      $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
+      $url = $url->toString();
+
+      $form['wrapper']['information'] = [
+        '#type' => 'markup',
+        '#markup' => '<div class="explications">' .
+               Link::fromTextAndUrl(t('View my page personnelle'), $node->toUrl('canonical', $options)) .
+            '</div>',
+      ];
+
       /*$info = '';
       if (isset($userInformation['info'])) {
         foreach ($userInformation['info'] as $datum) {
@@ -172,13 +186,6 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
           '#markup' => up1_comptex_markup($userInformation)
         ];
 
-        $form['wrapper']['information'] = [
-          '#type' => 'markup',
-          '#markup' => '<div class="explications">
-            <div>Les informations ci-dessus sont récupérées de <a href="https://comptex.univ-paris1.fr/compte/donnees_perso">Mon compte Paris 1. </a></div>
-            <div>Elles apparaîtront telles quelles sur votre page personnelle. Pour modifier certaines informations, rendez-vous sur
-            <a href="https://comptex.univ-paris1.fr/compte/donnees_perso">Mon compte Paris 1. </a></div></div>'
-        ];
       }*/
     }
   }
