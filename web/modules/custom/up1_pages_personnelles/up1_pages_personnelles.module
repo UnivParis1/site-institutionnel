@@ -9,6 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use \Drupal\up1_pages_personnelles\ComptexManager;
 use \Drupal\up1_pages_personnelles\HalManager;
+use \Drupal\user\Entity\User;
 use \Drupal\User\UserInterface;
 use \Drupal\Node\NodeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -121,7 +122,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
     if ($form_id == "node_page_personnelle_form") {
       $userCurrent = \Drupal::currentUser();
 
-      $user = \Drupal\user\Entity\User::load($userCurrent->id());
+      $user = User::load($userCurrent->id());
       $name = $user->getUsername();
     }
     $userInformation = up1_pages_personnelles_get_comptex_info($name);
@@ -164,9 +165,9 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
 
       $form['wrapper']['information'] = [
         '#type' => 'markup',
-        '#markup' => "<div class='explications'>$html_link</div>",
+        '#markup' => "<div class='explications'>L'URL publique de ma page perso : $html_link</div>",
       ];
-
+      $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
       /*$info = '';
       if (isset($userInformation['info'])) {
         foreach ($userInformation['info'] as $datum) {
