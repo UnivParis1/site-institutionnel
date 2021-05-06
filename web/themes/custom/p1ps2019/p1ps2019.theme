@@ -5,6 +5,8 @@ use \Drupal\Core\Form\FormStateInterface;
 use \Drupal\taxonomy\Entity\Term;
 use \Drupal\user\Entity\User;
 use \Drupal\Core\Url;
+use Drupal\up1_pages_personnelles\WsGroupsService;
+
 
 /**
  * Implements hook_preprocess_HOOK() for html.twig.
@@ -138,7 +140,13 @@ function p1ps2019_preprocess_node(&$variables) {
   if ($node->getType() == 'page_personnelle') {
     $uid = $node->getOwnerId();
     $user = User::load($uid);
-    $variables['mail'] = $user->getEmail();
+    $umail = $user->getEmail();
+    if (isset($umail) && !empty ($umail)) {
+      $variables['mail'] = $umail;
+    } else {
+      $variables['mail'] = WsGroupsService::getUserEmail($user->getUsername());
+    }
+
   }
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
     $skills = $node->get('field_skills')->getValue();
