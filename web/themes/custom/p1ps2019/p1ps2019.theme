@@ -135,7 +135,11 @@ function p1ps2019_preprocess_node(&$variables) {
         break;
     }
   }
-
+  if ($node->getType() == 'page_personnelle') {
+    $uid = $node->getOwnerId();
+    $user = User::load($uid);
+    $variables['mail'] = $user->getEmail();
+  }
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
     $skills = $node->get('field_skills')->getValue();
     if (!empty($skills)) {
@@ -411,7 +415,7 @@ function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id) {
 
 
 function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables) {
-  $suggestions[] = 'field__' . 
-    $variables['element']['#field_name'] . '__' . 
+  $suggestions[] = 'field__' .
+    $variables['element']['#field_name'] . '__' .
     $variables['element']['#view_mode'];
 }
