@@ -142,9 +142,9 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_other_affiliation']['#access'] = FALSE;
       $form['actions']['preview']['#access'] = FALSE;
 
-      $form['field_other_email_address'] = $userInformation['supannMailPerso'];
+      $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $userInformation['supannMailPerso'];
       $form['field_other_email_address']['#disabled'] = TRUE;
-      
+
       $fonction = '';
       if (isset($userInformation['employeeType'])) {
         $fonction .= $userInformation['employeeType'];
