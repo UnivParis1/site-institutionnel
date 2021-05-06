@@ -142,6 +142,9 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_other_affiliation']['#access'] = FALSE;
       $form['actions']['preview']['#access'] = FALSE;
 
+      $form['field_other_email_address'] = $userInformation['supannMailPerso'];
+      $form['field_other_email_address']['#disabled'] = TRUE;
+      
       $fonction = '';
       if (isset($userInformation['employeeType'])) {
         $fonction .= $userInformation['employeeType'];
@@ -170,26 +173,6 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
         '#markup' => "<div class='explications'>L'URL publique de ma page perso : $html_link</div>",
       ];
       $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
-      /*$info = '';
-      if (isset($userInformation['info'])) {
-        foreach ($userInformation['info'] as $datum) {
-          $info .= $datum;
-        }
-      }
-      if (isset ($userInformation)) {
-        $form['field_research_themes']['#default_value'] = $info;
-
-        $form['wrapper'] = [
-          '#type' => 'container',
-        ];
-        $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
-
-        $form['wrapper']['markup'] = [
-          '#type' => 'markup',
-          '#markup' => up1_comptex_markup($userInformation)
-        ];
-
-      }*/
     }
   }
 }
