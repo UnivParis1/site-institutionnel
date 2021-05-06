@@ -30,7 +30,8 @@ class ComptexManager implements ComptexInterface {
     $searchUser = "$ws?token=$username";
 
     $params = [
-      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso"
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
+      'showExtendedInfo'=> 2
     ];
 
     $ch = curl_init();
