@@ -116,4 +116,29 @@ class WsGroupsService implements WsGroupsServiceInterface {
 
     return $users;
   }
+
+  public function getUserEmail($uid) {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $ws = $config->get('url_ws') . $config->get('search_user') . "?token=$uid";
+
+    $params = [
+      'attrs' => 'mail',
+      'showExtendedInfo' => 2
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+    $user = json_decode(curl_exec($ch), TRUE);
+    $user = reset($user);
+
+    curl_close($ch);
+    $mail = '';
+    if ($user && isset($user['mail'])) {
+      $mail = $user['mail'];
+    }
+
+    return $mail;
+  }
 }

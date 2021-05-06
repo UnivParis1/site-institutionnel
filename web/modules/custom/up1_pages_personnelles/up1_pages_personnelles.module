@@ -144,6 +144,8 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
 
       $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $userInformation['supannMailPerso'];
       $form['field_other_email_address']['#disabled'] = TRUE;
+      $form['field_other_email_address']['#access'] = FALSE;
+
 
       $fonction = '';
       if (isset($userInformation['employeeType'])) {
