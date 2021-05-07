@@ -136,8 +136,11 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
         if(empty($teacher->getEmail())) {
           if (isset($get_emails['mail'])) {
             $teacher->mail = $get_emails['mail'];
-            $teacher->save();
           }
+          else {
+            $teacher->mail = $get_emails['eduPersonPrincipalName'];
+          }
+          $teacher->save();
         }
       }
 
@@ -155,8 +158,14 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_other_affiliation']['#access'] = FALSE;
       $form['actions']['preview']['#access'] = FALSE;
 
-      $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
-      $form['field_other_email_address']['#disabled'] = TRUE;
+      if (isset($get_emails['supannMailPerso'])) {
+        $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
+        $form['field_other_email_address']['#disabled'] = TRUE;
+      }
+      else {
+        $form['field_other_email_address']['#access'] = FALSE;
+        $form['field_display_other_email']['#access'] = FALSE;
+      }
 
 
       $fonction = '';
