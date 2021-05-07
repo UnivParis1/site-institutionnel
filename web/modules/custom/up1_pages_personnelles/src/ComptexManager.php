@@ -165,7 +165,7 @@ class ComptexManager implements ComptexInterface {
     $information = reset($information);
     curl_close($ch);
 
-    $emails = $this->formatComptexData($information);
+    $emails = $this->formatEmails($information);
     \Drupal::logger('Comptex')->info(print_r($emails, 1));
 
     return $emails;
