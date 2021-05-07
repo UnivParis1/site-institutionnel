@@ -180,5 +180,8 @@ class ComptexManager implements ComptexInterface {
     if (isset($information['supannMailPerso']) && is_array($information['supannMailPerso'])) {
       $information['supannMailPerso'] = reset($information['supannMailPerso']);
     }
+    if (isset($information['eduPersonPrincipalName']) && is_array($information['eduPersonPrincipalName'])) {
+      $information['eduPersonPrincipalName'] = reset($information['eduPersonPrincipalName']);
+    }
   }
 }
