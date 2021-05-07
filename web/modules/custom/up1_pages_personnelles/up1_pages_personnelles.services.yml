@@ -5,3 +5,7 @@ services:
   up1_pages_personnelles.wsgroups:
     class: Drupal\up1_pages_personnelles\WsGroupsService
     arguments: ['@entity_type.manager']
+  up1_pages_personnelles.database:
+    class: Drupal\Core\Database\Connection
+    factory: 'Drupal\Core\Database\Database::getConnection'
+    arguments: ['default', 'external']

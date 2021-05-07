@@ -15,15 +15,15 @@ use Drupal\node\Entity;
 use Drupal\Core\Url;
 
 /**
- * Executes users (enseignants & doctorants) import from web service.
+ * Executes publications field import from web service.
  *
  * @QueueWorker(
- *   id = "up1_typo3_data_queue",
- *   title = @Translation("Page Perso populate"),
+ *   id = "up1_typo3_publications_queue",
+ *   title = @Translation("Page Perso import publications field."),
  *   cron = {"time" = 60}
  *  )
  */
-class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
@@ -82,9 +82,7 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
    * {@inheritDoc}
    */
   public function processItem($item) {
-
     $user = user_load_by_name($item->username);
-
     if ($user) {
       $author = $user->id();
       $ids = \Drupal::entityQuery('node')
@@ -95,46 +93,26 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
       if (!empty($pages)) {
         foreach ($pages as $node) {
           try {
-            $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
-            $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
-            $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;
-            $node->field_research_themes = [
-              'value' => $item->tx_oxcspagepersonnel_themes_recherche . "<br />" .
-                $item->tx_oxcspagepersonnel_projets_recherche,
-              'format' => 'full_html'];
-            $node->field_phd_supervisor = $item->tx_oxcspagepersonnel_directeur_these;
-            if (isset($item->tx_oxcspagepersonnel_publications) && !empty($item->tx_oxcspagepersonnel_publications)) {
-              $node->field_publications = [
-                'value' => "<div>" . $item->tx_oxcspagepersonnel_publications . "</div>",
-                'format' => 'full_html'];
-            }
-            if (isset($item->tx_oxcspagepersonnel_cv2) && !empty($item->tx_oxcspagepersonnel_cv2)) {
-              $node->field_resume_text = [
-                'value' => "<div>" . $item->tx_oxcspagepersonnel_cv2 . "</div>",
-                'format' => 'full_html'];
-            }
-            $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
-            $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
-            if (isset($item->tx_oxcspagepersonnel_page_externe_url) && !empty($item->tx_oxcspagepersonnel_page_externe_url)) {
-              if (!filter_var($item->tx_oxcspagepersonnel_page_externe_url, FILTER_VALIDATE_URL)) {
-                $url = Url::fromUri($item->tx_oxcspagepersonnel_page_externe_url);
-                $node->field_link_to_resume = $url->toString();
-              }
-            }
-            if (isset($item->tx_oxcspagepersonnel_cv) && !empty($item->tx_oxcspagepersonnel_cv)) {
-              $url = Url::fromUri("https://www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv);
-              $node->field_link_to_resume = $url->toString();
-            }
-
+            $publications = preg_replace("/<h3\s(.+?)>(.+?)<\/h3>/is", "<h4>$2</h4>", $item->tx_oxcspagepersonnel_publications);
+            $publications = preg_replace("/<h2\s(.+?)>(.+?)<\/h2>/is", "<h3>$2</h3>", $publications);
+            $node->field_publications = [
+              'value' => "<div>" . $publications . "</div>",
+              'format' => 'full_html'
+            ];
+            $node->field_my_hal_publications = [
+              'value' => 'nul',
+            ];
             $node->site_id = NULL;
             $node->save();
-          } catch (\Exception $e) {
-            \Drupal::logger('up1_typo3_data_queue')->error($this->t('La page personnelle de @username n\'a pas pu être créée.', ['@username' => $item->username] ));
-            \Drupal::logger('up1_typo3_data_queue')->error("@code : @Message" , [$e->getCode(), $e->getMessage()]);
+          }
+          catch (\Exception $e) {
+            \Drupal::logger('up1_typo3_publications_queue')->error($this->t('La page personnelle de @username n\'a pas pu être créée.',
+              ['@username' => $item->username] ));
+            \Drupal::logger('up1_typo3_publications_queue')->error("@code : @Message" , [$e->getCode(), $e->getMessage()]);
           }
         }
       }
     }
-
   }
 }
+

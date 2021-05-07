@@ -2,11 +2,13 @@
 
 namespace Drupal\up1_pages_personnelles;
 
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Site\Settings;
 
 /**
- * Class AnnuaireService.
+ * Class WsGroupsService.
  *
  */
 class WsGroupsService implements WsGroupsServiceInterface {
@@ -14,7 +16,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
   /**
    * The entity type manager.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var EntityTypeManagerInterface
    */
 
   protected $entityTypeManager;
@@ -22,7 +24,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
   /**
    * Constructs a AnnuaireService object.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager) {
@@ -33,14 +35,10 @@ class WsGroupsService implements WsGroupsServiceInterface {
    * @param $siteId (int) ID du site dont on veut recuperer l'annuaire
    *
    * @return array|mixed
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws InvalidPluginDefinitionException
+   * @throws PluginNotFoundException
    */
   public function getUserList($affiliation, $siteId = '') {
-    $users = [];
-    $filter = '';
-    $config = \Drupal::config('up1_pages_personnelles.settings');
-
     if (!empty($siteId)) {
       $siteStorage = $this->entityTypeManager->getStorage('site');
       $currentSite = $siteStorage->load($siteId);
@@ -51,15 +49,8 @@ class WsGroupsService implements WsGroupsServiceInterface {
         ];
       }
     }
+    $request = $this->getRequest($affiliation);
 
-    $ws = $config->get('url_ws');
-    $searchUser = $config->get('search_user');
-    $filter_affiliation = $config->get("filtre_$affiliation");
-    $request = $ws . $searchUser . $filter_affiliation;
-    $labeledURI = $config->get('other_filters');
-    if (!empty($labeledURI)) {
-      $request .= $labeledURI;
-    }
     $params = [
       'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
     ];
@@ -72,20 +63,39 @@ class WsGroupsService implements WsGroupsServiceInterface {
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
     }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
     $users = json_decode(curl_exec($ch), TRUE);
 
     curl_close($ch);
 
     $reponse['users'] = $users;
+
     return $reponse;
   }
-  public function getUsers($affiliation) {
-    $users = [];
-    $filter = '';
-    $config = \Drupal::config('up1_pages_personnelles.settings');
 
+  public function getUsers($affiliation) {
+
+    $request = $this->getRequest($affiliation);
+
+    $params = [
+      'attrs' => 'uid,displayName,supannCivilite,labeledURI,supannListeRouge'
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $users = json_decode(curl_exec($ch), TRUE);
+
+    curl_close($ch);
+
+    $reponse['users'] = $users;
+
+    return $reponse;
+  }
+
+  private function getRequest($affiliation) {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
     $ws = $config->get('url_ws');
     $searchUser = $config->get('search_user');
     $filter_affiliation = $config->get("filtre_$affiliation");
@@ -94,21 +104,17 @@ class WsGroupsService implements WsGroupsServiceInterface {
     if (!empty($labeledURI)) {
       $request .= $labeledURI;
     }
-    $params = [
-      'attrs' => 'uid,displayName,supannCivilite,labeledURI,supannListeRouge'
-    ];
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
 
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+    return $request;
+  }
 
-    $users = json_decode(curl_exec($ch), TRUE);
+  public function getAllUsers() {
+    $faculty = $this->getUsers('faculty');
+    $student = $this->getUsers('student');
 
-    curl_close($ch);
+    $users = array_merge($faculty['users'], $student['users']);
 
-    $reponse['users'] = $users;
-    return $reponse;
+    return $users;
   }
 
 }

@@ -30,7 +30,8 @@ class ComptexManager implements ComptexInterface {
     $searchUser = "$ws?token=$username";
 
     $params = [
-      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation"
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
+      'showExtendedInfo'=> 2
     ];
 
     $ch = curl_init();
@@ -107,9 +108,6 @@ class ComptexManager implements ComptexInterface {
       if (isset($information['givenName']) && is_array($information['givenName'])) {
         $information['givenName'] = reset($information['givenName']);
       }
-      if (isset($information['mail']) && is_array($information['mail'])) {
-        $information['mail'] = reset($information['mail']);
-      }
       if (isset($information['supannActivite']) && is_array($information['supannActivite'])) {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
@@ -147,5 +145,41 @@ class ComptexManager implements ComptexInterface {
       $information = [];
     }
     return $information;
+  }
+
+  public function getUserEmail($uid) {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $ws = $config->get('url_ws') . $config->get('search_user_page') . "?token=$uid";
+
+    $params = [
+      'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',
+      'showExtendedInfo' => 2
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+    $information = json_decode(curl_exec($ch), TRUE);
+    curl_close($ch);
+    \Drupal::logger('Comptex_information')->info(print_r($information, 1));
+    $information = reset($information);
+    \Drupal::logger('Comptex_reset_information')->info(print_r($information, 1));
+
+    $this->formatEmails($information);
+
+    \Drupal::logger('emails')->info(print_r($information, 1));
+
+    return $information;
+  }
+
+  private function formatEmails(&$information) {
+    if (isset($information['mail']) && !empty($information['mail'])) {
+      unset($information['eduPersonPrincipalName']);
+    }
+    if ((!isset($information['mail']) || empty($information['mail'])) &&
+      (isset($information['eduPersonPrincipalName']) && !empty($information['eduPersonPrincipalName']))) {
+      $information['mail'] = $information['eduPersonPrincipalName'];
+    }
   }
 }

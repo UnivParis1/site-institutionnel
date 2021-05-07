@@ -24,19 +24,19 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var EntityTypeManagerInterface
    */
   private $entityTypeManager;
   /**
    * Drupal\Core\Logger\LoggerChannelFactoryInterface definition.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   * @var LoggerChannelFactoryInterface
    */
   private $loggerChannelFactory;
   /**
    * The theses service.
    *
-   * @var \Drupal\up1_pages_personnelles\WsGroupsService;
+   * @var WsGroupsService;
    */
   protected $wsGroups;
 
@@ -46,9 +46,9 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * @param array $configuration
    * @param $plugin_id
    * @param $plugin_definition
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type
-   * @param \Drupal\up1_pages_personnelles\WsGroupsService $ws_groups
+   * @param LoggerChannelFactoryInterface $logger
+   * @param EntityTypeManagerInterface $entity_type
+   * @param WsGroupsService $ws_groups
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition,
                               EntityTypeManagerInterface $entity_type,
@@ -81,8 +81,8 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
   public function processItem($item) {
     $cas_user_manager = \Drupal::service('cas.user_manager');
     $cas_username = $item['uid'];
-    $existing_uid = $cas_user_manager->getUidForCasUsername($cas_username);
-    if ($existing_uid) {
+    $author = $cas_user_manager->getUidForCasUsername($cas_username);
+    if ($author) {
       return;
     }
     else {
@@ -95,7 +95,6 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
         $user_properties['mail'] = $item['mail'];
       }
-
       try {
         $cas_user_manager->register($cas_username, $user_properties);
       } catch (CasLoginException $e) {
@@ -106,11 +105,11 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
         ]);
         return;
       }
-    }
 
-    $user = user_load_by_name($item['uid']);
-    if ($user) {
-      $author = $user->id();
+      $user = user_load_by_name($item['uid']);
+      if ($user) {
+        $author = $user->id();
+      }
     }
     $values = \Drupal::entityQuery('node')
       ->condition('type', 'page_personnelle')
@@ -125,6 +124,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
         'uid' => $author,
         'status' => 1,
         'field_uid_ldap' => $item['uid'],
+        'site_id' => NULL,
       ]);
 
       $node->save();
