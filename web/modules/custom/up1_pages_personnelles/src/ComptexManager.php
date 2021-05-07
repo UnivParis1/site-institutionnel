@@ -152,7 +152,7 @@ class ComptexManager implements ComptexInterface {
     $ws = $config->get('url_ws') . $config->get('search_user') . "?token=$uid";
 
     $params = [
-      'attrs' => 'mail,supannMailPerso',
+      'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',
       'showExtendedInfo' => 2
     ];
     $ch = curl_init();
