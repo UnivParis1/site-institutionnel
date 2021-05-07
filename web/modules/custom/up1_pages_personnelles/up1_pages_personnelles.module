@@ -128,16 +128,18 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
     $userInformation = up1_pages_personnelles_get_comptex_info($name);
 
     if ($userInformation) {
+      $get_emails = up1_pages_personnelles_get_user_email($name);
       $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
         ->loadByProperties(['name' => $name]);
       $teacher = reset($load_teacher);
       if ($teacher) {
         if(empty($teacher->getEmail())) {
-          $teacher->email = $userInformation['mail'];
-          $teacher->save();
+          if (isset($get_emails['mail'])) {
+            $teacher->mail = $get_emails['mail'];
+            $teacher->save();
+          }
         }
       }
-
 
       $form['title']['#disabled'] = TRUE;
 
@@ -153,7 +155,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_other_affiliation']['#access'] = FALSE;
       $form['actions']['preview']['#access'] = FALSE;
 
-      $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $userInformation['supannMailPerso'];
+      $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
       $form['field_other_email_address']['#disabled'] = TRUE;
 
 
@@ -247,6 +249,19 @@ function up1_pages_personnelles_get_comptex_info($name) {
   $userInformation = $comptex->getUserInformation($name);
 
   return $userInformation;
+}
+
+//Private functions
+/**
+ * @param $name
+ *
+ * @return array
+ */
+function up1_pages_personnelles_get_user_email($name) {
+  $comptex = new ComptexManager();
+  $email = $comptex->getUserEmail($name);
+
+  return $email;
 }
 
 /**
