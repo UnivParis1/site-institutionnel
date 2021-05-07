@@ -292,11 +292,13 @@
             </div>
             <div class="box-style no-shadow auto-height semi-field-sep">
               <div class="box-content-padding paris1-bg-blue">
-                <div class="txt-second details">
+                {% if mail %}
+                <div class="txt-second details emailpro">
                   <span class="fa fa-envelope"> : </span> <a href="mailto:{{ mail }}">{{ mail }}</a>
                 </div>
-                {% if email_address %}
-                  <div class="txt-second details">
+                {% endif %}
+                {% if content.field_display_other_email.value and content.field_other_email_address.0 %}
+                  <div class="txt-second details emailperso">
                     <span class="fa fa-envelope"> : </span>
                     <a href="mailto:{{ content.field_other_email_address.0 }}">{{ content.field_other_email_address.0 }}</a>
                   </div>
