@@ -129,7 +129,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
 
     if ($userInformation) {
       $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['username' => $name]);
+        ->loadByProperties(['name' => $name]);
       $teacher = reset($load_teacher);
       if ($teacher) {
         if(empty($teacher->getEmail())) {
