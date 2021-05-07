@@ -36,11 +36,13 @@ class ComptexManager implements ComptexInterface {
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
+    \Drupal::logger('Comptex')->info(print_r($searchUser . '&' . http_build_query($params), 1));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
     $userInformation = json_decode(curl_exec($ch), TRUE);
     $userInformation = reset($userInformation);
+    \Drupal::logger('Comptex')->info(print_r($userInformation, 1));
 
     curl_close($ch);
 

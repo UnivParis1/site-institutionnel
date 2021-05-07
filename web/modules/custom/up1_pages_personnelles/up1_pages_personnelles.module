@@ -128,6 +128,17 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
     $userInformation = up1_pages_personnelles_get_comptex_info($name);
 
     if ($userInformation) {
+      $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['username' => $name]);
+      $teacher = reset($load_teacher);
+      if ($teacher) {
+        if(empty($teacher->getEmail())) {
+          $teacher->email = $userInformation['mail'];
+          $teacher->save();
+        }
+      }
+
+
       $form['title']['#disabled'] = TRUE;
 
       $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
@@ -144,7 +155,6 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
 
       $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $userInformation['supannMailPerso'];
       $form['field_other_email_address']['#disabled'] = TRUE;
-      $form['field_other_email_address']['#access'] = FALSE;
 
 
       $fonction = '';
