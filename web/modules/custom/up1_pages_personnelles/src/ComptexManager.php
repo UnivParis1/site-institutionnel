@@ -165,22 +165,21 @@ class ComptexManager implements ComptexInterface {
     \Drupal::logger('Comptex_information')->info(print_r($information, 1));
     $information = reset($information);
     \Drupal::logger('Comptex_reset_information')->info(print_r($information, 1));
-    $emails = $this->formatEmails($information);
 
-    \Drupal::logger('emails')->info(print_r($emails, 1));
+    $this->formatEmails($information);
 
-    return $emails;
+    \Drupal::logger('emails')->info(print_r($information, 1));
+
+    return $information;
   }
 
   private function formatEmails(&$information) {
-    if (isset($information['mail']) && is_array($information['mail'])) {
-      $information['mail'] = reset($information['mail']);
+    if (isset($information['mail']) && !empty($information['mail'])) {
+      unset($information['eduPersonPrincipalName']);
     }
-    if (isset($information['supannMailPerso']) && is_array($information['supannMailPerso'])) {
-      $information['supannMailPerso'] = reset($information['supannMailPerso']);
-    }
-    if (isset($information['eduPersonPrincipalName']) && is_array($information['eduPersonPrincipalName'])) {
-      $information['eduPersonPrincipalName'] = reset($information['eduPersonPrincipalName']);
+    if ((!isset($information['mail']) || empty($information['mail'])) &&
+      (isset($information['eduPersonPrincipalName']) && !empty($information['eduPersonPrincipalName']))) {
+      $information['mail'] = $information['eduPersonPrincipalName'];
     }
   }
 }
