@@ -96,7 +96,7 @@ display:
               empty_column: false
               responsive: ''
             name:
-              sortable: false
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
@@ -153,7 +153,7 @@ display:
           id: title
           table: node_field_data
           field: title
-          label: Title
+          label: Titre
           exclude: false
           alter:
             alter_text: false
@@ -322,7 +322,7 @@ display:
           id: status
           table: node_field_data
           field: status
-          label: État
+          label: Status
           exclude: false
           alter:
             alter_text: false
@@ -344,7 +344,7 @@ display:
           id: changed
           table: node_field_data
           field: changed
-          label: 'Mis à jour'
+          label: 'Mise à jour'
           exclude: false
           alter:
             alter_text: false
@@ -492,7 +492,7 @@ display:
           exposed: true
           expose:
             operator_id: title_op
-            label: Title
+            label: Titre
             description: ''
             use_operator: false
             operator: title_op
@@ -577,7 +577,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: État
+            label: Status
             description: ''
             use_operator: false
             operator: status_op
@@ -667,6 +667,55 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
+        uid:
+          id: uid
+          table: users_field_data
+          field: uid
+          relationship: uid
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: uid_op
+            label: Auteur
+            description: ''
+            use_operator: false
+            operator: uid_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: uid
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+              enseignant_doctorant: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: user
+          entity_field: uid
+          plugin_id: user_name
       sorts: {  }
       title: Content
       empty:

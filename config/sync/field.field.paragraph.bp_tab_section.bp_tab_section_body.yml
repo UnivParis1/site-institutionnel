@@ -11,9 +11,11 @@ dependencies:
     - paragraphs.paragraphs_type.bp_simple
     - paragraphs.paragraphs_type.bp_tab_section
     - paragraphs.paragraphs_type.bp_view
+    - paragraphs.paragraphs_type.bp_webform
     - paragraphs.paragraphs_type.hit_list
     - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.partenaire_section
     - paragraphs.paragraphs_type.section_presentation
     - paragraphs.paragraphs_type.tiles
   module:
@@ -41,11 +43,13 @@ settings:
       bp_carousel: bp_carousel
       bp_modal: bp_modal
       bp_view: bp_view
+      bp_webform: bp_webform
       key_figures_section: key_figures_section
       hit_list: hit_list
       medias: medias
       tiles: tiles
       section_presentation: section_presentation
+      partenaire_section: partenaire_section
     target_bundles_drag_drop:
       audio_media:
         weight: 24
@@ -96,7 +100,13 @@ settings:
         enabled: true
         weight: -21
       bp_webform:
+        enabled: true
         weight: 40
+      contact:
+        weight: 57
+        enabled: false
+      content_block:
+        weight: 58
         enabled: false
       files_media:
         weight: 41
@@ -107,6 +117,9 @@ settings:
       image_media:
         weight: 42
         enabled: false
+      jumbotron:
+        weight: 62
+        enabled: false
       key_figure:
         weight: 43
         enabled: false
@@ -116,8 +129,20 @@ settings:
       medias:
         enabled: true
         weight: 45
+      news_events:
+        weight: 66
+        enabled: false
+      partenaire:
+        weight: 67
+        enabled: false
+      partenaire_section:
+        enabled: true
+        weight: 68
       presentation:
         weight: 31
+        enabled: false
+      rich_content:
+        weight: 70
         enabled: false
       section_presentation:
         enabled: true
@@ -128,11 +153,17 @@ settings:
       tile_with_text:
         weight: 57
         enabled: false
+      tile_wo_image:
+        weight: 74
+        enabled: false
       tiles:
         enabled: true
         weight: 52
       title_and_subtitle:
         weight: 26
+        enabled: false
+      tuile_text_wo_image:
+        weight: 77
         enabled: false
       video_media:
         weight: 46

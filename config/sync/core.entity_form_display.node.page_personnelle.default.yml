@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.page_personnelle.field_about_me
     - field.field.node.page_personnelle.field_academia_link
     - field.field.node.page_personnelle.field_affiliation
-    - field.field.node.page_personnelle.field_display_other_email
     - field.field.node.page_personnelle.field_epi_link
     - field.field.node.page_personnelle.field_facebook_link
     - field.field.node.page_personnelle.field_firstname
@@ -17,9 +16,7 @@ dependencies:
     - field.field.node.page_personnelle.field_hal_link
     - field.field.node.page_personnelle.field_highlight_publications
     - field.field.node.page_personnelle.field_id_hal
-    - field.field.node.page_personnelle.field_link_to_resume
     - field.field.node.page_personnelle.field_linkedin_link
-    - field.field.node.page_personnelle.field_my_hal_publications
     - field.field.node.page_personnelle.field_my_medias
     - field.field.node.page_personnelle.field_name
     - field.field.node.page_personnelle.field_other_affiliation
@@ -72,14 +69,14 @@ third_party_settings:
       label: 'Réseaux sociaux & EPI'
     group_publications:
       children:
-        - field_my_hal_publications
+        - field_get_hal_publications
         - field_id_hal
         - field_publications
         - field_sticky_publications
         - field_highlight_publications
       parent_name: group_page_perso
-      weight: 10
-      format_type: accordion_item
+      weight: 9
+      format_type: tab
       region: content
       format_settings:
         id: ''
@@ -93,8 +90,8 @@ third_party_settings:
       children:
         - field_my_medias
       parent_name: group_page_perso
-      weight: 5
-      format_type: accordion_item
+      weight: 4
+      format_type: details
       region: content
       format_settings:
         description: ''
@@ -102,16 +99,14 @@ third_party_settings:
         id: ''
         classes: ''
         open: false
-        formatter: closed
       label: 'Mes médias'
     group_cv:
       children:
-        - field_link_to_resume
         - field_resume
         - field_resume_text
       parent_name: group_page_perso
-      weight: 7
-      format_type: accordion_item
+      weight: 6
+      format_type: tab
       region: content
       format_settings:
         id: ''
@@ -124,7 +119,7 @@ third_party_settings:
     group_sidebar:
       children: {  }
       parent_name: ''
-      weight: 13
+      weight: 16
       format_type: details_sidebar
       region: content
       format_settings:
@@ -145,14 +140,13 @@ third_party_settings:
         - group_these
         - group_publications
       parent_name: ''
-      weight: 3
-      format_type: accordion
+      weight: 6
+      format_type: tabs
       region: content
       format_settings:
-        direction: vertical
         id: ''
         classes: ''
-        effect: none
+        direction: horizontal
       label: 'Page Perso'
     group_presentation:
       children:
@@ -161,27 +155,27 @@ third_party_settings:
         - field_fonction
         - field_affiliation
         - field_other_affiliation
-        - field_other_email_address
-        - field_display_other_email
         - field_skills
         - field_about_me
       parent_name: group_page_perso
       weight: 3
-      format_type: accordion_item
+      format_type: tab
       region: content
       format_settings:
-        formatter: closed
-        required_fields: true
         id: ''
         classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
       label: Présentation
     group_coordonnees:
       children:
+        - field_other_email_address
         - field_other_page_perso
         - group_social_links
       parent_name: group_page_perso
-      weight: 6
-      format_type: accordion_item
+      weight: 5
+      format_type: tab
       region: content
       format_settings:
         description: ''
@@ -189,7 +183,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: ''
-      label: 'Liens & réseaux'
+      label: 'Liens & réseaux sociaux'
     group_recherche:
       children:
         - field_research_directions
@@ -197,8 +191,8 @@ third_party_settings:
         - field_research_themes
         - field_scientific_resp
       parent_name: group_page_perso
-      weight: 8
-      format_type: accordion_item
+      weight: 7
+      format_type: tab
       region: content
       format_settings:
         id: ''
@@ -212,8 +206,8 @@ third_party_settings:
         - field_thesis_subject
         - field_phd_supervisor
       parent_name: group_page_perso
-      weight: 9
-      format_type: accordion_item
+      weight: 8
+      format_type: tab
       region: content
       format_settings:
         id: ''
@@ -229,12 +223,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_about_me:
-    weight: 11
+    weight: 9
     settings:
       rows: 5
       placeholder: ''
@@ -256,29 +250,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_display_other_email:
-    weight: 9
-    settings:
-      display_label: true
-    third_party_settings:
-      conditional_fields:
-        b4517c9a-5cb8-4a56-93c7-24c1a3282ca5:
-          dependee: field_other_email_address
-          settings:
-            state: visible
-            condition: '!empty'
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form: {  }
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: page_personnelle
-    type: boolean_checkbox
     region: content
   field_epi_link:
     weight: 33
@@ -312,6 +283,13 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_get_hal_publications:
+    weight: 24
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_hal_link:
     weight: 35
     settings:
@@ -321,7 +299,7 @@ content:
     type: link_default
     region: content
   field_highlight_publications:
-    weight: 46
+    weight: 28
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -331,38 +309,29 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_id_hal:
-    weight: 43
+    weight: 25
     settings:
       size: 60
       placeholder: ''
     third_party_settings:
       conditional_fields:
-        7a73d3b2-42b3-4e39-b2b9-d0d3dedef0c7:
-          dependee: field_my_hal_publications
+        d391b226-416c-4c86-965b-09e330f5e6d4:
+          dependee: field_get_hal_publications
           settings:
             state: visible
-            condition: value
+            condition: checked
             grouping: AND
             values_set: 1
             value: ''
             values: {  }
             value_form:
-              -
-                value: idhal
+              value: false
             effect: show
             effect_options: {  }
             selector: ''
           entity_type: node
           bundle: page_personnelle
     type: string_textfield
-    region: content
-  field_link_to_resume:
-    weight: 38
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
     region: content
   field_linkedin_link:
     weight: 29
@@ -371,12 +340,6 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
-    region: content
-  field_my_hal_publications:
-    weight: 41
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
     region: content
   field_my_medias:
     type: entity_reference_paragraphs
@@ -407,7 +370,7 @@ content:
     type: string_textfield
     region: content
   field_other_email_address:
-    weight: 8
+    weight: 23
     settings:
       size: 60
       placeholder: ''
@@ -431,12 +394,28 @@ content:
     type: string_textfield
     region: content
   field_publications:
-    weight: 44
+    weight: 26
     settings:
       rows: 5
       placeholder: ''
     third_party_settings:
-      conditional_fields: {  }
+      conditional_fields:
+        f3ee17c0-0f45-4efd-957d-6a3307b19bc5:
+          dependee: field_get_hal_publications
+          settings:
+            state: visible
+            condition: '!checked'
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: false
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: page_personnelle
     type: text_textarea
     region: content
   field_research_directions:
@@ -456,7 +435,7 @@ content:
     type: text_textarea
     region: content
   field_resume:
-    weight: 39
+    weight: 34
     settings:
       entity_browser: document_browser
       field_widget_display: label
@@ -470,7 +449,7 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_resume_text:
-    weight: 40
+    weight: 36
     settings:
       rows: 5
       placeholder: ''
@@ -486,7 +465,7 @@ content:
     type: text_textarea
     region: content
   field_skills:
-    weight: 10
+    weight: 8
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -496,7 +475,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_sticky_publications:
-    weight: 45
+    weight: 27
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -554,13 +533,13 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 11
+    weight: 14
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -568,12 +547,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 11
     region: content
     third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -585,32 +564,32 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
+    weight: 15
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 12
     region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 2
+    weight: 5
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 6
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
@@ -621,4 +600,3 @@ content:
 hidden:
   body: true
   deleted: true
-  field_get_hal_publications: true

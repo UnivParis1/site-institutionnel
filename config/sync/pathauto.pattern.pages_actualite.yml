@@ -3,20 +3,31 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - language
     - node
 id: pages_actualite
 label: 'Pages actualité'
 type: 'canonical_entities:node'
 pattern: '[node:content-type:name]/[node:title]'
 selection_criteria:
-  8a4be24c-d58b-4abd-862e-f63db98b82cd:
+  e0efed0f-611d-4dda-846b-49c9d38b9dc5:
     id: node_type
     bundles:
       news: news
     negate: false
     context_mapping:
       node: node
-    uuid: 8a4be24c-d58b-4abd-862e-f63db98b82cd
+    uuid: e0efed0f-611d-4dda-846b-49c9d38b9dc5
+  11b5d3d1-e179-4fba-b78b-6cb4202cff5f:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 11b5d3d1-e179-4fba-b78b-6cb4202cff5f
 selection_logic: and
 weight: -5
-relationships: {  }
+relationships:
+  'node:langcode:language':
+    label: Langue
