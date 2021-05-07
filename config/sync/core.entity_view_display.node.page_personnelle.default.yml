@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.page_personnelle.field_about_me
     - field.field.node.page_personnelle.field_academia_link
     - field.field.node.page_personnelle.field_affiliation
+    - field.field.node.page_personnelle.field_display_other_email
     - field.field.node.page_personnelle.field_epi_link
     - field.field.node.page_personnelle.field_facebook_link
     - field.field.node.page_personnelle.field_firstname
@@ -15,7 +16,9 @@ dependencies:
     - field.field.node.page_personnelle.field_hal_link
     - field.field.node.page_personnelle.field_highlight_publications
     - field.field.node.page_personnelle.field_id_hal
+    - field.field.node.page_personnelle.field_link_to_resume
     - field.field.node.page_personnelle.field_linkedin_link
+    - field.field.node.page_personnelle.field_my_hal_publications
     - field.field.node.page_personnelle.field_my_medias
     - field.field.node.page_personnelle.field_name
     - field.field.node.page_personnelle.field_other_affiliation
@@ -39,6 +42,7 @@ dependencies:
   module:
     - entity_reference_revisions
     - link
+    - options
     - text
     - user
 id: node.page_personnelle.default
@@ -79,6 +83,16 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_display_other_email:
+    weight: 36
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_epi_link:
     weight: 21
@@ -159,6 +173,18 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_link_to_resume:
+    weight: 34
+    label: above
+    settings:
+      trim_length: 80
+      rel: nofollow
+      target: _blank
+      url_only: false
+      url_plain: false
+    third_party_settings: {  }
+    type: link_separate
+    region: content
   field_linkedin_link:
     weight: 19
     label: above
@@ -170,6 +196,13 @@ content:
       target: ''
     third_party_settings: {  }
     type: link
+    region: content
+  field_my_hal_publications:
+    weight: 35
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_my_medias:
     type: entity_reference_revisions_entity_view
@@ -225,7 +258,7 @@ content:
     region: content
   field_publications:
     weight: 9
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
