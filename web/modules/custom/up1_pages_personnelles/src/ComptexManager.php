@@ -157,18 +157,16 @@ class ComptexManager implements ComptexInterface {
     ];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
-    \Drupal::logger('Comptex')->info(print_r($ws . '&' . http_build_query($params), 1));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
     $information = json_decode(curl_exec($ch), TRUE);
-    \Drupal::logger('Comptex')->info(print_r($information, 1));
 
     $information = reset($information);
-    curl_close($ch);
 
     $emails = $this->formatEmails($information);
-    \Drupal::logger('Comptex')->info(print_r($emails, 1));
+    \Drupal::logger('emails')->info(print_r($emails, 1));
+    curl_close($ch);
 
     return $emails;
   }
