@@ -162,13 +162,9 @@ class ComptexManager implements ComptexInterface {
 
     $information = json_decode(curl_exec($ch), TRUE);
     curl_close($ch);
-    \Drupal::logger('Comptex_information')->info(print_r($information, 1));
     $information = reset($information);
-    \Drupal::logger('Comptex_reset_information')->info(print_r($information, 1));
 
     $this->formatEmails($information);
-
-    \Drupal::logger('emails')->info(print_r($information, 1));
 
     return $information;
   }
