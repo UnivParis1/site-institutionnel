@@ -96,7 +96,8 @@ class BulkPagesPersonnelles extends FormBase
         ->condition('type', 'page_personnelle')
         ->condition('uid', $author);
       $nids = $query->execute();
-      $data_typo3 = WsGroupsController::createMissingPagePerso($uid_ldap);
+      $ws = new WsGroupsController;
+      $data_typo3 = $ws->createMissingPagePerso($uid_ldap);
 
       $pages_perso = Node::loadMultiple($nids);
       if (!empty($pages_perso)) {
