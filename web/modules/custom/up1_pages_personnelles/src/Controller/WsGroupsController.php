@@ -623,8 +623,7 @@ class WsGroupsController extends ControllerBase {
       }
 
       $response = new RedirectResponse($goto);
-      $response->send();
-      return;
+      return $response->send();
     }
   }
 
