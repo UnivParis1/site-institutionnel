@@ -3,6 +3,7 @@ namespace Drupal\up1_pages_personnelles\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Connection;
 use Drupal\up1_pages_personnelles\Controller\WsGroupsController;
 
 /**
@@ -61,7 +62,7 @@ class BulkPagesPersonnelles extends FormBase
       $uid_ldap = trim($uid_ldap);
       if (!empty($uid_ldap)) {
         $operations[] = [
-          '\Drupal\up1_pages_personnelles\Form\BulkPagesPersonnelles::CreatePagePerso',
+          '\Drupal\up1_pages_personnelles\Form\BulkPagesPersonnelles::createPagePerso',
           [$uid_ldap],
         ];
       }
@@ -70,7 +71,7 @@ class BulkPagesPersonnelles extends FormBase
     $batch = [
       'title' => $this->t('Creating Pages Persos...'),
       'operations' => $operations,
-      'finished' => '\Drupal\up1_pages_personnelles\Form\BulkPagesPersonnelles::CreatePagePersoFinished',
+      'finished' => '\Drupal\up1_pages_personnelles\Form\BulkPagesPersonnelles::createPagePersoFinished',
       'progress_message' => $this->t('Processed @current out of @total.'),
     ];
 
@@ -86,8 +87,7 @@ class BulkPagesPersonnelles extends FormBase
    * @param array $context
    *   The batch context array, passed by reference.
    */
-  public static function createPagePerso($uid_ldap, array &$context)
-  {
+  public static function createPagePerso($uid_ldap, array &$context) {
     $user = user_load_by_name($uid_ldap);
     if ($user) {
       $author = $user->id();
