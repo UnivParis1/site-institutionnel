@@ -676,7 +676,12 @@ class WsGroupsController extends ControllerBase {
 
     return $result;
   }
-  public function selectUserData($username) {
+
+  public function createMissingPagePerso($username) {
+    return $this->selectUserData($username);
+  }
+
+  private function selectUserData($username) {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [
       'username',
