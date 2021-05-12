@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\up1_pages_personnelles;
+namespace Drupal\up1_pages_personnelles\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
