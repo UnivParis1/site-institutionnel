@@ -35,6 +35,7 @@ class BulkPagesPersonnelles extends ConfigFormBase
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('up1_pages_personnelles.bulk_import');
+
     $form['intro'] = [
       '#prefix' => '<p>',
       '#markup' => $this->t('Use this form to create a "Enseignant-chercheur ou doctorant" user with all Typo3.'),
@@ -44,7 +45,7 @@ class BulkPagesPersonnelles extends ConfigFormBase
       '#type' => 'textarea',
       '#title' => $this->t('uid ldap'),
       '#required' => TRUE,
-      '#default_value' => $config->get('uid_ldap'),
+      '#default_value' => implode(PHP_EOL, $config->get('uid_ldap')),
       '#description' => $this->t('Enter one uid per line.'),
       '#required' => TRUE
     ];

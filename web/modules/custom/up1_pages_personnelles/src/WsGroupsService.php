@@ -110,7 +110,8 @@ class WsGroupsService implements WsGroupsServiceInterface {
 
   public function getAllUsers() {
     $config = \Drupal::config('up1_pages_personnelles.bulk_import');
-    $users = $config->get('uid_ldap');
+    $users = trim($config->get('uid_ldap'));
+    $users = preg_split('/[\n\r|\r|\n]+/', $users);
     /*if (empty($users)) {
       $faculty = $this->getUsers('faculty');
       $student = $this->getUsers('student');
