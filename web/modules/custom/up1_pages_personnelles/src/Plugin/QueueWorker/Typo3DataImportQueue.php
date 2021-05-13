@@ -130,7 +130,7 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
             $node->save();
           } catch (\Exception $e) {
             \Drupal::logger('up1_typo3_data_queue')->error('La page personnelle de ' . $item->username . ' n\'a pas pu être créée.');
-            \Drupal::logger('up1_typo3_data_queue')->error("@code : @Message" , [$e->getCode(), $e->getMessage()]);
+            \Drupal::logger('up1_typo3_data_queue')->error("@code : @Message" , ['@code' => $e->getCode(), '@Message' => $e->getMessage()]);
           }
         }
       }
