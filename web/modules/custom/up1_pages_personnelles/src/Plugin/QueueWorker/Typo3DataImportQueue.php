@@ -97,7 +97,19 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
           try {
             $node->field_other_email_address = $item->tx_oxcspagepersonnel_courriel;
             $node->field_scientific_resp = $item->tx_oxcspagepersonnel_responsabilites_scientifiques;
-            $node->field_thesis_subject = $item->tx_oxcspagepersonnel_sujet_these;
+            $subject = $item->tx_oxcspagepersonnel_sujet_these;
+            if (strlen($subject) <= 254) {
+              $node->field_thesis_subject = $subject;
+            }
+            else if (strlen($subject) > 254) {
+              if (strpos($subject, '.') < 254) {
+                $node->field_thesis_subject = substr($subject,0, strpos($subject, '.'));
+              }
+              else {
+                $node->field_thesis_subject = substr($subject,0, 254);
+              }
+            }
+
             $node->field_research_themes = [
               'value' => $item->tx_oxcspagepersonnel_themes_recherche . "<br />" .
                 $item->tx_oxcspagepersonnel_projets_recherche,
@@ -116,21 +128,27 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
             $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
             $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
             if (isset($item->tx_oxcspagepersonnel_page_externe_url) && !empty($item->tx_oxcspagepersonnel_page_externe_url)) {
-              if (!filter_var($item->tx_oxcspagepersonnel_page_externe_url, FILTER_VALIDATE_URL)) {
-                $url = Url::fromUri($item->tx_oxcspagepersonnel_page_externe_url);
+              $page_externe = $item->tx_oxcspagepersonnel_page_externe_url;
+              if (!filter_var($page_externe, FILTER_VALIDATE_URL)) {
+                if (!preg_match("~^(?:f|ht)tps?://~i", $page_externe)) {
+                  $page_externe = "http://" . $page_externe;
+                }
+
+                $url = Url::fromUri($page_externe, ['https' => TRUE, 'absolute' => TRUE]);
                 $node->field_link_to_resume = $url->toString();
               }
             }
             if (isset($item->tx_oxcspagepersonnel_cv) && !empty($item->tx_oxcspagepersonnel_cv)) {
               $url = Url::fromUri("https://www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv);
+              if ($url)
               $node->field_link_to_resume = $url->toString();
             }
 
             $node->site_id = NULL;
             $node->save();
           } catch (\Exception $e) {
-            \Drupal::logger('up1_typo3_data_queue')->error('La page personnelle de ' . $item->username . ' n\'a pas pu être créée.');
-            \Drupal::logger('up1_typo3_data_queue')->error("@code : @Message" , ['@code' => $e->getCode(), '@Message' => $e->getMessage()]);
+            \Drupal::logger('up1_typo3_data_queue')->error("La page personnelle de @username n'a pas pu être créée. Message d'erreur : @Message" ,
+              ['@username' => $item->username, '@Message' => $e->getMessage()]);
           }
         }
       }
