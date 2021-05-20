@@ -126,22 +126,20 @@ class Typo3DataImportQueue extends QueueWorkerBase implements ContainerFactoryPl
                 'format' => 'full_html'];
             }
             $node->field_thesis_directions = $item->tx_oxcspagepersonnel_directions_these;
+            $node->field_my_hal_publications = 'nul';
             $node->field_other_page_perso = $item->tx_oxcspagepersonnel_page_externe_url;
             if (isset($item->tx_oxcspagepersonnel_page_externe_url) && !empty($item->tx_oxcspagepersonnel_page_externe_url)) {
               $page_externe = $item->tx_oxcspagepersonnel_page_externe_url;
-              if (!filter_var($page_externe, FILTER_VALIDATE_URL)) {
-                if (!preg_match("~^(?:f|ht)tps?://~i", $page_externe)) {
-                  $page_externe = "http://" . $page_externe;
-                }
-
-                $url = Url::fromUri($page_externe, ['https' => TRUE, 'absolute' => TRUE]);
-                $node->field_link_to_resume = $url->toString();
+              if (!preg_match("~^(?:f|ht)tps?://~i", $page_externe)) {
+                $page_externe = "http://" . $page_externe;
               }
+              $url = Url::fromUri($page_externe, ['https' => TRUE, 'absolute' => TRUE]);
+              $node->field_link_to_resume = $url->toString();
             }
             if (isset($item->tx_oxcspagepersonnel_cv) && !empty($item->tx_oxcspagepersonnel_cv)) {
               $url = Url::fromUri("https://www.pantheonsorbonne.fr/uploads/pics/" . $item->tx_oxcspagepersonnel_cv);
               if ($url)
-              $node->field_link_to_resume = $url->toString();
+                $node->field_link_to_resume = $url->toString();
             }
 
             $node->site_id = NULL;
