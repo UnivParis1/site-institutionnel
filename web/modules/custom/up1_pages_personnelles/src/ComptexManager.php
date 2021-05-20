@@ -135,8 +135,10 @@ class ComptexManager implements ComptexInterface {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
           $information['entites'][$key]['name'] = $supannEntiteAffectation['name'];
           $information['entites'][$key]['description'] = $supannEntiteAffectation['description'];
-          if ($supannEntiteAffectation['description'] == $information['supannRole']['structure']) {
-            $information['supannRole']['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+          if (isset($information['supannRole']) && !empty($information['supannRole'])) {
+            if ($supannEntiteAffectation['description'] == $information['supannRole']['structure']) {
+              $information['supannRole']['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+            }
           }
           if ($key == 0) {
             $information['entites'][$key]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
