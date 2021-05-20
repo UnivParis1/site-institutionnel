@@ -112,7 +112,8 @@ class ComptexManager implements ComptexInterface {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
-        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['role'];
+        $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
+        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
       }
       if (isset($information['employeeType']) && is_array($information['employeeType'])) {
