@@ -136,7 +136,7 @@ class ComptexManager implements ComptexInterface {
           $information['entites'][$key]['name'] = $supannEntiteAffectation['name'];
           $information['entites'][$key]['description'] = $supannEntiteAffectation['description'];
           if (isset($information['supannRole']) && !empty($information['supannRole'])) {
-            if ($supannEntiteAffectation['description'] == $information['supannRole']['structure']) {
+            if ($supannEntiteAffectation['name'] == $information['supannRole']['name']) {
               $information['supannRole']['labeledURI'] = $supannEntiteAffectation['labeledURI'];
             }
           }
