@@ -5,7 +5,7 @@ use \Drupal\Core\Form\FormStateInterface;
 use \Drupal\taxonomy\Entity\Term;
 use \Drupal\user\Entity\User;
 use \Drupal\Core\Url;
-use Drupal\up1_pages_personnelles\WsGroupsService;
+use \Drupal\up1_pages_personnelles\ComptexManager;
 
 
 /**
@@ -78,7 +78,7 @@ function p1ps2019_preprocess_page(&$variables) {
     }
   }
 
-  if ($node) {
+  if (isset($node) && is_object($node)) {
     $node_type = $node->getType();
     if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
       && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
@@ -144,7 +144,7 @@ function p1ps2019_preprocess_node(&$variables) {
     if (isset($umail) && !empty ($umail)) {
       $variables['mail'] = $umail;
     } else {
-      $variables['mail'] = WsGroupsService::getUserEmail($user->getUsername());
+      $variables['mail'] = ComptexManager::getUserEmail($user->getUsername());
     }
 
   }
