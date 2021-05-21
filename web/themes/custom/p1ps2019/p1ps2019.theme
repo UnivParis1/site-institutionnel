@@ -144,7 +144,8 @@ function p1ps2019_preprocess_node(&$variables) {
     if (isset($umail) && !empty ($umail)) {
       $variables['mail'] = $umail;
     } else {
-      $variables['mail'] = ComptexManager::getUserEmail($user->getUsername());
+      $comptex = new ComptexManager();
+      $variables['mail'] = $comptex->getUserEmail($user->getUsername());
     }
 
   }
