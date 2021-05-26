@@ -487,6 +487,7 @@ class WsGroupsController extends ControllerBase {
       drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
+
   /**
    * Get Typo3 publications field create queue items.
    *
@@ -590,7 +591,110 @@ class WsGroupsController extends ControllerBase {
   }
 
   /**
-   * Delete queues 'up1_page_perso_queue', 'up1_typo3_data_queue', 'up1_typo3_resume_queue' & 'up1_typo3_publications_queue'.
+   * Get Typo3 english resume & education field create queue items.
+   *
+   * @return array
+   */
+  public function importLastFields() {
+    $users = $this->wsGroupsService->getAllUsers();
+
+    //Select all Typo3 fields by user.
+    foreach ($users as $user) {
+      $epi_education = $this->selectEpiAndEducation($user['uid']);
+      if ($epi_education) {
+        $data[] = $epi_education;
+      }
+
+    }
+
+    $queue = $this->queueFactory->get('up1_typo3_last_fields_queue');
+
+    //Charge queue items.
+    foreach ($data as $datum) {
+      $queue->createItem($datum);
+    }
+
+    return [
+      '#type' => 'markup',
+      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
+    ];
+  }
+
+  public function batchImportLastFields() {
+    $batch = [
+      'title' => $this->t('Process pages persos english resume & education field with Typo3'),
+      'operations' => [],
+      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::LastFieldsFinished',
+    ];
+    $queue_factory = \Drupal::service('queue');
+    $queue = $queue_factory->get('up1_typo3_last_fields_queue');
+
+    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
+      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::LastFieldsProcess', []];
+    }
+    batch_set($batch);
+
+    return batch_process('/admin/content/pages-persos');
+  }
+
+  /**
+   * Batch publications process.
+   * @param $context
+   */
+  public static function batchLastFieldsProcess(&$context){
+
+    // We can't use here the Dependency Injection solution
+    // so we load the necessary services in the other way
+    $queue_factory = \Drupal::service('queue');
+    $queue_manager = \Drupal::service('plugin.manager.queue_worker');
+
+    // Get the queue implementation for import_content_from_xml queue
+    $queue = $queue_factory->get('up1_typo3_last_fields_queue');
+    // Get the queue worker
+    $queue_worker = $queue_manager->createInstance('up1_typo3_last_fields_queue');
+
+    // Get the number of items
+    $number_of_items = ($queue->numberOfItems() < IMPORT_DATA_SIZE) ? $queue->numberOfItems() : IMPORT_DATA_SIZE;
+
+    // Repeat $number_of_queue times
+    for ($i = 0; $i < $number_of_items; $i++) {
+      // Get a queued item
+      if ($item = $queue->claimItem()) {
+        try {
+          // Process it
+          $queue_worker->processItem($item->data);
+          // If everything was correct, delete the processed item from the queue
+          $queue->deleteItem($item);
+        }
+        catch (SuspendQueueException $e) {
+          // If there was an Exception trown because of an error
+          // Releases the item that the worker could not process.
+          // Another worker can come and process it
+          $queue->releaseItem($item);
+          break;
+        }
+      }
+    }
+  }
+
+  /**
+   * Batch finished callback.
+   * @param $success
+   * @param $results
+   * @param $operations
+   */
+  public static function batchLastFieldsFinished($success, $results, $operations) {
+    if ($success) {
+      drupal_set_message(t("The Typo3 english resume & education field haved been successfully imported from Typo3 database."));
+    }
+    else {
+      $error_operation = reset($operations);
+      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+    }
+  }
+
+  /**
+   * Delete queues 'up1_page_perso_queue', 'up1_typo3_data_queue', 'up1_typo3_resume_queue', 'up1_typo3_publications_queue' & 'up1_typo3_last_fields_queue'.
    *
    * Remember that the command drupal dq checks first for a queue worker
    * and if it exists, DC suposes that a queue exists.
@@ -600,6 +704,7 @@ class WsGroupsController extends ControllerBase {
     $this->queueFactory->get('up1_typo3_data_queue')->deleteQueue();
     $this->queueFactory->get('up1_typo3_publications_queue')->deleteQueue();
     $this->queueFactory->get('up1_typo3_resume_queue')->deleteQueue();
+    $this->queueFactory->get('up1_typo3_last_fields_queue')->deleteQueue();
     return [
       '#type' => 'markup',
       '#markup' => $this->t('All Typo3 queues have been deleted'),
@@ -672,6 +777,31 @@ class WsGroupsController extends ControllerBase {
     $query->fields('fu', $fields);
     $query->condition('username', $username, 'LIKE');
     $query->condition('tx_oxcspagepersonnel_cv2', '', '<>');
+    $result = $query->execute()->fetchObject();
+
+    return $result;
+  }
+
+  /**
+   * @param $username
+   * @return mixed
+   */
+  private function selectEpiAndEducation($username) {
+    $query = $this->database->select('fe_users', 'fu');
+    $fields = [
+      'username',
+      'tx_oxcspagepersonnel_epi',
+      'tx_oxcspagepersonnel_anglais'
+    ];
+    $query->fields('fu', $fields);
+    $query->condition('username', $username, 'LIKE');
+
+    $orGroup = $query->orConditionGroup()
+      ->condition('tx_oxcspagepersonnel_epi', '', '<>')
+      ->condition('tx_oxcspagepersonnel_anglais', '', '<>');
+
+    $query->condition($orGroup);
+
     $result = $query->execute()->fetchObject();
 
     return $result;
