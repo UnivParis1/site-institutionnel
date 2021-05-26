@@ -111,8 +111,11 @@ class ComptexManager implements ComptexInterface {
       if (isset($information['supannActivite']) && is_array($information['supannActivite'])) {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
+      \Drupal::logger('comptex')->info("Before condition : " . print_r($information['supannRoleEntite-all'], 1));
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
-        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['role'];
+        \Drupal::logger('comptex')->info(print_r($information['supannRoleEntite-all'], 1));
+        $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
+        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
       }
       if (isset($information['employeeType']) && is_array($information['employeeType'])) {
@@ -135,6 +138,11 @@ class ComptexManager implements ComptexInterface {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
           $information['entites'][$key]['name'] = $supannEntiteAffectation['name'];
           $information['entites'][$key]['description'] = $supannEntiteAffectation['description'];
+          if (isset($information['supannRole']) && !empty($information['supannRole'])) {
+            if ($supannEntiteAffectation['name'] == $information['supannRole']['name']) {
+              $information['supannRole']['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+            }
+          }
           if ($key == 0) {
             $information['entites'][$key]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
           }
@@ -162,13 +170,9 @@ class ComptexManager implements ComptexInterface {
 
     $information = json_decode(curl_exec($ch), TRUE);
     curl_close($ch);
-    \Drupal::logger('Comptex_information')->info(print_r($information, 1));
     $information = reset($information);
-    \Drupal::logger('Comptex_reset_information')->info(print_r($information, 1));
 
     $this->formatEmails($information);
-
-    \Drupal::logger('emails')->info(print_r($information, 1));
 
     return $information;
   }

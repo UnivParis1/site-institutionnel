@@ -118,6 +118,15 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
   if (in_array($form_id, ["node_page_personnelle_form", "node_page_personnelle_edit_form"]) ) {
     if ($form_id == "node_page_personnelle_edit_form") {
       $name = $form['field_uid_ldap']['widget'][0]['value']['#default_value'];
+
+      $nid = $form_state->getformObject()->getEntity()->id();
+      $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
+      $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
+
+      $link = Link::fromTextAndUrl($url->toString(), $url);
+
+      $html_link = $link->toString();
+
     }
     if ($form_id == "node_page_personnelle_form") {
       $userCurrent = \Drupal::currentUser();
@@ -181,15 +190,6 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_affiliation']['#access'] = FALSE;
       $form['field_affiliation']['widget'][0]['value']['#default_value'] =
         $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
-
-      $nid = $form_state->getformObject()->getEntity()->id();
-      $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
-
-      $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
-
-      $link = Link::fromTextAndUrl($url->toString(), $url);
-
-      $html_link = $link->toString();
 
       $form['wrapper']['information'] = [
         '#type' => 'markup',

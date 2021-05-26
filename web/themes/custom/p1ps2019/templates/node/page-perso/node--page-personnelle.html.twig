@@ -125,12 +125,12 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if info or research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor %}
-            <div class="btn btn-primary">
-              <a href="#page-perso-research">{{ 'Research'|t }}</a>
-              <i class="icon-ok"></i>
-              <span></span>
-            </div>
+            {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisor %}
+              <div class="btn btn-primary">
+                <a href="#page-perso-research">{{ 'Research'|t }}</a>
+                <i class="icon-ok"></i>
+                <span></span>
+              </div>
             {% endif %}
             {% if publications or hal_publications or publis %}
               <div class="btn btn-primary">
@@ -155,12 +155,10 @@
           <section class="new-section about">
             <a id="page-perso-about"></a>
             <h2>{{ employeeType }}  {% if supannActivite %} ({{ supannActivite }}) {% endif %}</h2>
+
             {% if supannRole %}
               <div class="infos-sep">
-                <span>{{ supannRole.name }}</span>
-                <a href="{{ entites.0.labeledURI }}" title="{{ entites.0.name }}" target="_blank">
-                  {{ entites.0.description }}
-                </a>
+                <span>{{ supannRole.role }}</span> <span>{{ supannRole.structure }}</span>
               </div>
             {% endif %}
 
@@ -200,60 +198,62 @@
               {# ----- field About me ----- #}
             </div>
           </section>
-          <section class="new-section research">
-            <a id="page-perso-research"></a>
-            <h2>{{ "Research"|t }}</h2>
-            {# field Research directions #}
-            {% if research_directions %}
-              <h3>{{ content.field_research_directions['#title'] }}</h3>
-              {{ content.field_research_directions.0 }}
-            {% endif %}
-            {# ----- field Research directions ----- #}
-            {# field_thesis_directions #}
-            {% if thesis_directions %}
-              <h3>{{ content.field_thesis_directions['#title'] }}</h3>
-              {{ content.field_thesis_directions.0 }}
-            {% endif %}
-            {# ----- field_thesis_directions ----- #}
-            {# field_research_themes #}
-            {% if info or research_themes %}
-              {% if info %}
-                <p class="txt-bold">{{ "Research themes"|t }}</p>
-                <ul>
-                  {% for key, item in info %}
-                    <li>{{ item }}</li>
-                  {% endfor %}
-                </ul>
+          {% if info or research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
+            <section class="new-section research">
+              <a id="page-perso-research"></a>
+              <h2>{{ "Research"|t }}</h2>
+              {# field Research directions #}
+              {% if research_directions %}
+                <h3>{{ content.field_research_directions['#title'] }}</h3>
+                {{ content.field_research_directions.0 }}
               {% endif %}
-              {% if research_themes %}
-                <p class="txt-bold">{{ "Research projects"|t }}</p>
-                {{ content.field_research_themes.0 }}
+              {# ----- field Research directions ----- #}
+              {# field_thesis_directions #}
+              {% if thesis_directions %}
+                <h3>{{ content.field_thesis_directions['#title'] }}</h3>
+                {{ content.field_thesis_directions.0 }}
               {% endif %}
-            {% endif %}
-            {# ----- field_research_themes ----- #}
-            {# field_research_projects #}
-            {% if research_projects %}
-              <h3>{{ content.research_projects['#title'] }}</h3>
-              <p>{{ content.research_projects.0 }}</p>
-            {% endif %}
-            {# ----- field_research_projects ----- #}
-            {# field_scientific_resp #}
-            {% if scientific_resp %}
-              <h3>{{ content.field_scientific_resp['#title'] }}</h3>
-              <p>{{ content.field_scientific_resp.0 }}</p>
-              {# ----- field_scientific_resp ----- #}
-            {% endif %}
-            {% if thesis_subject or phd_supervisor %}
-              {% if thesis_subject %}
-                <h3>{{ content.field_thesis_subject['#title'] }}</h3>
-                {{ content.field_thesis_subject.0 }}
+              {# ----- field_thesis_directions ----- #}
+              {# field_research_themes #}
+              {% if info or research_themes %}
+                {% if info %}
+                  <p class="txt-bold">{{ "Research themes"|t }}</p>
+                  <ul>
+                    {% for key, item in info %}
+                      <li>{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                {% if research_themes %}
+                  <p class="txt-bold">{{ "Research projects"|t }}</p>
+                  {{ content.field_research_themes.0 }}
+                {% endif %}
               {% endif %}
-              {% if phd_supervisor %}
-                <h3>{{ content.field_phd_supervisor['#title'] }}</h3>
-                {{ content.field_phd_supervisor.0 }}
+              {# ----- field_research_themes ----- #}
+              {# field_research_projects #}
+              {% if research_projects %}
+                <h3>{{ content.research_projects['#title'] }}</h3>
+                <p>{{ content.research_projects.0 }}</p>
               {% endif %}
-            {% endif %}
-          </section>
+              {# ----- field_research_projects ----- #}
+              {# field_scientific_resp #}
+              {% if scientific_resp %}
+                <h3>{{ content.field_scientific_resp['#title'] }}</h3>
+                <p>{{ content.field_scientific_resp.0 }}</p>
+                {# ----- field_scientific_resp ----- #}
+              {% endif %}
+              {% if thesis_subject or phd_supervisor %}
+                {% if thesis_subject %}
+                  <h3>{{ content.field_thesis_subject['#title'] }}</h3>
+                  {{ content.field_thesis_subject.0 }}
+                {% endif %}
+                {% if phd_supervisor %}
+                  <h3>{{ content.field_phd_supervisor['#title'] }}</h3>
+                  {{ content.field_phd_supervisor.0 }}
+                {% endif %}
+              {% endif %}
+            </section>
+          {% endif %}
           {% if publications or publis or hal_publications %}
             <section class="new-section publications">
               <a id="page-perso-publications"></a>
@@ -271,9 +271,9 @@
                 {{ content.field_publications.0 }}
               {% endif %}
               {% if hal_publications %}
-              <div>
-              {{ hal_publications|escape }}
-              </div>
+                <div>
+                  {{ hal_publications|raw }}
+                </div>
               {% endif %}
             </section>
           {% endif %}
@@ -295,9 +295,9 @@
             <div class="box-style no-shadow auto-height semi-field-sep">
               <div class="box-content-padding paris1-bg-blue">
                 {% if mail %}
-                <div class="txt-second details emailpro">
-                  <span class="fa fa-envelope"> : </span> <a href="mailto:{{ mail }}">{{ mail }}</a>
-                </div>
+                  <div class="txt-second details emailpro">
+                    <span class="fa fa-envelope"> : </span> <a href="mailto:{{ mail }}">{{ mail }}</a>
+                  </div>
                 {% endif %}
                 {% if 1 in content.field_display_other_email[0] %}
                   <div class="txt-second details emailperso">

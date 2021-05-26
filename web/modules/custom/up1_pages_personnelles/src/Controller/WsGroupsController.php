@@ -623,8 +623,7 @@ class WsGroupsController extends ControllerBase {
       }
 
       $response = new RedirectResponse($goto);
-      $response->send();
-      return;
+      return $response->send();
     }
   }
 
@@ -673,6 +672,34 @@ class WsGroupsController extends ControllerBase {
     $query->fields('fu', $fields);
     $query->condition('username', $username, 'LIKE');
     $query->condition('tx_oxcspagepersonnel_cv2', '', '<>');
+    $result = $query->execute()->fetchObject();
+
+    return $result;
+  }
+
+  public function createMissingPagePerso($username) {
+    return $this->selectUserData($username);
+  }
+
+  private function selectUserData($username) {
+    $query = $this->database->select('fe_users', 'fu');
+    $fields = [
+      'username',
+      'tx_oxcspagepersonnel_courriel',
+      'tx_oxcspagepersonnel_responsabilites_scientifiques',
+      'tx_oxcspagepersonnel_sujet_these',
+      'tx_oxcspagepersonnel_projets_recherche',
+      'tx_oxcspagepersonnel_directeur_these',
+      'tx_oxcspagepersonnel_epi',
+      'tx_oxcspagepersonnel_cv',
+      'tx_oxcspagepersonnel_directions_these',
+      'tx_oxcspagepersonnel_page_externe_url',
+      'tx_oxcspagepersonnel_themes_recherche',
+      'tx_oxcspagepersonnel_publications',
+      'tx_oxcspagepersonnel_cv2'
+    ];
+    $query->fields('fu', $fields);
+    $query->condition('username', $username, 'LIKE');
     $result = $query->execute()->fetchObject();
 
     return $result;
