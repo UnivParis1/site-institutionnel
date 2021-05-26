@@ -76,7 +76,7 @@ function p1ps2019_preprocess_page(&$variables) {
     }
   }
 
-  if ($node) {
+if (isset($node) && is_object($node)) {  
     $node_type = $node->getType();
     if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
       && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
