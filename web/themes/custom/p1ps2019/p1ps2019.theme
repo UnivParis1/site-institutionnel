@@ -178,7 +178,7 @@ function p1ps2019_preprocess_node(&$variables) {
         $uid = $author['target_id'];
         $pp = \Drupal::entityTypeManager()
           ->getStorage('node')
-          ->loadByProperties(['uid' => $uid]);
+          ->loadByProperties(['uid' => $uid, 'type' => 'page_personnelle']);
         $page_perso = reset($pp);
         if ($page_perso && $page_perso->getType() == 'page_personnelle') {
           $nom = $page_perso->get('field_name')->getValue();

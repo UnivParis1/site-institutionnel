@@ -111,9 +111,7 @@ class ComptexManager implements ComptexInterface {
       if (isset($information['supannActivite']) && is_array($information['supannActivite'])) {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
-      \Drupal::logger('comptex')->info("Before condition : " . print_r($information['supannRoleEntite-all'], 1));
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
-        \Drupal::logger('comptex')->info(print_r($information['supannRoleEntite-all'], 1));
         $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
