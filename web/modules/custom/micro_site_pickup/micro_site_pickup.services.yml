@@ -1,0 +1,10 @@
+services:
+  micro_site_pickup.route_subscriber:
+    class: Drupal\micro_site_pickup\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  access_check.pickup_content:
+    class: Drupal\micro_site_pickup\Access\PickupContentAccessCheck
+    arguments: [ '@event_dispatcher', '@current_user']
+    tags:
+      - { name: access_check, applies_to: _pickup_content }
