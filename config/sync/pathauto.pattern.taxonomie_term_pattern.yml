@@ -1,0 +1,23 @@
+uuid: fd953966-f179-4344-984b-a5ce3807d598
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: taxonomie_term_pattern
+label: 'Taxonomie term pattern'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:vocabulary]/[term:name]'
+selection_criteria:
+  ae08819a-e07d-46b9-b71d-eeacf06507bf:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      ecoles_doctorales: ecoles_doctorales
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: ae08819a-e07d-46b9-b71d-eeacf06507bf
+selection_logic: and
+weight: 0
+relationships: {  }

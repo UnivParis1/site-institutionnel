@@ -1,0 +1,31 @@
+uuid: 0aafe2ba-12a6-4dc9-b72a-1c2be01d8919
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.homepage
+    - field.field.media.video.field_media_video_file
+    - media.type.video
+  module:
+    - file
+id: media.video.homepage
+targetEntityType: media
+bundle: video
+mode: homepage
+content:
+  field_media_video_file:
+    type: file_default
+    weight: 0
+    label: above
+    settings:
+      use_description_as_link_text: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

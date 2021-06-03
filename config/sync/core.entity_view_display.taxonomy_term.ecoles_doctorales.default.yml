@@ -1,0 +1,35 @@
+uuid: 3dcb97c7-64b0-47ce-aa20-5ff058ec3aef
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.ecoles_doctorales.field_code_edo
+    - taxonomy.vocabulary.ecoles_doctorales
+  module:
+    - text
+id: taxonomy_term.ecoles_doctorales.default
+targetEntityType: taxonomy_term
+bundle: ecoles_doctorales
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_code_edo:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  include_master: true
+  langcode: true
+  search_api_excerpt: true
+  site_all: true
+  site_id: true
