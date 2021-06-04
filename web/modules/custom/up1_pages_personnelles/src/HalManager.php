@@ -12,65 +12,52 @@ class HalManager implements HalInterface {
   public function __construct() {}
 
   /**
-   * @param $username (string) username du user dont on veut les informations.
+   * @param (string) $method
+   * @param (string) $firstname
+   * @param (string) $lastname
+   * @param string|null $id_hal
    *
    * @return array|mixed
    */
-  public function getUserPublications($username) {
+  public function getUserPublications($method, $firstname, $lastname, $id_hal = NULL) {
     $publications = FALSE;
 
-    if (isset($username) && !empty($username)) {
-      $config = \Drupal::config('up1_pages_personnelles.settings');
-      $ws = $config->get('url_hal_api');
-
-      $searchUser = "$ws?idHal=$username";
-
-      $params = [
-        "CB_auteur" => "oui",
-        "CB_titre" => "oui",
-        "CB_typdoc" => "oui",
-        "CB_article" => "oui",
-        "CB_pubmedId" => "oui",
-        "langue" => "Francais",
-        "tri_exp" => "annee_publi",
-        "tri_exp2" => "typdoc",
-        "tri_exp3" => "date_publi",
-        "ordre_aff" => "TA",
-        "Fen" => "Aff",
-      ];
-
-      $url = $searchUser . '&' . http_build_query($params) . "&noheader";
-      $publications = file_get_contents($url);
+    switch ($method) {
+      case 'idhal':
+        $author = "idHal=$id_hal";
+        break;
+      case 'nomprenom':
+        $firstname = $this->removeSpecialChars($firstname);
+        $lastname = $this->removeSpecialChars($lastname);
+        $author = "auteur_exp=$firstname+$lastname&collection_exp=UNIV-PARIS1";
+        break;
     }
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $ws = $config->get('url_hal_api');
 
-    return $publications;
+    $searchUser = "$ws?$author";
+
+    $params = [
+      "CB_auteur" => "oui",
+      "CB_titre" => "oui",
+      "CB_typdoc" => "oui",
+      "CB_article" => "oui",
+      "CB_pubmedId" => "oui",
+      "langue" => "Francais",
+      "tri_exp" => "annee_publi",
+      "tri_exp2" => "typdoc",
+      "tri_exp3" => "date_publi",
+      "ordre_aff" => "TA",
+      "Fen" => "Aff",
+    ];
+
+    $url = $searchUser . '&' . http_build_query($params) . "&noheader";
+
+    return file_get_contents($url);
   }
 
   /**
-   * @param $firstname (string) firstname
-   * @param $name (string) name
-   *
-   * @return array|mixed
-   */
-  public function getPublicationsRSS($firstname, $name) {
-    $publications = FALSE;
-    if (isset($firstname) && !empty($firstname) && isset($name) && !empty($name)) {
-      $firstname = $this->removeSpecialChars($firstname);
-      $name = $this->removeSpecialChars($name);
-
-      $config = \Drupal::config('up1_pages_personnelles.settings');
-      $ws = $config->get('url_hal_rss');
-      $url = "$ws%22$firstname+$name%22";
-      \Drupal::logger('up1_pages_personnelles')->info(print_r($url,1));
-      $publications = file_get_contents($url);
-    }
-
-    return $publications;
-  }
-
-  /**
-   * @param $array
-   *
+   * @param $response
    * @return mixed
    */
   private function formatHalData($response) {
