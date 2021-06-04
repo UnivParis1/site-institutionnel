@@ -79,7 +79,6 @@
 {% set other_affiliation = content.field_other_affiliation|render %}
 {% set about_me = content.field_about_me|render %}
 {% set research_directions = content.field_research_directions|render %}
-{% set research_projects = content.field_research_projects|render %}
 {% set research_themes = content.field_research_themes|render %}
 {% set thesis_subject = content.field_thesis_subject|render %}
 {% set phd_supervisor = content.field_phd_supervisor|render %}
@@ -126,7 +125,7 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisor %}
+            {% if info or research_themes or research_directions or scientific_resp or thesis_subject or phd_supervisor %}
               <div class="btn btn-primary">
                 <a href="#page-perso-research">{{ 'Research'|t }}</a>
                 <i class="icon-ok"></i>
@@ -206,19 +205,19 @@
               {# ----- field About me ----- #}
             </div>
           </section>
-          {% if info or research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
+          {% if info or research_themes or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
             <section class="new-section research">
               <a id="page-perso-research"></a>
               <h2>{{ "Research"|t }}</h2>
               {# field Research directions #}
               {% if research_directions %}
-              <p class="txt-bold">{{ content.field_research_directions['#title'] }}</p>
+                <p class="txt-bold">{{ content.field_research_directions['#title'] }}</p>
                 {{ content.field_research_directions.0 }}
               {% endif %}
               {# ----- field Research directions ----- #}
               {# field_thesis_directions #}
               {% if thesis_directions %}
-              <p class="txt-bold">{{ content.field_thesis_directions['#title'] }}</p>
+                <p class="txt-bold">{{ content.field_thesis_directions['#title'] }}</p>
                 {{ content.field_thesis_directions.0 }}
               {% endif %}
               {# ----- field_thesis_directions ----- #}
@@ -236,14 +235,8 @@
                   <p class="txt-bold">{{ "Research projects"|t }}</p>
                   {{ content.field_research_themes.0 }}
                 {% endif %}
+                {# ----- field_research_themes ----- #}
               {% endif %}
-              {# ----- field_research_themes ----- #}
-              {# field_research_projects #}
-              {% if research_projects %}
-                <p class="txt-bold">{{ content.research_projects['#title'] }}</p>
-                <p>{{ content.research_projects.0 }}</p>
-              {% endif %}
-              {# ----- field_research_projects ----- #}
               {# field_scientific_resp #}
               {% if scientific_resp %}
                 <p class="txt-bold">{{ content.field_scientific_resp['#title'] }}</p>
