@@ -108,6 +108,7 @@
 {% endif %}
 {% set publis = content.field_highlight_publications|render %}
 {% set sticky_pub = content.field_sticky_publications|render %}
+{% set education = content.field_education|render %}
 
 {{ attach_library('up1_pages_personnelles/front') }}
 <article{{ attributes.addClass(classes) }}>
@@ -128,6 +129,13 @@
             {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisor %}
               <div class="btn btn-primary">
                 <a href="#page-perso-research">{{ 'Research'|t }}</a>
+                <i class="icon-ok"></i>
+                <span></span>
+              </div>
+            {% endif %}
+            {% if education %}
+              <div class="btn btn-primary">
+                <a href="#page-perso-education">{{ content.field_education['#title'] }}</a>
                 <i class="icon-ok"></i>
                 <span></span>
               </div>
@@ -204,13 +212,13 @@
               <h2>{{ "Research"|t }}</h2>
               {# field Research directions #}
               {% if research_directions %}
-                <h3>{{ content.field_research_directions['#title'] }}</h3>
+              <p class="txt-bold">{{ content.field_research_directions['#title'] }}</p>
                 {{ content.field_research_directions.0 }}
               {% endif %}
               {# ----- field Research directions ----- #}
               {# field_thesis_directions #}
               {% if thesis_directions %}
-                <h3>{{ content.field_thesis_directions['#title'] }}</h3>
+              <p class="txt-bold">{{ content.field_thesis_directions['#title'] }}</p>
                 {{ content.field_thesis_directions.0 }}
               {% endif %}
               {# ----- field_thesis_directions ----- #}
@@ -232,26 +240,36 @@
               {# ----- field_research_themes ----- #}
               {# field_research_projects #}
               {% if research_projects %}
-                <h3>{{ content.research_projects['#title'] }}</h3>
+                <p class="txt-bold">{{ content.research_projects['#title'] }}</p>
                 <p>{{ content.research_projects.0 }}</p>
               {% endif %}
               {# ----- field_research_projects ----- #}
               {# field_scientific_resp #}
               {% if scientific_resp %}
-                <h3>{{ content.field_scientific_resp['#title'] }}</h3>
+                <p class="txt-bold">{{ content.field_scientific_resp['#title'] }}</p>
                 <p>{{ content.field_scientific_resp.0 }}</p>
                 {# ----- field_scientific_resp ----- #}
               {% endif %}
               {% if thesis_subject or phd_supervisor %}
                 {% if thesis_subject %}
-                  <h3>{{ content.field_thesis_subject['#title'] }}</h3>
+                  <p class="txt-bold">{{ content.field_thesis_subject['#title'] }}</p>
                   {{ content.field_thesis_subject.0 }}
                 {% endif %}
                 {% if phd_supervisor %}
-                  <h3>{{ content.field_phd_supervisor['#title'] }}</h3>
+                  <p class="txt-bold">{{ content.field_phd_supervisor['#title'] }}</p>
                   {{ content.field_phd_supervisor.0 }}
                 {% endif %}
               {% endif %}
+            </section>
+          {% endif %}
+          {# field education #}
+          {% if education %}
+            <section class="new-section research">
+              <a id="page-perso-education"></a>
+              <h2>{{ content.field_education['#title'] }}</h2>
+              <p class="txt-second small">
+                {{ content.field_education.0 }}
+              </p>
             </section>
           {% endif %}
           {% if publications or publis or hal_publications %}
