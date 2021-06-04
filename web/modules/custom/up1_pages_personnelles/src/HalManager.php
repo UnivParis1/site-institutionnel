@@ -27,30 +27,28 @@ class HalManager implements HalInterface {
         $author = "auteur_exp=$firstname+$lastname&collection_exp=UNIV-PARIS1";
         break;
     }
-    if (isset($username) && !empty($username)) {
-      $config = \Drupal::config('up1_pages_personnelles.settings');
-      $ws = $config->get('url_hal_api');
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $ws = $config->get('url_hal_api');
 
-      $searchUser = "$ws?$author";
+    $searchUser = "$ws?$author";
 
-      $params = [
-        "CB_auteur" => "oui",
-        "CB_titre" => "oui",
-        "CB_typdoc" => "oui",
-        "CB_article" => "oui",
-        "CB_pubmedId" => "oui",
-        "langue" => "Francais",
-        "tri_exp" => "annee_publi",
-        "tri_exp2" => "typdoc",
-        "tri_exp3" => "date_publi",
-        "ordre_aff" => "TA",
-        "Fen" => "Aff",
-      ];
+    $params = [
+      "CB_auteur" => "oui",
+      "CB_titre" => "oui",
+      "CB_typdoc" => "oui",
+      "CB_article" => "oui",
+      "CB_pubmedId" => "oui",
+      "langue" => "Francais",
+      "tri_exp" => "annee_publi",
+      "tri_exp2" => "typdoc",
+      "tri_exp3" => "date_publi",
+      "ordre_aff" => "TA",
+      "Fen" => "Aff",
+    ];
 
-      $url = $searchUser . '&' . http_build_query($params) . "&noheader";
-      $publications = file_get_contents($url);
-    }
-
+    $url = $searchUser . '&' . http_build_query($params) . "&noheader";
+    $publications = file_get_contents($url);
+    
     return $publications;
   }
 
