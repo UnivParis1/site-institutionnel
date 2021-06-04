@@ -12,7 +12,10 @@ class HalManager implements HalInterface {
   public function __construct() {}
 
   /**
-   * @param $username (string) username du user dont on veut les informations.
+   * @param (string) $method
+   * @param (string) $firstname
+   * @param (string) $lastname
+   * @param string|null $id_hal
    *
    * @return array|mixed
    */
@@ -49,40 +52,12 @@ class HalManager implements HalInterface {
     ];
 
     $url = $searchUser . '&' . http_build_query($params) . "&noheader";
-    $publications = file_get_contents($url);
 
-    return $publications;
+    return file_get_contents($url);
   }
 
   /**
-   * @param $firstname (string) firstname
-   * @param $name (string) name
-   *
-   * @return array|mixed
-   */
-  public function getPublicationsRSS($firstname, $name) {
-    $publications = FALSE;
-    if (isset($firstname) && !empty($firstname) && isset($name) && !empty($name)) {
-      $firstname = $this->removeSpecialChars($firstname);
-      $name = $this->removeSpecialChars($name);
-
-      $config = \Drupal::config('up1_pages_personnelles.settings');
-      $ws = $config->get('url_hal_rss');
-      $url = "$ws%22$firstname+$name%22";
-      \Drupal::logger('up1_pages_personnelles')->info(print_r($url,1));
-      $publications = file_get_contents($url);
-      $json = json_encode($publications);
-      //$responseArray = json_decode($json,true);
-      \Drupal::logger('pages_personnelles_RSS_publications')->info(print_r($responseArray,1));
-
-    }
-
-    return $publications;
-  }
-
-  /**
-   * @param $array
-   *
+   * @param $response
    * @return mixed
    */
   private function formatHalData($response) {
