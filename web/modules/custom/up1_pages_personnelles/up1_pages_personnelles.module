@@ -227,15 +227,15 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
       if (!empty($get_publications) && $get_publications[0]['value']) {
+        $firstname = $node->get('field_firstname')->getValue();
+        $lastname = $node->get('field_name')->getValue();
         switch ($get_publications[0]['value']) {
           case 'idhal':
             $hal_publications = $node->get('field_id_hal')->getValue();
-            $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
+            $publications = up1_pages_personnelles_get_hal_publications('idhal', $firstname[0]['value'],$lastname[0]['value'],$hal_publications[0]['value']);
             break;
           case 'nomprenom':
-            $firstname = $node->get('field_firstname')->getValue();
-            $name = $node->get('field_name')->getValue();
-            $publications = up1_pages_personnelles_get_publications_rss($firstname[0]['value'],$name[0]['value']);
+            $publications = up1_pages_personnelles_get_hal_publications('nomprenom',$firstname[0]['value'],$lastname[0]['value']);
             break;
           case 'nul':
             $publications = "";
@@ -275,15 +275,16 @@ function up1_pages_personnelles_get_user_email($name) {
 }
 
 /**
- * @param $name
- *
+ * @param $method
+ * @param $firstname
+ * @param $lastname
+ * @param null $id_hal
  * @return array
  */
-function up1_pages_personnelles_get_hal_publications($name) {
+function up1_pages_personnelles_get_hal_publications($method, $firstname, $lastname,$id_hal = NULL) {
   $hal = new HalManager();
-  $publications = $hal->getUserPublications($name);
 
-  return $publications;
+  return $hal->getUserPublications($method, $firstname, $lastname,$id_hal);
 }
 
 /**

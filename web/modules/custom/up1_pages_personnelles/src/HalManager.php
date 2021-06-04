@@ -16,14 +16,22 @@ class HalManager implements HalInterface {
    *
    * @return array|mixed
    */
-  public function getUserPublications($username) {
+  public function getUserPublications($method, $firstname, $lastname, $id_hal = NULL) {
     $publications = FALSE;
 
+    switch ($method) {
+      case 'idhal':
+        $author = "idHal=$id_hal";
+        break;
+      case 'nomprenom':
+        $author = "auteur_exp=$firstname+$lastname&collection_exp=UNIV-PARIS1";
+        break;
+    }
     if (isset($username) && !empty($username)) {
       $config = \Drupal::config('up1_pages_personnelles.settings');
       $ws = $config->get('url_hal_api');
 
-      $searchUser = "$ws?idHal=$username";
+      $searchUser = "$ws?$author";
 
       $params = [
         "CB_auteur" => "oui",
@@ -64,7 +72,7 @@ class HalManager implements HalInterface {
       \Drupal::logger('up1_pages_personnelles')->info(print_r($url,1));
       $publications = file_get_contents($url);
       $json = json_encode($publications);
-      $responseArray = json_decode($json,true);
+      //$responseArray = json_decode($json,true);
       \Drupal::logger('pages_personnelles_RSS_publications')->info(print_r($responseArray,1));
 
     }
