@@ -5,6 +5,8 @@ use \Drupal\Core\Form\FormStateInterface;
 use \Drupal\taxonomy\Entity\Term;
 use \Drupal\user\Entity\User;
 use \Drupal\Core\Url;
+use \Drupal\up1_pages_personnelles\ComptexManager;
+
 
 /**
  * Implements hook_preprocess_HOOK() for html.twig.
@@ -76,7 +78,7 @@ function p1ps2019_preprocess_page(&$variables) {
     }
   }
 
-  if ($node) {
+  if (isset($node) && is_object($node)) {
     $node_type = $node->getType();
     if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
       && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
@@ -135,7 +137,18 @@ function p1ps2019_preprocess_node(&$variables) {
         break;
     }
   }
+  if ($node->getType() == 'page_personnelle') {
+    $uid = $node->getOwnerId();
+    $user = User::load($uid);
+    $umail = $user->getEmail();
+    if (isset($umail) && !empty ($umail)) {
+      $variables['mail'] = $umail;
+    } else {
+      $comptex = new ComptexManager();
+      $variables['mail'] = $comptex->getUserEmail($user->getUsername());
+    }
 
+  }
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
     $skills = $node->get('field_skills')->getValue();
     if (!empty($skills)) {

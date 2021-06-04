@@ -162,6 +162,22 @@ up1_pages_personnelles.batch_import_resume:
   requirements:
     _permission: 'access content'
 
+up1_pages_personnelles.import_last_fields:
+  path: '/pages-perso/import-last-fields'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::importLastFields'
+    _title: 'Import 2 last fields for pages persos from Typo3'
+  requirements:
+    _permission: 'access content'
+
+up1_pages_personnelles.batch_import_last_fields:
+  path: '/pages-perso/import-last-fields/batch'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportLastFields'
+    _title: 'Import 2 last fields for pages persos from Typo3'
+  requirements:
+    _permission: 'access content'
+
 up1_pages_personnelles.delete_queue_users:
   path: '/pages-perso/maj/empty'
   defaults:
@@ -176,3 +192,13 @@ up1_pages_personnelles.edit_page_perso:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::editPagePerso'
   requirements:
     _permission: 'has labeled URI'
+
+up1_pages_personnelles.bulk_import_page_perso:
+  path: '/admin/people/create/page-perso-bulk'
+  defaults:
+    _form: '\Drupal\up1_pages_personnelles\Form\BulkPagesPersonnelles'
+    _title: 'Bulk Populate Page Perso'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

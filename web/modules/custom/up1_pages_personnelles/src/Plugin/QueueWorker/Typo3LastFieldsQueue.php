@@ -15,15 +15,15 @@ use Drupal\node\Entity;
 use Drupal\Core\Url;
 
 /**
- * Executes publications field import from web service.
+ * Executes English resume & education fields import from web service.
  *
  * @QueueWorker(
- *   id = "up1_typo3_publications_queue",
- *   title = @Translation("Page Perso import publications field."),
+ *   id = "up1_typo3_last_fields_queue",
+ *   title = @Translation("Page Perso import english resume & education fields."),
  *   cron = {"time" = 60}
  *  )
  */
-class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class Typo3LastFieldsQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
@@ -83,6 +83,7 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
    */
   public function processItem($item) {
     $user = user_load_by_name($item->username);
+
     if ($user) {
       $author = $user->id();
       $ids = \Drupal::entityQuery('node')
@@ -93,26 +94,27 @@ class Typo3PublicationsQueue extends QueueWorkerBase implements ContainerFactory
       if (!empty($pages)) {
         foreach ($pages as $node) {
           try {
-            $publications = preg_replace("/<h3\s(.+?)>(.+?)<\/h3>/is", "<h4>$2</h4>", $item->tx_oxcspagepersonnel_publications);
-            $publications = preg_replace("/<h2\s(.+?)>(.+?)<\/h2>/is", "<h3>$2</h3>", $publications);
-            $node->field_publications = [
-              'value' => "<div>" . $publications . "</div>",
-              'format' => 'full_html'
-            ];
-            $node->field_my_hal_publications = [
-              'value' => 'nul',
-            ];
+            if (isset($item->tx_oxcspagepersonnel_anglais) && !empty($item->tx_oxcspagepersonnel_anglais)) {
+              $node->field_english_resume = [
+                'value' => "<div>" . $item->tx_oxcspagepersonnel_anglais . "</div>",
+                'format' => 'full_html'
+              ];
+            }
+            if (isset($item->tx_oxcspagepersonnel_epi) && !empty($item->tx_oxcspagepersonnel_epi)) {
+              $node->field_education = [
+                'value' => "<div>" . $item->tx_oxcspagepersonnel_epi . "</div>",
+                'format' => 'full_html'
+              ];
+            }
             $node->site_id = NULL;
             $node->save();
-          }
-          catch (\Exception $e) {
-            \Drupal::logger('up1_typo3_publications_queue')->error($this->t('La page personnelle de @username n\'a pas pu être créée.',
+          } catch (\Exception $e) {
+            \Drupal::logger('up1_typo3_last_fields_queue')->error($this->t('La page personnelle de @username n\'a pas pu être créée.',
               ['@username' => $item->username] ));
-            \Drupal::logger('up1_typo3_publications_queue')->error("@code : @Message" , [$e->getCode(), $e->getMessage()]);
+            \Drupal::logger('up1_typo3_last_fields_queue')->error("@code : @Message" , [$e->getCode(), $e->getMessage()]);
           }
         }
       }
     }
   }
 }
-

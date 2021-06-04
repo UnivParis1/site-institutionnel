@@ -9,10 +9,13 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use \Drupal\up1_pages_personnelles\ComptexManager;
 use \Drupal\up1_pages_personnelles\HalManager;
+use \Drupal\user\Entity\User;
 use \Drupal\User\UserInterface;
 use \Drupal\Node\NodeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
+use \Drupal\Core\Url;
+use \Drupal\Core\Link;
 
 /**
  * Implements hook_help().
@@ -115,16 +118,41 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
   if (in_array($form_id, ["node_page_personnelle_form", "node_page_personnelle_edit_form"]) ) {
     if ($form_id == "node_page_personnelle_edit_form") {
       $name = $form['field_uid_ldap']['widget'][0]['value']['#default_value'];
+
+      $nid = $form_state->getformObject()->getEntity()->id();
+      $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
+      $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
+
+      $link = Link::fromTextAndUrl($url->toString(), $url);
+
+      $html_link = $link->toString();
+
     }
     if ($form_id == "node_page_personnelle_form") {
       $userCurrent = \Drupal::currentUser();
 
-      $user = \Drupal\user\Entity\User::load($userCurrent->id());
+      $user = User::load($userCurrent->id());
       $name = $user->getUsername();
     }
     $userInformation = up1_pages_personnelles_get_comptex_info($name);
 
     if ($userInformation) {
+      $get_emails = up1_pages_personnelles_get_user_email($name);
+      $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['name' => $name]);
+      $teacher = reset($load_teacher);
+      if ($teacher) {
+        if(empty($teacher->getEmail())) {
+          if (isset($get_emails['mail'])) {
+            $teacher->mail = $get_emails['mail'];
+          }
+          else {
+            $teacher->mail = $get_emails['eduPersonPrincipalName'];
+          }
+          $teacher->save();
+        }
+      }
+
       $form['title']['#disabled'] = TRUE;
 
       $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
@@ -137,6 +165,17 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_firstname']['#access'] = FALSE;
 
       $form['field_other_affiliation']['#access'] = FALSE;
+      $form['actions']['preview']['#access'] = FALSE;
+
+      if (isset($get_emails['supannMailPerso'])) {
+        $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
+        $form['field_other_email_address']['#disabled'] = TRUE;
+      }
+      else {
+        $form['field_other_email_address']['#access'] = FALSE;
+        $form['field_display_other_email']['#access'] = FALSE;
+      }
+
 
       $fonction = '';
       if (isset($userInformation['employeeType'])) {
@@ -152,33 +191,11 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['field_affiliation']['widget'][0]['value']['#default_value'] =
         $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
 
-      $info = '';
-      if (isset($userInformation['info'])) {
-        foreach ($userInformation['info'] as $datum) {
-          $info .= $datum;
-        }
-      }
-      if (isset ($userInformation)) {
-        $form['field_research_themes']['#default_value'] = $info;
-
-        $form['wrapper'] = [
-          '#type' => 'container',
-        ];
-        $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
-
-        $form['wrapper']['markup'] = [
-          '#type' => 'markup',
-          '#markup' => up1_comptex_markup($userInformation)
-        ];
-
-        $form['wrapper']['information'] = [
-          '#type' => 'markup',
-          '#markup' => '<div class="explications">
-            <div>Les informations ci-dessus sont récupérées de <a href="https://comptex.univ-paris1.fr/compte/donnees_perso">Mon compte Paris 1. </a></div>
-            <div>Elles apparaîtront telles quelles sur votre page personnelle. Pour modifier certaines informations, rendez-vous sur
-            <a href="https://comptex.univ-paris1.fr/compte/donnees_perso">Mon compte Paris 1. </a></div></div>'
-        ];
-      }
+      $form['wrapper']['information'] = [
+        '#type' => 'markup',
+        '#markup' => "<div class='explications'>L'URL publique de ma page perso : $html_link</div>",
+      ];
+      $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
     }
   }
 }
@@ -241,6 +258,19 @@ function up1_pages_personnelles_get_comptex_info($name) {
   $userInformation = $comptex->getUserInformation($name);
 
   return $userInformation;
+}
+
+//Private functions
+/**
+ * @param $name
+ *
+ * @return array
+ */
+function up1_pages_personnelles_get_user_email($name) {
+  $comptex = new ComptexManager();
+  $email = $comptex->getUserEmail($name);
+
+  return $email;
 }
 
 /**

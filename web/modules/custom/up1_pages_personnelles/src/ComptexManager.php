@@ -30,7 +30,8 @@ class ComptexManager implements ComptexInterface {
     $searchUser = "$ws?token=$username";
 
     $params = [
-      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation"
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
+      'showExtendedInfo'=> 2
     ];
 
     $ch = curl_init();
@@ -107,14 +108,13 @@ class ComptexManager implements ComptexInterface {
       if (isset($information['givenName']) && is_array($information['givenName'])) {
         $information['givenName'] = reset($information['givenName']);
       }
-      if (isset($information['mail']) && is_array($information['mail'])) {
-        $information['mail'] = reset($information['mail']);
-      }
       if (isset($information['supannActivite']) && is_array($information['supannActivite'])) {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
+      
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
-        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['role'];
+        $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
+        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
       }
       if (isset($information['employeeType']) && is_array($information['employeeType'])) {
@@ -137,6 +137,11 @@ class ComptexManager implements ComptexInterface {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
           $information['entites'][$key]['name'] = $supannEntiteAffectation['name'];
           $information['entites'][$key]['description'] = $supannEntiteAffectation['description'];
+          if (isset($information['supannRole']) && !empty($information['supannRole'])) {
+            if ($supannEntiteAffectation['name'] == $information['supannRole']['name']) {
+              $information['supannRole']['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+            }
+          }
           if ($key == 0) {
             $information['entites'][$key]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
           }
@@ -147,5 +152,37 @@ class ComptexManager implements ComptexInterface {
       $information = [];
     }
     return $information;
+  }
+
+  public function getUserEmail($uid) {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $ws = $config->get('url_ws') . $config->get('search_user_page') . "?token=$uid";
+
+    $params = [
+      'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',
+      'showExtendedInfo' => 2
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+    $information = json_decode(curl_exec($ch), TRUE);
+    curl_close($ch);
+    $information = reset($information);
+
+    $this->formatEmails($information);
+
+    return $information;
+  }
+
+  private function formatEmails(&$information) {
+    if (isset($information['mail']) && !empty($information['mail'])) {
+      unset($information['eduPersonPrincipalName']);
+    }
+    if ((!isset($information['mail']) || empty($information['mail'])) &&
+      (isset($information['eduPersonPrincipalName']) && !empty($information['eduPersonPrincipalName']))) {
+      $information['mail'] = $information['eduPersonPrincipalName'];
+    }
   }
 }
