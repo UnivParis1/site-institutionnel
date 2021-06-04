@@ -135,7 +135,7 @@
             {% endif %}
             {% if education %}
               <div class="btn btn-primary">
-                <a href="#page-perso-education">{{ 'Eeducation'|t }}</a>
+                <a href="#page-perso-education">{{ 'Education'|t }}</a>
                 <i class="icon-ok"></i>
                 <span></span>
               </div>
@@ -264,10 +264,13 @@
           {% endif %}
           {# field education #}
           {% if education %}
+          <section class="new-section research">
+            <a id="page-perso-education"></a>
+            <h2>{{ content.field_education['#title'] }}</h2>
             <p class="txt-second small">
-              <span class="txt-bold">{{ content.field_education['#title'] }}</span>
                 {{ content.field_education.0 }}
             </p>
+          </section>
           {% endif %}
           {# field About me #}
           {% if about_me  %}
