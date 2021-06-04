@@ -108,6 +108,7 @@
 {% endif %}
 {% set publis = content.field_highlight_publications|render %}
 {% set sticky_pub = content.field_sticky_publications|render %}
+{% set education = content.field_education|render %}
 
 {{ attach_library('up1_pages_personnelles/front') }}
 <article{{ attributes.addClass(classes) }}>
@@ -125,9 +126,16 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisor %}
+            {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisorphd_supervisor %}
               <div class="btn btn-primary">
                 <a href="#page-perso-research">{{ 'Research'|t }}</a>
+                <i class="icon-ok"></i>
+                <span></span>
+              </div>
+            {% endif %}
+            {% if education %}
+              <div class="btn btn-primary">
+                <a href="#page-perso-education">{{ 'Eeducation'|t }}</a>
                 <i class="icon-ok"></i>
                 <span></span>
               </div>
@@ -254,6 +262,23 @@
               {% endif %}
             </section>
           {% endif %}
+          {# field education #}
+          {% if education %}
+            <p class="txt-second small">
+              <span class="txt-bold">{{ content.field_education['#title'] }}</span>
+                {{ content.field_education.0 }}
+            </p>
+          {% endif %}
+          {# field About me #}
+          {% if about_me  %}
+            <p class="txt-second small">
+              <span class="txt-bold"> {{ content.field_about_me['#title'] }} </span>
+              {{ content.field_about_me.0 }}
+            </p>
+          {% endif %}
+          {# ----- field About me ----- #}
+        </div>
+        </section>
           {% if publications or publis or hal_publications %}
             <section class="new-section publications">
               <a id="page-perso-publications"></a>
