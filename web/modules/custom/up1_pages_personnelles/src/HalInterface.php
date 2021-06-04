@@ -8,5 +8,5 @@ namespace Drupal\up1_pages_personnelles;
  * @package Drupal\up1_pages_personnelles
  */
 interface HalInterface {
-  public function getUserPublications($username);
+  public function getUserPublications($method, $firstname, $lastname, $id_hal);
 }
