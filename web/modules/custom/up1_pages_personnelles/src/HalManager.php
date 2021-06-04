@@ -62,6 +62,10 @@ class HalManager implements HalInterface {
       $ws = $config->get('url_hal_rss');
       $url = "$ws%22$firstname+$name%22";
       \Drupal::logger('up1_pages_personnelles')->info(print_r($url,1));
+      $json = json_encode($url);
+      $responseArray = json_decode($json,true);
+      \Drupal::logger('pages_personnelles_RSS_publications')->info(print_r($responseArray,1));
+
       $publications = file_get_contents($url);
     }
 

@@ -242,6 +242,7 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
             break;
         }
         $variables['hal_publications'] = $publications;
+        \Drupal::logger('pages_persos_preprocess_node')->info(print_r($publications, 1));
       }
     }
   }
