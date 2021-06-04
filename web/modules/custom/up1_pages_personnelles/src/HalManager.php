@@ -24,6 +24,8 @@ class HalManager implements HalInterface {
         $author = "idHal=$id_hal";
         break;
       case 'nomprenom':
+        $firstname = $this->removeSpecialChars($firstname);
+        $lastname = $this->removeSpecialChars($lastname);
         $author = "auteur_exp=$firstname+$lastname&collection_exp=UNIV-PARIS1";
         break;
     }
@@ -48,7 +50,7 @@ class HalManager implements HalInterface {
 
     $url = $searchUser . '&' . http_build_query($params) . "&noheader";
     $publications = file_get_contents($url);
-    
+
     return $publications;
   }
 
