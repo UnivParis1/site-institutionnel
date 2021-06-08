@@ -63,7 +63,7 @@ function p1ps2019_preprocess_page(&$variables) {
 
   if (isset($site) && !empty($site)) {
     if (in_array($system_path, ['/actualites', '/evenements', '/publications'])) {
-    $page_mini_site = TRUE;
+      $page_mini_site = TRUE;
     }
     $site_id = $site->id();
 
@@ -76,7 +76,7 @@ function p1ps2019_preprocess_page(&$variables) {
     }
   }
 
-if (isset($node) && is_object($node)) {  
+  if (isset($node) && is_object($node)) {
     $node_type = $node->getType();
     if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
       && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
@@ -114,24 +114,24 @@ function p1ps2019_preprocess_node(&$variables) {
       case "news2018" :
         $variables['node_type_text'] = t("Actualité");
         break;
-        case "page_personnelle" :
-          $variables['node_type_text'] = t("Page Personnelle");
+      case "page_personnelle" :
+        $variables['node_type_text'] = t("Page Personnelle");
         break;
-        case "event" :
-          $variables['node_type_text'] = t("Évènement");
+      case "event" :
+        $variables['node_type_text'] = t("Évènement");
         break;
-        case "viva" :
-          $variables['node_type_text'] = t("Soutenance de thèse");
+      case "viva" :
+        $variables['node_type_text'] = t("Soutenance de thèse");
         break;
-        case "offer" :
-          $variables['node_type_text'] = t("Offre d'emploi");
+      case "offer" :
+        $variables['node_type_text'] = t("Offre d'emploi");
         break;
-        case "page" :
-        case "second_level_pages" :
-          $variables['node_type_text'] = t("Page");
+      case "page" :
+      case "second_level_pages" :
+        $variables['node_type_text'] = t("Page");
         break;
       case "publication":
-          $variables['node_type_text'] = t("Publication");
+        $variables['node_type_text'] = t("Publication");
         break;
     }
   }
@@ -150,9 +150,10 @@ function p1ps2019_preprocess_node(&$variables) {
           target="_blank">'
           . $term->getName() . '</a>';
       }
+      $variables['expertises'] = $expertises;
     }
-    $variables['expertises'] = $expertises;
   }
+
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_highlight_publications')) {
     $publications = $node->get('field_highlight_publications')->getValue();
     $col_length = 12;
@@ -161,7 +162,7 @@ function p1ps2019_preprocess_node(&$variables) {
         $col_length = "8";
         break;
       case 2:
-      $col_length = "6";
+        $col_length = "6";
         break;
       case 3:
         $col_length = "4";
