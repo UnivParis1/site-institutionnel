@@ -47,6 +47,28 @@ class HalManager implements HalInterface {
   }
 
   /**
+   * @param $firstname (string) firstname
+   * @param $name (string) name
+   *
+   * @return array|mixed
+   */
+  public function getPublicationsRSS($firstname, $name) {
+    $publications = FALSE;
+    if (isset($firstname) && !empty($firstname) && isset($name) && !empty($name)) {
+      $firstname = $this->removeSpecialChars($firstname);
+      $name = $this->removeSpecialChars($name);
+
+      $config = \Drupal::config('up1_pages_personnelles.settings');
+      $ws = $config->get('url_hal_rss');
+      $url = "$ws%22$firstname+$name%22";
+      \Drupal::logger('up1_pages_personnelles')->info(print_r($url,1));
+      $publications = file_get_contents($url);
+    }
+
+    return $publications;
+  }
+
+  /**
    * @param $array
    *
    * @return mixed
@@ -75,5 +97,12 @@ class HalManager implements HalInterface {
     }
 
     return $publications;
+  }
+
+  private function removeSpecialChars($string) {
+    $string = str_replace(' ','%20',trim(strtolower(
+      strtr($string, 'áàâäãåçéèêëíìîïñóòôöõúùûüýÿ', 'aaaaaaceeeeiiiinooooouuuuyy'))));
+
+    return $string;
   }
 }

@@ -1,0 +1,51 @@
+uuid: 5aa24f60-671d-40bf-8432-3b364667367b
+langcode: fr
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - media.type.image
+    - responsive_image.styles.wide
+  module:
+    - responsive_image
+id: media.image.full
+targetEntityType: media
+bundle: image
+mode: full
+content:
+  field_credits:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_legende:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_media_image:
+    label: hidden
+    settings:
+      responsive_image_style: wide
+      image_link: ''
+    third_party_settings: {  }
+    type: responsive_image
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

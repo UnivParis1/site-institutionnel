@@ -128,13 +128,15 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $form['title']['#disabled'] = TRUE;
 
       $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
-      $form['field_uid_ldap']['#disabled'] = TRUE;
+      $form['field_uid_ldap']['#access'] = FALSE;
 
       $form['field_name']['widget'][0]['value']['#default_value'] = strtoupper($userInformation['sn']);
-      $form['field_name']['#disabled'] = TRUE;
+      $form['field_name']['#access'] = FALSE;
 
       $form['field_firstname']['widget'][0]['value']['#default_value'] = $userInformation['givenName'];
-      $form['field_firstname']['#disabled'] = TRUE;
+      $form['field_firstname']['#access'] = FALSE;
+
+      $form['field_other_affiliation']['#access'] = FALSE;
 
       $fonction = '';
       if (isset($userInformation['employeeType'])) {
@@ -144,9 +146,9 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
         $fonction .= ' (' . $userInformation['supannActivite'] . ')';
       }
       $form['field_fonction']['widget'][0]['value']['#default_value'] = $fonction;
-      $form['field_fonction']['#disabled'] = TRUE;
+      $form['field_fonction']['#access'] = FALSE;
 
-      $form['field_affiliation']['#disabled'] = TRUE;
+      $form['field_affiliation']['#access'] = FALSE;
       $form['field_affiliation']['widget'][0]['value']['#default_value'] =
         $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
 
@@ -206,17 +208,24 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
         $variables[$key] = $information;
       }
 
-      $variables['publications'] = "";
-      $get_publications = $node->get('field_get_hal_publications')->getValue();
-      $hal_publications = $node->get('field_id_hal')->getValue();
+      $get_publications = $node->get('field_my_hal_publications')->getValue();
       if (!empty($get_publications) && $get_publications[0]['value']) {
-        $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
-
+        switch ($get_publications[0]['value']) {
+          case 'idhal':
+            $hal_publications = $node->get('field_id_hal')->getValue();
+            $publications = up1_pages_personnelles_get_hal_publications($hal_publications[0]['value']);
+            break;
+          case 'nomprenom':
+            $firstname = $node->get('field_firstname')->getValue();
+            $name = $node->get('field_name')->getValue();
+            $publications = up1_pages_personnelles_get_publications_rss($firstname[0]['value'],$name[0]['value']);
+            break;
+          case 'nul':
+            $publications = "";
+            break;
+        }
         $variables['hal_publications'] = $publications;
       }
-    }
-    else {
-
     }
   }
 }
@@ -242,6 +251,19 @@ function up1_pages_personnelles_get_comptex_info($name) {
 function up1_pages_personnelles_get_hal_publications($name) {
   $hal = new HalManager();
   $publications = $hal->getUserPublications($name);
+
+  return $publications;
+}
+
+/**
+ * @param $firstname
+ * @param $name
+ *
+ * @return array
+ */
+function up1_pages_personnelles_get_publications_rss($firstname, $name) {
+  $hal = new HalManager();
+  $publications = $hal->getPublicationsRSS($firstname, $name);
 
   return $publications;
 }
@@ -306,7 +328,7 @@ function up1_comptex_markup($data) {
         <label><i class="fa fa-map-marker"></i></label><span class="uneditable-input ">' . $data['buildingName']. '</span>';
     }
     if (isset($data['postalAddress'])) {
-     $address .= '<span class="postalAddress">' . $data['postalAddress']. '</span>';
+      $address .= '<span class="postalAddress">' . $data['postalAddress']. '</span>';
     }
     $address .='</div>';
   }
@@ -331,7 +353,7 @@ function up1_comptex_markup($data) {
           <div class="col-md-5 contactInformation">
             <div class="mail"><i class="fa fa-envelope"></i> ' . $data['mail']. '</div>'.
     $phone
-     . $address . '
+    . $address . '
           </div>
       </div>
     </div>

@@ -1,0 +1,67 @@
+uuid: 933ec047-ea12-4852-8aaf-8db28adb1082
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.viva.field_add_to_cal
+    - field.field.node.viva.field_categories
+    - field.field.node.viva.field_ecole_doctorale
+    - field.field.node.viva.field_edo_code
+    - field.field.node.viva.field_edo_label
+    - field.field.node.viva.field_event_address
+    - field.field.node.viva.field_event_date
+    - field.field.node.viva.field_subtitle
+    - field.field.node.viva.field_thesis_supervisor
+    - node.type.viva
+  module:
+    - up1_global
+    - user
+id: node.viva.search_index
+targetEntityType: node
+bundle: viva
+mode: search_index
+content:
+  field_edo_label:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_event_date:
+    weight: 3
+    label: visually_hidden
+    settings:
+      timezone_override: ''
+      date_format: 'Y-m-d\TH:i:s'
+    third_party_settings: {  }
+    type: up1_viva_format
+    region: content
+  field_subtitle:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_thesis_supervisor:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_add_to_cal: true
+  field_categories: true
+  field_ecole_doctorale: true
+  field_edo_code: true
+  field_event_address: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  site_id: true

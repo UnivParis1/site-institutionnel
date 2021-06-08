@@ -53,19 +53,6 @@
   'clearfix',
 ]
 %}
-<section{{ attributes.addClass(classes) }}>
-<<<<<<< HEAD
-<<<<<<< HEAD
-  {# {% block content %}
-    {{ content }}
-  {% endblock %} #}
-  <div id="bg-video">{{ content }}</div>
-  <div class="buttons">
-    <button class="button" id="play-button">PLAY</button>
-    <button class="button" id="pause-button">PAUSE</button>
-    {# <button class="button" id="stop-button">STOP</button> #}
-  </div>
-=======
   {% if content.field_video_couverture %}
     <div id="bg-video">
       <video controls>
@@ -78,12 +65,6 @@
       {# <button class="button" id="stop-button">STOP</button> #}
     </div>
   {% else %}
-    {% block content %}
-        {{ content }}
-      {% endblock %}
-  {% endif %}
->>>>>>> bugfix/video-home
-=======
   {% block content %}
     {% if content.field_video_couverture is not empty %}
       <div id="bg-video">
@@ -100,5 +81,5 @@
       {{ content }}
     {% endif %}
   {% endblock %}
->>>>>>> bugfix/video-home
+{% endif %}
 </section>

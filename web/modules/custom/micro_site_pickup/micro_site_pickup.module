@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_site_pickup.module.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\micro_site\Entity\SiteInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_site_pickup_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_site_pickup module.
+    case 'help.page.micro_site_pickup':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Allows to pickup contents available on the master and others micro site from a micro site, and to publish them on it.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function micro_site_pickup_view_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  // Prevent user to delete the view pickup content.
+  if ($entity->id() == 'pickup_content' && $operation == 'delete') {
+    return AccessResult::forbidden('This view can not be deleted because we add custom access on its route.');
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Alters the artist options on artwork pages.
+ */
+function micro_site_pickup_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $field_sites = 'sites';
+  $form_ids = [
+    'views-exposed-form-pickup-content-page-1',
+    'views-exposed-form-pickup-content-page-2',
+  ];
+  if (!in_array($form['#id'], $form_ids)) {
+    return FALSE;
+  }
+  if (!isset($form[$field_sites])) {
+    return FALSE;
+  }
+  /** @var \Drupal\micro_site\SiteNegotiatorInterface $negotiator */
+  $negotiator = \Drupal::service('micro_site.negotiator');
+  $site = $negotiator->loadFromRequest();
+  if (!$site instanceof SiteInterface) {
+    $form[$field_sites]['#access'] = FALSE;
+  }
+//  $storage = \Drupal::entityTypeManager()->getStorage('site');
+//  $query = $storage->getQuery();
+//  $ids = $query->condition('registered', 1)
+//    ->condition('status', 1)
+//    ->sort('name')
+//    ->execute();
+//  if (empty($ids)) {
+//    return FALSE;
+//  }
+  $options = [];
+  $options[$site->id()] = $site->label();
+
+  $form[$field_sites]['#type'] = 'select';
+  $form[$field_sites]['#multiple'] = FALSE;
+  $form[$field_sites]['#empty_option'] = t('-- Select a secondary site --');
+  $form[$field_sites]['#options'] = $options;
+  unset($form[$field_sites]['#size']);
+}
