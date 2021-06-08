@@ -4,6 +4,7 @@
       if (window.NodeList && !NodeList.prototype.forEach) {
         console.log('unsupported browser');
         alert('Votre navigateur ne prend pas en charge certaines fonctionnalités du site. Veuillez le mettre à jour ou changer de navigateur. ');
+        window.top.location.href = "https://pantheonsorbonne.fr/pages-persos-unsupported-browsers";
       }
     }
   };
