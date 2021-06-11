@@ -152,8 +152,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
           $teacher->save();
         }
       }
-      $form['title'] = $userInformation['supannCivilite'] . " " . $userInformation['displayName'];
-      $form['title']['#disabled'] = TRUE;
+      $form['title']['#access'] = FALSE;
 
       $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
       $form['field_uid_ldap']['#access'] = FALSE;
@@ -224,7 +223,7 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       foreach ($userInformation as $key => $information) {
         $variables[$key] = $information;
       }
-
+      $variables['displayName'] = $userInformation['supannCivilite'] . " " . $userInformation['displayName'];
       $get_publications = $node->get('field_my_hal_publications')->getValue();
       $publications = "";
       if (!empty($get_publications) && $get_publications[0]['value']) {
