@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains micro_footer_umr.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_footer_umr_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the micro_footer_umr module.
+    case 'help.page.micro_footer_umr':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Block affichant le champ footer du mini site UMR associé') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function micro_footer_umr_theme() {
+  return [
+    'micro_footer' => [
+      'template' => 'micro-footer-umr',
+      'variables' => ['liens' => []],
+    ],
+  ];
+}
