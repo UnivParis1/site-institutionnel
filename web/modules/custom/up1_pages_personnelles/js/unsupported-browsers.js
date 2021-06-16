@@ -9,7 +9,7 @@
           var newDiv = document.createElement("div");
           // et lui donne un peu de contenu
           var newContent = document.createTextNode('Votre navigateur ne prend pas en charge certaines fonctionnalités du site. ' +
-            'Veuillez mettre à jour de navigateur ou télécharger un navigateur plus récent. ');
+            'Veuillez mettre à jour le navigateur ou télécharger un navigateur plus récent. ');
           newDiv.setAttribute('class','unsupported-browser');
           // ajoute le nœud texte au nouveau div créé
           newDiv.appendChild(newContent);
