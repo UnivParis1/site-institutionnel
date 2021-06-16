@@ -153,7 +153,7 @@ class ThesesHelper {
     $taxonomyEntity = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term');
     $termEd = $taxonomyEntity->loadByProperties([
-      'name' => $code,
+      'name' => $libelle,
       'vid' => $vocabulary_name
     ]);
     if (!empty($termEd)) {
@@ -162,7 +162,8 @@ class ThesesHelper {
     else {
       $term = Term::create([
         'name' => $libelle,
-        'vid' => $vocabulary_name
+        'vid' => $vocabulary_name,
+        'field_code_edo' => $code,
       ]);
       $term->save();
     }
