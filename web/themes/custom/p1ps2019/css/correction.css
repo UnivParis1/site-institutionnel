@@ -12,6 +12,32 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 .user-login-form .form-item-name, .user-login-form .form-item-pass, .user-login-form .form-actions {
     display: none;
 }
+/* affichage puce sur les listes à puces */
+#block-p1ps2019-content article .paragraph .grid-container .field ul {
+    list-style-type: disc;
+}
+.paragraph ul, ol, dl {
+    list-style-position: inside;
+}
+#block-p1ps2019-content article .paragraph .grid-container .field ul li ul {
+    list-style-type: circle;
+}
+#block-p1ps2019-content article .paragraph .grid-container .field ul li ul li ul {
+    list-style-type: square;
+}
+/* Ajout texte menu au burger menu **/
+#navbar #top-header .icon-menu::after {
+    content:"MENU";
+    display: block;
+    width:auto;
+    color:#FFF;
+    font-size:0.6rem;
+    margin-top:0.2rem;
+    font-weight:bold;
+}
+.scroll #navbar #top-header .icon-menu::after, .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .path-node #navbar #top-header .icon-menu::after {
+    color:#00326E;
+}
 
 /* label node type dans la recherche */
 .node-type-search {
@@ -156,4 +182,27 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 @media screen and (max-width: 420px) {
 .page-personnelle .page_personnelle { margin-top: 0; }
 .page-personnelle .page_personnelle .page_personnelle-name { position: inherit; }
+}
+/** Ajustement page perso largeur contenu colonne droite **/
+.page-personnelle .page_personnelle .right-mov-content .colonnedroite .cell {
+    margin: 0 0 2rem;
+    max-width: 100%;
+}
+/** Ajustement page perso pour que le bloc recherche passe au 1er plan **/
+.page-personnelle .page_personnelle .page_personnelle-name {
+z-index: 1 !important;
+}
+/** Ajustement page perso pour ajouter marge sur le h3 et h4 **/
+.page_personnelle .colonnecentrale h3 {
+    margin-top:1rem;
+    margin-bottom: 1rem;
+}
+.page_personnelle .colonnecentrale h4 {
+    margin-top:0.5rem;
+    margin-bottom: 0.25rem;
+}
+/** Ajustement page perso pour puce à double liste **/
+.page-personnelle .colonnecentrale ul ul {
+    list-style-type: circle;
+    list-style-position: inside;
 }
