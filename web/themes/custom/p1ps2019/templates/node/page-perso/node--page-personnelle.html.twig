@@ -172,7 +172,7 @@
             {# ----- Comptex Info ----- #}
             {# Comptex Affectations #}
             <div class="infos-sep">
-              <p class="txt-bold"> {{ "Assignment"|t }} </p>
+              <h3 class="date-style">{{ "Assignment"|t }} </h3>
               {% for key, entite in entites %}
                 {% if key != 0 %}
                   <span>{{ entite.description }}</span><br />
@@ -186,7 +186,7 @@
               {# ----- Comptex Affectations ----- #}
               {# field skills #}
               {% if skills %}
-                <p class="txt-bold">{{ content.field_skills['#title'] }}</p>
+                <h3 class="date-style">{{ content.field_skills['#title'] }}</h3>
                 <p class="txt-second small infos-sep">
                   {% for key, skill in skills if key|first != '#' %}
                     <span class="btn btn-primary">
@@ -205,25 +205,26 @@
               {# ----- field About me ----- #}
             </div>
           </section>
-          {% if info or research_themes or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
+          {% if info or research_themes or scientific_resp or thesis_subject or phd_supervisor or research_directions
+          or thesis_directions %}
             <section class="new-section research">
               <a id="page-perso-research"></a>
               <h2>{{ "Research"|t }}</h2>
               {# field Research directions #}
               {% if research_directions %}
-                <p class="txt-bold">{{ content.field_research_directions['#title'] }}</p>
+                <h3 class="date-style">{{ content.field_research_directions['#title'] }}</h3>
                 {{ content.field_research_directions.0 }}
               {% endif %}
               {# ----- field Research directions ----- #}
               {# field_thesis_directions #}
               {% if thesis_directions %}
-                <p class="txt-bold">{{ content.field_thesis_directions['#title'] }}</p>
+                <h3 class="date-style">{{ content.field_thesis_directions['#title'] }}</h3>
                 {{ content.field_thesis_directions.0 }}
               {% endif %}
               {# ----- field_thesis_directions ----- #}
               {# field_research_themes #}
               {% if info or research_themes %}
-                  <p class="txt-bold">{{ "Research themes"|t }}</p>
+                <h3 class="date-style">{{ "Research themes"|t }}</h3>
                 {% if info %}
                   <ul>
                     {% for key, item in info %}
@@ -238,17 +239,17 @@
               {% endif %}
               {# field_scientific_resp #}
               {% if scientific_resp %}
-                <p class="txt-bold">{{ content.field_scientific_resp['#title'] }}</p>
+                <h3 class="date-style">{{ content.field_scientific_resp['#title'] }}</h3>
                 <p>{{ content.field_scientific_resp.0 }}</p>
                 {# ----- field_scientific_resp ----- #}
               {% endif %}
               {% if thesis_subject or phd_supervisor %}
                 {% if thesis_subject %}
-                  <p class="txt-bold">{{ content.field_thesis_subject['#title'] }}</p>
+                  <h3 class="date-style">{{ content.field_thesis_subject['#title'] }}</h3>
                   {{ content.field_thesis_subject.0 }}
                 {% endif %}
                 {% if phd_supervisor %}
-                  <p class="txt-bold">{{ content.field_phd_supervisor['#title'] }}</p>
+                  <h3 class="date-style">{{ content.field_phd_supervisor['#title'] }}</h3>
                   {{ content.field_phd_supervisor.0 }}
                 {% endif %}
               {% endif %}
