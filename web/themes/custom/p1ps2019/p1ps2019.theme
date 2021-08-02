@@ -383,7 +383,7 @@ function p1ps2019_preprocess_paragraph(&$variables) {
     $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 
     if(!empty($paragraph->field_phone->value)) {
-      $variables['centre']['telephone'] = [];
+      unset($variables['centre']['telephone']);
       $variables['centre']['telephone'][] = $paragraph->field_phone->value;
     }
 
