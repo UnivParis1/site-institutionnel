@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the UP1 global module.
+ */
+
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Add terms to "Éditeurs" taxonomy.
+ */
+function up1_global_update_8101() {
+  $vocabulary_name = "publishers";
+
+  $taxonomyEntity = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term');
+
+  $json_path = file_get_contents('files/publishers.json');
+  $publishers = json_decode($json_path, true);
+
+  foreach ($publishers as $publisher) {
+    $termEd = $taxonomyEntity->loadByProperties([
+      'name' => trim($publisher['publisher']),
+      'vid' => $vocabulary_name
+    ]);
+    if (empty($termEd)) {
+      $term = Term::create([
+        'name' => trim($publisher['publisher']),
+        'vid' => $vocabulary_name,
+      ]);
+      $term->save();
+    }
+  }
+}
+
+/**
+ * Add terms to "Éditeurs" taxonomy.
+ */
+function up1_global_update_8102() {
+  $vocabulary_name = "collections";
+
+  $taxonomyEntity = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term');
+
+  $json_path = file_get_contents('files/collections.json');
+  $collections = json_decode($json_path, true);
+
+  foreach ($collections as $collection) {
+    $termEd = $taxonomyEntity->loadByProperties([
+      'name' => trim($collection['collection']),
+      'vid' => $vocabulary_name
+    ]);
+    if (empty($termEd)) {
+      $term = Term::create([
+        'name' => trim($collection['collection']),
+        'vid' => $vocabulary_name,
+      ]);
+      $term->save();
+    }
+  }
+}
