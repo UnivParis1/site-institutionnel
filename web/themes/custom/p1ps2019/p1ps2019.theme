@@ -56,7 +56,7 @@ function p1ps2019_preprocess_page(&$variables)
 
   $variables['#attached']['drupalSettings']['language'] = $language;
 
-  if ($variables['is_front'] || preg_match('/node\/preview/', $system_path)) {
+  if ($variables['is_front']) {
     $print_hp_image = TRUE;
   }
   if (preg_match('/node\/preview/', $system_path)) {
