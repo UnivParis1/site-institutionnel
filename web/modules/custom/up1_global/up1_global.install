@@ -17,7 +17,9 @@ function up1_global_update_8101() {
   $taxonomyEntity = \Drupal::entityTypeManager()
     ->getStorage('taxonomy_term');
 
-  $json_path = file_get_contents('files/publishers.json');
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('up1_global')->getPath();
+  $json_path = file_get_contents("$module_path/publishers.json");
   $publishers = json_decode($json_path, true);
 
   foreach ($publishers as $publisher) {
