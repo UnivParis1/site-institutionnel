@@ -97,58 +97,72 @@ function up1_global_update_8103() {
   if (!empty($publications)) {
     foreach ($publications as $publication) {
       $field_collection = [];
-      $field_collection_value = '';
-      $field_publisher = [];
-      $field_publisher_value = '';
       $taxonomyEntity = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term');
       //Migrate field_collection
       $field_collection = $publication->get('field_collection')->getValue();
-      $field_collection_value = $field_collection[0]['value'];
-      if (isset($field_collection) && $field_collection_value != '') {
-        $voc_collections = "collections";
-        $term_collection = $taxonomyEntity->loadByProperties([
-          'name' => trim($field_collection_value),
-          'vid' => $voc_collections
-        ]);
-        if (!empty($term_collection)) {
-          $term_collection = reset($term_collection);
-        } else {
-          $term_collection = Term::create([
+      if (isset($field_collection) && !empty($field_collection)) {
+        $field_collection_value = $field_collection[0]['value'];
+        if (isset($field_collection_value) && !empty($field_collection_value)) {
+          $voc_collections = "collections";
+          $term_collection = $taxonomyEntity->loadByProperties([
             'name' => trim($field_collection_value),
-            'vid' => $voc_collections,
+            'vid' => $voc_collections
           ]);
-          $term_collection->save();
+          if (!empty($term_collection)) {
+            $term_collection = reset($term_collection);
+          } else {
+            $term_collection = Term::create([
+              'name' => trim($field_collection_value),
+              'vid' => $voc_collections,
+            ]);
+            $term_collection->save();
+          }
+          $publication->set('field_collection_term', $term_collection);
+          $publication->save();
         }
       }
+    }
+  }
+}
+
+/**
+ * Migrate publisher data from text field to
+ * entity_reference field on publication node.
+ */
+function up1_global_update_8104() {
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'publication')
+    ->execute();
+  $publications = \Drupal\node\Entity\Node::loadMultiple($nids);
+  if (!empty($publications)) {
+    foreach ($publications as $publication) {
+      $field_publisher = [];
+      $taxonomyEntity = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term');
       //Migrate field_publisher
       $field_publisher = $publication->get('field_publisher')->getValue();
-      $field_publisher_value = $field_publisher[0]['value'];
-      if (isset($field_publisher) && $field_publisher_value != '') {
-        $voc_publishers = "publishers";
-        $term_publisher = $taxonomyEntity->loadByProperties([
-          'name' => trim($field_publisher_value),
-          'vid' => $voc_publishers
-        ]);
-        if (!empty($term_publisher)) {
-          $term_publisher = reset($term_publisher);
-        }
-        else {
-          $term_publisher = Term::create([
+      if (isset($field_publisher) && !empty($field_publisher)) {
+        $field_publisher_value = $field_publisher[0]['value'];
+        if (isset($field_publisher_value) && $field_publisher_value != '') {
+          $voc_publishers = "publishers";
+          $term_publisher = $taxonomyEntity->loadByProperties([
             'name' => trim($field_publisher_value),
-            'vid' => $voc_publishers,
+            'vid' => $voc_publishers
           ]);
-          $term_publisher->save();
-        }
-      }
-      if (isset($term_publisher) || isset($term_collection)) {
-        if (isset($term_publisher)) {
+          if (!empty($term_publisher)) {
+            $term_publisher = reset($term_publisher);
+          } else {
+            $term_publisher = Term::create([
+              'name' => trim($field_publisher_value),
+              'vid' => $voc_publishers,
+            ]);
+            $term_publisher->save();
+          }
           $publication->set('field_publisher_term', $term_publisher);
+          $publication->save();
         }
-        if (isset($term_collection)) {
-          $publication->set('field_collection_term', $term_collection);
-        }
-        $publication->save();
+
       }
     }
   }
