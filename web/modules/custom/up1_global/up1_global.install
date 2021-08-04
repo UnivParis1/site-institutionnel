@@ -99,30 +99,31 @@ function up1_global_update_8103() {
       $taxonomyEntity = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term');
       //Migrate field_collection
-      $field_collection = trim($publication->get('field_collection')->getValue());
-      if (isset($field_collection) && $field_collection != '') {
+      $field_collection = $publication->get('field_collection')->getValue();
+      $field_collection_value = $field_collection[0]['value'];
+      if (isset($field_collection) && $field_collection_value != '') {
         $voc_collections = "collections";
         $term_collection = $taxonomyEntity->loadByProperties([
-          'name' => $field_collection,
+          'name' => trim($field_collection_value),
           'vid' => $voc_collections
         ]);
         if (!empty($term_collection)) {
           $term = reset($term_collection);
         } else {
           $term_collection = Term::create([
-            'name' => trim($field_collection),
+            'name' => trim($field_collection_value),
             'vid' => $voc_collections,
           ]);
           $term_collection->save();
         }
       }
       //Migrate field_publisher
-      $field_publisher = trim($publication->get('field_collection')->getValue());
-      if (isset($field_publisher) && $field_publisher != '') {
+      $field_publisher = $publication->get('field_publisher')->getValue();
+      $field_publisher_value = $field_publisher[0]['value'];
+      if (isset($field_publisher) && $field_publisher_value != '') {
         $voc_publishers = "publishers";
-
         $term_publisher = $taxonomyEntity->loadByProperties([
-          'name' => $field_publisher,
+          'name' => trim($field_publisher_value),
           'vid' => $voc_publishers
         ]);
         if (!empty($term_publisher)) {
@@ -130,7 +131,7 @@ function up1_global_update_8103() {
         }
         else {
           $term_publisher = Term::create([
-            'name' => trim($field_publisher),
+            'name' => trim($field_publisher_value),
             'vid' => $voc_publishers,
           ]);
           $term_publisher->save();
