@@ -86,7 +86,7 @@ function up1_global_update_8102() {
 }
 
 /**
- * Migrate publisher & collections data from text field to
+ * Migrate collection data from text field to
  * entity_reference field on publication node.
  */
 function up1_global_update_8103() {
@@ -163,6 +163,31 @@ function up1_global_update_8104() {
           $publication->save();
         }
 
+      }
+    }
+  }
+}
+
+/**
+ * Migrate purchase link in new purchase link field.
+ */
+
+function up1_global_8105() {
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'publication')
+    ->execute();
+  $publications = \Drupal\node\Entity\Node::loadMultiple($nids);
+  if (!empty($publications)) {
+    foreach ($publications as $publication) {
+      $field_link = $publication->get('field_publication_link')->getValue();
+      if (isset($field_link) && !empty($field_link)) {
+        $field_link_title = $publication->get('field_link_title')->getValue();
+        if ($field_link_title[0]['value'] == 'buy') {
+          $publication->set('field_purchase_link',$field_link[0]['value']);
+          $publication->set('field_publication_link', '');
+
+          $publication->save();
+        }
       }
     }
   }

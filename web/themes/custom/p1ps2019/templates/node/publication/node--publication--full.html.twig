@@ -90,6 +90,15 @@
 {% set collection %}
   {{ content.field_collection.0 }}
 {% endset %}
+{% set publisher_term %}
+  {{ content.field_publisher_term }}
+{% endset %}
+{% set collection_term %}
+  {{ content.field_collection_term }}
+{% endset %}
+{% set topics %}
+  {{ content.field_publication_topics }}
+{% endset %}
 {% set isbn %}
   {{ content.field_isbn.0 }}
 {% endset %}
@@ -110,6 +119,9 @@
 {% endset %}
 {% set link %}
   {{ content.field_publication_link }}
+{% endset %}
+{% set purchase %}
+  {{ content.field_purchase_link }}
 {% endset %}
 {% set pages %}
   {{ content.field_nb_pages.0 }}
@@ -176,10 +188,20 @@
                 <span>{{ date }}</span>
               </div>
             {% endif %}
-            {% if publisher|striptags|trim %}
+            {% if publisher_term|render %}
               <div class="details txt-second">
                 <span class="txt-bold">{{ "Publisher"|t }} : </span>
-                <span> {{ publisher }}</span>
+                {% for key, aPublisher in content.field_publisher_term if key|first != '#' %}
+                  <span> {{ aPublisher }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if collection_term|render %}
+              <div class="details txt-second">
+                <span class="txt-bold">{{ "Collection"|t }} : </span>
+                {% for key, aCollection in content.field_collection_term if key|first != '#' %}
+                  <span> {{ aCollection }}</span>
+                {% endfor %}
               </div>
             {% endif %}
             {% if isbn|striptags|trim %}
@@ -219,15 +241,27 @@
                 {% endfor %}
               </div>
             {% endif %}
+            {% if topics|striptags|trim %}
+              <div class="details txt-second">
+                {% for key, topic in content.field_publication_topics if key|first != '#' %}
+                  <div class="categ-style block-title-sep">{{ topic }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
             {% if link|striptags|trim %}
               <div class="details txt-second">
                 <span class="txt-bold">
                 <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
-                  {% if link_title|trim|striptags %}
-                    {{ link_title }}
-                    {% else %}
-                      {{ "Link to the book"|t }}
-                  {% endif %}
+                    {{ "Read this book"|t }}
+                </a>
+                </span>
+              </div>
+            {% endif %}
+            {% if purchase|striptags|trim %}
+              <div class="details txt-second">
+                <span class="txt-bold">
+                <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
+                    {{ "Buy this book"|t }}
                 </a>
                 </span>
               </div>
