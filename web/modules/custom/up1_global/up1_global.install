@@ -96,6 +96,10 @@ function up1_global_update_8103() {
   $publications = \Drupal\node\Entity\Node::loadMultiple($ids);
   if (!empty($publications)) {
     foreach ($publications as $publication) {
+      $field_collection = [];
+      $field_collection_value = '';
+      $field_publisher = [];
+      $field_publisher_value = '';
       $taxonomyEntity = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term');
       //Migrate field_collection
