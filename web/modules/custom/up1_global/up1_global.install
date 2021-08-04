@@ -93,7 +93,7 @@ function up1_global_update_8103() {
   $ids = \Drupal::entityQuery('node')
     ->condition('type', 'publication')
     ->execute();
-  $publications = Node::loadMultiple($ids);
+  $publications = \Drupal\node\Entity\Node::loadMultiple($ids);
   if (!empty($publications)) {
     foreach ($publications as $publication) {
       $taxonomyEntity = \Drupal::entityTypeManager()
