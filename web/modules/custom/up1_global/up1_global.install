@@ -23,8 +23,6 @@ function up1_global_update_8101() {
   else {
     $vocabulary = $vocabularies['publishers'];
   }
-  print_r("update 8101 " . $vocabulary->id(), 1);
-  \Drupal::logger('up1_global')->info(print_r("update 8101 " . $vocabulary->id(), 1));
 
   $taxonomyEntity = \Drupal::entityTypeManager()
     ->getStorage('taxonomy_term');
@@ -34,19 +32,19 @@ function up1_global_update_8101() {
   $json_path = file_get_contents("$module_path/files/publishers.json");
   $publishers = json_decode($json_path, true);
 
-  /*foreach ($publishers as $publisher) {
+  foreach ($publishers as $publisher) {
     $termEd = $taxonomyEntity->loadByProperties([
       'name' => trim($publisher['publisher']),
-      'vid' => $vocabulary_name
+      'vid' => $vocabulary->id()
     ]);
     if (empty($termEd)) {
       $term = Term::create([
         'name' => trim($publisher['publisher']),
-        'vid' => $vocabulary_name,
+        'vid' => $vocabulary->id(),
       ]);
       $term->save();
     }
-  }*/
+  }
 }
 
 /**
@@ -64,9 +62,6 @@ function up1_global_update_8102() {
   else {
     $vocabulary = $vocabularies['collections'];
   }
-  print_r("update 8102 " . $vocabulary->id(), 1);
-  \Drupal::logger('up1_global')->info(print_r("update 8102 " . $vocabulary->id(), 1));
-
 
   $taxonomyEntity = \Drupal::entityTypeManager()
     ->getStorage('taxonomy_term');
@@ -75,17 +70,17 @@ function up1_global_update_8102() {
   $json_path = file_get_contents("$module_path/files/collections.json");
   $collections = json_decode($json_path, true);
 
- /* foreach ($collections as $collection) {
+ foreach ($collections as $collection) {
     $termEd = $taxonomyEntity->loadByProperties([
       'name' => trim($collection['collection']),
-      'vid' => $vocabulary_name
+      'vid' => $vocabulary->id()
     ]);
     if (empty($termEd)) {
       $term = Term::create([
         'name' => trim($collection['collection']),
-        'vid' => $vocabulary_name,
+        'vid' => $vocabulary->id(),
       ]);
       $term->save();
     }
-  }*/
+  }
 }
