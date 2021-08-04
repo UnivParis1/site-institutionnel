@@ -112,7 +112,7 @@ function up1_global_update_8103() {
           'vid' => $voc_collections
         ]);
         if (!empty($term_collection)) {
-          $term = reset($term_collection);
+          $term_collection = reset($term_collection);
         } else {
           $term_collection = Term::create([
             'name' => trim($field_collection_value),
