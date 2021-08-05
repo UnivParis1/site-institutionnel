@@ -148,7 +148,7 @@
           <div class="box-content">
             {% if author|striptags|trim or publication_authors %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ "Author(s)"|t }} : </h3>
+                <h3 class="publication-label">{{ "Author(s)"|t }} : </h3>
                 {% if publication_authors %}
                   {{ publication_authors|join(', ')|raw }}
                 {% endif %}
@@ -161,24 +161,24 @@
               </div>
             {% endif %}
             <div class="details txt-second">
-              <h3 class="pub-label">{{ 'Type'|t }} : </h3>
+              <h3 class="publication-label">{{ 'Type'|t }} : </h3>
               <span>{{ content.field_publication_type.0 }}</span>
             </div>
             {% if year|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ 'Publishing year'|t }} : </h3>
+                <h3 class="publication-label">{{ 'Publishing year'|t }} : </h3>
                 <span>{{ year }}</span>
               </div>
             {% endif %}
             {% if date|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ 'Publishing date'|t }} : </h3>
+                <h3 class="publication-label">{{ 'Publishing date'|t }} : </h3>
                 <span>{{ date }}</span>
               </div>
             {% endif %}
             {% if publisher_term|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ "Publisher"|t }} : </h3>
+                <h3 class="publication-label">{{ "Publisher"|t }} : </h3>
                 {% for key, aPublisher in content.field_publisher_term if key|first != '#' %}
                   <span> {{ aPublisher }}</span>
                 {% endfor %}
@@ -186,7 +186,7 @@
             {% endif %}
             {% if collection_term|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ "Collection"|t }} : </h3>
+                <h3 class="publication-label">{{ "Collection"|t }} : </h3>
                 {% for key, aCollection in content.field_collection_term if key|first != '#' %}
                   <span> {{ aCollection }}</span>
                 {% endfor %}
@@ -194,31 +194,31 @@
             {% endif %}
             {% if isbn|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ "ISBN"|t }} : </h3>
+                <h3 class="publication-label">{{ "ISBN"|t }} : </h3>
                 <span> {{ isbn }}</span>
               </div>
             {% endif %}
             {% if issn|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ "ISSN"|t }} : </h3>
+                <h3 class="publication-label">{{ "ISSN"|t }} : </h3>
                 <span> {{ issn }}</span>
               </div>
             {% endif %}
             {% if pages|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ "Number of pages"|t }} : </h3>
+                <h3 class="publication-label">{{ "Number of pages"|t }} : </h3>
                 <span> {{ pages }}</span>
               </div>
             {% endif %}
             {% if format|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label">{{ "Size"|t }} : </h3>
+                <h3 class="publication-label">{{ "Size"|t }} : </h3>
                 <span> {{ format }}</span>
               </div>
             {% endif %}
             {% if price|striptags|trim %}
               <div class="details txt-second">
-                <h3 class="pub-label"">{{ "Price"|t }} : </h3>
+                <h3 class="publication-label"">{{ "Price"|t }} : </h3>
                 <span>{{ price }}</span>
               </div>
             {% endif %}
