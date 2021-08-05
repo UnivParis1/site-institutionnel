@@ -127,10 +127,40 @@ function up1_global_update_8103() {
 }
 
 /**
+ * Authorize collections vocabulary for all sites.
+ */
+function up1_global_update_8104() {
+  $query = \Drupal::entityQuery('taxonomy_term');
+  $query->condition('vid', "collections");
+  $tids = $query->execute();
+  $collections = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+  foreach ($collections as $collection) {
+    $collection->set('site_all', 1);
+    $collection->set('include_master', 1);
+    $collection->save();
+  }
+}
+
+/**
+ * Authorize publishers vocabulary for all sites.
+ */
+function up1_global_update_8105() {
+  $query = \Drupal::entityQuery('taxonomy_term');
+  $query->condition('vid', "publishers");
+  $tids = $query->execute();
+  $publishers = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+  foreach ($publishers as $publisher) {
+    $publisher->set('site_all', 1);
+    $publisher->set('include_master', 1);
+    $publisher->save();
+  }
+}
+
+/**
  * Migrate publisher data from text field to
  * entity_reference field on publication node.
  */
-function up1_global_update_8104() {
+function up1_global_update_8106() {
   $nids = \Drupal::entityQuery('node')
     ->condition('type', 'publication')
     ->execute();
@@ -172,7 +202,7 @@ function up1_global_update_8104() {
  * Migrate purchase link in new purchase link field.
  */
 
-function up1_global_update_8105() {
+function up1_global_update_8107() {
   $nids = \Drupal::entityQuery('node')
     ->condition('type', 'publication')
     ->execute();
