@@ -1,0 +1,194 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the UP1 global module.
+ */
+
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Add terms to "Éditeurs" taxonomy.
+ */
+function up1_global_update_8101() {
+  $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
+  if (!isset($vocabularies['publishers'])) {
+    $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+      'vid' => 'publishers',
+      'name' => t('Éditeurs'),
+    ));
+    $vocabulary->save();
+  }
+  else {
+    $vocabulary = $vocabularies['publishers'];
+  }
+
+  $taxonomyEntity = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term');
+
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('up1_global')->getPath();
+  $json_path = file_get_contents("$module_path/files/publishers.json");
+  $publishers = json_decode($json_path, true);
+
+  foreach ($publishers as $publisher) {
+    $termEd = $taxonomyEntity->loadByProperties([
+      'name' => trim($publisher['publisher']),
+      'vid' => $vocabulary->id()
+    ]);
+    if (empty($termEd)) {
+      $term = Term::create([
+        'name' => trim($publisher['publisher']),
+        'vid' => $vocabulary->id(),
+      ]);
+      $term->save();
+    }
+  }
+}
+
+/**
+ * Add terms to "Collections" taxonomy.
+ */
+function up1_global_update_8102() {
+  $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
+  if (!isset($vocabularies['collections'])) {
+    $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+      'vid' => 'collections',
+      'name' => t('Collections'),
+    ));
+    $vocabulary->save();
+  }
+  else {
+    $vocabulary = $vocabularies['collections'];
+  }
+
+  $taxonomyEntity = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term');
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('up1_global')->getPath();
+  $json_path = file_get_contents("$module_path/files/collections.json");
+  $collections = json_decode($json_path, true);
+
+  foreach ($collections as $collection) {
+    $termEd = $taxonomyEntity->loadByProperties([
+      'name' => trim($collection['collection']),
+      'vid' => $vocabulary->id()
+    ]);
+    if (empty($termEd)) {
+      $term = Term::create([
+        'name' => trim($collection['collection']),
+        'vid' => $vocabulary->id(),
+      ]);
+      $term->save();
+    }
+  }
+}
+
+/**
+ * Migrate collection data from text field to
+ * entity_reference field on publication node.
+ */
+function up1_global_update_8103() {
+  $ids = \Drupal::entityQuery('node')
+    ->condition('type', 'publication')
+    ->execute();
+  $publications = \Drupal\node\Entity\Node::loadMultiple($ids);
+  if (!empty($publications)) {
+    foreach ($publications as $publication) {
+      $field_collection = [];
+      $taxonomyEntity = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term');
+      //Migrate field_collection
+      $field_collection = $publication->get('field_collection')->getValue();
+      if (isset($field_collection) && !empty($field_collection)) {
+        $field_collection_value = $field_collection[0]['value'];
+        if (isset($field_collection_value) && !empty($field_collection_value)) {
+          $voc_collections = "collections";
+          $term_collection = $taxonomyEntity->loadByProperties([
+            'name' => trim($field_collection_value),
+            'vid' => $voc_collections
+          ]);
+          if (!empty($term_collection)) {
+            $term_collection = reset($term_collection);
+          } else {
+            $term_collection = Term::create([
+              'name' => trim($field_collection_value),
+              'vid' => $voc_collections,
+            ]);
+            $term_collection->save();
+          }
+          $publication->set('field_collection_term', $term_collection);
+          $publication->save();
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Migrate publisher data from text field to
+ * entity_reference field on publication node.
+ */
+function up1_global_update_8104() {
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'publication')
+    ->execute();
+  $publications = \Drupal\node\Entity\Node::loadMultiple($nids);
+  if (!empty($publications)) {
+    foreach ($publications as $publication) {
+      $field_publisher = [];
+      $taxonomyEntity = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term');
+      //Migrate field_publisher
+      $field_publisher = $publication->get('field_publisher')->getValue();
+      if (isset($field_publisher) && !empty($field_publisher)) {
+        $field_publisher_value = $field_publisher[0]['value'];
+        if (isset($field_publisher_value) && $field_publisher_value != '') {
+          $voc_publishers = "publishers";
+          $term_publisher = $taxonomyEntity->loadByProperties([
+            'name' => trim($field_publisher_value),
+            'vid' => $voc_publishers
+          ]);
+          if (!empty($term_publisher)) {
+            $term_publisher = reset($term_publisher);
+          } else {
+            $term_publisher = Term::create([
+              'name' => trim($field_publisher_value),
+              'vid' => $voc_publishers,
+            ]);
+            $term_publisher->save();
+          }
+          $publication->set('field_publisher_term', $term_publisher);
+          $publication->save();
+        }
+
+      }
+    }
+  }
+}
+
+/**
+ * Migrate purchase link in new purchase link field.
+ */
+
+function up1_global_update_8105() {
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'publication')
+    ->execute();
+  $publications = \Drupal\node\Entity\Node::loadMultiple($nids);
+  if (!empty($publications)) {
+    foreach ($publications as $publication) {
+      $field_link = $publication->get('field_publication_link')->getValue();
+      if (isset($field_link) && !empty($field_link)) {
+        $field_link_title = $publication->get('field_link_title')->getValue();
+        if ($field_link_title[0]['value'] == 'buy') {
+          $publication->set('field_purchase_link',$field_link);
+          $publication->set('field_publication_link', NULL);
+
+          $publication->save();
+        }
+      }
+    }
+  }
+}
