@@ -177,7 +177,7 @@
               </div>
             {% endif %}
             {% if publisher_term|striptags|trim %}
-              <div class="details txt-second">
+              <div class="details txt-second publisher">
                 <h3 class="publication-label">{{ "Publisher"|t }} : </h3>
                 {% for key, aPublisher in content.field_publisher_term if key|first != '#' %}
                   <span> {{ aPublisher }}</span>
@@ -185,7 +185,7 @@
               </div>
             {% endif %}
             {% if collection_term|striptags|trim %}
-              <div class="details txt-second">
+              <div class="details txt-second collection">
                 <h3 class="publication-label">{{ "Collection"|t }} : </h3>
                 {% for key, aCollection in content.field_collection_term if key|first != '#' %}
                   <span> {{ aCollection }}</span>
