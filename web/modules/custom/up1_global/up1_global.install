@@ -183,8 +183,8 @@ function up1_global_update_8105() {
       if (isset($field_link) && !empty($field_link)) {
         $field_link_title = $publication->get('field_link_title')->getValue();
         if ($field_link_title[0]['value'] == 'buy') {
-          $publication->set('field_purchase_link',$field_link[0]['value']);
-          $publication->set('field_publication_link', '');
+          $publication->set('field_purchase_link',$field_link);
+          $publication->set('field_publication_link', NULL);
 
           $publication->save();
         }
