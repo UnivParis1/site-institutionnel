@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.bp_modal.bp_background
+    - field.field.paragraph.bp_modal.bp_header
     - field.field.paragraph.bp_modal.bp_modal_body
     - field.field.paragraph.bp_modal.bp_modal_button_text
     - field.field.paragraph.bp_modal.bp_modal_footer
@@ -25,19 +26,28 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  bp_header:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   bp_modal_body:
     type: entity_reference_paragraphs
-    weight: 4
+    weight: 5
     settings:
-      title: Paragraphe
+      title: Paragraph
       title_plural: Paragraphs
       edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
     region: content
   bp_modal_button_text:
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''
@@ -46,17 +56,18 @@ content:
     region: content
   bp_modal_footer:
     type: entity_reference_paragraphs
-    weight: 5
+    weight: 6
     settings:
-      title: Paragraphe
+      title: Paragraph
       title_plural: Paragraphs
       edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
     region: content
   bp_modal_title:
-    weight: 3
+    weight: 4
     settings:
       size: 60
       placeholder: ''

@@ -252,10 +252,10 @@ display:
         groups:
           1: AND
       sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
+        field_publishing_date_value:
+          id: field_publishing_date_value
+          table: node__field_publishing_date
+          field: field_publishing_date_value
           relationship: none
           group_type: group
           admin_label: ''
@@ -264,9 +264,7 @@ display:
           expose:
             label: ''
           granularity: day
-          entity_type: node
-          entity_field: created
-          plugin_id: date
+          plugin_id: datetime
       footer:
         area:
           id: area
@@ -430,20 +428,6 @@ display:
         groups:
           1: AND
       sorts:
-        promote:
-          id: promote
-          table: node_field_data
-          field: promote
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          entity_type: node
-          entity_field: promote
-          plugin_id: standard
         field_event_date_value:
           id: field_event_date_value
           table: node__field_event_date
@@ -856,10 +840,10 @@ display:
           view_mode: teaser
       rendering_language: '***LANGUAGE_language_interface***'
       arguments:
-        field_categories_target_id:
-          id: field_categories_target_id
-          table: node__field_categories
-          field: field_categories_target_id
+        field_news_topic_target_id:
+          id: field_news_topic_target_id
+          table: node__field_news_topic
+          field: field_news_topic_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -892,15 +876,34 @@ display:
           not: false
           plugin_id: numeric
       pager:
-        type: some
+        type: full
         options:
-          items_per_page: 3
+          items_per_page: 12
           offset: 0
+          id: 0
+          total_pages: 1
+          tags:
+            previous: '‹ Précédent'
+            next: 'Suivant ›'
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 0
+      allow:
+        items_per_page: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

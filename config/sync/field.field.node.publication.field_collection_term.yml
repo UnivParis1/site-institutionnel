@@ -1,0 +1,29 @@
+uuid: 233643ee-a837-42ca-9222-ea9693291feb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_collection_term
+    - node.type.publication
+    - taxonomy.vocabulary.collections
+id: node.publication.field_collection_term
+field_name: field_collection_term
+entity_type: node
+bundle: publication
+label: Collection
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'site_default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      collections: collections
+    sort:
+      field: name
+      direction: asc
+    auto_create: 1
+    auto_create_bundle: ''
+field_type: entity_reference

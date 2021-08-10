@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_type
     - field.field.node.event.field_media
+    - field.field.node.event.field_publish_master
     - field.field.node.event.field_sites
     - field.field.node.event.field_sites_all
     - field.field.node.event.field_subscription_link
@@ -546,9 +547,9 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 23
-    third_party_settings: {  }
+    weight: 43
     region: content
+    third_party_settings: {  }
   field_event_address:
     weight: 10
     settings:
@@ -575,7 +576,7 @@ content:
       entity_browser: image_browser
       field_widget_display: rendered_entity
       field_widget_display_settings:
-        view_mode: default
+        view_mode: full
       field_widget_edit: true
       field_widget_remove: true
       open: true
@@ -584,23 +585,30 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
+  field_publish_master:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    region: content
+    third_party_settings: {  }
   field_sites:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 40
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   field_sites_all:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 22
-    third_party_settings: {  }
+    weight: 41
     region: content
+    third_party_settings: {  }
   field_subscription_link:
     weight: 9
     settings:
@@ -692,5 +700,10 @@ content:
       match_limit: 10
     third_party_settings: {  }
     region: content
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   body: true

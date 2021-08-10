@@ -5,8 +5,18 @@ dependencies:
   config:
     - core.entity_view_mode.node.rss
     - core.entity_view_mode.node.teaser
+    - field.storage.node.field_lead
+    - field.storage.node.field_media
+    - field.storage.node.field_news_date
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_paragraphs
+    - field.storage.node.field_signature
+    - node.type.news
   module:
+    - datetime
     - node
+    - paragraphs
+    - text
     - user
 _core:
   default_config_hash: ezK5Dw8P_4bqJdDQIiecSAJak9p1Wf1yDwHzTutGFuQ
@@ -65,7 +75,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Filtrer
+          submit_button: Appliquer
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -186,8 +196,8 @@ display:
           tags:
             previous: '‹ Précédent'
             next: 'Suivant ›'
-            first: '« First'
-            last: 'Last »'
+            first: '« Premier'
+            last: 'Dernier »'
           quantity: 9
       query:
         type: views_query
@@ -202,20 +212,6 @@ display:
         options:
           view_mode: teaser
       sorts:
-        sticky:
-          admin_label: ''
-          expose:
-            label: ''
-          exposed: false
-          field: sticky
-          group_type: group
-          id: sticky
-          order: DESC
-          relationship: none
-          table: node_field_data
-          plugin_id: boolean
-          entity_type: node
-          entity_field: sticky
         created:
           field: created
           id: created

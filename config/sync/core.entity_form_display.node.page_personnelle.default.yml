@@ -9,6 +9,8 @@ dependencies:
     - field.field.node.page_personnelle.field_academia_link
     - field.field.node.page_personnelle.field_affiliation
     - field.field.node.page_personnelle.field_display_other_email
+    - field.field.node.page_personnelle.field_education
+    - field.field.node.page_personnelle.field_english_resume
     - field.field.node.page_personnelle.field_epi_link
     - field.field.node.page_personnelle.field_facebook_link
     - field.field.node.page_personnelle.field_firstname
@@ -93,7 +95,7 @@ third_party_settings:
       children:
         - field_my_medias
       parent_name: group_page_perso
-      weight: 5
+      weight: 4
       format_type: accordion_item
       region: content
       format_settings:
@@ -109,8 +111,9 @@ third_party_settings:
         - field_link_to_resume
         - field_resume
         - field_resume_text
+        - field_english_resume
       parent_name: group_page_perso
-      weight: 7
+      weight: 6
       format_type: accordion_item
       region: content
       format_settings:
@@ -143,6 +146,7 @@ third_party_settings:
         - group_cv
         - group_recherche
         - group_these
+        - group_education
         - group_publications
       parent_name: ''
       weight: 3
@@ -180,7 +184,7 @@ third_party_settings:
         - field_other_page_perso
         - group_social_links
       parent_name: group_page_perso
-      weight: 6
+      weight: 5
       format_type: accordion_item
       region: content
       format_settings:
@@ -197,7 +201,7 @@ third_party_settings:
         - field_research_themes
         - field_scientific_resp
       parent_name: group_page_perso
-      weight: 8
+      weight: 7
       format_type: accordion_item
       region: content
       format_settings:
@@ -212,7 +216,7 @@ third_party_settings:
         - field_thesis_subject
         - field_phd_supervisor
       parent_name: group_page_perso
-      weight: 9
+      weight: 8
       format_type: accordion_item
       region: content
       format_settings:
@@ -222,6 +226,20 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Thèse
+    group_education:
+      children:
+        - field_education
+      parent_name: group_page_perso
+      weight: 9
+      format_type: accordion_item
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        required_fields: true
+        description: ''
+      label: Enseignements
 id: node.page_personnelle.default
 targetEntityType: node
 bundle: page_personnelle
@@ -279,6 +297,22 @@ content:
           entity_type: node
           bundle: page_personnelle
     type: boolean_checkbox
+    region: content
+  field_education:
+    weight: 47
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_english_resume:
+    weight: 41
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
     region: content
   field_epi_link:
     weight: 33

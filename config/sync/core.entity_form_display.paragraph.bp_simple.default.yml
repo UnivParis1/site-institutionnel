@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.bp_simple.bp_background
+    - field.field.paragraph.bp_simple.bp_header
     - field.field.paragraph.bp_simple.bp_text
     - field.field.paragraph.bp_simple.bp_width
     - field.field.paragraph.bp_simple.field_column_number
@@ -19,13 +20,13 @@ bundle: bp_simple
 mode: default
 content:
   bp_background:
-    weight: 0
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   bp_text:
-    weight: 5
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -35,18 +36,17 @@ content:
   bp_width:
     weight: 2
     settings: {  }
-    third_party_settings:
-      conditional_fields: {  }
+    third_party_settings: {  }
     type: options_select
     region: content
   field_column_number:
-    weight: 1
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_title:
-    weight: 4
+    weight: 0
     settings:
       size: 60
       placeholder: ''
@@ -59,6 +59,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  bp_header: true
   created: true
   status: true
   uid: true

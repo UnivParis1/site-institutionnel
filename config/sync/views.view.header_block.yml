@@ -6,11 +6,11 @@ dependencies:
     - field.storage.node.field_media
     - field.storage.node.field_short_desc
     - field.storage.node.field_sub_title
+    - field.storage.node.field_video_couverture
     - node.type.page
   module:
     - micro_site
     - node
-    - user
 id: header_block
 label: 'Bloc entete pages de base'
 module: views
@@ -26,9 +26,8 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
-        options:
-          perm: 'access content'
+        type: none
+        options: {  }
       cache:
         type: tag
         options: {  }
@@ -406,7 +405,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
       tags:
         - 'config:field.storage.node.field_media'
         - 'config:field.storage.node.field_short_desc'
@@ -683,7 +681,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
       tags:
         - 'config:field.storage.node.field_media'
         - 'config:field.storage.node.field_short_desc'
@@ -766,6 +763,69 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_video_couverture:
+          id: field_video_couverture
+          table: node__field_video_couverture
+          field: field_video_couverture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: true
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_entity_view
+          settings:
+            view_mode: homepage
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       rendering_language: '***LANGUAGE_language_interface***'
       arguments:
         nid:
@@ -811,9 +871,9 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
       tags:
         - 'config:field.storage.node.field_media'
+        - 'config:field.storage.node.field_video_couverture'
   header_micro:
     display_plugin: block
     id: header_micro
@@ -1088,7 +1148,6 @@ display:
         - url
         - url.site
         - 'user.node_grants:view'
-        - user.permissions
       tags:
         - 'config:field.storage.node.field_short_desc'
         - 'config:field.storage.node.field_sub_title'
@@ -1238,6 +1297,5 @@ display:
         - url
         - url.site
         - 'user.node_grants:view'
-        - user.permissions
       tags:
         - 'config:field.storage.node.field_media'
