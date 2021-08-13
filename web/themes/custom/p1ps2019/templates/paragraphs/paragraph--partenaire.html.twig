@@ -46,47 +46,51 @@
   {{ content.field_text.0 }}
 {% endset %}
 {% set imgUrl %}
-{{ content.field_media.0 }}
+  {{ content.field_media.0 }}
 {% endset %}
 <div{{ attributes.addClass(classes) }}>
   <div class="paragraph__column no-hover relative-wrapper partenaires">
-      <div class="infos">
+    <div class="infos">
       {% if content.bp_link|render %}
         {% if content.bp_link.0['#title']|render %}
-	<a class="sm-teaser__img-link" href="{{ content.bp_link.0['#url'] }}" target="{{ content.bp_link.0['#options-attributes-target'] }}" title="{{ content.bp_link.0['#options-attributes-title'] }}" >
+          <a class="sm-teaser__img-link" href="{{ content.bp_link.0['#url'] }}" target="{{ content.bp_link.0['#options-attributes-target'] }}" title="{{ content.bp_link.0['#options-attributes-title'] }}" >
             {{ content.field_media }}
-            </a>
-            <div class="top-infos">
-            <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
-              {% if texte|striptags|trim %}
-              <div class="parag-title-sep txt medium">{{ texte }}</div>
-              {% endif %}
-            </div>
-            <div class="bottom-infos">
-              <a class="btn outline" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-                {{ content.bp_link.0['#title'] }}
-              </a>
-            </div>
-        {% else %}
-            <a class="sm-teaser__img-link" href="{{ content.bp_link.0['#url'] }}" >
-            {{ content.field_media }}
-            </a>
-            <div class="top-infos">
-            <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
-                {% if texte|striptags|trim %}
-                <div class="parag-title-sep txt medium">{{ texte }}</div>
-                {% endif %}
-            </div>
-        {% endif %}
-      {% else %}
-          {{ content.field_media }}
+          </a>
           <div class="top-infos">
-          <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
+            {%  if content.field_title|render %}
+              <h3 class="h4-style semi-field-sep">{{ content.field_title.0 }}</h3>
+            {% endif %}
             {% if texte|striptags|trim %}
-            <div class="parag-title-sep txt medium">{{ texte }}</div>
+              <div class="parag-title-sep txt medium">{{ texte }}</div>
             {% endif %}
           </div>
+          <div class="bottom-infos">
+            {{ content.bp_link }}
+          </div>
+        {% else %}
+          <a class="sm-teaser__img-link" href="{{ content.bp_link.0['#url'] }}" >
+            {{ content.field_media }}
+          </a>
+          <div class="top-infos">
+            {% if content.field_title|render %}
+              <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
+            {% endif %}
+            {% if texte|striptags|trim %}
+              <div class="parag-title-sep txt medium">{{ texte }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% else %}
+        {{ content.field_media }}
+        <div class="top-infos">
+          {% if content.field_title|render %}
+            <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
+          {% endif %}
+          {% if texte|striptags|trim %}
+            <div class="parag-title-sep txt medium">{{ texte }}</div>
+          {% endif %}
+        </div>
       {% endif %}
-      </div>
+    </div>
   </div>
 </div>
