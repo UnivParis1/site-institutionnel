@@ -38,22 +38,22 @@
 
 #}
 {% set imgUrl %}
-{{ content.field_media_image.0 }}
+  {{ content.field_media_image.0 }}
 {% endset %}
 <div{{ attributes.addClass(classes) }}>
   <div class="paragraph__column mask no-hover relative-wrapper tuile-avec-texte" style="background-image: url('{{ imgUrl|striptags|trim }}')">
-      <div class="infos">
-        <div class="top-infos">
+    <div class="infos">
+      <div class="top-infos">
+        {% if content.field_title|render %}
           <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
-          <div class="parag-title-sep txt medium">{{ content.bp_text.0 }}</div>
-        </div>
-        {% if content.bp_link|render %}
-        <div class="bottom-infos">
-          <a class="btn outline" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-            {{ content.bp_link.0['#title'] }}
-          </a>
-        </div>
         {% endif %}
+        <div class="parag-title-sep txt medium">{{ content.bp_text.0 }}</div>
       </div>
+      {% if content.bp_link|render %}
+        <div class="bottom-infos">
+          {{ content.bp_link }}
+        </div>
+      {% endif %}
+    </div>
   </div>
 </div>

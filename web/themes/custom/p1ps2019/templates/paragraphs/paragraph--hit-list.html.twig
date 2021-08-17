@@ -82,7 +82,9 @@
         <div class="grid-container">
           <div class="grid-x grid-margin-x grid-margin-y">
             <div class="cell small-12 no-margin-top-bottom">
-              <h2 class="section-sep">{{ content.field_title.0 }}</h2>
+              {% if content.field_title|render %}
+                <h2 class="section-sep">{{ content.field_title.0 }}</h2>
+              {% endif %}
             </div>
             {% for key, item in  content.field_ranking if key|first != '#' %}
               <div class="cell large-{{ nbCols }} medium-6 small-12 margin-y-mobile">
