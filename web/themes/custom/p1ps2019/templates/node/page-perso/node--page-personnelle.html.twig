@@ -99,6 +99,7 @@
 {% set twitter = content.field_twitter|render %}
 {% set linkedin_link = content.field_linkedin_link|render %}
 {% set viadeo_link = content.field_viadeo_link|render %}
+{% set hypotheses = content.field_hypotheses_link|render %}
 {% set epi = content.field_epi_link|render %}
 {% set hal = content.field_hal_link|render %}
 {% set academia = content.field_academia_link|render %}
@@ -362,7 +363,7 @@
                       <span class="visually-hidden">Twitter</span>
                     </a>
                   {% endif %}
-                  
+
                   {% if linkedin_link %}
                     <a href="{{ content.field_linkedin_link.0['#url'] }}" class="social-link fab fa-linkedin-square fa-2x"
                        target="_blank" title="LinkedIn">
@@ -386,7 +387,14 @@
                     <a href="{{ content.field_hal_link.0['#url'] }}"  class="social-link fa-2x"
                        target="_blank" title="HAL archives ouvertes">
                       <span class="visually-hidden">HAL</span>
-                      <img src="/{{ directory }}/svg/icons/HAL.svg" width="48">
+                      <img src="https://com-web.univ-paris1.fr/logos/logo-hal-texte-blanc.svg" width="48">
+                    </a>
+                  {% endif %}
+                  {% if hypotheses %}
+                    <a href="{{ content.field_hypotheses_link.0['#url'] }}"  class="social-link fa-2x"
+                       target="_blank" title="Hypotheses">
+                      <span class="visually-hidden">Hypotheses</span>
+                      <img src="https://com-web.univ-paris1.fr/logos/logo-hypotheses-blanc.svg" width="24">
                     </a>
                   {% endif %}
                   {% if epi %}
