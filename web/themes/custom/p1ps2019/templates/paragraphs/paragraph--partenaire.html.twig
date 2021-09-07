@@ -65,7 +65,9 @@
             {% endif %}
           </div>
           <div class="bottom-infos">
-            {{ content.bp_link }}
+            <a class="btn outline sm-teaser__img-link" href="{{ content.bp_link.0['#url'] }}" target="_blank" title="{{ content.bp_link.0['#title'] }}" >
+              {{ content.bp_link.0['#title'] }}
+            </a>
           </div>
         {% else %}
           <a class="sm-teaser__img-link" href="{{ content.bp_link.0['#url'] }}" >
