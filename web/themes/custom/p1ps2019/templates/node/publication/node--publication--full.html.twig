@@ -229,18 +229,20 @@
               {% endfor %}
             </div>
           {% endif %}
-        </div>
-        <div class="publication-links">
-          {% if link|striptags|trim %}
-            <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
-              {{ "Read this book"|t }}
-            </a>
-          {% endif %}
-          {% if purchase|striptags|trim %}
-            <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
-              {{ "Buy this book"|t }}
-            </a>
-          {% endif %}
+          <div class="details txt-second">
+            {% if link|striptags|trim %}
+              <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
+                {{ "Read this book"|t }}
+              </a>
+            {% endif %}
+          </div>
+          <div class="details txt-second">
+            {% if purchase|striptags|trim %}
+              <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
+                {{ "Buy this book"|t }}
+              </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
