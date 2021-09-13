@@ -232,22 +232,14 @@
         </div>
         <div class="publication-links">
           {% if link|striptags|trim %}
-            <div class="details txt-second">
-                <span class="txt-bold">
-                <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
-                    {{ "Read this book"|t }}
-                </a>
-                </span>
-            </div>
+            <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
+              {{ "Read this book"|t }}
+            </a>
           {% endif %}
           {% if purchase|striptags|trim %}
-            <div class="details txt-second">
-                <span class="txt-bold">
-                <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
-                    {{ "Buy this book"|t }}
-                </a>
-                </span>
-            </div>
+            <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
+              {{ "Buy this book"|t }}
+            </a>
           {% endif %}
         </div>
       </div>
