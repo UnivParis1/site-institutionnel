@@ -83,7 +83,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
     $cas_username = $item['uid'];
     $author = $cas_user_manager->getUidForCasUsername($cas_username);
     if ($author) {
-      return;
+      
     }
     else {
       $cas_settings = \Drupal::config('cas.settings');
@@ -111,6 +111,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
         $author = $user->id();
       }
     }
+
     $values = \Drupal::entityQuery('node')
       ->condition('type', 'page_personnelle')
       ->condition('uid', $author)

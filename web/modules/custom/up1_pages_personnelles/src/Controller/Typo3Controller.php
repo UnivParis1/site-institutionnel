@@ -30,7 +30,4 @@ class Typo3Controller extends ControllerBase {
     );
   }
 
-  public function populatePagePerso() {
-
-  }
 }
