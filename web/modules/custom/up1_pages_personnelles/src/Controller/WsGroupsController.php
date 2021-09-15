@@ -202,7 +202,7 @@ class WsGroupsController extends ControllerBase {
    * @return array
    */
   public function createPagePersoUsers() {
-    $data = array_merge($this->wsGroupsService->getAllUsers());
+    $data = $this->wsGroupsService->getAllUsers();
     \Drupal::logger('up1_page_perso')->info("get all Users : " . count($data));
     \Drupal::logger('up1_page_perso')->info(print_r($data,1));
     $queue = $this->queueFactory->get('up1_page_perso_queue');
