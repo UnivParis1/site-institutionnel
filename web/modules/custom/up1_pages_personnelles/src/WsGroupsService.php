@@ -91,6 +91,8 @@ class WsGroupsService implements WsGroupsServiceInterface {
 
     $reponse['users'] = $users;
 
+    \Drupal::logger('up1_pages_persos')->info("WsGroupsService get Users $affiliation: " . count($users));
+
     return $reponse;
   }
 
@@ -111,8 +113,8 @@ class WsGroupsService implements WsGroupsServiceInterface {
   public function getAllUsers() {
     $config = \Drupal::config('up1_pages_personnelles.bulk_import');
     $uids = $config->get('uid_ldap');
+    \Drupal::logger('up1_pages_persos')->info("WsGroupsService getAllUsers : " . count($uids));
     $users = [];
-
     if (!empty($uids)) {
       foreach ($uids as $uid) {
         $users[] = [
@@ -125,6 +127,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
       $student = $this->getUsers('student');
       $users = array_merge($faculty['users'], $student['users']);
     }
+    \Drupal::logger('up1_pages_persos')->info("WsGroupsService getAllUsers : " . count($users));
 
     return $users;
   }
