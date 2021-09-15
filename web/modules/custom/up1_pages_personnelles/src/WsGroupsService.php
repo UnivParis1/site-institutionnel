@@ -111,25 +111,10 @@ class WsGroupsService implements WsGroupsServiceInterface {
   }
 
   public function getAllUsers() {
-    $config = \Drupal::config('up1_pages_personnelles.bulk_import');
-    $uids = $config->get('uid_ldap');
-    \Drupal::logger('up1_pages_persos')->info("WsGroupsService getAllUsers : " . count($uids));
-    $users = [];
+    $faculty = $this->getUsers('faculty');
+    $student = $this->getUsers('student');
+    $users = array_merge($faculty['users'], $student['users']);
 
-    if (!empty($uids)) {
-    \Drupal::logger('up1_pages_persos')->info("WsGroupsService getAllUsers - Comment ça pas vide ???");
-      foreach ($uids as $uid) {
-        $users[] = [
-          'uid' => $uid
-        ];
-      }
-    }
-    else {
-    \Drupal::logger('up1_pages_persos')->info("WsGroupsService getAllUsers - Ah yesss c'est vide !!");
-      $faculty = $this->getUsers('faculty');
-      $student = $this->getUsers('student');
-      $users = array_merge($faculty['users'], $student['users']);
-    }
     \Drupal::logger('up1_pages_persos')->info("WsGroupsService getAllUsers : " . count($users));
 
     return $users;
