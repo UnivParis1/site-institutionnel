@@ -44,7 +44,6 @@ class BulkPagesPersonnelles extends ConfigFormBase
     $form['uid_ldap'] = [
       '#type' => 'textarea',
       '#title' => $this->t('uid ldap'),
-      '#required' => TRUE,
       '#default_value' => implode(PHP_EOL, $config->get('uid_ldap')),
       '#description' => $this->t('Enter one uid per line.'),
     ];
