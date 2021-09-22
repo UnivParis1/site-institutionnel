@@ -1,0 +1,232 @@
+uuid: 18474324-8ce9-4454-ab18-485df3d7c36f
+langcode: fr
+status: closed
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 46
+template: false
+archive: false
+id: formulaire_d_inscription_peps
+title: '19 - Formulaire d''inscription PEPS'
+description: 'Formulaire d&#39;inscription au Dipl&ocirc;me Universitaire Passerelle Etudiant&middot;es en Exil Panth&eacute;on-Sorbonne (DU PEPS)'
+category: 'Inscription à la Passerelle Étudiants en Exil'
+elements: "votre_nom:\n  '#type': textfield\n  '#title': 'Votre nom'\n  '#description': 'Renseigner ici votre nom (<em>last name</em>)'\n  '#required': true\n  '#required_error': 'Champ obligatoire : merci de saisir votre nom'\nvotre_prenom:\n  '#type': textfield\n  '#title': 'Votre prénom'\n  '#description': 'Veuillez renseigner votre pr&eacute;nom (<em>first name</em>).'\n  '#required': true\n  '#required_error': 'Champ obligatoire : merci de saisir votre prénom'\nvotre_adresse_electronique:\n  '#type': webform_email_confirm\n  '#title': 'Votre adresse électronique'\n  '#required': true\n  '#required_error': 'Merci d''indiquer votre adresse courriel (E-mail).'\n  '#confirm__title': 'Merci de taper une seconde fois votre adresse électronique'\n  '#confirm__description': 'Veuillez renseigner votre adresse &eacute;lectronique &laquo;courriel&raquo; ou <em>E-mail</em>.'\nquel_est_votre_statut_:\n  '#type': radios\n  '#title': 'Quel est votre statut ?'\n  '#options':\n    réfugié: réfugié\n    'demandeur d’asile': 'demandeur d’asile'\n    'protection subsidiaire ': 'protection subsidiaire '\n  '#required': true\n  '#required_error': 'Vous devez indiquer quel est votre statut.'\n  '#options__properties': ''\ngenre:\n  '#type': radios\n  '#title': Genre\n  '#options': gender\n  '#options_display': side_by_side\n  '#required': true\n  '#required_error': 'Vous devez choisir l''un ou l''autre'\n  '#options__properties': ''\nvotre_age:\n  '#type': number\n  '#title': 'Quel est votre age ?'\n  '#description': 'Indiquer quel est votre &acirc;ge en ann&eacute;es.'\n  '#required': true\n  '#required_error': 'Vous devez renseigner votre âge'\n  '#min': 18\n  '#max': 27\ndepuis_combien_de_temps_residez_vous_en_france_en_mois_:\n  '#type': number\n  '#title': 'Depuis combien de temps résidez-vous en France (en mois) ?'\n  '#required_error': 'Vous devez indiquer un nombre en mois'\navez_vous_suivi_en_2019_ou_2020_un_programme_de_formation_ou_de_:\n  '#type': radios\n  '#title': 'Avez-vous suivi, en 2019 ou 2020, un programme de formation ou de cours de français ?'\n  '#options': yes_no\n  '#options_display': buttons_horizontal\n  '#required': true\n  '#required_error': 'Vous devez cocher l''une des cases.'\n  '#options__properties': ''\nquel_niveau_avez_vous_valide_:\n  '#type': radios\n  '#title': 'Quel niveau avez-vous validé ?'\n  '#options':\n    A1: A1\n    A2: A2\n    B1: B1\n    B2: B2\n    C1: C1\n    Aucun: Aucun\n  '#required': true\n  '#required_error': 'Vous devez cocher l''une des cases.'\n  '#states':\n    visible:\n      ':input[name=\"avez_vous_deja_passe_un_test_de_certification_en_francais_de_typ\"]':\n        value: Oui\n  '#options__properties': ''\navez_vous_votre_baccalaureat_:\n  '#type': radios\n  '#title': 'Avez-vous votre baccalauréat ?'\n  '#description': 'Examen marquant la fin du second cycle de l&#39;enseignement du second degr&eacute; et permettant l&#39;acc&egrave;s aux &eacute;tudes sup&eacute;rieures.'\n  '#options': yes_no\n  '#options_display': buttons_horizontal\n  '#required': true\n  '#required_error': 'Vous devez indiquer si vous avez le baccalauréat ou non.'\n  '#options__properties': ''\navez_vous_un_diplome_d_etudes_superieures_:\n  '#type': radios\n  '#title': 'Avez-vous un diplôme d''études supérieures ?'\n  '#options':\n    Non: Non\n    'Oui, niveau licence': 'Oui, niveau licence'\n    'Oui, niveau master': 'Oui, niveau master'\n    'Oui, niveau post master': 'Oui, niveau post master'\n  '#options_display': side_by_side\n  '#required': true\n  '#required_error': 'Vous devez cocher l''une des cases.'\n  '#options__properties': ''\ndans_quel_domaine_avez_vous_suivi_des_etudes_superieures_:\n  '#type': textfield\n  '#title': 'Dans quel domaine avez-vous suivi des études supérieures ?'\n  '#description': '(ex. informatique, m&eacute;decine, histoire, comptabilit&eacute;...)'\n  '#required': true\n  '#required_error': 'Vous devez indiquer le domaine de vos études supérieurs'\n  '#states':\n    invisible:\n      ':input[name=\"avez_vous_fait_des_etudes_superieures_\"]':\n        value: Non\ndans_quel_domaine_souhaitez_vous_poursuivre_des_etudes_en_france:\n  '#type': textfield\n  '#title': 'Dans quel domaine souhaitez-vous poursuivre des études en France ?'\n  '#description': '(ex. informatique, m&eacute;decine, histoire, comptabilit&eacute;...)'\n  '#required': true\n  '#required_error': 'Vous devez indiquer dans quel domaine vous souhaitez poursuivre vos études en Franceurs'\navez_vous_deja_ete_inscrit_dans_une_filiere_d_etudes_superieures:\n  '#type': radios\n  '#title': 'Avez-vous déjà été inscrit dans une filière d''études supérieures en France ?'\n  '#options':\n    Oui: Oui\n    Non: Non\n  '#options_display': side_by_side\n  '#required': true\n  '#required_error': 'Vous devez cocher la case oui ou non.'\n  '#options__properties': ''\npreciser_le_nom_de_la_formation_et_l_etablissement_:\n  '#type': textfield\n  '#title': 'Préciser le nom de la formation et l''établissement.'\n  '#required': true\n  '#required_error': 'Vous devez précisez qu''elle était le nom de la formation ansi que le nom de l''établissement'\n  '#states':\n    visible:\n      ':input[name=\"avez_vous_deja_ete_inscrit_dans_une_filiere_d_etudes_superieures\"]':\n        value: Oui\nquelle_langue_vivante_etrangeres_or_le_francais_souhaiteriez_etu:\n  '#type': select\n  '#title': 'Quelle langue vivante étrangère hors le français souhaiteriez-vous étudier dans l''année ?'\n  '#options':\n    allemand: allemand\n    anglais: anglais\n    arabe: arabe\n    chinois: chinois\n    italien: italien\n    japonais: japonais\n    néerlandais: néerlandais\n    portugais: portugais\n    russe: russe\n    'grec ancien': 'grec ancien'\n    latin: latin\n    hittite: hittite\n  '#required': true\n  '#required_error': 'Vous devez choisir une langue vivante'\nquel_niveau_:\n  '#type': textfield\n  '#title': 'Quel niveau ?'\n  '#description': 'Exemple : B1'\n  '#required': true\npouvez_vous_nous_expliquer_en_quelques_lignes_votre_projet_d_etu:\n  '#type': textarea\n  '#title': 'Pouvez-vous écrire une lettre de motivation en +/- 100 mots en expliquant votre projet (d''études et professionnel) pour les prochaines années ?'\n  '#required': true\n  '#required_error': 'Il vaut faut décrire briévement votre projet dans la zone de texte.'\nen_soumettant_ce_formulaire_j_accepte_que_les_informations_saisi:\n  '#type': checkbox\n  '#title': 'En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de mon inscription au Diplôme Universitaire Passerelle Etudiant·es en Exil Panthéon-Sorbonne (DU PEPS). Ces données seront conservées durant trois mois dans la seule finalité d''étude de mon inscritption et seront supprimées au-delà de ce délai.'\n  '#required': true\n  '#required_error': 'Vous devez accepter les conditions pour valider ce formulaire'\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_remote_addr: true
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: 'Réponse au formulaire candidature DU PESPS'
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    label: 'Courriel d''inscription PEPS'
+    notes: ''
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: dupeps.ddl@univ-paris1.fr
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+variants: {  }

@@ -13,6 +13,8 @@ display:
           content:
             value: "<p><a class=\"btn btn-primary\" href=\"/evenements\">View all events</a></p>\r\n"
             format: full_html
+      title: 'Events of Paris 1'
+    display_title: 'Block events'
   events_micro:
     display_options:
       footer:
@@ -27,10 +29,19 @@ display:
           content:
             value: "<p><a class=\"btn btn-primary\" href=\"/actualites\">View all news</a></p>\r\n"
             format: full_html
-  news_micro:
+    display_title: 'Block news'
+  default:
     display_options:
+      exposed_form:
+        options:
+          submit_button: Filter
       footer:
         area:
           content:
-            value: "<p><a class=\"btn btn-primary\" href=\"/actualites\">View all news</a></p>\r\n"
-            format: full_html
+            value: '<a href="/publications" class="btn btn-primary">See all publications</a>'
+            format: restricted_html
+      title: News
+  block_1:
+    display_title: 'Block 12 events'
+    display_options:
+      title: '12 events Paris 1'

@@ -3,10 +3,9 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_publication_author
     - user.role.enseignant_doctorant
   module:
-    - node
+    - entity_reference_revisions
     - user
 id: publication_author
 label: 'Auteur de publication'
@@ -25,10 +24,14 @@ display:
       access:
         type: perm
         options:
-          perm: 'access user profiles'
+          perm: 'create publication content'
       cache:
-        type: tag
-        options: {  }
+        type: time
+        options:
+          results_lifespan: 0
+          results_lifespan_custom: 86400
+          output_lifespan: 0
+          output_lifespan_custom: 172800
       query:
         type: views_query
         options:
@@ -80,10 +83,10 @@ display:
           hide_empty: false
           default_field_elements: true
       fields:
-        mail:
-          id: mail
+        name:
+          id: name
           table: users_field_data
-          field: mail
+          field: name
           relationship: none
           group_type: group
           admin_label: ''
@@ -129,7 +132,72 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: basic_string
+          type: user_name
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: user
+          entity_field: name
+          plugin_id: field
+        mail:
+          id: mail
+          table: users_field_data
+          field: mail
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '- {{ mail }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: email_mailto
           settings: {  }
           group_column: value
           group_columns: {  }
@@ -202,10 +270,10 @@ display:
           entity_field: roles
           plugin_id: user_roles
       sorts:
-        mail:
-          id: mail
+        name:
+          id: name
           table: users_field_data
-          field: mail
+          field: name
           relationship: none
           group_type: group
           admin_label: ''
@@ -214,7 +282,7 @@ display:
           expose:
             label: ''
           entity_type: user
-          entity_field: mail
+          entity_field: name
           plugin_id: standard
       header: {  }
       footer: {  }
@@ -233,7 +301,7 @@ display:
   entity_reference_1:
     display_plugin: entity_reference
     id: entity_reference_1
-    display_title: 'Entity Reference'
+    display_title: 'Auteurs - Entity Reference'
     position: 1
     display_options:
       display_extenders: {  }
@@ -241,11 +309,20 @@ display:
         type: entity_reference
         options:
           search_fields:
-            mail: mail
+            name: name
       pager:
         type: none
         options:
           offset: 0
+      row:
+        type: entity_reference_revisions
+        options:
+          default_field_elements: false
+          inline:
+            mail: mail
+          separator: '-'
+          hide_empty: false
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:

@@ -7,10 +7,12 @@ dependencies:
     - field.field.node.article.comment
     - field.field.node.article.field_disable_canonical_url
     - field.field.node.article.field_image
+    - field.field.node.article.field_publish_master
     - field.field.node.article.field_sites
     - field.field.node.article.field_sites_all
     - field.field.node.article.field_tags
     - node.type.article
+    - workflows.workflow.publication
   module:
     - comment
     - content_moderation
@@ -49,26 +51,33 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 42
-    third_party_settings: {  }
+    weight: 43
     region: content
+    third_party_settings: {  }
+  field_publish_master:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    region: content
+    third_party_settings: {  }
   field_sites:
     type: entity_reference_autocomplete
     weight: 40
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    region: content
   field_sites_all:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 41
-    third_party_settings: {  }
     region: content
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 3

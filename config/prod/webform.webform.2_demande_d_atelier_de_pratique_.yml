@@ -1,0 +1,269 @@
+uuid: 00681189-ef13-47db-ad0a-5cd40bc5e8e0
+langcode: fr
+status: open
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 13
+template: false
+archive: false
+id: 2_demande_d_atelier_de_pratique_
+title: '2 - demande d''atelier de pratique à une formation'
+description: 'Des ateliers pratiques peuvent &ecirc;tre organis&eacute;s afin de r&eacute;pondre aux questions de ceux qui ont suivi une formation en ligne.'
+category: ''
+elements: "titre_du_formulaire:\n  '#type': webform_markup\n  '#markup': '<h3>Demande de participation &agrave; un atelier de mise en pratique</h3>'\nbloc_identifiant:\n  '#type': container\n  nom_du_demandeur:\n    '#type': textfield\n    '#title': 'Nom du demandeur'\n    '#autocomplete': ''\n    '#readonly': true\n    '#required': true\n    '#default_value': '[current-user:display-name]'\n  courriel:\n    '#type': textfield\n    '#title': Courriel\n    '#readonly': true\n    '#required': true\n    '#default_value': '[current-user:mail]'\npour_quel_formation:\n  '#type': container\n  pour_quel_logiciel_:\n    '#type': radios\n    '#title': 'Pour quelle formation ?'\n    '#options':\n      Drupal: Drupal\n      Typo3: Typo3\n      Ametys: Ametys\n      'Accessibilité web (RGAA)': 'Accessibilité web (RGAA)'\n      Limesurvey: Limesurvey\n    '#required': true\n  votre_besoin_sur_ce_logiciel_:\n    '#type': radios\n    '#title': 'Votre besoin ?'\n    '#options':\n      'Niveau débutant': 'Niveau débutant -- Vous débutez et vous souhaitez gérer les éléments de base.'\n      'Niveau avancé': 'Niveau avancé -- Vous maîtrisez la base mais vous avez du mal avec la suite.'\n      'Niveau expert': 'Niveau expert -- Vous maîtrisez tout ce qui a été expliqué dans les différentes formations et vous souhaitez aller plus loin.'\n    '#required': true\n  qu_est_ce_que_vous_souhaiteriez_savoir_en_plus_:\n    '#type': textarea\n    '#title': 'Qu''est ce que vous souhaiteriez savoir en plus ?'\n    '#description': 'Le niveau expert &eacute;tant du sur-mesure, il est imp&eacute;ratif d&#39;expliciter le besoin.'\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"votre_besoin_sur_ce_logiciel_\"]':\n          value: 'Niveau expert'\n  si_vous_avez_des_besoins_specifiques_merci_des_les_expliciter_ic:\n    '#type': textarea\n    '#title': 'Si vous avez des besoins spécifiques, merci des les expliciter ici'\ncontainer_organisation:\n  '#type': container\n  avez_vous_des_jours_de_predilections_:\n    '#type': checkboxes\n    '#title': 'Avez-vous des jours de prédilections ?'\n    '#description': 'Si vous avez un ou deux jours dans la semaine qui a votre pr&eacute;f&eacute;rence pour le choix de la journ&eacute;e de cet atelier, merci de l&#39;indiquer.'\n    '#options':\n      Lundi: Lundi\n      Mardi: Mardi\n      Mercredi: Mercredi\n      Jeudi: Jeudi\n      Vendredi: Vendredi\n    '#options_display': buttons\n    '#required': true\n  preferez_vous_le_matin_ou_l_apres_midi_:\n    '#type': select\n    '#title': 'Préferez-vous le matin ou l''après-midi ?'\n    '#options':\n      'Le matin (de 9h30 à 12h30)': 'Le matin (de 9h30 à 12h30)'\n      'L''après-midi (de 13h30 à 16h30)': 'L''après-midi (de 13h30 à 16h30)'\n      'Pas de préférence': 'Pas de préférence'\n    '#required': true\ncontainer_validation:\n  '#type': container\n  terms_of_service:\n    '#type': webform_terms_of_service\n    '#title': 'Je certifie {avoir suivi la formation en ligne dédié au logiciel sélectionné avant l''atelier}.'\n    '#required': true\n    '#terms_title': Obligatoire\n    '#terms_content': 'Afin de ne pas faire perdre de temps aux autres participants, il est obligatoire que vous ayez regard&eacute; en entier la(les) formation(s) en ligne qui porte sur le sujet avant l&#39;atelier. Les formations sont disponibles en haut de cette page.'\nactions:\n  '#type': webform_actions\n  '#title': 'Bouton(s) d''envoi'\n  '#submit__label': 'Envoyer la demande'"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_remote_addr: true
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_title: 'Votre demande a bien été envoyé...'
+  confirmation_message: "<strong>Merci d&#39;avoir rempli le formulaire.</strong><br />\r\nCelui-ci vient d&#39;&ecirc;tre transmis au <span><span><a href=\"https://www.pantheonsorbonne.fr/ent/intranet2/drh/formation-et-concours/\" title=\"DRH-SFPC : Service de la formation des personnels et concours (DGED)\">DRH-SFPC</a> (qui g&egrave;re l&#39;organisation de l&#39;atelier) et au Webmaster (qui animera l&#39;atelier).<br />\r\nUn courriel reprennant les informations que vous avez saisi, vous a &eacute;t&eacute; envoy&eacute; sur votre adresse de messagerie.<br />\r\n<br />\r\nBonne journ&eacute;e.</span></span>"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    label: 'Courriel à la DRH-SFPC et la DSIUN-PAS'
+    notes: ''
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: concours@univ-paris1.fr
+      to_options: {  }
+      cc_mail: lagadic@univ-paris1.fr
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom_du_demandeur:raw]'
+      subject: 'Demande de participation à un atelier de formation Web'
+      body: "Ce courriel automatique provient du formulaire qui se trouve sur la page :<br />\r\n<a href=\"https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier\">https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier</a><br />\r\n<br />\r\nEnvoy&eacute; le [webform_submission:created]<br />\r\nEnvoy&eacute; par : [webform_submission:user]<br />\r\nLes valeurs soumises sont :<br />\r\n[webform_submission:values]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_1:
+    id: email
+    label: 'Courriel au demandeur'
+    notes: ''
+    handler_id: email_1
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: concours@univ-paris1.fr
+      from_options: {  }
+      from_name: DRH-SFPC
+      subject: 'Confirmation envoi formulaire de Demande de participation à un atelier de formation Web'
+      body: "<strong>Merci d&#39;avoir rempli le formulaire sur la page :</strong><br />\r\n<a href=\"https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier\">https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier</a><br />\r\n<br />\r\nCe courriel automatique provient du formulaire que vous avez rempli sur cette page et les r&eacute;ponses que vous avez fournies (voir ci-dessous) ont &eacute;t&eacute; envoy&eacute; au <span><span><a href=\"https://www.pantheonsorbonne.fr/ent/intranet2/drh/formation-et-concours/\" title=\"DRH-SFPC : Service de la formation des personnels et concours (DGED)\">DRH-SFPC</a> (qui g&egrave;re l&#39;organisation de l&#39;atelier) et au Webmaster (qui animera l&#39;atelier).</span></span><br />\r\n<br />\r\nFormulaire envoy&eacute; le [webform_submission:created]<br />\r\nLes valeurs soumises sont :<br />\r\n[webform_submission:values]<br />\r\n<br />\r\nMerci et bonne journ&eacute;e."
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+variants: {  }

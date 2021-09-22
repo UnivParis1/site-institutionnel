@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.publication.field_author_name
     - field.field.node.publication.field_back_cover
     - field.field.node.publication.field_collection
+    - field.field.node.publication.field_collection_term
     - field.field.node.publication.field_disable_canonical_url
     - field.field.node.publication.field_format
     - field.field.node.publication.field_isbn
@@ -21,8 +22,11 @@ dependencies:
     - field.field.node.publication.field_publication_link
     - field.field.node.publication.field_publication_topics
     - field.field.node.publication.field_publication_type
+    - field.field.node.publication.field_publish_master
     - field.field.node.publication.field_publisher
+    - field.field.node.publication.field_publisher_term
     - field.field.node.publication.field_publishing_date
+    - field.field.node.publication.field_purchase_link
     - field.field.node.publication.field_sites
     - field.field.node.publication.field_sites_all
     - field.field.node.publication.field_subtitle
@@ -32,7 +36,7 @@ dependencies:
     - content_moderation
     - datetime
     - entity_browser
-    - link_attributes
+    - link
     - path
     - text
 id: node.publication.default
@@ -57,28 +61,30 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_author_name:
-    weight: 7
+    weight: 9
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_collection:
-    weight: 4
+  field_collection_term:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
     settings:
+      match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_disable_canonical_url:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 31
-    third_party_settings: {  }
+    weight: 32
     region: content
+    third_party_settings: {  }
   field_format:
     weight: 15
     settings:
@@ -102,12 +108,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_link_title:
-    weight: 18
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
     region: content
   field_media:
     weight: 3
@@ -159,59 +159,69 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
-      enabled_attributes:
-        id: false
-        name: false
-        target: true
-        rel: true
-        class: true
-        accesskey: false
     third_party_settings: {  }
-    type: link_attributes
+    type: link_default
     region: content
   field_publication_topics:
     type: options_select
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_publication_type:
-    weight: 6
+    weight: 7
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
-  field_publisher:
-    weight: 9
+  field_publish_master:
+    type: boolean_checkbox
     settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
+      display_label: true
+    weight: 31
     region: content
-  field_publishing_date:
-    weight: 11
-    settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_sites:
+  field_publisher_term:
     type: entity_reference_autocomplete
-    weight: 29
+    weight: 4
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_publishing_date:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
+  field_purchase_link:
+    type: link_default
+    weight: 18
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 29
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_sites_all:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 30
-    third_party_settings: {  }
     region: content
+    third_party_settings: {  }
   field_subtitle:
     weight: 2
     settings:
@@ -298,5 +308,8 @@ content:
     third_party_settings: {  }
 hidden:
   field_back_cover: true
+  field_collection: true
+  field_link_title: true
+  field_publisher: true
   field_publishing_year: true
   promote: true

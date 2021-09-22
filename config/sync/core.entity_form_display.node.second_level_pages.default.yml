@@ -6,12 +6,14 @@ dependencies:
     - field.field.node.second_level_pages.body
     - field.field.node.second_level_pages.field_disable_canonical_url
     - field.field.node.second_level_pages.field_editorial_blocks
+    - field.field.node.second_level_pages.field_indexrobots
     - field.field.node.second_level_pages.field_publish_master
     - field.field.node.second_level_pages.field_sites
     - field.field.node.second_level_pages.field_sites_all
     - node.type.second_level_pages
   module:
     - content_moderation
+    - metatag
     - paragraphs
     - path
 id: node.second_level_pages.default
@@ -36,8 +38,21 @@ content:
     type: entity_reference_paragraphs
     weight: 14
     region: content
-    settings: {  }
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
+  field_indexrobots:
+    weight: 44
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_publish_master:
     type: boolean_checkbox
     settings:

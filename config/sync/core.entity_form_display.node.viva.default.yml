@@ -5,10 +5,14 @@ dependencies:
   config:
     - field.field.node.viva.field_add_to_cal
     - field.field.node.viva.field_categories
+    - field.field.node.viva.field_disable_canonical_url
     - field.field.node.viva.field_edo_code
     - field.field.node.viva.field_edo_label
     - field.field.node.viva.field_event_address
     - field.field.node.viva.field_event_date
+    - field.field.node.viva.field_publish_master
+    - field.field.node.viva.field_sites
+    - field.field.node.viva.field_sites_all
     - field.field.node.viva.field_subtitle
     - field.field.node.viva.field_thesis_supervisor
     - node.type.viva
@@ -44,6 +48,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 43
+    region: content
+    third_party_settings: {  }
   field_edo_code:
     weight: 4
     settings:
@@ -74,6 +85,30 @@ content:
     third_party_settings: {  }
     type: daterange_default
     region: content
+  field_publish_master:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 42
+    region: content
+    third_party_settings: {  }
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sites_all:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 41
+    region: content
+    third_party_settings: {  }
   field_subtitle:
     weight: 2
     settings:

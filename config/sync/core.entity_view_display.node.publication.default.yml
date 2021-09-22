@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.publication.field_author_name
     - field.field.node.publication.field_back_cover
     - field.field.node.publication.field_collection
+    - field.field.node.publication.field_collection_term
     - field.field.node.publication.field_disable_canonical_url
     - field.field.node.publication.field_format
     - field.field.node.publication.field_isbn
@@ -20,8 +21,11 @@ dependencies:
     - field.field.node.publication.field_publication_link
     - field.field.node.publication.field_publication_topics
     - field.field.node.publication.field_publication_type
+    - field.field.node.publication.field_publish_master
     - field.field.node.publication.field_publisher
+    - field.field.node.publication.field_publisher_term
     - field.field.node.publication.field_publishing_date
+    - field.field.node.publication.field_purchase_link
     - field.field.node.publication.field_sites
     - field.field.node.publication.field_sites_all
     - field.field.node.publication.field_subtitle
@@ -40,7 +44,7 @@ mode: default
 content:
   body:
     type: text_default
-    weight: 9
+    weight: 7
     region: content
     label: hidden
     settings: {  }
@@ -53,31 +57,15 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_collection:
-    weight: 3
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_format:
+  field_collection_term:
+    type: entity_reference_label
     weight: 17
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
-  field_isbn:
-    weight: 7
-    label: visually_hidden
+    label: above
     settings:
-      link_to_entity: false
+      link: true
     third_party_settings: {  }
-    type: string
-    region: content
-  field_issn:
+  field_format:
     weight: 15
     label: hidden
     settings:
@@ -85,15 +73,31 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_isbn:
+    weight: 5
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_issn:
+    weight: 13
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_link_title:
-    weight: 10
+    weight: 8
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_media:
-    weight: 8
+    weight: 6
     label: hidden
     settings:
       view_mode: publication
@@ -102,7 +106,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_nb_pages:
-    weight: 16
+    weight: 14
     label: hidden
     settings:
       thousand_separator: ''
@@ -111,7 +115,7 @@ content:
     type: number_integer
     region: content
   field_price:
-    weight: 18
+    weight: 16
     label: hidden
     settings:
       thousand_separator: ''
@@ -122,7 +126,7 @@ content:
     type: number_decimal
     region: content
   field_pub_year:
-    weight: 19
+    weight: 18
     label: above
     settings:
       timezone_override: ''
@@ -138,7 +142,7 @@ content:
     type: entity_reference_entity_id
     region: content
   field_publication_link:
-    weight: 11
+    weight: 9
     label: hidden
     settings:
       trim_length: 80
@@ -149,24 +153,32 @@ content:
     third_party_settings: {  }
     type: link_separate
     region: content
+  field_publication_topics:
+    type: entity_reference_label
+    weight: 21
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
   field_publication_type:
-    weight: 4
+    weight: 3
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_publisher:
-    weight: 5
-    label: visually_hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
+  field_publisher_term:
+    type: entity_reference_label
+    weight: 20
     region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
   field_publishing_date:
-    weight: 6
+    weight: 4
     label: hidden
     settings:
       timezone_override: ''
@@ -174,6 +186,18 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_purchase_link:
+    type: link
+    weight: 19
+    region: content
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
   field_subtitle:
     weight: 0
     label: hidden
@@ -183,7 +207,7 @@ content:
     type: string
     region: content
   field_tags:
-    weight: 12
+    weight: 10
     label: visually_hidden
     settings:
       link: false
@@ -191,22 +215,24 @@ content:
     type: entity_reference_label
     region: content
   links:
-    weight: 14
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
     label: hidden
     type: entity_reference_label
-    weight: 13
+    weight: 11
     region: content
     settings:
       link: false
     third_party_settings: {  }
 hidden:
   field_back_cover: true
+  field_collection: true
   field_disable_canonical_url: true
-  field_publication_topics: true
+  field_publish_master: true
+  field_publisher: true
   field_sites: true
   field_sites_all: true
   langcode: true

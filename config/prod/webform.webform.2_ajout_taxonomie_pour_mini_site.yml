@@ -1,0 +1,232 @@
+uuid: 1f09da02-b717-48c7-96ab-506846f3bd8e
+langcode: fr
+status: open
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 13
+template: false
+archive: false
+id: 2_ajout_taxonomie_pour_mini_site
+title: '2 - Ajout taxonomie pour mini-site'
+description: 'Afin que les webmestres puissent filtrer leur actualit&eacute;, leur publication, etc.'
+category: ''
+elements: "titre_du_formulaire:\n  '#type': webform_markup\n  '#markup': '<h3>Demande d&#39;ajout de Taxonomie</h3>'\npour_quel_mini_site:\n  '#type': container\n  nom_du_demandeur:\n    '#type': textfield\n    '#title': 'Nom du demandeur'\n    '#placeholder': 'Votre nom de famille'\n    '#readonly': true\n    '#default_value': '[current-user:display-name]'\n    '#access_create_roles':\n      - authenticated\n    '#required': true\n  courriel:\n    '#type': textfield\n    '#title': Courriel\n    '#placeholder': 'Votre adresse courriel'\n    '#readonly': true\n    '#required': true\n    '#default_value': '[current-user:mail]'\n  indiquez_pour_quel_mini_site:\n    '#type': entity_autocomplete\n    '#title': 'Indiquez pour quel mini-site'\n    '#help_title': 'Ne mettez pas l''URL mais tapez le nom'\n    '#help': 'C&#39;est un champ d&#39;auto-compl&eacute;tion qui cherche le nom des sites, donc si votre site est celui de l&#39;&Eacute;cole de Droit de la Sorbonne (EDS) par exemple, tapez juste droit ou eds dans ce champ.'\n    '#required': true\n    '#target_type': site_type\n    '#selection_handler': 'default:site_type'\ncontainer_quelle_taxo:\n  '#type': container\n  pour_quel_type_de_contenu_:\n    '#type': select\n    '#title': 'Pour quel type de contenu ?'\n    '#options':\n      Actualité: Actualité\n      Évènement: Évènement\n      Publication: Publication\n    '#required': true\n  indiquez_les_categories_que_vous_souhaitez_ajouter_:\n    '#type': textarea\n    '#title': 'Indiquez les catégories que vous souhaitez ajouter :'\n    '#description': 'Mettez une valeur par ligne. Par exemple, si vous &ecirc;tes une UMR est que vous avez plusieurs labos, indiquez vos labos (un par ligne) et vous pourrez ainsi filtrer les r&eacute;sultats affich&eacute;s en ne demandant d&#39;afficher que les r&eacute;sultats pour tel ou tel labo.'\n    '#required': true\n    '#states':\n      visible:\n        - ':input[name=\"pour_quel_type_de_contenu_\"]':\n            value: Actualité\n        - xor\n        - ':input[name=\"pour_quel_type_de_contenu_\"]':\n            value: Évènement\n  pour_quel_champ_:\n    '#type': radios\n    '#title': 'Pour quel champ ?'\n    '#options':\n      Éditeur: Éditeur\n      Collection: Collection\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"pour_quel_type_de_contenu_\"]':\n          value: Publication\n  indiquez_vos_editeurs_a_ajouter_:\n    '#type': textarea\n    '#title': 'Indiquez vos éditeurs à ajouter :'\n    '#description': 'Merci de les noter un par ligne.'\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"pour_quel_champ_\"]':\n          value: Éditeur\n  indiquez_les_collections_que_vous_souhaitez_ajouter_:\n    '#type': textarea\n    '#title': 'Indiquez les collections que vous souhaitez ajouter :'\n    '#description': 'Merci de noter vos collections, une par ligne'\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"pour_quel_champ_\"]':\n          value: Collection\nactions:\n  '#type': webform_actions\n  '#title': 'Bouton(s) d''envoi'\n  '#submit__label': 'Envoyer la demande'"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_remote_addr: true
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_title: 'Votre demande a bien été envoyé...'
+  confirmation_message: 'Votre demande a &eacute;t&eacute; transf&eacute;r&eacute; &agrave; l&#39;assistance de la DSIUN. Un ticket de demande d&#39;intervention va &ecirc;tre ouvert. C&#39;est ensuite via ce ticket que vous pourrez suivre le suivi et la r&eacute;solution de votre demande.'
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    label: 'Courriel à l''assistance DSIUN'
+    notes: ''
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: assistance-dsiun@univ-paris1.fr
+      to_options: {  }
+      cc_mail: 'lagadic@univ-paris1.fr, Liliana.Helmany@univ-paris1.fr'
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom_du_demandeur:raw]'
+      subject: '[Drupal] Ajout taxonomie pour mini-site'
+      body: "Ce courriel automatique provient du formulaire pr&eacute;sent &agrave; la page suivante :<br />\r\n<a href=\"https://aide-siteweb.pantheonsorbonne.fr/experts/filtrer-vos-contenus-votre-mini-site\">https://aide-siteweb.pantheonsorbonne.fr/experts/filtrer-vos-contenus-votre-mini-site</a><br />\r\n<br />\r\nDemande envoy&eacute; le [webform_submission:created]<br />\r\nEnvoy&eacute; par : [webform_submission:user]<br />\r\nLes valeurs soumises sont :<br />\r\n[webform_submission:values]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+variants: {  }

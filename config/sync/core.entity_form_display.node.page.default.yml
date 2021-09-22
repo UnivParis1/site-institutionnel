@@ -6,6 +6,7 @@ dependencies:
     - entity_browser.browser.image_browser
     - field.field.node.page.body
     - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_indexrobots
     - field.field.node.page.field_media
     - field.field.node.page.field_paragraphs
     - field.field.node.page.field_publish_master
@@ -14,9 +15,11 @@ dependencies:
     - field.field.node.page.field_sites_all
     - field.field.node.page.field_sub_title
     - node.type.page
+    - workflows.workflow.publication
   module:
     - content_moderation
     - entity_browser
+    - metatag
     - paragraphs
     - path
 _core:
@@ -39,6 +42,13 @@ content:
     weight: 43
     region: content
     third_party_settings: {  }
+  field_indexrobots:
+    weight: 44
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_media:
     weight: 3
     settings:
