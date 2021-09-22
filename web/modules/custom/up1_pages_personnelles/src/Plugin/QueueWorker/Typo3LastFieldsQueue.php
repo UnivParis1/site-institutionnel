@@ -8,20 +8,22 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
+use Drupal\node\Entity\Node;
 use Drupal\up1_pages_personnelles\WsGroupsService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use \Drupal\user\Entity\User;
+use Drupal\node\Entity;
+use Drupal\Core\Url;
 
 /**
- * Executes users (enseignants & doctorants) import from web service.
+ * Executes English resume & education fields import from web service.
  *
  * @QueueWorker(
- *   id = "up1_page_perso_queue",
- *   title = @Translation("Page Perso creation"),
- *   cron = {"time" = 30}
+ *   id = "up1_typo3_last_fields_queue",
+ *   title = @Translation("Page Perso import english resume & education fields."),
+ *   cron = {"time" = 60}
  *  )
  */
-class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class Typo3LastFieldsQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
@@ -62,7 +64,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
   }
 
   /**
-   * {@inheritDoc}
+   * {@
    */
   public static function create(ContainerInterface $container,
                                 array $configuration, $plugin_id, $plugin_definition) {
@@ -80,59 +82,39 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * {@inheritDoc}
    */
   public function processItem($item) {
-    $cas_user_manager = \Drupal::service('cas.user_manager');
-    $cas_username = $item['uid'];
-    $author = $cas_user_manager->getUidForCasUsername($cas_username);
-    if ($author) {
-      $author_user = User::load($author);
-      $author_user->addRole('enseignant_doctorant');
-      $author_user->save();
-    }
-    else {
-      $cas_settings = \Drupal::config('cas.settings');
+    $user = user_load_by_name($item->username);
 
-      $user_properties = [
-        'roles' => ['enseignant_doctorant'],
-      ];
-      $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
-      if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
-        $user_properties['mail'] = $item['mail'];
+    if ($user) {
+      $author = $user->id();
+      $ids = \Drupal::entityQuery('node')
+        ->condition('type', 'page_personnelle')
+        ->condition('uid', $author)
+        ->execute();
+      $pages = Node::loadMultiple($ids);
+      if (!empty($pages)) {
+        foreach ($pages as $node) {
+          try {
+            if (isset($item->tx_oxcspagepersonnel_anglais) && !empty($item->tx_oxcspagepersonnel_anglais)) {
+              $node->field_english_resume = [
+                'value' => "<div>" . $item->tx_oxcspagepersonnel_anglais . "</div>",
+                'format' => 'full_html'
+              ];
+            }
+            if (isset($item->tx_oxcspagepersonnel_epi) && !empty($item->tx_oxcspagepersonnel_epi)) {
+              $node->field_education = [
+                'value' => "<div>" . $item->tx_oxcspagepersonnel_epi . "</div>",
+                'format' => 'full_html'
+              ];
+            }
+            $node->site_id = NULL;
+            $node->save();
+          } catch (\Exception $e) {
+            \Drupal::logger('up1_typo3_last_fields_queue')->error($this->t('La page personnelle de @username n\'a pas pu être créée.',
+              ['@username' => $item->username] ));
+            \Drupal::logger('up1_typo3_last_fields_queue')->error("@code : @Message" , [$e->getCode(), $e->getMessage()]);
+          }
+        }
       }
-      try {
-        $cas_user_manager->register($cas_username, $user_properties);
-      } catch (CasLoginException $e) {
-        \Drupal::logger('cas')->error('CasLoginException when
-        registering user with name %name: %e', [
-          '%name' => $cas_username,
-          '%e' => $e->getMessage()
-        ]);
-        return;
-      }
-
-      $user = user_load_by_name($item['uid']);
-      if ($user) {
-        $author = $user->id();
-      }
-    }
-
-    $values = \Drupal::entityQuery('node')
-      ->condition('type', 'page_personnelle')
-      ->condition('uid', $author)
-      ->execute();
-    if (empty($values)) {
-      $storage = $this->entityTypeManager->getStorage('node');
-      $node = $storage->create([
-        'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
-        'type' => 'page_personnelle',
-        'langcode' => 'fr',
-        'uid' => $author,
-        'status' => 1,
-        'field_uid_ldap' => $item['uid'],
-        'site_id' => NULL,
-      ]);
-
-      $node->save();
     }
   }
-
 }

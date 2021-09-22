@@ -152,7 +152,8 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
           $teacher->save();
         }
       }
-      $form['title']['#access'] = FALSE;
+
+      $form['title']['#disabled'] = TRUE;
 
       $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
       $form['field_uid_ldap']['#access'] = FALSE;
@@ -223,34 +224,26 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       foreach ($userInformation as $key => $information) {
         $variables[$key] = $information;
       }
-      $variables['displayName'] = $userInformation['supannCivilite'] . " " . $userInformation['displayName'];
+
       $get_publications = $node->get('field_my_hal_publications')->getValue();
-      $publications = "";
       if (!empty($get_publications) && $get_publications[0]['value']) {
-        $field_firstname = $node->get('field_firstname')->getValue();
-        if (isset($field_firstname) && !empty($field_firstname[0]) && isset($field_firstname[0])) {
-          $firstname = $field_firstname[0]['value'];
+        $firstname = $node->get('field_firstname')->getValue();
+        $lastname = $node->get('field_name')->getValue();
+        switch ($get_publications[0]['value']) {
+          case 'idhal':
+            $hal_publications = $node->get('field_id_hal')->getValue();
+            $publications = up1_pages_personnelles_get_hal_publications('idhal', $firstname[0]['value'],$lastname[0]['value'],$hal_publications[0]['value']);
+            break;
+          case 'nomprenom':
+            $publications = up1_pages_personnelles_get_hal_publications('nomprenom',$firstname[0]['value'],$lastname[0]['value']);
+            break;
+          case 'nul':
+            $publications = "";
+            break;
         }
-        $field_name = $node->get('field_name')->getValue();
-        if (isset($field_name) && !empty($field_name[0]) && isset($field_name[0])) {
-          $lastname = $field_name[0]['value'];
-        }
-        if (isset($firstname) && isset($lastname)) {
-          switch ($get_publications[0]['value']) {
-            case 'idhal':
-              $hal_publications = $node->get('field_id_hal')->getValue();
-              $publications = up1_pages_personnelles_get_hal_publications('idhal', $firstname, $lastname, $hal_publications[0]['value']);
-              break;
-            case 'nomprenom':
-              $publications = up1_pages_personnelles_get_hal_publications('nomprenom', $firstname, $lastname);
-              break;
-            default:
-              $publications = "";
-              break;
-          }
-        }
+        $variables['hal_publications'] = $publications;
+        \Drupal::logger('pages_persos_preprocess_node')->info(print_r($publications, 1));
       }
-      $variables['hal_publications'] = $publications;
     }
   }
 }
