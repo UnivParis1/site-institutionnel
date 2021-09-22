@@ -186,6 +186,24 @@ up1_pages_personnelles.delete_queue_users:
   requirements:
     _permission: 'access administration pages'
 
+up1_pages_personnelles.delete_page_perso_queue:
+  path: '/pages-perso/maj/delete-queue'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::deletePagePersoQueue'
+    _title: 'Delete up1_page_perso_queue'
+  requirements:
+    _permission: 'access content'
+
+up1_pages_personnelles.get_new_ecd:
+  path: '/pages-perso/create-ecd-and-page-perso'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchCreationOfUsers'
+    _title: 'Import new enseignant-chercheur/doctorant from ldap and create their page perso'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
 up1_pages_personnelles.edit_page_perso:
   path: '/modifier-ma-page-personnelle/{username}'
   defaults:

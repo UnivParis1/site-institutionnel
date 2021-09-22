@@ -10,6 +10,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\up1_pages_personnelles\WsGroupsService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use \Drupal\user\Entity\User;
 
 /**
  * Executes users (enseignants & doctorants) import from web service.
@@ -83,7 +84,9 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
     $cas_username = $item['uid'];
     $author = $cas_user_manager->getUidForCasUsername($cas_username);
     if ($author) {
-      
+      $author_user = User::load($author);
+      $author_user->addRole('enseignant_doctorant');
+      $author_user->save();
     }
     else {
       $cas_settings = \Drupal::config('cas.settings');

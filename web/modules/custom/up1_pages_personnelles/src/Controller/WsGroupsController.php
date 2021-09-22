@@ -203,8 +203,6 @@ class WsGroupsController extends ControllerBase {
    */
   public function createPagePersoUsers() {
     $data = $this->wsGroupsService->getAllUsers();
-    \Drupal::logger('up1_page_perso')->info("get all Users : " . count($data));
-    \Drupal::logger('up1_page_perso')->info(print_r($data,1));
     $queue = $this->queueFactory->get('up1_page_perso_queue');
     foreach ($data as $datum) {
       $queue->createItem($datum);
@@ -696,9 +694,6 @@ class WsGroupsController extends ControllerBase {
 
   /**
    * Delete queues 'up1_page_perso_queue', 'up1_typo3_data_queue', 'up1_typo3_resume_queue', 'up1_typo3_publications_queue' & 'up1_typo3_last_fields_queue'.
-   *
-   * Remember that the command drupal dq checks first for a queue worker
-   * and if it exists, DC suposes that a queue exists.
    */
   public function deleteTheQueue() {
     $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
@@ -712,6 +707,17 @@ class WsGroupsController extends ControllerBase {
     ];
   }
 
+  /**
+   * Delete queue 'up1_page_perso_queue'.
+   */
+  public function deletePagePersoQueue() {
+    $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
+    return [
+      '#type' => 'markup',
+      '#markup' => $this->t('Up1 Page Perso queue has been deleted'),
+    ];
+  }
+
   public function editPagePerso($username) {
     $user = user_load_by_name($username);
 
@@ -721,6 +727,8 @@ class WsGroupsController extends ControllerBase {
         ->condition('uid', $user->id());
         $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
+        $user->addRole('enseignant_doctorant');
+        $user->save();
         $nid = reset($result);
         $goto = "/node/$nid/edit";
       }
