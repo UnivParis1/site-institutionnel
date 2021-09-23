@@ -5,11 +5,14 @@ use \Drupal\Core\Form\FormStateInterface;
 use \Drupal\taxonomy\Entity\Term;
 use \Drupal\user\Entity\User;
 use \Drupal\Core\Url;
+use \Drupal\up1_pages_personnelles\ComptexManager;
+
 
 /**
  * Implements hook_preprocess_HOOK() for html.twig.
  */
-function p1ps2019_preprocess_html(&$variables) {
+function p1ps2019_preprocess_html(&$variables)
+{
   $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $negotiator = \Drupal::service('micro_site.negotiator');
   $system_path = \Drupal::service('path.current')->getPath();
@@ -25,29 +28,30 @@ function p1ps2019_preprocess_html(&$variables) {
 
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  }
-  catch (Exception $e) {
+  } catch (Exception $e) {
     $variables['is_front'] = FALSE;
   }
-  if (preg_match('/site/',$variables['root_path']) && !isset($variables['node_type']) ) {
+  if (preg_match('/site/', $variables['root_path']) && !isset($variables['node_type'])) {
     $variables['is_front_mini_site'] = TRUE;
-  }
-  else $variables['is_front_mini_site'] = FALSE;
+  } else $variables['is_front_mini_site'] = FALSE;
 }
 
 /**
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
-function p1ps2019_preprocess_page(&$variables) {
+function p1ps2019_preprocess_page(&$variables)
+{
   $page_mini_site = FALSE;
   $is_front_mini_site = FALSE;
   $print_hp_image = FALSE;
+  $preview = FALSE;
   $node_type = FALSE;
   $site_id = 0;
   $variables['site_name'] = "";
 
-  if (isset($variables['node'])) {$node = $variables['node'];}
-  else $node = FALSE;
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+  } else $node = FALSE;
 
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $system_path = \Drupal::service('path.current')->getPath();
@@ -56,6 +60,9 @@ function p1ps2019_preprocess_page(&$variables) {
 
   if ($variables['is_front']) {
     $print_hp_image = TRUE;
+  }
+  if (preg_match('/node\/preview/', $system_path)) {
+    $preview = TRUE;
   }
 
   $negotiator = \Drupal::service('micro_site.negotiator');
@@ -70,8 +77,7 @@ function p1ps2019_preprocess_page(&$variables) {
     $complete_name = $site->get('field_complete_name')->getValue();
     if (!empty($complete_name)) {
       $variables['site_name'] = $complete_name[0]['value'];
-    }
-    else {
+    } else {
       $variables['site_name'] = $site->getName();
     }
   }
@@ -95,13 +101,13 @@ function p1ps2019_preprocess_page(&$variables) {
 
   $variables['node_type'] = $node_type;
   $variables['print_hp_image'] = $print_hp_image;
+  $variables['preview'] = $preview;
   $variables['page_mini_site'] = $page_mini_site;
   $variables['is_front_mini_site'] = $is_front_mini_site;
-  $variables['is_front_mini_site'] = $is_front_mini_site;
-
 }
 
-function p1ps2019_preprocess_node(&$variables) {
+function p1ps2019_preprocess_node(&$variables)
+{
   if (isset($site) && !empty($site)) {
     $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
@@ -133,11 +139,26 @@ function p1ps2019_preprocess_node(&$variables) {
       case "publication":
         $variables['node_type_text'] = t("Publication");
         break;
+      case "page_personnelle":
+        $variables['node_type_text'] = t("Page personnelle");
+        break;
     }
   }
+  if ($node->getType() == 'page_personnelle') {
+    $uid = $node->getOwnerId();
+    $user = User::load($uid);
+    $umail = $user->getEmail();
+    if (isset($umail) && !empty ($umail)) {
+      $variables['mail'] = $umail;
+    } else {
+      $comptex = new ComptexManager();
+      $variables['mail'] = $comptex->getUserEmail($user->getUsername());
+    }
 
+  }
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
     $skills = $node->get('field_skills')->getValue();
+    $expertises = [];
     if (!empty($skills)) {
       foreach ($skills as $key => $skill) {
         $tid = $skill['target_id'];
@@ -145,15 +166,14 @@ function p1ps2019_preprocess_node(&$variables) {
         $arg = 'skills[' . $tid . ']';
         $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
         $expertises[$key] =
-          '<a href="'. $url->toString() .'"
-          title="'. t('Link to @term_name page', ['@term_name' => $term->getName()]) . '"
+          '<a href="' . $url->toString() . '"
+          title="' . t('Link to @term_name page', ['@term_name' => $term->getName()]) . '"
           target="_blank">'
           . $term->getName() . '</a>';
       }
-      $variables['expertises'] = $expertises;
     }
+    $variables['expertises'] = $expertises;
   }
-
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_highlight_publications')) {
     $publications = $node->get('field_highlight_publications')->getValue();
     $col_length = 12;
@@ -179,7 +199,7 @@ function p1ps2019_preprocess_node(&$variables) {
         $uid = $author['target_id'];
         $pp = \Drupal::entityTypeManager()
           ->getStorage('node')
-          ->loadByProperties(['uid' => $uid, 'type' => 'page_personnelle']);
+          ->loadByProperties(['uid' => $uid]);
         $page_perso = reset($pp);
         if ($page_perso && $page_perso->getType() == 'page_personnelle') {
           $nom = $page_perso->get('field_name')->getValue();
@@ -189,7 +209,7 @@ function p1ps2019_preprocess_node(&$variables) {
           $publication_authors[] =
             '<a href="' . $page_perso_url . '" target="_blank"
             title="Page personnelle de ' . $prenom[0]['value'] . ' ' . $nom[0]['value'] . '">
-            '. $prenom[0]['value'] . ' ' . $nom[0]['value'] . '</a>';
+            ' . $prenom[0]['value'] . ' ' . $nom[0]['value'] . '</a>';
         }
       }
       $variables['publication_authors'] = $publication_authors;
@@ -200,12 +220,12 @@ function p1ps2019_preprocess_node(&$variables) {
 /**
  * Implements hook_preprocess_HOOK() for menu.html.twig.
  */
-function p1ps2019_preprocess_menu(&$variables) {
+function p1ps2019_preprocess_menu(&$variables)
+{
   $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  }
-  catch (Exception $e) {
+  } catch (Exception $e) {
     $variables['is_front'] = FALSE;
   }
 }
@@ -215,7 +235,8 @@ function p1ps2019_preprocess_menu(&$variables) {
  * @param array $suggestions
  * @param array $variables
  */
-function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $variables)
+{
   // Block suggestions for custom block bundles.
   if (isset($variables['elements']['content']['#block_content'])) {
     array_splice($suggestions, 1, 0,
@@ -223,7 +244,8 @@ function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $vari
   }
 }
 
-function p1ps2019_preprocess_block(&$variables) {
+function p1ps2019_preprocess_block(&$variables)
+{
   if (isset($variables["elements"]["#id"])) {
     $block_id = $variables["elements"]["#id"];
 
@@ -239,30 +261,30 @@ function p1ps2019_preprocess_block(&$variables) {
       $site = $negotiator->getActiveSite();
       if ($site) {
         $variables['host_url'] = $site->getSiteScheme() . "://" . $site->getHostPublicUrl();
-      }
-      else $variables['host_url'] = '';
+      } else $variables['host_url'] = '';
     }
   }
 }
 
 // add a template suggestion based on region name
-function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $variables)
+{
   if (isset($variables["attributes"]["region"])) {
     $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
-    if ($variables["attributes"]["region"] == "navigation_left" && preg_match('/site-/', $variables['menu_name'])) {
-      $suggestions[] = 'menu__mini_site__navigation_left';
-    }
   }
 }
-function p1ps2019_preprocess_block__welcome_message_block(&$variables){
-  $variables['isHome']=\Drupal::service('path.matcher')->isFrontPage();
+
+function p1ps2019_preprocess_block__welcome_message_block(&$variables)
+{
+  $variables['isHome'] = \Drupal::service('path.matcher')->isFrontPage();
 }
 
 /*
 * template_preprocess_image
 *
 */
-function p1ps2019_preprocess_image(&$variables){
+function p1ps2019_preprocess_image(&$variables)
+{
   if (!isset($variables['alt'])) {
     $variables['attributes']['alt'] = "";
   }
@@ -271,13 +293,14 @@ function p1ps2019_preprocess_image(&$variables){
 /**
  * Implements hook_theme_suggestions_container_alter().
  */
-function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $variables) {
-  $name='';
+function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $variables)
+{
+  $name = '';
   $display_id = '';
   $pieces = [];
 
-  if(isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
-  if(isset($variables['element']['#display_id']) && $variables['element']['#display_id']) $display_id = $variables['element']['#display_id'];
+  if (isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
+  if (isset($variables['element']['#display_id']) && $variables['element']['#display_id']) $display_id = $variables['element']['#display_id'];
 
   if (isset($variables['element']['#type']) && !empty($variables['element']['#type'])) {
     $pieces[] = $variables['element']['#type'];
@@ -295,7 +318,8 @@ function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $
  * @param $variables
  * @param $hook
  */
-function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook) {
+function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
+{
   if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
     $original_theme_hook = $variables['theme_hook_original'];
     array_unshift($suggestions, $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']));
@@ -308,7 +332,8 @@ function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook) {
  * @param $suggestions
  * @param $variables
  */
-function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
+function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
+{
 
   // Define the view mode.
   $mode = $variables['elements']['#view_mode'];
@@ -332,9 +357,10 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions,  $variables) {
 * Implements template_preprocess_views_view()
 * @param array $variables
 */
-function p1ps2019_preprocess_views_view(&$variables) {
+function p1ps2019_preprocess_views_view(&$variables)
+{
   $variables['is_listing_page'] = FALSE;
-  $views = ['travailler_universite','listings'];
+  $views = ['travailler_universite', 'listings'];
   if (in_array($variables['id'], $views)) {
     $variables['is_listing_page'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
@@ -359,7 +385,7 @@ function p1ps2019_preprocess_views_view(&$variables) {
     $view_display = $variables['view']->getDisplay();
     $variables['view_display'] = $view_display->display['display_title'];
   }
-  if($variables['more']) {
+  if ($variables['more']) {
     $variables['more']['#options']['attributes']['class'] = array(
       'link-style', 'with-arrow'
     );
@@ -367,23 +393,24 @@ function p1ps2019_preprocess_views_view(&$variables) {
   }
 }
 
-function p1ps2019_preprocess_views_view_table(&$variables) {
+function p1ps2019_preprocess_views_view_table(&$variables)
+{
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  }
-  catch (Exception $e) {
+  } catch (Exception $e) {
     $variables['is_front'] = FALSE;
   }
 }
 
-function p1ps2019_preprocess_paragraph(&$variables) {
+function p1ps2019_preprocess_paragraph(&$variables)
+{
   $paragraph = $variables['paragraph'];
   if ($paragraph->bundle() == 'contact') {
     $service = \Drupal::service('up1_global.centres');
     $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 
-    if(!empty($paragraph->field_phone->value)) {
-      unset($variables['centre']['telephone']);
+    if (!empty($paragraph->field_phone->value)) {
+      $variables['centre']['telephone'] = [];
       $variables['centre']['telephone'][] = $paragraph->field_phone->value;
     }
 
@@ -391,7 +418,7 @@ function p1ps2019_preprocess_paragraph(&$variables) {
     if (!empty($variables['centre']['email'])) {
       $email[] = $variables['centre']['email'];
     }
-    if(!empty($paragraph->field_email_address->value)) {
+    if (!empty($paragraph->field_email_address->value)) {
       array_unshift($email, $paragraph->field_email_address->value);
     }
     $variables['centre']['email'] = $email;
@@ -404,7 +431,8 @@ function p1ps2019_preprocess_paragraph(&$variables) {
   }
 }
 
-function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id) {
+function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id)
+{
   if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
     $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
     unset($form['name']['#title'], $form['name']['#description']);
@@ -416,7 +444,8 @@ function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id) {
 }
 
 
-function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables) {
+function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables)
+{
   $suggestions[] = 'field__' .
     $variables['element']['#field_name'] . '__' .
     $variables['element']['#view_mode'];
