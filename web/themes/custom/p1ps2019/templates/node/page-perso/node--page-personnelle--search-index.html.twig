@@ -68,49 +68,14 @@
 {%
   set classes = [
   node.bundle|clean_class,
-  node.isPromoted() ? 'is-promoted',
-  node.isSticky() ? 'is-sticky',
-  not node.isPublished() ? 'is-unpublished',
   view_mode ? view_mode|clean_class,
   'clearfix'
 ]
 %}
-{{ attach_library('p1ps2019/match_height') }}
-{% set other_affiliation = content.field_other_affiliation|render %}
-{% set about_me = content.field_about_me|render %}
-{% set research_directions = content.field_research_directions|render %}
-{% set research_projects = content.field_research_projects|render %}
-{% set research_themes = content.field_research_themes|render %}
-{% set thesis_subject = content.field_thesis_subject|render %}
-{% set phd_supervisor = content.field_phd_supervisor|render %}
-{#{% set skills = content.field_skills|render %}#}
-{% set hal_publications = hal_publications %}
-{% if content.field_publications|render %}
-  {% set publications = content.field_publications %}
-{% endif %}
-{% set resume_text = content.field_resume_text|render %}
-{% set resume = content.field_resume|render %}
-{% set resume_pdf = content.field_resume_pdf|render %}
-{% set link_to_resume = content.field_link_to_resume|render %}
-{% set email_address = content.field_other_email_address|render %}
-{% set scientific_resp = content.field_scientific_resp|render %}
-{% set thesis_directions = content.field_thesis_directions|render %}
-{% set facebook_link = content.field_facebook_link|render %}
-{% set twitter = content.field_twitter|render %}
-{% set linkedin_link = content.field_linkedin_link|render %}
-{% set viadeo_link = content.field_viadeo_link|render %}
-{% set hypotheses = content.field_hypotheses_link|render %}
-{% set epi = content.field_epi_link|render %}
-{% set hal = content.field_hal_link|render %}
-{% set academia = content.field_academia_link|render %}
-{% set my_medias = content.field_my_medias|render %}
+
 {% if expertises %}
   {% set skills = expertises %}
 {% endif %}
-{% set publis = content.field_highlight_publications|render %}
-{% set sticky_pub = content.field_sticky_publications|render %}
-{% set education = content.field_education|render %}
-
 
 <article{{ attributes.addClass(classes) }}>
   <div class="box-style column-item">
