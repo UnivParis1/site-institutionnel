@@ -205,7 +205,7 @@ class WsGroupsController extends ControllerBase {
     $data = $this->wsGroupsService->getAllUsers();
     $queue = $this->queueFactory->get('up1_page_perso_queue');
     foreach ($data as $datum) {
-      $queue->createItem($datum);
+  //    $queue->createItem($datum);
     }
 
     return [

@@ -119,7 +119,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       ->condition('type', 'page_personnelle')
       ->condition('uid', $author)
       ->execute();
-    if (empty($values)) {
+   /* if (empty($values)) {
       $storage = $this->entityTypeManager->getStorage('node');
       $node = $storage->create([
         'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
@@ -132,7 +132,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       ]);
 
       $node->save();
-    }
+      }*/
   }
 
 }
