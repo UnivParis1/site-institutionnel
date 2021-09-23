@@ -123,14 +123,12 @@
       <div>{{ content.field_affiliation|raw|capitalize }}</div>
       <div>{{ content.field_fonction|raw|capitalize }}</div>
       {% if skills %}
+        <div class="skills">
         <p class="txt-bold">{{ content.field_skills['#title'] }}</p>
-        <ul class="txt-second small infos-sep">
           {% for key, skill in skills if key|first != '#' %}
-            <li class="btn btn-primary">
-              {{ skill|raw }}
-            </li>
+              <span>{{ skill|raw }}</span>
           {% endfor %}
-        </ul>
+        </div>
       {% endif %}
     </div>
   </div>
