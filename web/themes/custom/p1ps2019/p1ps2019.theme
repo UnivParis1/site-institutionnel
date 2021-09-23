@@ -155,6 +155,7 @@ function p1ps2019_preprocess_node(&$variables)
   }
   if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
     $skills = $node->get('field_skills')->getValue();
+    $expertises = [];
     if (!empty($skills)) {
       foreach ($skills as $key => $skill) {
         $tid = $skill['target_id'];
