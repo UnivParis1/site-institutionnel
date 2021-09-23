@@ -114,14 +114,14 @@
 
 <article{{ attributes.addClass(classes) }}>
   <div class="box-style column-item">
-    <div class="box-style same-height">
+    <div class="box-content same-height">
       {{ title_prefix }}
       <h2 class="h4-style title semi-infos-sep">
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
       {{ title_suffix }}
-      <div>{{ content.field_affiliation|raw }}</div>
-      <div>{{ content.field_fonction|raw }}</div>
+      <div>{{ content.field_affiliation|raw|capitalize }}</div>
+      <div>{{ content.field_fonction|raw|capitalize }}</div>
       {% if skills %}
         <p class="txt-bold">{{ content.field_skills['#title'] }}</p>
         <ul class="txt-second small infos-sep">
