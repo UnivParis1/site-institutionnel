@@ -39,7 +39,13 @@
   if($('#search-toggle').length > 0){
     $('#search-toggle').click(function(){
       var scrollTop = $(window).scrollTop();
-      if($('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length > 0){
+      /*if($('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length > 0 ) {
+        overlayClose();
+        if(scrollTop <= 0 || $(window).width() < 1024){
+          $('body').removeClass('scroll');
+        }
+      }*/
+      if($('.block-views-exposed-filter-blockrecherche-db-page-1.overlay-show').length > 0 ) {
         overlayClose();
         if(scrollTop <= 0 || $(window).width() < 1024){
           $('body').removeClass('scroll');
@@ -47,7 +53,8 @@
       }
       else{
         overlayClose();
-        $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1, #search-toggle').addClass('overlay-show');
+        //$('.block-views-exposed-filter-blockrecherche-de-contenu-page-1, #search-toggle').addClass('overlay-show');
+        $('.block-views-exposed-filter-blockrecherche-db-page-1, #search-toggle').addClass('overlay-show');
         if(scrollTop <= 0 || $(window).width() < 1024){
           $('body').addClass('scroll');
         }
@@ -112,7 +119,8 @@
         overlayClose();
         $('#navbar-header, .icon-menu').addClass('overlay-show');
         if($(window).width() < 1024){
-          $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+         // $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+          $('.block-views-exposed-filter-blockrecherche-db-page-1').addClass('overlay-show');
         }
         $('body').addClass('noscroll');
         if(scrollTop <= 0 || $(window).width() < 1024){
@@ -123,50 +131,13 @@
   }
 
   // var replaceUrlIframe = false;
-<<<<<<< HEAD
 
-
-=======
-  // var player;
-  //
-  // function onYouTubePlayerAPIReady() {
-  //   // create the global player from the specific iframe (#video)
-  //   player = new YT.Player('video', {
-  //       events: {
-  //           // call this function when player is ready to use
-  //           'onReady': onPlayerReady
-  //       }
-  //   });
-  // }
-
-  // function onPlayerReady(event) {
-  //     // bind events
-  //     var playButton = document.getElementById("play-button");
-  //     playButton.addEventListener("click", function() {
-  //         player.playVideo();
-  //     });
-  //
-  //     var pauseButton = document.getElementById("pause-button");
-  //     pauseButton.addEventListener("click", function() {
-  //         player.pauseVideo();
-  //     });
-  //
-  //     var stopButton = document.getElementById("stop-button");
-  //     stopButton.addEventListener("click", function() {
-  //         player.stopVideo();
-  //     });
-  // }
->>>>>>> bugfix/video-home
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
 
       // if($('.media-oembed-content').length > 0){
-<<<<<<< HEAD
-      //   console.log('media-oembed-content EXISTS and replaced: ' + replaceUrlIframe);
 
-=======
->>>>>>> bugfix/video-home
       //   if(replaceUrlIframe == false){
       //     setTimeout(function(){
       //       console.log('iframe');
@@ -175,10 +146,8 @@
       //       replaceUrlIframe = true;
       //      }, 100);
       //   }
-<<<<<<< HEAD
-      // }
 
-      var vid = $("#bg-video video"); 
+      var vid = $("#bg-video video");
       $('#play-button').click(function(){
         // vid.get(0).play();
         console.log('trigger play');
@@ -190,15 +159,6 @@
         $("#bg-video video").trigger('pause');
       });
 
-=======
-      //   // Inject YouTube API script
-      //   var tag = document.createElement('script');
-      //   tag.src = "https://www.youtube.com/player_api";
-      //   var firstScriptTag = document.getElementsByTagName('script')[0];
-      //   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      // }
->>>>>>> bugfix/video-home
-
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
       });
@@ -208,7 +168,11 @@
           var top=$(this).scrollTop();
           if(top>1) {
             setTimeout(function(){ $("body").addClass("scroll"); }, 100);
-          } if(top < 1 && $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length <= 0) {
+          }
+          /*if(top < 1 && $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1.overlay-show').length <= 0) {
+            setTimeout(function(){ $("body").removeClass("scroll"); }, 100);
+          }*/
+          if(top < 1 && $('.block-views-exposed-filter-blockrecherche-db-page-1.overlay-show').length <= 0) {
             setTimeout(function(){ $("body").removeClass("scroll"); }, 100);
           }
         });
@@ -248,7 +212,8 @@
 
       $(window).resize(function(e) {
         if($(window).width() < 1024 && $('#navbar-header.overlay-show').length > 0){
-          $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+         // $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+          $('.block-views-exposed-filter-blockrecherche-db-page-1').addClass('overlay-show');
         }
       });//close resize
       if (($('.bp-columns-three-uneven').length != 0) &&
