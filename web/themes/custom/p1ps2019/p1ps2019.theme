@@ -400,6 +400,9 @@ function p1ps2019_preprocess_views_view_table(&$variables)
   }
 }
 
+/**
+ * @param $variables
+ */
 function p1ps2019_preprocess_paragraph(&$variables)
 {
   $paragraph = $variables['paragraph'];
@@ -441,10 +444,31 @@ function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id)
   }
 }
 
-
+/**
+ * Implements hook_theme_suggestions_field_alter().
+ */
 function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables)
 {
   $suggestions[] = 'field__' .
     $variables['element']['#field_name'] . '__' .
     $variables['element']['#view_mode'];
+}
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function MYTHEME_theme_suggestions_page_alter(&$suggestions, $variables, $hook) {
+  /**
+   * 404 template suggestion.
+   */
+  if (!is_null(Drupal::requestStack()->getCurrentRequest()->attributes->get('exception'))) {
+    $status_code = Drupal::requestStack()->getCurrentRequest()->attributes->get('exception')->getStatusCode();
+    switch ($status_code) {
+      case 404: {
+        $suggestions[] = 'page__' . (string) $status_code;
+        break;
+      }
+      default:
+        break;
+    }
+  }
 }
