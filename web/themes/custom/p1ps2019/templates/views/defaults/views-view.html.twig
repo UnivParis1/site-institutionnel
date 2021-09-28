@@ -59,7 +59,14 @@
     {{ exposed }}
   {% endif %}
   {{ title_suffix }}
-
+  {% if header %}
+    <div class="grid-container">
+      <header>
+        {{ header }}
+      </header>
+    </div>
+  {% endif %}
+  {{ attachment_before }}
   {% if rows -%}
     {{ rows }}
   {% elseif empty -%}
@@ -67,27 +74,20 @@
   {% endif %}
 
   {% if pager or archives %}
-  <div class="grid-container pager-archives">
-    {% if header %}
-      <header>
-        {{ header }}
-      </header>
-    {% endif %}
-    {{ attachment_before }}
+  <div>&nbsp;</div>
+  {% if pager %}
+    {{ pager }}
+  {% else %}
     <div>&nbsp;</div>
-    {% if pager %}
-      {{ pager }}
-    {% else %}
-      <div>&nbsp;</div>
-    {% endif %}
-    {% if archives %}
-      <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
-         class="bold-link">{{ "Archives"|t }}</a>
-    {% else %}
-      <div>&nbsp;</div>
-    {% endif %}
-  </div>
   {% endif %}
+  {% if archives %}
+    <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
+       class="bold-link">{{ "Archives"|t }}</a>
+  {% else %}
+    <div>&nbsp;</div>
+  {% endif %}
+</div>
+{% endif %}
 
   {{ attachment_after }}
 
