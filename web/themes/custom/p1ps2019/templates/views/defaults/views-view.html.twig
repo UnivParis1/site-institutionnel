@@ -60,7 +60,7 @@
   {% endif %}
   {{ title_suffix }}
   {% if header %}
-    <div class="grid-container">
+    <div class="view-message grid-container padding-top">
       <header>
         {{ header }}
       </header>
@@ -70,7 +70,9 @@
   {% if rows -%}
     {{ rows }}
   {% elseif empty -%}
-    {{ empty }}
+    <div class="grid-container padding-top-bottom">
+      {{ empty }}
+    </div>
   {% endif %}
 
   {% if pager or archives %}
