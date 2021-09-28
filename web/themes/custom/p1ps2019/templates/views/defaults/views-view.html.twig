@@ -48,7 +48,7 @@
       <div class="grid-container">
         <div class="grid-margin-x">
           <div class="cell small-12">
-            <h1 class="h2-style title semi-field-sep"> {{ view_title }} </h1>
+            <h2 class="title semi-field-sep"> {{ view_title }} </h2>
           </div>
         </div>
       </div>
@@ -59,36 +59,37 @@
     {{ exposed }}
   {% endif %}
   {{ title_suffix }}
-
   {% if header %}
-    <header>
-      {{ header }}
-    </header>
+    <div class="view-message grid-container padding-top">
+      <header>
+        {{ header }}
+      </header>
+    </div>
   {% endif %}
   {{ attachment_before }}
-
   {% if rows -%}
     {{ rows }}
   {% elseif empty -%}
-    {{ empty }}
+    <div class="grid-container padding-top-bottom">
+      {{ empty }}
+    </div>
   {% endif %}
 
   {% if pager or archives %}
-  <div class="grid-container pager-archives">
+  <div>&nbsp;</div>
+  {% if pager %}
+    {{ pager }}
+  {% else %}
     <div>&nbsp;</div>
-    {% if pager %}
-      {{ pager }}
-    {% else %}
-      <div>&nbsp;</div>
-    {% endif %}
-    {% if archives %}
-      <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
-         class="bold-link">{{ "Archives"|t }}</a>
-    {% else %}
-      <div>&nbsp;</div>
-    {% endif %}
-  </div>
   {% endif %}
+  {% if archives %}
+    <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
+       class="bold-link">{{ "Archives"|t }}</a>
+  {% else %}
+    <div>&nbsp;</div>
+  {% endif %}
+</div>
+{% endif %}
 
   {{ attachment_after }}
 
