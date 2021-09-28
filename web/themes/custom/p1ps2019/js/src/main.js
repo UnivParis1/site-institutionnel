@@ -58,6 +58,7 @@
         if(scrollTop <= 0 || $(window).width() < 1024){
           $('body').addClass('scroll');
         }
+        $('#views-exposed-form-recherche-db-page-1 #edit-text').focus();
       }
     });
   }
