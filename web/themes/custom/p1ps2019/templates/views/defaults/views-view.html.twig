@@ -60,13 +60,6 @@
   {% endif %}
   {{ title_suffix }}
 
-  {% if header %}
-    <header>
-      {{ header }}
-    </header>
-  {% endif %}
-  {{ attachment_before }}
-
   {% if rows -%}
     {{ rows }}
   {% elseif empty -%}
@@ -75,6 +68,12 @@
 
   {% if pager or archives %}
   <div class="grid-container pager-archives">
+    {% if header %}
+      <header>
+        {{ header }}
+      </header>
+    {% endif %}
+    {{ attachment_before }}
     <div>&nbsp;</div>
     {% if pager %}
       {{ pager }}
