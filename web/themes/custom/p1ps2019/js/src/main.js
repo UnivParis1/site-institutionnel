@@ -35,7 +35,7 @@
       var scrollTop = $(window).scrollTop();
       if ($('body').hasClass('path-frontpage')) {
         overlayClose();
-        $('html,body').animate({ scrollTop: 0 }, 'slow'); return false;
+        $('html,body').animate({ scrollTop: 0 }, 'slow'); 
         setTimeout(function() { $('#homepage-search-form #edit-homepage-search').focus() }, 30);
       }
       else {
