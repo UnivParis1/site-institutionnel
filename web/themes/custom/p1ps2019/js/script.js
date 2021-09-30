@@ -34,12 +34,6 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     });
   }
 
-  if($('.path-recherche #search-toggle').length > 0){
-    $('#search-toggle').click(function(){
-      $('#edit-homepage-search').focus();
-    });
-  }
-
   //search toggle
   if($('#search-toggle').length > 0){
     $('#search-toggle').click(function(){
@@ -63,6 +57,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
         if(scrollTop <= 0 || $(window).width() < 1024){
           $('body').addClass('scroll');
         }
+	      setTimeout(function() { $('#views-exposed-form-recherche-db-page-1 #edit-text').focus() }, 30);
       }
     });
   }

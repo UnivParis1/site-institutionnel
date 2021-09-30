@@ -29,12 +29,6 @@
     });
   }
 
-  if($('.path-recherche #search-toggle').length > 0){
-    $('#search-toggle').click(function(){
-      $('#edit-homepage-search').focus();
-    });
-  }
-
   //search toggle
   if($('#search-toggle').length > 0){
     $('#search-toggle').click(function(){
@@ -58,7 +52,7 @@
         if(scrollTop <= 0 || $(window).width() < 1024){
           $('body').addClass('scroll');
         }
-        $('#views-exposed-form-recherche-db-page-1 #edit-text').focus();
+	      setTimeout(function() { $('#views-exposed-form-recherche-db-page-1 #edit-text').focus() }, 30);
       }
     });
   }
