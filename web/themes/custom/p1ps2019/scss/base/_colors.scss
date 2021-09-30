@@ -654,14 +654,6 @@ fieldset {
   .block-views-exposed-filter-blockrecherche-db-page-1{
     background-color: $background-white;
     @include box-shadow(0.25, 2px, 0, $background-black);
-    #views-exposed-form-recherche-de-contenu-page-1,
-    #views-exposed-form-recherche-db-page-1 {
-      // .form-item{
-      // 	input{
-      // 		border-bottom: 2px solid $text-light-gray;
-      // 	}
-      // }
-    }
   }
   .accessibility-wrapper{
     #accessibility-toggle{
@@ -1085,10 +1077,30 @@ fieldset {
 @include breakpoint($large - 1 down) {
 
   #navbar{
-    .block-views-exposed-filter-blockrecherche-de-contenu-page-1,
+    .block-views-exposed-filter-blockrecherche-de-contenu-page-1 {
+      background-color: $background-main-color;
+      #views-exposed-form-recherche-de-contenu-page-1 {
+        .form-item{
+          input{
+            border: 1px solid $text-white; color: $text-white;
+            &::-webkit-input-placeholder {
+              color: $text-white;
+            }
+            &:-moz-placeholder { /* Firefox 18- */
+              color: $text-white;
+            }
+            &::-moz-placeholder {  /* Firefox 19+ */
+              color: $text-white;
+            }
+            &:-ms-input-placeholder {
+              color: $text-white;
+            }
+          }
+        }
+      }
+    }
     .block-views-exposed-filter-blockrecherche-db-page-1{
       background-color: $background-main-color;
-      #views-exposed-form-recherche-de-contenu-page-1,
       #views-exposed-form-recherche-db-page-1{
         .form-item{
           input{
