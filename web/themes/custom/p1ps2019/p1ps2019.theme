@@ -269,6 +269,11 @@ function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $varia
 {
   if (isset($variables["attributes"]["region"])) {
     $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
+$negotiator = \Drupal::service('micro_site.negotiator');
+    $site = $negotiator->getActiveSite();
+    if ($site) {
+    $suggestions[] = "menu__mini_site__" . $variables["attributes"]["region"];
+    }
   }
 }
 
