@@ -118,7 +118,10 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
           'uid' => $author,
           'status' => 1,
           'field_uid_ldap' => $item['uid'],
+          'field_name' => $item['sn'],
+          'field_firstname' => $item['field_firstname'],
           'site_id' => NULL,
+          'mail' => $item['mail'],
         ]);
 
         $node->save();
