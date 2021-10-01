@@ -113,6 +113,8 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $student = $this->getUsers('student');
     $users = array_merge($faculty['users'], $student['users']);
 
+
+
     return $users;
   }
 

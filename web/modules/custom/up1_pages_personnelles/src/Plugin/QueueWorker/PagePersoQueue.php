@@ -80,59 +80,50 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * {@inheritDoc}
    */
   public function processItem($item) {
+    $cas_settings = \Drupal::config('cas.settings');
     $cas_user_manager = \Drupal::service('cas.user_manager');
-    $cas_username = $item['uid'];
-    $author = $cas_user_manager->getUidForCasUsername($cas_username);
-    if ($author) {
-      $author_user = User::load($author);
-      $author_user->addRole('enseignant_doctorant');
-      $author_user->save();
-    }
-    else {
-      $cas_settings = \Drupal::config('cas.settings');
 
-      $user_properties = [
-        'roles' => ['enseignant_doctorant'],
-      ];
-      $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
-      if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
-        $user_properties['mail'] = $item['mail'];
-      }
-      try {
-        $cas_user_manager->register($cas_username, $user_properties);
-      } catch (CasLoginException $e) {
-        \Drupal::logger('cas')->error('CasLoginException when
+    $user_properties = [
+      'roles' => ['enseignant_doctorant'],
+    ];
+    $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
+    if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
+      $user_properties['mail'] = $item['mail'];
+    }
+    try {
+      $cas_user_manager->register($item['uid'], $user_properties);
+    } catch (CasLoginException $e) {
+      \Drupal::logger('cas')->error('CasLoginException when
         registering user with name %name: %e', [
-          '%name' => $cas_username,
-          '%e' => $e->getMessage()
-        ]);
-        return;
-      }
-
-      $user = user_load_by_name($item['uid']);
-      if ($user) {
-        $author = $user->id();
-      }
+        '%name' => $item['uid'],
+        '%e' => $e->getMessage()
+      ]);
+      return;
     }
 
-    $values = \Drupal::entityQuery('node')
-      ->condition('type', 'page_personnelle')
-      ->condition('uid', $author)
-      ->execute();
-   /* if (empty($values)) {
-      $storage = $this->entityTypeManager->getStorage('node');
-      $node = $storage->create([
-        'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
-        'type' => 'page_personnelle',
-        'langcode' => 'fr',
-        'uid' => $author,
-        'status' => 1,
-        'field_uid_ldap' => $item['uid'],
-        'site_id' => NULL,
-      ]);
+    $user = user_load_by_name($item['uid']);
+    if ($user) {
+      $author = $user->id();
 
-      $node->save();
-      }*/
+      $values = \Drupal::entityQuery('node')
+        ->condition('type', 'page_personnelle')
+        ->condition('uid', $author)
+        ->execute();
+      if (empty($values)) {
+        $storage = $this->entityTypeManager->getStorage('node');
+        $node = $storage->create([
+          'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
+          'type' => 'page_personnelle',
+          'langcode' => 'fr',
+          'uid' => $author,
+          'status' => 1,
+          'field_uid_ldap' => $item['uid'],
+          'site_id' => NULL,
+        ]);
+
+        $node->save();
+      }
+    }
   }
 
 }

@@ -202,10 +202,18 @@ class WsGroupsController extends ControllerBase {
    * @return array
    */
   public function createPagePersoUsers() {
-    $data = $this->wsGroupsService->getAllUsers();
+    $users = $this->wsGroupsService->getAllUsers();
+    $new_ecd = [];
+    $cas_user_manager = \Drupal::service('cas.user_manager');
+
     $queue = $this->queueFactory->get('up1_page_perso_queue');
-    foreach ($data as $datum) {
-  //    $queue->createItem($datum);
+
+    foreach ($users as $user) {
+      $cas_username = $user['uid'];
+      $author = $cas_user_manager->getUidForCasUsername($cas_username);
+      if (!$author) {
+        $queue->createItem($user);
+      }
     }
 
     return [
@@ -725,7 +733,7 @@ class WsGroupsController extends ControllerBase {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
         ->condition('uid', $user->id());
-        $result = $query->execute();
+      $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
         $user->addRole('enseignant_doctorant');
         $user->save();
