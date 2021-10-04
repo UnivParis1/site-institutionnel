@@ -138,9 +138,9 @@ class ComptexManager implements ComptexInterface {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
           if ($supannEntiteAffectation['businessCategory'] != 'pedagogy') {
             $business_cat = $supannEntiteAffectation['businessCategory'];
-            $information[$business_cat]['description'] = $supannEntiteAffectation['description'];
+            $information['entites'][$business_cat]['description'] = $supannEntiteAffectation['description'];
             if (isset($supannEntiteAffectation['labeledURI'])) {
-              $information[$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+              $information['entites'][$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
             }
             else {
               $ids = \Drupal::entityQuery('site')
@@ -151,8 +151,10 @@ class ComptexManager implements ComptexInterface {
               \Drupal::logger('pages_persos')->info(print_r($ids, 1));
               \Drupal::logger('pages_persos')->info(print_r($site, 1));
             }
+
           }
         }
+        \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
       }
     }
     else {
