@@ -153,7 +153,7 @@ class ComptexManager implements ComptexInterface {
               if (count($site) == 1) {
                 $site = reset($site);
                 $site_url = $site->get('site_url')->getValue();
-                $information['entites'][$business_cat]['labeledURI'] = $site_url['value'];
+                $information['entites'][$business_cat]['labeledURI'] = $site_url[0]['value'];
               }
             }
           }
