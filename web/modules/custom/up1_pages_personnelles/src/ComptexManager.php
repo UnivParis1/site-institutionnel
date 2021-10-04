@@ -144,7 +144,6 @@ class ComptexManager implements ComptexInterface {
             }
             else {
               $ids = \Drupal::entityQuery('site')
-                ->condition('type', 'mini_site')
                 ->condition('groups', $supannEntiteAffectation['key'])
                 ->execute();
               $site = Site::loadMultiple($ids);
