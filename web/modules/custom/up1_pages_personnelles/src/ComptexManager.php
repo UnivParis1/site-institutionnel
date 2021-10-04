@@ -138,13 +138,13 @@ class ComptexManager implements ComptexInterface {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
           if ($supannEntiteAffectation['businessCategory'] != 'pedagogy') {
             $business_cat = $supannEntiteAffectation['businessCategory'];
+            $information['entites'][$business_cat]['name'] = $supannEntiteAffectation['name'];
             $information['entites'][$business_cat]['description'] = $supannEntiteAffectation['description'];
             if (isset($supannEntiteAffectation['labeledURI'])) {
               $information['entites'][$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
             }
             else {
               $site_group = $supannEntiteAffectation['key'];
-              $site_group = "ds65";
               $ids = \Drupal::entityQuery('site')
                 ->condition('type', 'mini_site')
                 ->condition('groups', $site_group)

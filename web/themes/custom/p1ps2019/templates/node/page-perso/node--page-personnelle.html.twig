@@ -175,13 +175,18 @@
             {# Comptex Affectations #}
             <div class="infos-sep">
               <p class="txt-bold"> {{ "Assignment"|t }} </p>
-              {% for key, entite in entites %}
-                {% if key != 0 %}
-                  <span>{{ entite.description }}</span><br />
+              {% if entites.doctoralSchool.labeledURI is defined %}
+                  <p><a href="{{ entites.doctoralSchool.labeledURI }}" title="{{entites.doctoralSchool.name }}"
+                     target="_blank">{{ entites.doctoralSchool.description }}</a></p>
                 {% else %}
-                  <a href="{{ entites.0.labeledURI }}" title="{{ entites.0.name }}" target="_blank">{{ entites.0.description }}</a><br />
+                <p>{{ entites.doctoralSchool.description }}</p>
                 {% endif %}
-              {% endfor %}
+              {% if entites.research.labeledURI is defined %}
+                  <p><a href="{{ entites.research.labeledURI }}" title="{{entites.research.name }}"
+                     target="_blank">{{ entites.research.description }}</a></p>
+                {% else %}
+                {{ entites.research.description }}
+                {% endif %}
               {% if other_affiliation %}
                 <p>{{ content.field_other_affiliation.0 }}</p>
               {% endif %}
