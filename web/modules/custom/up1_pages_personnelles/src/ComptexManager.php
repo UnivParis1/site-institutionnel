@@ -3,6 +3,7 @@
 namespace Drupal\up1_pages_personnelles;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\micro_site\Entity\Site;
 
 class ComptexManager implements ComptexInterface {
 
@@ -111,7 +112,7 @@ class ComptexManager implements ComptexInterface {
       if (isset($information['supannActivite']) && is_array($information['supannActivite'])) {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
-      
+
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
         $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
@@ -135,15 +136,21 @@ class ComptexManager implements ComptexInterface {
 
       if (isset($information['supannEntiteAffectation-all']) && !empty($information['supannEntiteAffectation-all'])) {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
-          $information['entites'][$key]['name'] = $supannEntiteAffectation['name'];
-          $information['entites'][$key]['description'] = $supannEntiteAffectation['description'];
-          if (isset($information['supannRole']) && !empty($information['supannRole'])) {
-            if ($supannEntiteAffectation['name'] == $information['supannRole']['name']) {
-              $information['supannRole']['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+          if ($supannEntiteAffectation['businessCategory'] != 'pedagogy') {
+            $business_cat = $supannEntiteAffectation['businessCategory'];
+            $information[$business_cat]['description'] = $supannEntiteAffectation['description'];
+            if (isset($supannEntiteAffectation['labeledURI'])) {
+              $information[$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
             }
-          }
-          if ($key == 0) {
-            $information['entites'][$key]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+            else {
+              $ids = \Drupal::entityQuery('site')
+                ->condition('type', 'mini_site')
+                ->condition('groups', $supannEntiteAffectation['key'])
+                ->execute();
+              $site = Site::loadMultiple($ids);
+              \Drupal::logger('pages_persos')->info(print_r($ids, 1));
+              \Drupal::logger('pages_persos')->info(print_r($site, 1));
+            }
           }
         }
       }
