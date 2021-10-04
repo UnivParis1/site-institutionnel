@@ -143,14 +143,19 @@ class ComptexManager implements ComptexInterface {
               $information['entites'][$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
             }
             else {
+              $site_group = $supannEntiteAffectation['key'];
+              $site_group = "ds65";
               $ids = \Drupal::entityQuery('site')
-                ->condition('groups', $supannEntiteAffectation['key'])
+                ->condition('type', $site_group)
+                ->condition('type', 'mini_site')
                 ->execute();
               $site = Site::loadMultiple($ids);
-              \Drupal::logger('pages_persos')->info(print_r($ids, 1));
-              \Drupal::logger('pages_persos')->info(print_r($site, 1));
+              if (count($site) == 1) {
+                $site = reset($site);
+                $site_url = $site->get('site_url')->getValue();
+                $information['entites'][$business_cat]['labeledURI'] = $site_url['value'];
+              }
             }
-
           }
         }
         \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
