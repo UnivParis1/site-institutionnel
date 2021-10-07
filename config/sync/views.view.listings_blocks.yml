@@ -9,10 +9,10 @@ dependencies:
     - node.type.news2018
     - node.type.offer
     - node.type.publication
+    - taxonomy.vocabulary.collections
     - taxonomy.vocabulary.events_types
     - taxonomy.vocabulary.news_topics
     - taxonomy.vocabulary.offers
-    - taxonomy.vocabulary.publication_type
   module:
     - datetime
     - node
@@ -1464,10 +1464,10 @@ display:
           entity_field: created
           plugin_id: date
       arguments:
-        field_publication_type_target_id:
-          id: field_publication_type_target_id
-          table: node__field_publication_type
-          field: field_publication_type_target_id
+        field_collection_term_target_id:
+          id: field_collection_term_target_id
+          table: node__field_collection_term
+          field: field_collection_term_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1481,11 +1481,10 @@ display:
           default_argument_type: taxonomy_tid
           default_argument_options:
             term_page: '1'
-            node: true
-            limit: true
-            vids:
-              publication_type: publication_type
             anyall: ','
+            node: false
+            limit: false
+            vids: {  }
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -1496,11 +1495,16 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: false
+          specify_validation: true
           validate:
-            type: none
+            type: 'entity:taxonomy_term'
             fail: 'not found'
-          validate_options: {  }
+          validate_options:
+            bundles:
+              collections: collections
+            operation: view
+            multiple: 1
+            access: false
           break_phrase: false
           not: false
           plugin_id: numeric

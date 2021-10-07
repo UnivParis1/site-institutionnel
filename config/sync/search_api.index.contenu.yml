@@ -1,0 +1,486 @@
+uuid: 597dbe68-063a-4035-a8bf-964672c791f3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_affiliation
+    - field.storage.node.field_editorial_blocks
+    - field.storage.node.field_paragraphs
+    - field.storage.node.field_categories
+    - field.storage.node.field_lead
+    - field.storage.node.field_collection_term
+    - field.storage.node.field_short_desc
+    - field.storage.node.field_news_date
+    - field.storage.node.field_event_date
+    - field.storage.node.field_publishing_date
+    - field.storage.node.field_skills
+    - field.storage.node.body
+    - field.storage.node.field_fonction
+    - field.storage.node.field_sub_title
+    - field.storage.node.field_subtitle
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_thesis_subject
+    - field.storage.node.field_publication_type
+    - field.storage.node.field_event_type
+    - field.storage.node.field_publisher
+    - search_api.server.database_search
+    - core.entity_view_mode.node.teaser
+  module:
+    - taxonomy
+    - node
+    - search_api
+id: contenu
+name: Contenu
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: 'Détails de l''évènement'
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  field_affiliation:
+    label: Affiliation
+    datasource_id: 'entity:node'
+    property_path: field_affiliation
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_affiliation
+  field_categories:
+    label: Catégories
+    datasource_id: 'entity:node'
+    property_path: field_categories
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_categories
+  field_collection_term:
+    label: Collection
+    datasource_id: 'entity:node'
+    property_path: field_collection_term
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_collection_term
+  field_editorial_blocks:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_editorial_blocks
+    type: text
+    boost: !!float 13
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+  field_event_date:
+    label: 'Date de l''évènement'
+    datasource_id: 'entity:node'
+    property_path: field_event_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_event_date
+  field_event_type:
+    label: 'Type d''événement'
+    datasource_id: 'entity:node'
+    property_path: field_event_type
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+  field_fonction:
+    label: Fonction
+    datasource_id: 'entity:node'
+    property_path: field_fonction
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_fonction
+  field_lead:
+    label: Chapô
+    datasource_id: 'entity:node'
+    property_path: field_lead
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_lead
+  field_news_date:
+    label: 'Date de l''actualité'
+    datasource_id: 'entity:node'
+    property_path: field_news_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_news_date
+  field_news_topic:
+    label: 'Sujet d''actualité'
+    datasource_id: 'entity:node'
+    property_path: field_news_topic
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_news_topic
+  field_paragraphs:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_paragraphs
+    type: text
+    boost: !!float 13
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+  field_publication_type:
+    label: Type
+    datasource_id: 'entity:node'
+    property_path: field_publication_type
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_publication_type
+  field_publisher:
+    label: Éditeur
+    datasource_id: 'entity:node'
+    property_path: field_publisher
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_publisher
+  field_publishing_date:
+    label: 'Date de publication'
+    datasource_id: 'entity:node'
+    property_path: field_publishing_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_publishing_date
+  field_short_desc:
+    label: 'Courte description'
+    datasource_id: 'entity:node'
+    property_path: field_short_desc
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_short_desc
+  field_skills:
+    label: 'Domaines d''expertise'
+    datasource_id: 'entity:node'
+    property_path: field_skills
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_skills
+  field_sub_title:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_sub_title
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_sub_title
+  field_subtitle:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_subtitle
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_subtitle
+  field_thesis_subject:
+    label: 'Sujet de thèse'
+    datasource_id: 'entity:node'
+    property_path: field_thesis_subject
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_thesis_subject
+  name_field_categories:
+    label: 'Catégories name'
+    datasource_id: 'entity:node'
+    property_path: 'field_categories:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_categories
+      module:
+        - taxonomy
+  name_field_event_type:
+    label: 'Type d''événement name'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+      module:
+        - taxonomy
+  name_field_news_topic:
+    label: 'Sujet d''actualité name'
+    datasource_id: 'entity:node'
+    property_path: 'field_news_topic:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_news_topic
+      module:
+        - taxonomy
+  name_field_skills:
+    label: 'Domaines d''expertise name'
+    datasource_id: 'entity:node'
+    property_path: 'field_skills:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_skills
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Information d''accès du nœud.'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          event: teaser
+          news: teaser
+          news2018: teaser
+          offer: ''
+          page: teaser
+          page_personnelle: ''
+          publication: teaser
+          second_level_pages: teaser
+          viva: ''
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Titre
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 21
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Type de contenu'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: text
+    boost: !!float 8
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: text
+    configuration:
+      absolute: true
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected:
+        - article
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  html_filter:
+    all_fields: true
+    fields:
+      - body
+      - field_affiliation
+      - field_categories
+      - field_collection_term
+      - field_editorial_blocks
+      - field_event_type
+      - field_fonction
+      - field_lead
+      - field_news_topic
+      - field_paragraphs
+      - field_publication_type
+      - field_publisher
+      - field_short_desc
+      - field_skills
+      - field_sub_title
+      - field_subtitle
+      - field_thesis_subject
+      - name_field_categories
+      - name_field_event_type
+      - name_field_news_topic
+      - name_field_skills
+      - rendered_item
+      - title
+      - type
+      - url
+    title: true
+    alt: true
+    tags:
+      b: 2
+      em: 1
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+      u: 1
+    weights:
+      preprocess_index: -47
+      preprocess_query: -15
+  ignore_character:
+    all_fields: true
+    fields:
+      - body
+      - field_affiliation
+      - field_categories
+      - field_collection_term
+      - field_editorial_blocks
+      - field_event_type
+      - field_fonction
+      - field_lead
+      - field_news_topic
+      - field_paragraphs
+      - field_publication_type
+      - field_publisher
+      - field_short_desc
+      - field_skills
+      - field_sub_title
+      - field_subtitle
+      - field_thesis_subject
+      - name_field_categories
+      - name_field_event_type
+      - name_field_news_topic
+      - name_field_skills
+      - rendered_item
+      - title
+      - type
+      - url
+    ignorable: '[''¿¡!?,.:;]'
+    ignorable_classes:
+      - Pc
+      - Pd
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
+    weights:
+      preprocess_index: -46
+      preprocess_query: -10
+  ignorecase:
+    all_fields: true
+    fields:
+      - body
+      - field_affiliation
+      - field_categories
+      - field_collection_term
+      - field_editorial_blocks
+      - field_event_type
+      - field_fonction
+      - field_lead
+      - field_news_topic
+      - field_paragraphs
+      - field_publication_type
+      - field_publisher
+      - field_short_desc
+      - field_skills
+      - field_sub_title
+      - field_subtitle
+      - field_thesis_subject
+      - name_field_categories
+      - name_field_event_type
+      - name_field_news_topic
+      - name_field_skills
+      - rendered_item
+      - title
+      - type
+      - url
+    weights:
+      preprocess_index: -49
+      preprocess_query: -20
+  language_with_fallback: {  }
+  rendered_item: {  }
+  transliteration:
+    all_fields: true
+    fields:
+      - body
+      - field_affiliation
+      - field_categories
+      - field_collection_term
+      - field_editorial_blocks
+      - field_event_type
+      - field_fonction
+      - field_lead
+      - field_news_topic
+      - field_paragraphs
+      - field_publication_type
+      - field_publisher
+      - field_short_desc
+      - field_skills
+      - field_sub_title
+      - field_subtitle
+      - field_thesis_subject
+      - name_field_categories
+      - name_field_event_type
+      - name_field_news_topic
+      - name_field_skills
+      - rendered_item
+      - title
+      - type
+      - url
+    weights:
+      preprocess_index: -48
+      preprocess_query: -20
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 500
+server: database_search

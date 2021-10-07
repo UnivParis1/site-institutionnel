@@ -21,6 +21,7 @@ dependencies:
     - node.type.news
   module:
     - micro_node
+    - paragraphs
     - text
     - user
 _core:
@@ -58,9 +59,16 @@ content:
     settings:
       link: false
     third_party_settings: {  }
+  field_paragraphs:
+    type: paragraph_summary
+    weight: 4
+    region: content
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
   site_id:
     type: entity_reference_label_site
-    weight: 4
+    weight: 5
     region: content
     label: hidden
     settings:
@@ -71,7 +79,6 @@ hidden:
   field_disable_canonical_url: true
   field_media: true
   field_news_date: true
-  field_paragraphs: true
   field_publish_master: true
   field_related_news: true
   field_signature: true

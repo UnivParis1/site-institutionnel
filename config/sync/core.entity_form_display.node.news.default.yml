@@ -27,6 +27,7 @@ dependencies:
     - entity_browser
     - paragraphs
     - path
+    - scheduler
     - text
 _core:
   default_config_hash: rQgsIlxsmnO7l3sAyFIye3zPpgEaylNppydAa0auuP8
@@ -57,7 +58,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 43
+    weight: 27
     region: content
     third_party_settings: {  }
   field_lead:
@@ -117,7 +118,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 42
+    weight: 26
     region: content
     third_party_settings: {  }
   field_related_news:
@@ -140,7 +141,7 @@ content:
     region: content
   field_sites:
     type: entity_reference_autocomplete
-    weight: 40
+    weight: 24
     region: content
     settings:
       match_operator: CONTAINS
@@ -152,7 +153,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 41
+    weight: 25
     region: content
     third_party_settings: {  }
   field_tag:
@@ -170,13 +171,13 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 19
+    weight: 22
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 18
+    weight: 21
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -187,6 +188,17 @@ content:
     weight: 16
     third_party_settings: {  }
     region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
     weight: 14
@@ -201,7 +213,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 20
+    weight: 23
     region: content
     third_party_settings: {  }
   sticky:
@@ -234,4 +246,10 @@ content:
       match_limit: 10
     third_party_settings: {  }
     region: content
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }

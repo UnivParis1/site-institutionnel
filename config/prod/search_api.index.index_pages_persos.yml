@@ -1,0 +1,164 @@
+uuid: 68552528-a1f7-471d-987a-7ae9c9672034
+langcode: fr
+status: false
+dependencies:
+  config:
+    - field.storage.node.field_affiliation
+    - field.storage.node.field_education
+    - field.storage.node.field_fonction
+    - field.storage.node.field_other_affiliation
+    - field.storage.node.field_publications
+    - field.storage.node.field_research_themes
+    - field.storage.node.field_scientific_resp
+    - field.storage.node.field_skills
+    - field.storage.node.field_thesis_subject
+    - search_api.server.ess
+  module:
+    - node
+    - search_api
+id: index_pages_persos
+name: 'Index pages persos'
+description: ''
+read_only: false
+field_settings:
+  field_affiliation:
+    label: Affiliation
+    datasource_id: 'entity:node'
+    property_path: field_affiliation
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_affiliation
+  field_education:
+    label: Enseignements
+    datasource_id: 'entity:node'
+    property_path: field_education
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_education
+  field_fonction:
+    label: Fonction
+    datasource_id: 'entity:node'
+    property_path: field_fonction
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_fonction
+  field_other_affiliation:
+    label: 'Autre affiliation'
+    datasource_id: 'entity:node'
+    property_path: field_other_affiliation
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_other_affiliation
+  field_publications:
+    label: Publications
+    datasource_id: 'entity:node'
+    property_path: field_publications
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_publications
+  field_research_themes:
+    label: 'Thème(s) de recherche'
+    datasource_id: 'entity:node'
+    property_path: field_research_themes
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_research_themes
+  field_scientific_resp:
+    label: 'Responsabilités scientifiques'
+    datasource_id: 'entity:node'
+    property_path: field_scientific_resp
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_scientific_resp
+  field_skills:
+    label: 'Domaines d''expertise'
+    datasource_id: 'entity:node'
+    property_path: field_skills
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_skills
+  field_thesis_subject:
+    label: 'Sujet de thèse'
+    datasource_id: 'entity:node'
+    property_path: field_thesis_subject
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_thesis_subject
+  title:
+    label: Titre
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - page_personnelle
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  html_filter:
+    all_fields: true
+    fields:
+      - field_affiliation
+      - field_education
+      - field_fonction
+      - field_other_affiliation
+      - field_publications
+      - field_research_themes
+      - field_scientific_resp
+      - field_skills
+      - field_thesis_subject
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -48
+      preprocess_query: -46
+  language_with_fallback: {  }
+  rendered_item: {  }
+  transliteration:
+    all_fields: true
+    fields:
+      - field_affiliation
+      - field_education
+      - field_fonction
+      - field_other_affiliation
+      - field_publications
+      - field_research_themes
+      - field_scientific_resp
+      - field_skills
+      - field_thesis_subject
+      - title
+    weights:
+      preprocess_index: -47
+      preprocess_query: -45
+tracker_settings:
+  default:
+    indexing_order: lifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: ess

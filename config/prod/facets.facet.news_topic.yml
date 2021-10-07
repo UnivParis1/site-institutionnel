@@ -3,8 +3,8 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - search_api.index.siri
-    - views.view.recherche_de_contenu
+    - search_api.index.contenu
+    - views.view.recherche_db
   module:
     - search_api
 id: news_topic
@@ -13,12 +13,12 @@ url_alias: news_topic
 weight: -1
 min_count: 1
 show_only_one_result: false
-field_identifier: news_topic
-facet_source_id: 'search_api:views_page__recherche_de_contenu__page_1'
+field_identifier: name_field_news_topic
+facet_source_id: 'search_api:views_page__recherche_db__page_1'
 widget:
   type: checkbox
   config:
-    show_numbers: false
+    show_numbers: true
     soft_limit: 0
     soft_limit_settings:
       show_less_label: 'Show less'
@@ -28,6 +28,7 @@ widget:
     hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
+keep_hierarchy_parents_active: false
 expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 0

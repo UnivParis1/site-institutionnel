@@ -3,212 +3,127 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_categories
-    - field.storage.node.field_lead
-    - field.storage.node.body
-    - field.storage.node.field_signature
-    - field.storage.node.field_subtitle
-    - field.storage.node.field_sub_title
-    - field.storage.node.field_news_topic
+    - field.storage.node.field_editorial_blocks
     - field.storage.node.field_event_type
+    - field.storage.node.field_lead
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_paragraphs
     - field.storage.node.field_publication_type
-    - field.storage.paragraph.bp_accordion_section
-    - field.storage.paragraph.bp_accordion_section_body
-    - field.storage.paragraph.bp_accordion_section_title
-    - field.storage.paragraph.field_number
-    - field.storage.paragraph.field_key_figure
-    - field.storage.paragraph.field_ranking
-    - field.storage.paragraph.field_partenaire
-    - field.storage.paragraph.bp_tab_section
-    - field.storage.paragraph.bp_tab_section_body
-    - field.storage.paragraph.bp_text
-    - field.storage.paragraph.field_tile
+    - field.storage.node.field_short_desc
+    - field.storage.node.field_skills
+    - field.storage.node.field_sub_title
+    - field.storage.node.field_subtitle
+    - field.storage.node.field_categories
     - search_api.server.ess
     - core.entity_view_mode.node.teaser
   module:
     - taxonomy
     - node
-    - micro_node
-    - paragraphs
     - search_api
-    - media
 id: siri
 name: Siri
 description: ''
 read_only: false
 field_settings:
-  body:
-    label: Corps
+  field_editorial_blocks:
+    label: 'Blocs éditoriaux'
     datasource_id: 'entity:node'
-    property_path: body
+    property_path: field_editorial_blocks
     type: text
+    boost: !!float 8
     dependencies:
       config:
-        - field.storage.node.body
-  bp_accordion_section:
-    label: 'Accordion Section'
-    datasource_id: 'entity:paragraph'
-    property_path: bp_accordion_section
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.bp_accordion_section
-  bp_accordion_section_body:
-    label: 'Accordion Section Body'
-    datasource_id: 'entity:paragraph'
-    property_path: bp_accordion_section_body
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.bp_accordion_section_body
-  bp_accordion_section_title:
-    label: 'Accordion Section Title'
-    datasource_id: 'entity:paragraph'
-    property_path: bp_accordion_section_title
-    type: string
-    dependencies:
-      config:
-        - field.storage.paragraph.bp_accordion_section_title
-  bp_tab_section:
-    label: Tab
-    datasource_id: 'entity:paragraph'
-    property_path: bp_tab_section
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.bp_tab_section
-  bp_tab_section_body:
-    label: 'Tab Body'
-    datasource_id: 'entity:paragraph'
-    property_path: bp_tab_section_body
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.bp_tab_section_body
-  bp_text:
-    label: Text
-    datasource_id: 'entity:paragraph'
-    property_path: bp_text
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.bp_text
-  event_type:
+        - field.storage.node.field_editorial_blocks
+  field_event_type:
     label: 'Type d''événement'
     datasource_id: 'entity:node'
-    property_path: 'field_event_type:entity:name'
-    type: string
+    property_path: field_event_type
+    type: text
+    boost: !!float 2
     dependencies:
       config:
         - field.storage.node.field_event_type
-      module:
-        - taxonomy
-  field_key_figure:
-    label: 'Chiffre clé'
-    datasource_id: 'entity:paragraph'
-    property_path: field_key_figure
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.field_key_figure
   field_lead:
     label: Chapô
     datasource_id: 'entity:node'
     property_path: field_lead
     type: text
+    boost: !!float 3
     dependencies:
       config:
         - field.storage.node.field_lead
-  field_number:
-    label: Chiffre
-    datasource_id: 'entity:paragraph'
-    property_path: field_number
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.field_number
-  field_partenaire:
-    label: Partner
-    datasource_id: 'entity:paragraph'
-    property_path: field_partenaire
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.field_partenaire
-  field_ranking:
-    label: Classement
-    datasource_id: 'entity:paragraph'
-    property_path: field_ranking
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.field_ranking
-  field_signature:
-    label: Signature
+  field_news_topic:
+    label: 'Sujet d''actualité'
     datasource_id: 'entity:node'
-    property_path: field_signature
+    property_path: field_news_topic
     type: text
+    boost: !!float 2
     dependencies:
       config:
-        - field.storage.node.field_signature
+        - field.storage.node.field_news_topic
+  field_paragraphs:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_paragraphs
+    type: text
+    boost: !!float 8
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+  field_publication_type:
+    label: Type
+    datasource_id: 'entity:node'
+    property_path: field_publication_type
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_publication_type
+  field_short_desc:
+    label: 'Courte description'
+    datasource_id: 'entity:node'
+    property_path: field_short_desc
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_short_desc
+  field_skills:
+    label: 'Domaines d''expertise'
+    datasource_id: 'entity:node'
+    property_path: field_skills
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_skills
   field_sub_title:
-    label: 'Sous-titre page'
+    label: Sous-titre
     datasource_id: 'entity:node'
     property_path: field_sub_title
     type: text
+    boost: !!float 3
     dependencies:
       config:
         - field.storage.node.field_sub_title
   field_subtitle:
-    label: 'Sous-titre evenement'
+    label: Sous-titre
     datasource_id: 'entity:node'
     property_path: field_subtitle
     type: text
+    boost: !!float 3
     dependencies:
       config:
         - field.storage.node.field_subtitle
-  field_tile:
-    label: Tuile
-    datasource_id: 'entity:paragraph'
-    property_path: field_tile
-    type: text
-    dependencies:
-      config:
-        - field.storage.paragraph.field_tile
-  field_tile_1:
-    label: Tuile
-    datasource_id: 'entity:paragraph'
-    property_path: field_tile
-    type: integer
-    dependencies:
-      config:
-        - field.storage.paragraph.field_tile
   name:
     label: Catégories
     datasource_id: 'entity:node'
     property_path: 'field_categories:entity:name'
-    type: string
+    type: text
+    boost: !!float 2
     dependencies:
       config:
         - field.storage.node.field_categories
-      module:
-        - taxonomy
-  name_1:
-    label: Name
-    datasource_id: 'entity:taxonomy_term'
-    property_path: name
-    type: string
-    dependencies:
-      module:
-        - taxonomy
-  news_topic:
-    label: 'Sujet d''actualité'
-    datasource_id: 'entity:node'
-    property_path: 'field_news_topic:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_news_topic
       module:
         - taxonomy
   node_grants:
@@ -218,16 +133,6 @@ field_settings:
     indexed_locked: true
     type_locked: true
     hidden: true
-  publication_type:
-    label: 'Type de publication'
-    datasource_id: 'entity:node'
-    property_path: 'field_publication_type:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_publication_type
-      module:
-        - taxonomy
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
@@ -246,14 +151,6 @@ field_settings:
           page: teaser
           publication: teaser
           second_level_pages: teaser
-  site_id:
-    label: Site
-    datasource_id: 'entity:node'
-    property_path: site_id
-    type: integer
-    dependencies:
-      module:
-        - micro_node
   status:
     label: Published
     datasource_id: 'entity:node'
@@ -277,18 +174,11 @@ field_settings:
     label: 'Type de contenu'
     datasource_id: 'entity:node'
     property_path: type
-    type: string
+    type: text
+    boost: !!float 3
     dependencies:
       module:
         - node
-  type_1:
-    label: 'Type de paragraphe'
-    datasource_id: 'entity:paragraph'
-    property_path: type
-    type: string
-    dependencies:
-      module:
-        - paragraphs
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -304,33 +194,11 @@ field_settings:
     property_path: search_api_url
     type: text
 datasource_settings:
-  'entity:media':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
   'entity:node':
     bundles:
       default: true
       selected:
         - article
-    languages:
-      default: true
-      selected: {  }
-  'entity:paragraph':
-    bundles:
-      default: true
-      selected:
-        - bp_blank
-    languages:
-      default: true
-      selected: {  }
-  'entity:taxonomy_term':
-    bundles:
-      default: true
-      selected: {  }
     languages:
       default: true
       selected: {  }
@@ -344,14 +212,10 @@ processor_settings:
   html_filter:
     all_fields: false
     fields:
-      - event_type
       - field_sub_title
       - field_subtitle
       - name
-      - news_topic
-      - publication_type
       - title
-      - type
       - url
     title: true
     alt: true
@@ -367,14 +231,10 @@ processor_settings:
   ignorecase:
     all_fields: false
     fields:
-      - event_type
       - field_sub_title
       - field_subtitle
       - name
-      - news_topic
-      - publication_type
       - title
-      - type
       - url
     weights:
       preprocess_index: -20
@@ -384,14 +244,10 @@ processor_settings:
   transliteration:
     all_fields: false
     fields:
-      - event_type
       - field_sub_title
       - field_subtitle
       - name
-      - news_topic
-      - publication_type
       - title
-      - type
       - url
     weights:
       preprocess_index: -20
@@ -410,5 +266,5 @@ tracker_settings:
     indexing_order: fifo
 options:
   index_directly: true
-  cron_limit: -1
+  cron_limit: 1500
 server: ess
