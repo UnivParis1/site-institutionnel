@@ -226,9 +226,10 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       }
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
-      if (!empty($get_publications) && $get_publications[0]['value']) {
         $firstname = $node->get('field_firstname')->getValue();
         $lastname = $node->get('field_name')->getValue();
+      if (!empty($get_publications) && $get_publications[0]['value'] && !empty($firstname) && $firstname[0]['value']
+      && !empty($lastname) && $lastname[0]['value']) {
         switch ($get_publications[0]['value']) {
           case 'idhal':
             $hal_publications = $node->get('field_id_hal')->getValue();
@@ -242,7 +243,6 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
             break;
         }
         $variables['hal_publications'] = $publications;
-        \Drupal::logger('pages_persos_preprocess_node')->info(print_r($publications, 1));
       }
     }
   }
