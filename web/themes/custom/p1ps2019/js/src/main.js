@@ -33,27 +33,20 @@
   if($('#search-toggle').length > 0){
     $('#search-toggle').click(function(){
       var scrollTop = $(window).scrollTop();
-      if ($('body').hasClass('path-frontpage')) {
+      if ($('.block-views-exposed-filter-blockrecherche-db-page-1.overlay-show').length > 0) {
         overlayClose();
-        $('html,body').animate({ scrollTop: 0 }, 'slow'); 
-        setTimeout(function() { $('#homepage-search-form #edit-homepage-search').focus() }, 30);
-      }
-      else {
-        if ($('.block-views-exposed-filter-blockrecherche-db-page-1.overlay-show').length > 0) {
-          overlayClose();
-          if (scrollTop <= 0 || $(window).width() < 1024) {
-            $('body').removeClass('scroll');
-          }
-        } else {
-          overlayClose();
-          $('.block-views-exposed-filter-blockrecherche-db-page-1, #search-toggle').addClass('overlay-show');
-          if (scrollTop <= 0 || $(window).width() < 1024) {
-            $('body').addClass('scroll');
-          }
-          setTimeout(function () {
-            $('#views-exposed-form-recherche-db-page-1 #edit-text').focus()
-          }, 30);
+        if (scrollTop <= 0 || $(window).width() < 1024) {
+          $('body').removeClass('scroll');
         }
+      } else {
+        overlayClose();
+        $('.block-views-exposed-filter-blockrecherche-db-page-1, #search-toggle').addClass('overlay-show');
+        if (scrollTop <= 0 || $(window).width() < 1024) {
+          $('body').addClass('scroll');
+        }
+        setTimeout(function () {
+          $('#views-exposed-form-recherche-db-page-1 #edit-text').focus()
+        }, 30);
       }
     });
   }
@@ -115,7 +108,7 @@
         overlayClose();
         $('#navbar-header, .icon-menu').addClass('overlay-show');
         if($(window).width() < 1024){
-         // $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+          // $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
           $('.block-views-exposed-filter-blockrecherche-db-page-1').addClass('overlay-show');
         }
         $('body').addClass('noscroll');
@@ -208,7 +201,7 @@
 
       $(window).resize(function(e) {
         if($(window).width() < 1024 && $('#navbar-header.overlay-show').length > 0){
-         // $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
+          // $('.block-views-exposed-filter-blockrecherche-de-contenu-page-1').addClass('overlay-show');
           $('.block-views-exposed-filter-blockrecherche-db-page-1').addClass('overlay-show');
         }
       });//close resize
