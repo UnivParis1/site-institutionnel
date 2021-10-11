@@ -4,18 +4,6 @@
 */
 
 (function($) {
-
-  var vid = $("#bg-video video");
-  $('#play-button').click(function(){
-    // vid.get(0).play();
-    console.log('trigger play');
-    $("#bg-video video").trigger('play');
-  });
-  $('#pause-button').click(function(){
-    // vid.get(0).pause();
-    console.log('trigger pause');
-    $("#bg-video video").get(0).pause();
-  });
   //accessibility toggler
   if($('#accessibility-toggle').length > 0){
     $('#accessibility-toggle').click(function(){
@@ -124,29 +112,6 @@
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
-
-      // if($('.media-oembed-content').length > 0){
-
-      //   if(replaceUrlIframe == false){
-      //     setTimeout(function(){
-      //       console.log('iframe');
-      //       var srcIframe = $('.media-oembed-content').contents().find('iframe').attr('src') + '?enablejsapi=1&html5=1';
-      //       $('.media-oembed-content').contents().find('iframe').attr('src',srcIframe);
-      //       replaceUrlIframe = true;
-      //      }, 100);
-      //   }
-
-      var vid = $("#bg-video video");
-      $('#play-button').click(function(){
-        // vid.get(0).play();
-        console.log('trigger play');
-        $("#bg-video video").trigger('play');
-      });
-      $('#pause-button').click(function(){
-        // vid.get(0).pause();
-        console.log('trigger pause');
-        $("#bg-video video").trigger('pause');
-      });
 
       $(document, context).once('foundation-init').each(function() {
         $(document).foundation();
