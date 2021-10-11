@@ -72,7 +72,7 @@
     $('.sm-teaser').matchHeight();
   }
 
-  /*Drupal.AjaxCommands.prototype.viewsScrollTop = function (ajax, response) {
+  Drupal.AjaxCommands.prototype.viewsScrollTop = function (ajax, response) {
     // Prevents the scroll to top behavior when a "View more" pager link was
     // utilized.
     if (ajax.element.className == 'results__link') {
@@ -108,5 +108,5 @@
     if (offset.top - 10 < $(scrollTarget).scrollTop()) {
       $(scrollTarget).animate({scrollTop: (offset.top - 10)}, 500);
     }
-  };*/
+  };
 })(jQuery, Drupal);
