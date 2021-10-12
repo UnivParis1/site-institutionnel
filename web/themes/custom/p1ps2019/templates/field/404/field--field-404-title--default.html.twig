@@ -52,6 +52,8 @@
 ]
 %}
 
-<div{{ attributes.addClass(classes) }}>
-  <h1{{ item.attributes.addClass('field--item') }}>{{ item.content }}</h1>
-</div>
+{% for item in items %}
+  <div{{ attributes.addClass(classes) }}>
+    <h1{{ item.attributes.addClass('field--item') }}>{{ item.content }}</h1>
+  </div>
+{% endfor %}

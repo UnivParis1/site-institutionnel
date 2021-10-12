@@ -52,6 +52,8 @@
 ]
 %}
 
-<div{{ attributes.addClass(classes) }}>
-  <span{{ item.attributes.addClass('field--item') }}>{{ item.content }}</span>
-</div>
+{% for item in items %}
+  <div{{ attributes.addClass(classes) }}>
+    <span{{ item.attributes.addClass('field--item') }}>{{ item.content }}</span>
+  </div>
+{% endfor %}
