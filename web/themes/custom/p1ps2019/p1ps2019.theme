@@ -106,8 +106,7 @@ function p1ps2019_preprocess_page(&$variables)
   $variables['is_front_mini_site'] = $is_front_mini_site;
 }
 
-function p1ps2019_preprocess_node(&$variables)
-{
+function p1ps2019_preprocess_node(&$variables) {
   if (isset($site) && !empty($site)) {
     $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
@@ -144,6 +143,7 @@ function p1ps2019_preprocess_node(&$variables)
         break;
     }
   }
+
   if ($node->getType() == 'page_personnelle') {
     $uid = $node->getOwnerId();
     $user = User::load($uid);
@@ -154,52 +154,51 @@ function p1ps2019_preprocess_node(&$variables)
       $comptex = new ComptexManager();
       $variables['mail'] = $comptex->getUserEmail($user->getUsername());
     }
-
-  }
-  if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
-    $skills = $node->get('field_skills')->getValue();
-    $expertises = [];
-    if (!empty($skills)) {
-      foreach ($skills as $key => $skill) {
-        $tid = $skill['target_id'];
-        $term = Term::load($tid);
-        $arg = 'skills[' . $tid . ']';
-        $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
-        $expertises[$key] =
-          '<a href="' . $url->toString() . '"
+    if ($node->hasField('field_skills')) {
+      $skills = $node->get('field_skills')->getValue();
+      $expertises = [];
+      if (!empty($skills)) {
+        foreach ($skills as $key => $skill) {
+          $tid = $skill['target_id'];
+          $term = Term::load($tid);
+          $arg = 'skills[' . $tid . ']';
+          $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
+          $expertises[$key] =
+            '<a href="' . $url->toString() . '"
           title="' . t('Link to @term_name page', ['@term_name' => $term->getName()]) . '"
           target="_blank">'
-          . $term->getName() . '</a>';
+            . $term->getName() . '</a>';
+        }
       }
+      $variables['expertises'] = $expertises;
     }
-    $variables['expertises'] = $expertises;
-  }
-  if ($node->getType() == 'page_personnelle' && $node->hasField('field_highlight_publications')) {
-    $publications = $node->get('field_highlight_publications')->getValue();
-    $col_length = 12;
-    switch (count($publications)) {
-      case 1:
-        $col_length = "8";
-        break;
-      case 2:
-        $col_length = "6";
-        break;
-      case 3:
-        $col_length = "4";
-        break;
+    if ($node->hasField('field_highlight_publications')) {
+      $publications = $node->get('field_highlight_publications')->getValue();
+      $col_length = 12;
+      switch (count($publications)) {
+        case 1:
+          $col_length = "8";
+          break;
+        case 2:
+          $col_length = "6";
+          break;
+        case 3:
+          $col_length = "4";
+          break;
+      }
+      $variables['col_length'] = $col_length;
     }
-    $variables['col_length'] = $col_length;
   }
-
+  //preprocess_node publications
   if ($node->getType() == 'publication' && $node->hasField('field_publication_author')) {
     $authors = $node->get('field_publication_author')->getValue();
+    $publication_authors = [];
     if (!empty($authors)) {
-      $publication_authors = [];
       foreach ($authors as $author) {
         $uid = $author['target_id'];
         $pp = \Drupal::entityTypeManager()
           ->getStorage('node')
-          ->loadByProperties(['uid' => $uid, 'type' => 'page_personnelle' ]);
+          ->loadByProperties(['uid' => $uid,'type' => 'page_personnelle']);
         $page_perso = reset($pp);
         if ($page_perso) {
           $page_perso_url = Url::fromRoute('entity.node.canonical',
@@ -211,6 +210,16 @@ function p1ps2019_preprocess_node(&$variables)
         }
       }
       $variables['publication_authors'] = $publication_authors;
+    }
+  }
+//node_process article
+  if ($node->getType() == 'article') {
+    $node = $variables['node'];
+    if($node->hasField('field_media')){
+      $mid = $node->field_media[0]->getValue()['target_id'];
+      $fid = Media::load($mid)->field_media[0]->getValue()['target_id'];
+      $file = File::load($fid);
+      $variables['image_url'] = $file->url();
     }
   }
 }
@@ -269,6 +278,11 @@ function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $varia
 {
   if (isset($variables["attributes"]["region"])) {
     $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    $site = $negotiator->getActiveSite();
+    if ($site) {
+      $suggestions[] = "menu__mini_site__" . $variables["attributes"]["region"];
+    }
   }
 }
 
@@ -400,9 +414,6 @@ function p1ps2019_preprocess_views_view_table(&$variables)
   }
 }
 
-/**
- * @param $variables
- */
 function p1ps2019_preprocess_paragraph(&$variables)
 {
   $paragraph = $variables['paragraph'];
@@ -444,31 +455,10 @@ function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id)
   }
 }
 
-/**
- * Implements hook_theme_suggestions_field_alter().
- */
+
 function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables)
 {
   $suggestions[] = 'field__' .
     $variables['element']['#field_name'] . '__' .
     $variables['element']['#view_mode'];
-}
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function MYTHEME_theme_suggestions_page_alter(&$suggestions, $variables, $hook) {
-  /**
-   * 404 template suggestion.
-   */
-  if (!is_null(Drupal::requestStack()->getCurrentRequest()->attributes->get('exception'))) {
-    $status_code = Drupal::requestStack()->getCurrentRequest()->attributes->get('exception')->getStatusCode();
-    switch ($status_code) {
-      case 404: {
-        $suggestions[] = 'page__' . (string) $status_code;
-        break;
-      }
-      default:
-        break;
-    }
-  }
 }
