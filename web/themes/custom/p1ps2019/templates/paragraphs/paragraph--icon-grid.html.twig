@@ -40,17 +40,14 @@
 {% if content.bp_background|render %}
   {% set background_field = content.bp_background|render %}
   {% set layout_background = content.bp_background['#items'].getString() %}
-  {% set layout_background_classes = ['paragraph--color'] %}
-  {% if 'paris1-bg-soft-grey' == layout_background %}
-    {% set background_color = ['paris1-bg-soft-grey'] %}
-  {% elseif 'paris1-bg-blue' == layout_background %}
-    {% set background_color = ['paris1-bg-blue'] %}
-  {% else %}
-    {% set background_color = ['no-color'] %}
-  {% endif %}
+  {% set layout_background_classes = [
+    'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
+    'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
+  ]
+  %}
+{% else %}
+  {% set layout_background_classes = ['bg-white'] %}
 {% endif %}
-{% set layout_background_classes = layout_background_classes|merge(background_color) %}
-
 {%
   set classes = [
   paragraph.bundle|clean_class,
