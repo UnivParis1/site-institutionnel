@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7ddaee3758e66d7291deef2a4e870a9",
+    "content-hash": "d85dd771941d4d664c5028f4f97b8f4f",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2590,41 +2590,44 @@
         },
         {
             "name": "drupal/cas",
-            "version": "1.5.0",
+            "version": "2.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/cas.git",
-                "reference": "8.x-1.5"
+                "reference": "2.0.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/cas-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "e9060d973d69247862d71e2230762cb3147ae946"
+                "url": "https://ftp.drupal.org/files/projects/cas-2.0.0-beta3.zip",
+                "reference": "2.0.0-beta3",
+                "shasum": "73f09e95914942756b15de24fe47117bac946a1b"
             },
             "require": {
-                "drupal/core": "~8.0",
-                "drupal/externalauth": "*"
+                "drupal/core": "^8.8 || ^9",
+                "drupal/externalauth": "^1.2"
+            },
+            "require-dev": {
+                "drupal/cas_mock_server": "^1.2"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1578260883",
+                    "version": "2.0.0-beta3",
+                    "datestamp": "1633028470",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 },
                 "drush": {
                     "services": {
-                        "drush.services.yml": "^9"
+                        "drush.services.yml": "^9 || ^10"
                     }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -2651,35 +2654,35 @@
             "description": "Provides CAS authentication for Drupal.",
             "homepage": "http://drupal.org/project/cas",
             "support": {
-                "source": "http://cgit.drupalcode.org/cas",
+                "source": "https://git.drupalcode.org/project/cas",
                 "issues": "http://drupal.org/project/issues/cas",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             }
         },
         {
             "name": "drupal/cas_attributes",
-            "version": "1.0.0-beta2",
+            "version": "2.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/cas_attributes.git",
-                "reference": "8.x-1.0-beta2"
+                "reference": "2.0.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/cas_attributes-8.x-1.0-beta2.zip",
-                "reference": "8.x-1.0-beta2",
-                "shasum": "c9689a1112643a25733ee6b7a85ce00707894534"
+                "url": "https://ftp.drupal.org/files/projects/cas_attributes-2.0.0-beta3.zip",
+                "reference": "2.0.0-beta3",
+                "shasum": "e76b90f025b88e5ed43556f23ac48045fb9488b5"
             },
             "require": {
-                "drupal/cas": "*",
-                "drupal/core": "~8.0",
+                "drupal/cas": "^1.7 || ^2.0@beta",
+                "drupal/core": "^8.8 || ^9",
                 "drupal/token": "*"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-beta2",
-                    "datestamp": "1568232185",
+                    "version": "2.0.0-beta3",
+                    "datestamp": "1617032053",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -2688,7 +2691,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -2718,8 +2721,14 @@
             ],
             "description": "Provides tokens for CAS attributes and an interface for token replacement in user account fields as well as advanced role mapping capability.",
             "homepage": "https://www.drupal.org/project/cas_attributes",
+            "keywords": [
+                "CAS",
+                "Drupal",
+                "single sign-on"
+            ],
             "support": {
-                "source": "https://git.drupalcode.org/project/cas_attributes"
+                "source": "https://git.drupalcode.org/project/cas_attributes",
+                "issues": "https://www.drupal.org/project/issues/cas_attributes"
             }
         },
         {
@@ -5393,17 +5402,17 @@
         },
         {
             "name": "drupal/gutenberg",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gutenberg.git",
-                "reference": "8.x-2.1"
+                "reference": "8.x-2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gutenberg-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "7559e9ed7b1901769b52fb10c61d1d7811ac407a"
+                "url": "https://ftp.drupal.org/files/projects/gutenberg-8.x-2.2.zip",
+                "reference": "8.x-2.2",
+                "shasum": "2b2692d5dc9d7d73efde58840e8eaf1c4fc6ee36"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -5413,8 +5422,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1633614833",
+                    "version": "8.x-2.2",
+                    "datestamp": "1635435771",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -15566,6 +15575,7 @@
     "stability-flags": {
         "drupal/better_exposed_filters": 15,
         "drupal/bootstrap_paragraphs": 10,
+        "drupal/cas": 10,
         "drupal/cas_attributes": 10,
         "drupal/ckeditor_a11ychecker": 15,
         "drupal/ckeditor_balloonpanel": 15,
