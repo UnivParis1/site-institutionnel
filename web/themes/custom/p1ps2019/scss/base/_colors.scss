@@ -940,6 +940,17 @@ fieldset {
 
 // ============= BTN ================ //
 .site-content-wrapper{
+  .paragraph {
+    .cell.outline {
+      .btn {
+        border-color: $text-white; color: $text-white; background-color: transparent;
+        &:hover{
+          background-color: $background-white; color: $text-main-color;
+          *{color: $text-main-color;}
+        }
+      }
+    }
+  }
   .btn, .button--primary,
   button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
   input[type="submit"].button {
@@ -953,7 +964,8 @@ fieldset {
         *{color: $text-main-color;}
       }
     }
-  }//close btn
+  }
+  //close btn
 }//close .site-content-wrapper
 
 //_box-style.scss ====================
