@@ -33,7 +33,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -54,6 +54,9 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_method: ''
+  form_action: ''
+  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -113,8 +116,8 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
-  confirmation_title: ''
-  confirmation_message: ''
+  confirmation_title: 'Envoi effectué.'
+  confirmation_message: 'Merci d&#39;avoir rempli le formulaire.'
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -194,7 +197,7 @@ access:
 handlers:
   email:
     id: email
-    label: 'Courriel webmaster Paris 1'
+    label: 'Courriel au demandeur'
     notes: ''
     handler_id: email
     status: true
@@ -203,15 +206,15 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: www@univ-paris1.fr
+      to_mail: '[webform_submission:values:votre_courriel:raw]'
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: '[webform_submission:values:votre_courriel:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:votre_nom:raw]'
+      from_name: ''
       subject: _default
       body: _default
       excluded_elements: {  }

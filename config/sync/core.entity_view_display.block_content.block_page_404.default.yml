@@ -1,0 +1,66 @@
+uuid: 281a2e43-d821-453b-9a4a-192a2da3aa4e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.block_page_404
+    - field.field.block_content.block_page_404.body
+    - field.field.block_content.block_page_404.field_404_button
+    - field.field.block_content.block_page_404.field_404_subtitle
+    - field.field.block_content.block_page_404.field_404_title
+    - field.field.block_content.block_page_404.field_search_form
+  module:
+    - link
+    - text
+    - webform
+id: block_content.block_page_404.default
+targetEntityType: block_content
+bundle: block_page_404
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_404_button:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_404_subtitle:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_404_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_search_form:
+    weight: 3
+    label: hidden
+    settings:
+      source_entity: true
+    third_party_settings: {  }
+    type: webform_entity_reference_entity_view
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

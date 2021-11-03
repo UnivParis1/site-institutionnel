@@ -1,0 +1,25 @@
+uuid: 5d6d064a-85ba-4ea3-a832-24b7da66238f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.search_block
+    - field.field.block_content.search_block.field_search_form
+  module:
+    - webform
+id: block_content.search_block.default
+targetEntityType: block_content
+bundle: search_block
+mode: default
+content:
+  field_search_form:
+    weight: 0
+    label: visually_hidden
+    settings:
+      source_entity: true
+    third_party_settings: {  }
+    type: webform_entity_reference_entity_view
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

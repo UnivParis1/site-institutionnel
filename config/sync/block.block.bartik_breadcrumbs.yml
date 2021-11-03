@@ -1,0 +1,40 @@
+uuid: be10e28b-90e2-49c0-a2c7-5f31de73f2d3
+langcode: fr
+status: true
+dependencies:
+  module:
+    - micro_path
+    - micro_site
+    - system
+  theme:
+    - bartik
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: bartik_breadcrumbs
+theme: bartik
+region: header
+weight: -16
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility:
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }

@@ -1,0 +1,42 @@
+uuid: 445984ad-b827-4d41-9979-9fede0e6179b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - facets.facet.categorie
+  module:
+    - facets
+    - micro_path
+    - micro_site
+    - system
+  theme:
+    - bartik
+id: bartik_categories
+theme: bartik
+region: header
+weight: -14
+provider: null
+plugin: 'facet_block:categorie'
+settings:
+  id: 'facet_block:categorie'
+  label: Catégories
+  provider: facets
+  label_display: '0'
+  block_id: categories
+visibility:
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: "/recherche\r\n/recherche*"
+    negate: false
+    context_mapping: {  }

@@ -1,6 +1,6 @@
 uuid: 71a9ccf1-db79-4cc5-8ce8-9437e13a273b
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - elasticsearch_connector
@@ -8,15 +8,14 @@ dependencies:
     - micro_node
     - node
     - search_api
-    - search_api_elasticsearch_attachments
   config:
-    - field.storage.node.field_categories
-    - field.storage.node.field_lead
     - field.storage.node.body
+    - field.storage.node.field_event_type
+    - field.storage.node.field_lead
     - field.storage.node.field_signature
+    - field.storage.node.field_categories
     - field.storage.node.field_news_topic
     - field.storage.node.field_publication_type
-    - field.storage.node.field_event_type
     - search_api.server.elasticsearch
 third_party_settings:
   elasticsearch_connector:
@@ -38,13 +37,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.body
-  es_attachment:
-    label: 'Search API Elasticsearch attachments'
-    property_path: es_attachment
-    type: object
-    indexed_locked: true
-    type_locked: true
-    hidden: true
   event_type:
     label: 'type événement'
     datasource_id: 'entity:node'
@@ -193,21 +185,6 @@ processor_settings:
   content_access:
     weights:
       preprocess_query: -30
-  elasticsearch_attachments:
-    boost: '1.0'
-    excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv jpg jpeg'
-    max_filesize: '0'
-    excluded_private: 1
-    excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv image/jpeg'
-    weights:
-      preprocess_index: -20
-  elasticsearch_attachments_highlight:
-    highlight: 'yes'
-    excerpt: 0
-    prefix: '<strong>'
-    suffix: '</strong>'
-    weights:
-      postprocess_query: 0
   entity_status: {  }
   highlight:
     highlight: always

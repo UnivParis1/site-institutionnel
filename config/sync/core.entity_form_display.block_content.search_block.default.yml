@@ -1,0 +1,38 @@
+uuid: 5dd45d0b-4764-4038-9c29-c3c40397ab29
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.search_block
+    - field.field.block_content.search_block.field_search_form
+  module:
+    - webform
+id: block_content.search_block.default
+targetEntityType: block_content
+bundle: search_block
+mode: default
+content:
+  field_search_form:
+    weight: 26
+    settings:
+      default_data: true
+      webforms: {  }
+    third_party_settings: {  }
+    type: webform_entity_reference_select
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

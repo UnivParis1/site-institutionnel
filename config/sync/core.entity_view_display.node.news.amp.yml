@@ -1,0 +1,109 @@
+uuid: 1ad157e6-b802-4a6b-9a99-543fae839447
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.amp
+    - field.field.node.news.comment
+    - field.field.node.news.field_categories
+    - field.field.node.news.field_disable_canonical_url
+    - field.field.node.news.field_lead
+    - field.field.node.news.field_media
+    - field.field.node.news.field_news_date
+    - field.field.node.news.field_news_topic
+    - field.field.node.news.field_paragraphs
+    - field.field.node.news.field_publish_master
+    - field.field.node.news.field_related_news
+    - field.field.node.news.field_signature
+    - field.field.node.news.field_sites
+    - field.field.node.news.field_sites_all
+    - field.field.node.news.field_tag
+    - node.type.news
+  module:
+    - amp
+    - datetime
+    - entity_reference_revisions
+    - user
+_core:
+  default_config_hash: Gp86l3QzHHkplQwGqvKFBgU2ItCGjdOkbfoXt12bVBw
+id: node.news.amp
+targetEntityType: node
+bundle: news
+mode: amp
+content:
+  content_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_lead:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: amp_text
+    region: content
+  field_media:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      layout: responsive
+      width: 16
+      height: 9
+    third_party_settings: {  }
+    type: amp_media
+    region: content
+  field_news_date:
+    type: datetime_default
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: news_date
+    third_party_settings: {  }
+  field_paragraphs:
+    weight: 4
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_related_news:
+    weight: 6
+    label: inline
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_signature:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: amp_text
+    region: content
+  social_simple_buttons:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  comment: true
+  field_categories: true
+  field_disable_canonical_url: true
+  field_news_topic: true
+  field_publish_master: true
+  field_sites: true
+  field_sites_all: true
+  field_tag: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  site_id: true

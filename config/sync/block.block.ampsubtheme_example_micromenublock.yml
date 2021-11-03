@@ -1,0 +1,41 @@
+uuid: 38ebdc6f-1706-4bd0-a1ab-86946de8d90d
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - micro_menu
+    - micro_path
+    - micro_site
+  theme:
+    - ampsubtheme_example
+id: ampsubtheme_example_micromenublock
+theme: ampsubtheme_example
+region: header
+weight: -14
+provider: null
+plugin: micro_menu_block
+settings:
+  id: micro_menu_block
+  label: 'Micro menu block'
+  provider: micro_menu
+  label_display: '0'
+visibility:
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    bundles:
+      mini_site: mini_site
+    negate: false
+    context_mapping:
+      site: '@micro_site.current_site_context:site'
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }

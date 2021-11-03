@@ -1,0 +1,41 @@
+uuid: e4c9ec46-fd02-4e34-9cc9-ad5328f003ad
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - micro_footer
+    - micro_path
+    - micro_site
+  theme:
+    - amptheme
+id: amptheme_footerblock
+theme: amptheme
+region: sidebar_first
+weight: -12
+provider: null
+plugin: footer_block
+settings:
+  id: footer_block
+  label: 'Footer block'
+  provider: micro_footer
+  label_display: '0'
+visibility:
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    bundles:
+      mini_site: mini_site
+    negate: false
+    context_mapping:
+      site: '@micro_site.current_site_context:site'
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }

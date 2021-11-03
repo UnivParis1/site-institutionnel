@@ -1,0 +1,44 @@
+uuid: 7853b6d5-1fc2-4d89-95de-34f74a6c54ef
+langcode: fr
+status: true
+dependencies:
+  module:
+    - micro_path
+    - micro_site
+    - system
+    - up1_keywords
+  theme:
+    - amptheme
+id: amptheme_motsclessaisonniers
+theme: amptheme
+region: sidebar_first
+weight: -15
+provider: null
+plugin: keywords_block
+settings:
+  id: keywords_block
+  label: Recherche
+  provider: up1_keywords
+  label_display: visible
+  mot_cle_1: Formation
+  mot_cle_2: Inscription
+  mot_cle_3: Université
+  mot_cle_4: Fondation
+  mot_cle_5: 'Una Europa'
+visibility:
+  site_type:
+    id: site_type
+    site_type: {  }
+    negate: false
+    context_mapping: {  }
+  site:
+    id: site
+    sites: {  }
+    sites_front_page: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: "/recherche\r\n/recherche*\r\n/new-resultats-recherche\r\n/new-resultats-recherche*"
+    negate: false
+    context_mapping: {  }

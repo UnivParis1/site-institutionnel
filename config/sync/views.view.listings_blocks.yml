@@ -9,10 +9,10 @@ dependencies:
     - node.type.news2018
     - node.type.offer
     - node.type.publication
+    - taxonomy.vocabulary.collections
     - taxonomy.vocabulary.events_types
     - taxonomy.vocabulary.news_topics
     - taxonomy.vocabulary.offers
-    - taxonomy.vocabulary.publication_type
   module:
     - datetime
     - node
@@ -64,7 +64,7 @@ display:
       style:
         type: default
         options:
-          row_class: 'cell small-12 medium-4'
+          row_class: 'cell small-12 medium-3'
           default_row_class: true
           uses_fields: false
       row:
@@ -165,7 +165,43 @@ display:
           plugin_id: text
       empty: {  }
       relationships: {  }
-      arguments: {  }
+      arguments:
+        site_id:
+          id: site_id
+          table: node_field_data
+          field: site_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: current_site
+          default_argument_options: {  }
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: site_id
+          plugin_id: numeric
       display_extenders: {  }
       title: 'Les actualités'
       css_class: 'grid-x grid-margin-x flex-grow'
@@ -174,12 +210,379 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.site
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   block_1:
     display_plugin: block
     id: block_1
+    display_title: 'Bloc actualités site '
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            news: news
+            news2018: news2018
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: sticky
+          plugin_id: boolean
+      defaults:
+        filters: false
+        filter_groups: false
+        sorts: false
+        footer: false
+        style: false
+        row: false
+        arguments: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        field_news_date_value:
+          id: field_news_date_value
+          table: node__field_news_date
+          field: field_news_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: day
+          plugin_id: datetime
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<a href="/actualite" class="btn btn-primary">Voir toutes les actualités</a>'
+            format: full_html
+          plugin_id: text
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12 medium-4'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      arguments: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_2:
+    display_plugin: block
+    id: block_2
+    display_title: 'Évènements site'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Les évènements Paris 1'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        sorts: false
+        footer: false
+        css_class: false
+        arguments: false
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_event_date_end_value:
+          id: field_event_date_end_value
+          table: node__field_event_date
+          field: field_event_date_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '+1 hour +1 minute'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: sticky
+          plugin_id: boolean
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: day
+          plugin_id: datetime
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<a href="/evenement" class="btn btn-primary">Voir tous les évènements</a>'
+            format: full_html
+          plugin_id: text
+      css_class: 'grid-x full-height'
+      arguments: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_all_news:
+    display_plugin: block
+    id: block_all_news
     display_title: 'Bloc actualités mini-sites'
     position: 1
     display_options:
@@ -249,367 +652,6 @@ display:
         footer: false
         style: false
         row: false
-        arguments: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      sorts:
-        field_news_date_value:
-          id: field_news_date_value
-          table: node__field_news_date
-          field: field_news_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          granularity: day
-          plugin_id: datetime
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/actualites" class="btn btn-primary">Voir toutes les actualités</a>'
-            format: full_html
-          plugin_id: text
-      style:
-        type: default
-        options:
-          row_class: 'cell small-12 medium-6'
-          default_row_class: true
-          uses_fields: false
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser
-      arguments:
-        site_id:
-          id: site_id
-          table: node_field_data
-          field: site_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          default_action: default
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: current_site
-          default_argument_options: {  }
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            items_per_page: 25
-            override: false
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: false
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          break_phrase: false
-          not: false
-          entity_type: node
-          entity_field: site_id
-          plugin_id: numeric
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.site
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  block_2:
-    display_plugin: block
-    id: block_2
-    display_title: 'Bloc évènements mini-sites'
-    position: 3
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      title: 'Les évènements Paris 1'
-      defaults:
-        title: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        footer: false
-        css_class: false
-        arguments: false
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            event: event
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-        field_event_date_end_value:
-          id: field_event_date_end_value
-          table: node__field_event_date
-          field: field_event_date_end_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '>='
-          value:
-            min: ''
-            max: ''
-            value: '+1 hour +1 minute'
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      sorts:
-        field_event_date_value:
-          id: field_event_date_value
-          table: node__field_event_date
-          field: field_event_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: day
-          plugin_id: datetime
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/evenements" class="btn btn-primary">Voir tous les évènements</a>'
-            format: full_html
-          plugin_id: text
-      css_class: 'grid-x full-height'
-      arguments:
-        site_id:
-          id: site_id
-          table: node_field_data
-          field: site_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          default_action: default
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: current_site
-          default_argument_options: {  }
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            items_per_page: 25
-            override: false
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: false
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          break_phrase: false
-          not: false
-          entity_type: node
-          entity_field: site_id
-          plugin_id: numeric
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.site
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  block_all_news:
-    display_plugin: block
-    id: block_all_news
-    display_title: 'Bloc actualités'
-    position: 1
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            news: news
-            news2018: news2018
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-      defaults:
-        filters: false
-        filter_groups: false
-        sorts: false
-        footer: false
-        style: false
-        row: false
       filter_groups:
         operator: AND
         groups:
@@ -658,13 +700,15 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.site
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   block_events:
     display_plugin: block
     id: block_events
-    display_title: 'Bloc évènements'
+    display_title: 'Évènements mini-sites'
     position: 3
     display_options:
       display_extenders: {  }
@@ -816,6 +860,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.site
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1188,7 +1234,7 @@ display:
         filter_groups: false
         sorts: false
         footer: false
-        css_class: false
+        arguments: false
       filters:
         status:
           value: '1'
@@ -1279,12 +1325,50 @@ display:
             value: '<a href="/publications" class="btn btn-primary">Voir toutes les publications</a>'
             format: full_html
           plugin_id: text
-      css_class: 'grid-x grid-margin-x full-height'
+      arguments:
+        site_id:
+          id: site_id
+          table: node_field_data
+          field: site_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: current_site
+          default_argument_options: {  }
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: site_id
+          plugin_id: numeric
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.site
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1380,10 +1464,10 @@ display:
           entity_field: created
           plugin_id: date
       arguments:
-        field_publication_type_target_id:
-          id: field_publication_type_target_id
-          table: node__field_publication_type
-          field: field_publication_type_target_id
+        field_collection_term_target_id:
+          id: field_collection_term_target_id
+          table: node__field_collection_term
+          field: field_collection_term_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1397,11 +1481,10 @@ display:
           default_argument_type: taxonomy_tid
           default_argument_options:
             term_page: '1'
-            node: true
-            limit: true
-            vids:
-              publication_type: publication_type
             anyall: ','
+            node: false
+            limit: false
+            vids: {  }
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -1412,11 +1495,16 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: false
+          specify_validation: true
           validate:
-            type: none
+            type: 'entity:taxonomy_term'
             fail: 'not found'
-          validate_options: {  }
+          validate_options:
+            bundles:
+              collections: collections
+            operation: view
+            multiple: 1
+            access: false
           break_phrase: false
           not: false
           plugin_id: numeric
@@ -1556,7 +1644,7 @@ display:
       pager:
         type: some
         options:
-          items_per_page: 8
+          items_per_page: 5
           offset: 0
       css_class: swiper-container
       header:
@@ -1578,6 +1666,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.site
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1650,9 +1740,6 @@ display:
         filter_groups: false
         sorts: false
         title: false
-        style: false
-        row: false
-        footer: false
       filter_groups:
         operator: AND
         groups:
@@ -1672,36 +1759,13 @@ display:
           granularity: day
           plugin_id: datetime
       title: Recrutement
-      style:
-        type: default
-        options:
-          row_class: 'cell small-12 medium-4'
-          default_row_class: true
-          uses_fields: false
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/publications" class="btn btn-primary">Voir toutes les offres</a>'
-            format: full_html
-          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.site
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

@@ -1,7 +1,35 @@
 uuid: 0c050d86-e0f9-485c-a0f7-da270e0d1c34
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - menu_ui
+    - scheduler
+    - social_simple
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: publish
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: true
+    publish_touch: true
+    show_message_after_update: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: true
+  social_simple:
+    share: 0
+    networks: {  }
+    title: ''
+    hashtags: '0'
+    forward_integration: null
 _core:
   default_config_hash: KuyA4NHPXcmKAjRtwa0vQc2ZcyrUJy6IlS2TAyMNRbc
 name: 'Page de base'

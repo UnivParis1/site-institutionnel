@@ -1,0 +1,36 @@
+uuid: a2406dd6-39ea-4da2-9872-d989af47705e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.button_grid.bp_background
+    - field.field.paragraph.button_grid.field_button_item
+    - paragraphs.paragraphs_type.button_grid
+  module:
+    - paragraphs
+id: paragraph.button_grid.default
+targetEntityType: paragraph
+bundle: button_grid
+mode: default
+content:
+  bp_background:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_button_item:
+    type: entity_reference_paragraphs
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true

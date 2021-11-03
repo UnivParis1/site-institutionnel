@@ -36,11 +36,6 @@ type_settings:
       default_revision: false
       label: 'En relecture'
       weight: -1
-    moved_to_trash:
-      published: false
-      default_revision: false
-      label: Supprimé
-      weight: 3
     published:
       published: true
       default_revision: true
@@ -91,16 +86,6 @@ type_settings:
         - published
       to: draft
       weight: -2
-    trash:
-      label: Corbeille
-      from:
-        - archive
-        - draft
-        - en_attente_de_publication
-        - en_relecture
-        - published
-      to: moved_to_trash
-      weight: 3
   entity_types:
     node:
       - article

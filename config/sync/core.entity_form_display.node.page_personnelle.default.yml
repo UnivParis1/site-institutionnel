@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.page_personnelle.field_get_hal_publications
     - field.field.node.page_personnelle.field_hal_link
     - field.field.node.page_personnelle.field_highlight_publications
+    - field.field.node.page_personnelle.field_hypotheses_link
     - field.field.node.page_personnelle.field_id_hal
     - field.field.node.page_personnelle.field_link_to_resume
     - field.field.node.page_personnelle.field_linkedin_link
@@ -61,16 +62,18 @@ third_party_settings:
         - field_epi_link
         - field_academia_link
         - field_hal_link
+        - field_hypotheses_link
       parent_name: group_coordonnees
       weight: 25
       format_type: details
       region: content
       format_settings:
+        description: ''
+        open: true
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
-        required_fields: true
-        open: false
+        show_empty_fields: false
       label: 'Réseaux sociaux & EPI'
     group_publications:
       children:
@@ -80,7 +83,7 @@ third_party_settings:
         - field_sticky_publications
         - field_highlight_publications
       parent_name: group_page_perso
-      weight: 10
+      weight: 11
       format_type: accordion_item
       region: content
       format_settings:
@@ -230,7 +233,7 @@ third_party_settings:
       children:
         - field_education
       parent_name: group_page_perso
-      weight: 9
+      weight: 10
       format_type: accordion_item
       region: content
       format_settings:
@@ -307,7 +310,7 @@ content:
     type: text_textarea
     region: content
   field_english_resume:
-    weight: 41
+    weight: 42
     settings:
       rows: 5
       placeholder: ''
@@ -363,6 +366,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_hypotheses_link:
+    weight: 36
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
     region: content
   field_id_hal:
     weight: 43
@@ -490,7 +501,7 @@ content:
     type: text_textarea
     region: content
   field_resume:
-    weight: 39
+    weight: 40
     settings:
       entity_browser: document_browser
       field_widget_display: label
@@ -504,7 +515,7 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_resume_text:
-    weight: 40
+    weight: 41
     settings:
       rows: 5
       placeholder: ''
@@ -651,6 +662,11 @@ content:
       placeholder: ''
       match_limit: 10
     region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   body: true

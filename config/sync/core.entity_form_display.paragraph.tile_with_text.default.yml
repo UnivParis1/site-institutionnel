@@ -11,7 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.tile_with_text
   module:
     - entity_browser
-    - link
+    - link_attributes
     - text
 id: paragraph.tile_with_text.default
 targetEntityType: paragraph
@@ -23,8 +23,17 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+      enabled_attributes:
+        id: true
+        name: true
+        target: true
+        rel: true
+        class: true
+        accesskey: true
+        aria-label: true
+        title: true
     third_party_settings: {  }
-    type: link_default
+    type: link_attributes
     region: content
   bp_text:
     weight: 2
@@ -57,6 +66,11 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   status: true

@@ -6,12 +6,14 @@ dependencies:
     - field.field.node.second_level_pages.body
     - field.field.node.second_level_pages.field_disable_canonical_url
     - field.field.node.second_level_pages.field_editorial_blocks
+    - field.field.node.second_level_pages.field_indexrobots
     - field.field.node.second_level_pages.field_publish_master
     - field.field.node.second_level_pages.field_sites
     - field.field.node.second_level_pages.field_sites_all
     - node.type.second_level_pages
   module:
     - content_moderation
+    - metatag
     - paragraphs
     - path
 id: node.second_level_pages.default
@@ -43,6 +45,13 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
+    region: content
+  field_indexrobots:
+    weight: 51
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   field_publish_master:
     type: boolean_checkbox
@@ -140,6 +149,11 @@ content:
       placeholder: ''
       match_limit: 10
     region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   body: true

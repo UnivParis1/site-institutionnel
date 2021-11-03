@@ -3,6 +3,8 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - gutenberg
+    - linkit
     - nbsp
     - token_filter
 name: 'Édito simple'
@@ -29,7 +31,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<em> <strong> <b> <i> <cite> <blockquote cite> <ul type> <ol type start> <li> <a href hreflang !href accesskey id rel target title data-entity-type data-entity-uuid> <img src alt data-entity-type data-entity-uuid>'
+      allowed_html: '<em> <strong> <b> <i> <cite> <blockquote cite> <ul type> <ol type start> <li> <a href hreflang !href accesskey id rel target title data-entity-type data-entity-uuid data-entity-substitution data-entity-type data-entity-uuid data-entity-substitution> <img src alt data-entity-type data-entity-uuid data-entity-substitution>'
       filter_html_help: true
       filter_html_nofollow: false
   filter_autop:
@@ -50,3 +52,17 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: -11
+    settings:
+      title: false
+  gutenberg:
+    id: gutenberg
+    provider: gutenberg
+    status: false
+    weight: 0
+    settings:
+      processor_settings: {  }

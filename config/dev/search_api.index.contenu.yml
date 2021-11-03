@@ -1,0 +1,227 @@
+uuid: 5b000a29-ed0b-46b5-835e-151c45e41cd4
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+    - search_api
+  config:
+    - field.storage.node.field_affiliation
+    - field.storage.node.field_editorial_blocks
+    - field.storage.node.field_paragraphs
+    - field.storage.node.field_lead
+    - field.storage.node.field_collection_term
+    - field.storage.node.field_short_desc
+    - field.storage.node.field_skills
+    - field.storage.node.field_fonction
+    - field.storage.node.field_sub_title
+    - field.storage.node.field_subtitle
+    - search_api.server.local_search
+id: contenu
+name: Contenu
+description: ''
+read_only: false
+field_settings:
+  field_affiliation:
+    label: Affiliation
+    datasource_id: 'entity:node'
+    property_path: field_affiliation
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_affiliation
+  field_collection_term:
+    label: Collection
+    datasource_id: 'entity:node'
+    property_path: field_collection_term
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_collection_term
+  field_editorial_blocks:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_editorial_blocks
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+  field_fonction:
+    label: Fonction
+    datasource_id: 'entity:node'
+    property_path: field_fonction
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_fonction
+  field_lead:
+    label: Chapô
+    datasource_id: 'entity:node'
+    property_path: field_lead
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_lead
+  field_paragraphs:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_paragraphs
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+  field_short_desc:
+    label: 'Courte description'
+    datasource_id: 'entity:node'
+    property_path: field_short_desc
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_short_desc
+  field_skills:
+    label: 'Domaines d''expertise'
+    datasource_id: 'entity:node'
+    property_path: field_skills
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_skills
+  field_sub_title:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_sub_title
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_sub_title
+  field_subtitle:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_subtitle
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_subtitle
+  name:
+    label: 'Domaines d''expertise » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_skills:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_skills
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Information d''accès du nœud.'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Titre
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 13
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected:
+        - article
+        - news2018
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  ignore_character:
+    all_fields: true
+    fields:
+      - field_affiliation
+      - field_collection_term
+      - field_editorial_blocks
+      - field_fonction
+      - field_lead
+      - field_paragraphs
+      - field_short_desc
+      - field_skills
+      - field_sub_title
+      - field_subtitle
+      - name
+      - title
+    ignorable: '[''¿¡!?,.:;]'
+    ignorable_classes:
+      - Pc
+      - Pd
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
+  language_with_fallback: {  }
+  rendered_item: {  }
+  transliteration:
+    all_fields: true
+    fields:
+      - field_affiliation
+      - field_collection_term
+      - field_editorial_blocks
+      - field_fonction
+      - field_lead
+      - field_paragraphs
+      - field_short_desc
+      - field_skills
+      - field_sub_title
+      - field_subtitle
+      - name
+      - title
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+tracker_settings:
+  default:
+    indexing_order: lifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: local_search
