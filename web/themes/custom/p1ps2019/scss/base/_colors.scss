@@ -654,6 +654,13 @@ fieldset {
   .block-views-exposed-filter-blockrecherche-db-page-1{
     background-color: $background-white;
     @include box-shadow(0.25, 2px, 0, $background-black);
+    #views-exposed-form-recherche-de-contenu-page-1{
+      // .form-item{
+      // 	input{
+      // 		border-bottom: 2px solid $text-light-gray;
+      // 	}
+      // }
+    }
   }
   .accessibility-wrapper{
     #accessibility-toggle{
@@ -933,6 +940,17 @@ fieldset {
 
 // ============= BTN ================ //
 .site-content-wrapper{
+  .paragraph {
+    .cell.outline {
+      .btn {
+        border-color: $text-white; color: $text-white; background-color: transparent;
+        &:hover{
+          background-color: $background-white; color: $text-main-color;
+          *{color: $text-main-color;}
+        }
+      }
+    }
+  }
   .btn, .button--primary,
   button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
   input[type="submit"].button {
@@ -946,7 +964,8 @@ fieldset {
         *{color: $text-main-color;}
       }
     }
-  }//close btn
+  }
+  //close btn
 }//close .site-content-wrapper
 
 //_box-style.scss ====================
@@ -1077,31 +1096,9 @@ fieldset {
 @include breakpoint($large - 1 down) {
 
   #navbar{
-    .block-views-exposed-filter-blockrecherche-de-contenu-page-1 {
+    .block-views-exposed-filter-blockrecherche-de-contenu-page-1{
       background-color: $background-main-color;
-      #views-exposed-form-recherche-de-contenu-page-1 {
-        .form-item{
-          input{
-            border: 1px solid $text-white; color: $text-white;
-            &::-webkit-input-placeholder {
-              color: $text-white;
-            }
-            &:-moz-placeholder { /* Firefox 18- */
-              color: $text-white;
-            }
-            &::-moz-placeholder {  /* Firefox 19+ */
-              color: $text-white;
-            }
-            &:-ms-input-placeholder {
-              color: $text-white;
-            }
-          }
-        }
-      }
-    }
-    .block-views-exposed-filter-blockrecherche-db-page-1{
-      background-color: $background-main-color;
-      #views-exposed-form-recherche-db-page-1{
+      #views-exposed-form-recherche-de-contenu-page-1{
         .form-item{
           input{
             border: 1px solid $text-white; color: $text-white;
@@ -1199,3 +1196,39 @@ fieldset {
   }
 }//close media - large
 //============= FIN RESPONSIVE =========//
+
+//Paragraph icon grid
+#block-p1ps2019-content {
+  .paragraph--type--icon-grid {
+    &.bg-no-color {
+      h2 {
+        color: $gold-p1ps;
+      }
+      .paragraph--type--icon-grid-item {
+        .fontawesome-icons, h3, p {
+          color: $gold-p1ps;
+        }
+      }
+    }
+    &.paris1-bg-soft-grey {
+      h2 {
+        color: $text-main-color;
+      }
+      .paragraph--type--icon-grid-item {
+        .fontawesome-icons, h3, p {
+          color: $text-main-color;
+        }
+      }
+    }
+    &.paris1-bg-blue {
+      h2 {
+        color: $text-white;
+      }
+      .paragraph--type--icon-grid-item {
+        .fontawesome-icons, h3, p {
+          color: $text-white;
+        }
+      }
+    }
+  }
+}
