@@ -91,11 +91,13 @@
                 {{ item }}
               </div>
             {% endfor %}
-            <div class="cell small-12 no-margin-top-bottom">
+            {% if content.bp_link|render is not empty %}
+		<div class="cell small-12 no-margin-top-bottom">
               <a class="btn outline {{ cta_classes }}" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}">
                 {{ content.bp_link.0['#title'] }}
               </a>
             </div>
+{% endif %}
           </div>
         </div>
       </div>
