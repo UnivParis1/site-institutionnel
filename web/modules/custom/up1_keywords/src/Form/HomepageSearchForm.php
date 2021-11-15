@@ -19,7 +19,8 @@ class HomepageSearchForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $current_path = \Drupal::service('path.current')->getPath();
 
-    if (preg_match('/recherche/', $current_path)) {
+    $value = "";
+    if (preg_match('/resultats-recherche/', $current_path)) {
       $value = \Drupal::request()->query->get('text');
     }
 
