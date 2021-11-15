@@ -18,7 +18,7 @@ class CentresService {
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    */
   public function __construct(ConfigFactoryInterface $configFactory) {
-    $this->settings = $configFactory->get('up1.settings');
+    //$this->settings = $configFactory->get('up1.settings');
   }
 
   public function getCentresJson($url) {
