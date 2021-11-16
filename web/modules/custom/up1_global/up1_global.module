@@ -8,6 +8,7 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use \Drupal\node\NodeInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -80,7 +81,7 @@ function up1_global_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_language_switch_links_alter().
  */
-function up1_global_language_switch_links_alter(array &$links, $type, \Drupal\Core\Url $url) {
+function up1_global_language_switch_links_alter(array &$links, $type, Url $url) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     foreach ($links as $langcode => $link) {
       if ($node && !array_key_exists($langcode, $node->getTranslationLanguages(TRUE))) {
