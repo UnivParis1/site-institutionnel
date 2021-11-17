@@ -1,14 +1,5 @@
 /** Chiffres-Clés **/
 
-//set spacing between parags
-// .paragraph{
-//   ~ .paragraph{
-//     padding-top: rem-calc(72px);
-//     &[class*="bg"]{
-//       margin-top: rem-calc(72px);
-//     }
-//   }
-// }
 .paragraph {
   &:not(.paragraph--type--hit-list):not(.tiles-full):not(.paragraph--type--rich-content):not(.paragraph--type--tuile-text-wo-image):not(.paragraph--type--tile-wo-image):not(.paragraph--type--key-figure):not(.paragraph--type--presentation):not(.paragraph--type--bp-columns){
     padding-bottom: rem-calc(56px);
@@ -29,6 +20,9 @@
     &.paragraph--type--button-grid-item {
       padding-bottom: rem-calc(56px);
       padding-top: rem-calc(16px);
+    }
+    &.paragraph--type--bp-simple {
+      padding: rem-calc(32px);
     }
   }
   .no-padding-top-bottom &, .node--type-event &, .paragraph--type--bp-columns &{
@@ -257,9 +251,6 @@
   flex-direction: column-reverse;
 }
 
-/** Couleurs Paris 1 **/
-
-
 /** Icones **/
 /* Positions */
 .icon-top-left {
@@ -459,6 +450,17 @@
           text-align:center;
         }
       }
+    }
+  }
+}
+
+/** Paragraph button grid **/
+#block-p1ps2019-content {
+  .paragraph--type--button-grid {
+    .grid-button-x {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
