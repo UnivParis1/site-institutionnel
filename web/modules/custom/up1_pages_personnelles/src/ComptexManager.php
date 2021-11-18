@@ -30,8 +30,11 @@ class ComptexManager implements ComptexInterface {
 
     $searchUser = "$ws?token=$username";
 
+    /**
+     * @TODO: Delete employeeType when gender is validated
+     */
     $params = [
-      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,employeeType-all,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
       'showExtendedInfo'=> 2
     ];
 
@@ -118,9 +121,24 @@ class ComptexManager implements ComptexInterface {
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
       }
+      /**
+       * @TODO: Delete those lines when gender is validated
+       */
       if (isset($information['employeeType']) && is_array($information['employeeType'])) {
         $information['employeeType'] = reset($information['employeeType']);
       }
+      /**
+       * @TODO: Uncomment those lines when gender is validated
+       */
+      /*if (isset($information['employeeType-all']) && is_array($information['employeeType'])) {
+        $employeeType = reset($information['employeeType']);
+        if (isset($employeeType['name-gender'])) {
+          $information['employeeType'] = $employeeType['name-gender'];
+        }
+        else {
+          $information['employeeType'] = $employeeType['name'];
+        }
+      }*/
       if (isset($information['buildingName']) && is_array($information['buildingName'])) {
         $information['buildingName'] = reset($information['buildingName']);
       }
