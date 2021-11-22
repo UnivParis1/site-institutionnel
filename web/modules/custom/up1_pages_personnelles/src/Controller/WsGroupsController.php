@@ -189,10 +189,19 @@ class WsGroupsController extends ControllerBase {
     }
   }
 
+  /**
+   * @param string $affiliation
+   * @return string
+   *
+   */
   public function getPageTitle($affiliation) {
     return "Page personnelle $affiliation";
   }
 
+  /**
+   * @param string $letter
+   * @return string
+   */
   public function getPageLetterTitle($letter) {
     return ucfirst($letter);
   }
@@ -850,5 +859,41 @@ class WsGroupsController extends ControllerBase {
     $result = $query->execute()->fetchObject();
 
     return $result;
+  }
+
+  public function equipeDispatch() {
+    $siteId = $this->getSiteId();
+    if (isset($siteId)) {
+      if ($this->getfieldEc()) {
+        return $this->microFacultyList('A');
+      }
+      else if ($this->getfieldDoc()) {
+        return $this->microStudentList('A');
+      }
+      else {
+        throw new NotFoundHttpException();
+      }
+    }
+    else {
+      throw new NotFoundHttpException();
+    }
+  }
+
+  public function getPageEquipeTitle() {
+    $siteId = $this->getSiteId();
+    if (isset($siteId)) {
+      if ($this->getfieldEc()) {
+        return "Page personnelle Enseignant-Chercheur";
+      }
+      else if ($this->getfieldDoc()) {
+        return "Page personnelle Doctorant";
+      }
+      else {
+        throw new NotFoundHttpException();
+      }
+    }
+    else {
+      throw new NotFoundHttpException();
+    }
   }
 }

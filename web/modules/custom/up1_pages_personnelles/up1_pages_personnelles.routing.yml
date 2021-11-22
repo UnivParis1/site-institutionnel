@@ -63,9 +63,8 @@ up1_pages_personnelles.micro_faculty_list_default:
 up1_pages_personnelles.micro_default:
   path: '/equipe'
   defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::microFacultyList'
-    _title: 'Équipe'
-    letter: 'A'
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::equipeDispatch'
+    _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageEquipeTitle'
   requirements:
     _permission: 'view published site entities'
 
