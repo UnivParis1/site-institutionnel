@@ -196,7 +196,7 @@ class WsGroupsController extends ControllerBase {
    *
    */
   public function getPageTitle($affiliation) {
-    return "Page personnelle $affiliation";
+    return "Pages personnelles $affiliation";
   }
 
   /**
@@ -884,10 +884,10 @@ class WsGroupsController extends ControllerBase {
     $siteId = $this->getSiteId();
     if (isset($siteId)) {
       if ($this->getfieldEc()) {
-        return "Page personnelle Enseignant-Chercheur";
+        return "Pages personnelles enseignants-chercheurs";
       }
       else if ($this->getfieldDoc()) {
-        return "Page personnelle Doctorant";
+        return "Pages personnelles doctorants";
       }
       else {
         throw new NotFoundHttpException();
