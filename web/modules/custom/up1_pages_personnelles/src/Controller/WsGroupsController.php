@@ -213,7 +213,6 @@ class WsGroupsController extends ControllerBase {
    */
   public function createPagePersoUsers() {
     $users = $this->wsGroupsService->getAllUsers();
-    $new_ecd = [];
     $cas_user_manager = \Drupal::service('cas.user_manager');
 
     $queue = $this->queueFactory->get('up1_page_perso_queue');

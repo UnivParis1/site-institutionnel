@@ -154,28 +154,32 @@ class ComptexManager implements ComptexInterface {
 
       if (isset($information['supannEntiteAffectation-all']) && !empty($information['supannEntiteAffectation-all'])) {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
-          if ($supannEntiteAffectation['businessCategory'] != 'pedagogy') {
-            $business_cat = $supannEntiteAffectation['businessCategory'];
-            $information['entites'][$business_cat]['name'] = $supannEntiteAffectation['name'];
-            $information['entites'][$business_cat]['description'] = $supannEntiteAffectation['description'];
-            if (isset($supannEntiteAffectation['labeledURI'])) {
-              $information['entites'][$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
-            }
-            else {
-              $site_group = $supannEntiteAffectation['key'];
-              $ids = \Drupal::entityQuery('site')
-                ->condition('type', 'mini_site')
-                ->condition('groups', $site_group)
-                ->execute();
-              $site = Site::loadMultiple($ids);
-              if (count($site) == 1) {
-                $site = reset($site);
-                $site_url = $site->get('site_url')->getValue();
-                $information['entites'][$business_cat]['labeledURI'] = $site_url[0]['value'];
-              }
+          $business_cat = $supannEntiteAffectation['businessCategory'];
+          $information['entites'][$business_cat]['name'] = $supannEntiteAffectation['name'];
+          $information['entites'][$business_cat]['description'] = $supannEntiteAffectation['description'];
+          if (isset($supannEntiteAffectation['labeledURI'])) {
+            $information['entites'][$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+          }
+          else {
+            $site_group = $supannEntiteAffectation['key'];
+            $ids = \Drupal::entityQuery('site')
+              ->condition('type', 'mini_site')
+              ->condition('groups', $site_group)
+              ->execute();
+            $site = Site::loadMultiple($ids);
+            if (count($site) == 1) {
+              $site = reset($site);
+              $site_url = $site->get('site_url')->getValue();
+              $information['entites'][$business_cat]['labeledURI'] = $site_url[0]['value'];
             }
           }
         }
+        $order = ['doctoralSchool',  'research',  'pedagogy'];
+        usort($information['entites'], function($a, $b) use ($order) {
+          $pos_a = array_search($a['businessCategory'], $order);
+          $pos_b = array_search($b['businessCategory'], $order);
+          return $pos_a - $pos_b;
+        });
         \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
       }
     }
