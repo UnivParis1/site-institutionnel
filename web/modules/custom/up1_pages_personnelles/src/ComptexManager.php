@@ -155,10 +155,9 @@ class ComptexManager implements ComptexInterface {
       if (isset($information['supannEntiteAffectation-all']) && !empty($information['supannEntiteAffectation-all'])) {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
           $business_cat = $supannEntiteAffectation['businessCategory'];
-          $information['entites'][$business_cat]['name'] = $supannEntiteAffectation['name'];
-          $information['entites'][$business_cat]['description'] = $supannEntiteAffectation['description'];
+          $uri = "";
           if (isset($supannEntiteAffectation['labeledURI'])) {
-            $information['entites'][$business_cat]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+            $uri = $supannEntiteAffectation['labeledURI'];
           }
           else {
             $site_group = $supannEntiteAffectation['key'];
@@ -170,11 +169,20 @@ class ComptexManager implements ComptexInterface {
             if (count($site) == 1) {
               $site = reset($site);
               $site_url = $site->get('site_url')->getValue();
-              $information['entites'][$business_cat]['labeledURI'] = $site_url[0]['value'];
+              $uri = $site_url[0]['value'];
             }
           }
+          $information['entites'][] = [
+            'businessCategory' => $business_cat,
+            'name' => $supannEntiteAffectation['name'],
+            'description' => $supannEntiteAffectation['description'],
+            'labeledURI' => $uri
+          ];
         }
+        \Drupal::logger('pages_persos')->info("before usort : " . print_r($information['entites'], 1));
         $order = ['doctoralSchool',  'research',  'pedagogy'];
+        \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
+
         usort($information['entites'], function($a, $b) use ($order) {
           $pos_a = array_search($a['businessCategory'], $order);
           $pos_b = array_search($b['businessCategory'], $order);
