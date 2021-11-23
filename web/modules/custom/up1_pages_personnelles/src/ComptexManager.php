@@ -177,7 +177,8 @@ class ComptexManager implements ComptexInterface {
               $uri = $site_url[0]['value'];
             }
           }
-          if (!in_array($information['employeeType'], ['Doctorant', 'Doctorante'])) {
+          if (((in_array($information['employeeType'], ['Doctorant', 'Doctorante']) && $business_cat != 'pedagogy')) ||
+            (!in_array($information['employeeType'], ['Doctorant', 'Doctorante'])) {
             $entites[] = [
               'businessCategory' => $business_cat,
               'name' => $supannEntiteAffectation['name'],
