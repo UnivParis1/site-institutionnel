@@ -121,6 +121,9 @@ class ComptexManager implements ComptexInterface {
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
       }
+      else {
+        $information['supannRole']['role'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
+      }
       /**
        * @TODO: Delete those lines when gender is validated
        */
