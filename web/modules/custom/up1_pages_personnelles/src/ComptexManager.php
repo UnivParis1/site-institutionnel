@@ -190,8 +190,8 @@ class ComptexManager implements ComptexInterface {
         $information['entites'] = [];
         foreach ($entites as $entite) {
           if (!empty($entite['labeledURI'])) {
-            $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['name'] . "' target='_blank'>"
-             . $entite['name'] . "</a></p>";
+            $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['description'] . "' target='_blank'>"
+             . $entite['description'] . "</a></p>";
           }
           else {
             $affectation[] = "<p>" . $entite['name'] . "</p>";
