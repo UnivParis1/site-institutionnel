@@ -174,21 +174,9 @@
             {# ----- Comptex Info ----- #}
             {# Comptex Affectations #}
             <div class="infos-sep">
-              <p class="txt-bold"> {{ "Assignment"|t }} </p>
-              {% if entites.doctoralSchool.labeledURI is defined %}
-                  <p><a href="{{ entites.doctoralSchool.labeledURI }}" title="{{entites.doctoralSchool.name }}"
-                     target="_blank">{{ entites.doctoralSchool.description }}</a></p>
-                {% else %}
-                <p>{{ entites.doctoralSchool.description }}</p>
-                {% endif %}
-              {% if entites.research.labeledURI is defined %}
-                  <p><a href="{{ entites.research.labeledURI }}" title="{{entites.research.name }}"
-                     target="_blank">{{ entites.research.description }}</a></p>
-                {% else %}
-                {{ entites.research.description }}
-                {% endif %}
-              {% if other_affiliation %}
-                <p>{{ content.field_other_affiliation.0 }}</p>
+              {% if affectation is empty %}
+                <p class="txt-bold"> {{ "Assignment"|t }} </p>
+                {{ affectation|raw }}
               {% endif %}
               {# ----- Comptex Affectations ----- #}
               {# field skills #}

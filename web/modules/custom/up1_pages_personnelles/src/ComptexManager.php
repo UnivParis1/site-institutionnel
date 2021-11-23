@@ -179,22 +179,30 @@ class ComptexManager implements ComptexInterface {
             'labeledURI' => $uri
           ];
         }
-        \Drupal::logger('pages_persos')->info("before usort : " . print_r($information['entites'], 1));
         $order = ['doctoralSchool',  'research',  'pedagogy'];
-        \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
 
         usort($information['entites'], function($a, $b) use ($order) {
           $pos_a = array_search($a['businessCategory'], $order);
           $pos_b = array_search($b['businessCategory'], $order);
           return $pos_a - $pos_b;
         });
-        \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
+
+        $affectation = [];
+        foreach ($information['entites'] as $entite) {
+          if (!empty($entite['labeledURI'])) {
+            $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['name'] . "'
+            target='_blank'>" . $entite['name'] . "</a></p>";
+          }
+          else {
+            $affectation[] = "<p>" . $entite['name'] . "</p>";
+          }
+        }
       }
     }
     else {
-      $information = [];
+      $affectation = [];
     }
-    return $information;
+    return $affectation;
   }
 
   public function getUserEmail($uid) {
