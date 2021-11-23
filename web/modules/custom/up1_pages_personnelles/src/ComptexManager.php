@@ -172,7 +172,7 @@ class ComptexManager implements ComptexInterface {
               $uri = $site_url[0]['value'];
             }
           }
-          $information['entites'][] = [
+          $entites[] = [
             'businessCategory' => $business_cat,
             'name' => $supannEntiteAffectation['name'],
             'description' => $supannEntiteAffectation['description'],
@@ -181,28 +181,29 @@ class ComptexManager implements ComptexInterface {
         }
         $order = ['doctoralSchool',  'research',  'pedagogy'];
 
-        usort($information['entites'], function($a, $b) use ($order) {
+        usort($entites, function($a, $b) use ($order) {
           $pos_a = array_search($a['businessCategory'], $order);
           $pos_b = array_search($b['businessCategory'], $order);
           return $pos_a - $pos_b;
         });
 
-        $affectation = [];
-        foreach ($information['entites'] as $entite) {
+        $information['entites'] = [];
+        foreach ($entites as $entite) {
           if (!empty($entite['labeledURI'])) {
-            $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['name'] . "'
-            target='_blank'>" . $entite['name'] . "</a></p>";
+            $information['entites'][] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['name'] . "' target='_blank'>"
+             . $entite['name'] . "</a></p>";
           }
           else {
-            $affectation[] = "<p>" . $entite['name'] . "</p>";
+            $information['entites'][] = "<p>" . $entite['name'] . "</p>";
           }
+          \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
         }
       }
     }
     else {
-      $affectation = [];
+      $information = [];
     }
-    return $affectation;
+    return $information;
   }
 
   public function getUserEmail($uid) {
