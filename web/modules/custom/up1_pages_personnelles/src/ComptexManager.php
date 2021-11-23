@@ -200,7 +200,7 @@ class ComptexManager implements ComptexInterface {
              . $entite['description'] . "</a></p>";
           }
           else {
-            $affectation[] = "<p>" . $entite['name'] . "</p>";
+            $affectation[] = "<p>" . $entite['description'] . "</p>";
           }
           $information['entites'] = implode('', $affectation);
           \Drupal::logger('pages_persos')->info(print_r( $information['entites'], 1));
