@@ -190,13 +190,14 @@ class ComptexManager implements ComptexInterface {
         $information['entites'] = [];
         foreach ($entites as $entite) {
           if (!empty($entite['labeledURI'])) {
-            $information['entites'][] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['name'] . "' target='_blank'>"
+            $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['name'] . "' target='_blank'>"
              . $entite['name'] . "</a></p>";
           }
           else {
-            $information['entites'][] = "<p>" . $entite['name'] . "</p>";
+            $affectation[] = "<p>" . $entite['name'] . "</p>";
           }
-          \Drupal::logger('pages_persos')->info(print_r($information['entites'], 1));
+          $information['entites'] = implode('', $affectation);
+          \Drupal::logger('pages_persos')->info(print_r( $information['entites'], 1));
         }
       }
     }
