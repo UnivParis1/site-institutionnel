@@ -128,7 +128,7 @@ class ComptexManager implements ComptexInterface {
         $information['employeeType'] = reset($information['employeeType']);
       }
       else {
-        $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
+        $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
       }
       /**
        * @TODO: Uncomment those lines when gender is validated
@@ -141,6 +141,9 @@ class ComptexManager implements ComptexInterface {
         else {
           $information['employeeType'] = $employeeType['name'];
         }
+      }
+      else {
+        $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
       }*/
       if (isset($information['buildingName']) && is_array($information['buildingName'])) {
         $information['buildingName'] = reset($information['buildingName']);
