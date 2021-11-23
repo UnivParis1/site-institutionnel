@@ -164,8 +164,7 @@ class ComptexManager implements ComptexInterface {
           $uri = "";
           if (isset($supannEntiteAffectation['labeledURI'])) {
             $uri = $supannEntiteAffectation['labeledURI'];
-          }
-          else {
+          } else {
             $site_group = $supannEntiteAffectation['key'];
             $ids = \Drupal::entityQuery('site')
               ->condition('type', 'mini_site')
@@ -178,12 +177,14 @@ class ComptexManager implements ComptexInterface {
               $uri = $site_url[0]['value'];
             }
           }
-          $entites[] = [
-            'businessCategory' => $business_cat,
-            'name' => $supannEntiteAffectation['name'],
-            'description' => $supannEntiteAffectation['description'],
-            'labeledURI' => $uri
-          ];
+          if (!in_array($information['employeeType'], ['Doctorant', 'Doctorante'])) {
+            $entites[] = [
+              'businessCategory' => $business_cat,
+              'name' => $supannEntiteAffectation['name'],
+              'description' => $supannEntiteAffectation['description'],
+              'labeledURI' => $uri
+            ];
+          }
         }
         $order = ['doctoralSchool',  'research',  'pedagogy'];
 
