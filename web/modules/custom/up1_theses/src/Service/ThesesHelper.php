@@ -275,7 +275,7 @@ class ThesesHelper {
     $date_apogee[0] = $mois;
     $date_apogee[2] = '20'.$date_apogee[2];
 
-    $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_get("Europe/Paris"));
+    $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
     \Drupal::logger('up1_theses')->info(print_r("timestamp : $timestamp", 1));
 
     $new_date = new \DateTime($timestamp, new \DateTimeZone('Europe/Paris'));
