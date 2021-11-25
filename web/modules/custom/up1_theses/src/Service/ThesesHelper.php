@@ -270,11 +270,18 @@ class ThesesHelper {
    */
   public function formatDate($date, $hours, $minutes) {
     $date_apogee = explode('/', $date);
+    $mois = $date_apogee[1];
+    $date_apogee[1] = $date_apogee[0];
+    $date_apogee[0] = $mois;
     $date_apogee[2] = '20'.$date_apogee[2];
 
-    $formatted_date = implode('-', array_reverse($date_apogee)) . " $hours:$minutes:00";
-    \Drupal::logger('up1_theses')->info(print_r("timestamp : $formatted_date", 1));
+    $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_get("Europe/Paris"));
+    \Drupal::logger('up1_theses')->info(print_r("timestamp : $timestamp", 1));
 
-    return $formatted_date;
+    $new_date = new \DateTime($timestamp, new \DateTimeZone('Europe/Paris'));
+    \Drupal::logger('up1_theses')->info(print_r("timestamp : $new_date", 1));
+
+
+    return $new_date;
   }
 }
