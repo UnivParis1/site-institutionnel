@@ -125,7 +125,7 @@ class ThesesHelper {
                 'value' => $this->formatDate($these['DAT_SOU_THS'],
                   $these['HH_SOU_THS'], $these['MM_SOU_THS']),
                 'end_value' => $this->formatDate($these['DAT_SOU_THS'],
-                  ($these['HH_SOU_THS'] + 2), $these['MM_SOU_THS'])
+                  ($these['HH_SOU_THS'] + 4), $these['MM_SOU_THS'])
               ]
             ],
             'field_address_map' => [
@@ -269,32 +269,15 @@ class ThesesHelper {
    * @return string $formattedDate
    */
   public function formatDate($date, $hours, $minutes) {
-    $format = 'd/m/Y H:i';
-    \Drupal::logger('up1_theses')->info(print_r("date $date, heures : $hours, minutes : $minutes", 1));
-    $fullDate = str_replace('/21', '/2021',$date) . " " . ($hours - 2).":";
-    \Drupal::logger('up1_theses')->info(print_r("full date : $fullDate", 1));
+    $date_apogee = explode('/', $date);
+    $mois = $date_apogee[1];
+    $date_apogee[1] = $date_apogee[0];
+    $date_apogee[0] = $mois;
+    $date_apogee[2] = '20'.$date_apogee[2];
 
-    $fullDate .= ($minutes == 0)? "00" : $minutes;
+    $formatted_date = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_get("Europe/Paris"));
+    \Drupal::logger('up1_theses')->info(print_r("timestamp : $formatted_date", 1));
 
-    $newDate = \DateTime::createFromFormat($format, $fullDate);
-    $formattedDate = "";
-
-    if ($newDate instanceof \DateTime) {
-      $formattedDate = \Drupal::service('date.formatter')
-        ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
-      \Drupal::logger('up1_theses')->info(print_r("Y-m-dTH:i:s : $formattedDate", 1));
-      $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
-      \Drupal::logger('up1_theses')->info(print_r("CEST ? Y-m-dTH:i:s : $formattedDate", 1));
-      $formattedDate = preg_replace('/CET/i', 'T', $formattedDate);
-      \Drupal::logger('up1_theses')->info(print_r("CET ? Y-m-dTH:i:s : $formattedDate", 1));
-      $formattedDate = preg_replace('/LMT/i', 'T', $formattedDate);
-      \Drupal::logger('up1_theses')->info(print_r("LMT ? Y-m-dTH:i:s : $formattedDate", 1));
-    }
-    else {
-      \Drupal::logger('up1_theses')->notice("The date won't be created for this viva.");
-    }
-
-    return $formattedDate;
-
+    return $formatted_date;
   }
 }
