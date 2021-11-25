@@ -8,6 +8,7 @@ use Drupal\Core\Queue\QueueWorkerManager;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 define("IMPORT_USER_SIZE", 150);
 define("IMPORT_DATA_SIZE", 50);
@@ -189,10 +190,19 @@ class WsGroupsController extends ControllerBase {
     }
   }
 
+  /**
+   * @param string $affiliation
+   * @return string
+   *
+   */
   public function getPageTitle($affiliation) {
-    return "Page personnelle $affiliation";
+    return "Pages personnelles $affiliation";
   }
 
+  /**
+   * @param string $letter
+   * @return string
+   */
   public function getPageLetterTitle($letter) {
     return ucfirst($letter);
   }
@@ -203,7 +213,6 @@ class WsGroupsController extends ControllerBase {
    */
   public function createPagePersoUsers() {
     $users = $this->wsGroupsService->getAllUsers();
-    $new_ecd = [];
     $cas_user_manager = \Drupal::service('cas.user_manager');
 
     $queue = $this->queueFactory->get('up1_page_perso_queue');
@@ -850,5 +859,41 @@ class WsGroupsController extends ControllerBase {
     $result = $query->execute()->fetchObject();
 
     return $result;
+  }
+
+  public function equipeDispatch() {
+    $siteId = $this->getSiteId();
+    if (isset($siteId)) {
+      if ($this->getfieldEc()) {
+        return $this->microFacultyList('A');
+      }
+      else if ($this->getfieldDoc()) {
+        return $this->microStudentList('A');
+      }
+      else {
+        throw new NotFoundHttpException();
+      }
+    }
+    else {
+      throw new NotFoundHttpException();
+    }
+  }
+
+  public function getPageEquipeTitle() {
+    $siteId = $this->getSiteId();
+    if (isset($siteId)) {
+      if ($this->getfieldEc()) {
+        return "Pages personnelles enseignants-chercheurs";
+      }
+      else if ($this->getfieldDoc()) {
+        return "Pages personnelles doctorants";
+      }
+      else {
+        throw new NotFoundHttpException();
+      }
+    }
+    else {
+      throw new NotFoundHttpException();
+    }
   }
 }

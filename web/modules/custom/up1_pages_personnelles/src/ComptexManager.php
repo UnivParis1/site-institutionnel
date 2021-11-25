@@ -3,6 +3,7 @@
 namespace Drupal\up1_pages_personnelles;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\micro_site\Entity\Site;
 
 class ComptexManager implements ComptexInterface {
 
@@ -29,8 +30,11 @@ class ComptexManager implements ComptexInterface {
 
     $searchUser = "$ws?token=$username";
 
+    /**
+     * @TODO: Delete employeeType when gender is validated
+     */
     $params = [
-      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,employeeType-all,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
       'showExtendedInfo'=> 2
     ];
 
@@ -111,15 +115,39 @@ class ComptexManager implements ComptexInterface {
       if (isset($information['supannActivite']) && is_array($information['supannActivite'])) {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
-      
+
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
         $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
       }
+
+      /**
+       * @TODO: Delete those lines when gender is validated
+       */
       if (isset($information['employeeType']) && is_array($information['employeeType'])) {
         $information['employeeType'] = reset($information['employeeType']);
       }
+      else {
+        $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
+      }
+
+      /**
+       * @TODO: Uncomment those lines when gender is validated
+       */
+      /*if (isset($information['employeeType-all']) && is_array($information['employeeType'])) {
+        $employeeType = reset($information['employeeType']);
+        if (isset($employeeType['name-gender'])) {
+          $information['employeeType'] = $employeeType['name-gender'];
+        }
+        else {
+          $information['employeeType'] = $employeeType['name'];
+        }
+      }
+      else {
+        $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
+      }
+      */
       if (isset($information['buildingName']) && is_array($information['buildingName'])) {
         $information['buildingName'] = reset($information['buildingName']);
       }
@@ -135,16 +163,51 @@ class ComptexManager implements ComptexInterface {
 
       if (isset($information['supannEntiteAffectation-all']) && !empty($information['supannEntiteAffectation-all'])) {
         foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
-          $information['entites'][$key]['name'] = $supannEntiteAffectation['name'];
-          $information['entites'][$key]['description'] = $supannEntiteAffectation['description'];
-          if (isset($information['supannRole']) && !empty($information['supannRole'])) {
-            if ($supannEntiteAffectation['name'] == $information['supannRole']['name']) {
-              $information['supannRole']['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+          $business_cat = $supannEntiteAffectation['businessCategory'];
+          $uri = "";
+          if (isset($supannEntiteAffectation['labeledURI'])) {
+            $uri = $supannEntiteAffectation['labeledURI'];
+          } else {
+            $site_group = $supannEntiteAffectation['key'];
+            $ids = \Drupal::entityQuery('site')
+              ->condition('type', 'mini_site')
+              ->condition('groups', $site_group)
+              ->execute();
+            $site = Site::loadMultiple($ids);
+            if (count($site) == 1) {
+              $site = reset($site);
+              $site_url = $site->get('site_url')->getValue();
+              $uri = $site_url[0]['value'];
             }
           }
-          if ($key == 0) {
-            $information['entites'][$key]['labeledURI'] = $supannEntiteAffectation['labeledURI'];
+          if ((in_array($information['employeeType'], ['Doctorant', 'Doctorante']) && $business_cat != 'pedagogy') ||
+            (!in_array($information['employeeType'], ['Doctorant', 'Doctorante']))) {
+            $entites[] = [
+              'businessCategory' => $business_cat,
+              'name' => $supannEntiteAffectation['name'],
+              'description' => $supannEntiteAffectation['description'],
+              'labeledURI' => $uri
+            ];
           }
+        }
+        $order = ['doctoralSchool',  'research',  'pedagogy'];
+
+        usort($entites, function($a, $b) use ($order) {
+          $pos_a = array_search($a['businessCategory'], $order);
+          $pos_b = array_search($b['businessCategory'], $order);
+          return $pos_a - $pos_b;
+        });
+
+        $information['entites'] = [];
+        foreach ($entites as $entite) {
+          if (!empty($entite['labeledURI'])) {
+            $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['description'] . "' target='_blank'>"
+             . $entite['description'] . "</a></p>";
+          }
+          else {
+            $affectation[] = "<p>" . $entite['description'] . "</p>";
+          }
+          $information['entites'] = implode('', $affectation);
         }
       }
     }
