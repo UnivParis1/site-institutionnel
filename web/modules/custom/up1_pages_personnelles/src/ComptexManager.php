@@ -121,6 +121,7 @@ class ComptexManager implements ComptexInterface {
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
       }
+
       /**
        * @TODO: Delete those lines when gender is validated
        */
@@ -130,6 +131,7 @@ class ComptexManager implements ComptexInterface {
       else {
         $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
       }
+
       /**
        * @TODO: Uncomment those lines when gender is validated
        */
@@ -144,7 +146,8 @@ class ComptexManager implements ComptexInterface {
       }
       else {
         $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
-      }*/
+      }
+      */
       if (isset($information['buildingName']) && is_array($information['buildingName'])) {
         $information['buildingName'] = reset($information['buildingName']);
       }
@@ -174,7 +177,7 @@ class ComptexManager implements ComptexInterface {
             if (count($site) == 1) {
               $site = reset($site);
               $site_url = $site->get('site_url')->getValue();
-              $uri = $site_url[0]['value'];
+              $uri = "//" . $site_url[0]['value'];
             }
           }
           if ((in_array($information['employeeType'], ['Doctorant', 'Doctorante']) && $business_cat != 'pedagogy') ||
@@ -205,7 +208,6 @@ class ComptexManager implements ComptexInterface {
             $affectation[] = "<p>" . $entite['description'] . "</p>";
           }
           $information['entites'] = implode('', $affectation);
-          \Drupal::logger('pages_persos')->info(print_r( $information['entites'], 1));
         }
       }
     }

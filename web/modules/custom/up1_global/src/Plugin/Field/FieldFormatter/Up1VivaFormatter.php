@@ -40,53 +40,19 @@ class Up1VivaFormatter extends DateTimeCustomFormatter {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      if (!empty($item->start_date) && !empty($item->end_date)) {
-        /** @var \Drupal\Core\Datetime\DrupalDateTime $start_date */
+      if (!empty($item->start_date)) {
         $start_date = $item->start_date;
-        $start_date->setTimezone(timezone_open(drupal_get_user_timezone()));
+        $start_date->setTimezone(timezone_open(date_default_timezone_get()));
 
-        /** @var \Drupal\Core\Datetime\DrupalDateTime $end_date */
-        $end_date = $item->end_date;
-        $end_date->setTimezone(timezone_open(drupal_get_user_timezone()));
-
-        $start_hour = $start_date->format('H') . "h" . $start_date->format('i');
-        $end_hour = $end_date->format('H') . "h" . $end_date->format('i');
-
-        if ($start_date->format('d-m-Y') !== $end_date->format('d-m-Y')) {
-          $elements[$delta] = [
-            'date' => [
-              '#markup' => "<div class='event-date'>
-              <div class='start-date'>
-                <span class=''>" . t("From: ") . "</span> " .
-                $start_date->format('l j F Y ') . "<i class='fa fa-arrow-right'>
-                <span class='sr-only'>" . t( ' at ') . "</span></i> $start_hour
-              </div>
-              <div class='end-date'>
-              <span class=''>" . t("To: ") . "</span> " .
-                $end_date->format('d/m/Y') . "<i class='fa fa-arrow-right'>
-              <span class='sr-only'>" . t( ' at ') . "</span> </i> $end_hour </div>",
-            ],
-          ];
-        }
-        elseif ($start_date->getTimestamp() === $end_date->getTimestamp()) {
-          $elements[$delta] = [
-            'date' => [
-              '#markup' => "<div>" . $start_date->format('d/m/Y') . "</div>",
-            ],
-          ];
-        }
-        else {
-          $elements[$delta] = [
-            'date' => [
-              '#markup' => "<div>
-              <span class=''>" . t("On ") . "</span> " . $start_date->format('l j F Y') . "
-              <span class='sr-only'>" .  $this->t(' from ') . "</span>
-              <span>$start_hour</span>
-              <i class='fa fa-arrow-right'><span class='sr-only'>" .  $this->t(' to ') . "</span></i>
-              <span>$end_hour</span></div>",
-            ],
-          ];
-        }
+        $elements[$delta] = [
+          'date' => [
+            '#markup' => "<div class='event-date'>
+              <div class='start-date'>" . t("On: @date at @hour", [
+                "@date" => $start_date->format('l j F Y '),
+                "hour" => $start_date->format('H') . "h" . $start_date->format('i'),
+              ]) ."</div>",
+          ],
+        ];
       }
     }
 
