@@ -271,7 +271,7 @@ class ThesesHelper {
   public function formatDate($date, $hours, $minutes) {
     $format = 'd/m/Y H:i';
     \Drupal::logger('up1_theses')->info(print_r("date $date, heures : $hours, minutes : $minutes", 1));
-    $fullDate = str_replace('/21', '/2021',$date) . " " . ($hours - 2).":";
+    $fullDate = str_replace('/21', '/2021',$date) . " " . ($hours - 1).":";
     \Drupal::logger('up1_theses')->info(print_r("full date : $fullDate", 1));
 
     $fullDate .= ($minutes == 0)? "00" : $minutes;
