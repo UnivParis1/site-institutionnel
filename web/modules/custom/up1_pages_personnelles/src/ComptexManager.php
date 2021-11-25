@@ -177,7 +177,7 @@ class ComptexManager implements ComptexInterface {
             if (count($site) == 1) {
               $site = reset($site);
               $site_url = $site->get('site_url')->getValue();
-              $uri = $site_url[0]['value'];
+              $uri = "//" . $site_url[0]['value'];
             }
           }
           if ((in_array($information['employeeType'], ['Doctorant', 'Doctorante']) && $business_cat != 'pedagogy') ||
