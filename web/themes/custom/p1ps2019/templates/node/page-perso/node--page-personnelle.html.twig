@@ -127,8 +127,7 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_directions or
-              thesis_subject or phd_supervisorphd_supervisor %}
+            {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisorphd_supervisor %}
               <div class="btn btn-primary">
                 <a href="#page-perso-research">{{ 'Research'|t }}</a>
                 <i class="icon-ok"></i>
@@ -175,16 +174,9 @@
             {# ----- Comptex Info ----- #}
             {# Comptex Affectations #}
             <div class="infos-sep">
-              <p class="txt-bold"> {{ "Assignment"|t }} </p>
-              {% for key, entite in entites %}
-                {% if key != 0 %}
-                  <span>{{ entite.description }}</span><br />
-                {% else %}
-                  <a href="{{ entites.0.labeledURI }}" title="{{ entites.0.name }}" target="_blank">{{ entites.0.description }}</a><br />
-                {% endif %}
-              {% endfor %}
-              {% if other_affiliation %}
-                <p>{{ content.field_other_affiliation.0 }}</p>
+              {% if entites is not empty %}
+                <p class="txt-bold"> {{ "Assignment"|t }} </p>
+                {{ entites|raw }}
               {% endif %}
               {# ----- Comptex Affectations ----- #}
               {# field skills #}
@@ -208,7 +200,7 @@
               {# ----- field About me ----- #}
             </div>
           </section>
-          {% if info or research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor or research_directions or thesis_directions %}
+          {% if info or research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
             <section class="new-section research">
               <a id="page-perso-research"></a>
               <h2>{{ "Research"|t }}</h2>
@@ -385,20 +377,24 @@
                     </a>
                   {% endif %}
                   {% if hal %}
-                    <a href="{{ content.field_hal_link.0['#url'] }}"  class="social-link up1-hal fa-2x" target="_blank"
-                       title="HAL archives ouvertes">
+                    <a href="{{ content.field_hal_link.0['#url'] }}"  class="social-link fa-2x"
+                       target="_blank" title="HAL archives ouvertes">
                       <span class="visually-hidden">HAL</span>
+                      <img src="https://com-web.univ-paris1.fr/logos/logo-hal-texte-blanc.svg" width="48">
                     </a>
                   {% endif %}
                   {% if hypotheses %}
-                    <a href="{{ content.field_hypotheses_link.0['#url'] }}"  class="social-link up1-hal fa-2x"
+                    <a href="{{ content.field_hypotheses_link.0['#url'] }}"  class="social-link fa-2x"
                        target="_blank" title="Hypotheses">
                       <span class="visually-hidden">Hypotheses</span>
+                      <img src="https://com-web.univ-paris1.fr/logos/logo-hypotheses-blanc.svg" width="24">
                     </a>
                   {% endif %}
                   {% if epi %}
-                    <a href="{{ content.field_epi_link.0['#url'] }}" title="EPI" class="social-link epi fa-2x" target="_blank">
+                    <a href="{{ content.field_epi_link.0['#url'] }}" title="EPI" class="social-link epi fa-2x"
+                       target="_blank">
                       <span class="visually-hidden">EPI</span>
+                      <img src="/{{ directory }}/svg/icons/epi.svg" width="96">
                     </a>
                   {% endif %}
                 </div>
