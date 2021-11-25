@@ -124,6 +124,8 @@ class ThesesHelper {
               [
                 'value' => $this->formatDate($these['DAT_SOU_THS'],
                   $these['HH_SOU_THS'], $these['MM_SOU_THS']),
+                'end_value' => $this->formatDate($these['DAT_SOU_THS'],
+                  ($these['HH_SOU_THS'] + 4), $these['MM_SOU_THS'])
               ]
             ],
             'field_address_map' => [
