@@ -270,12 +270,9 @@ class ThesesHelper {
    */
   public function formatDate($date, $hours, $minutes) {
     $date_apogee = explode('/', $date);
-    $mois = $date_apogee[1];
-    $date_apogee[1] = $date_apogee[0];
-    $date_apogee[0] = $mois;
     $date_apogee[2] = '20'.$date_apogee[2];
 
-    $formatted_date = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
+    $formatted_date = implode('-', array_reverse($date_apogee)) . " $hours:$minutes:00";
     \Drupal::logger('up1_theses')->info(print_r("timestamp : $formatted_date", 1));
 
     return $formatted_date;
