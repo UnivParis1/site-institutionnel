@@ -49,7 +49,7 @@ class Up1VivaFormatter extends DateTimeCustomFormatter {
             '#markup' => "<div class='event-date'>
               <div class='start-date'>" . t("On: @date at @hour", [
                 "@date" => $start_date->format('l j F Y '),
-                "hour" => $start_date->format('H') . "h" . $start_date->format('i'),
+                "@hour" => $start_date->format('H') . "h" . $start_date->format('i'),
               ]) ."</div>",
           ],
         ];
