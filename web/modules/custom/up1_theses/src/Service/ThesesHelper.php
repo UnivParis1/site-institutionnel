@@ -109,6 +109,7 @@ class ThesesHelper {
           else {
             $libedo = "École doctorale de " . $these['LIB_EDO'];
           }
+          \Drupal::logger('up1_theses')->info(print_r($these['LIB_THS'] . " " . $these['DAT_SOU_THS'] . " " . $these['HH_SOU_THS'] . ":" . $these['MM_SOU_THS'],1));
 
           $nodes[] = [
             'cod_ths' => $cod_ths,
