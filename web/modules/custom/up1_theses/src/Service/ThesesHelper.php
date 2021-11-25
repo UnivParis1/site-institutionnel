@@ -276,12 +276,12 @@ class ThesesHelper {
     $date_apogee[1] = $date_apogee[0];
     $date_apogee[0] = $mois;
     $date_apogee[2] = '20'.$date_apogee[2];
+    $minutes = ($minutes == 0 || $minutes == "")? "00" : $minutes;
 
     $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
-    \Drupal::logger('up1_theses')->info(print_r("timestamp : $timestamp", 1));
 
     $formatted_date = \Drupal::service('date.formatter')->format($timestamp, 'custom', 'Y-m-d H:i', "Europe/Paris");
-    \Drupal::logger('up1_theses')->info(print_r("Formatted date : $formatted_date", 1));
+    \Drupal::logger('up1_theses')->info(print_r("timestamp : $timestamp, Formatted date : $formatted_date", 1));
 
 
     return $formatted_date;
