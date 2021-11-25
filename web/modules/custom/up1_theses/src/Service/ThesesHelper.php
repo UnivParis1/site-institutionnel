@@ -278,10 +278,10 @@ class ThesesHelper {
     $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
     \Drupal::logger('up1_theses')->info(print_r("timestamp : $timestamp", 1));
 
-    $new_date = new \DateTime($timestamp, new \DateTimeZone('Europe/Paris'));
-    \Drupal::logger('up1_theses')->info(print_r("timestamp : $new_date", 1));
+    $formatted_date = \Drupal::service('date.formatter')->format($timestamp, 'custom', 'Y-m-d H:i', "Europe/Paris");
+    \Drupal::logger('up1_theses')->info(print_r("timestamp : $formatted_date", 1));
 
 
-    return $new_date;
+    return $formatted_date;
   }
 }
