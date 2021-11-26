@@ -78,12 +78,12 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
     try {
       $storage = $this->entityTypeManager->getStorage('node');
       $node = $storage->create([
-        'cod_ths' => $item['cod_ths'],
         'title' => $item['title'],
         'type' => 'viva',
         'langcode' => 'fr',
         'uid' => $item['uid'],
         'status' => 1,
+        'site_id' => NULL,
         'field_subtitle' => $item['field_subtitle'],
         'field_thesis_supervisor' => $item['field_thesis_supervisor'],
         'field_event_address' => $item['field_event_address'],

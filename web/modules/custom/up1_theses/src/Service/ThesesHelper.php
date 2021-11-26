@@ -4,6 +4,7 @@ namespace Drupal\up1_theses\Service;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\taxonomy\Entity\Term;
 
 
 class ThesesHelper {
@@ -50,6 +51,7 @@ class ThesesHelper {
       watchdog_exception('up1_theses', $e);
     }
 
+    return FALSE;
   }
 
   /**
@@ -72,7 +74,6 @@ class ThesesHelper {
       $uid = $this->thesesService->getWebmestreUid();
       foreach ($data as $key => $these) {
         $ok = FALSE;
-        $existingTheses = $this->thesesService->getExistingTheses();
         $cod_ths = $these['COD_THS'];
 
         if (!empty($nodes)) {
@@ -89,7 +90,10 @@ class ThesesHelper {
           !empty($these['HH_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
           !empty($these['LIB_PR1_IND']) && !empty($these['LIB_NOM_PAT_IND']) &&
           !empty($these['PNOMDIR']) && !empty($these['NOMPDIR'])) {
-          $address = $this->formatAddress($these['LIB_CMT_LEU_SOU_THS']);
+          $codedo = "ED" . $these['COD_EDO'];
+
+          $existingTheses = $this->thesesService->getExistingTheses();
+
           $thesard = ucfirst(strtolower($these['LIB_PR1_IND']))
             . " " . ucfirst(strtolower($these['LIB_NOM_PAT_IND']));
           $dir_ths = ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
@@ -98,6 +102,9 @@ class ThesesHelper {
             preg_match('/^[É]/i', $these['LIB_EDO']) ||
             preg_match('/^[é]/i', $these['LIB_EDO'])) {
             $libedo = "École doctorale d'" . $these['LIB_EDO'];
+          }
+          elseif (preg_match('/(de)/i', $these['LIB_EDO'])) {
+            $libedo = "École doctorale " . $these['LIB_EDO'];
           }
           else {
             $libedo = "École doctorale de " . $these['LIB_EDO'];
@@ -118,7 +125,7 @@ class ThesesHelper {
                 'value' => $this->formatDate($these['DAT_SOU_THS'],
                   $these['HH_SOU_THS'], $these['MM_SOU_THS']),
                 'end_value' => $this->formatDate($these['DAT_SOU_THS'],
-                  ($these['HH_SOU_THS'] + 2), $these['MM_SOU_THS'])
+                  ($these['HH_SOU_THS'] + 4), $these['MM_SOU_THS'])
               ]
             ],
             'field_address_map' => [
@@ -128,102 +135,13 @@ class ThesesHelper {
               ]
             ],
             'field_categories' => $category,
-            'cod_edo' => "ED" . $these['COD_EDO'],
+            'cod_edo' => $codedo,
             'lib_edo' => $libedo,
           ];
         }
       }
     }
     return $nodes;
-
-  }
-
-  /**
-   * Gets latitude and longitude from the address field of the web service.
-   *
-   * @param string $address
-   * @param bool $french
-   *
-   * @return array The array of json data
-   */
-  public function getLatLongFromAddress($address, $french = TRUE) {
-    if ($french) {
-      $baseUrl = $this->thesesService->getFrenchAddressUrl();
-      $url = "$baseUrl$address&limit=1";
-
-      $response = \Drupal::httpClient()->get($url, [
-        'headers' => ['Accept' => 'text/plain']
-      ]);
-      $data = $response->getBody();
-      $json = json_decode($data, TRUE);
-
-      if (isset($json['features'][0]['geometry']['coordinates'])) {
-        $coord = $json['features'][0]['geometry']['coordinates'];
-
-        $latLon = [
-          'lat' => $coord[1],
-          'lon' => $coord[0],
-        ];
-      }
-    }
-    else {
-      $baseUrl = $this->thesesService->getWorldwideAddressUrl();
-      $url = "$baseUrl$address&limit=1";
-
-      $response = \Drupal::httpClient()->get($url, [
-        'headers' => ['Accept' => 'text/plain']
-      ]);
-      $data = $response->getBody();
-      $json = json_decode($data, TRUE);
-
-      if (isset($json[0]['lat']) &&isset($json[0]['lon'])) {
-        $latLon = [
-          'lat' => $json[0]['lat'],
-          'lon' => $json[0]['lon'],
-        ];
-      }
-    }
-
-    if (!isset($latLon['lat']) && !isset($latLon['lon'])) {
-      $latLon  = [
-        'lat' => "48.8468",
-        'lon' => "2.344879"
-      ];
-    }
-
-    return $latLon;
-
-  }
-
-  /**
-   * Obtains latitude and longitude from the address field of the web service.
-   * @param string $address
-   *
-   * @return array $addressData
-   */
-  public function formatAddress($address) {
-    $formattedAddress = $address;
-    $french = FALSE;
-    if (preg_match('/centre Panthéon/i', $address) && !preg_match('/Paris/i', $address)) {
-      $formattedAddress = "12+place+du+Pantheon+75005+Paris";
-      $french = TRUE;
-    }
-    if(preg_match('/Paris/i', $address)) {
-      $french = TRUE;
-      preg_match('/^\D*(?=\d)/', $address, $m);
-      if (isset($m[0])) {
-        $formattedAddress = substr($address, strlen($m[0]));
-      }
-      if (!empty($formattedAddress)) {
-        if (preg_match('/Paris(.*)?/i', $formattedAddress)) {
-          $formattedAddress = preg_replace('/Paris(.*)?/i', '$2 Paris', $formattedAddress);
-        }
-        $formattedAddress = preg_replace("/(\s-\s)|(\s\s)|(\s)/i", "+", $formattedAddress);
-      }
-    }
-
-    $addressData = $this->getLatLongFromAddress($formattedAddress, $french);
-    return $addressData;
 
   }
 
@@ -237,25 +155,15 @@ class ThesesHelper {
    * @return string $formattedDate
    */
   public function formatDate($date, $hours, $minutes) {
-	  $format = 'd/m/Y H:i';
-	  $fullDate = str_replace('/21', '/2021',$date) . " " . ($hours - 2).":";
-    $fullDate .= ($minutes == 0)? "00" : $minutes;
+    $date_apogee = explode('/', $date);
+    $mois = $date_apogee[1];
+    $date_apogee[1] = $date_apogee[0];
+    $date_apogee[0] = $mois;
+    $date_apogee[2] = '20'.$date_apogee[2];
+    $minutes = ($minutes == 0 || $minutes == "")? "00" : $minutes;
 
-    $newDate = \DateTime::createFromFormat($format, $fullDate);
-    $formattedDate = "";
+    $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
 
-    if ($newDate instanceof \DateTime) {
-      $formattedDate = \Drupal::service('date.formatter')
-        ->format($newDate->getTimestamp(), 'custom', 'Y-m-dTH:i:s');
-      $formattedDate = preg_replace('/CEST/i', 'T', $formattedDate);
-      $formattedDate = preg_replace('/CET/i', 'T', $formattedDate);
-      $formattedDate = preg_replace('/LMT/i', 'T', $formattedDate);
-    }
-    else {
-      \Drupal::logger('up1_theses')->notice("The date won't be created for this viva.");
-    }
-
-    return $formattedDate;
-
+    return gmdate('Y-m-d\TH:i:s', $timestamp);
   }
 }
