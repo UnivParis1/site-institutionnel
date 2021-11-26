@@ -280,7 +280,8 @@ class ThesesHelper {
 
     $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
 
-    $formatted_date = \Drupal::service('date.formatter')->format($timestamp, 'custom', 'Y-m-d H:i', "Europe/Paris");
+    $formatted_date = gmdate('Y-m-d\TH:i:s', $timestamp);
+
     \Drupal::logger('up1_theses')->info(print_r("timestamp : $timestamp, Formatted date : $formatted_date", 1));
 
 
