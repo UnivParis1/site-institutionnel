@@ -9,7 +9,7 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\datetime_range\DateTimeRangeTrait;
 
 /**
- * Plugin implementation of the 'UP1' formatter for 'daterange' fields.
+ * Plugin implementation of the 'UP1' formatter for 'daterange' or 'date' fields.
  *
  * This formatter renders the data range as plain text, with a fully
  * configurable date format using the PHP date syntax and separator.
@@ -18,7 +18,8 @@ use Drupal\datetime_range\DateTimeRangeTrait;
  *   id = "up1_viva_format",
  *   label = @Translation("Up1 soutenances format"),
  *   field_types = {
- *     "daterange"
+ *     "daterange",
+ *     "date"
  *   }
  * )
  */
