@@ -106,6 +106,16 @@ class ThesesHelper {
           $date_sout = gmdate('Y-m-d\TH:i:s', strtotime($these['DAT_SOU_THS'],
             date_default_timezone_set("Europe/Paris")));
 
+          $array_board = explode(',',$these['NOMJUR']);
+          $board = '';
+          if (!empty($array_board)) {
+            $board = "<ul>";
+            foreach ($array_board as $item) {
+              $board .= "<li>$item</li>";
+            }
+            $board .= '</ul>';
+          }
+
           $nodes[] = [
             'cod_ths' => $cod_ths,
             'title' => $these['LIB_THS'],
@@ -116,7 +126,7 @@ class ThesesHelper {
             'field_subtitle' => $these['LIB_NOM_IND'],
             'field_thesis_supervisor' => $these['NOMDIR'],
             'field_co_director' => $these['NOMCODIR'],
-            'field_board' => $these['NOMJUR'],
+            'field_board' => $board,
             'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
             'field_viva_date' => $date_sout,
             'field_hdr' => ($these['TEM_DOC_HDR'] == "HDR") ? 1 : 0,
