@@ -130,28 +130,5 @@ class ThesesHelper {
     }
 
     return $nodes;
-
-  }
-
-  /**
-   * Get Drupal formatted date from date field of the web service.
-   *
-   * @param string $date
-   * @param string $hours
-   * @param string $minutes
-   *
-   * @return string $formattedDate
-   */
-  public function formatDate($date) {
-    $date_apogee = explode('/', $date);
-    $mois = $date_apogee[1];
-    $date_apogee[1] = $date_apogee[0];
-    $date_apogee[0] = $mois;
-    $date_apogee[2] = '20'.$date_apogee[2];
-    $minutes = ($minutes == 0 || $minutes == "")? "00" : $minutes;
-
-    $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
-
-    return gmdate('Y-m-d\TH:i:s', $timestamp);
   }
 }
