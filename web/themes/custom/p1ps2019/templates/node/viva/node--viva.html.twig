@@ -78,7 +78,9 @@
 %}
 
 {% set board = content.field_board|render %}
-{% set codir = content.field_co_director|render %}
+{% set codir = content.field_co_director.0|trim %}
+{% set the_board = content.field_board.0|split(',') %}
+{{ tthe }}
 
 <article{{ attributes.addClass(classes) }}>
   <div class="box-content same-height">
@@ -96,8 +98,13 @@
       {% if codir %} & {{ content.field_co_director.0}} {% endif %}
       </span>
     </div>
+
     <div class="board">
-      {{ board|raw }}
+      <ul>
+        {% for key, item in the_board %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
     </div>
     <div class="edo">{{ content.field_edo_label.0 }}</div>
 
@@ -106,8 +113,7 @@
         {{ content.field_viva_date }}
       </div>
       <div class="event-details">
-        <span>{{ 'Lieu : '|t }}</span>
-        {{ content.field_event_address }}
+        <span>{{ 'Lieu : '|t }}</span>{{ content.field_event_address }}
       </div>
       {{ content.field_add_to_cal }}
     </div>
