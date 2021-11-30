@@ -9,20 +9,19 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\datetime_range\DateTimeRangeTrait;
 
 /**
- * Plugin implementation of the 'UP1' formatter for 'daterange' fields.
+ * Plugin implementation of the 'UP1' formatter for 'datetime' fields.
  *
- * This formatter renders the data range as plain text, with a fully
- * configurable date format using the PHP date syntax and separator.
+ * This formatter renders the date range as plain text like "l j F Y at H:i".
  *
  * @FieldFormatter(
- *   id = "up1_viva_format",
- *   label = @Translation("Up1 soutenances format"),
+ *   id = "up1_datetime_format",
+ *   label = @Translation("Up1 datetime format"),
  *   field_types = {
- *     "daterange"
+ *     "datetime"
  *   }
  * )
  */
-class Up1VivaFormatter extends DateTimeCustomFormatter {
+class Up1DatetimeFormatter extends DateTimeCustomFormatter {
 
   use DateTimeRangeTrait;
 
@@ -42,7 +41,7 @@ class Up1VivaFormatter extends DateTimeCustomFormatter {
     foreach ($items as $delta => $item) {
       if (!empty($item->start_date)) {
         $start_date = $item->start_date;
-        $start_date->setTimezone(timezone_open(date_default_timezone_get()));
+        $start_date->setTimezone(timezone_open(date_default_timezone_set("Europe/Paris")));
 
         $elements[$delta] = [
           'date' => [
