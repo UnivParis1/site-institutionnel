@@ -19,7 +19,7 @@ use Drupal\datetime_range\DateTimeRangeTrait;
  *   label = @Translation("Up1 soutenances format"),
  *   field_types = {
  *     "daterange",
- *     "date"
+ *     "datetime"
  *   }
  * )
  */
