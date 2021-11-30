@@ -103,7 +103,9 @@ class ThesesHelper {
           else {
             $libedo = "École doctorale de " . $these['LIB_EDO'];
           }
-          \Drupal::logger('up1_theses')->info(print_r($these['DAT_SOU_THS'], 1));
+          $date_sout = gmdate('Y-m-d\TH:i:s', strtotime($these['DAT_SOU_THS'],
+            date_default_timezone_set("Europe/Paris")));
+
           $nodes[] = [
             'cod_ths' => $cod_ths,
             'title' => $these['LIB_THS'],
@@ -116,7 +118,7 @@ class ThesesHelper {
             'field_co_director' => $these['NOMCODIR'],
             'field_board' => $these['NOMJUR'],
             'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
-            'field_viva_date' => $these['DAT_SOU_THS'] . ":00",
+            'field_viva_date' => $date_sout,
             'field_hdr' => ($these['TEM_DOC_HDR'] == "HDR") ? 1 : 0,
             'field_categories' => $category,
             'cod_edo' => $codedo,
@@ -128,5 +130,28 @@ class ThesesHelper {
     }
 
     return $nodes;
+
+  }
+
+  /**
+   * Get Drupal formatted date from date field of the web service.
+   *
+   * @param string $date
+   * @param string $hours
+   * @param string $minutes
+   *
+   * @return string $formattedDate
+   */
+  public function formatDate($date) {
+    $date_apogee = explode('/', $date);
+    $mois = $date_apogee[1];
+    $date_apogee[1] = $date_apogee[0];
+    $date_apogee[0] = $mois;
+    $date_apogee[2] = '20'.$date_apogee[2];
+    $minutes = ($minutes == 0 || $minutes == "")? "00" : $minutes;
+
+    $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
+
+    return gmdate('Y-m-d\TH:i:s', $timestamp);
   }
 }
