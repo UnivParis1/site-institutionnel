@@ -78,7 +78,6 @@
 
 {% set codir = content.field_co_director.0|trim %}
 {% set board = content.field_board|render %}
-{% set the_board = content.field_board.0|split(',') %}
 
 <article{{ attributes.addClass(classes) }}>
   <div class="box-content same-height">
@@ -90,19 +89,16 @@
       {{ label.0 }}
     </h2>
     {{ title_suffix }}
-    {% if content.field_hdr %}<span>HDR</span>{% endif %}
+    {% if content.field_hdr == 1%}
+      <span>HDR</span>
+    {% endif %}
     <div class="thesis-direction">
       <span class="direction-name">{{ "Sous la direction de "|t }}
         {{ content.field_thesis_supervisor.0}}</span>
-        {% if codir %} & {{ content.field_co_director.0}} {% endif %}
+      {% if codir %} & {{ content.field_co_director.0}} {% endif %}
     </div>
-    <div class="board">
-      <ul>
-      {% for key, item in the_board %}
-        <li>{{ item }}</li>
-      {% endfor %}
-      </ul>
-    </div>
+
+    {% if board is not empty %}<div class="board"> {{ content.field_board|raw }}</div>{% endif %}
     <div class="edo">{{ content.field_edo_label.0 }}</div>
 
     <div class="bottom-infos">
@@ -110,8 +106,7 @@
         {{ content.field_viva_date }}
       </div>
       <div class="event-details">
-        <span>{{ 'Lieu : '|t }}</span>
-        <span>{{ content.field_event_address.0 }}</span>
+        <span>{{ 'Lieu : '|t }}{{ content.field_event_address.0 }}</span>
       </div>
       {{ content.field_add_to_cal }}
     </div>
