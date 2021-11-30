@@ -86,14 +86,16 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
         'site_id' => NULL,
         'field_subtitle' => $item['field_subtitle'],
         'field_thesis_supervisor' => $item['field_thesis_supervisor'],
+        'field_co_director' => $item['field_co_director'],
+        'field_board' => $item['field_board'],
         'field_event_address' => $item['field_event_address'],
         'field_event_date' => $item['field_event_date'],
-        'field_address_map' => $item['field_address_map'],
+        'field_viva_date' => $item['field_viva_date'],
+        'field_hdr' => $item['field_hdr'],
         'field_edo_code' => $item['cod_edo'],
         'field_edo_label' => $item['lib_edo'],
       ]);
       $node->set('field_categories', [$item['field_categories']]);
-      $node->set('field_ecole_doctorale', [$item['field_ecole_doctorale']]);
       $node->set('moderation_state', 'published');
 
       $node->save();
