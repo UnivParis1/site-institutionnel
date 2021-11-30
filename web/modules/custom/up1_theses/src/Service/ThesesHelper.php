@@ -116,7 +116,7 @@ class ThesesHelper {
             'field_co_director' => $these['NOMCODIR'],
             'field_board' => $these['NOMJUR'],
             'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
-            'field_viva_date' => $these['DAT_SOU_THS'],
+            'field_viva_date' => $these['DAT_SOU_THS'] . ":00",
             'field_hdr' => ($these['TEM_DOC_HDR'] == "HDR") ? 1 : 0,
             'field_categories' => $category,
             'cod_edo' => $codedo,
