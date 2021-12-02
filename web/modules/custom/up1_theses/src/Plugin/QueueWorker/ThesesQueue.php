@@ -86,7 +86,7 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
           ->condition('cod_ths', $item['cod_ths']);
         $value = $query->execute()->fetchCol();
 
-        \Drupal::logger('up1_theses_queue')->print_r("The node exists, its nid is $value", 1);
+        \Drupal::logger('up1_theses_queue')->info(print_r("The node exists, its nid is $value", 1));
 
         $node = Node::load($value);
         $node->set('title', $item['title']);
