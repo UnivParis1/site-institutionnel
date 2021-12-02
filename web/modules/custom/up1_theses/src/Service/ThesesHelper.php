@@ -107,17 +107,22 @@ class ThesesHelper {
           $date_sout = gmdate('Y-m-d\TH:i:s', strtotime($these['DAT_SOU_THS'],
             date_default_timezone_set("Europe/Paris")));
 
+          $jury = explode(',',$these['NOMJUR']);
+          foreach($jury as $key => $member) {
+            $jury[$key] = trim(ucwords(strtolower($member)));
+          }
+
           $nodes[] = [
             'cod_ths' => $cod_ths,
-            'title' => trim($these['LIB_THS']),
+            'title' => trim(ucwords(strtolower($these['LIB_THS']))),
             'type' => 'viva',
             'langcode' => 'fr',
             'uid' => $uid,
             'status' => 1,
             'field_subtitle' => $these['LIB_NOM_IND'],
-            'field_thesis_supervisor' => trim($these['NOMDIR']),
-            'field_co_director' => trim($these['NOMCODIR']),
-            'field_board' => trim($these['NOMJUR']),
+            'field_thesis_supervisor' => trim(ucwords(strtolower($these['NOMDIR']))),
+            'field_co_director' => trim(ucwords(strtolower($these['NOMCODIR']))),
+            'field_board' => implode(', ',$jury),
             'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
             'field_viva_date' => $date_sout,
             'field_hdr' => ($these['TEM_DOC_HDR'] == "HDR") ? 1 : 0,
