@@ -73,68 +73,67 @@ class ThesesHelper {
       $category = reset($termCategory);
       $uid = $this->thesesService->getWebmestreUid();
       foreach ($data as $key => $these) {
-        $ok = FALSE;
         $cod_ths = $these['COD_THS'];
 
-        if (!empty($nodes)) {
-          foreach ($nodes as $node) {
-            if ($cod_ths == $node['cod_ths']) {
-              $ok = TRUE;
-              break;
-            }
-          }
-        }
-
-        if (!$ok && !in_array($cod_ths, $existingTheses)
-          && !empty($these['LIB_THS']) && !empty($these['DAT_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
-          !empty($these['LIB_NOM_IND']) && !empty($these['NOMDIR'])) {
-          $codedo = "ED" . $these['COD_EDO'];
-
-          $existingTheses = $this->thesesService->getExistingTheses();
-
+        if (!empty($these['LIB_THS'])) {
           $these['LIB_EDO'] = trim($these['LIB_EDO']);
-          if (preg_match('/^[aeiouyh]/i', $these['LIB_EDO']) ||
-            preg_match('/^[É]/i', $these['LIB_EDO']) ||
-            preg_match('/^[é]/i', $these['LIB_EDO'])) {
-            $libedo = "École doctorale d'" . $these['LIB_EDO'];
-          }
-          elseif (preg_match('/(de)/i', $these['LIB_EDO'])) {
-            $libedo = "École doctorale " . $these['LIB_EDO'];
+
+          if (!empty($these['DAT_SOU_THS'])) {
+            $date_sout = gmdate('Y-m-d\TH:i:s', strtotime($these['DAT_SOU_THS'],
+              date_default_timezone_set("Europe/Paris")));
           }
           else {
-            $libedo = "École doctorale de " . $these['LIB_EDO'];
+            $date_sout = gmdate('Y-m-d\TH:i:s', strtotime(time(),
+              date_default_timezone_set("Europe/Paris")));
           }
-          $date_sout = gmdate('Y-m-d\TH:i:s', strtotime($these['DAT_SOU_THS'],
-            date_default_timezone_set("Europe/Paris")));
 
-          $jury = explode(',',$these['NOMJUR']);
-          foreach($jury as $key => $member) {
-            $jury[$key] = trim(ucwords(strtolower($member)));
+          $board = "";
+          if (!empty($these['NOMJUR'])) {
+            $jury = explode(',', $these['NOMJUR']);
+            foreach ($jury as $key => $member) {
+              $jury[$key] = ucwords(strtolower(trim($member)));
+            }
+            $board = implode(', ',$jury);
           }
 
           $nodes[] = [
             'cod_ths' => $cod_ths,
-            'title' => trim(ucwords(strtolower($these['LIB_THS']))),
+            'title' => trim($these['LIB_THS']),
             'type' => 'viva',
             'langcode' => 'fr',
             'uid' => $uid,
             'status' => 1,
-            'field_subtitle' => $these['LIB_NOM_IND'],
-            'field_thesis_supervisor' => trim(ucwords(strtolower($these['NOMDIR']))),
-            'field_co_director' => trim(ucwords(strtolower($these['NOMCODIR']))),
-            'field_board' => implode(', ',$jury),
-            'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
+            'field_subtitle' => !empty($these['LIB_NOM_IND']) ? ucwords(strtolower(trim($these['LIB_NOM_IND']))) : "",
+            'field_thesis_supervisor' => !empty($these['NOMDIR']) ? ucwords(strtolower(trim($these['NOMDIR']))) : "",
+            'field_co_director' => !empty($these['NOMCODIR']) ? ucwords(strtolower(trim($these['NOMCODIR']))) : "",
+            'field_board' => $board,
+            'field_event_address' => !empty($these['LIB_CMT_LEU_SOU_THS']) ? $these['LIB_CMT_LEU_SOU_THS'] : "",
             'field_viva_date' => $date_sout,
             'field_hdr' => ($these['TEM_DOC_HDR'] == "HDR") ? 1 : 0,
             'field_categories' => $category,
-            'cod_edo' => $codedo,
-            'lib_edo' => $libedo,
+            'cod_edo' => !empty($these['COD_EDO']) ? "ED" . $these['COD_EDO'] :  "",
+            'lib_edo' => (!empty($these['LIB_EDO'])) ? $this->formatEdoLabel($these['LIB_EDO']) : "",
           ];
         }
       }
-      \Drupal::logger('up1_theses')->info(print_r($nodes, 1));
     }
 
     return $nodes;
+  }
+
+  private function formatEdoLabel($label) {
+
+    if (preg_match('/^[aeiouyh]/i', $label) ||
+      preg_match('/^[É]/i', $label) ||
+      preg_match('/^[é]/i', $label)) {
+      $edo = "École doctorale d'" . $label;
+    }
+    elseif (preg_match('/(de)/i', $label)) {
+      $edo = "École doctorale " . $label;
+    }
+    else {
+      $edo = "École doctorale de " . $label;
+    }
+    return $edo;
   }
 }
