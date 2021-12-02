@@ -76,7 +76,7 @@
 ]
 %}
 
-{% set codir = content.field_co_director.0|trim %}
+{% set codir = content.field_co_director|render %}
 {% set board = content.field_board|render %}
 
 <article{{ attributes.addClass(classes) }}>
@@ -89,7 +89,7 @@
       {{ label.0 }}
     </h2>
     {{ title_suffix }}
-    {% if content.field_hdr == 1%}
+    {% if content.field_hdr == 1 %}
       <span>HDR</span>
     {% endif %}
     <div class="thesis-direction">
@@ -98,7 +98,7 @@
       {% if codir %} & {{ content.field_co_director.0}} {% endif %}
     </div>
 
-    {% if board is not empty %}<div class="board"> {{ content.field_board|raw }}</div>{% endif %}
+    {% if board %}<div class="board"> {{ content.field_board }}</div>{% endif %}
     <div class="edo">{{ content.field_edo_label.0 }}</div>
 
     <div class="bottom-infos">
