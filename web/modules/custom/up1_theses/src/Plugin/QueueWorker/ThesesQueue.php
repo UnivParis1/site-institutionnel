@@ -87,25 +87,29 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
         $value = $query->execute()->fetchCol();
 
         \Drupal::logger('up1_theses_queue')->info(print_r($value, 1));
+        if (!empty($value) && isset($value[0])) {
+          $node = Node::load($value[0]);
+          $node->set('title', $item['title']);
+          $node->set('type', 'viva');
+          $node->set('langcode', 'fr');
+          $node->set('uid', $item['uid']);
+          $node->set('status', 1);
+          $node->set('site_id', NULL);
+          $node->set('field_subtitle', $item['field_subtitle']);
+          $node->set('field_thesis_supervisor', $item['field_thesis_supervisor']);
+          $node->set('field_co_director', $item['field_co_director']);
+          $node->set('field_board', $item['field_board']);
+          $node->set('field_event_address', $item['field_event_address']);
+          $node->set('field_viva_date', $item['field_viva_date']);
+          $node->set('field_hdr', $item['field_hdr']);
+          $node->set('field_edo_code', $item['cod_edo']);
+          $node->set('field_ths_code', $item['cod_ths']);
+          $node->set('field_edo_label', $item['lib_edo']);
 
-        $node = Node::load($value);
-        $node->set('title', $item['title']);
-        $node->set('type', 'viva');
-        $node->set('langcode', 'fr');
-        $node->set('uid', $item['uid']);
-        $node->set('status', 1);
-        $node->set('site_id', NULL);
-        $node->set('field_subtitle', $item['field_subtitle']);
-        $node->set('field_thesis_supervisor', $item['field_thesis_supervisor']);
-        $node->set('field_co_director', $item['field_co_director']);
-        $node->set('field_board', $item['field_board']);
-        $node->set('field_event_address', $item['field_event_address']);
-        $node->set('field_viva_date', $item['field_viva_date']);
-        $node->set('field_hdr', $item['field_hdr']);
-        $node->set('field_edo_code', $item['cod_edo']);
-        $node->set('field_ths_code', $item['cod_ths']);
-        $node->set('field_edo_label', $item['lib_edo']);
-      } else {
+          $node->save();
+        }
+      }
+      else {
         $node = $storage->create([
           'title' => $item['title'],
           'type' => 'viva',
