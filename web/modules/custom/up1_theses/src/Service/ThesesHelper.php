@@ -73,8 +73,6 @@ class ThesesHelper {
       $category = reset($termCategory);
       $uid = $this->thesesService->getWebmestreUid();
       foreach ($data as $key => $these) {
-        $cod_ths = $these['COD_THS'];
-
         if (!empty($these['LIB_THS'])) {
           $these['LIB_EDO'] = trim($these['LIB_EDO']);
 
@@ -97,7 +95,7 @@ class ThesesHelper {
           }
 
           $nodes[] = [
-            'cod_ths' => $cod_ths,
+            'cod_ths' => $these['COD_THS'],
             'title' => trim($these['LIB_THS']),
             'type' => 'viva',
             'langcode' => 'fr',
