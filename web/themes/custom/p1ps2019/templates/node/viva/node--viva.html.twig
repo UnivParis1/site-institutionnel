@@ -82,7 +82,9 @@
 
 <article{{ attributes.addClass(classes) }}>
   <div class="box-content same-height{% if hdr_value %} blue-box{% endif %}">
-    <span class="texthdr">hdr</span>
+    {% if hdr_value %}
+      <span class="texthdr">hdr</span>
+    {% endif %}
     <div class="top-infos"> {{ title_prefix }}
       <h2 class="h5-style">
         {{ label.0 }}
