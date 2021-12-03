@@ -81,6 +81,7 @@
 {% set board = content.field_board|render %}
 
 <article{{ attributes.addClass(classes) }}>
+  {{ content.field_hdr.0 }}
   <div class="box-content same-height{% if content.field_hdr.0 == 'HDR' %} blue-box{% endif %}">
     <div class="top-infos"> {{ title_prefix }}
       <h2 class="h5-style">
@@ -97,8 +98,8 @@
 
     {% if board %}
       <div class="board">
-        <span>{{ "Composition du jury : "|t }}</span> {
-        { content.field_board.0 }}
+        <span>{{ "Composition du jury : "|t }}</span>
+        {{ content.field_board.0 }}
       </div>
     {% endif %}
 
