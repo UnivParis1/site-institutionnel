@@ -76,21 +76,20 @@
   'bootstrap-cards', 'viva'
 ]
 %}
-
+{% set hdr_value = content.field_hdr['#items'].getString() %}
 {% set codir = content.field_co_director|render %}
 {% set board = content.field_board|render %}
 
 <article{{ attributes.addClass(classes) }}>
-  {{ content.field_hdr.0 }}
-  <div class="box-content same-height{% if content.field_hdr.0 == 'HDR' %} blue-box{% endif %}">
+  <div class="box-content same-height{% if hdr_value %} blue-box{% endif %}">
     <div class="top-infos"> {{ title_prefix }}
       <h2 class="h5-style">
         {{ label.0 }}
       </h2>
-      <h3 class="h4-style">{{ content.field_subtitle.0 }}</h3>
+      <h3 class="h4-style txt-align-center">{{ content.field_subtitle.0 }}</h3>
       {{ title_suffix }}
     </div>
-    <div class="thesis-direction">
+    <div class="subtitle">
       <span>{{ "Sous la direction de "|t }}</span>
       {{ content.field_thesis_supervisor.0}}
       {% if codir %} & {{ content.field_co_director.0}} {% endif %}
@@ -109,7 +108,7 @@
         <span>{{ 'Lieu : '|t }}{{ content.field_event_address.0 }}</span>
       </div>
     </div>
-    <div class="bottom-infos">
+    <div class="bottom-infos txt-align-center">
       <div class="categ-style semi-infos-sep">{{ content.field_edo_label.0 }}</div>
       {{ content.field_add_to_cal }}
     </div>

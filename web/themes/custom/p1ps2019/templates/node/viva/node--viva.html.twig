@@ -76,12 +76,12 @@
   'grid-x', 'grid-margin-x', 'grid-margin-y'
 ]
 %}
-
+{% set hdr_value = content.field_hdr['#items'].getString() %}
 {% set codir = content.field_co_director|render %}
 {% set board = content.field_board|render %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="box-content same-height{% if content.field_hdr.0 == 'HDR' %} blue-box{% endif %}">
+  <div class="box-content same-height{% if hdr_value %} blue-box{% endif %}">
     <div class="top-infos"> {{ title_prefix }}
       <h2 class="h5-style">
         {{ label.0 }}
