@@ -77,7 +77,8 @@
 ]
 %}
 
-{% set hdr_class = 'HDR' == content.field_hdr.0 ? ' blue-box' : '' %}
+{% set hdr = content.field_hdr.0 %}
+{% set hdr_class = ('HDR' == hdr ? ' blue-box') %}
 {% set codir = content.field_co_director|render %}
 {% set board = content.field_board|render %}
 
@@ -109,8 +110,8 @@
         <span>{{ 'Lieu : '|t }}{{ content.field_event_address.0 }}</span>
       </div>
     </div>
-    <div class="categ-style semi-infos-sep">{{ content.field_edo_label.0 }}</div>
     <div class="bottom-infos">
+      <div class="categ-style semi-infos-sep">{{ content.field_edo_label.0 }}</div>
       {{ content.field_add_to_cal }}
     </div>
   </div>
