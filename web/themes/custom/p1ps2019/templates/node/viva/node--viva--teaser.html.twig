@@ -87,25 +87,25 @@
     <h2 class="h4-style">
       {{ label.0 }}
     </h2>
-    <h3 class="">{{ content.field_subtitle.0 }}</h3>
+    <h3 class="h4-style">{{ content.field_subtitle.0 }}</h3>
     {{ title_suffix }}
     <span class="hdr"> {{ content.field_hdr.0 }} </span>
     <div class="thesis-direction">
       <span>{{ "Sous la direction de "|t }}</span>
       {{ content.field_thesis_supervisor.0}}
-      {% if codir %} & {{ content.field_co_director.0}} {% endif %}
+      {% if codir %} &nbsp; {{ content.field_co_director.0}} {% endif %}
     </div>
 
     {% if board %}
       <div class="board">
-      <span>{{ "Composition du jury : "|t }}</span> {
-        { content.field_board.0 }}
+        <span>{{ "Composition du jury : "|t }}</span>
+        {{ content.field_board.0 }}
       </div>
     {% endif %}
 
     <div class="event-details">
       <div class="date-style semi-field-sep">
-        <span>{{ content.field_viva_date.0 }}</span>
+        <span>{{ content.field_viva_date.0 }}</span><br/>
         <span>{{ 'Lieu : '|t }}{{ content.field_event_address.0 }}</span>
       </div>
     </div>
