@@ -76,6 +76,8 @@
   'bootstrap-cards', 'viva'
 ]
 %}
+{% set all_board = content.field_board['#items'].getString() %}
+{% set list_board = all_board|split(', ') %}
 {% set hdr_value = content.field_hdr['#items'].getString() %}
 {% set codir = content.field_co_director|render %}
 {% set board = content.field_board|render %}
@@ -89,10 +91,10 @@
       <h2 class="h5-style">
         {{ label.0 }}
       </h2>
-      <h3 class="h4-style txt-align-center">{{ content.field_subtitle.0 }}</h3>
+      <h3 class="h4-style">{{ content.field_subtitle.0 }}</h3>
       {{ title_suffix }}
     </div>
-    <div class="subtitle">
+    <div class="thesis-direction">
       <span>{{ "Sous la direction de "|t }}</span>
       {{ content.field_thesis_supervisor.0}}
       {% if codir %} & {{ content.field_co_director.0}} {% endif %}
@@ -101,7 +103,12 @@
     {% if board %}
       <div class="board">
         <span>{{ "Composition du jury : "|t }}</span>
-        {{ content.field_board.0 }}
+        <ul>
+          {% for key, member in list_board %}
+            <li>{{ member }}</li>
+            {% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </ul>>
       </div>
     {% endif %}
 
@@ -111,7 +118,7 @@
         <span>{{ 'Lieu : '|t }}{{ content.field_event_address.0 }}</span>
       </div>
     </div>
-    <div class="bottom-infos txt-align-center">
+    <div class="bottom-infos">
       <div class="categ-style semi-infos-sep">{{ content.field_edo_label.0 }}</div>
       {{ content.field_add_to_cal }}
     </div>

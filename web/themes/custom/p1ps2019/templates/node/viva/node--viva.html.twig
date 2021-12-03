@@ -76,6 +76,8 @@
   'grid-x', 'grid-margin-x', 'grid-margin-y'
 ]
 %}
+{% set all_board = content.field_board['#items'].getString() %}
+{% set list_board = all_board|split(', ') %}
 {% set hdr_value = content.field_hdr['#items'].getString() %}
 {% set codir = content.field_co_director|render %}
 {% set board = content.field_board|render %}
@@ -101,7 +103,12 @@
     {% if board %}
       <div class="board">
         <span>{{ "Composition du jury : "|t }}</span>
-        {{ content.field_board.0 }}
+        <ul>
+        {% for key, member in list_board %}
+          <li>{{ member }}</li>
+          {% if not loop.last %}, {% endif %}
+        {% endfor %}
+        </ul>>
       </div>
     {% endif %}
 
