@@ -36,9 +36,11 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
     font-weight:bold;
 }
 .scroll #navbar #top-header .icon-menu::after, .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .path-node #navbar #top-header .icon-menu::after, .path-resultats-recherche #navbar #top-header .icon-menu::after, .path-publications #navbar #top-header .icon-menu::after, .path-actualites #navbar #top-header .icon-menu::after, .path-evenements #navbar #top-header .icon-menu::after, .path-soutenances #navbar #top-header .icon-menu::after {
-    color:#00326E;
+    color:#00326e;
 }
-
+.accessibility-mode .scroll #navbar #top-header .icon-menu::after, .accessibility-mode .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .accessibility-mode .path-node #navbar #top-header .icon-menu::after, .accessibility-mode .path-resultats-recherche #navbar #top-header .icon-menu::after, .accessibility-mode .path-publications #navbar #top-header .icon-menu::after, .accessibility-mode .path-actualites #navbar #top-header .icon-menu::after, .accessibility-mode .path-evenements #navbar #top-header .icon-menu::after, .accessibility-mode .path-soutenances #navbar #top-header .icon-menu::after {
+    color: #fff;
+}
 /* label node type dans la recherche */
 .node-type-search {
   display: block;
@@ -118,7 +120,6 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 .paragraph--type--content-block .views-element-container .flex-grow .cell {
 	margin-bottom: 2rem;
 }
-
 /** correction Bouton pour bloc partenaire **/
 .site-content-wrapper .partenaires .btn.outline {
     color: #00326e;
@@ -144,7 +145,6 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 .paragraph--type--partenaire-section .grid-margin-y > .small-10, .paragraph--type--partenaire-section .grid-margin-y > .small-8 {
     margin: 0.75rem auto;
 }
-
 .sm-teaser .sm-teaser__img-link .field--name-field-legende {
 	position: absolute;
 	color: #fff;
@@ -153,7 +153,13 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 	padding: 5px 10px;
 	font-size: 12px;
 }
-
+/** correction border des publications qui apparaissent sur bloc partenaire **/
+#block-p1ps2019-content .paragraph .partenaires .sm-teaser__img-link img {
+    border: 0 none;
+}
+#block-p1ps2019-content .paragraph--type--partenaire-section .sm-teaser {
+    border-bottom: 0 none;
+}
 /** correction affichage page domaine expertise **/
 .path-domaines-expertise .content-left .form-item:not(.form-item-centre-name)::before, .path-domaines-expertise  .chosen-container-single::before {
     top: auto;
@@ -218,7 +224,6 @@ z-index: 1 !important;
 }
 
 /*** NODE PREVIEW ***/
-
 .node-preview-container.container-inline {
   width: 100vw;
   background: #00326e;
@@ -353,6 +358,12 @@ z-index: 1 !important;
 
 /* Responsive > Mobile */
 @media screen and (max-width: 46.1875em) {
+.page-personnelle .page_personnelle .content {
+      padding: 0 0.5rem;
+}
+.page-personnelle .page_personnelle .right-mov-content .colonnecentrale .new-section.about .infos-sep .btn {
+      margin-bottom: 0.5rem;
+}
 .transparent:not(.scroll) #navbar #top-header .header-center #block-p1ps2019-branding svg {
     max-width: 30vw;
     background-position: center;
@@ -389,17 +400,7 @@ z-index: 1 !important;
     font-size: 1.3rem;
     line-height: 1;
 }
-  /*.paragraph--type--button-grid .grid-button-x {
-    display: block;
-    align-items: unset;
-    justify-content: unset;
-  }
-  .paragraph--type--button-grid .grid-button-x .paragraph--type--button-grid-item {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-  }*/
 }
-
 /** Correction Taille police sur H2 sur Actualité **/
 #block-p1ps2019-content .news .paragraph h2 {
     font-size: 1.875rem;
@@ -416,10 +417,91 @@ z-index: 1 !important;
   display: inline-block;
   margin: 1rem 1rem 0 0;
 }
-/* PAGE 404 */
+/** affichage menu droite en mode mobile sur site www **/
+@media screen and (max-width: 63.9375em) {
+#navbar-header .navigation-region {
+    display: block;
+    background-color:#FFF;
+}
+#navbar-header .navigation-region ul li a, #navbar-header .navigation-region ul li span {
+    color: #00326E;
+}
+#navbar-header .navigation-region #block-p1ps2019-menuliensutileshaut #block-p1ps2019-menuliensutileshaut-menu.visually-hidden  {
+    display: block;
+    position: relative !important;
+    color: #c89108;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-size: 1rem;
+    background-color: #FFF;
+    margin-top: -1rem;
+    padding: 0.5rem;
+    border: 1px dashed #c89108;
+    margin-bottom: 1.5rem;
+}
+}
+/**** Micro-site header - social media icons ****/
+.header-micro .micro-right .icon-rs {
+  content:'';
+  height: 24px;
+  width:24px;
+  display:block;
+}
+.transparent:not(.scroll) .header-micro .micro-right .up1-hypotheses, .page_personnelle .socialinks .up1-hypotheses {
+  background: url('https://com-web.univ-paris1.fr/logos/logo-hypotheses-blanc.svg') no-repeat;
+}
+.header-micro .micro-right .up1-hypotheses {
+  background: url('https://com-web.univ-paris1.fr/logos/logo-hypotheses-noir.svg') no-repeat;
+}
+.transparent:not(.scroll) .header-micro .micro-right .up1-hal, .page_personnelle .socialinks .up1-hal {
+  background: url('https://com-web.univ-paris1.fr/logos/logo-hal-texte-blanc.svg') no-repeat;
+}
+.header-micro .micro-right .up1-hal {
+  background: url('https://com-web.univ-paris1.fr/logos/logo-hal-texte-noir.svg') no-repeat;
+  margin-top: 5px;
+  width: 52px;
+}
+.page-personnelle .socialinks .hal img {
+  width: 62px;
+}
+.page_personnelle .socialinks {
+  margin-top: 2rem;
+}
+.header-micro .micro-right .up1-hal,.page_personnelle .socialinks .epi {
+  height: 32px;
+  display: block;
+  content: "";
+}
+.page_personnelle .socialinks .epi {
+  width: 32px;
+  background: url('https://com-web.univ-paris1.fr/logos/logo_epi_bleu.svg') no-repeat;
+}
+/*** Correction affichage bloc media file dans 2 columns uneven ****/
+#block-p1ps2019-content .bp-columns-two-uneven .grid-container .column-uneven-wrapper .paragraph--type--medias .grid-container {
+    padding: 0;
+	max-width: 100%;
+}
+#block-p1ps2019-content .bp-columns-two-uneven .grid-container .column-uneven-wrapper .paragraph--type--medias .grid-container .paragraph--type--files-media {
+    margin: 0;
+	max-width: 100%;
+    width:100%;
+}
+@media print, screen and (min-width: 46.25em) {
+#block-p1ps2019-content .bp-columns-two-uneven .grid-container .column-uneven-wrapper .medium-3 {
+    max-width: 60%;
+}
+}
 
-#page-8187 {
-  background: url('https://com-web.univ-paris1.fr/background/page-404.png');
-  background-size: cover;
-  height: 100vh;
+.margin-archives {
+	margin: 3rem auto;
+}
+/*** ajout habillage pour en-tête des tableaux ***/
+#block-p1ps2019-content .paragraph--type--bp-simple table thead {
+    background: #00326E;
+    color: #fff;
+}
+/*** lien dans accordeon si fond en bleu **/
+#block-p1ps2019-content .paris1-bg-blue .accordion .accordion-content p a {
+    color:#00326E;
 }
