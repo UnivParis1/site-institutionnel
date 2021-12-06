@@ -28,7 +28,6 @@ class ThesesService {
    *   The base URL.
    */
   public function getWebServiceUrl() {
-    $protocol = $this->settings->get('webservice.protocol');
     $hostname = $this->settings->get('webservice.hostname');
 
     if (!isset($hostname) || empty($hostname)) {
@@ -37,39 +36,7 @@ class ThesesService {
       return FALSE;
     }
     else {
-      return "$protocol://$hostname";
-    }
-  }
-
-  /**
-   * @return bool|string
-   */
-  public function getFrenchAddressUrl() {
-    $hostname = $this->settings->get('address.french');
-
-    if (!isset($hostname) || empty($hostname)) {
-      \Drupal::logger('up1_theses')
-        ->error('You must define the hostname of the addresses web service');
-      return FALSE;
-    }
-    else {
-      return "$hostname?q=";
-    }
-  }
-
-  /**
-   * @return bool|string
-   */
-  public function getWorldwideAddressUrl() {
-    $hostname = $this->settings->get('address.worldwide');
-
-    if (!isset($hostname) || empty($hostname)) {
-      \Drupal::logger('up1_theses')
-        ->error('You must define the hostname of the addresses web service');
-      return FALSE;
-    }
-    else {
-      return "$hostname?format=json&addressdetails=1&q=";
+      return $hostname;
     }
   }
 

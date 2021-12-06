@@ -38,20 +38,9 @@ class Up1ThesesSettings extends ConfigFormBase {
     $config = $this->config('up1_theses.settings');
     $form['webservice'] = [
       '#type' => 'details',
-      '#title' => $this->t('Agenda des soutenances de thèse.'),
+      '#title' => $this->t('Récupération des soutenances de thèse depuis Apogée.'),
       '#open' => TRUE,
       '#tree' => TRUE,
-      '#description' => $this->t('Enter the details of "Agenda des soutenances de thèse".'),
-    ];
-    $form['webservice']['protocol'] = [
-      '#type' => 'radios',
-      '#title' => $this->t('HTTP Protocol'),
-      '#options' => [
-        'http' => $this->t('HTTP (non-secure)'),
-        'https' => $this->t('HTTPS (secure)'),
-      ],
-      '#default_value' => ($config->get('webservice.protocol'))? $config->get('webservice.protocol') : 'http',
-      '#description' => $this->t('HTTP protocol type of the  webservice. '),
     ];
     $form['webservice']['hostname'] = [
       '#type' => 'textfield',
@@ -59,29 +48,6 @@ class Up1ThesesSettings extends ConfigFormBase {
       '#description' => $this->t('Hostname or IP Address of the web service.'),
       '#size' => 60,
       '#default_value' => $config->get('webservice.hostname'),
-    ];
-    $form['address'] = [
-      '#type' => 'details',
-      '#title' => $this->t('Addresses API.'),
-      '#open' => TRUE,
-      '#tree' => TRUE,
-      '#description' => $this->t('Addresses API'),
-    ];
-    $form['address']['french'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('URL of the web service for french addresses.'),
-      '#description' => $this->t('URL of the web service to retrieve 
-      french addresses coordinates. Exemple : https://api-adresse.data.gouv.fr/search'),
-      '#size' => 60,
-      '#default_value' => $config->get('address.french'),
-    ];
-    $form['address']['worldwide'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('URL of the web service for worldwide addresses.'),
-      '#description' => $this->t('URL of the web service to retrieve 
-      worldwide addresses coordinates. Exemple : https://nominatim.openstreetmap.org'),
-      '#size' => 60,
-      '#default_value' => $config->get('address.worldwide'),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -93,16 +59,10 @@ class Up1ThesesSettings extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('up1_theses.settings');
     $webservice_data = $form_state->getValue('webservice');
-    $address_data = $form_state->getValue('address');
-    $config
-      ->set('webservice.protocol', $webservice_data['protocol'])
-      ->set('webservice.hostname', $webservice_data['hostname'])
-      ->set('address.french', $address_data['french'])
-      ->set('address.worldwide', $address_data['worldwide']);
+    $config->set('webservice.hostname', $webservice_data['hostname']);
 
     $config->save();
     parent::submitForm($form, $form_state);
-    // Confirmation on form submission.
     \Drupal::messenger()->addMessage($this->t('The configuration options have been saved.'));
   }
 

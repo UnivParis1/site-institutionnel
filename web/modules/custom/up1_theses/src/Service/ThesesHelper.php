@@ -73,97 +73,65 @@ class ThesesHelper {
       $category = reset($termCategory);
       $uid = $this->thesesService->getWebmestreUid();
       foreach ($data as $key => $these) {
-        $ok = FALSE;
-        $cod_ths = $these['COD_THS'];
+        if (!empty($these['LIB_THS'])) {
+          $these['LIB_EDO'] = trim($these['LIB_EDO']);
 
-        if (!empty($nodes)) {
-          foreach ($nodes as $node) {
-            if ($cod_ths == $node['cod_ths']) {
-              $ok = TRUE;
-              break;
-            }
-          }
-        }
-
-        if (!$ok && !in_array($cod_ths, $existingTheses)
-          && !empty($these['LIB_THS']) && !empty($these['DAT_SOU_THS']) &&
-          !empty($these['HH_SOU_THS']) && !empty($these['LIB_CMT_LEU_SOU_THS']) &&
-          !empty($these['LIB_PR1_IND']) && !empty($these['LIB_NOM_PAT_IND']) &&
-          !empty($these['PNOMDIR']) && !empty($these['NOMPDIR'])) {
-          $codedo = "ED" . $these['COD_EDO'];
-
-          $existingTheses = $this->thesesService->getExistingTheses();
-
-          $thesard = ucfirst(strtolower($these['LIB_PR1_IND']))
-            . " " . ucfirst(strtolower($these['LIB_NOM_PAT_IND']));
-          $dir_ths = ucfirst($these['PNOMDIR']) . " " . ucfirst($these['NOMPDIR']);
-
-          if (preg_match('/^[aeiouyh]/i', $these['LIB_EDO']) ||
-            preg_match('/^[É]/i', $these['LIB_EDO']) ||
-            preg_match('/^[é]/i', $these['LIB_EDO'])) {
-            $libedo = "École doctorale d'" . $these['LIB_EDO'];
-          }
-          elseif (preg_match('/(de)/i', $these['LIB_EDO'])) {
-            $libedo = "École doctorale " . $these['LIB_EDO'];
+          if (!empty($these['DAT_SOU_THS'])) {
+            $date_sout = gmdate('Y-m-d\TH:i:s', strtotime($these['DAT_SOU_THS'],
+              date_default_timezone_set("Europe/Paris")));
           }
           else {
-            $libedo = "École doctorale de " . $these['LIB_EDO'];
+            $date_sout = gmdate('Y-m-d\TH:i:s', strtotime(time(),
+              date_default_timezone_set("Europe/Paris")));
+          }
+
+          $board = "";
+          if (!empty($these['NOMJUR'])) {
+            $jury = explode(',', $these['NOMJUR']);
+            foreach ($jury as $key => $member) {
+              $jury[$key] = ucwords(strtolower(trim($member)));
+            }
+            $board = implode(', ',$jury);
           }
 
           $nodes[] = [
-            'cod_ths' => $cod_ths,
-            'title' => $these['LIB_THS'],
+            'cod_ths' => $these['COD_THS'],
+            'title' => trim($these['LIB_THS']),
             'type' => 'viva',
             'langcode' => 'fr',
             'uid' => $uid,
             'status' => 1,
-            'field_subtitle' => $thesard,
-            'field_thesis_supervisor' => $dir_ths,
-            'field_event_address' => $these['LIB_CMT_LEU_SOU_THS'],
-            'field_event_date' => [
-              [
-                'value' => $this->formatDate($these['DAT_SOU_THS'],
-                  $these['HH_SOU_THS'], $these['MM_SOU_THS']),
-                'end_value' => $this->formatDate($these['DAT_SOU_THS'],
-                  ($these['HH_SOU_THS'] + 4), $these['MM_SOU_THS'])
-              ]
-            ],
-            'field_address_map' => [
-              [
-                'lat' => isset($address['lat']) ? $address['lat'] : 0,
-                'lng' => isset($address['lon']) ? $address['lon'] : 0,
-              ]
-            ],
+            'field_subtitle' => !empty($these['LIB_NOM_IND']) ? ucwords(strtolower(trim($these['LIB_NOM_IND']))) : "",
+            'field_thesis_supervisor' => !empty($these['NOMDIR']) ? ucwords(strtolower(trim($these['NOMDIR']))) : "",
+            'field_co_director' => !empty($these['NOMCODIR']) ? ucwords(strtolower(trim($these['NOMCODIR']))) : "",
+            'field_board' => $board,
+            'field_event_address' => !empty($these['LIB_CMT_LEU_SOU_THS']) ? $these['LIB_CMT_LEU_SOU_THS'] : "",
+            'field_viva_date' => $date_sout,
+            'field_hdr' => ($these['TEM_DOC_HDR'] == "HDR") ? 1 : 0,
             'field_categories' => $category,
-            'cod_edo' => $codedo,
-            'lib_edo' => $libedo,
+            'cod_edo' => !empty($these['COD_EDO']) ? "ED" . $these['COD_EDO'] :  "",
+            'lib_edo' => (!empty($these['LIB_EDO'])) ? $this->formatEdoLabel($these['LIB_EDO']) : "",
           ];
         }
       }
     }
-    return $nodes;
 
+    return $nodes;
   }
 
-  /**
-   * Get Drupal formatted date from date field of the web service.
-   *
-   * @param string $date
-   * @param string $hours
-   * @param string $minutes
-   *
-   * @return string $formattedDate
-   */
-  public function formatDate($date, $hours, $minutes) {
-    $date_apogee = explode('/', $date);
-    $mois = $date_apogee[1];
-    $date_apogee[1] = $date_apogee[0];
-    $date_apogee[0] = $mois;
-    $date_apogee[2] = '20'.$date_apogee[2];
-    $minutes = ($minutes == 0 || $minutes == "")? "00" : $minutes;
+  private function formatEdoLabel($label) {
 
-    $timestamp = strtotime(implode('/', $date_apogee) . "$hours:$minutes:00", date_default_timezone_set("Europe/Paris"));
-
-    return gmdate('Y-m-d\TH:i:s', $timestamp);
+    if (preg_match('/^[aeiouyh]/i', $label) ||
+      preg_match('/^[É]/i', $label) ||
+      preg_match('/^[é]/i', $label)) {
+      $edo = "École doctorale d'" . $label;
+    }
+    elseif (preg_match('/(de)/i', $label)) {
+      $edo = "École doctorale " . $label;
+    }
+    else {
+      $edo = "École doctorale de " . $label;
+    }
+    return $edo;
   }
 }

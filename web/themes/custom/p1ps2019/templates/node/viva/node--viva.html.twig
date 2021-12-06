@@ -76,31 +76,49 @@
   'grid-x', 'grid-margin-x', 'grid-margin-y'
 ]
 %}
+{% set all_board = content.field_board['#items'].getString() %}
+{% set list_board = all_board|split(', ') %}
+{% set hdr_value = content.field_hdr['#items'].getString() %}
+{% set codir = content.field_co_director|render %}
+{% set board = content.field_board|render %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="box-content same-height">
-    <div class="top-infos">
-      <div class="categ-style semi-infos-sep">{{ content.field_subtitle.0 }}</div>
+  <div class="box-content same-height{% if hdr_value %} blue-box{% endif %}">
+    {% if hdr_value %}
+      <span class="texthdr">hdr</span>
+    {% endif %}
+    <div class="top-infos"> {{ title_prefix }}
+      <h2 class="h5-style">
+        {{ label.0 }}
+      </h2>
+      <h3 class="h4-style">{{ content.field_subtitle.0 }}</h3>
+      {{ title_suffix }}
     </div>
-    {{ title_prefix }}
-    <h2 class="title semi-infos-sep">
-      {{ label.0 }}
-    </h2>
-    {{ title_suffix }}
-    <div class="thesis-direction">{{ "Sous la direction de "|t }}
-      <span class="direction-name">{{ content.field_thesis_supervisor.0}}</span>
+    <div class="subtitle">
+      <span>{{ "Sous la direction de "|t }}</span>
+      {{ content.field_thesis_supervisor.0}}
+      {% if codir %} & {{ content.field_co_director.0}} {% endif %}
     </div>
 
-    <div class="edo">{{ content.field_edo_label.0 }}</div>
+    {% if board %}
+      <div class="board">
+        <span>{{ "Composition du jury : "|t }}</span>
+        <ul>
+        {% for key, member in list_board %}
+          <li>{{ member|trim }}{% if not loop.last %}, {% endif %}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
 
-    <div class="bottom-infos">
+    <div class="event-details">
       <div class="date-style semi-field-sep">
-        {{ content.field_event_date }}
+        <span>{{ content.field_viva_date.0 }}</span><br />
+        <span>{{ 'Lieu : '|t }}{{ content.field_event_address.0 }}</span>
       </div>
-      <div class="event-details">
-        <span>{{ 'Lieu : '|t }}</span>
-        {{ destination|raw }}
-      </div>
+    </div>
+    <div class="bottom-infos">
+      <div class="categ-style semi-infos-sep">{{ content.field_edo_label.0 }}</div>
       {{ content.field_add_to_cal }}
     </div>
   </div>
