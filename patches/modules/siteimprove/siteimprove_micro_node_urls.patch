@@ -1,0 +1,16 @@
+diff --git a/src/SiteimproveUtils.php b/src/SiteimproveUtils.php
+index 74a5f6f..3dd3eaf 100644
+--- a/src/SiteimproveUtils.php
++++ b/src/SiteimproveUtils.php
+@@ -236,7 +236,10 @@ class SiteimproveUtils {
+ 
+     // Create urls for active frontend urls for the entity.
+     foreach ($domains as $domain) {
+-      $urls[] = $domain . $url_relative->getGeneratedUrl();
++        if (!str_contains($url_relative->getGeneratedUrl(), 'http')){
++            $urls[] = $domain . $url_relative->getGeneratedUrl();
++        }
++        else $urls[] = $url_relative->getGeneratedUrl();
+     }
+ 
+     $frontpage = $this->configFactory->get('system.site')->get('page.front');
