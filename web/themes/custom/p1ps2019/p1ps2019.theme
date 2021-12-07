@@ -36,10 +36,11 @@ function p1ps2019_preprocess_html(&$variables)
   }
   else $variables['is_front_mini_site'] = FALSE;
 
-  $variables['is_error_page'] = FALSE;
-  if (\Drupal::routeMatch()->getRouteName() == 'system.404') {
-    $variables['is_error_page'] = TRUE;
+  $is_error_page = FALSE;
+  if (\Drupal::routeMatch()->getRouteName() == 'view.erreur_404.page_1') {
+    $is_error_page = TRUE;
   }
+  $variables['is_error_page'] = $is_error_page;
 }
 
 /**
