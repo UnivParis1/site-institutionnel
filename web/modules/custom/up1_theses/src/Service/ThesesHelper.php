@@ -121,6 +121,7 @@ class ThesesHelper {
 
   private function formatEdoLabel($label) {
 
+    $label = preg_replace('/(de la sorbonne || Pantheon-sorbonne)/i', '', $label);
     if (preg_match('/^[aeiouyh]/i', $label) ||
       preg_match('/^[É]/i', $label) ||
       preg_match('/^[é]/i', $label)) {
@@ -132,6 +133,7 @@ class ThesesHelper {
     else {
       $edo = "École doctorale de " . $label;
     }
+
     return $edo;
   }
 }
