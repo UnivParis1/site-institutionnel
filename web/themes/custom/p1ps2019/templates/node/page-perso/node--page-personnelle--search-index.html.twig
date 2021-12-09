@@ -92,9 +92,8 @@
       <div>{{ content.field_fonction|raw|capitalize }}</div>
       {% if skills %}
         <div class="skills">
-        <p class="txt-bold">{{ content.field_skills['#title'] }}</p>
           {% for key, skill in skills if key|first != '#' %}
-              <span>{{ skill|raw }}</span>
+            <span>{{ skill|raw }}</span>
           {% endfor %}
         </div>
       {% endif %}
