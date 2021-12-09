@@ -85,13 +85,15 @@
     {% if hdr_value %}
       <span class="texthdr">hdr</span>
     {% endif %}
-    <div class="top-infos"> {{ title_prefix }}
+    {{ title_prefix }}
+    <div class="top-infos">
+      <div class="node-type-search">{{ node_type_text }}</div>
       <h2 class="h5-style">
         {{ label.0 }}
       </h2>
       <h3 class="h4-style">{{ content.field_subtitle.0 }}</h3>
-      {{ title_suffix }}
     </div>
+      {{ title_suffix }}
     <div class="subtitle">
       <span>{{ "Sous la direction de "|t }}</span>
       {{ content.field_thesis_supervisor.0}}
