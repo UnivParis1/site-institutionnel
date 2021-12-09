@@ -37,10 +37,8 @@ function p1ps2019_preprocess_html(&$variables)
   else $variables['is_front_mini_site'] = FALSE;
 
   $is_error_page = FALSE;
-  $variables['is_front'] = FALSE;
   if (\Drupal::routeMatch()->getRouteName() == 'view.erreur_404.page_1') {
     $is_error_page = TRUE;
-    $variables['is_front'] = TRUE;
   }
   $variables['is_error_page'] = $is_error_page;
 }
