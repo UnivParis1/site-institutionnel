@@ -72,7 +72,8 @@
   'clearfix'
 ]
 %}
-
+{% set affiliation = content.field_affiliation['#items'].getString() %}
+{% set fonction = content.field_fonction['#items'].getString() %}
 {% if expertises %}
   {% set skills = expertises %}
 {% endif %}
@@ -88,8 +89,8 @@
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
       {{ title_suffix }}
-      <div>{{ content.field_affiliation|raw|capitalize }}</div>
-      <div>{{ content.field_fonction|raw|capitalize }}</div>
+      <div>{{ affiliation }}</div>
+      <div>{{ fonction }}</div>
       {% if skills %}
         <div class="skills">
           {% for key, skill in skills if key|first != '#' %}
