@@ -76,7 +76,7 @@
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
   <div{{ attributes.addClass(classes) }}>
-    {% if header %}<h2>{{ content.bp_header.0 }}</h2>
+    {% if header %}<h2>{{ content.bp_header.0 }}</h2>{% endif %}
     <div class="grid-x grid-margin-y">
       {%- for item in content.bp_column_content if key|first != '#' -%}
         <div class="cell small-12 medium-{{ nbCols }} equal-height">
