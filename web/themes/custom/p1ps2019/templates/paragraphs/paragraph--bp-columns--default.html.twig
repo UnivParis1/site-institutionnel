@@ -70,18 +70,19 @@
   %}
 {% endif %}
 
-{% set nbCols %}
-  {{ content.field_column_number['#items'].getString() }}
-{% endset %}
-
+{% set nbCols = content.field_column_number['#items'].getString() %}
+{% set header = content.bp_header|render %}
 {% if background_field %}
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
   <div{{ attributes.addClass(classes) }}>
+    {% if header %}<h2>{{ content.bp_header.0 }}</h2>
     <div class="grid-x grid-margin-y">
-      <div class="cell small-12 medium-{{ nbCols }} equal-height">
-      {%- for item in items -%}
-      {{ content|without('bp_width', 'bp_background','field_column_number') }}
+      {%- for item in content.bp_column_content if key|first != '#' -%}
+        <div class="cell small-12 medium-{{ nbCols }} equal-height">
+          {{ item }}
+        </div>
+      {% endfor %}
     </div>
   </div>
   {% if background_field %}
