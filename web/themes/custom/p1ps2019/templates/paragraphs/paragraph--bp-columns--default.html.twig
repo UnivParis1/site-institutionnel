@@ -70,11 +70,19 @@
   %}
 {% endif %}
 
+{% set nbCols %}
+  {{ content.field_column_number['#items'].getString() }}
+{% endset %}
+
 {% if background_field %}
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
   <div{{ attributes.addClass(classes) }}>
-    {{ content|without('bp_width', 'bp_background') }}
+    <div class="grid-x grid-margin-y">
+      <div class="cell small-12 medium-{{ nbCols }} equal-height">
+      {%- for item in items -%}
+      {{ content|without('bp_width', 'bp_background','field_column_number') }}
+    </div>
   </div>
   {% if background_field %}
 </div>
