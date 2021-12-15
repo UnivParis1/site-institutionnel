@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c708f2de880ae11d39ba14f6f23bb820",
+    "content-hash": "f63b83368626327b8fd83e4ee0025f65",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3522,29 +3522,34 @@
         },
         {
             "name": "drupal/content_sync",
-            "version": "2.1.0",
+            "version": "3.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/content_sync.git",
-                "reference": "8.x-2.1"
+                "reference": "3.0.0-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/content_sync-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "6eab25cdeed48efdd608db40191243f0bd61db47"
+                "url": "https://ftp.drupal.org/files/projects/content_sync-3.0.0-beta1.zip",
+                "reference": "3.0.0-beta1",
+                "shasum": "3685d705f3371fe1b64b32b05129f72746cd5cad"
             },
             "require": {
-                "drupal/core": "^8"
+                "drupal/core": "^8.8 || ^9"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1551619984",
+                    "version": "3.0.0-beta1",
+                    "datestamp": "1631154042",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9 || ^10"
                     }
                 }
             },
@@ -3555,29 +3560,34 @@
             "authors": [
                 {
                     "name": "Blanca.Esqueda",
-                    "homepage": "https://www.drupal.org/user/3082389"
+                    "homepage": "https://www.drupal.org/u/blancaesqueda",
+                    "role": "Maintainer"
                 },
                 {
-                    "name": "andrew.trebble",
-                    "homepage": "https://www.drupal.org/user/3159065"
+                    "name": "David Gil Hidalgo",
+                    "homepage": "https://www.drupal.org/u/dabito",
+                    "role": "Maintainer"
                 },
                 {
-                    "name": "chris.smith",
-                    "homepage": "https://www.drupal.org/user/1812018"
+                    "name": "David Nova",
+                    "homepage": "https://www.drupal.org/u/david4lim",
+                    "role": "Maintainer"
                 },
                 {
-                    "name": "dabito",
-                    "homepage": "https://www.drupal.org/user/2400660"
+                    "name": "Andrés Moncada",
+                    "homepage": "https://www.drupal.org/u/acmoncadab4",
+                    "role": "Contributor"
                 },
                 {
-                    "name": "david4lim",
-                    "homepage": "https://www.drupal.org/user/934262"
+                    "name": "See contributors",
+                    "homepage": "https://www.drupal.org/node/2865869/committers"
                 }
             ],
-            "description": "Allows to import/export content using YAML files",
-            "homepage": "https://www.drupal.org/project/content_sync",
+            "description": "Content Sync functionality.",
+            "homepage": "http://drupal.org/project/content_sync",
             "support": {
-                "source": "https://git.drupalcode.org/project/content_sync"
+                "source": "https://git.drupalcode.org/project/content_sync",
+                "issues": "http://drupal.org/project/content_sync"
             }
         },
         {
@@ -6671,56 +6681,6 @@
             }
         },
         {
-            "name": "drupal/micro_sitemap",
-            "version": "1.0.0-alpha2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/micro_sitemap.git",
-                "reference": "8.x-1.0-alpha2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/micro_sitemap-8.x-1.0-alpha2.zip",
-                "reference": "8.x-1.0-alpha2",
-                "shasum": "63e2c3096aa2be77666be59831f21c84c78ff4ff"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/micro_site": "*",
-                "drupal/sitemap": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0-alpha2",
-                    "datestamp": "1542539280",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "flocondetoile",
-                    "homepage": "https://www.drupal.org/user/2006064"
-                }
-            ],
-            "description": "Integrate sitemap module with micro sites",
-            "homepage": "https://www.drupal.org/project/micro_sitemap",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/micro_sitemap",
-                "issues": "https://www.drupal.org/project/issues/micro_sitemap"
-            }
-        },
-        {
             "name": "drupal/micro_taxonomy",
             "version": "1.0.0-alpha6",
             "source": {
@@ -7916,35 +7876,35 @@
         },
         {
             "name": "drupal/sitemap",
-            "version": "1.5.0",
+            "version": "2.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/sitemap.git",
-                "reference": "8.x-1.5"
+                "reference": "8.x-2.0-beta2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/sitemap-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "aa6f0189eba189c9f6c1a1e24505f1ce802eeea1"
+                "url": "https://ftp.drupal.org/files/projects/sitemap-8.x-2.0-beta2.zip",
+                "reference": "8.x-2.0-beta2",
+                "shasum": "0da73151b43c6c1923c75dfad5906d8e65af083b"
             },
             "require": {
-                "drupal/core": "~8.0"
+                "drupal/core": "^8 || ^9"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1541693881",
+                    "version": "8.x-2.0-beta2",
+                    "datestamp": "1603126195",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -8687,17 +8647,17 @@
         },
         {
             "name": "drupal/webform",
-            "version": "6.1.1",
+            "version": "6.1.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "6.1.1"
+                "reference": "6.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-6.1.1.zip",
-                "reference": "6.1.1",
-                "shasum": "0d3c619a165f4a84b5cced8aa35c54e1296df22e"
+                "url": "https://ftp.drupal.org/files/projects/webform-6.1.2.zip",
+                "reference": "6.1.2",
+                "shasum": "3afb96566f5d31474483e163b4e0138d43cffdcd"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -8707,15 +8667,15 @@
                 "drupal/bootstrap": "~3.0",
                 "drupal/captcha": "~1.0",
                 "drupal/chosen": "~3.0",
-                "drupal/clientside_validation": "~3.0",
+                "drupal/clientside_validation": "*",
                 "drupal/clientside_validation_jquery": "*",
-                "drupal/devel": "~3.0",
+                "drupal/devel": "*",
                 "drupal/entity": "~1.0",
-                "drupal/entity_print": "~2.0",
+                "drupal/entity_print": "*",
                 "drupal/gnode": "*",
-                "drupal/group": "1.0",
+                "drupal/group": "*",
                 "drupal/jquery_ui": "~1.0",
-                "drupal/jquery_ui_checkboxradio": "~1.0",
+                "drupal/jquery_ui_checkboxradio": "*",
                 "drupal/jquery_ui_datepicker": "~1.0",
                 "drupal/lingotek": "~3.0",
                 "drupal/mailsystem": "~4.0",
@@ -8724,7 +8684,7 @@
                 "drupal/smtp": "~1.0",
                 "drupal/styleguide": "~1.0",
                 "drupal/telephone_validation": "~2.0",
-                "drupal/token": "~1.0",
+                "drupal/token": "*",
                 "drupal/variationcache": "~1.0",
                 "drupal/webform_access": "*",
                 "drupal/webform_attachment": "*",
@@ -8745,8 +8705,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.1.1",
-                    "datestamp": "1638398898",
+                    "version": "6.1.2",
+                    "datestamp": "1638988073",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -14882,6 +14842,7 @@
         "drupal/ckeditor_a11ychecker": 15,
         "drupal/ckeditor_balloonpanel": 15,
         "drupal/conditional_fields": 15,
+        "drupal/content_sync": 10,
         "drupal/elasticsearch_connector": 15,
         "drupal/geolocation_nominatim": 15,
         "drupal/linkit": 10,
@@ -14889,11 +14850,11 @@
         "drupal/micro_node": 15,
         "drupal/micro_path": 15,
         "drupal/micro_site": 15,
-        "drupal/micro_sitemap": 15,
         "drupal/micro_taxonomy": 15,
         "drupal/micro_theme": 15,
         "drupal/micro_user": 15,
         "drupal/nbsp": 15,
+        "drupal/sitemap": 10,
         "drupal/xmlsitemap": 5
     },
     "prefer-stable": true,
