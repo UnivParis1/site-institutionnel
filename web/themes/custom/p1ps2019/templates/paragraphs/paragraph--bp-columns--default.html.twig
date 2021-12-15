@@ -71,6 +71,10 @@
 {% endif %}
 
 {% set nbCols = content.field_column_number['#items'].getString() %}
+{% if nbCols is not defined %}
+  {% set nbCols = '6' %}
+{% endif %}
+
 {% set header = content.bp_header|render %}
 {% if background_field %}
 <div class="{{ layout_background_classes|join(' ') }}">
