@@ -1,8 +1,11 @@
-{#{{ devel_breakpoint() }}#}
+{% set autoplay = content.field_autoplay['#items'].getString() %}
+{%  if autoplay is not defined %}
+  {% set autoplay = false %}
+{% endif %}
 <div class="field field--name-field-media-oembed-video">
   <iframe
     class="media-oembed-content"
-    src="{{ url }}?is_iframe=true&autoplay=false&loop=true"
+    src="{{ url }}?is_iframe=true&autoplay={{ autoplay }}&loop=true"
     title="{{ title }}"
     size="240"
     width="640"
@@ -10,3 +13,4 @@
     style="padding: 0; margin: 0; border:0" allowfullscreen >
   </iframe>
 </div>
+
