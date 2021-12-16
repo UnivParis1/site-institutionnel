@@ -13,16 +13,14 @@
  */
 #}
   {% if content %}
-    {% set autoplay = content.field_autoplay['#items'].getString() %}
-    {%  if autoplay is not defined %}
-      {% set autoplay = false %}
-    {% endif %}
+    {% set bool = content.field_autoplay['#items'].getString() %}
     {% set url = content.field_media_mediatheque.0['#url'] %}
     {% set title = content.field_media_mediatheque.0['#title'] %}
+
     <div class="field field--name-field-media-oembed-video">
       <iframe
         class="media-oembed-content"
-        src="{{ url }}?is_iframe=true&autoplay={{ autoplay }}&loop=true"
+        src="{{ url }}?is_iframe=true&autoplay={% bool == 1 ? true : false %}&loop=true"
         {% if title is not empty %}title="{{ title }}"{% endif %}
         size="240"
         width="640"
