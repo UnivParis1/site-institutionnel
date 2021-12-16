@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+  {% if content %}
+    {% set autoplay = content.field_autoplay['#items'].getString() == 1 ? 'true' : 'false' %}
+    {% set url = content.field_media_mediatheque.0['#url'] %}
+    {% set title = content.field_media_mediatheque.0['#title'] %}
+
+    <div class="field field--name-field-media-oembed-video">
+      <iframe
+        class="media-oembed-content"
+        src="{{ url }}?is_iframe=true&autoplay={{ autoplay }}&loop=true"
+        {% if title is not empty %}title="{{ title }}"{% endif %}
+        size="240"
+        width="640"
+        height="360"
+        style="padding: 0; margin: 0; border:0" allowfullscreen >
+      </iframe>
+    </div>
+  {% endif %}
