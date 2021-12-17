@@ -33,7 +33,14 @@ function p1ps2019_preprocess_html(&$variables)
   }
   if (preg_match('/site/', $variables['root_path']) && !isset($variables['node_type'])) {
     $variables['is_front_mini_site'] = TRUE;
-  } else $variables['is_front_mini_site'] = FALSE;
+  }
+  else $variables['is_front_mini_site'] = FALSE;
+
+  $is_error_page = FALSE;
+  if (\Drupal::routeMatch()->getRouteName() == 'view.erreur_404.page_1') {
+    $is_error_page = TRUE;
+  }
+  $variables['is_error_page'] = $is_error_page;
 }
 
 /**
