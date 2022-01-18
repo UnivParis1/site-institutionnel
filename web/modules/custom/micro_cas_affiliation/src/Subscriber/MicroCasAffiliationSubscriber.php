@@ -68,14 +68,13 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     $memberOf = $account->get('field_group');
     if (!empty($memberOf)) {
       $CNs = explode('cn=', $memberOf[0]->value);
-      \Drupal::logger('cas_affiliation')->info(" CN : " . print_r($CNs, 1));
       // les cn sont de la forme cn=applications.www.webmestre.general,ou=groups,dc=univ-paris1,dc=fr
       // ou  cn=applications.www.redacteur.miniSite.ufr.sx5,ou=groups,dc=univ-paris1,dc=fr
       foreach ($CNs as $CN) {
-        \Drupal::logger('cas_affiliation')->info(print_r($CN, 1));
+
         if (!empty($CN) && substr_compare($CN, 'applications', 0, 12, TRUE) == 0) {
           $part = explode('.', $CN);
-          \Drupal::logger('cas_affiliation')->info("exploded CN : " . print_r($part, 1));
+
           $role = $part[2];
           $minisite = in_array('miniSite', $part);
           $general = in_array('general', $part);
@@ -124,7 +123,6 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
           }
           elseif($general) {
             // on affecte le rôle listé dans le cn à l'utilisateur
-            \Drupal::logger('cas_affiliation')->info("Cas général! " . print_r($role, 1));
             switch ($role) {
               case 'redacteur':
                 $account->addRole('contributeur');
@@ -138,15 +136,12 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
         }
       }
     }
-    if (empty($memberOf)) {
+    else {
       $comptex = new ComptexManager();
       if ($comptex->userHasPagePerso()) {
         $account->addRole('enseignant_doctorant');
         $account->save();
       }
-    }
-    else {
-
     }
   }
 }
