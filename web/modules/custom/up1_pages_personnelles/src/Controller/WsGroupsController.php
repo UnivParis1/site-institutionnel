@@ -113,7 +113,7 @@ class WsGroupsController extends ControllerBase {
   }
 
   private function getSiteId() {
-    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    /** @var $negotiator  SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $siteId = $negotiator->getActiveId();
@@ -295,11 +295,11 @@ class WsGroupsController extends ControllerBase {
    */
   public static function batchUsersFinished($success, $results, $operations) {
     if ($success) {
-      drupal_set_message(t("The users have been successfully imported from Ws Groups."));
+      \Drupal::messenger()->addStatus(t("The users have been successfully imported from Ws Groups."));
     }
     else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -394,11 +394,11 @@ class WsGroupsController extends ControllerBase {
    */
   public static function batchPagesPersosFinished($success, $results, $operations) {
     if ($success) {
-      drupal_set_message(t("The Typo3 data haved been successfully imported from Typo3 database."));
+      \Drupal::messenger()->addStatus(t("The Typo3 data haved been successfully imported from Typo3 database."));
     }
     else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -496,11 +496,11 @@ class WsGroupsController extends ControllerBase {
    */
   public static function batchPublicationsFinished($success, $results, $operations) {
     if ($success) {
-      drupal_set_message(t("The Typo3 publications haved been successfully imported from Typo3 database."));
+      \Drupal::messenger()->addStatus(t("The Typo3 publications haved been successfully imported from Typo3 database."));
     }
     else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -598,11 +598,11 @@ class WsGroupsController extends ControllerBase {
    */
   public static function batchResumeFinished($success, $results, $operations) {
     if ($success) {
-      drupal_set_message(t("The Typo3 resume text haved been successfully imported from Typo3 database."));
+      \Drupal::messenger()->addStatus(t("The Typo3 resume text haved been successfully imported from Typo3 database."));
     }
     else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -701,11 +701,11 @@ class WsGroupsController extends ControllerBase {
    */
   public static function batchLastFieldsFinished($success, $results, $operations) {
     if ($success) {
-      drupal_set_message(t("The Typo3 english resume & education field haved been successfully imported from Typo3 database."));
+      \Drupal::messenger()->addStatus(t("The Typo3 english resume & education field haved been successfully imported from Typo3 database."));
     }
     else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 

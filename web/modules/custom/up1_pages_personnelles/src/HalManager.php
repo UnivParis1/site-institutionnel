@@ -12,9 +12,9 @@ class HalManager implements HalInterface {
   public function __construct() {}
 
   /**
-   * @param (string) $method
-   * @param (string) $firstname
-   * @param (string) $lastname
+   * @param string $method
+   * @param string $firstname
+   * @param string $lastname
    * @param string|null $id_hal
    *
    * @return array|mixed

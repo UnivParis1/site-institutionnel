@@ -76,7 +76,7 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
   return $fields;
 }
 
-function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface $form_state, $form_id)
 {
   $form['pages_personnelles'] = [
     '#type' => 'details',
@@ -395,30 +395,6 @@ function up1_comptex_markup($data) {
 
   return $container;
 }
-
-/**
- * Implements hook_user_login().
- */
-/*function up1_pages_personnelles_user_login(UserInterface $account) {
-  if ($account->hasRole('enseignant_doctorant')) {
-    $query = \Drupal::entityQuery('node')
-      ->condition('uid', $account->id())
-      ->condition('type', 'page_personnelle');
-
-    $result = $query->execute();
-    if (!empty($result) && count($result) == 1) {
-      $nid = reset($result);
-      $goto = "/node/$nid/edit";
-    }
-    else {
-      $goto = "/node/add/page_personnelle";
-    }
-
-    $response = new Symfony\Component\HttpFoundation\RedirectResponse($goto);
-    $response->send();
-    return;
-  }
-}*/
 
 /**
  * Implements hook_theme().
