@@ -130,73 +130,75 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
     }
     if ($form_id == "node_page_personnelle_form") {
       $userCurrent = \Drupal::currentUser();
-
       $user = User::load($userCurrent->id());
-      $name = $user->getUsername();
     }
-    $userInformation = up1_pages_personnelles_get_comptex_info($name);
+    $roles = $userCurrent->getRoles();
 
-    if ($userInformation) {
-      $get_emails = up1_pages_personnelles_get_user_email($name);
-      $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['name' => $name]);
-      $teacher = reset($load_teacher);
-      if ($teacher) {
-        if(empty($teacher->getEmail())) {
-          if (isset($get_emails['mail'])) {
-            $teacher->mail = $get_emails['mail'];
+    if (in_array('enseignant_doctorant', $roles)) {
+      $name = $user->getUsername();
+      $userInformation = up1_pages_personnelles_get_comptex_info($name);
+
+      if ($userInformation) {
+        $get_emails = up1_pages_personnelles_get_user_email($name);
+        $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
+          ->loadByProperties(['name' => $name]);
+        $teacher = reset($load_teacher);
+        if ($teacher) {
+          if(empty($teacher->getEmail())) {
+            if (isset($get_emails['mail'])) {
+              $teacher->mail = $get_emails['mail'];
+            }
+            else {
+              $teacher->mail = $get_emails['eduPersonPrincipalName'];
+            }
+            $teacher->save();
           }
-          else {
-            $teacher->mail = $get_emails['eduPersonPrincipalName'];
-          }
-          $teacher->save();
         }
-      }
 
-      $form['title']['#disabled'] = TRUE;
+        $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
+        $form['field_uid_ldap']['#access'] = FALSE;
 
-      $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
-      $form['field_uid_ldap']['#access'] = FALSE;
+        $form['field_name']['widget'][0]['value']['#default_value'] = strtoupper($userInformation['sn']);
+        $form['field_name']['#access'] = FALSE;
 
-      $form['field_name']['widget'][0]['value']['#default_value'] = strtoupper($userInformation['sn']);
-      $form['field_name']['#access'] = FALSE;
+        $form['field_firstname']['widget'][0]['value']['#default_value'] = $userInformation['givenName'];
+        $form['field_firstname']['#access'] = FALSE;
 
-      $form['field_firstname']['widget'][0]['value']['#default_value'] = $userInformation['givenName'];
-      $form['field_firstname']['#access'] = FALSE;
+        $form['field_other_affiliation']['#access'] = FALSE;
+        $form['actions']['preview']['#access'] = FALSE;
 
-      $form['field_other_affiliation']['#access'] = FALSE;
-      $form['actions']['preview']['#access'] = FALSE;
+        if (isset($get_emails['supannMailPerso'])) {
+          $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
+          $form['field_other_email_address']['#disabled'] = TRUE;
+        }
+        else {
+          $form['field_other_email_address']['#access'] = FALSE;
+          $form['field_display_other_email']['#access'] = FALSE;
+        }
 
-      if (isset($get_emails['supannMailPerso'])) {
-        $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
-        $form['field_other_email_address']['#disabled'] = TRUE;
-      }
-      else {
-        $form['field_other_email_address']['#access'] = FALSE;
-        $form['field_display_other_email']['#access'] = FALSE;
-      }
-
-      if (!empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
-        $fonction = $userInformation['employeeType'] . ' (' . $userInformation['supannActivite'] . ')';
-      }
-      elseif (!empty($userInformation['employeeType']) && empty($userInformation['supannActivite'])) {
+        if (!empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
+          $fonction = $userInformation['employeeType'] . ' (' . $userInformation['supannActivite'] . ')';
+        }
+        elseif (!empty($userInformation['employeeType']) && empty($userInformation['supannActivite'])) {
           $fonction = $userInformation['employeeType'] ;
-      }
-      elseif (empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
-        $fonction = $userInformation['supannActivite'];
-      }
-      $form['field_fonction']['widget'][0]['value']['#default_value'] = $fonction;
-      //$form['field_fonction']['#access'] = FALSE;
+        }
+        elseif (empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
+          $fonction = $userInformation['supannActivite'];
+        }
+        $form['field_fonction']['widget'][0]['value']['#default_value'] = $fonction;
 
-      //$form['field_affiliation']['#access'] = FALSE;
-      $form['field_affiliation']['widget'][0]['value']['#default_value'] =
-        $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
+        $form['field_affiliation']['widget'][0]['value']['#default_value'] =
+          $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
 
-      $form['wrapper']['information'] = [
-        '#type' => 'markup',
-        '#markup' => "<div class='explications'>L'URL publique de ma page perso : $html_link <p><a href='https://mediatheque.univ-paris1.fr/video/2969-comment-mettre-a-jour-sa-page-perso/'>Visualisez le tutoriel en vidéo</a></div>",
-      ];
-      $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
+        $form['wrapper']['information'] = [
+          '#type' => 'markup',
+          '#markup' => "<div class='explications'>L'URL publique de ma page perso : $html_link <p><a href='https://mediatheque.univ-paris1.fr/video/2969-comment-mettre-a-jour-sa-page-perso/'>Visualisez le tutoriel en vidéo</a></div>",
+        ];
+        $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
+      }
+    }
+    if (!in_array('administrator', $roles)) {
+      $form['title']['#disabled'] = TRUE;
     }
   }
 }
@@ -227,10 +229,10 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       }
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
-        $firstname = $node->get('field_firstname')->getValue();
-        $lastname = $node->get('field_name')->getValue();
+      $firstname = $node->get('field_firstname')->getValue();
+      $lastname = $node->get('field_name')->getValue();
       if (!empty($get_publications) && $get_publications[0]['value'] && !empty($firstname) && $firstname[0]['value']
-      && !empty($lastname) && $lastname[0]['value']) {
+        && !empty($lastname) && $lastname[0]['value']) {
         switch ($get_publications[0]['value']) {
           case 'idhal':
             $hal_publications = $node->get('field_id_hal')->getValue();
