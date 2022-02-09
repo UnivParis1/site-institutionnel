@@ -36,6 +36,12 @@
 * @ingroup themeable
 */
 #}
+
+
 <div class="grid-container">
-  {{ content }}
+  <ul>
+  {% for key, item in  content.field_patrimoine_immobilier if key|first != '#' %}
+    <li class="{{ 'cell small-12 medium-6' }}">{{ item }}</li>
+  {% endfor %}
+  </ul>
 </div>
