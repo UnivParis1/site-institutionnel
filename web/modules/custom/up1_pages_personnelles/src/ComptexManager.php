@@ -243,9 +243,9 @@ class ComptexManager implements ComptexInterface {
         curl_close($ch);
         $information = reset($information);
 
-        $this->formatEmails($information);
+	$this->formatEmails($information);
 
-        return $information;
+        return $information['mail'];
     }
 
     private function formatEmails(&$information) {
