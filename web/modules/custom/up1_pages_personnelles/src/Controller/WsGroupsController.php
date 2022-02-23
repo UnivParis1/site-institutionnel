@@ -170,11 +170,11 @@ class WsGroupsController extends ControllerBase
    * @param $siteId
    * @return array
    */
-  public function getTrombiList($theme, $path, $siteId = NULL)
-  {
+  public function getTrombiList($theme, $path, $siteId = NULL) {
     $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
 
     foreach ($users as $user) {
+      $this->formatTrombiData($user);
       \Drupal::logger('up1_pages_persos')->info(print_r($user,1));
     }
     $build['item_list'] = [
@@ -973,8 +973,7 @@ class WsGroupsController extends ControllerBase
     }
   }
 
-  public function getPageEquipeTitle()
-  {
+  public function getPageEquipeTitle() {
     $siteId = $this->getSiteId();
     if (isset($siteId)) {
       if ($this->getFieldEc()) {
@@ -986,6 +985,59 @@ class WsGroupsController extends ControllerBase
       }
     } else {
       throw new NotFoundHttpException();
+    }
+  }
+
+  private function formatTrombiData(&$user) {
+    if (!empty($user['employeeType'])) {
+      reset($user['employeeType']);
+    }
+    $affec = $user['supannEntiteAffectation-all'];
+    if (!empty($affec)) {
+      foreach ($affec as $item) {
+        $business_cat = $item['businessCategory'];
+        $uri = "";
+        if (isset($affec['labeledURI'])) {
+          $uri = $affec['labeledURI'];
+        } else {
+          $site_group = $affec['key'];
+          $ids = \Drupal::entityQuery('site')
+            ->condition('type', 'mini_site')
+            ->condition('groups', $site_group)
+            ->execute();
+          $site = Site::loadMultiple($ids);
+          if (count($site) == 1) {
+            $site = reset($site);
+            $site_url = $site->get('site_url')->getValue();
+            $uri = "//" . $site_url[0]['value'];
+          }
+        }
+        if ($business_cat != 'doctoralSchool') {
+          $entites[] = [
+            'businessCategory' => $business_cat,
+            'name' => $item['name'],
+            'description' => $item['description'],
+            'labeledURI' => $uri
+          ];
+        }
+      }
+      $order = ['research', 'pedagogy'];
+
+      usort($entites, function ($a, $b) use ($order) {
+        $pos_a = array_search($a['businessCategory'], $order);
+        $pos_b = array_search($b['businessCategory'], $order);
+        return $pos_a - $pos_b;
+      });
+
+      foreach ($entites as $entite) {
+        if (!empty($entite['labeledURI'])) {
+          $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['description'] . "' target='_blank'>"
+            . $entite['description'] . "</a></p>";
+        } else {
+          $affectation[] = "<p>" . $entite['description'] . "</p>";
+        }
+        $user['entites'] = implode('', $affectation);
+      }
     }
   }
 }

@@ -11,8 +11,7 @@
           <div>{{ "Aucun résultat n'a été trouvé."|t }}</div>
         {% else %}
           {% for user in users %}
-            {% if user.labeledURI is not empty and ((Trusted and user.supannListeRouge == FALSE) or
-              (not Trusted and user.sn != 'supannListeRouge')) %}
+            {% if user.labeledURI is not empty and user.supannListeRouge == FALSE %}
               <article class="trombi-item">
                 <a href="{{ user.labeledURI[0] }}"  target="_blank"
                    title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
