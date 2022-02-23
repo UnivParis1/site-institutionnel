@@ -8,8 +8,8 @@
       {% if users|length < 1 %}
         <h3>{{ "Aucun résultat n'a été trouvé."|t }}</h3>
       {% else %}
+        <h3>{{ category }}</h3>
         <div class="annuaire-content mb-5">
-          <h3>{{ category }}</h3>
           {% for user in users %}
             {% if user.labeledURI is not empty and ((Trusted and user.supannListeRouge == FALSE) or
               (not Trusted and user.sn != 'supannListeRouge')) %}
