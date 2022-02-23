@@ -20,17 +20,20 @@
                   </a>
                 </b>
                 {% set supannRole = user.supannRoleEntite-all %}
-                {% for supannRole as role %}
+                {{ supannRole }}
+{# {% for supannRole in role %}
                   <span>
                     {{ role }} {{ role.structure.description }}
                   </span>
                 {% endfor %}
+#}
                 {% set supannAffec = user.supannEntiteAffectation-all %}
-                {% for supannAffec as affec %}
+                {{ supannAffec }}
+              {#   {% for supannAffec in affec %}
                   <span>
                     {{ affec.businessCategory }}{{ affec.description }}
                   </span>
-                {% endfor %}
+                {% endfor %} #}
               </div>
             {% endif %}
           {% endfor %}
