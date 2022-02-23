@@ -71,7 +71,7 @@ class WsGroupsController extends ControllerBase
     return $site;
   }
 
-  private function getCachedUsers($affiliation = NULL, $siteId = NULL)
+  private function getCachedUsers($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL)
   {
     $cache = \Drupal::cache();
 
@@ -81,7 +81,7 @@ class WsGroupsController extends ControllerBase
         $response = $cachedUser->data;
         $users = $response['users'];
       } else {
-        $response = $this->wsGroupsService->getUserList($affiliation, $siteId);
+        $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
         $users = $response['users'];
         $this->createPagePersoUsers($users);
         $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
@@ -174,7 +174,7 @@ class WsGroupsController extends ControllerBase
    */
   public function getTrombiList($theme, $path, $siteId = NULL)
   {
-    $users = $this->getCachedUsers('faculty', $siteId);
+    $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
 
     $build['item_list'] = [
       '#theme' => $theme,
