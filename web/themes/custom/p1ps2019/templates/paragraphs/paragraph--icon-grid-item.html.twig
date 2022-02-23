@@ -37,6 +37,9 @@
 */
 #}
 
+
+{% set title = content.field_title|render %}
+
 {# The template default set classes. #}
 {%
 set classes = [
@@ -49,7 +52,7 @@ set classes = [
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       {{ content.field_fa_icon }}
-      <h3>{{ content.field_title }}</h3>
+      {% if title %} <h3>{{ content.field_title }}</h3> {% endif %}
       <div> {{ content.field_text.0 }} </div>
     {% endblock %}
   </div>
