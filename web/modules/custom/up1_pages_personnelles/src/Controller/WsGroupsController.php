@@ -124,7 +124,7 @@ class WsGroupsController extends ControllerBase {
     }
     else return FALSE;
   }
-  public function getGlobalList($type, $letter, $theme, $path, $siteId = NULL) {
+  public function getGlobalList($type, $theme, $path, $siteId = NULL) {
     $users = $this->getCachedUsers($type, $siteId);
 
     $build['item_list'] = [
@@ -188,11 +188,11 @@ class WsGroupsController extends ControllerBase {
   /**
    * Liste des Enseignants-Chercheurs d'une structure/mini-site
    */
-  public function microFacultyList($letter) {
+  public function microFacultyList($letter = NULL) {
     $siteId = $this->getSiteId();
     if (isset($siteId) && $this->getfieldEc()) {
       //return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list', $siteId);
-      return $this->getGlobalList('faculty', $letter, 'list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $siteId);
+      return $this->getGlobalList('faculty', 'list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $siteId);
     }
     else {
       throw new NotFoundHttpException();
