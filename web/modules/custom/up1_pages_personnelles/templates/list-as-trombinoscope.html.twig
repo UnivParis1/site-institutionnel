@@ -19,12 +19,14 @@
                     {{ user.sn|upper }} {{ user.givenName }}
                   </a>
                 </b>
-                {% for user.supannRoleEntite-all as role %}
+                {% set supannRole = user.supannRoleEntite-all %}
+                {% for supannRole as role %}
                   <span>
                     {{ role }} {{ role.structure.description }}
                   </span>
                 {% endfor %}
-                {% for user.supannEntiteAffectation-all as affec %}
+                {% set supannAffec = user.supannEntiteAffectation-all %}
+                {% for supannAffec as affec %}
                   <span>
                     {{ affec.businessCategory }}{{ affec.description }}
                   </span>
