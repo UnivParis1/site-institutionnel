@@ -128,11 +128,12 @@ class WsGroupsController extends ControllerBase
     return $site->get('trombi_ec_enable')->value;
   }
 
-  private function getTrombiFields()
-  {
+  private function getTrombiFields() {
+    $trombi_fields = [];
     if ($this->getFieldTrombiEc()) {
       $site = $this->getCurrentSite();
-      return [
+
+      $trombi_fields = [
         'supannEntite_pedagogy' => $site->get('supannEntite_pedagogy')->value,
         'supannEntite_research' => $site->get('supannEntite_research')->value,
         'discipline_enseignement' => $site->get('discipline_enseignement')->value,
@@ -141,6 +142,8 @@ class WsGroupsController extends ControllerBase
         'about_me' => $site->get('about_me')->value,
       ];
     }
+
+    return $trombi_fields;
   }
 
   private function getFieldDoc()
