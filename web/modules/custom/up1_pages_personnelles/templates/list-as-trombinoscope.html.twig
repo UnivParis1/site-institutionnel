@@ -6,35 +6,38 @@
   <div class="grid-x grid-margin-x grid-margin-y">
     <div class="grid-container">
       {% if users|length < 1 %}
-        <h4>{{ "Aucun résultat n'a été trouvé."|t }}</h4>
+        <h3>{{ "Aucun résultat n'a été trouvé."|t }}</h3>
       {% else %}
         <div class="annuaire-content mb-5">
+          <h3>{{ category }}</h3>
           {% for user in users %}
             {% if user.labeledURI is not empty and ((Trusted and user.supannListeRouge == FALSE) or
               (not Trusted and user.sn != 'supannListeRouge')) %}
-              <div class="annuaire-item">
-                <b>
-                  <a href="{{ user.labeledURI[0] }}"  target="_blank"
-                     title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
-                    {{ user.sn|upper }} {{ user.givenName }}
-                  </a>
-                </b>
-                {% set supannRole = user.supannRoleEntite-all %}
-                {{ supannRole }}
-{# {% for supannRole in role %}
-                  <span>
-                    {{ role }} {{ role.structure.description }}
-                  </span>
-                {% endfor %}
-#}
-                {% set supannAffec = user.supannEntiteAffectation-all %}
-                {{ supannAffec }}
-              {#   {% for supannAffec in affec %}
-                  <span>
-                    {{ affec.businessCategory }}{{ affec.description }}
-                  </span>
-                {% endfor %} #}
-              </div>
+              <article class="trombi-item">
+                <a href="{{ user.labeledURI[0] }}"  target="_blank"
+                   title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
+                  <img src="https://userphoto.univ-paris1.fr/?ldap-test=1&penpalAffiliation=anonymous&uid="
+                       alt="{{ {{ user.givenName }} {{ user.sn|upper }} }}" />
+                  <div class="trombi-infos">
+                    <h4>{{ user.givenName }} {{ user.sn|upper }}</h4>
+                    <p class="trombi-employeetype">{{ user.employeeType }}</p>
+                    <p class="trombi-role"> Directeur adjoint - Sciences Sociales (UMR 3646)</p>
+                    {# {{ user.supannRoleEntite-all }} #}
+                    <p class="trombi-affectation">ED Sciences Économiques{# {{ user.supannEntiteAffectation-all }}  #}</p>
+                    <p class="trombi-affectation">PJSE : {# {{ user.supannEntiteAffectation-all }}  #}</p>
+                    <ul class="trombi-skills">
+                      <li>Trop douée dans ça</li>
+                      <li>Et ça aussi</li>
+                    </ul>
+                    <div class="trombi-apropos">
+                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.
+                    </div>
+                  </div>
+                  <div class="trombi-btn">
+                    <div class="faux-btn">{{ "See page"|t }}</div>
+                  </div>
+                </a>
+              </article>
             {% endif %}
           {% endfor %}
         </div>
