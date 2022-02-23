@@ -38,7 +38,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
    * @throws InvalidPluginDefinitionException
    * @throws PluginNotFoundException
    */
-  public function getUserList($affiliation, $siteId = '') {
+  public function getUserList($affiliation, $siteId = '', $trombi_settings = NULL) {
     if (!empty($siteId)) {
       $siteStorage = $this->entityTypeManager->getStorage('site');
       $currentSite = $siteStorage->load($siteId);
@@ -54,6 +54,15 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $params = [
       'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
     ];
+    if (!empty($trombi_settings)) {
+      if ($trombi_settings['supannRole']) {
+        $params['attrs'] .= 'supannRoleEntite-all';
+      }
+      if ($trombi_settings['supannEntite_pedagogy'] || $trombi_settings['supannEntite_research']) {
+        $params['attrs'] .= 'supannEntiteAffectation-all';
+      }
+    }
+
     $ch = curl_init();
     if (isset($structure)) {
       $params['attrs'] .= ',employeeType';
