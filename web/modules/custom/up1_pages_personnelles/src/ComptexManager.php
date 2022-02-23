@@ -242,10 +242,9 @@ class ComptexManager implements ComptexInterface {
         $information = json_decode(curl_exec($ch), TRUE);
         curl_close($ch);
         $information = reset($information);
-
         $this->formatEmails($information);
 
-        return $information;
+        return $information['mail'];
     }
 
     private function formatEmails(&$information) {
