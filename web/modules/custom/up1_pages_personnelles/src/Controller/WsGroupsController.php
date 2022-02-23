@@ -175,7 +175,7 @@ class WsGroupsController extends ControllerBase
     $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
 
     foreach ($users as $user) {
-      \Drupal::logger('up1_pages_persos')->infos(print_r($user,1));
+      \Drupal::logger('up1_pages_persos')->info(print_r($user,1));
     }
     $build['item_list'] = [
       '#theme' => $theme,
