@@ -1,11 +1,6 @@
 {% if affiliation == 'faculty' %}
   {% set category = "Enseignants-Chercheurs" %}
-{% else %}
-  {% set category = "Doctorants" %}
 {% endif %}
-
-
-{{ trombi_settings }}
 
 <div id="trombi" class="cell small-12">
   <div class="grid-x grid-margin-x grid-margin-y">
@@ -27,7 +22,10 @@
                   </a>
                 </b>
                 <span>
-                  {{ user.employeeType|join(', ') }}
+                  {{ user.supannRoleEntite-all }}
+                </span>
+                <span>
+                  {{ user.upannEntiteAffectation-all }}
                 </span>
               </div>
             {% endif %}
