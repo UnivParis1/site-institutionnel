@@ -5,8 +5,6 @@
 <div id="trombi" class="cell small-12">
   <div class="grid-x grid-margin-x grid-margin-y">
     <div class="grid-container">
-      <h3>{{ category|upper }}</h3>
-      <hr />
       {% if users|length < 1 %}
         <h4>{{ "Aucun résultat n'a été trouvé."|t }}</h4>
       {% else %}
@@ -21,12 +19,16 @@
                     {{ user.sn|upper }} {{ user.givenName }}
                   </a>
                 </b>
-                <span>
-                  {{ user.supannRoleEntite-all }}
-                </span>
-                <span>
-                  {{ user.upannEntiteAffectation-all }}
-                </span>
+                {% for user.supannRoleEntite-all as role %}
+                  <span>
+                    {{ role }} {{ role.structure.description }}
+                  </span>
+                {% endfor %}
+                {% for user.supannEntiteAffectation-all as affec %}
+                  <span>
+                    {{ affec.businessCategory }}{{ affec.description }}
+                  </span>
+                {% endfor %}
               </div>
             {% endif %}
           {% endfor %}

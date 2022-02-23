@@ -56,10 +56,10 @@ class WsGroupsService implements WsGroupsServiceInterface {
     ];
     if (!empty($trombi_settings)) {
       if ($trombi_settings['supannRole']) {
-        $params['attrs'] .= 'supannRoleEntite-all';
+        $params['attrs'] .= ',supannRoleEntite-all';
       }
       if ($trombi_settings['supannEntite_pedagogy'] || $trombi_settings['supannEntite_research']) {
-        $params['attrs'] .= 'supannEntiteAffectation-all';
+        $params['attrs'] .= ',supannEntiteAffectation-all';
       }
     }
 

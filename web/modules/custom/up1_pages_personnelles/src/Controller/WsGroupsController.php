@@ -182,7 +182,7 @@ class WsGroupsController extends ControllerBase
       '#affiliation' => 'faculty',
       '#link' => $path,
       '#Trusted' => FALSE,
-      '#trombi_settings' => $this->getTrombiFields(),
+      '#trombi_settings' => [],
       '#attached' => [
         'library' => [
           'up1_pages_personnelles/liste'
