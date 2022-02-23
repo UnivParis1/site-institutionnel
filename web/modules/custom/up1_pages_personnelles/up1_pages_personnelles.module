@@ -88,9 +88,19 @@ function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface 
     '#weight' => 100,
     '#optional' => TRUE,
   ];
-  $form['staff'] = [
+  $form['staff_ec'] = [
     '#type' => 'details',
-    '#title' => t('Équipe'),
+    '#title' => t('Équipe Enseignant-Chercheur'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-staff'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
+  $form['staff_doc'] = [
+    '#type' => 'details',
+    '#title' => t('Équipe doctorants'),
     '#group' => 'advanced',
     '#attributes' => [
       'class' => ['site-form-staff'],
@@ -102,11 +112,34 @@ function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface 
   if (isset($form['groups'])) {
     $form['groups']['#group'] = 'pages_personnelles';
   }
+
   if (isset($form['ec_enabled'])) {
-    $form['ec_enabled']['#group'] = 'staff';
+    $form['ec_enabled']['#group'] = 'staff_ec';
   }
+  if (isset($form['trombi_ec_enable'])) {
+    $form['trombi_ec_enable']['#group'] = 'staff_ec';
+  }
+  if (isset($form['supannEntite_pedagogy'])) {
+    $form['supannEntite_pedagogy']['#group'] = 'staff_ec';
+  }
+  if (isset($form['supannEntite_research'])) {
+    $form['supannEntite_research']['#group'] = 'staff_doc';
+  }
+  if (isset($form['discipline_enseignement'])) {
+    $form['discipline_enseignement']['#group'] = 'staff_doc';
+  }
+  if (isset($form['skills_lists'])) {
+    $form['skills_lists']['#group'] = 'staff_ec';
+  }
+  if (isset($form['supannRole'])) {
+    $form['supannRole']['#group'] = 'staff_ec';
+  }
+  if (isset($form['about_me'])) {
+    $form['about_me']['#group'] = 'staff_ec';
+  }
+
   if (isset($form['doc_enabled'])) {
-    $form['doc_enabled']['#group'] = 'staff';
+    $form['doc_enabled']['#group'] = 'staff_doc';
   }
 }
 
