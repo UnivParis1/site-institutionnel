@@ -55,6 +55,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
       'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
     ];
     if (!empty($trombi_settings)) {
+      $params['attrs'] .= ',employeeType';
       if ($trombi_settings['supannRole']) {
         $params['attrs'] .= ',supannRoleEntite-all';
       }
