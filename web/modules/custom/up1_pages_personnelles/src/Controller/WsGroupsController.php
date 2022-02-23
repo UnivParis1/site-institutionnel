@@ -83,7 +83,6 @@ class WsGroupsController extends ControllerBase
       } else {
         $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
         $users = $response['users'];
-        $this->createPagePersoUsers($users);
         $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
       }
     } else {
@@ -95,7 +94,6 @@ class WsGroupsController extends ControllerBase
       } else {
         $response = $this->wsGroupsService->getUserList($affiliation);
         $users = $response['users'];
-        $this->createPagePersoUsers($users);
         $cache->set('labeledURI_' . $affiliation, $response, time() + 60 * 60);
       }
     }
@@ -176,6 +174,9 @@ class WsGroupsController extends ControllerBase
   {
     $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
 
+    foreach ($users as $user) {
+      \Drupal::logger('up1_pages_persos')->infos(print_r($user,1));
+    }
     $build['item_list'] = [
       '#theme' => $theme,
       '#users' => $users,
