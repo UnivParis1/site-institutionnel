@@ -4,7 +4,7 @@
   {% set category = "Doctorants" %}
 {% endif %}
 
-<div id="liste-pp-emptyp" class="cell small-12">
+<div id="trombi" class="cell small-12">
   <div class="grid-x grid-margin-x grid-margin-y">
     <div class="grid-container">
       <h3>{{ category|upper }}</h3>
@@ -31,18 +31,6 @@
           {% endfor %}
         </div>
       {% endif %}
-
-      <div class="pager pager-top">
-        {% for letter in 'a'|upper .. 'z'|upper %}
-          <span class="letter">
-              {% if affiliation == 'faculty' %}
-                <a href="{{ path(link,{'letter': letter}) }}">{{ letter }}</a>
-              {% else %}
-                <a href="{{ path(link,{'letter': letter}) }}">{{ letter }}</a>
-              {% endif %}
-            </span>
-        {% endfor %}
-      </div>
     </div>
   </div>
 </div>
