@@ -202,7 +202,8 @@ class WsGroupsController extends ControllerBase {
   public function microStudentList($letter) {
     $siteId = $this->getSiteId();
     if (isset($siteId) && $this->getfieldDoc()) {
-      return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $siteId);
+      //return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $siteId);
+      return $this->getGlobalList('student', 'list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $siteId);
     }
     else {
       throw new NotFoundHttpException();
