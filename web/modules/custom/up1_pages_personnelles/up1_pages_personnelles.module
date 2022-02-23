@@ -123,7 +123,7 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['supannRole'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('SShow "supannRole" on trombinoscope'))
+      ->setLabel(t('Show "supannRole" on trombinoscope'))
       ->setDescription(t('See fonction on trombinoscope card.'))
       ->setDefaultValue(FALSE)
       ->setRevisionable(TRUE)
@@ -193,10 +193,10 @@ function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface 
     $form['supannEntite_pedagogy']['#group'] = 'staff_ec';
   }
   if (isset($form['supannEntite_research'])) {
-    $form['supannEntite_research']['#group'] = 'staff_doc';
+    $form['supannEntite_research']['#group'] = 'staff_ec';
   }
   if (isset($form['discipline_enseignement'])) {
-    $form['discipline_enseignement']['#group'] = 'staff_doc';
+    $form['discipline_enseignement']['#group'] = 'staff_ec';
   }
   if (isset($form['skills_lists'])) {
     $form['skills_lists']['#group'] = 'staff_ec';
@@ -524,6 +524,7 @@ function up1_pages_personnelles_theme() {
         'link' => NULL,
         'affiliation' => NULL,
         'Trusted' => FALSE,
+        'trombi_settings' => []
       ]
     ]
   ];
