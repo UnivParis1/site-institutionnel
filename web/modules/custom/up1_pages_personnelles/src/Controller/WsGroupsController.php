@@ -124,6 +124,24 @@ class WsGroupsController extends ControllerBase {
     }
     else return FALSE;
   }
+  public function getGlobalList($type, $letter, $theme, $path, $siteId = NULL) {
+    $users = $this->getCachedUsers($type, $siteId);
+
+    $build['item_list'] = [
+      '#theme' => $theme,
+      '#users' => $users,
+      '#affiliation' => $type,
+      '#link' => $path,
+      '#Trusted' => FALSE,
+      '#attached' => [
+        'library' => [
+          'up1_pages_personnelles/liste'
+        ]
+      ]
+    ];
+
+    return $build;
+  }
 
   public function getList($type, $letter, $theme, $path, $siteId = NULL) {
     $filtered_users = [];
@@ -173,7 +191,8 @@ class WsGroupsController extends ControllerBase {
   public function microFacultyList($letter) {
     $siteId = $this->getSiteId();
     if (isset($siteId) && $this->getfieldEc()) {
-      return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list', $siteId);
+      //return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list', $siteId);
+      return $this->getGlobalList('faculty', $letter, 'list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $siteId);
     }
     else {
       throw new NotFoundHttpException();
