@@ -52,10 +52,9 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $request = $this->getRequest($affiliation);
 
     $params = [
-      'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
+      'attrs' => 'sn,givenName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
     ];
     if (!empty($trombi_settings)) {
-      $params['attrs'] .= ',employeeType';
       if ($trombi_settings['supannRole']) {
         $params['attrs'] .= ',supannRoleEntite-all';
       }
@@ -64,9 +63,10 @@ class WsGroupsService implements WsGroupsServiceInterface {
       }
     }
 
+    \Drupal::logger('up1_pages_personnelles')->info(print_r($params['attrs'], 1));
+
     $ch = curl_init();
     if (isset($structure)) {
-      $params['attrs'] .= ',employeeType';
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params) . '&' . http_build_query($structure));
     }
     else {
