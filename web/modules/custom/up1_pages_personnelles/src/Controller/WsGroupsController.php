@@ -9,6 +9,7 @@ use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\micro_site\Entity\Site;
 
 define("IMPORT_USER_SIZE", 150);
 define("IMPORT_DATA_SIZE", 50);
