@@ -992,8 +992,9 @@ class WsGroupsController extends ControllerBase
       \Drupal::logger('user_clay')->info(print_r($user, 1));
       \Drupal::logger('user_affect_all')->info(print_r($user['supannEntiteAffectation-all'],1));
     }
-    if (!empty($user['supannEntiteAffectation-all'])) {
-      foreach ($user['supannEntiteAffectation-all'] as $key => $item) {
+    $affectation = $user['supannEntiteAffectation-all'];
+    if (!empty($affectation) && count($affectation) > 1 ) {
+      foreach ($affectation as $key => $item) {
         if ($user['sn'] == "Clay") {
           \Drupal::logger('one_affectation')->info(print_r($item, 1));
           $business_cat = $item['businessCategory'];
@@ -1041,9 +1042,17 @@ class WsGroupsController extends ControllerBase
         }
         $user['entites'] = implode('', $affectation);
       }
-      if ($user['sn'] == "Clay") {
-        \Drupal::logger('user_entites')->info(print_r($user['entites'], 1));
+    }
+    else if (count($affectation) == 1) {
+      $affectation = reset($affectation);
+      if (!empty($affectation)) {
+        $user['entites'] = "<p><a href='" . $affectation['labeledURI'] . "' title='" . $affectation['description'] . "' target='_blank'>"
+          . $affectation['description'] . "</a></p>";
+      }
+      else {
+        $user['entites'] = "<p>" . $affectation['description'] . "</p>";
       }
     }
+    \Drupal::logger('user_entites')->info(print_r($user['entites'], 1));
   }
 }
