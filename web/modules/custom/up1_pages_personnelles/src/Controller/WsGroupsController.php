@@ -175,7 +175,6 @@ class WsGroupsController extends ControllerBase
 
     foreach ($users as $user) {
       $this->formatTrombiData($user);
-      \Drupal::logger('up1_pp')->info(print_r($user['entites'],1));
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -990,18 +989,21 @@ class WsGroupsController extends ControllerBase
 
   private function formatTrombiData(&$user) {
     if ($user['sn'] == "Clay") {
-      \Drupal::logger('pages_perso_users')->info(print_r($user, 1));
+      \Drupal::logger('user_clay')->info(print_r($user, 1));
+      \Drupal::logger('user_affect_all')->info(print_r($user['supannEntiteAffectation-all'],1));
     }
-    \Drupal::logger('formatTrombiData')->info(print_r($user['supannEntiteAffectation-all'],1));
     if (!empty($user['supannEntiteAffectation-all'])) {
       foreach ($user['supannEntiteAffectation-all'] as $key => $item) {
-        \Drupal::logger('formatTrombiData')->info(print_r($item,1));
-        $business_cat = $item['businessCategory'];
+        if ($user['sn'] == "Clay") {
+          \Drupal::logger('one_affectation')->info(print_r($item, 1));
+          $business_cat = $item['businessCategory'];
+          \Drupal::logger('one_affectation_bc')->info(print_r($business_cat, 1));
+        }
         $uri = "";
-        if (isset($affec['labeledURI'])) {
-          $uri = $affec['labeledURI'];
+        if (isset($item['labeledURI'])) {
+          $uri = $item['labeledURI'];
         } else {
-          $site_group = $affec['key'];
+          $site_group = $item['key'];
           $ids = \Drupal::entityQuery('site')
             ->condition('type', 'mini_site')
             ->condition('groups', $site_group)
@@ -1038,6 +1040,9 @@ class WsGroupsController extends ControllerBase
           $affectation[] = "<p>" . $entite['description'] . "</p>";
         }
         $user['entites'] = implode('', $affectation);
+      }
+      if ($user['sn'] == "Clay") {
+        \Drupal::logger('user_entites')->info(print_r($user['entites'], 1));
       }
     }
   }
