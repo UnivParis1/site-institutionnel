@@ -988,6 +988,7 @@ class WsGroupsController extends ControllerBase
   }
 
   private function formatTrombiData(&$user, $settings) {
+    unset($user['entites']);
     $user['entites'] = '';
     if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
       $affectation = $user['supannEntiteAffectation-all'];
@@ -1005,7 +1006,7 @@ class WsGroupsController extends ControllerBase
       if ($settings['supannEntite_pedagogy']) {
         $key_search = array_search('pedagogy', array_column($affectation, 'businessCategory'));
         if (!empty($affectation[$key_search]['labeledURI'])) {
-          $entiteAffectations[] .= "<p><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
+          $entiteAffectations[] .= "<p class='trombi-affectation'><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
             $affectation[$key_search]['description'] . "' target='_blank'>"
             . $affectation[$key_search]['description'] . "</a></p>";
         } else {
