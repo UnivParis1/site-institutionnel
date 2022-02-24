@@ -990,9 +990,12 @@ class WsGroupsController extends ControllerBase
 
   private function formatTrombiData(&$user) {
     if (!empty($user['employeeType'])) {
-      reset($user['employeeType']);
+      \Drupal::logger('employeeType')->info(print_r($user['employeeType'], 1));
+      \Drupal::logger('pages_perso_users')->info(print_r($user, 1));
+      //reset($user['employeeType']);
     }
     $affec = $user['supannEntiteAffectation-all'];
+    \Drupal::logger('formatTrombiData')->info(print_r($affec,1));
     if (!empty($affec)) {
       foreach ($affec as $item) {
         \Drupal::logger('formatTrombiData')->info(print_r($item,1));

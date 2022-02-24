@@ -52,7 +52,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $request = $this->getRequest($affiliation);
 
     $params = [
-      'attrs' => 'sn,givenName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
+      'attrs' => 'sn,givenName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
     ];
     if (!empty($trombi_settings)) {
       if ($trombi_settings['supannRole']) {
