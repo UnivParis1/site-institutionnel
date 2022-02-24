@@ -165,7 +165,6 @@ class WsGroupsController extends ControllerBase
   }
 
   /**
-   * @param $type 'faculty'|'student'
    * @param $theme
    * @param $path
    * @param $siteId
@@ -176,7 +175,7 @@ class WsGroupsController extends ControllerBase
 
     foreach ($users as $user) {
       $this->formatTrombiData($user);
-      \Drupal::logger('up1_pages_persos')->info(print_r($user,1));
+      \Drupal::logger('up1_pp')->info(print_r($user['entites'],1));
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -187,7 +186,7 @@ class WsGroupsController extends ControllerBase
       '#trombi_settings' => [],
       '#attached' => [
         'library' => [
-          'up1_pages_personnelles/liste'
+          'up1_pages_personnelles/trombi'
         ]
       ]
     ];

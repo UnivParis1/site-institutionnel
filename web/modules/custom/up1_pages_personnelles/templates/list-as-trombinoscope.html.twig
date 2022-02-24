@@ -1,17 +1,14 @@
-{% if affiliation == 'faculty' %}
-  {% set category = "Enseignants-Chercheurs" %}
-{% endif %}
-
 <div id="trombi" class="cell small-12">
   <div class="grid-x grid-margin-x grid-margin-y">
     <div class="grid-container">
-      <h1>{{ category }}</h1>
+      <h1>{{ 'Enseignants-Chercheurs'|t }}</h1>
       <div class="annuaire-content mb-5">
         {% if users|length < 1 %}
           <div>{{ "Aucun résultat n'a été trouvé."|t }}</div>
         {% else %}
           {% for user in users %}
-            {% if user.labeledURI is not empty and user.supannListeRouge == FALSE %}
+            {% if user.labeledURI is not empty and ((Trusted and user.supannListeRouge == FALSE) or
+              (not Trusted and user.sn != 'supannListeRouge')) %}
               <article class="trombi-item">
                 <a href="{{ user.labeledURI[0] }}"  target="_blank"
                    title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
@@ -19,7 +16,7 @@
                        alt="{{ user.givenName }} {{ user.sn|upper }}" />
                   <div class="trombi-infos">
                     <h2>{{ user.givenName }} {{ user.sn|upper }}</h2>
-                    <p class="trombi-employeetype">{{ user.employeeType }}</p>
+                    <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
                     <p class="trombi-role"> Directeur adjoint - Sciences Sociales (UMR 3646)</p>
                     {# {{ user.supannRoleEntite-all }} #}
                     <p class="trombi-affectation">ED Sciences Économiques{# {{ user.supannEntiteAffectation-all }}  #}</p>
