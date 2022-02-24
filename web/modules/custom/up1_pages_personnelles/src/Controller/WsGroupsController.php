@@ -174,7 +174,7 @@ class WsGroupsController extends ControllerBase
     $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
 
     foreach ($users as $user) {
-      $this->formatTrombiData($user);
+      $this->formatTrombiData($user, $this->getTrombiFields());
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -987,72 +987,35 @@ class WsGroupsController extends ControllerBase
     }
   }
 
-  private function formatTrombiData(&$user) {
-    if ($user['sn'] == "Clay") {
-      \Drupal::logger('user_clay')->info(print_r($user, 1));
-      \Drupal::logger('user_affect_all')->info(print_r($user['supannEntiteAffectation-all'],1));
-    }
-    $affectation = $user['supannEntiteAffectation-all'];
-    if (!empty($affectation) && count($affectation) > 1 ) {
-      foreach ($affectation as $key => $item) {
-        if ($user['sn'] == "Clay") {
-          \Drupal::logger('one_affectation')->info(print_r($item, 1));
-          $business_cat = $item['businessCategory'];
-          \Drupal::logger('one_affectation_bc')->info(print_r($business_cat, 1));
-        }
-        $uri = "";
-        if (isset($item['labeledURI'])) {
-          $uri = $item['labeledURI'];
+  private function formatTrombiData(&$user, $settings) {
+    $user['entites'] = '';
+    if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
+      $affectation = $user['supannEntiteAffectation-all'];
+      $entiteAffectations = [];
+      if ($settings['supannEntite_research']) {
+        $key_search = array_search('research', array_column($affectation, 'businessCategory'));
+        if (!empty($affectation[$key_search]['labeledURI'])) {
+          $entiteAffectations[] .= "<p><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
+            $affectation[$key_search]['description'] . "' target='_blank'>"
+            . $affectation[$key_search]['description'] . "</a></p>";
         } else {
-          $site_group = $item['key'];
-          $ids = \Drupal::entityQuery('site')
-            ->condition('type', 'mini_site')
-            ->condition('groups', $site_group)
-            ->execute();
-          $site = Site::loadMultiple($ids);
-          if (count($site) == 1) {
-            $site = reset($site);
-            $site_url = $site->get('site_url')->getValue();
-            $uri = "//" . $site_url[0]['value'];
-          }
-        }
-        if ($business_cat != 'doctoralSchool') {
-          $entites[] = [
-            'businessCategory' => $business_cat,
-            'name' => $item['name'],
-            'description' => $item['description'],
-            'labeledURI' => $uri
-          ];
+          $entiteAffectations[] .= "<p>" . $affectation[$key_search]['description'] . "</p>";
         }
       }
-      $order = ['research', 'pedagogy'];
-
-      usort($entites, function ($a, $b) use ($order) {
-        $pos_a = array_search($a['businessCategory'], $order);
-        $pos_b = array_search($b['businessCategory'], $order);
-        return $pos_a - $pos_b;
-      });
-
-      foreach ($entites as $entite) {
-        if (!empty($entite['labeledURI'])) {
-          $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['description'] . "' target='_blank'>"
-            . $entite['description'] . "</a></p>";
+      if ($settings['supannEntite_pedagogy']) {
+        $key_search = array_search('pedagogy', array_column($affectation, 'businessCategory'));
+        if (!empty($affectation[$key_search]['labeledURI'])) {
+          $entiteAffectations[] .= "<p><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
+            $affectation[$key_search]['description'] . "' target='_blank'>"
+            . $affectation[$key_search]['description'] . "</a></p>";
         } else {
-          $affectation[] = "<p>" . $entite['description'] . "</p>";
+          $entiteAffectations[] .= "<p>" . $affectation[$key_search]['description'] . "</p>";
         }
-        $user['entites'] = implode('', $affectation);
       }
+      unset($user['supannEntiteAffectation-all']);
+      $user['supannEntiteAffectation-all'] = implode('',$entiteAffectations);
+      \Drupal::logger('format_supannEntiteAffectation')->info(print_r($user['supannEntiteAffectation-all'],1));
     }
-    else if (count($affectation) == 1) {
-      $affectation = reset($affectation);
-      if (!empty($affectation)) {
-        $user['entites'] = "<p><a href='" . $affectation['labeledURI'] . "' title='" . $affectation['description'] . "' target='_blank'>"
-          . $affectation['description'] . "</a></p>";
-      }
-      else {
-        $user['entites'] = "<p>" . $affectation['description'] . "</p>";
-      }
-    }
-    \Drupal::logger('user_entites')->info(print_r($user['entites'], 1));
   }
 }
+
