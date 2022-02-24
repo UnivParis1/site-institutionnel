@@ -995,6 +995,7 @@ class WsGroupsController extends ControllerBase
     $affec = $user['supannEntiteAffectation-all'];
     if (!empty($affec)) {
       foreach ($affec as $item) {
+        \Drupal::logger('formatTrombiData')->info(print_r($item,1));
         $business_cat = $item['businessCategory'];
         $uri = "";
         if (isset($affec['labeledURI'])) {
