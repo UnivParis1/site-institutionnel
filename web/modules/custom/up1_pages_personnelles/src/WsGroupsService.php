@@ -68,6 +68,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $ch = curl_init();
     if (isset($structure)) {
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params) . '&' . http_build_query($structure));
+
     }
     else {
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
