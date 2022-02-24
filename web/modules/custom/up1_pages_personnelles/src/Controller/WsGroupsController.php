@@ -993,8 +993,8 @@ class WsGroupsController extends ControllerBase
       \Drupal::logger('pages_perso_users')->info(print_r($user, 1));
     }
     \Drupal::logger('formatTrombiData')->info(print_r($user['supannEntiteAffectation-all'],1));
-    /*if (!empty($affec)) {
-      foreach ($affec as $item) {
+    if (!empty($user['supannEntiteAffectation-all'])) {
+      foreach ($user['supannEntiteAffectation-all'] as $key => $item) {
         \Drupal::logger('formatTrombiData')->info(print_r($item,1));
         $business_cat = $item['businessCategory'];
         $uri = "";
@@ -1039,6 +1039,6 @@ class WsGroupsController extends ControllerBase
         }
         $user['entites'] = implode('', $affectation);
       }
-    }*/
+    }
   }
 }
