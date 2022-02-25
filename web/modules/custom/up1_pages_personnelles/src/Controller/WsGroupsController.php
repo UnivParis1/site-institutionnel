@@ -987,6 +987,19 @@ class WsGroupsController extends ControllerBase
   }
 
   private function formatTrombiData(&$user, $settings) {
+    if ($settings['about_me'] || $settings['skills_ia']) {
+      $drupal_user = user_load_by_name($user['uid']);
+      $uid = $drupal_user->id();
+
+      $pp = \Drupal::entityTypeManager()
+        ->getStorage('node')
+        ->loadByProperties(['uid' => $uid, 'type' => 'page_personnelle']);
+      $page_perso = reset($pp);
+      if ($page_perso) {
+        $user['about_me'] = $page_perso->get('field_about_me')->value;
+        $user['skills'] = $page_perso->get('field_skills')->value;
+      }
+    }
     if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
       $user['entites'] = '';
       $affectation = $user['supannEntiteAffectation-all'];
@@ -1005,9 +1018,6 @@ class WsGroupsController extends ControllerBase
       if ($user['sn'] == 'Clay') {
         \Drupal::logger('formatTrombiData')->info(print_r($user, 1));
       }
-    }
-    if ($settings['about_me']) {
-
     }
   }
 
