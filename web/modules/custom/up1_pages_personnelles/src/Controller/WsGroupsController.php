@@ -178,7 +178,7 @@ class WsGroupsController extends ControllerBase
       $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
-      if ($user['sn'] == 'Assouline') {
+      if ($user['sn'] == 'Chiroleu Assouline') {
         \Drupal::logger('user_data')->info(print_r($user, 1));
       }
     }
