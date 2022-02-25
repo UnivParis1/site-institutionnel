@@ -1055,7 +1055,7 @@ class WsGroupsController extends ControllerBase
         $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
       }
     }
-    \Drupal::logger("formatedData_$key")->info(print_r($data[$key_search], 1));
+    \Drupal::logger("formatedData_$key")->info(print_r($formated_data, 1));
     return $formated_data;
   }
 }
