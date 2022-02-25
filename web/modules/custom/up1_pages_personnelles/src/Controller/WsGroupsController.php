@@ -991,18 +991,17 @@ class WsGroupsController extends ControllerBase
       $user['entites'] = '';
       $affectation = $user['supannEntiteAffectation-all'];
       if ($settings['supannEntite_research']) {
-        $entites[] = $this->formatSupannEntites('research', $affectation, 'businessCategory');
+        $user['entites'] .= $this->formatSupannEntites('research', $affectation, 'businessCategory');
         if ($user['sn'] == 'Clay') {
-          \Drupal::logger('formatSupannEntites')->info(print_r($entites, 1));
+          \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
         }
       }
       if ($settings['supannEntite_pedagogy']) {
-        $entites[] = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
+        $user['entites'] = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
         if ($user['sn'] == 'Clay') {
-          \Drupal::logger('formatSupannEntites')->info(print_r($entites, 1));
+          \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
         }
       }
-      $user['entites'] = implode(' ', $entites);
       if ($user['sn'] == 'Clay') {
         \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
       }
