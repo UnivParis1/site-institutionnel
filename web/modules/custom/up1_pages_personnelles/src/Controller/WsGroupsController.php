@@ -991,18 +991,17 @@ class WsGroupsController extends ControllerBase
       $user['entites'] = '';
       $affectation = $user['supannEntiteAffectation-all'];
       if ($settings['supannEntite_research']) {
-        $entites[] = $this->formatSupannEntites('research', $affectation, 'businessCategory');
+        $user['entites'] .= $this->formatSupannEntites('research', $affectation, 'businessCategory');
         if ($user['sn'] == 'Clay') {
-          \Drupal::logger('formatSupannEntites')->info(print_r($entites, 1));
+          \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
         }
       }
       if ($settings['supannEntite_pedagogy']) {
-        $entites[] = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
+        $user['entites'] = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
         if ($user['sn'] == 'Clay') {
-          \Drupal::logger('formatSupannEntites')->info(print_r($entites, 1));
+          \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
         }
       }
-      $user['entites'] = implode(' ', $entites);
       if ($user['sn'] == 'Clay') {
         \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
       }
@@ -1011,13 +1010,13 @@ class WsGroupsController extends ControllerBase
 
   private function formatSupannEntites($key, $data, $column) {
     $key_search = array_search($key, array_column($data, $column));
-    $formated_data = [];
+    $formated_data = '';
     if (!empty($data[$key_search]['labeledURI'])) {
-      $formated_data['entites'][] = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
+      $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
         $data[$key_search]['description'] . "' target='_blank'>"
         . $data[$key_search]['description'] . "</a></p>";
     } else {
-      $formated_data['entites'][] = "<p>" . $data[$key_search]['description'] . "</p>";
+      $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
     }
 
     return $formated_data;
