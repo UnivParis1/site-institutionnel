@@ -176,8 +176,8 @@ class WsGroupsController extends ControllerBase
     foreach ($users as $user) {
       $skills = $this->formatTrombiData('skills', $user, $site_settings);
       $about = $this->formatTrombiData('about', $user, $site_settings);
-      $pedagogy = $this->formatTrombiData('pedagogy', $user, $site_settings);
       $research = $this->formatTrombiData('research', $user, $site_settings);
+      $pedagogy = $this->formatTrombiData('pedagogy', $user, $site_settings);
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -186,8 +186,8 @@ class WsGroupsController extends ControllerBase
       '#link' => $path,
       '#Trusted' => FALSE,
       '#trombi_settings' => [],
-      '#pedagogy' => $pedagogy,
       '#research' => $research,
+      '#pedagogy' => $pedagogy,
       '#skills' => $skills,
       '#about_me' => $about,
       '#attached' => [
@@ -1046,16 +1046,15 @@ class WsGroupsController extends ControllerBase
   private function formatSupannEntites($key, $data, $column) {
     $key_search = array_search($key, array_column($data, $column));
     $formated_data = '';
-    if (!empty($data[$key_search])) {
-      if (!empty($data[$key_search]['labeledURI'])) {
-        $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
-          $data[$key_search]['description'] . "' target='_blank'>"
-          . $data[$key_search]['description'] . "</a></p>";
-      } else {
-        $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
-      }
-    }
 
+    if (!empty($data[$key_search]['labeledURI'])) {
+      $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
+        $data[$key_search]['description'] . "' target='_blank'>"
+        . $data[$key_search]['description'] . "</a></p>";
+    } else {
+      $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
+    }
+    
     return $formated_data;
   }
 }
