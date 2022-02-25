@@ -988,16 +988,17 @@ class WsGroupsController extends ControllerBase
 
   private function formatTrombiData(&$user, $settings) {
     if ($settings['about_me'] || $settings['skills_ia']) {
+      \Drupal::logger('user_load_byName')->info(print_r($user['uid'],1));
       $drupal_user = user_load_by_name($user['uid']);
-      $uid = $drupal_user->id();
+
       if ($user['sn'] == 'Clay') {
         \Drupal::logger('user_load_byName')->info(print_r($drupal_user,1));
-        \Drupal::logger('user_load_byName')->info(print_r($uid,1));
+        \Drupal::logger('user_load_byName')->info(print_r($user['uid'],1));
       }
 
       $pp = \Drupal::entityTypeManager()
         ->getStorage('node')
-        ->loadByProperties(['uid' => $uid, 'type' => 'page_personnelle']);
+        ->loadByProperties(['uid' => $user['uid'], 'type' => 'page_personnelle']);
       $page_perso = reset($pp);
       if ($page_perso) {
         $user['about_me'] = $page_perso->get('field_about_me')->value;
