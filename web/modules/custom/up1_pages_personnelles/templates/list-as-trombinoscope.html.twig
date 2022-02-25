@@ -18,7 +18,9 @@
                     <h2>{{ user.givenName }} {{ user.sn|upper }}</h2>
                     <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
                     <p class="trombi-role"> Directeur adjoint - Sciences Sociales (UMR 3646)</p>
-                     {{ user.entites|raw }}
+                    {% autoescape %}
+                     {{ user.entites }}
+                    {% endautoescape %}
                     <ul class="trombi-skills">
                       <li>Trop douée dans ça</li>
                       <li>Et ça aussi</li>

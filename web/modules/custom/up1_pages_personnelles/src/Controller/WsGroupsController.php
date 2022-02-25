@@ -1006,6 +1006,9 @@ class WsGroupsController extends ControllerBase
         \Drupal::logger('formatTrombiData')->info(print_r($user, 1));
       }
     }
+    if ($settings['about_me']) {
+
+    }
   }
 
   private function formatSupannEntites($key, $data, $column) {
