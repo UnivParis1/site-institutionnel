@@ -1043,7 +1043,7 @@ class WsGroupsController extends ControllerBase
       case 'role' :
         if ($settings['supannRole'] == 1) {
           if(!empty($user['supannRoleEntite-all'])) {
-            $role = $user['supannRoleEntite-all'];
+            $role = $user['supannRoleEntite-all'][0];
             $result = $role['role'] . ' ' . $role['structure']['description'];
           }
         }
