@@ -178,7 +178,7 @@ class WsGroupsController extends ControllerBase
       $pedagogy = $this->formatTrombiData('pedagogy', $user, $this->getTrombiFields());
       $research = $this->formatTrombiData('research', $user, $this->getTrombiFields());
       \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r($pedagogy, 1));
-      \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r(research, 1));
+      \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r($research, 1));
     }
     $build['item_list'] = [
       '#theme' => $theme,
