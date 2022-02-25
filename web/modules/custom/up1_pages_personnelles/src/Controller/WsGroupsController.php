@@ -175,6 +175,7 @@ class WsGroupsController extends ControllerBase
 
     foreach ($users as $user) {
       $this->formatTrombiData($user, $this->getTrombiFields());
+      \Drupal::logger('pages_personnelles_user')->info(print_r($user, 1));
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -1014,7 +1015,6 @@ class WsGroupsController extends ControllerBase
       }
 
       $user['entites'] = implode('',$entiteAffectations);
-      \Drupal::logger('format_supannEntiteAffectation')->info(print_r($user['supannEntiteAffectation-all'],1));
     }
   }
 }
