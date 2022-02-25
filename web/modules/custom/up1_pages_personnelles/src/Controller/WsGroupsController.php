@@ -988,21 +988,23 @@ class WsGroupsController extends ControllerBase
 
   private function formatTrombiData(&$user, $settings) {
     if ($settings['about_me'] || $settings['skills_ia']) {
-      \Drupal::logger('user_load_byName')->info(print_r($user['uid'],1));
       $drupal_user = user_load_by_name($user['uid']);
 
       if ($user['sn'] == 'Clay') {
-        \Drupal::logger('user_load_byName')->info(print_r($drupal_user,1));
-        \Drupal::logger('user_load_byName')->info(print_r($user['uid'],1));
+        \Drupal::logger('user_load_byName')->info('User : ' . print_r($drupal_user,1));
+        \Drupal::logger('user_load_byName')->info('uid ' . print_r($user['uid'],1));
       }
 
       $pp = \Drupal::entityTypeManager()
         ->getStorage('node')
         ->loadByProperties(['uid' => $user['uid'], 'type' => 'page_personnelle']);
       $page_perso = reset($pp);
+    \Drupal::logger('node_page_perso')->info('node ? ' . $page_perso->id());
       if ($page_perso) {
         $user['about_me'] = $page_perso->get('field_about_me')->value;
+      \Drupal::logger('node_page_perso')->info('about me ? ' . $page_perso->get('field_about_me')->value);
         $user['skills'] = $page_perso->get('field_skills')->value;
+      \Drupal::logger('node_page_perso')->info('field_skills ? ' . $page_perso->get('field_skills')->value);
       }
     }
     if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
