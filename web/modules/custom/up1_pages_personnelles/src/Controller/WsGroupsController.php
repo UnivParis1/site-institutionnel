@@ -1046,7 +1046,7 @@ class WsGroupsController extends ControllerBase
   private function formatSupannEntites($key, $data, $column) {
     $key_search = array_search($key, array_column($data, $column));
     $formated_data = '';
-    if ($key_search) {
+    if (!empty($data[$key_search])) {
       if (!empty($data[$key_search]['labeledURI'])) {
         $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
           $data[$key_search]['description'] . "' target='_blank'>"
@@ -1055,7 +1055,7 @@ class WsGroupsController extends ControllerBase
         $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
       }
     }
-    \Drupal::logger("formatedData_$key")->info(print_r($formated_data, 1));
+
     return $formated_data;
   }
 }
