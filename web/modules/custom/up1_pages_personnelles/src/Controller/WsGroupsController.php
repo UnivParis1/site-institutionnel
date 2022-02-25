@@ -989,9 +989,9 @@ class WsGroupsController extends ControllerBase
   private function formatTrombiData(&$user, $settings) {
     if ($settings['about_me'] || $settings['skills_ia']) {
       $drupal_user = user_load_by_name($user['uid']);
+      $uid = $drupal_user->id();
       if ($user['sn'] == 'Clay') {
         \Drupal::logger('user_load_byName')->info(print_r($drupal_user,1));
-        $uid = $drupal_user->id();
         \Drupal::logger('user_load_byName')->info(print_r($uid,1));
       }
 
