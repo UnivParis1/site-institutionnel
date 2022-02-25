@@ -989,18 +989,30 @@ class WsGroupsController extends ControllerBase
 
   private function formatTrombiData(&$user, $settings) {
     if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
-      $user['entites'] = [];
+      $user['entites'] = '';
       $affectation = $user['supannEntiteAffectation-all'];
       if ($settings['supannEntite_research']) {
-        $key_entite = 'research';
-        $key_search = array_search($key_entite, array_column($affectation, 'businessCategory'));
+        $entites[] = $this->formatSupannEntites('research', $affectation, 'businessCategory');
       }
       if ($settings['supannEntite_pedagogy']) {
-        $key_entite = 'pedagogy';
-        $key_search = array_search($key_entite, array_column($affectation, 'businessCategory'));
+        $entites[] = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
       }
-      $user['entites'][$key_entite][] = $affectation[$key_search];
+      $user['entites'] = implode(' ', $entites);
     }
+  }
+
+  private function formatSupannEntites($key, $data, $column) {
+    $key_search = array_search($key, array_column($data, $column));
+    $formated_data = [];
+    if (!empty($data[$key_search]['labeledURI'])) {
+      $formated_data['entites'][] = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
+        $data[$key_search]['description'] . "' target='_blank'>"
+        . $data[$key_search]['description'] . "</a></p>";
+    } else {
+      $formated_data['entites'][] = "<p>" . $data[$key_search]['description'] . "</p>";
+    }
+
+    return $formated_data;
   }
 }
 
