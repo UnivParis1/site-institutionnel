@@ -991,13 +991,12 @@ class WsGroupsController extends ControllerBase
       $drupal_user = user_load_by_name($user['uid']);
 
       if ($user['sn'] == 'Clay') {
-        \Drupal::logger('user_load_byName')->info('User : ' . print_r($drupal_user,1));
-        \Drupal::logger('user_load_byName')->info('uid ' . print_r($user['uid'],1));
+        \Drupal::logger('user_load_byName')->info('User : ' . print_r($drupal_user->id(),1));
       }
 
       $pp = \Drupal::entityTypeManager()
         ->getStorage('node')
-        ->loadByProperties(['uid' => $user['uid'], 'type' => 'page_personnelle']);
+        ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
       $page_perso = reset($pp);
     \Drupal::logger('node_page_perso')->info('node ? ' . $page_perso->id());
       if ($page_perso) {
