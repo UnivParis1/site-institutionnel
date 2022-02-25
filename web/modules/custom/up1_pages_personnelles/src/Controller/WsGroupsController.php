@@ -1025,6 +1025,7 @@ class WsGroupsController extends ControllerBase
           $affectation = $user['supannEntiteAffectation-all'];
           $key_search = array_search('research', array_column($affectation, 'businessCategory'));
           $result = $affectation[$key_search]['description'];
+          \Drupal::logger('case_research')->info(print_r($result, 1));
         }
         break;
       case 'pedagogy' :
