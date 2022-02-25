@@ -989,15 +989,17 @@ class WsGroupsController extends ControllerBase
   private function formatTrombiData(&$user, $settings) {
     if ($settings['about_me'] || $settings['skills_ia']) {
       $drupal_user = user_load_by_name($user['uid']);
-      $user_id = $drupal_user->id();
-      if(isset($user_id)) {
-        $pp = \Drupal::entityTypeManager()
-          ->getStorage('node')
-          ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-        $page_perso = reset($pp);
-        if ($page_perso) {
-          $user['about_me'] = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
-          $user['skills'] = (!empty($page_perso->get('field_skills')->value)) ? $page_perso->get('field_skills')->value : '';
+      if ($drupal_user) {
+        $user_id = $drupal_user->id();
+        if (isset($user_id)) {
+          $pp = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+          $page_perso = reset($pp);
+          if ($page_perso) {
+            $user['about_me'] = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
+            $user['skills'] = (!empty($page_perso->get('field_skills')->value)) ? $page_perso->get('field_skills')->value : '';
+          }
         }
       }
     }
