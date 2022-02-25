@@ -189,7 +189,7 @@ class WsGroupsController extends ControllerBase
       ]
     ];
 
-    return \Drupal::service('renderer')->renderPlain($build);
+    return $build;
   }
 
   public function getList($type, $letter, $theme, $path, $siteId = NULL)
