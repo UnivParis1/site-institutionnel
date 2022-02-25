@@ -996,11 +996,11 @@ class WsGroupsController extends ControllerBase
       if ($settings['supannEntite_research']) {
         $key_search = array_search('research', array_column($affectation, 'businessCategory'));
         if (!empty($affectation[$key_search]['labeledURI'])) {
-          $entiteAffectations[] .= "<p class='trombi-affectation'><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
+          $entiteAffectations[] = "<p class='trombi-affectation'><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
             $affectation[$key_search]['description'] . "' target='_blank'>"
             . $affectation[$key_search]['description'] . "</a></p>";
         } else {
-          $entiteAffectations[] .= "<p>" . $affectation[$key_search]['description'] . "</p>";
+          $entiteAffectations[] = "<p>" . $affectation[$key_search]['description'] . "</p>";
         }
       }
       if ($settings['supannEntite_pedagogy']) {
@@ -1010,7 +1010,7 @@ class WsGroupsController extends ControllerBase
             $affectation[$key_search]['description'] . "' target='_blank'>"
             . $affectation[$key_search]['description'] . "</a></p>";
         } else {
-          $entiteAffectations[] .= "<p>" . $affectation[$key_search]['description'] . "</p>";
+          $entiteAffectations[] = "<p>" . $affectation[$key_search]['description'] . "</p>";
         }
       }
 
