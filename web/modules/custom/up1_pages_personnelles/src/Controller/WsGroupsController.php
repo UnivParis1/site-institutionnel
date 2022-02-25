@@ -178,6 +178,7 @@ class WsGroupsController extends ControllerBase
       $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
+      $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
       if ($user['sn'] == 'Chiroleu Assouline') {
         \Drupal::logger('user_data')->info(print_r($user, 1));
       }
@@ -1008,8 +1009,9 @@ class WsGroupsController extends ControllerBase
             ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
           $page_perso = reset($pp);
           if ($page_perso) {
-            \Drupal::logger('field_skills')->info(print_r($page_perso->get('field_skills')->referencedEntities(), 1));
-            $result = (!empty($page_perso->get('field_skills')->value)) ? $page_perso->get('field_skills')->value : '';
+            if (!empty($page_perso->get('field_skills')->referencedEntities())) {
+              \Drupal::logger('field_skills')->info(print_r($page_perso->get('field_skills')->referencedEntities(), 1));
+            }
           }
         }
         break;
@@ -1038,7 +1040,13 @@ class WsGroupsController extends ControllerBase
           $result = $affectation[$key_search]['description'];
         }
         break;
-      case 'roles' :
+      case 'role' :
+        if ($settings['supannRole'] == 1) {
+          if(!empty($user['supannRoleEntite-all'])) {
+            $role = $user['supannRoleEntite-all'];
+            $result = $role['role'] . ' ' . $role['structure']['description'];
+          }
+        }
       default:
         break;
     }
