@@ -989,21 +989,16 @@ class WsGroupsController extends ControllerBase
   private function formatTrombiData(&$user, $settings) {
     if ($settings['about_me'] || $settings['skills_ia']) {
       $drupal_user = user_load_by_name($user['uid']);
-
-      if ($user['sn'] == 'Clay') {
-        \Drupal::logger('user_load_byName')->info('User : ' . print_r($drupal_user->id(),1));
-      }
-
-      $pp = \Drupal::entityTypeManager()
-        ->getStorage('node')
-        ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-      $page_perso = reset($pp);
-    \Drupal::logger('node_page_perso')->info('node ? ' . $page_perso->id());
-      if ($page_perso) {
-        $user['about_me'] = $page_perso->get('field_about_me')->value;
-      \Drupal::logger('node_page_perso')->info('about me ? ' . $page_perso->get('field_about_me')->value);
-        $user['skills'] = $page_perso->get('field_skills')->value;
-      \Drupal::logger('node_page_perso')->info('field_skills ? ' . $page_perso->get('field_skills')->value);
+      $user_id = $drupal_user->id();
+      if(isset($user_id)) {
+        $pp = \Drupal::entityTypeManager()
+          ->getStorage('node')
+          ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+        $page_perso = reset($pp);
+        if ($page_perso) {
+          $user['about_me'] = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
+          $user['skills'] = (!empty($page_perso->get('field_skills')->value)) ? $page_perso->get('field_skills')->value : '';
+        }
       }
     }
     if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
@@ -1011,18 +1006,9 @@ class WsGroupsController extends ControllerBase
       $affectation = $user['supannEntiteAffectation-all'];
       if ($settings['supannEntite_research']) {
         $user['entites'] .= $this->formatSupannEntites('research', $affectation, 'businessCategory');
-        if ($user['sn'] == 'Clay') {
-          \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
-        }
       }
       if ($settings['supannEntite_pedagogy']) {
         $user['entites'] .= $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
-        if ($user['sn'] == 'Clay') {
-          \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
-        }
-      }
-      if ($user['sn'] == 'Clay') {
-        \Drupal::logger('formatTrombiData')->info(print_r($user, 1));
       }
     }
   }
