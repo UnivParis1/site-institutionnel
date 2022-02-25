@@ -178,7 +178,9 @@ class WsGroupsController extends ControllerBase
       $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
-      \Drupal::logger('user_data')->info(print_r($user, 1));
+      if ($user['sn'] == 'Assouline') {
+        \Drupal::logger('user_data')->info(print_r($user, 1));
+      }
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -1017,8 +1019,6 @@ class WsGroupsController extends ControllerBase
             ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
           $page_perso = reset($pp);
           if ($page_perso) {
-            \Drupal::logger('about_me')->info(print_r($page_perso->id(), 1));
-            \Drupal::logger('about_me')->info(print_r($page_perso->get('field_about_me')->value, 1));
             $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
           }
         }
@@ -1028,14 +1028,12 @@ class WsGroupsController extends ControllerBase
           $affectation = $user['supannEntiteAffectation-all'];
           $key_search = array_search('research', array_column($affectation, 'businessCategory'));
           $result = $affectation[$key_search]['description'];
-          \Drupal::logger('research_aff_desc')->info($user['sn'] . ' : ' . $key_search . ' - '. print_r($affectation[$key_search]['description'], 1));
         }
         break;
       case 'pedagogy' :
         if ($settings['supannEntite_pedagogy'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
           $key_search = array_search('pedagogy', array_column($affectation, 'businessCategory'));
-          \Drupal::logger('peda_aff_desc')->info($user['sn'] . ' : ' . $key_search . ' - '. print_r($affectation[$key_search]['description'], 1));
           $result = $affectation[$key_search]['description'];
         }
         break;
