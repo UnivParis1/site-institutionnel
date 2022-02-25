@@ -171,14 +171,13 @@ class WsGroupsController extends ControllerBase
    * @return array
    */
   public function getTrombiList($theme, $path, $siteId = NULL) {
-    $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
+    $site_settings = $this->getTrombiFields();
+    $users = $this->getCachedUsers('faculty', $siteId, $site_settings);
     foreach ($users as $user) {
-      $skills = $this->formatTrombiData('skills', $user, $this->getTrombiFields());
-      $about = $this->formatTrombiData('about', $user, $this->getTrombiFields());
-      $pedagogy = $this->formatTrombiData('pedagogy', $user, $this->getTrombiFields());
-      $research = $this->formatTrombiData('research', $user, $this->getTrombiFields());
-      \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r($pedagogy, 1));
-      \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r($research, 1));
+      $skills = $this->formatTrombiData('skills', $user, $site_settings);
+      $about = $this->formatTrombiData('about', $user, $site_settings);
+      $pedagogy = $this->formatTrombiData('pedagogy', $user, $site_settings);
+      $research = $this->formatTrombiData('research', $user, $site_settings);
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -1022,16 +1021,19 @@ class WsGroupsController extends ControllerBase
         }
         break;
       case 'research' :
-        if ($settings['supannEntite_research']) {
+        \Drupal::logger('case_research')->info(print_r($settings, 1));
+        if ($settings['supannEntite_research'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
-            $result = $this->formatSupannEntites('research', $affectation, 'businessCategory');
+          $result = $this->formatSupannEntites('research', $affectation, 'businessCategory');
+          \Drupal::logger('case_research_result')->info(print_r($result, 1));
         }
         break;
       case 'pedagogy' :
-        if ($settings['supannEntite_pedagogy']) {
+        \Drupal::logger('case_pedagogy')->info(print_r($settings, 1));
+        if ($settings['supannEntite_pedagogy'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
-            $result = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
-
+          $result = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
+          \Drupal::logger('case_pedagogy_result')->info(print_r($result, 1));
         }
         break;
       case 'roles' :
@@ -1043,6 +1045,8 @@ class WsGroupsController extends ControllerBase
 
   private function formatSupannEntites($key, $data, $column) {
     $key_search = array_search($key, array_column($data, $column));
+    \Drupal::logger('case_research')->info(print_r($key_search, 1));
+    \Drupal::logger("format_supannEntity_$key")->info(print_r($data[$key_search], 1));
     $formated_data = '';
     if ($key_search && !empty($data[$key_search]['labeledURI'])) {
       $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
