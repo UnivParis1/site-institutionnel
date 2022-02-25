@@ -1021,7 +1021,6 @@ class WsGroupsController extends ControllerBase
         }
         break;
       case 'research' :
-        \Drupal::logger('case_research')->info(print_r($settings, 1));
         if ($settings['supannEntite_research'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
           $result = $this->formatSupannEntites('research', $affectation, 'businessCategory');
@@ -1029,7 +1028,6 @@ class WsGroupsController extends ControllerBase
         }
         break;
       case 'pedagogy' :
-        \Drupal::logger('case_pedagogy')->info(print_r($settings, 1));
         if ($settings['supannEntite_pedagogy'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
           $result = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
@@ -1048,10 +1046,6 @@ class WsGroupsController extends ControllerBase
     $formated_data = '';
 
     if (!empty($data[$key_search]['labeledURI'])) {
-      $formated_data = "<p class='trombi-affectation $key'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
-        $data[$key_search]['description'] . "' target='_blank'>"
-        . $data[$key_search]['description'] . "</a></p>";
-    } else {
       $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
     }
 
