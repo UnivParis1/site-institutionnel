@@ -997,13 +997,13 @@ class WsGroupsController extends ControllerBase
         }
       }
       if ($settings['supannEntite_pedagogy']) {
-        $user['entites'] = $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
+        $user['entites'] .= $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
         if ($user['sn'] == 'Clay') {
           \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
         }
       }
       if ($user['sn'] == 'Clay') {
-        \Drupal::logger('formatSupannEntites')->info(print_r($user['entites'], 1));
+        \Drupal::logger('formatTrombiData')->info(print_r($user, 1));
       }
     }
   }
