@@ -1048,13 +1048,13 @@ class WsGroupsController extends ControllerBase
     $formated_data = '';
 
     if (!empty($data[$key_search]['labeledURI'])) {
-      $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
+      $formated_data = "<p class='trombi-affectation $key'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
         $data[$key_search]['description'] . "' target='_blank'>"
         . $data[$key_search]['description'] . "</a></p>";
     } else {
       $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
     }
-    
+
     return $formated_data;
   }
 }
