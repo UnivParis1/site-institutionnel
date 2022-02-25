@@ -63,7 +63,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
       }
     }
 
-    \Drupal::logger('up1_pages_personnelles')->info(print_r($params['attrs'], 1));
+    $params['allowExtendedInfo'] = '1';
 
     $ch = curl_init();
     if (isset($structure)) {
