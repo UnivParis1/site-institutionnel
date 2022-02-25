@@ -1045,17 +1045,17 @@ class WsGroupsController extends ControllerBase
 
   private function formatSupannEntites($key, $data, $column) {
     $key_search = array_search($key, array_column($data, $column));
-    \Drupal::logger('case_research')->info(print_r($key_search, 1));
-    \Drupal::logger("format_supannEntity_$key")->info(print_r($data[$key_search], 1));
     $formated_data = '';
-    if ($key_search && !empty($data[$key_search]['labeledURI'])) {
-      $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
-        $data[$key_search]['description'] . "' target='_blank'>"
-        . $data[$key_search]['description'] . "</a></p>";
-    } else if ($key_search && empty($data[$key_search]['labeledURI'])) {
-      $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
+    if ($key_search) {
+      if (!empty($data[$key_search]['labeledURI'])) {
+        $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
+          $data[$key_search]['description'] . "' target='_blank'>"
+          . $data[$key_search]['description'] . "</a></p>";
+      } else {
+        $formated_data = "<p>" . $data[$key_search]['description'] . "</p>";
+      }
     }
-
+    \Drupal::logger("formatedData_$key")->info(print_r($data[$key_search], 1));
     return $formated_data;
   }
 }
