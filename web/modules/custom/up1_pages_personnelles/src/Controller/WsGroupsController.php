@@ -173,7 +173,8 @@ class WsGroupsController extends ControllerBase
   public function getTrombiList($theme, $path, $siteId = NULL) {
     $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
     foreach ($users as $user) {
-      $this->formatTrombiData($user, $this->getTrombiFields());
+      $user = $this->formatTrombiData($user, $this->getTrombiFields());
+      \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r($user, 1));
     }
     $build['item_list'] = [
       '#theme' => $theme,
