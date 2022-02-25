@@ -190,10 +190,6 @@ class WsGroupsController extends ControllerBase
       '#link' => $path,
       '#Trusted' => FALSE,
       '#trombi_settings' => [],
-      '#research' => NULL,
-      '#pedagogy' => NULL,
-      '#skills' => NULL,
-      '#about_me' => NULL,
       '#attached' => [
         'library' => [
           'up1_pages_personnelles/trombi'
@@ -1009,8 +1005,10 @@ class WsGroupsController extends ControllerBase
             ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
           $page_perso = reset($pp);
           if ($page_perso) {
-            if (!empty($page_perso->get('field_skills')->referencedEntities())) {
-              \Drupal::logger('field_skills')->info(print_r($page_perso->get('field_skills')->referencedEntities(), 1));
+            if (!empty($terms = $page_perso->get('field_skills')->referencedEntities())) {
+              foreach ($terms as $term) {
+                $result .= '<li>' . $term->getName() . '</li>';
+              }
             }
           }
         }
