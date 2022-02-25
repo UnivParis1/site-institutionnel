@@ -18,14 +18,12 @@
                     <h2>{{ user.givenName }} {{ user.sn|upper }}</h2>
                     <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
                     <p class="trombi-role"> Directeur adjoint - Sciences Sociales (UMR 3646)</p>
-                    {% autoescape FALSE %}
-                     {{ user.entites }}
-                    {% endautoescape %}
+                     {{ affectations | raw }}
                     <ul class="trombi-skills">
-                      {{ user.skills }}
+                      {{ skills }}
                     </ul>
                     <div class="trombi-apropos">
-                      {{ user.about_me }}
+                      {{ about_me }}
                     </div>
                   </div>
                   <div class="trombi-btn">

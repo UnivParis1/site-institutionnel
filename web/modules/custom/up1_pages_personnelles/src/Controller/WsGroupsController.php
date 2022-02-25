@@ -173,8 +173,10 @@ class WsGroupsController extends ControllerBase
   public function getTrombiList($theme, $path, $siteId = NULL) {
     $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
     foreach ($users as $user) {
-      $this->formatTrombiData($user, $this->getTrombiFields());
-      \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r($user, 1));
+      $affectations = $this->formatTrombiData('affectations', $user, $this->getTrombiFields());
+      \Drupal::logger('user_data_trombi')->info($user['sn'] . ' ' . print_r($affectations, 1));
+      $skills = $this->formatTrombiData('skills', $user, $this->getTrombiFields());
+      $about = $this->formatTrombiData('about', $user, $this->getTrombiFields());
     }
     $build['item_list'] = [
       '#theme' => $theme,
@@ -183,6 +185,9 @@ class WsGroupsController extends ControllerBase
       '#link' => $path,
       '#Trusted' => FALSE,
       '#trombi_settings' => [],
+      '#affectations' => $affectations,
+      '#skills' => $skills,
+      '#about_me' => $about,
       '#attached' => [
         'library' => [
           'up1_pages_personnelles/trombi'
@@ -987,39 +992,54 @@ class WsGroupsController extends ControllerBase
     }
   }
 
-  private function formatTrombiData(&$user, $settings) {
-    if ($settings['about_me'] || $settings['skills_ia']) {
-      $drupal_user = user_load_by_name($user['uid']);
-      if ($drupal_user) {
-        $user_id = $drupal_user->id();
-        if (isset($user_id)) {
+  private function formatTrombiData($data_to_get, $user, $settings) {
+    $drupal_user = user_load_by_name($user['uid']);
+    $result = '';
+    switch ($data_to_get) {
+      case 'skills' :
+        if ($settings['skills_ia'] && $drupal_user) {
           $pp = \Drupal::entityTypeManager()
             ->getStorage('node')
             ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
           $page_perso = reset($pp);
           if ($page_perso) {
-            $user['about_me'] = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
-            $user['skills'] = (!empty($page_perso->get('field_skills')->value)) ? $page_perso->get('field_skills')->value : '';
+            $result = (!empty($page_perso->get('field_skills')->value)) ? $page_perso->get('field_skills')->value : '';
           }
         }
-      }
+        break;
+      case 'about' :
+        if ($settings['about_me'] && $drupal_user) {
+          $pp = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+          $page_perso = reset($pp);
+          if ($page_perso) {
+            $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
+          }
+        }
+        break;
+      case 'affectations' :
+        if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
+          $affectation = $user['supannEntiteAffectation-all'];
+          if ($settings['supannEntite_research']) {
+            $result .= $this->formatSupannEntites('research', $affectation, 'businessCategory');
+          }
+          if ($settings['supannEntite_pedagogy']) {
+            $result .= $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
+          }
+        }
+        break;
+      case 'roles' :
+      default:
+        break;
     }
-    if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
-      $user['entites'] = '';
-      $affectation = $user['supannEntiteAffectation-all'];
-      if ($settings['supannEntite_research']) {
-        $user['entites'] .= $this->formatSupannEntites('research', $affectation, 'businessCategory');
-      }
-      if ($settings['supannEntite_pedagogy']) {
-        $user['entites'] .= $this->formatSupannEntites('pedagogy', $affectation, 'businessCategory');
-      }
-    }
+    return $result;
   }
 
   private function formatSupannEntites($key, $data, $column) {
     $key_search = array_search($key, array_column($data, $column));
     $formated_data = '';
-    if (!empty($data[$key_search]['labeledURI'])) {
+    if ($key_search && !empty($data[$key_search]['labeledURI'])) {
       $formated_data = "<p class='trombi-affectation'><a href='" . $data[$key_search]['labeledURI'] . "' title='" .
         $data[$key_search]['description'] . "' target='_blank'>"
         . $data[$key_search]['description'] . "</a></p>";
