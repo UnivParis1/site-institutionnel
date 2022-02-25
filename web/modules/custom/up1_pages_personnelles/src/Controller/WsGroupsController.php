@@ -172,7 +172,6 @@ class WsGroupsController extends ControllerBase
    */
   public function getTrombiList($theme, $path, $siteId = NULL) {
     $users = $this->getCachedUsers('faculty', $siteId, $this->getTrombiFields());
-
     foreach ($users as $user) {
       $this->formatTrombiData($user, $this->getTrombiFields());
       \Drupal::logger('pages_personnelles_user')->info(print_r($user, 1));
@@ -989,30 +988,18 @@ class WsGroupsController extends ControllerBase
   }
 
   private function formatTrombiData(&$user, $settings) {
-    $user['entites'] = '';
     if ($settings['supannEntite_pedagogy'] || $settings['supannEntite_research']) {
+      $user['entites'] = [];
       $affectation = $user['supannEntiteAffectation-all'];
-      $entiteAffectations = [];
       if ($settings['supannEntite_research']) {
-        $key_search = array_search('research', array_column($affectation, 'businessCategory'));
-        if (!empty($affectation[$key_search]['labeledURI'])) {
-          $entiteAffectations[] = "<p class='trombi-affectation'><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
-            $affectation[$key_search]['description'] . "' target='_blank'>" . $affectation[$key_search]['description'] . "</a></p>";
-        } else {
-          $entiteAffectations[] = "<p>" . $affectation[$key_search]['description'] . "</p>";
-        }
+        $key_entite = 'research';
+        $key_search = array_search($key_entite, array_column($affectation, 'businessCategory'));
       }
       if ($settings['supannEntite_pedagogy']) {
-        $key_search = array_search('pedagogy', array_column($affectation, 'businessCategory'));
-        if (!empty($affectation[$key_search]['labeledURI'])) {
-          $entiteAffectations[] = "<p class='trombi-affectation'><a href='" . $affectation[$key_search]['labeledURI'] . "' title='" .
-            $affectation[$key_search]['description'] . "' target='_blank'>" . $affectation[$key_search]['description'] . "</a></p>";
-        } else {
-          $entiteAffectations[] = "<p>" . $affectation[$key_search]['description'] . "</p>";
-        }
+        $key_entite = 'pedagogy';
+        $key_search = array_search($key_entite, array_column($affectation, 'businessCategory'));
       }
-
-      $user['entites'] = implode('',$entiteAffectations);
+      $user['entites'][$key_entite][] = $affectation[$key_search];
     }
   }
 }
