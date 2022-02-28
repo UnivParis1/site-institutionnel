@@ -17,15 +17,22 @@
                   <div class="trombi-infos">
                     <h2>{{ user.givenName }} {{ user.sn|upper }}</h2>
                     <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
-                    <p class="trombi-role"> {{ user.role }}</p>
-                    <p class="trombi-affectation"> {{ user.research | raw }} </p>
-                    <p class="trombi-affectation"> {{ user.pedagogy }}</p>
+                    {% if user.role %}<p class="trombi-role"> {{ user.role }}</p>
+                    {% if user.research %}<p class="trombi-affectation">
+                        {{ user.research | raw }} </p>
+                    {% endif %}
+                    {% if user.pedagogy %}<p class="trombi-affectation">
+                        {{ user.pedagogy }}</p>
+                    {% endif %}
+                    {% if user.skills is not empty %}
                     <ul class="trombi-skills">
                       {{ user.skills | raw }}
                     </ul>
-                    <div class="trombi-apropos">
+                    {% endif %}
+                    {% if user.about %}<div class="trombi-apropos">
                       {{ user.about | raw }}
                     </div>
+                      {% endif %}
                   </div>
                   <div class="trombi-btn">
                     <div class="faux-btn">{{ "See page"|t }}</div>

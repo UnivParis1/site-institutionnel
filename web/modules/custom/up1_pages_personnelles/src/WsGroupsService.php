@@ -63,7 +63,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
       }
     }
 
-    $params['allowExtendedInfo'] = '1';
+    $params['showExtendedInfo'] = true;
 
     $ch = curl_init();
     if (isset($structure)) {
