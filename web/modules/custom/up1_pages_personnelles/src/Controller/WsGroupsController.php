@@ -206,8 +206,8 @@ class WsGroupsController extends ControllerBase
    */
   public function getTrombiList($theme, $path, $group, $siteId = NULL) {
     $site_settings = $this->getTrombiFields();
+    \Drupal::logger('getTrombiList')->info('group : ' . $group);
     $users = $this->getCachedUsers('faculty', $siteId, $group, $site_settings);
-
 
     foreach ($users as &$user) {
       if ($group == 'observatoireIA') {
