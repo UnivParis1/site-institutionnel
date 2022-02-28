@@ -90,22 +90,7 @@ html :where(img) {
   margin-right: 20px;
   margin-bottom: 20px;
 }
-
-@media screen and (min-width:601px){
-  .trombi-item {
-    width: calc(33.3% - 13.33px);
-    margin-right: 20px;
-    padding-bottom: 60px;
-
-  }
-}
-@media screen and (max-width:600px){
-  .trombi-item {
-    width: calc(50% - 10px);
-    margin-right: 20px;
-  }
-}
-.annuaire-content .trombi-item:nth-child(3n) {
+#trombi .annuaire-content .trombi-item:nth-child(3n) {
   margin-right: 0px;
 }
 .annuaire-content .trombi-item h2 {
@@ -160,4 +145,60 @@ p {
   padding-top: 0.5rem;
   color: #000;
   font-size: 0.9rem;
+}
+
+/*** responsive ****/
+
+@media screen and (min-width: 89.9376em) {
+#trombi .annuaire-content  .trombi-item {
+  width: calc(33.3% - 13.33px);
+  margin-right: 20px;
+  padding-bottom: 60px;
+
+  }
+}
+@media screen and (max-width: 89.9375em) {
+#trombi .annuaire-content .trombi-item {
+  width: calc(33.3% - 13.33px);
+  margin-right: 20px;
+  padding-bottom: 60px;
+
+  }
+}
+@media screen and (max-width: 63.9375em) {
+#trombi .annuaire-content .trombi-item {
+    width: calc(50% - 10px);
+	margin-right: 20px;
+	}
+#trombi .annuaire-content .trombi-item:nth-child(2n) {
+  margin-right: 0px;
+}
+#trombi .annuaire-content .trombi-item:nth-child(3n) {
+  margin-right: 20px;
+}
+}
+@media screen and (max-width:575px){
+#trombi .grid-margin-x {
+    margin-left: 0;
+    margin-right: 0;
+  }
+#trombi .grid-container {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: calc(100% - 1rem);
+  }
+#trombi h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+#trombi .annuaire-content .trombi-item {
+    width: calc(100% - 20px);
+	margin: 10px auto;
+	}
+  #trombi .annuaire-content .trombi-item:nth-child(2n) {
+    margin-right: 10px;
+  }
+  #trombi .annuaire-content .trombi-item:nth-child(3n) {
+    margin-right: 10px;
+  }
 }

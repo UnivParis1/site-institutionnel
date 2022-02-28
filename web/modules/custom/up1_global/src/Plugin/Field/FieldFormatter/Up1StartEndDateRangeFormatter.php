@@ -43,11 +43,11 @@ class Up1StartEndDateRangeFormatter extends DateTimeCustomFormatter {
       if (!empty($item->start_date) && !empty($item->end_date)) {
         /** @var \Drupal\Core\Datetime\DrupalDateTime $start_date */
         $start_date = $item->start_date;
-        $start_date->setTimezone(timezone_open(drupal_get_user_timezone()));
+        $start_date->setTimezone(timezone_open(date_default_timezone_get()));
 
         /** @var \Drupal\Core\Datetime\DrupalDateTime $end_date */
         $end_date = $item->end_date;
-        $end_date->setTimezone(timezone_open(drupal_get_user_timezone()));
+        $end_date->setTimezone(timezone_open(date_default_timezone_get()));
 
         $start_hour = $start_date->format('H:i');
         $end_hour = $end_date->format('H:i');
