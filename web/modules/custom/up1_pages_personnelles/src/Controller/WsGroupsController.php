@@ -179,9 +179,8 @@ class WsGroupsController extends ControllerBase
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
       $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
-      if (in_array($user['sn'], ['Chiroleu Assouline', 'Clay']) ) {
-        \Drupal::logger('user_data')->info(print_r($user, 1));
-      }
+      $config = \Drupal::config('up1_pages_personnelles.settings');
+      $user['photo'] = $config->get('url_userphoto') . $user['uid'];
     }
     $build['item_list'] = [
       '#theme' => $theme,
