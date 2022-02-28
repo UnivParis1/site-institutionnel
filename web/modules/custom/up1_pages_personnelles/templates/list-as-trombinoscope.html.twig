@@ -17,7 +17,9 @@
                   <div class="trombi-infos">
                     <h2>{{ user.givenName }} {{ user.sn|upper }}</h2>
                     <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
-                    {% if user.role %}<p class="trombi-role"> {{ user.role }}</p>
+                    {% if user.role %}<p class="trombi-role">
+                      {{ user.role }}</p>
+                    {% endif %}
                     {% if user.research %}<p class="trombi-affectation">
                         {{ user.research | raw }} </p>
                     {% endif %}
