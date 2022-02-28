@@ -112,14 +112,11 @@ class WsGroupsService implements WsGroupsServiceInterface {
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params) . '&' . http_build_query($structure));
     }
     else {
-      \Drupal::logger('WsGroupService')->info('request : ' . print_r($request, 1));
-      \Drupal::logger('WsGroupService')->info('params : ' . print_r($params, 1));
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
     }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
     $users = json_decode(curl_exec($ch), TRUE);
-    \Drupal::logger('WsGroupService')->info('how many users ? ' . count($users));
 
     curl_close($ch);
 

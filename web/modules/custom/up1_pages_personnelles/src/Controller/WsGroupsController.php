@@ -83,7 +83,7 @@ class WsGroupsController extends ControllerBase
         $users = $response['users'];
       } else {
 
-        $group == 'obersvatoireIA'?
+        $group == 'observatoireIA'?
           $response = $this->wsGroupsService->getUserListForAI($affiliation, $siteId, $trombi_settings) :
           $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
 
@@ -206,7 +206,6 @@ class WsGroupsController extends ControllerBase
    */
   public function getTrombiList($theme, $path, $group, $siteId = NULL) {
     $site_settings = $this->getTrombiFields();
-    \Drupal::logger('getTrombiList')->info('group : ' . $group);
     $users = $this->getCachedUsers('faculty', $siteId, $group, $site_settings);
 
     foreach ($users as &$user) {
