@@ -237,7 +237,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $roles = $userCurrent->getRoles();
 
       if (in_array('enseignant_doctorant', $roles)) {
-        $name = $user->getUsername();
+        $name = $user->getDisplayName();
         $userInformation = up1_pages_personnelles_get_comptex_info($name);
       }
       if ($userInformation) {
