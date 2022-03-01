@@ -43,6 +43,7 @@ class PagesPersonnellesSettings extends ConfigFormBase {
     parent::submitForm($form, $form_state);
 
     $this->config('up1_pages_personnelles.settings')
+      ->set('url_ws', $form_state->getValue('activate_maintenance'))
       ->set('url_ws', $form_state->getValue('url_ws'))
       ->set('search_user', $form_state->getValue('search_user'))
       ->set('filtre_faculty', $form_state->getValue('filtre_faculty'))
@@ -75,6 +76,19 @@ class PagesPersonnellesSettings extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('up1_pages_personnelles.settings');
+
+    $form['maintenance'] = [
+      '#type' => 'details',
+      '#title' => t('Maintenance'),
+      '#weight' => 50,
+      '#open' => TRUE,
+    ];
+    $form['maintenance']['activate_maintenance'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Activer le mode maintenance'),
+      '#description' => $this->t('Empêcher la modification des pages personnelles en activant le mode maintenance.'),
+      '#default_value' => $config->get('activate_maintenance')
+    ];
 
     $form['wsGroups'] = [
       '#type' => 'details',
