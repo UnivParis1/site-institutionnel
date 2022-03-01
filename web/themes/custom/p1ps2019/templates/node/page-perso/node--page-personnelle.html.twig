@@ -110,6 +110,7 @@
 {% set publis = content.field_highlight_publications|render %}
 {% set sticky_pub = content.field_sticky_publications|render %}
 {% set education = content.field_education|render %}
+{% set discipline = '' %}
 
 {{ attach_library('up1_pages_personnelles/front') }}
 <article{{ attributes.addClass(classes) }}>
@@ -163,8 +164,11 @@
         <div class="colonnecentrale content small-12 large-8">
           <section class="new-section about">
             <a id="page-perso-about"></a>
-            <h2>{{ employeeType }}  {% if supannActivite %} ({{ supannActivite }}) {% endif %}</h2>
-
+            {% if info %}
+              {% set discipline = ' ' ~ info|join(', ') %}
+            {% endif %}
+            <h2>{{ employeeType }} </h2>
+            {% if supannActivite %}<p class="cnu">{{ supannActivite }}</p>{% endif %}
             {% if supannRole %}
               <div class="infos-sep">
                 <span>{{ supannRole.role }}</span> <span>{{ supannRole.structure }}</span>
