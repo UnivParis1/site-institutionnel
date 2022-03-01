@@ -1073,7 +1073,15 @@ class WsGroupsController extends ControllerBase
             ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
           $page_perso = reset($pp);
           if ($page_perso) {
-            $result = (!empty($page_perso->get('field_ia_skills')->value)) ? $page_perso->get('field_ia_skills')->getString() : '';
+            $ia_skills = $page_perso->get('field_ia_skills')->getString();
+            $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
+            if(!empty($ia_skills)) {
+              $result_skills = [];
+              foreach ($ia_skills as $ia_skill) {
+                $result_skills = '<li>' . $all_skills[$ia_skill] . '</li>';
+              }
+            }
+            $result = implode('', $result_skills);
           }
         }
         break;
