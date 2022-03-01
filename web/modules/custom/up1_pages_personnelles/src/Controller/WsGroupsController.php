@@ -220,6 +220,7 @@ class WsGroupsController extends ControllerBase
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
       $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
+      $user['discipline'] = $this->formatTrombiData('discipline', $user, $site_settings);
       $config = \Drupal::config('up1_pages_personnelles.settings');
       $user['photo'] = $config->get('url_userphoto') . $user['uid'];
     }
@@ -1117,6 +1118,12 @@ class WsGroupsController extends ControllerBase
           if(!empty($user['supannRoleEntite-all'])) {
             $role = $user['supannRoleEntite-all'][0];
             $result = $role['role'] . ' ' . $role['structure']['description'];
+          }
+        }
+        case 'discipline' :
+        if ($settings['discipline_enseignement'] == 1) {
+          if(!empty($user['info'])) {
+            $result = implode(', ', $user['info']);
           }
         }
       default:

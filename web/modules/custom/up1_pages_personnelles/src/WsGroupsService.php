@@ -95,7 +95,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     //filter_supannConsentement={PROJ:OBSIA}CGU
     $params = [
       'filter_supannConsentement' => '{PROJ:OBSIA}CGU',
-      'attrs' => 'sn,givenName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
+      'attrs' => 'sn,givenName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
       'showExtendedInfo' => true
     ];
     if (!empty($trombi_settings)) {
