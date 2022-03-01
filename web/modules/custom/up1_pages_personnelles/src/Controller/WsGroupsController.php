@@ -1079,8 +1079,8 @@ class WsGroupsController extends ControllerBase
               $selected_skills = explode(', ', $ia_skills);
               \Drupal::logger('ia_skills')->info('Selected skills : ' . print_r($selected_skills,1));
               $result_skills = [];
-              foreach ($selected_skills as $key => $a_skill) {
-                $result_skills[] = '<li>' . $all_skills[$key] . '</li>';
+              foreach ($selected_skills as $a_skill) {
+                $result_skills[] = '<li>' . $all_skills[$a_skill] . '</li>';
               }
               $result = implode('', $result_skills);
             }
