@@ -34,7 +34,7 @@ class ComptexManager implements ComptexInterface {
          * @TODO: Delete employeeType when gender is validated
          */
         $params = [
-            'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType-all,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso",
+            'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType-all,buildingName,telephoneNumber,postalAddress,info,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
             'showExtendedInfo'=> 2
         ];
 
@@ -169,7 +169,6 @@ class ComptexManager implements ComptexInterface {
             if (isset($information['eduPersonPrimaryAffiliation']) && is_array($information['eduPersonPrimaryAffiliation'])) {
                 $information['eduPersonPrimaryAffiliation'] = reset($information['eduPersonPrimaryAffiliation']);
             }
-
             if (isset($information['supannEntiteAffectation-all']) && !empty($information['supannEntiteAffectation-all'])) {
                 foreach ($information['supannEntiteAffectation-all'] as $key => $supannEntiteAffectation) {
                     $business_cat = $supannEntiteAffectation['businessCategory'];
@@ -218,6 +217,14 @@ class ComptexManager implements ComptexInterface {
                     }
                     $information['entites'] = implode('', $affectation);
                 }
+            }
+
+            //Consentement pour apparaître dans l'annuaire de l'Observatoire de l'IA
+            $information['obsia'] = FALSE;
+            if (!empty($information['supannConsentement'])) {
+              if (array_search($information['supannConsentement'], '{PROJ:OBSIA}CGU')) {
+                $information['obsia'] = TRUE;
+              }
             }
         }
         else {

@@ -256,6 +256,12 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
           }
         }
 
+        //Groupe de champs spécifiques si champ pour annuaire obsia coché dans Comptex
+        if (!$userInformation['obsia']) {
+          $form['group_obsia']['#access'] = FALSE;
+          $form['group_obsia']['#required'] = FALSE;
+        }
+
         $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
         $form['field_uid_ldap']['#access'] = FALSE;
 
