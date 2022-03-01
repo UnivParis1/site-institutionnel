@@ -1093,7 +1093,7 @@ class WsGroupsController extends ControllerBase
             ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
           $page_perso = reset($pp);
           if ($page_perso) {
-            $result = (!empty($page_perso->get('field_short_bio')->value)) ? $page_perso->get('field_short_bio')->value : '';
+            $result = (!empty($page_perso->get('field_short_bio')->getValue())) ? $page_perso->get('field_short_bio')->getValue() : '';
           }
         }
         break;
