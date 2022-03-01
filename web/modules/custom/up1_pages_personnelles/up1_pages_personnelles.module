@@ -218,11 +218,9 @@ function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface 
  * Implements hook_form_FORM_ID_alter().
  */
 function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  \Drupal::logger('modif_ma_pp')->info('form_id : ' . $form_id);
   if (in_array($form_id, ["node_page_personnelle_form", "node_page_personnelle_edit_form"]) ) {
     if ($form_id == "node_page_personnelle_edit_form") {
       $name = $form['field_uid_ldap']['widget'][0]['value']['#default_value'];
-
       $nid = $form_state->getformObject()->getEntity()->id();
       $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
       $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
@@ -255,7 +253,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
             $teacher->save();
           }
         }
-        \Drupal::logger('nodform_alter')->info('Obsia ? ' . print_r($userInformation['obsia'], 1 ));
+
         //Groupe de champs spécifiques si champ pour annuaire obsia coché dans Comptex
         if (!$userInformation['obsia']) {
           $form['group_obsia']['#access'] = FALSE;

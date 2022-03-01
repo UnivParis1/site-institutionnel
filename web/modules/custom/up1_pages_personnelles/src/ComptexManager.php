@@ -221,6 +221,8 @@ class ComptexManager implements ComptexInterface {
 
             //Consentement pour apparaître dans l'annuaire de l'Observatoire de l'IA
             $information['obsia'] = FALSE;
+            \Drupal::logger('comptex')->info(print_r($information['supannConsentement'], 1));
+            \Drupal::logger('comptex')->info(print_r(array_search($information['supannConsentement'], '{PROJ:OBSIA}CGU'), 1));
             if (!empty($information['supannConsentement'])) {
               if (array_search($information['supannConsentement'], '{PROJ:OBSIA}CGU')) {
                 $information['obsia'] = TRUE;
