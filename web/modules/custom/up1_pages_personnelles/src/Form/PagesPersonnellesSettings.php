@@ -43,7 +43,7 @@ class PagesPersonnellesSettings extends ConfigFormBase {
     parent::submitForm($form, $form_state);
 
     $this->config('up1_pages_personnelles.settings')
-      ->set('url_ws', $form_state->getValue('activate_maintenance'))
+      ->set('activate_maintenance', $form_state->getValue('activate_maintenance'))
       ->set('url_ws', $form_state->getValue('url_ws'))
       ->set('search_user', $form_state->getValue('search_user'))
       ->set('filtre_faculty', $form_state->getValue('filtre_faculty'))
