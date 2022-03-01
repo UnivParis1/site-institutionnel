@@ -1079,9 +1079,10 @@ class WsGroupsController extends ControllerBase
             \Drupal::logger('all_skills')->info('All skills from list : ' . print_r($all_skills,1));
             if(!empty($ia_skills)) {
               $result_skills = [];
-              foreach ($ia_skills as $key => $ia_skill) {
-                \Drupal::logger('key_ia_skill')->info(print_r($all_skills[$key],1));
-                $result_skills = '<li>' . $all_skills[$ia_skill] . '</li>';
+              foreach ($all_skills as $key => $a_skill) {
+                \Drupal::logger('key_a_skill')->info(print_r($key,1));
+                \Drupal::logger('a_skill')->info(print_r($all_skills[$key],1));
+                $result_skills = '<li>' . $all_skills[$key] . '</li>';
                 \Drupal::logger('format_ia_skills')->info(print_r($all_skills[$key],1));
               }
             }
