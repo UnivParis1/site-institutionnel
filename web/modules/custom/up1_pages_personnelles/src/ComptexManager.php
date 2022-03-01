@@ -224,7 +224,7 @@ class ComptexManager implements ComptexInterface {
             \Drupal::logger('comptex')->info(print_r($information['supannConsentement'], 1));
             \Drupal::logger('comptex')->info(print_r(array_search($information['supannConsentement'], '{PROJ:OBSIA}CGU'), 1));
             if (!empty($information['supannConsentement'])) {
-              if (array_search($information['supannConsentement'], '{PROJ:OBSIA}CGU')) {
+              if (array_search('{PROJ:OBSIA}CGU', $information['supannConsentement'])) {
                 $information['obsia'] = TRUE;
               }
             }
