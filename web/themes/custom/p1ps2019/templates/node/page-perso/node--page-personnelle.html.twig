@@ -217,20 +217,24 @@
               <a id="page-perso-obsia"></a>
               <h2>{{ "IA project"|t }}</h2>
               {% if content.field_short_bio|render %}
-                <p class="txt-bold">{{ "IA Bio"|t }}</p>
+                <p class="txt-bold">{{ "Biographie en lien avec l'IA"|t }}</p>
                 {{ content.field_short_bio }}
               {% endif %}
-              {% if content.field_ia_skills|render %}
-                <p class="txt-bold">{{ "IA Skills"|t }}</p>
-                {{ content.field_ia_skills }}
+              {% if content.field_formations_ia|render %}
+                <p class="txt-bold">{{ "Formations menées en lien avec l'IA"|t }}</p>
+                {{ content.field_formations_ia }}
               {% endif %}
               {% if content.field_projects_ia|render %}
                 <p class="txt-bold">{{ "Projets IA"|t }}</p>
                 {{ content.field_projects_ia }}
               {% endif %}
-              {% if content.field_formations_ia|render %}
-                <p class="txt-bold">{{ "Formations"|t }}</p>
-                {{ content.field_formations_ia }}
+              {% if content.field_ia_skills|render %}
+                <p class="txt-bold">{{ "Domaines d'expertise sur l'IA"|t }}</p>
+                <ul class="trombi-skills">
+                  {% for key, item in  content.field_ia_skills if key|first != '#' %}
+                    <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
               {% endif %}
             </section>
           {% endif %}
