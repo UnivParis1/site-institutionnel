@@ -1074,19 +1074,13 @@ class WsGroupsController extends ControllerBase
           $page_perso = reset($pp);
           if ($page_perso) {
             $ia_skills = $page_perso->get('field_ia_skills')->getString();
-            \Drupal::logger('ia_skills')->info('Selected domaine : ' . print_r($ia_skills,1));
             $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
-            \Drupal::logger('all_skills')->info('All skills from list : ' . print_r($all_skills,1));
             if(!empty($ia_skills)) {
               $result_skills = [];
               foreach ($all_skills as $key => $a_skill) {
-                \Drupal::logger('key_a_skill')->info(print_r($key,1));
-                \Drupal::logger('a_skill')->info(print_r($all_skills[$key],1));
-                $result_skills = '<li>' . $all_skills[$key] . '</li>';
-                \Drupal::logger('format_ia_skills')->info(print_r($all_skills[$key],1));
+                $result_skills[] = '<li>' . $all_skills[$key] . '</li>';
               }
             }
-            \Drupal::logger('format_ia_skills')->info(print_r($result_skills,1));
             $result = implode('', $result_skills);
           }
         }
