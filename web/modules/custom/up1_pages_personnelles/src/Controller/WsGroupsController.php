@@ -1074,13 +1074,17 @@ class WsGroupsController extends ControllerBase
           $page_perso = reset($pp);
           if ($page_perso) {
             $ia_skills = $page_perso->get('field_ia_skills')->getString();
+            \Drupal::logger('format_ia_skills')->info(print_r($ia_skills,1));
             $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
+            \Drupal::logger('format_ia_skills')->info(print_r($all_skills,1));
             if(!empty($ia_skills)) {
               $result_skills = [];
               foreach ($ia_skills as $ia_skill) {
                 $result_skills = '<li>' . $all_skills[$ia_skill] . '</li>';
+                \Drupal::logger('format_ia_skills')->info(print_r($all_skills[$ia_skill],1));
               }
             }
+            \Drupal::logger('format_ia_skills')->info(print_r($result_skills,1));
             $result = implode('', $result_skills);
           }
         }
