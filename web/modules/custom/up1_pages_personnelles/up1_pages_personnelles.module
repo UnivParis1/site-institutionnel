@@ -230,9 +230,8 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $link = Link::fromTextAndUrl($url->toString(), $url);
 
       $html_link = $link->toString();
-
     }
-    if ($form_id == "node_page_personnelle_form") {
+    //if ($form_id == "node_page_personnelle_form") {
       $userCurrent = \Drupal::currentUser();
       $user = User::load($userCurrent->id());
       $roles = $userCurrent->getRoles();
@@ -301,7 +300,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
         ];
         $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
       }
-    }
+    //}
     if (!in_array('administrator', $roles)) {
       $form['title']['#disabled'] = TRUE;
     }
