@@ -216,6 +216,10 @@
             <section class="new-section obsia">
               <a id="page-perso-obsia"></a>
               <h2>{{ "IA project"|t }}</h2>
+              {% if content.field_short_bio|render %}
+                <p class="txt-bold">{{ "IA Bio"|t }}</p>
+                {{ content.field_short_bio }}
+              {% endif %}
               {% if content.field_ia_skills|render %}
                 <p class="txt-bold">{{ "IA Skills"|t }}</p>
                 {{ content.field_ia_skills }}
