@@ -119,7 +119,7 @@
       <div class="page_personnelle-name">
         <h1 class="title display-inline">{{ label.0 }}</h1>
       </div>
-      {#<!-- Side navigation -->#}
+      {# <!-- Side navigation --> #}
       <aside class="left-fix-aside small-12 large-2">
         <div class="progress">
           <div class="wrapper">
@@ -128,7 +128,14 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if info or research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisorphd_supervisor %}
+            {% if obsia %}
+              <div class="btn btn-primary">
+                <a href="#page-perso-obsia">{{ 'IA Projects'|t }}</a>
+                <i class="icon-ok"></i>
+                <span></span>
+              </div>
+            {% endif %}
+            {% if research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisorphd_supervisor %}
               <div class="btn btn-primary">
                 <a href="#page-perso-research">{{ 'Research'|t }}</a>
                 <i class="icon-ok"></i>
@@ -159,7 +166,7 @@
           </div>
         </div>
       </aside>
-      {#<!-- Page content -->#}
+      {# <!-- Page content --> #}
       <div class="right-mov-content content small-12 large-10">
         <div class="colonnecentrale content small-12 large-8">
           <section class="new-section about">
@@ -204,36 +211,45 @@
               {# ----- field About me ----- #}
             </div>
           </section>
-          {% if info or research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
+          {# obsia section #}
+          {% if obsia %}
+            <section class="new-section obsia">
+              <a id="page-perso-obsia"></a>
+              <h2>{{ "IA project"|t }}</h2>
+              {% if content.field_ia_skills|render %}
+                <p class="txt-bold">{{ "IA Skills"|t }}</p>
+                {{ field_ia_skills }}
+              {% endif %}
+              {% if content.field_projects_ia|render %}
+                <p class="txt-bold">{{ "Projets IA"|t }}</p>
+                {{ field_projects_ia }}
+              {% endif %}
+              {% if content.field_formations_ia|render %}
+                <p class="txt-bold">{{ "Formations"|t }}</p>
+                {{ field_formations_ia }}
+              {% endif %}
+            </section>
+          {% endif %}
+          {% if research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
             <section class="new-section research">
               <a id="page-perso-research"></a>
               <h2>{{ "Research"|t }}</h2>
               {# field Research directions #}
               {% if research_directions %}
-              <p class="txt-bold">{{ content.field_research_directions['#title'] }}</p>
+                <p class="txt-bold">{{ content.field_research_directions['#title'] }}</p>
                 {{ content.field_research_directions.0 }}
               {% endif %}
               {# ----- field Research directions ----- #}
               {# field_thesis_directions #}
               {% if thesis_directions %}
-              <p class="txt-bold">{{ content.field_thesis_directions['#title'] }}</p>
+                <p class="txt-bold">{{ content.field_thesis_directions['#title'] }}</p>
                 {{ content.field_thesis_directions.0 }}
               {% endif %}
               {# ----- field_thesis_directions ----- #}
               {# field_research_themes #}
-              {% if info or research_themes %}
-                {% if info %}
-                  <p class="txt-bold">{{ "Research themes"|t }}</p>
-                  <ul>
-                    {% for key, item in info %}
-                      <li>{{ item }}</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-                {% if research_themes %}
-                  <p class="txt-bold">{{ "Research projects"|t }}</p>
-                  {{ content.field_research_themes.0 }}
-                {% endif %}
+              {% if research_themes %}
+                <p class="txt-bold">{{ "Research themes"|t }}</p>
+                {{ content.field_research_themes.0 }}
               {% endif %}
               {# ----- field_research_themes ----- #}
               {# field_research_projects #}
