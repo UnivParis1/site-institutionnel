@@ -38,9 +38,6 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 .scroll #navbar #top-header .icon-menu::after, .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .path-node #navbar #top-header .icon-menu::after, .path-resultats-recherche #navbar #top-header .icon-menu::after, .path-publications #navbar #top-header .icon-menu::after, .path-actualites #navbar #top-header .icon-menu::after, .path-evenements #navbar #top-header .icon-menu::after, .path-soutenances #navbar #top-header .icon-menu::after {
     color:#00326e;
 }
-.accessibility-mode .scroll #navbar #top-header .icon-menu::after, .accessibility-mode .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .accessibility-mode .path-node #navbar #top-header .icon-menu::after, .accessibility-mode .path-resultats-recherche #navbar #top-header .icon-menu::after, .accessibility-mode .path-publications #navbar #top-header .icon-menu::after, .accessibility-mode .path-actualites #navbar #top-header .icon-menu::after, .accessibility-mode .path-evenements #navbar #top-header .icon-menu::after, .accessibility-mode .path-soutenances #navbar #top-header .icon-menu::after {
-    color: #fff;
-}
 /* label node type dans la recherche */
 .node-type-search {
   display: block;
@@ -194,6 +191,11 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
     right: auto;
     width: 100%;
     margin-top: 0 !important;
+}
+.page-personnelle .cnu {
+  font-weight: bold;
+  color: #C89108;
+  font-size: 1.2rem;
 }
 @media screen and (max-width: 420px) {
 .page-personnelle .page_personnelle { margin-top: 0; }
@@ -671,4 +673,27 @@ z-index: 1 !important;
 	left: 0;
 	font-style: italic;
 	padding: 0.3rem 0.8rem;
+}
+/** ACCESSIBILITY **/
+.accessibility-mode .page-personnelle .cnu {
+  color: #000;
+}
+.accessibility-mode .site-content-wrapper .btn a {
+  color: #fff;
+  border-color: #000;
+}
+.accessibility-mode .path-node #navbar #top-header svg, .accessibility-mode .path-resultats-recherche #navbar #top-header svg, .accessibility-mode .path-publications #navbar #top-header svg, .accessibility-mode .path-actualites #navbar #top-header svg, .accessibility-mode .path-evenements #navbar #top-header svg, .accessibility-mode .path-soutenances #navbar #top-header svg {
+  background-image: url('https://com-web.univ-paris1.fr/logos/21-153-50ans-BlocP1PS-bouton_site_V2-blanc.svg');
+}
+.accessibility-mode .footer .footer-wrapper .logo-wrapper {
+  background-image: url('https://com-web.univ-paris1.fr/logos/logo_paris1_tout-blanc.svg');
+}
+.accessibility-mode .scroll #navbar #top-header .icon-menu::after,
+.accessibility-mode .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-node #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-resultats-recherche #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-publications #navbar #top-header .icon-menu::after, .accessibility-mode .path-actualites #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-evenements #navbar #top-header .icon-menu::after, .accessibility-mode .path-soutenances #navbar #top-header .icon-menu::after,
+.accessibility-mode .footer .footer-wrapper a {
+  color: #FFF;
 }
