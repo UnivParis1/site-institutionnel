@@ -736,25 +736,34 @@ class WsGroupsController extends ControllerBase {
   }
 
   public function editPagePerso($username) {
-    $user = user_load_by_name($username);
-
-    if ($user) {
-      $query = \Drupal::entityQuery('node')
-        ->condition('type', 'page_personnelle')
-        ->condition('uid', $user->id());
-      $result = $query->execute();
-      if (!empty($result) && count($result) == 1) {
-        $user->addRole('enseignant_doctorant');
-        $user->save();
-        $nid = reset($result);
-        $goto = "/node/$nid/edit";
-      }
-      else {
-        $goto = '<front>';
-      }
-
-      $response = new RedirectResponse($goto);
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $maintenance = $config->get('activate_maintenance');
+    
+    if ($maintenance) {
+      $response = new RedirectResponse("https://majtrantor.univ-paris1.fr/miseajourpageperso.html");
       return $response->send();
+    }
+    else {
+      $user = user_load_by_name($username);
+
+      if ($user) {
+        $query = \Drupal::entityQuery('node')
+          ->condition('type', 'page_personnelle')
+          ->condition('uid', $user->id());
+        $result = $query->execute();
+        if (!empty($result) && count($result) == 1) {
+          $user->addRole('enseignant_doctorant');
+          $user->save();
+          $nid = reset($result);
+          $goto = "/node/$nid/edit";
+        }
+        else {
+          $goto = '<front>';
+        }
+
+        $response = new RedirectResponse($goto);
+        return $response->send();
+      }
     }
   }
 

@@ -370,7 +370,7 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
 function p1ps2019_preprocess_views_view(&$variables)
 {
   $variables['is_listing_page'] = FALSE;
-  $views = ['travailler_universite', 'listings'];
+  $views = ['travailler_universite', 'listings','annuaire_des_mini_sites'];
   if (in_array($variables['id'], $views)) {
     $variables['is_listing_page'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();

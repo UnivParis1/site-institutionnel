@@ -36,56 +36,56 @@
   'view-annuaire-sites'
 ]
 %}
+
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {{ title }}
   {{ title_suffix }}
 
-  <div class="view-header-color white">
-    <div class="grid-container">
-      <div class="grid-margin-x">
-        <div class="cell small-12">
-          <h2 class="title semi-field-sep"> {{ view_title }} </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{ title_suffix }}
-
-  <section class="small-12">
-    <div class="grid-container block-sep">
-      <div class="grid-x grid-margin-x">
-        <div class="cell small-12 large-4">
-          <div class="txt medium infos-sep">{{ 'Filtres'|t }}</div>
-          <div class="content-left box-style auto-height">
-            <div class="box-content white ">
-              <div>
-                {{ exposed }}
-              </div>
-            </div>
+  {% if is_listing_page or is_master_view %}
+    <div class="view-header-color">
+      <div class="grid-container">
+        <div class="grid-margin-x">
+          <div class="cell small-12">
+            <h2 class="title semi-field-sep"> {{ view_title }} </h2>
           </div>
         </div>
-        <div class="cell small-12 large-8">
-          {% if header %}
-            <div class="txt medium infos-sep">
-              {{ header }}
-            </div>
-          {% endif %}
-          {% if rows -%}
-            <div {{ attributes }}>
-              {{ rows }}
-            </div>
-          {% elseif empty -%}
-            {{ empty }}
-          {% endif %}
-          {{ pager }}
-
-          {{ attachment_after }}
-          {{ more }}
-        </div>
       </div>
+      {{ exposed }}
     </div>
-  </section>
+  {% else %}
+    {{ title }}
+    {{ exposed }}
+  {% endif %}
+  {{ title_suffix }}
+  {% if header %}
+    <div class="view-message grid-container padding-top">
+      <header>
+        {{ header }}
+      </header>
+    </div>
+  {% endif %}
+  {{ attachment_before }}
+  {% if rows -%}
+    {{ rows }}
+  {% elseif empty -%}
+    <div class="grid-container padding-top-bottom">
+      {{ empty }}
+    </div>
+  {% endif %}
+
+  {% if pager %}
+    {{ pager }}
+{% else %}
+  {% if archives %}
+    <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
+       class="bold-link">{{ "Archives"|t }}</a>
+{% endif %}
+{% endif %}
+
+  {{ attachment_after }}
+
+  {{ more }}
 
   {% if footer %}
     <footer class="cell small-12">

@@ -38,9 +38,6 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 .scroll #navbar #top-header .icon-menu::after, .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .path-node #navbar #top-header .icon-menu::after, .path-resultats-recherche #navbar #top-header .icon-menu::after, .path-publications #navbar #top-header .icon-menu::after, .path-actualites #navbar #top-header .icon-menu::after, .path-evenements #navbar #top-header .icon-menu::after, .path-soutenances #navbar #top-header .icon-menu::after {
     color:#00326e;
 }
-.accessibility-mode .scroll #navbar #top-header .icon-menu::after, .accessibility-mode .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .accessibility-mode .path-node #navbar #top-header .icon-menu::after, .accessibility-mode .path-resultats-recherche #navbar #top-header .icon-menu::after, .accessibility-mode .path-publications #navbar #top-header .icon-menu::after, .accessibility-mode .path-actualites #navbar #top-header .icon-menu::after, .accessibility-mode .path-evenements #navbar #top-header .icon-menu::after, .accessibility-mode .path-soutenances #navbar #top-header .icon-menu::after {
-    color: #fff;
-}
 /* label node type dans la recherche */
 .node-type-search {
   display: block;
@@ -194,6 +191,11 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
     right: auto;
     width: 100%;
     margin-top: 0 !important;
+}
+.page-personnelle .cnu {
+  font-weight: bold;
+  color: #C89108;
+  font-size: 1.2rem;
 }
 @media screen and (max-width: 420px) {
 .page-personnelle .page_personnelle { margin-top: 0; }
@@ -626,4 +628,72 @@ z-index: 1 !important;
 	bottom: -38px;
   right: 1rem;
 }
+}
+
+/************ PAGE ANNUAIRE SITES PARIS1 ************/
+.path-annuaire-sites-paris1 .overlay-desc {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    font-size: .9rem;
+    padding: 0 1rem;
+    font-style: italic;
+    bottom: 10%;
+    color: #fff;
+    transform: translateY(20px);
+}
+.path-annuaire-sites-paris1 .overlay-infos {
+    text-align: center;
+    padding: 0 1rem;
+}
+/*** correction RGAA ***/
+.link-style:hover, .field--type-text-long a:hover {
+  text-decoration: underline;
+  color: #A16C0D;
+}
+.paris1-bg-blue .link-style:hover, .paris1-bg-blue .field--type-text-long a:hover {
+  color: #C89201;
+}
+
+.page-personnelle .page_personnelle .right-mov-content .colonnecentrale .new-section.publications #res_script .SousRubrique {
+	text-transform: unset!important;
+	font-weight: bold;
+}
+
+.field--name-field-media-image {
+	position: relative;
+}
+
+.field.field--name-field-legende.field--type-string.field--label-hidden.field--item {
+	position: absolute;
+	bottom: 0;
+	z-index: 200;
+	background-color: rgba(255,255,255,0.6);
+	left: 0;
+	font-style: italic;
+	padding: 0.3rem 0.8rem;
+}
+/** ACCESSIBILITY **/
+.accessibility-mode .page-personnelle .cnu {
+  color: #000;
+}
+.accessibility-mode .site-content-wrapper .btn a {
+  color: #fff;
+  border-color: #000;
+}
+.accessibility-mode .path-node #navbar #top-header svg, .accessibility-mode .path-resultats-recherche #navbar #top-header svg, .accessibility-mode .path-publications #navbar #top-header svg, .accessibility-mode .path-actualites #navbar #top-header svg, .accessibility-mode .path-evenements #navbar #top-header svg, .accessibility-mode .path-soutenances #navbar #top-header svg {
+  background-image: url('https://com-web.univ-paris1.fr/logos/21-153-50ans-BlocP1PS-bouton_site_V2-blanc.svg');
+}
+.accessibility-mode .footer .footer-wrapper .logo-wrapper {
+  background-image: url('https://com-web.univ-paris1.fr/logos/logo_paris1_tout-blanc.svg');
+}
+.accessibility-mode .scroll #navbar #top-header .icon-menu::after,
+.accessibility-mode .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-node #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-resultats-recherche #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-publications #navbar #top-header .icon-menu::after, .accessibility-mode .path-actualites #navbar #top-header .icon-menu::after,
+.accessibility-mode .path-evenements #navbar #top-header .icon-menu::after, .accessibility-mode .path-soutenances #navbar #top-header .icon-menu::after,
+.accessibility-mode .footer .footer-wrapper a {
+  color: #FFF;
 }
