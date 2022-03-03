@@ -2,31 +2,23 @@
   <ul>
     {% for lien in liens %}
       {% if "facebook" in lien.uri %}
-        {% set class = "fab fa-facebook-square" %}
+        {% set class = "fa-facebook-square" %}
       {% elseif "twitter" in lien.uri %}
-        {% set class = "fab fa-twitter" %}
+        {% set class = "fa-twitter" %}
       {% elseif "linkedin" in lien.uri %}
-        {% set class = "fab fa-linkedin-square" %}
+        {% set class = "fa-linkedin-square" %}
       {% elseif "youtube" in lien.uri %}
-        {% set class = "fab fa-youtube" %}
+        {% set class = "fa-youtube" %}
       {% elseif "youtu.be" in lien.uri %}
-        {% set class = "fab fa-youtube-play" %}
+        {% set class = "fa-youtube-play" %}
       {% elseif "instagram" in lien.uri %}
-        {% set class = "fab fa-instagram" %}
+        {% set class = "fa-instagram" %}
       {% elseif "viadeo" in lien.uri %}
-        {% set class = "fab fa-viadeo" %}
-      {% elseif "hypotheses" in lien.uri %}
-        {% set class="icon-rs up1-hypotheses" %}
-      {% elseif "openedition" in lien.uri %}
-        {% set class="icon-rs up1-hypotheses" %}
-      {% elseif "archives-ouvertes" in lien.uri %}
-        {% set class="icon-rs up1-hal" %}
+        {% set class = "fa-viadeo" %}
       {% endif %}
       <li>
         <span>
-          <a href="{{ lien.uri }}" class="{{ class }}" title="{{ lien.title }}" target="_blank">
-            <span class="visually-hidden">{{ lien.title }}</span>
-          </a>
+          <a href="{{ lien.uri }}" class="fab {{ class }}" title="{{ lien.title }}" target="_blank"></a>
         </span>
       </li>
     {% endfor %}

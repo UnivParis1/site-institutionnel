@@ -91,7 +91,7 @@ class WsGroupsController extends ControllerBase {
   }
 
   private function getfieldEc() {
-    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    /** @var $negotiator  SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $site = $negotiator->loadById($negotiator->getActiveId());
@@ -102,7 +102,7 @@ class WsGroupsController extends ControllerBase {
   }
 
   private function getfieldDoc() {
-    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    /** @var $negotiator  SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $site = $negotiator->loadById($negotiator->getActiveId());
@@ -113,7 +113,7 @@ class WsGroupsController extends ControllerBase {
   }
 
   private function getSiteId() {
-    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    /** @var $negotiator  SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $siteId = $negotiator->getActiveId();
@@ -738,7 +738,7 @@ class WsGroupsController extends ControllerBase {
   public function editPagePerso($username) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $maintenance = $config->get('activate_maintenance');
-    
+
     if ($maintenance) {
       $response = new RedirectResponse("https://majtrantor.univ-paris1.fr/miseajourpageperso.html");
       return $response->send();

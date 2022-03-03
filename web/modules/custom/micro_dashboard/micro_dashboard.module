@@ -29,9 +29,7 @@ function micro_dashboard_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_views_pre_view().
  */
 function micro_dashboard_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
-  if ($view->id() == 'contenus_en_relecture' ||
-    $view->id() == 'control_content_panes'){
-//    dump($view);
+  if ($view->id() == 'contenus_en_relecture' || $view->id() == 'control_content_panes'){
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $currentSiteId = $negotiator->getActiveId();

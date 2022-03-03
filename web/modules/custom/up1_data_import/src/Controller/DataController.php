@@ -5,9 +5,11 @@ namespace Drupal\up1_data_import\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\up1_data_import\Service\DataHelper;
+use Drupal\up1_data_import\Service\TypoHelper;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Queue\QueueFactory;
+
 
 class DataController extends ControllerBase {
 
@@ -17,6 +19,12 @@ class DataController extends ControllerBase {
    * @var \Drupal\up1_data_import\Service\DataHelper
    */
   protected $dataHelper;
+  /**
+   * The news helper used to get settings from.
+   *
+   * @var \Drupal\up1_data_import\Service\TypoHelper
+   */
+  protected $typoHelper;
   /**
    * Drupal\Core\Messenger\MessengerInterface definition.
    *
@@ -37,9 +45,11 @@ class DataController extends ControllerBase {
   protected $client;
 
 
-  public function __construct(DataHelper $data_helper, QueueFactory $queue,
-                              MessengerInterface $messenger, ClientInterface $client) {
+  public function __construct(DataHelper $data_helper, TypoHelper $typo_helper,
+                              QueueFactory $queue, MessengerInterface $messenger,
+                              ClientInterface $client) {
     $this->dataHelper = $data_helper;
+    $this->typoHelper = $typo_helper;
     $this->queueFactory = $queue;
     $this->messenger = $messenger;
     $this->client = $client;
@@ -48,6 +58,7 @@ class DataController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('data.helper'),
+      $container->get('database.typo'),
       $container->get('queue'),
       $container->get('messenger'),
       $container->get('http_client')
@@ -173,5 +184,28 @@ class DataController extends ControllerBase {
     ];
 
     return $tableTheme;
+  }
+
+  public function getInfosPagePerso() {
+    $data = $this->typoHelper->selectFeUsers('tclay');
+    if (!empty($data)) {
+      foreach ($data as $datum) {
+        $rows[] = $datum;
+      }
+      $header = [
+        'courriel', 'responsabilites_scientifiques','sujet_these',
+        'projets_recherche', 'directeur_these','publications','epi','cv','cv2',
+        'directions_these','page_externe_url',
+      ] ;
+    }
+    return [
+      '#type' => 'table',
+      '#caption' => "Les informations page perso récupérées depuis Typo3",
+      '#header' => $header,
+      '#rows' => isset($rows) ? $rows : [],
+      '#attributes' => [],
+      '#sticky' => TRUE,
+      '#empty' => $this->t('No items.'),
+    ];
   }
 }
