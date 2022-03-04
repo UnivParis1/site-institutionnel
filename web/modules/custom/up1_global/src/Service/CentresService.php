@@ -30,14 +30,14 @@ class CentresService {
   public function getWebServiceUrl() {
     $protocol = $this->settings->get('webservice_centres.protocol');
     $hostname = $this->settings->get('webservice_centres.hostname');
-    if (!isset($hostname) || empty($hostname)) {
+    /*if (!isset($hostname) || empty($hostname)) {
       \Drupal::logger('up1_global')
         ->error('You must define the hostname of the web service');
       return FALSE;
     }
-    else {
-      return "$protocol://$hostname";
-    }
+    else {*/
+      return "https://ws-centres.univ-paris1.fr/new_liste_centres_up1.json";
+    //}
   }
 
   public function getCentresJson($url) {
