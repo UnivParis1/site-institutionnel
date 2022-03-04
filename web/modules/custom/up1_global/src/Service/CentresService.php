@@ -28,8 +28,8 @@ class CentresService {
    *   The base URL.
    */
   public function getWebServiceUrl() {
-    $protocol = $this->settings->get('webservice_centres.protocol');
-    $hostname = $this->settings->get('webservice_centres.hostname');
+    //$protocol = $this->settings->get('webservice_centres.protocol');
+    //$hostname = $this->settings->get('webservice_centres.hostname');
     /*if (!isset($hostname) || empty($hostname)) {
       \Drupal::logger('up1_global')
         ->error('You must define the hostname of the web service');
@@ -60,8 +60,8 @@ class CentresService {
     if (!empty($dataArray)) {
       $key = array_search($code, array_column($dataArray, 'code'));
       $centre = $dataArray[$key];
-      $protocol = \Drupal::config('up1.settings')->get('webservice_centres.protocol');
-      $path = \Drupal::config('up1.settings')->get('webservice_centres.images_path');
+      //$protocol = \Drupal::config('up1.settings')->get('webservice_centres.protocol');
+      //$path = \Drupal::config('up1.settings')->get('webservice_centres.images_path');
       $url_images = "https://ws-centres.univ-paris1.fr/images/";
       $file = "$url_images$code.jpg";
       if ($code == "0011_B") $file = $url_images . "0011_A.jpg";
