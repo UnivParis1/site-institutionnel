@@ -62,7 +62,7 @@ class CentresService {
       $centre = $dataArray[$key];
       $protocol = \Drupal::config('up1.settings')->get('webservice_centres.protocol');
       $path = \Drupal::config('up1.settings')->get('webservice_centres.images_path');
-      $url_images = "$protocol://$path";
+      $url_images = "https://ws-centres.univ-paris1.fr/images/";
       $file = "$url_images$code.jpg";
       if ($code == "0011_B") $file = $url_images . "0011_A.jpg";
       $file_headers = @get_headers($file);
