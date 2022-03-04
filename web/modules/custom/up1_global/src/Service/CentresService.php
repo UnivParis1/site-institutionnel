@@ -28,12 +28,21 @@ class CentresService {
    *   The base URL.
    */
   public function getWebServiceUrl() {
-      return "https://ws-centres.univ-paris1.fr/new_liste_centres_up1.json";
+      return "https://ws-centres.univ-paris1.fr";
   }
 
   public function getCentresJson($url) {
-    $json = file_get_contents($url);
-    $dataArray = json_decode($json, TRUE);
+    $cache = \Drupal::cache();
+
+    $up1_centres = $cache->get('up1_liste_centres');
+    if ($up1_centres) {
+      $dataArray = $up1_centres->data;
+    }
+    else {
+      $json = file_get_contents($url);
+      $dataArray = json_decode($json, TRUE);
+      $cache->set('up1_liste_centres', $dataArray, time() + 24 * 60 * 60);
+    }
 
     return $dataArray;
   }
@@ -47,7 +56,7 @@ class CentresService {
   public function getACentre($code) {
     $centre = [];
     $url = $this->getWebServiceUrl();
-    $dataArray = $this->getCentresJson($url);
+    $dataArray = $this->getCentresJson("$url/new_liste_centres_up1.json");
     if (!empty($dataArray)) {
       $key = array_search($code, array_column($dataArray, 'code'));
       $centre = $dataArray[$key];
