@@ -80,11 +80,18 @@ class CentresUp1Form extends FormBase {
   }
 
   public function getCentresJson() {
-    $url = "https://ws-centres.univ-paris1.fr/new_liste_centres_up1.json";
+    $cache = \Drupal::cache();
 
-    $json = file_get_contents($url);
-    $dataArray = json_decode($json, TRUE);
+    $up1_centres = $cache->get('up1_liste_centres');
+    if ($up1_centres) {
+      $dataArray = $up1_centres->data;
+    } else {
+      $url = "https://ws-centres.univ-paris1.fr/new_liste_centres_up1.json";
 
+      $json = file_get_contents($url);
+      $dataArray = json_decode($json, TRUE);
+      $cache->set('up1_liste_centres', $dataArray, time() + 12 * 60 * 60);
+    }
     return $dataArray;
   }
 
