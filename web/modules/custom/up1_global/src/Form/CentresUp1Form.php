@@ -71,7 +71,6 @@ class CentresUp1Form extends FormBase {
   }
 
   public function getCentre($code) {
-
     if (!empty($dataArray = $this->getCentresJson())) {
       $key = array_search($code, array_column($dataArray, 'code'));
       $centre = $dataArray[$key];
@@ -81,9 +80,7 @@ class CentresUp1Form extends FormBase {
   }
 
   public function getCentresJson() {
-    $protocol = \Drupal::config('up1.settings')->get('webservice_centres.protocol');
-    $hostname = \Drupal::config('up1.settings')->get('webservice_centres.hostname');
-    $url = "$protocol://$hostname";
+    $url = "https://ws-centres.univ-paris1.fr/new_liste_centres_up1.json";
 
     $json = file_get_contents($url);
     $dataArray = json_decode($json, TRUE);
@@ -92,20 +89,18 @@ class CentresUp1Form extends FormBase {
   }
 
   public function getCentreImage($code) {
-    $protocol = \Drupal::config('up1.settings')->get('webservice_centres.protocol');
-    $path = \Drupal::config('up1.settings')->get('webservice_centres.images_path');
-    $url = "$protocol://$path";
+    $url = "https://ws-centres.univ-paris1.fr/images";
 
     $image_path = "";
 
-    $file = "$url$code.jpg";
+    $file = "$url/$code.jpg";
     $file_headers = @get_headers($file);
 
     if (!empty($file_headers) && $file_headers[0] == 'HTTP/1.1 200 OK') {
       $image_path = $file;
     }
     else {
-      $file = "$url$code.png";
+      $file = "$url/$code.png";
       $file_headers = @get_headers($file);
 
       if (!empty($file_headers) && $file_headers[0] == 'HTTP/1.1 200 OK') {
@@ -113,7 +108,7 @@ class CentresUp1Form extends FormBase {
       }
       else {
         $random = rand(0, 1) ? 'blue' : 'white';
-        $image_path = $url."default_$random.jpg";
+        $image_path = "$url/default_$random.jpg";
       }
     }
 
