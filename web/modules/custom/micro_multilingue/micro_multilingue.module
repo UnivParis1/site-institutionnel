@@ -81,11 +81,11 @@ function micro_multilingue_field_widget_language_select_form_alter(&$element, Fo
         }
       }
     }
-    foreach ($languages as $key => $language) {
-      $options[$key] = t($language->getName());
-    }
   }
-  
+  foreach ($languages as $key => $language) {
+    $options[$key] = t($language->getName());
+  }
+
   $element['value']['#options'] = $options;
 }
 
