@@ -329,21 +329,20 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
     if ($userInformation) {
       foreach ($userInformation as $key => $information) {
         $variables[$key] = $information;
-        \Drupal::logger('up1_pages_personnelles_preprocess_node')->info("$key : $information");
       }
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
       $firstname = $node->get('field_firstname')->getValue();
       $lastname = $node->get('field_name')->getValue();
-      if (!empty($get_publications) && $get_publications[0]['value'] && !empty($firstname) && $firstname[0]['value']
-        && !empty($lastname) && $lastname[0]['value']) {
+      if (!empty($get_publications) && $get_publications[0]['value'] && !empty($userInformation['givenName'])
+        && !empty($userInformation['sn'])) {
         switch ($get_publications[0]['value']) {
           case 'idhal':
             $hal_publications = $node->get('field_id_hal')->getValue();
-            $publications = up1_pages_personnelles_get_hal_publications('idhal', $firstname[0]['value'],$lastname[0]['value'],$hal_publications[0]['value']);
+            $publications = up1_pages_personnelles_get_hal_publications('idhal',$userInformation['givenName'],$userInformation['sn'],$hal_publications[0]['value']);
             break;
           case 'nomprenom':
-            $publications = up1_pages_personnelles_get_hal_publications('nomprenom',$firstname[0]['value'],$lastname[0]['value']);
+            $publications = up1_pages_personnelles_get_hal_publications('nomprenom',$userInformation['givenName'],$userInformation['sn']);
             break;
           case 'nul':
             $publications = "";
