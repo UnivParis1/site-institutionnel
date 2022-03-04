@@ -329,6 +329,7 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
     if ($userInformation) {
       foreach ($userInformation as $key => $information) {
         $variables[$key] = $information;
+        \Drupal::logger('up1_pages_personnelles_preprocess_node')->info("$key : $information");
       }
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
