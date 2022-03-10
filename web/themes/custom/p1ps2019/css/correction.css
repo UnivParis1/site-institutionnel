@@ -637,7 +637,7 @@ z-index: 1 !important;
 .view-patimmo .fieldset-wrapper .form-radios.form--inline {
     display: inline-flex;
 }
-.view-patimmo .fieldset-wrapper .form-radios.form--inline .form-item-type::before{
+.view-patimmo .fieldset-wrapper .form-radios.form--inline .form-item-type::before,.view-patimmo fieldset:before {
     content:none;
     background-color: transparent;
 }
@@ -648,6 +648,10 @@ z-index: 1 !important;
     color: #00326e;
     font-weight: 400;
     margin: 0;
+}
+.view-patimmo .fieldset-wrapper .form-radios.form--inline input:checked + label {
+    color: #c89108;
+    font-weight: bold;
 }
 .view-patimmo input[type="submit"].js-hide {
     display:none;
@@ -756,4 +760,7 @@ z-index: 1 !important;
 .accessibility-mode .path-evenements #navbar #top-header .icon-menu::after, .accessibility-mode .path-soutenances #navbar #top-header .icon-menu::after,
 .accessibility-mode .footer .footer-wrapper a {
   color: #FFF;
+}
+.accessibility-mode .view-patimmo .fieldset-wrapper .form-radios.form--inline input:checked + label {
+    color: #000;
 }
