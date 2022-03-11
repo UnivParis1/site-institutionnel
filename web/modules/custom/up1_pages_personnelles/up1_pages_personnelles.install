@@ -28,3 +28,60 @@ function up1_pages_personnelles_update_8001(&$sandbox) {
   $definition_manager->installFieldStorageDefinition('ec_enabled', 'site', 'site', $ec_enabled);
   $definition_manager->installFieldStorageDefinition('doc_enabled', 'site', 'site', $doc_enabled);
 }
+
+function up1_pages_personnelles_update_8002(&$sandbox) {
+  $trombi_ec_enable = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Enable trombinoscope for EC'))
+    ->setDescription(t('List of all ECs displayed as trombinoscope.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $supannEntite_pedagogy = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Show "supannEntite pedagogy" on trombinoscope'))
+    ->setDescription(t('See label of the "UFR" on trombinoscope card.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $supannEntite_research = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Show "supannEntite research" on trombinoscope'))
+    ->setDescription(t('See label of the "labo de rattachement" on trombinoscope card.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $discipline_enseignement = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Show "discipline" on trombinoscope'))
+    ->setDescription(t('See "discipline d\'enseignement" on trombinoscope card.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $skills_lists = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Show "skills" on trombinoscope'))
+    ->setDescription(t('See "skills" list on trombinoscope card.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $supannRole = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Show "supannRole" on trombinoscope'))
+    ->setDescription(t('See fonction on trombinoscope card.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $about_me = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Show "about me" on trombinoscope'))
+    ->setDescription(t('See about me section on trombinoscope card.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $definition_manager->installFieldStorageDefinition('trombi_ec_enable', 'site', 'site', $trombi_ec_enable);
+  $definition_manager->installFieldStorageDefinition('supannEntite_pedagogy', 'site', 'site', $supannEntite_pedagogy);
+  $definition_manager->installFieldStorageDefinition('supannEntite_research', 'site', 'site', $supannEntite_research);
+  $definition_manager->installFieldStorageDefinition('discipline_enseignement', 'site', 'site', $discipline_enseignement);
+  $definition_manager->installFieldStorageDefinition('skills_lists', 'site', 'site', $skills_lists);
+  $definition_manager->installFieldStorageDefinition('supannRole', 'site', 'site', $supannRole);
+  $definition_manager->installFieldStorageDefinition('about_me', 'site', 'site', $about_me);
+}

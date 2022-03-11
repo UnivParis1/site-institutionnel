@@ -38,25 +38,77 @@ class WsGroupsService implements WsGroupsServiceInterface {
    * @throws InvalidPluginDefinitionException
    * @throws PluginNotFoundException
    */
-  public function getUserList($affiliation, $siteId = '') {
+  public function getUserList($affiliation, $siteId = '', $trombi_settings = NULL) {
     if (!empty($siteId)) {
       $siteStorage = $this->entityTypeManager->getStorage('site');
       $currentSite = $siteStorage->load($siteId);
 
       if (!empty($currentSite->get('groups')->value)) {
         $structure = [
-          'filter_member_of_group' => 'structures-' . $currentSite->get('groups')->value
+          'filter_member_of_group' => 'structures-' . $currentSite->get('groups')->value,
+          'showExtendedInfo' => true
         ];
       }
     }
     $request = $this->getRequest($affiliation);
 
     $params = [
-      'attrs' => 'sn,givenName,labeledURI,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge'
+      'attrs' => 'sn,givenName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
     ];
+    if (!empty($trombi_settings)) {
+      if ($trombi_settings['supannRole']) {
+        $params['attrs'] .= ',supannRoleEntite-all';
+      }
+      if ($trombi_settings['supannEntite_pedagogy'] || $trombi_settings['supannEntite_research']) {
+        $params['attrs'] .= ',supannEntiteAffectation-all';
+      }
+    }
+
     $ch = curl_init();
     if (isset($structure)) {
-      $params['attrs'] .= ',employeeType';
+      curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params) . '&' . http_build_query($structure));
+
+    }
+    else {
+      curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
+    }
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $users = json_decode(curl_exec($ch), TRUE);
+
+    curl_close($ch);
+
+    $reponse['users'] = $users;
+
+    return $reponse;
+  }
+
+  /**
+   * @param $affiliation
+   * @param $siteId
+   * @param $trombi_settings
+   * @return array
+   */
+  public function getUserListForAI($siteId = '', $trombi_settings = NULL) {
+    $request = $this->getRequest(NULL, FALSE);
+
+    //filter_supannConsentement={PROJ:OBSIA}CGU
+    $params = [
+      'filter_supannConsentement' => '{PROJ:OBSIA}CGU',
+      'attrs' => 'sn,givenName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
+      'showExtendedInfo' => true
+    ];
+    if (!empty($trombi_settings)) {
+      if ($trombi_settings['supannRole']) {
+        $params['attrs'] .= ',supannRoleEntite-all';
+      }
+      if ($trombi_settings['supannEntite_pedagogy'] || $trombi_settings['supannEntite_research']) {
+        $params['attrs'] .= ',supannEntiteAffectation-all';
+      }
+    }
+
+    $ch = curl_init();
+    if (isset($structure)) {
       curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params) . '&' . http_build_query($structure));
     }
     else {
@@ -94,15 +146,14 @@ class WsGroupsService implements WsGroupsServiceInterface {
     return $reponse;
   }
 
-  private function getRequest($affiliation) {
+  private function getRequest($affiliation = NULL, $filter_labeledURI = TRUE) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $ws = $config->get('url_ws');
     $searchUser = $config->get('search_user');
     $filter_affiliation = $config->get("filtre_$affiliation");
     $request = $ws . $searchUser . $filter_affiliation;
-    $labeledURI = $config->get('other_filters');
-    if (!empty($labeledURI)) {
-      $request .= $labeledURI;
+    if ($filter_labeledURI && !empty($config->get('other_filters')) ) {
+      $request .= $config->get('other_filters');
     }
 
     return $request;

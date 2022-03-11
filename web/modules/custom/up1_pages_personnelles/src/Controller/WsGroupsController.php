@@ -9,13 +9,15 @@ use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\micro_site\Entity\Site;
 
 define("IMPORT_USER_SIZE", 150);
 define("IMPORT_DATA_SIZE", 50);
 /**
  * Class WsGroupsController.
  */
-class WsGroupsController extends ControllerBase {
+class WsGroupsController extends ControllerBase
+{
 
   /**
    * @var wsGroupsService
@@ -56,7 +58,19 @@ class WsGroupsController extends ControllerBase {
     );
   }
 
-  private function getCachedUsers($affiliation = NULL, $siteId = NULL) {
+  public function getCurrentSite()
+  {
+    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    if (!empty($negotiator->getActiveSite())) {
+      $site = $negotiator->loadById($negotiator->getActiveId());
+    }
+
+    return $site;
+  }
+
+  private function getCachedUsers($affiliation = NULL, $siteId = NULL, $group = NULL, $trombi_settings = NULL)
+  {
     $cache = \Drupal::cache();
 
     if ($siteId) {
@@ -64,25 +78,24 @@ class WsGroupsController extends ControllerBase {
       if ($cachedUser) {
         $response = $cachedUser->data;
         $users = $response['users'];
-      }
-      else {
-        $response = $this->wsGroupsService->getUserList($affiliation, $siteId);
+      } else {
+
+        $group == 'observatoireIA'?
+          $response = $this->wsGroupsService->getUserListForAI($affiliation, $siteId, $trombi_settings) :
+          $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
+
         $users = $response['users'];
-        $this->createPagePersoUsers($users);
         $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
       }
-    }
-    else {
+    } else {
       $cachedUser = $cache->get('labeledURI_' . $affiliation);
 
       if ($cachedUser) {
         $response = $cachedUser->data;
         $users = $response['users'];
-      }
-      else {
+      } else {
         $response = $this->wsGroupsService->getUserList($affiliation);
         $users = $response['users'];
-        $this->createPagePersoUsers($users);
         $cache->set('labeledURI_' . $affiliation, $response, time() + 60 * 60);
       }
     }
@@ -90,42 +103,143 @@ class WsGroupsController extends ControllerBase {
     return $users;
   }
 
-  private function getfieldEc() {
-    /** @var $negotiator  SiteNegotiatorInterface */
+  private function getCachedUsersIA($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL)
+  {
+    $cache = \Drupal::cache();
+
+    if ($siteId) {
+      $cachedUser = $cache->get('labeledURI_' . $siteId . '_' . $affiliation);
+      if ($cachedUser) {
+        $response = $cachedUser->data;
+        $users = $response['users'];
+      } else {
+        $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
+        $users = $response['users'];
+        $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
+      }
+    } else {
+      $cachedUser = $cache->get('labeledURI_' . $affiliation);
+
+      if ($cachedUser) {
+        $response = $cachedUser->data;
+        $users = $response['users'];
+      } else {
+        $response = $this->wsGroupsService->getUserList($affiliation);
+        $users = $response['users'];
+        $cache->set('labeledURI_' . $affiliation, $response, time() + 60 * 60);
+      }
+    }
+
+    return $users;
+  }
+
+  /**
+   * Get value of ec_enabled to see if ec annuaire is enable.
+   * @return int
+   */
+  private function getFieldEc()
+  {
+    /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $site = $negotiator->loadById($negotiator->getActiveId());
 
       return $site->get('ec_enabled')->value;
-    }
-    else return FALSE;
+    } else return FALSE;
   }
 
-  private function getfieldDoc() {
-    /** @var $negotiator  SiteNegotiatorInterface */
-    $negotiator = \Drupal::service('micro_site.negotiator');
-    if (!empty($negotiator->getActiveSite())) {
-      $site = $negotiator->loadById($negotiator->getActiveId());
-
-      return $site->get('doc_enabled')->value;
-    }
-    else return FALSE;
+  /**
+   * Get value of ec_trombi_enable to see if trombinoscope is the main display.
+   * @return int
+   */
+  private function getFieldTrombiEc()
+  {
+    $site = $this->getCurrentSite();
+    return $site->get('trombi_ec_enable')->value;
   }
 
-  private function getSiteId() {
+  private function getTrombiFields() {
+    $trombi_fields = [];
+    if ($this->getFieldTrombiEc()) {
+      $site = $this->getCurrentSite();
+
+      $trombi_fields = [
+        'supannEntite_pedagogy' => $site->get('supannEntite_pedagogy')->value,
+        'supannEntite_research' => $site->get('supannEntite_research')->value,
+        'discipline_enseignement' => $site->get('discipline_enseignement')->value,
+        'skills_lists' => $site->get('skills_lists')->value,
+        'supannRole' => $site->get('supannRole')->value,
+        'about_me' => $site->get('about_me')->value,
+      ];
+    }
+
+    return $trombi_fields;
+  }
+
+  private function getFieldDoc()
+  {
+    $site = $this->getCurrentSite();
+
+    return $site->get('doc_enabled')->value;
+  }
+
+  private function getSiteId()
+  {
     /** @var $negotiator  SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
       $siteId = $negotiator->getActiveId();
       if (!empty($siteId)) {
         return $siteId;
-      }
-      else return FALSE;
-    }
-    else return FALSE;
+      } else return FALSE;
+    } else return FALSE;
   }
 
-  public function getList($type, $letter, $theme, $path, $siteId = NULL) {
+  /**
+   * @param $theme
+   * @param $path
+   * @param $siteId
+   * @return array
+   */
+  public function getTrombiList($theme, $path, $group, $siteId = NULL) {
+    $site_settings = $this->getTrombiFields();
+    $users = $this->getCachedUsers('faculty', $siteId, $group, $site_settings);
+
+    foreach ($users as &$user) {
+      if ($group == 'observatoireIA') {
+        $user['skills'] = $this->formatTrombiData('skillsIA', $user, $site_settings);
+        $user['about'] = $this->formatTrombiData('aboutIA', $user, $site_settings);
+      }
+      else {
+        $user['skills'] = $this->formatTrombiData('skills', $user, $site_settings);
+        $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
+      }
+      $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
+      $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
+      $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
+      $user['discipline'] = $this->formatTrombiData('discipline', $user, $site_settings);
+      $config = \Drupal::config('up1_pages_personnelles.settings');
+      $user['photo'] = $config->get('url_userphoto') . $user['uid'];
+    }
+    $build['item_list'] = [
+      '#theme' => $theme,
+      '#users' => $users,
+      '#affiliation' => 'faculty',
+      '#link' => $path,
+      '#Trusted' => FALSE,
+      '#trombi_settings' => [],
+      '#attached' => [
+        'library' => [
+          'up1_pages_personnelles/trombi'
+        ]
+      ]
+    ];
+
+    return $build;
+  }
+
+  public function getList($type, $letter, $theme, $path, $siteId = NULL)
+  {
     $filtered_users = [];
     $sortedUsers = [];
 
@@ -159,33 +273,44 @@ class WsGroupsController extends ControllerBase {
     return $build;
   }
 
-  public function masterFacultyList($letter) {
+  public function masterFacultyList($letter)
+  {
     return $this->getList('faculty', $letter, 'liste_pages_persos_filtree', 'up1_pages_personnelles.wsgroups_faculty_list');
   }
 
-  public function masterStudentList($letter) {
+  public function masterStudentList($letter)
+  {
     return $this->getList('student', $letter, 'liste_pages_persos_filtree', 'up1_pages_personnelles.wsgroups_student_list');
   }
 
   /**
    * Liste des Enseignants-Chercheurs d'une structure/mini-site
    */
-  public function microFacultyList($letter) {
+  public function microFacultyList($letter = NULL)
+  {
     $siteId = $this->getSiteId();
-    if (isset($siteId) && $this->getfieldEc()) {
-      return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list', $siteId);
-    }
-    else {
+    if (isset($siteId) && $this->getFieldEc()) {
+      //Get site group to see if we are on obsia site.
+      $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
+      $site = $siteStorage->load($siteId);
+      $group = $site->get('groups')->value;
+
+      if ($this->getFieldTrombiEc()) {
+        return $this->getTrombiList('list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $group, $siteId);
+      } else {
+        return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list', $siteId);
+      }
+    } else {
       throw new NotFoundHttpException();
     }
   }
 
-  public function microStudentList($letter) {
+  public function microStudentList($letter)
+  {
     $siteId = $this->getSiteId();
-    if (isset($siteId) && $this->getfieldDoc()) {
+    if (isset($siteId) && $this->getFieldDoc()) {
       return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $siteId);
-    }
-    else {
+    } else {
       throw new NotFoundHttpException();
     }
   }
@@ -293,13 +418,13 @@ class WsGroupsController extends ControllerBase {
    * @param $results
    * @param $operations
    */
-  public static function batchUsersFinished($success, $results, $operations) {
+  public static function batchUsersFinished($success, $results, $operations)
+  {
     if ($success) {
-      drupal_set_message(t("The users have been successfully imported from Ws Groups."));
-    }
-    else {
+      \Drupal::messenger()->addStatus(t("The users have been successfully imported from Ws Groups."));
+    } else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -308,7 +433,8 @@ class WsGroupsController extends ControllerBase {
    *
    * @return array
    */
-  public function populatePagePersoUsers() {
+  public function populatePagePersoUsers()
+  {
     $users = $this->wsGroupsService->getAllUsers();
 
     //Select all Typo3 fields by user.
@@ -392,13 +518,13 @@ class WsGroupsController extends ControllerBase {
    * @param $results
    * @param $operations
    */
-  public static function batchPagesPersosFinished($success, $results, $operations) {
+  public static function batchPagesPersosFinished($success, $results, $operations)
+  {
     if ($success) {
-      drupal_set_message(t("The Typo3 data haved been successfully imported from Typo3 database."));
-    }
-    else {
+      \Drupal::messenger()->addStatus(t("The Typo3 data haved been successfully imported from Typo3 database."));
+    } else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -476,8 +602,7 @@ class WsGroupsController extends ControllerBase {
           $queue_worker->processItem($item->data);
           // If everything was correct, delete the processed item from the queue
           $queue->deleteItem($item);
-        }
-        catch (SuspendQueueException $e) {
+        } catch (SuspendQueueException $e) {
           // If there was an Exception trown because of an error
           // Releases the item that the worker could not process.
           // Another worker can come and process it
@@ -494,13 +619,13 @@ class WsGroupsController extends ControllerBase {
    * @param $results
    * @param $operations
    */
-  public static function batchPublicationsFinished($success, $results, $operations) {
+  public static function batchPublicationsFinished($success, $results, $operations)
+  {
     if ($success) {
-      drupal_set_message(t("The Typo3 publications haved been successfully imported from Typo3 database."));
-    }
-    else {
+      \Drupal::messenger()->addStatus(t("The Typo3 publications haved been successfully imported from Typo3 database."));
+    } else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -578,8 +703,7 @@ class WsGroupsController extends ControllerBase {
           $queue_worker->processItem($item->data);
           // If everything was correct, delete the processed item from the queue
           $queue->deleteItem($item);
-        }
-        catch (SuspendQueueException $e) {
+        } catch (SuspendQueueException $e) {
           // If there was an Exception trown because of an error
           // Releases the item that the worker could not process.
           // Another worker can come and process it
@@ -596,13 +720,13 @@ class WsGroupsController extends ControllerBase {
    * @param $results
    * @param $operations
    */
-  public static function batchResumeFinished($success, $results, $operations) {
+  public static function batchResumeFinished($success, $results, $operations)
+  {
     if ($success) {
-      drupal_set_message(t("The Typo3 resume text haved been successfully imported from Typo3 database."));
-    }
-    else {
+      \Drupal::messenger()->addStatus(t("The Typo3 resume text haved been successfully imported from Typo3 database."));
+    } else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -756,18 +880,17 @@ class WsGroupsController extends ControllerBase {
           $user->save();
           $nid = reset($result);
           $goto = "/node/$nid/edit";
-        }
-        else {
+        } else {
           $goto = '<front>';
         }
-
-        $response = new RedirectResponse($goto);
-        return $response->send();
       }
+      $response = new RedirectResponse($goto);
+      return $response->send();
     }
   }
 
-  private function selectFeUsers($username) {
+  private function selectFeUsers($username)
+  {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [
       'username',
@@ -789,7 +912,8 @@ class WsGroupsController extends ControllerBase {
     return $result;
   }
 
-  private function selectPublications($username) {
+  private function selectPublications($username)
+  {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [
       'username',
@@ -803,7 +927,8 @@ class WsGroupsController extends ControllerBase {
     return $result;
   }
 
-  private function selectResume($username) {
+  private function selectResume($username)
+  {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [
       'username',
@@ -821,7 +946,8 @@ class WsGroupsController extends ControllerBase {
    * @param $username
    * @return mixed
    */
-  private function selectEpiAndEducation($username) {
+  private function selectEpiAndEducation($username)
+  {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [
       'username',
@@ -842,11 +968,13 @@ class WsGroupsController extends ControllerBase {
     return $result;
   }
 
-  public function createMissingPagePerso($username) {
+  public function createMissingPagePerso($username)
+  {
     return $this->selectUserData($username);
   }
 
-  private function selectUserData($username) {
+  private function selectUserData($username)
+  {
     $query = $this->database->select('fe_users', 'fu');
     $fields = [
       'username',
@@ -870,20 +998,18 @@ class WsGroupsController extends ControllerBase {
     return $result;
   }
 
-  public function equipeDispatch() {
+  public function equipeDispatch()
+  {
     $siteId = $this->getSiteId();
     if (isset($siteId)) {
-      if ($this->getfieldEc()) {
+      if ($this->getFieldEc()) {
         return $this->microFacultyList('A');
-      }
-      else if ($this->getfieldDoc()) {
+      } else if ($this->getFieldDoc()) {
         return $this->microStudentList('A');
-      }
-      else {
+      } else {
         throw new NotFoundHttpException();
       }
-    }
-    else {
+    } else {
       throw new NotFoundHttpException();
     }
   }
@@ -891,18 +1017,110 @@ class WsGroupsController extends ControllerBase {
   public function getPageEquipeTitle() {
     $siteId = $this->getSiteId();
     if (isset($siteId)) {
-      if ($this->getfieldEc()) {
+      if ($this->getFieldEc()) {
         return "Pages personnelles enseignants-chercheurs";
-      }
-      else if ($this->getfieldDoc()) {
+      } else if ($this->getFieldDoc()) {
         return "Pages personnelles doctorants";
-      }
-      else {
+      } else {
         throw new NotFoundHttpException();
       }
-    }
-    else {
+    } else {
       throw new NotFoundHttpException();
     }
   }
+
+  private function formatTrombiData($data_to_get, $user, $settings) {
+    $drupal_user = user_load_by_name($user['uid']);
+    $result = '';
+    switch ($data_to_get) {
+      case 'skills' :
+        if ($settings['skills_lists'] && $drupal_user) {
+          $pp = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+          $page_perso = reset($pp);
+          if ($page_perso) {
+            if (!empty($terms = $page_perso->get('field_skills')->referencedEntities())) {
+              foreach ($terms as $term) {
+                $result .= '<li>' . $term->getName() . '</li>';
+              }
+            }
+          }
+        }
+        break;
+      case 'skillsIA' :
+        if ($settings['skills_lists'] && $drupal_user) {
+          $pp = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+          $page_perso = reset($pp);
+          if ($page_perso) {
+            $ia_skills = $page_perso->get('field_ia_skills')->getString();
+            $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
+            if(!empty($ia_skills)) {
+              $selected_skills = explode(', ', $ia_skills);
+              $result_skills = [];
+              foreach ($selected_skills as $a_skill) {
+                $result_skills[] = '<li>' . $all_skills[$a_skill] . '</li>';
+              }
+              $result = implode('', $result_skills);
+            }
+          }
+        }
+        break;
+      case 'aboutIA' :
+        if ($settings['about_me'] && $drupal_user) {
+          $pp = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+          $page_perso = reset($pp);
+          if ($page_perso) {
+            $result = (!empty($page_perso->get('field_short_bio')->value)) ? $page_perso->get('field_short_bio')->value : '';
+          }
+        }
+        break;
+      case 'about' :
+        if ($settings['about_me'] && $drupal_user) {
+          $pp = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+          $page_perso = reset($pp);
+          if ($page_perso) {
+            $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
+          }
+        }
+        break;
+      case 'research' :
+        if ($settings['supannEntite_research'] == 1) {
+          $affectation = $user['supannEntiteAffectation-all'];
+          $key_search = array_search('research', array_column($affectation, 'businessCategory'));
+          $result = $affectation[$key_search]['description'];
+        }
+        break;
+      case 'pedagogy' :
+        if ($settings['supannEntite_pedagogy'] == 1) {
+          $affectation = $user['supannEntiteAffectation-all'];
+          $key_search = array_search('pedagogy', array_column($affectation, 'businessCategory'));
+          $result = $affectation[$key_search]['description'];
+        }
+        break;
+      case 'role' :
+        if ($settings['supannRole'] == 1) {
+          if(!empty($user['supannRoleEntite-all'])) {
+            $role = $user['supannRoleEntite-all'][0];
+            $result = $role['role'] . ' ' . $role['structure']['description'];
+          }
+        }
+        case 'discipline' :
+        if ($settings['discipline_enseignement'] == 1) {
+          if(!empty($user['info'])) {
+            $result = implode(', ', $user['info']);
+          }
+        }
+      default:
+        break;
+    }
+    return $result;
+  }
 }
+
