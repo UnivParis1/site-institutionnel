@@ -123,6 +123,9 @@ class WsGroupsService implements WsGroupsServiceInterface {
 
     curl_close($ch);
 
+    $columns = array_column($users, 'sn');
+    array_multisort($columns, SORT_NATURAL, $users);
+    
     $reponse['users'] = $users;
 
     return $reponse;
