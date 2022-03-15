@@ -31,7 +31,7 @@
                     </ul>
                     {% endif %}
                     {% if user.about %}<div class="trombi-apropos">
-                      {{ user.about | raw }}
+                      {{ user.about|striptags('<p>')|raw }}
                     </div>
                       {% endif %}
                   </div>
