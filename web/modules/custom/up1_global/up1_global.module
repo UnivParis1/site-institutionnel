@@ -9,6 +9,8 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use \Drupal\node\NodeInterface;
 use Drupal\Core\Url;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
 
 /**
  * Implements hook_help().
@@ -89,5 +91,15 @@ function up1_global_language_switch_links_alter(array &$links, $type, Url $url) 
         unset($links[$langcode]);
       }
     }
+  }
+}
+
+/**
+ * @param ViewExecutable $view
+ * @param QueryPluginBase $query
+ */
+function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() === 'patrimoine_immobilier') {
+    Drupal::logger('up1_global')->info(print_r($query->getFields(), 1));
   }
 }
