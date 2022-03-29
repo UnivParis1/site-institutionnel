@@ -34,4 +34,7 @@ function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $que
 
     $query->addWhereExpression('', $snippet, $argument = [":site_id" => NULL ]);
   }
+  if ($view->id() === 'patrimoine_immobilier') {
+    Drupal::logger('up1_global')->info("OK");
+  }
 }
