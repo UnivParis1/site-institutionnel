@@ -1095,7 +1095,7 @@ class WsGroupsController extends ControllerBase
           });
           if (!empty($key_search)) {
             $key_search = reset($key_search);
-            $result = $key_search[0]['description'];
+            $result = $key_search['description'];
           }
         }
         break;
