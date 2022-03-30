@@ -42,6 +42,7 @@ function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $que
  */
 function up1_global_views_pre_render(ViewExecutable $view) {
   if ($view->id() === 'patrimoine_immobilier') {
+    Drupal::logger('up1_global_view_pre_render')->info("Total rows : $view->total_rows");
     $results = $view->result;
     $allResults = [];
     $allTitles = [];
@@ -58,6 +59,10 @@ function up1_global_views_pre_render(ViewExecutable $view) {
         $filteredResults[] = $result;
       }
     }
-    Drupal::logger('up1_global_view_pre_render')->info(print_r($filteredResults, 1));
+    foreach ($filteredResults as $key => &$row) {
+      $row->index = $key;
+    }
+
+    Drupal::logger('up1_global_view_pre_render')->info("Total after : " . count($filteredResults));
   }
 }
