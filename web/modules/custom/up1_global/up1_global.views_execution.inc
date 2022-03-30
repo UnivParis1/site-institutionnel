@@ -45,13 +45,19 @@ function up1_global_views_pre_render(ViewExecutable $view) {
     $results = $view->result;
     $allResults = [];
     $allTitles = [];
+    $filteredResults = [];
 
     foreach ($results as $result) {
-      $allTitles[] = $result->_entity->field_title->value;
-      $allResults[] = $result;
+      $allTitles[$result->id] = $result->_entity->field_title->value;
     }
-    $serialized = array_map('serialize', $allResults);
-    $unique = array_unique($serialized);
-    Drupal::logger('up1_global_view_pre_render')->info(print_r(array_intersect_key($allResults, $unique), 1));
+    Drupal::logger('up1_global_view_pre_render')->info(print_r(array_unique($allTitles), 1));
+    $allTitles = array_unique($allTitles);
+    $keys = array_keys($allTitles);
+    foreach ($results as $result) {
+      if (in_array($result->id, $keys)) {
+        $filteredResults[] = $result;
+      }
+    }
+    Drupal::logger('up1_global_view_pre_render')->info(print_r($filteredResults, 1));
   }
 }
