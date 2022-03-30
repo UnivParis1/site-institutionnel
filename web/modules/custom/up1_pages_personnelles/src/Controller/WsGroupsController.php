@@ -218,6 +218,7 @@ class WsGroupsController extends ControllerBase
         $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
       }
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
+      \Drupal::logger('formatTrombiData')->info(print_r($user['research'], 1));
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
       $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
       $user['discipline'] = $this->formatTrombiData('discipline', $user, $site_settings);
@@ -1111,15 +1112,25 @@ class WsGroupsController extends ControllerBase
       case 'research' :
         if ($settings['supannEntite_research'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_search('research', array_column($affectation, 'businessCategory'));
-          $result = $affectation[$key_search]['description'];
+          $key_search = array_filter($affectation, function ($item) {
+            return $item['businessCategory'] == 'research';
+          });
+          if (!empty($key_search)) {
+            $key_search = reset($key_search);
+            $result = $key_search[0]['description'];
+          }
         }
         break;
       case 'pedagogy' :
         if ($settings['supannEntite_pedagogy'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_search('pedagogy', array_column($affectation, 'businessCategory'));
-          $result = $affectation[$key_search]['description'];
+          $key_search = array_filter($affectation, function ($item) {
+            return $item['businessCategory'] == 'pedagogy';
+          });
+          if (!empty($key_search)) {
+            $key_search = reset($key_search);
+            $result = $key_search['description'];
+          }
         }
         break;
       case 'role' :
