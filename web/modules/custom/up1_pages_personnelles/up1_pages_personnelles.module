@@ -332,8 +332,7 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       }
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
-      $firstname = $node->get('field_firstname')->getValue();
-      $lastname = $node->get('field_name')->getValue();
+
       if (!empty($get_publications) && $get_publications[0]['value'] && !empty($userInformation['givenName'])
         && !empty($userInformation['sn'])) {
         switch ($get_publications[0]['value']) {
