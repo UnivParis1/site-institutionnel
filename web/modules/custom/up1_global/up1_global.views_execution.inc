@@ -21,7 +21,8 @@ function up1_global_views_query_substitutions(ViewExecutable $view) {
 /**
  * Implements hook_views_query_alter().
  */
-function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $query)
+{
   if ($view->id() == 'actualite') {
     \Drupal::logger('up1_global_views_query')->info("We're IN");
     $is = "IS";
@@ -32,9 +33,24 @@ function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $que
 
     $snippet = "($news_global) OR ($news_micro)";
 
-    $query->addWhereExpression('', $snippet, $argument = [":site_id" => NULL ]);
+    $query->addWhereExpression('', $snippet, $argument = [":site_id" => NULL]);
   }
   if ($view->id() === 'patrimoine_immobilier') {
     Drupal::logger('up1_global')->info("OK");
+  }
+}
+
+/**
+ *
+ */
+function up1_global_views_pre_render(ViewExecutable $view) {
+  if ($view->id() === 'patrimoine_immobilier') {
+    $results = $view->result;
+    $filteredResults = [];
+
+    foreach ($results as $result) {
+        $filteredResults[] = $result;
+        \Drupal::logger('up1_global_view_pre_render')->info(" Résultats patimmo : " . print_r($result, 1));
+    }
   }
 }
