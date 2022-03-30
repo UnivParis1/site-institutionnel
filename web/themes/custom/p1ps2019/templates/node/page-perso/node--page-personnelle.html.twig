@@ -111,6 +111,10 @@
 {% set sticky_pub = content.field_sticky_publications|render %}
 {% set education = content.field_education|render %}
 {% set discipline = '' %}
+{% set short_bio = content.field_short_bio|render %}
+{% set formations_ia = content.field_formations_ia|render %}
+{% set projects_ia = content.field_projects_ia|render %}
+{% set ia_skills = content.field_ia_skills|render %}
 
 {{ attach_library('up1_pages_personnelles/front') }}
 <article{{ attributes.addClass(classes) }}>
@@ -129,11 +133,13 @@
               <span></span>
             </div>
             {% if obsia %}
-              <div class="btn btn-primary">
-                <a href="#page-perso-obsia">{{ 'IA Projects'|t }}</a>
-                <i class="icon-ok"></i>
-                <span></span>
-              </div>
+              {% if short_bio or formations_ia or projects_ia or ia_skills %}
+                <div class="btn btn-primary">
+                  <a href="#page-perso-obsia">{{ 'Artificial Intelligence'|t }}</a>
+                  <i class="icon-ok"></i>
+                  <span></span>
+                </div>
+              {% endif %}
             {% endif %}
             {% if research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisorphd_supervisor %}
               <div class="btn btn-primary">
@@ -213,30 +219,32 @@
           </section>
           {# obsia section #}
           {% if obsia %}
-            <section class="new-section obsia">
-              <a id="page-perso-obsia"></a>
-              <h2>{{ "IA project"|t }}</h2>
-              {% if content.field_short_bio|render %}
-                <p class="txt-bold">{{ "Biographie en lien avec l'IA"|t }}</p>
-                {{ content.field_short_bio }}
-              {% endif %}
-              {% if content.field_formations_ia|render %}
-                <p class="txt-bold">{{ "Formations menées en lien avec l'IA"|t }}</p>
-                {{ content.field_formations_ia }}
-              {% endif %}
-              {% if content.field_projects_ia|render %}
-                <p class="txt-bold">{{ "Projets IA"|t }}</p>
-                {{ content.field_projects_ia }}
-              {% endif %}
-              {% if content.field_ia_skills|render %}
-                <p class="txt-bold">{{ "Domaines d'expertise sur l'IA"|t }}</p>
-                <ul class="trombi-skills">
-                  {% for key, item in  content.field_ia_skills if key|first != '#' %}
-                    <li>{{ item }}</li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </section>
+            {% if short_bio or formations_ia or projects_ia or ia_skills  %}
+              <section class="new-section obsia">
+                <a id="page-perso-obsia"></a>
+                <h2>{{ "Artificial Intelligence"|t }}</h2>
+                {% if content.field_short_bio|render %}
+                  <p class="txt-bold">{{ "Biographie en lien avec l'IA"|t }}</p>
+                  {{ content.field_short_bio }}
+                {% endif %}
+                {% if content.field_formations_ia|render %}
+                  <p class="txt-bold">{{ "Formations menées en lien avec l'IA"|t }}</p>
+                  {{ content.field_formations_ia }}
+                {% endif %}
+                {% if content.field_projects_ia|render %}
+                  <p class="txt-bold">{{ "Projets IA"|t }}</p>
+                  {{ content.field_projects_ia }}
+                {% endif %}
+                {% if content.field_ia_skills|render %}
+                  <p class="txt-bold">{{ "Domaines d'expertise sur l'IA"|t }}</p>
+                  <ul class="trombi-skills">
+                    {% for key, item in  content.field_ia_skills if key|first != '#' %}
+                      <li>{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </section>
+            {% endif %}
           {% endif %}
           {% if research_themes or research_projects or scientific_resp or thesis_subject or phd_supervisor or research_directions %}
             <section class="new-section research">
@@ -405,7 +413,7 @@
                     </a>
                   {% endif %}
                   {% if hal %}
-                    <a href="{{ content.field_hal_link.0['#url'] }}"  class="social-link fa-2x"
+                    <a href="{{ content.field_hal_link.0['#url'] }}"  class="hal social-link fa-2x"
                        target="_blank" title="HAL archives ouvertes">
                       <span class="visually-hidden">HAL</span>
                       <img src="https://com-web.univ-paris1.fr/logos/logo-hal-texte-blanc.svg" width="48">
