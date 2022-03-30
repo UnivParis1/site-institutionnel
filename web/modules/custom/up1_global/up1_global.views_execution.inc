@@ -43,12 +43,15 @@ function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $que
 function up1_global_views_pre_render(ViewExecutable $view) {
   if ($view->id() === 'patrimoine_immobilier') {
     $results = $view->result;
-    $filteredResults = [];
+    $allResults = [];
+    $allTitles = [];
 
     foreach ($results as $result) {
-        $filteredResults[] = $result;
-        \Drupal::logger('up1_global_view_pre_render')->info(" Title patimmo : " . print_r($result->_entity->field_title->value, 1));
-        \Drupal::logger('up1_global_view_pre_render')->info(" Full Entity : " . print_r($result->paragraph__field_title_field_title_value . ' ' . $result->id(), 1));
+      $allTitles[] = _entity->field_title->value;
+      $allResults[] = $result;
     }
+    $serialized = array_map('serialize', $allResults);
+    $unique = array_unique($serialized);
+    Drupal::logger('up1_global_view_pre_render')->info(print_r(array_intersect_key($allResults, $unique), 1));
   }
 }
