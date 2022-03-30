@@ -51,18 +51,21 @@ function up1_global_views_pre_render(ViewExecutable $view) {
     foreach ($results as $result) {
       $allTitles[$result->id] = $result->_entity->field_title->value;
     }
-    Drupal::logger('up1_global_view_pre_render')->info(print_r(array_unique($allTitles), 1));
-    $allTitles = array_unique($allTitles);
-    $keys = array_keys($allTitles);
+    Drupal::logger('up1_global_view_pre_render')->info("All titles : " . print_r($allTitles, 1));
+    Drupal::logger('up1_global_view_pre_render')->info("Unique titles : " . print_r(array_unique($allTitles), 1));
+    $keys = array_keys(array_unique($allTitles));
+    Drupal::logger('up1_global_view_pre_render')->info("keys : " . print_r($keys, 1));
+
     foreach ($results as $result) {
+      Drupal::logger('up1_global_view_pre_render')->info($result->id . " in array ? " . in_array($result->id, $keys));
       if (in_array($result->id, $keys)) {
         $filteredResults[] = $result;
       }
     }
-    foreach ($filteredResults as $key => &$row) {
+
+    Drupal::logger('up1_global_view_pre_render')->info("COunt filtered results : " . count($filteredResults));
+    foreach ($filteredResults as $key => $row) {
       $row->index = $key;
     }
-
-    Drupal::logger('up1_global_view_pre_render')->info("Total after : " . count($filteredResults));
   }
 }
