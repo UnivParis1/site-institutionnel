@@ -401,8 +401,7 @@ class WsGroupsController extends ControllerBase
           $queue_worker->processItem($item->data);
           // If everything was correct, delete the processed item from the queue
           $queue->deleteItem($item);
-        }
-        catch (SuspendQueueException $e) {
+        } catch (SuspendQueueException $e) {
           // If there was an Exception trown because of an error
           // Releases the item that the worker could not process.
           // Another worker can come and process it
@@ -533,12 +532,13 @@ class WsGroupsController extends ControllerBase
    *
    * @return array
    */
-  public function importPublications() {
+  public function importPublications()
+  {
     $users = $this->wsGroupsService->getAllUsers();
 
     //Select all Typo3 fields by user.
     foreach ($users as $user) {
-      $publications= $this->selectPublications($user['uid']);
+      $publications = $this->selectPublications($user['uid']);
       if ($publications) {
         $data[] = $publications;
       }
@@ -805,8 +805,7 @@ class WsGroupsController extends ControllerBase
           $queue_worker->processItem($item->data);
           // If everything was correct, delete the processed item from the queue
           $queue->deleteItem($item);
-        }
-        catch (SuspendQueueException $e) {
+        } catch (SuspendQueueException $e) {
           // If there was an Exception trown because of an error
           // Releases the item that the worker could not process.
           // Another worker can come and process it
@@ -825,11 +824,10 @@ class WsGroupsController extends ControllerBase
    */
   public static function batchLastFieldsFinished($success, $results, $operations) {
     if ($success) {
-      drupal_set_message(t("The Typo3 english resume & education field haved been successfully imported from Typo3 database."));
-    }
-    else {
+      \Drupal::messenger()->addStatus(t("The Typo3 english resume & education field haved been successfully imported from Typo3 database."));
+    } else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
     }
   }
 
@@ -862,7 +860,6 @@ class WsGroupsController extends ControllerBase
   public function editPagePerso($username) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $maintenance = $config->get('activate_maintenance');
-
     if ($maintenance) {
       $response = new RedirectResponse("https://majtrantor.univ-paris1.fr/miseajourpageperso.html");
       return $response->send();
@@ -1093,15 +1090,25 @@ class WsGroupsController extends ControllerBase
       case 'research' :
         if ($settings['supannEntite_research'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_search('research', array_column($affectation, 'businessCategory'));
-          $result = $affectation[$key_search]['description'];
+          $key_search = array_filter($affectation, function ($item) {
+            return $item['businessCategory'] == 'research';
+          });
+          if (!empty($key_search)) {
+            $key_search = reset($key_search);
+            $result = $key_search[0]['description'];
+          }
         }
         break;
       case 'pedagogy' :
         if ($settings['supannEntite_pedagogy'] == 1) {
           $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_search('pedagogy', array_column($affectation, 'businessCategory'));
-          $result = $affectation[$key_search]['description'];
+          $key_search = array_filter($affectation, function ($item) {
+            return $item['businessCategory'] == 'pedagogy';
+          });
+          if (!empty($key_search)) {
+            $key_search = reset($key_search);
+            $result = $key_search['description'];
+          }
         }
         break;
       case 'role' :
