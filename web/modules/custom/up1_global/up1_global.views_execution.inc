@@ -47,7 +47,7 @@ function up1_global_views_pre_render(ViewExecutable $view) {
     $allTitles = [];
 
     foreach ($results as $result) {
-      $allTitles[] = _entity->field_title->value;
+      $allTitles[] = $result->_entity->field_title->value;
       $allResults[] = $result;
     }
     $serialized = array_map('serialize', $allResults);
