@@ -48,7 +48,7 @@ function up1_global_views_pre_render(ViewExecutable $view) {
     foreach ($results as $result) {
         $filteredResults[] = $result;
         \Drupal::logger('up1_global_view_pre_render')->info(" Title patimmo : " . print_r($result->_entity->field_title->value, 1));
-        \Drupal::logger('up1_global_view_pre_render')->info(" Full Entity : " . print_r($result->_relationship_entities, 1));
+        \Drupal::logger('up1_global_view_pre_render')->info(" Full Entity : " . print_r($result->paragraph__field_title_field_title_value . ' ' . $result->id(), 1));
     }
   }
 }
