@@ -35,9 +35,6 @@ function up1_global_views_query_alter(ViewExecutable $view, QueryPluginBase $que
 
     $query->addWhereExpression('', $snippet, $argument = [":site_id" => NULL]);
   }
-  if ($view->id() === 'patrimoine_immobilier') {
-    Drupal::logger('up1_global')->info("OK");
-  }
 }
 
 /**
@@ -50,7 +47,8 @@ function up1_global_views_pre_render(ViewExecutable $view) {
 
     foreach ($results as $result) {
         $filteredResults[] = $result;
-        \Drupal::logger('up1_global_view_pre_render')->info(" Résultats patimmo : " . print_r($result, 1));
+        \Drupal::logger('up1_global_view_pre_render')->info(" Title patimmo : " . print_r($result->_entity->field_title->value, 1));
+        \Drupal::logger('up1_global_view_pre_render')->info(" Full Entity : " . print_r($result->_relationship_entities, 1));
     }
   }
 }
