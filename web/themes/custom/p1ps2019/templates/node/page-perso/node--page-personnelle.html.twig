@@ -111,6 +111,10 @@
 {% set sticky_pub = content.field_sticky_publications|render %}
 {% set education = content.field_education|render %}
 {% set discipline = '' %}
+{% set short_bio = content.field_short_bio|render %}
+{% set formations_ia = content.field_formations_ia|render %}
+{% set projects_ia = content.field_projects_ia|render %}
+{% set ia_skills = content.field_ia_skills|render %}
 
 {{ attach_library('up1_pages_personnelles/front') }}
 <article{{ attributes.addClass(classes) }}>
@@ -128,7 +132,7 @@
               <i class="icon-ok"></i>
               <span></span>
             </div>
-            {% if obsia %}
+            {% if obsia and (short_bio or formations_ia or projects_ia or ia_skills) %}
               <div class="btn btn-primary">
                 <a href="#page-perso-obsia">{{ 'Artificial Intelligence'|t }}</a>
                 <i class="icon-ok"></i>
@@ -212,7 +216,7 @@
             </div>
           </section>
           {# obsia section #}
-          {% if obsia %}
+          {% if obsia and (short_bio or formations_ia or projects_ia or ia_skills) %}
             <section class="new-section obsia">
               <a id="page-perso-obsia"></a>
               <h2>{{ "Artificial Intelligence"|t }}</h2>
