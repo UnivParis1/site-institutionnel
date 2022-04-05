@@ -129,54 +129,6 @@ up1_pages_personnelles.batch_populate_pages_persos:
   options:
     _admin_route: TRUE
 
-up1_pages_personnelles.import_publications:
-  path: '/pages-perso/import-publications'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::importPublications'
-    _title: 'Populate pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.batch_import_publications:
-  path: '/pages-perso/import-publications/batch'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportPublications'
-    _title: 'Populate pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.import_resume:
-  path: '/pages-perso/import-resume'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::importResume'
-    _title: 'Import field resume pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.batch_import_resume:
-  path: '/pages-perso/import-resume/batch'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportResume'
-    _title: 'Import field resume pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.import_last_fields:
-  path: '/pages-perso/import-last-fields'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::importLastFields'
-    _title: 'Import 2 last fields for pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.batch_import_last_fields:
-  path: '/pages-perso/import-last-fields/batch'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportLastFields'
-    _title: 'Import 2 last fields for pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
 up1_pages_personnelles.delete_queue_users:
   path: '/pages-perso/maj/empty'
   defaults:
@@ -203,6 +155,7 @@ up1_pages_personnelles.batch_new_ecd:
   options:
     _admin_route: TRUE
 
+# API pour Comptex
 up1_pages_personnelles.edit_page_perso:
   path: '/modifier-ma-page-personnelle/{username}'
   defaults:
@@ -210,6 +163,7 @@ up1_pages_personnelles.edit_page_perso:
   requirements:
     _permission: 'has labeled URI'
 
+# API pour Comptex
 up1_pages_personnelles.bulk_import_page_perso:
   path: '/admin/people/create/page-perso-bulk'
   defaults:
@@ -219,3 +173,10 @@ up1_pages_personnelles.bulk_import_page_perso:
     _permission: 'access administration pages'
   options:
     _admin_route: TRUE
+
+up1_pages_personnelles.obsia:
+  path: '/mon-parcours-obsia/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::parcoursObsia'
+  requirements:
+    _permission: 'has labeled URI'
