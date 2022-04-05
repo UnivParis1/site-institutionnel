@@ -632,6 +632,8 @@ class WsGroupsController extends ControllerBase
    */
   public function parcoursObsia($username)
   {
+    $formations = \Drupal::request()->query->get('formations-ia');
+    \Drupal::logger('up1_pages_personnelles')->info("FORMATIONS : " . print_r($formations, 1));
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $maintenance = $config->get('activate_maintenance');
     if ($maintenance) {
