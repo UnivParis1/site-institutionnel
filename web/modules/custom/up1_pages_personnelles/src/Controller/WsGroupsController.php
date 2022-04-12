@@ -632,8 +632,8 @@ class WsGroupsController extends ControllerBase
    */
   public function parcoursObsia($username)
   {
-    $formations = \Drupal::request()->query->get('formations-ia');
-    \Drupal::logger('up1_pages_personnelles')->info("FORMATIONS : " . print_r($formations, 1));
+   /* $formations = \Drupal::request()->query->get('formations-ia');
+    \Drupal::logger('up1_pages_personnelles')->info("FORMATIONS : " . print_r($formations, 1));*/
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $maintenance = $config->get('activate_maintenance');
     if ($maintenance) {
@@ -650,8 +650,6 @@ class WsGroupsController extends ControllerBase
         $result = $query->execute();
         if (!empty($result) && count($result) == 1) {
           \Drupal::logger('up1_pages_personnelles')->info("Resultat : " . print_r($result, 1));
-          $formations = \Drupal::request()->query->get('formations-ia');
-          \Drupal::logger('up1_pages_personnelles')->info("FORMATIONS : " . print_r($formations, 1));
         }
       }
     }
