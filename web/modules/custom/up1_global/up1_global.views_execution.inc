@@ -8,9 +8,7 @@ use Drupal\views\Plugin\views\query\QueryPluginBase;
  */
 function up1_global_views_pre_render(ViewExecutable $view) {
   if ($view->id() === 'patrimoine_immobilier') {
-    Drupal::logger('up1_global_view_pre_render')->info("Total rows : $view->total_rows");
     $results = $view->result;
-    $allResults = [];
     $allTitles = [];
     $filteredResults = [];
 
