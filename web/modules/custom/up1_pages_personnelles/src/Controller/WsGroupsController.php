@@ -658,6 +658,9 @@ class WsGroupsController extends ControllerBase
           return "Ok pour nous. Formations = $formations";
         }
       }
+      else {
+        return "Données manquantes pour l'API";
+      }
     }
   }
 }
