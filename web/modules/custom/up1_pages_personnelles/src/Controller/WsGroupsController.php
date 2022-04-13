@@ -10,6 +10,7 @@ use Drupal\Core\Database\Connection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\micro_site\Entity\Site;
+use Drupal\node\Entity\Node;
 
 define("IMPORT_USER_SIZE", 150);
 define("IMPORT_DATA_SIZE", 50);
@@ -642,14 +643,19 @@ class WsGroupsController extends ControllerBase
     }
     else {
       $user = user_load_by_name($username);
+      $formations = \Drupal::request()->query->get('formations-ia');
+      \Drupal::logger('up1_pages_personnelles')->info("FORMATIONS : " . print_r($formations, 1));
 
-      if ($user) {
+      if ($user && $formations) {
         $query = \Drupal::entityQuery('node')
           ->condition('type', 'page_personnelle')
           ->condition('uid', $user->id());
         $result = $query->execute();
         if (!empty($result) && count($result) == 1) {
-          \Drupal::logger('up1_pages_personnelles')->info("Resultat : " . print_r($result, 1));
+          $nid = reset($result);
+          $page_perso = Node::load($nid);
+
+          return "Ok pour nous. Formations = $formations";
         }
       }
     }
