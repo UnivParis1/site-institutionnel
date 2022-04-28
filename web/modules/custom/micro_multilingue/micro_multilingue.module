@@ -74,10 +74,12 @@ function micro_multilingue_field_widget_language_select_form_alter(&$element, Fo
   }
   else {
     $site = $negotiator->getActiveSite();
+    if ($site) {
     foreach ($site->get('active_language') as $language) {
       $languages[$language->entity->getID()] = $language->entity;
     }
   }
+}
   foreach ($languages as $key => $language) {
     $options[$key] = t($language->getName());
   }
