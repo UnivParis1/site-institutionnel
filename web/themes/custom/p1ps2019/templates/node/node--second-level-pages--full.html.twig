@@ -70,9 +70,11 @@
  *   in different view modes.
  */
 #}
+
 {% set classes = ['second-level-page'] %}
 {% set id = node.id() %}
 {% set htmlId = 'page-' ~ id %}
+
 <article{{ attributes.setAttribute('id', htmlId).addClass(classes) }}>
   <div class="grid-container">
     <div class="grid-x grid-margin-x">
@@ -82,6 +84,11 @@
         {{ title_suffix }}
       </div>
     </div>
+  </div>
+  <div class="grid-container">
+    {% if changed is not empty %}
+      {% trans %}Changed on:{% endtrans %} {{ changed }}
+    {% endif %} 
   </div>
   <div{{ content_attributes }}>
     {{ content }}

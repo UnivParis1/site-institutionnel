@@ -70,10 +70,14 @@
  *   in different view modes.
  */
 #}
-<article{{ attributes }}>
 
+<article{{ attributes }}>
   <div{{ content_attributes }}>
+    {% if changed is not empty %}
+      <div class="grid-container">
+        {% trans %}Changed on:{% endtrans %} {{ changed }}
+      </div>
+    {% endif %}
     {{ content }}
   </div>
-
 </article>
