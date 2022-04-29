@@ -633,8 +633,6 @@ class WsGroupsController extends ControllerBase
    */
   public function parcoursObsia($username)
   {
-   /* $formations = \Drupal::request()->query->get('formations-ia');
-    \Drupal::logger('up1_pages_personnelles')->info("FORMATIONS : " . print_r($formations, 1));*/
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $maintenance = $config->get('activate_maintenance');
     if ($maintenance) {
@@ -643,10 +641,15 @@ class WsGroupsController extends ControllerBase
     }
     else {
       $user = user_load_by_name($username);
-      $formations = \Drupal::request()->query->get('formations-ia');
-      \Drupal::logger('up1_pages_personnelles')->info("FORMATIONS : " . print_r($formations, 1));
+      $data = [];
+      $data['bio'] = \Drupal::request()->query->get('short-bio');
+      $data['formations'] = \Drupal::request()->query->get('formations');
+      $data['projects'] = \Drupal::request()->query->get('projects');
+      $data['skills'] = \Drupal::request()->query->get('skills');
 
-      if ($user && $formations) {
+      \Drupal::logger('up1_pages_personnelles')->info("Data : " . print_r($data, 1));
+
+      if ($user) {
         $query = \Drupal::entityQuery('node')
           ->condition('type', 'page_personnelle')
           ->condition('uid', $user->id());
@@ -654,12 +657,20 @@ class WsGroupsController extends ControllerBase
         if (!empty($result) && count($result) == 1) {
           $nid = reset($result);
           $page_perso = Node::load($nid);
-
-          return "Ok pour nous. Formations = $formations";
+          $data = [];
+          +      $data['bio'] = \Drupal::request()->query->get('short-bio');
+          +      $data['formations'] = \Drupal::request()->query->get('formations');
+          +      $data['projects'] = \Drupal::request()->query->get('projects');
+          +      $data['skills'] = \Drupal::request()->query->get('skills');
+          +
+          +      \Drupal::logger('up1_pages_personnelles')->info("Data : " . print_r($data, 1));
+          $response = new RedirectResponse( \Drupal::service('path_alias.manager')->getAliasByPath("/node/$nid/edit") );
+          return $response->send();
         }
       }
       else {
-        return "Données manquantes pour l'API";
+        $response = new RedirectResponse( \Drupal::service('path_alias.manager')->getAliasByPath("front") );
+        return $response->send();
       }
     }
   }
