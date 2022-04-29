@@ -233,7 +233,7 @@ function p1ps2019_preprocess_node(&$variables) {
   if (in_array($node->getType(), ['page', 'second_level_pages'])) {
     $node = $variables['node'];
     if ($node->hasField('field_display_node_changed')) {
-      $display_changed = $node->field_display_node_changed->getValue(); 
+      $display_changed = $node->field_display_node_changed->getValue();
       if ($display_changed[0]['value']) {
         $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long');
       }
@@ -433,7 +433,7 @@ function p1ps2019_preprocess_views_view_table(&$variables)
 function p1ps2019_preprocess_paragraph(&$variables)
 {
   $paragraph = $variables['paragraph'];
-  if ($paragraph->bundle() == 'contact') {
+  if (in_array($paragraph->bundle(), ['contact','contact_free'])) {
     $service = \Drupal::service('up1_global.centres');
     $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 
