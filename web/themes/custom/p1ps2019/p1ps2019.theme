@@ -433,7 +433,7 @@ function p1ps2019_preprocess_views_view_table(&$variables)
 function p1ps2019_preprocess_paragraph(&$variables)
 {
   $paragraph = $variables['paragraph'];
-  if (in_array($paragraph->bundle(), ['contact','contact_free'])) {
+  if (in_array($paragraph->bundle(), ['contact','contact_free'])){
     $service = \Drupal::service('up1_global.centres');
     $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 
