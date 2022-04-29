@@ -626,53 +626,133 @@ class WsGroupsController extends ControllerBase
     return $result;
   }
 
-  /**
-   * Get Data from Comptex and save page_personnelle node
-   * @param $username
-   * @return mixed
-   */
-  public function parcoursObsia($username)
-  {
-    $config = \Drupal::config('up1_pages_personnelles.settings');
-    $maintenance = $config->get('activate_maintenance');
-    if ($maintenance) {
-      $response = new RedirectResponse("https://majtrantor.univ-paris1.fr/miseajourpageperso.html");
-      return $response->send();
-    }
-    else {
-      $user = user_load_by_name($username);
-      $data = [];
-      $data['bio'] = \Drupal::request()->query->get('short-bio');
-      $data['formations'] = \Drupal::request()->query->get('formations');
-      $data['projects'] = \Drupal::request()->query->get('projects');
-      $data['skills'] = \Drupal::request()->query->get('skills');
-
-      \Drupal::logger('up1_pages_personnelles')->info("Data : " . print_r($data, 1));
-
-      if ($user) {
-        $query = \Drupal::entityQuery('node')
-          ->condition('type', 'page_personnelle')
-          ->condition('uid', $user->id());
-        $result = $query->execute();
-        if (!empty($result) && count($result) == 1) {
-          $nid = reset($result);
-          $page_perso = Node::load($nid);
-          $data = [];
-          +      $data['bio'] = \Drupal::request()->query->get('short-bio');
-          +      $data['formations'] = \Drupal::request()->query->get('formations');
-          +      $data['projects'] = \Drupal::request()->query->get('projects');
-          +      $data['skills'] = \Drupal::request()->query->get('skills');
-          +
-          +      \Drupal::logger('up1_pages_personnelles')->info("Data : " . print_r($data, 1));
-          $response = new RedirectResponse( \Drupal::service('path_alias.manager')->getAliasByPath("/node/$nid/edit") );
-          return $response->send();
+    /**
+     * Get data from Drupal to display it on Comptex page
+     * @param $username
+     * @return mixed
+     */
+    public function getParcoursObsia($username) {
+        if (!$this->maintenancePagePersos()) {
+            return new JsonResponse([ 'data' => $this->getObsiaFields($username), 'method' => 'GET', 'status'=> 200]);
         }
-      }
-      else {
-        $response = new RedirectResponse( \Drupal::service('path_alias.manager')->getAliasByPath("front") );
-        return $response->send();
-      }
     }
-  }
+
+    /**
+     * Get data from Comptex and save page_personnelle node
+     * @param $username
+     * @return mixed
+     */
+    public function setParcoursObsia($username) {
+        if (!$this->maintenancePagePersos()) {
+            $data = [];
+
+            $data['bio'] = \Drupal::request()->query->get('bio');
+            $data['formations'] = \Drupal::request()->query->get('formations');
+            $data['projets'] = \Drupal::request()->query->get('projets');
+            $data['skills'] = \Drupal::request()->query->get('skills');
+
+            $this->updateObsiaFields($username, $data);
+        }
+    }
+
+    /**
+     * Delete data from Comptex and save page_personnelle node
+     * @param $username
+     * @return void
+     */
+    public function deleteParcoursObsia($username) {
+        if (!$this->maintenancePagePersos()) {
+            $this->updateObsiaFields($username);
+        }
+    }
+
+    /**
+     * Update fields related to obsia in page perso node
+     * @param $username
+     * @param $fields
+     * @return void
+     */
+    private function updateObsiaFields($username, $fields = []) {
+        $user = user_load_by_name($username);
+        if ($user) {
+            $query = \Drupal::entityQuery('node')
+                ->condition('type', 'page_personnelle')
+                ->condition('uid', $user->id());
+            $result = $query->execute();
+            if (!empty($result) && count($result) == 1) {
+                $nid = reset($result);
+                $page_perso = Node::load($nid);
+                if (!empty($fields)) {
+                    if (!empty($fields['bio'])) $page_perso->set('field_short_bio', $fields['bio']);
+                    if (!empty($fields['formations'])) $page_perso->set('field_formations_ia', $fields['formations']);
+                    if (!empty($fields['projets'])) $page_perso->set('field_projects_ia', $fields['projets']);
+                    if (!empty($fields['skills'])) $page_perso->set('field_ia_skills', explode(',', $fields['skills']));
+                }
+                else {
+                    $page_perso->set('field_short_bio', NULL);
+                    $page_perso->set('field_formations_ia', NULL);
+                    $page_perso->set('field_projects_ia', NULL);
+                    $page_perso->set('field_ia_skills',  NULL);
+                }
+
+                if ($page_perso->save()) {
+                    \Drupal::messenger()->addMessage(
+                        t('The page perso has been successfully updated.'), 'status');
+                }
+                else {
+                    \Drupal::messenger()->addMessage(
+                        t('An error has occured when updating the page perso.'), 'error');
+                }
+                $response = new RedirectResponse( \Drupal::service('path_alias.manager')->getAliasByPath("/node/$nid/edit") );
+                return $response->send();
+            }
+        }
+        else {
+            $response = new RedirectResponse( '/system/404' );
+            return $response->send();
+        }
+    }
+
+    /**
+     * Update fields related to obsia in page perso node
+     * @param $username
+     * @param $fields
+     * @return void
+     */
+    private function getObsiaFields($username) {
+        $user = user_load_by_name($username);
+        $fields = [];
+        if ($user) {
+            $query = \Drupal::entityQuery('node')
+                ->condition('type', 'page_personnelle')
+                ->condition('uid', $user->id());
+            $nids = $query->execute();
+            if ($nids) {
+                foreach ($nids as $nid) {
+                    $page_perso = Node::load($nid);
+                    $fields[] = [
+                        'username' => $username,
+                        'bio' => $page_perso->field_short_bio->getValue(),
+                        'formations' => $page_perso->field_formations_ia->getValue(),
+                        'projets' => $page_perso->field_projects_ia->getValue(),
+                        'skills' => $page_perso->field_ia_skills->getValue()
+                    ];
+                }
+            }
+            return $fields;
+        }
+    }
+    /**
+     * @return void
+     */
+    private function maintenancePagePersos() {
+        $config = \Drupal::config('up1_pages_personnelles.settings');
+        $maintenance = $config->get('activate_maintenance');
+        if ($maintenance) {
+            $response = new RedirectResponse("https://majtrantor.univ-paris1.fr/miseajourpageperso.html");
+            return $response->send();
+        }
+        else return FALSE;
+    }
 }
 

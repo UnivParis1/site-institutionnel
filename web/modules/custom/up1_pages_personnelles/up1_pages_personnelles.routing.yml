@@ -161,19 +161,20 @@ up1_pages_personnelles.obsia:
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::setParcoursObsia'
   requirements:
-    _access: TRUE
+    _access: 'TRUE'
 
 up1_pages_personnelles.delete_obsia:
   path: '/supprimer-parcours-obsia/{username}'
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::deleteParcoursObsia'
   requirements:
-    _access: TRUE
+    _access: 'TRUE'
 
 up1_pages_personnelles.get_obsia_fields:
   path: '/get-parcours-obsia/{username}'
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getParcoursObsia'
+    _title: 'Parcours Obsia'
+  methods:  [GET]
   requirements:
-    _access: TRUE
-
+    _access: 'TRUE'
