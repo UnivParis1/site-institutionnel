@@ -92,8 +92,14 @@
   <div class="grid-container">
     <div{{ content_attributes.addClass('content grid-x grid-margin-x') }}>
       <section class="content cell small-12 large-9">
-        <div class="date">{% trans %} Publication date: {% endtrans %} {{ content.field_publishing_date.0 }}</div>
-        {{ content.body }}
+        <div class="categ-style">
+          {{ content.field_type.0 }}
+        </div>
+        {{ content.body.0 }}
+        <div class="date">
+          {% trans %} Publication date: {% endtrans %}
+          {{ content.field_publishing_date.0 }}
+        </div>
       </section>
       <aside class="large-3 medium-12 small-12 grid-x full-height same-height">
         <div class="event-details jobinfo">
