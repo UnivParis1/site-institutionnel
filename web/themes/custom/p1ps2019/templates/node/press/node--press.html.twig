@@ -79,15 +79,19 @@
 ]
 %}
 
-<div class="grid-container field-sep press">
-  <article{{ attributes.addClass(classes) }}>
-    <div{{ content_attributes.addClass('content grid-x  grid-margin-x') }}>
+<article{{ attributes.addClass(classes) }}>
+  <div class="grid-container">
+    <div class="cell small-12">
+      {{ title_prefix }}
+      <h2 class="h3-style">
+        {{ label }}
+      </h2>
+      {{ title_suffix }}
+    </div>
+  </div>
+  <div class="grid-container">
+    <div{{ content_attributes.addClass('content grid-x grid-margin-x') }}>
       <section class="content cell small-12 large-9">
-        {{ title_prefix }}
-        <h2 class="h3-style">
-          {{ label }}
-        </h2>
-        {{ title_suffix }}
         <div class="date">{% trans %} Publication date: {% endtrans %} {{ content.field_publishing_date.0 }}</div>
         {{ content.body }}
       </section>
@@ -97,5 +101,5 @@
         </div>
       </aside>
     </div>
-  </article>
-</div>
+  </div>
+</article>
