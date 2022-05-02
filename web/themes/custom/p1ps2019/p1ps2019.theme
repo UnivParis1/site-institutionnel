@@ -92,7 +92,8 @@ function p1ps2019_preprocess_page(&$variables)
   if (isset($node) && is_object($node)) {
     $node_type = $node->getType();
     if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
-      && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
+      && ($node->hasField('field_media') && !empty($node->get('field_media')->getValue()) ||
+        $node->hasField('field_video_couverture') && !empty($node->get('field_video_couverture')->getValue()) )) {
       $print_hp_image = TRUE;
     }
     if ($site_id != 0) {
