@@ -235,8 +235,9 @@ function p1ps2019_preprocess_node(&$variables) {
     $node = $variables['node'];
     if ($node->hasField('field_display_node_changed')) {
       $display_changed = $node->field_display_node_changed->getValue();
-      if ($display_changed[0]['value']) {
+      if (!empty($display_changed[0]['value'])) {
         $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long_date_hour');
+        $variables['isNew'] = $node->isNew();
       }
     }
   }
