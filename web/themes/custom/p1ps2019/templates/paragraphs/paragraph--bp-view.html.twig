@@ -73,8 +73,8 @@
 {% endif %}
 
 {# Prints div with classes, and content without Width and Background. #}
-<div{{ wrapper_classes|join('') }}>
-  <div{{ layout_classes|join('') }}>
+<div class="{{ wrapper_classes|join(' ') }}" >
+  <div class="{{ layout_classes|join(' ') }}">
     {% if paragTitle|striptags|trim %}
       <h2 class="title-sep big padding-mobile">{{ content.field_title }}</h2>
     {% endif %}
