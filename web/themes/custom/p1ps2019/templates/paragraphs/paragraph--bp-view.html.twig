@@ -56,6 +56,7 @@
   'no-padding-mobile paragraph grid-container column-wrapper',
 ] %}
 {% set layout_classes = ['cell small-12'] %}
+
 {% if content.bp_width|render %}
   {% set layout_width = content.bp_width['#items'].getString() %}
   {% set layout_classes = [
@@ -66,10 +67,10 @@
     'paragraph--width--full' == layout_width ? 'large-12'
   ]|merge(layout_classes)
   %}
-  Layout_width : {{ layout_width }}
-  {% if 'paragraph--width--full' == layout_width %}
-    {% set wrapper_classes = ['full']|merge(wrapper_classes) %}
-  {% endif %}
+  {% set wrapper_classes = [
+    'paragraph--width--full' == layout_width ? 'full'
+  ]|merge(wrapper_classes)
+  %}
 {% endif %}
 
 {# Prints div with classes, and content without Width and Background. #}
