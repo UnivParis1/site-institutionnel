@@ -75,7 +75,7 @@
   <div{{ content_attributes }}>
     {% if changed is not empty %}
     <div class="grid-container">
-      {% isNew == 1%} {% trans %}Changed on:{% endtrans %} {% endif %}
+      {% if isNew == 1 %} {% trans %}Changed on:{% endtrans %} {% endif %}
       {{ changed }}
     </div>
     {% endif %}
