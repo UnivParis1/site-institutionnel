@@ -54,8 +54,7 @@
 {% endset %}
 {% set wrapper_classes = [
   'no-padding-mobile paragraph grid-container column-wrapper',
-]
-%}
+] %}
 {% set layout_classes = ['cell small-12'] %}
 {% if content.bp_width|render %}
   {% set layout_width = content.bp_width['#items'].getString() %}
@@ -67,6 +66,7 @@
     'paragraph--width--full' == layout_width ? 'large-12'
   ]|merge(layout_classes)
   %}
+  Layout_width : {{ layout_width }}
   {% if 'paragraph--width--full' == layout_width %}
     {% set wrapper_classes = ['full']|merge(wrapper_classes) %}
   {% endif %}
