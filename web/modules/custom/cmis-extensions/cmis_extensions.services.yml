@@ -1,0 +1,11 @@
+services:
+  cmis_extensions.twig_extension:
+    class: Drupal\cmis_extensions\TwigExtension\BytesConversionTwigExtension
+    tags:
+      - { name: twig.extension }
+  cmis_extensions.nomenclatures_provider:
+    class: Drupal\cmis_extensions\Service\NomenclaturesProvider
+  cmis_extensions.folders_provider:
+    class: Drupal\cmis_extensions\Service\FoldersProvider
+  cmis_extensions.nuxeo_service:
+    class: Drupal\cmis_extensions\Service\NuxeoService
