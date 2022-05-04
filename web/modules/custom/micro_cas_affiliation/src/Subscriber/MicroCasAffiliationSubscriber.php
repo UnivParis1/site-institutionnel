@@ -67,6 +67,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     $account = $casPostLoginEvent->getAccount();
     $memberOf = $account->get('field_group');
     if (!empty($memberOf)) {
+      \Drupal::logger('affectationRoleetMiniSite')->info(print_r($memberOf, 1));
       $CNs = explode('cn=', $memberOf[0]->value);
       // les cn sont de la forme cn=applications.www.webmestre.general,ou=groups,dc=univ-paris1,dc=fr
       // ou  cn=applications.www.redacteur.miniSite.ufr.sx5,ou=groups,dc=univ-paris1,dc=fr
