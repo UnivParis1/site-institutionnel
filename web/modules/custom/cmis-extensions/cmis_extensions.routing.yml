@@ -1,0 +1,38 @@
+cmis_extensions.results:
+  path: '/cmis-search/results'
+  defaults:
+    _controller: '\Drupal\cmis_extensions\Controller\SearchController::displayResults'
+    _title: 'Search results'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'
+
+cmis_extensions.download:
+  path: '/nuxeo/download/{id}/blob/{index}'
+  methods: GET
+  defaults:
+    _controller: '\Drupal\cmis_extensions\Controller\NuxeoController::download'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'
+
+
+cmis_extensions.form:
+  path: '/admin/config/development/cmis_extensions'
+  defaults:
+    _form: '\Drupal\cmis_extensions\Form\CmisExtensionsForm'
+    _title: 'CMIS Extensions settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+cmis_extensions.cache_inspect:
+  path: '/admin/cmis_extensions/cache'
+  methods: GET
+  defaults:
+    _controller: '\Drupal\cmis_extensions\Controller\CacheController::inspect'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    no_cache: 'TRUE'

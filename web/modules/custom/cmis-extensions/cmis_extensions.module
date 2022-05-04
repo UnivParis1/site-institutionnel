@@ -1,0 +1,26 @@
+<?php
+
+function cmis_extensions_theme() {
+  return [
+    'cmis_extensions_search_results' => [
+      'variables' => [
+        'form' => NULL,
+        'result_bag' => NULL,
+        'q' => NULL,
+        'page' => NULL
+      ],
+      'template' => 'cmis-extensions-search-results'
+    ],
+    'cmis_extensions_last_items' => [
+      'variables' => [
+        'items' => NULL
+      ],
+      'template' => 'cmis-extensions-last-items'
+    ]
+  ];
+}
+
+function cmis_extensions_rebuild() {
+  $service = \Drupal::service('cmis_extensions.nuxeo_service');
+  $service->cacheAllPaths();
+}

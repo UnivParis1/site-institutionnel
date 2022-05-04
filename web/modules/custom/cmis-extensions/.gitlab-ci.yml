@@ -1,0 +1,19 @@
+before_script:
+  - curl https://getcomposer.org/installer > installer
+  - php installer
+  - php composer.phar install
+
+test:7.3:
+  image: php:7.3-alpine
+  script:
+    - ./vendor/bin/phpunit tests
+
+test:8.0:
+  image: php:8.0-alpine
+  script:
+    - ./vendor/bin/phpunit tests
+
+test:8.1:
+  image: php:8.1-alpine
+  script:
+    - ./vendor/bin/phpunit tests
