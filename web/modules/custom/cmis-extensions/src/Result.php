@@ -44,7 +44,8 @@ class Result {
   }
 
   public function getDownloadUrl() {
-    return "https://ged.uphf.fr/nuxeo/json/cmis/default/root"
-      . "?objectId=" . $this->id;
+    $config = \Drupal::config('cmis_extensions.settings');
+    return
+      $config->get('nuxeo_base_url') ."/nuxeo/json/cmis/default/root?objectId=" . config->get('nuxeo_folder_id');
   }
 }

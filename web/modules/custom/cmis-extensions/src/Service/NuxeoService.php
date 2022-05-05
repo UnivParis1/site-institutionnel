@@ -15,8 +15,8 @@ class NuxeoService {
 
   private $user;
   private $password;
-
-  private const BASE_URL = "https://ged.uphf.fr";
+  private $base_url;
+  private $default_folder_id;
 
   public function __construct() {
     $this->client = new GuzzleClient();
@@ -25,11 +25,13 @@ class NuxeoService {
 
     $this->user = $config->get('user');
     $this->password = $config->get('password');
+    $this->base_url = $config->get('nuxeo_base_url');
+    $this->default_folder_id = $config->get('nuxeo_folder_id');
   }
 
   public function get(Nxql\Query $nxql, $pageSize, $currentPageIndex = 0) {
     $query = $nxql->toNxql(true);
-    $url   = self::BASE_URL . "/nuxeo/site/api/v1/query?query=" . $query
+    $url   = $this->base_url . "/nuxeo/site/api/v1/query?query=" . $query
         . "&pageSize=" . $pageSize
         . "&currentPageIndex=" . $currentPageIndex;
 
@@ -77,7 +79,7 @@ class NuxeoService {
 
     try {
       $nuxeoResponse = $this->client->get(
-        self::BASE_URL . "/nuxeo/api/v1/repo/default/id/"
+        $this->base_url . "/nuxeo/api/v1/repo/default/id/"
           . $id . "/@blob/files:files/"
           . $index . "/file",
         [
@@ -126,7 +128,7 @@ class NuxeoService {
   private function cachePath($id, &$cache, $parent = null) {
     try {
       $response = $this->client->get(
-        self::BASE_URL . "/nuxeo/json/cmis/default/root?objectId=" . $id,
+        $this->base_url . "/nuxeo/json/cmis/default/root?objectId=" . $id,
         ['auth' => [$this->user, $this->password]]
       );
 

@@ -72,6 +72,27 @@ class CmisExtensionsForm extends ConfigFormBase {
       '#suffix' => '</p>'
     ];
 
+    $form['nuxeo'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Nuxeo'),
+      '#open' => TRUE
+    ];
+
+    $form['nuxeo']['nuxeo_base_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Nuxeo base URL'),
+      '#default_value' => $config->get('nuxeo_base_url'),
+      '#required' => true
+    ];
+
+    $form['nuxeo']['nuxeo_folder_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Nuxeo base URL'),
+      '#default_value' => $config->get('nuxeo_folder_id'),
+      '#required' => true
+    ];
+
+
     return $form;
   }
 
@@ -84,6 +105,8 @@ class CmisExtensionsForm extends ConfigFormBase {
 
     $config->set('user', $form_state->getValue('name'));
     $config->set('password', $form_state->getValue('password'));
+    $config->set('nuxeo_base_url', $form_state->getValue('nuxeo_base_url'));
+    $config->set('nuxeo_folder_id', $form_state->getValue('nuxeo_folder_id'));
     $config->save();
 
     return parent::submitForm($form, $form_state);

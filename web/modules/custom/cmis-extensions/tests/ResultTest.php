@@ -25,11 +25,12 @@ final class ResultTest extends TestCase {
   }
 
   public function testDownloadUrl() : void {
-    $id = "abc-def-123";
+    $config = \Drupal::config('cmis_extensions.settings');
+    $id = $config->get('njuxeo_folder_id');
     $result = new Result($id, "", 0, strtotime("now"), "");
 
     $this->assertEquals(
-      "https://ged.uphf.fr/nuxeo/json/cmis/default/root?objectId=" . $id,
+      $config->get('nuxeo_base_url') . "/nuxeo/json/cmis/default/root?objectId=" . $id,
       $result->getDownloadUrl()
     );
   }
