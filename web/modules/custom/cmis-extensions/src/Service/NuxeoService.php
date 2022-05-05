@@ -119,8 +119,9 @@ class NuxeoService {
   }
 
   public function cacheAllPaths() {
+
     $cache = [];
-    $this->cachePath('4e693e96-7f7b-45ba-8529-685058ca1610', $cache);
+    $this->cachePath($this->default_folder_id, $cache);
 
     \Drupal::cache()->set("cmis_extensions:folders", $cache);
   }
