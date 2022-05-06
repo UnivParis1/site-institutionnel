@@ -66,13 +66,11 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     // TODO verifier que l'evenement post login est declenché en cas de creation du user
     $account = $casPostLoginEvent->getAccount();
     $memberOf = $account->get('field_group');
-    if (!empty($memberOf)) {
-      \Drupal::logger('affectationRoleetMiniSite')->info(print_r($memberOf, 1));
+    if (!empty($memberOf) && is_object($memberOf[0])) {
       $CNs = explode('cn=', $memberOf[0]->value);
       // les cn sont de la forme cn=applications.www.webmestre.general,ou=groups,dc=univ-paris1,dc=fr
       // ou  cn=applications.www.redacteur.miniSite.ufr.sx5,ou=groups,dc=univ-paris1,dc=fr
       foreach ($CNs as $CN) {
-
         if (!empty($CN) && substr_compare($CN, 'applications', 0, 12, TRUE) == 0) {
           $part = explode('.', $CN);
 
@@ -139,7 +137,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     }
     else {
       $comptex = new ComptexManager();
-      if ($comptex->userHasPagePerso()) {
+      if ($comptex->userHasPagePerso($account->name->value)) {
         $account->addRole('enseignant_doctorant');
         $account->save();
       }
