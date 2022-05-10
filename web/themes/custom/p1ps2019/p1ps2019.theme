@@ -220,6 +220,17 @@ function p1ps2019_preprocess_node(&$variables)
       $variables['publication_authors'] = $publication_authors;
     }
   }
+
+  if (in_array($node->getType(), ['page', 'second_level_pages'])) {
+    $node = $variables['node'];
+    if ($node->hasField('field_display_node_changed')) {
+      $display_changed = $node->field_display_node_changed->getValue();
+      if (!empty($display_changed[0]['value'])) {
+        $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long_date_hour');
+        $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0 ;
+      }
+    }
+  }
 }
 
 /**
