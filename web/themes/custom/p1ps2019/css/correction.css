@@ -874,29 +874,37 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
   font-weight: bold;
   text-align: center;
 }
-#cmis-browser-wrapper .cmis-folder::before {
-  background-image: url('../svg/icons/folder.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  content: "";
-  display: inline-block;
-  width:32px;
-  height: 24px;
-  vertical-align: bottom;
+#cmis-browser-wrapper .cmis-folder::before, #cmis-browser-wrapper .cmis-document::before {
+    background-repeat: no-repeat;
+	background-size: contain;
+    content: "";
+    display: inline-block;
+    width:32px;
+    height: 24px;
+	vertical-align: bottom;
 }
-#cmis-browser-wrapper .cmis-folder {
+#cmis-browser-wrapper .cmis-folder::before {
+    background-image: url('../svg/icons/folder.svg');
+}
+#cmis-browser-wrapper .cmis-folder, #cmis-browser-wrapper .cmis-document {
   padding: 1rem 2.5rem;
   font-weight: bold;
   text-align: left;
 }
-#cmis-browser-wrapper .cmis-folder a {
+#cmis-browser-wrapper .cmis-folder a, #cmis-browser-wrapper .cmis-document a {
   color: #000;
 }
+#cmis-browser-wrapper .cmis-document::before {
+    background-image: url('../svg/icons/file.svg');
+}
+#cmis-browser-wrapper .cmis-document .element-name {
+  display: inline-block;
+}
 #cmis-browser-wrapper .breadcrumb {
-  list-style: disclosure-closed;
+	list-style: disclosure-closed;
 }
 #cmis-browser-wrapper .breadcrumb li {
-  display: inline list-item;
-  padding-left: 0.5rem;
-  color:#c89018;
+	display: inline list-item;
+	padding-left: 0.5rem;
+    color:#c89018;
 }
