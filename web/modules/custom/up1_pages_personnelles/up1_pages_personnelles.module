@@ -234,10 +234,14 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $user = User::load($userCurrent->id());
       $roles = $userCurrent->getRoles();
 
-      if (in_array('enseignant_doctorant', $roles)) {
+      /*if (in_array('enseignant_doctorant', $roles)) {
         $name = $user->getDisplayName();
         $userInformation = up1_pages_personnelles_get_comptex_info($name);
       }
+      else {*/
+        $node = Node::load($nid);
+        $userInformation = up1_pages_personnelles_get_comptex_info($node->getOwnerId());
+     // }
       if ($userInformation) {
         $get_emails = up1_pages_personnelles_get_user_email($name);
         $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
@@ -255,7 +259,7 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
         }
 
         //Groupe de champs spécifiques si champ pour annuaire obsia coché dans Comptex
-        if (!$userInformation['obsia']) {
+        if (!$userInformation['obsia'] || !in_array('administrator', $roles) {
           $form['group_obsia']['#access'] = FALSE;
           $form['group_obsia']['#required'] = FALSE;
         }

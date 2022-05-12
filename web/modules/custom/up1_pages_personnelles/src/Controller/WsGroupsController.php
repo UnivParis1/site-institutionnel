@@ -696,20 +696,16 @@ class WsGroupsController extends ControllerBase
                 }
 
                 if ($page_perso->save()) {
-                    \Drupal::messenger()->addMessage(
-                        t('The page perso has been successfully updated.'), 'status');
+                  $message = t('The page perso has been successfully updated.');
                 }
                 else {
-                    \Drupal::messenger()->addMessage(
-                        t('An error has occured when updating the page perso.'), 'error');
+                  $message = t('An error has occured while updating the page perso.');
                 }
-                $response = new RedirectResponse( \Drupal::service('path_alias.manager')->getAliasByPath("/node/$nid/edit") );
-                return $response->send();
+              return new JsonResponse([ 'data' => [ 'username' => $username, 'message' => $message ], 'method' => 'GET', 'status'=> 200]);
             }
         }
         else {
-            $response = new RedirectResponse( '/system/404' );
-            return $response->send();
+          return new JsonResponse([ 'data' => [ 'username' => $username, 'message' => t('Error') ], 'method' => 'GET', 'status'=> 200]);
         }
     }
 
