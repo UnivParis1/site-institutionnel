@@ -853,11 +853,13 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
 #cmis-browser-wrapper table > :not(:first-child) {
   border-top: 2px solid #C89108;
 }
+#cmis-browser-wrapper .browser-table {
+  margin-bottom: 2rem;
+}
 #cmis-browser-wrapper table {
   border-collapse: collapse;
   width: 100%;
 }
-
 #cmis-browser-wrapper th, #cmis-browser-wrapper td {
   text-align: left;
   padding: 8px;
@@ -874,29 +876,37 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
   font-weight: bold;
   text-align: center;
 }
-#cmis-browser-wrapper .cmis-folder::before {
-  background-image: url('../svg/icons/folder.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  content: "";
-  display: inline-block;
-  width:32px;
-  height: 24px;
-  vertical-align: bottom;
+#cmis-browser-wrapper .cmis-folder a::before, #cmis-browser-wrapper .cmis-document a::before {
+    background-repeat: no-repeat;
+	background-size: contain;
+    content: "";
+    display: inline-block;
+    width:32px;
+    height: 24px;
+	vertical-align: bottom;
 }
-#cmis-browser-wrapper .cmis-folder {
+#cmis-browser-wrapper .cmis-folder a::before {
+    background-image: url('../svg/icons/folder.svg');
+}
+#cmis-browser-wrapper .cmis-folder, #cmis-browser-wrapper .cmis-document {
   padding: 1rem 2.5rem;
   font-weight: bold;
   text-align: left;
 }
-#cmis-browser-wrapper .cmis-folder a {
+#cmis-browser-wrapper .cmis-folder a, #cmis-browser-wrapper .cmis-document a {
   color: #000;
 }
+#cmis-browser-wrapper .cmis-document a::before {
+    background-image: url('../svg/icons/file.svg');
+}
+#cmis-browser-wrapper .cmis-document .element-name {
+  display: inline-block;
+}
 #cmis-browser-wrapper .breadcrumb {
-  list-style: disclosure-closed;
+	list-style: disclosure-closed;
 }
 #cmis-browser-wrapper .breadcrumb li {
-  display: inline list-item;
-  padding-left: 0.5rem;
-  color:#c89018;
+	display: inline list-item;
+	padding-left: 0.5rem;
+    color:#c89018;
 }
