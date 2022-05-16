@@ -1,7 +1,44 @@
 uuid: 0f02f6c6-0007-44b2-aaaa-9f67bb4286d8
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.custom_format
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - media.type.audio
+    - media.type.file
+    - media.type.image
+    - media.type.mediatheque
+    - media.type.mediatheque_audio
+    - media.type.remote_video
+    - media.type.video
+    - node.type.event
+    - node.type.news
+    - node.type.page
+    - node.type.publication
+    - node.type.second_level_pages
+    - taxonomy.vocabulary.collections
+    - taxonomy.vocabulary.news_topics
+    - taxonomy.vocabulary.publication_topics
+    - taxonomy.vocabulary.publishers
+    - workflows.workflow.publication
+  module:
+    - content_moderation
+    - content_translation
+    - entity_browser
+    - filter
+    - media
+    - micro_node
+    - micro_user
+    - node
+    - paragraphs
+    - quickedit
+    - scheduler
+    - siteimprove
+    - system
+    - taxonomy
+    - toolbar
 id: contributeur
 label: 'Contributeur général'
 weight: -8
@@ -52,7 +89,6 @@ permissions:
   - 'edit own publication content'
   - 'edit own remote_video media'
   - 'edit own second_level_pages content'
-  - 'edit own test content'
   - 'edit own video media'
   - 'edit terms in collections'
   - 'edit terms in publishers'
@@ -85,6 +121,5 @@ permissions:
   - 'view page revisions'
   - 'view publication revisions'
   - 'view second_level_pages revisions'
-  - 'view test revisions'
   - 'view the administration theme'
   - 'view unpublished paragraphs'

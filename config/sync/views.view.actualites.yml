@@ -20,90 +20,34 @@ base_table: node_field_data
 base_field: nid
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'access content'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Appliquer
-          reset_button: false
-          reset_button_label: Réinitialiser
-          exposed_sorts_label: 'Trier par'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: mini
-        options:
-          items_per_page: 15
-          offset: 0
-          id: 0
-          total_pages: null
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- Tout -'
-            offset: false
-            offset_label: Décalage
-          tags:
-            previous: ‹‹
-            next: ››
-      style:
-        type: default
-        options:
-          row_class: 'cell small-12 medium-6'
-          default_row_class: true
-          uses_fields: false
-      row:
-        type: 'entity:node'
-        options:
-          view_mode: teaser
+      title: Actualités
       fields:
         title:
           id: title
           table: node_field_data
           field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
           entity_type: node
           entity_field: title
+          plugin_id: field
           label: ''
+          exclude: false
           alter:
             alter_text: false
             make_link: false
             absolute: false
-            trim: false
             word_boundary: false
             ellipsis: false
             strip_tags: false
+            trim: false
             html: false
-          hide_empty: false
-          empty_zero: false
-          settings:
-            link_to_entity: true
-          plugin_id: field
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exclude: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -113,9 +57,13 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
+          hide_empty: false
+          empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
           type: string
+          settings:
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -126,29 +74,81 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      pager:
+        type: mini
+        options:
+          offset: 0
+          items_per_page: 15
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- Tout -'
+            offset: false
+            offset_label: Décalage
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Appliquer
+          reset_button: false
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        field_news_date_value:
+          id: field_news_date_value
+          table: node__field_news_date
+          field: field_news_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: field_news_date_value
+          exposed: false
+          granularity: day
+      arguments: {  }
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            news: news
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            news: news
           expose:
             operator_limit_selection: false
             operator_list: {  }
@@ -159,6 +159,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: datetime
           operator: '='
           value:
             min: ''
@@ -173,6 +174,8 @@ display:
             description: ''
             use_operator: false
             operator: field_news_date_value_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: date_value
             required: false
             remember: false
@@ -186,11 +189,9 @@ display:
               webmestre_general: '0'
               admin_dir_com: '0'
               administrator: '0'
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -203,29 +204,29 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: datetime
-      sorts:
-        field_news_date_value:
-          id: field_news_date_value
-          table: node__field_news_date
-          field: field_news_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          granularity: day
-          plugin_id: datetime
-      title: Actualités
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12 medium-6'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          view_mode: teaser
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships: {  }
+      css_class: 'grid-x grid-margin-x grid-margin-y'
       header: {  }
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
-      css_class: 'grid-x grid-margin-x grid-margin-y'
     cache_metadata:
       max-age: -1
       contexts:
@@ -237,52 +238,41 @@ display:
         - user.permissions
       tags: {  }
   block_all_news:
-    display_plugin: block
     id: block_all_news
     display_title: 'Bloc actualités'
+    display_plugin: block
     position: 2
     display_options:
-      display_extenders: {  }
       title: 'Bloc actualités'
-      defaults:
-        title: false
-        pager: false
-        arguments: false
-        filters: false
-        filter_groups: false
-        footer: false
-        css_class: false
       pager:
         type: some
         options:
-          items_per_page: 4
           offset: 0
-      display_description: ''
-      block_description: 'Bloc toutes les actualités'
+          items_per_page: 4
       arguments: {  }
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            news: news
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            news: news
           expose:
             operator_limit_selection: false
             operator_list: {  }
@@ -293,6 +283,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
           operator: in
           value:
             '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
@@ -305,6 +298,8 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
@@ -312,8 +307,6 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -326,14 +319,20 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: langcode
-          plugin_id: language
       filter_groups:
         operator: AND
         groups:
           1: AND
-      rendering_language: '***LANGUAGE_entity_translation***'
+      defaults:
+        title: false
+        css_class: false
+        pager: false
+        arguments: false
+        filters: false
+        filter_groups: false
+        footer: false
+      css_class: 'grid-x grid-margin-x full-height'
+      display_description: ''
       footer:
         area:
           id: area
@@ -342,13 +341,15 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: text
           empty: false
-          tokenize: false
           content:
             value: '<a href="[view:url]" class="btn btn-primary">Voir toutes les actualités</a>'
             format: full_html
-          plugin_id: text
-      css_class: 'grid-x grid-margin-x full-height'
+          tokenize: false
+      rendering_language: '***LANGUAGE_entity_translation***'
+      display_extenders: {  }
+      block_description: 'Bloc toutes les actualités'
     cache_metadata:
       max-age: -1
       contexts:
@@ -358,26 +359,17 @@ display:
         - user.permissions
       tags: {  }
   block_new_filtered:
-    display_plugin: block
     id: block_new_filtered
     display_title: 'Bloc actualités avec filtre'
+    display_plugin: block
     position: 3
     display_options:
-      display_extenders: {  }
       title: 'Bloc actualités avec filtre'
-      defaults:
-        title: false
-        pager: false
-        arguments: false
-        filters: false
-        filter_groups: false
       pager:
         type: some
         options:
-          items_per_page: 4
           offset: 0
-      display_description: ''
-      block_description: 'Actualités par thème'
+          items_per_page: 4
       arguments:
         field_news_topic_target_id:
           id: field_news_topic_target_id
@@ -386,6 +378,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           default_action: default
           exception:
             value: all
@@ -405,8 +398,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -418,30 +411,29 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-          plugin_id: numeric
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            news: news
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            news: news
           expose:
             operator_limit_selection: false
             operator_list: {  }
@@ -449,6 +441,15 @@ display:
         operator: AND
         groups:
           1: AND
+      defaults:
+        title: false
+        pager: false
+        arguments: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      block_description: 'Actualités par thème'
     cache_metadata:
       max-age: -1
       contexts:
@@ -459,23 +460,22 @@ display:
         - user.permissions
       tags: {  }
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Actualités
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: actualites-old
+      enabled: false
       pager:
         type: full
         options:
-          items_per_page: 15
           offset: 0
-          id: 0
+          items_per_page: 15
           total_pages: null
+          id: 0
           tags:
-            previous: ‹‹
             next: ››
+            previous: ‹‹
             first: '« Premier'
             last: 'Dernier »'
           expose:
@@ -487,34 +487,29 @@ display:
             offset: false
             offset_label: Décalage
           quantity: 9
-      defaults:
-        pager: false
-        filters: false
-        filter_groups: false
-      display_description: ''
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            news: news
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            news: news
           group: 1
           expose:
             operator_limit_selection: false
@@ -526,6 +521,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -536,6 +534,8 @@ display:
             description: ''
             use_operator: false
             operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: title
             required: false
             remember: false
@@ -550,8 +550,6 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -564,9 +562,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
         field_news_topic_target_id:
           id: field_news_topic_target_id
           table: node__field_news_topic
@@ -574,6 +569,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: taxonomy_index_tid
           operator: or
           value: {  }
           group: 1
@@ -584,6 +580,8 @@ display:
             description: ''
             use_operator: false
             operator: field_news_topic_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: field_news_topic_target_id
             required: false
             remember: false
@@ -598,8 +596,6 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -613,12 +609,11 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          type: select
-          limit: true
           vid: news_topics
+          type: select
           hierarchy: false
+          limit: true
           error_message: true
-          plugin_id: taxonomy_index_tid
         field_news_date_value:
           id: field_news_date_value
           table: node__field_news_date
@@ -626,6 +621,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: datetime
           operator: '='
           value:
             min: ''
@@ -640,6 +636,8 @@ display:
             description: ''
             use_operator: false
             operator: field_news_date_value_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: date_value
             required: false
             remember: false
@@ -653,11 +651,9 @@ display:
               webmestre_general: '0'
               admin_dir_com: '0'
               administrator: '0'
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -670,12 +666,17 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: datetime
       filter_groups:
         operator: AND
         groups:
           1: AND
-      enabled: false
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: actualites-old
     cache_metadata:
       max-age: -1
       contexts:
@@ -688,23 +689,23 @@ display:
         - user.permissions
       tags: {  }
   page_news_archives:
-    display_plugin: page
     id: page_news_archives
     display_title: 'Archives actualités'
+    display_plugin: page
     position: 4
     display_options:
-      display_extenders: {  }
-      path: actualites-archives
+      enabled: false
+      title: 'Archives actualités'
       pager:
         type: full
         options:
-          items_per_page: 15
           offset: 0
-          id: 0
+          items_per_page: 15
           total_pages: null
+          id: 0
           tags:
-            previous: ‹‹
             next: ››
+            previous: ‹‹
             first: '« Premier'
             last: 'Dernier »'
           expose:
@@ -716,36 +717,29 @@ display:
             offset: false
             offset_label: Décalage
           quantity: 9
-      defaults:
-        pager: false
-        title: false
-        filters: false
-        filter_groups: false
-      display_description: ''
-      title: 'Archives actualités'
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            news: news
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            news: news
           group: 1
           expose:
             operator_limit_selection: false
@@ -757,6 +751,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -767,6 +764,8 @@ display:
             description: ''
             use_operator: false
             operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: title
             required: false
             remember: false
@@ -781,8 +780,6 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -795,14 +792,18 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
-      enabled: false
+      defaults:
+        title: false
+        pager: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: actualites-archives
     cache_metadata:
       max-age: -1
       contexts:

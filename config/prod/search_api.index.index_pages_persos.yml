@@ -114,6 +114,9 @@ processor_settings:
   add_url: {  }
   aggregated_field: {  }
   html_filter:
+    weights:
+      preprocess_index: -48
+      preprocess_query: -46
     all_fields: true
     fields:
       - field_affiliation
@@ -134,12 +137,12 @@ processor_settings:
       h2: 3
       h3: 2
       strong: 2
-    weights:
-      preprocess_index: -48
-      preprocess_query: -46
   language_with_fallback: {  }
   rendered_item: {  }
   transliteration:
+    weights:
+      preprocess_index: -47
+      preprocess_query: -45
     all_fields: true
     fields:
       - field_affiliation
@@ -152,13 +155,11 @@ processor_settings:
       - field_skills
       - field_thesis_subject
       - title
-    weights:
-      preprocess_index: -47
-      preprocess_query: -45
 tracker_settings:
   default:
     indexing_order: lifo
 options:
-  index_directly: true
   cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
 server: ess

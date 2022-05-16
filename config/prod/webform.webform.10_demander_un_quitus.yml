@@ -1,10 +1,10 @@
 uuid: 34d00af0-b000-4367-89ac-ebfb8ad967c6
 langcode: fr
-status: scheduled
+status: open
 dependencies: {  }
-open: '2021-08-25T10:00:00'
-close: null
 weight: 0
+open: null
+close: null
 uid: 51
 template: false
 archive: false
@@ -12,7 +12,46 @@ id: 10_demander_un_quitus
 title: '10 - Demander un quitus'
 description: "Arborescence : Menu Direction &gt; Services &gt; demander un quitus<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Services </em>(module tuiles : &quot;Demander un quitus&quot;)<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Nous contacter</em>, rubrique &quot;Demander un quitus&quot;<br />\r\n<br />\r\nLien vers ce formulaire depuis les pages de pr&eacute;sentation de chaque biblioth&egrave;ques (module tabs, rubrique &quot;Nos services&quot;, &quot;Demander un quitus&quot;) :\r\n<ul>\r\n\t<li>Biblioth&egrave;que Pierre Mend&egrave;s France</li>\r\n\t<li>Biblioth&egrave;que Jean-Claude Colliard</li>\r\n\t<li>Biblioth&egrave;que Cuzin</li>\r\n\t<li>Biblioth&egrave;que Lagroye</li>\r\n\t<li>Biblioth&egrave;que de l&#39;Ecole des arts de la Sorbonne</li>\r\n\t<li>Biblioth&egrave;que Lavisse</li>\r\n</ul>"
 category: Contact
-elements: "numero_d_etudiant:\n  '#type': textfield\n  '#title': 'Numéro d''étudiant'\n  '#required': true\nnom_prenom:\n  '#type': webform_name\n  '#title': 'Nom, prénom'\n  '#required': true\n  '#title__access': false\n  '#first__title': Nom\n  '#first__required': true\n  '#middle__access': false\n  '#last__title': Prénom\n  '#last__required': true\n  '#suffix__access': false\n  '#degree__access': false\ntelephone:\n  '#type': tel\n  '#title': Téléphone\n  '#required': true\n  '#required_error': 'Champ obligatoire'\ncourriel:\n  '#type': email\n  '#title': Courriel\n  '#required': true\n  '#required_error': 'Champ obligatoire'\ncommentaires:\n  '#type': textarea\n  '#title': Commentaires\nterms_of_service:\n  '#type': webform_terms_of_service\n  '#title': 'J''accepte les {conditions de service}.'\n  '#terms_content': '<span class=\"field-prefix\">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de quitus</span>'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Envoyer la demande'"
+elements: |-
+  numero_d_etudiant:
+    '#type': textfield
+    '#title': 'Numéro d''étudiant'
+    '#required': true
+  nom_prenom:
+    '#type': webform_name
+    '#title': 'Nom, prénom'
+    '#required': true
+    '#title__access': false
+    '#first__title': Nom
+    '#first__required': true
+    '#middle__access': false
+    '#last__title': Prénom
+    '#last__required': true
+    '#suffix__access': false
+    '#degree__access': false
+  telephone:
+    '#type': tel
+    '#title': Téléphone
+    '#required': true
+    '#required_error': 'Champ obligatoire'
+  courriel:
+    '#type': email
+    '#title': Courriel
+    '#required': true
+    '#required_error': 'Champ obligatoire'
+  commentaires:
+    '#type': textarea
+    '#title': Commentaires
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'J''accepte les {conditions de service}.'
+    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de quitus</span>'
+  captcha:
+    '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +66,48 @@ settings:
   page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
+  form_open_message: ''
+  form_close_message: "Le service de demande de quitus est ferm&eacute; pendant les vacances de fin d&#39;ann&eacute;e. R&eacute;ouverture pr&eacute;vue : 3 janvier 2022.<br />\r\nMerci de votre compr&eacute;hension."
   form_exception_message: ''
-  form_open_message: "Le service de demande de quitus est ferm&eacute; pendant l&#39;&eacute;t&eacute; du 23 juillet au 24 ao&ucirc;t 2021 inclus.<br />\r\nMerci de votre compr&eacute;hension."
-  form_close_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +116,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +126,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +155,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: 'Demande enregistrée'
   confirmation_message: 'Votre demande a &eacute;t&eacute; prise en compte. Notre &eacute;quipe vous fera parvenir votre quitus par courriel dans les meilleurs d&eacute;lais.'
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +236,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: pretbu@univ-paris1.fr
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +247,17 @@ handlers:
         - completed
       to_mail: pretbu@univ-paris1.fr
       to_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_options: {  }
       from_mail: '[webform_submission:values:courriel:raw]'
       from_options: {  }
       from_name: '[webform_submission:values:nom_prenom:value]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Demande de quitus depuis le site internet des bibliothèques'
       body: "<p>Envoyé le [webform_submission:created]</p>\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
       excluded_elements:
@@ -224,11 +270,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

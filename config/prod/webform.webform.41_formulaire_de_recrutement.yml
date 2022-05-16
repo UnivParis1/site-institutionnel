@@ -2,9 +2,9 @@ uuid: 9d2befd8-b980-47aa-94cb-136553588c71
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 2425
 template: false
 archive: false
@@ -12,7 +12,154 @@ id: 41_formulaire_de_recrutement
 title: '41 - Formulaire de recrutement'
 description: 'Recrutement des &eacute;tudiants de l&#39;EMS en apprentissage par les entreprises'
 category: ''
-elements: "etes_vous_un_diplome_de_l_universite_de_paris_1_:\n  '#type': checkboxes\n  '#title': 'Êtes-vous un diplômé de l''université Paris 1 Panthéon-Sorbonne ?'\n  '#multiple': 2\n  '#options':\n    Oui: Oui\n    Non: Non\n  '#required': true\n  '#options__properties': ''\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#placeholder': Pierre\n  '#required': true\n  '#format_items': comma\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#placeholder': Duval\n  '#required': true\n  '#format_items': comma\nfonction:\n  '#type': textfield\n  '#title': Fonction\n  '#placeholder': Président\n  '#required': true\n  '#format_items': comma\ntelephone:\n  '#type': tel\n  '#title': Téléphone\n  '#placeholder': '01 22 33 44 55'\n  '#required': true\n  '#format_items': comma\nadresse_mail:\n  '#type': email\n  '#title': Courriel\n  '#placeholder': pierreduval@exemple.com\n  '#required': true\n  '#format_items': comma\nnom_de_l_entreprise:\n  '#type': textfield\n  '#title': 'Nom de l''entreprise'\n  '#format_items': comma\n  '#required': true\nadresse:\n  '#type': webform_address\n  '#title': Adresse\n  '#required': true\n  '#format_items': ol\n  '#address__placeholder': '1 Place du Panthéon'\n  '#address_2__access': false\n  '#city__placeholder': Paris\n  '#state_province__access': false\n  '#postal_code__placeholder': '75005'\n  '#country__placeholder': France\nsiret:\n  '#type': textfield\n  '#title': SIRET\n  '#placeholder': '111 222 333 44444'\n  '#required': true\n  '#format_items': comma\nsecteur_d_activite:\n  '#type': select\n  '#title': 'Secteur d''activité'\n  '#options':\n    agriculture/agroalimentaire: agriculture/agroalimentaire\n    'Arts et artisanats d''arts': 'Arts et artisanats d''arts'\n    Audiovisuel: Audiovisuel\n    'Banque / Finance / Assurance': 'Banque / Finance / Assurance'\n    'Bâtiment / Travaux publics / Génie civil': 'Bâtiment / Travaux publics / Génie civil'\n    'Droit et carrières juridiques': 'Droit et carrières juridiques'\n    'Environnement / Aménagement / Propreté': 'Environnement / Aménagement / Propreté'\n    'Fonction publique': 'Fonction publique'\n    'Gestion de l''entreprise': 'Gestion de l''entreprise'\n    'Gestion industrielle': 'Gestion industrielle'\n    Humanitaire: Humanitaire\n    Immobilier: Immobilier\n    'Information / Communication': 'Information / Communication'\n    'Informatique / Télécommunications': 'Informatique / Télécommunications'\n    'Habillement / matériaux souples': 'Habillement / matériaux souples'\n    'Lettres / Langues': 'Lettres / Langues'\n    'Matériaux / Transformation': 'Matériaux / Transformation'\n    'Patrimoine / Culture': 'Patrimoine / Culture'\n    'Physique / Chimie / Biologie': 'Physique / Chimie / Biologie'\n    'Services aux personnes': 'Services aux personnes'\n    Sécurité: Sécurité\n    'Tourisme / Hôtellerie / Restauration': 'Tourisme / Hotellerie / Restauration'\n    'Transport / Logistique': 'Transport / Logistique'\n  '#required': true\nhorizontal_rule_01:\n  '#type': webform_horizontal_rule\nnature_de_l_offre:\n  '#type': select\n  '#title': 'Nature de l''offre'\n  '#options':\n    'Recruter un(e) diplômé(e)': 'Recruter un(e) diplômé(e)'\n    'Accueillir un(e) stagiaire': 'Accueillir un(e) stagiaire'\n    'Accueillir un(e) apprenti(e)': 'Accueillir un(e) apprenti(e)'\n  '#required': true\nintitule:\n  '#type': textfield\n  '#title': Intitulé\n  '#format_items': comma\n  '#required': true\nlieu_precision_:\n  '#type': textfield\n  '#title': 'Lieu (précision)'\n  '#format_items': comma\n  '#required': true\ndebut:\n  '#type': select\n  '#title': Début\n  '#options':\n    Janvier: Janvier\n    Février: Février\n    Mars: Mars\n    Avril: Avril\n    Mai: Mai\n    Juin: Juin\n    Juillet: Juillet\n    Août: Août\n    Septembre: Septembre\n    Octobre: Octobre\n    Novembre: Novembre\n    Décembre: Décembre\n    Immédiatement: Immédiatement\n    'Dès que possible': 'Dès que possible'\n  '#required': true\nduree:\n  '#type': textfield\n  '#title': Durée\n  '#placeholder': '1 an'\n  '#required': true\n  '#format_items': comma\ndescription:\n  '#type': textarea\n  '#title': Description\n  '#format_items': comma\n  '#required': true\ncaptcha:\n  '#type': captcha\nhorizontal_rule:\n  '#type': webform_horizontal_rule\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Envoyer le formulaire'"
+elements: |-
+  etes_vous_un_diplome_de_l_universite_de_paris_1_:
+    '#type': checkboxes
+    '#title': 'Êtes-vous un diplômé de l''université Paris 1 Panthéon-Sorbonne ?'
+    '#multiple': 2
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#required': true
+    '#options__properties': ''
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': Pierre
+    '#required': true
+    '#format_items': comma
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Duval
+    '#required': true
+    '#format_items': comma
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': Président
+    '#required': true
+    '#format_items': comma
+  telephone:
+    '#type': tel
+    '#title': Téléphone
+    '#placeholder': '01 22 33 44 55'
+    '#required': true
+    '#format_items': comma
+  adresse_mail:
+    '#type': email
+    '#title': Courriel
+    '#placeholder': pierreduval@exemple.com
+    '#required': true
+    '#format_items': comma
+  nom_de_l_entreprise:
+    '#type': textfield
+    '#title': 'Nom de l''entreprise'
+    '#format_items': comma
+    '#required': true
+  adresse:
+    '#type': webform_address
+    '#title': Adresse
+    '#required': true
+    '#format_items': ol
+    '#address__placeholder': '1 Place du Panthéon'
+    '#address_2__access': false
+    '#city__placeholder': Paris
+    '#state_province__access': false
+    '#postal_code__placeholder': '75005'
+    '#country__placeholder': France
+  siret:
+    '#type': textfield
+    '#title': SIRET
+    '#placeholder': '111 222 333 44444'
+    '#required': true
+    '#format_items': comma
+  secteur_d_activite:
+    '#type': select
+    '#title': 'Secteur d''activité'
+    '#options':
+      agriculture/agroalimentaire: agriculture/agroalimentaire
+      'Arts et artisanats d''arts': 'Arts et artisanats d''arts'
+      Audiovisuel: Audiovisuel
+      'Banque / Finance / Assurance': 'Banque / Finance / Assurance'
+      'Bâtiment / Travaux publics / Génie civil': 'Bâtiment / Travaux publics / Génie civil'
+      'Droit et carrières juridiques': 'Droit et carrières juridiques'
+      'Environnement / Aménagement / Propreté': 'Environnement / Aménagement / Propreté'
+      'Fonction publique': 'Fonction publique'
+      'Gestion de l''entreprise': 'Gestion de l''entreprise'
+      'Gestion industrielle': 'Gestion industrielle'
+      Humanitaire: Humanitaire
+      Immobilier: Immobilier
+      'Information / Communication': 'Information / Communication'
+      'Informatique / Télécommunications': 'Informatique / Télécommunications'
+      'Habillement / matériaux souples': 'Habillement / matériaux souples'
+      'Lettres / Langues': 'Lettres / Langues'
+      'Matériaux / Transformation': 'Matériaux / Transformation'
+      'Patrimoine / Culture': 'Patrimoine / Culture'
+      'Physique / Chimie / Biologie': 'Physique / Chimie / Biologie'
+      'Services aux personnes': 'Services aux personnes'
+      Sécurité: Sécurité
+      'Tourisme / Hôtellerie / Restauration': 'Tourisme / Hotellerie / Restauration'
+      'Transport / Logistique': 'Transport / Logistique'
+    '#required': true
+  horizontal_rule_01:
+    '#type': webform_horizontal_rule
+  nature_de_l_offre:
+    '#type': select
+    '#title': 'Nature de l''offre'
+    '#options':
+      'Recruter un(e) diplômé(e)': 'Recruter un(e) diplômé(e)'
+      'Accueillir un(e) stagiaire': 'Accueillir un(e) stagiaire'
+      'Accueillir un(e) apprenti(e)': 'Accueillir un(e) apprenti(e)'
+    '#required': true
+  intitule:
+    '#type': textfield
+    '#title': Intitulé
+    '#format_items': comma
+    '#required': true
+  lieu_precision_:
+    '#type': textfield
+    '#title': 'Lieu (précision)'
+    '#format_items': comma
+    '#required': true
+  debut:
+    '#type': select
+    '#title': Début
+    '#options':
+      Janvier: Janvier
+      Février: Février
+      Mars: Mars
+      Avril: Avril
+      Mai: Mai
+      Juin: Juin
+      Juillet: Juillet
+      Août: Août
+      Septembre: Septembre
+      Octobre: Octobre
+      Novembre: Novembre
+      Décembre: Décembre
+      Immédiatement: Immédiatement
+      'Dès que possible': 'Dès que possible'
+    '#required': true
+  duree:
+    '#type': textfield
+    '#title': Durée
+    '#placeholder': '1 an'
+    '#required': true
+    '#format_items': comma
+  description:
+    '#type': textarea
+    '#title': Description
+    '#format_items': comma
+    '#required': true
+  captcha:
+    '#type': captcha
+  horizontal_rule:
+    '#type': webform_horizontal_rule
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Envoyer le formulaire'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +174,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +224,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +234,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +263,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: ''
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +344,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: Email
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +355,17 @@ handlers:
         - completed
       to_mail: stages-ems@univ-paris1.fr
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: _default
       body: _default
       excluded_elements: {  }
@@ -222,18 +376,14 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
   email_1:
     id: email
+    handler_id: email_1
     label: Confirmation
     notes: ''
-    handler_id: email_1
     status: true
     conditions: {  }
     weight: 0
@@ -242,13 +392,17 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:adresse_mail:raw]'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: stages-ems@univ-paris1.fr
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Votre formulaire de recrutement a bien été envoyé.'
       body: _default
       excluded_elements: {  }
@@ -259,11 +413,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

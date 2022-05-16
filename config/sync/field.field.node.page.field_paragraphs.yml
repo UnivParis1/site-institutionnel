@@ -16,14 +16,18 @@ dependencies:
     - paragraphs.paragraphs_type.bp_tabs
     - paragraphs.paragraphs_type.bp_view
     - paragraphs.paragraphs_type.bp_webform
+    - paragraphs.paragraphs_type.button_grid
     - paragraphs.paragraphs_type.contact
+    - paragraphs.paragraphs_type.contact_free
     - paragraphs.paragraphs_type.content_block
     - paragraphs.paragraphs_type.hit_list
+    - paragraphs.paragraphs_type.icon_grid
     - paragraphs.paragraphs_type.jumbotron
     - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
     - paragraphs.paragraphs_type.news_events
     - paragraphs.paragraphs_type.partenaire_section
+    - paragraphs.paragraphs_type.patrimoine_immobilier_list
     - paragraphs.paragraphs_type.rich_content
     - paragraphs.paragraphs_type.section_presentation
     - paragraphs.paragraphs_type.tiles
@@ -42,7 +46,6 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       bp_simple: bp_simple
       medias: medias
@@ -64,15 +67,20 @@ settings:
       tiles: tiles
       bp_block: bp_block
       content_block: content_block
+      button_grid: button_grid
       news_events: news_events
+      icon_grid: icon_grid
+      contact_free: contact_free
       partenaire_section: partenaire_section
+      patrimoine_immobilier_list: patrimoine_immobilier_list
+    negate: 0
     target_bundles_drag_drop:
       audio_media:
         weight: -57
         enabled: false
       bp_accordion:
-        enabled: true
         weight: -67
+        enabled: true
       bp_accordion_section:
         weight: -65
         enabled: false
@@ -80,23 +88,23 @@ settings:
         weight: -58
         enabled: false
       bp_block:
-        enabled: true
         weight: -39
+        enabled: true
       bp_carousel:
-        enabled: true
         weight: -60
+        enabled: true
       bp_column_wrapper:
-        enabled: true
         weight: -61
+        enabled: true
       bp_columns:
-        enabled: true
         weight: -64
+        enabled: true
       bp_columns_three_uneven:
-        enabled: true
         weight: -63
-      bp_columns_two_uneven:
         enabled: true
+      bp_columns_two_uneven:
         weight: -62
+        enabled: true
       bp_image:
         weight: -56
         enabled: false
@@ -104,65 +112,86 @@ settings:
         weight: -55
         enabled: false
       bp_simple:
-        enabled: true
         weight: -71
+        enabled: true
       bp_tab_section:
         weight: -52
         enabled: false
       bp_tabs:
-        enabled: true
         weight: -53
+        enabled: true
       bp_view:
-        enabled: true
         weight: -51
+        enabled: true
       bp_webform:
-        enabled: true
         weight: -47
+        enabled: true
+      button_grid:
+        weight: 61
+        enabled: true
+      button_grid_item:
+        weight: 62
+        enabled: false
       contact:
-        enabled: true
         weight: -68
-      content_block:
         enabled: true
+      contact_free:
+        weight: 67
+        enabled: true
+      content_block:
         weight: 56
+        enabled: true
       files_media:
         weight: -59
         enabled: false
       hit_list:
-        enabled: true
         weight: -44
+        enabled: true
+      icon_grid:
+        weight: 63
+        enabled: true
+      icon_grid_item:
+        weight: 64
+        enabled: false
       image_media:
         weight: -46
         enabled: false
       jumbotron:
-        enabled: true
         weight: -54
+        enabled: true
       key_figure:
         weight: -48
         enabled: false
       key_figures_section:
-        enabled: true
         weight: -66
+        enabled: true
       medias:
-        enabled: true
         weight: -70
-      news_events:
         enabled: true
+      news_events:
         weight: 62
+        enabled: true
       partenaire:
         weight: 67
         enabled: false
       partenaire_section:
-        enabled: true
         weight: 68
+        enabled: true
+      patrimoine_immobilier:
+        weight: 79
+        enabled: false
+      patrimoine_immobilier_list:
+        weight: 80
+        enabled: true
       presentation:
         weight: -49
         enabled: false
       rich_content:
-        enabled: true
         weight: -69
-      section_presentation:
         enabled: true
+      section_presentation:
         weight: -50
+        enabled: true
       tile:
         weight: -42
         enabled: false
@@ -173,8 +202,8 @@ settings:
         weight: -38
         enabled: false
       tiles:
-        enabled: true
         weight: -40
+        enabled: true
       title_and_subtitle:
         weight: -43
         enabled: false

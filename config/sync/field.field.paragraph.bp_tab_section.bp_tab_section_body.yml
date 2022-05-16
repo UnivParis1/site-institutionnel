@@ -12,7 +12,9 @@ dependencies:
     - paragraphs.paragraphs_type.bp_tab_section
     - paragraphs.paragraphs_type.bp_view
     - paragraphs.paragraphs_type.bp_webform
+    - paragraphs.paragraphs_type.button_grid
     - paragraphs.paragraphs_type.hit_list
+    - paragraphs.paragraphs_type.icon_grid
     - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
     - paragraphs.paragraphs_type.partenaire_section
@@ -35,7 +37,6 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       bp_simple: bp_simple
       bp_image: bp_image
@@ -49,14 +50,17 @@ settings:
       medias: medias
       tiles: tiles
       section_presentation: section_presentation
+      button_grid: button_grid
+      icon_grid: icon_grid
       partenaire_section: partenaire_section
+    negate: 0
     target_bundles_drag_drop:
       audio_media:
         weight: 24
         enabled: false
       bp_accordion:
-        enabled: true
         weight: -28
+        enabled: true
       bp_accordion_section:
         weight: -20
         enabled: false
@@ -67,8 +71,8 @@ settings:
         weight: -23
         enabled: false
       bp_carousel:
-        enabled: true
         weight: -27
+        enabled: true
       bp_column_wrapper:
         weight: 30
         enabled: false
@@ -82,14 +86,14 @@ settings:
         weight: -24
         enabled: false
       bp_image:
-        enabled: true
         weight: -30
+        enabled: true
       bp_modal:
-        enabled: true
         weight: -22
-      bp_simple:
         enabled: true
+      bp_simple:
         weight: -31
+        enabled: true
       bp_tab_section:
         weight: -18
         enabled: false
@@ -97,11 +101,17 @@ settings:
         weight: -19
         enabled: false
       bp_view:
-        enabled: true
         weight: -21
-      bp_webform:
         enabled: true
+      bp_webform:
         weight: 40
+        enabled: true
+      button_grid:
+        weight: 61
+        enabled: true
+      button_grid_item:
+        weight: 62
+        enabled: false
       contact:
         weight: 57
         enabled: false
@@ -112,8 +122,14 @@ settings:
         weight: 41
         enabled: false
       hit_list:
-        enabled: true
         weight: 45
+        enabled: true
+      icon_grid:
+        weight: 67
+        enabled: true
+      icon_grid_item:
+        weight: 68
+        enabled: false
       image_media:
         weight: 42
         enabled: false
@@ -124,11 +140,11 @@ settings:
         weight: 43
         enabled: false
       key_figures_section:
-        enabled: true
         weight: 44
-      medias:
         enabled: true
+      medias:
         weight: 45
+        enabled: true
       news_events:
         weight: 66
         enabled: false
@@ -136,8 +152,8 @@ settings:
         weight: 67
         enabled: false
       partenaire_section:
-        enabled: true
         weight: 68
+        enabled: true
       presentation:
         weight: 31
         enabled: false
@@ -145,8 +161,8 @@ settings:
         weight: 70
         enabled: false
       section_presentation:
-        enabled: true
         weight: 55
+        enabled: true
       tile:
         weight: 28
         enabled: false
@@ -157,8 +173,8 @@ settings:
         weight: 74
         enabled: false
       tiles:
-        enabled: true
         weight: 52
+        enabled: true
       title_and_subtitle:
         weight: 26
         enabled: false

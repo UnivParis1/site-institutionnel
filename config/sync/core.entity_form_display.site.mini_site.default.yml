@@ -6,6 +6,7 @@ dependencies:
     - field.field.site.mini_site.field_complete_name
     - field.field.site.mini_site.field_footer
     - field.field.site.mini_site.field_site_administrator
+    - field.field.site.mini_site.field_site_category
     - field.field.site.mini_site.field_site_contributor
     - field.field.site.mini_site.field_site_manager
     - field.field.site.mini_site.field_site_member
@@ -23,124 +24,144 @@ mode: default
 content:
   css:
     type: string_textarea
-    weight: 19
+    weight: 20
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  favicon:
-    label: hidden
-    type: image_image
-    weight: 4
-    settings:
-      preview_image_style: thumbnail
-      progress_indicator: throbber
+  doc_enabled:
+    type: boolean_checkbox
+    weight: 30
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
+  ec_enabled:
+    type: boolean_checkbox
+    weight: 29
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  favicon:
+    type: image_image
+    weight: 5
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    label: hidden
   field_complete_name:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_footer:
-    weight: 26
+    type: link_default
+    weight: 27
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_site_administrator:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 21
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
+  field_site_category:
+    type: options_select
+    weight: 3
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_site_contributor:
     type: entity_reference_autocomplete
-    weight: 22
+    weight: 23
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    region: content
   field_site_manager:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 22
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    region: content
   field_site_member:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 24
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    region: content
   field_social_media:
-    weight: 27
+    type: link_default
+    weight: 28
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   filtre:
+    type: string_textarea
     weight: -8
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
   groups:
-    weight: 10
+    type: string_textfield
+    weight: 11
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
   langcode:
     type: language_select
-    weight: 16
+    weight: 17
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   logo:
-    label: hidden
     type: image_image
-    weight: 3
-    settings:
-      preview_image_style: thumbnail
-      progress_indicator: throbber
+    weight: 4
     region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
+    label: hidden
   mail:
     type: email_default
-    weight: 6
+    weight: 7
     region: content
     settings:
-      size: 60
       placeholder: ''
+      size: 60
     third_party_settings: {  }
   name:
     type: string_textfield
@@ -152,14 +173,14 @@ content:
     third_party_settings: {  }
   piwik_id:
     type: number
-    weight: 14
+    weight: 15
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   piwik_url:
     type: string_textfield
-    weight: 18
+    weight: 19
     region: content
     settings:
       size: 60
@@ -167,20 +188,20 @@ content:
     third_party_settings: {  }
   registered:
     type: boolean_checkbox
+    weight: 25
+    region: content
     settings:
       display_label: true
-    weight: 24
-    region: content
     third_party_settings: {  }
   schedule_end:
     type: datetime_default
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   shield_password:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -188,7 +209,7 @@ content:
     third_party_settings: {  }
   shield_user:
     type: string_textfield
-    weight: 12
+    weight: 13
     region: content
     settings:
       size: 60
@@ -196,21 +217,21 @@ content:
     third_party_settings: {  }
   site_scheme:
     type: boolean_checkbox
+    weight: 10
+    region: content
     settings:
       display_label: true
-    weight: 9
-    region: content
     third_party_settings: {  }
   site_shield:
     type: boolean_checkbox
+    weight: 12
+    region: content
     settings:
       display_label: true
-    weight: 11
-    region: content
     third_party_settings: {  }
   site_url:
     type: string_textfield
-    weight: 8
+    weight: 9
     region: content
     settings:
       size: 60
@@ -226,31 +247,31 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 26
+    region: content
     settings:
       display_label: true
-    weight: 25
-    region: content
     third_party_settings: {  }
   theme:
     type: options_select
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   type_url:
     type: options_buttons
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   user_id:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 18
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
 hidden: {  }

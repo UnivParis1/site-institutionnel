@@ -2,9 +2,9 @@ uuid: 5c3b4002-4969-43cc-a124-0dc91ed57a31
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 5486
 template: false
 archive: true
@@ -12,7 +12,84 @@ id: site_institutionnel_formulaire_d
 title: Site_Institutionnel_formulaire_demoreseries_cocktail
 description: ''
 category: ''
-elements: "nom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nadresse_mail:\n  '#type': email\n  '#title': Courriel\n  '#required': true\ndate_de_naissance:\n  '#type': date\n  '#title': 'Date de naissance'\n  '#required': true\n  '#date_date_format': ''\nj_assisterai_a_la_journee_de_colloque_du_30_septembre_a_la_sorbo:\n  '#type': radios\n  '#title': 'J''assisterai à la journée de colloque du 30 septembre à la Sorbonne'\n  '#options': yes_no\n  '#required': true\n  '#required_error': 'J''assisterai à la journée de colloque du 30 septembre à la Sorbonne'\n  '#options__properties': ''\nj_assisterai_a_la_journee_de_colloque_du_1er_octobre_a_l_asiem:\n  '#type': radios\n  '#title': 'J''assisterai à la journée de colloque du 1er octobre à l''ASIEM'\n  '#options': yes_no\n  '#required': true\n  '#required_error': 'J''assisterai à la journée de colloque du 1er octobre à l''ASIEM'\n  '#options__properties': ''\nje_souhaite_participer_au_cocktail_dinatoire_du_1er_octobre:\n  '#type': radios\n  '#title': 'Je souhaite participer au cocktail dinatoire du 1er octobre'\n  '#options': yes_no\n  '#required': true\n  '#required_error': 'Je souhaite participer au cocktail dinatoire du 1er octobre'\n  '#options__properties': ''\npreferences_restrictions_alimentaires:\n  '#type': radios\n  '#title': 'Préférences / restrictions alimentaires'\n  '#options': yes_no\n  '#required': true\n  '#options__properties': ''\ncommentaires:\n  '#type': textarea\n  '#title': 'Si oui, veuillez les préciser :'\nmessage_descriptif:\n  '#type': item\n  '#title': 'Message descriptif'\n  '#title_display': invisible\n  '#markup': |\n    <p>Pr&eacute;sentation du pass sanitaire obligatoire pour assister au colloque.</p>\n    \n    <p>L&#39;entr&eacute;e se fait sur inscription pr&eacute;alable et liste nominative.</p>\n    \n    <p>Votre date de naissance est demand&eacute;e par la s&eacute;curit&eacute; des lieux accueillant ce colloque.</p>\n    \nj_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:\n  '#type': checkbox\n  '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '\n  '#description': 'Voir notre <a href=\"https://www.pantheonsorbonne.fr/mentions-legales\" target=\"_blank\">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'\n  '#required': true\n  '#required_error': 'J''autorise ce site à conserver mes données personnelles transmise via ce formulaire. Voir notre politique de gestion des données'\ncaptcha:\n  '#type': captcha\nmarkup:\n  '#type': webform_markup\n  '#markup': |\n    <p>\n      &nbsp;\n    </p>\n    \nactions:\n  '#type': webform_actions\n  '#title': 'Bouton(s) d''envoi'\n  '#submit__label': Envoyer"
+elements: |-
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#required': true
+  adresse_mail:
+    '#type': email
+    '#title': Courriel
+    '#required': true
+  date_de_naissance:
+    '#type': date
+    '#title': 'Date de naissance'
+    '#required': true
+    '#date_date_format': ''
+  j_assisterai_a_la_journee_de_colloque_du_30_septembre_a_la_sorbo:
+    '#type': radios
+    '#title': 'J''assisterai à la journée de colloque du 30 septembre à la Sorbonne'
+    '#options': yes_no
+    '#required': true
+    '#required_error': 'J''assisterai à la journée de colloque du 30 septembre à la Sorbonne'
+    '#options__properties': ''
+  j_assisterai_a_la_journee_de_colloque_du_1er_octobre_a_l_asiem:
+    '#type': radios
+    '#title': 'J''assisterai à la journée de colloque du 1er octobre à l''ASIEM'
+    '#options': yes_no
+    '#required': true
+    '#required_error': 'J''assisterai à la journée de colloque du 1er octobre à l''ASIEM'
+    '#options__properties': ''
+  je_souhaite_participer_au_cocktail_dinatoire_du_1er_octobre:
+    '#type': radios
+    '#title': 'Je souhaite participer au cocktail dinatoire du 1er octobre'
+    '#options': yes_no
+    '#required': true
+    '#required_error': 'Je souhaite participer au cocktail dinatoire du 1er octobre'
+    '#options__properties': ''
+  preferences_restrictions_alimentaires:
+    '#type': radios
+    '#title': 'Préférences / restrictions alimentaires'
+    '#options': yes_no
+    '#required': true
+    '#options__properties': ''
+  commentaires:
+    '#type': textarea
+    '#title': 'Si oui, veuillez les préciser :'
+  message_descriptif:
+    '#type': item
+    '#title': 'Message descriptif'
+    '#title_display': invisible
+    '#markup': |
+      <p>Pr&eacute;sentation du pass sanitaire obligatoire pour assister au colloque.</p>
+      
+      <p>L&#39;entr&eacute;e se fait sur inscription pr&eacute;alable et liste nominative.</p>
+      
+      <p>Votre date de naissance est demand&eacute;e par la s&eacute;curit&eacute; des lieux accueillant ce colloque.</p>
+      
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
+    '#type': checkbox
+    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
+    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
+    '#required': true
+    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmise via ce formulaire. Voir notre politique de gestion des données'
+  captcha:
+    '#type': captcha
+  markup:
+    '#type': webform_markup
+    '#markup': |
+      <p>
+        &nbsp;
+      </p>
+      
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Envoyer
 css: ''
 javascript: ''
 settings:
@@ -27,40 +104,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +154,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +164,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +193,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: 'Confirmation de l''inscription'
   confirmation_message: "Votre inscription a bien &eacute;t&eacute; enregistr&eacute;e.<br />\r\nMerci pour votre participation !"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +274,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: 'Email aux organisateurs'
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +285,17 @@ handlers:
         - completed
       to_mail: contact@demoseries.eu
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: '[webform_submission:values:adresse_mail:raw]'
       from_options: {  }
       from_name: '[webform_submission:values:nom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Demoseries - Formulaire d''inscription'
       body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Envoy&eacute; par : [webform_submission:user]</p>\r\n\r\n<p>Les r&eacute;ponses soumises sont :</p>\r\n[webform_submission:values]"
       excluded_elements: {  }
@@ -222,18 +306,14 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
   email_1:
     id: email
+    handler_id: email_1
     label: 'Email aux demandeurs'
     notes: ''
-    handler_id: email_1
     status: true
     conditions: {  }
     weight: 0
@@ -242,13 +322,17 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:adresse_mail:raw]'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: contact@demoseries.eu
       from_options: {  }
       from_name: Demoseries
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: '[Réponse automatique ] Confirmation d''inscription'
       body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Envoy&eacute; par : [webform_submission:user]</p>\r\n\r\n<p>Les r&eacute;ponses soumises sont :</p>\r\n[webform_submission:values]"
       excluded_elements: {  }
@@ -259,11 +343,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

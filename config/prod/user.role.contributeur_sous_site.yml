@@ -1,7 +1,41 @@
 uuid: 2028e6b3-6abc-4d45-9a1d-3d9547309883
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.custom_format
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - media.type.audio
+    - media.type.file
+    - media.type.image
+    - media.type.mediatheque
+    - media.type.mediatheque_audio
+    - media.type.remote_video
+    - media.type.video
+    - node.type.event
+    - node.type.news
+    - node.type.page
+    - node.type.publication
+    - node.type.second_level_pages
+    - taxonomy.vocabulary.news_topics
+    - taxonomy.vocabulary.publication_topics
+    - workflows.workflow.publication
+  module:
+    - content_moderation
+    - content_translation
+    - entity_browser
+    - filter
+    - media
+    - metatag_extended_perms
+    - micro_node
+    - node
+    - paragraphs
+    - quickedit
+    - scheduler
+    - siteimprove
+    - system
+    - toolbar
 id: contributeur_sous_site
 label: 'Contributeur sous-site'
 weight: -7
@@ -11,6 +45,7 @@ permissions:
   - 'access content overview'
   - 'access in-place editing'
   - 'access media_entity_browser entity browser pages'
+  - 'access metatag advanced__content_language'
   - 'access toolbar'
   - 'create audio media'
   - 'create content translations'
@@ -53,13 +88,9 @@ permissions:
   - 'edit own publication content'
   - 'edit own remote_video media'
   - 'edit own second_level_pages content'
-  - 'edit own test content'
   - 'edit own video media'
-  - 'edit terms in collections'
-  - 'edit terms in publishers'
   - 'publish on any assigned site'
   - 'schedule publishing of nodes'
-  - 'translate any entity'
   - 'translate event node'
   - 'translate news node'
   - 'translate news_topics taxonomy_term'

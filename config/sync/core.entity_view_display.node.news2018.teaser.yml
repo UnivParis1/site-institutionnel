@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.news2018.field_media
     - field.field.node.news2018.field_news_date
     - field.field.node.news2018.field_news_topic
+    - field.field.node.news2018.field_publish_master
     - field.field.node.news2018.field_sites
     - field.field.node.news2018.field_sites_all
     - node.type.news2018
@@ -25,35 +26,35 @@ mode: teaser
 content:
   field_media:
     type: entity_reference_entity_view
-    weight: 0
-    region: content
     label: hidden
     settings:
       view_mode: thumbnail_news
       link: false
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_news_date:
     type: datetime_default
-    weight: 2
-    region: content
     label: hidden
     settings:
       timezone_override: ''
       format_type: news_date
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_news_topic:
     type: entity_reference_label
-    weight: 1
-    region: content
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
-  links:
-    weight: 3
+    weight: 1
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 3
+    region: content
 hidden:
   body: true
   content_moderation_control: true
@@ -61,6 +62,7 @@ hidden:
   field_disable_canonical_url: true
   field_label_color: true
   field_lead: true
+  field_publish_master: true
   field_sites: true
   field_sites_all: true
   langcode: true

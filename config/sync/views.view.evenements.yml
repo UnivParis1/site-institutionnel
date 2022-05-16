@@ -14,6 +14,7 @@ dependencies:
     - datetime
     - datetime_range
     - geolocation
+    - geolocation_leaflet
     - node
     - taxonomy
     - up1_global
@@ -28,94 +29,34 @@ base_table: node_field_data
 base_field: nid
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'access content'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Appliquer
-          reset_button: false
-          reset_button_label: Réinitialiser
-          exposed_sorts_label: 'Trier par'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 15
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« Premier'
-            last: 'Dernier »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- Tout -'
-            offset: false
-            offset_label: Décalage
-          quantity: 9
-      style:
-        type: default
-        options:
-          row_class: 'cell small-12'
-          default_row_class: true
-          uses_fields: false
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser
+      title: Évènements
       fields:
         title:
           id: title
           table: node_field_data
           field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
           entity_type: node
           entity_field: title
+          plugin_id: field
           label: ''
+          exclude: false
           alter:
             alter_text: false
             make_link: false
             absolute: false
-            trim: false
             word_boundary: false
             ellipsis: false
             strip_tags: false
+            trim: false
             html: false
-          hide_empty: false
-          empty_zero: false
-          settings:
-            link_to_entity: true
-          plugin_id: field
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exclude: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -125,9 +66,13 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
+          hide_empty: false
+          empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
           type: string
+          settings:
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -150,6 +95,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: geolocation_field
           label: ''
           exclude: true
           alter:
@@ -204,35 +150,89 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: geolocation_field
         field_event_date:
           id: field_event_date
           table: node__field_event_date
           field: field_event_date
           plugin_id: field
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 15
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- Tout -'
+            offset: false
+            offset_label: Décalage
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Appliquer
+          reset_button: false
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          order: ASC
+          expose:
+            label: Date
+            field_identifier: field_event_date_value
+          exposed: false
+          granularity: day
+      arguments: {  }
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            event: event
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            event: event
           group: 1
           expose:
             operator_limit_selection: false
@@ -244,6 +244,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -254,6 +257,8 @@ display:
             description: ''
             use_operator: false
             operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: title
             required: false
             remember: false
@@ -268,8 +273,6 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -282,9 +285,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
         field_event_date_value:
           id: field_event_date_value
           table: node__field_event_date
@@ -292,6 +292,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: datetime
           operator: '='
           value:
             min: ''
@@ -306,6 +307,8 @@ display:
             description: ''
             use_operator: false
             operator: field_event_date_value_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: field_event_date_value
             required: false
             remember: false
@@ -319,11 +322,9 @@ display:
               webmestre_general: '0'
               admin_dir_com: '0'
               administrator: '0'
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -336,7 +337,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: datetime
         field_event_type_target_id:
           id: field_event_type_target_id
           table: node__field_event_type
@@ -344,6 +344,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: taxonomy_index_tid
           operator: or
           value: {  }
           group: 1
@@ -354,6 +355,8 @@ display:
             description: ''
             use_operator: false
             operator: field_event_type_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: field_event_type_target_id
             required: false
             remember: false
@@ -368,8 +371,6 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -383,12 +384,11 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          type: select
-          limit: true
           vid: events_types
+          type: select
           hierarchy: false
+          limit: true
           error_message: true
-          plugin_id: taxonomy_index_tid
         field_event_date_end_value:
           id: field_event_date_end_value
           table: node__field_event_date
@@ -397,21 +397,31 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-      sorts:
-        field_event_date_value:
-          id: field_event_date_value
-          table: node__field_event_date
-          field: field_event_date_value
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
           relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: Date
-          granularity: day
-          plugin_id: datetime
-      title: Évènements
+          view_mode: teaser
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships: {  }
+      css_class: 'grid-x full-height same-height'
       header: {  }
       footer:
         area:
@@ -421,21 +431,13 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: text
           empty: false
-          tokenize: false
           content:
             value: '<a href="[view:url]" class="btn btn-primary">Voir tous les évènements</a>'
             format: full_html
-          plugin_id: text
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
+          tokenize: false
       display_extenders: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      css_class: 'grid-x full-height same-height'
     cache_metadata:
       max-age: -1
       contexts:
@@ -451,36 +453,39 @@ display:
         - 'config:field.storage.node.field_event_address'
         - 'config:field.storage.node.field_event_date'
   block_events:
-    display_plugin: block
     id: block_events
     display_title: 'Bloc évènements'
+    display_plugin: block
     position: 4
     display_options:
-      display_extenders: {  }
-      display_description: ''
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 2
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            event: event
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            event: event
           group: 1
           expose:
             operator_limit_selection: false
@@ -492,6 +497,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: datetime
           operator: '>='
           value:
             min: ''
@@ -506,17 +512,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -529,21 +535,16 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: datetime
-      defaults:
-        filters: false
-        filter_groups: false
-        pager: false
-        footer: false
       filter_groups:
         operator: AND
         groups:
           1: AND
-      pager:
-        type: some
-        options:
-          items_per_page: 2
-          offset: 0
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        footer: false
+      display_description: ''
       footer:
         area:
           id: area
@@ -552,12 +553,13 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: text
           empty: false
-          tokenize: false
           content:
             value: '<a href="[view:url]" class="btn btn-primary">Voir tous les évènements</a>'
             format: full_html
-          plugin_id: text
+          tokenize: false
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -570,94 +572,16 @@ display:
         - 'config:field.storage.node.field_event_address'
         - 'config:field.storage.node.field_event_date'
   block_events_filtered:
-    display_plugin: block
     id: block_events_filtered
     display_title: 'Bloc évènements avec filtre'
+    display_plugin: block
     position: 5
     display_options:
-      display_extenders: {  }
-      display_description: ''
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          value:
-            event: event
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          group: 1
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-        field_event_date_end_value:
-          id: field_event_date_end_value
-          table: node__field_event_date
-          field: field_event_date_end_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '>='
-          value:
-            min: ''
-            max: ''
-            value: '+1 hour +1 minute'
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-      defaults:
-        filters: false
-        filter_groups: false
-        arguments: false
-        pager: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 4
       arguments:
         field_event_type_target_id:
           id: field_event_type_target_id
@@ -666,6 +590,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           default_action: default
           exception:
             value: all
@@ -685,8 +610,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -698,213 +623,33 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-          plugin_id: numeric
-      block_description: 'Bloc évènements par type'
-      pager:
-        type: some
-        options:
-          items_per_page: 4
-          offset: 0
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_address_map'
-        - 'config:field.storage.node.field_event_address'
-        - 'config:field.storage.node.field_event_date'
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Évènements
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: evenements-old
-      display_description: ''
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            event: event
           entity_type: node
           entity_field: type
           plugin_id: bundle
-          group: 1
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Titre
-            description: ''
-            use_operator: false
-            operator: title_op
-            identifier: title
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-        field_event_date_value:
-          id: field_event_date_value
-          table: node__field_event_date
-          field: field_event_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
           value:
-            min: ''
-            max: ''
-            value: ''
-            type: date
+            event: event
           group: 1
-          exposed: true
           expose:
-            operator_id: field_event_date_value_op
-            label: Date
-            description: ''
-            use_operator: false
-            operator: field_event_date_value_op
-            identifier: field_event_date_value
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
             operator_limit_selection: false
             operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-        field_event_type_target_id:
-          id: field_event_type_target_id
-          table: node__field_event_type
-          field: field_event_type_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_event_type_target_id_op
-            label: 'Type d''événement'
-            description: ''
-            use_operator: false
-            operator: field_event_type_target_id_op
-            identifier: field_event_type_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: events_types
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
         field_event_date_end_value:
           id: field_event_date_end_value
           table: node__field_event_date
@@ -912,6 +657,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: datetime
           operator: '>='
           value:
             min: ''
@@ -926,17 +672,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -949,44 +695,46 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: datetime
-      defaults:
-        filters: false
-        filter_groups: false
-        header: false
-        pager: false
-        use_ajax: false
-        footer: false
-        style: false
-        row: false
       filter_groups:
         operator: AND
         groups:
           1: AND
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/evenements/map" title="Afficher les événements sur une carte">Vue carte</a>'
-            format: full_html
-          plugin_id: text
+      defaults:
+        pager: false
+        arguments: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      block_description: 'Bloc évènements par type'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_address_map'
+        - 'config:field.storage.node.field_event_address'
+        - 'config:field.storage.node.field_event_date'
+  page_1:
+    id: page_1
+    display_title: Évènements
+    display_plugin: page
+    position: 1
+    display_options:
       pager:
         type: infinite_scroll
         options:
-          items_per_page: 4
           offset: 0
-          id: 0
+          items_per_page: 4
           total_pages: null
+          id: 0
           tags:
-            previous: ‹‹
             next: ››
+            previous: ‹‹
           expose:
             items_per_page: false
             items_per_page_label: 'Éléments par page'
@@ -998,8 +746,234 @@ display:
           views_infinite_scroll:
             button_text: 'Load More'
             automatically_load_content: false
-      use_ajax: true
-      footer: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            event: event
+          group: 1
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Titre
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_date_value_op
+            label: Date
+            description: ''
+            use_operator: false
+            operator: field_event_date_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_event_date_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_event_type_target_id:
+          id: field_event_type_target_id
+          table: node__field_event_type
+          field: field_event_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_type_target_id_op
+            label: 'Type d''événement'
+            description: ''
+            use_operator: false
+            operator: field_event_type_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_event_type_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: events_types
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+        field_event_date_end_value:
+          id: field_event_date_end_value
+          table: node__field_event_date
+          field: field_event_date_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '+1 hour +1 minute'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: default
         options:
@@ -1011,6 +985,34 @@ display:
         options:
           relationship: none
           view_mode: bootstrap_cards
+      defaults:
+        use_ajax: false
+        pager: false
+        style: false
+        row: false
+        filters: false
+        filter_groups: false
+        header: false
+        footer: false
+      use_ajax: true
+      display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<a href="/evenements/map" title="Afficher les événements sur une carte">Vue carte</a>'
+            format: full_html
+          tokenize: false
+      footer: {  }
+      display_extenders: {  }
+      path: evenements-old
     cache_metadata:
       max-age: -1
       contexts:
@@ -1026,803 +1028,34 @@ display:
         - 'config:field.storage.node.field_event_address'
         - 'config:field.storage.node.field_event_date'
   page_event_map:
-    display_plugin: page
     id: page_event_map
     display_title: 'Carte évènements'
+    display_plugin: page
     position: 2
     display_options:
-      display_extenders: {  }
-      path: evenements/map
-      display_description: ''
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          value:
-            event: event
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          group: 1
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Titre
-            description: ''
-            use_operator: false
-            operator: title_op
-            identifier: title
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-        field_event_date_value:
-          id: field_event_date_value
-          table: node__field_event_date
-          field: field_event_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-            type: date
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_event_date_value_op
-            label: Date
-            description: ''
-            use_operator: false
-            operator: field_event_date_value_op
-            identifier: field_event_date_value
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-        field_event_type_target_id:
-          id: field_event_type_target_id
-          table: node__field_event_type
-          field: field_event_type_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_event_type_target_id_op
-            label: 'Type d''événement'
-            description: ''
-            use_operator: false
-            operator: field_event_type_target_id_op
-            identifier: field_event_type_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: events_types
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_event_date_end_value:
-          id: field_event_date_end_value
-          table: node__field_event_date
-          field: field_event_date_end_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '>='
-          value:
-            min: ''
-            max: ''
-            value: '+1 hour +1 minute'
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-        langcode:
-          id: langcode
-          table: node_field_data
-          field: langcode
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
-            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: langcode
-          plugin_id: language
-      defaults:
-        filters: false
-        filter_groups: false
-        style: false
-        row: false
-        fields: false
-        header: false
-        pager: false
-        footer: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      style:
-        type: maps_common
-        options:
-          geolocation_field: field_address_map
-          data_provider_id: geolocation_field_provider
-          title_field: none
-          centre:
-            fit_bounds:
-              enable: true
-              settings:
-                reset_zoom: true
-              weight: 0
-              map_center_id: fit_bounds
-            freeogeoip:
-              weight: 0
-              enable: false
-              map_center_id: location_plugins
-            fixed_value:
-              settings:
-                latitude: null
-                longitude: null
-              weight: 0
-              enable: false
-              map_center_id: location_plugins
-            first_row:
-              weight: 0
-              enable: false
-              map_center_id: location_plugins
-            client_location:
-              weight: 0
-              enable: false
-              map_center_id: client_location
-          even_empty: 0
-          marker_icon_path: ''
-          marker_row_number: 0
-          map_provider_id: leaflet
-          map_provider_settings:
-            map_features:
-              leaflet_control_scale:
-                weight: 0
-                settings:
-                  position: topright
-                  metric: 0
-                  imperial: 0
-                enabled: false
-              leaflet_tile_layer:
-                weight: 0
-                settings:
-                  tile_layer_provider: 'OpenStreetMap Mapnik'
-                  tile_provider_options:
-                    Thunderforest:
-                      apikey: ''
-                    MapBox:
-                      accessToken: ''
-                    HERE:
-                      app_id: ''
-                      app_code: ''
-                    GeoportailFrance:
-                      apikey: ''
-                enabled: false
-              leaflet_custom_tile_layer:
-                weight: 0
-                settings:
-                  tile_layer_url: '//{s}.tile.osm.org/{z}/{x}/{y}.png'
-                  tile_layer_attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-                  tile_layer_subdomains: abc
-                  tile_layer_zoom: '18'
-                enabled: false
-              leaflet_max_bounds:
-                weight: 0
-                settings:
-                  north: ''
-                  south: ''
-                  east: ''
-                  west: ''
-                enabled: false
-              leaflet_marker_zoom_and_animate:
-                weight: 0
-                settings:
-                  marker_zoom_anchor_id: ''
-                enabled: false
-              geolocation_marker_scroll_to_id:
-                weight: 0
-                settings:
-                  scroll_target_id: ''
-                enabled: false
-              leaflet_marker_popup:
-                enabled: true
-                weight: 0
-                settings:
-                  info_auto_display: true
-              leaflet_marker_icon:
-                weight: 0
-                settings:
-                  marker_icon_path: ''
-                  icon_size:
-                    width: ''
-                    height: ''
-                  icon_anchor:
-                    x: ''
-                    'y': ''
-                  popup_anchor:
-                    x: '0'
-                    'y': '0'
-                  marker_shadow_path: ''
-                  shadow_size:
-                    width: ''
-                    height: ''
-                  shadow_anchor:
-                    x: ''
-                    'y': ''
-                enabled: false
-              leaflet_marker_clusterer:
-                weight: 0
-                enabled: false
-                settings:
-                  cluster_settings:
-                    show_coverage_on_hover: 0
-                    zoom_to_bounds_on_click: 0
-              leaflet_control_zoom:
-                enabled: true
-                weight: 0
-                settings:
-                  position: topright
-              leaflet_control_layer:
-                weight: 0
-                settings:
-                  position: topright
-                  default_label: Default
-                  tile_layer_providers:
-                    OpenStreetMap:
-                      'OpenStreetMap Mapnik':
-                        label: ''
-                        checkbox: 0
-                      'OpenStreetMap BlackAndWhite':
-                        label: ''
-                        checkbox: 0
-                      'OpenStreetMap DE':
-                        label: ''
-                        checkbox: 0
-                      'OpenStreetMap CH':
-                        label: ''
-                        checkbox: 0
-                      'OpenStreetMap France':
-                        label: ''
-                        checkbox: 0
-                      'OpenStreetMap HOT':
-                        label: ''
-                        checkbox: 0
-                      'OpenStreetMap BZH':
-                        label: ''
-                        checkbox: 0
-                    OpenTopoMap:
-                      OpenTopoMap:
-                        label: ''
-                        checkbox: 0
-                    Thunderforest:
-                      'Thunderforest OpenCycleMap':
-                        label: ''
-                        checkbox: 0
-                      'Thunderforest Transport':
-                        label: ''
-                        checkbox: 0
-                      'Thunderforest TransportDark':
-                        label: ''
-                        checkbox: 0
-                      'Thunderforest SpinalMap':
-                        label: ''
-                        checkbox: 0
-                      'Thunderforest Landscape':
-                        label: ''
-                        checkbox: 0
-                      'Thunderforest Outdoors':
-                        label: ''
-                        checkbox: 0
-                      'Thunderforest Pioneer':
-                        label: ''
-                        checkbox: 0
-                    OpenMapSurfer:
-                      'OpenMapSurfer Roads':
-                        label: ''
-                        checkbox: 0
-                      'OpenMapSurfer Grayscale':
-                        label: ''
-                        checkbox: 0
-                    Hydda:
-                      'Hydda Full':
-                        label: ''
-                        checkbox: 0
-                      'Hydda Base':
-                        label: ''
-                        checkbox: 0
-                    MapBox:
-                      MapBox:
-                        label: ''
-                        checkbox: 0
-                    Stamen:
-                      'Stamen Toner':
-                        label: ''
-                        checkbox: 0
-                      'Stamen TonerBackground':
-                        label: ''
-                        checkbox: 0
-                      'Stamen TonerLite':
-                        label: ''
-                        checkbox: 0
-                      'Stamen Watercolor':
-                        label: ''
-                        checkbox: 0
-                      'Stamen Terrain':
-                        label: ''
-                        checkbox: 0
-                      'Stamen TerrainBackground':
-                        label: ''
-                        checkbox: 0
-                      'Stamen TopOSMRelief':
-                        label: ''
-                        checkbox: 0
-                    Esri:
-                      'Esri WorldStreetMap':
-                        label: ''
-                        checkbox: 0
-                      'Esri DeLorme':
-                        label: ''
-                        checkbox: 0
-                      'Esri WorldTopoMap':
-                        label: ''
-                        checkbox: 0
-                      'Esri WorldImagery':
-                        label: ''
-                        checkbox: 0
-                      'Esri WorldTerrain':
-                        label: ''
-                        checkbox: 0
-                      'Esri WorldShadedRelief':
-                        label: ''
-                        checkbox: 0
-                      'Esri WorldPhysical':
-                        label: ''
-                        checkbox: 0
-                      'Esri OceanBasemap':
-                        label: ''
-                        checkbox: 0
-                      'Esri NatGeoWorldMap':
-                        label: ''
-                        checkbox: 0
-                      'Esri WorldGrayCanvas':
-                        label: ''
-                        checkbox: 0
-                    HERE:
-                      'HERE normalDay':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalDayCustom':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalDayGrey':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalDayMobile':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalDayGreyMobile':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalDayTransit':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalDayTransitMobile':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalNight':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalNightMobile':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalNightGrey':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalNightGreyMobile':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalNightTransit':
-                        label: ''
-                        checkbox: 0
-                      'HERE normalNightTransitMobile':
-                        label: ''
-                        checkbox: 0
-                      'HERE redcuedDay':
-                        label: ''
-                        checkbox: 0
-                      'HERE redcuedNight':
-                        label: ''
-                        checkbox: 0
-                      'HERE basicMap':
-                        label: ''
-                        checkbox: 0
-                      'HERE mapLabels':
-                        label: ''
-                        checkbox: 0
-                      'HERE trafficFlow':
-                        label: ''
-                        checkbox: 0
-                      'HERE carnavDayGrey':
-                        label: ''
-                        checkbox: 0
-                      'HERE hybridDayMobile':
-                        label: ''
-                        checkbox: 0
-                      'HERE hybridDayTransit':
-                        label: ''
-                        checkbox: 0
-                      'HERE hybridDayGrey':
-                        label: ''
-                        checkbox: 0
-                      'HERE pedestrianDay':
-                        label: ''
-                        checkbox: 0
-                      'HERE pedestrianNight':
-                        label: ''
-                        checkbox: 0
-                      'HERE satelliteDay':
-                        label: ''
-                        checkbox: 0
-                      'HERE terrainDay':
-                        label: ''
-                        checkbox: 0
-                      'HERE terrainDayMobile':
-                        label: ''
-                        checkbox: 0
-                    FreeMapSK:
-                      FreeMapSK:
-                        label: ''
-                        checkbox: 0
-                    MtbMap:
-                      MtbMap:
-                        label: ''
-                        checkbox: 0
-                    CartoDB:
-                      'CartoDB Positron':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB PositronNoLabels':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB PositronOnlyLabels':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB DarkMatter':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB DarkMatterNoLabels':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB DarkMatterOnlyLabels':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB Voyager':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB VoyagerNoLabels':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB VoyagerOnlyLabels':
-                        label: ''
-                        checkbox: 0
-                      'CartoDB VoyagerLabelsUnder':
-                        label: ''
-                        checkbox: 0
-                    HikeBike:
-                      HikeBike:
-                        label: ''
-                        checkbox: 0
-                      'HikeBike HillShading':
-                        label: ''
-                        checkbox: 0
-                    BasemapAT:
-                      'BasemapAT basemap':
-                        label: ''
-                        checkbox: 0
-                      'BasemapAT grau':
-                        label: ''
-                        checkbox: 0
-                      'BasemapAT overlay':
-                        label: ''
-                        checkbox: 0
-                      'BasemapAT highdpi':
-                        label: ''
-                        checkbox: 0
-                      'BasemapAT orthofoto':
-                        label: ''
-                        checkbox: 0
-                    NLS:
-                      NLS:
-                        label: ''
-                        checkbox: 0
-                    Wikimedia:
-                      Wikimedia:
-                        label: ''
-                        checkbox: 0
-                    GeoportailFrance:
-                      'GeoportailFrance parcels':
-                        label: ''
-                        checkbox: 0
-                      'GeoportailFrance ignMaps':
-                        label: ''
-                        checkbox: 0
-                      'GeoportailFrance maps':
-                        label: ''
-                        checkbox: 0
-                      'GeoportailFrance orthos':
-                        label: ''
-                        checkbox: 0
-                  tile_providers_options:
-                    Thunderforest:
-                      apikey: ''
-                    MapBox:
-                      accessToken: ''
-                    HERE:
-                      app_id: ''
-                      app_code: ''
-                    GeoportailFrance:
-                      apikey: ''
-                enabled: false
-              leaflet_control_recenter:
-                weight: 0
-                settings:
-                  position: topright
-                enabled: false
-              leaflet_control_locate:
-                weight: 0
-                settings:
-                  position: topright
-                enabled: false
-              leaflet_control_geocoder:
-                weight: 0
-                settings:
-                  position: topright
-                  geocoder: photon
-                  settings:
-                    label: Adresse
-                    description: 'Saisir l''adresse à localiser.'
-                    location_priority:
-                      lat: ''
-                      lng: ''
-                enabled: false
-              leaflet_control_fullscreen:
-                weight: 0
-                settings:
-                  position: topright
-                enabled: false
-              leaflet_gesture_handling:
-                weight: 0
-                enabled: false
-              leaflet_disable_user_interaction:
-                weight: 0
-                enabled: false
-              leaflet_client_location_indicator:
-                weight: 0
-                enabled: false
-              leaflet_wms:
-                weight: 0
-                settings:
-                  url: ''
-                  version: 1.1.1
-                  layers: ''
-                  styles: ''
-                  srs: ''
-                  format: image/jpeg
-                  transparent: 0
-                  identify: 0
-                enabled: false
-            height: 400px
-            width: 100%
-            zoom: '14'
-      row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
+      enabled: true
       fields:
         title:
           id: title
           table: node_field_data
           field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
           entity_type: node
           entity_field: title
+          plugin_id: field
           label: ''
+          exclude: false
           alter:
             alter_text: false
             make_link: false
             absolute: false
-            trim: false
             word_boundary: false
             ellipsis: false
             strip_tags: false
+            trim: false
             html: false
-          hide_empty: false
-          empty_zero: false
-          settings:
-            link_to_entity: true
-          plugin_id: field
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exclude: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -1832,9 +1065,13 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
+          hide_empty: false
+          empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
           type: string
+          settings:
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1857,6 +1094,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: geolocation_field
           label: ''
           exclude: true
           alter:
@@ -1911,7 +1149,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: geolocation_field
         field_event_date:
           id: field_event_date
           table: node__field_event_date
@@ -1919,6 +1156,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1978,72 +1216,33 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/evenements" title="Afficher les événements dans une liste">Vue liste</a>'
-            format: full_html
-          plugin_id: text
       pager:
         type: none
         options:
           offset: 0
-      footer: {  }
-      enabled: true
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_address_map'
-        - 'config:field.storage.node.field_event_address'
-        - 'config:field.storage.node.field_event_date'
-  page_events_archives:
-    display_plugin: page
-    id: page_events_archives
-    display_title: 'Archives évènements'
-    position: 3
-    display_options:
-      display_extenders: {  }
-      path: evenements-archives
-      display_description: ''
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            event: event
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            event: event
           group: 1
           expose:
             operator_limit_selection: false
@@ -2055,6 +1254,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -2065,6 +1267,8 @@ display:
             description: ''
             use_operator: false
             operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: title
             required: false
             remember: false
@@ -2079,8 +1283,6 @@ display:
               admin_dir_com: '0'
               administrator: '0'
             placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2093,9 +1295,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
         field_event_date_value:
           id: field_event_date_value
           table: node__field_event_date
@@ -2103,6 +1302,807 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: datetime
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_date_value_op
+            label: Date
+            description: ''
+            use_operator: false
+            operator: field_event_date_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_event_date_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_event_type_target_id:
+          id: field_event_type_target_id
+          table: node__field_event_type
+          field: field_event_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_type_target_id_op
+            label: 'Type d''événement'
+            description: ''
+            use_operator: false
+            operator: field_event_type_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_event_type_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: events_types
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+        field_event_date_end_value:
+          id: field_event_date_end_value
+          table: node__field_event_date
+          field: field_event_date_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '+1 hour +1 minute'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: maps_common
+        options:
+          data_provider_id: geolocation_field_provider
+          geolocation_field: field_address_map
+          title_field: none
+          marker_row_number: 0
+          marker_icon_path: ''
+          even_empty: 0
+          centre:
+            fit_bounds:
+              enable: true
+              weight: 0
+              settings:
+                reset_zoom: true
+              map_center_id: fit_bounds
+            freeogeoip:
+              enable: false
+              weight: 0
+              map_center_id: location_plugins
+            fixed_value:
+              enable: false
+              weight: 0
+              settings:
+                latitude: null
+                longitude: null
+              map_center_id: location_plugins
+            first_row:
+              enable: false
+              weight: 0
+              map_center_id: location_plugins
+            client_location:
+              enable: false
+              weight: 0
+              map_center_id: client_location
+          map_provider_id: leaflet
+          map_provider_settings:
+            map_features:
+              leaflet_control_scale:
+                weight: 0
+                settings:
+                  position: topright
+                  metric: false
+                  imperial: false
+                enabled: false
+              leaflet_tile_layer:
+                weight: 0
+                settings:
+                  tile_layer_provider: 'OpenStreetMap Mapnik'
+                  tile_provider_options:
+                    Thunderforest:
+                      apikey: ''
+                    MapBox:
+                      accessToken: ''
+                    HERE:
+                      app_id: ''
+                      app_code: ''
+                    GeoportailFrance:
+                      apikey: ''
+                enabled: false
+              leaflet_custom_tile_layer:
+                weight: 0
+                settings:
+                  tile_layer_url: '//{s}.tile.osm.org/{z}/{x}/{y}.png'
+                  tile_layer_attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+                  tile_layer_subdomains: abc
+                  tile_layer_zoom: 18
+                enabled: false
+              leaflet_max_bounds:
+                weight: 0
+                settings:
+                  north: null
+                  south: null
+                  east: null
+                  west: null
+                enabled: false
+              leaflet_marker_zoom_and_animate:
+                weight: 0
+                settings:
+                  marker_zoom_anchor_id: ''
+                enabled: false
+              geolocation_marker_scroll_to_id:
+                weight: 0
+                settings:
+                  scroll_target_id: ''
+                enabled: false
+              leaflet_marker_popup:
+                weight: 0
+                settings:
+                  info_auto_display: true
+                enabled: true
+              leaflet_marker_icon:
+                weight: 0
+                settings:
+                  marker_shadow_path: ''
+                  marker_icon_path: ''
+                  icon_size:
+                    width: null
+                    height: null
+                  icon_anchor:
+                    x: null
+                    'y': null
+                  popup_anchor:
+                    x: 0
+                    'y': 0
+                  shadow_size:
+                    width: null
+                    height: null
+                  shadow_anchor:
+                    x: null
+                    'y': null
+                enabled: false
+              leaflet_marker_clusterer:
+                weight: 0
+                settings:
+                  cluster_settings:
+                    show_coverage_on_hover: false
+                    zoom_to_bounds_on_click: false
+                enabled: false
+              leaflet_control_zoom:
+                weight: 0
+                settings:
+                  position: topright
+                enabled: true
+              leaflet_control_layer:
+                weight: 0
+                settings:
+                  position: topright
+                  default_label: Default
+                  tile_layer_providers:
+                    OpenStreetMap:
+                      'OpenStreetMap Mapnik':
+                        checkbox: false
+                        label: ''
+                      'OpenStreetMap BlackAndWhite':
+                        checkbox: false
+                        label: ''
+                      'OpenStreetMap DE':
+                        checkbox: false
+                        label: ''
+                      'OpenStreetMap CH':
+                        checkbox: false
+                        label: ''
+                      'OpenStreetMap France':
+                        checkbox: false
+                        label: ''
+                      'OpenStreetMap HOT':
+                        checkbox: false
+                        label: ''
+                      'OpenStreetMap BZH':
+                        checkbox: false
+                        label: ''
+                    OpenTopoMap:
+                      OpenTopoMap:
+                        checkbox: false
+                        label: ''
+                    Thunderforest:
+                      'Thunderforest OpenCycleMap':
+                        checkbox: false
+                        label: ''
+                      'Thunderforest Transport':
+                        checkbox: false
+                        label: ''
+                      'Thunderforest TransportDark':
+                        checkbox: false
+                        label: ''
+                      'Thunderforest SpinalMap':
+                        checkbox: false
+                        label: ''
+                      'Thunderforest Landscape':
+                        checkbox: false
+                        label: ''
+                      'Thunderforest Outdoors':
+                        checkbox: false
+                        label: ''
+                      'Thunderforest Pioneer':
+                        checkbox: false
+                        label: ''
+                    OpenMapSurfer:
+                      'OpenMapSurfer Roads':
+                        checkbox: false
+                        label: ''
+                      'OpenMapSurfer Grayscale':
+                        checkbox: false
+                        label: ''
+                    Hydda:
+                      'Hydda Full':
+                        checkbox: false
+                        label: ''
+                      'Hydda Base':
+                        checkbox: false
+                        label: ''
+                    MapBox:
+                      MapBox:
+                        checkbox: false
+                        label: ''
+                    Stamen:
+                      'Stamen Toner':
+                        checkbox: false
+                        label: ''
+                      'Stamen TonerBackground':
+                        checkbox: false
+                        label: ''
+                      'Stamen TonerLite':
+                        checkbox: false
+                        label: ''
+                      'Stamen Watercolor':
+                        checkbox: false
+                        label: ''
+                      'Stamen Terrain':
+                        checkbox: false
+                        label: ''
+                      'Stamen TerrainBackground':
+                        checkbox: false
+                        label: ''
+                      'Stamen TopOSMRelief':
+                        checkbox: false
+                        label: ''
+                    Esri:
+                      'Esri WorldStreetMap':
+                        checkbox: false
+                        label: ''
+                      'Esri DeLorme':
+                        checkbox: false
+                        label: ''
+                      'Esri WorldTopoMap':
+                        checkbox: false
+                        label: ''
+                      'Esri WorldImagery':
+                        checkbox: false
+                        label: ''
+                      'Esri WorldTerrain':
+                        checkbox: false
+                        label: ''
+                      'Esri WorldShadedRelief':
+                        checkbox: false
+                        label: ''
+                      'Esri WorldPhysical':
+                        checkbox: false
+                        label: ''
+                      'Esri OceanBasemap':
+                        checkbox: false
+                        label: ''
+                      'Esri NatGeoWorldMap':
+                        checkbox: false
+                        label: ''
+                      'Esri WorldGrayCanvas':
+                        checkbox: false
+                        label: ''
+                    HERE:
+                      'HERE normalDay':
+                        checkbox: false
+                        label: ''
+                      'HERE normalDayCustom':
+                        checkbox: false
+                        label: ''
+                      'HERE normalDayGrey':
+                        checkbox: false
+                        label: ''
+                      'HERE normalDayMobile':
+                        checkbox: false
+                        label: ''
+                      'HERE normalDayGreyMobile':
+                        checkbox: false
+                        label: ''
+                      'HERE normalDayTransit':
+                        checkbox: false
+                        label: ''
+                      'HERE normalDayTransitMobile':
+                        checkbox: false
+                        label: ''
+                      'HERE normalNight':
+                        checkbox: false
+                        label: ''
+                      'HERE normalNightMobile':
+                        checkbox: false
+                        label: ''
+                      'HERE normalNightGrey':
+                        checkbox: false
+                        label: ''
+                      'HERE normalNightGreyMobile':
+                        checkbox: false
+                        label: ''
+                      'HERE normalNightTransit':
+                        checkbox: false
+                        label: ''
+                      'HERE normalNightTransitMobile':
+                        checkbox: false
+                        label: ''
+                      'HERE redcuedDay':
+                        checkbox: false
+                        label: ''
+                      'HERE redcuedNight':
+                        checkbox: false
+                        label: ''
+                      'HERE basicMap':
+                        checkbox: false
+                        label: ''
+                      'HERE mapLabels':
+                        checkbox: false
+                        label: ''
+                      'HERE trafficFlow':
+                        checkbox: false
+                        label: ''
+                      'HERE carnavDayGrey':
+                        checkbox: false
+                        label: ''
+                      'HERE hybridDayMobile':
+                        checkbox: false
+                        label: ''
+                      'HERE hybridDayTransit':
+                        checkbox: false
+                        label: ''
+                      'HERE hybridDayGrey':
+                        checkbox: false
+                        label: ''
+                      'HERE pedestrianDay':
+                        checkbox: false
+                        label: ''
+                      'HERE pedestrianNight':
+                        checkbox: false
+                        label: ''
+                      'HERE satelliteDay':
+                        checkbox: false
+                        label: ''
+                      'HERE terrainDay':
+                        checkbox: false
+                        label: ''
+                      'HERE terrainDayMobile':
+                        checkbox: false
+                        label: ''
+                    FreeMapSK:
+                      FreeMapSK:
+                        checkbox: false
+                        label: ''
+                    MtbMap:
+                      MtbMap:
+                        checkbox: false
+                        label: ''
+                    CartoDB:
+                      'CartoDB Positron':
+                        checkbox: false
+                        label: ''
+                      'CartoDB PositronNoLabels':
+                        checkbox: false
+                        label: ''
+                      'CartoDB PositronOnlyLabels':
+                        checkbox: false
+                        label: ''
+                      'CartoDB DarkMatter':
+                        checkbox: false
+                        label: ''
+                      'CartoDB DarkMatterNoLabels':
+                        checkbox: false
+                        label: ''
+                      'CartoDB DarkMatterOnlyLabels':
+                        checkbox: false
+                        label: ''
+                      'CartoDB Voyager':
+                        checkbox: false
+                        label: ''
+                      'CartoDB VoyagerNoLabels':
+                        checkbox: false
+                        label: ''
+                      'CartoDB VoyagerOnlyLabels':
+                        checkbox: false
+                        label: ''
+                      'CartoDB VoyagerLabelsUnder':
+                        checkbox: false
+                        label: ''
+                    HikeBike:
+                      HikeBike:
+                        checkbox: false
+                        label: ''
+                      'HikeBike HillShading':
+                        checkbox: false
+                        label: ''
+                    BasemapAT:
+                      'BasemapAT basemap':
+                        checkbox: false
+                        label: ''
+                      'BasemapAT grau':
+                        checkbox: false
+                        label: ''
+                      'BasemapAT overlay':
+                        checkbox: false
+                        label: ''
+                      'BasemapAT highdpi':
+                        checkbox: false
+                        label: ''
+                      'BasemapAT orthofoto':
+                        checkbox: false
+                        label: ''
+                    NLS:
+                      NLS:
+                        checkbox: false
+                        label: ''
+                    Wikimedia:
+                      Wikimedia:
+                        checkbox: false
+                        label: ''
+                    GeoportailFrance:
+                      'GeoportailFrance parcels':
+                        checkbox: false
+                        label: ''
+                      'GeoportailFrance ignMaps':
+                        checkbox: false
+                        label: ''
+                      'GeoportailFrance maps':
+                        checkbox: false
+                        label: ''
+                      'GeoportailFrance orthos':
+                        checkbox: false
+                        label: ''
+                  tile_providers_options:
+                    Thunderforest:
+                      apikey: ''
+                    MapBox:
+                      accessToken: ''
+                    HERE:
+                      app_id: ''
+                      app_code: ''
+                    GeoportailFrance:
+                      apikey: ''
+                enabled: false
+              leaflet_control_recenter:
+                weight: 0
+                settings:
+                  position: topright
+                enabled: false
+              leaflet_control_locate:
+                weight: 0
+                settings:
+                  position: topright
+                enabled: false
+              leaflet_control_geocoder:
+                weight: 0
+                settings:
+                  position: topright
+                  geocoder: photon
+                  settings:
+                    label: Adresse
+                    description: 'Saisir l''adresse à localiser.'
+                    location_priority:
+                      lat: null
+                      lng: null
+                enabled: false
+              leaflet_control_fullscreen:
+                weight: 0
+                settings:
+                  position: topright
+                enabled: false
+              leaflet_gesture_handling:
+                weight: 0
+                enabled: false
+              leaflet_disable_user_interaction:
+                weight: 0
+                enabled: false
+              leaflet_client_location_indicator:
+                weight: 0
+                enabled: false
+              leaflet_wms:
+                weight: 0
+                settings:
+                  url: ''
+                  version: 1.1.1
+                  layers: ''
+                  styles: ''
+                  srs: ''
+                  format: image/jpeg
+                  transparent: false
+                  identify: false
+                enabled: false
+            zoom: '14'
+            height: 400px
+            width: 100%
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        filters: false
+        filter_groups: false
+        header: false
+        footer: false
+      display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<a href="/evenements" title="Afficher les événements dans une liste">Vue liste</a>'
+            format: full_html
+          tokenize: false
+      footer: {  }
+      display_extenders: {  }
+      path: evenements/map
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_address_map'
+        - 'config:field.storage.node.field_event_address'
+        - 'config:field.storage.node.field_event_date'
+  page_events_archives:
+    id: page_events_archives
+    display_title: 'Archives évènements'
+    display_plugin: page
+    position: 3
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            event: event
+          group: 1
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Titre
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
           operator: '<'
           value:
             min: ''
@@ -2117,6 +2117,8 @@ display:
             description: ''
             use_operator: false
             operator: field_event_date_value_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: field_event_date_value
             required: false
             remember: false
@@ -2130,11 +2132,9 @@ display:
               webmestre_general: '0'
               admin_dir_com: '0'
               administrator: '0'
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2147,18 +2147,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: datetime
-      defaults:
-        filters: false
-        filter_groups: false
-        footer: false
-        style: false
-        row: false
       filter_groups:
         operator: AND
         groups:
           1: AND
-      footer: {  }
       style:
         type: default
         options:
@@ -2170,6 +2162,16 @@ display:
         options:
           relationship: none
           view_mode: bootstrap_cards
+      defaults:
+        style: false
+        row: false
+        filters: false
+        filter_groups: false
+        footer: false
+      display_description: ''
+      footer: {  }
+      display_extenders: {  }
+      path: evenements-archives
     cache_metadata:
       max-age: -1
       contexts:

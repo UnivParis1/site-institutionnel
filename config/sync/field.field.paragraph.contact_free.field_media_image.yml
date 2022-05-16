@@ -1,0 +1,31 @@
+uuid: 7a46b789-80f3-40e2-97dc-67b5d1382ef7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_image
+    - media.type.image
+    - media.type.mediatheque
+    - paragraphs.paragraphs_type.contact_free
+id: paragraph.contact_free.field_media_image
+field_name: field_media_image
+entity_type: paragraph
+bundle: contact_free
+label: Image
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      mediatheque: mediatheque
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

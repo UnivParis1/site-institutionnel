@@ -38,6 +38,8 @@ dependencies:
     - entity_browser
     - link
     - path
+    - scheduler
+    - scheduler_content_moderation_integration
     - text
 id: node.publication.default
 targetEntityType: node
@@ -61,13 +63,13 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_author_name:
+    type: string_textfield
     weight: 9
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_collection_term:
     type: entity_reference_autocomplete
     weight: 5
@@ -80,88 +82,88 @@ content:
     third_party_settings: {  }
   field_disable_canonical_url:
     type: boolean_checkbox
+    weight: 43
+    region: content
     settings:
       display_label: true
-    weight: 32
-    region: content
     third_party_settings: {  }
   field_format:
+    type: string_textfield
     weight: 15
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_isbn:
+    type: string_textfield
     weight: 12
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_issn:
+    type: string_textfield
     weight: 13
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_media:
+    type: entity_browser_entity_reference
     weight: 3
+    region: content
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity
-      field_widget_display_settings:
-        view_mode: thumbnail_news
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
       field_widget_replace: false
       open: false
+      field_widget_display_settings:
+        view_mode: thumbnail_news
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_nb_pages:
+    type: number
     weight: 14
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_price:
+    type: number
     weight: 17
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_pub_year:
+    type: datetime_default
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_publication_author:
+    type: entity_reference_autocomplete
     weight: 8
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_publication_link:
+    type: link_default
     weight: 19
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_publication_topics:
     type: options_select
     weight: 6
@@ -169,17 +171,17 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_publication_type:
+    type: options_select
     weight: 7
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_publish_master:
     type: boolean_checkbox
+    weight: 42
+    region: content
     settings:
       display_label: true
-    weight: 31
-    region: content
     third_party_settings: {  }
   field_publisher_term:
     type: entity_reference_autocomplete
@@ -192,11 +194,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_publishing_date:
+    type: datetime_default
     weight: 11
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_purchase_link:
     type: link_default
     weight: 18
@@ -207,7 +209,7 @@ content:
     third_party_settings: {  }
   field_sites:
     type: entity_reference_autocomplete
-    weight: 29
+    weight: 40
     region: content
     settings:
       match_operator: CONTAINS
@@ -217,29 +219,29 @@ content:
     third_party_settings: {  }
   field_sites_all:
     type: boolean_checkbox
+    weight: 41
+    region: content
     settings:
       display_label: true
-    weight: 30
-    region: content
     third_party_settings: {  }
   field_subtitle:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_tags:
+    type: entity_reference_autocomplete
     weight: 20
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   langcode:
     type: language_select
     weight: 0
@@ -250,8 +252,8 @@ content:
   moderation_state:
     type: moderation_state_default
     weight: 25
-    settings: {  }
     region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
@@ -259,29 +261,46 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
     weight: 21
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 28
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 27
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -299,12 +318,24 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 26
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_back_cover: true

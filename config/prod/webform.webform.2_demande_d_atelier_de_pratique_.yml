@@ -2,9 +2,9 @@ uuid: 00681189-ef13-47db-ad0a-5cd40bc5e8e0
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 13
 template: false
 archive: false
@@ -12,7 +12,91 @@ id: 2_demande_d_atelier_de_pratique_
 title: '2 - demande d''atelier de pratique à une formation'
 description: 'Des ateliers pratiques peuvent &ecirc;tre organis&eacute;s afin de r&eacute;pondre aux questions de ceux qui ont suivi une formation en ligne.'
 category: ''
-elements: "titre_du_formulaire:\n  '#type': webform_markup\n  '#markup': '<h3>Demande de participation &agrave; un atelier de mise en pratique</h3>'\nbloc_identifiant:\n  '#type': container\n  nom_du_demandeur:\n    '#type': textfield\n    '#title': 'Nom du demandeur'\n    '#autocomplete': ''\n    '#readonly': true\n    '#required': true\n    '#default_value': '[current-user:display-name]'\n  courriel:\n    '#type': textfield\n    '#title': Courriel\n    '#readonly': true\n    '#required': true\n    '#default_value': '[current-user:mail]'\npour_quel_formation:\n  '#type': container\n  pour_quel_logiciel_:\n    '#type': radios\n    '#title': 'Pour quelle formation ?'\n    '#options':\n      Drupal: Drupal\n      Typo3: Typo3\n      Ametys: Ametys\n      'Accessibilité web (RGAA)': 'Accessibilité web (RGAA)'\n      Limesurvey: Limesurvey\n    '#required': true\n  votre_besoin_sur_ce_logiciel_:\n    '#type': radios\n    '#title': 'Votre besoin ?'\n    '#options':\n      'Niveau débutant': 'Niveau débutant -- Vous débutez et vous souhaitez gérer les éléments de base.'\n      'Niveau avancé': 'Niveau avancé -- Vous maîtrisez la base mais vous avez du mal avec la suite.'\n      'Niveau expert': 'Niveau expert -- Vous maîtrisez tout ce qui a été expliqué dans les différentes formations et vous souhaitez aller plus loin.'\n    '#required': true\n  qu_est_ce_que_vous_souhaiteriez_savoir_en_plus_:\n    '#type': textarea\n    '#title': 'Qu''est ce que vous souhaiteriez savoir en plus ?'\n    '#description': 'Le niveau expert &eacute;tant du sur-mesure, il est imp&eacute;ratif d&#39;expliciter le besoin.'\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"votre_besoin_sur_ce_logiciel_\"]':\n          value: 'Niveau expert'\n  si_vous_avez_des_besoins_specifiques_merci_des_les_expliciter_ic:\n    '#type': textarea\n    '#title': 'Si vous avez des besoins spécifiques, merci des les expliciter ici'\ncontainer_organisation:\n  '#type': container\n  avez_vous_des_jours_de_predilections_:\n    '#type': checkboxes\n    '#title': 'Avez-vous des jours de prédilections ?'\n    '#description': 'Si vous avez un ou deux jours dans la semaine qui a votre pr&eacute;f&eacute;rence pour le choix de la journ&eacute;e de cet atelier, merci de l&#39;indiquer.'\n    '#options':\n      Lundi: Lundi\n      Mardi: Mardi\n      Mercredi: Mercredi\n      Jeudi: Jeudi\n      Vendredi: Vendredi\n    '#options_display': buttons\n    '#required': true\n  preferez_vous_le_matin_ou_l_apres_midi_:\n    '#type': select\n    '#title': 'Préferez-vous le matin ou l''après-midi ?'\n    '#options':\n      'Le matin (de 9h30 à 12h30)': 'Le matin (de 9h30 à 12h30)'\n      'L''après-midi (de 13h30 à 16h30)': 'L''après-midi (de 13h30 à 16h30)'\n      'Pas de préférence': 'Pas de préférence'\n    '#required': true\ncontainer_validation:\n  '#type': container\n  terms_of_service:\n    '#type': webform_terms_of_service\n    '#title': 'Je certifie {avoir suivi la formation en ligne dédié au logiciel sélectionné avant l''atelier}.'\n    '#required': true\n    '#terms_title': Obligatoire\n    '#terms_content': 'Afin de ne pas faire perdre de temps aux autres participants, il est obligatoire que vous ayez regard&eacute; en entier la(les) formation(s) en ligne qui porte sur le sujet avant l&#39;atelier. Les formations sont disponibles en haut de cette page.'\nactions:\n  '#type': webform_actions\n  '#title': 'Bouton(s) d''envoi'\n  '#submit__label': 'Envoyer la demande'"
+elements: |-
+  titre_du_formulaire:
+    '#type': webform_markup
+    '#markup': '<h3>Demande de participation &agrave; un atelier de mise en pratique</h3>'
+  bloc_identifiant:
+    '#type': container
+    nom_du_demandeur:
+      '#type': textfield
+      '#title': 'Nom du demandeur'
+      '#autocomplete': ''
+      '#readonly': true
+      '#required': true
+      '#default_value': '[current-user:display-name]'
+    courriel:
+      '#type': textfield
+      '#title': Courriel
+      '#readonly': true
+      '#required': true
+      '#default_value': '[current-user:mail]'
+  pour_quel_formation:
+    '#type': container
+    pour_quel_logiciel_:
+      '#type': radios
+      '#title': 'Pour quelle formation ?'
+      '#options':
+        Drupal: Drupal
+        Typo3: Typo3
+        Ametys: Ametys
+        'Accessibilité web (RGAA)': 'Accessibilité web (RGAA)'
+        Limesurvey: Limesurvey
+      '#required': true
+    votre_besoin_sur_ce_logiciel_:
+      '#type': radios
+      '#title': 'Votre besoin ?'
+      '#options':
+        'Niveau débutant': 'Niveau débutant -- Vous débutez et vous souhaitez gérer les éléments de base.'
+        'Niveau avancé': 'Niveau avancé -- Vous maîtrisez la base mais vous avez du mal avec la suite.'
+        'Niveau expert': 'Niveau expert -- Vous maîtrisez tout ce qui a été expliqué dans les différentes formations et vous souhaitez aller plus loin.'
+      '#required': true
+    qu_est_ce_que_vous_souhaiteriez_savoir_en_plus_:
+      '#type': textarea
+      '#title': 'Qu''est ce que vous souhaiteriez savoir en plus ?'
+      '#description': 'Le niveau expert &eacute;tant du sur-mesure, il est imp&eacute;ratif d&#39;expliciter le besoin.'
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="votre_besoin_sur_ce_logiciel_"]':
+            value: 'Niveau expert'
+    si_vous_avez_des_besoins_specifiques_merci_des_les_expliciter_ic:
+      '#type': textarea
+      '#title': 'Si vous avez des besoins spécifiques, merci des les expliciter ici'
+  container_organisation:
+    '#type': container
+    avez_vous_des_jours_de_predilections_:
+      '#type': checkboxes
+      '#title': 'Avez-vous des jours de prédilections ?'
+      '#description': 'Si vous avez un ou deux jours dans la semaine qui a votre pr&eacute;f&eacute;rence pour le choix de la journ&eacute;e de cet atelier, merci de l&#39;indiquer.'
+      '#options':
+        Lundi: Lundi
+        Mardi: Mardi
+        Mercredi: Mercredi
+        Jeudi: Jeudi
+        Vendredi: Vendredi
+      '#options_display': buttons
+      '#required': true
+    preferez_vous_le_matin_ou_l_apres_midi_:
+      '#type': select
+      '#title': 'Préferez-vous le matin ou l''après-midi ?'
+      '#options':
+        'Le matin (de 9h30 à 12h30)': 'Le matin (de 9h30 à 12h30)'
+        'L''après-midi (de 13h30 à 16h30)': 'L''après-midi (de 13h30 à 16h30)'
+        'Pas de préférence': 'Pas de préférence'
+      '#required': true
+  container_validation:
+    '#type': container
+    terms_of_service:
+      '#type': webform_terms_of_service
+      '#title': 'Je certifie {avoir suivi la formation en ligne dédié au logiciel sélectionné avant l''atelier}.'
+      '#required': true
+      '#terms_title': Obligatoire
+      '#terms_content': 'Afin de ne pas faire perdre de temps aux autres participants, il est obligatoire que vous ayez regard&eacute; en entier la(les) formation(s) en ligne qui porte sur le sujet avant l&#39;atelier. Les formations sont disponibles en haut de cette page.'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +111,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +161,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +171,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +200,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: 'Votre demande a bien été envoyé...'
   confirmation_message: "<strong>Merci d&#39;avoir rempli le formulaire.</strong><br />\r\nCelui-ci vient d&#39;&ecirc;tre transmis au <span><span><a href=\"https://www.pantheonsorbonne.fr/ent/intranet2/drh/formation-et-concours/\" title=\"DRH-SFPC : Service de la formation des personnels et concours (DGED)\">DRH-SFPC</a> (qui g&egrave;re l&#39;organisation de l&#39;atelier) et au Webmaster (qui animera l&#39;atelier).<br />\r\nUn courriel reprennant les informations que vous avez saisi, vous a &eacute;t&eacute; envoy&eacute; sur votre adresse de messagerie.<br />\r\n<br />\r\nBonne journ&eacute;e.</span></span>"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +281,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: 'Courriel à la DRH-SFPC et la DSIUN-PAS'
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +292,17 @@ handlers:
         - completed
       to_mail: concours@univ-paris1.fr
       to_options: {  }
-      cc_mail: lagadic@univ-paris1.fr
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: lagadic@univ-paris1.fr
+      cc_options: {  }
       from_mail: '[webform_submission:values:courriel:raw]'
       from_options: {  }
       from_name: '[webform_submission:values:nom_du_demandeur:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Demande de participation à un atelier de formation Web'
       body: "Ce courriel automatique provient du formulaire qui se trouve sur la page :<br />\r\n<a href=\"https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier\">https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier</a><br />\r\n<br />\r\nEnvoy&eacute; le [webform_submission:created]<br />\r\nEnvoy&eacute; par : [webform_submission:user]<br />\r\nLes valeurs soumises sont :<br />\r\n[webform_submission:values]"
       excluded_elements: {  }
@@ -222,18 +313,14 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
   email_1:
     id: email
+    handler_id: email_1
     label: 'Courriel au demandeur'
     notes: ''
-    handler_id: email_1
     status: true
     conditions: {  }
     weight: 0
@@ -242,13 +329,17 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: concours@univ-paris1.fr
       from_options: {  }
       from_name: DRH-SFPC
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Confirmation envoi formulaire de Demande de participation à un atelier de formation Web'
       body: "<strong>Merci d&#39;avoir rempli le formulaire sur la page :</strong><br />\r\n<a href=\"https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier\">https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/formations-en-ligne-drupal-typo3-ametys#atelier</a><br />\r\n<br />\r\nCe courriel automatique provient du formulaire que vous avez rempli sur cette page et les r&eacute;ponses que vous avez fournies (voir ci-dessous) ont &eacute;t&eacute; envoy&eacute; au <span><span><a href=\"https://www.pantheonsorbonne.fr/ent/intranet2/drh/formation-et-concours/\" title=\"DRH-SFPC : Service de la formation des personnels et concours (DGED)\">DRH-SFPC</a> (qui g&egrave;re l&#39;organisation de l&#39;atelier) et au Webmaster (qui animera l&#39;atelier).</span></span><br />\r\n<br />\r\nFormulaire envoy&eacute; le [webform_submission:created]<br />\r\nLes valeurs soumises sont :<br />\r\n[webform_submission:values]<br />\r\n<br />\r\nMerci et bonne journ&eacute;e."
       excluded_elements: {  }
@@ -259,11 +350,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }
