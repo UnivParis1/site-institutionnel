@@ -647,9 +647,9 @@ class WsGroupsController extends ControllerBase
     }
 
     /**
-     * Get data from Comptex and save page_personnelle node
+     * Set obsia data from Comptex in page_personnelle node.
      * @param $username
-     * @return mixed
+     * @return JsonResponse
      */
     public function setParcoursObsia($username) {
         if (!$this->maintenancePagePersos()) {
@@ -659,7 +659,6 @@ class WsGroupsController extends ControllerBase
             $data['formations'] = \Drupal::request()->query->get('formations');
             $data['projets'] = \Drupal::request()->query->get('projets');
             $data['skills'] = \Drupal::request()->query->get('skills');
-            \Drupal::logger('setParcoursObsia')->info(print_r($data, 1));
 
             $message = $this->updateObsiaFields($username, $data);
         }
@@ -674,9 +673,9 @@ class WsGroupsController extends ControllerBase
     }
 
     /**
-     * Delete data from Comptex and save page_personnelle node
+     * Delete Obsia data if "obsia checkbox" uncheck in Comptex and save page_personnelle node.
      * @param $username
-     * @return void
+     * @return JsonResponse
      */
     public function deleteParcoursObsia($username) {
         if (!$this->maintenancePagePersos()) {
@@ -693,14 +692,14 @@ class WsGroupsController extends ControllerBase
     }
 
     /**
-     * Update fields related to obsia in page perso node
+     * Update fields related to obsia in user's page personelle.
      * @param $username
      * @param $fields
-     * @return void
+     * @return string
      */
     private function updateObsiaFields($username, $fields = []) {
         $user = user_load_by_name($username);
-        $message = "";
+
         if ($user) {
             $query = \Drupal::entityQuery('node')
                 ->condition('type', 'page_personnelle')
@@ -740,10 +739,9 @@ class WsGroupsController extends ControllerBase
     }
 
     /**
-     * Update fields related to obsia in page perso node
+     * Get fields related to obsia in page perso node for a username.
      * @param $username
-     * @param $fields
-     * @return void
+     * @return array
      */
     private function getObsiaFields($username) {
         $user = user_load_by_name($username);
@@ -768,8 +766,10 @@ class WsGroupsController extends ControllerBase
             return $fields;
         }
     }
+    
     /**
-     * @return void
+     * Check if maintenance mode is activate or not.
+     * @return RedirectResponse|FALSE;
      */
     private function maintenancePagePersos() {
         $config = \Drupal::config('up1_pages_personnelles.settings');
