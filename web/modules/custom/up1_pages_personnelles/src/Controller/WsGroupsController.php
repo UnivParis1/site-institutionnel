@@ -676,6 +676,7 @@ class WsGroupsController extends ControllerBase
      */
     private function updateObsiaFields($username, $fields = []) {
         $user = user_load_by_name($username);
+        $message = "";
         if ($user) {
             $query = \Drupal::entityQuery('node')
                 ->condition('type', 'page_personnelle')
@@ -703,12 +704,15 @@ class WsGroupsController extends ControllerBase
                 else {
                   $message = t('An error has occured while updating the page perso.');
                 }
-              return new JsonResponse([ 'data' => [ 'username' => $username, 'message' => $message ], 'method' => 'GET', 'status'=> 200]);
+            }
+            else {
+              $message = t('%username doesn\'t have page personnelle', ['%username' => $username]);
             }
         }
         else {
-          return new JsonResponse([ 'data' => [ 'username' => $username, 'message' => t('Error') ], 'method' => 'GET', 'status'=> 200]);
+          $message = t('No user with the username %username exists here. ', ['%username' => $username]);
         }
+      return new JsonResponse([ 'data' => [ 'username' => $username, 'message' => $message ], 'method' => 'GET', 'status'=> 200]);
     }
 
     /**
