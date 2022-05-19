@@ -8,8 +8,10 @@ use Drupal\Core\Queue\QueueWorkerManager;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\micro_site\Entity\Site;
+use Drupal\node\Entity\Node;
 
 define("IMPORT_USER_SIZE", 150);
 define("IMPORT_DATA_SIZE", 50);
@@ -428,425 +430,6 @@ class WsGroupsController extends ControllerBase
   }
 
   /**
-   * Get all Typo3 fields group by user and create queue items.
-   *
-   * @return array
-   */
-  public function populatePagePersoUsers()
-  {
-    $users = $this->wsGroupsService->getAllUsers();
-
-    //Select all Typo3 fields by user.
-    foreach ($users as $user) {
-      $data[] = $this->selectFeUsers($user['uid']);
-    }
-
-    $queue = $this->queueFactory->get('up1_typo3_data_queue');
-
-    //Charge queue items.
-    foreach ($data as $datum) {
-      $queue->createItem($datum);
-    }
-
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
-    ];
-  }
-
-  public function batchPopulatePagePerso() {
-    $batch = [
-      'title' => $this->t('Process populating pages persos with Typo3 data'),
-      'operations' => [],
-      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosFinished',
-    ];
-    $queue_factory = \Drupal::service('queue');
-    $queue = $queue_factory->get('up1_typo3_data_queue');
-
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
-      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPagesPersosProcess', []];
-    }
-    batch_set($batch);
-
-    return batch_process('<front>');
-  }
-
-  /**
-   * Batch Pages persos process.
-   * @param $context
-   */
-  public function batchPagesPersosProcess(&$context){
-
-    // We can't use here the Dependency Injection solution
-    // so we load the necessary services in the other way
-    $queue_factory = \Drupal::service('queue');
-    $queue_manager = \Drupal::service('plugin.manager.queue_worker');
-
-    // Get the queue implementation for import_content_from_xml queue
-    $queue = $queue_factory->get('up1_typo3_data_queue');
-    // Get the queue worker
-    $queue_worker = $queue_manager->createInstance('up1_typo3_data_queue');
-
-    // Get the number of items
-    $number_of_items = ($queue->numberOfItems() < IMPORT_DATA_SIZE) ? $queue->numberOfItems() : IMPORT_DATA_SIZE;
-
-    // Repeat $number_of_queue times
-    for ($i = 0; $i < $number_of_items; $i++) {
-      // Get a queued item
-      if ($item = $queue->claimItem()) {
-        try {
-          // Process it
-          $queue_worker->processItem($item->data);
-          // If everything was correct, delete the processed item from the queue
-          $queue->deleteItem($item);
-        }
-        catch (SuspendQueueException $e) {
-          // If there was an Exception trown because of an error
-          // Releases the item that the worker could not process.
-          // Another worker can come and process it
-          $queue->releaseItem($item);
-          break;
-        }
-      }
-    }
-  }
-
-  /**
-   * Batch finished callback.
-   * @param $success
-   * @param $results
-   * @param $operations
-   */
-  public static function batchPagesPersosFinished($success, $results, $operations)
-  {
-    if ($success) {
-      \Drupal::messenger()->addStatus(t("The Typo3 data haved been successfully imported from Typo3 database."));
-    } else {
-      $error_operation = reset($operations);
-      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
-    }
-  }
-
-  /**
-   * Get Typo3 publications field create queue items.
-   *
-   * @return array
-   */
-  public function importPublications()
-  {
-    $users = $this->wsGroupsService->getAllUsers();
-
-    //Select all Typo3 fields by user.
-    foreach ($users as $user) {
-      $publications = $this->selectPublications($user['uid']);
-      if ($publications) {
-        $data[] = $publications;
-      }
-    }
-
-    $queue = $this->queueFactory->get('up1_typo3_publications_queue');
-
-    //Charge queue items.
-    foreach ($data as $datum) {
-      $queue->createItem($datum);
-    }
-
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
-    ];
-  }
-
-  public function batchImportPublications() {
-    $batch = [
-      'title' => $this->t('Process pages persos publications field with Typo3'),
-      'operations' => [],
-      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPublicationsFinished',
-    ];
-    $queue_factory = \Drupal::service('queue');
-    $queue = $queue_factory->get('up1_typo3_publications_queue');
-
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
-      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPublicationsProcess', []];
-    }
-    batch_set($batch);
-
-    return batch_process('<front>');
-  }
-
-  /**
-   * Batch publications process.
-   * @param $context
-   */
-  public static function batchPublicationsProcess(&$context){
-
-    // We can't use here the Dependency Injection solution
-    // so we load the necessary services in the other way
-    $queue_factory = \Drupal::service('queue');
-    $queue_manager = \Drupal::service('plugin.manager.queue_worker');
-
-    // Get the queue implementation for import_content_from_xml queue
-    $queue = $queue_factory->get('up1_typo3_publications_queue');
-    // Get the queue worker
-    $queue_worker = $queue_manager->createInstance('up1_typo3_publications_queue');
-
-    // Get the number of items
-    $number_of_items = ($queue->numberOfItems() < IMPORT_DATA_SIZE) ? $queue->numberOfItems() : IMPORT_DATA_SIZE;
-
-    // Repeat $number_of_queue times
-    for ($i = 0; $i < $number_of_items; $i++) {
-      // Get a queued item
-      if ($item = $queue->claimItem()) {
-        try {
-          // Process it
-          $queue_worker->processItem($item->data);
-          // If everything was correct, delete the processed item from the queue
-          $queue->deleteItem($item);
-        } catch (SuspendQueueException $e) {
-          // If there was an Exception trown because of an error
-          // Releases the item that the worker could not process.
-          // Another worker can come and process it
-          $queue->releaseItem($item);
-          break;
-        }
-      }
-    }
-  }
-
-  /**
-   * Batch finished callback.
-   * @param $success
-   * @param $results
-   * @param $operations
-   */
-  public static function batchPublicationsFinished($success, $results, $operations)
-  {
-    if ($success) {
-      \Drupal::messenger()->addStatus(t("The Typo3 publications haved been successfully imported from Typo3 database."));
-    } else {
-      $error_operation = reset($operations);
-      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
-    }
-  }
-
-  /**
-   * Get Typo3 publications field create queue items.
-   *
-   * @return array
-   */
-  public function importResume() {
-    $users = $this->wsGroupsService->getAllUsers();
-
-    //Select all Typo3 fields by user.
-    foreach ($users as $user) {
-      $resume = $this->selectResume($user['uid']);
-      if ($resume) {
-        $data[] = $resume;
-      }
-    }
-
-    $queue = $this->queueFactory->get('up1_typo3_resume_queue');
-
-    //Charge queue items.
-    foreach ($data as $datum) {
-      $queue->createItem($datum);
-    }
-
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
-    ];
-  }
-
-  public function batchImportResume() {
-    $batch = [
-      'title' => $this->t('Process pages persos resume text field with Typo3'),
-      'operations' => [],
-      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchResumeFinished',
-    ];
-    $queue_factory = \Drupal::service('queue');
-    $queue = $queue_factory->get('up1_typo3_resume_queue');
-
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
-      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchResumeProcess', []];
-    }
-    batch_set($batch);
-
-    return batch_process('<front>');
-  }
-
-  /**
-   * Batch publications process.
-   * @param $context
-   */
-  public static function batchResumeProcess(&$context){
-
-    // We can't use here the Dependency Injection solution
-    // so we load the necessary services in the other way
-    $queue_factory = \Drupal::service('queue');
-    $queue_manager = \Drupal::service('plugin.manager.queue_worker');
-
-    // Get the queue implementation for import_content_from_xml queue
-    $queue = $queue_factory->get('up1_typo3_resume_queue');
-    // Get the queue worker
-    $queue_worker = $queue_manager->createInstance('up1_typo3_resume_queue');
-
-    // Get the number of items
-    $number_of_items = ($queue->numberOfItems() < IMPORT_DATA_SIZE) ? $queue->numberOfItems() : IMPORT_DATA_SIZE;
-
-    // Repeat $number_of_queue times
-    for ($i = 0; $i < $number_of_items; $i++) {
-      // Get a queued item
-      if ($item = $queue->claimItem()) {
-        try {
-          // Process it
-          $queue_worker->processItem($item->data);
-          // If everything was correct, delete the processed item from the queue
-          $queue->deleteItem($item);
-        } catch (SuspendQueueException $e) {
-          // If there was an Exception trown because of an error
-          // Releases the item that the worker could not process.
-          // Another worker can come and process it
-          $queue->releaseItem($item);
-          break;
-        }
-      }
-    }
-  }
-
-  /**
-   * Batch finished callback.
-   * @param $success
-   * @param $results
-   * @param $operations
-   */
-  public static function batchResumeFinished($success, $results, $operations)
-  {
-    if ($success) {
-      \Drupal::messenger()->addStatus(t("The Typo3 resume text haved been successfully imported from Typo3 database."));
-    } else {
-      $error_operation = reset($operations);
-      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
-    }
-  }
-
-  /**
-   * Get Typo3 english resume & education field create queue items.
-   *
-   * @return array
-   */
-  public function importLastFields() {
-    $users = $this->wsGroupsService->getAllUsers();
-
-    //Select all Typo3 fields by user.
-    foreach ($users as $user) {
-      $epi_education = $this->selectEpiAndEducation($user['uid']);
-      if ($epi_education) {
-        $data[] = $epi_education;
-      }
-
-    }
-
-    $queue = $this->queueFactory->get('up1_typo3_last_fields_queue');
-
-    //Charge queue items.
-    foreach ($data as $datum) {
-      $queue->createItem($datum);
-    }
-
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
-    ];
-  }
-
-  public function batchImportLastFields() {
-    $batch = [
-      'title' => $this->t('Process pages persos english resume & education field with Typo3'),
-      'operations' => [],
-      'finished' => '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::LastFieldsFinished',
-    ];
-    $queue_factory = \Drupal::service('queue');
-    $queue = $queue_factory->get('up1_typo3_last_fields_queue');
-
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_DATA_SIZE); $i++) {
-      $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::LastFieldsProcess', []];
-    }
-    batch_set($batch);
-
-    return batch_process('/admin/content/pages-persos');
-  }
-
-  /**
-   * Batch publications process.
-   * @param $context
-   */
-  public static function batchLastFieldsProcess(&$context){
-
-    // We can't use here the Dependency Injection solution
-    // so we load the necessary services in the other way
-    $queue_factory = \Drupal::service('queue');
-    $queue_manager = \Drupal::service('plugin.manager.queue_worker');
-
-    // Get the queue implementation for import_content_from_xml queue
-    $queue = $queue_factory->get('up1_typo3_last_fields_queue');
-    // Get the queue worker
-    $queue_worker = $queue_manager->createInstance('up1_typo3_last_fields_queue');
-
-    // Get the number of items
-    $number_of_items = ($queue->numberOfItems() < IMPORT_DATA_SIZE) ? $queue->numberOfItems() : IMPORT_DATA_SIZE;
-
-    // Repeat $number_of_queue times
-    for ($i = 0; $i < $number_of_items; $i++) {
-      // Get a queued item
-      if ($item = $queue->claimItem()) {
-        try {
-          // Process it
-          $queue_worker->processItem($item->data);
-          // If everything was correct, delete the processed item from the queue
-          $queue->deleteItem($item);
-        } catch (SuspendQueueException $e) {
-          // If there was an Exception trown because of an error
-          // Releases the item that the worker could not process.
-          // Another worker can come and process it
-          $queue->releaseItem($item);
-          break;
-        }
-      }
-    }
-  }
-
-  /**
-   * Batch finished callback.
-   * @param $success
-   * @param $results
-   * @param $operations
-   */
-  public static function batchLastFieldsFinished($success, $results, $operations) {
-    if ($success) {
-      \Drupal::messenger()->addStatus(t("The Typo3 english resume & education field haved been successfully imported from Typo3 database."));
-    } else {
-      $error_operation = reset($operations);
-      \Drupal::messenger()->addError(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
-    }
-  }
-
-  /**
-   * Delete queues 'up1_page_perso_queue', 'up1_typo3_data_queue', 'up1_typo3_resume_queue', 'up1_typo3_publications_queue' & 'up1_typo3_last_fields_queue'.
-   */
-  public function deleteTheQueue() {
-    $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
-    $this->queueFactory->get('up1_typo3_data_queue')->deleteQueue();
-    $this->queueFactory->get('up1_typo3_publications_queue')->deleteQueue();
-    $this->queueFactory->get('up1_typo3_resume_queue')->deleteQueue();
-    $this->queueFactory->get('up1_typo3_last_fields_queue')->deleteQueue();
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('All Typo3 queues have been deleted'),
-    ];
-  }
-
-  /**
    * Delete queue 'up1_page_perso_queue'.
    */
   public function deletePagePersoQueue() {
@@ -884,115 +467,6 @@ class WsGroupsController extends ControllerBase
       $response = new RedirectResponse($goto);
       return $response->send();
     }
-  }
-
-  private function selectFeUsers($username)
-  {
-    $query = $this->database->select('fe_users', 'fu');
-    $fields = [
-      'username',
-      'tx_oxcspagepersonnel_courriel',
-      'tx_oxcspagepersonnel_responsabilites_scientifiques',
-      'tx_oxcspagepersonnel_sujet_these',
-      'tx_oxcspagepersonnel_projets_recherche',
-      'tx_oxcspagepersonnel_directeur_these',
-      'tx_oxcspagepersonnel_epi',
-      'tx_oxcspagepersonnel_cv',
-      'tx_oxcspagepersonnel_directions_these',
-      'tx_oxcspagepersonnel_page_externe_url',
-      'tx_oxcspagepersonnel_themes_recherche',
-    ];
-    $query->fields('fu', $fields);
-    $query->condition('username', $username, 'LIKE');
-    $result = $query->execute()->fetchObject();
-
-    return $result;
-  }
-
-  private function selectPublications($username)
-  {
-    $query = $this->database->select('fe_users', 'fu');
-    $fields = [
-      'username',
-      'tx_oxcspagepersonnel_publications',
-    ];
-    $query->fields('fu', $fields);
-    $query->condition('username', $username, 'LIKE');
-    $query->condition('tx_oxcspagepersonnel_publications', '', '<>');
-    $result = $query->execute()->fetchObject();
-
-    return $result;
-  }
-
-  private function selectResume($username)
-  {
-    $query = $this->database->select('fe_users', 'fu');
-    $fields = [
-      'username',
-      'tx_oxcspagepersonnel_cv2',
-    ];
-    $query->fields('fu', $fields);
-    $query->condition('username', $username, 'LIKE');
-    $query->condition('tx_oxcspagepersonnel_cv2', '', '<>');
-    $result = $query->execute()->fetchObject();
-
-    return $result;
-  }
-
-  /**
-   * @param $username
-   * @return mixed
-   */
-  private function selectEpiAndEducation($username)
-  {
-    $query = $this->database->select('fe_users', 'fu');
-    $fields = [
-      'username',
-      'tx_oxcspagepersonnel_epi',
-      'tx_oxcspagepersonnel_anglais'
-    ];
-    $query->fields('fu', $fields);
-    $query->condition('username', $username, 'LIKE');
-
-    $orGroup = $query->orConditionGroup()
-      ->condition('tx_oxcspagepersonnel_epi', '', '<>')
-      ->condition('tx_oxcspagepersonnel_anglais', '', '<>');
-
-    $query->condition($orGroup);
-
-    $result = $query->execute()->fetchObject();
-
-    return $result;
-  }
-
-  public function createMissingPagePerso($username)
-  {
-    return $this->selectUserData($username);
-  }
-
-  private function selectUserData($username)
-  {
-    $query = $this->database->select('fe_users', 'fu');
-    $fields = [
-      'username',
-      'tx_oxcspagepersonnel_courriel',
-      'tx_oxcspagepersonnel_responsabilites_scientifiques',
-      'tx_oxcspagepersonnel_sujet_these',
-      'tx_oxcspagepersonnel_projets_recherche',
-      'tx_oxcspagepersonnel_directeur_these',
-      'tx_oxcspagepersonnel_epi',
-      'tx_oxcspagepersonnel_cv',
-      'tx_oxcspagepersonnel_directions_these',
-      'tx_oxcspagepersonnel_page_externe_url',
-      'tx_oxcspagepersonnel_themes_recherche',
-      'tx_oxcspagepersonnel_publications',
-      'tx_oxcspagepersonnel_cv2'
-    ];
-    $query->fields('fu', $fields);
-    $query->condition('username', $username, 'LIKE');
-    $result = $query->execute()->fetchObject();
-
-    return $result;
   }
 
   public function equipeDispatch()
@@ -1095,7 +569,7 @@ class WsGroupsController extends ControllerBase
           });
           if (!empty($key_search)) {
             $key_search = reset($key_search);
-            $result = $key_search['description'];
+            $result = $key_search[0]['description'];
           }
         }
         break;
@@ -1128,6 +602,159 @@ class WsGroupsController extends ControllerBase
         break;
     }
     return $result;
+  }
+
+  /**
+   * Get data from Drupal to display it on Comptex page
+   * @param $username
+   * @return mixed
+   */
+  public function getParcoursObsia($username) {
+    if (!$this->maintenancePagePersos()) {
+      return new JsonResponse([ 'data' => $this->getObsiaFields($username), 'method' => 'GET', 'status'=> 200]);
+    }
+    else {
+      return new JsonResponse([
+        'data' => t('Pages personnelles are not available for modifications. Please try later.'),
+        'method' => 'GET',
+        'status' => 200
+      ]);
+    }
+  }
+
+  /**
+   * Set obsia data from Comptex in page_personnelle node.
+   * @param $username
+   * @return JsonResponse
+   */
+  public function setParcoursObsia($username) {
+    if (!$this->maintenancePagePersos()) {
+      $data = [];
+
+      $data['bio'] = \Drupal::request()->query->get('bio');
+      $data['formations'] = \Drupal::request()->query->get('formations');
+      $data['projets'] = \Drupal::request()->query->get('projets');
+      $data['skills'] = \Drupal::request()->query->get('skills');
+
+      $message = $this->updateObsiaFields($username, $data);
+    }
+    else {
+      $message = t('Pages personnelles are not available for modifications. Please try later.');
+    }
+    return new JsonResponse([
+      'data' => [ 'username' => $username, 'message' => $message ],
+      'method' => 'GET',
+      'status'=> 200
+    ]);
+  }
+
+  /**
+   * Delete Obsia data if "obsia checkbox" uncheck in Comptex and save page_personnelle node.
+   * @param $username
+   * @return JsonResponse
+   */
+  public function deleteParcoursObsia($username) {
+    if (!$this->maintenancePagePersos()) {
+      $message = $this->updateObsiaFields($username);
+    }
+    else {
+      $message = t('Pages personnelles are not available for modifications. Please try later.');
+    }
+    return new JsonResponse([
+      'data' => [ 'username' => $username, 'message' => $message ],
+      'method' => 'GET',
+      'status'=> 200
+    ]);
+  }
+
+  /**
+   * Update fields related to obsia in user's page personelle.
+   * @param $username
+   * @param $fields
+   * @return string
+   */
+  private function updateObsiaFields($username, $fields = []) {
+    $user = user_load_by_name($username);
+
+    if ($user) {
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'page_personnelle')
+        ->condition('uid', $user->id());
+      $result = $query->execute();
+      if (!empty($result) && count($result) == 1) {
+        $nid = reset($result);
+        $page_perso = Node::load($nid);
+        if (!empty($fields)) {
+          if (!empty($fields['bio'])) $page_perso->set('field_short_bio', $fields['bio']);
+          if (!empty($fields['formations'])) $page_perso->set('field_formations_ia', $fields['formations']);
+          if (!empty($fields['projets'])) $page_perso->set('field_projects_ia', $fields['projets']);
+          if (!empty($fields['skills'])) $page_perso->set('field_ia_skills', explode(',', $fields['skills']));
+        }
+        else {
+          $page_perso->set('field_short_bio', NULL);
+          $page_perso->set('field_formations_ia', NULL);
+          $page_perso->set('field_projects_ia', NULL);
+          $page_perso->set('field_ia_skills',  NULL);
+        }
+
+        if ($page_perso->save()) {
+          $message = t('The page perso has been successfully updated.');
+        }
+        else {
+          $message = t('An error has occured while updating the page perso.');
+        }
+      }
+      else {
+        $message = t('%username doesn\'t have page personnelle', ['%username' => $username]);
+      }
+    }
+    else {
+      $message = t('No user with the username %username exists here. ', ['%username' => $username]);
+    }
+    return $message;
+  }
+
+  /**
+   * Get fields related to obsia in page perso node for a username.
+   * @param $username
+   * @return array
+   */
+  private function getObsiaFields($username) {
+    $user = user_load_by_name($username);
+    $fields = [];
+    if ($user) {
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'page_personnelle')
+        ->condition('uid', $user->id());
+      $nids = $query->execute();
+      if ($nids) {
+        foreach ($nids as $nid) {
+          $page_perso = Node::load($nid);
+          $fields[] = [
+            'username' => $username,
+            'bio' => $page_perso->field_short_bio->getValue(),
+            'formations' => $page_perso->field_formations_ia->getValue(),
+            'projets' => $page_perso->field_projects_ia->getValue(),
+            'skills' => $page_perso->field_ia_skills->getValue()
+          ];
+        }
+      }
+      return $fields;
+    }
+  }
+
+  /**
+   * Check if maintenance mode is activate or not.
+   * @return RedirectResponse|FALSE;
+   */
+  private function maintenancePagePersos() {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $maintenance = $config->get('activate_maintenance');
+    if ($maintenance) {
+      $response = new RedirectResponse("https://majtrantor.univ-paris1.fr/miseajourpageperso.html");
+      return $response->send();
+    }
+    else return FALSE;
   }
 }
 
