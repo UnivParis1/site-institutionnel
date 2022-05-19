@@ -80,51 +80,49 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
    * {@inheritDoc}
    */
   public function processItem($item) {
-    $cas_settings = \Drupal::config('cas.settings');
-    $cas_user_manager = \Drupal::service('cas.user_manager');
+    switch ($item['case']) {
+      case 'new-ecd' :
+        $cas_settings = \Drupal::config('cas.settings');
+        $cas_user_manager = \Drupal::service('cas.user_manager');
 
-    $user = user_load_by_name($item['uid']);
-    if (!$user) {
-      $user_properties = [
-        'roles' => ['enseignant_doctorant'],
-      ];
-      $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
-      if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
-        $user_properties['mail'] = $item['mail'];
-      }
-      try {
-        $cas_user_manager->register($item['uid'], $user_properties);
-      } catch (CasLoginException $e) {
-        \Drupal::logger('cas')->error('CasLoginException when
+        $user_properties = [
+          'roles' => ['enseignant_doctorant'],
+        ];
+        $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
+        if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
+          $user_properties['mail'] = $item['mail'];
+        }
+        try {
+          $user = $cas_user_manager->register($item['uid'], $user_properties);
+          $this->createNode($user->id(), $item);
+        } catch (CasLoginException $e) {
+          \Drupal::logger('cas')->error('CasLoginException when
         registering user with name %name: %e', [
-          '%name' => $item['uid'],
-          '%e' => $e->getMessage()
-        ]);
-        return;
-      }
-    }
-    else {
-      $author = $user->id();
-
-      $values = \Drupal::entityQuery('node')
-        ->condition('type', 'page_personnelle')
-        ->condition('uid', $author)
-        ->execute();
-      if (empty($values)) {
-        $storage = $this->entityTypeManager->getStorage('node');
-        $node = $storage->create([
-          'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
-          'type' => 'page_personnelle',
-          'langcode' => 'fr',
-          'uid' => $author,
-          'status' => 1,
-          'field_uid_ldap' => $item['uid'],
-          'site_id' => NULL,
-        ]);
-
-        $node->save();
-      }
+            '%name' => $item['uid'],
+            '%e' => $e->getMessage()
+          ]);
+          return;
+        }
+        break;
+      case 'no-pp':
+        $user = $item['user'];
+        $this->createNode($user->id(), $item);
+        break;
     }
   }
 
+  private function createNode($uid, $data) {
+    $storage = $this->entityTypeManager->getStorage('node');
+    $node = $storage->create([
+      'title' => $data['supannCivilite'] . ' ' . $data['displayName'],
+      'type' => 'page_personnelle',
+      'langcode' => 'fr',
+      'uid' => $uid,
+      'status' => 1,
+      'field_uid_ldap' => $data['uid'],
+      'site_id' => NULL,
+    ]);
+
+    $node->save();
+  }
 }

@@ -346,13 +346,28 @@ class WsGroupsController extends ControllerBase
    */
   public function createPagePersoUsers()
   {
-    $users = $this->wsGroupsService->getAllUsers();
-    $cas_user_manager = \Drupal::service('cas.user_manager');
-
+    $users_ws_groups = $this->wsGroupsService->getAllUsers();
     $queue = $this->queueFactory->get('up1_page_perso_queue');
 
-    foreach ($users as $user) {
-      $queue->createItem($user);
+    foreach ($users_ws_groups as $user_ws_groups) {
+      $user = user_load_by_name($user_ws_groups['uid']);
+      $user_ws_groups['case'] = 'new-ecd';
+      if (!$user) {
+        $queue->createItem($user_ws_groups);
+      }
+      else {
+        $author = $user->id();
+
+        $values = \Drupal::entityQuery('node')
+          ->condition('type', 'page_personnelle')
+          ->condition('uid', $author)
+          ->execute();
+        if (empty($values)) {
+          $user_ws_groups['case'] = 'no-pp';
+          $user_ws_groups['user'] = $user;
+          $queue->createItem($user_ws_groups);
+        }
+      }
     }
 
     return [
