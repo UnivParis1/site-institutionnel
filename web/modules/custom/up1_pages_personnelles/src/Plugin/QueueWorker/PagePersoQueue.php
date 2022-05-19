@@ -83,26 +83,27 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
     $cas_settings = \Drupal::config('cas.settings');
     $cas_user_manager = \Drupal::service('cas.user_manager');
 
-    $user_properties = [
-      'roles' => ['enseignant_doctorant'],
-    ];
-    $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
-    if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
-      $user_properties['mail'] = $item['mail'];
-    }
-    try {
-      $cas_user_manager->register($item['uid'], $user_properties);
-    } catch (CasLoginException $e) {
-      \Drupal::logger('cas')->error('CasLoginException when
-        registering user with name %name: %e', [
-        '%name' => $item['uid'],
-        '%e' => $e->getMessage()
-      ]);
-      return;
-    }
-
     $user = user_load_by_name($item['uid']);
-    if ($user) {
+    if (!$user) {
+      $user_properties = [
+        'roles' => ['enseignant_doctorant'],
+      ];
+      $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
+      if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
+        $user_properties['mail'] = $item['mail'];
+      }
+      try {
+        $cas_user_manager->register($item['uid'], $user_properties);
+      } catch (CasLoginException $e) {
+        \Drupal::logger('cas')->error('CasLoginException when
+        registering user with name %name: %e', [
+          '%name' => $item['uid'],
+          '%e' => $e->getMessage()
+        ]);
+        return;
+      }
+    }
+    else {
       $author = $user->id();
 
       $values = \Drupal::entityQuery('node')
