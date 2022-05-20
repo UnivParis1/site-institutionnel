@@ -700,19 +700,22 @@ class WsGroupsController extends ControllerBase
       ->condition('roles', 'enseignant_doctorant')
       ->execute();
     $users = User::loadMultiple($ids);
+    \Drupal::logger('count_drupal_users')->info(count($users));
+    \Drupal::logger('count_wsgroups_users')->info(count($users_ws_groups));
 
     foreach($users as $user) {
       if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
+        unset($users[$user->id()]);
         \Drupal::logger('syncLdap_still')->info($user->get('name')->value . " still exists. ");
       }
       else {
         \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . " has to be disabled. ");
-        $to_delete[] = $user;
+        $to_delete[$user->id()] = $user->get('name')->value;
       }
     }
 
     return new JsonResponse([
-      'data' => $to_delete,
+      'data' => ['count_users_to_delete' => count($to_delete), 'users_drupal' => count($users), 'users_to_delete' => $to_delete],
       'method' => 'GET',
       'status'=> 200
     ]);
