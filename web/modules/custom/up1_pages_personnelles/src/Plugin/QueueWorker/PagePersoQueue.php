@@ -77,6 +77,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
   }
 
   /**
+   * Creates CAS user account & the associated page.
    * {@inheritDoc}
    */
   public function processItem($item) {
@@ -91,6 +92,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user_properties['mail'] = $item['mail'];
     }
     try {
+      // function register() : This has to be changed if cas module evolves.
       $user = $cas_user_manager->register($item['uid'], $item['uid'], $user_properties);
       $storage = $this->entityTypeManager->getStorage('node');
       $node = $storage->create([

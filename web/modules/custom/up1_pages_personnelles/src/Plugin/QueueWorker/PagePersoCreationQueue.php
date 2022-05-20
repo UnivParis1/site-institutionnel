@@ -77,6 +77,7 @@ class PagePersoCreationQueue extends QueueWorkerBase implements ContainerFactory
   }
 
   /**
+   * Create missing page perso for registered ECD.
    * {@inheritDoc}
    */
   public function processItem($data) {

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\micro_site\Entity\Site;
 use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
 
 
 define("IMPORT_USER_SIZE", 150);
@@ -686,6 +687,32 @@ class WsGroupsController extends ControllerBase
     }
     return new JsonResponse([
       'data' => [ 'username' => $username, 'message' => $message ],
+      'method' => 'GET',
+      'status'=> 200
+    ]);
+  }
+
+  public function syncLdap() {
+    $to_delete = [];
+    $users_ws_groups = $this->wsGroupsService->getAllUsers();
+    $ids = \Drupal::entityQuery('user')
+      ->condition('status', 1)
+      ->condition('roles', 'enseignant_doctorant')
+      ->execute();
+    $users = User::loadMultiple($ids);
+
+    foreach($users as $user) {
+      if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
+        \Drupal::logger('syncLdap')->info($user->get('name')->value . " still exists. ");
+      }
+      else {
+        \Drupal::logger('syncLdap')->info($user->get('name')->value . " has to be disabled. ");
+        $to_delete[] = $user;
+      }
+    }
+
+    return new JsonResponse([
+      'data' => $to_delete,
       'method' => 'GET',
       'status'=> 200
     ]);

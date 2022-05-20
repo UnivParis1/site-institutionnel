@@ -148,6 +148,7 @@ up1_pages_personnelles.bulk_import_page_perso:
   options:
     _admin_route: TRUE
 
+# API pour Comptex
 up1_pages_personnelles.obsia:
   path: '/mon-parcours-obsia/{username}'
   defaults:
@@ -156,6 +157,7 @@ up1_pages_personnelles.obsia:
   requirements:
     _access: 'TRUE'
 
+# API pour Comptex
 up1_pages_personnelles.delete_obsia:
   path: '/supprimer-parcours-obsia/{username}'
   defaults:
@@ -164,11 +166,21 @@ up1_pages_personnelles.delete_obsia:
   requirements:
     _access: 'TRUE'
 
+# API pour Comptex
 up1_pages_personnelles.get_obsia_fields:
   path: '/get-parcours-obsia/{username}'
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getParcoursObsia'
     _title: 'Parcours Obsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
+#Script de mise à jour des pages persos en fonction du ldap.
+up1_pages_personnelles.sync_ldap:
+  path: '/pages-persos/sync-ldap'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::syncLdap'
   methods: [GET]
   requirements:
     _access: 'TRUE'
