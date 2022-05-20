@@ -91,7 +91,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user_properties['mail'] = $item['mail'];
     }
     try {
-      $user = $cas_user_manager->register($item['uid'], $user_properties, $item['uid']);
+      $user = $cas_user_manager->register($item['uid'], $item['uid'], $user_properties);
       $storage = $this->entityTypeManager->getStorage('node');
       $node = $storage->create([
         'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
