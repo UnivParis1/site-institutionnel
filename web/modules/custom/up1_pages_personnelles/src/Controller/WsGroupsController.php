@@ -347,32 +347,33 @@ class WsGroupsController extends ControllerBase
   public function createPagePersoUsers()
   {
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
-    $queue = $this->queueFactory->get('up1_page_perso_queue');
+    //ECD does not exists. We have to create both user & node page perso.
+    $queue_user_node = $this->queueFactory->get('up1_page_perso_queue');
+    //ECD exists. We just create the node page perso.
+    $queue_node = $this->queueFactory->get('up1_page_perso_node_creation_queue');
 
     foreach ($users_ws_groups as $user_ws_groups) {
       $user = user_load_by_name($user_ws_groups['uid']);
-      $user_ws_groups['case'] = 'new-ecd';
       if (!$user) {
-        $queue->createItem($user_ws_groups);
+        $queue_user_node->createItem($user_ws_groups);
       }
       else {
         $author = $user->id();
-
         $values = \Drupal::entityQuery('node')
           ->condition('type', 'page_personnelle')
           ->condition('uid', $author)
           ->execute();
         if (empty($values)) {
-          $user_ws_groups['case'] = 'no-pp';
           $user_ws_groups['user'] = $user;
-          $queue->createItem($user_ws_groups);
+          $queue_node->createItem($user_ws_groups);
         }
       }
     }
 
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
+      '#markup' => $this->t('@user_node users with page persos will be created. @node users don\'t have pages perso. ',
+        ['@user_node' => $queue_user_node->numberOfItems(),'@node' => $queue_node->numberOfItems()]),
     ];
   }
 
@@ -450,26 +451,15 @@ class WsGroupsController extends ControllerBase
   }
 
   /**
-   * Delete queues 'up1_page_perso_queue', 'up1_typo3_data_queue', 'up1_typo3_resume_queue', 'up1_typo3_publications_queue' & 'up1_typo3_last_fields_queue'.
-   */
-  public function deleteTheQueue()
-  {
-    $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('All Typo3 queues have been deleted'),
-    ];
-  }
-
-  /**
    * Delete queue 'up1_page_perso_queue'.
    */
   public function deletePagePersoQueue()
   {
     $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
+    $this->queueFactory->get('up1_page_perso_node_creation_queue')->deleteQueue();
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('Up1 Page Perso queue has been deleted'),
+      '#markup' => $this->t('Up1 Page Perso queues has been deleted'),
     ];
   }
 

@@ -16,9 +16,9 @@ use \Drupal\user\Entity\User;
  * Executes users (enseignants & doctorants) import from web service.
  *
  * @QueueWorker(
- *   id = "up1_page_perso_queue",
- *   title = @Translation("User does not exists. Script for User & Page Perso creation."),
- *   cron = {"time" = 60}
+ *   id = "up1_page_perso_node_creation_queue",
+ *   title = @Translation("User already exists. Only create his Page Perso"),
+ *   cron = {"time" = 30}
  *  )
  */
 class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
@@ -79,37 +79,19 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
   /**
    * {@inheritDoc}
    */
-  public function processItem($item) {
-    $cas_settings = \Drupal::config('cas.settings');
-    $cas_user_manager = \Drupal::service('cas.user_manager');
+  public function processItem($data) {
+    $user = $data['user'];
+    $storage = $this->entityTypeManager->getStorage('node');
+    $node = $storage->create([
+      'title' => $data['supannCivilite'] . ' ' . $data['displayName'],
+      'type' => 'page_personnelle',
+      'langcode' => 'fr',
+      'uid' => $user->id(),
+      'status' => 1,
+      'field_uid_ldap' => $data['uid'],
+      'site_id' => NULL,
+    ]);
 
-    $user_properties = [
-      'roles' => ['enseignant_doctorant'],
-    ];
-    $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
-    if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
-      $user_properties['mail'] = $item['mail'];
-    }
-    try {
-      $user = $cas_user_manager->register($item['uid'], $user_properties);
-      $storage = $this->entityTypeManager->getStorage('node');
-      $node = $storage->create([
-        'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
-        'type' => 'page_personnelle',
-        'langcode' => 'fr',
-        'uid' => $user->id(),
-        'status' => 1,
-        'field_uid_ldap' => $item['uid'],
-        'site_id' => NULL,
-      ]);
-      $node->save();
-    } catch (CasLoginException $e) {
-      \Drupal::logger('cas')->error('CasLoginException when
-        registering user with name %name: %e', [
-        '%name' => $item['uid'],
-        '%e' => $e->getMessage()
-      ]);
-      return;
-    }
+    $node->save();
   }
 }
