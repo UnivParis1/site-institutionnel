@@ -703,10 +703,10 @@ class WsGroupsController extends ControllerBase
 
     foreach($users as $user) {
       if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
-        \Drupal::logger('syncLdap')->info($user->get('name')->value . " still exists. ");
+        \Drupal::logger('syncLdap_still')->info($user->get('name')->value . " still exists. ");
       }
       else {
-        \Drupal::logger('syncLdap')->info($user->get('name')->value . " has to be disabled. ");
+        \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . " has to be disabled. ");
         $to_delete[] = $user;
       }
     }
