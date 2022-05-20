@@ -21,7 +21,7 @@ use \Drupal\user\Entity\User;
  *   cron = {"time" = 30}
  *  )
  */
-class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class PagePersoCreationQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
