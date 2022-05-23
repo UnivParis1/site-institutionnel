@@ -6,7 +6,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Queue\QueueWorkerManager;
 use Drupal\Core\Queue\QueueFactory;
-use Drupal\Core\Database\Connection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,9 +13,6 @@ use Drupal\micro_site\Entity\Site;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 
-
-define("IMPORT_USER_SIZE", 150);
-define("IMPORT_DATA_SIZE", 50);
 /**
  * Class WsGroupsController.
  */
@@ -38,17 +34,10 @@ class WsGroupsController extends ControllerBase
    */
   protected $queueManager;
 
-  /**
-   * @var Connection
-   */
-  protected $database;
-
-  public function __construct(QueueFactory $queue, QueueWorkerManager $queue_manager,
-                              Connection   $dataservice = null)
+  public function __construct(QueueFactory $queue, QueueWorkerManager $queue_manager)
   {
     $this->queueFactory = $queue;
     $this->queueManager = $queue_manager;
-    $this->database = $dataservice;
     $this->wsGroupsService = \Drupal::service('up1_pages_personnelles.wsgroups');
   }
 
@@ -60,13 +49,11 @@ class WsGroupsController extends ControllerBase
     return new static(
       $container->get('queue'),
       $container->get('plugin.manager.queue_worker'),
-      $container->get('up1_pages_personnelles.database'),
       $container->get('up1_pages_personnelles.wsgroups')
     );
   }
 
-  public function getCurrentSite()
-  {
+  public function getCurrentSite() {
     /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
@@ -76,8 +63,7 @@ class WsGroupsController extends ControllerBase
     return $site;
   }
 
-  private function getCachedUsers($affiliation = NULL, $siteId = NULL, $group = NULL, $trombi_settings = NULL)
-  {
+  private function getCachedUsers($affiliation = NULL, $siteId = NULL, $group = NULL, $trombi_settings = NULL) {
     $cache = \Drupal::cache();
 
     if ($siteId) {
@@ -110,8 +96,7 @@ class WsGroupsController extends ControllerBase
     return $users;
   }
 
-  private function getCachedUsersIA($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL)
-  {
+  private function getCachedUsersIA($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL) {
     $cache = \Drupal::cache();
 
     if ($siteId) {
@@ -144,8 +129,7 @@ class WsGroupsController extends ControllerBase
    * Get value of ec_enabled to see if ec annuaire is enable.
    * @return int
    */
-  private function getFieldEc()
-  {
+  private function getFieldEc() {
     /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
@@ -343,10 +327,9 @@ class WsGroupsController extends ControllerBase
 
   /**
    * Get Users from external source (wsgroups) and create a item queue for each user.
-   * @return array
+   * @return JsonResponse
    */
-  public function createPagePersoUsers()
-  {
+  public function createPagePersoUsers() {
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
     //ECD does not exists. We have to create both user & node page perso.
     $queue_user_node = $this->queueFactory->get('up1_page_perso_queue');
@@ -371,15 +354,19 @@ class WsGroupsController extends ControllerBase
       }
     }
 
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('@user_node users with page persos will be created. @node users don\'t have pages perso. ',
-        ['@user_node' => $queue_user_node->numberOfItems(),'@node' => $queue_node->numberOfItems()]),
-    ];
+    return new JsonResponse([
+      'data' => [
+        'user_node' => $queue_user_node->numberOfItems(),
+        'node' => $queue_node->numberOfItems(),
+        'message' => $this->t('@user_node users with page persos will be created. @node users don\'t have pages perso. ',
+          ['@user_node' => $queue_user_node->numberOfItems(),'@node' => $queue_node->numberOfItems()]),
+      ],
+      'method' => 'GET',
+      'status'=> 200
+    ]);
   }
 
-  public function batchCreationOfUsers()
-  {
+  public function batchCreationOfUsers() {
     $batch = [
       'title' => $this->t('Process creating users from wsgroups'),
       'operations' => [],
