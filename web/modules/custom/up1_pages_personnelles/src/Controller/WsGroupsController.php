@@ -703,20 +703,7 @@ class WsGroupsController extends ControllerBase
     foreach($users as $user) {
       //If Drupal User doesn't exists in ldap, we disable his page_perso.
       if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
-        \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . " doesn't have a labeledURI. ");
-        $query = \Drupal::entityQuery('node')
-          ->condition('type', 'page_personnelle')
-          ->condition('uid', $user->id());
-        $result = $query->execute();
-        if (!empty($result) && count($result) == 1) {
-          $nid = reset($result);
-          $page_perso = Node::load($nid);
-          $page_perso->setPublished(FALSE);
-          $page_perso->save();
-        }
-        if (!$page_perso->isPublished()) {
-          \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . "'s page_perso has been disabled. ");
-        }
+        $to_delete[$user->id()] = $user;
       }
     }
 
