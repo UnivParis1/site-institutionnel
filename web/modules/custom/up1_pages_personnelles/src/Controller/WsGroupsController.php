@@ -693,22 +693,18 @@ class WsGroupsController extends ControllerBase
   }
 
   public function syncLdap() {
-    $to_delete = [];
+    $count_disabled = 0;
+    $disabled_users = [];
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
     $ids = \Drupal::entityQuery('user')
       ->condition('status', 1)
       ->condition('roles', 'enseignant_doctorant')
       ->execute();
     $users = User::loadMultiple($ids);
-    \Drupal::logger('count_drupal_users')->info(count($users));
-    \Drupal::logger('count_wsgroups_users')->info(count($users_ws_groups));
 
     foreach($users as $user) {
       //If Drupal User doesn't exists in ldap, we disable his page_perso.
       if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
-        $to_delete[$user->id()] = $user->get('name')->value;
-        \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . " doesn't have a labeledURI. ");
-
         $query = \Drupal::entityQuery('node')
           ->condition('type', 'page_personnelle')
           ->condition('uid', $user->id());
@@ -716,17 +712,19 @@ class WsGroupsController extends ControllerBase
         if (!empty($result) && count($result) == 1) {
           $nid = reset($result);
           $page_perso = Node::load($nid);
-          $page_perso->setPublished(FALSE);
+          $page_perso->status = 0;
           $page_perso->save();
         }
-        if (!$page_perso->isPublished()) {
-          \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . "'s page_perso has been disabled. ");
-        }
+        //Block user.
+        $user->block();
+        $user->save();
+        $count_disabled++;
+        $disabled_users[] = $user->get('name')->value;
       }
     }
 
     return new JsonResponse([
-      'data' => ['count_users_to_delete' => count($to_delete), 'users_drupal' => count($users), 'users_to_delete' => $to_delete],
+      'data' => ['nb_disabled_users' => $count_disabled, 'users_name' => implode(', ', $disabled_users)],
       'method' => 'GET',
       'status'=> 200
     ]);
