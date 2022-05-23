@@ -693,24 +693,30 @@ class WsGroupsController extends ControllerBase
   }
 
   public function syncLdap() {
-    $to_delete = [];
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
     $ids = \Drupal::entityQuery('user')
       ->condition('status', 1)
       ->condition('roles', 'enseignant_doctorant')
       ->execute();
     $users = User::loadMultiple($ids);
-    \Drupal::logger('count_drupal_users')->info(count($users));
-    \Drupal::logger('count_wsgroups_users')->info(count($users_ws_groups));
 
     foreach($users as $user) {
-      if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
-        unset($users[$user->id()]);
-        \Drupal::logger('syncLdap_still')->info($user->get('name')->value . " still exists. ");
-      }
-      else {
-        \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . " has to be disabled. ");
-        $to_delete[$user->id()] = $user->get('name')->value;
+      //If Drupal User doesn't exists in ldap, we disable his page_perso.
+      if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
+        \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . " doesn't have a labeledURI. ");
+        $query = \Drupal::entityQuery('node')
+          ->condition('type', 'page_personnelle')
+          ->condition('uid', $user->id());
+        $result = $query->execute();
+        if (!empty($result) && count($result) == 1) {
+          $nid = reset($result);
+          $page_perso = Node::load($nid);
+          $page_perso->setPublished(FALSE);
+          $page_perso->save();
+        }
+        if (!$page_perso->isPublished()) {
+          \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . "'s page_perso has been disabled. ");
+        }
       }
     }
 
