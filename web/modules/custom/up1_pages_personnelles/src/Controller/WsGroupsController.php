@@ -693,17 +693,23 @@ class WsGroupsController extends ControllerBase
   }
 
   public function syncLdap() {
+    $to_delete = [];
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
     $ids = \Drupal::entityQuery('user')
       ->condition('status', 1)
       ->condition('roles', 'enseignant_doctorant')
       ->execute();
     $users = User::loadMultiple($ids);
+    \Drupal::logger('count_drupal_users')->info(count($users));
+    \Drupal::logger('count_wsgroups_users')->info(count($users_ws_groups));
 
     foreach($users as $user) {
-      //If Drupal User doesn't exists in ldap, we disable his page_perso.
-      if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
-        $to_delete[$user->id()] = $user;
+      if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
+        \Drupal::logger('syncLdap_still')->info($user->get('name')->value . " still exists. ");
+      }
+      else {
+        \Drupal::logger('syncLdap_delete')->info($user->get('name')->value . " has to be disabled. ");
+        $to_delete[$user->id()] = $user->get('name')->value;
       }
     }
 
