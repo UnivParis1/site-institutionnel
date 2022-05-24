@@ -91,6 +91,7 @@ class ThesesService {
           'created' => $created,
         ])
         ->execute();
+      \Drupal::logger('up1_theses')->info("node $nid code THS $cod_ths created at $created.");
     } catch (\Exception $e) {
       \Drupal::logger('up1_theses')->error("Erreur de création de l'entrée en base de données. " . $e->getMessage());
     }
