@@ -2,8 +2,10 @@
 
 namespace Drupal\up1_theses\Service;
 
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\taxonomy\Entity\Term;
 
 
@@ -12,7 +14,7 @@ class ThesesHelper {
   /**
    * The theses service.
    *
-   * @var \Drupal\up1_theses\Service\ThesesService
+   * @var ThesesService
    */
   protected $thesesService;
 
@@ -20,7 +22,7 @@ class ThesesHelper {
 
   /**
    * Constructs a MyClass object.
-   * @param \Drupal\up1_theses\Service\ThesesService $theses_service
+   * @param ThesesService $theses_service
    */
   public function __construct(ThesesService $theses_service) {
     $this->thesesService = $theses_service;
@@ -34,31 +36,24 @@ class ThesesHelper {
       $container->get('theses.service')
     );
   }
+
   /**
-   * Transform Json data to array.
-   *
-   * return void
+   * @return array|mixed
    */
   public function transformJsonDataToArray() {
-    try {
-      $json = file_get_contents($this->thesesService->getWebServiceUrl());
-      $dataArray = json_decode($json, TRUE);
-      if (!empty($dataArray)) {
-        return $dataArray;
-      }
+    $json = file_get_contents($this->thesesService->getWebServiceUrl());
+    $dataArray = json_decode($json, TRUE);
+    if (!empty($dataArray)) {
+      return $dataArray;
     }
-    catch (RequestException $e) {
-      watchdog_exception('up1_theses', $e);
+    else {
+      return [];
     }
-
-    return FALSE;
   }
 
   /**
-   * Create nodes viva from json.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * Prepare data for node viva from json.
+   * @return array
    */
   public function formatDataFromJson() {
     $nodes = [];

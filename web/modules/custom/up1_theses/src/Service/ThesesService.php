@@ -83,12 +83,17 @@ class ThesesService {
    * @throws \Exception
    */
   public function populateImportTable($cod_ths, $nid, $created) {
-    \Drupal::database()->merge('up1_theses_import')
-      ->keys([
-        'cod_ths' => $cod_ths,
-        'nid' => $nid,
-        'created' => $created,
-      ])
-      ->execute();
+    try {
+      \Drupal::database()->merge('up1_theses_import')
+        ->keys([
+          'cod_ths' => $cod_ths,
+          'nid' => $nid,
+          'created' => $created,
+        ])
+        ->execute();
+      \Drupal::logger('up1_theses')->info("node $nid code THS $cod_ths created at $created.");
+    } catch (\Exception $e) {
+      \Drupal::logger('up1_theses')->error("Erreur de création de l'entrée en base de données. " . $e->getMessage());
+    }
   }
 }
