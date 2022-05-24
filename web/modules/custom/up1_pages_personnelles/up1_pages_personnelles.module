@@ -16,6 +16,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use \Drupal\Core\Url;
 use \Drupal\Core\Link;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_help().
@@ -221,7 +222,6 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
   if (in_array($form_id, ["node_page_personnelle_form", "node_page_personnelle_edit_form"]) ) {
     if ($form_id == "node_page_personnelle_edit_form") {
       $name = $form['field_uid_ldap']['widget'][0]['value']['#default_value'];
-
       $nid = $form_state->getformObject()->getEntity()->id();
       $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
       $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
@@ -235,10 +235,14 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $user = User::load($userCurrent->id());
       $roles = $userCurrent->getRoles();
 
-      if (in_array('enseignant_doctorant', $roles)) {
+      /*if (in_array('enseignant_doctorant', $roles)) {
         $name = $user->getDisplayName();
         $userInformation = up1_pages_personnelles_get_comptex_info($name);
       }
+      else {*/
+        $node = Node::load($nid);
+        $userInformation = up1_pages_personnelles_get_comptex_info($node->getOwnerId());
+     // }
       if ($userInformation) {
         $get_emails = up1_pages_personnelles_get_user_email($name);
         $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
@@ -333,8 +337,7 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       }
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
-      $firstname = $node->get('field_firstname')->getValue();
-      $lastname = $node->get('field_name')->getValue();
+
       if (!empty($get_publications) && $get_publications[0]['value'] && !empty($userInformation['givenName'])
         && !empty($userInformation['sn'])) {
         switch ($get_publications[0]['value']) {

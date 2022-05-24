@@ -3,18 +3,16 @@
 namespace Drupal\up1_pages_personnelles\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Queue\QueueWorkerManager;
-use Drupal\Core\Queue\QueueFactory;
-use Drupal\Core\Database\Connection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Drupal\micro_site\Entity\Site;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Queue\QueueWorkerManager;
+use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
+use Drupal\micro_site\Entity\Site;
 
-define("IMPORT_USER_SIZE", 150);
-define("IMPORT_DATA_SIZE", 50);
 /**
  * Class WsGroupsController.
  */
@@ -37,31 +35,29 @@ class WsGroupsController extends ControllerBase
   protected $queueManager;
 
   /**
-   * @var Connection
+   * @param QueueFactory $queue
+   * @param QueueWorkerManager $queue_manager
    */
-  protected $database;
-
-  public function __construct(QueueFactory $queue, QueueWorkerManager $queue_manager,
-                              Connection $dataservice = null) {
+  public function __construct(QueueFactory $queue, QueueWorkerManager $queue_manager)
+  {
     $this->queueFactory = $queue;
     $this->queueManager = $queue_manager;
-    $this->database = $dataservice;
     $this->wsGroupsService = \Drupal::service('up1_pages_personnelles.wsgroups');
   }
+
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container)
+  {
     return new static(
       $container->get('queue'),
       $container->get('plugin.manager.queue_worker'),
-      $container->get('up1_pages_personnelles.database'),
       $container->get('up1_pages_personnelles.wsgroups')
     );
   }
 
-  public function getCurrentSite()
-  {
+  public function getCurrentSite() {
     /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
@@ -71,8 +67,7 @@ class WsGroupsController extends ControllerBase
     return $site;
   }
 
-  private function getCachedUsers($affiliation = NULL, $siteId = NULL, $group = NULL, $trombi_settings = NULL)
-  {
+  private function getCachedUsers($affiliation = NULL, $siteId = NULL, $group = NULL, $trombi_settings = NULL) {
     $cache = \Drupal::cache();
 
     if ($siteId) {
@@ -105,8 +100,7 @@ class WsGroupsController extends ControllerBase
     return $users;
   }
 
-  private function getCachedUsersIA($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL)
-  {
+  private function getCachedUsersIA($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL) {
     $cache = \Drupal::cache();
 
     if ($siteId) {
@@ -139,8 +133,7 @@ class WsGroupsController extends ControllerBase
    * Get value of ec_enabled to see if ec annuaire is enable.
    * @return int
    */
-  private function getFieldEc()
-  {
+  private function getFieldEc() {
     /** @var $negotiator  \Drupal\micro_site\SiteNegotiatorInterface */
     $negotiator = \Drupal::service('micro_site.negotiator');
     if (!empty($negotiator->getActiveSite())) {
@@ -243,7 +236,6 @@ class WsGroupsController extends ControllerBase
   public function getList($type, $letter, $theme, $path, $siteId = NULL)
   {
     $filtered_users = [];
-    $sortedUsers = [];
 
     $users = $this->getCachedUsers($type, $siteId);
     if (!empty($users)) {
@@ -254,7 +246,7 @@ class WsGroupsController extends ControllerBase
       }
 
       // on trie les utilisateurs par ordre alphabetique des cn
-      $sortedUsers = usort($filtered_users, function ($a, $b) {
+      usort($filtered_users, function ($a, $b) {
         return strnatcasecmp($a['sn'], $b['sn']);
       });
     }
@@ -330,32 +322,50 @@ class WsGroupsController extends ControllerBase
    * @param string $letter
    * @return string
    */
-  public function getPageLetterTitle($letter) {
+  public function getPageLetterTitle($letter)
+  {
     return ucfirst($letter);
   }
 
   /**
    * Get Users from external source (wsgroups) and create a item queue for each user.
-   * @return array
+   * @return JsonResponse
    */
   public function createPagePersoUsers() {
-    $users = $this->wsGroupsService->getAllUsers();
-    $cas_user_manager = \Drupal::service('cas.user_manager');
+    $users_ws_groups = $this->wsGroupsService->getAllUsers();
+    //ECD does not exists. We have to create both user & node page perso.
+    $queue_user_node = $this->queueFactory->get('up1_page_perso_queue');
+    //ECD exists. We just create the node page perso.
+    $queue_node = $this->queueFactory->get('up1_page_perso_node_creation_queue');
 
-    $queue = $this->queueFactory->get('up1_page_perso_queue');
-
-    foreach ($users as $user) {
-      $cas_username = $user['uid'];
-      $author = $cas_user_manager->getUidForCasUsername($cas_username);
-      if (!$author) {
-        $queue->createItem($user);
+    foreach ($users_ws_groups as $user_ws_groups) {
+      $user = user_load_by_name($user_ws_groups['uid']);
+      if (!$user) {
+        $queue_user_node->createItem($user_ws_groups);
+      }
+      else {
+        $author = $user->id();
+        $values = \Drupal::entityQuery('node')
+          ->condition('type', 'page_personnelle')
+          ->condition('uid', $author)
+          ->execute();
+        if (empty($values)) {
+          $user_ws_groups['user'] = $user;
+          $queue_node->createItem($user_ws_groups);
+        }
       }
     }
 
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('@count queue items have been created.', ['@count' => $queue->numberOfItems()]),
-    ];
+    return new JsonResponse([
+      'data' => [
+        'user_node' => $queue_user_node->numberOfItems(),
+        'node' => $queue_node->numberOfItems(),
+        'message' => $this->t('@user_node users with page persos will be created. @node users don\'t have pages perso. ',
+          ['@user_node' => $queue_user_node->numberOfItems(),'@node' => $queue_node->numberOfItems()]),
+      ],
+      'method' => 'GET',
+      'status'=> 200
+    ]);
   }
 
   public function batchCreationOfUsers() {
@@ -430,14 +440,17 @@ class WsGroupsController extends ControllerBase
   }
 
   /**
-   * Delete queue 'up1_page_perso_queue'.
+   * Delete 'up1_page_perso_queue' & 'up1_page_perso_node_creation_queue' queues.
    */
   public function deletePagePersoQueue() {
     $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('Up1 Page Perso queue has been deleted'),
-    ];
+    $this->queueFactory->get('up1_page_perso_node_creation_queue')->deleteQueue();
+
+    return new JsonResponse([
+      'data' => ['message' => "Queues up1_page_perso_queue & up1_page_perso_node_creation_queue deleted."],
+      'method' => 'GET',
+      'status' => 200
+    ]);
   }
 
   public function editPagePerso($username) {
@@ -592,7 +605,7 @@ class WsGroupsController extends ControllerBase
             $result = $role['role'] . ' ' . $role['structure']['description'];
           }
         }
-        case 'discipline' :
+      case 'discipline' :
         if ($settings['discipline_enseignement'] == 1) {
           if(!empty($user['info'])) {
             $result = implode(', ', $user['info']);
@@ -662,6 +675,44 @@ class WsGroupsController extends ControllerBase
     }
     return new JsonResponse([
       'data' => [ 'username' => $username, 'message' => $message ],
+      'method' => 'GET',
+      'status'=> 200
+    ]);
+  }
+
+  public function syncLdap() {
+    $count_disabled = 0;
+    $disabled_users = [];
+    $users_ws_groups = $this->wsGroupsService->getAllUsers();
+    $ids = \Drupal::entityQuery('user')
+      ->condition('status', 1)
+      ->condition('roles', 'enseignant_doctorant')
+      ->execute();
+    $users = User::loadMultiple($ids);
+
+    foreach($users as $user) {
+      //If Drupal User doesn't exists in ldap, we disable his page_perso.
+      if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
+        $query = \Drupal::entityQuery('node')
+          ->condition('type', 'page_personnelle')
+          ->condition('uid', $user->id());
+        $result = $query->execute();
+        if (!empty($result) && count($result) == 1) {
+          $nid = reset($result);
+          $page_perso = Node::load($nid);
+          $page_perso->status = 0;
+          $page_perso->save();
+        }
+        //Block user.
+        $user->block();
+        $user->save();
+        $count_disabled++;
+        $disabled_users[] = $user->get('name')->value;
+      }
+    }
+
+    return new JsonResponse([
+      'data' => ['nb_disabled_users' => $count_disabled, 'users_name' => implode(', ', $disabled_users)],
       'method' => 'GET',
       'status'=> 200
     ]);

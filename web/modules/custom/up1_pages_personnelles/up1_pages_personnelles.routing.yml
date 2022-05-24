@@ -108,16 +108,9 @@ up1_pages_personnelles.get_new_ecd:
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::createPagePersoUsers'
     _title: 'Import new enseignant-chercheur/doctorant from ldap and create their page perso'
+  methods: [GET]
   requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.delete_queue_users:
-  path: '/pages-perso/maj/empty'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::deleteTheQueue'
-    _title: 'Delete queue import users from LDAP'
-  requirements:
-    _permission: 'access administration pages'
+    _permission: 'TRUE'
 
 up1_pages_personnelles.delete_page_perso_queue:
   path: '/pages-perso/maj/delete-queue'
@@ -145,6 +138,7 @@ up1_pages_personnelles.edit_page_perso:
   requirements:
     _permission: 'has labeled URI'
 
+# API pour Comptex
 up1_pages_personnelles.bulk_import_page_perso:
   path: '/admin/people/create/page-perso-bulk'
   defaults:
@@ -179,6 +173,15 @@ up1_pages_personnelles.get_obsia_fields:
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getParcoursObsia'
     _title: 'Parcours Obsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
+#Script de mise à jour des pages persos en fonction du ldap.
+up1_pages_personnelles.sync_ldap:
+  path: '/pages-persos/sync-ldap'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::syncLdap'
   methods: [GET]
   requirements:
     _access: 'TRUE'
