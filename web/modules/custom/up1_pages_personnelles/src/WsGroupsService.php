@@ -2,7 +2,7 @@
 
 namespace Drupal\up1_pages_personnelles;
 
-use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use  Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Site\Settings;
@@ -77,9 +77,6 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $users = json_decode(curl_exec($ch), TRUE);
 
     curl_close($ch);
-
-    $columns = array_column($users, 'sn');
-    array_multisort($columns, SORT_NATURAL, $users);
 
     $reponse['users'] = $users;
 
