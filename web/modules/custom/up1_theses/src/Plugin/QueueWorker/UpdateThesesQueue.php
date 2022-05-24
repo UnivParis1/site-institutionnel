@@ -11,15 +11,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\Entity\Node;
 
 /**
- * Executes theses import from web service.
+ * Executes up1_theses_updates_queue.
  *
  * @QueueWorker(
- *   id = "up1_theses_queue_import",
- *   title = @Translation("Import Thèses from web service"),
+ *   id = "up1_theses_updates_queue",
+ *   title = @Translation("Update existing vivas from web service"),
  *   cron = {"time" = 30}
  *  )
  */
-class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class UpdateThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
@@ -77,17 +77,7 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
    */
   public function processItem($item) {
     try {
-      $storage = $this->entityTypeManager->getStorage('node');
-      $existingTheses = $this->thesesService->getExistingTheses();
-
-      if (in_array($item['cod_ths'], $existingTheses)) {
-        $query = \Drupal::database()->select('up1_theses_import', 't')
-          ->fields('t', ['nid'])
-          ->condition('cod_ths', $item['cod_ths']);
-        $value = $query->execute()->fetchCol();
-
-        if (!empty($value) && isset($value[0])) {
-          $node = Node::load($value[0]);
+          $node = Node::load($item[0]);
           $node->set('title', $item['title']);
           $node->set('type', 'viva');
           $node->set('langcode', 'fr');
@@ -106,35 +96,8 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
           $node->set('field_edo_label', $item['lib_edo']);
 
           $node->save();
-        }
       }
-      else {
-        $node = $storage->create([
-          'title' => $item['title'],
-          'type' => 'viva',
-          'langcode' => 'fr',
-          'uid' => $item['uid'],
-          'status' => 1,
-          'site_id' => NULL,
-          'field_subtitle' => $item['field_subtitle'],
-          'field_thesis_supervisor' => $item['field_thesis_supervisor'],
-          'field_co_director' => $item['field_co_director'],
-          'field_board' => $item['field_board'],
-          'field_event_address' => $item['field_event_address'],
-          'field_viva_date' => $item['field_viva_date'],
-          'field_hdr' => $item['field_hdr'],
-          'field_edo_code' => $item['cod_edo'],
-          'field_ths_code' => $item['cod_ths'],
-          'field_edo_label' => $item['lib_edo'],
-        ]);
-        $node->set('field_categories', [$item['field_categories']]);
-        $node->set('moderation_state', 'published');
 
-        $node->save();
-        $this->thesesService->populateImportTable($item['cod_ths'],
-          $node->id(), $node->getCreatedTime());
-      }
-    }
     catch (\Exception $e) {
       $this->loggerChannelFactory->get('Warning')->warning('Exception thrown for queue $error',
         ['@error' => $e->getMessage()]);

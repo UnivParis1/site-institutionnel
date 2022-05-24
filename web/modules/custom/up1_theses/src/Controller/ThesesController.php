@@ -1,5 +1,4 @@
 <?php
-
 namespace Drupal\up1_theses\Controller;
 
 use GuzzleHttp\ClientInterface;
@@ -11,6 +10,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
 use Drupal\up1_theses\Service\ThesesHelper;
+use Drupal\up1_theses\Service\ThesesService;
 
 class ThesesController extends ControllerBase {
 
@@ -20,6 +20,11 @@ class ThesesController extends ControllerBase {
    * @var ThesesHelper
    */
   protected $thesesHelper;
+
+  /**
+   * @var ThesesService
+   */
+  protected $thesesService;
   /**
    * Drupal\Core\Messenger\MessengerInterface definition.
    *
@@ -45,13 +50,15 @@ class ThesesController extends ControllerBase {
   /**
    * Inject services.
    *
+   * @param ThesesService $theses_service
    * @param ThesesHelper $theses_helper
    * @param QueueFactory $queue
    * @param MessengerInterface $messenger
    * @param ClientInterface $client
    */
-  public function __construct(ThesesHelper $theses_helper, QueueFactory $queue,
-       MessengerInterface $messenger, ClientInterface $client) {
+  public function __construct(ThesesService $theses_service, ThesesHelper $theses_helper,
+                              QueueFactory $queue, MessengerInterface $messenger, ClientInterface $client) {
+    $this->thesesService = $theses_service;
     $this->thesesHelper = $theses_helper;
     $this->queueFactory = $queue;
     $this->messenger = $messenger;
@@ -63,6 +70,7 @@ class ThesesController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('theses.service'),
       $container->get('theses.helper'),
       $container->get('queue'),
       $container->get('messenger'),
@@ -75,36 +83,50 @@ class ThesesController extends ControllerBase {
    */
   public function getThesesList() {
     $data = $this->thesesHelper->formatDataFromJson();
+    $new_these_queue = $this->queueFactory->get('up1_theses_import_queue');
+    $updated_these_queue = $this->queueFactory->get('up1_theses_updates_queue');
     $vivas = [];
+
     if (!$data) {
       \Drupal::logger('up1_theses')->info('No new viva to import from APOGÉE.');
       $message = $this->t('No new viva to import from APOGÉE.');
     }
     else {
-      $queue = $this->queueFactory->get('up1_theses_queue_import');
-
+      $existingTheses = $this->thesesService->getExistingTheses();
       foreach ($data as $element) {
-        $queue->createItem($element);
+        $vivas[] = [
+          'code' => $element['cod_ths'],
+          'title' => $element['title'],
+        ];
+        if (in_array($element['cod_ths'], $existingTheses)) {
+          $query = \Drupal::database()->select('up1_theses_import', 't')
+            ->fields('t', ['nid'])
+            ->condition('cod_ths', $element['cod_ths']);
+          $value = $query->execute()->fetchCol();
+          if (!empty($value) && isset($value[0])) {
+            $element['nid'] = $value[0];
+            $updated_these_queue->createItem($element);
+          }
+        } else {
+          $new_these_queue->createItem($element);
+        }
       }
-      // 4. Get the total of item in the Queue.
-      $totalItemsAfter = $queue->numberOfItems();
-
-      // 5. Get what's in the queue now.
-      $vivas = $this->getItemList($queue);
-      $message = $this->t('@count new vivas to import.',
-        [
-          '@count' => count($data),
-        ]);
     }
-      return [
-        'data' => [
-          'message' => $message,
-          'vivas' => $vivas,
-          'status' => 200,
-          'method' => 'GET'
-        ]
-      ];
 
+    return new JsonResponse([
+      'data' => [
+        'new_theses' => $new_these_queue->numberOfItems(),
+        'updated_theses' => $updated_these_queue->numberOfItems(),
+        'message' => $this->t('@new theses created. @updated theses updated. ',
+          [
+            '@new' => $new_these_queue->numberOfItems(),
+            '@node' => $updated_these_queue->numberOfItems()
+          ]),
+        'vivas' => $vivas
+      ],
+      'method' => 'GET',
+      'status'=> 200
+    ]);
   }
 
   /**
