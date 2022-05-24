@@ -154,10 +154,11 @@ class ThesesController extends ControllerBase {
    * @return JsonResponse
    */
   public function deleteTheQueue() {
-    $this->queueFactory->get('up1_theses_queue_import')->deleteQueue();
+    $this->queueFactory->get('up1_theses_import_queue')->deleteQueue();
+    $this->queueFactory->get('up1_theses_updates_queue')->deleteQueue();
 
     return new JsonResponse([
-      'data' => ['message' => $this->t('The queue "up1_theses_queue_import" has been deleted')],
+      'data' => ['message' => $this->t('Queues "up1_theses_import_queue" & "up1_theses_updates_queue" have been deleted')],
       'method' => 'GET',
       'status' => 200
     ]);
