@@ -23,19 +23,19 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var EntityTypeManagerInterface
    */
   private $entityTypeManager;
   /**
    * Drupal\Core\Logger\LoggerChannelFactoryInterface definition.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   * @var LoggerChannelFactoryInterface
    */
   private $loggerChannelFactory;
   /**
    * The theses service.
    *
-   * @var \Drupal\up1_theses\Service\ThesesService
+   * @var ThesesService
    */
   protected $thesesService;
 
@@ -45,16 +45,16 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
    * @param array $configuration
    * @param $plugin_id
    * @param $plugin_definition
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $lcfi
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $etmi
-   * @param \Drupal\up1_theses\Service\ThesesService
+   * @param LoggerChannelFactoryInterface $lcfi
+   * @param EntityTypeManagerInterface $etmi
+   * @param ThesesService $ts
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition,
-                              EntityTypeManagerInterface $etmi, LoggerChannelFactoryInterface $lcfi, ThesesService $thesesService) {
+                              EntityTypeManagerInterface $etmi, LoggerChannelFactoryInterface $lcfi, ThesesService $ts) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityTypeManager = $etmi;
     $this->loggerChannelFactory = $lcfi;
-    $this->thesesService = $thesesService;
+    $this->thesesService = $ts;
 
   }
 
@@ -86,7 +86,6 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
           ->condition('cod_ths', $item['cod_ths']);
         $value = $query->execute()->fetchCol();
 
-        \Drupal::logger('up1_theses_queue')->info(print_r($value, 1));
         if (!empty($value) && isset($value[0])) {
           $node = Node::load($value[0]);
           $node->set('title', $item['title']);
@@ -132,11 +131,8 @@ class ThesesQueue extends QueueWorkerBase implements ContainerFactoryPluginInter
         $node->set('moderation_state', 'published');
 
         $node->save();
-
-        if ($node) {
-          $this->thesesService->populateImportTable($item['cod_ths'],
-            $node->id(), $node->getCreatedTime());
-        }
+        $this->thesesService->populateImportTable($item['cod_ths'],
+          $node->id(), $node->getCreatedTime());
       }
     }
     catch (\Exception $e) {

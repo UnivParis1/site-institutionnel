@@ -2,38 +2,40 @@
 
 namespace Drupal\up1_theses\Controller;
 
+use GuzzleHttp\ClientInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
 use Drupal\up1_theses\Service\ThesesHelper;
-use GuzzleHttp\ClientInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ThesesController extends ControllerBase {
 
   /**
    * The theses helper used to get settings from.
    *
-   * @var \Drupal\up1_theses\Service\ThesesHelper
+   * @var ThesesHelper
    */
   protected $thesesHelper;
   /**
    * Drupal\Core\Messenger\MessengerInterface definition.
    *
-   * @var \Drupal\Core\Messenger\MessengerInterface
+   * @var MessengerInterface
    */
   protected $messenger;
   /**
    * Symfony\Component\DependencyInjection\ContainerAwareInterface definition.
    *
-   * @var \Symfony\Component\DependencyInjection\ContainerAwareInterface
+   * @var ContainerAwareInterface
    */
   protected $queueFactory;
   /**
    * GuzzleHttp\ClientInterface definition.
    *
-   * @var \GuzzleHttp\ClientInterface
+   * @var ClientInterface
    */
   protected $client;
   /**
@@ -43,10 +45,10 @@ class ThesesController extends ControllerBase {
   /**
    * Inject services.
    *
-   * @param \Drupal\up1_theses\Service\ThesesHelper $theses_helper
-   * @param \Drupal\Core\Queue\QueueFactory $queue
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   * @param \GuzzleHttp\ClientInterface $client
+   * @param ThesesHelper $theses_helper
+   * @param QueueFactory $queue
+   * @param MessengerInterface $messenger
+   * @param ClientInterface $client
    */
   public function __construct(ThesesHelper $theses_helper, QueueFactory $queue,
        MessengerInterface $messenger, ClientInterface $client) {
@@ -73,17 +75,13 @@ class ThesesController extends ControllerBase {
    */
   public function getThesesList() {
     $data = $this->thesesHelper->formatDataFromJson();
+    $vivas = [];
     if (!$data) {
-      \Drupal::logger('up1_theses')->warning('No new data to import.');
-      $finalMessage = $this->t('No new data to import.');
-      $header = [];
-      $rows = [];
-      $attributes = [];
-      $sticky = [];
+      \Drupal::logger('up1_theses')->info('No new viva to import from APOGÉE.');
+      $message = $this->t('No new viva to import from APOGÉE.');
     }
     else {
       $queue = $this->queueFactory->get('up1_theses_queue_import');
-      $totalItemsInQueue = $queue->numberOfItems();
 
       foreach ($data as $element) {
         $queue->createItem($element);
@@ -92,28 +90,19 @@ class ThesesController extends ControllerBase {
       $totalItemsAfter = $queue->numberOfItems();
 
       // 5. Get what's in the queue now.
-      $tableVariables = $this->getItemList($queue);
-      $header = $tableVariables['header'];
-      $rows = $tableVariables['rows'];
-      $attributes = $tableVariables['attributes'];
-      $sticky = $tableVariables['sticky'];
-
-      $finalMessage = $this->t('The Queue had @totalBefore items.
-    We should have added @count items in the Queue. Now the Queue has @totalAfter items.',
+      $vivas = $this->getItemList($queue);
+      $message = $this->t('@count new vivas to import.',
         [
           '@count' => count($data),
-          '@totalAfter' => $totalItemsAfter,
-          '@totalBefore' => $totalItemsInQueue,
         ]);
     }
       return [
-        '#type' => 'table',
-        '#caption' => $finalMessage,
-        '#header' => $header,
-        '#rows' => isset($rows) ? $rows : [],
-        '#attributes' => $attributes,
-        '#sticky' => $sticky,
-        '#empty' => $this->t('No items.'),
+        'data' => [
+          'message' => $message,
+          'vivas' => $vivas,
+          'status' => 200,
+          'method' => 'GET'
+        ]
       ];
 
   }
@@ -138,17 +127,18 @@ class ThesesController extends ControllerBase {
   }
 
   /**
-   * Delete the queue 'up1_theses_queue_import'.
    *
-   * Remember that the command drupal dq checks first for a queue worker
-   * and if it exists, DC suposes that a queue exists.
+   * Deletes the queue 'up1_theses_queue_import'.
+   * @return JsonResponse
    */
   public function deleteTheQueue() {
     $this->queueFactory->get('up1_theses_queue_import')->deleteQueue();
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('The queue "up1_theses_queue_import" has been deleted'),
-    ];
+
+    return new JsonResponse([
+      'data' => ['message' => $this->t('The queue "up1_theses_queue_import" has been deleted')],
+      'method' => 'GET',
+      'status' => 200
+    ]);
   }
 
   protected function getItemList($queue) {

@@ -3,15 +3,15 @@
 namespace Drupal\up1_pages_personnelles\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Queue\QueueWorkerManager;
-use Drupal\Core\Queue\QueueFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Drupal\micro_site\Entity\Site;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Queue\QueueWorkerManager;
+use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
+use Drupal\micro_site\Entity\Site;
 
 /**
  * Class WsGroupsController.
@@ -34,6 +34,10 @@ class WsGroupsController extends ControllerBase
    */
   protected $queueManager;
 
+  /**
+   * @param QueueFactory $queue
+   * @param QueueWorkerManager $queue_manager
+   */
   public function __construct(QueueFactory $queue, QueueWorkerManager $queue_manager)
   {
     $this->queueFactory = $queue;
@@ -439,16 +443,18 @@ class WsGroupsController extends ControllerBase
   }
 
   /**
-   * Delete queue 'up1_page_perso_queue'.
+   * Delete 'up1_page_perso_queue' & 'up1_page_perso_node_creation_queue' queues.
    */
   public function deletePagePersoQueue()
   {
     $this->queueFactory->get('up1_page_perso_queue')->deleteQueue();
     $this->queueFactory->get('up1_page_perso_node_creation_queue')->deleteQueue();
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('Up1 Page Perso queues has been deleted'),
-    ];
+
+    return new JsonResponse([
+      'data' => ['message' => "Queues up1_page_perso_queue & up1_page_perso_node_creation_queue deleted."],
+      'method' => 'GET',
+      'status' => 200
+    ]);
   }
 
   public function editPagePerso($username)
