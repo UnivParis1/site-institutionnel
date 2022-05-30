@@ -11,15 +11,13 @@ up1_theses.liste:
   defaults:
     _controller: '\Drupal\up1_theses\Controller\ThesesController::getThesesList'
     _title: 'Agenda des soutenances de thèse'
-  methods: [GET]
   requirements:
-    _permission: 'TRUE'
+    _permission: 'access content'
 
 up1_theses.delete_liste:
   path: '/delete-queue'
   defaults:
     _controller: '\Drupal\up1_theses\Controller\ThesesController::deleteTheQueue'
     _title: 'Agenda des soutenances de thèse - Delete'
-  methods: [GET]
   requirements:
-    _permission: 'TRUE'
+    _permission: 'access content'
