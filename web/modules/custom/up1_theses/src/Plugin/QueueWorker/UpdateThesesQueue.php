@@ -77,7 +77,7 @@ class UpdateThesesQueue extends QueueWorkerBase implements ContainerFactoryPlugi
    */
   public function processItem($item) {
     try {
-          $node = Node::load($item[0]);
+          $node = Node::load($item['nid']);
           $node->set('title', $item['title']);
           $node->set('type', 'viva');
           $node->set('langcode', 'fr');

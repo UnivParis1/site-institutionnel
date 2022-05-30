@@ -92,8 +92,9 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user_properties['mail'] = $item['mail'];
     }
     try {
-      // function register() : This has to be changed if cas module evolves.
-      $user = $cas_user_manager->register($item['uid'], $item['uid'], $user_properties);
+      // function register() : This has to be changed when cas module will be updated evolves.
+      //$user = $cas_user_manager->register($item['uid'], $item['uid'], $user_properties);
+      $user = $cas_user_manager->register($item['uid'], $user_properties);
       $storage = $this->entityTypeManager->getStorage('node');
       $node = $storage->create([
         'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
