@@ -198,8 +198,10 @@ class WsGroupsController extends ControllerBase
    */
   public function getTrombiList($theme, $path, $group, $siteId = NULL) {
     $site_settings = $this->getTrombiFields();
+    \Drupal::logger('getTrombiList')->info("site number $siteId");  
     $users = $this->getCachedUsers('faculty', $siteId, $group, $site_settings);
 
+    \Drupal::logger('getTrombiList')->info(print_r($users,1));
     foreach ($users as &$user) {
       if ($group == 'observatoireIA') {
         $user['skills'] = $this->formatTrombiData('skillsIA', $user, $site_settings);
@@ -217,6 +219,9 @@ class WsGroupsController extends ControllerBase
       $config = \Drupal::config('up1_pages_personnelles.settings');
       $user['photo'] = $config->get('url_userphoto') . $user['uid'];
     }
+    usort($users, function ($a, $b) {
+        return strnatcasecmp($a['sn'], $b['sn']);
+      });
     $build['item_list'] = [
       '#theme' => $theme,
       '#users' => $users,
