@@ -108,9 +108,8 @@ up1_pages_personnelles.get_new_ecd:
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::createPagePersoUsers'
     _title: 'Import new enseignant-chercheur/doctorant from ldap and create their page perso'
-  methods: [GET]
   requirements:
-    _permission: 'TRUE'
+    _permission: 'access content'
 
 up1_pages_personnelles.delete_page_perso_queue:
   path: '/pages-perso/maj/delete-queue'
@@ -182,6 +181,5 @@ up1_pages_personnelles.sync_ldap:
   path: '/pages-persos/sync-ldap'
   defaults:
     _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::syncLdap'
-  methods: [GET]
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
