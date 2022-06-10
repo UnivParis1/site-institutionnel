@@ -120,7 +120,7 @@ class ThesesController extends ControllerBase {
         'message' => $this->t('@new theses created. @updated theses updated. ',
           [
             '@new' => $new_these_queue->numberOfItems(),
-            '@node' => $updated_these_queue->numberOfItems()
+            '@updated' => $updated_these_queue->numberOfItems()
           ]),
         'vivas' => $vivas
       ],
