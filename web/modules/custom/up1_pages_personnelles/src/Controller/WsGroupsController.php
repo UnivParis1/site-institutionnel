@@ -201,7 +201,6 @@ class WsGroupsController extends ControllerBase
     \Drupal::logger('getTrombiList')->info("site number $siteId");  
     $users = $this->getCachedUsers('faculty', $siteId, $group, $site_settings);
 
-    \Drupal::logger('getTrombiList')->info(print_r($users,1));
     foreach ($users as &$user) {
       if ($group == 'observatoireIA') {
         $user['skills'] = $this->formatTrombiData('skillsIA', $user, $site_settings);
@@ -212,7 +211,6 @@ class WsGroupsController extends ControllerBase
         $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
       }
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
-      \Drupal::logger('formatTrombiData')->info(print_r($user['research'], 1));
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
       $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
       $user['discipline'] = $this->formatTrombiData('discipline', $user, $site_settings);
