@@ -222,8 +222,7 @@ function p1ps2019_preprocess_node(&$variables) {
   }
 //node_process article
   if ($node->getType() == 'article') {
-    $node = $variables['node'];
-    if($node->hasField('field_media')){
+    if ($node->hasField('field_media') && !empty($node->field_media)) {
       $mid = $node->field_media[0]->getValue()['target_id'];
       $fid = Media::load($mid)->field_media[0]->getValue()['target_id'];
       $file = File::load($fid);
@@ -232,7 +231,6 @@ function p1ps2019_preprocess_node(&$variables) {
   }
 
   if (in_array($node->getType(), ['page', 'second_level_pages'])) {
-    $node = $variables['node'];
     if ($node->hasField('field_display_node_changed')) {
       $display_changed = $node->field_display_node_changed->getValue();
       if (!empty($display_changed[0]['value'])) {
