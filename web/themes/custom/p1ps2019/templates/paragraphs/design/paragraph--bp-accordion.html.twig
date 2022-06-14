@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a paragraph in Bootstrap Paragraphs.
+ * Bootstrap Paragraphs template for displaying an Accordion (Collapse).
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -35,25 +35,47 @@
  *
  * @ingroup themeable
  */
-
 #}
-{% set imgUrl %}
-{{ content.field_media_image.0 }}
-{% endset %}
-<div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column mask no-hover relative-wrapper tuile-avec-texte" style="background-image: url('{{ imgUrl|striptags|trim }}')">
-      <div class="infos">
-        <div class="top-infos">
-          <h3 class="semi-field-sep">{{ content.field_title.0 }}</h3>
-          <div class="parag-title-sep txt medium">{{ content.bp_text.0 }}</div>
+{% if content.bp_background|render %}
+  {% set layout_background = content.bp_background['#items'].getString() %}
+{% endif %}
+{# Sets Paragraph ID as class. #}
+{%
+  set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  accordion_active ? 'paragraph--accordion_active--',
+  layout_background,
+  'section-sep', 'big'
+]
+%}
+
+{# Sets Unique ID for Accordion from Paragraph ID. #}
+{% set paragraph_id = 'accordion-' ~ paragraph.id.value %}
+{% set title = content.field_title|render %}
+{% set header = content.bp_header|render %}
+{# Prints Accordion template. #}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="paragraph__column">
+        <div class="grid-container">
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-12 accordion-wrapper">
+              {% if title %}
+                <h2 class="titre page-title-sep">{{ content.field_title }}</h2>
+              {% endif %}
+              {% if header %}
+                <h3 class="page-title-sep">{{ content.bp_header }}</h3>
+              {% endif %}
+              <ul class="accordion" data-accordion data-allow-all-closed="true">
+                {{ content|without('field_title', 'bp_background') }}
+              </ul>
+            </div>
+          </div>
         </div>
-        {% if content.bp_link|render %}
-        <div class="bottom-infos">
-          <a class="btn outline" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-            {{ content.bp_link.0['#title'] }}
-          </a>
-        </div>
-        {% endif %}
       </div>
+    {% endblock %}
   </div>
-</div>
+{% endblock %}

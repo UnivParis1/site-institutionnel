@@ -1,16 +1,18 @@
 {#
 /**
  * @file
- * Bootstrap Paragraphs template for displaying an Accordion (Collapse).
+ * Default theme implementation to display a paragraph.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
- *   - id: The paragraph ID.
- *   - bundle: The type of the paragraph, for example, "image" or "text".
- *   - authorid: The user ID of the paragraph author.
- *   - createdtime: Formatted creation date. Preprocess functions can
- *     reformat it by calling format_date() with the desired parameters on
- *     $variables['paragraph']->getCreatedTime().
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
  * - content: All paragraph items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
  *   {{ content|without('field_example') }} to temporarily suppress the printing
@@ -36,42 +38,24 @@
  * @ingroup themeable
  */
 #}
-{% if content.bp_background|render %}
-  {% set layout_background = content.bp_background['#items'].getString() %}
-{% endif %}
-{# Sets Paragraph ID as class. #}
+{% set icon = "icon-" ~ content.field_icon['#items'].getString() %}
+{% set icon_position = "icon-" ~ content.field_icon_position['#items'].getString() %}
+{# variables icon, icon_position et icon-presentation retirées des classes #}
+
 {%
   set classes = [
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
-  accordion_active ? 'paragraph--accordion_active--',
-  layout_background,
-  'section-sep', 'big'
 ]
 %}
-
-{# Sets Unique ID for Accordion from Paragraph ID. #}
-{% set paragraph_id = 'accordion-' ~ paragraph.id.value %}
-{% set title = content.field_title|render %}
-{# Prints Accordion template. #}
 
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="paragraph__column">
-        <div class="grid-container">
-          <div class="grid-x grid-margin-x">
-            <div class="cell small-12 accordion-wrapper">
-              {% if title %}
-                <h2 class="titre page-title-sep">{{ content.field_title }}</h2>
-              {% endif %}
-              <ul class="accordion" data-accordion data-allow-all-closed="true">
-                {{ content|without('field_title', 'bp_background') }}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% if content.field_title|render %}
+        <h3>{{ content.field_title }}</h3>
+      {% endif %}
+      <div> {{ content.bp_text.0 }} </div>
     {% endblock %}
   </div>
-{% endblock %}
+{% endblock paragraph %}

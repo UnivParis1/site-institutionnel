@@ -40,63 +40,36 @@
 {# The template default set classes. #}
 {%
   set classes = [
-  'paragraph',
+  'paragraph', 'grid-x', content.bp_view['#items']|length > 1 ? 'grid-margin-x mobile-sep',
+  content.bp_view['#items']|length == 1 ? 'grid-container full', content.bp_view['#items']|length == 1 ? 'big',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
-  paragraph.bundle|clean_class,
-  'cell',
-  'small-12',
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  'paragraph--id--' ~ paragraph.id.value,
 ]
 %}
-
-{# Set width of the paragraph #}
-{% if content.bp_width|render %}
-  {% set layout_width = content.bp_width['#items'].getString() %}
-  {% set layout_width_classes = [
-    'paragraph--width--tiny' == layout_width ? 'large-6 large-offset-3',
-    'paragraph--width--narrow' == layout_width ? 'large-8 large-offset-2',
-    'paragraph--width--medium' == layout_width ? 'large-10 large-offset-1'
-  ]
-  %}
-  {% set classes = classes|merge(layout_width_classes) %}
-{% endif %}
-
-{# Set link icon if exists #}
-{% set icon = content.field_cta_icon['#items'].getString() %}
-{% if icon is not empty %}
-  {% set cta_classes = 'with-icon fa fa-' ~ icon %}
-{% endif %}
-
-{#Set Background of the paragraph #}
-{% if content.bp_background|render %}
-  {% set background_field = content.bp_background|render %}
-  {% set layout_background = content.bp_background['#items'].getString() %}
-  {% set layout_background_classes = [
-    'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
-    'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
-  ]
-  %}
-  {% set btn_style = 'paris1-bg-soft-grey' == layout_background ? 'inline' : 'outline' %}
-{% endif %}
-
-{% if background_field %}
-<div class="{{ layout_background_classes|join(' ') }}">
-  {% endif %}
+{% set paragTitle = '' %}
+{% set paragTitle %}
+  {{ content.field_title }}
+{% endset %}
+{# Prints div with classes, and content without Width and Background. #}
+<div class="no-padding-mobile paragraph grid-container column-wrapper">
+  {% if paragTitle|striptags|trim %}<h2 class="title-sep big padding-mobile">{{ content.field_title }}</h2>{% endif %}
   <div{{ attributes.addClass(classes) }}>
-    <div class="grid-container">
-      <div class="grid-x grid-margin-x">
-        <div class="cell small-12">
-          <h2 class="titre">{{ content.field_title.0 }}</h2>
-          <div>{{ content.bp_text }}</div>
-          {% if content.bp_link|render %}
-            <span class="{{ content.field_cta_icon.0 }}">{{ icon }}</span>
-            <a class=" btn {{ btn_style }} with-icon" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
-              {{ content.bp_link.0['#title'] }}
-            </a>
-          {% endif %}
+    {# {% if content.bp_view['#items']|length > 1 %}
+       {% for key, item in content.bp_view if key|first != '#' %}
+         {% set rowClass = key is even ? 'large-8 custom-padding':'large-4' %}
+         <div class="cell small-12 {{ rowClass }}">
+           <div class="same-height full-height">{{ item }}</div>
+         </div>
+       {% endfor %}
+     {% else %}#}
+    {# for slider type #}
+    {% for key, item in content.bp_view if key|first != '#' %}
+      <div class="cell small-12">
+        <div class="padding-mobile">
+          {{ item }}
         </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
-  {% if background_field %}
 </div>
-{% endif %}
