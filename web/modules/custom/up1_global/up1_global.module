@@ -52,6 +52,10 @@ function up1_global_form_alter(&$form, FormStateInterface $form_state, $form_id)
     }
   }
 
+  if (in_array($form_id, ["node_publication_form", "node_publication_edit_form"])) {
+    $form['field_author_p1']['#disabled'] = TRUE;
+  }
+
 }
 
 function up1_global_contact_paragraph_submit($form, FormStateInterface $form_state) {}
