@@ -3,20 +3,24 @@ description: 'Trouver et gérer les blocs personnalisés.'
 display:
   default:
     display_options:
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
+      title: 'Bibliothèque de blocs personnalisés'
       fields:
         info:
           label: 'Description du bloc'
         type:
           label: 'Type de bloc'
         changed:
-          label: 'Mis à jour'
+          label: Updated
         operations:
-          label: Actions
+          label: Operations
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+      empty:
+        area_text_custom:
+          content: 'Il n''y a pas de bloc personnalisé disponible.'
       filters:
         info:
           expose:
@@ -24,10 +28,6 @@ display:
         type:
           expose:
             label: 'Type de bloc'
-      title: 'Bibliothèque de blocs personnalisés'
-      empty:
-        area_text_custom:
-          content: 'Il n''y a pas de bloc personnalisé disponible.'
   page_1:
     display_options:
       menu:

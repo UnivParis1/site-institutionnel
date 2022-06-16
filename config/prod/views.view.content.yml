@@ -9,7 +9,6 @@ dependencies:
     - node.type.news2018
     - node.type.offer
     - node.type.page
-    - node.type.page_personnelle
     - node.type.publication
     - node.type.second_level_pages
     - node.type.viva
@@ -30,7 +29,7 @@ base_field: nid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Maître
     display_plugin: default
     position: 0
     display_options:
@@ -228,7 +227,7 @@ display:
           entity_type: node
           entity_field: status
           plugin_id: field
-          label: Statut
+          label: État
           exclude: false
           alter:
             alter_text: false
@@ -388,15 +387,15 @@ display:
           tags:
             next: 'Suivant ›'
             previous: '‹ Précédent'
-            first: '« First'
-            last: 'Last »'
+            first: '« Premier'
+            last: 'Dernier »'
       exposed_form:
         type: basic
         options:
           submit_button: Filtrer
           reset_button: true
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
@@ -532,7 +531,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: Statut
+            label: État
             description: ''
             use_operator: false
             operator: status_op
@@ -1243,16 +1242,13 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            all: all
             news: news
             news2018: news2018
             article: article
-            page_personnelle: page_personnelle
             page: page
             second_level_pages: second_level_pages
             publication: publication
             offer: offer
-            viva: viva
             event: event
           group: 1
           exposed: true
@@ -1278,7 +1274,7 @@ display:
               admin_dir_com: '0'
               administrator: '0'
               enseignant_doctorant: '0'
-            reduce: false
+            reduce: true
           is_grouped: false
           group_info:
             label: ''
@@ -1485,6 +1481,53 @@ display:
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            news: news
+            page: page
+            second_level_pages: second_level_pages
+            publication: publication
+            offer: offer
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
           is_grouped: false
           group_info:
             label: ''

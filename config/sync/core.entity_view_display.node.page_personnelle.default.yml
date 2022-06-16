@@ -13,10 +13,12 @@ dependencies:
     - field.field.node.page_personnelle.field_facebook_link
     - field.field.node.page_personnelle.field_firstname
     - field.field.node.page_personnelle.field_fonction
+    - field.field.node.page_personnelle.field_formations_ia
     - field.field.node.page_personnelle.field_get_hal_publications
     - field.field.node.page_personnelle.field_hal_link
     - field.field.node.page_personnelle.field_highlight_publications
     - field.field.node.page_personnelle.field_hypotheses_link
+    - field.field.node.page_personnelle.field_ia_skills
     - field.field.node.page_personnelle.field_id_hal
     - field.field.node.page_personnelle.field_link_to_resume
     - field.field.node.page_personnelle.field_linkedin_link
@@ -27,12 +29,14 @@ dependencies:
     - field.field.node.page_personnelle.field_other_email_address
     - field.field.node.page_personnelle.field_other_page_perso
     - field.field.node.page_personnelle.field_phd_supervisor
+    - field.field.node.page_personnelle.field_projects_ia
     - field.field.node.page_personnelle.field_publications
     - field.field.node.page_personnelle.field_research_directions
     - field.field.node.page_personnelle.field_research_themes
     - field.field.node.page_personnelle.field_resume
     - field.field.node.page_personnelle.field_resume_text
     - field.field.node.page_personnelle.field_scientific_resp
+    - field.field.node.page_personnelle.field_short_bio
     - field.field.node.page_personnelle.field_skills
     - field.field.node.page_personnelle.field_sticky_publications
     - field.field.node.page_personnelle.field_thesis_directions
@@ -98,7 +102,7 @@ content:
     region: content
   field_education:
     type: text_default
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 37
@@ -143,6 +147,13 @@ content:
     third_party_settings: {  }
     weight: 33
     region: content
+  field_formations_ia:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 41
+    region: content
   field_get_hal_publications:
     type: boolean
     label: above
@@ -173,6 +184,13 @@ content:
       link: false
     third_party_settings: {  }
     weight: 10
+    region: content
+  field_ia_skills:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 38
     region: content
   field_id_hal:
     type: string
@@ -265,6 +283,13 @@ content:
     third_party_settings: {  }
     weight: 25
     region: content
+  field_projects_ia:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 39
+    region: content
   field_publications:
     type: text_default
     label: hidden
@@ -308,6 +333,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 12
+    region: content
+  field_short_bio:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 40
     region: content
   field_skills:
     type: entity_reference_entity_id

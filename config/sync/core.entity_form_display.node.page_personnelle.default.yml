@@ -136,7 +136,7 @@ third_party_settings:
       label: Sidebar
       region: content
       parent_name: ''
-      weight: 14
+      weight: 13
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -155,7 +155,6 @@ third_party_settings:
         - group_these
         - group_education
         - group_publications
-        - group_obsia
       label: 'Page Perso'
       region: content
       parent_name: ''
@@ -250,14 +249,14 @@ third_party_settings:
         required_fields: true
     group_obsia:
       children:
-        - field_short_bio
-        - field_projects_ia
         - field_formations_ia
         - field_ia_skills
+        - field_projects_ia
+        - field_short_bio
       label: 'Intelligence Artificielle'
-      region: content
-      parent_name: group_page_perso
-      weight: 11
+      region: hidden
+      parent_name: ''
+      weight: 19
       format_type: accordion_item
       format_settings:
         classes: ''
@@ -272,7 +271,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -363,14 +362,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_formations_ia:
-    type: text_textarea
-    weight: 23
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
   field_hal_link:
     type: link_default
     weight: 35
@@ -396,12 +387,6 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
-    third_party_settings: {  }
-  field_ia_skills:
-    type: options_select
-    weight: 24
-    region: content
-    settings: {  }
     third_party_settings: {  }
   field_id_hal:
     type: string_textfield
@@ -503,14 +488,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_projects_ia:
-    type: text_textarea
-    weight: 22
-    region: content
-    settings:
-      rows: 3
-      placeholder: 'financés ou non financés et passés ou en cours en lien avec l’IA ? Cela inclut également vos publications. '
-    third_party_settings: {  }
   field_publications:
     type: text_textarea
     weight: 44
@@ -565,16 +542,6 @@ content:
     settings:
       rows: 5
       placeholder: ''
-    third_party_settings: {  }
-  field_short_bio:
-    type: text_textarea_with_summary
-    weight: 20
-    region: content
-    settings:
-      rows: 5
-      summary_rows: 2
-      placeholder: 'Rédigez une courte biographie et expliquez vos travaux de recherche sur l''IA en 5 lignes maximum.'
-      show_summary: true
     third_party_settings: {  }
   field_skills:
     type: entity_reference_autocomplete
@@ -645,38 +612,38 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 12
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 9
+    weight: 8
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 18
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -686,14 +653,14 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 13
+    weight: 12
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 10
+    weight: 9
     region: content
     settings:
       display_label: true
@@ -707,13 +674,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -723,13 +690,13 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 15
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 17
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -741,4 +708,8 @@ content:
 hidden:
   body: true
   deleted: true
+  field_formations_ia: true
   field_get_hal_publications: true
+  field_ia_skills: true
+  field_projects_ia: true
+  field_short_bio: true

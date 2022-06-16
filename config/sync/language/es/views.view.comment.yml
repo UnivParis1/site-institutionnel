@@ -2,26 +2,9 @@ label: Comentarios
 description: 'Buscar y administrar comentarios.'
 display:
   default:
-    display_title: Máster
+    display_title: 'Por defecto'
     display_options:
-      exposed_form:
-        options:
-          submit_button: Aplicar
-          reset_button_label: Restablecer
-          exposed_sorts_label: 'Ordenar por'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        options:
-          tags:
-            previous: '‹ anterior'
-            next: 'siguiente ›'
-            first: '« primero'
-            last: 'última »'
-          expose:
-            items_per_page_label: 'Elementos por página'
-            items_per_page_options_all_label: '- Todo -'
-            offset_label: Desplazamiento
+      title: Comentarios
       fields:
         comment_bulk_form:
           action_title: Acción
@@ -43,6 +26,27 @@ display:
           label: Operaciones
         name_1:
           separator: ', '
+      pager:
+        options:
+          tags:
+            next: 'siguiente ›'
+            previous: '‹ anterior'
+            first: '« primero'
+            last: 'última »'
+          expose:
+            items_per_page_label: 'Elementos por página'
+            items_per_page_options_all_label: '- Todo -'
+            offset_label: Desplazamiento
+      exposed_form:
+        options:
+          submit_button: Filtro
+          reset_button_label: Restablecer
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      empty:
+        area_text_custom:
+          content: 'No hay comentarios disponibles.'
       filters:
         subject:
           expose:
@@ -53,35 +57,17 @@ display:
         langcode:
           expose:
             label: Idioma
-      title: Comentarios
-      empty:
-        area_text_custom:
-          content: 'No hay comentarios disponibles.'
       use_more_text: más
   page_published:
     display_title: 'Comentarios publicados'
     display_options:
+      display_description: 'La lista de comentarios aprobados.'
       menu:
         title: Comentarios
         description: 'Comentarios publicados'
-      display_description: 'La lista de comentarios aprobados.'
   page_unapproved:
     display_title: 'Comentarios sin aprobar'
     display_options:
-      menu:
-        title: 'Comentarios sin aprobar'
-        description: 'Comentarios no aprobados'
-      display_description: 'La lista de comentarios no aprobados.'
-      filters:
-        subject:
-          expose:
-            label: Asunto
-        combine:
-          expose:
-            label: 'Nombre de autor'
-        langcode:
-          expose:
-            label: Idioma
       fields:
         comment_bulk_form:
           action_title: Acción
@@ -103,3 +89,17 @@ display:
           label: Operaciones
         name_1:
           separator: ', '
+      filters:
+        subject:
+          expose:
+            label: Asunto
+        combine:
+          expose:
+            label: 'Nombre de autor'
+        langcode:
+          expose:
+            label: Idioma
+      display_description: 'La lista de comentarios no aprobados.'
+      menu:
+        title: 'Comentarios sin aprobar'
+        description: 'Comentarios no aprobados'

@@ -1,52 +1,60 @@
-uuid: 1679e3ad-c62c-4cee-9f93-5048d2637f6f
+uuid: 73e69e25-b901-4853-9234-713372dd56bb
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 452
+uid: 13
 template: false
 archive: false
-id: s_abonner_a_la_liste_de_diffusio
-title: '18 - S''abonner à la liste de diffusion en droit comparé franco-allemand'
-description: 'Demande d&#39;inscription &agrave; la liste de diffusion en droit compar&eacute; franco-allemand'
-category: 'Inscription liste de diffusion'
+id: 2_ajout_utilisateur_dans_google_
+title: '2 - Ajout utilisateur dans Google search'
+description: ''
+category: ''
 elements: |-
-  votre_nom:
-    '#type': textfield
-    '#title': 'Votre nom'
-    '#help_title': 'Saisissez votre nom.'
-    '#placeholder': 'Saisissez votre nom'
-    '#required': true
-    '#required_error': 'Champ obligatoire : merci de saisir votre nom.'
-  votre_prenom:
-    '#type': textfield
-    '#title': 'Votre prénom'
-    '#help_title': 'Saisissez votre prénom.'
-    '#placeholder': 'Saisissez votre prénom'
-    '#required': true
-    '#required_error': 'Champ obligatoire : merci de saisir votre prénom.'
-  votre_courriel:
+  titre_du_formulaire_form_google:
+    '#type': webform_markup
+    '#markup': '<h3>Demande d''ajout d''un utilisateur à Google Search Console</h3>'
+  votre_adresse_de_messagerie:
     '#type': email
-    '#title': 'Votre courriel'
-    '#help_title': 'Saisissez l''adresse électronique à laquelle vous souhaitez recevoir les messages envoyés à la liste de diffusion.'
-    '#placeholder': 'Saisissez votre courriel'
+    '#title': 'Votre adresse de messagerie Paris 1'
+    '#readonly': true
+    '#default_value': '[current-user:mail]'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': 'Identifiant Google'
+    '#placeholder': 'Saisir l''adresse e-mail de votre compte Google valide'
     '#required': true
-    '#required_error': 'Champ obligatoire : merci d''indiquer votre courriel.'
-  _collecte_de_donnees_a_caractere_personnel:
+    '#required_error': 'Veuillez saisir l''adresse e-mail d''un compte Google valide'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  niveau_d_acces_demande:
     '#type': radios
-    '#title': ' Collecte de données à caractère personnel : en soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de mon inscription à la liste de diffusion en droit comparé franco-allemand.'
-    '#options': yes_no
+    '#title': 'Niveau d''accès demandé'
+    '#help': |-
+      <ul>
+      	<li data-outlined="false"><b>accès complet</b>&nbsp;: peut consulter toutes les données et réaliser certaines actions.</li>
+      	<li><strong>accès limité</strong>&nbsp;: peut uniquement consulter la plupart des données.</li>
+      </ul>
+    '#options':
+      'accès complet': 'accès complet'
+      'accès limité': 'accès limité'
     '#required': true
-    '#options__properties': ''
-  captcha:
-    '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
+    '#required_error': 'Veuillez indiquer le niveau'
+  url_s_des_sites_que_vous_gerez:
+    '#type': textarea
+    '#title': 'URL(s) du ou des sites que vous gérez'
+    '#description': '<p>et sur lesquels vous souhaitez avoir la main.</p>'
+    '#description_display': before
+    '#placeholder': 'https://droit.pantheonsorbonne.fr'
+    '#required': true
+    '#required_error': 'indiquez la ou les URL(s)'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   actions:
     '#type': webform_actions
-    '#title': 'Submit button(s)'
-    '#submit__label': 'S''abonner à la liste de diffusion'
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
 settings:
@@ -59,8 +67,8 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
-  form_submit_once: true
+  form_title: both
+  form_submit_once: false
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
@@ -131,7 +139,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -152,7 +160,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande a bien été envoyé.</p>\r\n\r\n<p>Un ticket assistance va être automatiquement généré.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -228,5 +236,43 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email_a_assistance_dsiun:
+    id: email
+    handler_id: email_a_assistance_dsiun
+    label: 'Email à assistance-dsiun'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: assistance-dsiun@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'PAS-Web : Demande création utilisateur sur Google Form Console'
+      body: _default
+      excluded_elements:
+        titre_du_formulaire_form_google: titre_du_formulaire_form_google
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

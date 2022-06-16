@@ -6,7 +6,6 @@ dependencies:
     - field.storage.node.field_editorial_blocks
     - node.type.second_level_pages
     - paragraphs.paragraphs_type.bp_accordion
-    - paragraphs.paragraphs_type.bp_block
     - paragraphs.paragraphs_type.bp_carousel
     - paragraphs.paragraphs_type.bp_column_wrapper
     - paragraphs.paragraphs_type.bp_columns
@@ -31,6 +30,7 @@ dependencies:
     - paragraphs.paragraphs_type.rich_content
     - paragraphs.paragraphs_type.section_presentation
     - paragraphs.paragraphs_type.tiles
+    - paragraphs.paragraphs_type.trait
   module:
     - entity_reference_revisions
 id: node.second_level_pages.field_editorial_blocks
@@ -56,7 +56,6 @@ settings:
       bp_columns_two_uneven: bp_columns_two_uneven
       bp_column_wrapper: bp_column_wrapper
       bp_accordion: bp_accordion
-      bp_block: bp_block
       bp_carousel: bp_carousel
       jumbotron: jumbotron
       bp_tabs: bp_tabs
@@ -73,6 +72,7 @@ settings:
       contact_free: contact_free
       partenaire_section: partenaire_section
       patrimoine_immobilier_list: patrimoine_immobilier_list
+      trait: trait
     negate: 0
     target_bundles_drag_drop:
       audio_media:
@@ -89,7 +89,7 @@ settings:
         enabled: false
       bp_block:
         weight: -60
-        enabled: true
+        enabled: false
       bp_carousel:
         weight: -59
         enabled: true
@@ -207,6 +207,9 @@ settings:
       title_and_subtitle:
         weight: -49
         enabled: false
+      trait:
+        weight: 92
+        enabled: true
       tuile_text_wo_image:
         weight: -37
         enabled: false

@@ -3,14 +3,7 @@ description: 'Trouver et gérer les fichiers.'
 display:
   default:
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filter
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
+      title: Fichiers
       fields:
         fid:
           label: 'Identifiant (FID)'
@@ -19,7 +12,7 @@ display:
         filesize:
           label: Taille
         status:
-          label: État
+          label: Status
           settings:
             format_custom_false: Temporaire
         created:
@@ -28,6 +21,17 @@ display:
           label: 'Date de modification'
         count:
           label: 'Utilisé dans'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+      exposed_form:
+        options:
+          submit_button: Filter
+      empty:
+        area_text_custom:
+          content: 'Aucun fichier disponible.'
       filters:
         filename:
           expose:
@@ -37,11 +41,7 @@ display:
             label: 'Type MIME'
         status:
           expose:
-            label: État
-      title: Fichiers
-      empty:
-        area_text_custom:
-          content: 'Aucun fichier disponible.'
+            label: Status
   page_1:
     display_title: 'Vue d''ensemble des fichiers'
     display_options:
@@ -50,11 +50,7 @@ display:
   page_2:
     display_title: 'Utilisation du fichier'
     display_options:
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
+      title: 'Utilisation du fichier'
       fields:
         entity_label:
           label: Entité
@@ -64,9 +60,13 @@ display:
           label: 'Enregistrement du module'
         count:
           label: 'Nombre d''utilisations'
-      title: 'Utilisation du fichier'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
       arguments:
         fid:
           exception:
-            title: Tout
+            title: All
           title: 'Information d''utilisation du fichier {{ arguments.fid }}'

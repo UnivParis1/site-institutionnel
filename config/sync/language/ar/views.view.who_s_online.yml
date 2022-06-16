@@ -2,8 +2,9 @@ label: 'Bloc "Qui est connecté"'
 description: 'Affiche les noms des utilisateurs les plus actifs récemment et le nombre total d''utilisateurs actifs.'
 display:
   default:
-    display_title: الرئيسي
+    display_title: الافتراضي
     display_options:
+      title: 'المتصلون الأن'
       exposed_form:
         options:
           submit_button: تطبيق
@@ -11,20 +12,19 @@ display:
           exposed_sorts_label: 'الترتيب حسب'
           sort_asc_label: تصاعدي
           sort_desc_label: تنازلي
+      empty:
+        area_text_custom:
+          content: 'Il y a actuellement 0 utilisateurs en ligne.'
       filters:
         access:
           expose:
             label: 'آخر وصول'
             description: 'تحسب فترة وجود المستخدم عالخط منذ آخر عرض لصفحة.'
-      title: 'المتصلون الأن'
       header:
         result:
           content: 'Il y a actuellement @total utilisateurs en ligne.'
-      empty:
-        area_text_custom:
-          content: 'Il y a actuellement 0 utilisateurs en ligne.'
   who_s_online_block:
     display_title: 'المتصلون الأن'
     display_options:
-      block_description: 'المتصلون الأن'
       display_description: 'Une liste d''utilisateurs actuellement connectés.'
+      block_description: 'المتصلون الأن'
