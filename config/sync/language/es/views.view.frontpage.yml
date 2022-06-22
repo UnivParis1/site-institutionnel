@@ -2,12 +2,19 @@ label: 'Página principal'
 description: 'Todo el contenido promovido a la página principal.'
 display:
   default:
+    display_title: 'Por defecto'
     display_options:
-      empty:
-        area_text_custom:
-          content: 'Aucun contenu de page d''accueil n''a été créé pour l''instant. Suivre le <a href="https://www.drupal.org/fr/docs/user_guide/fr/index.html">Guide utilisateur</a> pour démarrer la construction de votre site.'
-        title:
-          title: 'Bienvenido a [site:name]'
+      pager:
+        options:
+          tags:
+            next: 'Siguiente >'
+            previous: '‹ Anterior'
+            first: '« Primero'
+            last: 'Último »'
+          expose:
+            items_per_page_label: 'Elementos por página'
+            items_per_page_options_all_label: '- Todo -'
+            offset_label: Desplazamiento
       exposed_form:
         options:
           submit_button: Aplicar
@@ -15,18 +22,11 @@ display:
           exposed_sorts_label: 'Ordenar por'
           sort_asc_label: Asc
           sort_desc_label: Desc
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Elementos por página'
-            items_per_page_options_all_label: '- Todo -'
-            offset_label: Desplazamiento
-          tags:
-            previous: '‹ Anterior'
-            next: 'Siguiente >'
-            first: '« Primero'
-            last: 'Último »'
-    display_title: Máster
+      empty:
+        area_text_custom:
+          content: 'Aucun contenu de page d''accueil n''a été créé pour l''instant. Suivre le <a href="https://www.drupal.org/fr/docs/user_guide/fr/index.html">Guide utilisateur</a> pour démarrer la construction de votre site.'
+        title:
+          title: 'Bienvenido a [site:name]'
   feed_1:
     display_title: Agregador
   page_1:

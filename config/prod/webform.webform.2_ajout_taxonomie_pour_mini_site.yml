@@ -2,9 +2,9 @@ uuid: 1f09da02-b717-48c7-96ab-506846f3bd8e
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 13
 template: false
 archive: false
@@ -12,7 +12,96 @@ id: 2_ajout_taxonomie_pour_mini_site
 title: '2 - Ajout taxonomie pour mini-site'
 description: 'Afin que les webmestres puissent filtrer leur actualit&eacute;, leur publication, etc.'
 category: ''
-elements: "titre_du_formulaire:\n  '#type': webform_markup\n  '#markup': '<h3>Demande d&#39;ajout de Taxonomie</h3>'\npour_quel_mini_site:\n  '#type': container\n  nom_du_demandeur:\n    '#type': textfield\n    '#title': 'Nom du demandeur'\n    '#placeholder': 'Votre nom de famille'\n    '#readonly': true\n    '#default_value': '[current-user:display-name]'\n    '#access_create_roles':\n      - authenticated\n    '#required': true\n  courriel:\n    '#type': textfield\n    '#title': Courriel\n    '#placeholder': 'Votre adresse courriel'\n    '#readonly': true\n    '#required': true\n    '#default_value': '[current-user:mail]'\n  indiquez_pour_quel_mini_site:\n    '#type': entity_autocomplete\n    '#title': 'Indiquez pour quel mini-site'\n    '#help_title': 'Ne mettez pas l''URL mais tapez le nom'\n    '#help': 'C&#39;est un champ d&#39;auto-compl&eacute;tion qui cherche le nom des sites, donc si votre site est celui de l&#39;&Eacute;cole de Droit de la Sorbonne (EDS) par exemple, tapez juste droit ou eds dans ce champ.'\n    '#required': true\n    '#target_type': site\n    '#selection_handler': 'default:site'\n    '#selection_settings':\n      target_bundles: null\n      sort:\n        field: name\n        direction: ASC\ncontainer_quelle_taxo:\n  '#type': container\n  pour_quel_type_de_contenu_:\n    '#type': select\n    '#title': 'Pour quel type de contenu ?'\n    '#options':\n      Actualité: Actualité\n      Évènement: Évènement\n      Publication: Publication\n    '#required': true\n  indiquez_les_categories_que_vous_souhaitez_ajouter_:\n    '#type': textarea\n    '#title': 'Indiquez les catégories que vous souhaitez ajouter :'\n    '#description': 'Mettez une valeur par ligne. Par exemple, si vous &ecirc;tes une UMR est que vous avez plusieurs labos, indiquez vos labos (un par ligne) et vous pourrez ainsi filtrer les r&eacute;sultats affich&eacute;s en ne demandant d&#39;afficher que les r&eacute;sultats pour tel ou tel labo.'\n    '#required': true\n    '#states':\n      visible:\n        - ':input[name=\"pour_quel_type_de_contenu_\"]':\n            value: Actualité\n        - xor\n        - ':input[name=\"pour_quel_type_de_contenu_\"]':\n            value: Évènement\n  pour_quel_champ_:\n    '#type': radios\n    '#title': 'Pour quel champ ?'\n    '#options':\n      Éditeur: Éditeur\n      Collection: Collection\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"pour_quel_type_de_contenu_\"]':\n          value: Publication\n  indiquez_vos_editeurs_a_ajouter_:\n    '#type': textarea\n    '#title': 'Indiquez vos éditeurs à ajouter :'\n    '#description': 'Merci de les noter un par ligne.'\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"pour_quel_champ_\"]':\n          value: Éditeur\n  indiquez_les_collections_que_vous_souhaitez_ajouter_:\n    '#type': textarea\n    '#title': 'Indiquez les collections que vous souhaitez ajouter :'\n    '#description': 'Merci de noter vos collections, une par ligne'\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"pour_quel_champ_\"]':\n          value: Collection\nactions:\n  '#type': webform_actions\n  '#title': 'Bouton(s) d''envoi'\n  '#submit__label': 'Envoyer la demande'"
+elements: |-
+  titre_du_formulaire:
+    '#type': webform_markup
+    '#markup': '<h3>Demande d&#39;ajout de Taxonomie</h3>'
+  pour_quel_mini_site:
+    '#type': container
+    nom_du_demandeur:
+      '#type': textfield
+      '#title': 'Nom du demandeur'
+      '#placeholder': 'Votre nom de famille'
+      '#readonly': true
+      '#default_value': '[current-user:display-name]'
+      '#access_create_roles':
+        - authenticated
+      '#required': true
+    courriel:
+      '#type': textfield
+      '#title': Courriel
+      '#placeholder': 'Votre adresse courriel'
+      '#readonly': true
+      '#required': true
+      '#default_value': '[current-user:mail]'
+    indiquez_pour_quel_mini_site:
+      '#type': entity_autocomplete
+      '#title': 'Indiquez pour quel mini-site'
+      '#help_title': 'Ne mettez pas l''URL mais tapez le nom'
+      '#help': 'C&#39;est un champ d&#39;auto-compl&eacute;tion qui cherche le nom des sites, donc si votre site est celui de l&#39;&Eacute;cole de Droit de la Sorbonne (EDS) par exemple, tapez juste droit ou eds dans ce champ.'
+      '#required': true
+      '#target_type': site
+      '#selection_handler': 'default:site'
+      '#selection_settings':
+        target_bundles: null
+        sort:
+          field: name
+          direction: ASC
+  container_quelle_taxo:
+    '#type': container
+    pour_quel_type_de_contenu_:
+      '#type': select
+      '#title': 'Pour quel type de contenu ?'
+      '#options':
+        Actualité: Actualité
+        Évènement: Évènement
+        Publication: Publication
+      '#required': true
+    indiquez_les_categories_que_vous_souhaitez_ajouter_:
+      '#type': textarea
+      '#title': 'Indiquez les catégories que vous souhaitez ajouter :'
+      '#description': 'Mettez une valeur par ligne. Par exemple, si vous &ecirc;tes une UMR est que vous avez plusieurs labos, indiquez vos labos (un par ligne) et vous pourrez ainsi filtrer les r&eacute;sultats affich&eacute;s en ne demandant d&#39;afficher que les r&eacute;sultats pour tel ou tel labo.'
+      '#required': true
+      '#states':
+        visible:
+          - ':input[name="pour_quel_type_de_contenu_"]':
+              value: Actualité
+          - xor
+          - ':input[name="pour_quel_type_de_contenu_"]':
+              value: Évènement
+    pour_quel_champ_:
+      '#type': radios
+      '#title': 'Pour quel champ ?'
+      '#options':
+        Éditeur: Éditeur
+        Collection: Collection
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="pour_quel_type_de_contenu_"]':
+            value: Publication
+    indiquez_vos_editeurs_a_ajouter_:
+      '#type': textarea
+      '#title': 'Indiquez vos éditeurs à ajouter :'
+      '#description': 'Merci de les noter un par ligne.'
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="pour_quel_champ_"]':
+            value: Éditeur
+    indiquez_les_collections_que_vous_souhaitez_ajouter_:
+      '#type': textarea
+      '#title': 'Indiquez les collections que vous souhaitez ajouter :'
+      '#description': 'Merci de noter vos collections, une par ligne'
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="pour_quel_champ_"]':
+            value: Collection
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +116,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +166,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +176,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +205,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: 'Votre demande a bien été envoyé...'
   confirmation_message: 'Votre demande a &eacute;t&eacute; transf&eacute;r&eacute; &agrave; l&#39;assistance de la DSIUN. Un ticket de demande d&#39;intervention va &ecirc;tre ouvert. C&#39;est ensuite via ce ticket que vous pourrez suivre le suivi et la r&eacute;solution de votre demande.'
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +286,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: 'Courriel à l''assistance DSIUN'
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +297,17 @@ handlers:
         - completed
       to_mail: assistance-dsiun@univ-paris1.fr
       to_options: {  }
-      cc_mail: 'lagadic@univ-paris1.fr, Liliana.Helmany@univ-paris1.fr'
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: 'lagadic@univ-paris1.fr, Liliana.Helmany@univ-paris1.fr'
+      cc_options: {  }
       from_mail: '[webform_submission:values:courriel:raw]'
       from_options: {  }
       from_name: '[webform_submission:values:nom_du_demandeur:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: '[Drupal] Ajout taxonomie pour mini-site'
       body: "Ce courriel automatique provient du formulaire pr&eacute;sent &agrave; la page suivante :<br />\r\n<a href=\"https://aide-siteweb.pantheonsorbonne.fr/experts/filtrer-vos-contenus-votre-mini-site\">https://aide-siteweb.pantheonsorbonne.fr/experts/filtrer-vos-contenus-votre-mini-site</a><br />\r\n<br />\r\nDemande envoy&eacute; le [webform_submission:created]<br />\r\nEnvoy&eacute; par : [webform_submission:user]<br />\r\nLes valeurs soumises sont :<br />\r\n[webform_submission:values]"
       excluded_elements: {  }
@@ -222,11 +318,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

@@ -11,22 +11,22 @@ type: 'canonical_entities:node'
 pattern: 'news/[node:title]'
 selection_criteria:
   50f482a4-e865-44b3-8ba1-a8511d40d634:
-    id: node_type
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 50f482a4-e865-44b3-8ba1-a8511d40d634
+    context_mapping:
+      node: node
     bundles:
       news: news
       news2018: news2018
-    negate: false
-    context_mapping:
-      node: node
-    uuid: 50f482a4-e865-44b3-8ba1-a8511d40d634
   8b6dce7b-19fd-4a30-9a35-eb2e1e7802d5:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: 8b6dce7b-19fd-4a30-9a35-eb2e1e7802d5
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 8b6dce7b-19fd-4a30-9a35-eb2e1e7802d5
+    langcodes:
+      en: en
 selection_logic: and
 weight: -10
 relationships:

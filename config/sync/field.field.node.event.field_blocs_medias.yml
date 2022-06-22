@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.bp_simple
     - paragraphs.paragraphs_type.bp_webform
     - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.trait
   module:
     - entity_reference_revisions
 id: node.event.field_blocs_medias
@@ -23,11 +24,12 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       bp_simple: bp_simple
       bp_webform: bp_webform
       medias: medias
+      trait: trait
+    negate: 0
     target_bundles_drag_drop:
       audio_media:
         weight: 25
@@ -66,8 +68,8 @@ settings:
         weight: 36
         enabled: false
       bp_simple:
-        enabled: true
         weight: 37
+        enabled: true
       bp_tab_section:
         weight: 38
         enabled: false
@@ -78,10 +80,19 @@ settings:
         weight: 40
         enabled: false
       bp_webform:
-        enabled: true
         weight: 41
+        enabled: true
+      button_grid:
+        weight: 65
+        enabled: false
+      button_grid_item:
+        weight: 66
+        enabled: false
       contact:
         weight: 55
+        enabled: false
+      contact_free:
+        weight: 68
         enabled: false
       content_block:
         weight: 56
@@ -91,6 +102,12 @@ settings:
         enabled: false
       hit_list:
         weight: 58
+        enabled: false
+      icon_grid:
+        weight: 72
+        enabled: false
+      icon_grid_item:
+        weight: 73
         enabled: false
       image_media:
         weight: 42
@@ -105,10 +122,22 @@ settings:
         weight: 44
         enabled: false
       medias:
-        enabled: true
         weight: 45
+        enabled: true
       news_events:
         weight: 64
+        enabled: false
+      partenaire:
+        weight: 80
+        enabled: false
+      partenaire_section:
+        weight: 81
+        enabled: false
+      patrimoine_immobilier:
+        weight: 82
+        enabled: false
+      patrimoine_immobilier_list:
+        weight: 83
         enabled: false
       presentation:
         weight: 65
@@ -134,6 +163,9 @@ settings:
       title_and_subtitle:
         weight: 72
         enabled: false
+      trait:
+        weight: 92
+        enabled: true
       tuile_text_wo_image:
         weight: 73
         enabled: false

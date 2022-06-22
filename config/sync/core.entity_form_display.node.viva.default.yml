@@ -4,23 +4,30 @@ status: true
 dependencies:
   config:
     - field.field.node.viva.field_add_to_cal
+    - field.field.node.viva.field_board
     - field.field.node.viva.field_categories
+    - field.field.node.viva.field_co_director
     - field.field.node.viva.field_disable_canonical_url
     - field.field.node.viva.field_edo_code
     - field.field.node.viva.field_edo_label
     - field.field.node.viva.field_event_address
     - field.field.node.viva.field_event_date
+    - field.field.node.viva.field_hdr
     - field.field.node.viva.field_publish_master
     - field.field.node.viva.field_sites
     - field.field.node.viva.field_sites_all
     - field.field.node.viva.field_subtitle
     - field.field.node.viva.field_thesis_supervisor
+    - field.field.node.viva.field_ths_code
+    - field.field.node.viva.field_viva_date
     - node.type.viva
   module:
     - content_moderation
-    - datetime_range
+    - datetime
     - ics_field
     - path
+    - scheduler
+    - scheduler_content_moderation_integration
 id: node.viva.default
 targetEntityType: node
 bundle: viva
@@ -28,103 +35,103 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 11
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   field_add_to_cal:
-    weight: 8
+    type: calendar_download_default_widget
+    weight: 12
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: calendar_download_default_widget
+  field_board:
+    type: string_textarea
+    weight: 7
     region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_categories:
-    weight: 18
+    type: entity_reference_autocomplete
+    weight: 22
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+  field_co_director:
+    type: string_textfield
+    weight: 6
     region: content
-  field_disable_canonical_url:
-    type: boolean_checkbox
     settings:
-      display_label: true
-    weight: 43
-    region: content
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_edo_code:
-    weight: 4
+    type: string_textfield
+    weight: 8
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_edo_label:
-    weight: 5
+    type: string_textfield
+    weight: 9
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_event_address:
-    weight: 7
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_event_date:
-    weight: 6
-    settings: {  }
-    third_party_settings: {  }
-    type: daterange_default
-    region: content
-  field_publish_master:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 42
-    region: content
-    third_party_settings: {  }
-  field_sites:
-    type: entity_reference_autocomplete
-    weight: 40
+    weight: 11
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_sites_all:
+  field_hdr:
     type: boolean_checkbox
+    weight: 4
+    region: content
     settings:
       display_label: true
-    weight: 41
-    region: content
     third_party_settings: {  }
   field_subtitle:
-    weight: 2
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_thesis_supervisor:
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_thesis_supervisor:
     type: string_textfield
+    weight: 5
     region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_ths_code:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_viva_date:
+    type: datetime_default
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 0
@@ -134,68 +141,102 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 16
-    settings: {  }
+    weight: 20
     region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 15
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
+    weight: 17
+    region: content
     settings:
       display_label: true
-    weight: 13
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 25
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 23
+    region: content
+    settings: {  }
     third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 14
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 21
+    region: content
     settings:
       display_label: true
-    weight: 17
-    region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
+    weight: 18
+    region: content
     settings:
       display_label: true
-    weight: 14
-    region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 1
+    weight: 2
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 12
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 13
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
-hidden: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 24
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 28
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_disable_canonical_url: true
+  field_event_date: true
+  field_publish_master: true
+  field_sites: true
+  field_sites_all: true

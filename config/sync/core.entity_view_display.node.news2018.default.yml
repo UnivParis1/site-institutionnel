@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.news2018.field_media
     - field.field.node.news2018.field_news_date
     - field.field.node.news2018.field_news_topic
+    - field.field.node.news2018.field_publish_master
     - field.field.node.news2018.field_sites
     - field.field.node.news2018.field_sites_all
     - node.type.news2018
@@ -24,66 +25,67 @@ bundle: news2018
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 7
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 7
     region: content
   content_moderation_control:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_categories:
-    weight: 3
+    type: entity_reference_label
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 3
     region: content
   field_lead:
-    weight: 4
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 4
     region: content
   field_media:
-    weight: 1
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: full
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
   field_news_date:
-    weight: 5
+    type: datetime_default
     label: hidden
     settings:
       timezone_override: ''
       format_type: news_date
     third_party_settings: {  }
-    type: datetime_default
+    weight: 5
     region: content
   field_news_topic:
-    weight: 6
+    type: entity_reference_label
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 6
     region: content
   links:
-    weight: 2
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   field_disable_canonical_url: true
   field_label_color: true
+  field_publish_master: true
   field_sites: true
   field_sites_all: true
   langcode: true

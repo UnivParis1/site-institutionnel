@@ -9,6 +9,8 @@ dependencies:
     - paragraphs.paragraphs_type.bp_columns_two_uneven
     - paragraphs.paragraphs_type.bp_modal
     - paragraphs.paragraphs_type.bp_simple
+    - paragraphs.paragraphs_type.button_grid
+    - paragraphs.paragraphs_type.icon_grid
     - paragraphs.paragraphs_type.medias
     - paragraphs.paragraphs_type.partenaire_section
     - paragraphs.paragraphs_type.tiles
@@ -29,15 +31,17 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       bp_simple: bp_simple
       bp_columns: bp_columns
       bp_columns_two_uneven: bp_columns_two_uneven
       bp_modal: bp_modal
       medias: medias
+      button_grid: button_grid
       tiles: tiles
+      icon_grid: icon_grid
       partenaire_section: partenaire_section
+    negate: 0
     target_bundles_drag_drop:
       audio_media:
         weight: 35
@@ -61,23 +65,23 @@ settings:
         weight: 41
         enabled: false
       bp_columns:
-        enabled: true
         weight: -28
+        enabled: true
       bp_columns_three_uneven:
         weight: -27
         enabled: false
       bp_columns_two_uneven:
-        enabled: true
         weight: -26
+        enabled: true
       bp_image:
         weight: -30
         enabled: false
       bp_modal:
-        enabled: true
         weight: -24
-      bp_simple:
         enabled: true
+      bp_simple:
         weight: -31
+        enabled: true
       bp_tab_section:
         weight: -18
         enabled: false
@@ -90,6 +94,12 @@ settings:
       bp_webform:
         weight: 51
         enabled: false
+      button_grid:
+        weight: 61
+        enabled: true
+      button_grid_item:
+        weight: 62
+        enabled: false
       contact:
         weight: 52
         enabled: false
@@ -101,6 +111,12 @@ settings:
         enabled: false
       hit_list:
         weight: 54
+        enabled: false
+      icon_grid:
+        weight: 67
+        enabled: true
+      icon_grid_item:
+        weight: 68
         enabled: false
       image_media:
         weight: 55
@@ -115,8 +131,8 @@ settings:
         weight: 57
         enabled: false
       medias:
-        enabled: true
         weight: 58
+        enabled: true
       news_events:
         weight: 66
         enabled: false
@@ -124,8 +140,8 @@ settings:
         weight: 67
         enabled: false
       partenaire_section:
-        enabled: true
         weight: 68
+        enabled: true
       presentation:
         weight: 59
         enabled: false
@@ -145,8 +161,8 @@ settings:
         weight: 64
         enabled: false
       tiles:
-        enabled: true
         weight: 65
+        enabled: true
       title_and_subtitle:
         weight: 66
         enabled: false

@@ -3,36 +3,36 @@ description: 'Trouver et modérer du contenu.'
 display:
   default:
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filter
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
+      title: 'Contenu modéré'
       fields:
         type:
-          label: 'Type de contenu'
+          label: 'Content type'
         moderation_state:
           label: 'État de modération'
         changed:
-          label: 'Mis à jour'
+          label: Updated
         operations:
-          label: Actions
+          label: Operations
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+      exposed_form:
+        options:
+          submit_button: Filter
+      empty:
+        area_text_custom:
+          content: 'Aucun contenu modéré disponible. Seules les versions de contenu en attente, telles que ''Brouillon'', sont listées ici.'
       filters:
         type:
           expose:
-            label: 'Type de contenu'
+            label: 'Content type'
         moderation_state:
           expose:
             label: 'État de modération'
         langcode:
           expose:
-            label: Langue
-      title: 'Contenu modéré'
-      empty:
-        area_text_custom:
-          content: 'Aucun contenu modéré disponible. Seules les versions de contenu en attente, telles que ''Brouillon'', sont listées ici.'
+            label: Language
   moderated_content:
     display_title: 'Contenu modéré'

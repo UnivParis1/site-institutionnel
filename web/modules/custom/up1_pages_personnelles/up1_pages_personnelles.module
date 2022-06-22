@@ -16,6 +16,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use \Drupal\Core\Url;
 use \Drupal\Core\Link;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_help().
@@ -71,12 +72,82 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
         'weight' => 100,
       ])
       ->setDisplayConfigurable('form', TRUE);
+
+    $fields['trombi_ec_enable'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Enable trombinoscope for EC'))
+      ->setDescription(t('List of all ECs displayed as trombinoscope.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['supannEntite_pedagogy'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Show "supannEntite pedagogy" on trombinoscope'))
+      ->setDescription(t('See label of the "UFR" on trombinoscope card.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['supannEntite_research'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Show "supannEntite research" on trombinoscope'))
+      ->setDescription(t('See label of the "labo de rattachement" on trombinoscope card.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['discipline_enseignement'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Show "discipline d\'enseignement" on trombinoscope'))
+      ->setDescription(t('See "discipline d\'enseignement" on trombinoscope card.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['skills_lists'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Show "skills" on trombinoscope'))
+      ->setDescription(t('See "skills" list on trombinoscope card.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['supannRole'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Show "supannRole" on trombinoscope'))
+      ->setDescription(t('See fonction on trombinoscope card.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['about_me'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Show "about me" on trombinoscope'))
+      ->setDescription(t('See about me section on trombinoscope card.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
   }
 
   return $fields;
 }
 
-function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface $form_state, $form_id)
 {
   $form['pages_personnelles'] = [
     '#type' => 'details',
@@ -88,9 +159,19 @@ function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\F
     '#weight' => 100,
     '#optional' => TRUE,
   ];
-  $form['staff'] = [
+  $form['staff_ec'] = [
     '#type' => 'details',
-    '#title' => t('Équipe'),
+    '#title' => t('Équipe Enseignant-Chercheur'),
+    '#group' => 'advanced',
+    '#attributes' => [
+      'class' => ['site-form-staff'],
+    ],
+    '#weight' => 100,
+    '#optional' => TRUE,
+  ];
+  $form['staff_doc'] = [
+    '#type' => 'details',
+    '#title' => t('Équipe doctorants'),
     '#group' => 'advanced',
     '#attributes' => [
       'class' => ['site-form-staff'],
@@ -102,11 +183,34 @@ function up1_pages_personnelles_form_site_form_alter(&$form, \Drupal\Core\Form\F
   if (isset($form['groups'])) {
     $form['groups']['#group'] = 'pages_personnelles';
   }
+
   if (isset($form['ec_enabled'])) {
-    $form['ec_enabled']['#group'] = 'staff';
+    $form['ec_enabled']['#group'] = 'staff_ec';
   }
+  if (isset($form['trombi_ec_enable'])) {
+    $form['trombi_ec_enable']['#group'] = 'staff_ec';
+  }
+  if (isset($form['supannEntite_pedagogy'])) {
+    $form['supannEntite_pedagogy']['#group'] = 'staff_ec';
+  }
+  if (isset($form['supannEntite_research'])) {
+    $form['supannEntite_research']['#group'] = 'staff_ec';
+  }
+  if (isset($form['discipline_enseignement'])) {
+    $form['discipline_enseignement']['#group'] = 'staff_ec';
+  }
+  if (isset($form['skills_lists'])) {
+    $form['skills_lists']['#group'] = 'staff_ec';
+  }
+  if (isset($form['supannRole'])) {
+    $form['supannRole']['#group'] = 'staff_ec';
+  }
+  if (isset($form['about_me'])) {
+    $form['about_me']['#group'] = 'staff_ec';
+  }
+
   if (isset($form['doc_enabled'])) {
-    $form['doc_enabled']['#group'] = 'staff';
+    $form['doc_enabled']['#group'] = 'staff_doc';
   }
 }
 
@@ -118,7 +222,6 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
   if (in_array($form_id, ["node_page_personnelle_form", "node_page_personnelle_edit_form"]) ) {
     if ($form_id == "node_page_personnelle_edit_form") {
       $name = $form['field_uid_ldap']['widget'][0]['value']['#default_value'];
-
       $nid = $form_state->getformObject()->getEntity()->id();
       $options = ['absolute' => TRUE, 'attributes' => ['target' => '_blank']];
       $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
@@ -126,80 +229,86 @@ function up1_pages_personnelles_form_alter(&$form, FormStateInterface $form_stat
       $link = Link::fromTextAndUrl($url->toString(), $url);
 
       $html_link = $link->toString();
-
     }
-    if ($form_id == "node_page_personnelle_form") {
+    //if ($form_id == "node_page_personnelle_form") {
       $userCurrent = \Drupal::currentUser();
-
       $user = User::load($userCurrent->id());
-      $name = $user->getUsername();
-    }
-    $userInformation = up1_pages_personnelles_get_comptex_info($name);
+      $roles = $userCurrent->getRoles();
 
-    if ($userInformation) {
-      $get_emails = up1_pages_personnelles_get_user_email($name);
-      $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['name' => $name]);
-      $teacher = reset($load_teacher);
-      if ($teacher) {
-        if(empty($teacher->getEmail())) {
-          if (isset($get_emails['mail'])) {
-            $teacher->mail = $get_emails['mail'];
+      /*if (in_array('enseignant_doctorant', $roles)) {
+        $name = $user->getDisplayName();
+        $userInformation = up1_pages_personnelles_get_comptex_info($name);
+      }
+      else {*/
+        $node = Node::load($nid);
+        $userInformation = up1_pages_personnelles_get_comptex_info($node->getOwnerId());
+     // }
+      if ($userInformation) {
+        $get_emails = up1_pages_personnelles_get_user_email($name);
+        $load_teacher = \Drupal::entityTypeManager()->getStorage('user')
+          ->loadByProperties(['name' => $name]);
+        $teacher = reset($load_teacher);
+        if ($teacher) {
+          if (empty($teacher->getEmail())) {
+            if (isset($get_emails['mail'])) {
+              $teacher->mail = $get_emails['mail'];
+            } else {
+              $teacher->mail = $get_emails['eduPersonPrincipalName'];
+            }
+            $teacher->save();
           }
-          else {
-            $teacher->mail = $get_emails['eduPersonPrincipalName'];
-          }
-          $teacher->save();
         }
-      }
 
+        //Groupe de champs spécifiques si champ pour annuaire obsia coché dans Comptex
+        if (!$userInformation['obsia']) {
+          $form['group_obsia']['#access'] = FALSE;
+          $form['group_obsia']['#required'] = FALSE;
+        }
+
+        $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
+        $form['field_uid_ldap']['#access'] = FALSE;
+
+        $form['field_name']['widget'][0]['value']['#default_value'] = strtoupper($userInformation['sn']);
+        $form['field_name']['#access'] = FALSE;
+
+        $form['field_firstname']['widget'][0]['value']['#default_value'] = $userInformation['givenName'];
+        $form['field_firstname']['#access'] = FALSE;
+
+        $form['field_other_affiliation']['#access'] = FALSE;
+        $form['actions']['preview']['#access'] = FALSE;
+
+        if (isset($get_emails['supannMailPerso'])) {
+          $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
+          $form['field_other_email_address']['#disabled'] = TRUE;
+        } else {
+          $form['field_other_email_address']['#access'] = FALSE;
+          $form['field_display_other_email']['#access'] = FALSE;
+        }
+
+        if (!empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
+          $fonction = $userInformation['employeeType'] . ' (' . $userInformation['supannActivite'] . ')';
+        } elseif (!empty($userInformation['employeeType']) && empty($userInformation['supannActivite'])) {
+          $fonction = $userInformation['employeeType'];
+        } elseif (empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
+          $fonction = $userInformation['supannActivite'];
+        }
+        $form['field_fonction']['widget'][0]['value']['#default_value'] = $fonction;
+
+        $form['field_affiliation']['widget'][0]['value']['#default_value'] =
+          $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
+
+        $form['wrapper']['information'] = [
+          '#type' => 'markup',
+          '#markup' => "<div class='explications'>L'URL publique de ma page perso : $html_link <p><a href='https://mediatheque.univ-paris1.fr/video/2969-comment-mettre-a-jour-sa-page-perso/'>Visualisez le tutoriel en vidéo</a></div>",
+        ];
+        $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
+      }
+    //}
+    if (!in_array('administrator', $roles)) {
       $form['title']['#disabled'] = TRUE;
-
-      $form['field_uid_ldap']['widget'][0]['value']['#default_value'] = $name;
-      $form['field_uid_ldap']['#access'] = FALSE;
-
-      $form['field_name']['widget'][0]['value']['#default_value'] = strtoupper($userInformation['sn']);
-      $form['field_name']['#access'] = FALSE;
-
-      $form['field_firstname']['widget'][0]['value']['#default_value'] = $userInformation['givenName'];
-      $form['field_firstname']['#access'] = FALSE;
-
-      $form['field_other_affiliation']['#access'] = FALSE;
-      $form['actions']['preview']['#access'] = FALSE;
-
-      if (isset($get_emails['supannMailPerso'])) {
-        $form['field_other_email_address']['widget'][0]['value']['#default_value'] = $get_emails['supannMailPerso'];
-        $form['field_other_email_address']['#disabled'] = TRUE;
-      }
-      else {
-        $form['field_other_email_address']['#access'] = FALSE;
-        $form['field_display_other_email']['#access'] = FALSE;
-      }
-
-      if (!empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
-        $fonction = $userInformation['employeeType'] . ' (' . $userInformation['supannActivite'] . ')';
-      }
-      elseif (!empty($userInformation['employeeType']) && empty($userInformation['supannActivite'])) {
-          $fonction = $userInformation['employeeType'] ;
-      }
-      elseif (empty($userInformation['employeeType']) && !empty($userInformation['supannActivite'])) {
-        $fonction = $userInformation['supannActivite'];
-      }
-      $form['field_fonction']['widget'][0]['value']['#default_value'] = $fonction;
-      //$form['field_fonction']['#access'] = FALSE;
-      $form['field_fonction']['#disabled'] = TRUE;
-
-      $form['field_affiliation']['#access'] = FALSE;
-      $form['field_affiliation']['widget'][0]['value']['#default_value'] =
-        $userInformation['eduPersonPrimaryAffiliation'] == 'student' ? "doctorant" : "enseignant-chercheur";
-
-      $form['wrapper']['information'] = [
-        '#type' => 'markup',
-        '#markup' => "<div class='explications'>L'URL publique de ma page perso : $html_link <p><a href='https://mediatheque.univ-paris1.fr/video/2969-comment-mettre-a-jour-sa-page-perso/'>Visualisez le tutoriel en vidéo</a></div>",
-      ];
-      $form['#attached']['library'][] = 'up1_pages_personnelles/admin';
     }
   }
+
 }
 
 function up1_pages_personnelles_node_create(NodeInterface $node) {
@@ -228,17 +337,16 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
       }
 
       $get_publications = $node->get('field_my_hal_publications')->getValue();
-        $firstname = $node->get('field_firstname')->getValue();
-        $lastname = $node->get('field_name')->getValue();
-      if (!empty($get_publications) && $get_publications[0]['value'] && !empty($firstname) && $firstname[0]['value']
-      && !empty($lastname) && $lastname[0]['value']) {
+
+      if (!empty($get_publications) && $get_publications[0]['value'] && !empty($userInformation['givenName'])
+        && !empty($userInformation['sn'])) {
         switch ($get_publications[0]['value']) {
           case 'idhal':
             $hal_publications = $node->get('field_id_hal')->getValue();
-            $publications = up1_pages_personnelles_get_hal_publications('idhal', $firstname[0]['value'],$lastname[0]['value'],$hal_publications[0]['value']);
+            $publications = up1_pages_personnelles_get_hal_publications('idhal',$userInformation['givenName'],$userInformation['sn'],$hal_publications[0]['value']);
             break;
           case 'nomprenom':
-            $publications = up1_pages_personnelles_get_hal_publications('nomprenom',$firstname[0]['value'],$lastname[0]['value']);
+            $publications = up1_pages_personnelles_get_hal_publications('nomprenom',$userInformation['givenName'],$userInformation['sn']);
             break;
           case 'nul':
             $publications = "";
@@ -398,30 +506,6 @@ function up1_comptex_markup($data) {
 }
 
 /**
- * Implements hook_user_login().
- */
-/*function up1_pages_personnelles_user_login(UserInterface $account) {
-  if ($account->hasRole('enseignant_doctorant')) {
-    $query = \Drupal::entityQuery('node')
-      ->condition('uid', $account->id())
-      ->condition('type', 'page_personnelle');
-
-    $result = $query->execute();
-    if (!empty($result) && count($result) == 1) {
-      $nid = reset($result);
-      $goto = "/node/$nid/edit";
-    }
-    else {
-      $goto = "/node/add/page_personnelle";
-    }
-
-    $response = new Symfony\Component\HttpFoundation\RedirectResponse($goto);
-    $response->send();
-    return;
-  }
-}*/
-
-/**
  * Implements hook_theme().
  */
 function up1_pages_personnelles_theme() {
@@ -440,6 +524,15 @@ function up1_pages_personnelles_theme() {
         'link' => NULL,
         'affiliation' => NULL,
         'Trusted' => FALSE,
+      ]
+    ],
+    'list_as_trombinoscope' => [
+      'variables' => [
+        'users' => [],
+        'link' => NULL,
+        'affiliation' => NULL,
+        'Trusted' => FALSE,
+        'trombi_settings' => []
       ]
     ]
   ];

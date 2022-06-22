@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_display_node_changed
     - field.field.node.page.field_indexrobots
     - field.field.node.page.field_media
     - field.field.node.page.field_paragraphs
@@ -26,33 +27,34 @@ bundle: page
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
     weight: 1
     region: content
+  content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-  content_moderation_control:
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
   field_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 3
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 3
     region: content
   links:
-    weight: 2
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   field_disable_canonical_url: true
+  field_display_node_changed: true
   field_indexrobots: true
   field_media: true
   field_publish_master: true

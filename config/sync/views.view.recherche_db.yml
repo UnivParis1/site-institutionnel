@@ -17,64 +17,12 @@ base_table: search_api_index_contenu
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'access content'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          skip_access: 0
-          bypass_access: 0
-          preserve_facet_query_args: 0
-      exposed_form:
-        type: basic
-        options:
-          submit_button: OK
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: infinite_scroll
-        options:
-          items_per_page: 12
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          views_infinite_scroll:
-            button_text: 'Afficher plus'
-            automatically_load_content: true
-            initially_load_all_pages: false
-      style:
-        type: default
-        options:
-          grouping: {  }
-          row_class: ' cell small-12 semi-infos-sep'
-          default_row_class: true
-      row:
-        type: fields
+      title: 'Résultats de recherche'
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -83,6 +31,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_rendered_item
           label: ''
           exclude: false
           alter:
@@ -129,13 +78,119 @@ display:
               event: search_index
               news: search_index
               news2018: search_index
-              offer: ''
+              offer: search_index
               page: search_index
               page_personnelle: search_index
-              publication: ''
+              publication: search_index
               second_level_pages: search_index
               viva: search_index
-          plugin_id: search_api_rendered_item
+      pager:
+        type: infinite_scroll
+        options:
+          offset: 0
+          items_per_page: 12
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Afficher plus'
+            automatically_load_content: true
+            initially_load_all_pages: false
+      exposed_form:
+        type: basic
+        options:
+          submit_button: OK
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<p class=\"h4-style title-sep\"><a href=\"/resultats-recherche\" title=\"Réinitialiser la recherche\">Réinitialiser la  recherche</a></p>\r\n<div>Votre recherche n'a renvoyé aucun résultat...</div>\r\n"
+            format: full_html
+          tokenize: false
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_contenu
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: search_api_relevance
+          exposed: false
+        field_news_date:
+          id: field_news_date
+          table: search_api_index_contenu
+          field: field_news_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: field_news_date
+          exposed: false
+        field_event_date:
+          id: field_event_date
+          table: search_api_index_contenu
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: field_event_date
+          exposed: false
+        field_publishing_date:
+          id: field_publishing_date
+          table: search_api_index_contenu
+          field: field_publishing_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: field_publishing_date
+          exposed: false
+      arguments: {  }
       filters:
         status:
           id: status
@@ -144,6 +199,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: '1'
           group: 1
@@ -174,7 +230,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_boolean
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_contenu
@@ -182,6 +237,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_fulltext
           operator: or
           value: ''
           group: 1
@@ -208,8 +264,8 @@ display:
               admin_dir_com: '0'
               administrator: '0'
               enseignant_doctorant: '0'
-            placeholder: ''
             expose_fields: false
+            placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
           is_grouped: false
           group_info:
@@ -245,7 +301,6 @@ display:
             - title
             - type
             - url
-          plugin_id: search_api_fulltext
         search_api_language:
           id: search_api_language
           table: search_api_index_contenu
@@ -253,6 +308,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_language
           operator: in
           value:
             '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
@@ -285,7 +341,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_language
         type:
           id: type
           table: search_api_index_contenu
@@ -293,10 +348,14 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_options
           operator: or
           value:
+            all: all
+            article: article
             event: event
             news: news
+            news2018: news2018
             offer: offer
             page: page
             page_personnelle: page_personnelle
@@ -333,57 +392,22 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: search_api_options
-      sorts:
-        search_api_relevance:
-          id: search_api_relevance
-          table: search_api_index_contenu
-          field: search_api_relevance
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        field_news_date:
-          id: field_news_date
-          table: search_api_index_contenu
-          field: field_news_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        field_event_date:
-          id: field_event_date
-          table: search_api_index_contenu
-          field: field_event_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        field_publishing_date:
-          id: field_publishing_date
-          table: search_api_index_contenu
-          field: field_publishing_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-      title: 'Résultats de recherche'
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ' cell small-12 semi-infos-sep'
+          default_row_class: true
+      row:
+        type: fields
+      query:
+        type: views_query
+        options:
+          skip_access: 0
+          bypass_access: 0
+          preserve_facet_query_args: 0
+      relationships: {  }
+      use_ajax: true
       header:
         area:
           id: area
@@ -392,12 +416,12 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: text
           empty: false
-          tokenize: false
           content:
             value: '<p class="h4-style title-sep"><a href="/resultats-recherche" title="Réinitialiser la recherche">Réinitialiser la  recherche</a></p>'
             format: full_html
-          plugin_id: text
+          tokenize: false
         result:
           id: result
           table: views
@@ -405,15 +429,11 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: result
           empty: false
           content: '<div><em>Nombre de résultats</em> : <b>@total</b></div>'
-          plugin_id: result
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
-      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -425,18 +445,18 @@ display:
       tags:
         - 'config:search_api.index.contenu'
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Page
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: resultats-recherche
       cache:
         type: none
       defaults:
         cache: false
       exposed_block: true
+      display_extenders: {  }
+      path: resultats-recherche
     cache_metadata:
       max-age: -1
       contexts:

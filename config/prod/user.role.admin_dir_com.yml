@@ -1,7 +1,88 @@
 uuid: 2fa56280-6282-4619-9728-dc1bb85ed657
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.custom_format
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - filter.format.token_editor
+    - media.type.audio
+    - media.type.file
+    - media.type.image
+    - media.type.mediatheque
+    - media.type.mediatheque_audio
+    - media.type.remote_video
+    - media.type.video
+    - node.type.event
+    - node.type.news
+    - node.type.news2018
+    - node.type.offer
+    - node.type.page
+    - node.type.publication
+    - node.type.second_level_pages
+    - node.type.viva
+    - taxonomy.vocabulary.categories
+    - taxonomy.vocabulary.collections
+    - taxonomy.vocabulary.events_types
+    - taxonomy.vocabulary.news_topics
+    - taxonomy.vocabulary.publication_topics
+    - taxonomy.vocabulary.publication_type
+    - taxonomy.vocabulary.publishers
+    - taxonomy.vocabulary.tags
+    - workflows.workflow.publication
+  module:
+    - block
+    - block_content
+    - comment
+    - conditional_fields
+    - config
+    - config_split
+    - contact
+    - content_moderation
+    - content_moderation_notifications
+    - content_translation
+    - contextual
+    - crop
+    - elasticsearch_connector
+    - entity_browser
+    - facets
+    - field_ui
+    - file
+    - filter
+    - geolocation
+    - image
+    - leaflet
+    - media
+    - menu_link_content
+    - metatag_extended_perms
+    - micro_footer
+    - micro_media
+    - micro_menu
+    - micro_multilingue
+    - micro_node
+    - micro_path
+    - micro_site
+    - micro_site_pickup
+    - micro_social_media
+    - micro_taxonomy
+    - micro_user
+    - module_filter
+    - node
+    - paragraphs
+    - path
+    - quickedit
+    - responsive_image
+    - scheduler
+    - search_api_autocomplete
+    - shortcut
+    - siteimprove
+    - sitemap
+    - system
+    - taxonomy
+    - toolbar
+    - total_control
+    - webform
 id: admin_dir_com
 label: 'Admin Dir Com'
 weight: -4
@@ -10,21 +91,19 @@ permissions:
   - 'access administration pages'
   - 'access content overview'
   - 'access contextual links'
-  - 'access devel information'
   - 'access files overview'
   - 'access in-place editing'
   - 'access media overview'
   - 'access media_entity_browser entity browser pages'
   - 'access metatag advanced__content_language'
-  - 'access metatag advanced__news_keywords'
   - 'access metatag advanced__robots'
   - 'access metatag basic__description'
   - 'access metatag basic__keywords'
   - 'access metatag basic__title'
-  - 'access piwik reports'
   - 'access site overview'
   - 'access site reports'
   - 'access site revisions'
+  - 'access sitemap'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access user contact forms'
@@ -32,7 +111,6 @@ permissions:
   - 'access webform overview'
   - 'add global media'
   - 'add micro paths'
-  - 'add page perso entities'
   - 'administer block_content display'
   - 'administer block_content fields'
   - 'administer block_content form display'
@@ -76,14 +154,9 @@ permissions:
   - 'administer own micro menu'
   - 'administer own micro site pattern'
   - 'administer own micro vocabulary'
-  - 'administer page perso entities'
-  - 'administer page_perso display'
-  - 'administer page_perso fields'
-  - 'administer page_perso form display'
   - 'administer paragraph display'
   - 'administer paragraph fields'
   - 'administer paragraph form display'
-  - 'administer piwik reports'
   - 'administer responsive images'
   - 'administer search_api_autocomplete'
   - 'administer shortcuts'
@@ -125,12 +198,10 @@ permissions:
   - 'create terms in publication_type'
   - 'create terms in publishers'
   - 'create terms in tags'
-  - 'create test content'
   - 'create url aliases'
   - 'create video media'
   - 'create webform'
   - 'customize shortcut links'
-  - 'delete all page perso revisions'
   - 'delete all revisions'
   - 'delete all site revisions'
   - 'delete any audio media'
@@ -147,7 +218,6 @@ permissions:
   - 'delete any publication content'
   - 'delete any remote_video media'
   - 'delete any second_level_pages content'
-  - 'delete any test content'
   - 'delete any video media'
   - 'delete any webform submission'
   - 'delete conditional fields'
@@ -171,10 +241,8 @@ permissions:
   - 'delete own publication content'
   - 'delete own remote_video media'
   - 'delete own second_level_pages content'
-  - 'delete own test content'
   - 'delete own video media'
   - 'delete own webform'
-  - 'delete page perso entities'
   - 'delete page revisions'
   - 'delete publication revisions'
   - 'delete second_level_pages revisions'
@@ -184,7 +252,6 @@ permissions:
   - 'delete terms in publication_topics'
   - 'delete terms in publication_type'
   - 'delete terms in tags'
-  - 'delete test revisions'
   - 'delete viva revisions'
   - 'edit any audio media'
   - 'edit any event content'
@@ -199,7 +266,6 @@ permissions:
   - 'edit any publication content'
   - 'edit any remote_video media'
   - 'edit any second_level_pages content'
-  - 'edit any test content'
   - 'edit any video media'
   - 'edit any viva content'
   - 'edit any webform submission'
@@ -221,12 +287,10 @@ permissions:
   - 'edit own publication content'
   - 'edit own remote_video media'
   - 'edit own second_level_pages content'
-  - 'edit own test content'
   - 'edit own video media'
   - 'edit own viva content'
   - 'edit own webform'
   - 'edit own webform submission'
-  - 'edit page perso entities'
   - 'edit terms in categories'
   - 'edit terms in collections'
   - 'edit terms in events_types'
@@ -236,6 +300,7 @@ permissions:
   - 'edit terms in publishers'
   - 'edit terms in tags'
   - 'export configuration'
+  - 'have total control'
   - 'import configuration'
   - 'link to any page'
   - 'login master host'
@@ -245,7 +310,6 @@ permissions:
   - 'publish on any assigned site'
   - 'publish on any site'
   - 'publish on master'
-  - 'revert all page perso revisions'
   - 'revert all revisions'
   - 'revert event revisions'
   - 'revert news revisions'
@@ -254,12 +318,10 @@ permissions:
   - 'revert page revisions'
   - 'revert publication revisions'
   - 'revert second_level_pages revisions'
-  - 'revert test revisions'
   - 'revert viva revisions'
   - 'schedule publishing of nodes'
   - 'select account cancellation method'
   - 'switch shortcut sets'
-  - 'switch users'
   - 'synchronize configuration'
   - 'translate any entity'
   - 'translate audio media'
@@ -301,7 +363,6 @@ permissions:
   - 'use text format restricted_html'
   - 'use text format token_editor'
   - 'view all media revisions'
-  - 'view all page perso revisions'
   - 'view all revisions'
   - 'view all site revisions'
   - 'view any unpublished content'
@@ -321,6 +382,5 @@ permissions:
   - 'view scheduled content'
   - 'view second_level_pages revisions'
   - 'view the administration theme'
-  - 'view unpublished page perso entities'
   - 'view unpublished paragraphs'
   - 'view unpublished site entities'

@@ -17,8 +17,8 @@ use \Drupal\user\Entity\User;
  *
  * @QueueWorker(
  *   id = "up1_page_perso_queue",
- *   title = @Translation("Page Perso creation"),
- *   cron = {"time" = 30}
+ *   title = @Translation("User does not exists. Script for User & Page Perso creation."),
+ *   cron = {"time" = 60}
  *  )
  */
 class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
@@ -77,6 +77,7 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
   }
 
   /**
+   * Creates CAS user account & the associated page.
    * {@inheritDoc}
    */
   public function processItem($item) {
@@ -91,7 +92,20 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user_properties['mail'] = $item['mail'];
     }
     try {
-      $cas_user_manager->register($item['uid'], $user_properties);
+      // function register() : This has to be changed when cas module will be updated evolves.
+      //$user = $cas_user_manager->register($item['uid'], $item['uid'], $user_properties);
+      $user = $cas_user_manager->register($item['uid'], $user_properties);
+      $storage = $this->entityTypeManager->getStorage('node');
+      $node = $storage->create([
+        'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
+        'type' => 'page_personnelle',
+        'langcode' => 'fr',
+        'uid' => $user->id(),
+        'status' => 1,
+        'field_uid_ldap' => $item['uid'],
+        'site_id' => NULL,
+      ]);
+      $node->save();
     } catch (CasLoginException $e) {
       \Drupal::logger('cas')->error('CasLoginException when
         registering user with name %name: %e', [
@@ -100,30 +114,5 @@ class PagePersoQueue extends QueueWorkerBase implements ContainerFactoryPluginIn
       ]);
       return;
     }
-
-    $user = user_load_by_name($item['uid']);
-    if ($user) {
-      $author = $user->id();
-
-      $values = \Drupal::entityQuery('node')
-        ->condition('type', 'page_personnelle')
-        ->condition('uid', $author)
-        ->execute();
-      if (empty($values)) {
-        $storage = $this->entityTypeManager->getStorage('node');
-        $node = $storage->create([
-          'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
-          'type' => 'page_personnelle',
-          'langcode' => 'fr',
-          'uid' => $author,
-          'status' => 1,
-          'field_uid_ldap' => $item['uid'],
-          'site_id' => NULL,
-        ]);
-
-        $node->save();
-      }
-    }
   }
-
 }

@@ -66,7 +66,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     // TODO verifier que l'evenement post login est declenché en cas de creation du user
     $account = $casPostLoginEvent->getAccount();
     $memberOf = $account->get('field_group');
-    if (!empty($memberOf)) {
+    if (!empty($memberOf) && !empty($memberOf[0]->value)) {
       $CNs = explode('cn=', $memberOf[0]->value);
       // les cn sont de la forme cn=applications.www.webmestre.general,ou=groups,dc=univ-paris1,dc=fr
       // ou  cn=applications.www.redacteur.miniSite.ufr.sx5,ou=groups,dc=univ-paris1,dc=fr
@@ -138,7 +138,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     }
     else {
       $comptex = new ComptexManager();
-      if ($comptex->userHasPagePerso()) {
+      if ($comptex->userHasPagePerso($account->name->value)) {
         $account->addRole('enseignant_doctorant');
         $account->save();
       }

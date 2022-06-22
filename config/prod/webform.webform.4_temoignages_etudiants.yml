@@ -2,9 +2,9 @@ uuid: 1f155913-1970-4597-97c2-71cb9f9161ca
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 50
 template: false
 archive: false
@@ -12,7 +12,70 @@ id: 4_temoignages_etudiants
 title: '4 - Demandes pays - Témoignages étudiants'
 description: 'Pays demand&eacute;s par les &eacute;tudiants pour enrichir la page de t&eacute;moignages.&nbsp;'
 category: ''
-elements: "processed_text:\n  '#type': processed_text\n  '#text': |\n    <h2>Il manque un pays ?</h2>\n    \n    <p>&nbsp;</p>\n    \n  '#format': full_html\nvotre_adresse_e_mail_:\n  '#type': email\n  '#title': 'Votre e-mail '\n  '#help': 'Vous serez recontact&eacute;(e) par e-mail lors de la publication d&#39;un nouveau t&eacute;moignage.'\n  '#placeholder': prenom.nom@etu.univ-paris1.fr\n  '#required': true\n  '#required_error': 'Champ obligatoire : merci de saisir votre adresse e-mail'\nchoix_pays_temoignage:\n  '#type': select\n  '#title': 'Par quel pays êtes-vous intéressé(e) ?'\n  '#help': 'Choisissez un pays parmi la liste ci-dessous. Il s&#39;agit de pays partenaires de l&#39;universit&eacute;, pour lesquels nous n&#39;avons pas de t&eacute;moignage &eacute;crit publi&eacute; sur cette page.'\n  '#options':\n    Australie: Australie\n    Autriche: Autriche\n    Belgique: Belgique\n    Biélorussie: Biélorussie\n    Bulgarie: Bulgarie\n    Croatie: Croatie\n    Danemark: Danemark\n    Équateur: Équateur\n    Hongrie: Hongrie\n    Inde: Inde\n    Indonésie: Indonésie\n    Israël: Israël\n    Lettonie: Lettonie\n    Lituanie: Lituanie\n    'Macédoine du Nord': 'Macédoine du Nord'\n    Madagascar: Madagascar\n    Mexique: Mexique\n    Ouzbékistan: Ouzbékistan\n    Portugal: Portugal\n    Roumanie: Roumanie\n    Seychelles: Seychelles\n    Slovaquie: Slovaquie\n    Slovénie: Slovénie\n    Suisse: Suisse\n    Taïwan: Taïwan\n    Thaïlande: Thaïlande\n    Uruguay: Uruguay\n  '#required': true\n  '#required_error': 'Merci de choisir un pays'\n  '#options__properties': ''\nterms_of_service:\n  '#type': webform_terms_of_service\n  '#title': 'J''ai lu et j''accepte les {termes et conditions}.'\n  '#required': true\n  '#required_error': 'Champ obligatoire : merci de cocher cette case'\n  '#terms_type': slideout\n  '#terms_content': 'En soumettant ce formulaire, j&#39;accepte la collecte et l&#39;utilisation de mes donn&eacute;es &agrave; caract&egrave;re personnel.'\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': Envoyer\n  '#submit__attributes':\n    style: 'margin-top: 20px;'"
+elements: |-
+  processed_text:
+    '#type': processed_text
+    '#text': |
+      <h2>Il manque un pays ?</h2>
+      
+      <p>&nbsp;</p>
+      
+    '#format': full_html
+  votre_adresse_e_mail_:
+    '#type': email
+    '#title': 'Votre e-mail '
+    '#help': 'Vous serez recontact&eacute;(e) par e-mail lors de la publication d&#39;un nouveau t&eacute;moignage.'
+    '#placeholder': prenom.nom@etu.univ-paris1.fr
+    '#required': true
+    '#required_error': 'Champ obligatoire : merci de saisir votre adresse e-mail'
+  choix_pays_temoignage:
+    '#type': select
+    '#title': 'Par quel pays êtes-vous intéressé(e) ?'
+    '#help': 'Choisissez un pays parmi la liste ci-dessous. Il s&#39;agit de pays partenaires de l&#39;universit&eacute;, pour lesquels nous n&#39;avons pas de t&eacute;moignage &eacute;crit publi&eacute; sur cette page.'
+    '#options':
+      Australie: Australie
+      Autriche: Autriche
+      Belgique: Belgique
+      Biélorussie: Biélorussie
+      Bulgarie: Bulgarie
+      Danemark: Danemark
+      Équateur: Équateur
+      Inde: Inde
+      Indonésie: Indonésie
+      Israël: Israël
+      Lettonie: Lettonie
+      Lituanie: Lituanie
+      'Macédoine du Nord': 'Macédoine du Nord'
+      Madagascar: Madagascar
+      Mexique: Mexique
+      Ouzbékistan: Ouzbékistan
+      Roumanie: Roumanie
+      Seychelles: Seychelles
+      Slovaquie: Slovaquie
+      Slovénie: Slovénie
+      Suisse: Suisse
+      Taïwan: Taïwan
+      Thaïlande: Thaïlande
+      Uruguay: Uruguay
+    '#required': true
+    '#required_error': 'Merci de choisir un pays'
+    '#options__properties': ''
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'J''ai lu et j''accepte les {termes et conditions}.'
+    '#required': true
+    '#required_error': 'Champ obligatoire : merci de cocher cette case'
+    '#terms_type': slideout
+    '#terms_content': 'En soumettant ce formulaire, j&#39;accepte la collecte et l&#39;utilisation de mes donn&eacute;es &agrave; caract&egrave;re personnel.'
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': Envoyer
+    '#submit__attributes':
+      style: 'margin-top: 20px;'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +90,48 @@ settings:
   page_theme_name: ''
   form_title: webform_source_entity
   form_submit_once: true
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: false
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +140,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +150,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +179,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: message
+  confirmation_url: ''
   confirmation_title: 'Merci !'
   confirmation_message: "<h4><br />\r\n<br />\r\nVotre demande a bien &eacute;t&eacute; enregistr&eacute;e.&nbsp;<br />\r\n<br />\r\n&nbsp;</h4>"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +260,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: 'Nouvelle réponse formulaire'
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +271,17 @@ handlers:
         - completed
       to_mail: international-communication@univ-paris1.fr
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Nouvelle réponse au formulaire - Page témoignages'
       body: _default
       excluded_elements:
@@ -224,11 +294,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

@@ -13,10 +13,12 @@ dependencies:
     - field.field.node.page_personnelle.field_facebook_link
     - field.field.node.page_personnelle.field_firstname
     - field.field.node.page_personnelle.field_fonction
+    - field.field.node.page_personnelle.field_formations_ia
     - field.field.node.page_personnelle.field_get_hal_publications
     - field.field.node.page_personnelle.field_hal_link
     - field.field.node.page_personnelle.field_highlight_publications
     - field.field.node.page_personnelle.field_hypotheses_link
+    - field.field.node.page_personnelle.field_ia_skills
     - field.field.node.page_personnelle.field_id_hal
     - field.field.node.page_personnelle.field_link_to_resume
     - field.field.node.page_personnelle.field_linkedin_link
@@ -27,12 +29,14 @@ dependencies:
     - field.field.node.page_personnelle.field_other_email_address
     - field.field.node.page_personnelle.field_other_page_perso
     - field.field.node.page_personnelle.field_phd_supervisor
+    - field.field.node.page_personnelle.field_projects_ia
     - field.field.node.page_personnelle.field_publications
     - field.field.node.page_personnelle.field_research_directions
     - field.field.node.page_personnelle.field_research_themes
     - field.field.node.page_personnelle.field_resume
     - field.field.node.page_personnelle.field_resume_text
     - field.field.node.page_personnelle.field_scientific_resp
+    - field.field.node.page_personnelle.field_short_bio
     - field.field.node.page_personnelle.field_skills
     - field.field.node.page_personnelle.field_sticky_publications
     - field.field.node.page_personnelle.field_thesis_directions
@@ -53,21 +57,21 @@ bundle: page_personnelle
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
     region: content
   field_about_me:
-    weight: 14
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 14
     region: content
   field_academia_link:
-    weight: 22
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -76,35 +80,35 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 22
     region: content
   field_affiliation:
-    weight: 28
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 28
     region: content
   field_display_other_email:
-    weight: 36
+    type: boolean
     label: hidden
     settings:
       format: boolean
-      format_custom_true: ''
       format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 36
     region: content
   field_education:
     type: text_default
-    weight: 37
-    region: content
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 37
+    region: content
   field_epi_link:
-    weight: 21
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -113,10 +117,10 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 21
     region: content
   field_facebook_link:
-    weight: 17
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -125,36 +129,43 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 17
     region: content
   field_firstname:
-    weight: 32
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 32
     region: content
   field_fonction:
-    weight: 33
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 33
+    region: content
+  field_formations_ia:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 41
     region: content
   field_get_hal_publications:
-    weight: 13
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 13
     region: content
   field_hal_link:
-    weight: 23
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -163,39 +174,46 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 23
     region: content
   field_highlight_publications:
-    weight: 10
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 10
+    region: content
+  field_ia_skills:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 38
     region: content
   field_id_hal:
-    weight: 16
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 16
     region: content
   field_link_to_resume:
-    weight: 34
+    type: link_separate
     label: above
     settings:
       trim_length: 80
-      rel: nofollow
-      target: _blank
       url_only: false
       url_plain: false
+      rel: nofollow
+      target: _blank
     third_party_settings: {  }
-    type: link_separate
+    weight: 34
     region: content
   field_linkedin_link:
-    weight: 19
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -204,49 +222,49 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 19
     region: content
   field_my_hal_publications:
-    weight: 35
+    type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 35
     region: content
   field_my_medias:
     type: entity_reference_revisions_entity_view
-    weight: 30
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 30
     region: content
   field_name:
-    weight: 31
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 31
     region: content
   field_other_affiliation:
-    weight: 3
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 3
     region: content
   field_other_email_address:
-    weight: 15
+    type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 15
     region: content
   field_other_page_perso:
-    weight: 4
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -255,93 +273,107 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 4
     region: content
   field_phd_supervisor:
-    weight: 25
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 25
     region: content
-  field_publications:
-    weight: 9
+  field_projects_ia:
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 39
+    region: content
+  field_publications:
     type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
     region: content
   field_research_directions:
-    weight: 6
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 6
     region: content
   field_research_themes:
-    weight: 24
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 24
     region: content
   field_resume:
     type: entity_reference_entity_view
-    weight: 29
     label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 29
     region: content
   field_resume_text:
-    weight: 5
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 5
     region: content
   field_scientific_resp:
-    weight: 12
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 12
+    region: content
+  field_short_bio:
     type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 40
     region: content
   field_skills:
-    weight: 8
+    type: entity_reference_entity_id
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: entity_reference_entity_id
+    weight: 8
     region: content
   field_sticky_publications:
-    weight: 11
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 11
     region: content
   field_thesis_directions:
-    weight: 7
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 7
     region: content
   field_thesis_subject:
-    weight: 26
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 26
     region: content
   field_twitter:
-    weight: 18
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -350,18 +382,18 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 18
     region: content
   field_uid_ldap:
-    weight: 27
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 27
     region: content
   field_viadeo_link:
-    weight: 20
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -370,21 +402,21 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 20
     region: content
   links:
-    weight: 1
-    region: content
     settings: {  }
     third_party_settings: {  }
-  site_id:
-    label: hidden
-    type: entity_reference_label
-    weight: 0
+    weight: 1
     region: content
+  site_id:
+    type: entity_reference_label
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_hypotheses_link: true
   langcode: true

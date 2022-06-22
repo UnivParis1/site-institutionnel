@@ -19,7 +19,9 @@ bundle: partenaire
 mode: default
 content:
   bp_link:
+    type: link_attributes
     weight: 3
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -33,39 +35,37 @@ content:
         accesskey: false
         aria-label: false
     third_party_settings: {  }
-    type: link_attributes
-    region: content
   field_media:
+    type: entity_browser_entity_reference
     weight: 1
+    region: content
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity
-      field_widget_display_settings:
-        view_mode: thumbnail_news
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
       field_widget_replace: false
       open: false
+      field_widget_display_settings:
+        view_mode: thumbnail_news
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_text:
+    type: text_textarea
     weight: 2
+    region: content
     settings:
       rows: 3
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_title:
+    type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
 hidden:
   created: true
   status: true

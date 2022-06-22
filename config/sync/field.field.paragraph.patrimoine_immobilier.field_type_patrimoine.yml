@@ -1,0 +1,29 @@
+uuid: 0b90e763-860c-4559-933b-c71cff428066
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_type_patrimoine
+    - paragraphs.paragraphs_type.patrimoine_immobilier
+    - taxonomy.vocabulary.patrimoine_immobilier
+id: paragraph.patrimoine_immobilier.field_type_patrimoine
+field_name: field_type_patrimoine
+entity_type: paragraph
+bundle: patrimoine_immobilier
+label: 'Famille d''appartenance'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'site_default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      patrimoine_immobilier: patrimoine_immobilier
+    sort:
+      field: name
+      direction: asc
+    auto_create: 0
+    auto_create_bundle: ''
+field_type: entity_reference

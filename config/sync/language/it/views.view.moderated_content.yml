@@ -2,26 +2,9 @@ label: 'Contenuto moderato'
 description: 'Trouver et modérer du contenu.'
 display:
   default:
-    display_title: Principale
+    display_title: Predefinito
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtra
-          reset_button_label: Ripristina
-          exposed_sorts_label: 'Ordina per'
-          sort_asc_label: Asc
-          sort_desc_label: Disc
-      pager:
-        options:
-          tags:
-            previous: '‹ Precedente'
-            next: 'Seguente ›'
-            first: '« Prima'
-            last: 'Ultima »'
-          expose:
-            items_per_page_label: 'Voci per pagina'
-            items_per_page_options_all_label: '- Tutto -'
-            offset_label: Scostamento
+      title: 'Contenuto moderato'
       fields:
         title:
           label: Titolo
@@ -40,6 +23,27 @@ display:
           separator: ', '
         operations:
           label: Operazioni
+      pager:
+        options:
+          tags:
+            next: 'Seguente ›'
+            previous: '‹ Precedente'
+            first: '« Prima'
+            last: 'Ultima »'
+          expose:
+            items_per_page_label: 'Voci per pagina'
+            items_per_page_options_all_label: '- Tutto -'
+            offset_label: Scostamento
+      exposed_form:
+        options:
+          submit_button: Filtra
+          reset_button_label: Ripristina
+          exposed_sorts_label: 'Ordina per'
+          sort_asc_label: Asc
+          sort_desc_label: Disc
+      empty:
+        area_text_custom:
+          content: 'Aucun contenu modéré disponible. Seules les versions de contenu en attente, telles que ''Brouillon'', sont listées ici.'
       filters:
         title:
           expose:
@@ -53,9 +57,5 @@ display:
         langcode:
           expose:
             label: Lingua
-      title: 'Contenuto moderato'
-      empty:
-        area_text_custom:
-          content: 'Aucun contenu modéré disponible. Seules les versions de contenu en attente, telles que ''Brouillon'', sont listées ici.'
   moderated_content:
     display_title: 'Contenuto moderato'

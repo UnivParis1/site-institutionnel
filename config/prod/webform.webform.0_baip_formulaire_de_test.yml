@@ -2,9 +2,9 @@ uuid: 6d1aac52-ea72-4b9c-9017-df50af656941
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 54
 template: false
 archive: false
@@ -12,7 +12,139 @@ id: 0_baip_formulaire_de_test
 title: '0 - BAIP - Formulaire de test'
 description: 'Formulaire de test'
 category: ''
-elements: "avez_vous_deja_pris_contact_avec_le_baip_:\n  '#type': select\n  '#title': 'Avez-vous déjà pris contact avec le BAIP ?'\n  '#options': yes_no\n  '#required': true\n  '#required_error': 'Le champ \"Avez-vous déjà pris contact avec le BAIP ? \" est requis.'\ncomment_avez_vous_connu_le_baip_:\n  '#type': textfield\n  '#title': 'Comment avez-vous connu le BAIP ?'\n  '#help_title': 'Indiquez par quel moyen avez-vous entendu parlé du BAIP'\n  '#help': 'Cela peut &ecirc;tre par un ami, par un courriel du BAIP, via le site internet de l&#39;universit&eacute;...'\n  '#placeholder': 'Par un ami'\n  '#states':\n    invisible:\n      ':input[name=\"avez_vous_deja_pris_contact_avec_le_baip_\"]':\n        value: Oui\nvotre_nom:\n  '#type': textfield\n  '#title': 'Votre nom'\n  '#help_title': 'Indiquez votre nom de famille'\n  '#placeholder': Dubois\n  '#required': true\n  '#required_error': 'Le champ \"Votre nom\" est requis.'\nvotre_prenom:\n  '#type': textfield\n  '#title': 'Votre prénom'\n  '#help_title': 'Indiquez votre prénom'\n  '#placeholder': Alice\n  '#required': true\n  '#required_error': 'Le champ \"Votre prénom\" est requis.'\nvotre_courriel:\n  '#type': email\n  '#title': 'Votre courriel'\n  '#help_title': 'Indiquez une adresse de messagerie valide'\n  '#placeholder': alice.dubois@nomdedomaine.fr\n  '#required': true\n  '#required_error': 'Le champ \"Votre courriel\" est requis. '\nvotre_site_internet:\n  '#type': url\n  '#title': 'Votre site internet'\n  '#help_title': 'Copiez le lien vers votre site : CV en ligne, book... '\nvous_souhaitez_en_savoir_plus_sur_:\n  '#type': checkboxes\n  '#title': 'Vous souhaitez en savoir plus sur : '\n  '#options':\n    'Les stages': 'Les stages'\n    'Les jobs étudiants': 'Les jobs étudiants'\n    'L''entrepreneuriat': 'L''entrepreneuriat'\n  '#options_all': true\n  '#options_all_text': 'Tout cela à la fois'\n  '#options_none': true\n  '#options_none_text': 'Rien de tout cela'\n  '#options__properties': ''\nvotre_message:\n  '#type': textfield\n  '#title': 'Votre message'\n  '#help_title': 'Indiquez le message que vous souhaitez faire parvenir au BAIP'\n  '#help': 'Cela peut &ecirc;tre une demande d&#39;information, d&#39;accompagnement...'\n  '#required': true\n  '#required_error': 'Le champ \"Votre message\" est requis. '\nen_majorite_sur_quel_centre_ont_lieu_vos_enseignements_:\n  '#type': webform_select_other\n  '#title': 'En majorité, sur quel centre ont lieu vos enseignements ?'\n  '#options':\n    'Centre Pierre-Mendès-France': 'Centre Pierre-Mendès-France'\n    'Campus Port-Royal': 'Campus Port-Royal'\n    'Centre Saint-Charles': 'Centre Saint-Charles'\n  '#other__placeholder': Autre...\navez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc:\n  '#type': select\n  '#title': 'Avez-vous déjà assisté à un événement (forum, job dating, conférence...) organisé par le BAIP ?'\n  '#options': yes_no\n  '#default_value': Non\nle_s_recommanderiez_vous_a_un_e_ami_e_:\n  '#type': webform_scale\n  '#title': 'Le(s) recommanderiez-vous à un-e ami-e ?'\n  '#help_title': 'Cochez la note correspondante à votre satisfaction'\n  '#help': 'Non = 1, Plut&ocirc;t non = 2, Plut&ocirc;t oui = 3, Oui = 4'\n  '#states':\n    invisible:\n      ':input[name=\"avez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc\"]':\n        value: Non\n  '#max': 4\n  '#min_text': Non\n  '#max_text': Oui\n  '#scale_type': square\nsi_oui_le_s_quel_s_:\n  '#type': textfield\n  '#title': 'Si oui le(s)quel(s) ? '\n  '#help_title': 'Indiquez les événements du BAIP auxquels vous avez participé'\n  '#placeholder': 'Forum Objectif Emploi, Conférences APEC, etc. '\n  '#states':\n    invisible:\n      ':input[name=\"avez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc[Oui]\"]':\n        '': ''\nquelle_note_donneriez_vous_a_ce_formulaire_test_:\n  '#type': webform_rating\n  '#title': 'Quelle note donneriez-vous à ce formulaire test ? '\n  '#help_title': 'Donnez le nombre d''étoiles correspondant à votre satisfaction'\nquel_s_jour_s_etes_vous_disponoible_pour_un_rendez_vous_:\n  '#type': datelist\n  '#title': 'Quel(s) jour(s) êtes vous disponible pour un rendez-vous ?'\n  '#date_date_min': 10-02-2021\n  '#date_date_max': 15-02-2021\n  '#date_days':\n    - '1'\n    - '2'\n    - '3'\n    - '4'\n    - '5'\n  '#date_part_order':\n    - day\n    - month\n    - year\n  '#date_year_range': '2021:2021'\nj_ai_compris_qu_il_fallait_selectionner_la_case_ci_contre:\n  '#type': checkbox\n  '#title': 'J''ai compris qu''il fallait sélectionner la case ci-contre'\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\n  '#captcha_admin_mode': true\nquel_s_jour_s_n_etes_vous_pas_disponible_pour_un_rendez_vous_:\n  '#type': checkboxes\n  '#title': 'Quel(s) jour(s) n''êtes vous pas disponible pour un rendez-vous ?'\n  '#options': days\n  '#options__properties': ''\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Envoyez votre demande'"
+elements: |-
+  avez_vous_deja_pris_contact_avec_le_baip_:
+    '#type': select
+    '#title': 'Avez-vous déjà pris contact avec le BAIP ?'
+    '#options': yes_no
+    '#required': true
+    '#required_error': 'Le champ "Avez-vous déjà pris contact avec le BAIP ? " est requis.'
+  comment_avez_vous_connu_le_baip_:
+    '#type': textfield
+    '#title': 'Comment avez-vous connu le BAIP ?'
+    '#help_title': 'Indiquez par quel moyen avez-vous entendu parlé du BAIP'
+    '#help': 'Cela peut &ecirc;tre par un ami, par un courriel du BAIP, via le site internet de l&#39;universit&eacute;...'
+    '#placeholder': 'Par un ami'
+    '#states':
+      invisible:
+        ':input[name="avez_vous_deja_pris_contact_avec_le_baip_"]':
+          value: Oui
+  votre_nom:
+    '#type': textfield
+    '#title': 'Votre nom'
+    '#help_title': 'Indiquez votre nom de famille'
+    '#placeholder': Dubois
+    '#required': true
+    '#required_error': 'Le champ "Votre nom" est requis.'
+  votre_prenom:
+    '#type': textfield
+    '#title': 'Votre prénom'
+    '#help_title': 'Indiquez votre prénom'
+    '#placeholder': Alice
+    '#required': true
+    '#required_error': 'Le champ "Votre prénom" est requis.'
+  votre_courriel:
+    '#type': email
+    '#title': 'Votre courriel'
+    '#help_title': 'Indiquez une adresse de messagerie valide'
+    '#placeholder': alice.dubois@nomdedomaine.fr
+    '#required': true
+    '#required_error': 'Le champ "Votre courriel" est requis. '
+  votre_site_internet:
+    '#type': url
+    '#title': 'Votre site internet'
+    '#help_title': 'Copiez le lien vers votre site : CV en ligne, book... '
+  vous_souhaitez_en_savoir_plus_sur_:
+    '#type': checkboxes
+    '#title': 'Vous souhaitez en savoir plus sur : '
+    '#options':
+      'Les stages': 'Les stages'
+      'Les jobs étudiants': 'Les jobs étudiants'
+      'L''entrepreneuriat': 'L''entrepreneuriat'
+    '#options_all': true
+    '#options_all_text': 'Tout cela à la fois'
+    '#options_none': true
+    '#options_none_text': 'Rien de tout cela'
+    '#options__properties': ''
+  votre_message:
+    '#type': textfield
+    '#title': 'Votre message'
+    '#help_title': 'Indiquez le message que vous souhaitez faire parvenir au BAIP'
+    '#help': 'Cela peut &ecirc;tre une demande d&#39;information, d&#39;accompagnement...'
+    '#required': true
+    '#required_error': 'Le champ "Votre message" est requis. '
+  en_majorite_sur_quel_centre_ont_lieu_vos_enseignements_:
+    '#type': webform_select_other
+    '#title': 'En majorité, sur quel centre ont lieu vos enseignements ?'
+    '#options':
+      'Centre Pierre-Mendès-France': 'Centre Pierre-Mendès-France'
+      'Campus Port-Royal': 'Campus Port-Royal'
+      'Centre Saint-Charles': 'Centre Saint-Charles'
+    '#other__placeholder': Autre...
+  avez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc:
+    '#type': select
+    '#title': 'Avez-vous déjà assisté à un événement (forum, job dating, conférence...) organisé par le BAIP ?'
+    '#options': yes_no
+    '#default_value': Non
+  le_s_recommanderiez_vous_a_un_e_ami_e_:
+    '#type': webform_scale
+    '#title': 'Le(s) recommanderiez-vous à un-e ami-e ?'
+    '#help_title': 'Cochez la note correspondante à votre satisfaction'
+    '#help': 'Non = 1, Plut&ocirc;t non = 2, Plut&ocirc;t oui = 3, Oui = 4'
+    '#states':
+      invisible:
+        ':input[name="avez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc"]':
+          value: Non
+    '#max': 4
+    '#min_text': Non
+    '#max_text': Oui
+    '#scale_type': square
+  si_oui_le_s_quel_s_:
+    '#type': textfield
+    '#title': 'Si oui le(s)quel(s) ? '
+    '#help_title': 'Indiquez les événements du BAIP auxquels vous avez participé'
+    '#placeholder': 'Forum Objectif Emploi, Conférences APEC, etc. '
+    '#states':
+      invisible:
+        ':input[name="avez_vous_deja_assiste_a_un_evenement_forum_job_dating_conferenc[Oui]"]':
+          '': ''
+  quelle_note_donneriez_vous_a_ce_formulaire_test_:
+    '#type': webform_rating
+    '#title': 'Quelle note donneriez-vous à ce formulaire test ? '
+    '#help_title': 'Donnez le nombre d''étoiles correspondant à votre satisfaction'
+  quel_s_jour_s_etes_vous_disponoible_pour_un_rendez_vous_:
+    '#type': datelist
+    '#title': 'Quel(s) jour(s) êtes vous disponible pour un rendez-vous ?'
+    '#date_date_min': 10-02-2021
+    '#date_date_max': 15-02-2021
+    '#date_days':
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+    '#date_part_order':
+      - day
+      - month
+      - year
+    '#date_year_range': '2021:2021'
+  j_ai_compris_qu_il_fallait_selectionner_la_case_ci_contre:
+    '#type': checkbox
+    '#title': 'J''ai compris qu''il fallait sélectionner la case ci-contre'
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+    '#captcha_admin_mode': true
+  quel_s_jour_s_n_etes_vous_pas_disponible_pour_un_rendez_vous_:
+    '#type': checkboxes
+    '#title': 'Quel(s) jour(s) n''êtes vous pas disponible pour un rendez-vous ?'
+    '#options': days
+    '#options__properties': ''
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Envoyez votre demande'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +159,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +209,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +219,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +248,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: ''
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''

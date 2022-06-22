@@ -2,9 +2,9 @@ uuid: cfbdaae8-b770-4190-8919-26b82d8e8e38
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 13
 template: false
 archive: false
@@ -12,7 +12,62 @@ id: 2_ajout_d_icone_reseau_sociaux_s
 title: '2 - Ajout d''icône reseau sociaux sur mon site'
 description: 'Afin de collecter les reseaux sociaux existants'
 category: ''
-elements: "container01_pour_quel_mini_site:\n  '#type': container\n  votre_nom:\n    '#type': textfield\n    '#title': 'Votre nom'\n    '#default_value': '[current-user:display-name]'\n    '#required': true\n  votre_adresse_courriel:\n    '#type': email\n    '#title': 'Votre adresse courriel'\n    '#required': true\n    '#default_value': '[current-user:mail]'\n  votre_mini_site:\n    '#type': entity_autocomplete\n    '#title': 'Votre mini-site'\n    '#help_title': 'Ne mettez pas l''url mais tapez le nom'\n    '#help': 'C&#39;est un champ d&#39;auto-compl&eacute;tion qui cherche le nom des sites, donc si votre site est celui de la fondation par exemple, tapez juste fondation dans ce champ.'\n    '#required': true\n    '#target_type': site\n    '#selection_handler': 'default:site'\n    '#selection_settings':\n      target_bundles: null\n      sort:\n        field: name\n        direction: ASC\npour_quel_mini_site_horizontal_rule:\n  '#type': webform_horizontal_rule\n  '#attributes':\n    class:\n      - webform-horizontal-rule--solid\n      - webform-horizontal-rule--thin\n    style: reglewebform\npour_quel_reseau_social_:\n  '#type': checkboxes\n  '#title': 'Pour quel(s) réseau(x) social(ux) ?'\n  '#options':\n    Facebook: Facebook\n    Linkedin: Linkedin\n    Instagram: Instagram\n    Tweeter: Tweeter\n    Youtube: Youtube\n  '#options_display': buttons\n  '#options_description_display': help\n  '#required': true\nindiquez_l_url_de_ce_s_reseau_x_:\n  '#type': textarea\n  '#title': 'Indiquez l''URL de ce(s) réseau(x)'\n  '#help': 'Merci de mettre une URL par ligne'\n  '#required': true\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Envoyer la demande'"
+elements: |-
+  container01_pour_quel_mini_site:
+    '#type': container
+    votre_nom:
+      '#type': textfield
+      '#title': 'Votre nom'
+      '#default_value': '[current-user:display-name]'
+      '#required': true
+    votre_adresse_courriel:
+      '#type': email
+      '#title': 'Votre adresse courriel'
+      '#required': true
+      '#default_value': '[current-user:mail]'
+    votre_mini_site:
+      '#type': entity_autocomplete
+      '#title': 'Votre mini-site'
+      '#help_title': 'Ne mettez pas l''url mais tapez le nom'
+      '#help': 'C&#39;est un champ d&#39;auto-compl&eacute;tion qui cherche le nom des sites, donc si votre site est celui de la fondation par exemple, tapez juste fondation dans ce champ.'
+      '#required': true
+      '#target_type': site
+      '#selection_handler': 'default:site'
+      '#selection_settings':
+        target_bundles: null
+        sort:
+          field: name
+          direction: ASC
+  pour_quel_mini_site_horizontal_rule:
+    '#type': webform_horizontal_rule
+    '#attributes':
+      class:
+        - webform-horizontal-rule--solid
+        - webform-horizontal-rule--thin
+      style: reglewebform
+  pour_quel_reseau_social_:
+    '#type': checkboxes
+    '#title': 'Pour quel(s) réseau(x) social(ux) ?'
+    '#options':
+      Facebook: Facebook
+      Linkedin: Linkedin
+      Instagram: Instagram
+      Tweeter: Tweeter
+      Youtube: Youtube
+      Hypothèse: Hypothèse
+      HAL: HAL
+    '#options_display': buttons_horizontal
+    '#options_description_display': help
+    '#required': true
+  indiquez_l_url_de_ce_s_reseau_x_:
+    '#type': textarea
+    '#title': 'Indiquez l''URL de ce(s) réseau(x)'
+    '#help': 'Merci de mettre une URL par ligne'
+    '#required': true
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +82,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +132,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +142,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +171,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: 'Votre demande a été envoyé'
   confirmation_message: 'Vous allez recevoir un courriel de assistance-dsiun@univ-paris1.fr qui vous indiquera qu&#39;un ticket de demande d&#39;intervention a &eacute;t&eacute; cr&eacute;&eacute;. Nous t&acirc;cherons de mettre &ccedil;a en place le plus rapidement possible.'
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +252,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: 'Prévenir une souscription'
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +263,17 @@ handlers:
         - completed
       to_mail: assistance-dsiun@univ-paris1.fr
       to_options: {  }
-      cc_mail: lagadic@univ-paris1.fr
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: lagadic@univ-paris1.fr
+      cc_options: {  }
       from_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
       from_options: {  }
       from_name: '[webform_submission:values:votre_nom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: _default
       body: _default
       excluded_elements: {  }
@@ -222,11 +284,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

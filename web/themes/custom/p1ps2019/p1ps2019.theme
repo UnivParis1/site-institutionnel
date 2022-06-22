@@ -113,8 +113,7 @@ function p1ps2019_preprocess_page(&$variables)
   $variables['is_front_mini_site'] = $is_front_mini_site;
 }
 
-function p1ps2019_preprocess_node(&$variables)
-{
+function p1ps2019_preprocess_node(&$variables) {
   if (isset($site) && !empty($site)) {
     $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
@@ -159,7 +158,7 @@ function p1ps2019_preprocess_node(&$variables)
       $variables['mail'] = $umail;
     } else {
       $comptex = new ComptexManager();
-      $variables['mail'] = $comptex->getUserEmail($user->getUsername());
+      $variables['mail'] = $comptex->getUserEmail($user->getDisplayName());
     }
 
   }
@@ -218,6 +217,17 @@ function p1ps2019_preprocess_node(&$variables)
         }
       }
       $variables['publication_authors'] = $publication_authors;
+    }
+  }
+
+  if (in_array($node->getType(), ['page', 'second_level_pages'])) {
+    $node = $variables['node'];
+    if ($node->hasField('field_display_node_changed')) {
+      $display_changed = $node->field_display_node_changed->getValue();
+      if (!empty($display_changed[0]['value'])) {
+        $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long_date_hour');
+        $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0 ;
+      }
     }
   }
 }
@@ -370,7 +380,7 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
 function p1ps2019_preprocess_views_view(&$variables)
 {
   $variables['is_listing_page'] = FALSE;
-  $views = ['travailler_universite', 'listings','annuaire_des_mini_sites'];
+  $views = ['travailler_universite', 'listings','annuaire_des_mini_sites', 'viva'];
   if (in_array($variables['id'], $views)) {
     $variables['is_listing_page'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
@@ -415,7 +425,7 @@ function p1ps2019_preprocess_views_view_table(&$variables)
 function p1ps2019_preprocess_paragraph(&$variables)
 {
   $paragraph = $variables['paragraph'];
-  if ($paragraph->bundle() == 'contact') {
+  if (in_array($paragraph->bundle(), ['contact','contact_free'])){
     $service = \Drupal::service('up1_global.centres');
     $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 

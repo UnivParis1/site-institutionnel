@@ -23,19 +23,22 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   546a8bfd-68bc-43e8-988d-939bff06026f:
+    id: view
+    uuid: 546a8bfd-68bc-43e8-988d-939bff06026f
+    label: 'Liste des images'
+    weight: 1
     settings:
-      view: media_entity_browser
-      view_display: image_browser
       submit_text: Sélectionner
       auto_select: false
-    uuid: 546a8bfd-68bc-43e8-988d-939bff06026f
-    weight: 1
-    label: 'Liste des images'
-    id: view
+      view: media_entity_browser
+      view_display: image_browser
   c6c978cd-8e13-45cf-ad55-ad47ebf8f96d:
+    id: dropzonejs_media_entity_inline_entity_form
+    uuid: c6c978cd-8e13-45cf-ad55-ad47ebf8f96d
+    label: 'Téléverser des fichiers'
+    weight: 3
     settings:
-      form_mode: default
-      media_type: image
+      submit_text: Enregistrer
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Déposer vos fichiers ici pour les téléverser'
       max_filesize: 5M
@@ -46,8 +49,5 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
-      submit_text: Enregistrer
-    uuid: c6c978cd-8e13-45cf-ad55-ad47ebf8f96d
-    weight: 3
-    label: 'Téléverser des fichiers'
-    id: dropzonejs_media_entity_inline_entity_form
+      media_type: image
+      form_mode: default

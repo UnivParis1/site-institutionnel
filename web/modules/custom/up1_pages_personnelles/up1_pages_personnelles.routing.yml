@@ -111,80 +111,6 @@ up1_pages_personnelles.get_new_ecd:
   requirements:
     _permission: 'access content'
 
-up1_pages_personnelles.populate_pages_persos:
-  path: '/pages-perso/populate'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::populatePagePersoUsers'
-    _title: 'Populate pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.batch_populate_pages_persos:
-  path: '/admin/pages-perso/populate'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchPopulatePagePerso'
-    _title: 'Populate pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-  options:
-    _admin_route: TRUE
-
-up1_pages_personnelles.import_publications:
-  path: '/pages-perso/import-publications'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::importPublications'
-    _title: 'Populate pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.batch_import_publications:
-  path: '/pages-perso/import-publications/batch'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportPublications'
-    _title: 'Populate pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.import_resume:
-  path: '/pages-perso/import-resume'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::importResume'
-    _title: 'Import field resume pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.batch_import_resume:
-  path: '/pages-perso/import-resume/batch'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportResume'
-    _title: 'Import field resume pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.import_last_fields:
-  path: '/pages-perso/import-last-fields'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::importLastFields'
-    _title: 'Import 2 last fields for pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.batch_import_last_fields:
-  path: '/pages-perso/import-last-fields/batch'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchImportLastFields'
-    _title: 'Import 2 last fields for pages persos from Typo3'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.delete_queue_users:
-  path: '/pages-perso/maj/empty'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::deleteTheQueue'
-    _title: 'Delete queue import users from LDAP'
-  requirements:
-    _permission: 'access administration pages'
-
 up1_pages_personnelles.delete_page_perso_queue:
   path: '/pages-perso/maj/delete-queue'
   defaults:
@@ -203,6 +129,7 @@ up1_pages_personnelles.batch_new_ecd:
   options:
     _admin_route: TRUE
 
+# API pour Comptex
 up1_pages_personnelles.edit_page_perso:
   path: '/modifier-ma-page-personnelle/{username}'
   defaults:
@@ -210,6 +137,7 @@ up1_pages_personnelles.edit_page_perso:
   requirements:
     _permission: 'has labeled URI'
 
+# API pour Comptex
 up1_pages_personnelles.bulk_import_page_perso:
   path: '/admin/people/create/page-perso-bulk'
   defaults:
@@ -219,3 +147,39 @@ up1_pages_personnelles.bulk_import_page_perso:
     _permission: 'access administration pages'
   options:
     _admin_route: TRUE
+
+# API pour Comptex
+up1_pages_personnelles.obsia:
+  path: '/mon-parcours-obsia/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::setParcoursObsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
+# API pour Comptex
+up1_pages_personnelles.delete_obsia:
+  path: '/supprimer-parcours-obsia/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::deleteParcoursObsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
+# API pour Comptex
+up1_pages_personnelles.get_obsia_fields:
+  path: '/get-parcours-obsia/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getParcoursObsia'
+    _title: 'Parcours Obsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
+#Script de mise à jour des pages persos en fonction du ldap.
+up1_pages_personnelles.sync_ldap:
+  path: '/pages-persos/sync-ldap'
+  defaults:
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::syncLdap'
+  requirements:
+    _permission: 'access content'

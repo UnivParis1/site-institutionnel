@@ -1,50 +1,50 @@
-label: Contenu
+label: Content
 description: 'Trouver et gérer le contenu.'
 display:
   default:
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filter
+      title: Content
+      fields:
+        type:
+          label: 'Content type'
+        status:
+          label: Status
+          settings:
+            format_custom_false: Unpublished
+        changed:
+          label: Updated
+        operations:
+          label: Operations
       pager:
         options:
           tags:
-            previous: '‹ Précédent'
             next: 'Suivant ›'
-      fields:
-        type:
-          label: 'Type de contenu'
-        status:
-          label: État
-          settings:
-            format_custom_false: 'Non publié'
-        changed:
-          label: 'Mis à jour'
-        operations:
-          label: Actions
-      filters:
-        type:
-          expose:
-            label: 'Type de contenu'
-        status:
-          expose:
-            label: État
-          group_info:
-            label: 'Statut de publication'
-            group_items:
-              2:
-                title: 'Non publié'
-        langcode:
-          expose:
-            label: Langue
-      title: Contenu
+            previous: '‹ Précédent'
+      exposed_form:
+        options:
+          submit_button: Filter
       empty:
         area_text_custom:
           content: 'Aucun contenu disponible.'
+      filters:
+        type:
+          expose:
+            label: 'Content type'
+        status:
+          expose:
+            label: Status
+          group_info:
+            label: 'Published status'
+            group_items:
+              2:
+                title: Unpublished
+        langcode:
+          expose:
+            label: Language
   page_1:
     display_options:
       menu:
-        title: Contenu
+        title: Content
       tab_options:
-        title: Contenu
+        title: Content
         description: 'Trouver et gérer le contenu'

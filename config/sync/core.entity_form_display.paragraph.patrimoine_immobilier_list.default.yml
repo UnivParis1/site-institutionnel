@@ -1,0 +1,29 @@
+uuid: 4b6c6efa-850e-44cd-aece-d520aca6ef8b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.patrimoine_immobilier_list.field_patrimoine_immobilier
+    - paragraphs.paragraphs_type.patrimoine_immobilier_list
+  module:
+    - paragraphs
+id: paragraph.patrimoine_immobilier_list.default
+targetEntityType: paragraph
+bundle: patrimoine_immobilier_list
+mode: default
+content:
+  field_patrimoine_immobilier:
+    type: entity_reference_paragraphs
+    weight: 0
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

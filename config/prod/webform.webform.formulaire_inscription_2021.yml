@@ -1,10 +1,10 @@
 uuid: cd605635-0a15-41da-9f83-ca15a8049373
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 2584
 template: false
 archive: false
@@ -12,7 +12,116 @@ id: formulaire_inscription_2021
 title: 'chairestrategique - Formulaire inscription 2021'
 description: ''
 category: ''
-elements: "_h3_informations_personnelles_h3_:\n  '#type': label\n  '#title': '<h3>Informations personnelles</h3>'\nflexbox:\n  '#type': webform_flexbox\n  nom:\n    '#type': textfield\n    '#title': 'Votre Nom'\n    '#title_display': before\n    '#maxlength': 30\n    '#placeholder': 'Saisissez votre nom '\n    '#required': true\n    '#required_error': 'Veuillez saisir votre nom'\n  votre_prenom:\n    '#type': textfield\n    '#title': 'Votre Prénom'\n    '#title_display': before\n    '#maxlength': 27\n    '#placeholder': 'Saisissez votre prénom'\n    '#required': true\n    '#required_error': 'Veuillez saisir votre prénom'\nflexbox_01:\n  '#type': webform_flexbox\n  votre_entreprise_:\n    '#type': textfield\n    '#title': 'Votre Entreprise '\n    '#title_display': before\n    '#maxlength': 49\n    '#placeholder': 'Saisissez le nom de votre entreprise '\n    '#autocomplete': organization\n    '#required': true\n    '#required_error': 'Veuillez saisir le nom de votre entreprise '\n  votre_fonction:\n    '#type': textfield\n    '#title': 'Votre Fonction'\n    '#size': 50\n    '#placeholder': 'Saisissez votre fonction au sein de l''entreprise '\n    '#required': true\n    '#required_error': 'Veuillez saisir votre fonction '\nvotre_courriel:\n  '#type': webform_email_confirm\n  '#title': 'Votre courriel'\n  '#title_display': before\n  '#placeholder': 'Saisissez votre courriel '\n  '#required': true\n  '#required_error': 'Veuillez saisir votre courriel '\n  '#confirm__title': 'Vérification du courriel'\n  '#confirm__description': 'Veuillez ressaisir votre courriel&nbsp;'\nvotre_telephone:\n  '#type': tel\n  '#title': 'Votre Téléphone'\n  '#title_display': before\n  '#required': true\n  '#required_error': 'Veuillez saisir votre numéro de téléphone '\nhorizontal_rule:\n  '#type': webform_horizontal_rule\nconferences:\n  '#type': label\n  '#title': '<h3>Conférences</h3>'\n  '#description': 'Veuillez indiqu&eacute; les conf&eacute;rences auxquelles vous souhaitez participer.&nbsp;'\nveuillez_indiquer_les_conferences_auxquelles_vous_souhaitez_part:\n  '#type': label\n  '#title': 'Veuillez indiquer les conférences auxquelles vous souhaitez participer.'\nflexbox_02:\n  '#type': webform_flexbox\n  '#align_items': center\n  25_01_lecon_inaugurale_:\n    '#type': radios\n    '#title': '<b>30/06/2021 - Général François Lecointre</b>'\n    '#title_display': before\n    '#options': yes_no\n    '#options_display': buttons_horizontal\n    '#default_value': Non\n    '#options__properties': ''\n  _b_option_b_:\n    '#type': radios\n    '#title': '<b>Participation</b>'\n    '#title_display': before\n    '#options':\n      'Par Internet': 'Par Internet'\n    '#options_display': buttons_horizontal\n    '#default_value': 'Par Internet'\n    '#options__properties': ''\nacceptation_:\n  '#type': radios\n  '#title': '<b>Collecte de données à caractère personnel</b>'\n  '#description': 'En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de mon inscription au cycle de la Chaire Grands enjeux strat&eacute;giques contemporains :'\n  '#title_display': before\n  '#description_display': before\n  '#options': yes_no\n  '#options_display': buttons_horizontal\n  '#required': true\n  '#required_error': 'Vous n''avez pas accepté les conditions d''exploitations de vos données personnelles'\n  '#default_value': Non\n  '#options__properties': ''\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#states':\n    disabled:\n      ':input[name=\"acceptation_\"]':\n        value: Non\n      ':input[name=\"captcha\"]':\n        unchecked: true\n  '#states_clear': false\n  '#submit__label': 'S''inscrire '"
+elements: |-
+  _h3_informations_personnelles_h3_:
+    '#type': label
+    '#title': '<h3>Informations personnelles</h3>'
+  flexbox:
+    '#type': webform_flexbox
+    nom:
+      '#type': textfield
+      '#title': 'Votre Nom'
+      '#title_display': before
+      '#maxlength': 30
+      '#placeholder': 'Saisissez votre nom '
+      '#required': true
+      '#required_error': 'Veuillez saisir votre nom'
+    votre_prenom:
+      '#type': textfield
+      '#title': 'Votre Prénom'
+      '#title_display': before
+      '#maxlength': 27
+      '#placeholder': 'Saisissez votre prénom'
+      '#required': true
+      '#required_error': 'Veuillez saisir votre prénom'
+  flexbox_01:
+    '#type': webform_flexbox
+    votre_entreprise_:
+      '#type': textfield
+      '#title': 'Votre Entreprise '
+      '#title_display': before
+      '#maxlength': 49
+      '#placeholder': 'Saisissez le nom de votre entreprise '
+      '#autocomplete': organization
+      '#required': true
+      '#required_error': 'Veuillez saisir le nom de votre entreprise '
+    votre_fonction:
+      '#type': textfield
+      '#title': 'Votre Fonction'
+      '#size': 50
+      '#placeholder': 'Saisissez votre fonction au sein de l''entreprise '
+      '#required': true
+      '#required_error': 'Veuillez saisir votre fonction '
+  votre_courriel:
+    '#type': webform_email_confirm
+    '#title': 'Votre courriel'
+    '#title_display': before
+    '#placeholder': 'Saisissez votre courriel '
+    '#required': true
+    '#required_error': 'Veuillez saisir votre courriel '
+    '#confirm__title': 'Vérification du courriel'
+    '#confirm__description': 'Veuillez ressaisir votre courriel&nbsp;'
+  votre_telephone:
+    '#type': tel
+    '#title': 'Votre Téléphone'
+    '#title_display': before
+    '#required': true
+    '#required_error': 'Veuillez saisir votre numéro de téléphone '
+  horizontal_rule:
+    '#type': webform_horizontal_rule
+  conferences:
+    '#type': label
+    '#title': '<h3>Conférences</h3>'
+    '#description': 'Veuillez indiqu&eacute; les conf&eacute;rences auxquelles vous souhaitez participer.&nbsp;'
+  veuillez_indiquer_les_conferences_auxquelles_vous_souhaitez_part:
+    '#type': label
+    '#title': 'Veuillez indiquer les conférences auxquelles vous souhaitez participer.'
+  flexbox_02:
+    '#type': webform_flexbox
+    '#align_items': center
+    25_01_lecon_inaugurale_:
+      '#type': radios
+      '#title': '<b>30/06/2021 - Général François Lecointre</b>'
+      '#title_display': before
+      '#options': yes_no
+      '#options_display': buttons_horizontal
+      '#default_value': Non
+      '#options__properties': ''
+    _b_option_b_:
+      '#type': radios
+      '#title': '<b>Participation</b>'
+      '#title_display': before
+      '#options':
+        'Par Internet': 'Par Internet'
+      '#options_display': buttons_horizontal
+      '#default_value': 'Par Internet'
+      '#options__properties': ''
+  acceptation_:
+    '#type': radios
+    '#title': '<b>Collecte de données à caractère personnel</b>'
+    '#description': 'En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de mon inscription au cycle de la Chaire Grands enjeux strat&eacute;giques contemporains :'
+    '#title_display': before
+    '#description_display': before
+    '#options': yes_no
+    '#options_display': buttons_horizontal
+    '#required': true
+    '#required_error': 'Vous n''avez pas accepté les conditions d''exploitations de vos données personnelles'
+    '#default_value': Non
+    '#options__properties': ''
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#states':
+      disabled:
+        ':input[name="acceptation_"]':
+          value: Non
+        ':input[name="captcha"]':
+          unchecked: true
+    '#states_clear': false
+    '#submit__label': 'S''inscrire '
 css: ''
 javascript: ''
 settings:
@@ -27,40 +136,48 @@ settings:
   page_theme_name: p1ps2019
   form_title: source_entity_webform
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +186,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +196,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +225,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: 'Confirmation inscription'
   confirmation_message: 'Nous vous confirmons avoir bien pris en compte votre inscription.&nbsp;'
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +306,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: 'Confirmation inscription'
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +317,17 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:votre_courriel:raw]'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: _default
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: contact@chairestrategique.fr
       from_options: {  }
       from_name: 'Chaire Grands enjeux stratégiques contemporains '
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Confirmation inscription'
       body: "Bonjour,<br />\r\n<br />\r\nNous vous confirmons avoir bien pris en compte votre inscription &agrave; la<br />\r\nChaire Grands enjeux strat&eacute;giques contemporains.<br />\r\n<br />\r\nPour rappel, voici les informations dont vous nous avez fait part :&nbsp;<br />\r\n[webform_submission:values]<br />\r\n<br />\r\n******************************************<br />\r\nPour les participants par Internet, retrouvez-nous sur les plateformes YouTube et Twitch le <strong>30 juin 2021 &agrave; 16h00</strong> depuis les liens respectifs suivants :<br />\r\n<br />\r\n<strong>YouTube </strong>: <a href=\"https://www.youtube.com/watch?v=NbiAGrK72SI\">https://www.youtube.com/watch?v=NbiAGrK72SI</a><br />\r\n<br />\r\n<strong>Twitch </strong>: <a href=\"https://www.twitch.tv/chairestrategie\">https://www.twitch.tv/chairestrategie</a><br />\r\n<br />\r\n******************************************<br />\r\n<br />\r\nVous remerciant de votre inscription.&nbsp;<br />\r\nChaire Grands enjeux strat&eacute;giques contemporains&nbsp;"
       excluded_elements: {  }
@@ -222,11 +338,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

@@ -2,7 +2,12 @@ uuid: 8334080a-2e9d-4da6-aedd-2c4641f46636
 langcode: fr
 status: true
 dependencies:
+  config:
+    - field.storage.site.field_complete_name
+    - node.type.event
+    - node.type.news
   module:
+    - micro_site
     - node
     - user
 _core:
@@ -16,65 +21,22 @@ base_table: node_field_data
 base_field: nid
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'have total control'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: some
-        options:
-          items_per_page: 5
-          offset: 0
-      style:
-        type: html_list
-      row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline:
-            uid: uid
-            type: type
-            created: created
-          separator: ''
-          hide_empty: false
+      title: 'Nouveau contenu'
       fields:
         title:
           id: title
           table: node_field_data
           field: title
-          settings:
-            link_to_entity: true
-          plugin_id: field
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          plugin_id: field
+          label: Titre
           exclude: false
           alter:
             alter_text: false
@@ -117,6 +79,8 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: string
+          settings:
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -134,7 +98,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: field
+          label: Type
           exclude: false
           alter:
             alter_text: false
@@ -189,9 +156,199 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: type
+        name:
+          id: name
+          table: site_field_data
+          field: name
+          relationship: site_id
+          group_type: group
+          admin_label: ''
+          entity_type: site
+          entity_field: name
           plugin_id: field
+          label: Name
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        site_url:
+          id: site_url
+          table: site_field_data
+          field: site_url
+          relationship: site_id
+          group_type: group
+          admin_label: ''
+          entity_type: site
+          entity_field: site_url
+          plugin_id: field
+          label: 'URL du site'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_complete_name:
+          id: field_complete_name
+          table: site__field_complete_name
+          field: field_complete_name
+          relationship: site_id
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Libellé mini-site'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: '<a href="//{{ site_url }}" target="_blank">{{ name }}</a>'
+          hide_empty: false
+          empty_zero: true
+          hide_alter_empty: false
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         uid:
           id: uid
           table: node_field_data
@@ -199,7 +356,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ' by'
+          entity_type: node
+          entity_field: uid
+          plugin_id: field
+          label: ' Auteur'
           exclude: false
           alter:
             alter_text: false
@@ -254,9 +414,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: uid
-          plugin_id: field
         created:
           id: created
           table: node_field_data
@@ -264,7 +421,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ' on'
+          entity_type: node
+          entity_field: created
+          plugin_id: field
+          label: 'Écrit le'
           exclude: false
           alter:
             alter_text: false
@@ -308,7 +468,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: long
+            date_format: short
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -321,42 +481,41 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: created
-          plugin_id: field
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
+      pager:
+        type: mini
+        options:
+          offset: 0
+          items_per_page: 5
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
           expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-      title: 'Nouveau contenu'
-      header: {  }
-      footer: {  }
+            items_per_page: true
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: true
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Appliquer
+          reset_button: false
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'have total control'
+      cache:
+        type: tag
+        options: {  }
       empty:
         area:
           id: area
@@ -365,13 +524,29 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: text
           empty: true
-          tokenize: false
           content:
             value: 'A fresh site. Neat! Once you starting adding content, most recent ones will appear here. <a href="/node/add">Start adding content now</a>!'
             format: full_html
-          plugin_id: text
-      relationships: {  }
+          tokenize: false
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: created
+          exposed: false
+          granularity: second
       arguments:
         site_id:
           id: site_id
@@ -380,6 +555,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: site_id
+          plugin_id: numeric
           default_action: ignore
           exception:
             value: all
@@ -394,8 +572,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -407,9 +585,213 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            news: news
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          operator: between
+          value:
+            min: '-1 week'
+            max: now
+            value: ''
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            title: title
+            type: type
+            name: name
+            site_url: site_url
+            field_complete_name: field_complete_name
+            uid: uid
+            created: created
+          default: created
+          info:
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            name:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            site_url:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_complete_name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uid:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            created:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline:
+            uid: uid
+            type: type
+            created: created
+          separator: ''
+          hide_empty: false
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships:
+        site_id:
+          id: site_id
+          table: node_field_data
+          field: site_id
+          relationship: none
+          group_type: group
+          admin_label: Site
           entity_type: node
           entity_field: site_id
-          plugin_id: numeric
+          plugin_id: standard
+          required: false
+      header: {  }
+      footer: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -417,18 +799,20 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.site.field_complete_name'
   pane_tc_new:
-    display_plugin: block
     id: pane_tc_new
     display_title: 'Total Control new content summary'
+    display_plugin: block
     position: 1
     display_options:
+      display_description: ''
       display_extenders: {  }
       block_description: 'Nouveau contenu'
-      display_description: ''
       block_category: 'Tableau de bord'
     cache_metadata:
       max-age: -1
@@ -436,6 +820,8 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.site.field_complete_name'

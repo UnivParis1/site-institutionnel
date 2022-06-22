@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.media.mediatheque.field_autoplay
     - field.field.media.mediatheque.field_media_mediatheque
     - media.type.mediatheque
   module:
@@ -12,41 +13,48 @@ targetEntityType: media
 bundle: mediatheque
 mode: default
 content:
+  field_autoplay:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_media_mediatheque:
-    weight: 1
+    type: link_default
+    weight: 2
+    region: content
     settings:
       placeholder_url: 'https://mediatheque.univ-paris1.fr/video/XXX'
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   is_global:
     type: boolean_checkbox
+    weight: 5
+    region: content
     settings:
       display_label: true
-    region: content
-    weight: 26
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 0
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: 0
+    weight: 1
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   path: true

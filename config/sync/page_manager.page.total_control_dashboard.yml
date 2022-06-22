@@ -1,7 +1,9 @@
 uuid: a5999f62-1dd7-4ebf-9a7c-79d408aebc3b
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - user
 _core:
   default_config_hash: pj2LJUXR2Dhdq155xqCz7-s4L4nSVlf2RgtfBkkFmRc
 id: total_control_dashboard
@@ -10,5 +12,13 @@ description: 'Total Control administrative dashboard.'
 use_admin_theme: true
 path: /admin/dashboard
 access_logic: and
-access_conditions: {  }
+access_conditions:
+  -
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      admin_dir_com: admin_dir_com
+      administrator: administrator
 parameters: {  }

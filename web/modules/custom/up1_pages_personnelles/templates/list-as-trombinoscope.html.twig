@@ -1,0 +1,49 @@
+<div id="trombi" class="cell small-12">
+  <div class="grid-x grid-margin-x grid-margin-y">
+    <div class="grid-container">
+      <h1>{{ 'Enseignants-Chercheurs'|t }}</h1>
+      <div class="annuaire-content mb-5">
+        {% if users|length < 1 %}
+          <div>{{ "Aucun résultat n'a été trouvé."|t }}</div>
+        {% else %}
+          {% for user in users %}
+            {% if user.labeledURI is not empty and ((Trusted and user.supannListeRouge == FALSE) or
+              (not Trusted and user.sn != 'supannListeRouge')) %}
+              <article class="trombi-item">
+                <a href="{{ user.labeledURI[0] }}"  target="_blank"
+                   title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
+                  <img src=" {{ user.photo }} " alt="{{ user.givenName }} {{ user.sn|upper }}" />
+                  <div class="trombi-infos">
+                    <h2>{{ user.givenName }} {{ user.sn|upper }}</h2>
+                    <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
+                    {% if user.role %}<p class="trombi-role">
+                      {{ user.role }}</p>
+                    {% endif %}
+                    {% if user.research %}<p class="trombi-affectation">
+                        {{ user.research | raw }} </p>
+                    {% endif %}
+                    {% if user.pedagogy %}<p class="trombi-affectation">
+                        {{ user.pedagogy }}</p>
+                    {% endif %}
+                    {% if user.skills is not empty %}
+                    <ul class="trombi-skills">
+                      {{ user.skills | raw }}
+                    </ul>
+                    {% endif %}
+                    {% if user.about %}<div class="trombi-apropos">
+                      {{ user.about | raw }}
+                    </div>
+                      {% endif %}
+                  </div>
+                  <div class="trombi-btn">
+                    <div class="faux-btn">{{ "See page"|t }}</div>
+                  </div>
+                </a>
+              </article>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

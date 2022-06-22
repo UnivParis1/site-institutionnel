@@ -2,9 +2,9 @@ uuid: 2e7e8d21-e69c-47e1-96bb-d104ece860d0
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 91
 template: false
 archive: false
@@ -12,7 +12,45 @@ id: 44_formulaire_de_contact_test
 title: '44-Formulaire de contact test'
 description: 'Test de formulaire'
 category: ''
-elements: "test_du_champs_texte:\n  '#type': textfield\n  '#title': 'test du champs texte'\n  '#description': 'et de sa description'\n  '#help_title': 'du help title'\n  '#help': 'de du texte d&#39;aide'\ntitre_de_la_zone_de_texte:\n  '#type': textarea\n  '#title': 'titre de la zone de texte'\n  '#description': 'et sa descritpion'\n  '#help_title': 'son help title'\nrenseignez_votre_adresse_email:\n  '#type': email\n  '#title': 'Renseignez votre adresse email'\n  '#help_title': Précision\n  '#help': 'Nous vous contacterons via cette email'\n  '#required': true\n  '#states':\n    invisible:\n      ':input[name=\"test_du_champs_texte\"]':\n        value: ''\nj_autorise_l_utilisation_de_mes_donnees_personnelles_pour_repond:\n  '#type': checkbox\n  '#title': 'J''autorise l''utilisation de mes données personnelles pour répondre '\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_admin_mode': true\nvous_avez_aime_dites_le_nous:\n  '#type': webform_scale\n  '#title': 'Vous avez aimé ? Dites-le nous'\n  '#min_text': 'Non pas du tout'\n  '#max_text': 'Oui j''ai adoré'\nou_habitez_vous_:\n  '#type': webform_address\n  '#title': 'Où habitez vous ?'\n  '#address_2__access': false\n  '#country__title': France"
+elements: |-
+  test_du_champs_texte:
+    '#type': textfield
+    '#title': 'test du champs texte'
+    '#description': 'et de sa description'
+    '#help_title': 'du help title'
+    '#help': 'de du texte d&#39;aide'
+  titre_de_la_zone_de_texte:
+    '#type': textarea
+    '#title': 'titre de la zone de texte'
+    '#description': 'et sa descritpion'
+    '#help_title': 'son help title'
+  renseignez_votre_adresse_email:
+    '#type': email
+    '#title': 'Renseignez votre adresse email'
+    '#help_title': Précision
+    '#help': 'Nous vous contacterons via cette email'
+    '#required': true
+    '#states':
+      invisible:
+        ':input[name="test_du_champs_texte"]':
+          value: ''
+  j_autorise_l_utilisation_de_mes_donnees_personnelles_pour_repond:
+    '#type': checkbox
+    '#title': 'J''autorise l''utilisation de mes données personnelles pour répondre '
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_admin_mode': true
+  vous_avez_aime_dites_le_nous:
+    '#type': webform_scale
+    '#title': 'Vous avez aimé ? Dites-le nous'
+    '#min_text': 'Non pas du tout'
+    '#max_text': 'Oui j''ai adoré'
+  ou_habitez_vous_:
+    '#type': webform_address
+    '#title': 'Où habitez vous ?'
+    '#address_2__access': false
+    '#country__title': France
 css: ''
 javascript: ''
 settings:
@@ -27,40 +65,48 @@ settings:
   page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: true
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: true
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +115,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +125,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +154,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: ''
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''

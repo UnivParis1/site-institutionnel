@@ -24,45 +24,12 @@ base_table: search_api_index_siri
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: none
-        options: {  }
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          bypass_access: false
-          skip_access: false
-          preserve_facet_query_args: false
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Filtrer
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: none
-        options:
-          offset: 0
-      style:
-        type: default
-        options:
-          grouping: {  }
-          row_class: 'cell small-12 semi-infos-sep'
-          default_row_class: true
-      row:
-        type: fields
+      title: Recherche
       fields:
         name:
           id: name
@@ -71,6 +38,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -133,7 +101,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_subtitle:
           id: field_subtitle
           table: search_api_index_siri
@@ -141,6 +108,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -203,7 +171,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_sub_title:
           id: field_sub_title
           table: search_api_index_siri
@@ -211,6 +178,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -273,7 +241,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         title:
           id: title
           table: search_api_index_siri
@@ -281,6 +248,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -343,7 +311,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_editorial_blocks:
           id: field_editorial_blocks
           table: search_api_index_siri
@@ -351,6 +318,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -413,7 +381,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_paragraphs:
           id: field_paragraphs
           table: search_api_index_siri
@@ -421,6 +388,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -483,7 +451,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         search_api_rendered_item:
           id: search_api_rendered_item
           table: search_api_index_siri
@@ -491,6 +458,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_rendered_item
           label: ''
           exclude: false
           alter:
@@ -544,7 +512,6 @@ display:
               publication: search_index
               second_level_pages: search_index
               viva: search_index
-          plugin_id: search_api_rendered_item
         body:
           id: body
           table: search_api_datasource_siri_entity_node
@@ -552,6 +519,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -613,8 +582,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: node
-          plugin_id: search_api_field
         field_grade:
           id: field_grade
           table: search_api_datasource_siri_entity_node
@@ -622,6 +589,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
           label: ''
           exclude: true
           alter:
@@ -683,8 +652,42 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: node
-          plugin_id: search_api_field
+      pager:
+        type: none
+        options:
+          offset: 0
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filtrer
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: tag
+        options: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<div>Vous avez visionné tous les résultats correspondant à vos filtres de recherche.</div>'
+            format: full_html
+          tokenize: false
+      sorts: {  }
+      arguments: {  }
       filters:
         search_api_language:
           id: search_api_language
@@ -693,6 +696,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_language
           operator: in
           value:
             '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
@@ -725,7 +729,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_language
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_siri
@@ -733,6 +736,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_fulltext
           operator: or
           value: ''
           group: 1
@@ -775,29 +779,25 @@ display:
           parse_mode: terms
           min_length: 3
           fields: {  }
-          plugin_id: search_api_fulltext
-      sorts: {  }
-      title: Recherche
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: 'cell small-12 semi-infos-sep'
+          default_row_class: true
+      row:
+        type: fields
+      query:
+        type: views_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+      relationships: {  }
+      use_ajax: true
       header: {  }
       footer: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<div>Vous avez visionné tous les résultats correspondant à vos filtres de recherche.</div>'
-            format: full_html
-          plugin_id: text
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
-      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -814,18 +814,18 @@ display:
         - 'config:field.storage.node.field_subtitle'
         - 'config:search_api.index.siri'
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Page
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: old-resultats-recherche
-      exposed_block: true
       cache:
         type: none
       defaults:
         cache: false
+      exposed_block: true
+      display_extenders: {  }
+      path: old-resultats-recherche
     cache_metadata:
       max-age: -1
       contexts:

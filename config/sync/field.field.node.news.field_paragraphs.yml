@@ -10,6 +10,7 @@ dependencies:
     - paragraphs.paragraphs_type.bp_columns_two_uneven
     - paragraphs.paragraphs_type.bp_simple
     - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.trait
   module:
     - entity_reference_revisions
 id: node.news.field_paragraphs
@@ -25,64 +26,59 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       bp_simple: bp_simple
       bp_columns_two_uneven: bp_columns_two_uneven
       bp_accordion_section: bp_accordion_section
       bp_carousel: bp_carousel
       medias: medias
+      trait: trait
+    negate: 0
     target_bundles_drag_drop:
-      bp_simple:
-        enabled: true
-        weight: -71
-      bp_columns_two_uneven:
-        enabled: true
-        weight: -70
-      bp_accordion_section:
-        enabled: true
-        weight: -69
-      bp_carousel:
-        enabled: true
-        weight: -68
-      medias:
-        enabled: true
-        weight: -67
+      audio_media:
+        weight: -61
+        enabled: false
       bp_accordion:
         weight: -66
         enabled: false
+      bp_accordion_section:
+        weight: -69
+        enabled: true
       bp_blank:
         weight: -65
         enabled: false
       bp_block:
         weight: -64
         enabled: false
+      bp_carousel:
+        weight: -68
+        enabled: true
+      bp_column_wrapper:
+        weight: -59
+        enabled: false
       bp_columns:
         weight: -63
-        enabled: false
-      files_media:
-        weight: -62
-        enabled: false
-      audio_media:
-        weight: -61
         enabled: false
       bp_columns_three_uneven:
         weight: -60
         enabled: false
-      bp_column_wrapper:
-        weight: -59
-        enabled: false
+      bp_columns_two_uneven:
+        weight: -70
+        enabled: true
       bp_image:
         weight: -58
         enabled: false
       bp_modal:
         weight: -57
         enabled: false
-      bp_tabs:
-        weight: -56
-        enabled: false
+      bp_simple:
+        weight: -71
+        enabled: true
       bp_tab_section:
         weight: -55
+        enabled: false
+      bp_tabs:
+        weight: -56
         enabled: false
       bp_view:
         weight: -54
@@ -90,26 +86,62 @@ settings:
       bp_webform:
         weight: -53
         enabled: false
+      button_grid:
+        weight: 65
+        enabled: false
+      button_grid_item:
+        weight: 66
+        enabled: false
+      contact:
+        weight: -48
+        enabled: false
+      contact_free:
+        weight: 68
+        enabled: false
+      content_block:
+        weight: 69
+        enabled: false
+      files_media:
+        weight: -62
+        enabled: false
+      hit_list:
+        weight: -47
+        enabled: false
+      icon_grid:
+        weight: 72
+        enabled: false
+      icon_grid_item:
+        weight: 73
+        enabled: false
+      image_media:
+        weight: -50
+        enabled: false
+      jumbotron:
+        weight: -46
+        enabled: false
       key_figure:
         weight: -52
         enabled: false
       key_figures_section:
         weight: -51
         enabled: false
-      image_media:
-        weight: -50
+      medias:
+        weight: -67
+        enabled: true
+      news_events:
+        weight: 79
         enabled: false
-      video_media:
-        weight: -49
+      partenaire:
+        weight: 80
         enabled: false
-      contact:
-        weight: -48
+      partenaire_section:
+        weight: 81
         enabled: false
-      hit_list:
-        weight: -47
+      patrimoine_immobilier:
+        weight: 82
         enabled: false
-      jumbotron:
-        weight: -46
+      patrimoine_immobilier_list:
+        weight: 83
         enabled: false
       presentation:
         weight: -45
@@ -123,19 +155,25 @@ settings:
       tile:
         weight: -42
         enabled: false
-      tiles:
-        weight: -41
-        enabled: false
       tile_with_text:
         weight: -40
         enabled: false
       tile_wo_image:
         weight: -39
         enabled: false
+      tiles:
+        weight: -41
+        enabled: false
       title_and_subtitle:
         weight: -38
         enabled: false
+      trait:
+        weight: 92
+        enabled: true
       tuile_text_wo_image:
         weight: -37
+        enabled: false
+      video_media:
+        weight: -49
         enabled: false
 field_type: entity_reference_revisions

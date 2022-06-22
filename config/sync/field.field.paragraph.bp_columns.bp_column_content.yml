@@ -7,8 +7,12 @@ dependencies:
     - paragraphs.paragraphs_type.bp_block
     - paragraphs.paragraphs_type.bp_columns
     - paragraphs.paragraphs_type.bp_simple
+    - paragraphs.paragraphs_type.bp_webform
+    - paragraphs.paragraphs_type.button_grid
+    - paragraphs.paragraphs_type.icon_grid
     - paragraphs.paragraphs_type.jumbotron
     - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.partenaire_section
     - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
@@ -27,13 +31,17 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       bp_simple: bp_simple
       bp_block: bp_block
+      bp_webform: bp_webform
       jumbotron: jumbotron
       medias: medias
+      button_grid: button_grid
       tiles: tiles
+      icon_grid: icon_grid
+      partenaire_section: partenaire_section
+    negate: 0
     target_bundles_drag_drop:
       audio_media:
         weight: 36
@@ -48,8 +56,8 @@ settings:
         weight: -29
         enabled: false
       bp_block:
-        enabled: true
         weight: -22
+        enabled: true
       bp_carousel:
         weight: -27
         enabled: false
@@ -72,8 +80,8 @@ settings:
         weight: -21
         enabled: false
       bp_simple:
-        enabled: true
         weight: -31
+        enabled: true
       bp_tab_section:
         weight: -17
         enabled: false
@@ -85,9 +93,18 @@ settings:
         enabled: false
       bp_webform:
         weight: 52
+        enabled: true
+      button_grid:
+        weight: 61
+        enabled: true
+      button_grid_item:
+        weight: 62
         enabled: false
       contact:
         weight: 53
+        enabled: false
+      content_block:
+        weight: 64
         enabled: false
       files_media:
         weight: 54
@@ -95,12 +112,18 @@ settings:
       hit_list:
         weight: 55
         enabled: false
+      icon_grid:
+        weight: 67
+        enabled: true
+      icon_grid_item:
+        weight: 68
+        enabled: false
       image_media:
         weight: 56
         enabled: false
       jumbotron:
-        enabled: true
         weight: 57
+        enabled: true
       key_figure:
         weight: 58
         enabled: false
@@ -108,8 +131,23 @@ settings:
         weight: 59
         enabled: false
       medias:
-        enabled: true
         weight: 60
+        enabled: true
+      news_events:
+        weight: 74
+        enabled: false
+      partenaire:
+        weight: 75
+        enabled: false
+      partenaire_section:
+        weight: 76
+        enabled: true
+      patrimoine_immobilier:
+        weight: 79
+        enabled: false
+      patrimoine_immobilier_list:
+        weight: 80
+        enabled: false
       presentation:
         weight: 61
         enabled: false
@@ -129,8 +167,8 @@ settings:
         weight: 66
         enabled: false
       tiles:
-        enabled: true
         weight: 67
+        enabled: true
       title_and_subtitle:
         weight: 68
         enabled: false

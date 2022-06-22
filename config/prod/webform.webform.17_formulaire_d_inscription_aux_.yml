@@ -2,17 +2,416 @@ uuid: efc763f3-55e7-479e-87f1-545353fea310
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
-uid: 79
+uid: 321
 template: false
 archive: false
 id: 17_formulaire_d_inscription_aux_
 title: '17 - Formulaire d''inscription aux formations courtes'
 description: 'Nous vous remercions de bien vouloir remplir ce formulaire pour vous pr&eacute;-inscrire &agrave; l&#39;une de nos formations courtes.'
 category: ''
-elements: "profil:\n  '#type': item\n  '#title': PROFIL\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#placeholder': Dupont\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Nom\"'\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#placeholder': Marie\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Prénom\"'\ndate_de_naissance:\n  '#type': date\n  '#title': 'Date de naissance'\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Date de naissance\"'\n  '#date_date_format': ''\nville_de_naissance:\n  '#type': textfield\n  '#title': 'Ville de naissance'\nnumero_de_securite_sociale:\n  '#type': textfield\n  '#title': 'Numéro de sécurité sociale'\n  '#description': 'Votre num&eacute;ro de S&eacute;curit&eacute; sociale nous permettra d&#39;&eacute;tablir la convention pour cette formation.'\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Numéro de Sécurité sociale\"'\nadresse:\n  '#type': webform_address\n  '#title': Adresse\n  '#required': true\n  '#address__required': true\n  '#address_2__access': false\n  '#city__required': true\n  '#state_province__access': false\n  '#postal_code__required': true\nadresse_mail:\n  '#type': email\n  '#title': 'Adresse mail'\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Adresse mail\"'\ntelephone:\n  '#type': tel\n  '#title': Téléphone\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Téléphone\"'\nsituation:\n  '#type': webform_checkboxes_other\n  '#title': Situation\n  '#options':\n    Salarié: Salarié\n    'Demandeur d''emploi': 'Demandeur d''emploi'\n    Etudiant: Etudiant\n  '#other__option_label': 'Autre, précisez'\n  '#other__placeholder': 'Autre, précisez.'\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Situation\"'\n  '#options__properties': ''\nformation:\n  '#type': item\n  '#title': 'NOS FORMATIONS COURTES'\n  '#description': 'Merci de cocher les domaine(s) de formation qui vous int&eacute;resse(nt) :'\ncommunication_partenariats:\n  '#type': checkbox\n  '#title': 'Communication & partenariats'\n  '#states':\n    visible:\n      '':\n        '': ''\ncommunication:\n  '#type': checkboxes\n  '#title': 'Formation(s) en communication & partenariats qui m''intéresse(nt) : '\n  '#options':\n    'Approfondissement des techniques de la communication orale pour une prise de parole en public': 'Approfondissement des techniques de la communication orale pour une prise de parole en public'\n    'Initiation à la communication sur les réseaux sociaux': 'Initiation à la communication sur les réseaux sociaux'\n    'Optimiser sa stratégie de communication digitale sur les réseaux sociaux': 'Optimiser sa stratégie de communication digitale sur les réseaux sociaux'\n    'Regarder un film/une série : Comment construire un discours critique': 'Regarder un film : Comment construire un discours critique'\n    'Regarder une série : Comment construire un discours critique': 'Regarder une série : Comment construire un discours critique'\n  '#states':\n    visible:\n      ':input[name=\"communication_partenariats\"]':\n        filled: true\n    invisible:\n      ':input[name=\"communication_partenariats\"]':\n        unchecked: true\n  '#options__properties': ''\ndefense_securite:\n  '#type': checkbox\n  '#title': 'Défense & sécurité'\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_s_en_defense_securite_qui_m_interessent_:\n  '#type': checkboxes\n  '#title': 'Formation(s) en défense & sécurité qui m''intéresse(nt) :'\n  '#options':\n    'Action publique, gestion des risques et des crises en France': 'Action publique, gestion des risques et des crises en France'\n    'Affaires européennes, défense et industries': 'Affaires européennes, défense et industries'\n    'Communication de crise et media training': 'Communication de crise et media training'\n    'Gestion de crise - La cellule de crise': 'Gestion de crise - La cellule de crise'\n    'Industries et marchés de défense': 'Industries et marchés de défense'\n    'Les fondamentaux de la gestion de crise et de la communication de crise': 'Les fondamentaux de la gestion de crise et de la communication de crise'\n    'Protection des systèmes d''information contre la cyber menace': 'Protection des systèmes d''information contre la cyber menace'\n    'Sécurité du numérique dans le domaine de la santé': 'Sécurité du numérique dans le domaine de la santé'\n  '#states':\n    visible:\n      ':input[name=\"defense_securite\"]':\n        filled: true\n    invisible:\n      ':input[name=\"defense_securite\"]':\n        unchecked: true\n  '#options__properties': ''\ndroit:\n  '#type': checkbox\n  '#title': Droit\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_s_en_droit_qui_m_interesse_nt_:\n  '#type': checkboxes\n  '#title': 'Formation(s) en droit qui m''intéresse(nt) :'\n  '#options':\n    'Actualité de la réparation du dommage corporel en lien avec une activité médicale: Responsabilités des professionnels et/ou indemnisation par l''ONIAM': 'Actualité de la réparation du dommage corporel en lien avec une activité médicale: Responsabilités des professionnels et/ou indemnisation par l''ONIAM'\n    'Contentieux de la protection sociale complémentaire': 'Contentieux de la protection sociale complémentaire'\n    'Droit de la réparation du dommage corporel : actualités des notions, principes et postes de préjudices': 'Droit de la réparation du dommage corporel : actualités des notions, principes et postes de préjudices'\n    'Droit des données et secteur public': 'Droit des données et secteur public'\n    'Droit et contentieux dans la fonction publique': 'Droit et contentieux dans la fonction publique'\n    'Enjeux juridiques et opérationnels de la conduite de l’Open Data dans la commande publique': 'Enjeux juridiques et opérationnels de la conduite de l’Open Data dans la commande publique'\n    'Europe Express : acquérir le réflexe européen en une journée': 'Europe Express : acquérir le réflexe européen en une journée'\n    'Gérer le droit pénal social en entreprise': 'Gérer le droit pénal social en entreprise'\n    'Incidence du recours des tiers-payeurs en droit de la réparation du dommage corporel Règles de recours et d’imputation / Mise en pratique ': 'Incidence du recours des tiers-payeurs en droit de la réparation du dommage corporel Règles de recours et d’imputation / Mise en pratique '\n    'Initiation à la recherche juridique': 'Initiation à la recherche juridique'\n    'Droit algorithmique et Big Data': 'Droit algorithmique et Big Data'\n    'Intelligence artificielle :  éthique et libertés fondamentales': 'Intelligence artificielle :  éthique et libertés fondamentales'\n    'Laïcité et service public': 'Laïcité et service public'\n    'Maitriser les outils du juriste numérique': 'Maitriser les outils du juriste numérique'\n  '#states':\n    visible:\n      ':input[name=\"droit\"]':\n        filled: true\n    invisible:\n      ':input[name=\"droit\"]':\n        unchecked: true\n  '#options__properties': ''\ngestion_finance:\n  '#type': checkbox\n  '#title': 'Gestion & finance'\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_s_en_gestion_finance_qui_m_interesse_nt_:\n  '#type': checkboxes\n  '#title': 'Formation(s) en gestion & finance qui m''intéresse(nt) :'\n  '#options':\n    'Audit & contrôle interne : maîtriser les risques': 'Audit & contrôle interne : maîtriser les risques'\n    'Data Science niveau 1  Initiation au data mining avec le logiciel R': 'Data Science niveau 1  Initiation au data mining avec le logiciel R'\n    'Data Science niveau 2  Intelligence prédictive pour les managers ': 'Data Science niveau 2  Intelligence prédictive pour les managers '\n    'Data visualisation avec le logiciel Tableau': 'Data visualisation avec le logiciel Tableau'\n    'Economie de la santé : base de données': 'Economie de la santé : base de données'\n    'Finance pour non financiers': 'Finance pour non financiers'\n    'Finances publiques': 'Finances publiques'\n    'Introduction à l''économie de la santé': 'Introduction à l''économie de la santé'\n    'Python pour la Data Science': 'Python pour la Data Science'\n  '#states':\n    visible:\n      ':input[name=\"gestion_finance\"]':\n        filled: true\n    invisible:\n      ':input[name=\"gestion_finance\"]':\n        unchecked: true\n  '#options__properties': ''\nimmobilier:\n  '#type': checkbox\n  '#title': Immobilier\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_en_immobilier_qui_m_interesse:\n  '#type': checkboxes\n  '#title': 'Formation en immobilier qui m''intéresse :'\n  '#options':\n    'Professionnalisation de l''immobilier': 'Professionnalisation de l''immobilier'\n  '#states':\n    visible:\n      ':input[name=\"immobilier\"]':\n        filled: true\n    invisible:\n      ':input[name=\"immobilier\"]':\n        unchecked: true\n  '#options__properties': ''\nlangues:\n  '#type': checkbox\n  '#title': Langues\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_s_en_langues_qui_m_interesse_nt_:\n  '#type': checkboxes\n  '#title': 'Formation(s) en langues qui m''intéresse(nt) :'\n  '#options':\n    'Anglais - Cours hebdomadaires': 'Anglais - Cours hebdomadaires'\n    'Anglais - Stage intensif ': 'Anglais - Stage intensif '\n    'Écrire avec efficacité en français': 'Écrire avec efficacité en français'\n    'Français Langue Étrangère (FLE) | Améliorer ses écrits': 'Français Langue Étrangère (FLE) | Améliorer ses écrits'\n    'Français Langue Étrangère (FLE) |  Atelier d''écriture : développer ses capacités d''expression': 'Français Langue Étrangère (FLE) |  Atelier d''écriture : développer ses capacités d''expression'\n    'Français Langue Étrangère (FLE) |  Orthographe/grammaire : consolider ses savoirs': 'Français Langue Étrangère (FLE) |  Orthographe/grammaire : consolider ses savoirs'\n    'Français Langue Étrangère (FLE) | Préparation au diplôme d''études en langue française (DELF)': 'Français Langue Étrangère (FLE) | Préparation au diplôme d''études en langue française (DELF)'\n    'Université d''été en français langue étrangère (FLE)': 'Université d''été en français langue étrangère (FLE)'\n  '#states':\n    visible:\n      ':input[name=\"langues\"]':\n        filled: true\n    invisible:\n      ':input[name=\"langues\"]':\n        unchecked: true\n  '#options__properties': ''\nmanagement_ergonomie:\n  '#type': checkbox\n  '#title': 'Management & ergonomie'\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_s_en_management_ergonomie_qui_m_interesse_nt_:\n  '#type': checkboxes\n  '#title': 'Formation(s) en management & ergonomie qui m''intéresse(nt) : '\n  '#options':\n    'Coaching d''équipe': 'Coaching d''équipe'\n    'Maîtriser les tableaux de bord pour piloter ses activités': 'Maîtriser les tableaux de bord pour piloter ses activités'\n    'Programmation ergonomique architecturale': 'Programmation ergonomique architecturale'\n    'Santé mentale au travail': 'Santé mentale au travail'\n  '#states':\n    visible:\n      ':input[name=\"management_ergonomie\"]':\n        filled: true\n    invisible:\n      ':input[name=\"management_ergonomie\"]':\n        unchecked: true\n  '#options__properties': ''\nressources_humaines:\n  '#type': checkbox\n  '#title': 'Ressources humaines'\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_s_en_ressources_humaines_qui_m_interesse_nt_:\n  '#type': checkboxes\n  '#title': 'Formation(s) en ressources humaines qui m''intéresse(nt) : '\n  '#options':\n    'Évaluation d''une action de formation': 'Évaluation d''une action de formation'\n    'Gestion de projet systèmes d''information ressources humaines (SIRH)': 'Gestion de projet systèmes d''information ressources humaines (SIRH)'\n    'Gestion des ressources humaines (GRH) digitale': 'Gestion des ressources humaines (GRH) digitale'\n    'Initiation à la conduite de projet SIRH': 'Initiation à la conduite de projet SIRH'\n    'Recruter sans discriminer ': 'Recruter sans discriminer '\n    'Reporting social': 'Reporting social'\n    'Réussir dans sa posture entrepreneuriale': 'Réussir dans sa posture entrepreneuriale'\n    'Réussir sa prise de poste': 'Réussir sa prise de poste'\n    'Réussir sa transition professionnelle': 'Réussir sa transition professionnelle'\n  '#states':\n    visible:\n      ':input[name=\"ressources_humaines\"]':\n        filled: true\n    invisible:\n      ':input[name=\"ressources_humaines\"]':\n        unchecked: true\n  '#options__properties': ''\nscience_politique:\n  '#type': checkbox\n  '#title': 'Science politique'\n  '#states':\n    visible:\n      '':\n        '': ''\nformation_s_en_science_politique_qui_m_interesse_nt_:\n  '#type': checkboxes\n  '#title': 'Formation(s) en science politique qui m''intéresse(nt) :'\n  '#options':\n    'Le millefeuille territorial  État des lieux et perspectives': 'Le millefeuille territorial  État des lieux et perspectives'\n    Lobbying: Lobbying\n  '#states':\n    visible:\n      ':input[name=\"science_politique\"]':\n        filled: true\n    invisible:\n      ':input[name=\"science_politique\"]':\n        unchecked: true\n  '#options__properties': ''\nmode_de_financement:\n  '#type': item\n  '#title': 'MODE DE FINANCEMENT'\nquel_sera_votre_mode_de_financement_:\n  '#type': webform_checkboxes_other\n  '#title': 'Quel sera votre mode de financement ?'\n  '#options':\n    'Financement individuel': 'Financement individuel'\n    'Prise en charge par l''employeur': 'Prise en charge par l''employeur'\n    'Prise en charge par Pôle Emploi': 'Prise en charge par Pôle Emploi'\n  '#other__option_label': 'Autre financeur, précisez :'\n  '#other__placeholder': 'Autre, précisez.'\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Mode de financement\"'\n  '#options__properties': ''\nnumero_de_siret:\n  '#type': textfield\n  '#title': 'Numéro de SIRET :'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\ncode_ape:\n  '#type': textfield\n  '#title': 'Code APE :'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\nnom_de_l_employeur_:\n  '#type': textfield\n  '#title': 'Nom de l''employeur : '\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\nadresse_employeur:\n  '#type': webform_address\n  '#title': 'Adresse de l''employeur :'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\n  '#address_2__access': false\n  '#state_province__access': false\n  '#country__access': false\nemail_employeur_:\n  '#type': email\n  '#title': 'Email employeur :'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\ntelephone_de_l_employeur_:\n  '#type': tel\n  '#title': 'Téléphone de l''employeur :'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\nnom_et_fonction_du_signataire_de_la_convention:\n  '#type': textfield\n  '#title': 'Nom et fonction du signataire de la convention :'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\nemail_du_signataire_de_la_convention:\n  '#type': email\n  '#title': 'Email du signataire de la convention'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\ntelephone_du_signataire_de_la_convention_:\n  '#type': tel\n  '#title': 'Téléphone du signataire de la convention : '\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]\"]':\n        unchecked: true\nvotre_identifiant_pole_emploi_:\n  '#type': textfield\n  '#title': 'Votre identifiant Pôle Emploi : '\n  '#description': 'Votre identifiant P&ocirc;le Emploi nous servira &agrave; &eacute;tablir le devis.'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]\"]':\n        unchecked: true\nvotre_agence_pole_emploi_de_rattachement_:\n  '#type': textfield\n  '#title': 'Votre agence Pôle Emploi de rattachement : '\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]\"]':\n        unchecked: true\nsi_un_devis_aif_aide_individuel_a_la_formation_est_etabli_merci_:\n  '#type': checkbox\n  '#title': 'Si un devis AIF (Aide individuelle à la formation) est établi, merci de cocher cette case.'\n  '#states':\n    visible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]\"]':\n        filled: true\n    invisible:\n      ':input[name=\"quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]\"]':\n        unchecked: true\ncomment_avez_vous_connu_cette_ou_ces_formation_s_:\n  '#type': webform_checkboxes_other\n  '#title': 'Comment avez-vous connu cette ou ces formation(s) ?'\n  '#options':\n    'Recherche sur Internet (ex : Google)': 'Recherche sur Internet (ex : Google)'\n    'Via Twitter': 'Via Twitter'\n    'Via LinkedIn': 'Via LinkedIn'\n    'Une publicité': 'Une publicité'\n    'Le bouche à oreille': 'Le bouche à oreille'\n  '#other__option_label': 'Autre, précisez :'\n  '#other__placeholder': 'Autre, précisez.'\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Comment avez-vous connu cette ou ces formation(s)\"'\n  '#options__properties': ''\ncgv_formationscourtes:\n  '#type': checkbox\n  '#title': 'Conditions générales de vente - Formations courtes | En validant ce formulaire, je suis informé(e) que mes données personnelles permettront au service FCPS d''établir (éventuellement) une convention de formation et de me contacter pour me proposer des formations.'\n  '#description': 'Je reconnais avoir pris connaissance des <a href=\"https://formation-continue.pantheonsorbonne.fr/sites/default/files/2021-05/conditions_generales_de_vente_-_formations_courtes.pdf\">conditions g&eacute;n&eacute;rales de vente</a>.'\n  '#required': true\n  '#required_error': 'Champ obligatoire : \"Conditions générales de vente\"'\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': Envoyer"
+elements: |-
+  profil:
+    '#type': item
+    '#title': PROFIL
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Dupont
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Nom"'
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': Marie
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Prénom"'
+  date_de_naissance:
+    '#type': date
+    '#title': 'Date de naissance'
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Date de naissance"'
+    '#date_date_format': ''
+  ville_de_naissance:
+    '#type': textfield
+    '#title': 'Ville de naissance'
+  numero_de_securite_sociale:
+    '#type': textfield
+    '#title': 'Numéro de sécurité sociale'
+    '#description': 'Votre num&eacute;ro de S&eacute;curit&eacute; sociale nous permettra d&#39;&eacute;tablir la convention pour cette formation.'
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Numéro de Sécurité sociale"'
+  adresse:
+    '#type': webform_address
+    '#title': Adresse
+    '#required': true
+    '#address__required': true
+    '#address_2__access': false
+    '#city__required': true
+    '#state_province__access': false
+    '#postal_code__required': true
+  adresse_mail:
+    '#type': email
+    '#title': 'Adresse mail'
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Adresse mail"'
+  telephone:
+    '#type': tel
+    '#title': Téléphone
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Téléphone"'
+  situation:
+    '#type': webform_checkboxes_other
+    '#title': Situation
+    '#options':
+      Salarié: Salarié
+      'Demandeur d''emploi': 'Demandeur d''emploi'
+      Etudiant: Etudiant
+    '#other__option_label': 'Autre, précisez'
+    '#other__placeholder': 'Autre, précisez.'
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Situation"'
+    '#options__properties': ''
+  formation:
+    '#type': item
+    '#title': 'NOS FORMATIONS COURTES'
+    '#description': 'Merci de cocher les domaine(s) de formation qui vous int&eacute;resse(nt) :'
+  communication_partenariats:
+    '#type': checkbox
+    '#title': 'Communication & partenariats'
+    '#states':
+      visible:
+        '':
+          '': ''
+  communication:
+    '#type': checkboxes
+    '#title': 'Formation(s) en communication & partenariats qui m''intéresse(nt) : '
+    '#options':
+      'Approfondissement des techniques de la communication orale pour une prise de parole en public': 'Approfondissement des techniques de la communication orale pour une prise de parole en public'
+      'Regarder un film/une série : Comment construire un discours critique': 'Regarder un film : Comment construire un discours critique'
+      'Regarder une série : Comment construire un discours critique': 'Regarder une série : Comment construire un discours critique'
+    '#states':
+      visible:
+        ':input[name="communication_partenariats"]':
+          filled: true
+      invisible:
+        ':input[name="communication_partenariats"]':
+          unchecked: true
+    '#options__properties': ''
+  defense_securite:
+    '#type': checkbox
+    '#title': 'Défense & sécurité'
+    '#states':
+      visible:
+        '':
+          '': ''
+  formation_s_en_defense_securite_qui_m_interessent_:
+    '#type': checkboxes
+    '#title': 'Formation(s) en défense & sécurité qui m''intéresse(nt) :'
+    '#options':
+      'Action publique, gestion des risques et des crises en France': 'Action publique, gestion des risques et des crises en France'
+      'Affaires européennes, défense et industries': 'Affaires européennes, défense et industries'
+      'Communication de crise et media training': 'Communication de crise et media training'
+      'Gestion de crise - La cellule de crise': 'Gestion de crise - La cellule de crise'
+      'Industries et marchés de défense': 'Industries et marchés de défense'
+      'Les fondamentaux de la gestion de crise et de la communication de crise': 'Les fondamentaux de la gestion de crise et de la communication de crise'
+      'Protection des systèmes d''information contre la cyber menace': 'Protection des systèmes d''information contre la cyber menace'
+      'Sécurité du numérique dans le domaine de la santé': 'Sécurité du numérique dans le domaine de la santé'
+    '#states':
+      visible:
+        ':input[name="defense_securite"]':
+          filled: true
+      invisible:
+        ':input[name="defense_securite"]':
+          unchecked: true
+    '#options__properties': ''
+  droit:
+    '#type': checkbox
+    '#title': Droit
+    '#states':
+      visible:
+        '':
+          '': ''
+  formation_s_en_droit_qui_m_interesse_nt_:
+    '#type': checkboxes
+    '#title': 'Formation(s) en droit qui m''intéresse(nt) :'
+    '#options':
+      'Actualité de la réparation du dommage corporel en lien avec une activité médicale: Responsabilités des professionnels et/ou indemnisation par l''ONIAM': 'Actualité de la réparation du dommage corporel en lien avec une activité médicale: Responsabilités des professionnels et/ou indemnisation par l''ONIAM'
+      'Droit de la réparation du dommage corporel : actualités des notions, principes et postes de préjudices': 'Droit de la réparation du dommage corporel : actualités des notions, principes et postes de préjudices'
+      'Droit des données et secteur public': 'Droit des données et secteur public'
+      'Droit et contentieux dans la fonction publique': 'Droit et contentieux dans la fonction publique'
+      'Enjeux juridiques et opérationnels de la conduite de l’Open Data dans la commande publique': 'Enjeux juridiques et opérationnels de la conduite de l’Open Data dans la commande publique'
+      'Europe Express : acquérir le réflexe européen en une journée': 'Europe Express : acquérir le réflexe européen en une journée'
+      'Gérer le droit pénal social en entreprise': 'Gérer le droit pénal social en entreprise'
+      'Incidence du recours des tiers-payeurs en droit de la réparation du dommage corporel Règles de recours et d’imputation / Mise en pratique ': 'Incidence du recours des tiers-payeurs en droit de la réparation du dommage corporel Règles de recours et d’imputation / Mise en pratique '
+      'Initiation à la recherche juridique': 'Initiation à la recherche juridique'
+      'Droit algorithmique et Big Data': 'Droit algorithmique et Big Data'
+      'Intelligence artificielle :  éthique et libertés fondamentales': 'Intelligence artificielle :  éthique et libertés fondamentales'
+      'Laïcité et service public': 'Laïcité et service public'
+      'Maitriser les outils du juriste numérique': 'Maitriser les outils du juriste numérique'
+    '#states':
+      visible:
+        ':input[name="droit"]':
+          filled: true
+      invisible:
+        ':input[name="droit"]':
+          unchecked: true
+    '#options__properties': ''
+  gestion_finance:
+    '#type': checkbox
+    '#title': 'Gestion & finance'
+    '#states':
+      visible:
+        '':
+          '': ''
+  formation_s_en_gestion_finance_qui_m_interesse_nt_:
+    '#type': checkboxes
+    '#title': 'Formation(s) en gestion & finance qui m''intéresse(nt) :'
+    '#options':
+      'Audit & contrôle interne : maîtriser les risques': 'Audit & contrôle interne : maîtriser les risques'
+      'Data visualisation avec le logiciel Tableau': 'Data visualisation avec le logiciel Tableau'
+      'Economie de la santé : base de données': 'Economie de la santé : base de données'
+      'Finance pour non financiers': 'Finance pour non financiers'
+      'Finances publiques': 'Finances publiques'
+      'Introduction à l''économie de la santé': 'Introduction à l''économie de la santé'
+      'Python pour la Data Science': 'Python pour la Data Science'
+    '#states':
+      visible:
+        ':input[name="gestion_finance"]':
+          filled: true
+      invisible:
+        ':input[name="gestion_finance"]':
+          unchecked: true
+    '#options__properties': ''
+  immobilier:
+    '#type': checkbox
+    '#title': Immobilier
+    '#states':
+      visible:
+        '':
+          '': ''
+  formation_en_immobilier_qui_m_interesse:
+    '#type': checkboxes
+    '#title': 'Formation en immobilier qui m''intéresse :'
+    '#options':
+      'Professionnalisation de l''immobilier': 'Professionnalisation de l''immobilier'
+    '#states':
+      visible:
+        ':input[name="immobilier"]':
+          filled: true
+      invisible:
+        ':input[name="immobilier"]':
+          unchecked: true
+    '#options__properties': ''
+  langues:
+    '#type': checkbox
+    '#title': Langues
+    '#states':
+      visible:
+        '':
+          '': ''
+  formation_s_en_langues_qui_m_interesse_nt_:
+    '#type': checkboxes
+    '#title': 'Formation(s) en langues qui m''intéresse(nt) :'
+    '#options':
+      'Anglais - Cours hebdomadaires': 'Anglais - Cours hebdomadaires'
+      'Anglais - Stage intensif ': 'Anglais - Stage intensif '
+    '#states':
+      visible:
+        ':input[name="langues"]':
+          filled: true
+      invisible:
+        ':input[name="langues"]':
+          unchecked: true
+    '#options__properties': ''
+  science_politique:
+    '#type': checkbox
+    '#title': 'Science politique'
+    '#states':
+      visible:
+        '':
+          '': ''
+  formation_s_en_science_politique_qui_m_interesse_nt_:
+    '#type': checkboxes
+    '#title': 'Formation en science politique qui m''intéresse :'
+    '#options':
+      Lobbying: Lobbying
+    '#states':
+      visible:
+        ':input[name="science_politique"]':
+          filled: true
+      invisible:
+        ':input[name="science_politique"]':
+          unchecked: true
+    '#options__properties': ''
+  mode_de_financement:
+    '#type': item
+    '#title': 'MODE DE FINANCEMENT'
+  quel_sera_votre_mode_de_financement_:
+    '#type': webform_checkboxes_other
+    '#title': 'Quel sera votre mode de financement ?'
+    '#options':
+      'Financement individuel': 'Financement individuel'
+      'Prise en charge par l''employeur': 'Prise en charge par l''employeur'
+      'Prise en charge par Pôle Emploi': 'Prise en charge par Pôle Emploi'
+    '#other__option_label': 'Autre financeur, précisez :'
+    '#other__placeholder': 'Autre, précisez.'
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Mode de financement"'
+    '#options__properties': ''
+  numero_de_siret:
+    '#type': textfield
+    '#title': 'Numéro de SIRET :'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  code_ape:
+    '#type': textfield
+    '#title': 'Code APE :'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  nom_de_l_employeur_:
+    '#type': textfield
+    '#title': 'Nom de l''employeur : '
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  adresse_employeur:
+    '#type': webform_address
+    '#title': 'Adresse de l''employeur :'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+    '#address_2__access': false
+    '#state_province__access': false
+    '#country__access': false
+  email_employeur_:
+    '#type': email
+    '#title': 'Email employeur :'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  telephone_de_l_employeur_:
+    '#type': tel
+    '#title': 'Téléphone de l''employeur :'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  nom_et_fonction_du_signataire_de_la_convention:
+    '#type': textfield
+    '#title': 'Nom et fonction du signataire de la convention :'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  email_du_signataire_de_la_convention:
+    '#type': email
+    '#title': 'Email du signataire de la convention'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  telephone_du_signataire_de_la_convention_:
+    '#type': tel
+    '#title': 'Téléphone du signataire de la convention : '
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par l''employeur]"]':
+          unchecked: true
+  votre_identifiant_pole_emploi_:
+    '#type': textfield
+    '#title': 'Votre identifiant Pôle Emploi : '
+    '#description': 'Votre identifiant P&ocirc;le Emploi nous servira &agrave; &eacute;tablir le devis.'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]"]':
+          unchecked: true
+  votre_agence_pole_emploi_de_rattachement_:
+    '#type': textfield
+    '#title': 'Votre agence Pôle Emploi de rattachement : '
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]"]':
+          unchecked: true
+  si_un_devis_aif_aide_individuel_a_la_formation_est_etabli_merci_:
+    '#type': checkbox
+    '#title': 'Si un devis AIF (Aide individuelle à la formation) est établi, merci de cocher cette case.'
+    '#states':
+      visible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]"]':
+          filled: true
+      invisible:
+        ':input[name="quel_sera_votre_mode_de_financement_[checkboxes][Prise en charge par Pôle Emploi]"]':
+          unchecked: true
+  comment_avez_vous_connu_cette_ou_ces_formation_s_:
+    '#type': webform_checkboxes_other
+    '#title': 'Comment avez-vous connu cette ou ces formation(s) ?'
+    '#options':
+      'Recherche sur Internet (ex : Google)': 'Recherche sur Internet (ex : Google)'
+      'Via Twitter': 'Via Twitter'
+      'Via LinkedIn': 'Via LinkedIn'
+      'Une publicité': 'Une publicité'
+      'Le bouche à oreille': 'Le bouche à oreille'
+    '#other__option_label': 'Autre, précisez :'
+    '#other__placeholder': 'Autre, précisez.'
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Comment avez-vous connu cette ou ces formation(s)"'
+    '#options__properties': ''
+  cgv_formationscourtes:
+    '#type': checkbox
+    '#title': 'Conditions générales de vente - Formations courtes | En validant ce formulaire, je suis informé(e) que mes données personnelles permettront au service FCPS d''établir (éventuellement) une convention de formation et de me contacter pour me proposer des formations.'
+    '#description': 'Je reconnais avoir pris connaissance des <a href="https://formation-continue.pantheonsorbonne.fr/sites/default/files/2021-05/conditions_generales_de_vente_-_formations_courtes.pdf">conditions g&eacute;n&eacute;rales de vente</a>.'
+    '#required': true
+    '#required_error': 'Champ obligatoire : "Conditions générales de vente"'
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': Envoyer
 css: ''
 javascript: ''
 settings:
@@ -27,40 +426,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +476,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +486,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +515,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: 'Confirmation de pré-inscription'
   confirmation_message: "Nous vous confirmons la prise en compte de votre pr&eacute;-inscription pour l&#39;une de nos formations courtes.<br />\r\n<br />\r\nPour toute question, vous pouvez envoyer un mail &agrave; : <a href=\"mailto:formations-courtes-fcps@univ-paris1.fr\">formations-courtes-fcps@univ-paris1.fr</a>"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +596,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: 'Formulaire de pré-inscription aux formations courtes'
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +607,17 @@ handlers:
         - completed
       to_mail: formations-courtes-fcps@univ-paris1.fr
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Formulaire de pré-inscription aux formations courtes'
       body: _default
       excluded_elements: {  }
@@ -222,18 +628,14 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
   formulaire_de_pre_inscription_aux_formations_courtes:
     id: email
+    handler_id: formulaire_de_pre_inscription_aux_formations_courtes
     label: 'Formulaire de pré-inscription aux formations courtes'
     notes: ''
-    handler_id: formulaire_de_pre_inscription_aux_formations_courtes
     status: true
     conditions: {  }
     weight: 1
@@ -242,13 +644,17 @@ handlers:
         - completed
       to_mail: com-formation-continue@univ-paris1.fr
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Formulaire de pré-inscription aux formations courtes'
       body: _default
       excluded_elements: {  }
@@ -259,11 +665,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

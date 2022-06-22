@@ -2,9 +2,9 @@ uuid: 0342f91b-d76a-4ed8-9d74-ba113ee85d6c
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 77
 template: false
 archive: false
@@ -12,7 +12,76 @@ id: 24_suggerer_un_achat_de_document
 title: '24 - Suggérer un achat de document'
 description: 'Formulaire de suggestion d&#39;achat de document&nbsp;'
 category: ''
-elements: "nom_du_demandeur:\n  '#type': textfield\n  '#title': Demandeur\n  '#placeholder': 'Saisissez vos nom et prénom'\n  '#required': true\n  '#required_error': 'champ obligatoire'\ncourriel:\n  '#type': email\n  '#title': Courriel\n  '#placeholder': 'Saisissez votre courriel'\n  '#required': true\n  '#required_error': 'champ obligatoire'\ninstitution:\n  '#type': select\n  '#title': Institution\n  '#placeholder': 'Saisissez votre institution ou organisme d''appartenance'\n  '#options':\n    CNRS: CNRS\n    'Université Paris 1 Panthéon-Sorbonne': 'Université Paris 1 Panthéon-Sorbonne'\n    Autre: Autre\n  '#empty_option': Sélectionner\n  '#choices': true\nstatut:\n  '#type': select\n  '#title': Statut\n  '#placeholder': 'Saisissez votre statut'\n  '#options':\n    Chercheur: Chercheur\n    Enseignant-chercheur: Enseignant-chercheur\n    Doctorant: Doctorant\n    Master: Master\n    Autre: Autre\n  '#empty_option': Sélectionner\n  '#choices': true\ntitre_du_document:\n  '#type': textfield\n  '#title': 'Titre du document'\n  '#placeholder': 'Saisissez le titre du document'\n  '#required': true\nauteur:\n  '#type': textfield\n  '#title': Auteur\n  '#placeholder': 'Saisissez le nom de l''auteur'\n  '#required': true\nediteur:\n  '#type': textfield\n  '#title': Editeur\n  '#placeholder': 'Saisissez le nom de l''éditeur '\ndate_de_publication:\n  '#type': textfield\n  '#title': 'Date de publication'\n  '#placeholder': 'Saisissez l''année de publication du document'\nisbn:\n  '#type': textfield\n  '#title': ISBN\n  '#placeholder': 'Ex :  978-280-7-320185'\ndonnees_personnelles:\n  '#type': radios\n  '#title': 'J''autorise l''utilisation de mes données personnelles pour le traitement de ma demande'\n  '#options': yes_no\n  '#options_display': buttons_horizontal\n  '#options__properties': ''\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': Envoyer"
+elements: |-
+  nom_du_demandeur:
+    '#type': textfield
+    '#title': Demandeur
+    '#placeholder': 'Saisissez vos nom et prénom'
+    '#required': true
+    '#required_error': 'champ obligatoire'
+  courriel:
+    '#type': email
+    '#title': Courriel
+    '#placeholder': 'Saisissez votre courriel'
+    '#required': true
+    '#required_error': 'champ obligatoire'
+  institution:
+    '#type': select
+    '#title': Institution
+    '#placeholder': 'Saisissez votre institution ou organisme d''appartenance'
+    '#options':
+      CNRS: CNRS
+      'Université Paris 1 Panthéon-Sorbonne': 'Université Paris 1 Panthéon-Sorbonne'
+      Autre: Autre
+    '#empty_option': Sélectionner
+    '#choices': true
+  statut:
+    '#type': select
+    '#title': Statut
+    '#placeholder': 'Saisissez votre statut'
+    '#options':
+      Chercheur: Chercheur
+      Enseignant-chercheur: Enseignant-chercheur
+      Doctorant: Doctorant
+      Master: Master
+      Autre: Autre
+    '#empty_option': Sélectionner
+    '#choices': true
+  titre_du_document:
+    '#type': textfield
+    '#title': 'Titre du document'
+    '#placeholder': 'Saisissez le titre du document'
+    '#required': true
+  auteur:
+    '#type': textfield
+    '#title': Auteur
+    '#placeholder': 'Saisissez le nom de l''auteur'
+    '#required': true
+  editeur:
+    '#type': textfield
+    '#title': Editeur
+    '#placeholder': 'Saisissez le nom de l''éditeur '
+  date_de_publication:
+    '#type': textfield
+    '#title': 'Date de publication'
+    '#placeholder': 'Saisissez l''année de publication du document'
+  isbn:
+    '#type': textfield
+    '#title': ISBN
+    '#placeholder': 'Ex :  978-280-7-320185'
+  donnees_personnelles:
+    '#type': radios
+    '#title': 'J''autorise l''utilisation de mes données personnelles pour le traitement de ma demande'
+    '#options': yes_no
+    '#options_display': buttons_horizontal
+    '#options__properties': ''
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': Envoyer
 css: ''
 javascript: ''
 settings:
@@ -27,40 +96,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +146,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,13 +156,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -113,9 +185,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: ''
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +266,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: Email
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +277,17 @@ handlers:
         - completed
       to_mail: docmse@univ-paris1.fr
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: _default
       body: _default
       excluded_elements: {  }
@@ -222,11 +298,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

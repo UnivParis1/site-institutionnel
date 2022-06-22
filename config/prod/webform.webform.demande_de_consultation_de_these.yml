@@ -2,9 +2,9 @@ uuid: 605eda56-b777-42cb-ae51-3547ffb49c5c
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 51
 template: false
 archive: false
@@ -12,7 +12,77 @@ id: demande_de_consultation_de_these
 title: '10 - Demande de consultation de thèse - PMF'
 description: "Arborescence : Menu direction &gt; Biblioth&egrave;que Pierre Mend&egrave;s France<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Biblioth&egrave;que Pierre Mend&egrave;s France</em> &gt; rubrique <em>Conditions d&#39;acc&egrave;s et de pr&ecirc;t</em>"
 category: Contact
-elements: "coordonnees:\n  '#type': webform_section\n  '#title': Coordonnées\n  nom_prenom:\n    '#type': webform_name\n    '#title': 'Nom, prénom'\n    '#required': true\n    '#title__access': false\n    '#first__title': Prénom\n    '#first__required': true\n    '#middle__access': false\n    '#last__title': Nom\n    '#last__required': true\n    '#suffix__access': false\n    '#degree__access': false\n  telephone:\n    '#type': tel\n    '#title': Téléphone\n    '#required': true\n  courriel:\n    '#type': email\n    '#title': Courriel\n    '#required': true\nreferences_de_la_these:\n  '#type': webform_section\n  '#title': 'Références de la thèse'\n  titre_de_la_these:\n    '#type': textfield\n    '#title': 'Titre de la thèse'\n    '#required': true\n  auteur_de_la_these:\n    '#type': textfield\n    '#title': 'Auteur de la thèse'\n    '#required': true\ndate_souhaitee_pour_le_rendez_vous:\n  '#type': webform_section\n  '#title': 'Date souhaitée pour le rendez-vous'\n  choisir_une_date:\n    '#type': date\n    '#title': 'Choisir une date (délai minimum de 24h)'\n    '#required': true\n    '#date_days':\n      - '1'\n      - '2'\n      - '3'\n      - '4'\n      - '5'\n      - '6'\n    '#datepicker': true\n    '#datepicker_button': true\n    '#date_date_format': 'l, F j, Y'\n  creneau_souhaite:\n    '#type': radios\n    '#title': 'Créneau souhaité'\n    '#options':\n      Matin: Matin\n      Après-midi: Après-midi\n    '#required': true\n    '#options__properties': ''\nterms_of_service:\n  '#type': webform_terms_of_service\n  '#title': 'J''accepte les {conditions de service}.'\n  '#required': true\n  '#terms_content': '<span class=\"field-prefix\">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de consultation de th&egrave;se.</span>'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Bouton(s) d''envoi'\n  '#submit__label': 'Envoyer la demande'"
+elements: |-
+  coordonnees:
+    '#type': webform_section
+    '#title': Coordonnées
+    nom_prenom:
+      '#type': webform_name
+      '#title': 'Nom, prénom'
+      '#required': true
+      '#title__access': false
+      '#first__title': Prénom
+      '#first__required': true
+      '#middle__access': false
+      '#last__title': Nom
+      '#last__required': true
+      '#suffix__access': false
+      '#degree__access': false
+    telephone:
+      '#type': tel
+      '#title': Téléphone
+      '#required': true
+    courriel:
+      '#type': email
+      '#title': Courriel
+      '#required': true
+  references_de_la_these:
+    '#type': webform_section
+    '#title': 'Références de la thèse'
+    titre_de_la_these:
+      '#type': textfield
+      '#title': 'Titre de la thèse'
+      '#required': true
+    auteur_de_la_these:
+      '#type': textfield
+      '#title': 'Auteur de la thèse'
+      '#required': true
+  date_souhaitee_pour_le_rendez_vous:
+    '#type': webform_section
+    '#title': 'Date souhaitée pour le rendez-vous'
+    choisir_une_date:
+      '#type': date
+      '#title': 'Choisir une date (délai minimum de 48h)'
+      '#required': true
+      '#date_days':
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+      '#datepicker': true
+      '#datepicker_button': true
+      '#date_date_format': 'l, F j, Y'
+    creneau_souhaite:
+      '#type': radios
+      '#title': 'Créneau souhaité'
+      '#options':
+        Matin: Matin
+        Après-midi: Après-midi
+      '#required': true
+      '#options__properties': ''
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'J''accepte les {conditions de service}.'
+    '#required': true
+    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de consultation de th&egrave;se.</span>'
+  captcha:
+    '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
 settings:
@@ -25,42 +95,50 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: "<p>En raison de la fermeture des différents centres et donc de la bibliothèque, la consultation des thèses est suspendue jusqu'au lundi 2 mai.<br />\r\nMerci de votre compréhension.</p>"
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -69,11 +147,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -84,17 +157,17 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -113,9 +186,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: "Votre demande de rendez-vous pour une consultation de th&egrave;se a &eacute;t&eacute; prise en compte. Nous vous r&eacute;pondrons dans les meilleurs d&eacute;lais, du lundi au vendredi, de 9h &agrave; 17h.<br />\r\nPour rappel : votre rendez-vous doit &ecirc;tre pris au minimum 24h &agrave; l&#39;avance."
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,9 +267,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: pretbu@univ-paris1.fr
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -205,13 +278,17 @@ handlers:
         - completed
       to_mail: pretbu@univ-paris1.fr
       to_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_options: {  }
       from_mail: '[webform_submission:values:courriel:raw]'
       from_options: {  }
       from_name: '[webform_submission:values:nom_prenom:value]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Votre demande de consultation de thèse'
       body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Veuillez conserver ce mail. Il vous sera n&eacute;cessaire pour acc&eacute;der au centre Pierre Mend&egrave;s France.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>&nbsp;</p>"
       excluded_elements:
@@ -224,11 +301,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

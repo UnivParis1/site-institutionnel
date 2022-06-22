@@ -1,0 +1,25 @@
+uuid: b582656b-7425-4617-b8cc-ed096518c69e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.patrimoine_immobilier_list.field_patrimoine_immobilier
+    - paragraphs.paragraphs_type.patrimoine_immobilier_list
+  module:
+    - entity_reference_revisions
+id: paragraph.patrimoine_immobilier_list.default
+targetEntityType: paragraph
+bundle: patrimoine_immobilier_list
+mode: default
+content:
+  field_patrimoine_immobilier:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true
