@@ -1,0 +1,411 @@
+uuid: 9c2959f6-428a-432c-ab96-eb5beb0a40ba
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 5433
+template: false
+archive: false
+id: 102_formulaire_d_inscription_as_
+title: '102 - formulaire d''inscription AS Paris 1'
+description: ''
+category: ''
+elements: |-
+  ndeg_etudiant:
+    '#type': textfield
+    '#title': 'N° Etudiant'
+    '#required': true
+    '#required_error': 'Ton  N° d''étudiant stp . merci'
+  code_etape_diplome:
+    '#type': textfield
+    '#title': 'code étape/ diplome'
+    '#description': 'Code de ton diplome inscrit sur le derniere ligne du papillon autocollant de ta carte d&#39;&eacute;tudiant. En dessous de 2021-2022.'
+    '#placeholder': L2B101
+    '#required': true
+    '#required_error': 'Ton code étape stp.'
+  enseignant_coach:
+    '#type': textfield
+    '#title': 'Enseignant /Coach'
+  creneau_jour_et_heure_du_cours_:
+    '#type': textfield
+    '#title': 'creneau (jour et heure du cours )'
+  activite_sportive_uefaps:
+    '#type': textfield
+    '#title': 'Activité sportive UEFAPS'
+    '#help_title': 'Activité pratiquée à l''uefaps en bonus, UE ou Loisir (fp)'
+  genre:
+    '#type': radios
+    '#title': Genre
+    '#options':
+      Féminin: Féminin
+      Masculin: Masculin
+    '#options_display': buttons_horizontal
+    '#required': true
+  nom:
+    '#type': textfield
+    '#title': NOM
+    '#required': true
+  prenom:
+    '#type': textfield
+    '#title': PRENOM
+    '#required': true
+  date_de_naissance:
+    '#type': textfield
+    '#title': 'DATE  DE NAISSANCE'
+    '#required': true
+    '#required_error': 'Ta date de naissance stp.merci'
+  adresse:
+    '#type': webform_address
+    '#title': ADRESSE
+    '#required': true
+    '#address_2__access': false
+    '#state_province__access': false
+    '#country__access': false
+  telephone_mobile:
+    '#type': tel
+    '#title': 'TELEPHONE MOBILE'
+    '#required': true
+    '#required_error': 'Ton numero de telephone mobile stp. Merci'
+  telephone_fixe:
+    '#type': tel
+    '#title': 'TELEPHONE FIXE'
+  courriel_paris_1:
+    '#type': email
+    '#title': 'Courriel Paris 1'
+    '#help_title': 'prénom.nom @etu.univ-paris1.fr'
+    '#placeholder': dimitri.payet@etu.univ-paris1.fr
+    '#required': true
+  courriel_perso:
+    '#type': email
+    '#title': 'Courriel Perso'
+    '#required': true
+  activite_s_sportive_s_as_paris_1:
+    '#type': textfield
+    '#title': 'Activité (s) sportive (s) AS Paris 1'
+    '#help_title': 'Activité sportive en compétitiotn  pour laquelle tu t''inscrits à l''AS. '
+    '#required': true
+    '#required_error': 'Quelle est ton activité AS STP ?'
+  specialite_:
+    '#type': textfield
+    '#title': 'SPECIALITE '
+    '#help_title': ' sport individuel : discipline,categorie, poids  ou classement'
+  participation_aux_championnat_de_france:
+    '#type': radios
+    '#title': 'Participation aux championnat de france'
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#options_display': buttons_horizontal
+    '#required': true
+  demande_de_licence_ffsu:
+    '#type': radios
+    '#title': 'Demande de licence FFSU'
+    '#options':
+      Nouvelle: Nouvelle
+      Renouvellement: Renouvellement
+    '#options_display': buttons_horizontal
+  etudes_universitaires_de_:
+    '#type': textfield
+    '#title': 'Etudes universitaires  de : '
+    '#help_title': 'Qu''étudies tu à la fac ?'
+    '#placeholder': Economie
+    '#required': true
+  annee_d_etudes_universitaire_:
+    '#type': textfield
+    '#title': 'Année d''études universitaire :'
+    '#help_title': 'En quelle année est tu ?'
+    '#placeholder': M2
+    '#required': true
+  je_soussigne:
+    '#type': checkbox
+    '#title': 'Je soussigné(e), déclare être régulièrement inscrit(e) dans l''établissement d''enseignement supérieur mentionnée ci-dessus, après avoir pris connaissance des statuts et règlements de la FF SPORT U et y avoir adhéré, après avoir présenté un *certificat médical de non contre indication à la pratique des sports de compétition, avoir pris connaissance de l''ensemble des garanties offertes par l''assurance choisie par mon association sportive (y compris les garanties facultatives proposées).'
+    '#required': true
+    '#required_error': 'Veuillez cocher la case Je soussigné ...'
+    '#return_value': 'Oui, je valide cette déclaration.'
+  utilisation_de_mon_image:
+    '#type': checkbox
+    '#title': 'J''autorise l''utilisation de mon image uniquement dans le cadre des outils de communication de l''Université Paris 1'
+    '#default_value': true
+    '#return_value': OUI
+  processed_text:
+    '#type': processed_text
+    '#display_on': both
+    '#text': |
+      <p style="color:#fff;padding:1rem;background-color:#00326E;font-size:1.2em;font-weight:bold;">Pour rappel : Paiement : Espèces ou 2 chèques à l'ordre de "Association Sportive Paris 1". Cotisation 2021-2022 : 30 euros - Veste : 20 euros.</p>
+      
+    '#format': full_html
+  date_fait_a_paris:
+    '#type': date
+    '#title': 'Fait à Paris le :'
+    '#required': true
+    '#required_error': 'Indiques la date ... stp'
+    '#datepicker': true
+    '#datepicker_button': true
+    '#date_date_format': 'l, F j, Y'
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+    '#captcha_admin_mode': true
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Envoyer
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: 'Merci de votre inscription'
+  confirmation_message: "Un courriel vous a &eacute;t&eacute; envoy&eacute; avec les informations que vous avez saisie.<br />\r\nN&#39;oubliez pas de venir &agrave; l&quot;&#39;AS pour r&egrave;gler votre solde et r&eacute;cup&eacute;rer votre &eacute;quipement."
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: 'Email à l''étudiant'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel_paris_1:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel_perso:raw]'
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Message automatique'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Confirmation inscription à l''AS'
+      body: "Bonjour,<br />\r\nTu as remplis le formulaire d&#39;inscription le [webform_submission:created] pour t&#39;inscrire &agrave; l&#39;AS.<br />\r\nVoici les informations que tu nous as transmis :<br />\r\n[webform_submission:values]<br />\r\n<br />\r\nMerci<br />\r\nL&#39;AS Paris 1"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email à l''AS'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: assport@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel_paris_1:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription AS'
+      body: "[webform_submission:values]<br />\r\n&nbsp;\r\n<table>\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td>Signature :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />\r\n\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />\r\n\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<hr /> <strong>Cadre r&eacute;serv&eacute; &agrave; l&#39;administration</strong>\r\n\r\n<table bgcolor=\"#FFFFCC\" border=\"2\" width=\"100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td colspan=\"2\">Statut : N&deg;Etudiant :</td>\r\n\t\t\t<td width=\"41%\">Ext&eacute;rieurs: Cours (ou et) Stage</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td colspan=\"3\">N&deg;Carte AS Date de d&eacute;livrance:</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<table bgcolor=\"#FFFFCC\" border=\"2\" width=\"100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td>Maillot:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\r\n\t\t\t<td>Taille:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\r\n\t\t\t<td>Tee-shirt:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\r\n\t\t\t<td>Taille:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\r\n\t\t\t<td>Veste:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\r\n\t\t\t<td>Taille:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\r\n\t\t\t<td colspan=\"3\">Esp&egrave;ce &nbsp; Ch&egrave;que</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>\r\n\t\t\t<div align=\"left\">Paiement</div>\r\n\t\t\t</td>\r\n\t\t\t<td width=\"12%\">Cotisation</td>\r\n\t\t\t<td width=\"6%\">&nbsp;</td>\r\n\t\t\t<td>Surcotisation</td>\r\n\t\t\t<td>&nbsp;</td>\r\n\t\t\t<td colspan=\"2\">\r\n\t\t\t<div align=\"right\">Montant total:</div>\r\n\t\t\t</td>\r\n\t\t\t<td width=\"18%\">&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td width=\"13%\">Esp&egrave;ces</td>\r\n\t\t\t<td colspan=\"5\">&nbsp;</td>\r\n\t\t\t<td>\r\n\t\t\t<div align=\"right\">Montant</div>\r\n\t\t\t</td>\r\n\t\t\t<td>&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>Ch&egrave;que 1</td>\r\n\t\t\t<td colspan=\"2\">Nom si diff&eacute;rent du porteur</td>\r\n\t\t\t<td width=\"18%\">&nbsp;</td>\r\n\t\t\t<td width=\"11%\">Nom de la banque</td>\r\n\t\t\t<td width=\"12%\">&nbsp;</td>\r\n\t\t\t<td class=\"Style16\" width=\"10%\">\r\n\t\t\t<div align=\"right\">Montant</div>\r\n\t\t\t</td>\r\n\t\t\t<td>&nbsp;</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<p bgcolor=\"#FFFFCC\">Enregistrement Licence N&deg;S100 Date (Entr&eacute;e base Access UP1)<br />\r\nSignature</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -8,10 +8,15 @@ dependencies:
     - paragraphs.paragraphs_type.bp_columns_two_uneven
     - paragraphs.paragraphs_type.bp_image
     - paragraphs.paragraphs_type.bp_simple
+    - paragraphs.paragraphs_type.bp_webform
     - paragraphs.paragraphs_type.button_grid
     - paragraphs.paragraphs_type.icon_grid
+    - paragraphs.paragraphs_type.jumbotron
+    - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
     - paragraphs.paragraphs_type.partenaire_section
+    - paragraphs.paragraphs_type.rich_content
+    - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
 _core:
@@ -33,8 +38,13 @@ settings:
       bp_simple: bp_simple
       bp_image: bp_image
       bp_accordion: bp_accordion
+      bp_webform: bp_webform
+      jumbotron: jumbotron
+      key_figures_section: key_figures_section
       medias: medias
       button_grid: button_grid
+      rich_content: rich_content
+      tiles: tiles
       icon_grid: icon_grid
       partenaire_section: partenaire_section
     negate: 0
@@ -89,7 +99,7 @@ settings:
         enabled: false
       bp_webform:
         weight: 52
-        enabled: false
+        enabled: true
       button_grid:
         weight: 61
         enabled: true
@@ -98,6 +108,9 @@ settings:
         enabled: false
       contact:
         weight: 53
+        enabled: false
+      contact_free:
+        weight: 68
         enabled: false
       content_block:
         weight: 56
@@ -119,13 +132,13 @@ settings:
         enabled: false
       jumbotron:
         weight: 57
-        enabled: false
+        enabled: true
       key_figure:
         weight: 58
         enabled: false
       key_figures_section:
         weight: 59
-        enabled: false
+        enabled: true
       medias:
         weight: 60
         enabled: true
@@ -138,12 +151,18 @@ settings:
       partenaire_section:
         weight: 76
         enabled: true
+      patrimoine_immobilier:
+        weight: 82
+        enabled: false
+      patrimoine_immobilier_list:
+        weight: 83
+        enabled: false
       presentation:
         weight: 61
         enabled: false
       rich_content:
         weight: 62
-        enabled: false
+        enabled: true
       section_presentation:
         weight: 63
         enabled: false
@@ -158,9 +177,12 @@ settings:
         enabled: false
       tiles:
         weight: 67
-        enabled: false
+        enabled: true
       title_and_subtitle:
         weight: 68
+        enabled: false
+      trait:
+        weight: 92
         enabled: false
       tuile_text_wo_image:
         weight: 69
