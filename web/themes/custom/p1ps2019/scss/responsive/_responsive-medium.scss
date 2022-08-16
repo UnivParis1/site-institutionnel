@@ -6,21 +6,9 @@
 
 //large up
 @include breakpoint($large){
-  .logo-footer{
-    svg{
-      width: 50%; height: 50%;
-    }
-  }
   .paragraph--type--hit-list{
     .paragraph__column{
       padding: 0 !important;
-      .paragraph__column{
-        &:before{
-          content: "\f054"; top: rem-calc(6px);
-          position: absolute; #{$left} : rem-calc(-20px);
-          font: normal normal normal 14px/1 FontAwesome;
-        }
-      }
     }
   }
   .swiper-tiles{
@@ -37,7 +25,7 @@
   }
   .center-form {
     .overlay-infos {
-      background: rgba(0, 50, 110, 0.6);
+      background-color: $background-main-color;
       padding: rem-calc(70px 122px);
       top: unset;
       transform: none;
@@ -48,11 +36,17 @@
       flex-direction: row;
       font-size: rem-calc(14px);
       .centre-up1 {
-        width: 40%;
+        width: 50%;
       }
       .image-centre {
-        width: 60%;
+        width: 50%;
       }
+    }
+  }
+
+  .key-figures-section {
+    .paragraph--type--key-figure {
+      margin-bottom: rem-calc(32px);
     }
   }
 }
@@ -156,7 +150,9 @@
   }
 
 
-  .paragraph--type--key-figures-section, .paragraph--type--section-presentation, .paragraph--type--hit-list{
+  .paragraph--type--key-figures-section,
+  .paragraph--type--section-presentation,
+  .paragraph--type--hit-list{
     h2{
       margin-bottom: rem-calc(16px);
     }
@@ -264,7 +260,7 @@
       }
       .overlay-infos{
         position: relative;
-        background: rgba(0, 50, 110, 0.6);
+        background-color: $background-main-color;
         padding: rem-calc(70px 24px);
         .form-item{
           .chosen-container-single {
@@ -413,9 +409,6 @@
     img{object-fit: cover;
       //	min-height: rem-calc(270px);
     }
-    .anchor-header{
-      display: none;
-    }
     // max-height: rem-calc(270px); overflow: hidden; .mask{height: rem-calc(270px);}
     // .path-frontpage & {
     // 	max-height: rem-calc(616px);
@@ -463,7 +456,7 @@
     }
     .header-center{
       #block-p1ps2019-branding{
-        svg{max-width: rem-calc(48px);}
+        svg{max-width: rem-calc(130px);}
       }
     }
     .header-right{
@@ -483,8 +476,12 @@
               }
               &#ent{
                 a{
-                  padding: 0; border-radius: 0;
+                  padding: 0;
+                  border-radius: 0;
                   box-shadow: none !important;
+                  background-color: transparent !important;
+                  color: $text-main-color;
+                  .fa{color: $text-main-color;}
                 }
               }
             }
@@ -735,8 +732,8 @@
     }
   }
   .key-figures-section {
-    .chiffre, .legende{
-      font-size: rem-calc(18px); line-height: 1.44;
+    .legende{
+      font-size: rem-calc(18px);
     }
   }
   .paragraph--type--key-figures-section{
@@ -915,17 +912,12 @@
 
   //footer
   .footer{
+    padding: rem-calc(70px 0);
     .footer-wrapper{
       .grid-x{justify-content: center;}
-      padding: rem-calc(16px 32px);
       .cell{
         padding-top: 0; padding-bottom: 0;
-        &:not(:last-child){
-          &:after{
-            display: none;
-          }
-        }
-        > div {display: inline-flex;}
+        //> div {display: inline-flex;}
       }
 
       //social media footer
