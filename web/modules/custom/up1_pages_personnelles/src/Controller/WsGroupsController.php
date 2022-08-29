@@ -695,6 +695,7 @@ class WsGroupsController extends ControllerBase
       ->execute();
     $users = User::loadMultiple($ids);
 
+    if (!empty($users_ws_groups) && !empty($users)) {
     foreach($users as $user) {
       //If Drupal User doesn't exists in ldap, we disable his page_perso.
       if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
@@ -707,17 +708,16 @@ class WsGroupsController extends ControllerBase
           $page_perso = Node::load($nid);
           $page_perso->status = 0;
           $page_perso->save();
-        }
-        //Block user.
-        $user->block();
-        $user->save();
-        $count_disabled++;
-        $disabled_users[] = $user->get('name')->value;
+        
+	  $count_disabled++;
+	  $disabled_users[] = $user->get('name')->value;
+	}
       }
+    }
     }
 
     return new JsonResponse([
-      'data' => ['nb_disabled_users' => $count_disabled, 'users_name' => implode(', ', $disabled_users)],
+      'data' => ['nb_disabled_pages' => $count_disabled, 'users_name' => implode(', ', $disabled_users)],
       'method' => 'GET',
       'status'=> 200
     ]);

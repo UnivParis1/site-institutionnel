@@ -1,6 +1,6 @@
 uuid: 056a3386-c3c3-4e5e-b649-35eca8e7fae7
 langcode: fr
-status: false
+status: true
 dependencies: {  }
 id: preprod
 label: Préprod
@@ -8,11 +8,27 @@ description: ''
 weight: 0
 folder: ../config/ppd
 module:
+  cas: 0
+  dblog: 0
+  elasticsearch_connector: 0
+  facets: 0
+  micro_reports: 0
+  system: 0
   kint: 0
 theme: {  }
 blacklist:
   - smtp.settings
+  - user.role.admin_dir_com
+  - user.role.contributeur
+  - user.role.contributeur_sous_site
+  - user.role.webmestre_general
+  - user.role.webmestre_sous_site
   - elasticsearch_connector.cluster.elasticsearch_server
+  - up1.settings
+  - micro_annuaire_sorbonne.annuaireconfig
+  - 'block.block.p1ps2019*'
+  - block.block.nuagedemotscle
+  - 'webform.webform*'
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true

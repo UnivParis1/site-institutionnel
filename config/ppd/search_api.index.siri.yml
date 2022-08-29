@@ -1,0 +1,272 @@
+uuid: dc7c61ed-bd21-44ce-97a9-edf25e7c9e8a
+langcode: fr
+status: false
+dependencies:
+  config:
+    - field.storage.node.field_editorial_blocks
+    - field.storage.node.field_event_type
+    - field.storage.node.field_lead
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_paragraphs
+    - field.storage.node.field_publication_type
+    - field.storage.node.field_short_desc
+    - field.storage.node.field_skills
+    - field.storage.node.field_sub_title
+    - field.storage.node.field_subtitle
+    - field.storage.node.field_categories
+    - search_api.server.ess
+    - core.entity_view_mode.node.teaser
+  module:
+    - taxonomy
+    - node
+    - search_api
+id: siri
+name: Siri
+description: ''
+read_only: false
+field_settings:
+  field_editorial_blocks:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_editorial_blocks
+    type: text
+    boost: !!float 8
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+  field_event_type:
+    label: 'Type d''événement'
+    datasource_id: 'entity:node'
+    property_path: field_event_type
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+  field_lead:
+    label: Chapô
+    datasource_id: 'entity:node'
+    property_path: field_lead
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_lead
+  field_news_topic:
+    label: 'Sujet d''actualité'
+    datasource_id: 'entity:node'
+    property_path: field_news_topic
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_news_topic
+  field_paragraphs:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_paragraphs
+    type: text
+    boost: !!float 8
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+  field_publication_type:
+    label: Type
+    datasource_id: 'entity:node'
+    property_path: field_publication_type
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_publication_type
+  field_short_desc:
+    label: 'Courte description'
+    datasource_id: 'entity:node'
+    property_path: field_short_desc
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_short_desc
+  field_skills:
+    label: 'Domaines d''expertise'
+    datasource_id: 'entity:node'
+    property_path: field_skills
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_skills
+  field_sub_title:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_sub_title
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_sub_title
+  field_subtitle:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_subtitle
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_subtitle
+  name:
+    label: Catégories
+    datasource_id: 'entity:node'
+    property_path: 'field_categories:entity:name'
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_categories
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Information d''accès du nœud.'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    boost: !!float 13
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          article: ''
+          event: teaser
+          news: teaser
+          news2018: ''
+          offer: ''
+          page: teaser
+          publication: teaser
+          second_level_pages: teaser
+  status:
+    label: Published
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Titre
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 21
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Type de contenu'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: text
+    boost: !!float 3
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: text
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected:
+        - article
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  entity_type: {  }
+  html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+    all_fields: false
+    fields:
+      - field_sub_title
+      - field_subtitle
+      - name
+      - title
+      - url
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+  ignorecase:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+    all_fields: false
+    fields:
+      - field_sub_title
+      - field_subtitle
+      - name
+      - title
+      - url
+  language_with_fallback: {  }
+  rendered_item: {  }
+  transliteration:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+    all_fields: false
+    fields:
+      - field_sub_title
+      - field_subtitle
+      - name
+      - title
+      - url
+  type_boost:
+    weights:
+      preprocess_index: 0
+    boosts:
+      'entity:node':
+        datasource_boost: !!float 1
+        bundle_boosts:
+          event: !!float 2
+          news: !!float 2
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 1500
+  index_directly: true
+  track_changes_in_references: true
+server: ess
