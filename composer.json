@@ -164,6 +164,7 @@
         ]
     },
     "extra": {
+	"enable-patching": true,    
         "patches" : {
             "drupal/micro_theme": ["patches/modules/micro_theme/micro_theme-focal_point_issue.patch"],
             "drupal/cas": ["https://www.drupal.org/files/issues/2020-06-14/2583325-39.patch"],
@@ -179,7 +180,8 @@
                 "patches/modules/siteimprove/siteimprove_micro_node_urls.patch"
             ],
             "drupal/rules" : ["https://www.drupal.org/files/issues/2021-01-28/email_textarea_via_typed_data.patch"],
-            "drupal/ics_field" : ["https://www.drupal.org/files/issues/2022-05-24/ics_field-if_file_exists-3267032_3.patch"]
+            "drupal/ics_field" : ["https://www.drupal.org/files/issues/2022-05-24/ics_field-if_file_exists-3267032_3.patch"],
+	    "vendor/dkd/php-cmis" : ["patches/vendor/dkd/php-cmis-client/patch.diff"]
         },
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
