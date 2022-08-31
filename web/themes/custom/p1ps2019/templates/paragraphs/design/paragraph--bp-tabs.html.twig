@@ -44,6 +44,7 @@ set classes = [
 'paragraph',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
   nb_tabs,
+'grid-container'
 ]
 %}
 
@@ -51,34 +52,36 @@ set classes = [
 {% set paragraph_id = 'tab-' ~ paragraph.id.value %}
 
 {# Prints Tabs template. #}
-<div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }} role="tablist" aria-multiselectable="true">
-<ul class="accordion-tabs" data-responsive-accordion-tabs="accordion large-tabs" data-allow-all-closed="true">
-  {% for key, item in content.bp_tab_section if key|first != '#' %}
-    <li role="presentation" class="accordion-item {% if loop.first %}is-active{% endif %}" data-accordion-item>
-      <a class="accordion-title" href="#">
-        <span>{{ item['#paragraph'].bp_tab_section_title.value }}</span>
-      </a>
-      <div class="accordion-content" id="{{ paragraph_id }}-{{ key + 1 }}" data-tab-content >
-  	      {% for body_key, body_item in item['#paragraph'].bp_tab_section_body %}
-  	        {# Use the same render array as item and set the '#paragraph'. #}
-  	        {% set section_body = item %}
-  	        {% set lang = section_body['#paragraph'].langcode[0].value %}
-  	        {# Check if a translation exists #}
-  	        {% if section_body['#paragraph'].bp_tab_section_body[body_key].entity.hasTranslation(lang) %}
-  	          {# Load the entity for the current translation #}
-  	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity.getTranslation(lang) %}
-  	        {% else %}
-  	          {# Load the source entity #}
-  	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity %}
-  	        {% endif %}
-  	        {% set section_body = section_body|merge({'#paragraph': section_translation}) %}
-  	        {# Remove the cache keys so it doesn't repeat the first value. #}
-  	        {% set section_body = section_body|merge({'#cache': {}}) %}
-  	        {# Print the compiled section body. #}
-  	        {{ section_body }}
-  	      {% endfor %}
-      </div>
-    </li>
-  {% endfor %}
-</ul>
+<div class="paris1-bg-soft-grey">
+  <div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }} role="tablist" aria-multiselectable="true">
+    <ul class="accordion-tabs" data-responsive-accordion-tabs="accordion large-tabs" data-allow-all-closed="true">
+    {% for key, item in content.bp_tab_section if key|first != '#' %}
+      <li role="presentation" class="accordion-item {% if loop.first %}is-active{% endif %}" data-accordion-item>
+        <a class="accordion-title" href="#">
+          <span>{{ item['#paragraph'].bp_tab_section_title.value }}</span>
+        </a>
+        <div class="accordion-content" id="{{ paragraph_id }}-{{ key + 1 }}" data-tab-content >
+    	      {% for body_key, body_item in item['#paragraph'].bp_tab_section_body %}
+    	        {# Use the same render array as item and set the '#paragraph'. #}
+    	        {% set section_body = item %}
+    	        {% set lang = section_body['#paragraph'].langcode[0].value %}
+    	        {# Check if a translation exists #}
+    	        {% if section_body['#paragraph'].bp_tab_section_body[body_key].entity.hasTranslation(lang) %}
+    	          {# Load the entity for the current translation #}
+    	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity.getTranslation(lang) %}
+    	        {% else %}
+    	          {# Load the source entity #}
+    	          {% set section_translation= section_body['#paragraph'].bp_tab_section_body[body_key].entity %}
+    	        {% endif %}
+    	        {% set section_body = section_body|merge({'#paragraph': section_translation}) %}
+    	        {# Remove the cache keys so it doesn't repeat the first value. #}
+    	        {% set section_body = section_body|merge({'#cache': {}}) %}
+    	        {# Print the compiled section body. #}
+    	        {{ section_body }}
+    	      {% endfor %}
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
 </div>

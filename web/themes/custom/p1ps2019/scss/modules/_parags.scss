@@ -6,8 +6,8 @@
     padding-top: rem-calc(8px);
   }
   &:not(.paragraph--type--hit-list):not(.tiles-full):not(.paragraph--type--rich-content):not(.paragraph--type--tuile-text-wo-image):not(.paragraph--type--tile-wo-image):not(.paragraph--type--key-figure):not(.paragraph--type--presentation):not(.paragraph--type--bp-columns):not(.paragraph--type--trait){
-    padding-bottom: rem-calc(56px);
-    padding-top: rem-calc(72px);
+    //padding-bottom: rem-calc(56px);
+    //padding-top: rem-calc(72px);
     &:not([class*='paris1-bg']){
       + .paragraph:not([class*='paris1-bg']){
         padding-top: 0;
@@ -56,16 +56,15 @@
   }
   .chiffre, .legende{
     text-align: center;
-    @include setFont($fontType-bold);
+    @include setFont($fontType-medium);
   }
   .chiffre{
-    font-size: rem-calc(70px);
+    font-size: rem-calc(48px);
     margin: 0; line-height: 1.12;
     p{line-height: 1;}
   }
   .legende{
     font-size: rem-calc(20px);
-    text-transform: uppercase;
   }
 }//close .key-figures-section
 
@@ -114,7 +113,9 @@
 }//close .paragraph--type--hit-list
 
 .paragraph--type--section-presentation{
-  h2{margin-bottom: rem-calc($fgutter*1.875);}
+  h2{
+    //margin-bottom: rem-calc($fgutter*1.875);
+  }
   .paragraph--type--presentation{
     width: 80%;
     h3{

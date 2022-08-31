@@ -10,18 +10,18 @@
 
 /* Heading TYPOGRAPHY -- BEGIN */
 h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, .h4-style, h5, h6 {
-  font-family: $font-main; @include setFont($fontType-bold);
+  font-family: $font-headings; @include setFont($fontType-bold);
   line-height: 1.2;
 }
-h1, .h1-style{font-size: rem-calc(100px);}
+h1, .h1-style{font-size: rem-calc(64px);}
 .path-site h1, .path-site .h1-style{font-size: rem-calc(85px);}
 h2, .h2-style{
-  font-size: rem-calc(45px);
+  font-size: rem-calc(48px);
 }
-h3, .h3-style{font-size: rem-calc(30px);}
-h4, .h4-style{font-size: rem-calc(20px);}
+h3, .h3-style{font-size: rem-calc(36px);}
+h4, .h4-style{font-size: rem-calc(24px);}
 h5, .h5-style{font-size: rem-calc(18px);}
-h6, .h6-style{font-size: rem-calc(16px);}
+h6, .h6-style{font-size: rem-calc(14px);}
 /* TYPOGRAPHY -- END */
 
 /* TRANSITION -- BEGIN */
@@ -66,6 +66,9 @@ h6, .h6-style{font-size: rem-calc(16px);}
 }
 .parag-sep-top{
   margin-top: rem-calc($fgutter);//32px
+}
+.section-sep-top.medium{
+  margin-top: rem-calc($fgutter*1.75);//56px
 }
 .section-sep-top.big{
   margin-top: rem-calc($fgutter*3);//96px
@@ -134,13 +137,15 @@ table{
 .path-frontpage{
   .homepage-search-keywords{
     margin-bottom: 0;
-    @include flex(); @include flex-align(justify, null);
+    //@include flex(); @include flex-align(justify, null);
     .hp-search-form{
-      flex: 0 0 35%; max-width: 35%;
+      //flex: 0 0 35%;
+      //max-width: 35%;
       min-width: rem-calc(465px);
     }
     .keywords{
-      flex: 0 0 35%; max-width: 35%;
+      //flex: 0 0 35%;
+      //max-width: 35%;
     }
   }
 }
@@ -272,8 +277,24 @@ table{
 
 
 .main-overlay-infos{
-  position: absolute; @include responsiveVal(bottom, $gutter);
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
   #{$left}: 0; height: auto; width: 100%;z-index: 2;
+  text-align: center;
+
+  .path-frontpage & {
+    #{$left}: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    h1 {
+      max-width: 70%;
+      margin: auto;
+    }
+    .hp-search-form {
+      max-width: 55%;
+      margin: auto;
+    }
+  }
+
 }
 .overlay-infos{
   position: absolute; z-index: 2;
@@ -381,9 +402,10 @@ table{
 
 .categ-style{
   font-family: $font-main; text-align: center;
-  font-size: rem-calc(18px); line-height: 1.2;
+  font-size: rem-calc(13px); line-height: 1.2;
   @include setFont($fontType-medium); padding: rem-calc(4px 12px);
   display: inline-block;
+  border-radius: 50rem;
 }
 
 

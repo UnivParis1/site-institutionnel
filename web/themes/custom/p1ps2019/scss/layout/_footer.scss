@@ -36,25 +36,38 @@ form#centres-up1-form {
 }
 
 .footer{
+  background-color: $background-light-gray;
+  padding: rem-calc(120px 0);
   .footer-wrapper{
-    padding: rem-calc(48px 120px);
-    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.05);
     a{
-      display: block; font-size: rem-calc(18px); line-height: 1.62;
+      display: block;
+      font-size: rem-calc(18px);
+      line-height: 1.15;
       margin-bottom: rem-calc(4px);
+      @include setFont($fontType-medium);
     }
     .cell{
       // padding-top: rem-calc(24px); padding-bottom: rem-calc(24px);
+      text-align: center;
       &:not(:last-child){
         position: relative;
         &:after{
-          content:""; width: 1px; height: rem-calc(156px);
+          content:""; width: 1px; height: rem-calc(238px);
           position: absolute; top: 50%;
           #{$right}: -($fgutter/2); transform: translateY(-50%);
         }
       }
+      &:not(:first-child) {
+        ul li:not(:last-child) {
+          margin-bottom: rem-calc(20px);
+        }
+      }
       > div {
         height: 100%; @include flexDisplay(); @include flexDisplayAlign('center-middle');
+        &.logo-footer,
+        &.logo-footer + div {
+          height: auto;
+        }
       }
     }
 
@@ -62,17 +75,9 @@ form#centres-up1-form {
       position: relative;
       column-rule: none;
       &:after{
-        content:""; width: 1px; height: rem-calc(156px);
+        content:""; width: 1px; height: rem-calc(238px);
         position: absolute; top: 50%;
-        #{$right}: 50%; transform: translateY(-50%);
-      }
-    }
-
-    .txt-gold{
-      a{
-        color: inherit;
-        font-family: $font-main;
-        @include setFont($fontType-regular);
+        #{$right}: 49.5%; transform: translateY(-50%);
       }
     }
 
@@ -103,12 +108,11 @@ form#centres-up1-form {
       .two-columns{
         width: 100%;
         ul{
-          max-width: rem-calc(177px);
           margin: 0 auto;
           li{
             margin: rem-calc(0 24px);
             a{
-              @include setFont($fontType-regular);
+              @include setFont($fontType-medium);
             }
           }
         }

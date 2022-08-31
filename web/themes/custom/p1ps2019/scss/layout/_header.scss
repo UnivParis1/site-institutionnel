@@ -1,11 +1,3 @@
-.path-site {
-  #navbar {
-    .anchor-header{
-      margin: rem-calc(26px) 0 rem-calc(26px);
-    }
-  }
-}
-
 #navbar{
 	.header-full {
     height: 100vh;
@@ -17,17 +9,14 @@
 			.field--name-field-credits{height: auto !important;}
 		}
 	}
-	.anchor-header{
-		text-align: center; margin-top: rem-calc(90px);
-		a{
-			&:hover{text-decoration: none; opacity: 0.8;}
-			&:focus{outline: none; text-decoration: none;}
-			&:before{font-size: rem-calc(32px);}
-		}
-	}
 	#top-header {
-		position: fixed; top: 0; #{$left}: 0; z-index: 403;
-		width: 100%; padding: rem-calc(36px 120px); min-height: rem-calc(120px);
+		position: fixed;
+		top: 0;
+		#{$left}: 0;
+		z-index: 403;
+		width: 100%;
+		padding: rem-calc(10px 40px);
+		min-height: rem-calc(82px);
 		@include transitionEffect(300ms, ease-in-out);
 		align-items: center;
 		.site--type--mini-site &{
@@ -197,7 +186,7 @@
 							outline: none;
 						}
 						.fa:before{
-							font-size: rem-calc(18px);
+							font-size: rem-calc(22px);
 						}
 					}
 				}
@@ -210,11 +199,23 @@
 		    &:before{
 		      content: "";
 		      position: absolute;
-		      width: rem-calc(24px); height: rem-calc(48px);
-		      border-bottom-right-radius: rem-calc(48px);
-		      border-top-right-radius: rem-calc(48px);
-		      bottom: rem-calc(-10px); #{$right}: 0;
-		      transform: rotate(45deg);
+		      width: rem-calc(20px);
+		      height: rem-calc(20px);
+		      border-radius: rem-calc(48px);
+		      top: 50%;
+		      #{$right}: 50%;
+		      transform: translateX(50%) translateY(-50%);
+		    }
+		    &:after{
+		      content: "";
+		      position: absolute;
+		      width: rem-calc(8px);
+		      height: rem-calc(16px);
+		      border-bottom-right-radius: rem-calc(10px);
+		      border-top-right-radius: rem-calc(10px);
+		      top: 50%;
+		      #{$right}: 50%;
+		      transform: translateX(7px) translateY(-11px) rotate(-45deg);
 		    }
 		    &:focus{outline: none;}
 		  }
@@ -279,7 +280,7 @@
 	}
 
 	.block-views-exposed-filter-blockrecherche-db-page-1 {
-		position: fixed; top: rem-calc(112px); display: block;
+		position: fixed; top: rem-calc(80px); display: block;
 		padding: rem-calc(48px 24px);
 		overflow: hidden; z-index: -1;
 		opacity: 0; visibility: hidden;

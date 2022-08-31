@@ -1,7 +1,7 @@
 .centres-up1-form, .center-wrapper {
   .map-centre {
     width: 100%;
-    min-height: rem-calc(250px);
+    //min-height: rem-calc(250px);
     display: flex;
     flex-direction: row-reverse;
     .center-form {
@@ -27,6 +27,14 @@
         }
       }
       .overlay-infos {
+
+        > div {
+          display: flex;
+          align-items: center;
+        }
+
+
+
         a {
           color: #fff
         }
@@ -44,7 +52,12 @@
         }
         .form-item{
           label{
-            @extend .h2-style; margin-bottom: rem-calc(16px);
+            @extend .h2-style;
+            margin-bottom: rem-calc(0px);
+            white-space: nowrap;
+          }
+          .chosen-container {
+            margin-left: rem-calc(100px);
           }
         }
         input[type="submit"]{
