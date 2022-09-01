@@ -126,7 +126,6 @@ class KeywordsConfigForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues()['keywords_links'];
-    \Drupal::logger('up1_keywords_values')->info(print_r($values,1));
     $list = [];
     foreach($values as $key => $value){
       $list[] = ["uri" => $value['url'], "title" => $value['text']];
