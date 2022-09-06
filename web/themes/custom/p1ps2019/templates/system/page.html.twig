@@ -115,25 +115,27 @@
     {% if page.header_left or page.header_center or page.header_right %}
       <div id="top-header" {% if not page_mini_site and not is_front_mini_site %} class="grid-x align-justify" {% endif %}>
         {% if page_mini_site or is_front_mini_site %} <div class="grid-x align-justify top-header-infos"> {% endif %}
+          {# Refonte#2619 menu accès direct (site principal) #}
           <div class="cell shrink header-left">
-            {% if page_mini_site %}
-              <a href="{{ path('<front>') }}" class="mini-site-back-wrapper" title=" {{ site_name }}">
-                <span class="fa fa-chevron-left mini-site-circle"></span>
-                <h3>{{ 'Retour'|t }}</h3>
-              </a>
-            {% elseif not page_mini_site and not is_front_mini_site %}
-              <button href="#" class="icon-menu reset-btn" aria-label="Menu navigation principale">
-                <span class="visually-hidden">Navigation principale</span>
-                <span class="toggle-container">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-              </button>
+            {% if not page_mini_site and not is_front_mini_site %}
+              {% if page.header_left %}
+                <button href="#" class="button reset-btn">
+                  <span class="mini-site-back-wrapper">{{ "Accès directs"|t }}</span>
+                </button>
+                <div class="hidden">
+                  {{ page.header_left }}
+                </div>
+              {% endif %}
+              {# Refonte#2619 menu accès direct (mini-sites) #}
+            {% elseif page_mini_site or is_front_mini_site %}
+              <div class="site-name {{ siteNameClass }}">
+                <a href="{{ path('<front>') }}" class="" title=" {{ site_name }}">
+                  <h2 class="title" style="font-size: 1.25rem;text-transform: uppercase;">{{ site_name }}</h2>
+                </a>
+              </div>
             {% endif %}
-            {{ page.header_left }}
           </div>
+          {# End Refonte#2619 menu accès direct #}
           {% if page.header_center %}
             <div class="cell shrink header-center">
               {{ page.header_center }}
@@ -160,11 +162,6 @@
                       </span>
                   </button>
                   {{ page.header_micro_left }}
-                  <div class="site-name {{ siteNameClass }}">
-                    <a href="{{ path('<front>') }}" class="" title=" {{ site_name }}">
-                      <h2 class="title">{{ site_name }}</h2>
-                    </a>
-                  </div>
                 </div>
                 <div class="micro-right">
                   {{ page.header_micro_right }}
