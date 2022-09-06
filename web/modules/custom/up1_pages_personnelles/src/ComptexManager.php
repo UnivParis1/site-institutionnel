@@ -28,14 +28,15 @@ class ComptexManager implements ComptexInterface {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $ws = $config->get('url_ws') . $config->get('search_user_page');
 
-    $searchUser = "$ws?token=$username";
+    $searchUser = "$ws?id=$username";
 
     /**
      * @TODO: Delete employeeType when gender is validated
      */
     $params = [
-      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType-all,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
-      'showExtendedInfo'=> 2
+	'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType-all,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
+	'allowNoAffiliationAccounts' => true,
+	'showExtendedInfo'=> 2
     ];
 
     $ch = curl_init();
@@ -63,7 +64,7 @@ class ComptexManager implements ComptexInterface {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $ws = $config->get('url_ws') . $config->get('search_user_page');
 
-    $searchUser = "$ws?token=$username";
+    $searchUser = "$ws?id=$username";
 
     $params = [
       'attrs' => "labeledURI"
@@ -233,11 +234,12 @@ class ComptexManager implements ComptexInterface {
 
   public function getUserEmail($uid) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page') . "?token=$uid";
+    $ws = $config->get('url_ws') . $config->get('search_user_page') . "?id=$uid";
 
     $params = [
-      'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',
-      'showExtendedInfo' => 2
+	    'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',
+	    'allowNoAffiliationAccounts' => true,
+	    'showExtendedInfo' => 2
     ];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
