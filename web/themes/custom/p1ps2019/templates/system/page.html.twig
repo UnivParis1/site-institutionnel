@@ -115,7 +115,7 @@
     {% if page.header_left or page.header_center or page.header_right %}
       <div id="top-header" {% if not page_mini_site and not is_front_mini_site %} class="grid-x align-justify" {% endif %}>
         {% if page_mini_site or is_front_mini_site %} <div class="grid-x align-justify top-header-infos"> {% endif %}
-          {# Refonte#2619 menu accès direct (site principal) #}
+          {# Refonte#2617 menu accès direct (site principal) #}
           <div class="cell shrink header-left">
             {% if not page_mini_site and not is_front_mini_site %}
               {% if page.header_left %}
@@ -126,7 +126,7 @@
                   {{ page.header_left }}
                 </div>
               {% endif %}
-              {# Refonte#2619 menu accès direct (mini-sites) #}
+              {# Refonte#2617 menu accès direct (mini-sites) #}
             {% elseif page_mini_site or is_front_mini_site %}
               <div class="site-name {{ siteNameClass }}">
                 <a href="{{ path('<front>') }}" class="" title=" {{ site_name }}">
@@ -135,7 +135,7 @@
               </div>
             {% endif %}
           </div>
-          {# End Refonte#2619 menu accès direct #}
+          {# End Refonte#2617 menu accès direct #}
           {% if page.header_center %}
             <div class="cell shrink header-center">
               {{ page.header_center }}
