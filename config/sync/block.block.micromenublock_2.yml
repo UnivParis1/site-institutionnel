@@ -1,6 +1,6 @@
-uuid: 9da2563a-f553-4a2b-9e89-32acde645c73
+uuid: a663cb11-f4f7-4b15-85f2-07625503608b
 langcode: fr
-status: false
+status: true
 dependencies:
   module:
     - micro_menu
@@ -8,10 +8,10 @@ dependencies:
     - micro_site
   theme:
     - p1ps2019
-id: micromenublock
+id: micromenublock_2
 theme: p1ps2019
-region: navigation_left
-weight: -14
+region: navigation
+weight: -17
 provider: null
 plugin: micro_menu_block
 settings:
@@ -20,13 +20,6 @@ settings:
   label_display: '0'
   provider: micro_menu
 visibility:
-  'entity_bundle:site':
-    id: 'entity_bundle:site'
-    negate: false
-    context_mapping:
-      site: '@micro_site.current_site_context:site'
-    bundles:
-      mini_site: mini_site
   site_type:
     id: site_type
     negate: false
@@ -38,3 +31,10 @@ visibility:
     context_mapping: {  }
     sites: {  }
     sites_front_page: 0
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    negate: false
+    context_mapping:
+      site: '@micro_site.current_site_context:site'
+    bundles:
+      mini_site: mini_site

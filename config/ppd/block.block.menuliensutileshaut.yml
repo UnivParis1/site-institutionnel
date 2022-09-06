@@ -1,6 +1,6 @@
-uuid: ad3e06fa-3a75-4919-8f0a-f9f216c43c09
+uuid: 0accbf39-6d35-4449-bfb6-99919f5eb328
 langcode: fr
-status: true
+status: false
 dependencies:
   config:
     - system.menu.menu-liens-utiles-haut
@@ -10,20 +10,20 @@ dependencies:
     - system
   theme:
     - p1ps2019
-id: p1ps2019_menuliensutileshaut
+id: menuliensutileshaut
 theme: p1ps2019
-region: header_left
-weight: -17
+region: navigation
+weight: -16
 provider: null
 plugin: 'system_menu_block:menu-liens-utiles-haut'
 settings:
   id: 'system_menu_block:menu-liens-utiles-haut'
-  label: 'Accès directs (refonte)'
-  label_display: '0'
+  label: 'Accès directs (ancienne version)'
+  label_display: visible
   provider: system
   level: 1
   depth: 0
-  expand_all_items: false
+  expand_all_items: true
 visibility:
   site_type:
     id: site_type
@@ -156,3 +156,10 @@ visibility:
       120: '120'
       121: '121'
     sites_front_page: 0
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    negate: true
+    context_mapping:
+      site: '@micro_site.current_site_context:site'
+    bundles:
+      mini_site: mini_site
