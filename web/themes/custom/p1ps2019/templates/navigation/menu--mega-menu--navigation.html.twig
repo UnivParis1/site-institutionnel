@@ -30,14 +30,17 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul class="menu vertical medium-horizontal large-horizontal" data-responsive-menu="small-accordion medium-dropdown large-dropdown" data-submenu-toggle="true">
+      <ul class="dropdown large-horizontal menu" data-responsive-menu="accordion large-dropdown" data-alignment="left"
+      {# Refonte 2616 main menu #}style="display: flex; justify-content: space-between;flex-direction: row;">
     {% else %}
-      <ul class="vertical submenu menu nested">
+        {# Refonte#2616 #}
+      <ul class="menu hidden">
     {% endif %}
     {% for item in items %}
-      <li>
-        {{ link(item.title, item.url) }}
+      <li{{ item.attributes }}>
+        <div class="acc-link">{{ link(item.title, item.url) }}</div>
         {% if item.below %}
+          <a class="hide-for-large" href="#"></a>
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
       </li>

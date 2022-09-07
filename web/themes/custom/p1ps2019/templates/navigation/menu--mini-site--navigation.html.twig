@@ -30,15 +30,14 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul class="dropdown large-vertical menu" data-responsive-menu="accordion large-dropdown" data-alignment="left">
+      <ul class="menu vertical medium-horizontal large-horizontal" data-responsive-menu="small-accordion medium-dropdown large-dropdown" data-submenu-toggle="true">
     {% else %}
-      <ul class="menu">
+      <ul class="hidden vertical submenu menu nested">
     {% endif %}
     {% for item in items %}
-      <li{{ item.attributes }}>
-        <div class="acc-link">{{ link(item.title, item.url) }}</div>
+      <li>
+        {{ link(item.title, item.url) }}
         {% if item.below %}
-          <a class="hide-for-large" href="#"></a>
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
       </li>

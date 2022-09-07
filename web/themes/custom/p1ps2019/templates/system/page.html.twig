@@ -60,7 +60,7 @@
  * - is_front_mini_site : A flag indicating if the current page is the front page of a mini-site.
  *
  */
- #}
+#}
 
 {# Setting global variables for this template #}
 {% if page.navigation and page.navigation_left %}
@@ -113,8 +113,8 @@
       {#endif print_hp_image and page.header #}
     {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
-      <div id="top-header" {% if not page_mini_site and not is_front_mini_site %} class="grid-x align-justify" {% endif %}>
-        {% if page_mini_site or is_front_mini_site %} <div class="grid-x align-justify top-header-infos"> {% endif %}
+      <div id="top-header">
+        <div class="grid-x align-justify top-header-infos">
           {# Refonte#2617 menu accès direct (site principal) #}
           <div class="cell shrink header-left">
             {% if not page_mini_site and not is_front_mini_site %}
@@ -137,7 +137,7 @@
           </div>
           {# End Refonte#2617 menu accès direct #}
           {% if page.header_center %}
-            <div class="cell shrink header-center">
+            <div class="cell shrink header-center" style="top: 20%;">
               {{ page.header_center }}
             </div>
           {% endif %}
@@ -146,51 +146,25 @@
               {{ page.header_right }}
             </div>
           {% endif %}
-          {# end grid-x if page-mini-site #}{% if page_mini_site or is_front_mini_site %} </div> {% endif %}
-        {% if page_mini_site or is_front_mini_site %}
-          <div class="grid-x bottom-header-infos">
-            <div class="cell small-12 header-micro" >
-              <div class="grid-x space-between display-flex valign-center">
-                <div class="micro-left">
-                  <button href="#" class="icon-menu reset-btn">
-                    <span class="visually-hidden">Navigation principale</span>
-                    <span class="toggle-container">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </span>
-                  </button>
-                  {{ page.header_micro_left }}
-                </div>
-                <div class="micro-right">
-                  {{ page.header_micro_right }}
-                </div>
-              </div>
-            </div>
+          {# end grid-x if page-mini-site #}
           </div>
-          {#endif header micro left or right #}
-        {% endif %}
+        {# Refonte#2616 same structure for master & mini-sites main menus #}
+          <div class="grid-x bottom-header-infos" style="margin-top: 1rem;">
+            {# Navbar #}
+            {% if page.navigation %}
+              <div id="navbar-header" class="navbar-header-region overlay-show" style="top: 0rem; position: relative; height: auto;">
+                {% if page.navigation %}
+                  <div class="navigation-region cell small-12" style="padding: .5rem 0;">{{ page.navigation }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
       </div>
       {# endif page headers left right center #}
     {% endif %}
   </header>
   {#if all regions of header #}
 {% endif %}
-
-{# Navbar #}
-  {% if page.navigation or page.navigation_left %}
-    <div id="navbar-header" class="navbar-header-region">
-      {% if page.navigation_left %}
-        <div class="navigation-left-region cell small-12 {{ colWidth }}">
-          {{ page.navigation_left }}
-        </div>
-      {% endif %}
-      {% if page.navigation %}
-        <div class="navigation-region cell small-12 {{ colWidth }}">{{ page.navigation }}</div>
-      {% endif %}
-    </div>
-  {% endif %}
 
   {% if page.breadcrumbs %}
     <div id="breadcrumbs" class="breadcrumbs-region">
