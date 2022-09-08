@@ -21,6 +21,7 @@ dependencies:
     - node.type.news
   module:
     - datetime
+    - text
     - user
 _core:
   default_config_hash: r97PnKUahJgt6BMMOEaJ5rextDS6R0MntalQvfCfikU
@@ -33,6 +34,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_lead:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
   field_media:
     type: entity_reference_entity_view
@@ -50,7 +58,7 @@ content:
       timezone_override: ''
       format_type: news_date
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_news_topic:
     type: entity_reference_label
@@ -58,18 +66,17 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
 hidden:
   comment: true
   field_categories: true
   field_disable_canonical_url: true
-  field_lead: true
   field_paragraphs: true
   field_publish_master: true
   field_related_news: true
