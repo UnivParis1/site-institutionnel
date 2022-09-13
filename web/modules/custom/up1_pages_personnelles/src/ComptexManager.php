@@ -248,10 +248,14 @@ class ComptexManager implements ComptexInterface {
 
     $information = json_decode(curl_exec($ch), TRUE);
     curl_close($ch);
-    $information = reset($information);
-    $this->formatEmails($information);
+    if ($information) {
+      $information = reset($information);
+      $this->formatEmails($information);
 
-    return $information['mail'];
+      return $information['mail'];
+    }
+
+    else return NULL;
   }
 
   private function formatEmails(&$information) {

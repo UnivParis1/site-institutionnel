@@ -20,7 +20,6 @@ class HalManager implements HalInterface {
    * @return array|mixed
    */
   public function getUserPublications($method, $firstname, $lastname, $id_hal = NULL) {
-    $publications = FALSE;
 
     switch ($method) {
       case 'idhal':
@@ -52,8 +51,13 @@ class HalManager implements HalInterface {
     ];
 
     $url = $searchUser . '&' . http_build_query($params) . "&noheader";
+    if (file_get_contents($url)) {
+      $publications = file_get_contents($url);
+    }
+    else
+      $publications = FALSE;
 
-    return file_get_contents($url);
+    return $publications;
   }
 
   /**
