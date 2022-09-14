@@ -1,10 +1,10 @@
-uuid: 2d6fce6a-58de-403a-b880-92caf7176ac0
+uuid: 2131d4dd-269e-4198-9c0d-ff5b64549632
 langcode: fr
 status: true
 dependencies:
   config:
-    - search_api.index.contenu
-    - views.view.recherche_db
+    - search_api.index.preprod_data
+    - views.view.resultats_de_recherche
   module:
     - search_api
 id: event_type
@@ -14,8 +14,8 @@ min_count: 1
 missing: false
 missing_label: others
 url_alias: event_type
-facet_source_id: 'search_api:views_page__recherche_db__page_1'
-field_identifier: name_field_event_type
+facet_source_id: 'search_api:views_page__resultats_de_recherche__page_1'
+field_identifier: event_type_name
 query_operator: or
 hard_limit: 0
 exclude: false
@@ -29,10 +29,10 @@ enable_parent_when_child_gets_disabled: true
 widget:
   type: checkbox
   config:
-    show_numbers: false
+    show_numbers: true
     soft_limit: 0
     show_reset_link: false
-    reset_text: 'Tout afficher'
+    reset_text: 'Show all'
     hide_reset_when_no_selection: false
     soft_limit_settings:
       show_less_label: 'Show less'
@@ -43,50 +43,29 @@ only_visible_when_facet_source_is_visible: true
 show_only_one_result: false
 show_title: false
 processor_configs:
-  count_limit:
-    processor_id: count_limit
+  active_widget_order:
+    processor_id: active_widget_order
     weights:
-      build: 50
+      sort: 20
     settings:
-      minimum_items: 1
-      maximum_items: null
+      sort: DESC
   count_widget_order:
     processor_id: count_widget_order
     weights:
       sort: 30
     settings:
       sort: DESC
-  dependent_processor:
-    processor_id: dependent_processor
-    weights:
-      build: 5
-    settings:
-      categorie:
-        enable: false
-        condition: null
-        values: ''
-        negate: false
-      news_topic:
-        enable: false
-        condition: null
-        values: ''
-        negate: false
-      publication_type:
-        enable: false
-        condition: null
-        values: ''
-        negate: false
-      type_de_contenu:
-        enable: true
-        condition: values
-        values: event
-        negate: false
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:
       sort: 40
     settings:
       sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

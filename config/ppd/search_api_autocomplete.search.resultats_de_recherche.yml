@@ -1,0 +1,87 @@
+uuid: 06d40991-5225-4c9e-8cc5-f6b4ab48bef3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - search_api.index.preprod_data
+    - views.view.resultats_de_recherche
+    - core.entity_view_mode.node.search_index
+  module:
+    - views
+    - search_api_autocomplete
+id: resultats_de_recherche
+label: 'Résultats de recherche'
+index_id: preprod_data
+suggester_settings:
+  live_results:
+    fields:
+      - eb_bp_text
+      - eb_field_title
+      - eb_header
+      - eb_link
+      - eb_simple_text
+      - eb_subtitle
+      - eb_text
+      - field_short_bio
+      - field_short_desc
+      - field_simple_text
+      - p_bp_text
+      - p_text
+      - sub_title
+      - subtitle
+      - title
+    highlight:
+      enabled: false
+      field: ''
+    view_modes:
+      'entity:node':
+        event: search_index
+        news: search_index
+        offer: search_index
+        page: search_index
+        page_personnelle: search_index
+        press: search_index
+        publication: search_index
+        second_level_pages: search_index
+        viva: search_index
+  server:
+    fields:
+      - eb_bp_text
+      - eb_field_title
+      - eb_header
+      - eb_simple_text
+      - eb_subtitle
+      - eb_tab_title
+      - eb_text
+      - field_lead
+      - field_short_bio
+      - field_short_desc
+      - field_simple_text
+      - p_bp_text
+      - p_field_title
+      - p_header
+      - p_subtitle
+      - p_tab_title
+      - p_text
+      - sub_title
+      - subtitle
+      - title
+suggester_weights:
+  live_results: 0
+  server: 0
+suggester_limits:
+  live_results: 15
+  server: 20
+search_settings:
+  'views:resultats_de_recherche':
+    displays:
+      default: true
+      selected:
+        - page_1
+options:
+  limit: 10
+  min_length: 4
+  show_count: true
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true
