@@ -1,0 +1,49 @@
+uuid: 008260b9-a73a-41c9-86a7-71662473ab9f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.bookmark.bp_link
+    - field.field.paragraph.bookmark.field_bg_color
+    - field.field.paragraph.bookmark.field_fa_icon
+    - field.field.paragraph.bookmark.field_title
+    - paragraphs.paragraphs_type.bookmark
+  module:
+    - fontawesome
+    - link
+id: paragraph.bookmark.default
+targetEntityType: paragraph
+bundle: bookmark
+mode: default
+content:
+  bp_link:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_bg_color:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_fa_icon:
+    type: fontawesome_icon_widget
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
