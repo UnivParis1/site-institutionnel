@@ -1,0 +1,72 @@
+uuid: 7a0d4e25-8ac9-4950-ae1e-4b0f6fa0adc3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_horizontal.bp_background
+    - field.field.paragraph.card_horizontal.bp_link
+    - field.field.paragraph.card_horizontal.field_card_desc
+    - field.field.paragraph.card_horizontal.field_card_width
+    - field.field.paragraph.card_horizontal.field_media
+    - field.field.paragraph.card_horizontal.field_title
+    - paragraphs.paragraphs_type.card_horizontal
+  module:
+    - link
+    - options
+id: paragraph.card_horizontal.default
+targetEntityType: paragraph
+bundle: card_horizontal
+mode: default
+content:
+  bp_background:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  bp_link:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_card_desc:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_card_width:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: horizontal_card
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true
