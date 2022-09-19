@@ -5,7 +5,6 @@ dependencies:
   config:
     - search_api.index.preprod_data
   module:
-    - better_exposed_filters
     - search_api
     - views_infinite_scroll
 id: resultats_de_recherche
@@ -162,37 +161,15 @@ display:
             automatically_load_content: false
             initially_load_all_pages: false
       exposed_form:
-        type: bef
+        type: basic
         options:
-          submit_button: Appliquer
+          submit_button: OK
           reset_button: false
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Sélectionnez n''importe quel filtre et cliquez sur Appliquer pour voir les résultats'
-          text_input_required_format: full_html
-          bef:
-            general:
-              autosubmit: false
-              autosubmit_exclude_textfield: false
-              autosubmit_textfield_delay: 500
-              autosubmit_hide: false
-              input_required: false
-              allow_secondary: false
-              secondary_label: 'Options avancées'
-              secondary_open: false
-              reset_button_always_show: false
-            filter:
-              search_api_fulltext:
-                plugin_id: default
-                advanced:
-                  placeholder_text: Recherche
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
       access:
         type: none
         options: {  }
@@ -343,7 +320,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      exposed_block: false
+      exposed_block: true
       display_extenders: {  }
       path: resultats-de-recherche
     cache_metadata:
