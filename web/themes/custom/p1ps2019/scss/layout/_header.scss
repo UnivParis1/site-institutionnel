@@ -15,11 +15,52 @@
 		#{$left}: 0;
 		z-index: 403;
 		width: 100%;
-		padding: rem-calc(10px 40px);
+		padding: rem-calc(10px 40px 0 40px);
 		min-height: rem-calc(82px);
 		@include transitionEffect(300ms, ease-in-out);
 		align-items: center;
-		.site--type--mini-site &{
+		.top-header-infos {
+			.header-left {
+				position: relative;
+				.direct-access-btn {
+					display: flex;
+					align-items: center;
+					margin-top: 0;
+					&:before {
+						content: "";
+						margin-right: 0.5rem;
+						width: 17px;
+						height: 17px;
+						display: block;
+						background: url("../images/p1ps2022/arrow-external-link.svg") no-repeat;
+					}
+					&:hover,
+					&:focus {
+						background-color: $gold-p1ps;
+						border-color: $gold-p1ps;
+						color: $text-white;
+					}
+				}
+				.direct-access-wrapper {
+					background-color: $white;
+					border-radius: rem-calc(10px);
+					@include box-shadow(0.25, 5px, 0, $background-black);
+					position: absolute;
+					top: calc(100% + 5px);
+					text-align: center;
+					padding: rem-calc(0 10px);
+					ul li {
+						padding: rem-calc(10px 0);
+						a {
+							display: block;
+							font-size: rem-calc(16px);
+							line-height: rem-calc(18px);
+						}
+					}
+				}
+			}
+		}
+		.site--type--mini-site & {
 			padding: 0;
 			.top-header-infos{
 				padding: 36px 120px; position: relative;

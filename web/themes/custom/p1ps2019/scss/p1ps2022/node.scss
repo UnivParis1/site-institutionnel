@@ -1,3 +1,44 @@
+// NEWS AND EVENTS FILTERS
+.news-filters-form-container,
+.event-filters-form-container {
+  width: 100%;
+  .bef-links {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        margin-right: 0.5rem;
+        a {
+          font-family: $font-main;
+          text-align: center;
+          font-size: rem-calc(13px);
+          line-height: 1.2;
+          @include setFont($fontType-medium);
+          padding: rem-calc(4px 12px);
+          display: inline-block;
+          border-radius: 50rem;
+          border: 1px solid $gray2;
+          &:hover,
+          &:focus {
+            text-decoration: none;
+            color: $gold-p1ps;
+            border-color: $gold-p1ps;
+          }
+          &.bef-link--selected {
+            text-decoration: none;
+            color: $white;
+            background-color: $gold-p1ps;
+            border-color: $gold-p1ps;
+          }
+        }
+      }
+    }
+  }
+  .form-actions {
+    display: none;
+  }
+}
+
 // EVENTS
 .bootstrap-cards {
   &.event {

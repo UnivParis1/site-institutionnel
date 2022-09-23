@@ -119,10 +119,10 @@
           <div class="cell shrink header-left">
             {% if not page_mini_site and not is_front_mini_site %}
               {% if page.header_left %}
-                <button href="#" class="button reset-btn">
+                <button href="#" class="button direct-access-btn">
                   <span class="mini-site-back-wrapper">{{ "Accès directs"|t }}</span>
                 </button>
-                <div class="hidden">
+                <div class="direct-access-wrapper">
                   {{ page.header_left }}
                 </div>
               {% endif %}
@@ -152,9 +152,9 @@
           <div class="grid-x bottom-header-infos" style="margin-top: 1rem;">
             {# Navbar #}
             {% if page.navigation %}
-              <div id="navbar-header" class="navbar-header-region overlay-show" style="top: 0rem; position: relative; height: auto;">
+              <div id="navbar-header" class="navbar-header-region overlay-show">
                 {% if page.navigation %}
-                  <div class="navigation-region cell small-12" style="padding: .5rem 0;">{{ page.navigation }}</div>
+                  <div class="navigation-region cell small-12">{{ page.navigation }}</div>
                 {% endif %}
               </div>
             {% endif %}
