@@ -1,0 +1,41 @@
+uuid: e51a803f-6b7f-476b-955c-2806b4c297db
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.badge.field_card_desc
+    - field.field.paragraph.badge.field_fa_icon
+    - field.field.paragraph.badge.field_title
+    - paragraphs.paragraphs_type.badge
+  module:
+    - fontawesome
+id: paragraph.badge.default
+targetEntityType: paragraph
+bundle: badge
+mode: default
+content:
+  field_card_desc:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_fa_icon:
+    type: fontawesome_icon_widget
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
