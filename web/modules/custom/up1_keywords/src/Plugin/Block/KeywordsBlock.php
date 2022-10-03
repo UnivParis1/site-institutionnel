@@ -30,6 +30,12 @@ class KeywordsBlock extends BlockBase {
   public function build() {
     $build = [];
     $config = \Drupal::config('up1_keywords.settings');
+    $keywords = $config->get('keywords_links');
+    foreach ($keywords as $key => $keyword) {
+      if (empty($keyword['title']) || empty($keyword['uri'])) {
+        unset($keywords[$key]);
+      }
+    }
 
     $current_path = \Drupal::service('path.current')->getPath();
     $search_form = [];
@@ -39,7 +45,7 @@ class KeywordsBlock extends BlockBase {
 
     $build['up1_keywords'] = [
       '#theme' => 'up1_keywords',
-      '#keywords' =>  $config->get('keywords_links'),
+      '#keywords' =>  $keywords,
       '#search' => $search_form,
     ];
 
