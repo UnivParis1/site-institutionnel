@@ -65,9 +65,58 @@ body.path-frontpage {
   }
 }
 
-
-
-
+// SLICK HOME PAGE
+.paragraph-wrapper-full {
+  overflow: hidden;
+  .slick--optionset--homepage-carousel {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: calc(100% - 1rem);
+      width : 50vw;
+      background-color: $white;
+      z-index: 1;
+    }
+    .slick-list {
+      overflow: visible;
+      .slide {
+        @extend .grid-container;
+      }
+    }
+    .slick__arrow {
+      //bottom: auto;
+      height: 62px;
+      left: auto;
+      right: 1rem;
+      margin-top: 0;
+      //pointer-events: none;
+      //position: absolute;
+      top: -102px;
+      transform: translateY(0);
+      width: 140px;
+      //z-index: 2;
+      button {
+        &.slick-arrow {
+          margin: 0 !important;
+          padding: 0 !important;
+          border: 1px solid $gray2;
+          height: 62px;
+          width: 62px;
+          background-color: transparent !important;
+      }
+      }
+    }
+  }
+  &.paris1-bg-soft-grey {
+    .slick--optionset--homepage-carousel {
+      &:before {
+        background-color: $background-light-gray;
+      }
+    }
+  }
+}
 
 .paragraph--type--hit-list{
   .paragraph__column{
