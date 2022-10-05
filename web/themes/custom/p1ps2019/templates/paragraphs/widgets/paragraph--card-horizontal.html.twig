@@ -57,6 +57,7 @@
   {% set layout_background_classes = [
     'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
     'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
+    'bg-white' == layout_background ? 'paragraph--color bg-white',
   ]
   %}
 {% endif %}
@@ -64,11 +65,11 @@
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
     <div class="grid-container">
-      <div class="grid-x grid-margin-x">
+      <div class="grid-x grid-margin-x {{ layout_background_classes|join('') }}">
         <div class="cell medium-4 small-12 col-media">
           {{ content.field_media }}
         </div>
-        <div class="cell medium-8 small-12 col-content {{ layout_background_classes|join('') }}">
+        <div class="cell medium-8 small-12 col-content">
           <h2 class="title h4-style">
             <a href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}">{{ content.field_title.0 }}</a>
           </h2>
