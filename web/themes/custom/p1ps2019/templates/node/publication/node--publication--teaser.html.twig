@@ -67,7 +67,8 @@
 #}
 {%
   set classes = [
-  'sm-teaser'
+  'sm-teaser',
+  'bg-white'
 ]
 %}
 {% set subtitle %}
@@ -76,6 +77,7 @@
 {% set author %}
   {{ content.field_author_name.0 }}
 {% endset %}
+
 <article{{ attributes.addClass(classes) }}>
   <a class="sm-teaser__img-link" href="{{ url }}" title="{{ label.0 }}">
     {{ content.field_media }}
