@@ -150,7 +150,7 @@ tbody{
     &:before{color: $text-main-color;}
   }
 }
-.categ-style{color: $text-white; background-color: $background-main-color;}
+.categ-style{color: $text-white; background-color: $gold-p1ps;}
 .more-link, .load-more{color: $text-main-color;}
 .date-style{color: $text-black;}
 .author{
@@ -186,10 +186,10 @@ tbody{
 }
 .key-figures-section {
   .chiffre{
-    color: $text-main-color;
+    color: $gold-p1ps;
   }
   .legende{
-    color: $dark-gray2;
+    color: $text-main-color;
   }
 }
 
@@ -520,24 +520,17 @@ fieldset {
 //================ FOOTER =================== //
 .footer{
   .footer-wrapper{
-    background-color: $background-white;
     .cell{
       &:not(:last-child){
         &:after{
-          background-color: $gold;
+          background-color: $default-border-color;
         }
       }
     }
     .two-columns{
       a{color: $text-main-color;}
       &:after{
-        background-color: $gold;
-      }
-    }
-    .logo-footer{
-      svg{
-        fill: $gold;
-        *{fill: inherit;}
+        background-color: $default-border-color;
       }
     }
     .block-title{
@@ -574,18 +567,9 @@ fieldset {
 
 //================ HEADER =================== //
 #navbar{
-  .anchor-header{
-    a{
-      &:focus{color: $text-white;}
-    }
-  }
   #top-header {
     background-color: $background-white;
     @include box-shadow(0.25, 3px, 0, $background-black);
-    svg{
-      fill: $gold;
-      *{fill: $gold;}
-    }
     .site--type--mini-site.page-mini-site &, .site--type--mini-site.path-user &, .site--type--mini-site.transparent.scroll &{
       .top-header-infos{
         @include box-shadow(0.25, 3px, 0, $background-black);
@@ -636,13 +620,14 @@ fieldset {
         ul {
           #ent{
             a{
-              @include box-border(1px, $text-main-color);
-              color: $text-main-color;
-              .fa{color: $text-main-color;}
+              background-color: $background-main-color;
+              color: $text-white;
+              .fa{color: $text-white;}
               &:hover{
-                background-color: $background-main-color;
-                color: $text-white;
-                .fa{color: $text-white;}
+                @include box-border(1px, $default-border-color);
+                background-color: $default-border-color;
+                color: $text-main-color;
+                .fa{color: $text-main-color;}
               }
             }
           }
@@ -668,9 +653,17 @@ fieldset {
       &:before{
         background-color: $text-main-color;
       }
+      &:after{
+        background-color: $text-white;
+      }
     }
     &:hover, &.overlay-show{
-      #accessibility-toggle{border: 1px solid $text-main-color; }
+      #accessibility-toggle{
+        border: 1px solid $default-border-color;
+        &:after{
+          transform: translateX(1px) translateY(-5px) rotate(135deg) !important;
+        }
+      }
     }
     .accessibility-mode &{
       &:hover, &.overlay-show{
@@ -687,8 +680,8 @@ fieldset {
     }
     &.overlay-show, &:hover{
       #accessibility-toggle{
-        background-color: $background-main-color;
-        &:before{background-color: $text-white;}
+        background-color: $default-border-color;
+        //&:before{background-color: $text-white;}
       }
     }
   }
@@ -833,7 +826,7 @@ fieldset {
   border-bottom:2px solid $medium-gray;
 }//close region header
 #navbar-header{
-  background-color: $background-main-color;
+  //background-color: $background-main-color;
   .navigation-left-region{
     background-color: $background-white;
     ul{
@@ -848,7 +841,7 @@ fieldset {
     ul {
       li {
         a,span{
-          color: $text-white;
+          color: $text-main-color;
         }
       }
     }
@@ -970,8 +963,8 @@ fieldset {
 
 //_box-style.scss ====================
 .box-style{
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-  &.no-shadow{box-shadow: none;}
+  //box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+  //&.no-shadow{box-shadow: none;}
   .box-content{
     &:not(.no-bg):not(.blue-box) {
       background-color: $background-light-gray;
@@ -1071,23 +1064,33 @@ fieldset {
 }
 .field--type-text-long {
   a{
-    color: $background-main-color;
+    color: $background-light-gray;
     .paris1-bg-blue &{
       color: $text-white;
     }
   }
 }
 #tabs-style, .tabs, .accordion-tabs {
+  border-bottom: 1px solid $gray;
+  background-color: transparent;
   > li{
     > a{
-      color: $text-main-color; background-color: $background-light-gray;
+      color: $text-main-color;
+      //background-color: $background-light-gray;
       &:hover{
-        background-color: $background-main-color; color: $text-light-gray;
+        background-color: transparent;
+        color: $text-main-color;
+      }
+      &:after {
+        background-color: $text-main-color;
       }
     }//close a
     &.is-active > a{
-      background-color: $background-main-color;
-      color: $text-light-gray;
+      background-color: transparent;
+      color: $text-main-color;
+    }
+    .accordion-content {
+      background-color: transparent;
     }
   }
 }//close nav-tabs
@@ -1157,12 +1160,6 @@ fieldset {
         color: $text-main-color; border-color: $text-main-color;
         &:before{color: $text-main-color;}
       }
-    }
-  }
-
-  .key-figures-section {
-    .chiffre, .legende{
-      color: $text-white;
     }
   }
 

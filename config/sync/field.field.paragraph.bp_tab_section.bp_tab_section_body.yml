@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.bp_tab_section_body
+    - paragraphs.paragraphs_type.badges
+    - paragraphs.paragraphs_type.bookmarks
     - paragraphs.paragraphs_type.bp_accordion
     - paragraphs.paragraphs_type.bp_carousel
     - paragraphs.paragraphs_type.bp_image
@@ -13,6 +15,7 @@ dependencies:
     - paragraphs.paragraphs_type.bp_view
     - paragraphs.paragraphs_type.bp_webform
     - paragraphs.paragraphs_type.button_grid
+    - paragraphs.paragraphs_type.card_horizontal
     - paragraphs.paragraphs_type.hit_list
     - paragraphs.paragraphs_type.icon_grid
     - paragraphs.paragraphs_type.key_figures_section
@@ -20,6 +23,7 @@ dependencies:
     - paragraphs.paragraphs_type.partenaire_section
     - paragraphs.paragraphs_type.section_presentation
     - paragraphs.paragraphs_type.tiles
+    - paragraphs.paragraphs_type.trait
   module:
     - entity_reference_revisions
 _core:
@@ -50,14 +54,30 @@ settings:
       medias: medias
       tiles: tiles
       section_presentation: section_presentation
+      badges: badges
+      bookmarks: bookmarks
       button_grid: button_grid
       icon_grid: icon_grid
       partenaire_section: partenaire_section
+      card_horizontal: card_horizontal
+      trait: trait
     negate: 0
     target_bundles_drag_drop:
       audio_media:
         weight: 24
         enabled: false
+      badge:
+        weight: 56
+        enabled: false
+      badges:
+        weight: 57
+        enabled: true
+      bookmark:
+        weight: 58
+        enabled: false
+      bookmarks:
+        weight: 59
+        enabled: true
       bp_accordion:
         weight: -28
         enabled: true
@@ -112,8 +132,14 @@ settings:
       button_grid_item:
         weight: 62
         enabled: false
+      card_horizontal:
+        weight: 78
+        enabled: true
       contact:
         weight: 57
+        enabled: false
+      contact_free:
+        weight: 80
         enabled: false
       content_block:
         weight: 58
@@ -148,12 +174,21 @@ settings:
       news_events:
         weight: 66
         enabled: false
+      panel:
+        weight: 92
+        enabled: false
       partenaire:
         weight: 67
         enabled: false
       partenaire_section:
         weight: 68
         enabled: true
+      patrimoine_immobilier:
+        weight: 95
+        enabled: false
+      patrimoine_immobilier_list:
+        weight: 96
+        enabled: false
       presentation:
         weight: 31
         enabled: false
@@ -177,6 +212,12 @@ settings:
         enabled: true
       title_and_subtitle:
         weight: 26
+        enabled: false
+      trait:
+        weight: 105
+        enabled: true
+      triptych:
+        weight: 106
         enabled: false
       tuile_text_wo_image:
         weight: 77

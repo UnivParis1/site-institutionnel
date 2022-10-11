@@ -44,18 +44,21 @@ class ComptexManager implements ComptexInterface {
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
     $userInformation = json_decode(curl_exec($ch), TRUE);
-    $userInformation = reset($userInformation);
+    if (!empty($userInformation)) {
+      $userInformation = reset($userInformation);
 
-    curl_close($ch);
+      curl_close($ch);
 
-    $information = $this->formatComptexData($userInformation);
+      $information = $this->formatComptexData($userInformation);
 
-    if ($information && !empty($information)) {
-      if (isset($information['uid'])) {
-        $information['userPhoto'] = $config->get('url_userphoto') . $information['uid'];
+      if ($information && !empty($information)) {
+        if (isset($information['uid'])) {
+          $information['userPhoto'] = $config->get('url_userphoto') . $information['uid'];
+        }
       }
+      return $information;
     }
-    return $information;
+    else return FALSE;
   }
 
   public function userHasPagePerso($username) {
@@ -246,10 +249,14 @@ class ComptexManager implements ComptexInterface {
 
     $information = json_decode(curl_exec($ch), TRUE);
     curl_close($ch);
-    $information = reset($information);
-    $this->formatEmails($information);
+    if ($information) {
+      $information = reset($information);
+      $this->formatEmails($information);
 
-    return $information['mail'];
+      return $information['mail'];
+    }
+
+    else return NULL;
   }
 
   private function formatEmails(&$information) {

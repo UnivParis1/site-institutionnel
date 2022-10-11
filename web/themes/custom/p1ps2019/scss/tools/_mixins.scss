@@ -22,7 +22,8 @@ $colors-list: (
   $yellow yellow $text-white,
   $background-main-color turquoise $text-white,
   $red red $text-white,
-  $gold gold $text-black,
+  $gold-p1ps gold $text-white,
+  $orange orange $text-white,
 );
 
 
@@ -714,7 +715,7 @@ $colors-list: (
    font-family: $font-main; color: $text-main-color;
   //@extend .hand-cursor;
   font-size: rem-calc(20px);
-  border-radius: 0; background-image: none; position: relative;
+  border-radius: 50rem; background-image: none; position: relative;
   //min-height: rem-calc(71px); max-height: rem-calc(71px);
     @include flex(); @include flex-align(null, middle);
   padding: rem-calc(0 24px 0 72px); margin: 0;
@@ -746,12 +747,12 @@ $colors-list: (
   width: rem-calc(40px); height: rem-calc(40px);
   overflow: hidden;
   @include flexDisplay(); @include flexDisplayAlign('center-middle');
-  @include box-border(1px, $text-main-color);
+  @include box-border(1px, $default-border-color);
   color: $text-main-color;
   *{color: $text-main-color;}
   &.overlay-show, &:hover{
-    background-color: $background-main-color;
-    *{color: $text-white;} color: $text-white;
+    background-color: $default-border-color;
+    *{color: $background-main-color;} color: $background-main-color;
   }
   &.big{
     width: rem-calc(48px); height: rem-calc(48px);

@@ -6,27 +6,36 @@
 /* Ebizproduction : Navigation */
 
 #navbar-header{
-  width: 100%; @include transitionEffect(350ms);
-  transform: translateX(-150%); z-index: 402;
-  position: fixed; @include flexDisplay();
-  top: rem-calc(112px); #{$left}: rem-calc(-24px);
-  opacity: 0; height: calc(100vh - 112px);
-  overflow: auto;
+  width: 100%;
+  max-width: 75rem;
+  margin: auto;
+  @include transitionEffect(350ms);
+  transform: translateX(-150%);
+  z-index: 402;
+  position: relative;
+  top: 0;
+  height: auto;
+  @include flexDisplay();
+  opacity: 0;
+  //overflow: auto;
   .navigation-left-region, .navigation-region{
-    padding: rem-calc(72px 116px);
+    //padding: rem-calc(72px 116px);
     nav > ul{display: block;}
   }
   .navigation-region{
     ul{
       li{
         a{
-          text-transform: uppercase; font-family: $font-main;
-          font-size: rem-calc(18px); line-height: 1.2;
-          @include setFont($fontType-bold);
+          font-family: $font-main;
+          font-size: rem-calc(18px);
+          line-height: 1.2;
+          @include setFont($fontType-medium);
         }
+        /*
         &:not(:last-of-type){
           margin-bottom: rem-calc(8px);
         }
+        */
       }
     }
   }

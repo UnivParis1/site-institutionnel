@@ -76,17 +76,17 @@
   {% endif %}
 
   {% if pager or archives %}
-  <div>&nbsp;</div>
-  {% if pager %}
-    {{ pager }}
-   {% elseif archives %}
-    <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
-       class="bold-link">{{ "Archives"|t }}</a>
-  {% else %}
-    <div>&nbsp;</div>
+    <div>
+      {% if pager %}
+        {{ pager }}
+      {% elseif archives %}
+        <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
+           class="bold-link">{{ "Archives"|t }}</a>
+      {% else %}
+        &nbsp;
+      {% endif %}
+    </div>
   {% endif %}
-</div>
-{% endif %}
 
   {{ attachment_after }}
 
