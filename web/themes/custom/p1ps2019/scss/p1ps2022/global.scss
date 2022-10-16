@@ -67,7 +67,12 @@ body.path-frontpage {
 
 // SLICK HOME PAGE
 .paragraph-wrapper-full {
+  padding: 3rem 0;
+  margin: 3rem 0;
   overflow: hidden;
+  h2 {
+    margin-bottom: 2rem;
+  }
   .slick--optionset--homepage-carousel {
     &:before {
       content: "";
@@ -81,8 +86,12 @@ body.path-frontpage {
     }
     .slick-list {
       overflow: visible;
-      .slide {
-        @extend .grid-container;
+      .slick-track {
+        display: flex !important;
+        .slide {
+          height: inherit !important;
+          @extend .grid-container;
+        }
       }
     }
     .slick__arrow {
@@ -101,12 +110,38 @@ body.path-frontpage {
         &.slick-arrow {
           margin: 0 !important;
           padding: 0 !important;
-          border: 1px solid $gray2;
+          border: 1px solid $gray2 !important;
           height: 62px;
           width: 62px;
           background-color: transparent !important;
+        }
+        &:before {
+          content: "";
+          width: 24px;
+          height: 15px;
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+        &.slick-prev {
+          &:before {
+            background: url("../images/p1ps2022/slick-arrow-prev.svg") no-repeat center center / 100% auto;
+          }
+        }
+        &.slick-next {
+          &:before {
+            background: url("../images/p1ps2022/slick-arrow-next.svg") no-repeat center center / 100% auto;
+          }
+        }
       }
-      }
+    }
+  }
+  footer {
+    text-align: center;
+    .btn {
+      display: inline-block;
     }
   }
   &.paris1-bg-soft-grey {
@@ -142,30 +177,6 @@ body.path-frontpage {
   .legende{
     p {
       line-height: 1.4;
-    }
-  }
-}
-.site-content-wrapper {
-  .btn,
-  .button--primary,
-  button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
-  input[type="submit"].button {
-    color: $text-white;
-    background-color: $background-main-color;
-    border-color: $text-main-color;
-    &:hover{
-      color: $text-main-color;
-      background-color: transparent;
-    }
-    &.outline{
-      border-color: $text-main-color;
-      color: $text-main-color;
-      background-color: transparent;
-      &:hover{
-        background-color: $background-main-color;
-        color: $text-white;
-        *{color: $text-white;}
-      }
     }
   }
 }

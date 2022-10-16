@@ -38,19 +38,21 @@
 #}
 
 {% set classes = [
+  'parag-sep',
+  'parag-sep-top',
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
 ]
 %}
 <div{{ attributes.addClass(classes) }}>
   <div class="grid-container">
-    <div class="paragraph__column grid-x grid-margin-x align-center">
+    <div class="paragraph__column grid-x grid-margin-x align-center wrapper-title">
       {% if content.field_title|render %}
         <h2 class="title">{{ content.field_title.0 }}</h2>
       {% endif %}
     </div>
   </div>
-  <div class="" style="display: flex; flex-direction: row; justify-content: flex-start;">
+  <div class="wrapper-tiles">
     {{ content.field_panel_triptych }}
   </div>
 

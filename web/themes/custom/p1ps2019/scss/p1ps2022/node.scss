@@ -9,6 +9,7 @@
       flex-wrap: wrap;
       li {
         margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
         a {
           font-family: $font-main;
           text-align: center;
@@ -46,6 +47,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    text-align: left;
     .img-container {
       flex-grow: 0;
       margin-bottom: rem-calc(24px);
@@ -96,6 +98,9 @@
 // NEWS
 .news {
   &.news-teaser {
+    height: 100%;
+    position: relative;
+    padding-bottom: 2.5rem;
     .img-container {
       margin-bottom: rem-calc(24px);
       .categ-wrapper {
@@ -104,8 +109,26 @@
         right: 1rem;
       }
     }
+    .text-wrapper {
+      p {
+        margin-bottom: 1rem;
+        width:100%;
+        /**Major Properties**/
+        line-height: 1.6;
+        max-height: 4.8rem;
+        -webkit-box-orient: vertical;
+        display: block;
+        display: -webkit-box;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        word-break: break-word;
+      }
+    }
     .date-wrapper {
       display: flex;
+      position: absolute;
+      bottom: 0;
       &:before {
         content: "";
         width: 22px;
