@@ -47,6 +47,7 @@
 {%
   set classes = [
   'paragraph',
+  'parag-sep',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   'paragraph__column',
   'padding-mobile',
@@ -61,8 +62,8 @@
     {% if content.field_title|render %}
       <div class="grid-container">
         <div class="grid-x grid-margin-x">
-          <div class="cell small-12">
-            <h2 class="titre">{{ content.field_title.0 }}</h2>
+          <div class="cell small-12 parag-sep parag-sep-top">
+            <h2 class="titre txt-center">{{ content.field_title.0 }}</h2>
           </div>
         </div>
       </div>
@@ -72,10 +73,10 @@
         {% for key, badge in  content.field_badge if key|first != '#' %}
           <div class="cell small-12 large-3 bg-white box-style">{{ badge }}</div>
         {% endfor %}
-        <div class="cell small-12 large-3 box-style {{ content.field_bg_color['#items'].getString() }}">
+        <div class="cell small-12 large-3 box-style cta-wrapper {{ content.field_bg_color['#items'].getString() }}">
           <div class="box-style txt-center">
-            <span class="h5-style">{{ content.field_catchphrase.0 }}</span>
-            <a class="btn btn-primary" href="{{ content.bp_link.0['#url'] }} bg-white" title="{{ content.field_catchphrase.0 }}" >>
+            <span class="h5-style text-white">{{ content.field_catchphrase.0 }}</span>
+            <a class="btn btn-primary" href="{{ content.bp_link.0['#url'] }}" title="{{ content.field_catchphrase.0 }}" >>
               {{ content.bp_link.0['#title'] }}
             </a>
           </div>
