@@ -92,6 +92,15 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 .webform-submission-form .bordureorange { border: 1px solid #d67d24;padding: 0.5rem 1rem; }
 .accessibility-mode .webform-submission-form .bordureorange { border: 1px solid #BD5B0E;padding: 0.5rem 1rem; }
 .webform-submission-form .bordurebleumarine { border: 1px solid #0e326d;padding: 0.5rem 1rem; }
+/** ajout personnalisation fond couleur **/
+.webform-submission-form .fondvertclair { background-color: #c0d671; }
+.accessibility-mode .webform-submission-form .fondvertclair { background-color: #F1F1F1; }
+.webform-submission-form .fondrougeclair { background-color: #e59d80; }
+.webform-submission-form .fondorclair { background-color: #ffda7e; }
+.accessibility-mode .webform-submission-form .fondorclair { background-color: #F1F1F1; }
+.webform-submission-form .fondorangeclair { background-color: #ffbd7c; }
+.accessibility-mode .webform-submission-form .fondorangeclair { background-color: #F1F1F1; }
+.webform-submission-form .fondbleumarineclair { background-color: #75a9ff; }
 
 .webform-submission-form .fieldset-legend {
     color: #333;
@@ -965,57 +974,12 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
   font-size: 1rem;
 }
 
-/** Changement logo pour les 50 ans **/
-.footer .footer-wrapper .logo-wrapper .logo-footer svg {
-	display: none;
-}
-.footer .footer-wrapper .logo-wrapper {
-	background-image: url('https://com-web.univ-paris1.fr/logos/logo-univ-paris1.fr.svg');
-    display: block;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
 
-.transparent:not(.scroll) #navbar #top-header svg {
-    fill: transparent !important;
-    background-image: url('https://com-web.univ-paris1.fr/logos/21-153-50ans-BlocP1PS-bouton_site_V2-blanc.svg');
-    display: block;
-    width: 300px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-position: center;
+/** Restreindre image de la page de base pour module heatmap de matomo **/
+.full-height {
+  max-height: 1000px;
 }
-.scroll #navbar #top-header svg {
-    fill: transparent !important;
-    background-image: url('https://com-web.univ-paris1.fr/logos/21-153-50ans-BlocP1PS-bouton_site_V2_bleu_or.svg');
-    display: block;
-    width: 300px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.path-node #navbar #top-header svg, .path-resultats-recherche #navbar #top-header svg, .path-publications #navbar #top-header svg, .path-actualites #navbar #top-header svg, .path-evenements #navbar #top-header svg, .path-soutenances #navbar #top-header svg, .path-recrutement #navbar #top-header svg  {
-    fill: transparent !important;
-    background-image: url('https://com-web.univ-paris1.fr/logos/21-153-50ans-BlocP1PS-bouton_site_V2_bleu_or.svg');
-    display: block;
-    width: 300px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.scroll #navbar #top-header svg *, .path-node #navbar #top-header svg *, .path-resultats-recherche #navbar #top-header svg *, .path-publications #navbar #top-header svg *, .path-actualites #navbar #top-header svg *,  .path-evenements #navbar #top-header svg *, .path-soutenances #navbar #top-header svg *, .path-recrutement #navbar #top-header svg * {
-    fill: transparent !important;
-}
-@media screen and (max-width: 63.9375em) {
-  #navbar .header-center #block-p1ps2019-branding svg {
-    max-width: none;
-    max-height: 50px;
-  }
-  .site--entity #navbar .header-center {
-  top: 50%;
-  }
-}
-.paragraph.bp-columns-two-uneven .column-uneven-wrapper .paragraph--type--bp-image {
-    padding-top: 2rem!important;
+#navbar .screen-height .header-img * {
+  max-height: 1000px;
+  vertical-align: top;
 }
