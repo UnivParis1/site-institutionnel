@@ -1,3 +1,49 @@
+// BLOCK BOOKMARK
+.paragraph--type--bookmarks {
+  position: relative;
+  z-index: 1;
+  .cell {
+    transform: translateY(-50%);
+    &.large-2 {
+      @include breakpoint($large up) {
+        width: calc(20% - 2rem);
+        flex: 0 0 calc(20% - 2rem);
+        max-width: calc(20% - 2rem);
+      }
+    }
+    .box-style {
+      text-decoration: none;
+      font-family: $font-headings;
+      .box-content {
+        justify-content: center;
+        padding: rem-calc(100px 16px 48px 16px);
+        font-size: rem-calc(24px);
+        > div {
+          position: absolute;
+          width: 66px;
+          height: 68px;
+          border-radius: 0 0 5rem 5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: $white;
+          color: $text-main-color;
+        }
+      }
+    }
+    body.path-frontpage {
+      transform: translateY(-50%);
+    }
+    body.path-frontpage .paragraph & {
+      transform: translateY(0);
+    }
+  }
+}
+
+
 .paragraph--type--card-horizontal {
   > div {
     > div {
@@ -118,3 +164,82 @@
     }
   }
 }
+
+.paragraph--type--bp-tabs {
+  .grid-container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.paragraph--type--key-figures-section {
+  h2 {
+    margin-bottom: 2rem;
+  }
+  .legende {
+    p {
+      line-height: 1.4;
+    }
+  }
+}
+
+.paragraph--type--badge {
+  background-color: transparent !important;
+  text-align: center;
+  position: relative;
+  padding-top: 6.25rem !important;
+  justify-content: flex-start !important;
+  .field--name-field-fa-icon {
+    position: absolute;
+    width: 66px;
+    height: 68px;
+    border-radius: 0 0 5rem 5rem;
+    top: 0;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background-color: $background-main-color;
+    color: $text-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .field--label {
+      position: absolute !important;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      width: 1px;
+      height: 1px;
+      word-wrap: normal;
+    }
+  }
+  .h5-style {
+    font-family: $font-headings;
+    margin-bottom: 1rem;
+  }
+}
+
+.paragraph--type--badges {
+  .cta-wrapper {
+    padding: 2rem 1rem;
+    > div {
+      justify-content: center;
+      align-items: center;
+      .h5-style {
+        font-size: rem-calc(36px);
+        line-height: rem-calc(50px);
+        color: $text-white;
+        font-family: $font-headings;
+        word-break: normal;
+      }
+    }
+  }
+}
+
+.tuile-avec-texte {
+  padding: 5rem 3.5rem;
+}
+
+
+
+
+
