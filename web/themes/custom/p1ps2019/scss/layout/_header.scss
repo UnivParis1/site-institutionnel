@@ -1,12 +1,30 @@
 #navbar{
-	.header-full {
-    height: 100vh;
-  }
+	&.header-full {
+    	height: 100vh;
+  	}
+  	&.header-medium {
+    	height: 75vh;
+  	}
 	.screen-height{
 		.header-img *{
 			height: 100vh;
-      iframe{width: 100%;}
-			.field--name-field-credits{height: auto !important;}
+      		iframe{
+      			width: 100%;
+      		}
+			.field--name-field-credits{
+				height: auto !important;
+			}
+		}
+	}
+	.screen-medium-height{
+		.header-img *{
+			height: 75vh;
+      		iframe{
+      			width: 100%;
+      		}
+			.field--name-field-credits{
+				height: auto !important;
+			}
 		}
 	}
 	#top-header {
@@ -49,6 +67,16 @@
 					top: calc(100% + 5px);
 					text-align: center;
 					padding: rem-calc(0 10px);
+
+					opacity: 0;
+		    		visibility: hidden;
+		    		@include transitionEffect();
+
+					&.overlay-show{
+						opacity: 1;
+						visibility: visible;
+					}
+
 					ul li {
 						padding: rem-calc(10px 0);
 						a {
@@ -261,9 +289,14 @@
 		    &:focus{outline: none;}
 		  }
 		  #accessibility-container{
-		    opacity: 0; visibility: hidden; top: rem-calc(64px);
-		    position: absolute; width: rem-calc(240px);
-		    #{$left}: 50%; transform: translateX(-50%); padding: rem-calc(24px);
+		    opacity: 0;
+		    visibility: hidden;
+		    top: rem-calc(64px);
+		    position: absolute;
+		    width: rem-calc(240px);
+		    #{$left}: 50%;
+		    transform: translateX(-50%);
+		    padding: rem-calc(24px);
 		    @include transitionEffect();
 		    &:before{
 		      content: "";

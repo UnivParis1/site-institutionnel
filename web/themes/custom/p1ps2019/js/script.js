@@ -85,6 +85,19 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
       }
     });
   }
+  //direct access toggle
+  if( $('.direct-access-btn').length > 0){
+    $('.direct-access-btn').click(function(){
+      if($('.direct-access-wrapper.overlay-show').length > 0){
+        overlayClose();
+      }
+      else{
+        overlayClose();
+        $('.direct-access-wrapper').addClass('overlay-show');
+      }
+    });
+  }
+
 
   if($('#navbar-header').length > 0 && $('.icon-menu').length > 0){
     $('.icon-menu').click(function() {
