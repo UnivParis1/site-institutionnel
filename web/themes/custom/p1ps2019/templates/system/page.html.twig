@@ -86,11 +86,11 @@
   {% set siteNameClass = 'long' %}
 {% endif %}
 {% if page.header or page.header_left or page.header_center or page.header_right or page.hp_image %}
-  <header id="navbar" {% if print_hp_image %} class="header-full {{ siteNameClass }}" {% endif %}>
+  <header id="navbar" {% if print_hp_image %} class="header-medium {{ siteNameClass }}" {% endif %}>
     {% if print_hp_image %}
-      <div class="grid-x screen-height full-height">
+      <div class="grid-x screen-medium-height full-height">
         <div class="cell small-12 full-height">
-          <div class="mask no-hover relative-wrapper full-height">
+          <div class="mask no-hover relative-wrapper medium-height">
             <div class="header-img img-container full-height">{{ page.hp_image }}</div>
             <div class="main-overlay-infos">
               {{ page.header }}
@@ -152,7 +152,7 @@
           <div class="grid-x bottom-header-infos" style="margin-top: 1rem;">
             {# Navbar #}
             {% if page.navigation %}
-              <div id="navbar-header" class="navbar-header-region overlay-show">
+              <div id="navbar-header" class="navbar-header-region">
                 {% if page.navigation %}
                   <div class="navigation-region cell small-12">{{ page.navigation }}</div>
                 {% endif %}
