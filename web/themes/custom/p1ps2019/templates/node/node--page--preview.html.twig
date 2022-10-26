@@ -74,11 +74,31 @@
 <article{{ attributes }}>
   <div{{ content_attributes }}>
     {% if changed is not empty %}
-    <div class="grid-container changed">
-      {% if isNew == 0 %} {% trans %}Changed on {% endtrans %} {% endif %}
-      {{ changed }}
-    </div>
+      <div class="grid-container changed">
+        {% if isNew == 0 %} {% trans %}Changed on {% endtrans %} {% endif %}
+        {{ changed }}
+      </div>
     {% endif %}
-    {{ content|without('field_media','field_sub_title', 'field_short_desc') }}
+
+    {% if preview == 0 %}
+      {{ content|without('field_media','field_sub_title', 'field_short_desc') }}
+    {% else %}
+      <div class="grid-container padding-mobile">
+        <div class="grid-x">
+          <div class="cell small-12">
+            <h1 class="section-sep">{{ label.0 }}</h1>
+
+            {% if content.field_sub_title|render %}
+            <div class="subtitle semi-field-sep"> {{ content.field_sub_title.0 }}
+              {% endif %}
+              {% if content.field_short_desc|render %}
+                <div class="txt medium">{{ content.field_short_desc.0 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ content|without('field_media','field_sub_title', 'field_short_desc') }}
+    {% endif %}
   </div>
 </article>

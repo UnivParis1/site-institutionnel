@@ -92,8 +92,7 @@ function p1ps2019_preprocess_page(&$variables)
   if (isset($node) && is_object($node)) {
     $node_type = $node->getType();
     if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
-      && ($node->hasField('field_media') && !empty($node->get('field_media')->getValue()) ||
-        $node->hasField('field_video_couverture') && !empty($node->get('field_video_couverture')->getValue()) )) {
+      && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
       $print_hp_image = TRUE;
     }
     if ($site_id != 0) {
@@ -151,7 +150,6 @@ function p1ps2019_preprocess_node(&$variables) {
         break;
     }
   }
-
   if ($node->getType() == 'page_personnelle') {
     $uid = $node->getOwnerId();
     $user = User::load($uid);
@@ -162,13 +160,16 @@ function p1ps2019_preprocess_node(&$variables) {
       $comptex = new ComptexManager();
       $variables['mail'] = $comptex->getUserEmail($user->getDisplayName());
     }
-    if ($node->hasField('field_skills')) {
-      $skills = $node->get('field_skills')->getValue();
-      $expertises = [];
-      if (!empty($skills)) {
-        foreach ($skills as $key => $skill) {
-          $tid = $skill['target_id'];
-          $term = Term::load($tid);
+
+  }
+  if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
+    $skills = $node->get('field_skills')->getValue();
+    $expertises = [];
+    if (!empty($skills)) {
+      foreach ($skills as $key => $skill) {
+        $tid = $skill['target_id'];
+
+        if ($term = Term::load($tid)) {
           $arg = 'skills[' . $tid . ']';
           $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
           $expertises[$key] =
@@ -178,26 +179,26 @@ function p1ps2019_preprocess_node(&$variables) {
             . $term->getName() . '</a>';
         }
       }
-      $variables['expertises'] = $expertises;
     }
-    if ($node->hasField('field_highlight_publications')) {
-      $publications = $node->get('field_highlight_publications')->getValue();
-      $col_length = 12;
-      switch (count($publications)) {
-        case 1:
-          $col_length = "8";
-          break;
-        case 2:
-          $col_length = "6";
-          break;
-        case 3:
-          $col_length = "4";
-          break;
-      }
-      $variables['col_length'] = $col_length;
-    }
+    $variables['expertises'] = $expertises;
   }
-  //preprocess_node publications
+  if ($node->getType() == 'page_personnelle' && $node->hasField('field_highlight_publications')) {
+    $publications = $node->get('field_highlight_publications')->getValue();
+    $col_length = 12;
+    switch (count($publications)) {
+      case 1:
+        $col_length = "8";
+        break;
+      case 2:
+        $col_length = "6";
+        break;
+      case 3:
+        $col_length = "4";
+        break;
+    }
+    $variables['col_length'] = $col_length;
+  }
+
   if ($node->getType() == 'publication' && $node->hasField('field_publication_author')) {
     $authors = $node->get('field_publication_author')->getValue();
     $publication_authors = [];
@@ -220,23 +221,23 @@ function p1ps2019_preprocess_node(&$variables) {
       $variables['publication_authors'] = $publication_authors;
     }
   }
-//node_process article
-  if ($node->getType() == 'article') {
-    if ($node->hasField('field_media') && !empty($node->field_media)) {
-      $mid = $node->field_media[0]->getValue()['target_id'];
-      $fid = Media::load($mid)->field_media[0]->getValue()['target_id'];
-      $file = File::load($fid);
-      $variables['image_url'] = $file->url();
-    }
-  }
 
   if (in_array($node->getType(), ['page', 'second_level_pages'])) {
+    $node = $variables['node'];
     if ($node->hasField('field_display_node_changed')) {
       $display_changed = $node->field_display_node_changed->getValue();
       if (!empty($display_changed[0]['value'])) {
         $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long_date_hour');
         $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0 ;
       }
+    }
+  }
+
+  if ($node->getType() == 'page') {
+    $variables['preview'] = 0;
+    $node_preview = \Drupal::routeMatch()->getParameter('node_preview');
+    if (!empty($node_preview)) {
+      $variables['preview'] = 1;
     }
   }
 }
@@ -347,7 +348,8 @@ function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $
  * @param $variables
  * @param $hook
  */
-function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook) {
+function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
+{
   if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
     $original_theme_hook = $variables['theme_hook_original'];
     array_unshift($suggestions, $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']));
@@ -381,6 +383,17 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
   }
 }
 
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * @param $suggestions
+ * @param $variables
+ */
+function p1ps2019_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  $view = $variables['view'];
+  $view_display = $view->getDisplay();
+  $suggestions[] = 'views_view__' . $view->id() . '__' . $view->current_display;
+}
 /*
 * Implements template_preprocess_views_view()
 * @param array $variables
@@ -388,7 +401,7 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
 function p1ps2019_preprocess_views_view(&$variables)
 {
   $variables['is_listing_page'] = FALSE;
-  $views = ['travailler_universite', 'listings'];
+  $views = ['travailler_universite', 'listings','annuaire_des_mini_sites', 'viva'];
   if (in_array($variables['id'], $views)) {
     $variables['is_listing_page'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
@@ -477,4 +490,13 @@ function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables)
   $suggestions[] = 'field__' .
     $variables['element']['#field_name'] . '__' .
     $variables['element']['#view_mode'];
+}
+
+
+function p1ps2019_theme_suggestions_node_alter(&$suggestions, $variables) {
+  $node = \Drupal::routeMatch()->getParameter('node_preview');
+  if (!empty($node) && $node->getType() == 'page') {
+    $suggestions[] = 'node__' . $node->getType() . '__preview';
+  }
+  
 }
