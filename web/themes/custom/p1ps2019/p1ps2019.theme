@@ -113,7 +113,8 @@ function p1ps2019_preprocess_page(&$variables)
   $variables['is_front_mini_site'] = $is_front_mini_site;
 }
 
-function p1ps2019_preprocess_node(&$variables) {
+function p1ps2019_preprocess_node(&$variables)
+{
   if (isset($site) && !empty($site)) {
     $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
@@ -199,26 +200,49 @@ function p1ps2019_preprocess_node(&$variables) {
     $variables['col_length'] = $col_length;
   }
 
-  if ($node->getType() == 'publication' && $node->hasField('field_publication_author')) {
-    $authors = $node->get('field_publication_author')->getValue();
-    $publication_authors = [];
-    if (!empty($authors)) {
-      foreach ($authors as $author) {
-        $uid = $author['target_id'];
-        $pp = \Drupal::entityTypeManager()
-          ->getStorage('node')
-          ->loadByProperties(['uid' => $uid,'type' => 'page_personnelle']);
-        $page_perso = reset($pp);
-        if ($page_perso) {
-          $page_perso_url = Url::fromRoute('entity.node.canonical',
-            ['node' => $page_perso->id()])->toString();
-          $publication_authors[] =
-            '<a href="' . $page_perso_url . '" target="_blank"
-            title="Page personnelle de ' . $page_perso->getTitle() . '">
-            ' . $page_perso->getTitle() . '</a>';
+  //preprocess_node publications
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('text_or_entity') && $node->getType() == 'publication' 
+    && $node->hasField('field_authors') && $field_authors = $node->get('field_authors')->getValue()) {
+    \Drupal::logger('publications')->info(print_r($field_authors, 1));
+    $all_authors = [];
+    foreach ($field_authors as $key => $author) {
+      if (isset($author['target_id'])) {
+        $comptex = new ComptexManager();
+        $user = User::load($author['target_id']);
+        $displayName = $comptex->getUserAttribute($user->get('name')->value, 'displayName');
+        if (!empty($displayName)) {
+          $pp = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->loadByProperties([
+              'uid' => $user->id(),
+              'type' => 'page_personnelle',
+              'status' => 1
+            ]);
+          $page_perso = reset($pp);
+          if ($page_perso) {
+            $page_perso_url = Url::fromRoute('entity.node.canonical',
+              ['node' => $page_perso->id()])->toString();
+            $all_authors[$key] =
+              '<a href="' . $page_perso_url . '" target="_blank"
+                title="Page personnelle de ' . $displayName . '">
+                ' . $displayName . '</a>';
+          }
         }
+      } elseif (isset($author['text'])) {
+        $all_authors[$key] = $author['text'];
       }
-      $variables['publication_authors'] = $publication_authors;
+    }
+    $variables['auteurs'] = implode(', ', $all_authors);
+  }
+
+//node_process article
+  if ($node->getType() == 'article') {
+    if ($node->hasField('field_media') && !empty($node->field_media)) {
+      $mid = $node->field_media[0]->getValue()['target_id'];
+      $fid = Media::load($mid)->field_media[0]->getValue()['target_id'];
+      $file = File::load($fid);
+      $variables['image_url'] = $file->url();
     }
   }
 
@@ -228,7 +252,7 @@ function p1ps2019_preprocess_node(&$variables) {
       $display_changed = $node->field_display_node_changed->getValue();
       if (!empty($display_changed[0]['value'])) {
         $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long_date_hour');
-        $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0 ;
+        $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0;
       }
     }
   }

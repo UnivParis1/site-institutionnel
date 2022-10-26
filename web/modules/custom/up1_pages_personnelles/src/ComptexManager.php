@@ -254,6 +254,27 @@ class ComptexManager implements ComptexInterface {
     return $information['mail'];
   }
 
+  public function getUserAttribute($uid,  $attr) {
+      if (isset($uid) && isset($attr) && is_string($attr)) {
+      $config = \Drupal::config('up1_pages_personnelles.settings');
+      $ws = $config->get('url_ws') . $config->get('search_user_page') . "?id=$uid";
+      $params = ['attrs' => 'displayName'];
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+      $result = json_decode(curl_exec($ch), TRUE);
+      curl_close($ch);
+      if (!empty ($result)) {
+        return $result[0][$attr]; 
+      }
+      else return FALSE;
+    }
+    else return FALSE;
+    
+  }
+
   private function formatEmails(&$information) {
     if (isset($information['mail']) && !empty($information['mail'])) {
       unset($information['eduPersonPrincipalName']);

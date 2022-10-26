@@ -81,9 +81,6 @@
 {% set subtitle %}
   {{ content.field_subtitle.0 }}
 {% endset %}
-{% set author %}
-  {{ content.field_author_name.0 }}
-{% endset %}
 {% set publisher_term %}
   {{ content.field_publisher_term }}
 {% endset %}
@@ -146,18 +143,10 @@
       <aside class="cell small-12 large-4">
         <div class="box-style no-shadow auto-height semi-field-sep">
           <div class="box-content">
-            {% if author|striptags|trim or publication_authors %}
+            {% if auteurs %}
               <div class="details txt-second">
                 <h3 class="publication-label">{{ "Author(s)"|t }} : </h3>
-                {% if publication_authors %}
-                  {{ publication_authors|join(', ')|raw }}
-                {% endif %}
-                {% if  author|striptags|trim and publication_authors %}
-                  <span>, </span>
-                {% endif %}
-                {% if author|striptags|trim %}
-                  <span>{{ author }}</span>
-                {% endif %}
+		              {{ auteurs|raw }}
               </div>
             {% endif %}
             <div class="details txt-second">

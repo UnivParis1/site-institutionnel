@@ -96,9 +96,8 @@
       {{ title_suffix }}
     </div>
     <div>
-      {{ content.field_author_name.0 }}
-      {% if content.field_publishing_year|render %}
-        - {{ content.field_publishing_year.0 }}
+      {% if auteurs %}
+       {{ auteurs|raw }}
       {% endif %}
     </div>
     <div class="bottom-infos">
