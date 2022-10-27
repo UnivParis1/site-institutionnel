@@ -14,7 +14,7 @@ use Drupal\facets\Processor\ProcessorPluginBase;
  *
  * @FacetProcessor (
  *   id = "up1_facets_merge_pages",
- *   label = @Translatiion("Merge Pages and Second Level Pages together. "),
+ *   label = @Translation("Merge Pages and Second Level Pages together. "),
  *   description = @Translation("An integration to force put together Pages and Second Level Pages."),
  *   stages = {
  *    "build" = 60
