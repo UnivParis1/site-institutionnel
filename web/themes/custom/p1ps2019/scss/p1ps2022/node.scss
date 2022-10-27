@@ -36,6 +36,23 @@
       }
     }
   }
+  @include breakpoint($large - 1 down) {
+    width: 100%;
+    .bef-links {
+      width: calc(100% - 1rem);
+      margin-left: 1rem;
+      overflow: auto;
+      ul {
+        flex-wrap: nowrap;
+        li {
+          a {
+            word-break: normal;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
   .form-actions {
     display: none;
   }
