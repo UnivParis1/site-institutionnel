@@ -34,7 +34,7 @@ class MergeNodeTypes extends ProcessorPluginBase implements BuildProcessorInterf
   protected $entityTypeManager;
 
   /**
-   * Extract all available node types then mapped then as valid options.
+   * Extract all available node types then map them as valid options.
    *
    * @return array
    *
