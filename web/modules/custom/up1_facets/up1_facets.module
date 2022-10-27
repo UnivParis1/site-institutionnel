@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_facets.module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function up1_facets_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_facets module.
+    case 'help.page.up1_facets':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Defines combined facets for more readable facets.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
