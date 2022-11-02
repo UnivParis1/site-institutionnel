@@ -7,6 +7,7 @@ use Drupal\search_api\Utility\Utility;
 use Drupal\search_api\Processor\ProcessorPluginBase;
 use Drupal\search_api\Datasource\DatasourceInterface;
 use Drupal\search_api\SearchApiException;
+use Drupal\up1_search_api\Plugin\search_api\processor\Property;
 
 /**
  * * Adds customized aggregations of existing fields to the index.
