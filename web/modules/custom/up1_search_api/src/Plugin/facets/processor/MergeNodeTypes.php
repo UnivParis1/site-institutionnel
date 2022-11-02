@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\up1_facets\Plugin\facets\processor;
+namespace Drupal\up1_search_api\Plugin\facets\processor;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityTypeManager;
@@ -14,10 +14,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class MergeNodeTypes what allow merging facet content types.
  *
- * @package Drupal\up1_facets\Plugin\facets\processor
+ * @package Drupal\up1_search_api\Plugin\facets\processor
  *
  * @FacetsProcessor(
- *   id = "up1_facets_merge_node_types",
+ *   id = "up1_search_api_merge_node_types",
  *   label = @Translation("Merge node types together."),
  *   description = @Translation("An integration to force put together node types
 facet results into a single one."),
@@ -177,7 +177,7 @@ class MergeNodeTypes extends ProcessorPluginBase implements BuildProcessorInterf
     /** @var array $facet_groups */
     $facet_groups = NestedArray::getValue($form, [
       'facet_settings',
-      'up1_facets_merge_node_types',
+      'up1_search_api_merge_node_types',
       'settings',
       'facet_groups',
     ]);

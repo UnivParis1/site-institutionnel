@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\up1_facets\Plugin\facets\processor;
+namespace Drupal\up1_search_api\Plugin\facets\processor;
 
 use Drupal\facets\Annotation\FacetsProcessor;
 use Drupal\facets\FacetInterface;
@@ -10,10 +10,10 @@ use Drupal\facets\Processor\ProcessorPluginBase;
 /**
  * Class MergePages which's merging two hard-coded content types.
  *
- * @package Drupal\up1_facets\Plugin\facets\processor
+ * @package Drupal\up1_search_api\Plugin\facets\processor
  *
- * @FacetProcessor (
- *   id = "up1_facets_merge_pages",
+ * @FacetsProcessor (
+ *   id = "up1_search_api_merge_pages",
  *   label = @Translation("Merge Pages and Second Level Pages together. "),
  *   description = @Translation("An integration to force put together Pages and Second Level Pages."),
  *   stages = {
@@ -32,8 +32,6 @@ class MergePages extends ProcessorPluginBase implements BuildProcessorInterface 
       $carry[$item->getRawValue()] = $item;
     }, []);
 
-    \Drupal::logger('up1_facets')->info(print_r($facets['page_type'], 1));
-    \Drupal::logger('up1_facets')->info(print_r($facets, 1));
     /** @var \Drupal\facets\Result\Result $page */
     $page = $facets['page'] ?? NULL;
     /** @var \Drupal\facets\Result\Result $second_page */

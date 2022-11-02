@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\up1_facets\Plugin\facets\processor;
+namespace Drupal\up1_search_api\Plugin\facets\processor;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityTypeManager;
@@ -14,16 +14,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class MergeTaxonomyTerms : Group Taxonomy terms for a better search engine.
  *
- * @package Drupal\up1_facets\Plugin\facets\processor
+ * @package Drupal\up1_search_api\Plugin\facets\processor
  *
  * @FacetsProcessor(
- *   id = "up1_facets_merge_taxonomy_terms",
+ *   id = "up1_search_api_merge_taxonomy_terms",
  *   label = @Translation("Merge Taxonomy Terms."),
  *   description = @Translation("Group several taxonomy terms in order to lighten the search engine."),
  *   stages = {
  *    "build" = 1
  *   }
- *
+ * )
  */
 class MergeTaxonomyTerms extends ProcessorPluginBase implements BuildProcessorInterface, ContainerFactoryPluginInterface {
   /**
@@ -80,7 +80,7 @@ class MergeTaxonomyTerms extends ProcessorPluginBase implements BuildProcessorIn
 
     //Build the mapping array.
     $groups = [];
-    foreach($groupings as $grouping_name=>$array_tids){
+    foreach($groupings as $grouping_name => $array_tids){
       $taxonomy_terms = [];
       $taxonomy_terms_values = [];
       foreach($array_tids as $tid){
