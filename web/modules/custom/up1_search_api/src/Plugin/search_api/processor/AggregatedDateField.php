@@ -19,19 +19,13 @@ use Drupal\search_api\SearchApiException;
  *   label = @Translation("Aggregated dates fields."),
  *   description = @Translation("Aggregate dates in an only field to ease searches on dates fields. "),
  *   stages = {
- *    "add_properties" = 0,
+ *    "add_properties" = 20,
  *   },
  *   locked = true,
  *   hidden = true,
  * )
  */
 class AggregatedDateField extends ProcessorPluginBase {
-  /**
-   * Date.
-   *
-   * @var \Drupal\date
-   */
-
   /**
    * {@inheritdoc}
    */
@@ -43,7 +37,7 @@ class AggregatedDateField extends ProcessorPluginBase {
         'label' => $this->t('Aggregated dates'),
         'description' => $this->t('Aggregate dates in an only field.'),
         'type' => 'date',
-        'processort_id' => $this->getPluginId(),
+        'processor_id' => $this->getPluginId(),
         'is_list' => TRUE,
       ];
 
