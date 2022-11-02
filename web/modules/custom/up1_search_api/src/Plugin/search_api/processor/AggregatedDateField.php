@@ -4,7 +4,7 @@ namespace Drupal\up1_search_api\Plugin\search_api\processor;
 
 use Drupal\search_api\Item\ItemInterface;
 use Drupal\search_api\Utility\Utility;
-use Drupal\up1_search_api\Processor\ProcessorPluginBase;
+use Drupal\search_api\Processor\ProcessorPluginBase;
 use Drupal\search_api\Datasource\DatasourceInterface;
 use Drupal\search_api\SearchApiException;
 
