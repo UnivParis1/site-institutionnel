@@ -19,12 +19,13 @@ use Drupal\facets\Processor\ProcessorPluginBase;
  *   stages = {
  *    "build" = 60
  *   }
+ * )
  */
 class MergePages extends ProcessorPluginBase implements BuildProcessorInterface {
   /**
    * {@inheritdoc}
    */
-  public function build(FacetInterface $facet, [] $results)
+  public function build(FacetInterface $facet, array $results)
   {
     /** @var \Drupal\facets\Result\Result[] $facets */
     $facets = array_reduce($results, function ($carry, $item) {
