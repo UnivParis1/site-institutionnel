@@ -79,16 +79,20 @@ class AggregatedDateField extends ProcessorPluginBase {
         }
       }
 
-      switch ($configuration['type']) {
-        case 'latest':
-          $values = [implode("\n\n", $values)];
-          break;
-
-        case 'older':
-          $values = [array_sum($values)];
-          break;
+      if (count($values) == 1) {
+        $values = [reset($values)];
       }
+      else {
+        switch ($configuration['type']) {
+          case 'first':
+            $values = [current($values)];
+            break;
 
+          case 'older':
+            $values = [end($values)];
+            break;
+        }
+      }
       // Do not use setValues(), since that doesn't preprocess the values
       // according to their data type.
       foreach ($values as $value) {
