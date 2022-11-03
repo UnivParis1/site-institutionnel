@@ -82,28 +82,30 @@
   <a class="sm-teaser__img-link" href="{{ url }}" title="{{ label.0 }}">
     {{ content.field_media }}
   </a>
-  <div class="sm-teaser__block">
+  <div class="sm-teaser__block px-medium">
     {{ title_prefix }}
     <div class="sm-teaser__title">
       <h2>
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
       {% if subtitle|striptags|trim %}
-        <em class="txt small">{{ subtitle }}</em>
+        <p class="txt small">{{ subtitle }}</p>
       {% endif %}
     </div>
     {{ title_suffix }}
     {% if author|striptags|trim or publication_authors %}
-      <div class="author small sm-teaser__title--author">
-        {% if publication_authors %}
-          {{ publication_authors|join(', ')|raw }}
-        {% endif %}
-        {% if  author|striptags|trim and publication_authors %}
-          <span>, </span>
-        {% endif %}
-        {% if author|striptags|trim %}
-          {{ author }}
-        {% endif %}
+      <div class="author_wrapper">
+        <div class="author small sm-teaser__title--author">
+          {% if publication_authors %}
+            {{ publication_authors|join(', ')|raw }}
+          {% endif %}
+          {% if  author|striptags|trim and publication_authors %}
+            <span>, </span>
+          {% endif %}
+          {% if author|striptags|trim %}
+            {{ author }}
+          {% endif %}
+        </div>
       </div>
     {% endif %}
   </div>
