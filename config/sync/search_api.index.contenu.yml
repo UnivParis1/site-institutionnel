@@ -24,14 +24,9 @@ dependencies:
     - field.storage.node.field_subtitle
     - field.storage.node.field_thesis_subject
     - search_api.server.database_search
-    - core.entity_view_mode.node.teaser
   module:
-    - taxonomy
     - node
     - search_api
-    - media
-    - paragraphs
-    - micro_site
 id: contenu
 name: Contenu
 description: ''
@@ -211,46 +206,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_thesis_subject
-  name_field_categories:
-    label: 'Catégories name'
-    datasource_id: 'entity:node'
-    property_path: 'field_categories:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_categories
-      module:
-        - taxonomy
-  name_field_event_type:
-    label: 'Type d''événement name'
-    datasource_id: 'entity:node'
-    property_path: 'field_event_type:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_event_type
-      module:
-        - taxonomy
-  name_field_news_topic:
-    label: 'Sujet d''actualité name'
-    datasource_id: 'entity:node'
-    property_path: 'field_news_topic:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_news_topic
-      module:
-        - taxonomy
-  name_field_skills:
-    label: 'Domaines d''expertise name'
-    datasource_id: 'entity:node'
-    property_path: 'field_skills:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_skills
-      module:
-        - taxonomy
   node_grants:
     label: 'Information d''accès du nœud.'
     property_path: search_api_node_grants
@@ -258,24 +213,6 @@ field_settings:
     indexed_locked: true
     type_locked: true
     hidden: true
-  rendered_item:
-    label: 'Rendered HTML output'
-    property_path: rendered_item
-    type: text
-    configuration:
-      roles:
-        anonymous: anonymous
-      view_mode:
-        'entity:node':
-          event: teaser
-          news: teaser
-          news2018: teaser
-          offer: ''
-          page: teaser
-          page_personnelle: ''
-          publication: teaser
-          second_level_pages: teaser
-          viva: ''
   status:
     label: status
     datasource_id: 'entity:node'
@@ -321,42 +258,12 @@ field_settings:
     configuration:
       absolute: true
 datasource_settings:
-  'entity:media':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
   'entity:node':
     bundles:
       default: true
       selected:
         - article
         - news2018
-    languages:
-      default: true
-      selected: {  }
-  'entity:paragraph':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
-  'entity:site':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
-  'entity:taxonomy_term':
-    bundles:
-      default: true
-      selected:
-        - categories
-        - tags
     languages:
       default: true
       selected: {  }
@@ -390,11 +297,6 @@ processor_settings:
       - field_sub_title
       - field_subtitle
       - field_thesis_subject
-      - name_field_categories
-      - name_field_event_type
-      - name_field_news_topic
-      - name_field_skills
-      - rendered_item
       - title
       - type
       - url
@@ -431,11 +333,6 @@ processor_settings:
       - field_sub_title
       - field_subtitle
       - field_thesis_subject
-      - name_field_categories
-      - name_field_event_type
-      - name_field_news_topic
-      - name_field_skills
-      - rendered_item
       - title
       - type
       - url
@@ -471,11 +368,6 @@ processor_settings:
       - field_sub_title
       - field_subtitle
       - field_thesis_subject
-      - name_field_categories
-      - name_field_event_type
-      - name_field_news_topic
-      - name_field_skills
-      - rendered_item
       - title
       - type
       - url
@@ -504,11 +396,6 @@ processor_settings:
       - field_sub_title
       - field_subtitle
       - field_thesis_subject
-      - name_field_categories
-      - name_field_event_type
-      - name_field_news_topic
-      - name_field_skills
-      - rendered_item
       - title
       - type
       - url
@@ -516,7 +403,7 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  cron_limit: 500
-  index_directly: true
+  cron_limit: 100
+  index_directly: false
   track_changes_in_references: true
 server: database_search

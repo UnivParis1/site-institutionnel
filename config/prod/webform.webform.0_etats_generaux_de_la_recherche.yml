@@ -1,0 +1,338 @@
+uuid: 2db607d6-ebc4-47b2-989c-4c9073f5567c
+langcode: fr
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 5486
+template: false
+archive: false
+id: 0_etats_generaux_de_la_recherche
+title: '0 - Etats généraux de la recherche'
+description: ''
+category: ''
+elements: |-
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<h2>Formulaire d''inscription&nbsp;</h2>'
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': 'Prénom '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': 'Courriel '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  statut:
+    '#type': radios
+    '#title': Statut
+    '#options':
+      Étudiant: Étudiant
+      Personnel: Personnel
+      'Enseignant et enseignant chercheur': 'Enseignant et enseignant chercheur'
+      'Public externe à l''université': 'Public externe à l''université'
+    '#required': true
+    '#options__properties': ''
+  date_de_naissance:
+    '#type': date
+    '#title': 'Date de naissance'
+    '#description': '<p>Dans le cadre d''un contrôle de sécurité à l''entrée, votre date de naissance est requise.</p>'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#date_date_format': ''
+  aurez_vous_besoin_d_un_acces_pmr_:
+    '#type': radios
+    '#title': 'Aurez-vous besoin d’un accès PMR ?'
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#options__properties': ''
+  markup_02:
+    '#type': webform_markup
+    '#states':
+      visible:
+        ':input[name="aurez_vous_besoin_d_un_acces_pmr_"]':
+          value: Oui
+    '#markup': '<p>Si oui, merci de bien vouloir nous avertir à l''adresse suivante :&nbsp;<a aria-expanded="false" aria-haspopup="menu" data-remove-tab-index="true" data-sk="tooltip_parent" data-stringify-link="mailto:evenements@univ-paris1.fr" delay="150" href="mailto:evenements@univ-paris1.fr" rel="noopener noreferrer" tabindex="-1" target="_blank">evenements@univ-paris1.fr</a></p>'
+  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#type': checkbox
+    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  markup:
+    '#type': webform_markup
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Soumettre
+    '#update__label': 'Mettre à jour'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: "<p>Ce formulaire est désormais clos.<br />\r\nPour les personnels des universités de Paris 1 Panthéon-Sorbonne et Sorbonne Université souhaitant s'inscrire à l'événement, un accès au Grand débat des Etats généraux de la recherche sera possible sur présentation de la carte professionnelle.</p>"
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;<br />\r\nVous allez recevoir un courriel de confirmation.</p>\r\n\r\n<p>Merci de votre participation !</p>"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles:
+      - anonymous
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users:
+      - 6746
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users:
+      - 6746
+    permissions: {  }
+handlers:
+  email_aux_demandeurs:
+    id: email
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: evenements@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Université Paris 1 Panthéon-Sorbonne'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[Réponse automatique] Confirmation d''inscription au grand débat des États généraux de la recherche'
+      body: "<p><img alt=\"etats généraux de la recherche\" data-align=\"left\" data-entity-type=\"file\" data-entity-uuid=\"0c8ecd99-805d-4eda-b435-a9ad7a8c93b3\" src=\"/sites/default/files/inline-images/bandeau-etats%20generaux%20recherche%20-%20grand-amphi-bandeau-event%20-%20Copie.png\" /></p>\r\n\r\n<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>&nbsp;</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: evenements@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'États généraux de la recherche - Nouvelle inscription'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

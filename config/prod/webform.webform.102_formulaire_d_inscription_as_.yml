@@ -20,11 +20,12 @@ elements: |-
     '#required_error': 'Ton  N° d''étudiant stp . merci'
   code_etape_diplome:
     '#type': textfield
-    '#title': 'code étape/ diplome'
-    '#description': 'Code de ton diplome inscrit sur le derniere ligne du papillon autocollant de ta carte d&#39;&eacute;tudiant. En dessous de 2021-2022.'
+    '#title': 'code étape/diplôme'
+    '#description': '<p>Code de ton diplôme inscrit sur la dernière ligne du papillon autocollant de ta carte d''étudiant. En dessous de 2022-2023</p>'
     '#placeholder': L2B101
     '#required': true
     '#required_error': 'Ton code étape stp.'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   enseignant_coach:
     '#type': textfield
     '#title': 'Enseignant /Coach'
@@ -106,6 +107,22 @@ elements: |-
       Nouvelle: Nouvelle
       Renouvellement: Renouvellement
     '#options_display': buttons_horizontal
+  containerffsportusante:
+    '#type': container
+    '#format_attributes':
+      class:
+        - bordureverte
+    infoffsportusante:
+      '#type': webform_markup
+      '#markup': '<p>Note : afin de pouvoir compléter la question ci-dessous, vous devez avoir rempli <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="077eb63f-69b6-4acb-b607-1972d96b6626" href="/node/35546">le questionnaire de santé</a>.</p>'
+    apres_avoir_renseigne_le_questionnaire_de_sante_j_atteste_que_:
+      '#type': radios
+      '#title': 'Après avoir renseigné le questionnaire de santé, j''atteste que :'
+      '#options':
+        'J''ai répondu « NON » à toutes les questions': 'J''ai répondu « NON » à toutes les questions -- (je peux pratiquer TOUTES les activités sans contrainte particulière sans fournir de certificat médical)'
+        'J''ai répondu « OUI » à une rubrique du questionnaire de santé et atteste avoir présenté un certificat médical de non-contre-indication à la pratique d''un/des sport.s en compétition de moins de 6 mois': 'J''ai répondu « OUI » à une rubrique du questionnaire de santé et atteste avoir présenté un certificat médical de non-contre-indication à la pratique d''un/des sport.s en compétition de moins de 6 mois'
+        'Je souhaite pratiquer une activité à contraintes particulières (Rugby(s), Boxe(s) combat plein contact, Tir sportif, Biathlon, Karting, Pentathlon) et atteste avoir présenté un certificat médical de non-contre-indication à la pratique des sports de compét': 'Je souhaite pratiquer une activité à contraintes particulières (Rugby(s), Boxe(s) combat plein contact, Tir sportif, Biathlon, Karting, Pentathlon) et atteste avoir présenté un certificat médical de non-contre-indication à la pratique de ce sport'
+      '#options_display': side_by_side
   etudes_universitaires_de_:
     '#type': textfield
     '#title': 'Etudes universitaires  de : '
@@ -120,9 +137,9 @@ elements: |-
     '#required': true
   je_soussigne:
     '#type': checkbox
-    '#title': 'Je soussigné(e), déclare être régulièrement inscrit(e) dans l''établissement d''enseignement supérieur mentionnée ci-dessus, après avoir pris connaissance des statuts et règlements de la FF SPORT U et y avoir adhéré, après avoir présenté un *certificat médical de non contre indication à la pratique des sports de compétition, avoir pris connaissance de l''ensemble des garanties offertes par l''assurance choisie par mon association sportive (y compris les garanties facultatives proposées).'
+    '#title': 'Je soussigné(e), déclare être régulièrement inscrit(e) dans l''établissement d''enseignement supérieur mentionné ci-dessus, après avoir pris connaissance des statuts et règlements de la FF SPORT U et y avoir adhéré, après avoir présenté un *certificat médical de non contre indication à la pratique des sports de compétition, avoir pris connaissance de l''ensemble des garanties offertes par l''assurance choisie par mon association sportive (y compris les garanties facultatives proposées).'
     '#required': true
-    '#required_error': 'Veuillez cocher la case Je soussigné ...'
+    '#required_error': 'Veuillez cocher la case "Je soussigné(e) ..."'
     '#return_value': 'Oui, je valide cette déclaration.'
   utilisation_de_mon_image:
     '#type': checkbox
@@ -133,14 +150,15 @@ elements: |-
     '#type': processed_text
     '#display_on': both
     '#text': |
-      <p style="color:#fff;padding:1rem;background-color:#00326E;font-size:1.2em;font-weight:bold;">Pour rappel : Paiement : Espèces ou 2 chèques à l'ordre de "Association Sportive Paris 1". Cotisation 2021-2022 : 30 euros - Veste : 20 euros.</p>
-      
+      <p style="color:#fff;padding:1rem;background-color:#00326E;font-size:1.2em;font-weight:bold;">Pour rappel : Paiement en Espèces ou 2 chèques à l'ordre de "Association Sportive Paris 1". Cotisation 2022-2023 : 30 euros - Veste : 20 euros.</p>
     '#format': full_html
   date_fait_a_paris:
     '#type': date
     '#title': 'Fait à Paris le :'
+    '#prepopulate': true
     '#required': true
-    '#required_error': 'Indiques la date ... stp'
+    '#required_error': 'Indique la date ... stp'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#datepicker': true
     '#datepicker_button': true
     '#date_date_format': 'l, F j, Y'

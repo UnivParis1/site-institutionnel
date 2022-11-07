@@ -9,18 +9,27 @@ uid: 74
 template: false
 archive: false
 id: 30_test_nicolas
-title: '30 - test nicolas'
-description: '<p>Inscription évènement</p>'
+title: '30 - Evènements'
+description: "<p>Bonjour à tous</p>\r\n\r\n<p>L’IAES propose une visite guidée du musée de l'Industrie,&nbsp;292 rue Saint-Martin, 75141 Paris Cedex 03, le Samedi 26/11/2022 à 15&nbsp;:00. Nous n’avons que 60 places GRATUITES. Elles seront attribuées par ordre d’arrivée d'inscription.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div>&nbsp;</div>"
 category: ''
 elements: |-
+  ndeg_etudiant:
+    '#type': number
+    '#title': 'N° Etudiant'
+    '#title_display': before
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#min': 1
+    '#max': 999999999
+    '#required': true
   nom:
     '#type': textfield
     '#title': Nom
     '#description': '<p>Nom de famille tel qu''il apparait sur votre carte d''étudiant</p>'
     '#help_title': 'Nom patronimique cf carte étdudiant'
     '#title_display': before
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#required': true
+    '#required_error': 'Vous devez inscrire votre nom'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': Prénom
@@ -35,13 +44,6 @@ elements: |-
     '#title_display': before
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#required': true
-  ndeg_etudiant:
-    '#type': number
-    '#title': 'N° Etudiant'
-    '#title_display': before
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#min': 1
-    '#max': 999999999
   je_souhaite_participer:
     '#type': checkbox
     '#title': 'Je souhaite participer'
@@ -149,8 +151,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: ''
+  confirmation_title: 'Accusé réception de votre demande de participation'
+  confirmation_message: "<p>Bonjour</p>\r\n\r\n<p>Sous réserve que votre adresse mail ait été correctement transmise, je vous confirme votre pré inscription. La validation de votre inscription devrait vous parvenir avant le 21/11/2022. Si vous ne recevez rien d'ici là signalez-vous à <a href=\"mailto:nfortune@univ-paris1.fr\">nfortune@univ-paris1.fr</a></p>\r\n\r\n<p>Bien à vous</p>\r\n\r\n<p>Nicolas FORTUNE</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -226,5 +228,42 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:adresse_courriel:raw]'
+      to_options: {  }
+      bcc_mail: nfortune@univ-paris1.fr
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

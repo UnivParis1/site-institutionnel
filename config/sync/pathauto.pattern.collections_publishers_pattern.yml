@@ -1,0 +1,23 @@
+uuid: 063d0a0b-ef8d-4039-90ea-618090ced89a
+langcode: fr
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: collections_publishers_pattern
+label: 'collections & publishers pattern'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:vocabulary]/[term:name]'
+selection_criteria:
+  402a6f3c-1c95-4b0f-a106-599f3f88c1bb:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 402a6f3c-1c95-4b0f-a106-599f3f88c1bb
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      collections: collections
+      publishers: publishers
+selection_logic: and
+weight: -5
+relationships: {  }

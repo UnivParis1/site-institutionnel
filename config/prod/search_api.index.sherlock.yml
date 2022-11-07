@@ -1,0 +1,577 @@
+uuid: 8ec4a7fc-6590-4e42-ac67-2d7e143b1b7d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - field.storage.node.field_editorial_blocks
+    - field.storage.paragraph.bp_accordion_section_title
+    - field.storage.paragraph.bp_header
+    - field.storage.paragraph.bp_link
+    - field.storage.paragraph.field_subtitle
+    - field.storage.paragraph.bp_tab_section_title
+    - field.storage.paragraph.bp_text
+    - field.storage.paragraph.field_text
+    - field.storage.paragraph.field_simple_text
+    - field.storage.paragraph.field_title
+    - field.storage.node.field_lead
+    - field.storage.node.field_collection_term
+    - field.storage.node.body
+    - field.storage.node.field_short_desc
+    - field.storage.node.field_news_date
+    - field.storage.node.field_event_date
+    - field.storage.node.field_viva_date
+    - field.storage.node.field_publishing_date
+    - field.storage.media.field_legende
+    - field.storage.node.field_comm_press_file
+    - field.storage.node.field_isbn
+    - field.storage.node.field_issn
+    - field.storage.node.field_sub_title
+    - field.storage.node.field_subtitle
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_event_type
+    - field.storage.node.field_publisher_term
+    - search_api.server.holmes
+    - core.entity_view_mode.node.search_index
+  module:
+    - paragraphs
+    - taxonomy
+    - media
+    - node
+    - search_api
+id: sherlock
+name: Sherlock
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Corps
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  changed:
+    label: Modifié
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  collection_name:
+    label: 'Collection » Terme de taxonomie » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_collection_term:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_collection_term
+      module:
+        - taxonomy
+  eb_accordion_title:
+    label: 'Blocs éditoriaux » Paragraph » Accordion Section Title'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:bp_accordion_section_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_accordion_section_title
+      module:
+        - paragraphs
+  eb_bp_text:
+    label: 'Blocs éditoriaux » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:bp_text'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_text
+      module:
+        - paragraphs
+  eb_field_title:
+    label: 'Blocs éditoriaux » Paragraph » Titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:field_title'
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_title
+      module:
+        - paragraphs
+  eb_header:
+    label: 'Blocs éditoriaux » Paragraph » Header'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:bp_header'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_header
+      module:
+        - paragraphs
+  eb_link:
+    label: 'Blocs éditoriaux » Paragraph » Lien'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:bp_link'
+    type: text
+    boost: 0.5
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_link
+      module:
+        - paragraphs
+  eb_simple_text:
+    label: 'Blocs éditoriaux » Paragraph » Texte simple'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:field_simple_text'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_simple_text
+      module:
+        - paragraphs
+  eb_subtitle:
+    label: 'Blocs éditoriaux » Paragraph » Sous-titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:field_subtitle'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_subtitle
+      module:
+        - paragraphs
+  eb_tab_title:
+    label: 'Blocs éditoriaux » Paragraph » Tab Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:bp_tab_section_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_tab_section_title
+      module:
+        - paragraphs
+  eb_text:
+    label: 'Blocs éditoriaux » Paragraph » Texte'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:field_text'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_text
+      module:
+        - paragraphs
+  event_type_name:
+    label: 'Type d''événement » Terme de taxonomie » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_type:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+      module:
+        - taxonomy
+  field_collection_term:
+    label: Collection
+    datasource_id: 'entity:node'
+    property_path: field_collection_term
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_collection_term
+  field_event_date:
+    label: 'Date de l''évènement'
+    datasource_id: 'entity:node'
+    property_path: field_event_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_event_date
+  field_event_type:
+    label: 'Type d''événement'
+    datasource_id: 'entity:node'
+    property_path: field_event_type
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+  field_isbn:
+    label: ISBN
+    datasource_id: 'entity:node'
+    property_path: field_isbn
+    type: text
+    boost: 0.1
+    dependencies:
+      config:
+        - field.storage.node.field_isbn
+  field_issn:
+    label: ISSN
+    datasource_id: 'entity:node'
+    property_path: field_issn
+    type: text
+    boost: 0.3
+    dependencies:
+      config:
+        - field.storage.node.field_issn
+  field_lead:
+    label: Chapô
+    datasource_id: 'entity:node'
+    property_path: field_lead
+    type: text
+    boost: 1.5
+    dependencies:
+      config:
+        - field.storage.node.field_lead
+  field_legende:
+    label: 'Fichier » Média » Légende'
+    datasource_id: 'entity:node'
+    property_path: 'field_comm_press_file:entity:field_legende'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_legende
+        - field.storage.node.field_comm_press_file
+      module:
+        - media
+  field_news_date:
+    label: 'Date de l''actualité'
+    datasource_id: 'entity:node'
+    property_path: field_news_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_news_date
+  field_news_topic:
+    label: 'Sujet d''actualité'
+    datasource_id: 'entity:node'
+    property_path: field_news_topic
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_news_topic
+  field_paragraphs:
+    label: 'Blocs éditoriaux'
+    datasource_id: 'entity:node'
+    property_path: field_paragraphs
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+  field_publisher_term:
+    label: Éditeur
+    datasource_id: 'entity:node'
+    property_path: field_publisher_term
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_publisher_term
+  field_publishing_date:
+    label: 'Date de publication'
+    datasource_id: 'entity:node'
+    property_path: field_publishing_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_publishing_date
+  field_short_desc:
+    label: 'Courte description'
+    datasource_id: 'entity:node'
+    property_path: field_short_desc
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_short_desc
+  field_simple_text:
+    label: 'Blocs éditoriaux » Paragraph » Texte simple'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_simple_text'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_simple_text
+      module:
+        - paragraphs
+  field_viva_date:
+    label: 'Date de la soutenance'
+    datasource_id: 'entity:node'
+    property_path: field_viva_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_viva_date
+  langcode:
+    label: Langue
+    datasource_id: 'entity:node'
+    property_path: langcode
+    type: string
+    dependencies:
+      module:
+        - node
+  name:
+    label: 'Fichier » Média » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_comm_press_file:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_comm_press_file
+      module:
+        - media
+  news_topics_name:
+    label: 'Sujet d''actualité » Terme de taxonomie » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_news_topic:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_news_topic
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Information d''accès du nœud.'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  p_accordion_title:
+    label: 'Blocs éditoriaux » Paragraph » Accordion Section Title'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:bp_accordion_section_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_accordion_section_title
+      module:
+        - paragraphs
+  p_bp_text:
+    label: 'Blocs éditoriaux » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:bp_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_text
+      module:
+        - paragraphs
+  p_field_title:
+    label: 'Blocs éditoriaux » Paragraph » Titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_title'
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_title
+      module:
+        - paragraphs
+  p_header:
+    label: 'Blocs éditoriaux » Paragraph » Header'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:bp_header'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_header
+      module:
+        - paragraphs
+  p_link:
+    label: 'Blocs éditoriaux » Paragraph » Lien'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:bp_link'
+    type: text
+    boost: 0.5
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_link
+      module:
+        - paragraphs
+  p_subtitle:
+    label: 'Blocs éditoriaux » Paragraph » Sous-titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_subtitle'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_subtitle
+      module:
+        - paragraphs
+  p_tab_title:
+    label: 'Blocs éditoriaux » Paragraph » Tab Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:bp_tab_section_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_tab_section_title
+      module:
+        - paragraphs
+  p_text:
+    label: 'Blocs éditoriaux » Paragraph » Texte'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_text'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_text
+      module:
+        - paragraphs
+  publisher_name:
+    label: 'Éditeur » Terme de taxonomie » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_publisher_term:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_publisher_term
+      module:
+        - taxonomy
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        - anonymous
+      view_mode:
+        'entity:node':
+          article: ''
+          event: search_index
+          news: search_index
+          news2018: ''
+          offer: search_index
+          page: search_index
+          page_personnelle: ''
+          press: search_index
+          publication: search_index
+          second_level_pages: search_index
+          viva: search_index
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  sub_title:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_sub_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_sub_title
+  subtitle:
+    label: Sous-titre
+    datasource_id: 'entity:node'
+    property_path: field_subtitle
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_subtitle
+  title:
+    label: Titre
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 13
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Type de contenu'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: text
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: text
+    configuration:
+      absolute: false
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected:
+        - article
+        - news2018
+        - page_personnelle
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+  type_boost:
+    weights:
+      preprocess_index: 0
+    boosts:
+      'entity:node':
+        datasource_boost: !!float 1
+        bundle_boosts:
+          event: !!float 5
+          news: !!float 5
+          page: !!float 2
+          page_personnelle: 0.3
+          press: 0.5
+          publication: 0.5
+          second_level_pages: !!float 2
+          viva: 0.5
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 250
+  index_directly: true
+  track_changes_in_references: true
+server: holmes

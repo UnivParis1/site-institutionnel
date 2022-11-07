@@ -1,52 +1,72 @@
-uuid: 1753b21b-0f8e-48b1-a43a-37ecb1cb5b13
+uuid: 3beea5b2-fac3-4e01-b34e-3fd3ecc6f843
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 452
+uid: 51
 template: false
 archive: false
-id: 18_test_envoi_automatique_annonc
-title: '18 - Test envoi automatique annonces manifestations'
+id: 56_formulaire_de_contact_site_sc
+title: '56 - Formulaire de contact site Science ouverte'
 description: ''
-category: 'Annonce automatique d''événements'
+category: ''
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Intitulé
-    '#placeholder': Name
+  nom_prenom:
+    '#type': webform_name
+    '#title': 'Nom, prénom'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
+    '#title__access': false
+    '#first__title': Prénom
+    '#first__required': true
+    '#middle__access': false
+    '#last__title': Nom
+    '#last__required': true
+    '#suffix__access': false
+    '#degree__access': false
+  organisme:
     '#type': textfield
-    '#title': Prénom
-    '#placeholder': 'First name'
+    '#title': Organisme
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
+  adresse_electronique:
     '#type': email
-    '#title': Courriel
-    '#placeholder': Email
+    '#title': 'Adresse électronique'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut_ou_fonction:
-    '#type': textfield
-    '#title': 'Statut ou fonction'
-    '#placeholder': Role
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  rattachement_institutionnel:
-    '#type': textfield
-    '#title': 'Rattachement institutionnel'
-    '#placeholder': Institution
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  description_de_votre_demande_:
+    '#type': webform_section
+    '#title': 'Description de votre demande '
+    rubrique_a_laquelle_se_rapporte_votre_demande:
+      '#type': select
+      '#title': 'Rubrique à laquelle se rapporte votre demande'
+      '#options':
+        'Déposer dans HAL': 'Déposer dans HAL'
+        'Publier dans le cadre de la science ouverte ': 'Publier dans le cadre de la science ouverte '
+        'Gérer ses données': 'Gérer ses données'
+        'Visibilité académique en ligne': 'Visibilité académique en ligne'
+        'Intégrité scientifique': 'Intégrité scientifique'
+        Ressources: Ressources
+        Autres: Autres
+      '#required': true
+    votre_demande:
+      '#type': textarea
+      '#title': 'Votre demande'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'J''accepte les {conditions de service}.'
+    '#required': true
+    '#terms_content': '<p><span class="field-prefix">En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de ma demande.</span></p>'
   captcha:
     '#type': captcha
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Valider l''inscription'
+    '#submit__label': Envoyer
 css: ''
 javascript: ''
 settings:
@@ -55,14 +75,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: false
+  page: true
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
-  form_submit_once: true
+  form_title: both
+  form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Les inscriptions à cet événement sont closes.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -101,7 +121,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: true
+  submission_exclude_empty: false
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -131,7 +151,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -151,8 +171,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Inscription confirmée'
-  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
+  confirmation_title: ''
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -229,32 +249,32 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  courriel_aux_personnes_inscrites_en_presentiel:
+  envoi_sur_la_liste_paris_1:
     id: email
-    handler_id: courriel_aux_personnes_inscrites_en_presentiel
-    label: 'Courriel aux personnes inscrites'
+    handler_id: envoi_sur_la_liste_paris_1
+    label: 'Envoi sur la liste Paris 1'
     notes: ''
     status: true
     conditions: {  }
-    weight: 1
+    weight: 0
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: assistance-science.ouverte@univ-paris1.fr
       to_options: {  }
-      bcc_mail: Marina.Krivitzky@univ-paris1.fr
+      bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: Marina.Krivitzky@univ-paris1.fr
+      from_mail: '[webform_submission:values:adresse_electronique:raw]'
       from_options: {  }
-      from_name: 'Marina Krivitzky'
-      reply_to: Marina.Krivitzky@univ-paris1.fr
+      from_name: '[webform_submission:values:nom_prenom:value]'
+      reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription enregistrée pour [webform_submission:source-title]'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre inscription, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>Vos informations d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>En cas d'empêchement, je vous serais reconnaissante de m'informer au plus vite.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marina Krivitzky</p>"
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

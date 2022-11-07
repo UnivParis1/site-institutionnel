@@ -1,0 +1,36 @@
+uuid: 5523c5df-8475-439d-94d0-2c769cb77a96
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.exporturl
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - image.style.news_thumbnail
+    - media.type.image
+  module:
+    - image
+id: media.image.exporturl
+targetEntityType: media
+bundle: image
+mode: exporturl
+content:
+  field_media_image:
+    type: image_url
+    label: hidden
+    settings:
+      image_style: news_thumbnail
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_credits: true
+  field_legende: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

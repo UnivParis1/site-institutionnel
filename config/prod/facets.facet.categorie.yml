@@ -8,12 +8,14 @@ dependencies:
   module:
     - search_api
 id: categorie
-name: Catégorie
+name: Catégories
 weight: 1
 min_count: 1
+missing: false
+missing_label: others
 url_alias: categorie
 facet_source_id: 'search_api:views_page__recherche_db__page_1'
-field_identifier: name_field_categories
+field_identifier: field_categories
 query_operator: or
 hard_limit: 0
 exclude: false
@@ -60,8 +62,18 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   list_item:
     processor_id: list_item
+    weights:
+      build: 5
+    settings: {  }
+  translate_entity:
+    processor_id: translate_entity
     weights:
       build: 5
     settings: {  }

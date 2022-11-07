@@ -16,7 +16,6 @@ elements: |-
   markup:
     '#type': webform_markup
     '#display_on': both
-    '#markup': '<h2>Abonnement à l''<em>Agenda</em> mensuel et à la <em>Lettre</em> bimestrielle de l''ISJPS</h2>'
   nom:
     '#type': textfield
     '#title': Nom
@@ -35,6 +34,9 @@ elements: |-
     '#placeholder': Email
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
@@ -51,7 +53,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -123,7 +125,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0

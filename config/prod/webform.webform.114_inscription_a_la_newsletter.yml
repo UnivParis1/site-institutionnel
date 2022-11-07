@@ -13,17 +13,21 @@ title: '114 - Inscription à la newsletter'
 description: ''
 category: ''
 elements: |-
-  votre_adresse_courriel_:
-    '#type': email
-    '#title': 'Votre adresse courriel :'
-    '#placeholder': jeandupont@monfai.com
-    '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  actions:
-    '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'S''inscrire à la newsletter'
+  container:
+    '#type': container
+    '#attributes':
+      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
+    votre_adresse_courriel_:
+      '#type': email
+      '#title': 'Votre adresse courriel :'
+      '#placeholder': jeandupont@monfai.com
+      '#required': true
+      '#required_error': 'Vous devez saisir votre adresse de messagerie'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    actions:
+      '#type': webform_actions
+      '#title': 'Bouton(s) d''envoi'
+      '#submit__label': 'S''inscrire à la newsletter'
 css: ''
 javascript: ''
 settings:
@@ -231,7 +235,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: 'Confirmation d''inscription à la newsletter de l''observatoire des IA'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Vous recevez ce courriel car vous venez de vous inscrire sur la mailing-liste pour recevoir la newsletter de l'observatoire de l'IA de l'université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>Merci.</p>\r\n\r\n<p>L'équipe de l'IA.</p>"
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Vous recevez ce courriel car vous venez de vous inscrire sur la mailing-liste pour recevoir la newsletter de l'observatoire de l'IA de l'université Paris 1 Panthéon-Sorbonne.<br />\r\nN'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Merci.</p>\r\n\r\n<p>L'équipe de l'IA.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -267,7 +271,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'subscribe xxx'
+      subject: 'subscribe observatoire-ia-info'
       body: _default
       excluded_elements: {  }
       ignore_access: false
