@@ -380,8 +380,13 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
 function p1ps2019_preprocess_views_view(&$variables)
 {
   $variables['is_listing_page'] = FALSE;
-  $views = ['travailler_universite', 'listings','annuaire_des_mini_sites', 'viva'];
+  $views = ['travailler_universite', 'listings', 'viva'];
   if (in_array($variables['id'], $views)) {
+    $variables['is_listing_page'] = TRUE;
+    $variables['view_title'] = $variables['view']->getTitle();
+  }
+  $view_display = $variables['view']->getDisplay();
+  if ($variables['id'] == 'annuaire_des_mini_sites' && $view_display->display['display_title'] == 'Page') {
     $variables['is_listing_page'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
   }
