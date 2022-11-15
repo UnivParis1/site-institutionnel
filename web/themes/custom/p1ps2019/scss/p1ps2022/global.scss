@@ -25,6 +25,16 @@ body.path-frontpage {
     margin-bottom: 2rem;
   }
   .slick--optionset--homepage-carousel {
+    min-width: calc(100% + 2rem);
+    max-width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    @include breakpoint($large - 1 down) {
+      min-width: calc(100% + 4rem);
+      max-width: calc(100% + 4rem);
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
     &:before {
       content: "";
       position: absolute;
@@ -37,6 +47,7 @@ body.path-frontpage {
     }
     .slick-list {
       overflow: visible;
+      min-width: 100%;
       .slick-track {
         display: flex !important;
         .slide {
