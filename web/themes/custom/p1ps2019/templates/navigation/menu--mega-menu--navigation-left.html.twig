@@ -38,7 +38,7 @@
       <li{{ item.attributes }}>
         <div class="acc-link">{{ link(item.title, item.url) }}</div>
         {% if item.below %}
-          <a class="hide-for-large" href="#"></a>
+          <a class="hide-for-large" href="#"><span class="visually-hidden">{{ "Open / Close"|t }}</span></a>
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
       </li>
