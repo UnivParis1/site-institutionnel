@@ -77,8 +77,8 @@
   {{ content.field_author_name.0 }}
 {% endset %}
 <article{{ attributes.addClass(classes) }}>
-  <a class="sm-teaser__img-link" href="{{ url }}" title="{{ label.0 }}">
-    {{ content.field_media }}
+  <a class="sm-teaser__img-link" href="{{ url }}" title="{{ "Go to this publication page"|t }}">
+    <img src="{{ content.field_media.0|render }}" alt="{{ label.0 }}" />
   </a>
   <div class="sm-teaser__block">
     {{ title_prefix }}
