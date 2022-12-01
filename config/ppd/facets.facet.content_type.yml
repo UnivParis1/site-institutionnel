@@ -1,0 +1,604 @@
+uuid: fe8d2c2c-fa44-4966-88f7-b1849c5ab2c5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - search_api.index.preprod_data
+    - views.view.resultats_de_recherche
+  module:
+    - search_api
+id: content_type
+name: 'Type de contenu'
+weight: -1
+min_count: 1
+missing: false
+missing_label: others
+url_alias: content_type
+facet_source_id: 'search_api:views_page__resultats_de_recherche__page_1'
+field_identifier: type
+query_operator: or
+hard_limit: 0
+exclude: false
+use_hierarchy: false
+keep_hierarchy_parents_active: false
+hierarchy:
+  type: taxonomy
+  config: {  }
+expand_hierarchy: false
+enable_parent_when_child_gets_disabled: true
+widget:
+  type: checkbox
+  config:
+    show_numbers: true
+    soft_limit: 0
+    show_reset_link: false
+    reset_text: 'Show all'
+    hide_reset_when_no_selection: false
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+empty_behavior:
+  behavior: none
+only_visible_when_facet_source_is_visible: true
+show_only_one_result: false
+show_title: false
+processor_configs:
+  active_widget_order:
+    processor_id: active_widget_order
+    weights:
+      sort: 20
+    settings:
+      sort: ASC
+  display_value_widget_order:
+    processor_id: display_value_widget_order
+    weights:
+      sort: 40
+    settings:
+      sort: ASC
+  facets_custom_label:
+    processor_id: facets_custom_label
+    weights:
+      build: 50
+    settings:
+      replacement_values: "r|news|Actualité\r\nr|event|Évènement\r\nr|press|Presse\r\nr|publication|Publications\r\nr|offer|Recrutement"
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
+  up1_facets_merge_node_types:
+    processor_id: up1_facets_merge_node_types
+    weights:
+      build: 80
+    settings:
+      facet_groups:
+        -
+          facet_name: Page
+          content_types:
+            page: page
+            second_level_pages: second_level_pages
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            viva: 0
+        -
+          facet_name: 'Autre contenu'
+          content_types:
+            page_personnelle: page_personnelle
+            viva: viva
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+  up1_search_api_merge_node_types:
+    processor_id: up1_search_api_merge_node_types
+    weights:
+      build: 80
+    settings:
+      facet_groups:
+        -
+          facet_name: Autre
+          content_types:
+            page_personnelle: page_personnelle
+            viva: viva
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+        -
+          facet_name: Page
+          content_types:
+            page: page
+            second_level_pages: second_level_pages
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+        -
+          facet_name: ''
+          content_types:
+            article: 0
+            event: 0
+            news: 0
+            news2018: 0
+            offer: 0
+            page: 0
+            page_personnelle: 0
+            press: 0
+            publication: 0
+            second_level_pages: 0
+            viva: 0
+  url_processor_handler:
+    processor_id: url_processor_handler
+    weights:
+      pre_query: 50
+      build: 15
+    settings: {  }

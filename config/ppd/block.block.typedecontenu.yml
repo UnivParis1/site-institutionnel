@@ -1,28 +1,29 @@
-uuid: d7133ae3-5afa-4e9d-bb5c-317275b829a2
+uuid: f9817abc-46ff-44b1-9209-4222d9235d23
 langcode: fr
 status: true
 dependencies:
+  config:
+    - facets.facet.content_type
   module:
+    - facets
     - micro_path
     - micro_site
     - system
   theme:
     - p1ps2019
-_core:
-  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
-id: p1ps2019_local_tasks
+id: typedecontenu
 theme: p1ps2019
-region: content
-weight: -16
+region: content_left
+weight: -17
 provider: null
-plugin: local_tasks_block
+plugin: 'facet_block:content_type'
 settings:
-  id: local_tasks_block
-  label: Onglets
-  label_display: '0'
-  provider: core
-  primary: true
-  secondary: true
+  id: 'facet_block:content_type'
+  label: Type
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: typedecontenu
 visibility:
   site_type:
     id: site_type
@@ -37,6 +38,5 @@ visibility:
     sites_front_page: 0
   request_path:
     id: request_path
-    negate: true
-    context_mapping: {  }
-    pages: "/user\r\n/user/*"
+    negate: false
+    pages: "/resultats-de-recherche\r\n/resultats-de-recherche*"

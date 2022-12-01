@@ -1,28 +1,29 @@
-uuid: e273234a-9d8f-464c-b404-be40426fc174
+uuid: b78a0d39-0b8f-4dc5-b8ee-18e88b75b382
 langcode: fr
 status: true
 dependencies:
   config:
-    - views.view.resultats_de_recherche
+    - facets.facet.news_date
   module:
+    - facets
     - micro_path
     - micro_site
     - system
-    - views
   theme:
     - p1ps2019
-id: barre_de_recherche
+id: datedelactualite
 theme: p1ps2019
-region: header
-weight: -17
+region: content_left
+weight: 0
 provider: null
-plugin: 'views_exposed_filter_block:resultats_de_recherche-page_1'
+plugin: 'facet_block:news_date'
 settings:
-  id: 'views_exposed_filter_block:resultats_de_recherche-page_1'
-  label: ''
-  label_display: '0'
-  provider: views
-  views_label: ''
+  id: 'facet_block:news_date'
+  label: 'Date de l''actualité'
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: datedelactualite
 visibility:
   site_type:
     id: site_type

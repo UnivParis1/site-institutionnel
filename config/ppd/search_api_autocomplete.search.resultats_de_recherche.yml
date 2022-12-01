@@ -5,7 +5,6 @@ dependencies:
   config:
     - search_api.index.preprod_data
     - views.view.resultats_de_recherche
-    - core.entity_view_mode.node.search_index
   module:
     - views
     - search_api_autocomplete
@@ -22,8 +21,6 @@ suggester_settings:
       - eb_simple_text
       - eb_subtitle
       - eb_text
-      - field_short_bio
-      - field_short_desc
       - field_simple_text
       - p_bp_text
       - p_text
@@ -33,17 +30,17 @@ suggester_settings:
     highlight:
       enabled: false
       field: ''
+    suggest_keys: false
     view_modes:
       'entity:node':
-        event: search_index
-        news: search_index
-        offer: search_index
-        page: search_index
-        page_personnelle: search_index
-        press: search_index
-        publication: search_index
-        second_level_pages: search_index
-        viva: search_index
+        event: ''
+        news: ''
+        offer: ''
+        page: ''
+        press: ''
+        publication: ''
+        second_level_pages: ''
+        viva: ''
   server:
     fields:
       - eb_bp_text
@@ -54,8 +51,6 @@ suggester_settings:
       - eb_tab_title
       - eb_text
       - field_lead
-      - field_short_bio
-      - field_short_desc
       - field_simple_text
       - p_bp_text
       - p_field_title
@@ -76,8 +71,7 @@ search_settings:
   'views:resultats_de_recherche':
     displays:
       default: true
-      selected:
-        - page_1
+      selected: {  }
 options:
   limit: 10
   min_length: 4
