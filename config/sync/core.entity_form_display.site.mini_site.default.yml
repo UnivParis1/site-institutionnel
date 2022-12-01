@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.site.mini_site.field_complete_name
+    - field.field.site.mini_site.field_family
     - field.field.site.mini_site.field_footer
+    - field.field.site.mini_site.field_label
     - field.field.site.mini_site.field_site_administrator
     - field.field.site.mini_site.field_site_category
     - field.field.site.mini_site.field_site_contributor
@@ -14,7 +16,6 @@ dependencies:
     - image.style.thumbnail
     - micro_site.site_type.mini_site
   module:
-    - datetime
     - image
     - link
 id: site.mini_site.default
@@ -22,6 +23,13 @@ targetEntityType: site
 bundle: mini_site
 mode: default
 content:
+  about_me:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   css:
     type: string_textarea
     weight: 20
@@ -29,6 +37,13 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  discipline_enseignement:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   doc_enabled:
     type: boolean_checkbox
@@ -61,6 +76,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_family:
+    type: options_select
+    weight: 101
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_footer:
     type: link_default
     weight: 27
@@ -68,6 +89,12 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_label:
+    type: options_select
+    weight: 102
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_site_administrator:
     type: entity_reference_autocomplete
@@ -237,6 +264,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  skills_lists:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   slogan:
     type: string_textfield
     weight: 0
@@ -252,11 +286,39 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  supannEntite_pedagogy:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  supannEntite_research:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  supannRole:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   theme:
     type: options_select
     weight: 16
     region: content
     settings: {  }
+    third_party_settings: {  }
+  trombi_ec_enable:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   type_url:
     type: options_buttons

@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.site.mini_site.field_complete_name
+    - field.field.site.mini_site.field_family
     - field.field.site.mini_site.field_footer
+    - field.field.site.mini_site.field_label
     - field.field.site.mini_site.field_site_administrator
     - field.field.site.mini_site.field_site_category
     - field.field.site.mini_site.field_site_contributor
@@ -19,6 +21,20 @@ targetEntityType: site
 bundle: mini_site
 mode: default
 content:
+  field_family:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_label:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_site_category:
     type: list_default
     label: above

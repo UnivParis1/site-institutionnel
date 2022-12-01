@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.page.field_sub_title
     - node.type.page
   module:
+    - paragraphs
     - user
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
@@ -25,21 +26,21 @@ targetEntityType: node
 bundle: page
 mode: search_index
 content:
-  field_short_desc:
-    type: string
+  field_media:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_sub_title:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
+      view_mode: search_index
+      link: false
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_paragraphs:
+    type: paragraph_summary
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
   links:
     settings: {  }
@@ -52,11 +53,11 @@ hidden:
   field_disable_canonical_url: true
   field_display_node_changed: true
   field_indexrobots: true
-  field_media: true
-  field_paragraphs: true
   field_publish_master: true
+  field_short_desc: true
   field_sites: true
   field_sites_all: true
+  field_sub_title: true
   langcode: true
   search_api_excerpt: true
   site_id: true
