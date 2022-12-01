@@ -36,17 +36,41 @@ class KeywordsConfigForm extends ConfigFormBase {
   {
     $config = $this->config('up1_keywords.settings');
     $existing_keywords = $config->get('keywords_links');
-    $nb_keywords = count($existing_keywords);
+    $search_url = $config->get('url_resultat_de_recherche');
 
-    $form['container'] = [
+    $form['search_page'] = [
+      '#type' => 'details',
+      '#title' => 'Search page information',
+      '#weight' => -10,
+      '#open' => TRUE
+    ];
+    $form['search_page']['search_page_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Search page URI'),
+      '#description' => $this->t('Must look like "/url-page-search"'),
+      '#maxlength' => 64,
+      '#size' => 64,
+      '#default_value' => $config->get('search_page_url'),
+      '#required' => TRUE
+    ];
+
+    $nb_keywords = count($existing_keywords);
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => $this->t('List of tags with their URL to display on front page'),
+      '#weight' => -0,
+      '#open' => TRUE
+    ];
+
+    $form['keywords']['container'] = [
       '#type' => 'container',
       '#attributes' => ['id' => 'keywords-form-container']
     ];
     if ($this->additionnal_rows < 5) {
-      $form['container']['actions'] = [
+      $form['keywords']['container']['actions'] = [
         '#type' => 'actions'
       ];
-      $form['container']['actions']['add_item'] = [
+      $form['keywords']['container']['actions']['add_item'] = [
         '#type' => 'submit',
         '#value' => $this->t('Add keyword link'),
         '#submit' => ['::add_keyword_item'],
@@ -56,7 +80,7 @@ class KeywordsConfigForm extends ConfigFormBase {
         ],
       ];
     }
-    $form['container']['keywords_links'] = [
+    $form['keywords']['container']['keywords_links'] = [
       '#type' => 'table',
       '#tabledrag' => [
         [
@@ -67,18 +91,18 @@ class KeywordsConfigForm extends ConfigFormBase {
       ],
     ];
     for ($i = 0; $i < $nb_keywords; $i++) {
-      $form["container"]['keywords_links'][$i]['#attributes']['class'][] = 'draggable';
-      $form["container"]["keywords_links"][$i]["url"] = [
+      $form['keywords']["container"]['keywords_links'][$i]['#attributes']['class'][] = 'draggable';
+      $form['keywords']["container"]["keywords_links"][$i]["url"] = [
         '#type' => "url",
         '#title' => $this->t("URL"),
         '#default_value' => $existing_keywords[$i]["uri"],
       ];
-      $form["container"]["keywords_links"][$i]["text"] = [
+      $form['keywords']["container"]["keywords_links"][$i]["text"] = [
         '#type' => "textfield",
         '#title' => $this->t("Link text"),
         '#default_value' => $existing_keywords[$i]["title"],
       ];
-      $form["container"]['keywords_links'][$i]['weight'] = [
+      $form['keywords']["container"]['keywords_links'][$i]['weight'] = [
         '#type' => 'weight',
         '#title' => $this->t("Weight"),
         '#title_display' => 'invisible',
@@ -90,16 +114,16 @@ class KeywordsConfigForm extends ConfigFormBase {
     }
 
     for($i=0; $i < $this->additionnal_rows; $i++){
-      $form["container"]['keywords_links'][$nb_keywords+$i]['#attributes']['class'][] = 'draggable';
-      $form["container"]["keywords_links"][$nb_keywords+$i]["url"] = [
+      $form['keywords']["container"]['keywords_links'][$nb_keywords+$i]['#attributes']['class'][] = 'draggable';
+      $form['keywords']["container"]["keywords_links"][$nb_keywords+$i]["url"] = [
         '#type' => "url",
         '#title' => $this->t("URL"),
       ];
-      $form["container"]["keywords_links"][$nb_keywords+$i]["text"] = [
+      $form['keywords']["container"]["keywords_links"][$nb_keywords+$i]["text"] = [
         '#type' => "textfield",
         '#title' => $this->t("Link text"),
       ];
-      $form["container"]['keywords_links'][$nb_keywords+$i]['weight'] = [
+      $form['keywords']["container"]['keywords_links'][$nb_keywords+$i]['weight'] = [
         '#type' => 'weight',
         '#title' => $this->t("Weight"),
         '#title_display' => 'invisible',
@@ -125,15 +149,17 @@ class KeywordsConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $values = $form_state->getValues()['keywords_links'];
+    $search_page_url = $form_state->getValue('search_page_url');
+    $keywords = $form_state->getValues()['keywords_links'];
     $list = [];
-    foreach($values as $key => $value){
-      $list[] = ["uri" => $value['url'], "title" => $value['text']];
+    foreach($keywords as $key => $keyword){
+      $list[] = ["uri" => $keyword['url'], "title" => $keyword['text']];
     }
     $this->config('up1_keywords.settings')
       ->set('keywords_links', $list)
+      ->set('search_page_url', $search_page_url)
       ->save();
-    \Drupal::messenger()->addMessage($this->t("Keywords element(s) saved"));
+    \Drupal::messenger()->addMessage($this->t("Search URL & keywords element(s) saved"));
   }
 
   /**
