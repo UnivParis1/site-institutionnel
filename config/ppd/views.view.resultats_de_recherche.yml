@@ -5,6 +5,7 @@ dependencies:
   config:
     - search_api.index.preprod_data
   module:
+    - better_exposed_filters
     - search_api
     - views_infinite_scroll
 id: resultats_de_recherche
@@ -161,7 +162,7 @@ display:
             automatically_load_content: false
             initially_load_all_pages: false
       exposed_form:
-        type: basic
+        type: bef
         options:
           submit_button: OK
           reset_button: false
@@ -170,6 +171,28 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
+          text_input_required: 'Sélectionnez n''importe quel filtre et cliquez sur Appliquer pour voir les résultats'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: false
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Options avancées'
+              secondary_open: false
+              reset_button_always_show: false
+            filter:
+              search_api_fulltext:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: ''
+                  collapsible: false
+                  is_secondary: false
       access:
         type: none
         options: {  }
@@ -182,6 +205,58 @@ display:
           id: search_api_relevance
           table: search_api_index_preprod_data
           field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        news_date:
+          id: news_date
+          table: search_api_index_preprod_data
+          field: news_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        event_date:
+          id: event_date
+          table: search_api_index_preprod_data
+          field: event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        viva_date:
+          id: viva_date
+          table: search_api_index_preprod_data
+          field: viva_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        publishing_date:
+          id: publishing_date
+          table: search_api_index_preprod_data
+          field: publishing_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -277,6 +352,89 @@ display:
             - sub_title
             - subtitle
             - title
+        status:
+          id: status
+          table: search_api_index_preprod_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_preprod_data
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+          2: OR
       style:
         type: default
       row:
@@ -288,7 +446,6 @@ display:
               news: search_index
               offer: search_index
               page: search_index
-              page_personnelle: search_index
               press: search_index
               publication: search_index
               second_level_pages: search_index
@@ -301,8 +458,31 @@ display:
           preserve_facet_query_args: false
           query_tags: {  }
       relationships: {  }
-      use_ajax: false
-      header: {  }
+      use_ajax: true
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<h3>Résultats pour "[current-page:query:text]"</h3>'
+            format: full_html
+          tokenize: false
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<div class="search-result">Nombre de résultats : @total</div>'
       footer: {  }
       display_extenders: {  }
     cache_metadata:

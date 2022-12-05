@@ -1,0 +1,42 @@
+uuid: f9817abc-46ff-44b1-9209-4222d9235d23
+langcode: fr
+status: true
+dependencies:
+  config:
+    - facets.facet.content_type
+  module:
+    - facets
+    - micro_path
+    - micro_site
+    - system
+  theme:
+    - p1ps2019
+id: typedecontenu
+theme: p1ps2019
+region: content_left
+weight: -17
+provider: null
+plugin: 'facet_block:content_type'
+settings:
+  id: 'facet_block:content_type'
+  label: Type
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: typedecontenu
+visibility:
+  site_type:
+    id: site_type
+    negate: false
+    context_mapping: {  }
+    site_type: {  }
+  site:
+    id: site
+    negate: false
+    context_mapping: {  }
+    sites: {  }
+    sites_front_page: 0
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/resultats-de-recherche\r\n/resultats-de-recherche*"

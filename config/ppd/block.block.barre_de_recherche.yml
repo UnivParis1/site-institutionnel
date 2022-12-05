@@ -1,19 +1,20 @@
 uuid: e273234a-9d8f-464c-b404-be40426fc174
 langcode: fr
-status: false
+status: true
 dependencies:
   config:
     - views.view.resultats_de_recherche
   module:
     - micro_path
     - micro_site
+    - system
     - views
   theme:
     - p1ps2019
 id: barre_de_recherche
 theme: p1ps2019
 region: header
-weight: -16
+weight: -17
 provider: null
 plugin: 'views_exposed_filter_block:resultats_de_recherche-page_1'
 settings:
@@ -34,3 +35,7 @@ visibility:
     context_mapping: {  }
     sites: {  }
     sites_front_page: 0
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/resultats-de-recherche\r\n/resultats-de-recherche*"

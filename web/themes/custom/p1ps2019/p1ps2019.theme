@@ -65,7 +65,7 @@ function p1ps2019_preprocess_page(&$variables)
 
   $variables['#attached']['drupalSettings']['language'] = $language;
 
-  if ($variables['is_front']) {
+  if ($variables['is_front'] || preg_match('/resultats-de-recherche/', $system_path)) {
     $print_hp_image = TRUE;
   }
   if (preg_match('/node\/preview/', $system_path)) {
@@ -121,9 +121,9 @@ function p1ps2019_preprocess_node(&$variables) {
   $node = $variables['node'];
 
   if ($variables['elements']['#view_mode'] == 'search_index') {
+    $node_paragraphs = NULL;
     switch ($node->getType()) {
       case "news" :
-      case "news2018" :
         $variables['node_type_text'] = t("Actualité");
         break;
       case "page_personnelle" :
@@ -148,6 +148,28 @@ function p1ps2019_preprocess_node(&$variables) {
       case "page_personnelle":
         $variables['node_type_text'] = t("Page personnelle");
         break;
+    }
+
+    if (!empty($node_paragraphs)) {
+      foreach ($node_paragraphs as $key => $value) {
+        $paragraph = FALSE;
+        if (!empty($value['entity'])) {
+          // Use that, we're probably previewing.
+          $paragraph = $value['entity'];
+        }
+        elseif (!empty($value['target_id'])) {
+          $paragraph = Paragraph::load($value['target_id']);
+        }
+        if (!empty($paragraph) && $paragraph instanceof Paragraph) {
+          $view_builder = \Drupal::entityTypeManager()->getViewBuilder('paragraph');
+          $array = $view_builder->view($paragraph, 'search_index');
+          $array['#cache']['tags'][] = 'node:' . $node->id();
+          if (in_array($paragraph->bundle(), ['bp_simple', 'jumbotron', 'rich_content', 'bp_columns'])) {
+            $text_paragraphs[] = $array;
+          }
+        }
+      }
+      if (!empty($text_paragraphs)) $variables['text_paragraphs'] = $text_paragraphs;
     }
   }
   if ($node->getType() == 'page_personnelle') {
@@ -393,8 +415,13 @@ function p1ps2019_theme_suggestions_views_view_alter(array &$suggestions, array 
 function p1ps2019_preprocess_views_view(&$variables)
 {
   $variables['is_listing_page'] = FALSE;
-  $views = ['travailler_universite', 'listings','annuaire_des_mini_sites', 'viva'];
+  $views = ['travailler_universite', 'listings', 'viva'];
   if (in_array($variables['id'], $views)) {
+    $variables['is_listing_page'] = TRUE;
+    $variables['view_title'] = $variables['view']->getTitle();
+  }
+  $view_display = $variables['view']->getDisplay();
+  if ($variables['id'] == 'annuaire_des_mini_sites' && $view_display->display['display_title'] == 'Page') {
     $variables['is_listing_page'] = TRUE;
     $variables['view_title'] = $variables['view']->getTitle();
   }
@@ -423,6 +450,12 @@ function p1ps2019_preprocess_views_view(&$variables)
       'link-style', 'with-arrow'
     );
     $variables["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
+  }
+  if ($variables['id'] == 'resultats_de_recherche') {
+    $variables['show_view_header'] = FALSE;
+    if (!empty (\Drupal::request()->query->get('text'))) {
+      $variables['show_view_header'] = TRUE;
+    }
   }
 }
 

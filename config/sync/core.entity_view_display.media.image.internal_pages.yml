@@ -1,0 +1,51 @@
+uuid: 14c02fdb-431d-4f88-94a5-c265ac728004
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.internal_pages
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - media.type.image
+    - responsive_image.styles.internal_pages
+  module:
+    - responsive_image
+id: media.image.internal_pages
+targetEntityType: media
+bundle: image
+mode: internal_pages
+content:
+  field_credits:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_legende:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: internal_pages
+      image_link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true
