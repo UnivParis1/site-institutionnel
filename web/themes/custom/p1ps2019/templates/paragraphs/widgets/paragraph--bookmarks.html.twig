@@ -76,11 +76,11 @@
 {# Prints div with classes, and content without Width and Background. #}
 <div{{ attributes.addClass(classes|merge(layout_background_classes)) }}>
   <div class="paragraph__column padding-mobile">
-    {% if content.field_title.0|striptags|trim %}
+    {% if title %}
       <div class="grid-container">
         <div class="grid-x grid-margin-x">
           <div class="cell small-12">
-            <h2 class="titre">{{ content.field_title.0 }}</h2>
+            <h2 class="titre">{{ title }}</h2>
           </div>
         </div>
       </div>

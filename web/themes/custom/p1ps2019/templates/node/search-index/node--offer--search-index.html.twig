@@ -68,36 +68,27 @@
 {%
   set classes = [
   node.bundle|clean_class,
-  node.isPromoted() ? 'is-promoted',
-  node.isSticky() ? 'is-sticky',
-  not node.isPublished() ? 'is-unpublished',
   view_mode ? view_mode|clean_class,
-  'clearfix', 'box-style',
+  'clearfix',
 ]
 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="box-content same-height">
-    <div class="top-infos">
-      <div class="node-type-search">{{ node_type_text }}</div>
-      <div class="infos-row-wrapper space-between">
-        <div class="categ-wrapper infos-entry">
-          <div class="categ-style semi-infos-sep"> {{ content.field_offer_type }} </div>
-          <div class="categ-style semi-infos-sep"> {{ content.field_job_type }} </div>
-          <div class="categ-style semi-infos-sep"> {{ content.field_service }} </div>
-          {{ content.field_application_deadline }}
-        </div>
-      </div>
-      {{ title_prefix }}
-      <h2 class="title semi-infos-sep">
-        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
-      </h2>
-      {{ title_suffix }}
-    </div>
-    <div class="bottom-infos">
-      <div class="node-readmore">
-        <a href="{{ url }}" class="link-style" title="readmore">{{ "Read more"|t }}</a>
-      </div>
+  {# Offer color : orange #}
+  <div class="si-image si-picto-{{ node.bundle|clean_class }}">
+    {{ content.field_fa_icon }}
+  </div>
+  <div class="si-info">
+    <span class="si-type">{{ node_type_text }}</span><span>{{ content.field_contract_type }}</span>
+    {{ title_prefix }}
+    <h2{{ title_attributes.addClass('si-title') }}>
+      <a href="{{ url }}" rel="bookmark" title="{{ label.0 }}">{{ label.0 }}</a>
+    </h2>
+    {{ title_suffix }}
+    <div class="si-date"><i class="fa fas fa-calendar-day"></i>{{ content.field_application_deadline.0 }}</div>
+    <p class="si-job-type"><i class="fa fa-circle-info fa-regular"></i>{{ content.field_job_type.0 }}</p>
+    <div class="btn-wrapper">
+      <a href="{{ url }}" class="btn btn-primary" title="readmore">{{ "Read more"|t }}</a>
     </div>
   </div>
 </article>

@@ -5,9 +5,16 @@
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
-     Only "getter" methods (method names starting with "get", "has", or "is")
-     and a few common methods such as "id" and "label" are available. Calling
-     other methods (such as node.delete) will result in an exception.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
  * - label: The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
@@ -56,8 +63,6 @@
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
  *
- * @ingroup templates
- *
  * @see template_preprocess_node()
  *
  * @todo Remove the id attribute (or make it a class), because if that gets
@@ -65,38 +70,29 @@
  *   in different view modes.
  */
 #}
-{%
-    set classes = [
-    node.bundle|clean_class, 'box-style',
-    node.isPromoted() ? 'is-promoted',
-    node.isSticky() ? 'is-sticky',
-    not node.isPublished() ? 'is-unpublished',
-    view_mode ? view_mode|clean_class,
-    'clearfix',
-]
-%}
+{{ attach_library('p1ps2019/iframe') }}
+{% set classes = ['second-level-page'] %}
+{% set id = node.id() %}
+{% set htmlId = 'page-' ~ id %}
 
-<article{{ attributes.addClass(classes) }}>
-    <div class="box-content same-height">
-        <div class="top-infos">
-            <div class="node-type-search">{{ node_type_text }}</div>
-            <div class="categ-style semi-infos-sep">{{ content.field_news_topic }}</div>
-            {{ title_prefix }}
-            <h2{{ title_attributes.addClass('title title-sep') }}>
-                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-            </h2>
-            {{ title_suffix }}
-        </div>
-      <div>
-        {{ content.field_lead }}
+<article{{ attributes.setAttribute('id', htmlId).addClass(classes) }}>
+  <div class="grid-container">
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-12">
+        {{ title_prefix }}
+        <h1 class="title field-sep"> {{ label.0 }}</h1>
+        {{ title_suffix }}
       </div>
-      <div>
-        {{ field_paragraphs }}
-      </div>
-        <div class="bottom-infos">
-           <div class="node-readmore">
-             <a href="{{ url }}" class="link-style" title="readmore">{{ "Read more"|t }}</a>
-           </div>
-        </div>
     </div>
+  </div>
+  <div class="grid-container changed">
+    {% if changed is not empty %}
+      {% if isNew == 0 %} {% trans %}Changed on {% endtrans %} {% endif %}
+      {{ changed }}
+    {% endif %}
+  </div>
+  <div{{ content_attributes }}>
+    {{ content }}
+  </div>
+
 </article>

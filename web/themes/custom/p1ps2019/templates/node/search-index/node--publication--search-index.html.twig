@@ -65,60 +65,43 @@
  *   in different view modes.
  */
 #}
+{% set node_type = node.bundle|clean_class %}
 {%
   set classes = [
-  node.bundle|clean_class,
-  node.isPromoted() ? 'is-promoted',
-  node.isSticky() ? 'is-sticky',
-  not node.isPublished() ? 'is-unpublished',
-  'clearfix', 'box-style', 'viva'
+  node_type,
+  view_mode ? view_mode|clean_class,
+  'clearfix',
 ]
 %}
-{% set all_board = content.field_board['#items'].getString() %}
-{% set list_board = all_board|split(', ') %}
-{% set hdr_value = content.field_hdr['#items'].getString() %}
-{% set codir = content.field_co_director|render %}
-{% set board = content.field_board|render %}
-
 <article{{ attributes.addClass(classes) }}>
-  <div class="box-content same-height{% if hdr_value %} blue-box{% endif %}">
-    {% if hdr_value %}
-      <span class="texthdr">hdr</span>
-    {% endif %}
+  {% if image|render %}
+    <div class="si-image">
+      {{ content.field_media }}
+    </div>
+  {% else %}
+    <div class="si-image si-picto-{{ node_type }}">
+      <svg height="32" id="icon" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title/><path d="M28,6a2,2,0,0,0-2-2H22V2H20V4H12V2H10V4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2h4V26H6V6h4V8h2V6h8V8h2V6h4v6h2Z"/><polygon points="21 15 23.549 19.938 29 20.729 25 24.573 26 30 21 27.438 16 30 17 24.573 13 20.729 18.6 19.938 21 15"/><rect class="cls-1" data-name="&lt;Transparent Rectangle&gt;" height="32" id="_Transparent_Rectangle_" width="32"/></svg>
+    </div>
+  {% endif %}
+  <div class="si-info">
+    <div class="si-top-info">
+      <span class="si-type">{{ node_type_text }}</span><span class="categ-style"> {{ content.field_publication_type }}</span>
+    </div>
     {{ title_prefix }}
-    <div class="top-infos">
-      <div class="node-type-search">{{ node_type_text }}</div>
-      <h2 class="h5-style">
-        {{ label.0 }}
-      </h2>
-      <h3 class="h4-style">{{ content.field_subtitle.0 }}</h3>
+    <h2 class="title title-sep">
+      <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
+    </h2>
+    {{ title_suffix }}
+    <p>{{ content.field_author_name.0 }}
+    {% if content.field_publishing_year|render %}
+      - {{ content.field_publishing_year.0 }}
+    {% endif %}</p>
+    <p>{{ content.body.0 }}</p>
+    <p class="categ-style">{% for key, topic in content.field_publication_topics if key|first != '#' %}
+    <span>{{ topic }}</span>
+    {% endfor %}</p>
+    <div class="btn-wrapper">
+      <a href="{{ url }}" class="btn btn-primary" title="readmore">{{ "Read more"|t }}</a>
     </div>
-      {{ title_suffix }}
-    <div class="subtitle">
-      <span>{{ "Sous la direction de "|t }}</span>
-      {{ content.field_thesis_supervisor.0}}
-      {% if codir %} & {{ content.field_co_director.0}} {% endif %}
-    </div>
-    {% if board %}
-      <div class="board">
-        <span>{{ "Composition du jury : "|t }}</span>
-        <ul>
-          {% for key, member in list_board %}
-            <li>{{ member|trim }}{% if not loop.last %}, {% endif %}</li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-    <div class="event-details">
-      <div class="date-style semi-field-sep">
-        <span>{{ content.field_viva_date.0 }}</span><br />
-        <span>{{ 'Lieu : '|t }}{{ content.field_event_address.0 }}</span>
-      </div>
-    </div>
-    <div class="bottom-infos">
-      <div class="categ-style semi-infos-sep">{{ content.field_edo_label.0 }}</div>
-      {{ content.field_add_to_cal }}
-    </div>
-    <a href="/soutenances">{{ "Voir toutes les soutenances"|t }}</a>
   </div>
 </article>

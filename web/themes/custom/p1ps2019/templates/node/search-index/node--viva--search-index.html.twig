@@ -5,16 +5,9 @@
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
- *   Only method names starting with "get", "has", or "is" and a few common
- *   methods such as "id", "label", and "bundle" are available. For example:
- *   - node.getCreatedTime() will return the node creation timestamp.
- *   - node.hasField('field_example') returns TRUE if the node bundle includes
- *     field_example. (This does not indicate the presence of a value in this
- *     field.)
- *   - node.isPublished() will return whether the node is published or not.
- *   Calling other methods, such as node.delete(), will result in an exception.
- *   See \Drupal\node\Entity\Node for a full list of public properties and
- *   methods for the node object.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
  * - label: The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
@@ -63,6 +56,8 @@
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
  *
+ * @ingroup templates
+ *
  * @see template_preprocess_node()
  *
  * @todo Remove the id attribute (or make it a class), because if that gets
@@ -70,29 +65,47 @@
  *   in different view modes.
  */
 #}
+{%
+  set classes = [
+  node.bundle|clean_class,
+  view_mode ? view_mode|clean_class,
+  'clearfix'
+]
+%}
+{% set all_board = content.field_board['#items'].getString() %}
+{% set list_board = all_board|split(', ') %}
+{% set hdr_value = content.field_hdr['#items'].getString() %}
+{% set codir = content.field_co_director|render %}
+{% set board = content.field_board|render %}
 
-{% set classes = ['second-level-page'] %}
-{% set id = node.id() %}
-{% set htmlId = 'page-' ~ id %}
-
-<article{{ attributes.setAttribute('id', htmlId).addClass(classes) }}>
-  <div class="grid-container">
-    <div class="grid-x grid-margin-x">
-      <div class="cell small-12">
-        {{ title_prefix }}
-        <h1 class="title field-sep"> {{ label.0 }}</h1>
-        {{ title_suffix }}
+<article{{ attributes.addClass(classes) }}>
+  <div class="si-image si-picto-{{ node.bundle|clean_class }} bg-{{ node_type_color }}-light {{ node_type_color }}">&nbsp;</div>
+  <div class="si-info">
+    <div>
+      <span class="si-type">{{ node_type_text }}</span>
+      {% if hdr_value %}<span class="texthdr blue-box">{{ "HDR"|t }}</span>{% endif %}
+      <span>{{ content.field_edo_label.0 }}</span>
+    </div>
+    {{ title_prefix }}
+    <h2{{ title_attributes.addClass('si-title') }}>
+      <a href="{{ url }}" rel="bookmark" title="">{{ label.0 }}</a>
+    </h2>
+    {{ title_suffix }}
+    <div class="si-author">
+      <span>{{ content.field_subtitle.0 }}{{ ", sous la direction de "|t }}
+      {{ content.field_thesis_supervisor.0}}
+      {% if codir %} {{ "and "|t }} {{ content.field_co_director.0}}{% endif %}</span>
+    </div>
+    {% if board %}
+      <div class="board">
+        <i class="fa fas fa-users"></i> {{ all_board|join(', ') }}
       </div>
+    {% endif %}
+    <div class="si-date"><i class="fa fas fa-calendar-day"></i>{{ content.field_viva_date.0 }}</div>
+    <div class="si-maps"><i class="fa fas fa-location-dot"></i><span>{{ content.field_event_address.0 }}</span></div>
+    <p>{{ content.field_add_to_cal.0 }}</p>
+    <div class="btn-wrapper">
+      <a href="{{ url }}" class="btn btn-primary" title="readmore">{{ "Read more"|t }}</a>
     </div>
   </div>
-  <div class="grid-container changed">
-    {% if changed is not empty %}
-      {% if isNew == 0 %} {% trans %}Changed on {% endtrans %} {% endif %}
-      {{ changed }}
-    {% endif %}
-  </div>
-  <div{{ content_attributes }}>
-    {{ content }}
-  </div>
-
 </article>

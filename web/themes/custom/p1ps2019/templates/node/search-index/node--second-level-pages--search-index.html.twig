@@ -8,7 +8,7 @@
      Only "getter" methods (method names starting with "get", "has", or "is")
      and a few common methods such as "id" and "label" are available. Calling
      other methods (such as node.delete) will result in an exception.
- * - label: The title of the node.
+ * - label: (optional) The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
  *   {{ content|without('field_example') }} to temporarily suppress the printing
@@ -16,8 +16,8 @@
  * - author_picture: The node author user entity, rendered using the "compact"
  *   view mode.
  * - metadata: Metadata for this node.
- * - date: Themed creation date field.
- * - author_name: Themed author name field.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
  * - url: Direct URL of the current node.
  * - display_submitted: Whether submission information should be displayed.
  * - attributes: HTML attributes for the containing element.
@@ -65,44 +65,32 @@
  *   in different view modes.
  */
 #}
+
 {%
   set classes = [
   node.bundle|clean_class,
   view_mode ? view_mode|clean_class,
-  'clearfix'
+  'clearfix',
 ]
 %}
-{% set affiliation = content.field_affiliation['#items'].getString() %}
-{% set fonction = content.field_fonction['#items'].getString() %}
-{% if expertises %}
-  {% set skills = expertises %}
-{% endif %}
-
 <article{{ attributes.addClass(classes) }}>
-  <div class="box-style column-item">
-    <div class="box-content same-height">
-      <div class="top-infos">
-        <div class="node-type-search">{{ node_type_text }}</div>
-      </div>
-      {{ title_prefix }}
-      <h2 class="h4-style title semi-infos-sep">
-        <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
-      </h2>
-      {{ title_suffix }}
-      <div>{{ affiliation|capitalize }}</div>
-      <div>{{ fonction }}</div>
-      {% if skills %}
-        <div class="skills">
-          {% for key, skill in skills if key|first != '#' %}
-            <span>{{ skill|raw }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
-      <div class="bottom-infos">
-        <div class="node-readmore">
-          <a href="{{ url }}" class="link-style" title="readmore">{{ "Read more"|t }}</a>
-        </div>
-      </div>
+  <div class="si-image si-picto-{{ node.bundle|clean_class }} bg-{{ node_type_color }}-light{{ node_type_color }}">&nbsp;</div>
+  <div class="si-info">
+    <span class="si-type">{{ node_type_text }}</span>
+    {{ title_prefix }}
+    <h2{{ title_attributes.addClass('si-title') }}>
+      <a href="{{ url }}" rel="bookmark" title="">{{ label.0 }}</a>
+    </h2>
+    {{ title_suffix }}
+    {% if text_paragraphs is defined %}
+      {% for paragraph in text_paragraphs %}
+        {% if loop.index < 2 %}
+          {{ paragraph }}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    <div class="btn-wrapper">
+      <a href="{{ url }}" class="btn btn-primary" title="readmore">{{ "Read more"|t }}</a>
     </div>
   </div>
 </article>

@@ -77,10 +77,11 @@
 {% set author %}
   {{ content.field_author_name.0 }}
 {% endset %}
+{% set image_url = content.field_media.0|render %}
 
 <article{{ attributes.addClass(classes) }}>
   <a class="sm-teaser__img-link" href="{{ url }}" title="{{ label.0 }}">
-    {{ content.field_media }}
+    <img src="{{ image_url }}" alt="{{ label.0 }}"/>
   </a>
   <div class="sm-teaser__block px-medium">
     {{ title_prefix }}
