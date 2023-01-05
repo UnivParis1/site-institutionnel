@@ -4,7 +4,7 @@
     Par Ebizproduction
 */
 
-//large up
+//large up // Min width
 @include breakpoint($large){
   .paragraph--type--hit-list{
     .paragraph__column{
@@ -51,7 +51,7 @@
   }
 }
 
-//large down
+//large down // max width
 /* Ebizproduction : Responsive > Phablette */
 @include breakpoint($large - 1 down) {
   $fgutter : 24px;
@@ -61,10 +61,17 @@
       padding-left: 0; padding-right: 0;
     }
   }
-  .no-padding-mobile{padding-left: 0 !important; padding-right: 0 !important;}
-  .grid-container{
-    padding-left: rem-calc(32px); padding-right: rem-calc(32px);
-    .padding-mobile &{padding-left: 0; padding-right: 0;}
+  .no-padding-mobile{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .grid-container {
+    padding-left: rem-calc(32px);
+    padding-right: rem-calc(32px);
+    .padding-mobile & {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
   body{
     &:not(.transparent){

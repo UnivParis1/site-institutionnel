@@ -21,7 +21,8 @@ dependencies:
     - field.field.node.event.field_tag
     - node.type.event
   module:
-    - text
+    - entity_reference_revisions
+    - micro_node
     - up1_global
     - user
 _core:
@@ -31,21 +32,14 @@ targetEntityType: node
 bundle: event
 mode: search_index
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 250
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_categories:
-    type: entity_reference_label
+  field_blocs_medias:
+    type: entity_reference_revisions_entity_view
     label: visually_hidden
     settings:
-      link: false
+      view_mode: search_index
+      link: ''
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_event_date:
     type: daterange_up1
@@ -63,21 +57,38 @@ content:
     settings:
       link: false
     third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: search_index
+      link: false
+    third_party_settings: {  }
     weight: 0
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
+    weight: 5
+    region: content
+  site_id:
+    type: entity_reference_label_site
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
     weight: 4
     region: content
 hidden:
+  body: true
   content_moderation_control: true
   field_add_to_cal: true
   field_address_map: true
-  field_blocs_medias: true
+  field_categories: true
   field_disable_canonical_url: true
   field_event_address: true
-  field_media: true
   field_publish_master: true
   field_sites: true
   field_sites_all: true
@@ -85,5 +96,4 @@ hidden:
   field_tag: true
   langcode: true
   search_api_excerpt: true
-  site_id: true
   social_simple_buttons: true

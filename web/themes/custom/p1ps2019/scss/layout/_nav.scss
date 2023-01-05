@@ -10,21 +10,38 @@
   max-width: 75rem;
   margin: auto;
   @include transitionEffect(350ms);
-  transform: translateX(-150%);
+  //transform: translateX(-150%);
   z-index: 402;
   position: relative;
   top: 0;
   height: auto;
   @include flexDisplay();
-  opacity: 0;
+  //opacity: 0;
   //overflow: auto;
   .navigation-left-region, .navigation-region{
     //padding: rem-calc(72px 116px);
     nav > ul{display: block;}
   }
-  .navigation-region{
+  .navigation-region {
+    &:before {
+      content: "";
+      width: 100vw;
+      position: absolute;
+      border-top: 1px solid #cfd6cf;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
     ul{
       li{
+        &.is-dropdown-submenu-parent {
+          position: static;
+        }
+        &.is-active {
+          a {
+            background-color: $light-blue;
+          }
+        }
         a{
           font-family: $font-main;
           font-size: rem-calc(18px);
@@ -36,9 +53,48 @@
           margin-bottom: rem-calc(8px);
         }
         */
+
+
+        ul.submenu.is-dropdown-submenu {
+          background-color: $light-blue;
+          width: 100%;
+          left: 0;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          &:before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 100vw;
+            transform: translateX(-50%);
+            background-color: $light-blue;
+          }
+          &.js-dropdown-active {
+            display: flex;
+            //display: grid;
+            //grid-template-columns: 16.6666667% 16.6666667% 16.6666667% 16.6666667% 16.6666667% 16.6666667%;
+          }
+          li {
+            position: relative;
+            width: auto;
+            min-width: 16.6666667%;
+            max-width: 25%;
+            z-index: 1;
+            display: flex;
+            text-align: center;
+            align-items: center;
+          }
+        }
+
+
       }
     }
   }
+  /*
   .navigation-left-region{
     > div {width: 100%;}
      ul.menu.large-vertical {
@@ -93,10 +149,14 @@
       }
      }
     }
+    */
+
+    /*
     &.overlay-show{
-      transform: translateX(0);
-      #{$left}: 0; opacity: 1;
+      //transform: translateX(0);
+      //#{$left}: 0; opacity: 1;
     }
+    */
 
     //================ menu mini site ================//
     .site--type--mini-site &{

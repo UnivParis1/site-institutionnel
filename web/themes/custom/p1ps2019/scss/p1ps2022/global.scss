@@ -3,43 +3,6 @@ body.path-frontpage {
   #breadcrumbs {
     display: none;
   }
-  .paragraph--type--bookmarks {
-    position: relative;
-    z-index: 1;
-    .cell {
-      transform: translateY(-50%);
-      &.large-2 {
-        @include breakpoint($large up) {
-          width: calc(20% - 2rem);
-          flex: 0 0 calc(20% - 2rem);
-          max-width: calc(20% - 2rem);
-        }
-      }
-      .box-style {
-        text-decoration: none;
-        font-family: $font-headings;
-        .box-content {
-          justify-content: center;
-          padding: rem-calc(100px 16px 48px 16px);
-          font-size: rem-calc(24px);
-          > div {
-            position: absolute;
-            width: 66px;
-            height: 68px;
-            border-radius: 0 0 5rem 5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: $white;
-            color: $text-main-color;
-          }
-        }
-      }
-    }
-  }
   .homepage-search-keywords {
     .keywords a {
       width: auto;
@@ -53,22 +16,25 @@ body.path-frontpage {
   }
 }
 
-// BLOCK BOOKMARK
-.paragraph--type--bookmarks {
-  .cell {
-    transform: translateY(-50%);
-    a {
-      .box-style .box-content {
-
-      }
-    }
-  }
-}
-
 // SLICK HOME PAGE
 .paragraph-wrapper-full {
+  padding: 3rem 0;
+  margin: 3rem 0;
   overflow: hidden;
+  h2 {
+    margin-bottom: 2rem;
+  }
   .slick--optionset--homepage-carousel {
+    min-width: calc(100% + 2rem);
+    max-width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    @include breakpoint($large - 1 down) {
+      min-width: calc(100% + 4rem);
+      max-width: calc(100% + 4rem);
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
     &:before {
       content: "";
       position: absolute;
@@ -81,8 +47,13 @@ body.path-frontpage {
     }
     .slick-list {
       overflow: visible;
-      .slide {
-        @extend .grid-container;
+      min-width: 100%;
+      .slick-track {
+        display: flex !important;
+        .slide {
+          height: inherit !important;
+          @extend .grid-container;
+        }
       }
     }
     .slick__arrow {
@@ -101,12 +72,48 @@ body.path-frontpage {
         &.slick-arrow {
           margin: 0 !important;
           padding: 0 !important;
-          border: 1px solid $gray2;
+          border: 1px solid $gray2 !important;
           height: 62px;
           width: 62px;
           background-color: transparent !important;
+        }
+        &:before {
+          content: "";
+          width: 24px;
+          height: 15px;
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+        &.slick-prev {
+          &:before {
+            background: url("../images/p1ps2022/slick-arrow-prev.svg") no-repeat center center / 100% auto;
+          }
+        }
+        &.slick-next {
+          &:before {
+            background: url("../images/p1ps2022/slick-arrow-next.svg") no-repeat center center / 100% auto;
+          }
+        }
       }
+    }
+    @include breakpoint($large - 1 down) {
+      padding-bottom: 80px;
+      .slick__arrow {
+        left: 50%;
+        right: auto;
+        top: auto;
+        bottom: 0;
+        transform: translateX(-50%) translateY(0);
       }
+    }
+  }
+  footer {
+    text-align: center;
+    .btn {
+      display: inline-block;
     }
   }
   &.paris1-bg-soft-grey {
@@ -134,37 +141,6 @@ body.path-frontpage {
         display: flex;
         align-items: center;
         text-align: center;
-      }
-    }
-  }
-}
-.key-figures-section {
-  .legende{
-    p {
-      line-height: 1.4;
-    }
-  }
-}
-.site-content-wrapper {
-  .btn,
-  .button--primary,
-  button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
-  input[type="submit"].button {
-    color: $text-white;
-    background-color: $background-main-color;
-    border-color: $text-main-color;
-    &:hover{
-      color: $text-main-color;
-      background-color: transparent;
-    }
-    &.outline{
-      border-color: $text-main-color;
-      color: $text-main-color;
-      background-color: transparent;
-      &:hover{
-        background-color: $background-main-color;
-        color: $text-white;
-        *{color: $text-white;}
       }
     }
   }

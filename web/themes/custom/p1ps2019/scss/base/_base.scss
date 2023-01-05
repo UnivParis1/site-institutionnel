@@ -10,11 +10,15 @@
 
 /* Heading TYPOGRAPHY -- BEGIN */
 h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, .h4-style, h5, h6 {
-  font-family: $font-headings; @include setFont($fontType-bold);
+  font-family:
+  $font-headings;
+  @include setFont($fontType-bold);
   line-height: 1.2;
 }
 h1, .h1-style{font-size: rem-calc(64px);}
-.path-site h1, .path-site .h1-style{font-size: rem-calc(85px);}
+.path-site h1, .path-site .h1-style{
+  font-size: rem-calc(85px);
+}
 h2, .h2-style{
   font-size: rem-calc(48px);
 }
@@ -66,6 +70,9 @@ h6, .h6-style{font-size: rem-calc(14px);}
 }
 .parag-sep-top{
   margin-top: rem-calc($fgutter);//32px
+}
+.section-sep-top.small{
+  margin-top: rem-calc($fgutter*.5);//56px
 }
 .section-sep-top.medium{
   margin-top: rem-calc($fgutter*1.75);//56px
@@ -444,14 +451,14 @@ table{
 //Anchor style END ===========
 
 .date-style, .author{
-  font-size: rem-calc(20px); line-height: 1.6;
+  font-size: rem-calc(18px); line-height: 1.6;
   font-family: $font-main; @include setFont($fontType-medium);
   min-width: rem-calc(125px);
 }
 
 
 .author{
-  @include setFont($fontType-italic);
+  //@include setFont($fontType-italic);
 }
 .sm-teaser {
   .txt,.sm-teaser__title--author {

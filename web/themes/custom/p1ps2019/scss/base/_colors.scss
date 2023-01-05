@@ -944,22 +944,51 @@ fieldset {
       }
     }
   }
-  .btn, .button--primary,
+  .btn,
+  .button--primary,
   button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
   input[type="submit"].button {
-    color: $text-main-color; background-color: $background-white; border-color: $text-main-color;
-    &:hover{color: $text-white; background-color: $background-main-color;}
-
+    color: $text-white;
+    background-color: $background-main-color;
+    border-color: $text-main-color;
+    &:hover{
+      color: $text-main-color;
+      background-color: transparent;
+    }
     &.outline{
-      border-color: $text-white; color: $text-white; background-color: transparent;
+      border-color: $text-main-color;
+      color: $text-main-color;
+      background-color: transparent;
       &:hover{
-        background-color: $background-white; color: $text-main-color;
-        *{color: $text-main-color;}
+        background-color: $background-main-color;
+        color: $text-white;
+        *{color: $text-white;}
       }
     }
   }
   //close btn
 }//close .site-content-wrapper
+
+.btn-white {
+  border-color: $text-white;
+  color: $text-main-color;
+  background-color: $background-white;
+  &:hover{
+    background-color: transparent;
+    color: $text-white;
+    *{color: $text-white;}
+  }
+  &.outline {
+    border-color: $text-white;
+    color: $text-white;
+    background-color: transparent;
+    &:hover{
+      background-color: $background-white;
+      color: $text-main-color;
+      *{color: $text-main-color;}
+    }
+  }
+}
 
 //_box-style.scss ====================
 .box-style{
