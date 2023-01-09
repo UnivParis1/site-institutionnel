@@ -214,9 +214,9 @@
 
 {# Main #}
   {% block main %}
-    <div role="main" class="main-container" id="page-content">
+    <main class="main-container" id="page-content">
       {# Content #}
-      <section {{ content_attributes.addClass(content_classes) }}>
+      <div {{ content_attributes.addClass(content_classes) }}>
         {# Highlighted #}
         {% if page.highlighted %}
           {% block highlighted %}
@@ -257,8 +257,8 @@
         {% if page.after_content %}
           {{ page.after_content }}
         {% endif %}
-      </section>
-    </div>
+      </div>
+    </main>
   {% endblock %}
 {% if page.footer or page.footer_left or page.footer_center or page.footer_right %}
   {% block footer %}
