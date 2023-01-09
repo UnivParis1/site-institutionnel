@@ -1,6 +1,7 @@
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+
+var autoprefixer = require('gulp-autoprefixer'),
     csso = require("gulp-csso"),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
