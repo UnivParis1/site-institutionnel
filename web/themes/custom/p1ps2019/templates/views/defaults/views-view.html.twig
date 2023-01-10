@@ -41,8 +41,6 @@
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {{ title }}
-  {{ title_suffix }}
-
   {% if is_listing_page or is_master_view %}
     <div class="view-header-color">
       <div class="grid-container">
@@ -58,7 +56,9 @@
     {{ title }}
     {{ exposed }}
   {% endif %}
+
   {{ title_suffix }}
+
   {% if header %}
     <div class="view-message grid-container padding-top">
       <header>
@@ -66,27 +66,29 @@
       </header>
     </div>
   {% endif %}
+
   {{ attachment_before }}
+
   {% if rows -%}
     {{ rows }}
-  {% elseif empty -%}
-    <div class="grid-container padding-top-bottom">
-      {{ empty }}
-    </div>
+    {% elseif empty -%}
+      <div class="grid-container padding-top-bottom">
+        {{ empty }}
+      </div>
   {% endif %}
 
   {% if pager or archives %}
-  <div>&nbsp;</div>
-  {% if pager %}
-    {{ pager }}
-   {% elseif archives %}
-    <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
-       class="bold-link">{{ "Archives"|t }}</a>
-  {% else %}
-    <div>&nbsp;</div>
+    <div>
+      {% if pager %}
+        {{ pager }}
+        {% elseif archives %}
+          <a href="{{ path('view.listings.archives') }}" title="{{ "Link to events archives page"|t }}"
+             class="bold-link">{{ "Archives"|t }}</a>
+        {% else %}
+          &nbsp;
+        {% endif %}
+    </div>
   {% endif %}
-</div>
-{% endif %}
 
   {{ attachment_after }}
 
@@ -97,6 +99,7 @@
       {{ footer }}
     </footer>
   {% endif %}
-
-  {{ feed_icons }}
+  <div>
+    {{ feed_icons }}
+  </div>
 </div>

@@ -75,7 +75,7 @@
 {% set id = node.id() %}
 {% set htmlId = 'page-' ~ id %}
 
-<article{{ attributes.setAttribute('id', htmlId).addClass(classes) }}>
+<article{{ attributes.setAttribute('id', htmlId).addClass(classes).removeAttribute('role') }}>
   <div class="grid-container">
     <div class="grid-x grid-margin-x">
       <div class="cell small-12">

@@ -80,7 +80,7 @@
 {% set codir = content.field_co_director|render %}
 {% set board = content.field_board|render %}
 
-<article{{ attributes.addClass(classes) }}>
+<article{{ attributes.addClass(classes).removeAttribute('role') }}>
   <div class="box-content same-height{% if hdr_value %} blue-box{% endif %}">
     {% if hdr_value %}
       <span class="texthdr">hdr</span>

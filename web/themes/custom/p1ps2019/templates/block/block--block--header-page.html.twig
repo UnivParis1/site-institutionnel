@@ -47,14 +47,14 @@
 #}
 {%
   set classes = [
-  'block', 'test',
+  'block', 
   'block-' ~ configuration.provider|clean_class,
   'block-' ~ plugin_id|clean_class,
   'clearfix',
 ]
 %}
-<section{{ attributes.addClass(classes) }}>
+<div{{ attributes.addClass(classes) }}>
   {% block content %}
     {{ content }}
   {% endblock %}
-</section>
+</div>
