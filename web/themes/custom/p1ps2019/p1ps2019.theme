@@ -455,6 +455,7 @@ function p1ps2019_preprocess_views_view(&$variables)
     $variables['show_view_header'] = FALSE;
     if (!empty (\Drupal::request()->query->get('text'))) {
       $variables['show_view_header'] = TRUE;
+      $variables['request'] = \Drupal::request()->query->get('text');
     }
   }
 }
