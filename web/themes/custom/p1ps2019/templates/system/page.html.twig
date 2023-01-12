@@ -91,30 +91,34 @@
 {% endif %}
 {% if page.header or page.header_left or page.header_center or page.header_right or page.hp_image %}
   <header id="navbar" {% if print_hp_image %} class="header-{{ header_size }} {{ siteNameClass }}" {% endif %}>
-    {% if print_hp_image %}
-      <div class="grid-x screen-{{ header_size }}-height  full-height">
-        <div class="cell small-12 full-height">
-          <div class="mask no-hover relative-wrapper {{ header_size }}-height">
-            <div class="header-img img-container full-height">{{ page.hp_image }}</div>
-            <div class="main-overlay-infos">
-              {{ page.header }}
-            </div>
-          </div>
-        </div>
-      </div>
-    {% elseif page.header %}
-      <div class="grid-x">
-        <div class="cell small-12">
-          <div class="mask no-hover relative-wrapper">
-            <div class="main-overlay-infos">
-              <div class="header-content">
-                {{ page.header }}
+    {% if page.header or print_hp_image %}
+      <div class="hp-image-container">
+        {% if print_hp_image %}
+          <div class="grid-x screen-{{ header_size }}-height full-height">
+            <div class="cell small-12 full-height">
+              <div class="mask no-hover relative-wrapper {{ header_size }}-height">
+                <div class="header-img img-container full-height">{{ page.hp_image }}</div>
+                <div class="main-overlay-infos">
+                  {{ page.header }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        {% elseif page.header %}
+          <div class="grid-x">
+            <div class="cell small-12">
+              <div class="mask no-hover relative-wrapper">
+                <div class="main-overlay-infos">
+                  <div class="header-content">
+                    {{ page.header }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {#endif print_hp_image and page.header #}
+        {% endif %}
       </div>
-      {#endif print_hp_image and page.header #}
     {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
       <div id="top-header">
@@ -151,18 +155,18 @@
             </div>
           {% endif %}
           {# end grid-x if page-mini-site #}
-          </div>
+        </div>
         {# Refonte#2616 same structure for master & mini-sites main menus #}
-          <div class="grid-x bottom-header-infos">
-            {# Navbar #}
-            {% if page.navigation %}
-              <div id="navbar-header" class="navbar-header-region">
-                {% if page.navigation %}
-                  <div class="navigation-region cell small-12">{{ page.navigation }}</div>
-                {% endif %}
-              </div>
-            {% endif %}
-          </div>
+        <div class="grid-x bottom-header-infos">
+          {# Navbar #}
+          {% if page.navigation %}
+            <div id="navbar-header" class="navbar-header-region">
+              {% if page.navigation %}
+                <div class="navigation-region cell small-12">{{ page.navigation }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
       </div>
       {# endif page headers left right center #}
     {% endif %}
