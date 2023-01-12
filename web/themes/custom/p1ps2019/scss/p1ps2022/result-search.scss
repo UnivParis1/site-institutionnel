@@ -4,12 +4,48 @@
       .infos-sep {
         display: none;
       }
+      .block-facets-ajax {
+        .facets-widget-checkbox .js-facets-checkbox-links .facet-item {
+          label {
+            border: 1px solid $gray2;
+            border-radius: 50rem;
+          }
+          input[checked=checked]+label:after {
+            top: 50%;
+            right: 0.5rem;
+            transform: translateY(-50%);
+          }
+          &:not(:last-of-type) {
+            margin-bottom: 0.5rem;
+          }
+        } 
+      }
     }
     .col-results {
       article {
+        margin-bottom: 1.5rem;
         &.search-index {
           background-color: $background-light-gray;
-          display: flex
+          display: flex;
+          .si-image {
+            width: 200px;
+            flex-shrink: 0;
+            > div {
+              height: 100%;
+              display: flex;
+              picture,
+              img {
+                width: 100%;
+
+              }
+            }
+          }
+          .si-info {
+            padding: 1.5rem;
+            h2 {
+              @extend .h4-style;
+            }
+          }
         }
       }
     }
