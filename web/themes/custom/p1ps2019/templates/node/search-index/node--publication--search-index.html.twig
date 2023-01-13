@@ -94,13 +94,15 @@
     </h2>
     {{ title_suffix }}
     <p>{{ content.field_author_name.0 }}
-    {% if content.field_publishing_year|render %}
-      - {{ content.field_publishing_year.0 }}
-    {% endif %}</p>
+      {% if content.field_publishing_year|render %}
+        - {{ content.field_publishing_year.0 }}
+      {% endif %}</p>
     <p>{{ content.body.0 }}</p>
-    <p class="categ-style">{% for key, topic in content.field_publication_topics if key|first != '#' %}
-    <span>{{ topic }}</span>
-    {% endfor %}</p>
+    {% if content.field_publication_topics|render %}
+      <p class="categ-style">{% for key, topic in content.field_publication_topics if key|first != '#' %}
+          <span>{{ topic }}</span>
+        {% endfor %}</p>
+    {% endif %}
     <div class="btn-wrapper">
       <a href="{{ url }}" class="btn btn-primary" title="readmore">{{ "Read more"|t }}</a>
     </div>
