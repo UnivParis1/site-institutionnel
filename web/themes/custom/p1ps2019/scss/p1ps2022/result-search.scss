@@ -9,11 +9,17 @@
           label {
             border: 1px solid $gray2;
             border-radius: 50rem;
+            font-size: rem-calc(13px);
           }
-          input[checked=checked]+label:after {
-            top: 50%;
-            right: 0.5rem;
-            transform: translateY(-50%);
+          input[checked=checked]+label {
+            border-color: $gold-p1ps;
+            background-color: $gold-p1ps;
+            padding-right: 2rem;
+            &:after {
+              top: 50%;
+              right: 0.5rem;
+              transform: translateY(-50%);
+            }
           }
           &:not(:last-of-type) {
             margin-bottom: 0.5rem;
@@ -21,6 +27,7 @@
         } 
       }
     }
+
     .col-results {
       article {
         margin-bottom: 1.5rem;
