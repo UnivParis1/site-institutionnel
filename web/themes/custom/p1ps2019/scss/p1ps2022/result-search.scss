@@ -37,9 +37,14 @@
         margin-bottom: 1.5rem;
         &.search-index {
           background-color: $background-light-gray;
-          display: flex;
+          @include breakpoint($small-medium down) {
+            display: flex;
+          }
           .si-image {
-            width: 200px;
+            width: 100%;
+            @include breakpoint($small-medium down) {
+              width: 200px;
+            }
             flex-shrink: 0;
             position: relative;
             > div {
@@ -83,6 +88,12 @@
           }
           .si-info {
             padding: 1.5rem;
+            .si-type {
+              background-color: $background-main-color;
+              border-radius: 50rem;
+              font-size: rem-calc(13px);
+              padding: rem-calc(4px 24px);
+            }
             h2 {
               @extend .h4-style;
             }
