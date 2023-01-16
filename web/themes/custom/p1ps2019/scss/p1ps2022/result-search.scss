@@ -58,6 +58,15 @@
           }
           .si-image {
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba($background-main-color, 0.25);
+            svg {
+              width: 70px;
+              height: auto;
+              fill: $text-main-color;
+            }
             @include breakpoint($small-medium) {
               width: 200px;
             }
@@ -88,17 +97,6 @@
                 width: 70px;
                 height: auto;
                 fill: $green;
-              }
-            }
-            &[class^="si-picto"] {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background-color: rgba($background-main-color, 0.25);
-              svg {
-                width: 70px;
-                height: auto;
-                fill: $text-main-color;
               }
             }
           }
