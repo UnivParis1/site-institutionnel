@@ -33,11 +33,8 @@
           input[checked=checked]+label {
             border-color: $gold-p1ps;
             background-color: $gold-p1ps;
-            padding-right: 2rem;
             &:after {
-              top: 50%;
-              right: 0.5rem;
-              transform: translateY(-50%);
+              display: none;
             }
           }
           &:not(:last-of-type) {
@@ -56,12 +53,12 @@
         margin-bottom: 1.5rem;
         &.search-index {
           background-color: $background-light-gray;
-          @include breakpoint($small-medium down) {
+          @include breakpoint($small-medium) {
             display: flex;
           }
           .si-image {
             width: 100%;
-            @include breakpoint($small-medium down) {
+            @include breakpoint($small-medium) {
               width: 200px;
             }
             flex-shrink: 0;
