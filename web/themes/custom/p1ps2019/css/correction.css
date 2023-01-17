@@ -42,7 +42,7 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
     flex: 0 0 auto;
     width: auto;
     margin-left: .75rem;
-    margin-right: .75rem; 
+    margin-right: .75rem;
 }
 /* label node type dans la recherche */
 .node-type-search {
@@ -995,4 +995,66 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
 
 .paragraph--type--content-block .medium-4.views-row {
   margin-bottom: 2rem;
+}
+
+/** Correction titre long dans paragraph accordeon **/
+.accordion .accordion-item .accordion-title span {
+  width: calc(100% - 2.6rem);
+  display: block;
+}
+/** Correction habillage page accueil www sur mobile depuis changement section en div ***/
+@media screen and (max-width: 63.9375em) {
+
+#block-block-header-page, #block-views-block-header-block-header-micro {
+  padding-top: 180px;
+}
+#navbar {
+  height: calc(100% + 120px);
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+}
+#navbar .screen-height .header-img * {
+  height: calc(100% + 120px);
+}
+#breadcrumbs {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+}
+.mask::after {
+  height: calc(100% + 120px);
+}
+main {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  margin: 100px 0 0;
+  padding: 0;
+}
+.transparent #navbar .full-height .views-element-container h1 {
+  font-size: 1.5rem;
+}
+}
+/*** Ajout nouvelle class pour intégration iframe ***/
+.iframe-contener {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.iframe-contener .iframe-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.adminimal-admin-toolbar #navbar #top-header {
+    top: 39px;
+}
+.adminimal-admin-toolbar.toolbar-tray-open #navbar #top-header {
+    top: 78px;
 }
