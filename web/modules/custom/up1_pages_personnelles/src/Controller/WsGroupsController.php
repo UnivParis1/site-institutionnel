@@ -690,7 +690,9 @@ class WsGroupsController extends ControllerBase
 
   public function syncLdap() {
     $count_disabled = 0;
-    $disabled_users = [];
+    $count_enabled = 0;
+    $disabled_pages = [];
+    $enabled_pages = [];
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
     $ids = \Drupal::entityQuery('user')
       ->condition('status', 1)
@@ -699,28 +701,41 @@ class WsGroupsController extends ControllerBase
     $users = User::loadMultiple($ids);
 
     foreach($users as $user) {
-      //If Drupal User doesn't exists in ldap, we disable his page_perso.
-      if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
-        $query = \Drupal::entityQuery('node')
-          ->condition('type', 'page_personnelle')
-          ->condition('uid', $user->id());
-        $result = $query->execute();
-        if (!empty($result) && count($result) == 1) {
-          $nid = reset($result);
-          $page_perso = Node::load($nid);
-          $page_perso->status = 0;
-          $page_perso->save();
-        }
-        //Block user.
-        $user->block();
-        $user->save();
-        $count_disabled++;
-        $disabled_users[] = $user->get('name')->value;
+
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'page_personnelle')
+        ->condition('uid', $user->id());
+      $result = $query->execute();
+      if (!empty($result) && count($result) == 1) {
+        $nid = reset($result);
+        $page_perso = Node::load($nid);
       }
+      if (isset($page_perso) && !empty($page_perso)) {
+        //If Drupal User doesn't exists in ldap, we disable his page_perso.
+        if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
+            $page_perso->status = 0;
+            $page_perso->save();
+            $count_disabled++;
+            $disabled_pages[] = $user->get('name')->value;
+        }
+        else {
+          //If Drupal User exists in ldap, enable his page_perso if it has been disabled.
+        if (!$page_perso->status) {
+          $page_perso->status = 1;
+          $page_perso->save();
+          $count_enabled++;
+          $enabled_pages[] = $user->get('name')->value;
+        }
+      }
+     }
     }
 
-    return new JsonResponse([
-      'data' => ['nb_disabled_users' => $count_disabled, 'users_name' => implode(', ', $disabled_users)],
+    return new JsonResponse(['data' => [
+        'nb_disabled_pages' => $count_disabled,
+        'disabled_pages_username' => implode(', ', $disabled_pages),
+        'nb_enabled_pages' => $count_enabled,
+        'enabled_pages_username' => implode(', ', $enabled_pages)
+      ],
       'method' => 'GET',
       'status'=> 200
     ]);
