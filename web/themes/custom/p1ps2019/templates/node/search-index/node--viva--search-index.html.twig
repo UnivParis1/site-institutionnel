@@ -65,8 +65,11 @@
  *   in different view modes.
  */
 #}
+{% set node_type = node.bundle|clean_class %}
+
 {%
   set classes = [
+  node_type,
   node.bundle|clean_class,
   view_mode ? view_mode|clean_class,
   'clearfix'
