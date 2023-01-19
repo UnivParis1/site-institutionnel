@@ -122,9 +122,9 @@
     {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
       <div id="top-header">
-        <div class="grid-x align-justify top-header-infos">
+        <div class="grid-x align-justify align-middle top-header-infos">
           {# Refonte#2617 menu accès direct (site principal) #}
-          <div class="cell shrink header-left">
+          <div class="cell shrink header-left show-for-large">
             {% if not page_mini_site and not is_front_mini_site %}
               {% if page.header_left %}
                 <button href="#" class="button direct-access-btn">
@@ -151,7 +151,10 @@
           {% endif %}
           {% if page.header_right %}
             <div class="cell shrink header-right">
+
               {{ page.header_right }}
+              <span class="mobile-nav-control hide-for-large"></span>
+
             </div>
           {% endif %}
           {# end grid-x if page-mini-site #}

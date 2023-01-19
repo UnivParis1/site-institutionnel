@@ -47,12 +47,12 @@
 		#{$left}: 0;
 		z-index: 403;
 		width: 100%;
-		padding: rem-calc(10px 40px 0 40px);
+		padding: rem-calc(0 40px);
 		min-height: rem-calc(82px);
 		@include transitionEffect(300ms, ease-in-out);
 		align-items: center;
 		.top-header-infos {
-      height: 75px;
+      		height: 90px;
 			.header-left {
 				position: relative;
 				.direct-access-btn {
@@ -79,10 +79,10 @@
 					border-radius: rem-calc(10px);
 					@include box-shadow(0.25, 5px, 0, $background-black);
 					position: absolute;
+					z-index: 405;
 					top: calc(100% + 5px);
 					text-align: center;
 					padding: rem-calc(0 10px);
-
 					opacity: 0;
 		    		visibility: hidden;
 		    		@include transitionEffect();
@@ -200,7 +200,8 @@
 
 	.header-center{
 		position: absolute;
-		#{$left}: 50%; top: 30%;
+		#{$left}: 50%;
+		top: 30%;
 		transform: translate(-50%, -50%);
 	}
 
