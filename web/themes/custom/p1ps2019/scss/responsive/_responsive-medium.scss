@@ -519,6 +519,10 @@
         height: rem-calc(40px);
         border-radius: 50%;
         background: $background-main-color url("../images/p1ps2022/picto-open-menu-mobile.svg") no-repeat center center;
+        transition: background 0.3s ease-in-out;
+        &.overlay-show {
+          background: $background-main-color url("../images/p1ps2022/picto-close-menu-mobile.svg") no-repeat center center;
+        }
       }
 
       .block-up1-ent-search-block{
@@ -860,13 +864,47 @@
     column-gap: 0;
     padding: 0 rem-calc(48px);
   }
+
   /* fin paragraphs */
   #navbar-header{
     position: absolute; overflow-y: scroll;
     top: rem-calc(72px);
     #{$left}: -100%;
     opacity: 0; //height: calc(100vh - 64px);
-    .navigation-region{display: none;}
+    .navigation-region{
+      //display: none;
+      background-color: $white;
+      nav {
+        .menu {
+          li {
+            &.is-accordion-submenu-parent{
+              > a{
+                position: absolute; right: 0;
+                top: rem-calc(-3px);
+                &:before {
+                  content: '\f078'; position: relative;
+                  font: normal normal normal 14px/1 FontAwesome;
+                }
+              }
+              &[aria-expanded="true"]{
+                .acc-link a{text-align: underline;}
+                > a {
+                  transform: rotate(180deg); top: rem-calc(3px);
+                }
+              }
+              ul{
+                padding: rem-calc(12px 0 12px 7px);
+                background-color: rgba($background-main-color, 0.15);
+                li a {
+                  font-size: rem-calc(16px);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    /*
     .navigation-left-region{
       padding: rem-calc(40px 64px);
       ul.menu.large-vertical {
@@ -917,6 +955,7 @@
         }
       }
     }
+    */
     &.overlay-show{
       transform: translateX(0);
       #{$left}: 0; opacity: 1;
