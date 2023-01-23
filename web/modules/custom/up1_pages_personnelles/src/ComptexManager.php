@@ -29,12 +29,8 @@ class ComptexManager implements ComptexInterface {
     $ws = $config->get('url_ws') . $config->get('search_user_page');
 
     $searchUser = "$ws?id=$username";
-
-    /**
-     * @TODO: Delete employeeType when gender is validated
-     */
     $params = [
-	'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType-all,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
+	'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
 	'allowNoAffiliationAccounts' => true,
 	'showExtendedInfo'=> 2
     ];
@@ -125,37 +121,13 @@ class ComptexManager implements ComptexInterface {
        * @TODO: Delete those lines when gender is validated
        */
       if ($information['eduPersonPrimaryAffiliation'] == 'student') {
-        $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
+        $information['employeeType'] = ($information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant");
       }
       else {
-        if (isset($information['employeeType-all']) && is_array($information['employeeType-all'])) {
-          $employee_types = array_column($information['employeeType-all'], 'name', 'weight');
-          $key = min(array_keys($employee_types));
-          $information['employeeType'] = $employee_types[$key];
+        if (isset($information['employeeType']) && is_array($information['employeeType'])) {
+          reset($information['employeeType']);
         }
       }
-      /**
-       * @TODO: Uncomment those lines when gender is validated
-       */
-      /*
-      if ($information['eduPersonPrimaryAffiliation'] == 'student') {
-          $information['employeeType'] = $information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant";
-      }
-      else {
-        if (isset($information['employeeType-all']) && is_array($information['employeeType-all'])) {
-            if ($information['supannCivilite'] == "Mme")) {
-                foreach ($information['employeeType-all'] as $key => &$value) {
-                    if (isset($value['name-gender'])) {
-                        $value['name'] = $value['name-gender'];
-                    }
-                }
-            }
-            $employee_types = array_column($information['employeeType-all'], 'name', 'weight');
-            $key = min(array_keys($employee_types));
-            $information['employeeType'] = $employee_types[$key];
-        }
-      }
-      */
       if (isset($information['buildingName']) && is_array($information['buildingName'])) {
         $information['buildingName'] = reset($information['buildingName']);
       }
