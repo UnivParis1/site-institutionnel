@@ -870,7 +870,8 @@
     position: absolute; overflow-y: scroll;
     top: rem-calc(72px);
     #{$left}: -100%;
-    opacity: 0; //height: calc(100vh - 64px);
+    opacity: 0;
+    height: calc(100vh - 90px);
     .navigation-region{
       //display: none;
       background-color: $white;
@@ -962,8 +963,11 @@
     }
     //=============== menu mini site ==========//
     .site--type--mini-site &{
-      height: calc(100vh - 138px);
-      top: rem-calc(138px);
+      height: calc(100vh - 90px);
+      top: rem-calc(90px);
+      .header-left {
+        max-width: calc(50% - 120px);
+      }
       .block > ul{
         @include flex-align(left, null);
         flex-wrap: wrap !important;

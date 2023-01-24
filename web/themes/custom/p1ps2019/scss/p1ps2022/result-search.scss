@@ -92,7 +92,6 @@
             }
             .si-categ {
               margin-left: rem-calc(24px);
-              padding-left: rem-calc(24px);
               @extend .h5-style;
               font-family: $font-headings;
               display: inline-flex;
@@ -100,11 +99,15 @@
               &:before {
                 content: "";
                 display: block;
+                padding-right: rem-calc(24px);
                 width: 6px;
                 height: 6px;
                 border-radius: 50%;
                 background-color: $background-main-color;
               }
+            }
+            > div + h2 {
+              margin-top: rem-calc(10px);
             }
             h2 {
               @extend .h4-style;
@@ -114,7 +117,8 @@
         &.news {
           .si-image {
             background-color: rgba($main-color-darken, 0.25);
-            svg {
+            svg,
+            svg path {
               fill: $main-color-darken;
             }
           }
@@ -127,7 +131,8 @@
         &.event {
           .si-image {
             background-color: rgba($gold-p1ps, 0.25);
-            svg {
+            svg,
+            svg path {
               fill: $gold-p1ps;
             }
           }
@@ -140,7 +145,8 @@
         &.page {
           .si-image {
             background-color: rgba($green, 0.25);
-            svg {
+            svg,
+            svg path {
               fill: $green;
             }
           }
@@ -153,7 +159,8 @@
         &.publication {
           .si-image {
             background-color: rgba($orange, 0.25);
-            svg {
+            svg,
+            svg path {
               fill: $orange;
             }
           }
@@ -166,7 +173,8 @@
         &.press {
           .si-image {
             background-color: rgba($red, 0.25);
-            svg {
+            svg,
+            svg path {
               fill: $red;
             }
           }
@@ -179,7 +187,8 @@
         &.offer {
           .si-image {
             background-color: rgba($purple, 0.25);
-            svg {
+            svg,
+            svg path {
               fill: $purple;
             }
           }
@@ -192,7 +201,8 @@
         &.viva {
           .si-image {
             background-color: rgba($background-main-color, 0.25);
-            svg {
+            svg,
+            svg path {
               fill: $text-main-color;
             }
           }
