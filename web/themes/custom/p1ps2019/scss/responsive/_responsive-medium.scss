@@ -871,7 +871,7 @@
     top: rem-calc(72px);
     #{$left}: -100%;
     opacity: 0;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 72px);
     .navigation-region{
       //display: none;
       background-color: $white;
@@ -898,6 +898,36 @@
                 background-color: rgba($background-main-color, 0.15);
                 li a {
                   font-size: rem-calc(16px);
+                }
+              }
+            }
+          }
+        }
+
+        &#block-acces-directs-mobile {
+          border-top: 1px solid $gray2;
+          padding-top: rem-calc(10px);
+          h2 {
+            display: flex;
+            align-items: center;
+            margin: $menu-items-padding;
+            &:before {
+              content: "";
+              margin-right: 0.5rem;
+              width: 17px;
+              height: 17px;
+              display: block;
+              background: url("../images/p1ps2022/arrow-external-link-primary.svg") no-repeat;
+            }
+          }
+          ul {
+            li {
+              a {
+                display: block;
+                padding: $menu-items-padding;
+                &:hover,
+                &:focus {
+                  text-decoration: none;
                 }
               }
             }
@@ -963,8 +993,8 @@
     }
     //=============== menu mini site ==========//
     .site--type--mini-site &{
-      height: calc(100vh - 90px);
-      top: rem-calc(90px);
+      height: calc(100vh - 72px);
+      top: rem-calc(72px);
       .header-left {
         max-width: calc(50% - 120px);
       }
