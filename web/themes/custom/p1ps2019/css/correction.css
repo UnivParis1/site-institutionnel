@@ -1058,3 +1058,34 @@ main {
 .adminimal-admin-toolbar.toolbar-tray-open #navbar #top-header {
     top: 78px;
 }
+
+/*** correction affichage bandeau header trop bas sur smartphone **/
+.page-node-type-news .mask::after, .page-node-type-event .mask::after {
+  display: none;
+}
+@media screen and (max-width: 63.9375em) {
+body:not(.transparent) {
+  padding-top: 0;
+}
+.site--type--mini-site:not(.has-image):not(.transparent) #navbar, .site--type--mini-site:not(.has-image):not(.transparent) #navbar.long {
+  margin-top: 0;
+}
+.site--entity #navbar .header-center {
+  top: 50%;
+}
+.transparent:not(.scroll) #navbar #top-header .header-center #block-p1ps2019-branding svg {
+  max-width: 3rem;
+}
+.page-node-type-news main, .page-node-type-event main {
+  margin: 0;
+  padding: 0;
+}
+.page-node-type-news #breadcrumbs, .page-node-type-event #breadcrumbs {
+  margin-top: 66px;
+}
+}
+@media screen and (max-width: 46.1875em) {
+.transparent:not(.scroll) #navbar #top-header .header-center #block-p1ps2019-branding svg {
+  max-width: 3rem;
+}
+}
