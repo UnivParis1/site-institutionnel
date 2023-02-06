@@ -116,16 +116,13 @@ class ComptexManager implements ComptexInterface {
         $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
-      }
-      /**
-       * @TODO: Delete those lines when gender is validated
-       */
+      }     
       if ($information['eduPersonPrimaryAffiliation'] == 'student') {
         $information['employeeType'] = ($information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant");
       }
       else {
         if (isset($information['employeeType']) && is_array($information['employeeType'])) {
-          reset($information['employeeType']);
+          $information['employeeType'] = reset($information['employeeType']);
         }
       }
       if (isset($information['buildingName']) && is_array($information['buildingName'])) {
