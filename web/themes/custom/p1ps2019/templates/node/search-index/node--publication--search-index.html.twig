@@ -86,7 +86,7 @@
   {% endif %}
   <div class="si-info">
     <div class="si-top-info">
-      <span class="si-type">{{ node_type_text }}</span><span class="categ-style"> {{ content.field_publication_type }}</span>
+      <span class="si-type">{{ node_type_text }}</span><span class="si-categ"> {{ content.field_publication_type.0 }}</span>
     </div>
     {{ title_prefix }}
     <h2 class="title title-sep">
@@ -94,13 +94,15 @@
     </h2>
     {{ title_suffix }}
     <p>{{ content.field_author_name.0 }}
-    {% if content.field_publishing_year|render %}
-      - {{ content.field_publishing_year.0 }}
-    {% endif %}</p>
+      {% if content.field_publishing_year|render %}
+        - {{ content.field_publishing_year.0 }}
+      {% endif %}</p>
     <p>{{ content.body.0 }}</p>
-    <p class="categ-style">{% for key, topic in content.field_publication_topics if key|first != '#' %}
-    <span>{{ topic }}</span>
-    {% endfor %}</p>
+    {% if content.field_publication_topics|render %}
+      <p class="categ-style">{% for key, topic in content.field_publication_topics if key|first != '#' %}
+          <span>{{ topic }}</span>
+        {% endfor %}</p>
+    {% endif %}
     <div class="btn-wrapper">
       <a href="{{ url }}" class="btn btn-primary" title="readmore">{{ "Read more"|t }}</a>
     </div>

@@ -85,12 +85,12 @@
       </div>
     </div>
   </div>
-  <div class="grid-container changed">
-    {% if changed is not empty %}
+  {% if changed is not empty %}
+    <div class="grid-container changed">
       {% if isNew == 0 %} {% trans %}Changed on {% endtrans %} {% endif %}
       {{ changed }}
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
   <div{{ content_attributes }}>
     {{ content }}
   </div>

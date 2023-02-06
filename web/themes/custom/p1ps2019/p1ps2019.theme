@@ -53,6 +53,7 @@ function p1ps2019_preprocess_page(&$variables)
   $print_hp_image = FALSE;
   $preview = FALSE;
   $node_type = FALSE;
+  $is_search_page = FALSE;
   $site_id = 0;
   $variables['site_name'] = "";
 
@@ -65,9 +66,15 @@ function p1ps2019_preprocess_page(&$variables)
 
   $variables['#attached']['drupalSettings']['language'] = $language;
 
-  if ($variables['is_front'] || preg_match('/resultats-de-recherche/', $system_path)) {
+  if ($variables['is_front']) {
     $print_hp_image = TRUE;
   }
+  if (preg_match('/resultats-de-recherche/', $system_path)) {
+    $print_hp_image = TRUE;
+    $is_search_page = TRUE;
+
+  }
+
   if (preg_match('/node\/preview/', $system_path)) {
     $preview = TRUE;
   }
@@ -111,6 +118,7 @@ function p1ps2019_preprocess_page(&$variables)
   $variables['preview'] = $preview;
   $variables['page_mini_site'] = $page_mini_site;
   $variables['is_front_mini_site'] = $is_front_mini_site;
+  $variables['is_search_page'] = $is_search_page;
 }
 
 function p1ps2019_preprocess_node(&$variables) {
@@ -455,6 +463,7 @@ function p1ps2019_preprocess_views_view(&$variables)
     $variables['show_view_header'] = FALSE;
     if (!empty (\Drupal::request()->query->get('text'))) {
       $variables['show_view_header'] = TRUE;
+      $variables['request'] = \Drupal::request()->query->get('text');
     }
   }
 }

@@ -5,6 +5,9 @@
   	&.header-medium {
     	height: 75vh;
   	}
+  	&.header-small {
+    	height: 35vh;
+  	}
 	.screen-height{
 		.header-img *{
 			height: 100vh;
@@ -16,9 +19,9 @@
 			}
 		}
 	}
-	.screen-medium-height{
+	.screen-medium-height,
+	.screen-small-height {
 		.header-img *{
-			height: 75vh;
       		iframe{
       			width: 100%;
       		}
@@ -27,18 +30,30 @@
 			}
 		}
 	}
+	.screen-medium-height{
+		.header-img *{
+			height: 75vh;
+		}
+	}
+	.screen-small-height{
+		.header-img *{
+			height: 35vh;
+		}
+	}
+	
 	#top-header {
 		position: fixed;
 		top: 0;
 		#{$left}: 0;
 		z-index: 403;
 		width: 100%;
-		padding: rem-calc(10px 40px 0 40px);
+		padding: rem-calc(0 40px);
 		min-height: rem-calc(82px);
 		@include transitionEffect(300ms, ease-in-out);
 		align-items: center;
 		.top-header-infos {
-      height: 75px;
+      		height: 90px;
+      		position: relative;
 			.header-left {
 				position: relative;
 				.direct-access-btn {
@@ -65,10 +80,10 @@
 					border-radius: rem-calc(10px);
 					@include box-shadow(0.25, 5px, 0, $background-black);
 					position: absolute;
+					z-index: 405;
 					top: calc(100% + 5px);
 					text-align: center;
 					padding: rem-calc(0 10px);
-
 					opacity: 0;
 		    		visibility: hidden;
 		    		@include transitionEffect();
@@ -90,12 +105,32 @@
 			}
 		}
 		.site--type--mini-site & {
-			padding: 0;
+			/*padding: 0;
 			.top-header-infos{
-				padding: 36px 120px; position: relative;
+				padding: 36px 120px;
+				position: relative;
 			}
 			#navbar-header {
 				max-width: 90rem;
+			}*/
+			.top-header-infos {
+				.header-left {
+          			max-width: 35%;
+          			h2 {
+          				font-size: rem-calc(18px);
+          				font-family: $font-main;
+          				font-weight: 500;
+          				display: flex;
+          				align-items: center;
+          				&:before {
+          					content: "";
+          					width: 48px;
+          					height: 48px;
+          					margin-right: rem-calc(16px);
+          					background: url("../images/p1ps2022/picto-home-mini-site.svg") no-repeat center center;
+          				}
+          			}
+        		}
 			}
 		}
 
@@ -186,7 +221,8 @@
 
 	.header-center{
 		position: absolute;
-		#{$left}: 50%; top: 30%;
+		#{$left}: 50%;
+		top: 50%;
 		transform: translate(-50%, -50%);
 	}
 
@@ -390,7 +426,7 @@
 		}
 	}
 	.site--type--mini-site.has-image:not(.transparent) &{
-		margin-top: rem-calc(98px);
+		//margin-top: rem-calc(98px);
 		height: calc(100vh - 210px);
 		.screen-height{
 			.header-img *{

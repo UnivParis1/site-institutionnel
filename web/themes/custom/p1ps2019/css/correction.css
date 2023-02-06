@@ -26,6 +26,7 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
     list-style-type: square;
 }
 /* Ajout texte menu au burger menu **/
+/*
 #navbar #top-header .icon-menu::after {
     content:"MENU";
     display: block;
@@ -35,9 +36,12 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
     margin-top:0.2rem;
     font-weight:bold;
 }
-.scroll #navbar #top-header .icon-menu::after, .path-sites-web-universite #navbar #top-header .icon-menu::after, .node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .path-node #navbar #top-header .icon-menu::after, .path-resultats-recherche #navbar #top-header .icon-menu::after, .path-publications #navbar #top-header .icon-menu::after, .path-actualites #navbar #top-header .icon-menu::after, .path-evenements #navbar #top-header .icon-menu::after, .path-soutenances #navbar #top-header .icon-menu::after {
+.scroll #navbar #top-header .icon-menu::after,
+.path-sites-web-universite #navbar #top-header .icon-menu::after,
+.node--type-second-level-pages.page-mini-site #navbar #top-header .icon-menu::after, .path-node #navbar #top-header .icon-menu::after, .path-resultats-recherche #navbar #top-header .icon-menu::after, .path-publications #navbar #top-header .icon-menu::after, .path-actualites #navbar #top-header .icon-menu::after, .path-evenements #navbar #top-header .icon-menu::after, .path-soutenances #navbar #top-header .icon-menu::after {
     color:#00326e;
 }
+*/
 /* label node type dans la recherche */
 .node-type-search {
   display: block;
@@ -355,9 +359,6 @@ z-index: 1 !important;
   background-color: #FFF;
   box-shadow: 0 0 3px 0 rgba(51, 51, 51, 0.25);
 }
-.path-sites-web-universite:not(.scroll) #navbar #top-header svg {
-    background-image: url('https://com-web.univ-paris1.fr/logos/21-153-50ans-BlocP1PS-bouton_site_V2_bleu_or.svg');
-}
 .path-sites-web-universite:not(.scroll) #navbar .accessibility-wrapper #accessibility-toggle::before, .path-sites-web-universite:not(.scroll) #navbar .icon-menu span.toggle-container > span {
   background-color: #00326e;
 }
@@ -463,10 +464,12 @@ z-index: 1 !important;
 }
 /** affichage menu droite en mode mobile sur site www **/
 @media screen and (max-width: 63.9375em) {
+/*
 #navbar-header .navigation-region {
     display: block;
     background-color:#FFF;
 }
+*/
 #navbar-header .navigation-region ul li a, #navbar-header .navigation-region ul li span {
     color: #00326E;
 }
@@ -1013,4 +1016,23 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
   .site--entity #navbar .header-center {
   top: 50%;
   }
+}
+/*** Ajout nouvelle class pour intégration iframe ***/
+.iframe-contener {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.iframe-contener .iframe-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.adminimal-admin-toolbar #navbar #top-header {
+    top: 39px;
+}
+.adminimal-admin-toolbar.toolbar-tray-open #navbar #top-header {
+    top: 78px;
 }
