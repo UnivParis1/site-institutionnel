@@ -203,7 +203,7 @@ function p1ps2019_preprocess_node(&$variables) {
           $arg = 'skills[' . $tid . ']';
           $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
           $expertises[$key] =
-            '<a href="' . $url->toString() . '"
+            '<a class="btn btn-primary" href="' . $url->toString() . '"
           title="' . t('Link to @term_name page', ['@term_name' => $term->getName()]) . '"
           target="_blank">'
             . $term->getName() . '</a>';
