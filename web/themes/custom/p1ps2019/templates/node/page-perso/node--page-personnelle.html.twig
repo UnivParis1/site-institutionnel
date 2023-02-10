@@ -181,6 +181,7 @@
               {% set discipline = ' ' ~ info|join(', ') %}
             {% endif %}
             <h2>{{ employeeType }}{{ discipline }}</h2>
+            {% if other_affiliation %}<h3>{{ content.field_other_affiliation.0 }}</h3>{% endif %}
             {% if supannActivite %}<p class="cnu">{{ supannActivite }}</p>{% endif %}
             {% if supannRole %}
               <div class="infos-sep">
