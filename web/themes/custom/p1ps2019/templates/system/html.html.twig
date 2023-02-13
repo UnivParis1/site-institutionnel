@@ -77,7 +77,7 @@
         {{ 'Skip to main content'|t }}
       </a>
       {{ page_top }}
-      <div class="site-content-wrapper">{{ page }}</div>
+      <div class="{% if not web_component %}site-content-wrapper{% endif %}">{{ page }}</div>
       {{ page_bottom }}
       <js-bottom-placeholder token="{{ placeholder_token|raw }}">
       </body>
