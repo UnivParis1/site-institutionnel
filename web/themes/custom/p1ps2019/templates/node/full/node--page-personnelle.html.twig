@@ -120,51 +120,48 @@
 <article{{ attributes.addClass(classes) }}>
   <div class="small-12 page_personnelle">
     <div class="grid-x">
-      <div class="page_personnelle-name">
-        <h1 class="title display-inline">{{ supannCivilite }} {{ displayName }}</h1>
-      </div>
       {# <!-- Side navigation --> #}
-      <aside class="left-fix-aside small-12 large-2">
+      <aside class="hide-for-small left-fix-aside small-12 large-2">
         <div class="progress">
           <div class="wrapper">
-            <div class="btn btn-primary">
-              <a href="#page-perso-about">{{ 'About'|t }}</a>
+            <div class="link-wrapper">
+              <a class="nav-link" href="#page-perso-about">{{ 'About'|t }}</a>
               <i class="icon-ok"></i>
               <span></span>
             </div>
             {% if obsia %}
               {% if short_bio or formations_ia or projects_ia or ia_skills %}
-                <div class="btn btn-primary">
-                  <a href="#page-perso-obsia">{{ 'Artificial Intelligence'|t }}</a>
+                <div class="link-wrapper">
+                  <a class="nav-link" href="#page-perso-obsia">{{ 'Artificial Intelligence'|t }}</a>
                   <i class="icon-ok"></i>
                   <span></span>
                 </div>
               {% endif %}
             {% endif %}
             {% if research_themes or research_directions or research_projects or scientific_resp or thesis_subject or phd_supervisorphd_supervisor %}
-              <div class="btn btn-primary">
-                <a href="#page-perso-research">{{ 'Research'|t }}</a>
+              <div class="link-wrapper">
+                <a class="nav-link" href="#page-perso-research">{{ 'Research'|t }}</a>
                 <i class="icon-ok"></i>
                 <span></span>
               </div>
             {% endif %}
             {% if education %}
-              <div class="btn btn-primary">
-                <a href="#page-perso-education">{{ content.field_education['#title'] }}</a>
+              <div class="link-wrapper">
+                <a class="nav-link" href="#page-perso-education">{{ content.field_education['#title'] }}</a>
                 <i class="icon-ok"></i>
                 <span></span>
               </div>
             {% endif %}
             {% if publications or hal_publications or publis %}
-              <div class="btn btn-primary">
-                <a href="#page-perso-publications">{{ 'Publications'|t }}</a>
+              <div class="link-wrapper">
+                <a class="nav-link" href="#page-perso-publications">{{ 'Publications'|t }}</a>
                 <i class="icon-ok"></i>
                 <span></span>
               </div>
             {% endif %}
             {% if resume_text %}
-              <div class="btn btn-primary">
-                <a href="#page-perso-cv">{{ 'Resume'|t }}</a>
+              <div class="link-wrapper">
+                <a class="nav-link" href="#page-perso-cv">{{ 'Resume'|t }}</a>
                 <i class="icon-ok"></i>
                 <span></span>
               </div>
@@ -174,6 +171,9 @@
       </aside>
       {# <!-- Page content --> #}
       <div class="right-mov-content content small-12 large-10">
+        <div class="page_personnelle-name">
+          <h1 class="title display-inline">{{ supannCivilite }} {{ displayName }}</h1>
+        </div>
         <div class="colonnecentrale content small-12 large-8">
           <section class="new-section about">
             <a id="page-perso-about"></a>
@@ -201,7 +201,7 @@
                 <p class="txt-bold">{{ content.field_skills['#title'] }}</p>
                 <p class="txt-second small infos-sep">
                   {% for key, skill in skills if key|first != '#' %}
-                    <span class="btn btn-primary">
+                    <span class="skills-wrapper">
                       {{ skill|raw }}
                     </span>
                   {% endfor %}

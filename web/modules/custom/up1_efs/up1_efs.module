@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_efs.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+/**
+ * Implements hook_help().
+ */
+function up1_efs_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_theses module.
+    case 'help.page.up1_efs':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module to display a React based app in a Drupal page. ') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function up1_efs_theme($existing, $type, $theme, $path): array {
+  // Custom theme calls for templates within this module in /templates.
+  return [
+    'efs_wrapper' => [
+      'variables' => [
+        'title' => '',
+      ],
+    ],
+  ];
+}
+
