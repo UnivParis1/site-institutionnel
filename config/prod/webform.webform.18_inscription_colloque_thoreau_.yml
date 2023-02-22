@@ -1,33 +1,58 @@
-uuid: b8ded81b-118b-4e89-b8fd-2b31048837ad
+uuid: a8bac16a-f6f9-40ad-8d13-b85cf3ca7ce1
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 452
 template: false
 archive: false
-id: 114_inscription_a_la_newsletter
-title: '114 - Inscription à la newsletter'
+id: 18_inscription_colloque_thoreau_
+title: '18 - Inscription colloque Thoreau – 14/12'
 description: ''
-category: ''
+category: 'Inscription événement'
 elements: |-
-  container:
-    '#type': container
-    '#attributes':
-      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
-    votre_adresse_courriel_:
-      '#type': email
-      '#title': 'Votre adresse courriel :'
-      '#placeholder': jeandupont@monfai.com
-      '#required': true
-      '#required_error': 'Vous devez saisir votre adresse de messagerie'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    actions:
-      '#type': webform_actions
-      '#title': 'Bouton(s) d''envoi'
-      '#submit__label': 'S''inscrire à la newsletter'
+  markup:
+    '#type': webform_markup
+    '#markup': |-
+      <h1 class="js-quickedit-page-title page-title">Inscription au colloque Thoreau pour le mercredi 14/12</h1>
+
+      <h3>Inscriptions ouvertes jusqu'au 12/12/2022 inclus</h3>
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Name
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': 'First name'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': Courriel
+    '#placeholder': Email
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  statut_ou_fonction:
+    '#type': textfield
+    '#title': 'Statut ou fonction'
+    '#placeholder': Role
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  rattachement_institutionnel:
+    '#type': textfield
+    '#title': 'Rattachement institutionnel'
+    '#placeholder': Institution
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  captcha:
+    '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Valider l''inscription'
 css: ''
 javascript: ''
 settings:
@@ -36,14 +61,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: true
+  page: false
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
-  form_submit_once: false
+  form_title: source_entity_webform
+  form_submit_once: true
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: '<p>Les inscriptions à cet événement sont closes.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -82,7 +107,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: false
+  submission_exclude_empty: true
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -112,7 +137,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -132,8 +157,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: '<p>Merci de vous être inscrit(e) à notre newsletter. Vous allez recevoir un courriel de confirmation sur l''adresse de messagerie que vous avez renseigné.</p>'
+  confirmation_title: 'Inscription confirmée'
+  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -141,9 +166,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 55
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a>. Nous vous contacterons uniquement si une place se libère.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -210,69 +235,32 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_au_demandeur:
+  courriel_aux_personnes_inscrites_en_presentiel:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: courriel_aux_personnes_inscrites_en_presentiel
+    label: 'Courriel aux personnes inscrites'
     notes: ''
     status: true
     conditions: {  }
-    weight: 0
+    weight: 1
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
-      bcc_mail: ''
+      bcc_mail: Marina.Krivitzky@univ-paris1.fr
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: Marina.Krivitzky@univ-paris1.fr
       from_options: {  }
-      from_name: ''
-      reply_to: ''
+      from_name: 'Marina Krivitzky'
+      reply_to: Marina.Krivitzky@univ-paris1.fr
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation d''inscription à la newsletter de l''observatoire de l''intelligence artificielle de l''Université Paris 1 Panthéon-Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous remercions de votre inscription pour recevoir la newsletter et des informations de l'observatoire de l'intelligence artificielle de l'Université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>N'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Si vous souhaitez vous désabonner, nous vous prions de bien vouloir envoyer un message à sympa@listes.univ-paris1.fr avec dans le corps du message la commande : signoff observatoire-ia-info .</p>\r\n\r\n<p>Vous remerciant par avance et bien cordialement,</p>\r\n\r\n<p>L'équipe de l'observatoire de l'IA de l'Université de Paris 1 Panthéon-Sorbonne</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_a_sympa:
-    id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: sympa@listes.univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'subscribe observatoire-ia-info'
-      body: _default
+      subject: 'Inscription enregistrée pour [webform_submission:source-title], 14/12'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre inscription, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>Vos informations d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>En cas d'empêchement, je vous serais reconnaissante de m'informer au plus vite.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marina Krivitzky</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

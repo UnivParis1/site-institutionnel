@@ -62,10 +62,20 @@ elements: |-
     '#title': 'Submit button(s)'
     '#states':
       disabled:
-        ':input[name="collecte_de_donnees_a_caractere_personnel"]':
-          value: Non
-        ':input[name="captcha"]':
-          unchecked: true
+        - ':input[name="courriel"]':
+            value: ericjonesmyemail@gmail.com
+        - xor
+        - ':input[name="courriel"]':
+            value: info@prefabricated-hangar.com
+        - xor
+        - ':input[name="courriel"]':
+            value: eric.jones.z.mail@gmail.com
+        - xor
+        - ':input[name="collecte_de_donnees_a_caractere_personnel"]':
+            value: Non
+        - xor
+        - ':input[name="captcha"]':
+            unchecked: true
     '#submit__label': Envoyer
 css: ''
 javascript: ''

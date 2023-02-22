@@ -1,33 +1,28 @@
-uuid: b8ded81b-118b-4e89-b8fd-2b31048837ad
+uuid: e61f7d95-164c-4727-9966-59a22f18e81c
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 6049
 template: false
 archive: false
-id: 114_inscription_a_la_newsletter
-title: '114 - Inscription à la newsletter'
+id: una_europa_formulaire
+title: 'Una Europa_formulaire'
 description: ''
-category: ''
+category: Contact
 elements: |-
-  container:
-    '#type': container
-    '#attributes':
-      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
-    votre_adresse_courriel_:
-      '#type': email
-      '#title': 'Votre adresse courriel :'
-      '#placeholder': jeandupont@monfai.com
-      '#required': true
-      '#required_error': 'Vous devez saisir votre adresse de messagerie'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    actions:
-      '#type': webform_actions
-      '#title': 'Bouton(s) d''envoi'
-      '#submit__label': 'S''inscrire à la newsletter'
+  courriel_:
+    '#type': email
+    '#title': 'Courriel :'
+    '#multiple': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  messsage:
+    '#type': textarea
+    '#title': Messsage
+    '#multiple': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
 css: ''
 javascript: ''
 settings:
@@ -133,7 +128,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci de vous être inscrit(e) à notre newsletter. Vous allez recevoir un courriel de confirmation sur l''adresse de messagerie que vous avez renseigné.</p>'
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -209,79 +204,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  email_au_demandeur:
-    id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Confirmation d''inscription à la newsletter de l''observatoire de l''intelligence artificielle de l''Université Paris 1 Panthéon-Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous remercions de votre inscription pour recevoir la newsletter et des informations de l'observatoire de l'intelligence artificielle de l'Université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>N'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Si vous souhaitez vous désabonner, nous vous prions de bien vouloir envoyer un message à sympa@listes.univ-paris1.fr avec dans le corps du message la commande : signoff observatoire-ia-info .</p>\r\n\r\n<p>Vous remerciant par avance et bien cordialement,</p>\r\n\r\n<p>L'équipe de l'observatoire de l'IA de l'Université de Paris 1 Panthéon-Sorbonne</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_a_sympa:
-    id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: sympa@listes.univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'subscribe observatoire-ia-info'
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

@@ -1,33 +1,50 @@
-uuid: b8ded81b-118b-4e89-b8fd-2b31048837ad
+uuid: 62859ad5-4217-4dc6-bf3b-b336121075b3
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 5486
 template: false
 archive: false
-id: 114_inscription_a_la_newsletter
-title: '114 - Inscription à la newsletter'
+id: 0_p1p1_inclusion_inscription_ate
+title: '0 - P1P1 Inclusion - Inscription ateliers - 5 décembre'
 description: ''
 category: ''
 elements: |-
-  container:
-    '#type': container
-    '#attributes':
-      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
-    votre_adresse_courriel_:
-      '#type': email
-      '#title': 'Votre adresse courriel :'
-      '#placeholder': jeandupont@monfai.com
-      '#required': true
-      '#required_error': 'Vous devez saisir votre adresse de messagerie'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    actions:
-      '#type': webform_actions
-      '#title': 'Bouton(s) d''envoi'
-      '#submit__label': 'S''inscrire à la newsletter'
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<h3>Formulaire d''inscription pour le lundi 5 décembre de 12 h à 14 h</h3>'
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': 'Prénom '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': 'Courriel '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#type': checkbox
+    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  markup:
+    '#type': webform_markup
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Soumettre
+    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -40,10 +57,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: "<p>Ce formulaire est désormais clos.<br />\r\nPlus de places disponibles.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -112,7 +129,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -133,7 +150,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci de vous être inscrit(e) à notre newsletter. Vous allez recevoir un courriel de confirmation sur l''adresse de messagerie que vous avez renseigné.</p>'
+  confirmation_message: "<p>Votre demande d’inscription a bien été prise en compte. Le nombre de places étant limité, votre participation vous sera confirmée prochainement.<br />\r\n&nbsp;</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -141,7 +158,7 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 120
   limit_total_interval: null
   limit_total_message: ''
   limit_total_unique: false
@@ -190,7 +207,8 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles: {  }
+    roles:
+      - anonymous
     users: {  }
     permissions: {  }
   delete_own:
@@ -199,7 +217,8 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
   test:
     roles: {  }
@@ -207,13 +226,14 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
 handlers:
-  email_au_demandeur:
+  email_aux_demandeurs:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -221,21 +241,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: sve@univ-paris1.fr
       from_options: {  }
-      from_name: ''
+      from_name: 'Université Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation d''inscription à la newsletter de l''observatoire de l''intelligence artificielle de l''Université Paris 1 Panthéon-Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous remercions de votre inscription pour recevoir la newsletter et des informations de l'observatoire de l'intelligence artificielle de l'Université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>N'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Si vous souhaitez vous désabonner, nous vous prions de bien vouloir envoyer un message à sympa@listes.univ-paris1.fr avec dans le corps du message la commande : signoff observatoire-ia-info .</p>\r\n\r\n<p>Vous remerciant par avance et bien cordialement,</p>\r\n\r\n<p>L'équipe de l'observatoire de l'IA de l'Université de Paris 1 Panthéon-Sorbonne</p>"
+      subject: '[Réponse automatique] Confirmation d''inscription au repas dans le noir du 5 décembre'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d’inscription a bien été prise en compte. Le nombre de places étant limité, votre participation vous sera confirmée prochainement.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>&nbsp;</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -247,10 +267,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_a_sympa:
+  email_aux_organisateurs:
     id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -258,20 +278,20 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sympa@listes.univ-paris1.fr
+      to_mail: sve@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      from_mail: '[webform_submission:values:courriel:raw]'
       from_options: {  }
       from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'subscribe observatoire-ia-info'
+      subject: 'Semaine P1PS Inclusion - Repas dans le noir du 5 décembre - Nouvelle inscription'
       body: _default
       excluded_elements: {  }
       ignore_access: false

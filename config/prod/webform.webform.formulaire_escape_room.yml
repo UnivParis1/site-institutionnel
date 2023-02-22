@@ -1,33 +1,29 @@
-uuid: b8ded81b-118b-4e89-b8fd-2b31048837ad
+uuid: 956df144-8798-41ee-8c70-75550e72d6bc
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 7163
 template: false
 archive: false
-id: 114_inscription_a_la_newsletter
-title: '114 - Inscription à la newsletter'
-description: ''
-category: ''
+id: formulaire_escape_room
+title: 'Formulaire Escape Room'
+description: '<p>Est-ce que vous pouvez faire une formulaire d''inscription pour l''Escape Game de la BU PMF? On pensait l’ouvrir au plus tard <strong>mardi 10</strong>. Est-il possible de bloquer les inscriptions avec un <u>maximum de 20 personnes</u> (et de faire en sorte que les autres soient en liste d''attente) ? Nous voudrions que la formulaire demande le nom, le prenom, le telephone et le courriel des personnes qui vont pariciper.</p>'
+category: 'Inscription événement'
 elements: |-
-  container:
-    '#type': container
-    '#attributes':
-      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
-    votre_adresse_courriel_:
-      '#type': email
-      '#title': 'Votre adresse courriel :'
-      '#placeholder': jeandupont@monfai.com
-      '#required': true
-      '#required_error': 'Vous devez saisir votre adresse de messagerie'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    actions:
-      '#type': webform_actions
-      '#title': 'Bouton(s) d''envoi'
-      '#submit__label': 'S''inscrire à la newsletter'
+  123ok456:
+    '#type': webform_contact
+    '#title': Coordonnées
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#company__access': false
+    '#address__access': false
+    '#address_2__access': false
+    '#city__access': false
+    '#state_province__access': false
+    '#postal_code__access': false
+    '#country__access': false
 css: ''
 javascript: ''
 settings:
@@ -133,7 +129,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci de vous être inscrit(e) à notre newsletter. Vous allez recevoir un courriel de confirmation sur l''adresse de messagerie que vous avez renseigné.</p>'
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -210,10 +206,10 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_au_demandeur:
+  nikitas_gkikouris_univ_paris1_fr:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: nikitas_gkikouris_univ_paris1_fr
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -221,57 +217,20 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      to_mail: formationscd@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: '[webform_submission:values:123ok456:email:raw]'
       from_options: {  }
-      from_name: ''
+      from_name: '[webform_submission:values:123ok456:name:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation d''inscription à la newsletter de l''observatoire de l''intelligence artificielle de l''Université Paris 1 Panthéon-Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous remercions de votre inscription pour recevoir la newsletter et des informations de l'observatoire de l'intelligence artificielle de l'Université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>N'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Si vous souhaitez vous désabonner, nous vous prions de bien vouloir envoyer un message à sympa@listes.univ-paris1.fr avec dans le corps du message la commande : signoff observatoire-ia-info .</p>\r\n\r\n<p>Vous remerciant par avance et bien cordialement,</p>\r\n\r\n<p>L'équipe de l'observatoire de l'IA de l'Université de Paris 1 Panthéon-Sorbonne</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_a_sympa:
-    id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: sympa@listes.univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'subscribe observatoire-ia-info'
+      subject: _default
       body: _default
       excluded_elements: {  }
       ignore_access: false

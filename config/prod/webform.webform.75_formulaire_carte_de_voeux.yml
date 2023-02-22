@@ -1,17 +1,17 @@
-uuid: 33916890-5d6e-4319-8a6f-a6956badc17f
+uuid: d2d733cc-6031-4c5e-bd17-145043d22494
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 2430
+uid: 5486
 template: false
 archive: false
-id: 59_questionnaire_de_test
-title: '75 - Formulaire Carte de voeux'
-description: 'Pour permettre l&#39;envoi de carte de voeux &eacute;lectronique.'
-category: ''
+id: 75_formulaire_carte_de_voeux
+title: '75 - Carte de voeux Test'
+description: '<p>Pour permettre l''envoi de carte de voeux électronique pour la nouvelle année.</p>'
+category: Divers
 elements: |-
   votre_prenom_:
     '#type': textfield
@@ -27,10 +27,11 @@ elements: |-
     '#default_value': '[cas:attribute:sn]'
   merci_de_le_confirmer:
     '#type': webform_email_confirm
-    '#title': 'Votre courriel'
+    '#title': 'Votre courriel :'
     '#placeholder': dupont@gmail.com
     '#required': true
     '#default_value': '[current-user:mail]'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#confirm__placeholder': 'Merci de la ressaisir pour la confirmer'
   a_combien_de_personne_souhaitez_vous_envoyer_votre_carte_:
     '#type': radios
@@ -84,10 +85,10 @@ elements: |-
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   image_voeux_2022:
     '#type': webform_attachment_url
-    '#title': 'Image Voeux 2022'
-    '#filename': Carte-de-voeux-2022.gif
+    '#title': 'Image Voeux 2023'
+    '#filename': Carte-de-voeux-2023.png
     '#download': true
-    '#url': 'https://com-web.univ-paris1.fr/images/voeux/Carte-de-voeux-2022.gif'
+    '#url': 'https://com-web.univ-paris1.fr/fileadmin/Service-com/2023/Voeux2023/Carte-de-voeux-2023.png'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
@@ -302,8 +303,8 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[webform_submission:values:votre_prenom_:raw] [webform_submission:values:votre_nom_:raw]  vous a envoyé une carte de vœux'
-      body: "<meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n<style type=\"text/css\">.container {\r\n    display: block;\r\n    position: relative;\r\n\t\t\r\n}\r\n.container .text {\r\n  \r\n    z-index: 1;\r\n    position: absolute;\r\n    text-align: center;\r\n    font-family: brandon grotesque;\r\n    margin: 0 auto;\r\n    left: 0;\r\n    right: 0;\r\n    top: 25%;\r\n    width: 50%;\r\n\tmax-width:800px;\r\n\tfont-size:1.3rem;\r\n\tcolor:#535151;\r\n\tline-height:1.1;\r\n}\r\n\t\t\r\n td {line-height:0;}\r\n</style>\r\n<h1 style=\"font-size:1rem;text-align:center;color:#999;font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'\">[webform_submission:values:votre_prenom_] [webform_submission:values:votre_nom_] vous a envoyé une carte :</h1>\r\n\r\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"display:block;width:100%;max-width:800px;border:0 none;margin: 1rem auto;\" width=\"100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td><a href=\"https://mediatheque.univ-paris1.fr/video/3361-luniversite-vous-souhaite-ses-meilleurs-vux-pour-2023/?is_iframe=true&amp;autoplay=true\"><img alt=\"Université Paris 1 Panthéon Sorbonne\" src=\"https://com-web.univ-paris1.fr/fileadmin/Service-com/2023/Voeux2023/Carte-de-voeux-01.png\" style=\"width:100%;max-width:800px;height:auto;max-height:311px;\" /></a></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>\r\n\t\t\t<div class=\"container\"><a href=\"https://mediatheque.univ-paris1.fr/video/3361-luniversite-vous-souhaite-ses-meilleurs-vux-pour-2023/?is_iframe=true&amp;autoplay=true\"><img src=\"https://com-web.univ-paris1.fr/fileadmin/Service-com/2023/Voeux2023/Carte-de-voeux-02.png\" style=\"block-size:310px;max-width:800px;height:auto;max-height:311px;\" /></a>\r\n\t\t\t<div style=\"display:block;width:50%;margin:0 auto;\">\r\n\t\t\t<div class=\"text\">\r\n\t\t\t<p style=\"text-align:center;font-size:1.5rem;\">[webform_submission:values:votre_message_de_voeux]</p>\r\n\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td><a href=\"https://mediatheque.univ-paris1.fr/video/3361-luniversite-vous-souhaite-ses-meilleurs-vux-pour-2023/?is_iframe=true&amp;autoplay=true\"><img alt=\"Meilleurs voeux 2023\" src=\"https://com-web.univ-paris1.fr/fileadmin/Service-com/2023/Voeux2023/Carte-de-voeux-03.png\" style=\"width:100%;max-width:800px;height:auto;max-height:465px;\" /></a></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#B2B2B2;color:#FFF;padding:1.5rem 1rem;margin:0 auto;font-family: font-family: 'brandon grotesque', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif';text-decoration: none;\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height:1.1\"><span contenteditable=\"false\" tabindex=\"-1\"><a data-widget=\"image\" href=\"https://mediatheque.univ-paris1.fr/video/3361-luniversite-vous-souhaite-ses-meilleurs-vux-pour-2023/?is_iframe=true&amp;autoplay=true\" style=\"color:#FFF;text-decoration: none;\" target=\"_blank\" title=\"Cliquez pour aller voir la vidéo\">L'université Paris 1 Panthéon-Sorbonne<br />\r\n\t\t\tvous présente ses meilleurs voeux en vidéo</a><span style=\"background:rgba(220,220,220,0.5);background-image:url(https://www.pantheonsorbonne.fr/core/assets/vendor/ckeditor/plugins/widget/images/handle.png);display:none;\"><img draggable=\"true\" height=\"15\" role=\"presentation\" src=\"data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\" title=\"Cliquer et glisser pour déplacer\" width=\"15\" /></span></span></td>\r\n\t\t\t<td><a href=\"https://mediatheque.univ-paris1.fr/video/3361-luniversite-vous-souhaite-ses-meilleurs-vux-pour-2023/?is_iframe=true&amp;autoplay=true\" style=\"color:#FFF;text-decoration: none;\" target=\"_blank\" title=\"Cliquez pour aller voir la vidéo\"><img alt=\"icone play\" src=\"https://com-web.univ-paris1.fr/fileadmin/Service-com/2023/Voeux2023/Play.png\" style=\"display:block;width:42px;height:42px;margin:0 auto;\" /></a></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      subject: '[webform_submission:values:votre_prenom_:raw] [webform_submission:values:votre_nom_:raw]  vous a envoyé une carte'
+      body: "<h1 style=\"font-size:1rem;text-align:center;color:#999;font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'\">[webform_submission:values:votre_prenom_] [webform_submission:values:votre_nom_] vous a envoy&eacute; une carte :</h1>\r\n\r\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"display:block;width:100%;max-width:800px;border:0 none;margin: 1rem auto;\" width=\"100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td><img alt=\"Université Paris 1 Panthéon Sorbonne\" src=\"https://com-web.univ-paris1.fr/images/voeux/21-204-Carte-de-voeux_01.png\" style=\"width:100%;max-width:800px;height:auto;max-height:311px;\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"background:url('https://com-web.univ-paris1.fr/images/voeux/21-204-Carte-de-voeux_02.png') repeat-y scroll 0% 0% / contain; display:block; max-width:800px; width:100%\">\r\n\t\t\t<div style=\"display:block;width:50%;margin:0 auto;\">\r\n\t\t\t<p style=\"text-align:center;font-size:1.5rem;color:#00326E;\">[webform_submission:values:votre_message_de_voeux]</p>\r\n\t\t\t</div>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td><img alt=\"Meilleurs voeux 2022\" src=\"https://com-web.univ-paris1.fr/images/voeux/21-204-Carte-de-voeux_03.png\" style=\"width:100%;max-width:800px;height:auto;max-height:465px;\" /></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<div style=\"display:block; width:100%; text-align:center\">\r\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#c89018;color:#FFF;padding:1.5rem 1rem;margin:0 auto;font-family: font-family: 'brandon grotesque', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif';text-decoration: none;\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td><a data-widget=\"image\" href=\"https://mediatheque.univ-paris1.fr/video/2962-vux-2022/?autoplay=true&amp;loop=true;volume=5;\" style=\"color:#FFF;text-decoration: none;\" target=\"_blank\" title=\"Cliquez pour aller voir la vidéo\">L&#39;universit&eacute; Paris 1 Panth&eacute;on-Sorbonne<br />\r\n\t\t\tvous pr&eacute;sente ses meilleurs voeux en vid&eacute;o</a></td>\r\n\t\t\t<td><a href=\"https://mediatheque.univ-paris1.fr/video/2962-vux-2022/?autoplay=true&amp;loop=true;volume=5;\" style=\"color:#FFF;text-decoration: none;\" target=\"_blank\" title=\"Cliquez pour aller voir la vidéo\"><img alt=\"\" src=\"https://com-web.univ-paris1.fr/images/voeux/play-video-or.png\" style=\"display:block;width:42px;height:42px;margin:0 auto;\" /></a></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n</div>"
       excluded_elements:
         votre_prenom_: votre_prenom_
         votre_nom_: votre_nom_

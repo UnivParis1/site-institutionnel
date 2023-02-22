@@ -1,33 +1,50 @@
-uuid: b8ded81b-118b-4e89-b8fd-2b31048837ad
+uuid: 6315fd10-b251-46f0-b54c-7e10f36961ff
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 5486
 template: false
 archive: false
-id: 114_inscription_a_la_newsletter
-title: '114 - Inscription à la newsletter'
+id: 1_eds_partenariat_entreprises
+title: '1 - EDS Partenariat entreprises'
 description: ''
 category: ''
 elements: |-
-  container:
-    '#type': container
-    '#attributes':
-      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
-    votre_adresse_courriel_:
-      '#type': email
-      '#title': 'Votre adresse courriel :'
-      '#placeholder': jeandupont@monfai.com
-      '#required': true
-      '#required_error': 'Vous devez saisir votre adresse de messagerie'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    actions:
-      '#type': webform_actions
-      '#title': 'Bouton(s) d''envoi'
-      '#submit__label': 'S''inscrire à la newsletter'
+  prenom_nom_:
+    '#type': textfield
+    '#title': 'Prénom Nom :'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  entreprise_:
+    '#type': textfield
+    '#title': 'Entreprise :'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  votre_adresse_de_courriel_:
+    '#type': email
+    '#title': 'Votre adresse de courriel :'
+    '#required': true
+    '#required_error': 'Le courriel est requis'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  objet_:
+    '#type': textfield
+    '#title': 'Objet :'
+    '#required': true
+    '#required_error': 'L''objet est requis'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  message_:
+    '#type': textarea
+    '#title': 'Message :'
+    '#required': true
+    '#required_error': 'Message est requis'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  piece_jointe:
+    '#type': managed_file
+    '#title': 'Pièce jointe'
+  captcha:
+    '#type': captcha
 css: ''
 javascript: ''
 settings:
@@ -40,10 +57,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: '<p>Le formulaire est clos</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -115,6 +132,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -133,7 +152,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci de vous être inscrit(e) à notre newsletter. Vous allez recevoir un courriel de confirmation sur l''adresse de messagerie que vous avez renseigné.</p>'
+  confirmation_message: "<p>Votre demande a bien été prise en compte.<br />\r\nVous allez recevoir un courriel de confirmation.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -210,10 +229,10 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_au_demandeur:
+  email_aux_organisateurs:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -221,21 +240,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      to_mail: dip.eds@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
       from_options: {  }
-      from_name: ''
+      from_name: '[webform_submission:values:prenom_nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation d''inscription à la newsletter de l''observatoire de l''intelligence artificielle de l''Université Paris 1 Panthéon-Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous remercions de votre inscription pour recevoir la newsletter et des informations de l'observatoire de l'intelligence artificielle de l'Université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>N'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Si vous souhaitez vous désabonner, nous vous prions de bien vouloir envoyer un message à sympa@listes.univ-paris1.fr avec dans le corps du message la commande : signoff observatoire-ia-info .</p>\r\n\r\n<p>Vous remerciant par avance et bien cordialement,</p>\r\n\r\n<p>L'équipe de l'observatoire de l'IA de l'Université de Paris 1 Panthéon-Sorbonne</p>"
+      subject: 'Formulaire de contact Partenariat entreprises - nouvelle demande'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -247,10 +266,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_a_sympa:
+  email_aux_demandeurs:
     id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -258,21 +277,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sympa@listes.univ-paris1.fr
+      to_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      from_mail: dip.eds@univ-paris1.fr
       from_options: {  }
-      from_name: ''
+      from_name: 'Ecole de droit de la Sorbonne - Partenariat entreprises'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'subscribe observatoire-ia-info'
-      body: _default
+      subject: '[Réponse automatique]'
+      body: "<p style=\"text-align:left\">Bonjour,</p>\r\n\r\n<p style=\"text-align:left\">Votre demande de contact a bien été envoyée. Nous vous répondrons dans les meilleurs délais.</p>\r\n\r\n<p>Vous pouvez également nous joindre au <a href=\"tel:+33%201%2044%2007%2077%2039\">01 44 07 77 39</a>.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'École de droit de la Sorbonne</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

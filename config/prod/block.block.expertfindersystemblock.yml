@@ -1,4 +1,4 @@
-uuid: bd21e5d5-a2c0-42c7-b6a5-51c797b37372
+uuid: 2bf45a6a-e1fb-44c0-975e-22932eda29ae
 langcode: fr
 status: true
 dependencies:
@@ -6,20 +6,20 @@ dependencies:
     - micro_path
     - micro_site
     - system
-    - up1_global
+    - up1_efs
   theme:
     - p1ps2019
-id: p1ps2019_centresup1block
+id: expertfindersystemblock
 theme: p1ps2019
 region: content
-weight: -10
+weight: -11
 provider: null
-plugin: centres_up1_block
+plugin: up1_efs_block
 settings:
-  id: centres_up1_block
-  label: 'Rechercher un centre'
+  id: up1_efs_block
+  label: 'Expert Finder System block'
   label_display: '0'
-  provider: up1_global
+  provider: up1_efs
 visibility:
   site_type:
     id: site_type
@@ -30,10 +30,10 @@ visibility:
     id: site
     negate: false
     context_mapping: {  }
-    sites: {  }
+    sites:
+      115: '115'
     sites_front_page: 0
   request_path:
     id: request_path
     negate: false
-    context_mapping: {  }
-    pages: '<front>'
+    pages: /structures-recherche/rechercher-expertise

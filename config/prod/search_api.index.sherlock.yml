@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_paragraphs
-    - field.storage.node.field_editorial_blocks
     - field.storage.paragraph.bp_accordion_section_title
+    - field.storage.node.field_editorial_blocks
     - field.storage.paragraph.bp_header
     - field.storage.paragraph.bp_link
     - field.storage.paragraph.field_subtitle
@@ -20,12 +20,12 @@ dependencies:
     - field.storage.node.field_short_desc
     - field.storage.node.field_news_date
     - field.storage.node.field_event_date
-    - field.storage.node.field_viva_date
     - field.storage.node.field_publishing_date
     - field.storage.media.field_legende
     - field.storage.node.field_comm_press_file
     - field.storage.node.field_isbn
-    - field.storage.node.field_issn
+    - field.storage.site.field_label
+    - field.storage.site.field_complete_name
     - field.storage.node.field_sub_title
     - field.storage.node.field_subtitle
     - field.storage.node.field_news_topic
@@ -38,6 +38,8 @@ dependencies:
     - taxonomy
     - media
     - node
+    - micro_node
+    - micro_site
     - search_api
 id: sherlock
 name: Sherlock
@@ -192,6 +194,17 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_collection_term
+  field_complete_name:
+    label: 'Site » Site » Libellé complet'
+    datasource_id: 'entity:node'
+    property_path: 'site_id:entity:field_complete_name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.site.field_complete_name
+      module:
+        - micro_node
+        - micro_site
   field_event_date:
     label: 'Date de l''évènement'
     datasource_id: 'entity:node'
@@ -218,15 +231,17 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_isbn
-  field_issn:
-    label: ISSN
+  field_label:
+    label: 'Site » Site » Label'
     datasource_id: 'entity:node'
-    property_path: field_issn
-    type: text
-    boost: 0.3
+    property_path: 'site_id:entity:field_label'
+    type: string
     dependencies:
       config:
-        - field.storage.node.field_issn
+        - field.storage.site.field_label
+      module:
+        - micro_node
+        - micro_site
   field_lead:
     label: Chapô
     datasource_id: 'entity:node'
@@ -308,14 +323,15 @@ field_settings:
         - field.storage.paragraph.field_simple_text
       module:
         - paragraphs
-  field_viva_date:
-    label: 'Date de la soutenance'
+  id:
+    label: 'Site » Site » Identifiant (ID)'
     datasource_id: 'entity:node'
-    property_path: field_viva_date
-    type: date
+    property_path: 'site_id:entity:id'
+    type: string
     dependencies:
-      config:
-        - field.storage.node.field_viva_date
+      module:
+        - micro_node
+        - micro_site
   langcode:
     label: Langue
     datasource_id: 'entity:node'
@@ -472,6 +488,15 @@ field_settings:
           publication: search_index
           second_level_pages: search_index
           viva: search_index
+  site_name:
+    label: 'Site » Site » Name'
+    datasource_id: 'entity:node'
+    property_path: 'site_id:entity:name'
+    type: string
+    dependencies:
+      module:
+        - micro_node
+        - micro_site
   status:
     label: status
     datasource_id: 'entity:node'
@@ -539,6 +564,7 @@ datasource_settings:
         - article
         - news2018
         - page_personnelle
+        - viva
     languages:
       default: true
       selected: {  }

@@ -1,33 +1,51 @@
-uuid: b8ded81b-118b-4e89-b8fd-2b31048837ad
+uuid: 43e6641f-0c9f-4298-a2e8-c6ca9b82bb62
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 6230
 template: false
 archive: false
-id: 114_inscription_a_la_newsletter
-title: '114 - Inscription à la newsletter'
-description: ''
-category: ''
+id: inscription_debats_et_controver
+title: 'Inscription - Débats et Controverses "Vers une Union sans cesse plus verte? Les politiques européennes: greening ou greenwashing?"'
+description: "<p>Inscription - Débats et Controverses \"Vers une Union sans cesse plus verte? Les politiques européennes: greening ou greenwashing?\"</p>\r\n\r\n<p>Organisé par le GIS Euro-Lab, le lundi 9 janvier 2023 de 17H à 19H, au centre Panthéon, de l'Université Paris I Panthéon-Sorbonne.</p>"
+category: 'Inscription événement'
 elements: |-
-  container:
-    '#type': container
-    '#attributes':
-      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
-    votre_adresse_courriel_:
-      '#type': email
-      '#title': 'Votre adresse courriel :'
-      '#placeholder': jeandupont@monfai.com
-      '#required': true
-      '#required_error': 'Vous devez saisir votre adresse de messagerie'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    actions:
-      '#type': webform_actions
-      '#title': 'Bouton(s) d''envoi'
-      '#submit__label': 'S''inscrire à la newsletter'
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  e__mail:
+    '#type': email
+    '#title': E-mail
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  statut__fonction:
+    '#type': textfield
+    '#title': 'Statut / Fonction'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  rattachement__institutionnel:
+    '#type': textarea
+    '#title': 'Rattachement institutionnel'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  assistera_au_seminaire_debats_et_controverses_:
+    '#type': checkboxes
+    '#title': 'Assistera au séminaire "Débats et Controverses" :'
+    '#options':
+      'En présence (Salle 6 - Centre Panthéon, Universite Paris I)': 'En présence (Salle 6 - Centre Panthéon, Universite Paris I)'
+      'Via Zoom': 'Via Zoom'
+    '#required': true
+    '#options__properties': ''
 css: ''
 javascript: ''
 settings:
@@ -40,10 +58,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
-  form_submit_once: false
-  form_open_message: ''
-  form_close_message: ''
+  form_title: source_entity_webform
+  form_submit_once: true
+  form_open_message: '<p>Les inscriptions seront ouvertes à partir du 9 novembre 2022, à 8h.</p>'
+  form_close_message: '<p>Les inscriptions au séminaire sont closes.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -55,7 +73,7 @@ settings:
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
   form_unsaved: false
-  form_disable_back: false
+  form_disable_back: true
   form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
@@ -97,7 +115,7 @@ settings:
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
-  wizard_progress_bar: true
+  wizard_progress_bar: false
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
@@ -112,7 +130,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -133,7 +151,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci de vous être inscrit(e) à notre newsletter. Vous allez recevoir un courriel de confirmation sur l''adresse de messagerie que vous avez renseigné.</p>'
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -210,10 +228,10 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_au_demandeur:
-    id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+  action:
+    id: action
+    handler_id: action
+    label: Action
     notes: ''
     status: true
     conditions: {  }
@@ -221,67 +239,11 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Confirmation d''inscription à la newsletter de l''observatoire de l''intelligence artificielle de l''Université Paris 1 Panthéon-Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous remercions de votre inscription pour recevoir la newsletter et des informations de l'observatoire de l'intelligence artificielle de l'Université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>N'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Si vous souhaitez vous désabonner, nous vous prions de bien vouloir envoyer un message à sympa@listes.univ-paris1.fr avec dans le corps du message la commande : signoff observatoire-ia-info .</p>\r\n\r\n<p>Vous remerciant par avance et bien cordialement,</p>\r\n\r\n<p>L'équipe de l'observatoire de l'IA de l'Université de Paris 1 Panthéon-Sorbonne</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_a_sympa:
-    id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: sympa@listes.univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'subscribe observatoire-ia-info'
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
+      notes: ''
+      sticky: null
+      locked: null
+      data: ''
+      message: ''
+      message_type: status
       debug: false
 variants: {  }

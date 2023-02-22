@@ -1,52 +1,61 @@
-uuid: ab1a474e-47c9-40fe-bb58-edd80c4c4d51
+uuid: e6fbfa7a-b89e-4b62-b1df-2b74ea3ce65f
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 46
+uid: 5486
 template: false
 archive: false
-id: 19_formulaire_d_inscription_soir
-title: '19 - Formulaire d''inscription Soirée Saudade 2022'
-description: "<p>Formulaire pour inscription à la soirée Saudade organisée par Katia Resende de Melo du Département des langues de Paris1.<br />\r\nSoirée Saudade 2022</p>"
-category: 'Inscription événement'
+id: 0_p1p1_inclusion_2_decembre
+title: '0 - P1P1 Inclusion - Inscription ateliers - 2 décembre'
+description: ''
+category: ''
 elements: |-
-  inscription_pour_le_18_novembre_amphi_richelieu:
-    '#type': webform_wizard_page
-    '#title': 'Inscription pour le 18 novembre Amphi Richelieu'
-    votre_nom:
-      '#type': webform_contact
-      '#title': 'Vos coordonnées'
-      '#title_display': before
-      '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-      '#name__title': 'Votre nom'
-      '#name__placeholder': 'Jean Dupont'
-      '#name__help': 'Exemple : Jean Dupont'
-      '#name__description': |-
-        Élément indispensable pour l'entrée en Sorbonne,
-        la présentation d'une pièce d'identité sera demandée à l'entrée..
-      '#company__access': false
-      '#email__title': 'Votre adresse courriel'
-      '#email__placeholder': ' jean.dupont@univ-paris1.fr'
-      '#email__help': 'Exemple : jean.dupont@univ-paris1.fr'
-      '#email__description': 'Votre adresse courriel permet de vous prévenir en cas d''imprévue ou d''annulation de la soirée.'
-      '#phone__access': false
-      '#address__access': false
-      '#address_2__access': false
-      '#city__access': false
-      '#state_province__access': false
-      '#postal_code__access': false
-      '#country__access': false
-    captcha:
-      '#type': captcha
-      '#captcha_type': captcha/Math
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<h3>Formulaire d''inscription pour le vendredi 2 décembre</h3>'
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': 'Prénom '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': 'Courriel '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  horaire:
+    '#type': radios
+    '#title': 'Choisissez l''horaire (30 étudiants par heure) :'
+    '#options':
+      '11 h - 12 h ': '11 h - 12 h '
+      '12 h - 13 h ': '12 h - 13 h '
+      '13 h - 14 h': '13 h - 14 h'
+      '14 h - 15 h': '14 h - 15 h'
+      '15 h - 16 h': '15 h - 16 h'
+      '16 h - 17h': '16 h - 17h'
+    '#options__properties': ''
+  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#type': checkbox
+    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  markup:
+    '#type': webform_markup
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': Envoyer
+    '#submit__label': Soumettre
+    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -62,7 +71,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: "<p>Ce formulaire est désormais clos.<br />\r\nPlus de places disponibles.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -149,10 +158,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: inline
+  confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<h3 class=\"text-align-center\">Votre inscription est enregistrée. Vous pouvez fermer cette page.</h3>\r\n\r\n<h4 class=\"text-align-center\">Le Département des langues de Paris 1 vous souhaite une bonne journée.</h4>"
+  confirmation_message: "<p>Votre demande d’inscription a bien été prise en compte. Le nombre de places étant limité, votre participation vous sera confirmée prochainement.<br />\r\n&nbsp;</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -160,7 +169,7 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 200
   limit_total_interval: null
   limit_total_message: ''
   limit_total_unique: false
@@ -209,7 +218,8 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles: {  }
+    roles:
+      - anonymous
     users: {  }
     permissions: {  }
   delete_own:
@@ -218,7 +228,8 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
   test:
     roles: {  }
@@ -226,13 +237,14 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
 handlers:
-  crl_univ_paris1_fr:
+  email_aux_demandeurs:
     id: email
-    handler_id: crl_univ_paris1_fr
-    label: crl@univ-paris1.fr
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -240,20 +252,57 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: _default
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: Katia.Resende-De-Melo@univ-paris1.fr
+      cc_mail: ''
       cc_options: {  }
-      from_mail: _default
+      from_mail: sve@univ-paris1.fr
       from_options: {  }
-      from_name: _default
+      from_name: 'Université Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: _default
+      subject: '[Réponse automatique] Confirmation d''inscription au repas dans le noir du 2 décembre'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d’inscription a bien été prise en compte. Le nombre de places étant limité, votre participation vous sera confirmée prochainement.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>&nbsp;</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: sve@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Semaine P1PS Inclusion - Repas dans le noir du 2 décembre - Nouvelle inscription'
       body: _default
       excluded_elements: {  }
       ignore_access: false

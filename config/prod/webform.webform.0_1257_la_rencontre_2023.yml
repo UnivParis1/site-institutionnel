@@ -1,33 +1,48 @@
-uuid: b8ded81b-118b-4e89-b8fd-2b31048837ad
+uuid: 840691f5-eb23-48f9-a38d-9c9943264cda
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 5486
 template: false
 archive: false
-id: 114_inscription_a_la_newsletter
-title: '114 - Inscription à la newsletter'
+id: 0_1257_la_rencontre_2023
+title: '0 - 1257 la rencontre 2023'
 description: ''
 category: ''
 elements: |-
-  container:
-    '#type': container
-    '#attributes':
-      style: 'border:2px solid #00326E;padding:1rem;display: block; width: fit-content;'
-    votre_adresse_courriel_:
-      '#type': email
-      '#title': 'Votre adresse courriel :'
-      '#placeholder': jeandupont@monfai.com
-      '#required': true
-      '#required_error': 'Vous devez saisir votre adresse de messagerie'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    actions:
-      '#type': webform_actions
-      '#title': 'Bouton(s) d''envoi'
-      '#submit__label': 'S''inscrire à la newsletter'
+  markup:
+    '#type': webform_markup
+    '#markup': '<h2>Formulaire d''inscription</h2>'
+  nom_:
+    '#type': textfield
+    '#title': 'Nom :'
+    '#required': true
+    '#required_error': 'Nom est requis'
+  prenom_:
+    '#type': textfield
+    '#title': 'Prénom :'
+    '#required': true
+    '#required_error': 'Prénom est requis'
+  courriel_:
+    '#type': email
+    '#title': 'Courriel :'
+    '#required': true
+    '#required_error': 'Courriel est requis'
+  captcha:
+    '#type': captcha
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
+    '#type': checkbox
+    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
+    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
+    '#required': true
+    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': ENVOYER
 css: ''
 javascript: ''
 settings:
@@ -40,10 +55,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: '<p>Les inscriptions sont clôturées.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -112,9 +127,11 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -132,8 +149,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: '<p>Merci de vous être inscrit(e) à notre newsletter. Vous allez recevoir un courriel de confirmation sur l''adresse de messagerie que vous avez renseigné.</p>'
+  confirmation_title: 'Confirmation d''inscription'
+  confirmation_message: "Votre inscription a bien été enregistrée.\r\nMerci pour votre participation !"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -210,10 +227,10 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_au_demandeur:
+  email:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: email
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -221,21 +238,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      to_mail: evenements@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: '[webform_submission:values:courriel_:raw]'
       from_options: {  }
-      from_name: ''
+      from_name: '[webform_submission:values:nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation d''inscription à la newsletter de l''observatoire de l''intelligence artificielle de l''Université Paris 1 Panthéon-Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous remercions de votre inscription pour recevoir la newsletter et des informations de l'observatoire de l'intelligence artificielle de l'Université Paris 1 Panthéon-Sorbonne.</p>\r\n\r\n<p>N'hésitez pas à ajouter l'adresse observatoire-ia-info@listes.univ-paris1.fr dans votre carnet d'adresse afin que ces newsletters n'arrivent pas dans votre boite de spam.</p>\r\n\r\n<p>Si vous souhaitez vous désabonner, nous vous prions de bien vouloir envoyer un message à sympa@listes.univ-paris1.fr avec dans le corps du message la commande : signoff observatoire-ia-info .</p>\r\n\r\n<p>Vous remerciant par avance et bien cordialement,</p>\r\n\r\n<p>L'équipe de l'observatoire de l'IA de l'Université de Paris 1 Panthéon-Sorbonne</p>"
+      subject: 'Invitation #1257 La rencontre - nouvelle inscription'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -247,10 +264,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_a_sympa:
+  email_1:
     id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
+    handler_id: email_1
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -258,21 +275,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sympa@listes.univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel_:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      from_mail: evenements@univ-paris1.fr
       from_options: {  }
-      from_name: ''
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'subscribe observatoire-ia-info'
-      body: _default
+      subject: '[Réponse automatique ] #1257 La rencontre - Confirmation d''inscription'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est bien enregistrée.<br />\r\nMerci pour votre participation.</p>\r\n\r\n<p>La direction de la communication</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

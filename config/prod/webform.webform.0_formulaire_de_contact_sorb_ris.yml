@@ -1,127 +1,58 @@
-uuid: cd605635-0a15-41da-9f83-ca15a8049373
+uuid: 5f9aeca5-2d57-4f7e-b48e-505696cddb7f
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 2584
+uid: 5486
 template: false
 archive: false
-id: formulaire_inscription_2021
-title: 'chairestrategique - Formulaire inscription 2021'
-description: ''
+id: 0_formulaire_de_contact_sorb_ris
+title: '0 - Formulaire de contact Sorb''rising'
+description: '<p>Formulaire de contact permettant de contacter l''équipe Sorb''rising</p>'
 category: ''
 elements: |-
-  _h3_informations_personnelles_h3_:
-    '#type': label
-    '#title': '<h3>Informations personnelles</h3>'
-  flexbox:
-    '#type': webform_flexbox
-    nom:
-      '#type': textfield
-      '#title': 'Votre Nom'
-      '#title_display': before
-      '#maxlength': 30
-      '#placeholder': 'Saisissez votre nom '
-      '#required': true
-      '#required_error': 'Veuillez saisir votre nom'
-    votre_prenom:
-      '#type': textfield
-      '#title': 'Votre Prénom'
-      '#title_display': before
-      '#maxlength': 27
-      '#placeholder': 'Saisissez votre prénom'
-      '#required': true
-      '#required_error': 'Veuillez saisir votre prénom'
-  flexbox_01:
-    '#type': webform_flexbox
-    votre_entreprise_:
-      '#type': textfield
-      '#title': 'Votre Entreprise '
-      '#title_display': before
-      '#maxlength': 49
-      '#placeholder': 'Saisissez le nom de votre entreprise '
-      '#autocomplete': organization
-      '#required': true
-      '#required_error': 'Veuillez saisir le nom de votre entreprise '
-    votre_fonction:
-      '#type': textfield
-      '#title': 'Votre Fonction'
-      '#size': 50
-      '#placeholder': 'Saisissez votre fonction au sein de l''entreprise '
-      '#required': true
-      '#required_error': 'Veuillez saisir votre fonction '
-  votre_courriel:
-    '#type': webform_email_confirm
-    '#title': 'Votre courriel'
-    '#title_display': before
-    '#placeholder': 'Saisissez votre courriel '
+  nom:
+    '#type': textfield
+    '#title': 'Nom :'
     '#required': true
-    '#required_error': 'Veuillez saisir votre courriel '
-    '#confirm__title': 'Vérification du courriel'
-    '#confirm__description': 'Veuillez ressaisir votre courriel&nbsp;'
-  votre_telephone:
-    '#type': tel
-    '#title': 'Votre Téléphone'
-    '#title_display': before
+    '#required_error': 'Le nom est requis'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': 'Prénom :'
     '#required': true
-    '#required_error': 'Veuillez saisir votre numéro de téléphone '
-  horizontal_rule:
-    '#type': webform_horizontal_rule
-  conferences:
-    '#type': label
-    '#title': '<h3>Conférences</h3>'
-    '#description': 'Veuillez indiqu&eacute; les conf&eacute;rences auxquelles vous souhaitez participer.&nbsp;'
-  veuillez_indiquer_les_conferences_auxquelles_vous_souhaitez_part:
-    '#type': label
-    '#title': 'Veuillez indiquer les conférences auxquelles vous souhaitez participer.'
-  flexbox_02:
-    '#type': webform_flexbox
-    '#align_items': center
-    25_01_lecon_inaugurale_:
-      '#type': radios
-      '#title': '<b>30/06/2021 - Général François Lecointre</b>'
-      '#title_display': before
-      '#options': yes_no
-      '#options_display': buttons_horizontal
-      '#default_value': Non
-      '#options__properties': ''
-    _b_option_b_:
-      '#type': radios
-      '#title': '<b>Participation</b>'
-      '#title_display': before
-      '#options':
-        'Par Internet': 'Par Internet'
-      '#options_display': buttons_horizontal
-      '#default_value': 'Par Internet'
-      '#options__properties': ''
-  acceptation_:
-    '#type': radios
-    '#title': '<b>Collecte de données à caractère personnel</b>'
-    '#description': 'En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de mon inscription au cycle de la Chaire Grands enjeux strat&eacute;giques contemporains :'
-    '#title_display': before
-    '#description_display': before
-    '#options': yes_no
-    '#options_display': buttons_horizontal
+    '#required_error': 'Le prénom est requis'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': 'Courriel :'
+    '#placeholder': 'Indiquez votre adresse de messagerie'
     '#required': true
-    '#required_error': 'Vous n''avez pas accepté les conditions d''exploitations de vos données personnelles'
-    '#default_value': Non
-    '#options__properties': ''
+    '#required_error': 'Le courriel est requis'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  objet_de_votre_message_:
+    '#type': select
+    '#title': 'Objet de votre message :'
+    '#options':
+      Question: Question
+      Proposition: Proposition
+    '#empty_option': Sélectionnez
+    '#required': true
+  votre_message:
+    '#type': textarea
+    '#title': 'Votre message :'
+    '#placeholder': 'Ecrivez votre message ici'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   captcha:
     '#type': captcha
     '#captcha_type': recaptcha/reCAPTCHA
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
-    '#states':
-      disabled:
-        ':input[name="acceptation_"]':
-          value: Non
-        ':input[name="captcha"]':
-          unchecked: true
-    '#states_clear': false
-    '#submit__label': 'S''inscrire '
+    '#submit__label': Envoyer
 css: ''
 javascript: ''
 settings:
@@ -133,7 +64,7 @@ settings:
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  page_theme_name: p1ps2019
+  page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
@@ -226,8 +157,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Confirmation inscription'
-  confirmation_message: 'Nous vous confirmons avoir bien pris en compte votre inscription.&nbsp;'
+  confirmation_title: 'Confirmation d''envoi'
+  confirmation_message: "Bonjour,<br />\r\n<br />\r\nVotre message a bien &eacute;t&eacute; envoy&eacute;.&nbsp;<br />\r\n<br />\r\nNos vous r&eacute;pondrons dans les meilleurs d&eacute;lais.<br />\r\n<br />\r\nCordialement,<br />\r\nL&#39;&eacute;quipe du CESDoc"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -307,7 +238,7 @@ handlers:
   email:
     id: email
     handler_id: email
-    label: 'Confirmation inscription'
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -315,21 +246,58 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_courriel:raw]'
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
-      bcc_mail: _default
+      bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: contact@chairestrategique.fr
+      from_mail: no-reply@univ-paris1.fr
       from_options: {  }
-      from_name: 'Chaire Grands enjeux stratégiques contemporains '
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation inscription'
-      body: "Bonjour,<br />\r\n<br />\r\nNous vous confirmons avoir bien pris en compte votre inscription &agrave; la<br />\r\nChaire Grands enjeux strat&eacute;giques contemporains.<br />\r\n<br />\r\nPour rappel, voici les informations dont vous nous avez fait part :&nbsp;<br />\r\n[webform_submission:values]<br />\r\n<br />\r\n******************************************<br />\r\nPour les participants par Internet, retrouvez-nous sur les plateformes YouTube et Twitch le <strong>30 juin 2021 &agrave; 16h00</strong> depuis les liens respectifs suivants :<br />\r\n<br />\r\n<strong>YouTube </strong>: <a href=\"https://www.youtube.com/watch?v=NbiAGrK72SI\">https://www.youtube.com/watch?v=NbiAGrK72SI</a><br />\r\n<br />\r\n<strong>Twitch </strong>: <a href=\"https://www.twitch.tv/chairestrategie\">https://www.twitch.tv/chairestrategie</a><br />\r\n<br />\r\n******************************************<br />\r\n<br />\r\nVous remerciant de votre inscription.&nbsp;<br />\r\nChaire Grands enjeux strat&eacute;giques contemporains&nbsp;"
+      subject: '[Réponse automatique]'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande a bien été prise en compte.<br />\r\nNous vous répondrons dans les meilleurs délais.</p>\r\n\r\n<p>Bien cordialement,</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: sorb-rising@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Projet Sorb''Rising - Formulaire de contact '
+      body: "<p>Voici une nouvelle demande via le formulaire de contact.</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
