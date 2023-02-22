@@ -1,20 +1,21 @@
 langcode: fr
 settings:
   default_status: open
+  default_page: true
   default_page_base_path: /form
   default_ajax: false
   default_ajax_progress_type: throbber
   default_ajax_effect: fade
   default_ajax_speed: 500
-  default_submit_button_label: Submit
+  default_submit_button_label: Envoyer
   default_reset_button_label: Réinitialiser
-  default_delete_button_label: Delete
+  default_delete_button_label: Supprimer
   default_form_submit_once: false
-  default_form_open_message: 'This form has not yet been opened to submissions.'
-  default_form_close_message: 'Sorry…This form is closed to new submissions.'
-  default_form_exception_message: 'Unable to display this webform. Please contact the site administrator.'
-  default_form_confidential_message: 'Ce formulaire est confidentiel. Vous devez vous <a href="[site:login-url]/logout?destination=[current-page:url:relative]">déconnecter</a> pour l''utiliser.'
-  default_form_access_denied_message: 'Veuillez vous connecter pour accéder à ce formulaire.'
+  default_form_open_message: '<p>This form has not yet been opened to submissions.</p>'
+  default_form_close_message: '<p>Sorry…This form is closed to new submissions.</p>'
+  default_form_exception_message: '<p>Unable to display this webform. Please contact the site administrator.</p>'
+  default_form_confidential_message: '<p>Ce formulaire est confidentiel. Vous devez vous <a href="[site:login-url]/logout?destination=[current-page:url:relative]">déconnecter</a> pour l''utiliser.</p>'
+  default_form_access_denied_message: '<p>Veuillez vous connecter pour accéder à ce formulaire.</p>'
   default_form_disable_remote_addr: false
   default_form_novalidate: false
   default_form_disable_inline_errors: false
@@ -29,19 +30,19 @@ settings:
   default_wizard_next_button_label: 'Page suivante >'
   default_wizard_start_label: Début
   default_wizard_confirmation_label: Terminé
-  default_wizard_toggle_show_label: 'Show all'
-  default_wizard_toggle_hide_label: 'Hide all'
+  default_wizard_toggle_show_label: 'Voir tout'
+  default_wizard_toggle_hide_label: 'Masquer tout'
   default_preview_next_button_label: Prévisualiser
   default_preview_prev_button_label: '< Précédent'
   default_preview_label: Prévisualiser
   default_preview_title: '[webform:title] : Prévisualisation'
-  default_preview_message: 'Please review your submission. Your submission is not complete until you press the "Submit" button!'
+  default_preview_message: '<p>Please review your submission. Your submission is not complete until you press the "Submit" button!</p>'
   default_draft_button_label: 'Enregistrer le brouillon'
   default_draft_saved_message: 'Soumissions enregistrées. Vous pourrez revenir sur ce formulaire plus tard, cela restaurera les valeurs actuelles.'
   default_draft_loaded_message: 'Un formulaire partiellement complété a été trouvé. Veuillez compléter les portions restantes.'
   default_draft_pending_single_message: 'You have a pending draft for this webform. <a href="#">Load your pending draft</a>.'
   default_draft_pending_multiple_message: 'You have pending drafts for this webform. <a href="#">View your pending drafts</a>.'
-  default_confirmation_message: 'Nouvelle soumission ajoutée à [webform:title]'
+  default_confirmation_message: '<p>Nouvelle soumission ajoutée à [webform:title]</p>'
   default_confirmation_back_label: 'Retour au formulaire'
   default_limit_total_message: 'La quantité totale de soumissions autorisées a été atteinte.'
   default_limit_user_message: 'La quantité totale de soumissions autorisées a été atteinte.'
@@ -67,23 +68,11 @@ settings:
   default_previous_submission_message: 'You have already submitted this webform. <a href="#">View your previous submission</a>.'
   default_previous_submissions_message: 'You have already submitted this webform. <a href="#">View your previous submissions</a>.'
   default_autofill_message: 'This submission has been autofilled with your previous submission.'
-  form_classes: |
-    container-inline clearfix
-    form--inline clearfix
-    messages messages--error
-    messages messages--warning
-    messages messages--status
+  form_classes: "container-inline clearfix\r\nform--inline clearfix\r\nmessages messages--error\r\nmessages messages--warning\r\nmessages messages--status\r\n"
   button_classes: ''
-  preview_classes: |
-    messages messages--error
-    messages messages--warning
-    messages messages--status
-  confirmation_classes: |
-    messages messages--error
-    messages messages--warning
-    messages messages--status
-  confirmation_back_classes: |
-    button
+  preview_classes: "messages messages--error\r\nmessages messages--warning\r\nmessages messages--status\r\n"
+  confirmation_classes: "messages messages--error\r\nmessages messages--warning\r\nmessages messages--status\r\n"
+  confirmation_back_classes: "button\r\n"
   default_share: false
   default_share_node: false
   default_share_theme_name: ''
@@ -140,7 +129,7 @@ element:
 html_editor:
   disabled: false
   element_format: full_html
-  mail_format: ''
+  mail_format: full_html
   tidy: true
   make_unused_managed_files_temporary: false
 file:
@@ -174,11 +163,11 @@ mail:
   roles: {  }
 export:
   temp_directory: ''
-  exporter: delimited
-  delimiter: '|'
+  exporter: xlsx
+  delimiter: ','
   multiple_delimiter: ;
-  excel: true
-  archive_type: tar
+  excel: false
+  archive_type: zip
   header_format: label
   header_prefix: true
   header_prefix_key_delimiter: __

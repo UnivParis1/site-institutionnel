@@ -3,28 +3,34 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.body
-    - field.storage.node.field_affiliation
-    - field.storage.node.field_categories
-    - field.storage.node.field_collection_term
-    - field.storage.node.field_editorial_blocks
-    - field.storage.node.field_event_date
-    - field.storage.node.field_event_type
-    - field.storage.node.field_fonction
-    - field.storage.node.field_lead
-    - field.storage.node.field_news_date
-    - field.storage.node.field_news_topic
     - field.storage.node.field_paragraphs
-    - field.storage.node.field_publication_type
-    - field.storage.node.field_publisher
-    - field.storage.node.field_publishing_date
+    - field.storage.node.field_editorial_blocks
+    - field.storage.paragraph.bp_accordion_section_title
+    - field.storage.paragraph.field_campus_description
+    - field.storage.paragraph.bp_header
+    - field.storage.paragraph.field_subtitle
+    - field.storage.paragraph.bp_tab_section_title
+    - field.storage.paragraph.bp_text
+    - field.storage.paragraph.field_text
+    - field.storage.paragraph.field_simple_text
+    - field.storage.paragraph.field_title
+    - field.storage.node.field_lead
+    - field.storage.node.field_collection_term
     - field.storage.node.field_short_desc
-    - field.storage.node.field_skills
-    - field.storage.node.field_sub_title
+    - field.storage.node.field_news_date
+    - field.storage.node.field_event_date
+    - field.storage.node.field_publishing_date
+    - field.storage.node.field_publication_topics
+    - field.storage.node.body
+    - field.storage.node.field_isbn
     - field.storage.node.field_subtitle
-    - field.storage.node.field_thesis_subject
+    - field.storage.node.field_sub_title
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_event_type
     - search_api.server.database_search
   module:
+    - paragraphs
+    - taxonomy
     - node
     - search_api
 id: contenu
@@ -40,32 +46,120 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.body
-  field_affiliation:
-    label: Affiliation
+  bp_accordion_section_title:
+    label: 'Blocs éditoriaux » Paragraph » Accordion Section Title'
     datasource_id: 'entity:node'
-    property_path: field_affiliation
+    property_path: 'field_editorial_blocks:entity:bp_accordion_section_title'
     type: text
     dependencies:
       config:
-        - field.storage.node.field_affiliation
-  field_categories:
-    label: Catégories
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_accordion_section_title
+      module:
+        - paragraphs
+  bp_accordion_section_title_1:
+    label: 'Blocs éditoriaux » Paragraph » Accordion Section Title'
     datasource_id: 'entity:node'
-    property_path: field_categories
+    property_path: 'field_paragraphs:entity:bp_accordion_section_title'
     type: text
-    boost: !!float 3
     dependencies:
       config:
-        - field.storage.node.field_categories
-  field_collection_term:
-    label: Collection
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_accordion_section_title
+      module:
+        - paragraphs
+  bp_header:
+    label: 'Blocs éditoriaux » Paragraph » Header'
     datasource_id: 'entity:node'
-    property_path: field_collection_term
+    property_path: 'field_editorial_blocks:entity:bp_header'
     type: text
-    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_header
+      module:
+        - paragraphs
+  bp_header_1:
+    label: 'Blocs éditoriaux » Paragraph » Header'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:bp_header'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_header
+      module:
+        - paragraphs
+  bp_tab_section_title:
+    label: 'Blocs éditoriaux » Paragraph » Tab Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:bp_tab_section_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_tab_section_title
+      module:
+        - paragraphs
+  bp_text:
+    label: 'Blocs éditoriaux » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:bp_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.bp_text
+      module:
+        - paragraphs
+  bp_text_1:
+    label: 'Blocs éditoriaux » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:bp_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.bp_text
+      module:
+        - paragraphs
+  changed:
+    label: Modifié
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  end_value:
+    label: 'Date de l''évènement » Valeur de la date de fin'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_date:end_value'
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_event_date
+  field_campus_description:
+    label: 'Blocs éditoriaux » Paragraph » Description campus'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_campus_description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_campus_description
+      module:
+        - paragraphs
+  field_collection:
+    label: 'Collection » Terme de taxonomie » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_collection_term:entity:name'
+    type: string
     dependencies:
       config:
         - field.storage.node.field_collection_term
+      module:
+        - taxonomy
   field_editorial_blocks:
     label: 'Blocs éditoriaux'
     datasource_id: 'entity:node'
@@ -87,19 +181,19 @@ field_settings:
     label: 'Type d''événement'
     datasource_id: 'entity:node'
     property_path: field_event_type
-    type: text
-    boost: !!float 3
+    type: string
+    boost: !!float 8
     dependencies:
       config:
         - field.storage.node.field_event_type
-  field_fonction:
-    label: Fonction
+  field_isbn:
+    label: ISBN
     datasource_id: 'entity:node'
-    property_path: field_fonction
+    property_path: field_isbn
     type: text
     dependencies:
       config:
-        - field.storage.node.field_fonction
+        - field.storage.node.field_isbn
   field_lead:
     label: Chapô
     datasource_id: 'entity:node'
@@ -121,7 +215,7 @@ field_settings:
     label: 'Sujet d''actualité'
     datasource_id: 'entity:node'
     property_path: field_news_topic
-    type: text
+    type: string
     boost: !!float 3
     dependencies:
       config:
@@ -135,24 +229,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_paragraphs
-  field_publication_type:
-    label: Type
-    datasource_id: 'entity:node'
-    property_path: field_publication_type
-    type: text
-    boost: !!float 3
-    dependencies:
-      config:
-        - field.storage.node.field_publication_type
-  field_publisher:
-    label: Éditeur
-    datasource_id: 'entity:node'
-    property_path: field_publisher
-    type: text
-    boost: !!float 3
-    dependencies:
-      config:
-        - field.storage.node.field_publisher
   field_publishing_date:
     label: 'Date de publication'
     datasource_id: 'entity:node'
@@ -170,15 +246,28 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_short_desc
-  field_skills:
-    label: 'Domaines d''expertise'
+  field_simple_text:
+    label: 'Blocs éditoriaux » Paragraph » Texte simple'
     datasource_id: 'entity:node'
-    property_path: field_skills
+    property_path: 'field_editorial_blocks:entity:field_simple_text'
     type: text
-    boost: !!float 3
     dependencies:
       config:
-        - field.storage.node.field_skills
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_simple_text
+      module:
+        - paragraphs
+  field_simple_text_1:
+    label: 'Blocs éditoriaux » Paragraph » Texte simple'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_simple_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_simple_text
+      module:
+        - paragraphs
   field_sub_title:
     label: Sous-titre
     datasource_id: 'entity:node'
@@ -197,15 +286,82 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_subtitle
-  field_thesis_subject:
-    label: 'Sujet de thèse'
+  field_subtitle_1:
+    label: 'Blocs éditoriaux » Paragraph » Sous-titre'
     datasource_id: 'entity:node'
-    property_path: field_thesis_subject
+    property_path: 'field_editorial_blocks:entity:field_subtitle'
     type: text
-    boost: !!float 3
     dependencies:
       config:
-        - field.storage.node.field_thesis_subject
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_subtitle
+      module:
+        - paragraphs
+  field_subtitle_2:
+    label: 'Blocs éditoriaux » Paragraph » Sous-titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_subtitle'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_subtitle
+      module:
+        - paragraphs
+  field_text:
+    label: 'Blocs éditoriaux » Paragraph » Texte'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:field_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_text
+      module:
+        - paragraphs
+  field_text_1:
+    label: 'Blocs éditoriaux » Paragraph » Texte'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_text
+      module:
+        - paragraphs
+  field_title:
+    label: 'Blocs éditoriaux » Paragraph » Titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_editorial_blocks:entity:field_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_editorial_blocks
+        - field.storage.paragraph.field_title
+      module:
+        - paragraphs
+  field_title_1:
+    label: 'Blocs éditoriaux » Paragraph » Titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_title
+      module:
+        - paragraphs
+  name_1:
+    label: 'Discipline de la publication » Terme de taxonomie » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_publication_topics:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_publication_topics
+      module:
+        - taxonomy
   node_grants:
     label: 'Information d''accès du nœud.'
     property_path: search_api_node_grants
@@ -264,6 +420,8 @@ datasource_settings:
       selected:
         - article
         - news2018
+        - page_personnelle
+        - viva
     languages:
       default: true
       selected: {  }
@@ -281,22 +439,33 @@ processor_settings:
     all_fields: true
     fields:
       - body
-      - field_affiliation
-      - field_categories
-      - field_collection_term
+      - bp_accordion_section_title
+      - bp_accordion_section_title_1
+      - bp_header
+      - bp_header_1
+      - bp_tab_section_title
+      - bp_text
+      - bp_text_1
+      - field_campus_description
+      - field_collection
       - field_editorial_blocks
       - field_event_type
-      - field_fonction
+      - field_isbn
       - field_lead
       - field_news_topic
       - field_paragraphs
-      - field_publication_type
-      - field_publisher
       - field_short_desc
-      - field_skills
+      - field_simple_text
+      - field_simple_text_1
       - field_sub_title
       - field_subtitle
-      - field_thesis_subject
+      - field_subtitle_1
+      - field_subtitle_2
+      - field_text
+      - field_text_1
+      - field_title
+      - field_title_1
+      - name_1
       - title
       - type
       - url
@@ -317,22 +486,33 @@ processor_settings:
     all_fields: true
     fields:
       - body
-      - field_affiliation
-      - field_categories
-      - field_collection_term
+      - bp_accordion_section_title
+      - bp_accordion_section_title_1
+      - bp_header
+      - bp_header_1
+      - bp_tab_section_title
+      - bp_text
+      - bp_text_1
+      - field_campus_description
+      - field_collection
       - field_editorial_blocks
       - field_event_type
-      - field_fonction
+      - field_isbn
       - field_lead
       - field_news_topic
       - field_paragraphs
-      - field_publication_type
-      - field_publisher
       - field_short_desc
-      - field_skills
+      - field_simple_text
+      - field_simple_text_1
       - field_sub_title
       - field_subtitle
-      - field_thesis_subject
+      - field_subtitle_1
+      - field_subtitle_2
+      - field_text
+      - field_text_1
+      - field_title
+      - field_title_1
+      - name_1
       - title
       - type
       - url
@@ -352,22 +532,33 @@ processor_settings:
     all_fields: true
     fields:
       - body
-      - field_affiliation
-      - field_categories
-      - field_collection_term
+      - bp_accordion_section_title
+      - bp_accordion_section_title_1
+      - bp_header
+      - bp_header_1
+      - bp_tab_section_title
+      - bp_text
+      - bp_text_1
+      - field_campus_description
+      - field_collection
       - field_editorial_blocks
       - field_event_type
-      - field_fonction
+      - field_isbn
       - field_lead
       - field_news_topic
       - field_paragraphs
-      - field_publication_type
-      - field_publisher
       - field_short_desc
-      - field_skills
+      - field_simple_text
+      - field_simple_text_1
       - field_sub_title
       - field_subtitle
-      - field_thesis_subject
+      - field_subtitle_1
+      - field_subtitle_2
+      - field_text
+      - field_text_1
+      - field_title
+      - field_title_1
+      - name_1
       - title
       - type
       - url
@@ -380,28 +571,39 @@ processor_settings:
     all_fields: true
     fields:
       - body
-      - field_affiliation
-      - field_categories
-      - field_collection_term
+      - bp_accordion_section_title
+      - bp_accordion_section_title_1
+      - bp_header
+      - bp_header_1
+      - bp_tab_section_title
+      - bp_text
+      - bp_text_1
+      - field_campus_description
+      - field_collection
       - field_editorial_blocks
       - field_event_type
-      - field_fonction
+      - field_isbn
       - field_lead
       - field_news_topic
       - field_paragraphs
-      - field_publication_type
-      - field_publisher
       - field_short_desc
-      - field_skills
+      - field_simple_text
+      - field_simple_text_1
       - field_sub_title
       - field_subtitle
-      - field_thesis_subject
+      - field_subtitle_1
+      - field_subtitle_2
+      - field_text
+      - field_text_1
+      - field_title
+      - field_title_1
+      - name_1
       - title
       - type
       - url
 tracker_settings:
   default:
-    indexing_order: fifo
+    indexing_order: lifo
 options:
   cron_limit: 100
   index_directly: false

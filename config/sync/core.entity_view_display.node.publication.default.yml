@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.publication.field_issn
     - field.field.node.publication.field_link_title
     - field.field.node.publication.field_media
+    - field.field.node.publication.field_more
     - field.field.node.publication.field_nb_pages
     - field.field.node.publication.field_price
     - field.field.node.publication.field_pub_year
@@ -33,6 +34,7 @@ dependencies:
     - node.type.publication
   module:
     - datetime
+    - entity_reference_revisions
     - link
     - options
     - text
@@ -104,6 +106,15 @@ content:
       link: false
     third_party_settings: {  }
     weight: 6
+    region: content
+  field_more:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 22
     region: content
   field_nb_pages:
     type: number_integer

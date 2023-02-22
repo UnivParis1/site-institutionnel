@@ -88,7 +88,7 @@ display:
         type: infinite_scroll
         options:
           offset: 0
-          items_per_page: 12
+          items_per_page: 25
           total_pages: null
           id: 0
           tags:
@@ -104,7 +104,7 @@ display:
             offset_label: Offset
           views_infinite_scroll:
             button_text: 'Afficher plus'
-            automatically_load_content: true
+            automatically_load_content: false
             initially_load_all_pages: false
       exposed_form:
         type: basic
@@ -138,6 +138,19 @@ display:
             format: full_html
           tokenize: false
       sorts:
+        changed:
+          id: changed
+          table: search_api_index_contenu
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         search_api_relevance:
           id: search_api_relevance
           table: search_api_index_contenu
@@ -150,45 +163,6 @@ display:
           expose:
             label: ''
             field_identifier: search_api_relevance
-          exposed: false
-        field_news_date:
-          id: field_news_date
-          table: search_api_index_contenu
-          field: field_news_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: field_news_date
-          exposed: false
-        field_event_date:
-          id: field_event_date
-          table: search_api_index_contenu
-          field: field_event_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: field_event_date
-          exposed: false
-        field_publishing_date:
-          id: field_publishing_date
-          table: search_api_index_contenu
-          field: field_publishing_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: field_publishing_date
           exposed: false
       arguments: {  }
       filters:
@@ -280,24 +254,31 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           parse_mode: terms
-          min_length: null
+          min_length: 3
           fields:
-            - field_affiliation
-            - field_categories
-            - field_collection_term
-            - field_editorial_blocks
-            - field_event_type
-            - field_fonction
+            - body
+            - bp_accordion_section_title
+            - bp_accordion_section_title_1
+            - bp_header
+            - bp_header_1
+            - bp_tab_section_title
+            - bp_text
+            - bp_text_1
+            - field_campus_description
+            - field_isbn
             - field_lead
-            - field_news_topic
             - field_paragraphs
-            - field_publication_type
-            - field_publisher
             - field_short_desc
-            - field_skills
+            - field_simple_text
+            - field_simple_text_1
             - field_sub_title
             - field_subtitle
-            - field_thesis_subject
+            - field_subtitle_1
+            - field_subtitle_2
+            - field_text
+            - field_text_1
+            - field_title
+            - field_title_1
             - title
             - type
             - url
@@ -341,57 +322,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        type:
-          id: type
-          table: search_api_index_contenu
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_options
-          operator: or
-          value:
-            all: all
-            article: article
-            event: event
-            news: news
-            news2018: news2018
-            offer: offer
-            page: page
-            page_personnelle: page_personnelle
-            publication: publication
-            second_level_pages: second_level_pages
-            viva: viva
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
       style:
         type: default
         options:
@@ -403,9 +333,9 @@ display:
       query:
         type: search_api_query
         options:
-          skip_access: 0
-          bypass_access: 0
-          preserve_facet_query_args: 0
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
       relationships: {  }
       use_ajax: true
       header:
