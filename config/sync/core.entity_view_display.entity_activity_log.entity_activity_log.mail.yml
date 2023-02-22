@@ -1,0 +1,58 @@
+uuid: 330bf197-f41b-4f99-81bc-e4e4ccb25039
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.entity_activity_log.mail
+  module:
+    - entity_activity
+    - text
+    - user
+  enforced:
+    module:
+      - entity_activity_mail
+_core:
+  default_config_hash: yPPcprUtMv44e6WE9Arv1cVvC91Wg77Mbc1lDUJfV8w
+id: entity_activity_log.entity_activity_log.mail
+targetEntityType: entity_activity_log
+bundle: entity_activity_log
+mode: mail
+content:
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  log:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  subscription:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  uid:
+    type: author
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true
+  log_remove: true
+  read: true
+  search_api_excerpt: true
+  sent: true

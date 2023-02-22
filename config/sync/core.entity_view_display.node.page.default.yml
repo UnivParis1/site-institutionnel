@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_display_node_changed
     - field.field.node.page.field_indexrobots
     - field.field.node.page.field_media
+    - field.field.node.page.field_node_access
     - field.field.node.page.field_paragraphs
     - field.field.node.page.field_publish_master
     - field.field.node.page.field_short_desc
@@ -17,7 +19,6 @@ dependencies:
     - node.type.page
   module:
     - entity_reference_revisions
-    - text
     - user
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
@@ -26,34 +27,37 @@ targetEntityType: node
 bundle: page
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 1
-    region: content
+  content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-  content_moderation_control:
     weight: 0
     region: content
-    settings: {  }
+  field_node_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
     third_party_settings: {  }
+    weight: 3
+    region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 3
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
-  links:
     weight: 2
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
+  body: true
   field_disable_canonical_url: true
+  field_display_node_changed: true
   field_indexrobots: true
   field_media: true
   field_publish_master: true

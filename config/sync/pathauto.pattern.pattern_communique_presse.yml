@@ -1,0 +1,22 @@
+uuid: 74d13360-1dab-42af-a381-d27d95a0fd2e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: pattern_communique_presse
+label: 'Communiqué de presse'
+type: 'canonical_entities:node'
+pattern: 'communiques-dossiers-presse/[node:title]'
+selection_criteria:
+  26dcdbd6-e1c9-433f-bb06-36be549ce815:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 26dcdbd6-e1c9-433f-bb06-36be549ce815
+    context_mapping:
+      node: node
+    bundles:
+      communique: communique
+selection_logic: and
+weight: -5
+relationships: {  }

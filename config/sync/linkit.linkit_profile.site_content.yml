@@ -4,15 +4,15 @@ status: true
 dependencies:
   module:
     - node
-id: site_content
 label: 'Contenu du site'
+id: site_content
 description: ''
 matchers:
   e438f664-bb5d-4d76-8666-7b59a98124ea:
-    uuid: e438f664-bb5d-4d76-8666-7b59a98124ea
     id: 'entity:node'
-    weight: 0
+    uuid: e438f664-bb5d-4d76-8666-7b59a98124ea
     settings:
+      metadata: ''
       bundles:
         event: event
         news: news
@@ -21,6 +21,12 @@ matchers:
         publication: publication
         second_level_pages: second_level_pages
       group_by_bundle: true
-      include_unpublished: false
       substitution_type: canonical
-      metadata: ''
+      limit: 100
+      include_unpublished: false
+    weight: 0
+  a839cc51-8d8f-442f-9bc4-a6bfcd975eae:
+    id: email
+    uuid: a839cc51-8d8f-442f-9bc4-a6bfcd975eae
+    settings: {  }
+    weight: 0

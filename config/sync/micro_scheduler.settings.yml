@@ -1,20 +1,25 @@
-default_life_time: 365
+_core:
+  default_config_hash: 8sjF4UrXNdoExwFcR4OXEBvhptrZHwj0RdKTdxbVCWM
 langcode: fr
+default_life_time: 365
 unpublish_mail_admin:
   admin_roles:
     admin_dir_com: admin_dir_com
+    administrator: administrator
+    anonymous: 0
     authenticated: 0
+    contributeur: 0
     contributeur_sous_site: 0
     webmestre_sous_site: 0
-    anonymous: 0
-    administrator: administrator
+    webmestre_general: 0
+    enseignant_doctorant: 0
   subject: 'The site [micro_site:name] has been unpublished'
   message: 'Without action on your part, the site [micro_site:name] was automatically unpublished.Webmaster (s): [micro_site:administrator-list]'
 unpublish_mail_micro_site_admin:
   subject: 'The site [micro_site:name] has been unpublished'
   message: 'Without action on your part, the site [micro_site:name] was automatically put out of service. To restart your site, you must contact your administrator.'
 notification_timing:
-  8: '8'
+  8: 0
   15: 0
   30: 0
   60: 0
@@ -22,7 +27,5 @@ notification_mail_admin:
   subject: 'Unpublishing of the site [micro_site:name] in [micro_site:remaining-days] days'
   message: "Warning, the site [micro_site:name] will be automatically put out of service in [micro_site:remaining-days] days.\r\nWebmaster (s): [micro_site:administrator-list]\r\n"
 notification_site_admin_mail:
-  subject: 'Unpublishing your site [micro_site:name] in [micro_site:remaining-days] days'
+  subject: 'Fermeture automatique de votre site [micro_site:name] dans [micro_site:remaining-days] jours'
   message: 'Warning, without action on your part, your site [micro_site:name] will be automatically disabled in [micro_site:remaining-days] days. To postpone this release, you must contact your administrator.'
-_core:
-  default_config_hash: 8sjF4UrXNdoExwFcR4OXEBvhptrZHwj0RdKTdxbVCWM

@@ -1,6 +1,6 @@
 uuid: 5dc3094b-4702-4594-9335-79f3878c0002
 langcode: fr
-status: false
+status: true
 dependencies:
   config:
     - system.menu.mots-cles-page-d-accueil
@@ -19,25 +19,25 @@ plugin: 'system_menu_block:mots-cles-page-d-accueil'
 settings:
   id: 'system_menu_block:mots-cles-page-d-accueil'
   label: Mots-clés
+  label_display: '0'
   provider: system
-  label_display: visible
   level: 1
-  depth: 0
+  depth: 1
   expand_all_items: false
 visibility:
   site_type:
     id: site_type
-    site_type: {  }
     negate: false
     context_mapping: {  }
+    site_type: {  }
   site:
     id: site
+    negate: false
+    context_mapping: {  }
     sites: {  }
     sites_front_page: 0
-    negate: false
-    context_mapping: {  }
   request_path:
     id: request_path
-    pages: '<front>'
     negate: false
     context_mapping: {  }
+    pages: '<front>'

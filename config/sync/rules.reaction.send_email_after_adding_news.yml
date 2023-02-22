@@ -1,0 +1,83 @@
+uuid: 88b52a34-8af4-46b5-acc0-ab93547b865d
+langcode: fr
+status: false
+dependencies: {  }
+id: send_email_after_adding_news
+label: 'Send email after adding news '
+events:
+  -
+    event_name: 'rules_entity_insert:node'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 663d6cd8-5c5e-49c1-9500-8722f083b85b
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: bf8ad02e-4045-4054-bbf6-bf3aef3434b8
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: d872d4c6-884f-45ab-9e36-325dca3c1889
+        weight: 0
+        condition_id: rules_entity_is_of_bundle
+        negate: false
+        context_values:
+          type: node
+          bundle: news
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+  actions:
+    id: rules_action_set
+    uuid: 7746e12d-7903-47b4-8d4b-441ef7b2d5bc
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 9cfd86b2-e21a-45eb-9a34-1afe4740d290
+        weight: -50
+        action_id: rules_token_get_token_value
+        context_values:
+          token: '[node:title]'
+        context_mapping:
+          token_entity: node.title
+        context_processors:
+          token:
+            rules_tokens: {  }
+        provides_mapping:
+          token_value: node_title
+      -
+        id: rules_action
+        uuid: e58d21bd-77d6-4731-a4da-5470182ebca0
+        weight: -49
+        action_id: rules_send_email
+        context_values:
+          to:
+            - claire.nourrisson@univ-paris1.fr
+            - lhelmany@univ-paris1.fr
+          subject: 'Une nouvelle actualité a été créé !'
+          message: 'Le contenu : node_title vient d''être créé. '
+          reply: ''
+          language: ''
+        context_mapping: {  }
+        context_processors:
+          to:
+            rules_tokens: {  }
+          subject:
+            rules_tokens: {  }
+          message:
+            rules_tokens: {  }
+          reply:
+            rules_tokens: {  }
+          language:
+            rules_tokens: {  }
+        provides_mapping: {  }

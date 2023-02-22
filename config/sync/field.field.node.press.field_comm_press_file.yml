@@ -1,0 +1,31 @@
+uuid: 572a7db0-fbfe-4bff-aed5-a2ba2c83a0eb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_comm_press_file
+    - media.type.file
+    - media.type.mediatheque
+    - node.type.press
+id: node.press.field_comm_press_file
+field_name: field_comm_press_file
+entity_type: node
+bundle: press
+label: Fichier
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+      mediatheque: mediatheque
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: file
+field_type: entity_reference

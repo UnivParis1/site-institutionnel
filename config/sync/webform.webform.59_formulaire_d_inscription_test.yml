@@ -1,0 +1,526 @@
+uuid: 28d849d1-7d26-46d0-a40a-8a380a5bc7db
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 13
+template: false
+archive: false
+id: 59_formulaire_d_inscription_test
+title: '59 - Formulaire d''inscription test pour PSME'
+description: '<p>Formulaire d''inscription pour paiement</p>'
+category: ''
+elements: |-
+  field1:
+    '#type': textfield
+    '#title': 'Prénom et nom / First and Last name :'
+    '#placeholder': Dupont
+    '#required': true
+    '#required_error': 'Merci de renseigner votre nom'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  field2:
+    '#type': radios
+    '#title': 'Fees payment / Tarifs'
+    '#options':
+      reservation: 'Reservation fee / Tarif de la pré-inscription (500€)'
+      1erPaiement: '1st payment / 1er versement (1505€)'
+      2ePaiement: '2nd payment / 2e versement (1500€)'
+      3ePaiement: '3rd payment / 3e versement (1498€)'
+      4ePaiement: '4th payment / 4e versement (1497€)'
+      complet: 'Unique / Totalité (6000€)'
+    '#required': true
+    '#required_error': 'Select Fee payment / Sélectionnez le Tarif'
+  mail:
+    '#type': email
+    '#title': 'E-mail / Courriel'
+    '#description': '<p>Indiquez une adresse de messagerie valide car c''est avec celle-ci que nous vous contacterons et c''est sur celle-ci que vous recevrez votre ticket de paiement.</p>'
+    '#placeholder': jeandupont@monfai.com
+    '#required': true
+    '#required_error': 'Please indict your email / Merci d''indiquer votre courriel'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'I accept the terms / J''accepte les {Conditions générales de vente}'
+    '#help_title': 'Cliquez sur Conditions génrérales de vente pour les parcourir.'
+    '#help_display': title_before
+    '#required': true
+    '#required_error': 'You have to accept the terms / Vous devez accepter les conditions pour valider ce formulaire'
+    '#return_value': 'J''accepte les CGV'
+    '#terms_title': CGV
+    '#terms_content': |-
+      <p>The Université Paris 1 Panthéon-Sorbonne reserves the right to invoice bank handling charges, if any.</p>
+
+      <p><strong>Rights to withdraw</strong></p>
+
+      <p>The customer arranges no deadline to exercise his right to withdraw. Enrollment in the academic program is not covered by law of the traditional legal retraction deadline of 14 days. Any registration is thus firm and definitive.</p>
+
+      <p>Please make sure to include ALL BANKING AND TRANSACTION FEES when completing payments by bank transfer method. <strong>All transfer fees are the responsibility of the person making the payment</strong> and will not be covered by the University. Before making the transfer you should contact your bank to find out the exact amount to transfer in order for the correct payment to be received. <em><strong>Please note that payments made by international bank transfer may take up to 4 weeks to be confirmed by the University</strong></em>. Please take this into account when scheduling your payments.<br />
+      <br />
+      If you are having trouble making credit card payments please contact your bank or credit card holder and notify them of the details of the payment you are about to make. The problem is generally due to a maximum payment allowance, which you can request to be increased, or because you are making a foreing payment on the internet. Once you contact your bank the problem should be resolved and you can make the payment the next business day. <em><strong>Payments made by credit card are immediately confirmed</strong></em>.</p>
+
+      <table border="0" cellpadding="2" cellspacing="0" style="max-width:820px;width:100%;">
+      	<tbody>
+      		<tr>
+      			<td colspan="3">
+      			<div class="liste">
+      			<h3>Tuition Fees / Frais de scolarité</h3>
+      			</div>
+      			</td>
+      		</tr>
+      		<tr>
+      			<td colspan="3">&nbsp;</td>
+      		</tr>
+      		<tr>
+      			<td colspan="3">1. The tuition fee per academic year is set to 6500 euros. The fee covers 60 ECTS credits of courses in the Fall and the Spring semesters, which corresponds to what is required per year in the Bologna system.There is no application fee.<br />
+      			<br />
+      			2. The fees do not cover xerox, books, accommodation, health insurance (for students more than 28), meals, or general expenses. However the following facilities are offered
+      			<ul>
+      				<li>Library. Students will have access to the libraries of the university.</li>
+      				<li>Internet. Access to internet is provided at the University buildings together with computer facilities.</li>
+      			</ul>
+      			3. The first part of the fees (500 euros) is paid within 3 months after acceptation in the programme and no later than May 31. The remaining fees (6000 euros) have to be paid by this online procedure in four installments as specified above or by bank transfer.<br />
+      			<br />
+      			4. If you pay the different fees by bank transfer procedure, the whole of the fees have to be paid by June 30.<br />
+      			<br />
+      			5. Please note that all students should pay the CVEC corresponding to the academic year of their application (i.e you are applying for the academic year 20-21, you should pay the CVEC for the year 20-21). The payment of the CVEC is required for you in order to proceed with the first, second, third and fourth installments and NOT for the 500 euros reservation fees. / Veuillez noter que tous les étudiants doivent payer le CVEC correspondant à l’année académique de leur demande (c.-à-d., vous postulez pour l’année académique 20-21, vous devez payer le CVEC pour l’année 20-21). Le paiement de la CVEC est nécessaire pour vous afin de procéder aux 1er, 2e, 3e et 4e versements et NON pour les frais de réservation de 500 euros.</td>
+      		</tr>
+      	</tbody>
+      </table>
+
+      <hr />
+      <p>L’Université Paris 1 Panthéon-Sorbonne se réserve le droit de facturer les frais bancaires qui pourraient être liés à l’encaissement des droits d’inscription.</p>
+
+      <p><strong>Droit de rétractation</strong><br />
+      <br />
+      Le participant ne dispose d'aucun délai pour exercer son droit de rétractation. Les inscriptions aux formations universitaire sont dispensées par la loi du délai légal traditionnel de rétractation de 14 jours. Toute inscription est donc ferme et définitive.</p>
+
+      <p><strong>EN CAS DE VIREMENT BANCAIRE</strong><br />
+      <br />
+      Les frais du virement sont entièrement à la charge du donneur d'ordre et donc le bénéficiaire : L'université Paris 1 ne supportera aucun frais.</p>
+  comment_voulez_vous_payer_:
+    '#type': radios
+    '#title': 'Choose one of the following methods of payment / Choisissez l’une des méthodes ci-jointe :'
+    '#options':
+      CB: 'Carte Bancaire'
+      virement: 'Virement bancaire'
+    '#options_display': side_by_side
+    '#required': true
+    '#required_error': 'Choose your method of payment / Vous devez faire un choix pour le mode de paiement'
+    '#default_value': CB
+    '#options__properties': ''
+  facturation:
+    '#type': container
+    '#states':
+      visible:
+        ':input[name="comment_voulez_vous_payer_"]':
+          value: CB
+    titrefacturation:
+      '#type': webform_markup
+      '#markup': |-
+        <h3><span dir="ltr" lang="en"><span class="HwtZe" jsaction="mouseup:BR6jm" jsname="jqKxS"><span class="jCAhz ChMk0b" jsaction="agoMJf:PFBcW;MZfLnc:P7O7bd;nt4Alf:pvnm0e,pfE8Hb,PFBcW;B01qod:dJXsye;H1e5u:iXtTIf;lYIUJf:hij5Wb;bmeZHc:iURhpf;Oxj3Xe:qAKMYb,yaf12d" jscontroller="Gn4SMb" jsname="txFAF"><span class="ryNqvb" jsaction="click:E6Tfl,GFf3ac,tMZCfe; contextmenu:Nqw7Te,QP7LD; mouseout:Nqw7Te; mouseover:E6Tfl,c2aHje" jsname="W297wb">Billing address</span></span></span></span></h3>
+
+        <p><span dir="ltr" lang="en"><span class="HwtZe" jsaction="mouseup:BR6jm" jsname="jqKxS"><span class="jCAhz ChMk0b" jsaction="agoMJf:PFBcW;MZfLnc:P7O7bd;nt4Alf:pvnm0e,pfE8Hb,PFBcW;B01qod:dJXsye;H1e5u:iXtTIf;lYIUJf:hij5Wb;bmeZHc:iURhpf;Oxj3Xe:qAKMYb,yaf12d" jscontroller="Gn4SMb" jsname="txFAF"><span class="ryNqvb" jsaction="click:E6Tfl,GFf3ac,tMZCfe; contextmenu:Nqw7Te,QP7LD; mouseout:Nqw7Te; mouseover:E6Tfl,c2aHje" jsname="W297wb">(indicate the surname, first name and billing address of the credit card you are going to use)</span></span></span></span></p>
+
+        <h3>Adresse de facturation</h3>
+
+        <p>(indiquez le nom, prénom et l'adresse de facturation de la carte bancaire que vous allez utiliser)</p>
+    billingfirstname:
+      '#type': textfield
+      '#title': 'First name / Prénom'
+      '#placeholder': Jean
+      '#required_error': 'Merci d''indiquer le prénom pour la facturation'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    billinglastname:
+      '#type': textfield
+      '#title': 'Last name / Nom'
+      '#placeholder': Dupont
+      '#required_error': 'Merci d''indiquer le nom pour la facturation'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    billingaddress1:
+      '#type': textfield
+      '#title': 'Address / Adresse postale'
+      '#placeholder': '90 rue du paradis'
+      '#required_error': 'Merci d''indiquer l''adresse postale pour la facturation'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    billingzipcode:
+      '#type': textfield
+      '#title': 'Zip Code / Code postal'
+      '#placeholder': '77500'
+      '#required_error': 'Merci d''indiquer le code postal pour la facturation'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    billingcity:
+      '#type': textfield
+      '#title': 'City / Ville'
+      '#placeholder': Chelles
+      '#required_error': 'Merci d''indiquer la ville pour la facturation'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    billingcountrycode:
+      '#type': select
+      '#title': 'Country / Pays'
+      '#options': liste_pays_code_numerique_
+      '#required_error': 'Merci d''indiquer le pays pour la facturation'
+  piaement_par_virement_bancaire:
+    '#type': textfield
+    '#title': 'Name of the contractor and student/ Nom du donneur d''ordre et de l''étudiant :'
+    '#description': '<p>Inscrivez ici le nom du donneur d''ordre.</p>'
+    '#help': '<p>Le «nom du donneur d''ordre» qui peut-être différent de celui de la personne désirant s''inscrire.</p>'
+    '#required': true
+    '#required_error': 'Indict the name of the contractor / Indiquez le nom du donneur d''ordre'
+    '#states':
+      visible:
+        ':input[name="comment_voulez_vous_payer_"]':
+          value: virement
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  en_soumettant_ce_formulaire_j_accepte_que_les_informations_saisi:
+    '#type': checkbox
+    '#title': 'En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de mon inscription au PSME'
+    '#title_display': before
+    '#required': true
+    '#required_error': 'Vous devez accepter les conditions pour valider ce formulaire'
+    '#return_value': 'Oui je donne mon autorisation'
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+    '#captcha_admin_mode': true
+  pbx_total:
+    '#type': hidden
+    '#title': PBX_TOTAL
+  ldap_uid:
+    '#type': hidden
+    '#title': ldap_uid
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Submit / Envoyer'
+    '#delete_hide': false
+    '#delete__label': 'Supprimer mes informations'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: true
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: true
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: true
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: false
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: 'Merci pour votre inscription. '
+  confirmation_message: "<div style=\"display:block;width:100%;position:relative;\">\r\n<p style=\"text-align:center;text-transform:uppercase;font-size:1.3rem;color:#FFF;background-color:#00326E;padding:1rem 2rem;margin:0 auto;width:max-content;\">Important</p>\r\n\r\n<div style=\"display: inline-block;width: calc(50% - 31px);position: relative;padding: 1rem;border-left: 1px solid #00326E;margin: 0 15px 0 0;\">\r\n<p style=\"padding:0 2rem;\"><strong>Vous avez choisi de régulariser par un virement bancaire</strong>, n'oubliez pas d'indiquer DDL-FLE suivi de votre nom et prénom, au début de votre référence de paiement.<br />\r\nNotez cette référence pour les virements :<br />\r\nIBAN code FR76 1007 1750 0000 0010 0578 588<br />\r\nBIC (Bank Identifier Code) : TRPUFRP1<br />\r\nTransfer to : UNIVERSITE PARIS 1 AGENCE COMPTABLE<br />\r\nBank name : TRESOR PUBLIC<br />\r\nBank address : DRFIP ILE DE FRANCE ET DE PARIS 94 RUE REAUMUR F-75104 PARIS CEDEX 02<br />\r\nVous avez indiqué que la personne qui ferait ce virement sera : [webform_submission:values:piaement_par_virement_bancaire]</p>\r\n</div>\r\n</div>"
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: 'Aller au paiement'
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: true
+  confirmation_exclude_token: true
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users:
+      - 698
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users:
+      - 698
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: ecoledetefle.ddl@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:mail:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:field1:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Début d''inscription au cours d''été de FLE 2022'
+      body: "<p>Un personne a initié une inscription, voici les données qu'elle a saisie :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements:
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: true
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:mail:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ecoledetefle.ddl@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Cours d''été en FLE'
+      reply_to: ecoledetefle.ddl@univ-paris1.fr
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription au cours d''été de FLE 2022 - Confirmation remplissage formulaire'
+      body: "<p>Bonjour [webform_submission:values:field2:raw],</p>\r\n\r\n<p>Vous avez rempli le formulaire d'inscription pour les cours d'été en FLE.</p>\r\n\r\n<p>Votre demande a été envoyé le [webform_submission:created]</p>\r\n\r\n<p>et voici les données que vous nous avez transmises :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Merci.</p>\r\n\r\n<p>N'oubliez pas de régulariser cette inscription afin de valider votre demande.</p>\r\n\r\n<p>Cordialement,</p>\r\n\r\n<p>L'équipe organisatrice du FLE</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  subscription_payment:
+    id: remote_post
+    handler_id: subscription_payment
+    label: 'Subscription payment reservation'
+    notes: ''
+    status: true
+    conditions:
+      enabled:
+        ':input[name="comment_voulez_vous_payer_"]':
+          value: CB
+        ':input[name="field2"]':
+          value: reservation
+    weight: 0
+    settings:
+      method: POST
+      type: x-www-form-urlencoded
+      excluded_data:
+        serial: serial
+        sid: sid
+        uuid: uuid
+        token: token
+        uri: uri
+        created: created
+        completed: completed
+        changed: changed
+        in_draft: in_draft
+        current_page: current_page
+        remote_addr: remote_addr
+        uid: uid
+        langcode: langcode
+        webform_id: webform_id
+        entity_type: entity_type
+        entity_id: entity_id
+        locked: locked
+        sticky: sticky
+        notes: notes
+        terms_of_service: terms_of_service
+        comment_voulez_vous_payer_: comment_voulez_vous_payer_
+        billingfirstname: billingfirstname
+        billinglastname: billinglastname
+        billingaddress1: billingaddress1
+        billingzipcode: billingzipcode
+        billingcity: billingcity
+        billingcountrycode: billingcountrycode
+        piaement_par_virement_bancaire: piaement_par_virement_bancaire
+        en_soumettant_ce_formulaire_j_accepte_que_les_informations_saisi: en_soumettant_ce_formulaire_j_accepte_que_les_informations_saisi
+        pbx_total: pbx_total
+        ldap_uid: ldap_uid
+      custom_data: ''
+      custom_options: ''
+      file_data: true
+      cast: false
+      debug: false
+      completed_url: 'https://esup-pay.univ-paris1.fr/evts/PantheonSorbonneMasterinEconomicsFirstYearPSME/reservation'
+      completed_custom_data: ''
+      updated_url: ''
+      updated_custom_data: ''
+      deleted_url: ''
+      deleted_custom_data: ''
+      draft_created_url: ''
+      draft_created_custom_data: ''
+      draft_updated_url: ''
+      draft_updated_custom_data: ''
+      converted_url: ''
+      converted_custom_data: ''
+      message: ''
+      messages: {  }
+      error_url: ''
+variants: {  }

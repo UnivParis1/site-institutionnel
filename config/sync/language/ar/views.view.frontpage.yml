@@ -2,12 +2,19 @@ label: 'Page d''accueil'
 description: 'Tout le contenu promu en page d''accueil.'
 display:
   default:
+    display_title: الافتراضي
     display_options:
-      empty:
-        area_text_custom:
-          content: 'Aucun contenu de page d''accueil n''a été créé pour l''instant. Suivre le <a href="https://www.drupal.org/fr/docs/user_guide/fr/index.html">Guide utilisateur</a> pour démarrer la construction de votre site.'
-        title:
-          title: 'Bienvenue sur [site:name]'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
       exposed_form:
         options:
           submit_button: تطبيق
@@ -15,18 +22,9 @@ display:
           exposed_sorts_label: 'الترتيب حسب'
           sort_asc_label: تصاعدي
           sort_desc_label: تنازلي
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- الكل -'
-            offset_label: Décalage
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-            first: '« Premier'
-            last: 'Dernier »'
-    display_title: الرئيسي
+      empty:
+        area_text_custom:
+          content: 'Aucun contenu de page d''accueil n''a été créé pour l''instant. Suivre le <a href="https://www.drupal.org/fr/docs/user_guide/fr/index.html">Guide utilisateur</a> pour démarrer la construction de votre site.'
   feed_1:
     display_title: التلقيمة
   page_1:

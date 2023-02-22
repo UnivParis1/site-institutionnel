@@ -32,19 +32,19 @@ bundle: news
 mode: amp
 content:
   content_moderation_control:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_lead:
-    weight: 3
+    type: amp_text
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: amp_text
+    weight: 3
     region: content
   field_media:
-    weight: 1
+    type: amp_media
     label: hidden
     settings:
       image_style: ''
@@ -53,47 +53,47 @@ content:
       width: 16
       height: 9
     third_party_settings: {  }
-    type: amp_media
+    weight: 1
     region: content
   field_news_date:
     type: datetime_default
-    weight: 2
-    region: content
     label: hidden
     settings:
       timezone_override: ''
       format_type: news_date
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_paragraphs:
-    weight: 4
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 4
     region: content
   field_related_news:
-    weight: 6
+    type: entity_reference_entity_view
     label: inline
     settings:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 6
     region: content
   field_signature:
-    weight: 5
+    type: amp_text
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: amp_text
+    weight: 5
     region: content
   social_simple_buttons:
-    weight: 7
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 7
+    region: content
 hidden:
   comment: true
   field_categories: true

@@ -37,26 +37,28 @@ bundle: event
 mode: amp
 content:
   body:
-    label: hidden
     type: amp_text
-    weight: 4
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 4
     region: content
   field_add_to_cal:
-    weight: 8
+    type: calendar_download_default_formatter
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
-    type: calendar_download_default_formatter
+    weight: 8
     region: content
   field_address_map:
     type: geolocation_map
-    weight: 3
-    region: content
     label: visually_hidden
     settings:
       set_marker: true
+      show_label: false
+      common_map: true
+      show_delta_label: false
+      use_overridden_map_settings: false
       title: '[node:title]'
       info_text:
         value: "<p><strong>[node:title]</strong></p>\r\n\r\n<p><em>[node:field_event_date:start_date:short]</em></p>\r\n\r\n<p>[node:field_event_address]</p>\r\n"
@@ -64,30 +66,27 @@ content:
       centre:
         fit_bounds:
           enable: true
+          weight: -101
           settings:
             reset_zoom: true
-          weight: -101
           map_center_id: fit_bounds
         freeogeoip:
-          weight: 0
           enable: false
+          weight: 0
           map_center_id: location_plugins
         fixed_value:
+          enable: false
+          weight: 0
           settings:
             latitude: null
             longitude: null
-          weight: 0
-          enable: false
           map_center_id: location_plugins
         client_location:
-          weight: 0
           enable: false
+          weight: 0
           map_center_id: client_location
       map_provider_id: leaflet
       map_provider_settings:
-        height: 400px
-        width: 100%
-        zoom: '17'
         map_features:
           leaflet_control_scale:
             weight: 0
@@ -138,13 +137,14 @@ content:
               scroll_target_id: ''
             enabled: false
           leaflet_marker_popup:
-            enabled: true
             weight: 0
             settings:
               info_auto_display: true
+            enabled: true
           leaflet_marker_icon:
             weight: 0
             settings:
+              marker_shadow_path: ''
               marker_icon_path: ''
               icon_size:
                 width: null
@@ -155,7 +155,6 @@ content:
               popup_anchor:
                 x: 0
                 'y': 0
-              marker_shadow_path: ''
               shadow_size:
                 width: null
                 height: null
@@ -165,16 +164,16 @@ content:
             enabled: false
           leaflet_marker_clusterer:
             weight: 0
-            enabled: false
             settings:
               cluster_settings:
                 show_coverage_on_hover: false
                 zoom_to_bounds_on_click: false
+            enabled: false
           leaflet_control_zoom:
-            enabled: true
             weight: 0
             settings:
               position: topright
+            enabled: true
           leaflet_control_layer:
             weight: 0
             settings:
@@ -183,288 +182,288 @@ content:
               tile_layer_providers:
                 OpenStreetMap:
                   'OpenStreetMap Mapnik':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'OpenStreetMap BlackAndWhite':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'OpenStreetMap DE':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'OpenStreetMap CH':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'OpenStreetMap France':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'OpenStreetMap HOT':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'OpenStreetMap BZH':
-                    label: ''
                     checkbox: false
+                    label: ''
                 OpenTopoMap:
                   OpenTopoMap:
-                    label: ''
                     checkbox: false
+                    label: ''
                 Thunderforest:
                   'Thunderforest OpenCycleMap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Thunderforest Transport':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Thunderforest TransportDark':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Thunderforest SpinalMap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Thunderforest Landscape':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Thunderforest Outdoors':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Thunderforest Pioneer':
-                    label: ''
                     checkbox: false
+                    label: ''
                 OpenMapSurfer:
                   'OpenMapSurfer Roads':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'OpenMapSurfer Grayscale':
-                    label: ''
                     checkbox: false
+                    label: ''
                 Hydda:
                   'Hydda Full':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Hydda Base':
-                    label: ''
                     checkbox: false
+                    label: ''
                 MapBox:
                   MapBox:
-                    label: ''
                     checkbox: false
+                    label: ''
                 Stamen:
                   'Stamen Toner':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Stamen TonerBackground':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Stamen TonerLite':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Stamen Watercolor':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Stamen Terrain':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Stamen TerrainBackground':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Stamen TopOSMRelief':
-                    label: ''
                     checkbox: false
+                    label: ''
                 Esri:
                   'Esri WorldStreetMap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri DeLorme':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri WorldTopoMap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri WorldImagery':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri WorldTerrain':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri WorldShadedRelief':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri WorldPhysical':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri OceanBasemap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri NatGeoWorldMap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'Esri WorldGrayCanvas':
-                    label: ''
                     checkbox: false
+                    label: ''
                 HERE:
                   'HERE normalDay':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalDayCustom':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalDayGrey':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalDayMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalDayGreyMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalDayTransit':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalDayTransitMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalNight':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalNightMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalNightGrey':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalNightGreyMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalNightTransit':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE normalNightTransitMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE redcuedDay':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE redcuedNight':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE basicMap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE mapLabels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE trafficFlow':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE carnavDayGrey':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE hybridDayMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE hybridDayTransit':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE hybridDayGrey':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE pedestrianDay':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE pedestrianNight':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE satelliteDay':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE terrainDay':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HERE terrainDayMobile':
-                    label: ''
                     checkbox: false
+                    label: ''
                 FreeMapSK:
                   FreeMapSK:
-                    label: ''
                     checkbox: false
+                    label: ''
                 MtbMap:
                   MtbMap:
-                    label: ''
                     checkbox: false
+                    label: ''
                 CartoDB:
                   'CartoDB Positron':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB PositronNoLabels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB PositronOnlyLabels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB DarkMatter':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB DarkMatterNoLabels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB DarkMatterOnlyLabels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB Voyager':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB VoyagerNoLabels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB VoyagerOnlyLabels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'CartoDB VoyagerLabelsUnder':
-                    label: ''
                     checkbox: false
+                    label: ''
                 HikeBike:
                   HikeBike:
-                    label: ''
                     checkbox: false
+                    label: ''
                   'HikeBike HillShading':
-                    label: ''
                     checkbox: false
+                    label: ''
                 BasemapAT:
                   'BasemapAT basemap':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'BasemapAT grau':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'BasemapAT overlay':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'BasemapAT highdpi':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'BasemapAT orthofoto':
-                    label: ''
                     checkbox: false
+                    label: ''
                 NLS:
                   NLS:
-                    label: ''
                     checkbox: false
+                    label: ''
                 Wikimedia:
                   Wikimedia:
-                    label: ''
                     checkbox: false
+                    label: ''
                 GeoportailFrance:
                   'GeoportailFrance parcels':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'GeoportailFrance ignMaps':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'GeoportailFrance maps':
-                    label: ''
                     checkbox: false
+                    label: ''
                   'GeoportailFrance orthos':
-                    label: ''
                     checkbox: false
+                    label: ''
               tile_providers_options:
                 Thunderforest:
                   apikey: ''
@@ -524,48 +523,48 @@ content:
               transparent: false
               identify: false
             enabled: false
-      use_overridden_map_settings: false
-      common_map: true
+        zoom: '17'
+        height: 400px
+        width: 100%
       data_provider_settings: {  }
-      show_delta_label: false
-      show_label: false
     third_party_settings: {  }
+    weight: 3
+    region: content
   field_blocs_medias:
     type: entity_reference_revisions_entity_view
-    weight: 6
-    region: content
     label: visually_hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 6
+    region: content
   field_event_address:
     type: amp_text
-    weight: 5
-    region: content
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 5
+    region: content
   field_event_date:
-    weight: 2
+    type: startend_date_up1
     label: visually_hidden
     settings:
       date_format: 'Y-m-d\TH:i:s'
       timezone_override: ''
     third_party_settings: {  }
-    type: startend_date_up1
+    weight: 2
     region: content
   field_event_type:
-    weight: 1
+    type: entity_reference_label
     label: visually_hidden
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 1
     region: content
   field_media:
     type: amp_media
-    weight: 0
     label: visually_hidden
     settings:
       image_style: ''
@@ -574,29 +573,30 @@ content:
       width: 16
       height: 9
     third_party_settings: {  }
+    weight: 0
     region: content
   field_subscription_link:
-    weight: 7
+    type: link_separate
     label: hidden
     settings:
       trim_length: 80
-      rel: ''
-      target: ''
       url_only: false
       url_plain: false
+      rel: ''
+      target: ''
     third_party_settings: {  }
-    type: link_separate
+    weight: 7
     region: content
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 9
     region: content
+  social_simple_buttons:
     settings: {  }
     third_party_settings: {  }
-  social_simple_buttons:
     weight: 10
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   content_moderation_control: true
   field_categories: true

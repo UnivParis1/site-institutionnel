@@ -1,0 +1,71 @@
+uuid: 4ce1eb29-7236-4d20-b8e7-12470436f454
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.podcast.field_address
+    - field.field.paragraph.podcast.field_logo
+    - field.field.paragraph.podcast.field_media_audio
+    - field.field.paragraph.podcast.field_media_image
+    - field.field.paragraph.podcast.field_podcast_date
+    - field.field.paragraph.podcast.field_title
+    - paragraphs.paragraphs_type.podcast
+  module:
+    - datetime
+id: paragraph.podcast.default
+targetEntityType: paragraph
+bundle: podcast
+mode: default
+content:
+  field_address:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_logo:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_media_audio:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_media_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_podcast_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

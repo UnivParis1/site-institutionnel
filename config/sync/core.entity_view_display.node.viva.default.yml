@@ -4,18 +4,23 @@ status: true
 dependencies:
   config:
     - field.field.node.viva.field_add_to_cal
+    - field.field.node.viva.field_board
     - field.field.node.viva.field_categories
+    - field.field.node.viva.field_co_director
     - field.field.node.viva.field_ecole_doctorale
     - field.field.node.viva.field_edo_code
     - field.field.node.viva.field_edo_label
     - field.field.node.viva.field_event_address
     - field.field.node.viva.field_event_date
+    - field.field.node.viva.field_hdr
     - field.field.node.viva.field_subtitle
     - field.field.node.viva.field_thesis_supervisor
+    - field.field.node.viva.field_ths_code
+    - field.field.node.viva.field_viva_date
     - node.type.viva
   module:
+    - datetime
     - ics_field
-    - up1_global
     - user
 id: node.viva.default
 targetEntityType: node
@@ -23,71 +28,98 @@ bundle: viva
 mode: default
 content:
   field_add_to_cal:
-    weight: 4
+    type: calendar_download_default_formatter
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
-    type: calendar_download_default_formatter
+    weight: 3
+    region: content
+  field_board:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_co_director:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
     region: content
   field_ecole_doctorale:
-    weight: 7
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 6
     region: content
   field_edo_code:
     type: string
-    weight: 6
-    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_edo_label:
     weight: 5
+    region: content
+  field_edo_label:
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 4
     region: content
   field_event_address:
-    weight: 3
+    type: string
     label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
-  field_event_date:
-    weight: 0
+  field_hdr:
+    type: boolean
     label: visually_hidden
     settings:
-      timezone_override: ''
-      date_format: 'Y-m-d\TH:i:s'
+      format: custom
+      format_custom_false: DOC
+      format_custom_true: HDR
     third_party_settings: {  }
-    type: up1_viva_format
+    weight: 7
     region: content
   field_subtitle:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
   field_thesis_supervisor:
-    weight: 2
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
+    region: content
+  field_viva_date:
+    type: datetime_custom
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: 'j F Y à H\hi'
+    third_party_settings: {  }
+    weight: 10
     region: content
 hidden:
   field_categories: true
+  field_event_date: true
+  field_ths_code: true
   langcode: true
   links: true
   search_api_excerpt: true

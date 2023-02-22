@@ -1,0 +1,20 @@
+uuid: bfc021ae-c322-44cf-b709-d8d4973d1624
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.ecoles_doctorales
+id: taxonomy_term.ecoles_doctorales.site_id
+field_name: site_id
+entity_type: taxonomy_term
+bundle: ecoles_doctorales
+label: Site
+description: 'The site on which the term is created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\micro_taxonomy\MicroTaxonomyManager::getCurrentSiteId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

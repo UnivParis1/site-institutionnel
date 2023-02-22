@@ -4,55 +4,71 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.contact.field_address_map
+    - field.field.paragraph.contact.field_campus_description
     - field.field.paragraph.contact.field_centre
     - field.field.paragraph.contact.field_email_address
     - field.field.paragraph.contact.field_offices
     - field.field.paragraph.contact.field_phone
     - field.field.paragraph.contact.field_service
     - paragraphs.paragraphs_type.contact
+  module:
+    - text
 id: paragraph.contact.default
 targetEntityType: paragraph
 bundle: contact
 mode: default
 content:
+  field_campus_description:
+    type: text_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_centre:
+    type: options_select
     weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_email_address:
-    weight: 4
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
     type: email_default
+    weight: 4
     region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
   field_offices:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_phone:
+    type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_service:
+    type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+  translation:
+    weight: 10
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   field_address_map: true

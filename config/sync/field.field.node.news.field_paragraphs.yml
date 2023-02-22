@@ -7,9 +7,29 @@ dependencies:
     - node.type.news
     - paragraphs.paragraphs_type.bp_accordion_section
     - paragraphs.paragraphs_type.bp_carousel
+    - paragraphs.paragraphs_type.bp_column_wrapper
+    - paragraphs.paragraphs_type.bp_columns
+    - paragraphs.paragraphs_type.bp_columns_three_uneven
     - paragraphs.paragraphs_type.bp_columns_two_uneven
     - paragraphs.paragraphs_type.bp_simple
+    - paragraphs.paragraphs_type.bp_tabs
+    - paragraphs.paragraphs_type.button_grid
+    - paragraphs.paragraphs_type.contact
+    - paragraphs.paragraphs_type.contact_free
+    - paragraphs.paragraphs_type.content_block
+    - paragraphs.paragraphs_type.hit_list
+    - paragraphs.paragraphs_type.icon_grid
+    - paragraphs.paragraphs_type.jumbotron
+    - paragraphs.paragraphs_type.key_figures_section
     - paragraphs.paragraphs_type.medias
+    - paragraphs.paragraphs_type.news_events
+    - paragraphs.paragraphs_type.partenaire_section
+    - paragraphs.paragraphs_type.patrimoine_immobilier_list
+    - paragraphs.paragraphs_type.podcast
+    - paragraphs.paragraphs_type.rich_content
+    - paragraphs.paragraphs_type.section_presentation
+    - paragraphs.paragraphs_type.tiles
+    - paragraphs.paragraphs_type.trait
   module:
     - entity_reference_revisions
 id: node.news.field_paragraphs
@@ -25,20 +45,46 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       bp_accordion_section: bp_accordion_section
       bp_carousel: bp_carousel
+      bp_columns: bp_columns
+      bp_columns_three_uneven: bp_columns_three_uneven
       bp_columns_two_uneven: bp_columns_two_uneven
+      bp_column_wrapper: bp_column_wrapper
       bp_simple: bp_simple
+      bp_tabs: bp_tabs
+      key_figures_section: key_figures_section
       medias: medias
+      button_grid: button_grid
+      contact: contact
+      contact_free: contact_free
+      content_block: content_block
+      hit_list: hit_list
+      icon_grid: icon_grid
+      jumbotron: jumbotron
+      news_events: news_events
+      partenaire_section: partenaire_section
+      patrimoine_immobilier_list: patrimoine_immobilier_list
+      podcast: podcast
+      rich_content: rich_content
+      section_presentation: section_presentation
+      tiles: tiles
+      trait: trait
+    negate: 0
     target_bundles_drag_drop:
+      audio_media:
+        weight: 25
+        enabled: false
+      authors_publication:
+        weight: 54
+        enabled: false
       bp_accordion:
         weight: 19
         enabled: false
       bp_accordion_section:
-        enabled: true
         weight: 20
+        enabled: true
       bp_blank:
         weight: 21
         enabled: false
@@ -46,26 +92,20 @@ settings:
         weight: 22
         enabled: false
       bp_carousel:
-        enabled: true
         weight: 23
-      files_media:
-        weight: 24
-        enabled: false
-      bp_columns:
-        weight: 24
-        enabled: false
-      audio_media:
-        weight: 25
-        enabled: false
-      bp_columns_three_uneven:
-        weight: 25
-        enabled: false
-      bp_columns_two_uneven:
         enabled: true
-        weight: 26
       bp_column_wrapper:
         weight: 27
-        enabled: false
+        enabled: true
+      bp_columns:
+        weight: 24
+        enabled: true
+      bp_columns_three_uneven:
+        weight: 25
+        enabled: true
+      bp_columns_two_uneven:
+        weight: 26
+        enabled: true
       bp_image:
         weight: 28
         enabled: false
@@ -73,32 +113,119 @@ settings:
         weight: 29
         enabled: false
       bp_simple:
-        enabled: true
         weight: 30
-      bp_tabs:
-        weight: 31
-        enabled: false
+        enabled: true
       bp_tab_section:
         weight: 32
         enabled: false
+      bp_tabs:
+        weight: 31
+        enabled: true
       bp_view:
         weight: 33
         enabled: false
       bp_webform:
         weight: 34
         enabled: false
+      button_grid:
+        weight: 71
+        enabled: true
+      button_grid_item:
+        weight: 72
+        enabled: false
+      contact:
+        weight: 73
+        enabled: true
+      contact_free:
+        weight: 74
+        enabled: true
+      content_block:
+        weight: 75
+        enabled: true
+      external_author:
+        weight: 76
+        enabled: false
+      files_media:
+        weight: 24
+        enabled: false
+      hit_list:
+        weight: 78
+        enabled: true
+      icon_grid:
+        weight: 79
+        enabled: true
+      icon_grid_item:
+        weight: 80
+        enabled: false
+      image_media:
+        weight: 42
+        enabled: false
+      jumbotron:
+        weight: 82
+        enabled: true
       key_figure:
         weight: 35
         enabled: false
       key_figures_section:
         weight: 36
-        enabled: false
-      image_media:
-        weight: 42
-        enabled: false
-      medias:
         enabled: true
+      medias:
         weight: 45
+        enabled: true
+      news_events:
+        weight: 86
+        enabled: true
+      p1_author:
+        weight: 87
+        enabled: false
+      paris1_author:
+        weight: 88
+        enabled: false
+      partenaire:
+        weight: 89
+        enabled: false
+      partenaire_section:
+        weight: 90
+        enabled: true
+      patrimoine_immobilier:
+        weight: 91
+        enabled: false
+      patrimoine_immobilier_list:
+        weight: 92
+        enabled: true
+      podcast:
+        weight: 93
+        enabled: true
+      presentation:
+        weight: 94
+        enabled: false
+      rich_content:
+        weight: 95
+        enabled: true
+      section_presentation:
+        weight: 96
+        enabled: true
+      tile:
+        weight: 97
+        enabled: false
+      tile_with_text:
+        weight: 99
+        enabled: false
+      tile_wo_image:
+        weight: 100
+        enabled: false
+      tiles:
+        weight: 98
+        enabled: true
+      title_and_subtitle:
+        weight: 101
+        enabled: false
+      trait:
+        weight: 102
+        enabled: true
+      tuile_text_wo_image:
+        weight: 103
+        enabled: false
       video_media:
         weight: 46
         enabled: false

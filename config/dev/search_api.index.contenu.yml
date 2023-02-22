@@ -2,10 +2,6 @@ uuid: 5b000a29-ed0b-46b5-835e-151c45e41cd4
 langcode: fr
 status: true
 dependencies:
-  module:
-    - node
-    - taxonomy
-    - search_api
   config:
     - field.storage.node.field_affiliation
     - field.storage.node.field_editorial_blocks
@@ -18,6 +14,10 @@ dependencies:
     - field.storage.node.field_sub_title
     - field.storage.node.field_subtitle
     - search_api.server.local_search
+  module:
+    - node
+    - taxonomy
+    - search_api
 id: contenu
 name: Contenu
 description: ''
@@ -172,6 +172,9 @@ processor_settings:
       preprocess_query: -30
   entity_status: {  }
   ignore_character:
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
     all_fields: true
     fields:
       - field_affiliation
@@ -195,12 +198,12 @@ processor_settings:
       - Pi
       - Po
       - Ps
-    weights:
-      preprocess_index: -10
-      preprocess_query: -10
   language_with_fallback: {  }
   rendered_item: {  }
   transliteration:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
     all_fields: true
     fields:
       - field_affiliation
@@ -215,13 +218,11 @@ processor_settings:
       - field_subtitle
       - name
       - title
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
 tracker_settings:
   default:
     indexing_order: lifo
 options:
-  index_directly: true
   cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
 server: local_search

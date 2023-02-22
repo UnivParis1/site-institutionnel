@@ -1,0 +1,39 @@
+uuid: d352e796-0cdd-4053-b4b1-c1d1b47f5254
+langcode: fr
+status: true
+dependencies:
+  module:
+    - cmis_extensions
+    - micro_path
+    - micro_site
+    - system
+  theme:
+    - p1ps2019
+id: cmislastitemsblock
+theme: p1ps2019
+region: before_content
+weight: 0
+provider: null
+plugin: cmis_last_items_block
+settings:
+  id: cmis_last_items_block
+  label: 'Last items'
+  label_display: visible
+  provider: cmis_extensions
+  cmis_last_items_block_folder: ''
+visibility:
+  site_type:
+    id: site_type
+    negate: false
+    context_mapping: {  }
+    site_type: {  }
+  site:
+    id: site
+    negate: false
+    context_mapping: {  }
+    sites: {  }
+    sites_front_page: 0
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/cmis/browser/*'

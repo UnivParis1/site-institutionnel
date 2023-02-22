@@ -7,6 +7,7 @@ dependencies:
     - field.field.paragraph.bp_columns.bp_column_content
     - field.field.paragraph.bp_columns.bp_header
     - field.field.paragraph.bp_columns.bp_width
+    - field.field.paragraph.bp_columns.field_column_number
     - paragraphs.paragraphs_type.bp_columns
   module:
     - paragraphs
@@ -18,25 +19,27 @@ bundle: bp_columns
 mode: default
 content:
   bp_background:
-    weight: 0
+    type: options_select
+    weight: 1
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   bp_column_content:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
+    region: content
     settings:
       title: Paragraphe
       title_plural: Paragraphs
       edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   bp_column_content_2:
     type: entity_reference_paragraphs
     weight: 3
+    region: content
     settings:
       title: 'Column Content'
       title_plural: 'Column Contents'
@@ -45,26 +48,31 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
-    region: content
   bp_header:
     type: string_textfield
-    weight: 2
+    weight: 4
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   bp_width:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
     type: options_select
+    weight: 2
     region: content
-  translation:
-    weight: 10
     settings: {  }
     third_party_settings: {  }
+  field_column_number:
+    type: options_select
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   status: true

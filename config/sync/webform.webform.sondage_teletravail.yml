@@ -2,9 +2,9 @@ uuid: 179e959a-d371-41a1-a56b-fd8d7618a277
 langcode: fr
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 1
 template: false
 archive: false
@@ -12,7 +12,51 @@ id: sondage_teletravail
 title: 'Sondage télétravail'
 description: ''
 category: Sondages
-elements: "avant_de_commencer:\n  '#type': webform_wizard_page\n  '#title': 'Avant de commencer'\n  '#next_button_label': Continuer\n  e_mail:\n    '#type': email\n    '#title': 'Votre adresse e-mail'\n    '#required': true\n    '#required_error': 'Vous devez renseigner votre e-mail pour poursuivre'\nchapitre_1:\n  '#type': webform_wizard_page\n  '#title': 'Chapitre 1'\n  '#prev_button_label': Revenir\n  '#next_button_label': Continuer\n  teletravail_avant_mars_2020:\n    '#type': radios\n    '#title': 'Votre entreprise proposait-elle déjà le télétravail avant mars 2020?'\n    '#options': yes_no\n    '#options_display': buttons_horizontal\n  vous_teletravail:\n    '#type': radios\n    '#title': 'Effectuiez-vous du télétravail ?'\n    '#options': yes_no\n    '#options_display': buttons_horizontal\n    '#states':\n      visible:\n        ':input[name=\"teletravail_avant_mars_2020\"]':\n          value: Oui\n      required:\n        ':input[name=\"teletravail_avant_mars_2020\"]':\n          value: Oui\n  combien_de_jours_par_semaine_:\n    '#type': number\n    '#title': 'Combien de jours par semaine ?'\n    '#states':\n      visible:\n        ':input[name=\"vous_teletravail\"]':\n          value: Oui\n      required:\n        ':input[name=\"vous_teletravail\"]':\n          value: Oui\n    '#min': 1\n    '#max': 7\n    '#step': 1"
+elements: |-
+  avant_de_commencer:
+    '#type': webform_wizard_page
+    '#title': 'Avant de commencer'
+    '#next_button_label': Continuer
+    e_mail:
+      '#type': email
+      '#title': 'Votre adresse e-mail'
+      '#required': true
+      '#required_error': 'Vous devez renseigner votre e-mail pour poursuivre'
+  chapitre_1:
+    '#type': webform_wizard_page
+    '#title': 'Chapitre 1'
+    '#prev_button_label': Revenir
+    '#next_button_label': Continuer
+    teletravail_avant_mars_2020:
+      '#type': radios
+      '#title': 'Votre entreprise proposait-elle déjà le télétravail avant mars 2020?'
+      '#options': yes_no
+      '#options_display': buttons_horizontal
+    vous_teletravail:
+      '#type': radios
+      '#title': 'Effectuiez-vous du télétravail ?'
+      '#options': yes_no
+      '#options_display': buttons_horizontal
+      '#states':
+        visible:
+          ':input[name="teletravail_avant_mars_2020"]':
+            value: Oui
+        required:
+          ':input[name="teletravail_avant_mars_2020"]':
+            value: Oui
+    combien_de_jours_par_semaine_:
+      '#type': number
+      '#title': 'Combien de jours par semaine ?'
+      '#states':
+        visible:
+          ':input[name="vous_teletravail"]':
+            value: Oui
+        required:
+          ':input[name="vous_teletravail"]':
+            value: Oui
+      '#min': 1
+      '#max': 7
+      '#step': 1
 css: ''
 javascript: ''
 settings:
@@ -27,9 +71,9 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
@@ -39,31 +83,36 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
   form_method: ''
   form_action: ''
-  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -72,11 +121,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -87,13 +131,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -116,9 +160,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: ''
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''

@@ -2,10 +2,13 @@ uuid: 2f0c49b8-6c01-4bc7-ad39-be7159da2ce1
 langcode: fr
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.thumbnail_news
   module:
     - editor
     - gutenberg
     - linkit
+    - media
     - token_filter
 _core:
   default_config_hash: hewPmBgni9jlDK_IjLxUx1HsTbinK-hdl0lOwjbteIY
@@ -68,7 +71,7 @@ filters:
     status: false
     weight: -45
     settings:
-      allowed_html: '<a href hreflang data-entity-type data-entity-uuid data-entity-substitution> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-entity-substitution data-align data-caption> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre>'
+      allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-entity-substitution data-align data-caption> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre> <b> <div> <address> <q> <u> <abbr> <a href hreflang data-entity-type data-entity-uuid data-entity-substitution name> <span lang dir> <drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode alt title> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title>'
       filter_html_help: true
       filter_html_nofollow: false
   token_filter:
@@ -91,4 +94,24 @@ filters:
     status: false
     weight: 0
     settings:
-      processor_settings: {  }
+      processor_settings:
+        oembed:
+          maxwidth: 800
+          providers: "#https?://(www\\.)?youtube.com/watch.*#i | https://www.youtube.com/oembed | true\r\n#https?://youtu\\.be/\\w*#i | https://www.youtube.com/oembed | true\r\n#https?://(www\\.)?vimeo\\.com/\\w*#i | http://vimeo.com/api/oembed.json | true\r\n#http://(www\\.)?hulu\\.com/watch/.*#i | http://www.hulu.com/api/oembed.json | true\r\n#https?://(www\\.)?twitter.com/.+?/status(es)?/.*#i | https://api.twitter.com/1/statuses/oembed.json | true\r\n#https?:\\/\\/(www\\.)?google\\.com\\/maps\\/embed\\?pb\\=.*#i | http://open.iframe.ly/api/oembed | true\r\n#https?://maps.google.com/maps.*#i | google-maps | LOCAL\r\n#https?://docs.google.com/(document|spreadsheet)/.*#i | google-docs | LOCAL"
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: thumbnail_news
+      allowed_view_modes:
+        thumbnail_news: thumbnail_news
+      allowed_media_types:
+        audio: audio
+        file: file
+        image: image
+        mediatheque: mediatheque
+        mediatheque_audio: mediatheque_audio
+        remote_video: remote_video
+        video: video

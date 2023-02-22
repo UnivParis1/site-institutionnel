@@ -1,0 +1,69 @@
+uuid: b1ec73b7-d843-4282-9ff1-b237eba03721
+langcode: fr
+status: false
+dependencies: {  }
+id: send_email_after_adding_content_
+label: 'Send email after adding content '
+events:
+  -
+    event_name: 'rules_entity_insert:node'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 1a4f5ae3-6439-4909-9dfe-d491d6e59f23
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: fceb8ff5-7e46-40c2-a381-69e1218face1
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 58b2f12e-5258-4194-b5c9-024b42c71d16
+        weight: 0
+        condition_id: rules_entity_is_of_bundle
+        negate: false
+        context_values:
+          type: node
+          bundle: event
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+  actions:
+    id: rules_action_set
+    uuid: 3b503ebc-45fc-40be-ade2-759900050f60
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 18fe0d39-d09a-472e-ab1b-e710ba2af7e4
+        weight: 0
+        action_id: rules_send_email
+        context_values:
+          to:
+            - cnourrisson@univ-paris1.fr
+            - lhelmany@univ-paris1.fr
+          subject: 'Un nouvel événement a été créé !'
+          message: 'Un nouveau contenu de type <b>événement</b> a été créé.'
+          reply: ''
+          language: ''
+        context_mapping: {  }
+        context_processors:
+          to:
+            rules_tokens: {  }
+          subject:
+            rules_tokens: {  }
+          message:
+            rules_tokens: {  }
+          reply:
+            rules_tokens: {  }
+          language:
+            rules_tokens: {  }
+        provides_mapping: {  }

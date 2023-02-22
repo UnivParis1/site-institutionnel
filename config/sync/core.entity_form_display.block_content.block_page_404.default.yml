@@ -10,7 +10,7 @@ dependencies:
     - field.field.block_content.block_page_404.field_404_title
     - field.field.block_content.block_page_404.field_search_form
   module:
-    - link
+    - link_attributes
     - text
     - webform
 id: block_content.block_page_404.default
@@ -21,45 +21,52 @@ content:
   body:
     type: text_textarea_with_summary
     weight: 26
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    region: content
   field_404_button:
+    type: link_attributes
     weight: 29
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
+      enabled_attributes:
+        id: false
+        name: false
+        target: true
+        rel: true
+        class: true
+        accesskey: false
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_404_subtitle:
+    type: string_textfield
     weight: 27
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_404_title:
+    type: string_textfield
     weight: 28
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_search_form:
+    type: webform_entity_reference_select
     weight: 30
+    region: content
     settings:
       default_data: true
       webforms: {  }
     third_party_settings: {  }
-    type: webform_entity_reference_select
-    region: content
   info:
     type: string_textfield
     weight: -5

@@ -1,0 +1,34 @@
+uuid: f53fc553-056b-4349-8e87-39c8670c2df8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paris1_author.field_aut_p1_displayname
+    - field.field.paragraph.paris1_author.field_paris1_author
+    - paragraphs.paragraphs_type.paris1_author
+id: paragraph.paris1_author.default
+targetEntityType: paragraph
+bundle: paris1_author
+mode: default
+content:
+  field_aut_p1_displayname:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_paris1_author:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

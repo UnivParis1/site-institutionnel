@@ -2,19 +2,9 @@ label: Surveillance
 description: 'Entrées récentes du journal'
 display:
   default:
-    display_title: Master
+    display_title: Default
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filter
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Items per page'
-            items_per_page_options_all_label: '- All -'
-            offset_label: Offset
+      title: 'Entrées récentes du journal'
       fields:
         nothing:
           admin_label: Icône
@@ -23,15 +13,25 @@ display:
         name:
           label: User
         link:
-          label: Actions
-      filters:
-        severity:
+          label: Operations
+      pager:
+        options:
           expose:
-            label: Importance
-      title: 'Entrées récentes du journal'
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+      exposed_form:
+        options:
+          submit_button: Filter
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
       empty:
         area:
           admin_label: 'Aucune entrée du journal n''est disponible.'
           content: 'Aucune entrée du journal n''est disponible.'
+      filters:
+        severity:
+          expose:
+            label: Importance
   page:
-    display_title: 'Page editeurs'
+    display_title: Page

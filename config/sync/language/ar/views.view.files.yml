@@ -2,29 +2,15 @@ label: الملفات
 description: 'Trouver et gérer les fichiers.'
 display:
   default:
-    display_title: الرئيسي
+    display_title: الافتراضي
     display_options:
-      exposed_form:
-        options:
-          submit_button: انتقاء
-          reset_button_label: 'إعادة الضبط'
-          exposed_sorts_label: 'الترتيب حسب'
-          sort_asc_label: تصاعدي
-          sort_desc_label: تنازلي
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- الكل -'
-            offset_label: Décalage
+      title: الملفات
       fields:
         fid:
           label: 'Identifiant (FID)'
         filename:
           label: الاسم
+          separator: ', '
         filemime:
           label: 'نوع MIME'
         filesize:
@@ -39,6 +25,25 @@ display:
           label: 'Date de modification'
         count:
           label: 'مستخدمة في'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: انتقاء
+          reset_button_label: 'إعادة الضبط'
+          exposed_sorts_label: 'الترتيب حسب'
+          sort_asc_label: تصاعدي
+          sort_desc_label: تنازلي
+      empty:
+        area_text_custom:
+          content: 'Aucun fichier disponible.'
       filters:
         filename:
           expose:
@@ -49,10 +54,6 @@ display:
         status:
           expose:
             label: الحالة
-      title: الملفات
-      empty:
-        area_text_custom:
-          content: 'Aucun fichier disponible.'
   page_1:
     display_title: 'Vue d''ensemble des fichiers'
     display_options:
@@ -61,15 +62,7 @@ display:
   page_2:
     display_title: 'Utilisation du fichier'
     display_options:
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- الكل -'
-            offset_label: Décalage
+      title: 'Utilisation du fichier'
       fields:
         entity_label:
           label: الكيان
@@ -79,7 +72,15 @@ display:
           label: 'Enregistrement du module'
         count:
           label: 'Nombre d''utilisations'
-      title: 'Utilisation du fichier'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
       arguments:
         fid:
           exception:

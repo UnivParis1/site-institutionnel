@@ -1,0 +1,27 @@
+uuid: 85283929-52ae-46d0-a3d2-697ab870f2c7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_authors
+    - node.type.publication
+  module:
+    - text_or_entity
+id: node.publication.field_authors
+field_name: field_authors
+entity_type: node
+bundle: publication
+label: Auteurs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: publication_author
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: text_or_entity_reference

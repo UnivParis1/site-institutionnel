@@ -1,0 +1,31 @@
+uuid: 3c11a98c-2f36-4ff3-bb4b-7b4b7ceac5ed
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_audio
+    - media.type.audio
+    - media.type.mediatheque_audio
+    - paragraphs.paragraphs_type.podcast
+id: paragraph.podcast.field_media_audio
+field_name: field_media_audio
+entity_type: paragraph
+bundle: podcast
+label: 'Média audio'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      audio: audio
+      mediatheque_audio: mediatheque_audio
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: audio
+field_type: entity_reference

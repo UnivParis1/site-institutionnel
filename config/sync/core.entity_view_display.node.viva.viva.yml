@@ -5,14 +5,19 @@ dependencies:
   config:
     - core.entity_view_mode.node.viva
     - field.field.node.viva.field_add_to_cal
+    - field.field.node.viva.field_board
     - field.field.node.viva.field_categories
+    - field.field.node.viva.field_co_director
     - field.field.node.viva.field_ecole_doctorale
     - field.field.node.viva.field_edo_code
     - field.field.node.viva.field_edo_label
     - field.field.node.viva.field_event_address
     - field.field.node.viva.field_event_date
+    - field.field.node.viva.field_hdr
     - field.field.node.viva.field_subtitle
     - field.field.node.viva.field_thesis_supervisor
+    - field.field.node.viva.field_ths_code
+    - field.field.node.viva.field_viva_date
     - node.type.viva
   module:
     - datetime_range
@@ -24,63 +29,68 @@ bundle: viva
 mode: viva
 content:
   field_add_to_cal:
-    weight: 105
+    type: calendar_download_default_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: calendar_download_default_formatter
+    weight: 105
     region: content
   field_event_address:
-    weight: 104
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 104
     region: content
   field_event_date:
-    weight: 101
+    type: daterange_default
     label: above
     settings:
-      separator: '-'
-      format_type: medium
       timezone_override: ''
+      format_type: medium
+      separator: '-'
     third_party_settings: {  }
-    type: daterange_default
+    weight: 101
     region: content
   field_subtitle:
-    weight: 102
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 102
     region: content
   field_thesis_supervisor:
-    weight: 103
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 103
     region: content
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
   site_id:
-    label: hidden
     type: entity_reference_label
-    weight: 0
-    region: content
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
+  field_board: true
   field_categories: true
+  field_co_director: true
   field_ecole_doctorale: true
   field_edo_code: true
   field_edo_label: true
+  field_hdr: true
+  field_ths_code: true
+  field_viva_date: true
   langcode: true
   search_api_excerpt: true

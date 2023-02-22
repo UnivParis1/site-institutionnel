@@ -1,0 +1,90 @@
+display:
+  default:
+    display_title: الافتراضي
+    display_options:
+      title: ميديا
+      fields:
+        media_bulk_form:
+          action_title: إجراء
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: 'عمل تصفية'
+          reset_button_label: 'إعادة الضبط'
+          exposed_sorts_label: 'الترتيب حسب'
+          sort_asc_label: تصاعدي
+          sort_desc_label: تنازلي
+      filters:
+        status:
+          expose:
+            label: 'Statut de publication'
+          group_info:
+            label: منشور
+            group_items:
+              1:
+                title: منشور
+              2:
+                title: 'Non publié'
+        name:
+          expose:
+            label: الاسم
+        langcode:
+          expose:
+            label: اللغة
+  page:
+    display_title: 'Page editeurs'
+    display_options:
+      fields:
+        media_bulk_form:
+          action_title: إجراء
+        name:
+          separator: ', '
+        edit_media:
+          text: تحرير
+        delete_media:
+          text: حذف
+  widget:
+    display_title: ودجة
+    display_options:
+      arguments:
+        bundle:
+          exception:
+            title: الكل
+      filters:
+        name:
+          expose:
+            label: الاسم
+      header:
+        display_link_grid:
+          label: شبكة
+        display_link_table:
+          label: جدول
+  widget_table:
+    display_options:
+      fields:
+        thumbnail__target_id:
+          label: 'النسخة المصغرة'
+        name:
+          label: الاسم
+        uid:
+          label: المؤلف
+        changed:
+          label: التحديث
+      arguments:
+        bundle:
+          exception:
+            title: الكل
+      filters:
+        name:
+          expose:
+            label: الاسم
+      header:
+        display_link_grid:
+          label: شبكة
+        display_link_table:
+          label: جدول

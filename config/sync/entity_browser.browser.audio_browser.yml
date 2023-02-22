@@ -24,19 +24,22 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   4cc63c98-dda5-43b0-a111-d0f7a461adf1:
+    id: view
+    uuid: 4cc63c98-dda5-43b0-a111-d0f7a461adf1
+    label: 'Liste des fichiers audio'
+    weight: 1
     settings:
-      view: media_entity_browser
-      view_display: audio_browser
       submit_text: Sélectionner
       auto_select: false
-    uuid: 4cc63c98-dda5-43b0-a111-d0f7a461adf1
-    weight: 1
-    label: 'Liste des fichiers audio'
-    id: view
+      view: media_entity_browser
+      view_display: audio_browser
   8bb37d1a-5e79-4be8-9709-54757ef02eef:
+    id: dropzonejs_media_entity_inline_entity_form
+    uuid: 8bb37d1a-5e79-4be8-9709-54757ef02eef
+    label: 'Téléverser un fichier local'
+    weight: 3
     settings:
-      form_mode: default
-      media_type: audio
+      submit_text: Enregistrer
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Déposer vos fichiers ici pour les téléverser'
       max_filesize: 100M
@@ -47,18 +50,15 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
-      submit_text: Enregistrer
-    uuid: 8bb37d1a-5e79-4be8-9709-54757ef02eef
-    weight: 3
-    label: 'Téléverser un fichier local'
-    id: dropzonejs_media_entity_inline_entity_form
+      media_type: audio
+      form_mode: default
   ac8a72f5-1099-4a8b-8747-587601bb5704:
+    id: entity_form
+    uuid: ac8a72f5-1099-4a8b-8747-587601bb5704
+    label: 'URL mediatheque Paris 1'
+    weight: 3
     settings:
+      submit_text: 'Ajouter cet audio a la bibliothèque'
       entity_type: media
       bundle: mediatheque_audio
       form_mode: default
-      submit_text: 'Ajouter cet audio a la bibliothèque'
-    uuid: ac8a72f5-1099-4a8b-8747-587601bb5704
-    weight: 3
-    label: 'URL mediatheque Paris 1'
-    id: entity_form

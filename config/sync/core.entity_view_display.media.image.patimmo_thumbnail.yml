@@ -1,0 +1,39 @@
+uuid: d8406e2b-5b0a-4fcd-8de5-b3d5f1d11db0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.patimmo_thumbnail
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - image.style.patrimoine_immo_thumbnail
+    - media.type.image
+  module:
+    - image
+id: media.image.patimmo_thumbnail
+targetEntityType: media
+bundle: image
+mode: patimmo_thumbnail
+content:
+  field_media_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: patrimoine_immo_thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_credits: true
+  field_legende: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

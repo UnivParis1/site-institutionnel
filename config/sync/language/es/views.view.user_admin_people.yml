@@ -1,27 +1,10 @@
 label: Usuarios
-description: 'Encontrar y gestionar qué personas interactúan con su sitio.'
+description: 'Encuentre y gestione a las personas que interactúan con su sitio.'
 display:
   default:
-    display_title: Máster
+    display_title: 'Por defecto'
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtro
-          reset_button_label: Restablecer
-          exposed_sorts_label: 'Ordenar por'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        options:
-          tags:
-            previous: '‹ Anterior'
-            next: 'Siguiente >'
-            first: '« Primero'
-            last: 'Último »'
-          expose:
-            items_per_page_label: 'Elementos por página'
-            items_per_page_options_all_label: '- Todo -'
-            offset_label: Desplazamiento
+      title: Usuarios
       fields:
         user_bulk_form:
           label: 'Actualización masiva'
@@ -30,18 +13,45 @@ display:
         status:
           label: Estado
           settings:
-            format_custom_true: Activo
             format_custom_false: Bloqueado
+            format_custom_true: Activo
         roles_target_id:
           label: Roles
         created:
           label: 'Miembro desde hace'
+          settings:
+            future_format: '@interval'
+            past_format: '@interval'
         access:
           label: 'Último acceso'
+          settings:
+            future_format: 'Desde hace @interval'
+            past_format: 'Hace @interval'
         operations:
           label: Operaciones
         mail:
           separator: ', '
+      pager:
+        options:
+          tags:
+            next: 'Siguiente >'
+            previous: '‹ Anterior'
+            first: '« Primero'
+            last: 'Último »'
+          expose:
+            items_per_page_label: 'Elementos por página'
+            items_per_page_options_all_label: '- Todo -'
+            offset_label: Desplazamiento
+      exposed_form:
+        options:
+          submit_button: Filtro
+          reset_button_label: Restablecer
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      empty:
+        area_text_custom:
+          content: 'Personne n''est disponible.'
       filters:
         combine:
           expose:
@@ -60,17 +70,13 @@ display:
         permission:
           expose:
             label: Permiso
-      title: Usuarios
-      empty:
-        area_text_custom:
-          content: 'Personne n''est disponible.'
       use_more_text: más
   page_1:
     display_title: 'Page editeurs'
     display_options:
       menu:
-        title: Lista
-        description: 'Encontrar y gestionar qué personas interactúan con su sitio.'
+        title: Listado
+        description: 'Encuentre y gestione a las personas que interactúan con su sitio.'
       tab_options:
         title: Usuarios
         description: 'Gestionar cuentas, roles y permisos de usuarios.'

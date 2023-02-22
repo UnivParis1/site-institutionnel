@@ -2,24 +2,9 @@ label: Personnes
 description: 'Trouver et gérer les personnes interagissant avec votre site.'
 display:
   default:
-    display_title: Master
+    display_title: Default
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filter
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page_label: 'Items per page'
-            items_per_page_options_all_label: '- All -'
-            offset_label: Offset
+      title: Personnes
       fields:
         user_bulk_form:
           label: 'Mise à jour en masse'
@@ -28,8 +13,8 @@ display:
         status:
           label: Status
           settings:
-            format_custom_true: Actif
             format_custom_false: Bloqué
+            format_custom_true: Active
         roles_target_id:
           label: Roles
         created:
@@ -37,7 +22,26 @@ display:
         access:
           label: 'Dernier accès'
         operations:
-          label: Actions
+          label: Operations
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+      exposed_form:
+        options:
+          submit_button: Filter
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+      empty:
+        area_text_custom:
+          content: 'Personne n''est disponible.'
       filters:
         combine:
           expose:
@@ -47,7 +51,7 @@ display:
             label: Status
             group_items:
               1:
-                title: Actif
+                title: Active
               2:
                 title: Bloqué
         roles_target_id:
@@ -56,13 +60,9 @@ display:
         permission:
           expose:
             label: Droit
-      title: Personnes
-      empty:
-        area_text_custom:
-          content: 'Personne n''est disponible.'
       use_more_text: plus
   page_1:
-    display_title: 'Page editeurs'
+    display_title: Page
     display_options:
       menu:
         title: Lister

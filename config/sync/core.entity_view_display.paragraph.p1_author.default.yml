@@ -1,0 +1,25 @@
+uuid: dfe6ec10-5230-4621-bc94-a87e493d7e11
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.p1_author.field_author_p1
+    - paragraphs.paragraphs_type.p1_author
+  module:
+    - entity_reference_revisions
+id: paragraph.p1_author.default
+targetEntityType: paragraph
+bundle: p1_author
+mode: default
+content:
+  field_author_p1:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,61 @@
+uuid: 219ecdc0-b80f-4fb8-8586-26437a4e9f32
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.patrimoine_immobilier.bp_link
+    - field.field.paragraph.patrimoine_immobilier.field_node_link
+    - field.field.paragraph.patrimoine_immobilier.field_thumbnail_patrimoine
+    - field.field.paragraph.patrimoine_immobilier.field_title
+    - field.field.paragraph.patrimoine_immobilier.field_type_patrimoine
+    - paragraphs.paragraphs_type.patrimoine_immobilier
+  module:
+    - entity_browser
+    - link
+id: paragraph.patrimoine_immobilier.default
+targetEntityType: paragraph
+bundle: patrimoine_immobilier
+mode: default
+content:
+  bp_link:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_thumbnail_patrimoine:
+    type: entity_browser_entity_reference
+    weight: 1
+    region: content
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: thumbnail_news
+      selection_mode: selection_append
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_type_patrimoine:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_node_link: true
+  status: true

@@ -15,10 +15,12 @@ dependencies:
     - field.field.node.page_personnelle.field_facebook_link
     - field.field.node.page_personnelle.field_firstname
     - field.field.node.page_personnelle.field_fonction
+    - field.field.node.page_personnelle.field_formations_ia
     - field.field.node.page_personnelle.field_get_hal_publications
     - field.field.node.page_personnelle.field_hal_link
     - field.field.node.page_personnelle.field_highlight_publications
     - field.field.node.page_personnelle.field_hypotheses_link
+    - field.field.node.page_personnelle.field_ia_skills
     - field.field.node.page_personnelle.field_id_hal
     - field.field.node.page_personnelle.field_link_to_resume
     - field.field.node.page_personnelle.field_linkedin_link
@@ -29,12 +31,14 @@ dependencies:
     - field.field.node.page_personnelle.field_other_email_address
     - field.field.node.page_personnelle.field_other_page_perso
     - field.field.node.page_personnelle.field_phd_supervisor
+    - field.field.node.page_personnelle.field_projects_ia
     - field.field.node.page_personnelle.field_publications
     - field.field.node.page_personnelle.field_research_directions
     - field.field.node.page_personnelle.field_research_themes
     - field.field.node.page_personnelle.field_resume
     - field.field.node.page_personnelle.field_resume_text
     - field.field.node.page_personnelle.field_scientific_resp
+    - field.field.node.page_personnelle.field_short_bio
     - field.field.node.page_personnelle.field_skills
     - field.field.node.page_personnelle.field_sticky_publications
     - field.field.node.page_personnelle.field_thesis_directions
@@ -51,28 +55,28 @@ bundle: page_personnelle
 mode: search_index
 content:
   field_affiliation:
-    weight: 1
+    type: string
     label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_fonction:
-    weight: 2
+    type: string
     label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_skills:
-    weight: 0
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 0
     region: content
 hidden:
   body: true
@@ -84,10 +88,12 @@ hidden:
   field_epi_link: true
   field_facebook_link: true
   field_firstname: true
+  field_formations_ia: true
   field_get_hal_publications: true
   field_hal_link: true
   field_highlight_publications: true
   field_hypotheses_link: true
+  field_ia_skills: true
   field_id_hal: true
   field_link_to_resume: true
   field_linkedin_link: true
@@ -98,12 +104,14 @@ hidden:
   field_other_email_address: true
   field_other_page_perso: true
   field_phd_supervisor: true
+  field_projects_ia: true
   field_publications: true
   field_research_directions: true
   field_research_themes: true
   field_resume: true
   field_resume_text: true
   field_scientific_resp: true
+  field_short_bio: true
   field_sticky_publications: true
   field_thesis_directions: true
   field_thesis_subject: true

@@ -6,8 +6,10 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
     - field.field.node.page.field_disable_canonical_url
+    - field.field.node.page.field_display_node_changed
     - field.field.node.page.field_indexrobots
     - field.field.node.page.field_media
+    - field.field.node.page.field_node_access
     - field.field.node.page.field_paragraphs
     - field.field.node.page.field_publish_master
     - field.field.node.page.field_short_desc
@@ -27,33 +29,35 @@ bundle: page
 mode: teaser
 content:
   body:
-    label: hidden
     type: text_summary_or_trimmed
-    weight: 100
-    region: content
+    label: hidden
     settings:
       trim_length: 600
     third_party_settings: {  }
+    weight: 100
+    region: content
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   links:
     weight: 101
     region: content
   site_id:
-    label: hidden
     type: entity_reference_label
-    weight: 0
-    region: content
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_disable_canonical_url: true
+  field_display_node_changed: true
   field_indexrobots: true
   field_media: true
+  field_node_access: true
   field_paragraphs: true
   field_publish_master: true
   field_short_desc: true

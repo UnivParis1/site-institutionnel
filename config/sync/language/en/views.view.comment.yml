@@ -2,35 +2,39 @@ label: Commentaires
 description: 'Trouver et gérer les commentaires.'
 display:
   default:
-    display_title: Master
+    display_title: Default
     display_options:
-      exposed_form:
-        options:
-          submit_button: Apply
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
+      title: Commentaires
+      fields:
+        subject:
+          label: Objet
+        name:
+          label: Author
+        entity_id:
+          label: 'Posté sur'
+        changed:
+          label: Updated
+        operations:
+          label: Operations
       pager:
         options:
           tags:
-            previous: '‹ previous'
             next: 'next ›'
+            previous: '‹ previous'
             first: '« first'
             last: 'last »'
           expose:
             items_per_page_label: 'Items per page'
             items_per_page_options_all_label: '- All -'
             offset_label: Offset
-      fields:
-        subject:
-          label: Objet
-        name:
-          label: Author
-        entity_id:
-          label: 'Posté sur'
-        changed:
-          label: Updated
-        operations:
-          label: Actions
+      exposed_form:
+        options:
+          submit_button: Filter
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+      empty:
+        area_text_custom:
+          content: 'Aucun commentaire disponible.'
       filters:
         subject:
           expose:
@@ -40,36 +44,18 @@ display:
             label: 'Nom de l''auteur'
         langcode:
           expose:
-            label: Langue
-      title: Commentaires
-      empty:
-        area_text_custom:
-          content: 'Aucun commentaire disponible.'
+            label: Language
       use_more_text: plus
   page_published:
     display_title: 'Commentaires publiés'
     display_options:
+      display_description: 'La liste des commentaires approuvés.'
       menu:
         title: Commentaires
         description: 'Commentaires publiés'
-      display_description: 'La liste des commentaires approuvés.'
   page_unapproved:
     display_title: 'Commentaires non aprouvés'
     display_options:
-      menu:
-        title: 'Commentaires non aprouvés'
-        description: 'Commentaires non-approuvés'
-      display_description: 'La liste des commentaires non-approuvés.'
-      filters:
-        subject:
-          expose:
-            label: Objet
-        combine:
-          expose:
-            label: 'Nom de l''auteur'
-        langcode:
-          expose:
-            label: Langue
       fields:
         subject:
           label: Objet
@@ -80,4 +66,18 @@ display:
         changed:
           label: Updated
         operations:
-          label: Actions
+          label: Operations
+      filters:
+        subject:
+          expose:
+            label: Objet
+        combine:
+          expose:
+            label: 'Nom de l''auteur'
+        langcode:
+          expose:
+            label: Language
+      display_description: 'La liste des commentaires non-approuvés.'
+      menu:
+        title: 'Commentaires non aprouvés'
+        description: 'Commentaires non-approuvés'

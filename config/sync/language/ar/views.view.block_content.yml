@@ -2,8 +2,29 @@ label: 'Bibliothèque de blocs personnalisés'
 description: 'Trouver et gérer les blocs personnalisés.'
 display:
   default:
-    display_title: الرئيسي
+    display_title: الافتراضي
     display_options:
+      title: 'Bibliothèque de blocs personnalisés'
+      fields:
+        info:
+          label: 'وصف الصندوق'
+          separator: ', '
+        type:
+          label: 'نوع الصندوق'
+          separator: ', '
+        changed:
+          label: التحديث
+        operations:
+          label: عمليات
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- الكل -'
+            offset_label: Décalage
       exposed_form:
         options:
           submit_button: تطبيق
@@ -11,24 +32,9 @@ display:
           exposed_sorts_label: 'الترتيب حسب'
           sort_asc_label: تصاعدي
           sort_desc_label: تنازلي
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- الكل -'
-            offset_label: Décalage
-      fields:
-        info:
-          label: 'وصف الصندوق'
-        type:
-          label: 'نوع الصندوق'
-        changed:
-          label: التحديث
-        operations:
-          label: عمليات
+      empty:
+        area_text_custom:
+          content: 'Il n''y a pas de bloc personnalisé disponible.'
       filters:
         info:
           expose:
@@ -36,10 +42,6 @@ display:
         type:
           expose:
             label: 'نوع الصندوق'
-      title: 'Bibliothèque de blocs personnalisés'
-      empty:
-        area_text_custom:
-          content: 'Il n''y a pas de bloc personnalisé disponible.'
   page_1:
     display_title: 'Page editeurs'
     display_options:

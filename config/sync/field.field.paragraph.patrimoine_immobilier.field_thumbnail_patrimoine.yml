@@ -1,0 +1,31 @@
+uuid: b1a702a0-b7d4-42d0-90c5-bff7583d8831
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_thumbnail_patrimoine
+    - media.type.image
+    - media.type.mediatheque
+    - paragraphs.paragraphs_type.patrimoine_immobilier
+id: paragraph.patrimoine_immobilier.field_thumbnail_patrimoine
+field_name: field_thumbnail_patrimoine
+entity_type: paragraph
+bundle: patrimoine_immobilier
+label: Vignette
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      mediatheque: mediatheque
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

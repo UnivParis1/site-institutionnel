@@ -2,22 +2,9 @@ label: Fichiers
 description: 'Trouver et gérer les fichiers.'
 display:
   default:
-    display_title: Master
+    display_title: Default
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filter
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-          expose:
-            items_per_page_label: 'Items per page'
-            items_per_page_options_all_label: '- All -'
-            offset_label: Offset
+      title: Fichiers
       fields:
         fid:
           label: 'Identifiant (FID)'
@@ -37,6 +24,23 @@ display:
           label: 'Date de modification'
         count:
           label: 'Utilisé dans'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+      exposed_form:
+        options:
+          submit_button: Filter
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+      empty:
+        area_text_custom:
+          content: 'Aucun fichier disponible.'
       filters:
         filename:
           expose:
@@ -47,10 +51,6 @@ display:
         status:
           expose:
             label: Status
-      title: Fichiers
-      empty:
-        area_text_custom:
-          content: 'Aucun fichier disponible.'
   page_1:
     display_title: 'Vue d''ensemble des fichiers'
     display_options:
@@ -59,15 +59,7 @@ display:
   page_2:
     display_title: 'Utilisation du fichier'
     display_options:
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-          expose:
-            items_per_page_label: 'Items per page'
-            items_per_page_options_all_label: '- All -'
-            offset_label: Offset
+      title: 'Utilisation du fichier'
       fields:
         entity_label:
           label: Entité
@@ -77,7 +69,15 @@ display:
           label: 'Enregistrement du module'
         count:
           label: 'Nombre d''utilisations'
-      title: 'Utilisation du fichier'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
       arguments:
         fid:
           exception:

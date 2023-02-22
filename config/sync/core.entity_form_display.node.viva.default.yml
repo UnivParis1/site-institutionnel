@@ -4,20 +4,28 @@ status: true
 dependencies:
   config:
     - field.field.node.viva.field_add_to_cal
+    - field.field.node.viva.field_board
     - field.field.node.viva.field_categories
+    - field.field.node.viva.field_co_director
     - field.field.node.viva.field_ecole_doctorale
     - field.field.node.viva.field_edo_code
     - field.field.node.viva.field_edo_label
     - field.field.node.viva.field_event_address
     - field.field.node.viva.field_event_date
+    - field.field.node.viva.field_hdr
     - field.field.node.viva.field_subtitle
     - field.field.node.viva.field_thesis_supervisor
+    - field.field.node.viva.field_ths_code
+    - field.field.node.viva.field_viva_date
     - node.type.viva
   module:
     - content_moderation
+    - datetime
     - datetime_range
     - ics_field
     - path
+    - scheduler
+    - scheduler_content_moderation_integration
 id: node.viva.default
 targetEntityType: node
 bundle: viva
@@ -25,78 +33,115 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   field_add_to_cal:
-    weight: 9
+    type: calendar_download_default_widget
+    weight: 13
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: calendar_download_default_widget
+  field_board:
+    type: string_textarea
+    weight: 6
     region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_categories:
-    weight: 19
+    type: entity_reference_autocomplete
+    weight: 23
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_ecole_doctorale:
-    weight: 6
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_edo_code:
-    weight: 4
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+  field_co_director:
     type: string_textfield
-    region: content
-  field_edo_label:
     weight: 5
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+  field_ecole_doctorale:
+    type: options_select
+    weight: 9
     region: content
-  field_event_address:
-    weight: 8
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_event_date:
-    weight: 7
     settings: {  }
     third_party_settings: {  }
+  field_edo_code:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_edo_label:
+    type: string_textfield
+    weight: 8
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_event_address:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_event_date:
     type: daterange_default
+    weight: 10
     region: content
-  field_subtitle:
-    weight: 2
-    settings:
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_thesis_supervisor:
+  field_hdr:
+    type: boolean_checkbox
     weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_subtitle:
+    type: string_textfield
+    weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_thesis_supervisor:
     type: string_textfield
+    weight: 4
     region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_ths_code:
+    type: string_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_viva_date:
+    type: datetime_default
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 0
@@ -106,46 +151,58 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 17
-    settings: {  }
+    weight: 21
     region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 16
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
+    weight: 18
+    region: content
     settings:
       display_label: true
-    weight: 14
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 26
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 24
+    region: content
+    settings: {  }
     third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 15
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 22
+    region: content
     settings:
       display_label: true
-    weight: 18
-    region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
+    weight: 19
+    region: content
     settings:
       display_label: true
-    weight: 15
-    region: content
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -156,18 +213,35 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 13
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 14
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 25
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 28
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

@@ -1,0 +1,29 @@
+uuid: b3f851d5-4aa0-4567-8faa-45a42a42e689
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_node_access
+    - node.type.page
+    - taxonomy.vocabulary.specific_permissions
+id: node.page.field_node_access
+field_name: field_node_access
+entity_type: node
+bundle: page
+label: 'Node access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      specific_permissions: specific_permissions
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

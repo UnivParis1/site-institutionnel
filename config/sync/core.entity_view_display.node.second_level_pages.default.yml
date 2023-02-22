@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.second_level_pages.body
     - field.field.node.second_level_pages.field_disable_canonical_url
+    - field.field.node.second_level_pages.field_display_node_changed
     - field.field.node.second_level_pages.field_editorial_blocks
     - field.field.node.second_level_pages.field_indexrobots
     - field.field.node.second_level_pages.field_publish_master
@@ -21,28 +22,29 @@ bundle: second_level_pages
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
   field_editorial_blocks:
     type: entity_reference_revisions_entity_view
-    weight: 1
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 1
     region: content
   links:
-    weight: 2
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   field_disable_canonical_url: true
+  field_display_node_changed: true
   field_indexrobots: true
   field_publish_master: true
   field_sites: true
@@ -50,3 +52,4 @@ hidden:
   langcode: true
   search_api_excerpt: true
   site_id: true
+  subscribe_on: true

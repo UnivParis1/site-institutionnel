@@ -17,30 +17,30 @@ type: content_moderation
 type_settings:
   states:
     archive:
-      published: false
-      default_revision: true
       label: Archivé
       weight: 2
-    draft:
       published: false
-      default_revision: false
+      default_revision: true
+    draft:
       label: Brouillon
       weight: -2
-    en_attente_de_publication:
       published: false
       default_revision: false
+    en_attente_de_publication:
       label: 'En attente de publication'
       weight: 0
-    en_relecture:
       published: false
       default_revision: false
+    en_relecture:
       label: 'En relecture'
       weight: -1
+      published: false
+      default_revision: false
     published:
-      published: true
-      default_revision: true
       label: Publié
       weight: 1
+      published: true
+      default_revision: true
   transitions:
     archiver:
       label: Archiver
@@ -51,10 +51,10 @@ type_settings:
       weight: 2
     create_new_draft:
       label: 'Enregistrer en brouillon'
-      to: draft
-      weight: -3
       from:
         - draft
+      to: draft
+      weight: -3
     mettre_en_relecture:
       label: 'Mettre en relecture'
       from:
@@ -71,13 +71,13 @@ type_settings:
       weight: 0
     publish:
       label: Publier
-      to: published
-      weight: 1
       from:
         - archive
         - en_attente_de_publication
         - en_relecture
         - published
+      to: published
+      weight: 1
     remettre_en_brouillon:
       label: 'Remettre en brouillon'
       from:

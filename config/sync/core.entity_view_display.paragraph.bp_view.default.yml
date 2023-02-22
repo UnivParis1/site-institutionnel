@@ -10,6 +10,7 @@ dependencies:
     - field.field.paragraph.bp_view.field_title
     - paragraphs.paragraphs_type.bp_view
   module:
+    - options
     - viewsreference
 _core:
   default_config_hash: Q4Zemwcib9q-022d2TYMKL8I1Ca_nMkmLJui3lUmhJ4
@@ -19,26 +20,32 @@ bundle: bp_view
 mode: default
 content:
   bp_view:
-    weight: 1
+    type: viewsreference_formatter
     label: hidden
     settings:
       plugin_types:
         - block
     third_party_settings: {  }
-    type: viewsreference_formatter
+    weight: 1
+    region: content
+  bp_width:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
   field_title:
-    weight: 0
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
 hidden:
   bp_background: true
   bp_header: true
-  bp_width: true
   created: true
   search_api_excerpt: true
   uid: true

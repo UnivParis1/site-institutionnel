@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.publication.body
     - field.field.node.publication.field_author_name
+    - field.field.node.publication.field_authors
     - field.field.node.publication.field_back_cover
     - field.field.node.publication.field_collection
     - field.field.node.publication.field_collection_term
@@ -17,6 +18,7 @@ dependencies:
     - field.field.node.publication.field_media
     - field.field.node.publication.field_nb_pages
     - field.field.node.publication.field_price
+    - field.field.node.publication.field_pub_authors
     - field.field.node.publication.field_pub_year
     - field.field.node.publication.field_publication_author
     - field.field.node.publication.field_publication_link
@@ -41,39 +43,40 @@ mode: teaser
 content:
   field_author_name:
     type: string
-    weight: 2
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_media:
     type: entity_reference_entity_view
-    weight: 0
-    region: content
     label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_publication_type:
     type: entity_reference_label
-    weight: 1
-    region: content
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_subtitle:
     type: string
-    weight: 3
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 3
+    region: content
 hidden:
   body: true
+  field_authors: true
   field_back_cover: true
   field_collection: true
   field_collection_term: true
@@ -84,6 +87,7 @@ hidden:
   field_link_title: true
   field_nb_pages: true
   field_price: true
+  field_pub_authors: true
   field_pub_year: true
   field_publication_author: true
   field_publication_link: true
@@ -100,3 +104,4 @@ hidden:
   links: true
   search_api_excerpt: true
   site_id: true
+  subscribe_on: true

@@ -13,7 +13,7 @@ field_name: field_my_medias
 entity_type: node
 bundle: page_personnelle
 label: 'Mes medias'
-description: ''
+description: 'Vous avez la possibilité ici d''afficher un (ou plusieurs) média (fichier, vidéo, audio, image) sur votre page perso. Celui-ci s''affichera dans la colonne de droite, sous le bloc contact.'
 required: false
 translatable: false
 default_value: {  }
@@ -21,9 +21,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       medias: medias
+    negate: 0
     target_bundles_drag_drop:
       audio_media:
         weight: 37
@@ -76,14 +76,29 @@ settings:
       bp_webform:
         weight: 53
         enabled: false
+      button_grid:
+        weight: 61
+        enabled: false
+      button_grid_item:
+        weight: 62
+        enabled: false
       contact:
         weight: 54
+        enabled: false
+      content_block:
+        weight: 64
         enabled: false
       files_media:
         weight: 55
         enabled: false
       hit_list:
         weight: 56
+        enabled: false
+      icon_grid:
+        weight: 67
+        enabled: false
+      icon_grid_item:
+        weight: 68
         enabled: false
       image_media:
         weight: 57
@@ -98,10 +113,16 @@ settings:
         weight: 60
         enabled: false
       medias:
-        enabled: true
         weight: 61
-      pp_medias:
-        weight: 62
+        enabled: true
+      news_events:
+        weight: 74
+        enabled: false
+      partenaire:
+        weight: 75
+        enabled: false
+      partenaire_section:
+        weight: 76
         enabled: false
       presentation:
         weight: 63

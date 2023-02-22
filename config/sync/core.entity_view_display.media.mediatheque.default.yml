@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.media.mediatheque.field_autoplay
     - field.field.media.mediatheque.field_media_mediatheque
     - media.type.mediatheque
   module:
@@ -12,16 +13,35 @@ targetEntityType: media
 bundle: mediatheque
 mode: default
 content:
+  field_autoplay:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_media_mediatheque:
-    weight: 0
+    type: mediatheque_embed
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
-    type: mediatheque_embed
+    weight: 1
+    region: content
+  site_id:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true
   langcode: true
   name: true
+  search_api_excerpt: true
   thumbnail: true
   uid: true

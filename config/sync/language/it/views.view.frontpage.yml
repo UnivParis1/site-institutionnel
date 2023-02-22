@@ -2,12 +2,19 @@ label: 'Pagina iniziale'
 description: 'Tutti i contenuti promossi in prima pagina.'
 display:
   default:
+    display_title: Predefinito
     display_options:
-      empty:
-        area_text_custom:
-          content: 'Aucun contenu de page d''accueil n''a été créé pour l''instant. Suivre le <a href="https://www.drupal.org/fr/docs/user_guide/fr/index.html">Guide utilisateur</a> pour démarrer la construction de votre site.'
-        title:
-          title: 'Benvenuti in [site:name]'
+      pager:
+        options:
+          tags:
+            next: 'Seguente ›'
+            previous: '‹ Precedente'
+            first: '« Prima'
+            last: 'Ultima »'
+          expose:
+            items_per_page_label: 'Voci per pagina'
+            items_per_page_options_all_label: '- Tutto -'
+            offset_label: Scostamento
       exposed_form:
         options:
           submit_button: Applica
@@ -15,18 +22,9 @@ display:
           exposed_sorts_label: 'Ordina per'
           sort_asc_label: Asc
           sort_desc_label: Disc
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Voci per pagina'
-            items_per_page_options_all_label: '- Tutto -'
-            offset_label: Scostamento
-          tags:
-            previous: '‹ Precedente'
-            next: 'Seguente ›'
-            first: '« Prima'
-            last: 'Ultima »'
-    display_title: Principale
+      empty:
+        area_text_custom:
+          content: 'Aucun contenu de page d''accueil n''a été créé pour l''instant. Suivre le <a href="https://www.drupal.org/fr/docs/user_guide/fr/index.html">Guide utilisateur</a> pour démarrer la construction de votre site.'
   feed_1:
     display_title: Flux
   page_1:

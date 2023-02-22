@@ -1,0 +1,60 @@
+uuid: cd5f5aa8-dc4c-4a44-bffd-cfb5be3b31a3
+langcode: fr
+status: true
+dependencies: {  }
+id: nouvelle_actualite
+label: 'Nouvelle actualité'
+generators:
+  node:
+    id: node
+    status: true
+    published: true
+    operation: insert
+    bundles:
+      event: event
+      news: news
+      article: '0'
+      news2018: '0'
+      offer: '0'
+      page: '0'
+      page_personnelle: '0'
+      press: '0'
+      project: '0'
+      publication: '0'
+      second_level_pages: '0'
+      viva: '0'
+    subscribed_on: source_entity_type
+    referenced_by:
+      revision_uid: '0'
+      uid: '0'
+      site_id: '0'
+      menu_link: '0'
+      field_categories: '0'
+      field_event_type: '0'
+      field_media: '0'
+      field_sites: '0'
+      field_tag: '0'
+      field_news_topic: '0'
+      field_related_news: '0'
+    include_parents_term: false
+    log:
+      value: "<p>L'actualité&nbsp;<em>[node:title]</em> a été créée par [node:author] le [current-date:long_date_hour].</p>\r\n"
+      format: full_html
+    use_cron: false
+  comment:
+    id: comment
+    status: false
+    published: true
+    operation: insert
+    bundles:
+      comment: '0'
+    subscribed_on: source_entity_type
+    referenced_by:
+      uid: '0'
+      pid: '0'
+      entity_id: '0'
+    include_parents_term: false
+    log:
+      value: ''
+      format: plain_text
+    use_cron: false
