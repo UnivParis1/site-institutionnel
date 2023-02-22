@@ -49,8 +49,8 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
-  form_submit_once: false
+  form_title: source_entity_webform
+  form_submit_once: true
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
@@ -141,9 +141,9 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: inline
   confirmation_url: ''
-  confirmation_title: ''
+  confirmation_title: 'Merci pour votre demande'
   confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -227,7 +227,10 @@ handlers:
     label: Fabrice
     notes: ''
     status: true
-    conditions: {  }
+    conditions:
+      enabled:
+        ':input[name="votre_demande"]':
+          '': ''
     weight: 0
     settings:
       states:
