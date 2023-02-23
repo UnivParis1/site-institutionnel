@@ -1,19 +1,22 @@
-uuid: 9b60431c-daf8-466d-9bf2-91635bfda372
+uuid: 8e19f0a3-51a3-427f-ad4b-be4605cdbc93
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_title
     - paragraphs.paragraphs_type.contact_free
-id: paragraph.contact_free.field_title
-field_name: field_title
+id: paragraph.contact_free.status
+field_name: status
 entity_type: paragraph
 bundle: contact_free
-label: Titre
+label: Publié
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: 1
 default_value_callback: ''
-settings: {  }
-field_type: string
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

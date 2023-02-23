@@ -1,11 +1,12 @@
-uuid: 8c278baa-157d-475b-bc29-520ce5925d18
+uuid: b59b89c7-f352-4be8-b93a-0cfa947d07b7
 langcode: fr
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_image_360
-    - media.type.image360
     - paragraphs.paragraphs_type.image_360
+  module:
+    - image
 id: paragraph.image_360.field_image_360
 field_name: field_image_360
 entity_type: paragraph
@@ -17,13 +18,21 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:media'
-  handler_settings:
-    target_bundles:
-      image360: image360
-    sort:
-      field: _none
-      direction: ASC
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'jpg jpeg'
+  max_filesize: '20 MB'
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: false
+  title_field: true
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image
