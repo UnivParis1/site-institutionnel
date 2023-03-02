@@ -229,34 +229,36 @@
                 {% endfor %}
               </div>
             {% endif %}
-            {% if topics|striptags|trim %}
-              <div class="details txt-second">
-                {% for key, topic in content.field_publication_topics if key|first != '#' %}
-                  <div class="categ-style block-title-sep">{{ topic }}</div>
-                {% endfor %}
-              </div>
-            {% endif %}
-            {% if link|striptags|trim %}
+            {% if link|striptags|trim or purchase|striptags|trim %}
               <div class="details txt-second">
                 <span class="txt-bold">
-                <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
-                    {{ "Read this book"|t }}
-                </a>
-                </span>
-              </div>
-            {% endif %}
-            {% if purchase|striptags|trim %}
-              <div class="details txt-second">
-                <span class="txt-bold">
-                <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
-                    {{ "Buy this book"|t }}
-                </a>
+                  {% if link %}
+                    <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
+                      {{ "Read this book"|t }}
+                    </a>
+                  {% endif %}
+                  {% if purchase %}
+                    <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
+                      {{ "Buy this book"|t }}
+                    </a>
+                  {% endif %}
                 </span>
               </div>
             {% endif %}
           </div>
         </div>
       </aside>
+      <section class="cell small-12 large-8 semi-infos-sep-mobile">
+        {% if topics|striptags|trim %}
+          <div class="details txt-second">
+            {% for key, topic in content.field_publication_topics if key|first != '#' %}
+              <div class="categ-style block-title-sep">{{ topic }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        <div class="txt medium">{{ content.body }}</div>
+        {{ content.field_more }}
+      </section>
     </div>
   </div>
 </article>

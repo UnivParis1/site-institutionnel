@@ -17,12 +17,19 @@ function p1ps2019_preprocess_html(&$variables)
   $negotiator = \Drupal::service('micro_site.negotiator');
   $system_path = \Drupal::service('path.current')->getPath();
   $page_mini_site = FALSE;
+  $variables['web_component'] = FALSE;
 
   $site = $negotiator->getActiveSite();
   if (isset($site) && !empty($site)) {
     if (in_array($system_path, ['/actualites', '/evenements', '/publications'])) {
       $page_mini_site = TRUE;
     }
+
+    $site_id = $site->id();
+    if (preg_match('/node\/35225/', $system_path) && $site_id == 115) {
+      $variables['web_component'] = TRUE;
+     }
+     \Drupal::logger('web_component')->info(print_r("web component ? " . $variables['web_component'],1));
   }
   $variables['page_mini_site'] = $page_mini_site;
 
