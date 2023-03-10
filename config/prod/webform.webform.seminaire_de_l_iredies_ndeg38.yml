@@ -1,69 +1,53 @@
-uuid: aa29d50c-752f-41e9-b541-1d95bc75361d
+uuid: 214d5dd8-da99-4df4-b6a9-75a3e3b38006
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 7414
 template: false
 archive: false
-id: 0_nuit_des_idees_2023
-title: '0 - Nuit des idées 2023'
+id: seminaire_de_l_iredies_ndeg38
+title: 'Séminaire de l''IREDIES n°38'
 description: ''
-category: ''
+category: 'Inscription événement'
 elements: |-
   nom:
     '#type': textfield
     '#title': Nom
-    '#required': true
+    '#title_display': inline
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#format_items': comma
+    '#required': true
   prenom:
     '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
+    '#title': Prénom
+    '#title_display': inline
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
-    '#type': email
-    '#title': 'Courriel '
+    '#format_items': comma
     '#required': true
+  statut_fonction:
+    '#type': textfield
+    '#title': 'Statut / Fonction'
+    '#title_display': inline
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  markup_02:
-    '#type': webform_markup
-    '#markup': '<hr>'
-  markup_01:
-    '#type': webform_markup
-    '#markup': '<p style="font-size:1.25rem"><strong>Précisez les conférences auxquelles vous souhaitez assister :</strong></p>'
-  vous_souhaitez_participer:
-    '#type': checkboxes
-    '#title': 'Centre Panthéon'
-    '#options':
-      'Salle 1, 18 h - 21h : " Soirée Toujours + / Toujours -"': 'Salle 1, 18 h - 21h : " Soirée Toujours + / Toujours -"'
-      'Salle 2, 20 h - 21 h30 : "Vers l''infini et au-delà"': 'Salle 2, 20 h - 21 h30 : "Vers l''infini et au-delà"'
-      'Amphithéâtre 1, 19 h - 21h30 : " Soirée Entreprise et transformations des sociétés"': 'Amphithéâtre 1, 19 h - 21h30 : " Soirée Entreprise et transformations des sociétés"'
-    '#options__properties': ''
-  markup_03:
-    '#type': webform_markup
-    '#markup': '<hr />'
-  _comment_avez_vous_connu_la_nuit_des_idees_autour_du_pantheon_:
-    '#type': checkboxes
-    '#title': ' Comment avez-vous connu la Nuit des Idées autour du Panthéon ?'
-    '#options':
-      'Par le site de l’Institut français': 'Par le site de l’Institut français'
-      'Par la communication de l’université Paris 1 Panthéon-Sorbonne': 'Par la communication de l’université Paris 1 Panthéon-Sorbonne'
-      'Par la communication des établissements partenaires': 'Par la communication des établissements partenaires'
-      'Par les médias': 'Par les médias'
-      'Par le bouche-à-oreille': 'Par le bouche-à-oreille'
-    '#options__properties': ''
-  captcha:
-    '#type': captcha
-  markup:
-    '#type': webform_markup
-  actions:
-    '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#format_items': comma
+    '#required': true
+  etablissement_de_rattachement:
+    '#type': textfield
+    '#title': 'Établissement de rattachement'
+    '#title_display': inline
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#format_items': comma
+    '#required': true
+  e_mail_de_contact:
+    '#type': textfield
+    '#title': 'E-mail de contact'
+    '#title_display': inline
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#format_items': comma
+    '#required': true
 css: ''
 javascript: ''
 settings:
@@ -76,10 +60,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -148,7 +132,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -171,7 +155,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci pour votre participation !</p>"
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -228,8 +212,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -238,8 +221,7 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
@@ -247,82 +229,7 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
-handlers:
-  email_aux_demandeurs:
-    id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: culture@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Nuit des idées'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la nuit des idées'
-      body: "<p>&nbsp;</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: culture@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Nuit des idées 2023 - Nouvelle inscription'
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

@@ -1,61 +1,45 @@
-uuid: dab9b3bc-a462-4f74-9456-e6c2920fa866
+uuid: 11fb7084-398f-4950-b82c-53e33207fd44
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7414
+uid: 46
 template: false
 archive: false
-id: seminaire_de_l_iredies_ndeg39
-title: 'Séminaire de l''IREDIES n°39'
-description: ''
+id: 19_formulaire_d_inscription_fron
+title: '19 - Formulaire d''inscription Frontières'
+description: '<p>Formulaire d''inscription à la première journée d''étude Frontières du DDL (2023).</p>'
 category: 'Inscription événement'
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Nom
-    '#title_display': inline
+  vos_coordonnees:
+    '#type': webform_contact
+    '#title': 'Vos coordonnées'
+    '#title_display': before
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#format_items': comma
-    '#required': true
-  prenom:
-    '#type': textfield
-    '#title': Prénom
-    '#title_display': inline
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#format_items': comma
-    '#required': true
-  statut_fonction:
-    '#type': textfield
-    '#title': 'Statut / Fonction'
-    '#title_display': inline
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#format_items': comma
-    '#required': true
-  etablissement_de_rattachement:
-    '#type': textfield
-    '#title': 'Établissement de rattachement'
-    '#title_display': inline
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#format_items': comma
-    '#required': true
-  e_mail_de_contact:
-    '#type': textfield
-    '#title': 'E-mail de contact'
-    '#title_display': inline
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#format_items': comma
-    '#required': true
-  assistera_en_presentiel:
-    '#type': checkbox
-    '#title': 'Assistera en présentiel'
-    '#title_display': inline
-  assistera_en_distanciel:
-    '#type': checkbox
-    '#title': 'Assistera en distanciel'
-    '#title_display': inline
+    '#name__title': 'Prénom et nom de famille'
+    '#name__placeholder': 'Nadia Giraud'
+    '#name__help': 'Indiquez ici votre prénom suivi de votre nom.'
+    '#name__title_display': after
+    '#name__required': true
+    '#company__access': false
+    '#email__title': 'Adresse courriel'
+    '#email__placeholder': Nadia.Giraud@protonmail.com
+    '#email__help': 'Votre adresse électronique'
+    '#email__title_display': after
+    '#email__required': true
+    '#phone__access': false
+    '#address__access': false
+    '#address_2__access': false
+    '#city__access': false
+    '#state_province__access': false
+    '#postal_code__access': false
+    '#country__access': false
+  captcha:
+    '#type': captcha
+    '#captcha_type': captcha/Math
+    '#captcha_title': 'Combien fait l''addition simple ?'
 css: ''
 javascript: ''
 settings:
@@ -68,8 +52,8 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
-  form_submit_once: false
+  form_title: source_entity_webform
+  form_submit_once: true
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
@@ -82,7 +66,7 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_unsaved: false
+  form_unsaved: true
   form_disable_back: false
   form_submit_back: false
   form_disable_autocomplete: false

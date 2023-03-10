@@ -1,69 +1,58 @@
-uuid: aa29d50c-752f-41e9-b541-1d95bc75361d
+uuid: f3e2939f-6f3a-439f-8986-33d270f625dd
 langcode: fr
-status: closed
+status: scheduled
 dependencies: {  }
 weight: 0
-open: null
-close: null
-uid: 5486
+open: '2023-03-07T17:00:00'
+close: '2023-03-15T23:59:59'
+uid: 452
 template: false
 archive: false
-id: 0_nuit_des_idees_2023
-title: '0 - Nuit des idées 2023'
+id: 18_inscription_seminaire_axe_gnr
+title: '18 - Inscription séminaire axe genre Quotidien politique'
 description: ''
-category: ''
+category: 'Inscription événement'
 elements: |-
+  markup:
+    '#type': webform_markup
+    '#markup': |-
+      <h2>Inscription</h2>
+
+      <h3>Inscriptions ouvertes jusqu'au 15/03/2023 inclus</h3>
   nom:
     '#type': textfield
     '#title': Nom
+    '#placeholder': Name
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
-    '#title': 'Prénom '
+    '#title': Prénom
+    '#placeholder': 'First name'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
-    '#title': 'Courriel '
+    '#title': Courriel
+    '#placeholder': Email
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  markup_02:
-    '#type': webform_markup
-    '#markup': '<hr>'
-  markup_01:
-    '#type': webform_markup
-    '#markup': '<p style="font-size:1.25rem"><strong>Précisez les conférences auxquelles vous souhaitez assister :</strong></p>'
-  vous_souhaitez_participer:
-    '#type': checkboxes
-    '#title': 'Centre Panthéon'
-    '#options':
-      'Salle 1, 18 h - 21h : " Soirée Toujours + / Toujours -"': 'Salle 1, 18 h - 21h : " Soirée Toujours + / Toujours -"'
-      'Salle 2, 20 h - 21 h30 : "Vers l''infini et au-delà"': 'Salle 2, 20 h - 21 h30 : "Vers l''infini et au-delà"'
-      'Amphithéâtre 1, 19 h - 21h30 : " Soirée Entreprise et transformations des sociétés"': 'Amphithéâtre 1, 19 h - 21h30 : " Soirée Entreprise et transformations des sociétés"'
-    '#options__properties': ''
-  markup_03:
-    '#type': webform_markup
-    '#markup': '<hr />'
-  _comment_avez_vous_connu_la_nuit_des_idees_autour_du_pantheon_:
-    '#type': checkboxes
-    '#title': ' Comment avez-vous connu la Nuit des Idées autour du Panthéon ?'
-    '#options':
-      'Par le site de l’Institut français': 'Par le site de l’Institut français'
-      'Par la communication de l’université Paris 1 Panthéon-Sorbonne': 'Par la communication de l’université Paris 1 Panthéon-Sorbonne'
-      'Par la communication des établissements partenaires': 'Par la communication des établissements partenaires'
-      'Par les médias': 'Par les médias'
-      'Par le bouche-à-oreille': 'Par le bouche-à-oreille'
-    '#options__properties': ''
+  statut_ou_fonction:
+    '#type': textfield
+    '#title': 'Statut ou fonction'
+    '#placeholder': Role
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  rattachement_institutionnel:
+    '#type': textfield
+    '#title': 'Rattachement institutionnel'
+    '#placeholder': Institution
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   captcha:
     '#type': captcha
-  markup:
-    '#type': webform_markup
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#submit__label': 'Valider l''inscription'
 css: ''
 javascript: ''
 settings:
@@ -72,14 +61,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: true
+  page: false
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: false
+  form_submit_once: true
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: '<p>Les inscriptions à cet événement sont closes.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -118,7 +107,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: false
+  submission_exclude_empty: true
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -170,8 +159,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci pour votre participation !</p>"
+  confirmation_title: 'Inscription confirmée'
+  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -179,9 +168,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 40
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a>. Nous vous contacterons uniquement si une place se libère.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -228,8 +217,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -238,8 +226,7 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
@@ -247,73 +234,35 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
 handlers:
-  email_aux_demandeurs:
+  courriel_aux_personnes_inscrites_en_presentiel:
     id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
+    handler_id: courriel_aux_personnes_inscrites_en_presentiel
+    label: 'Courriel aux personnes inscrites'
     notes: ''
     status: true
     conditions: {  }
-    weight: 0
+    weight: 1
     settings:
       states:
         - completed
       to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
-      bcc_mail: ''
+      bcc_mail: Marina.Krivitzky@univ-paris1.fr
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: culture@univ-paris1.fr
+      from_mail: Marina.Krivitzky@univ-paris1.fr
       from_options: {  }
-      from_name: 'Nuit des idées'
-      reply_to: ''
+      from_name: 'Marina Krivitzky'
+      reply_to: Marina.Krivitzky@univ-paris1.fr
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la nuit des idées'
-      body: "<p>&nbsp;</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: culture@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Nuit des idées 2023 - Nouvelle inscription'
-      body: _default
+      subject: 'Inscription enregistrée pour [webform_submission:source-title]'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre inscription, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>Vos informations d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>En cas d'empêchement, je vous serais reconnaissante de m'informer au plus vite.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marina Krivitzky</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

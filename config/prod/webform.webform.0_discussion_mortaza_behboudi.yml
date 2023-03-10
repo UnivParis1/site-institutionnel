@@ -1,69 +1,48 @@
-uuid: aa29d50c-752f-41e9-b541-1d95bc75361d
+uuid: 1187b2af-77d7-400c-a7fc-3737a06b7fd7
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 6746
 template: false
 archive: false
-id: 0_nuit_des_idees_2023
-title: '0 - Nuit des idées 2023'
+id: 0_discussion_mortaza_behboudi
+title: '0 - Discussion Mortaza Behboudi'
 description: ''
 category: ''
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Nom
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
-    '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
-    '#type': email
-    '#title': 'Courriel '
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  markup_02:
-    '#type': webform_markup
-    '#markup': '<hr>'
-  markup_01:
-    '#type': webform_markup
-    '#markup': '<p style="font-size:1.25rem"><strong>Précisez les conférences auxquelles vous souhaitez assister :</strong></p>'
-  vous_souhaitez_participer:
-    '#type': checkboxes
-    '#title': 'Centre Panthéon'
-    '#options':
-      'Salle 1, 18 h - 21h : " Soirée Toujours + / Toujours -"': 'Salle 1, 18 h - 21h : " Soirée Toujours + / Toujours -"'
-      'Salle 2, 20 h - 21 h30 : "Vers l''infini et au-delà"': 'Salle 2, 20 h - 21 h30 : "Vers l''infini et au-delà"'
-      'Amphithéâtre 1, 19 h - 21h30 : " Soirée Entreprise et transformations des sociétés"': 'Amphithéâtre 1, 19 h - 21h30 : " Soirée Entreprise et transformations des sociétés"'
-    '#options__properties': ''
-  markup_03:
-    '#type': webform_markup
-    '#markup': '<hr />'
-  _comment_avez_vous_connu_la_nuit_des_idees_autour_du_pantheon_:
-    '#type': checkboxes
-    '#title': ' Comment avez-vous connu la Nuit des Idées autour du Panthéon ?'
-    '#options':
-      'Par le site de l’Institut français': 'Par le site de l’Institut français'
-      'Par la communication de l’université Paris 1 Panthéon-Sorbonne': 'Par la communication de l’université Paris 1 Panthéon-Sorbonne'
-      'Par la communication des établissements partenaires': 'Par la communication des établissements partenaires'
-      'Par les médias': 'Par les médias'
-      'Par le bouche-à-oreille': 'Par le bouche-à-oreille'
-    '#options__properties': ''
-  captcha:
-    '#type': captcha
   markup:
     '#type': webform_markup
+    '#markup': '<h2>Formulaire d''inscription</h2>'
+  nom_:
+    '#type': textfield
+    '#title': 'Nom :'
+    '#required': true
+    '#required_error': 'Nom est requis'
+  prenom_:
+    '#type': textfield
+    '#title': 'Prénom :'
+    '#required': true
+    '#required_error': 'Prénom est requis'
+  courriel_:
+    '#type': email
+    '#title': 'Courriel :'
+    '#required': true
+    '#required_error': 'Courriel est requis'
+  captcha:
+    '#type': captcha
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
+    '#type': checkbox
+    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
+    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
+    '#required': true
+    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis'
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#submit__label': ENVOYER
 css: ''
 javascript: ''
 settings:
@@ -79,7 +58,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: '<p>Le formulaire d''inscription est désormais fermé.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -170,8 +149,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci pour votre participation !</p>"
+  confirmation_title: 'Confirmation d''inscription'
+  confirmation_message: "Votre inscription a bien été enregistrée.\r\nMerci pour votre participation !"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -179,9 +158,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 205
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: '<p>Les inscriptions sont complètes.</p>'
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -228,8 +207,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -238,8 +216,7 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
@@ -247,14 +224,13 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
 handlers:
-  email_aux_demandeurs:
+  email:
     id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
+    handler_id: email
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -262,21 +238,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: Emmanuel.Charrier@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: culture@univ-paris1.fr
+      from_mail: '[webform_submission:values:courriel_:raw]'
       from_options: {  }
-      from_name: 'Nuit des idées'
+      from_name: '[webform_submission:values:nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la nuit des idées'
-      body: "<p>&nbsp;</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      subject: 'Soirée de soutien à Mortaza Behboudi – nouvelle inscription'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -288,10 +264,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_aux_organisateurs:
+  email_1:
     id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
+    handler_id: email_1
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -299,21 +275,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: culture@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel_:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Nuit des idées 2023 - Nouvelle inscription'
-      body: _default
+      subject: '[Réponse automatique ] Soirée de soutien à Mortaza Behboudi – Confirmation d''inscription'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est bien enregistrée.<br />\r\nMerci pour votre participation.</p>\r\n\r\n<p>&nbsp;</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
