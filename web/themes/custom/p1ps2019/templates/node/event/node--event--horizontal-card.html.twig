@@ -72,28 +72,22 @@
   node.isSticky() ? 'is-sticky',
   not node.isPublished() ? 'is-unpublished',
   view_mode ? view_mode|clean_class,
-  'box-style',
-  'clearfix',
+  'clearfix', 'box-style',
 ]
 %}
-{% set title = label.0 %}
 
 <article{{ attributes.addClass(classes).removeAttribute('role') }}>
-  <div class="img-container">{{ content.field_media }}</div>
   <div class="box-content same-height">
     <div class="top-infos">
       <div class="infos-row-wrapper space-between">
-        <div class="categ-wrapper semi-semi-infos-sep"><div class="categ-style"> {{ content.field_event_type.0 }} </div></div>
-        <div class="date-style txt-right semi-semi-infos-sep">{{ content.field_event_date.0 }}</div>
+        <div class="categ-wrapper semi-semi-infos-sep"><div class="categ-style"> {{ content.field_event_type }} </div></div>
+        <div class="date-style txt-right semi-semi-infos-sep">{{ content.field_event_date }}</div>
       </div>
     </div>
     {{ title_prefix }}
-    <h2{{ title_attributes.addClass('title semi-infos-sep') }}>
-      <a href="{{ url }}" rel="bookmark">{{ label.0 }}</a>
+    <h2 class="title">
+      <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
     </h2>
     {{ title_suffix }}
-    <div class="bottom-infos">
-      {{ content.field_add_to_cal }}
-    </div>
   </div>
 </article>

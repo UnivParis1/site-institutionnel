@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.horizontal_card
     - core.entity_view_mode.node.teaser
     - node.type.event
     - node.type.news
@@ -477,9 +478,22 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: horizontal_card
       defaults:
         title: false
         css_class: false
+        style: false
+        row: false
         sorts: false
         arguments: false
         filters: false
@@ -732,9 +746,22 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: default
+        options:
+          row_class: 'cell small-12'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: horizontal_card
       defaults:
         title: false
         css_class: false
+        style: false
+        row: false
         sorts: false
         arguments: false
         filters: false
