@@ -55,6 +55,35 @@ class ComptexManager implements ComptexInterface {
     return $information;
   }
 
+  /**
+   * @param $username (string) username du user dont on veut les informations.
+   * @param $attributes (array) attributes we want to get from wsgroups.
+   *
+   * @return array|mixed
+   */
+  public function getUserAttributes($username, $attributes = []) {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $ws = $config->get('url_ws') . $config->get('search_user_page');
+
+    $searchUser = "$ws?id=$username";
+    $params = [
+	'attrs' => implode(',', $attributes),
+	'allowNoAffiliationAccounts' => true,
+	'showExtendedInfo'=> 2
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+    $userInformation = json_decode(curl_exec($ch), TRUE);
+    $userInformation = reset($userInformation);
+    curl_close($ch);
+
+    return $userInformation;
+  }
+
   public function userHasPagePerso($username) {
     $has_page_perso = FALSE;
     $config = \Drupal::config('up1_pages_personnelles.settings');
@@ -116,7 +145,7 @@ class ComptexManager implements ComptexInterface {
         $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
         $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
         $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
-      }     
+      }
       if ($information['eduPersonPrimaryAffiliation'] == 'student') {
         $information['employeeType'] = ($information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant");
       }
@@ -236,12 +265,12 @@ class ComptexManager implements ComptexInterface {
       $result = json_decode(curl_exec($ch), TRUE);
       curl_close($ch);
       if (!empty ($result)) {
-        return $result[0][$attr]; 
+        return $result[0][$attr];
       }
       else return FALSE;
     }
     else return FALSE;
-    
+
   }
 
   private function formatEmails(&$information) {
