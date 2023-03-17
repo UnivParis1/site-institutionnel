@@ -2,6 +2,9 @@
 
 namespace Drupal\up1_pages_personnelles\Controller;
 
+use Drupal\cas\Exception\CasLoginException;
+use Drupal\cas\Service\CasUserManager;
+use Drupal\up1_pages_personnelles\ComptexManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -478,10 +481,69 @@ class WsGroupsController extends ControllerBase
           $user->save();
           $nid = reset($result);
           $goto = "/node/$nid/edit";
-        } else {
-          $goto = '<front>';
+        } 
+        elseif (empty($result)) {
+          $comptex = new ComptexManager();
+          $item = $comptex->getUserAttributes($username, ['supannCivilite','displayName']);
+
+          $user->addRole('enseignant_doctorant');
+          $user->status = 1;
+          $user->save();
+
+          $node = Node::create([
+            'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
+            'type' => 'page_personnelle',
+            'langcode' => 'fr',
+            'uid' => $user->id(),
+            'status' => 1,
+            'field_uid_ldap' => $item['uid'],
+            'site_id' => NULL,
+          ]);
+          $node->save();
+          $goto = "/node/" . $node->id() . '/edit';
         }
       }
+      else {
+        $comptex = new ComptexManager();
+        $item = $comptex->getUserAttributes($username, [
+          'supannCivilite',
+          'displayName',
+          'mail'
+        ]);
+
+        $cas_settings = \Drupal::config('cas.settings');
+        $cas_user_manager = \Drupal::service('cas.user_manager');
+        $user_properties = [
+          'roles' => ['enseignant_doctorant'],
+        ];
+        $email_assignment_strategy = $cas_settings->get('user_accounts.email_assignment_strategy');
+        if ($email_assignment_strategy === CasUserManager::EMAIL_ASSIGNMENT_STANDARD) {
+          $user_properties['mail'] = $item['mail'];
+        }
+        try {
+          // function register() : This has to be changed if cas module evolves.
+          $user = $cas_user_manager->register($item['uid'], $item['uid'], $user_properties);
+          $node = Node::create([
+            'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
+            'type' => 'page_personnelle',
+            'langcode' => 'fr',
+            'uid' => $user->id(),
+            'status' => 1,
+            'field_uid_ldap' => $item['uid'],
+            'site_id' => NULL,
+          ]);
+          $node->save();
+          $goto = "/node/" . $node->id() . '/edit';
+        } catch (CasLoginException $e) {
+          \Drupal::logger('cas')->error('CasLoginException when
+        registering user with name %name: %e', [
+            '%name' => $item['uid'],
+            '%e' => $e->getMessage()
+          ]);
+          return;
+        }
+      }
+
       $response = new RedirectResponse($goto);
       return $response->send();
     }
