@@ -202,7 +202,7 @@ function p1ps2019_preprocess_node(&$variables)
 
   //preprocess_node publications
   $moduleHandler = \Drupal::service('module_handler');
-  if ($moduleHandler->moduleExists('text_or_entity') && $node->getType() == 'publication' 
+  if ($moduleHandler->moduleExists('text_or_entity') && $node->getType() == 'publication'
     && $node->hasField('field_authors') && $field_authors = $node->get('field_authors')->getValue()) {
     \Drupal::logger('publications')->info(print_r($field_authors, 1));
     $all_authors = [];
@@ -234,16 +234,6 @@ function p1ps2019_preprocess_node(&$variables)
       }
     }
     $variables['auteurs'] = implode(', ', $all_authors);
-  }
-
-//node_process article
-  if ($node->getType() == 'article') {
-    if ($node->hasField('field_media') && !empty($node->field_media)) {
-      $mid = $node->field_media[0]->getValue()['target_id'];
-      $fid = Media::load($mid)->field_media[0]->getValue()['target_id'];
-      $file = File::load($fid);
-      $variables['image_url'] = $file->url();
-    }
   }
 
   if (in_array($node->getType(), ['page', 'second_level_pages'])) {
