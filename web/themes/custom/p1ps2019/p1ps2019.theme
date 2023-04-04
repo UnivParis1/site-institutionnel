@@ -140,12 +140,14 @@ function p1ps2019_preprocess_node(&$variables) {
     switch ($node->getType()) {
       case "news" :
         $variables['node_type_text'] = t("Actualité");
+        $node_paragraphs = $node->field_paragraphs->getValue();
         break;
       case "page_personnelle" :
         $variables['node_type_text'] = t("Page Personnelle");
         break;
       case "event" :
         $variables['node_type_text'] = t("Évènement");
+        $node_paragraphs = $node->field_blocs_medias->getValue();
         break;
       case "viva" :
         $variables['node_type_text'] = t("Soutenance de thèse");
@@ -154,7 +156,11 @@ function p1ps2019_preprocess_node(&$variables) {
         $variables['node_type_text'] = t("Offre d'emploi");
         break;
       case "page" :
+        $node_paragraphs = $node->field_paragraphs->getValue();
+        $variables['node_type_text'] = t("Page");
+        break;
       case "second_level_pages" :
+        $node_paragraphs = $node->field_editorial_blocks->getValue();
         $variables['node_type_text'] = t("Page");
         break;
       case "publication":
