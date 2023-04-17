@@ -53,6 +53,7 @@ class PagesPersonnellesSettings extends ConfigFormBase {
       ->set('url_hal_api', $form_state->getValue('url_hal_api'))
       ->set('url_hal_rss', $form_state->getValue('url_hal_rss'))
       ->set('url_userphoto', $form_state->getValue('url_userphoto'))
+      ->set('url_perso', $form_state->getValue('url_perso'))
       ->save();
   }
 
@@ -187,6 +188,21 @@ class PagesPersonnellesSettings extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('URL of the HAL RSS'),
       '#default_value' => $config->get('url_hal_rss'),
+      '#maxlength' => 255,
+      '#size' => 120,
+      '#required' => TRUE
+    ];
+
+    $form['miscellaneous'] = [
+      '#type' => 'details',
+      '#title' => t('Autres paramètres à définir. '),
+      '#weight' => 99,
+      '#open' => TRUE,
+    ];
+    $form['miscellaneous']['url_perso'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('domain of the shortened URL to build. '),
+      '#default_value' => $config->get('url_perso'),
       '#maxlength' => 255,
       '#size' => 120,
       '#required' => TRUE

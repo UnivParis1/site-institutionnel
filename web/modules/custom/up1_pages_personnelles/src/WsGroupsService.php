@@ -53,7 +53,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $request = $this->getRequest($affiliation);
 
     $params = [
-      'attrs' => 'sn,givenName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
+      'attrs' => 'sn,givenName,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
     ];
     if (!empty($trombi_settings)) {
       if ($trombi_settings['supannRole']) {
@@ -95,7 +95,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     //filter_supannConsentement={PROJ:OBSIA}CGU
     $params = [
       'filter_supannConsentement' => '{PROJ:OBSIA}CGU',
-      'attrs' => 'sn,givenName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
+      'attrs' => 'sn,givenName,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
       'showExtendedInfo' => true
     ];
     if (!empty($trombi_settings)) {
@@ -130,7 +130,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $request = $this->getRequest($affiliation);
 
     $params = [
-      'attrs' => 'uid,displayName,supannCivilite,labeledURI,supannListeRouge'
+      'attrs' => 'uid,displayName,supannCivilite,supannListeRouge'
     ];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));

@@ -79,7 +79,6 @@ class WsGroupsController extends ControllerBase
         $response = $cachedUser->data;
         $users = $response['users'];
       } else {
-
         $group == 'observatoireIA'?
           $response = $this->wsGroupsService->getUserListForAI($affiliation, $siteId, $trombi_settings) :
           $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
@@ -199,34 +198,50 @@ class WsGroupsController extends ControllerBase
    * @param $siteId
    * @return array
    */
-  public function getTrombiList($theme, $path, $group, $siteId = NULL) {
-    $site_settings = $this->getTrombiFields();
-    \Drupal::logger('getTrombiList')->info("site number $siteId");
-    $users = $this->getCachedUsers('faculty', $siteId, $group, $site_settings);
+  public function getTrombiList($type, $theme, $path, $group, $siteId = NULL) {
+    switch ($type) {
+      case 'faculty':
+        $site_settings = $this->getTrombiFields();
+        $users = $this->getCachedUsers($type, $siteId, $group, $site_settings);
+        foreach ($users as &$user) {
+          if ($group == 'observatoireIA') {
+            $user['skills'] = $this->formatTrombiData('skillsIA', $user, $site_settings);
+            $user['about'] = $this->formatTrombiData('aboutIA', $user, $site_settings);
+          }
+          else {
+            $user['skills'] = $this->formatTrombiData('skills', $user, $site_settings);
+            $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
+          }
+          $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
+          $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
+          $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
+          $user['discipline'] = $this->formatTrombiData('discipline', $user, $site_settings);
+          $config = \Drupal::config('up1_pages_personnelles.settings');
+          $user['photo'] = $config->get('url_userphoto') . $user['uid'];
+          $user['labeledURI'][] = $config->get('url_perso') . $user['uid'];
+        }
+        usort($users, function ($a, $b) {
+          return strnatcasecmp($a['sn'], $b['sn']);
+        });
 
-    foreach ($users as &$user) {
-      if ($group == 'observatoireIA') {
-        $user['skills'] = $this->formatTrombiData('skillsIA', $user, $site_settings);
-        $user['about'] = $this->formatTrombiData('aboutIA', $user, $site_settings);
-      }
-      else {
-        $user['skills'] = $this->formatTrombiData('skills', $user, $site_settings);
-        $user['about'] = $this->formatTrombiData('about', $user, $site_settings);
-      }
-      $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
-      $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
-      $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
-      $user['discipline'] = $this->formatTrombiData('discipline', $user, $site_settings);
-      $config = \Drupal::config('up1_pages_personnelles.settings');
-      $user['photo'] = $config->get('url_userphoto') . $user['uid'];
+        break;
+      case 'student':
+        $users = $this->getCachedUsers($type, $siteId, $group);
+
+        foreach ($users as &$user) {
+          $config = \Drupal::config('up1_pages_personnelles.settings');
+          $user['photo'] = $config->get('url_userphoto') . $user['uid'];
+          $user['labeledURI'][] = $config->get('url_perso') . $user['uid'];
+        }
+        usort($users, function ($a, $b) {
+          return strnatcasecmp($a['sn'], $b['sn']);
+        });
+        break;
     }
-    usort($users, function ($a, $b) {
-        return strnatcasecmp($a['sn'], $b['sn']);
-      });
     $build['item_list'] = [
       '#theme' => $theme,
       '#users' => $users,
-      '#affiliation' => 'faculty',
+      '#affiliation' => $type,
       '#link' => $path,
       '#Trusted' => FALSE,
       '#trombi_settings' => [],
@@ -246,10 +261,12 @@ class WsGroupsController extends ControllerBase
 
     $users = $this->getCachedUsers($type, $siteId);
     if (!empty($users)) {
+      $config = \Drupal::config('up1_pages_personnelles.settings');
       foreach ($users as $user) {
         if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
           $filtered_users[] = $user;
         }
+        $user['labeledURI'][] = $config->get('url_perso') . $user['uid'];
       }
 
       // on trie les utilisateurs par ordre alphabetique des cn
@@ -297,7 +314,7 @@ class WsGroupsController extends ControllerBase
       $group = $site->get('groups')->value;
 
       if ($this->getFieldTrombiEc()) {
-        return $this->getTrombiList('list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $group, $siteId);
+        return $this->getTrombiList('faculty', 'list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $group, $siteId);
       } else {
         return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list', $siteId);
       }
@@ -309,9 +326,17 @@ class WsGroupsController extends ControllerBase
   public function microStudentList($letter)
   {
     $siteId = $this->getSiteId();
-    if (isset($siteId) && $this->getFieldDoc()) {
+    if (isset($siteId) && $this->getFieldDoc() && !$this->getFieldTrombiDoc()) {
       return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $siteId);
-    } else {
+    }
+    elseif (isset($siteId) && $this->getFieldDoc() && $this->getFieldTrombiDoc()) {
+      $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
+      $site = $siteStorage->load($siteId);
+      $group = $site->get('groups')->value;
+
+      return $this->getTrombiList('student','list_as_trombinoscope', 'up1_pages_personnelles.micro_student_list', $group, $siteId);
+    }
+    else {
       throw new NotFoundHttpException();
     }
   }
@@ -553,7 +578,7 @@ class WsGroupsController extends ControllerBase
     }
   }
 
-    public function equipeDispatch()
+  public function equipeDispatch()
   {
     $siteId = $this->getSiteId();
     if (isset($siteId)) {
@@ -892,6 +917,12 @@ class WsGroupsController extends ControllerBase
       return $response->send();
     }
     else return FALSE;
+  }
+
+  private function getFieldTrombiDoc()
+  {
+    $site = $this->getCurrentSite();
+    return $site->get('trombi_doc_enable')->value;
   }
 }
 

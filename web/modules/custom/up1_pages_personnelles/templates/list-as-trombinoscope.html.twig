@@ -1,14 +1,19 @@
+{% if affiliation == 'faculty' %}
+  {% set category = "Enseignants-Chercheurs" %}
+{% else %}
+  {% set category = "Doctorants" %}
+{% endif %}
+
 <div id="trombi" class="cell small-12">
   <div class="grid-x grid-margin-x grid-margin-y">
     <div class="grid-container">
-      <h1>{{ 'Enseignants-Chercheurs'|t }}</h1>
+      <h1>{{ category }}</h1>
       <div class="annuaire-content mb-5">
         {% if users|length < 1 %}
           <div>{{ "Aucun résultat n'a été trouvé."|t }}</div>
         {% else %}
           {% for user in users %}
-            {% if user.labeledURI is not empty and ((Trusted and user.supannListeRouge == FALSE) or
-              (not Trusted and user.sn != 'supannListeRouge')) %}
+            {% if ((Trusted and user.supannListeRouge == FALSE) or (not Trusted and user.sn != 'supannListeRouge')) %}
               <article class="trombi-item">
                 <a href="{{ user.labeledURI[0] }}"  target="_blank"
                    title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">

@@ -85,3 +85,14 @@ function up1_pages_personnelles_update_8002(&$sandbox) {
   $definition_manager->installFieldStorageDefinition('supannRole', 'site', 'site', $supannRole);
   $definition_manager->installFieldStorageDefinition('about_me', 'site', 'site', $about_me);
 }
+
+function up1_pages_personnelles_update_8003(&$sandbox) {
+  $trombi_doc_enable = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Enable trombinoscope for doctorants'))
+    ->setDescription(t('List of all doctorants displayed as trombinoscope.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition_manager->installFieldStorageDefinition('trombi_doc_enable', 'site', 'site', $trombi_doc_enable);
+}

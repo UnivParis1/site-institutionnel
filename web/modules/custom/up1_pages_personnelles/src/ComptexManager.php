@@ -30,7 +30,7 @@ class ComptexManager implements ComptexInterface {
 
     $searchUser = "$ws?id=$username";
     $params = [
-	'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
+	'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
 	'allowNoAffiliationAccounts' => true,
 	'showExtendedInfo'=> 2
     ];
@@ -91,12 +91,7 @@ class ComptexManager implements ComptexInterface {
 
     $searchUser = "$ws?id=$username";
 
-    $params = [
-      'attrs' => "labeledURI"
-    ];
-
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
@@ -104,7 +99,7 @@ class ComptexManager implements ComptexInterface {
     $user = reset($user);
 
     curl_close($ch);
-    if ($user && isset($user['labeledURI'])) {
+    if ($user) {
       $has_page_perso = TRUE;
     }
 
@@ -125,9 +120,6 @@ class ComptexManager implements ComptexInterface {
       }
       if (isset($information['supannCivilite']) && is_array($information['supannCivilite'])) {
         $information['supannCivilite'] = reset($information['supannCivilite']);
-      }
-      if (isset($information['labeledURI']) && is_array($information['labeledURI'])) {
-        $information['labeledURI'] = reset($information['labeledURI']);
       }
       if (isset($information['displayName']) && is_array($information['displayName'])) {
         $information['displayName'] = reset($information['displayName']);
