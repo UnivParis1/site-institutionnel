@@ -149,6 +149,12 @@
 		              {{ auteurs|raw }}
               </div>
             {% endif %}
+            {% if df_authors %}
+              <div class="details txt-second">
+                <h3 class="publication-label">{{ "Author(s)"|t }} : </h3>
+		              {{ df_authors|raw }}
+              </div>
+            {% endif %}
             <div class="details txt-second">
               <h3 class="publication-label">{{ 'Type'|t }} : </h3>
               <span>{{ content.field_publication_type.0 }}</span>

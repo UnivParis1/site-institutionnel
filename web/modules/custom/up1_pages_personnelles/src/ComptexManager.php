@@ -247,7 +247,7 @@ class ComptexManager implements ComptexInterface {
   public function getUserAttribute($uid,  $attr) {
       if (isset($uid) && isset($attr) && is_string($attr)) {
       $config = \Drupal::config('up1_pages_personnelles.settings');
-      $ws = $config->get('url_ws') . $config->get('search_user_page') . "?id=$uid";
+      $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid";
       $params = ['attrs' => 'displayName'];
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
