@@ -211,6 +211,7 @@ function p1ps2019_preprocess_node(&$variables) {
       $list[$key] = $author['first'];
       if (!empty($author['second'])) {
         $user = user_load_by_name($author['second']);
+
         $comptex = new ComptexManager();
         $displayName = $comptex->getUserAttribute($author['second'], 'displayName');
         if (!empty($displayName)) {
@@ -225,10 +226,9 @@ function p1ps2019_preprocess_node(&$variables) {
           if ($page_perso) {
             $page_perso_url = Url::fromRoute('entity.node.canonical',
               ['node' => $page_perso->id()])->toString();
+            $name = (!empty($author['first'])) ? $author['first'] : $displayName;
             $list[$key] =
-              '<a href="' . $page_perso_url . '" target="_blank"
-                title="Page personnelle de ' . $displayName . '">
-                ' . $displayName . '</a>';
+              "<a href='$page_perso_url' target='_blank' title='Page personnelle de $displayName'>$name</a>";
           }
         }
       }
