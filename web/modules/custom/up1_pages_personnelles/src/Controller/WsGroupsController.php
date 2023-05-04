@@ -751,6 +751,7 @@ class WsGroupsController extends ControllerBase
     $count_disabled = 0;
     $disabled_users = [];
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
+
     $ids = \Drupal::entityQuery('user')
       ->condition('status', 1)
       ->condition('roles', 'enseignant_doctorant')
@@ -758,24 +759,29 @@ class WsGroupsController extends ControllerBase
     $users = User::loadMultiple($ids);
 
     if (!empty($users_ws_groups) && !empty($users)) {
-    foreach($users as $user) {
-      //If Drupal User doesn't exists in ldap, we disable his page_perso.
-      if (!array_search($user->get('name')->value, array_column($users_ws_groups, 'uid'))) {
-        $query = \Drupal::entityQuery('node')
-          ->condition('type', 'page_personnelle')
-          ->condition('uid', $user->id());
-        $result = $query->execute();
-        if (!empty($result) && count($result) == 1) {
-          $nid = reset($result);
-          $page_perso = Node::load($nid);
-          $page_perso->status = 0;
-          $page_perso->save();
-        
-	  $count_disabled++;
-	  $disabled_users[] = $user->get('name')->value;
-	}
+      foreach($users as $user) {
+        //If Drupal User doesn't exists in ldap, we disable his page_perso.
+        if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid')) === false) {
+          $query = \Drupal::entityQuery('node')
+            ->condition('type', 'page_personnelle')
+            ->condition('uid', $user->id());
+          $result = $query->execute();
+          //The request must retrieve a unique page perso. But due to previous mistakes, we will disable all pages persos. 
+          if (!empty($result)) {
+            foreach ($result as $item) {
+              $nid = reset($result);
+              $page_perso = Node::load($nid);
+              $page_perso->status = 0;
+              $page_perso->save();
+	      
+	      $count_disabled++;
+	      $disabled_users[] = $user->get('name')->value;
+	    }
+          }
+          $user->removeRole('enseignant_doctorant');
+          $user->save();
+        }
       }
-    }
     }
 
     return new JsonResponse([
