@@ -146,13 +146,13 @@ class WsGroupsService implements WsGroupsServiceInterface {
     return $reponse;
   }
 
-  private function getRequest($affiliation = NULL, $filter_labeledURI = TRUE) {
+  private function getRequest($affiliation = NULL) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $ws = $config->get('url_ws');
     $searchUser = $config->get('search_user');
     $filter_affiliation = $config->get("filtre_$affiliation");
     $request = $ws . $searchUser . $filter_affiliation;
-    if ($filter_labeledURI && !empty($config->get('other_filters')) ) {
+    if (!empty($config->get('other_filters')) ) {
       $request .= $config->get('other_filters');
     }
 
