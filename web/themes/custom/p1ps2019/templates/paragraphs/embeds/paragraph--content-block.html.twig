@@ -38,30 +38,31 @@
 #}
 
 {# The template default set classes. #}
-{%
-  set classes = [
-  'paragraph', 'grid-x',
-  'grid-container',
-  'paragraph--type--' ~ paragraph.bundle|clean_class,
-  'paragraph--id--' ~ paragraph.id.value,
-]
-%}
-{% if content.bp_background|render %}
-  {% set layout_background = content.bp_background['#items'].getString() %}
-  {% set layout_background_classes = [
-    'paragraph--color',
-    'full',
-    'paris1-bg-soft-grey' == layout_background ? 'paris1-bg-soft-grey',
-    'paris1-bg-blue' == layout_background ? 'paris1-bg-blue',
-    'bg-white' == layout_background ?  'bg-white',
-    'bg-transparent' == layout_background ?  'bg-transparent',
+{% set items = content.field_content_block %}
+  {%
+    set classes = [
+    'paragraph', 'grid-x',
+    'grid-container',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--id--' ~ paragraph.id.value,
   ]
   %}
-{% endif %}
-{% set paragTitle %}
-  {{ content.field_title|render }}
-{% endset %}
-{# Prints div with classes, and content without Width and Background. #}
+  {% if content.bp_background|render %}
+    {% set layout_background = content.bp_background['#items'].getString() %}
+    {% set layout_background_classes = [
+      'paragraph--color',
+      'full',
+      'paris1-bg-soft-grey' == layout_background ? 'paris1-bg-soft-grey',
+      'paris1-bg-blue' == layout_background ? 'paris1-bg-blue',
+      'bg-white' == layout_background ?  'bg-white',
+      'bg-transparent' == layout_background ?  'bg-transparent',
+    ]
+    %}
+  {% endif %}
+  {% set paragTitle %}
+    {{ content.field_title|render }}
+  {% endset %}
+  {# Prints div with classes, and content without Width and Background. #}
 <div class="paragraph-wrapper-full {{ layout_background_classes|join(' ') }}">
   {% if paragTitle|striptags|trim %}
     <div class="grid-container">
