@@ -134,13 +134,9 @@ class WsGroupsService implements WsGroupsServiceInterface {
     ];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $request . '&' . http_build_query($params));
-
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
     $users = json_decode(curl_exec($ch), TRUE);
-
     curl_close($ch);
-
     $reponse['users'] = $users;
 
     return $reponse;
@@ -162,11 +158,8 @@ class WsGroupsService implements WsGroupsServiceInterface {
   public function getAllUsers() {
     $faculty = $this->getUsers('faculty');
     $student = $this->getUsers('student');
-    $users = array_merge($faculty['users'], $student['users']);
 
-
-
-    return $users;
+    return array_merge($faculty['users'], $student['users']);
   }
 
 }

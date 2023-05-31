@@ -21,6 +21,12 @@ use Drupal\micro_site\Entity\Site;
  */
 class WsGroupsController extends ControllerBase
 {
+  /**
+   * Max number of items in a batch if not defined.
+   *
+   * @var int
+   */
+  const IMPORT_USER_SIZE = 50;
 
   /**
    * @var wsGroupsService
@@ -345,10 +351,16 @@ class WsGroupsController extends ControllerBase
     $queue_user_node = $this->queueFactory->get('up1_page_perso_queue');
     //ECD exists. We just create the node page perso.
     $queue_node = $this->queueFactory->get('up1_page_perso_node_creation_queue');
+    $user_more_than_one_pp = [];
+    $user_with_unpublished_pp = [];
+    $user_without_pp = [];
+    $user_does_not_exists = [];
 
     foreach ($users_ws_groups as $user_ws_groups) {
-      $user = user_load_by_name($user_ws_groups['uid']);
+      $name = $user_ws_groups['uid'];
+      $user = user_load_by_name($name);
       if (!$user) {
+        $user_does_not_exists[] = $name;
         $queue_user_node->createItem($user_ws_groups);
       }
       else {
@@ -356,20 +368,41 @@ class WsGroupsController extends ControllerBase
         $values = \Drupal::entityQuery('node')
           ->condition('type', 'page_personnelle')
           ->condition('uid', $author)
+          ->accessCheck(FALSE)
           ->execute();
         if (empty($values)) {
-          $user_ws_groups['user'] = $user;
+          $user_without_pp[] = $name;
+          $user_ws_groups['user'] = $user->id();
           $queue_node->createItem($user_ws_groups);
+        }
+        else {
+          $nb_pages_persos = count($values);
+          switch ($nb_pages_persos) {
+            case $nb_pages_persos > 1:
+              $user_more_than_one_pp[] = $name;
+              \Drupal::logger('createPagePersoUsers')->error("$name has more than one page perso. ");
+              break;
+            case $nb_pages_persos == 1 :
+              $node = Node::load(reset($values));
+              if (!empty($node)) {
+                if (!empty($node) && $node->status->getString() == 0) {
+                  $user_with_unpublished_pp[] = $name;
+                  $node->setPublished(TRUE);
+                  $node->save();
+                }
+              }
+              break;
+          }
         }
       }
     }
 
     return new JsonResponse([
       'data' => [
-        'user_node' => $queue_user_node->numberOfItems(),
-        'node' => $queue_node->numberOfItems(),
-        'message' => $this->t('@user_node users with page persos will be created. @node users don\'t have pages perso. ',
-          ['@user_node' => $queue_user_node->numberOfItems(),'@node' => $queue_node->numberOfItems()]),
+        'user_more_than_one_pp' => !empty($user_more_than_one_pp) ? implode(', ',$user_more_than_one_pp) : '',
+        'user_with_unpublished_pp' => !empty($user_with_unpublished_pp) ? implode(', ',$user_with_unpublished_pp) : '',
+        'user_without_pp' => !empty($user_without_pp) ? implode(', ',$user_without_pp) : '',
+        'user_does_not_exists' => !empty($user_does_not_exists) ? implode(', ',$user_does_not_exists) : '',
       ],
       'method' => 'GET',
       'status'=> 200
@@ -385,7 +418,7 @@ class WsGroupsController extends ControllerBase
     $queue_factory = \Drupal::service('queue');
     $queue = $queue_factory->get('up1_page_perso_queue');
 
-    for ($i = 0; $i < ceil($queue->numberOfItems() / IMPORT_USER_SIZE); $i++) {
+    for ($i = 0; $i < ceil($queue->numberOfItems() / self::IMPORT_USER_SIZE); $i++) {
       $batch['operations'][] = ['\Drupal\up1_pages_personnelles\Controller\WsGroupsController::batchUsersProcess', []];
     }
     batch_set($batch);
@@ -410,7 +443,7 @@ class WsGroupsController extends ControllerBase
     $queue_worker = $queue_manager->createInstance('up1_page_perso_queue');
 
     // Get the number of items
-    $number_of_queue = ($queue->numberOfItems() < IMPORT_USER_SIZE) ? $queue->numberOfItems() : IMPORT_USER_SIZE;
+    $number_of_queue = ($queue->numberOfItems() < self::IMPORT_USER_SIZE) ? $queue->numberOfItems() : self::IMPORT_USER_SIZE;
 
     // Repeat $number_of_queue times
     for ($i = 0; $i < $number_of_queue; $i++) {
@@ -470,25 +503,39 @@ class WsGroupsController extends ControllerBase
     }
     else {
       $user = user_load_by_name($username);
-
+      \Drupal::logger('editPagePerso')->info("$username trying to edit page perso from comptex.");
       if ($user) {
+        $user->addRole('enseignant_doctorant');
+        $user->save();
         $query = \Drupal::entityQuery('node')
           ->condition('type', 'page_personnelle')
           ->condition('uid', $user->id());
         $result = $query->execute();
-        if (!empty($result) && count($result) == 1) {
-          $user->addRole('enseignant_doctorant');
-          $user->save();
-          $nid = reset($result);
-          $goto = "/node/$nid/edit";
-        } 
-        elseif (empty($result)) {
+        if (!empty($result)) {
+          if (count($result) == 1) {
+            //On remet le role enseignant_doctorant à l'utilisateur. Au cas où celui-ci aurait été bloqué / démis de son rôle.
+            $nid = reset($result);
+            $node = Node::load($nid);
+            //On est sûr que le user a une page perso. On republie sa page avant qu'il y accède en modification.
+            $node->setPublished();
+            $node->save();
+
+            $goto = "/node/$nid/edit";
+          }
+          else {
+            $nodes = Node::loadMultiple($result);
+            $prob = [];
+            foreach ($nodes as $node) {
+              $prob[] = "nid " . $node->id() . ", URL : " . \Drupal::service('path_alias.manager')
+                  ->getAliasByPath('/node/' . $node->id() . ', activée ? ' . $node->isPublished());
+            }
+            \Drupal::logger('page_perso_comptex')->error(implode("\n", $prob));
+            $goto = "/node/38866";
+          }
+        }
+        else {
           $comptex = new ComptexManager();
           $item = $comptex->getUserAttributes($username, ['supannCivilite','displayName']);
-
-          $user->addRole('enseignant_doctorant');
-          $user->status = 1;
-          $user->save();
 
           $node = Node::create([
             'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
@@ -753,33 +800,30 @@ class WsGroupsController extends ControllerBase
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
 
     $ids = \Drupal::entityQuery('user')
-      ->condition('status', 1)
       ->condition('roles', 'enseignant_doctorant')
       ->execute();
     $users = User::loadMultiple($ids);
 
     if (!empty($users_ws_groups) && !empty($users)) {
       foreach($users as $user) {
-        //If Drupal User doesn't exists in ldap, we disable his page_perso.
+        //If Drupal User doesn't exist in ldap, we disable his page_perso.
+        $name = $user->get('name')->value;
         if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid')) === false) {
           $query = \Drupal::entityQuery('node')
             ->condition('type', 'page_personnelle')
             ->condition('uid', $user->id());
           $result = $query->execute();
-          //The request must retrieve a unique page perso. But due to previous mistakes, we will disable all pages persos. 
+          //The request must retrieve a unique page perso. But due to previous mistakes, we will disable all pages persos.
+          \Drupal::logger('syncLdap')->info("$name has page(s) perso(s) to disable.");
           if (!empty($result)) {
-            foreach ($result as $item) {
-              $nid = reset($result);
+            foreach ($result as $key => $nid) {
               $page_perso = Node::load($nid);
-              $page_perso->status = 0;
+              $page_perso->setPublished(FALSE);
               $page_perso->save();
-	      
-	      $count_disabled++;
-	      $disabled_users[] = $user->get('name')->value;
-	    }
+            }
+            $count_disabled++;
+            $disabled_users[] = $user->get('name')->value;
           }
-          $user->removeRole('enseignant_doctorant');
-          $user->save();
         }
       }
     }
@@ -825,7 +869,7 @@ class WsGroupsController extends ControllerBase
           $message = t('The page perso has been successfully updated.');
         }
         else {
-          $message = t('An error has occured while updating the page perso.');
+          $message = t('An error occurred while updating the page perso.');
         }
       }
       else {
@@ -863,12 +907,13 @@ class WsGroupsController extends ControllerBase
           ];
         }
       }
-      return $fields;
     }
+
+    return $fields;
   }
 
   /**
-   * Check if maintenance mode is activate or not.
+   * Check if maintenance mode is activated or not.
    * @return RedirectResponse|FALSE;
    */
   private function maintenancePagePersos() {

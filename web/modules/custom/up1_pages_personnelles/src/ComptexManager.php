@@ -65,7 +65,7 @@ class ComptexManager implements ComptexInterface {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $ws = $config->get('url_ws') . $config->get('search_user_page');
 
-    $searchUser = "$ws?id=$username";
+    $searchUser = "$ws&id=$username";
     $params = [
   'attrs' => implode(',', $attributes),
   'allowNoAffiliationAccounts' => true,
