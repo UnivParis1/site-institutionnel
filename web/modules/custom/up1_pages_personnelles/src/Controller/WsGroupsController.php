@@ -14,7 +14,6 @@ use Drupal\Core\Queue\QueueWorkerManager;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
-use Drupal\micro_site\Entity\Site;
 
 /**
  * Class WsGroupsController.
@@ -347,10 +346,7 @@ class WsGroupsController extends ControllerBase
    */
   public function createPagePersoUsers() {
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
-    //ECD does not exists. We have to create both user & node page perso.
     $queue_user_node = $this->queueFactory->get('up1_page_perso_queue');
-    //ECD exists. We just create the node page perso.
-    $queue_node = $this->queueFactory->get('up1_page_perso_node_creation_queue');
     $user_more_than_one_pp = [];
     $user_with_unpublished_pp = [];
     $user_without_pp = [];
@@ -359,6 +355,7 @@ class WsGroupsController extends ControllerBase
     foreach ($users_ws_groups as $user_ws_groups) {
       $name = $user_ws_groups['uid'];
       $user = user_load_by_name($name);
+      //ECD does not exists. We have to create both user & node page perso.
       if (!$user) {
         $user_does_not_exists[] = $name;
         $queue_user_node->createItem($user_ws_groups);
@@ -371,14 +368,25 @@ class WsGroupsController extends ControllerBase
           ->accessCheck(FALSE)
           ->execute();
         if (empty($values)) {
+          //ECD exists but doesn't have page perso. We just create his pp.
           $user_without_pp[] = $name;
-          $user_ws_groups['user'] = $user->id();
-          $queue_node->createItem($user_ws_groups);
+          $page_perso = Node::create([
+            'title' => $user_ws_groups['supannCivilite'] . ' ' . $user_ws_groups['displayName'],
+            'type' => 'page_personnelle',
+            'langcode' => 'fr',
+            'uid' => $user->id(),
+            'status' => 1,
+            'field_uid_ldap' => $user_ws_groups['uid'],
+            'site_id' => NULL,
+          ]);
+
+          $page_perso->save();
         }
         else {
           $nb_pages_persos = count($values);
           switch ($nb_pages_persos) {
             case $nb_pages_persos > 1:
+              //ECD has more than one page perso. We report it and do nothing more.
               $user_more_than_one_pp[] = $name;
               \Drupal::logger('createPagePersoUsers')->error("$name has more than one page perso. ");
               break;
@@ -386,6 +394,7 @@ class WsGroupsController extends ControllerBase
               $node = Node::load(reset($values));
               if (!empty($node)) {
                 if (!empty($node) && $node->status->getString() == 0) {
+                  //page perso has been unpublished. We publish it.
                   $user_with_unpublished_pp[] = $name;
                   $node->setPublished(TRUE);
                   $node->save();

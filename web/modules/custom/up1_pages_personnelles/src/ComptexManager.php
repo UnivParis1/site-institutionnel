@@ -232,7 +232,7 @@ class ComptexManager implements ComptexInterface {
 
   public function getUserEmail($uid) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page') . "?id=$uid";
+    $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid";
 
     $params = [
 	    'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',

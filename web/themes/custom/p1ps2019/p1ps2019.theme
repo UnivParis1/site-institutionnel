@@ -121,7 +121,6 @@ function p1ps2019_preprocess_page(&$variables)
 
 function p1ps2019_preprocess_node(&$variables) {
   if (isset($site) && !empty($site)) {
-    $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
   }
   $node = $variables['node'];
@@ -151,56 +150,54 @@ function p1ps2019_preprocess_node(&$variables) {
       case "publication":
         $variables['node_type_text'] = t("Publication");
         break;
-      case "page_personnelle":
-        $variables['node_type_text'] = t("Page personnelle");
-        break;
     }
   }
   if ($node->getType() == 'page_personnelle') {
     $uid = $node->getOwnerId();
     $user = User::load($uid);
     $umail = $user->getEmail();
-    if (isset($umail) && !empty ($umail)) {
-      $variables['mail'] = $umail;
-    } else {
+    if (empty ($umail)) {
       $comptex = new ComptexManager();
-      $variables['mail'] = $comptex->getUserEmail($user->getDisplayName());
+      $mail = $comptex->getUserEmail($user->getAccountName());
+      $user->setEmail($mail);
+      $user->save();
     }
+    $variables['mail'] = $user->getEmail();
 
-  }
-  if ($node->getType() == 'page_personnelle' && $node->hasField('field_skills')) {
-    $skills = $node->get('field_skills')->getValue();
-    $expertises = [];
-    if (!empty($skills)) {
-      foreach ($skills as $key => $skill) {
-        $tid = $skill['target_id'];
-        $term = Term::load($tid);
-        $arg = 'skills[' . $tid . ']';
-        $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
-        $expertises[$key] =
-          '<a href="' . $url->toString() . '"
+    if ($node->hasField('field_skills')) {
+      $skills = $node->get('field_skills')->getValue();
+      $expertises = [];
+      if (!empty($skills)) {
+        foreach ($skills as $key => $skill) {
+          $tid = $skill['target_id'];
+          $term = Term::load($tid);
+          $arg = 'skills[' . $tid . ']';
+          $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
+          $expertises[$key] =
+            '<a href="' . $url->toString() . '"
           title="' . t('Link to @term_name page', ['@term_name' => $term->getName()]) . '"
           target="_blank">'
-          . $term->getName() . '</a>';
+            . $term->getName() . '</a>';
+        }
       }
+      $variables['expertises'] = $expertises;
     }
-    $variables['expertises'] = $expertises;
-  }
-  if ($node->getType() == 'page_personnelle' && $node->hasField('field_highlight_publications')) {
-    $publications = $node->get('field_highlight_publications')->getValue();
-    $col_length = 12;
-    switch (count($publications)) {
-      case 1:
-        $col_length = "8";
-        break;
-      case 2:
-        $col_length = "6";
-        break;
-      case 3:
-        $col_length = "4";
-        break;
+    if ($node->hasField('field_highlight_publications')) {
+      $publications = $node->get('field_highlight_publications')->getValue();
+      $col_length = 12;
+      switch (count($publications)) {
+        case 1:
+          $col_length = "8";
+          break;
+        case 2:
+          $col_length = "6";
+          break;
+        case 3:
+          $col_length = "4";
+          break;
+      }
+      $variables['col_length'] = $col_length;
     }
-    $variables['col_length'] = $col_length;
   }
 
   //preprocess_node publications
