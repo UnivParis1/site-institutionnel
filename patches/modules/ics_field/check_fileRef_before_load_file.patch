@@ -1,0 +1,33 @@
+diff --git a/src/Plugin/Field/FieldFormatter/CalendarDownloadDefaultFormatter.php b/src/Plugin/Field/FieldFormatter/CalendarDownloadDefaultFormatter.php
+index efad466..7b0ea75 100644
+--- a/src/Plugin/Field/FieldFormatter/CalendarDownloadDefaultFormatter.php
++++ b/src/Plugin/Field/FieldFormatter/CalendarDownloadDefaultFormatter.php
+@@ -51,16 +51,19 @@ class CalendarDownloadDefaultFormatter extends FormatterBase {
+    */
+   protected function viewValue(FieldItemInterface $item) {
+     $fileRef = $item->get('fileref')->getValue();
+-    $file = File::load($fileRef);//TODO - once formatter classes get container access replace with DI
+-    if ($file) {
+-      $fileUrlObj = Url::fromUri(file_create_url($file->getFileUri()));
+-      $build = [
+-        '#type'  => 'link',
+-        '#title' => $this->t('iCal Download'),
+-        '#url'   => $fileUrlObj,
+-      ];
+-      return $build;
++    if (!empty($fileRef)) {
++      $file = File::load($fileRef);//TODO - once formatter classes get container access replace with DI
++      if ($file) {
++        $fileUrlObj = Url::fromUri(file_create_url($file->getFileUri()));
++        $build = [
++          '#type'  => 'link',
++          '#title' => $this->t('iCal Download'),
++          '#url'   => $fileUrlObj,
++        ];
++        return $build;
++      }
+     }
++
+     return NULL;
+   }
+ 
