@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.event.field_tag
     - node.type.event
   module:
+    - text
     - up1_global
     - user
 _core:
@@ -30,6 +31,14 @@ targetEntityType: node
 bundle: event
 mode: teaser
 content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 150
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_event_date:
     type: daterange_up1
     label: visually_hidden
@@ -51,10 +60,9 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
 hidden:
-  body: true
   content_moderation_control: true
   field_add_to_cal: true
   field_address_map: true

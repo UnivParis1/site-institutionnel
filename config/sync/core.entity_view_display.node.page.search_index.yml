@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_index
     - field.field.node.page.body
+    - field.field.node.page.field_diapo_homepage
     - field.field.node.page.field_disable_canonical_url
     - field.field.node.page.field_display_node_changed
     - field.field.node.page.field_indexrobots
@@ -17,7 +18,7 @@ dependencies:
     - field.field.node.page.field_sub_title
     - node.type.page
   module:
-    - paragraphs
+    - entity_reference_revisions
     - user
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
@@ -36,9 +37,11 @@ content:
     weight: 0
     region: content
   field_paragraphs:
-    type: paragraph_summary
+    type: entity_reference_revisions_entity_view
     label: visually_hidden
-    settings: {  }
+    settings:
+      view_mode: search_index
+      link: ''
     third_party_settings: {  }
     weight: 1
     region: content
@@ -50,6 +53,7 @@ content:
 hidden:
   body: true
   content_moderation_control: true
+  field_diapo_homepage: true
   field_disable_canonical_url: true
   field_display_node_changed: true
   field_indexrobots: true

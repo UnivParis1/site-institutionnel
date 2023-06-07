@@ -1,0 +1,33 @@
+uuid: f45f2ee0-d9fc-4855-885b-cccfe2ce09ec
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_entity_browser
+    - field.field.paragraph.media_image_360.field_media_image_360
+    - paragraphs.paragraphs_type.media_image_360
+  module:
+    - entity_browser
+id: paragraph.media_image_360.default
+targetEntityType: paragraph
+bundle: media_image_360
+mode: default
+content:
+  field_media_image_360:
+    type: entity_browser_entity_reference
+    weight: 0
+    region: content
+    settings:
+      entity_browser: media_entity_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: triptych
+      selection_mode: selection_append
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

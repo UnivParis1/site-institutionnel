@@ -1,0 +1,48 @@
+uuid: ab906b0a-b045-4e2b-835a-7b3ce473cf3f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.slick_content.body
+    - field.field.node.slick_content.field_carrousel
+    - field.field.node.slick_content.field_carrousel_paragraph
+    - field.field.node.slick_content.field_diapo_homepage
+    - field.field.node.slick_content.field_image_diapo
+    - node.type.slick_content
+  module:
+    - text
+    - user
+id: node.slick_content.teaser
+targetEntityType: node
+bundle: slick_content
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  site_id:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_carrousel: true
+  field_carrousel_paragraph: true
+  field_diapo_homepage: true
+  field_image_diapo: true
+  langcode: true
+  search_api_excerpt: true

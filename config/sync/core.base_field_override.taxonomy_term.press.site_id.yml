@@ -1,0 +1,20 @@
+uuid: 566f7e66-ac85-4657-9ea9-df623b9ee446
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.press
+id: taxonomy_term.press.site_id
+field_name: site_id
+entity_type: taxonomy_term
+bundle: press
+label: Site
+description: 'The site on which the term is created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\micro_taxonomy\MicroTaxonomyManager::getCurrentSiteId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

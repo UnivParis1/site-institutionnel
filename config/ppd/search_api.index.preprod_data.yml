@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_paragraphs
-    - field.storage.paragraph.bp_accordion_section_title
     - field.storage.node.field_editorial_blocks
+    - field.storage.paragraph.bp_accordion_section_title
     - field.storage.paragraph.bp_header
     - field.storage.paragraph.bp_link
     - field.storage.paragraph.field_subtitle
@@ -61,6 +61,13 @@ field_settings:
         - 'entity:node/field_viva_date'
         - 'entity:node/field_publishing_date'
         - 'entity:node/field_application_deadline'
+  aggregated_field:
+    label: 'Champ agrégé'
+    property_path: aggregated_field
+    type: string
+    configuration:
+      type: union
+      fields: {  }
   body:
     label: Corps
     datasource_id: 'entity:node'
@@ -199,6 +206,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_event_date
+  event_date_end:
+    label: 'Date de l''évènement » Valeur de la date de fin'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_date:end_value'
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_event_date
   event_end_date:
     label: 'FIn de l''évenement'
     datasource_id: 'entity:node'
@@ -221,7 +236,7 @@ field_settings:
     label: 'Site » Site » Libellé complet'
     datasource_id: 'entity:node'
     property_path: 'site_id:entity:field_complete_name'
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.site.field_complete_name

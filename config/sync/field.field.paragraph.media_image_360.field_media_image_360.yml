@@ -1,0 +1,33 @@
+uuid: 643cc63a-c040-41d9-8c5c-3ef32901c983
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_image_360
+    - media.type.image360
+    - media.type.image_360
+    - media.type.mediatheque
+    - paragraphs.paragraphs_type.media_image_360
+id: paragraph.media_image_360.field_media_image_360
+field_name: field_media_image_360
+entity_type: paragraph
+bundle: media_image_360
+label: 'Media Image 360'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image360: image360
+      image_360: image_360
+      mediatheque: mediatheque
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image360
+field_type: entity_reference

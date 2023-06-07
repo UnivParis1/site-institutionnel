@@ -5,6 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.bootstrap_cards
     - core.entity_view_mode.node.teaser
+    - field.storage.node.field_event_date
+    - field.storage.node.field_news_date
+    - field.storage.node.field_publishing_date
+    - field.storage.node.field_viva_date
     - node.type.event
     - node.type.news
     - node.type.publication
@@ -15,6 +19,7 @@ dependencies:
   module:
     - better_exposed_filters
     - datetime
+    - datetime_range
     - node
     - slick_views
     - taxonomy
@@ -87,9 +92,9 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 3
+          items_per_page: 8
       exposed_form:
-        type: bef
+        type: basic
         options:
           submit_button: Filtrer
           reset_button: false
@@ -98,24 +103,6 @@ display:
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Sélectionnez n''importe quel filtre et cliquez sur Appliquer pour voir les résultats'
-          text_input_required_format: null
-          bef:
-            general:
-              autosubmit: false
-              autosubmit_exclude_textfield: false
-              autosubmit_textfield_delay: 500
-              autosubmit_hide: false
-              input_required: false
-              allow_secondary: false
-              secondary_label: 'Options avancées'
-              secondary_open: false
-              reset_button_always_show: false
-            sort:
-              plugin_id: default
-            filter:
-              field_event_type_target_id:
-                plugin_id: default
       access:
         type: perm
         options:
@@ -217,7 +204,6 @@ display:
           query_tags: {  }
       relationships: {  }
       css_class: 'grid-x grid-margin-x flex-grow'
-      use_ajax: true
       header: {  }
       footer:
         area:
@@ -1471,6 +1457,7 @@ display:
           view_mode: teaser
       defaults:
         title: false
+        css_class: false
         pager: false
         style: false
         row: false
@@ -1479,6 +1466,7 @@ display:
         filters: false
         filter_groups: false
         footer: false
+      css_class: 'grid-x flex-grow'
       display_description: ''
       footer: {  }
       rendering_language: '***LANGUAGE_language_interface***'
@@ -1675,6 +1663,7 @@ display:
           view_mode: teaser
       defaults:
         title: false
+        css_class: false
         pager: false
         style: false
         row: false
@@ -1683,6 +1672,7 @@ display:
         filters: false
         filter_groups: false
         footer: false
+      css_class: 'grid-x flex-grow'
       display_description: ''
       footer:
         area:
@@ -1962,7 +1952,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<a href="/evenements" class="btn btn-primary">Découvrir les évènements</a>'
+            value: '<a href="/evenements" class="btn btn-primary">Voir tous les évènements</a>'
             format: full_html
           tokenize: false
       rendering_language: '***LANGUAGE_language_interface***'
@@ -2276,16 +2266,11 @@ display:
       tags: {  }
   events_slick:
     id: events_slick
-    display_title: 'Bloc évènements slick'
+    display_title: 'Évènements slick'
     display_plugin: block
     position: 3
     display_options:
       title: 'Les évènements Paris 1'
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 8
       exposed_form:
         type: bef
         options:
@@ -2300,7 +2285,7 @@ display:
           text_input_required_format: full_html
           bef:
             general:
-              autosubmit: false
+              autosubmit: true
               autosubmit_exclude_textfield: false
               autosubmit_textfield_delay: 500
               autosubmit_hide: false
@@ -2542,13 +2527,13 @@ display:
           exposed: true
           expose:
             operator_id: field_event_type_target_id_op
-            label: Type
+            label: 'Type d''événement'
             description: ''
             use_operator: false
             operator: field_event_type_target_id_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: type
+            identifier: event
             required: false
             remember: false
             multiple: false
@@ -2600,7 +2585,7 @@ display:
           vanilla: true
           layout: ''
           cache: 0
-          skin: ''
+          skin: classic
           style: grid
           grid: ''
           grid_medium: ''
@@ -2622,7 +2607,7 @@ display:
           thumbnail_position: ''
           override: false
           preserve_keys: false
-          visible_items: 4
+          visible_items: null
       row:
         type: 'entity:node'
         options:
@@ -2631,7 +2616,7 @@ display:
       defaults:
         title: false
         css_class: false
-        pager: false
+        use_ajax: false
         exposed_form: false
         style: false
         row: false
@@ -2641,6 +2626,7 @@ display:
         filter_groups: false
         footer: false
       css_class: 'grid-x grid-margin-x flex-grow'
+      use_ajax: true
       display_description: ''
       footer:
         area:
@@ -2653,7 +2639,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<a href="/evenements" class="btn btn-primary">Découvrir les évènements</a>'
+            value: '<a href="/evenements" class="btn btn-primary">Voir tous les évènements</a>'
             format: full_html
           tokenize: false
       rendering_language: '***LANGUAGE_language_interface***'
@@ -2878,7 +2864,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<a href="/actualites" class="btn btn-primary">Découvrir les actualités</a>'
+            value: '<a href="/actualites" class="btn btn-primary">Voir toutes les actualités</a>'
             format: full_html
           tokenize: false
       rendering_language: '***LANGUAGE_language_interface***'
@@ -2893,7 +2879,7 @@ display:
       tags: {  }
   news_slick:
     id: news_slick
-    display_title: 'Bloc actualités slick'
+    display_title: 'Actualités slick'
     display_plugin: block
     position: 1
     display_options:
@@ -2905,7 +2891,7 @@ display:
       exposed_form:
         type: bef
         options:
-          submit_button: OK
+          submit_button: Filtrer
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -3146,7 +3132,7 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: true
+          reduce_duplicates: false
           vid: news_topics
           type: select
           hierarchy: false
@@ -3170,7 +3156,7 @@ display:
           title: ''
           vanilla: true
           layout: ''
-          cache: 21600
+          cache: 0
           skin: classic
           style: grid
           grid: ''
@@ -3193,13 +3179,14 @@ display:
           thumbnail_position: ''
           override: false
           preserve_keys: false
-          visible_items: 4
+          visible_items: null
       row:
         type: 'entity:node'
         options:
           relationship: none
           view_mode: teaser
       defaults:
+        use_ajax: false
         pager: false
         exposed_form: false
         style: false
@@ -3209,6 +3196,7 @@ display:
         filters: false
         filter_groups: false
         footer: false
+      use_ajax: true
       display_description: ''
       footer:
         area:
@@ -3221,7 +3209,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<a href="/actualites" class="btn btn-primary">Découvrir les actualités</a>'
+            value: '<a href="/actualites" class="btn btn-primary">Voir toutes les actualités</a>'
             format: full_html
           tokenize: false
       rendering_language: '***LANGUAGE_language_interface***'

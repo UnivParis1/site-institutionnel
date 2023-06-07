@@ -1,4 +1,4 @@
-uuid: 06d40991-5225-4c9e-8cc5-f6b4ab48bef3
+uuid: 1530dbee-02a3-4f89-923c-8bd5f01f5a1a
 langcode: fr
 status: true
 dependencies:
@@ -9,23 +9,11 @@ dependencies:
     - views
     - search_api_autocomplete
 id: resultats_de_recherche
-label: 'Résultats de recherche'
+label: Recherche
 index_id: preprod_data
 suggester_settings:
   live_results:
     fields:
-      - eb_bp_text
-      - eb_field_title
-      - eb_header
-      - eb_link
-      - eb_simple_text
-      - eb_subtitle
-      - eb_text
-      - field_simple_text
-      - p_bp_text
-      - p_text
-      - sub_title
-      - subtitle
       - title
     highlight:
       enabled: false
@@ -43,30 +31,13 @@ suggester_settings:
         viva: ''
   server:
     fields:
-      - eb_bp_text
-      - eb_field_title
-      - eb_header
-      - eb_simple_text
-      - eb_subtitle
-      - eb_tab_title
-      - eb_text
-      - field_lead
-      - field_simple_text
-      - p_bp_text
-      - p_field_title
-      - p_header
-      - p_subtitle
-      - p_tab_title
-      - p_text
-      - sub_title
-      - subtitle
       - title
 suggester_weights:
   live_results: 0
   server: 0
 suggester_limits:
-  live_results: 15
-  server: 20
+  live_results: 10
+  server: 15
 search_settings:
   'views:resultats_de_recherche':
     displays:
@@ -74,8 +45,8 @@ search_settings:
       selected: {  }
 options:
   limit: 10
-  min_length: 4
-  show_count: true
+  min_length: 1
+  show_count: false
   delay: null
   submit_button_selector: ':submit'
   autosubmit: true
