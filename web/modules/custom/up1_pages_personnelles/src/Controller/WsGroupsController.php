@@ -511,13 +511,15 @@ class WsGroupsController extends ControllerBase
       return $response->send();
     }
     else {
+      $comptex = new ComptexManager();
       $user = user_load_by_name($username);
       \Drupal::logger('editPagePerso')->info("$username trying to edit page perso from comptex.");
-      if ($user) {
+      if ($user && $comptex->userHasPagePerso($username)) {
         $user->addRole('enseignant_doctorant');
         $user->save();
         $query = \Drupal::entityQuery('node')
           ->condition('type', 'page_personnelle')
+          ->accessCheck(FALSE)
           ->condition('uid', $user->id());
         $result = $query->execute();
         if (!empty($result)) {
@@ -526,7 +528,7 @@ class WsGroupsController extends ControllerBase
             $nid = reset($result);
             $node = Node::load($nid);
             //On est sûr que le user a une page perso. On republie sa page avant qu'il y accède en modification.
-            $node->setPublished();
+            $node->setPublished(TRUE);
             $node->save();
 
             $goto = "/node/$nid/edit";
@@ -578,7 +580,7 @@ class WsGroupsController extends ControllerBase
         }
         try {
           // function register() : This has to be changed if cas module evolves.
-          $user = $cas_user_manager->register($item['uid'], $item['uid'], $user_properties);
+          $user = $cas_user_manager->register($item['uid']);
           $node = Node::create([
             'title' => $item['supannCivilite'] . ' ' . $item['displayName'],
             'type' => 'page_personnelle',
@@ -596,7 +598,7 @@ class WsGroupsController extends ControllerBase
             '%name' => $item['uid'],
             '%e' => $e->getMessage()
           ]);
-          return;
+          $goto = "https://majtrantor.univ-paris1.fr/miseajourpageperso.html";
         }
       }
 
