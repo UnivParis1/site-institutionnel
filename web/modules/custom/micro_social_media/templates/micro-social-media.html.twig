@@ -1,34 +1,36 @@
-<div class="mini-site-social-media">
-  <ul>
-    {% for lien in liens %}
-      {% if "facebook" in lien.uri %}
-        {% set class = "fab fa-facebook-square" %}
-      {% elseif "twitter" in lien.uri %}
-        {% set class = "fab fa-twitter" %}
-      {% elseif "linkedin" in lien.uri %}
-        {% set class = "fab fa-linkedin-square" %}
-      {% elseif "youtube" in lien.uri %}
-        {% set class = "fab fa-youtube" %}
-      {% elseif "youtu.be" in lien.uri %}
-        {% set class = "fab fa-youtube-play" %}
-      {% elseif "instagram" in lien.uri %}
-        {% set class = "fab fa-instagram" %}
-      {% elseif "viadeo" in lien.uri %}
-        {% set class = "fab fa-viadeo" %}
-      {% elseif "hypotheses" in lien.uri %}
-        {% set class = "icon-rs up1-hypotheses" %}
-      {% elseif "hal-paris1" in lien.uri %}
-        {% set class = "icon-rs up1-hal" %}
-      {% elseif "hal.science" in lien.uri %}
-        {% set class = "icon-rs up1-hal" %}
-      {% elseif "archives-ouvertes" in lien.uri %}
-        {% set class = "icon-rs up1-hal" %}
-      {% endif %}
-      <li>
-        <span>
-          <a href="{{ lien.uri }}" class="{{ class }}" title="{{ lien.title }}" target="_blank"></a>
-        </span>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+{% if liens|length > 0 %}
+  <div class="mini-site-social-media">
+    <ul>
+      {% for lien in liens %}
+        {% if "facebook" in lien.uri %}
+          {% set class = "fab fa-facebook-square" %}
+        {% elseif "twitter" in lien.uri %}
+          {% set class = "fab fa-twitter" %}
+        {% elseif "linkedin" in lien.uri %}
+          {% set class = "fab fa-linkedin-square" %}
+        {% elseif "youtube" in lien.uri %}
+          {% set class = "fab fa-youtube" %}
+        {% elseif "youtu.be" in lien.uri %}
+          {% set class = "fab fa-youtube-play" %}
+        {% elseif "instagram" in lien.uri %}
+          {% set class = "fab fa-instagram" %}
+        {% elseif "viadeo" in lien.uri %}
+          {% set class = "fab fa-viadeo" %}
+        {% elseif "hypotheses" in lien.uri %}
+          {% set class = "icon-rs up1-hypotheses" %}
+        {% elseif "hal-paris1" in lien.uri %}
+          {% set class = "icon-rs up1-hal" %}
+        {% elseif "hal.science" in lien.uri %}
+          {% set class = "icon-rs up1-hal" %}
+        {% elseif "archives-ouvertes" in lien.uri %}
+          {% set class = "icon-rs up1-hal" %}
+        {% endif %}
+        <li>
+          <span>
+            <a href="{{ lien.uri }}" class="{{ class }}" title="{{ lien.title }}" target="_blank"></a>
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
