@@ -396,7 +396,7 @@ class WsGroupsController extends ControllerBase
                 if (!empty($node) && $node->status->getString() == 0) {
                   //page perso has been unpublished. We publish it.
                   $user_with_unpublished_pp[] = $name;
-                  $node->setPublished(TRUE);
+                  $node->setPublished();
                   $node->save();
                 }
               }
@@ -528,7 +528,7 @@ class WsGroupsController extends ControllerBase
             $nid = reset($result);
             $node = Node::load($nid);
             //On est sûr que le user a une page perso. On republie sa page avant qu'il y accède en modification.
-            $node->setPublished(TRUE);
+            $node->setPublished();
             $node->save();
 
             $goto = "/node/$nid/edit";
@@ -825,11 +825,10 @@ class WsGroupsController extends ControllerBase
             ->condition('uid', $user->id());
           $result = $query->execute();
           //The request must retrieve a unique page perso. But due to previous mistakes, we will disable all pages persos.
-          \Drupal::logger('syncLdap')->info("$name has page(s) perso(s) to disable.");
           if (!empty($result)) {
             foreach ($result as $key => $nid) {
               $page_perso = Node::load($nid);
-              $page_perso->setPublished(FALSE);
+              $page_perso->setUnpublished();
               $page_perso->save();
             }
             $count_disabled++;
