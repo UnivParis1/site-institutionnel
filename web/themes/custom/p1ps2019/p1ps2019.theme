@@ -21,14 +21,21 @@ function p1ps2019_preprocess_html(&$variables)
 
   $site = $negotiator->getActiveSite();
   if (isset($site) && !empty($site)) {
-    if (in_array($system_path, ['/actualites', '/evenements', '/publications'])) {
+    $specific_pages = [
+      '/actualites',
+      '/evenements',
+      '/publications',
+      '/evenements/archives',
+      '/recrutement'
+    ];
+    if (in_array($system_path, $specific_pages)) {
       $page_mini_site = TRUE;
     }
 
     $site_id = $site->id();
     if (preg_match('/node\/36841/', $system_path) && $site_id == 115) {
       $variables['web_component'] = TRUE;
-     }
+    }
   }
   $variables['page_mini_site'] = $page_mini_site;
 
@@ -82,7 +89,14 @@ function p1ps2019_preprocess_page(&$variables)
   $site = $negotiator->getActiveSite();
 
   if (isset($site) && !empty($site)) {
-    if (in_array($system_path, ['/actualites', '/evenements', '/publications'])) {
+    $specific_pages = [
+      '/actualites',
+      '/evenements',
+      '/publications',
+      '/evenements/archives',
+      '/recrutement'
+    ];
+    if (in_array($system_path, $specific_pages)) {
       $page_mini_site = TRUE;
     }
     $site_id = $site->id();
