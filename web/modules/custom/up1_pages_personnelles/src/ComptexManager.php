@@ -26,25 +26,14 @@ class ComptexManager implements ComptexInterface {
    */
   public function getUserInformation($username) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page');
-
-    $searchUser = "$ws&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
     $params = [
-	'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
-	'allowNoAffiliationAccounts' => true,
-	'showExtendedInfo'=> 2
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
+      'allowNoAffiliationAccounts' => true,
+      'showExtendedInfo'=> 2
     ];
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-
-    $userInformation = json_decode(curl_exec($ch), TRUE);
-    $userInformation = reset($userInformation);
-
-    curl_close($ch);
-
+    $userInformation = $this->curl_request($searchUser, $params);
     $information = $this->formatComptexData($userInformation);
 
     if ($information && !empty($information)) {
@@ -63,51 +52,32 @@ class ComptexManager implements ComptexInterface {
    */
   public function getUserAttributes($username, $attributes = []) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page');
 
-    $searchUser = "$ws&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
     $params = [
-  'attrs' => implode(',', $attributes),
-  'allowNoAffiliationAccounts' => true,
-  'showExtendedInfo'=> 2
+      'attrs' => implode(',', $attributes),
+      'allowNoAffiliationAccounts' => true,
+      'showExtendedInfo'=> 2
     ];
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-
-    $userInformation = json_decode(curl_exec($ch), TRUE);
-    $userInformation = reset($userInformation);
-    curl_close($ch);
-
-    return $userInformation;
+    return $this->curl_request($searchUser, $params);
   }
 
   public function userHasPagePerso($username) {
     $has_page_perso = FALSE;
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page');
-
-    $searchUser = "$ws&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
 
     $params = [
       'attrs' => "labeledURI"
     ];
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-
-    $user = json_decode(curl_exec($ch), TRUE);
-    $user = reset($user);
-
-    curl_close($ch);
-    if ($user && isset($user['labeledURI'])) {
-      $has_page_perso = TRUE;
+    $result = $this->curl_request($searchUser, $params);
+    if ($result) {
+      if (isset($result['labeledURI'])) {
+        $has_page_perso = TRUE;
+      }
     }
-
     return $has_page_perso;
   }
 
@@ -235,17 +205,12 @@ class ComptexManager implements ComptexInterface {
     $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid";
 
     $params = [
-	    'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',
-	    'allowNoAffiliationAccounts' => true,
-	    'showExtendedInfo' => 2
+      'attrs' => 'mail,supannMailPerso,eduPersonPrincipalName',
+      'allowNoAffiliationAccounts' => true,
+      'showExtendedInfo' => 2
     ];
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
-    $information = json_decode(curl_exec($ch), TRUE);
-    curl_close($ch);
+    $information = $this->curl_request($ws, $params);
     if ($information) {
       $information = reset($information);
       $this->formatEmails($information);
@@ -260,16 +225,11 @@ class ComptexManager implements ComptexInterface {
     if (isset($uid) && isset($attr) && is_string($attr)) {
       $config = \Drupal::config('up1_pages_personnelles.settings');
       $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid";
-      $params = ['attrs' => 'displayName'];
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $ws . '&' . http_build_query($params));
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+      $params = ['attrs' => $attr];
 
-      $result = json_decode(curl_exec($ch), TRUE);
-      curl_close($ch);
+      $result = $this->curl_request($ws, $params);
       if (!empty ($result)) {
-        return $result[0][$attr];
+        return $result[$attr];
       }
       else return FALSE;
     }
@@ -284,5 +244,19 @@ class ComptexManager implements ComptexInterface {
       (isset($information['eduPersonPrincipalName']) && !empty($information['eduPersonPrincipalName']))) {
       $information['mail'] = $information['eduPersonPrincipalName'];
     }
+  }
+
+  private function curl_request($searchUser, $params) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $searchUser . '&' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+    $userInformation = json_decode(curl_exec($ch), TRUE);
+    $userInformation = reset($userInformation);
+
+    curl_close($ch);
+
+    return $userInformation;
   }
 }
