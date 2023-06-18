@@ -1,0 +1,110 @@
+
+.home-agenda {
+  .agenda-list-block{
+    margin: 6rem 3rem 0 3rem;
+  }
+  .fc-unthemed {
+
+    /* remove border */
+    .fc-content, .fc-divider,.fc-list-heading td, .fc-list-view, .fc-popover, .fc-row,tbody, td,th, thead {
+      border:none;
+    }
+    .fc td, .fc th{
+      border:none!important;
+    }
+
+    /* hide content */
+    .fc-content-skeleton table tbody tr:not(:first-child) {
+      display:none;
+    }
+    .fc-more-cell{
+      display: none;
+    }
+    .fc-list-item-time{
+      display: none;
+    }
+    .fc-dayGridMonth-button{
+      display: none;
+    }
+    .fc-listDay-button{
+      display: none;
+    }
+    .fc-event-container .fc-event{
+      display:none;
+    }
+    .fc-list-item-marker{
+      display:none;
+    }
+
+    .fc-listDay-view{
+      .fc-list-heading{
+        display: none;
+      }
+    }
+
+    /* force all cells white */
+    .fc-content-skeleton thead{
+      background-color:$white;
+    }
+    .fc-day {
+      background-color:$white!important;
+    }
+    .fc-list-item {
+      background:$white;;
+    }
+    .fc-dayGridMonth-view .fc-head{
+      background:$white;;
+    }
+
+    /* except current cell is main color */
+    td.fc-current {
+      background-color:$background-main-color!important;
+      a {
+       color: $white;
+      }
+     }
+
+    /* Day text position */ 
+    .fc-dayGrid-view .fc-day-top{
+      text-align: center;
+      a.fc-day-number{
+        float:none!important;
+      }
+    }
+    .fc-event-container:after{
+      content:"•";
+      color:$gold-p1ps;
+      display:flex;
+      justify-content:center;
+    }
+    
+
+    /* event list item style */
+    .event-type{
+      text-decoration: none;
+      color: $white;
+      background-color: $gold-p1ps;
+      border-color: $gold-p1ps;
+      font-family: $font-main;
+      text-align: center;
+      font-size: rem-calc(13px);
+      line-height: 1.2;
+      @include setFont($fontType-medium);
+      padding: rem-calc(4px 12px);
+      display: inline-block;
+      border-radius: 50rem;
+    }
+
+  
+  }
+
+
+  [calendar-display='agenda_list']{
+    .fc-header-toolbar {
+      display: none;
+    }
+  }
+
+  
+  
+}
