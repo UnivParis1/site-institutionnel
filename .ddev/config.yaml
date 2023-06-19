@@ -16,7 +16,10 @@ mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "1"
 web_environment: []
-
+nodejs_version: "14"
+# change from the default system Node.js version to another supported version, like 12, 14, 17, 18.
+# Note that you can use 'ddev nvm' or nvm inside the web container to provide nearly any
+# Node.js version, including v6, etc.
 # Key features of ddev's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
@@ -76,10 +79,7 @@ web_environment: []
 # documentation.
 # To reinstall Composer after the image was built, run "ddev debug refresh".
 
-# nodejs_version: "16"
-# change from the default system Node.js version to another supported version, like 12, 14, 17, 18.
-# Note that you can use 'ddev nvm' or nvm inside the web container to provide nearly any
-# Node.js version, including v6, etc.
+
 
 # additional_hostnames:
 #  - somename
