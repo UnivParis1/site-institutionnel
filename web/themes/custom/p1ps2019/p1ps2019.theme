@@ -185,13 +185,14 @@ function p1ps2019_preprocess_node(&$variables) {
         foreach ($skills as $key => $skill) {
           $tid = $skill['target_id'];
           $term = Term::load($tid);
-          $arg = 'skills[' . $tid . ']';
-          $url = Url::fromRoute('view.skills.page', [$arg => $tid]);
-          $expertises[$key] =
-            '<a href="' . $url->toString() . '"
-          title="' . t('Link to @term_name page', ['@term_name' => $term->getName()]) . '"
+          if ($term) {
+            $url = Url::fromRoute('view.skills.page', ['skills[' . $tid . ']' => $tid]);
+            $expertises[$key] =
+              '<a href="' . $url->toString() . '"
+          title="' . t('Link to @term_name page', ['@term_name' => $term->get('name')->value]) . '"
           target="_blank">'
-            . $term->getName() . '</a>';
+              . $term->get('name')->value . '</a>';
+          }
         }
       }
       $variables['expertises'] = $expertises;
