@@ -1,68 +1,76 @@
-uuid: 438ab2a9-87c7-4077-90ec-bd55a8808805
+uuid: 8b96dffd-ed00-4690-857c-045cb9dc18f4
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 7710
 template: false
 archive: false
-id: 0_dhc_2022_cocktail
-title: '0 - DHC 2022 cocktail'
-description: ''
-category: ''
+id: 10_inscription_entree_pmf
+title: '10 - Inscription entrée PMF'
+description: "<p>Arborescence : Menu Direction &gt; Services &gt; Dès le 2 mai 2023 : s'inscrire pour accéder à la BU PMF<br />\r\n<br />\r\nLien vers ce formulaire depuis la page d'accueil du mini-site du SCD et la page de présentation de la BU Pierre-Mendès-France.</p>"
+category: 'Inscription pour entrer à la bibliothèque'
 elements: |-
-  markup_01:
-    '#type': webform_markup
-    '#markup': '<h2>Formulaire d''inscription&nbsp;</h2>'
-  nom:
-    '#type': textfield
-    '#title': Nom
+  coordonnees:
+    '#type': webform_section
+    '#title': Coordonnées
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
-    '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
-    '#type': email
-    '#title': 'Courriel '
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut:
-    '#type': radios
-    '#title': Statut
-    '#options':
-      Étudiant: Étudiant
-      Personnel: Personnel
-      'Enseignant et enseignant chercheur': 'Enseignant et enseignant chercheur'
-      'Public externe à l''université': 'Public externe à l''université'
-    '#required': true
-    '#options__properties': ''
-  je_souhaite_participer_au_cocktail_a_l_issue_de_la_ceremonie:
-    '#type': radios
-    '#title': 'Je souhaite participer au cocktail à l''issue de la cérémonie'
-    '#options':
-      Oui: Oui
-      Non: Non
-    '#required': true
-    '#options__properties': ''
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
-    '#type': checkbox
-    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
-    '#required': true
-  captcha:
-    '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-  markup:
-    '#type': webform_markup
+    nom:
+      '#type': webform_name
+      '#title': 'Nom, Prénom'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#title__access': false
+      '#first__title': Nom
+      '#first__required': true
+      '#middle__access': false
+      '#last__title': Prénom
+      '#last__required': true
+      '#suffix__access': false
+      '#degree__access': false
+    numero_d_etudiant_ou_de_lecteur:
+      '#type': textfield
+      '#title': 'Numéro d''étudiant ou de lecteur'
+      '#description': '<p>Ce numéro est inscrit sur votre carte d''étudiant ou de lecteur</p>'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    telephone:
+      '#type': tel
+      '#title': Téléphone
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    courriel:
+      '#type': email
+      '#title': Courriel
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  inscription:
+    '#type': webform_section
+    '#title': Inscription
+    choisir_une_bibliotheque:
+      '#type': select
+      '#title': 'Choisir une bibliothèque'
+      '#options':
+        Pierre-Mendès-France: Pierre-Mendès-France
+      '#required': true
+    choisir_un_creneau:
+      '#type': select
+      '#title': 'Choisir un créneau'
+      '#description': |-
+        <p>Le créneau choisi est valable pour le lendemain de l'inscription.<br />
+        Pour vous inscrire aux deux créneaux, veuillez réaliser une seconde inscription.</p>
+      '#options':
+        'Matin (9h-13h)': 'Matin (9h-13h)'
+        'Après-midi (13h-20h)': 'Après-midi (13h-20h)'
+      '#required': true
+    captcha:
+      '#type': captcha
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
 settings:
@@ -75,10 +83,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -147,9 +155,11 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -168,7 +178,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;<br />\r\nVous allez recevoir un courriel de confirmation.</p>\r\n\r\n<p>Merci de votre participation !</p>"
+  confirmation_message: "<p>Votre inscription pour accéder à la bibliothèque PMF <u><strong>demain</strong></u> a été prise en compte. Une confirmation de votre demande va vous être adressée par courriel.</p>\r\n\r\n<p>Nous attirons cependant votre attention sur le fait que votre réservation ne pourra être enregistrée que si elle a été faite dans les délais requis (<u>au plus tard avant minuit pour le lendemain</u>).</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -225,8 +235,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -235,24 +244,25 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
     users:
-      - 6746
-    permissions: {  }
+      - 6372
+      - 260
+    permissions:
+      - 'administer blocks'
+      - 'administer webform element access'
 handlers:
-  email_aux_demandeurs:
+  mail_de_confirmation_d_envoi_du_formulaire:
     id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
+    handler_id: mail_de_confirmation_d_envoi_du_formulaire
+    label: 'Mail de confirmation d''envoi du formulaire'
     notes: ''
     status: true
     conditions: {  }
@@ -266,52 +276,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: evenements@univ-paris1.fr
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: 'Cérémonie de remise des insignes de Docteur Honoris Causa '
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la Cérémonie de remise des insignes de Docteur Honoris Causa '
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>&nbsp;</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: evenements@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Cérémonie de remise des insignes de Docteur Honoris Causa  - Nouvelle inscription'
-      body: _default
+      subject: 'Votre inscription à la BU PMF demain'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Vous avez envoyé un formulaire de demande d'inscription le [webform_submission:created]<br />\r\npour accéder à la BU PMF le lendemain de cette date.</p>\r\n\r\n<p>Si votre demande a été faite avant minuit, vous pourrez accéder aux locaux demain en donnant votre nom à l'entrée du Centre PMF.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'équipe de la bibliothèque Pierre-Mendès-France</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

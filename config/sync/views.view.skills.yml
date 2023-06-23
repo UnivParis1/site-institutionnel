@@ -273,7 +273,7 @@ display:
           hide_alter_empty: true
           text: ''
           output_url_as_text: true
-          absolute: false
+          absolute: true
         title:
           id: title
           table: node_field_data
@@ -476,8 +476,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<a href="/domaines-expertise?skills={{ field_skills }} ({{ field_skills__target_id }})" title="{{ field_skills }}">{{ field_skills }}</a> '
             make_link: false
             path: ''
             absolute: false
@@ -553,8 +553,8 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Filtrer
-          reset_button: false
+          submit_button: OK
+          reset_button: true
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
           expose_sort_order: false
@@ -565,7 +565,7 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
+        type: none
         options: {  }
       empty: {  }
       sorts:

@@ -5,12 +5,12 @@ dependencies: {  }
 weight: 0
 open: '2022-08-29T10:00:00'
 close: null
-uid: 51
+uid: 7710
 template: false
 archive: false
 id: demande_de_consultation_de_these
 title: '10 - Demande de consultation de thèse - PMF'
-description: "Arborescence : Menu direction &gt; Biblioth&egrave;que Pierre Mend&egrave;s France<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Biblioth&egrave;que Pierre Mend&egrave;s France</em> &gt; rubrique <em>Conditions d&#39;acc&egrave;s et de pr&ecirc;t</em>"
+description: "<p>Arborescence : Menu direction &gt; Bibliothèque Pierre Mendès France<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Bibliothèque Pierre Mendès France</em> &gt; rubrique <em>Conditions d'accès et de prêt</em></p>"
 category: Contact
 elements: |-
   coordonnees:
@@ -170,6 +170,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -254,7 +256,9 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 6372
+      - 260
     permissions: {  }
   test:
     roles: {  }
@@ -262,7 +266,9 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 6372
+      - 260
     permissions: {  }
 handlers:
   email:
@@ -290,7 +296,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: 'Votre demande de consultation de thèse'
-      body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Veuillez conserver ce mail. Il vous sera n&eacute;cessaire pour acc&eacute;der au centre Pierre Mend&egrave;s France.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>&nbsp;</p>"
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Votre demande a bien été prise en compte.</p>\r\n\r\n<p>Veuillez conserver ce mail. Il vous sera nécessaire pour accéder au centre Pierre Mendès France.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>&nbsp;</p>"
       excluded_elements:
         terms_of_service: terms_of_service
         captcha: captcha

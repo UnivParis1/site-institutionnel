@@ -1,43 +1,50 @@
-uuid: 50f8e659-f48f-435b-8e74-ae2f7a5c23ec
+uuid: 540ca72f-6d3b-49f0-a128-39bdf5741ad3
 langcode: fr
 status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 6746
+uid: 5486
 template: false
 archive: false
-id: 0_mobility_challenges_for_aging_
-title: '0 - Mobility challenges for aging women'
+id: 0_eloquence_finale_2023_
+title: '0 - Eloquence finale 2023 '
 description: ''
 category: ''
 elements: |-
-  nom:
+  processed_text:
+    '#type': processed_text
+    '#text': |
+      <h3><b data-stringify-type="bold">Formulaire de demande d’inscription pour assister à la finale du Concours international d’éloquence</b></h3>
+    '#format': full_html
+  nom_:
     '#type': textfield
-    '#title': Nom
+    '#title': 'Nom :'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
+    '#required_error': 'Nom est requis'
+  prenom_:
     '#type': textfield
-    '#title': Prénom
+    '#title': 'Prénom :'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  adresse_mail:
-    '#type': textfield
-    '#title': 'Adresse mail'
+    '#required_error': 'Prénom est requis'
+  courriel_:
+    '#type': email
+    '#title': 'Courriel :'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  ecole_doctorale:
-    '#type': textfield
-    '#title': 'Licence (L1, L2 ou L3), Master (M1 ou M2)'
+    '#required_error': 'Courriel est requis'
+  captcha:
+    '#type': captcha
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
+    '#type': checkbox
+    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
+    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  ufr_de_rattachement_ex_droit_economie_:
-    '#type': textfield
-    '#title': 'UFR de rattachement (ex : droit, économie...)'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': ENVOYER
 css: ''
 javascript: ''
 settings:
@@ -53,7 +60,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Le formulaire d''inscription est fermé.</p>'
+  form_close_message: '<p>Le formulaire d''inscription est fermé. Plus de places disponibles.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -125,6 +132,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -142,8 +151,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: ''
+  confirmation_title: 'Confirmation d''inscription'
+  confirmation_message: "<p>Votre demande d'inscription a bien été enregistrée.<br />\r\nVous allez recevoir un mail de confirmation.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -184,9 +193,7 @@ access:
     users: {  }
     permissions: {  }
   update_any:
-    roles:
-      - webmestre_general
-      - admin_dir_com
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_any:
@@ -210,31 +217,24 @@ access:
     users: {  }
     permissions: {  }
   administer:
-    roles:
-      - webmestre_general
-      - admin_dir_com
+    roles: {  }
     users:
-      - 5486
+      - 6746
     permissions: {  }
   test:
-    roles:
-      - webmestre_general
-      - admin_dir_com
-    users:
-      - 5486
+    roles: {  }
+    users: {  }
     permissions: {  }
   configuration:
-    roles:
-      - webmestre_general
-      - admin_dir_com
+    roles: {  }
     users:
-      - 5486
+      - 6746
     permissions: {  }
 handlers:
-  semaine_internationale_de_l_acces_ouvert_2022:
+  email:
     id: email
-    handler_id: semaine_internationale_de_l_acces_ouvert_2022
-    label: 'Email aux demandeurs'
+    handler_id: email
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -242,21 +242,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:adresse_mail:raw]'
+      to_mail: evenements@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: developpement.durable@univ-paris1.fr
+      from_mail: '[webform_submission:values:courriel_:raw]'
       from_options: {  }
-      from_name: 'Mobility challenges for aging women'
+      from_name: '[webform_submission:values:nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la conférence Mobility challenges for aging women'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>"
+      subject: 'Finale du Concours international d''éloquence - nouvelle inscription '
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -268,10 +268,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_aux_organisateurs:
+  email_1:
     id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
+    handler_id: email_1
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -279,21 +279,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: developpement.durable@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel_:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:adresse_mail:raw]'
+      from_mail: evenements@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Mobility challenges for aging women - Nouvelle inscription'
-      body: _default
+      subject: '[Réponse automatique ] Finale du Concours international d''éloquence - Demande d''inscription'
+      body: "<p>Madame, monsieur,</p>\r\n\r\n<p>Nous avons bien pris en compte votre demande d’inscription pour assister sous la coupole du Panthéon, à la finale du Concours international d’éloquence. La jauge étant limitée, les demandes d’inscriptions seront prises en compte dans l’ordre d’arrivée. A la clôture des inscriptions, vous recevrez un courriel vous informant de la situation de votre demande.</p>\r\n\r\n<p>En vous remerciant pour votre compréhension,</p>\r\n\r\n<p>Bien cordialement,</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

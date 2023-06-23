@@ -1,6 +1,6 @@
 uuid: 11fb7084-398f-4950-b82c-53e33207fd44
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
@@ -17,11 +17,12 @@ elements: |-
     '#type': webform_contact
     '#title': 'Vos coordonnées'
     '#title_display': before
+    '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#name__title': 'Prénom et nom de famille'
     '#name__placeholder': 'Nadia Giraud'
     '#name__help': 'Indiquez ici votre prénom suivi de votre nom.'
-    '#name__title_display': after
+    '#name__title_display': inline
     '#name__required': true
     '#company__access': false
     '#email__title': 'Adresse courriel'
@@ -144,10 +145,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: inline
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: '<h2 class="text-align-center">Votre inscription est bien enregistrée.</h2>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -223,5 +224,42 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  copie_d_inscription_a_la_journee_d_etude:
+    id: email
+    handler_id: copie_d_inscription_a_la_journee_d_etude
+    label: Elizabeth.Levy@univ-paris1.fr
+    notes: 'Copie pour l''une des organisatrice afin de «monitorer» les inscriptions.'
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: 'Elizabeth.Levy@univ-paris1.fr,Emmanuel.Charrier@univ-paris1.fr,Nolwenn.Corriou@univ-paris1.fr'
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

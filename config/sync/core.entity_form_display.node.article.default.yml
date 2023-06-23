@@ -3,7 +3,6 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_disable_canonical_url
@@ -12,11 +11,12 @@ dependencies:
     - field.field.node.article.field_sites
     - field.field.node.article.field_sites_all
     - field.field.node.article.field_tags
+    - image.style.news_thumbnail
     - node.type.article
   module:
     - comment
     - content_moderation
-    - entity_browser
+    - focal_point
     - path
     - scheduler
     - scheduler_content_moderation_integration
@@ -58,18 +58,14 @@ content:
       display_label: true
     third_party_settings: {  }
   field_image:
-    type: entity_browser_file
+    type: image_focal_point
     weight: 1
     region: content
     settings:
-      entity_browser: image_browser
-      field_widget_edit: true
-      field_widget_remove: true
-      field_widget_replace: false
-      open: false
-      selection_mode: selection_append
-      view_mode: default
+      progress_indicator: throbber
       preview_image_style: news_thumbnail
+      preview_link: true
+      offsets: '50,50'
     third_party_settings: {  }
   field_publish_master:
     type: boolean_checkbox

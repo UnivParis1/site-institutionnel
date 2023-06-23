@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.publication.body
     - field.field.node.publication.field_author_name
+    - field.field.node.publication.field_authors_list
     - field.field.node.publication.field_back_cover
     - field.field.node.publication.field_collection
     - field.field.node.publication.field_collection_term
@@ -34,6 +35,7 @@ dependencies:
     - node.type.publication
   module:
     - datetime
+    - double_field
     - entity_reference_revisions
     - link
     - options
@@ -49,7 +51,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 8
     region: content
   field_author_name:
     type: string
@@ -59,13 +61,35 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_authors_list:
+    type: double_field_unformatted_list
+    label: hidden
+    settings:
+      first:
+        format_type: medium
+        link: false
+        hidden: false
+        decimal_separator: .
+        thousand_separator: ''
+        scale: 2
+      second:
+        format_type: medium
+        link: false
+        hidden: false
+        decimal_separator: .
+        thousand_separator: ''
+        scale: 2
+      inline: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_collection_term:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 17
+    weight: 18
     region: content
   field_format:
     type: string
@@ -73,7 +97,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 15
+    weight: 16
     region: content
   field_isbn:
     type: string
@@ -81,7 +105,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_issn:
     type: string
@@ -89,14 +113,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 13
+    weight: 14
     region: content
   field_link_title:
     type: list_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 8
+    weight: 9
     region: content
   field_media:
     type: entity_reference_entity_view
@@ -105,7 +129,7 @@ content:
       view_mode: publication
       link: false
     third_party_settings: {  }
-    weight: 6
+    weight: 7
     region: content
   field_more:
     type: entity_reference_revisions_entity_view
@@ -114,7 +138,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 22
+    weight: 23
     region: content
   field_nb_pages:
     type: number_integer
@@ -123,7 +147,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 14
+    weight: 15
     region: content
   field_price:
     type: number_decimal
@@ -134,7 +158,7 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 16
+    weight: 17
     region: content
   field_pub_year:
     type: datetime_default
@@ -143,7 +167,7 @@ content:
       timezone_override: ''
       format_type: html_year
     third_party_settings: {  }
-    weight: 18
+    weight: 19
     region: content
   field_publication_author:
     type: entity_reference_label
@@ -163,7 +187,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: content
   field_publication_topics:
     type: entity_reference_label
@@ -171,7 +195,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 21
+    weight: 22
     region: content
   field_publication_type:
     type: entity_reference_label
@@ -187,7 +211,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 20
+    weight: 21
     region: content
   field_publishing_date:
     type: datetime_default
@@ -196,7 +220,7 @@ content:
       timezone_override: ''
       format_type: short_date
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_purchase_link:
     type: link
@@ -208,7 +232,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 19
+    weight: 20
     region: content
   field_subtitle:
     type: string
@@ -224,12 +248,12 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 10
+    weight: 11
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 12
+    weight: 13
     region: content
   site_id:
     type: entity_reference_label
@@ -237,7 +261,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 11
+    weight: 12
     region: content
 hidden:
   field_back_cover: true

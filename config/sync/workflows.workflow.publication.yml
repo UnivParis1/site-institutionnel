@@ -21,23 +21,28 @@ type_settings:
       default_revision: true
     draft:
       label: Brouillon
-      weight: -2
+      weight: -3
       published: false
       default_revision: false
     en_attente_de_publication:
       label: 'En attente de publication'
-      weight: 0
+      weight: -1
       published: false
       default_revision: false
     en_relecture:
       label: 'En relecture'
-      weight: -1
+      weight: -2
       published: false
       default_revision: false
     published:
       label: Publié
-      weight: 1
+      weight: 0
       published: true
+      default_revision: true
+    unpublished_draft:
+      label: 'Remettre en brouillon'
+      weight: 1
+      published: false
       default_revision: true
   transitions:
     archiver:
@@ -53,11 +58,21 @@ type_settings:
         - draft
       to: draft
       weight: -3
+    draft_back:
+      label: 'Remettre en brouillon'
+      from:
+        - archive
+        - en_attente_de_publication
+        - en_relecture
+        - published
+      to: unpublished_draft
+      weight: 3
     mettre_en_relecture:
       label: 'Mettre en relecture'
       from:
         - draft
         - en_relecture
+        - unpublished_draft
       to: en_relecture
       weight: -1
     programmer_la_publication:
@@ -76,14 +91,6 @@ type_settings:
         - published
       to: published
       weight: 1
-    remettre_en_brouillon:
-      label: 'Remettre en brouillon'
-      from:
-        - archive
-        - en_relecture
-        - published
-      to: draft
-      weight: -2
   entity_types:
     node:
       - event

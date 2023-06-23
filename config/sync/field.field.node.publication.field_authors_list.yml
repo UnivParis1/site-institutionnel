@@ -1,0 +1,39 @@
+uuid: bd28407a-1516-43d9-8ce5-3bd8dcde8729
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_authors_list
+    - node.type.publication
+  module:
+    - double_field
+id: node.publication.field_authors_list
+field_name: field_authors_list
+entity_type: node
+bundle: publication
+label: 'Liste des auteurs'
+description: "Liste des auteurs de la publication, dans l'ordre d'apparition. \r\n<ol>\r\n<li>Renseigner dans le premier champ les prénom et nom de l'auteur.</li>\r\n<li>renseigner dans le second le login paris1 de l'auteur s'il s'agit d'un enseignant-chercheur de Paris 1 Panthéon-Sorbonne. </li>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  first:
+    label: ''
+    list: false
+    allowed_values: {  }
+    max: null
+    min: null
+    required: true
+    on_label: Activé
+    off_label: Désactivé
+  second:
+    label: ''
+    list: false
+    allowed_values: {  }
+    max: null
+    min: null
+    required: false
+    on_label: Activé
+    off_label: Désactivé
+field_type: double_field

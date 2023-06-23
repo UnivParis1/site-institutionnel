@@ -102,15 +102,15 @@ elements: |-
       '#type': radios
       '#title': Type
       '#options':
-        'Long-métrage fiction': 'Long-métrage fiction'
-        Téléfilm: Téléfilm
-        'Série TV': 'Série TV'
-        'Emission / reportage TV': 'Emission / reportage TV'
+        Long-métrage: Long-métrage
+        Série: Série
         Court-métrage: Court-métrage
-        'Spot publicitaire': 'Spot publicitaire'
         Documentaire: Documentaire
         'Clip musical': 'Clip musical'
-        'Contenu web': 'Contenu web'
+        Interview: Interview
+        Émission: Émission
+        Reportage: Reportage
+        'Spot publicitaire': 'Spot publicitaire'
         Autre: Autre
       '#options_display': buttons_horizontal
       '#required': true
@@ -209,11 +209,14 @@ elements: |-
       '#type': radios
       '#title': 'Nature de la demande'
       '#options':
-        Conférence/Colloque: Conférence/Colloque
+        'Concours / examen': 'Concours / examen'
+        'Conférence / colloque': 'Conférence / colloque'
+        'Assemblée générale': 'Assemblée générale'
+        Formation: Formation
+        Congrès: Congrès
         Séminaire: Séminaire
-        'Cérémonie/Soirée de gala': 'Cérémonie/Soirée de gala'
-        Congrès/Assemblées: Congrès/Assemblées
-        Exposition: Exposition
+        'Conseil d’administration': 'Conseil d’administration'
+        'Remise de prix': 'Remise de prix'
         Autre: Autre
       '#options_display': buttons_horizontal
       '#required': true
@@ -500,6 +503,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -518,7 +523,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande de location a bien été prise en compte.<br />\r\nVous allez recevoir un courriel de confirmation.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -614,13 +619,13 @@ handlers:
       cc_options: {  }
       from_mail: locations@univ-paris1.fr
       from_options: {  }
-      from_name: Locations
+      from_name: 'Locations Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: '[Réponse automatique] Demande de location'
-      body: _default
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande de location a bien été enregistrée.<br />\r\nNous vous recontacterons dans les meilleurs délais.</p>\r\n\r\n<p>Détails de la demande :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: true
       exclude_empty: true

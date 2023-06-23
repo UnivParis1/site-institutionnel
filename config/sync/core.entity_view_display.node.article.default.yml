@@ -3,7 +3,6 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - core.entity_view_display.comment.comment.default
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_disable_canonical_url
@@ -12,11 +11,10 @@ dependencies:
     - field.field.node.article.field_sites
     - field.field.node.article.field_sites_all
     - field.field.node.article.field_tags
-    - image.style.large
     - node.type.article
+    - responsive_image.styles.wide
   module:
-    - comment
-    - image
+    - responsive_image
     - text
     - user
 _core:
@@ -33,56 +31,28 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  comment:
-    type: comment_default
-    label: above
-    settings:
-      view_mode: default
-      pager_id: 0
-    third_party_settings: {  }
-    weight: 8
-    region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
     weight: -20
     region: content
   field_image:
-    type: image
+    type: responsive_image
     label: hidden
     settings:
+      responsive_image_style: wide
       image_link: ''
-      image_style: large
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  site_id:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
+  comment: true
   field_disable_canonical_url: true
   field_publish_master: true
   field_sites: true
   field_sites_all: true
+  field_tags: true
   langcode: true
+  links: true
   search_api_excerpt: true
+  site_id: true
