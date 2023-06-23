@@ -68,7 +68,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
   
         // Add blue bg for new date details.
         var newCurrent = anchorEl.parent('.fc-day-top').attr('data-date');
-        $('[data-date="'+newCurrent+'"').each(function(){
+        $('[data-date="'+newCurrent+'"]').each(function(){
           $(this).addClass('fc-current');
         })
   
