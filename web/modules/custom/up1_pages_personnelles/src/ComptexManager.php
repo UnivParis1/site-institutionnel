@@ -26,9 +26,8 @@ class ComptexManager implements ComptexInterface {
    */
   public function getUserInformation($username) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page');
 
-    $searchUser = "$ws?id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
     $params = [
 	'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
 	'allowNoAffiliationAccounts' => true,
@@ -63,9 +62,7 @@ class ComptexManager implements ComptexInterface {
    */
   public function getUserAttributes($username, $attributes = []) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page');
-
-    $searchUser = "$ws?id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
     $params = [
 	'attrs' => implode(',', $attributes),
 	'allowNoAffiliationAccounts' => true,
@@ -87,9 +84,7 @@ class ComptexManager implements ComptexInterface {
   public function userHasPagePerso($username) {
     $has_page_perso = FALSE;
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_ws') . $config->get('search_user_page');
-
-    $searchUser = "$ws?id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
