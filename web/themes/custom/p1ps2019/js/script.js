@@ -13,96 +13,112 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
   Drupal.behaviors.event_calendar = {
     attach: function (context, settings) {
 
-      if(typeof drupalSettings.calendar != "undefined"){
-        if(typeof drupalSettings.calendar[0] != "undefined"){
-
-          /** BEGIN : override calendar Month grid */
-          // Force lang = fr
-          drupalSettings.calendar[0].setOption('locale', 'fr');
-          // Define custom prev next button.
-          drupalSettings.calendar[0].setOption('customButtons', {
-            customprev: {
-              text: '<',
-              click: function() {
-                drupalSettings.calendar[0].prev();
-                // refresh event dot display when view month change.
-                refresh_event_display();
-              }
-            },
-            customnext: {
-              text: '>',
-              click: function() {
-                drupalSettings.calendar[0].next();
-                // refresh event dot display when view month change.
-                refresh_event_display();
-              }
-            }
-          });
-
-          // Display custom buttons in header toolbar instead of native prev next.
-          drupalSettings.calendar[0].setOption('header',{
-            left: 'customprev',
-            center: 'title',
-            right: 'customnext'
-          } );
-          /** END : override calendar Month grid */
-        }
-        if(typeof drupalSettings.calendar[1] != "undefined"){
-          // Force lang = fr
-          drupalSettings.calendar[1].setOption('locale', 'fr');
-        }
+      // Display only day event rows.
+      var today = $('.today.current-month');
+      if (today.length){
+        refresh_event_rows(today);
+      }else {
+        // Display first day no today date.
+        refresh_event_rows($('.current-month').first());
       }
 
-      //Set today day as default.
-      $('.fc-today').addClass('fc-current');
-  
-  
-      $(document).on('click.fc', 'a[data-goto]', function (ev) {
-        var anchorEl = $(ev.currentTarget);
-  
-        // Remove blue bg for old date details.
-        var oldCurrent = $('.fc-current');
-        oldCurrent.each(function(){
-          $(this).removeClass('fc-current');
-        });
-  
-        // Add blue bg for new date details.
-        var newCurrent = anchorEl.parent('.fc-day-top').attr('data-date');
-        $('[data-date="'+newCurrent+'"]').each(function(){
-          $(this).addClass('fc-current');
-        })
-  
-        // Refresh calendar + list with new date.
-        var gotoOptions = anchorEl.data('goto');
-        drupalSettings.calendar[1].changeView('listDay', gotoOptions.date);
-        drupalSettings.calendar[0].changeView('dayGridMonth', gotoOptions.date);
-        refresh_event_display();
+      // Refresh event row and current date.
+      $(document).on('click', '.calendar-view-day', function (ev) {
+        var el = $(ev.currentTarget);
+        el.parent('td').addClass('current-day');
+        refresh_event_rows(el.parent('td'));
       });
+
+      function refresh_event_rows( el ){
+        $('[data-nid]').hide();
+        $('.current-day').removeClass('current-day');
+        
+        var event_to_display = el.find('.calendar-view-day__rows').attr('data-nids-day');
+        if (typeof event_to_display != "undefined") {
+          if(event_to_display != ""){
+            var events = event_to_display.split(",");
+            $.each(events, function( index, value ) {
+              $('[data-nid="'+value+'"]').show();
+            });
+
+            $('.no-event').hide();
+          }else{
+            // if no event, display empty message.
+            $('.no-event').show();
+          }
+          
+        }else{
+          // if no event, display empty message.
+          $('.no-event').show();
+        }
+      }
   
-      refresh_event_display();
     }
   };
   
   
-  function refresh_event_display(){
-    // split td colspan to have as many dot as days.
-    $('.fc-day-grid .fc-content-skeleton').each(function() {
-      var count = 0;
-      $(this).find('table tbody td.fc-event-container').each(function() {
-        var td = $(this).attr('colspan');
-        if (td > 0) {
-          var tdVal = $(this).html();
-          for (var j = 0; j < td; j++) {
-            var newTd = $(this).clone();
-            newTd.removeAttr('colspan');
-            newTd.html(tdVal);
-            $(this).after(newTd);
-          }
-          $(this).remove();
-          count++;
+
+  Drupal.behaviors.agenda = {
+    attach: function (context, settings) {
+
+
+      function refresh_buttons_states(){
+        var btn_type = $('[data-drupal-selector="edit-field-event-date-value"]').parents().find('body').attr('data-search');
+        if( typeof btn_type != undefined && btn_type != ""){
+          $('[data-drupal-selector="edit-field-event-date-value"]').parents().find('form').find('.btn').removeClass('active');
+          $('.btn.'+btn_type).addClass('active');
         }
+      }
+      refresh_buttons_states();
+    
+
+      $('.today').click(function(){
+        $(this).parents().find('body').attr('data-search','today');
+        $('#agenda_datepicker').datepicker('setDate', '');
+        $('[data-drupal-selector="edit-field-event-date-value"]').val(moment().format('YYYY-MM-DD') );
+        $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment().format('YYYY-MM-DD') );
+        refresh_buttons_states();
       });
-    });
+    
+      $('.weekend').click(function(){
+        $(this).parents().find('body').attr('data-search','weekend');
+        $('#agenda_datepicker').datepicker('setDate', '');
+        var next_saturday = getNextDayOfWeek(new Date(), "6");
+        var next_sunday = getNextDayOfWeek(new Date(), "0");
+        $('[data-drupal-selector="edit-field-event-date-value"]').val(moment(next_saturday).format('YYYY-MM-DD'));
+        $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment(next_sunday).format('YYYY-MM-DD')  );
+        refresh_buttons_states();
+      });
+
+      $('.week').click(function(){
+        $(this).parents().find('body').attr('data-search','week');
+        var next_monday = getNextDayOfWeek(new Date(), "1");
+        $('[data-drupal-selector="edit-field-event-date-value"]').val(moment(next_monday).format('YYYY-MM-DD'));
+        $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment(next_monday).add(6, 'days').format('YYYY-MM-DD')  );
+        refresh_buttons_states();
+      });
+
+      $("#agenda_datepicker").datepicker({
+        dateFormat: 'yy-mm-dd'
+      });
+      $('#agenda_datepicker').datepicker("option", "onSelect", function(dateText) {
+          $(this).parents().find('body').attr('data-search','');
+          $('[data-drupal-selector="edit-field-event-date-value"]').val(dateText);
+          $('[data-drupal-selector="edit-field-event-date-end-value"]').val(dateText);
+      });
+
+      if( $('.btn.active').length == 0 && $('[data-drupal-selector="edit-field-event-date-value"]').val() != "" ) {
+        $('#agenda_datepicker').datepicker('setDate', $('[data-drupal-selector="edit-field-event-date-value"]').val());
+      }
+    }
+  };
+
+  
+
+  function getNextDayOfWeek(date, dayOfWeek) {
+    var resultDate = new Date(date.getTime());
+    resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
+    return resultDate;
   }
 })(jQuery,Drupal);
 /*
