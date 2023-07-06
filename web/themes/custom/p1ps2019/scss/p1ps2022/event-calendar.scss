@@ -1,3 +1,97 @@
+.view-display-id-block_calendar {
+  align-items: center;
+  .view-filters {
+    display: flex;
+    flex-grow: 1;
+    form {
+      flex-wrap: nowrap;
+      .form-item {
+        display: flex;
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          li {
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            a {
+              font-family: $font-main;
+              text-align: center;
+              font-size: rem-calc(13px);
+              line-height: 1.2;
+              @include setFont($fontType-medium);
+              padding: rem-calc(4px 12px);
+              display: inline-block;
+              border-radius: 50rem;
+              border: 1px solid $gray2;
+              &:hover,
+              &:focus {
+                text-decoration: none;
+                color: $gold-p1ps;
+                border-color: $gold-p1ps;
+              }
+              &.bef-link--selected {
+                text-decoration: none;
+                color: $white;
+                background-color: $gold-p1ps;
+                border-color: $gold-p1ps;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.two-col-calendar {
+  display: flex;
+  .view-calendar,
+  .view-results {
+    @extend .large-6;
+    @extend .grid-container;
+  }
+  .view-calendar {
+    .calendar-view-table {
+      background-color: $white;
+      thead {
+        background-color: transparent;
+        tr {
+          th {
+            background-color: transparent;
+            color: $text-main-color;
+          }
+        }
+      }
+      th, td {
+        border: none;
+        min-height: 0;
+        align-items: center;
+        text-align: center;
+        &.previous-month,
+        &.next-month {
+          background-color: transparent;
+        }
+        &.today {
+          background-color: $background-main-color;
+        }
+        .calendar-view-day__number {
+          font-size: 0.65em;
+          background: transparent;
+          color: $text-main-color;
+        }
+      }
+    }
+  }
+  .view-results {
+    .views-row {
+      background-color: $white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+  }
+}
+
+
 
 
 
