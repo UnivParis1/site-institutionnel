@@ -37,7 +37,7 @@
     <div class="view-results">
       {% for row in rows %}
         {% set row_classes = [ default_row_class ? 'views-row'] %}
-        <div{{ row.attributes.addClass(row_classes) }} data-nid="{{row.content['#row'].nid}}">
+        <div{{ row.attributes.addClass(row_classes).setAttribute('data-nid', row.content['#row'].nid)}}>
           {{- row.content -}}
         </div>
       {% endfor %}
