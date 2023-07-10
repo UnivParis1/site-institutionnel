@@ -13,6 +13,11 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
   Drupal.behaviors.event_calendar = {
     attach: function (context, settings) {
 
+      // Move pager in calendar div.
+      var pager_elm = $('#calendar-month-pager').clone();
+      $('.calendar-view-table caption').html(pager_elm.html());
+      $('#calendar-month-pager').hide();
+
       // Display only day event rows.
       var today = $('.today.current-month');
       if (today.length){
