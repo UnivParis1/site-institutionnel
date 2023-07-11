@@ -47,14 +47,94 @@
 
   .two-col-calendar {
     display: flex;
+    width: 100%;
+    @include breakpoint($large - 1 down) {
+      flex-direction: column;
+    }
     .view-calendar,
     .view-results {
+      width: 100%;
       @extend .large-6;
       @extend .grid-container;
+      max-height: 580px;
     }
     .view-calendar {
-      .calendar-view-table {
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        z-index: 0;
         background-color: $white;
+        top: 0;
+        bottom: 0;
+        left: 1rem;
+        right: 1rem;
+      }
+      @include breakpoint($large - 1 down) {
+        margin-bottom: 1rem;
+      }
+      .calendar-view-table {
+        position: relative;
+        z-index: 1;;
+        background-color: $white;
+        caption {
+          .calendar-view-pager {
+            background-color: transparent;
+            border: none;
+            flex-direction: row !important;
+            .pager__item {
+              > * {
+                padding: 0;
+              }
+              &.pager__current > div {
+                font-family: $font-headings;
+                @include setFont($fontType-bold);
+                font-size: rem-calc(24px);
+                line-height: 1.2;
+                color: $text-main-color;
+              }
+              &.pager__previous,
+              &.pager__next {
+                a {
+                  width: 50px;
+                  display: inline-block;
+                  overflow: hidden;
+                  text-indent: -500px;
+                  text-align: left;
+                  position: relative;
+                  &:before {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                    text-indent: 0;
+                    font-family: "Font Awesome 6 Free";
+                    font-weight: 900;
+                  }
+                }
+              }
+              &.pager__previous {
+                a {
+                  &:before {
+                    content: "\f053";
+                  }
+                }
+              }
+               &.pager__next {
+                a {
+                  &:before {
+                    content: "\f054";
+                  }
+                }
+              }
+            }
+          }
+        }
+        thead,
+        .next-month,
+        .previous-month {
+          display: flex !important;
+        }
         thead {
           background-color: transparent;
           tr {
@@ -62,6 +142,11 @@
               background-color: transparent;
               color: $text-main-color;
             }
+          }
+        }
+        tr {
+          @include breakpoint($large - 1 down) {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr !important;
           }
         }
         th, td {
@@ -72,6 +157,7 @@
         }
         td {
           padding: 0;
+          min-height: 75px;
           &.previous-month,
           &.next-month {
             background-color: transparent;
@@ -88,6 +174,7 @@
             color: $text-main-color;
             @include setFont($fontType-medium);
             margin-bottom: 0;
+            cursor: pointer;
           }
           .calendar-view-day__rows {
             span {
@@ -109,6 +196,7 @@
       }
     }
     .view-results {
+      overflow: auto;
       .views-row {
         background-color: $white;
         margin-bottom: 1rem;
@@ -150,6 +238,7 @@
               height: 20px;
               display: inline-block;
               margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
             }
           }
         }
@@ -164,6 +253,7 @@
               height: 20px;
               display: inline-block;
               margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
             }
           }
         }
