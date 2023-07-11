@@ -40,63 +40,150 @@
         }
       }
     }
+    .form-actions {
+      display: none;
+    }
   }
-}
 
-.two-col-calendar {
-  display: flex;
-  .view-calendar,
-  .view-results {
-    @extend .large-6;
-    @extend .grid-container;
-  }
-  .view-calendar {
-    .calendar-view-table {
-      background-color: $white;
-      thead {
-        background-color: transparent;
-        tr {
-          th {
+  .two-col-calendar {
+    display: flex;
+    .view-calendar,
+    .view-results {
+      @extend .large-6;
+      @extend .grid-container;
+    }
+    .view-calendar {
+      .calendar-view-table {
+        background-color: $white;
+        thead {
+          background-color: transparent;
+          tr {
+            th {
+              background-color: transparent;
+              color: $text-main-color;
+            }
+          }
+        }
+        th, td {
+          border: none;
+          min-height: 0;
+          align-items: center;
+          text-align: center;
+        }
+        td {
+          padding: 0;
+          &.previous-month,
+          &.next-month {
             background-color: transparent;
+          }
+          &.today {
+            background-color: $background-main-color;
+            .calendar-view-day__number {
+              color: $white;
+            }
+          }
+          .calendar-view-day__number {
+            font-size: 1rem;
+            background: transparent;
             color: $text-main-color;
+            @include setFont($fontType-medium);
+            margin-bottom: 0;
+          }
+          .calendar-view-day__rows {
+            span {
+              color: transparent;
+              &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: $gold-p1ps;
+              }
+            }
           }
         }
       }
-      th, td {
-        border: none;
-        min-height: 0;
-        align-items: center;
-        text-align: center;
-        &.previous-month,
-        &.next-month {
-          background-color: transparent;
+    }
+    .view-results {
+      .views-row {
+        background-color: $white;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        .views-field-field-event-type {
+          margin-bottom: 1rem;
+          .event_type {
+            a {
+              font-family: $font-main;
+              text-align: center;
+              font-size: rem-calc(13px);
+              line-height: 1.2;
+              @include setFont($fontType-medium);
+              padding: rem-calc(4px 12px);
+              display: inline-block;
+              border-radius: 50rem;
+              color: $white;
+              background-color: $gold-p1ps;
+            }
+          }
         }
-        &.today {
-          background-color: $background-main-color;
+        .views-field-title {
+          margin-bottom: 1rem;
+          span {
+            font-family: $font-headings;
+            @include setFont($fontType-bold);
+            font-size: rem-calc(24px);
+            line-height: 1.2;
+          }
         }
-        .calendar-view-day__number {
-          font-size: 0.65em;
-          background: transparent;
-          color: $text-main-color;
+        .views-field-field-event-date {
+          .field-content {
+            display: flex;
+            align-items: flex-start;
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/picto-calendar.png") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+            }
+          }
+        }
+        .views-field-field-event-address {
+          .field-content {
+            display: flex;
+            align-items: flex-start;
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/pointer-icon.svg") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+            }
+          }
         }
       }
     }
   }
-  .view-results {
-    .views-row {
-      background-color: $white;
-      margin-bottom: 1rem;
-      padding: 1rem;
-    }
+
+  .view-footer {
+    width: 100%;
+    text-align: center;
   }
-}
 
 
 
 
 
-.btn.active{
-  border-color: $text-white;
-  color: $text-main-color;
-  background-color: $background-white
+  .btn.active{
+    border-color: $text-white;
+    color: $text-main-color;
+    background-color: $background-white
+  }
+
 }
