@@ -93,16 +93,14 @@
         $('#agenda_datepicker').datepicker('setDate', '');
         $('[data-drupal-selector="edit-field-event-date-value"]').val(moment().add(1, 'days').format('YYYY-MM-DD'));
         $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment().add(1, 'days').format('YYYY-MM-DD')  );
-        
-        console.log($('[data-drupal-selector="edit-field-event-date-end-value"]'));
         refresh_buttons_states();
       });
 
       $('.week').click(function(){
         $(this).parents().find('body').attr('data-search','week');
         var next_monday = getNextDayOfWeek(new Date(), "1");
-        $('[data-drupal-selector="edit-field-event-date-value"]').val(moment(next_monday).format('YYYY-MM-DD'));
-        $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment(next_monday).add(6, 'days').format('YYYY-MM-DD')  );
+        $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment(next_monday).format('YYYY-MM-DD'));
+        $('[data-drupal-selector="edit-field-event-date-value"]').val(moment(next_monday).add(6, 'days').format('YYYY-MM-DD')  );
         refresh_buttons_states();
       });
 
