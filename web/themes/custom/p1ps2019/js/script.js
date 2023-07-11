@@ -21,6 +21,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
       // Display only day event rows.
       var today = $('.today.current-month');
       if (today.length){
+        today.addClass('current-day');
         refresh_event_rows(today);
       }else {
         // Display first day no today date.
@@ -35,6 +36,8 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 
       // Refresh event row and current date.
       $(document).on('click', '.calendar-view-day', function (ev) {
+        
+        $('.current-day').removeClass('current-day');
         var el = $(ev.currentTarget);
         el.parent('td').addClass('current-day');
         refresh_event_rows(el.parent('td'));
@@ -42,7 +45,6 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 
       function refresh_event_rows( el ){
         $('[data-nid]').hide();
-        $('.current-day').removeClass('current-day');
         
         var event_to_display = el.find('.calendar-view-day__rows').attr('data-nids-day');
         if (typeof event_to_display != "undefined") {
