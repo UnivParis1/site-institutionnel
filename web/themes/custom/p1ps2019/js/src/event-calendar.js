@@ -88,13 +88,13 @@
         refresh_buttons_states();
       });
     
-      $('.weekend').click(function(){
-        $(this).parents().find('body').attr('data-search','weekend');
+      $('.tomorrow').click(function(){
+        $(this).parents().find('body').attr('data-search','tomorrow');
         $('#agenda_datepicker').datepicker('setDate', '');
-        var next_saturday = getNextDayOfWeek(new Date(), "6");
-        var next_sunday = getNextDayOfWeek(new Date(), "0");
-        $('[data-drupal-selector="edit-field-event-date-value"]').val(moment(next_saturday).format('YYYY-MM-DD'));
-        $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment(next_sunday).format('YYYY-MM-DD')  );
+        $('[data-drupal-selector="edit-field-event-date-value"]').val(moment().add(1, 'days').format('YYYY-MM-DD'));
+        $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment().add(1, 'days').format('YYYY-MM-DD')  );
+        
+        console.log($('[data-drupal-selector="edit-field-event-date-end-value"]'));
         refresh_buttons_states();
       });
 
