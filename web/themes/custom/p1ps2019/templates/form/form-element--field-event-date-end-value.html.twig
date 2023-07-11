@@ -67,7 +67,9 @@
 %}
 
 {# custom date field with datepicker #}
+
 <div class="form-item">
+  <span>{{'Select the date you would like to check'|t}}</span>
   <input type="text" id="agenda_datepicker" value="" name="agenda_datepicker" placeholder="{{'select a date'|t}}"/>
   {# custom date button - date min and max will be set with js #}
   <div  class="grp-btn">
@@ -77,7 +79,7 @@
   </div>
 </div>
 
-{# date min field for date range #}
+{# date end field for date range #}
 <div{{ attributes.addClass(classes) }}>
   {% if label_display in ['before', 'invisible'] %}
     {{ label }}
