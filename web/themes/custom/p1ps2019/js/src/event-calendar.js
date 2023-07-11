@@ -22,6 +22,12 @@
         refresh_event_rows($('.current-month').first());
       }
 
+      // Change days name from LUNDI to LUN.
+      $('.calendar-view-month th').each(function(){
+        var dayname = $(this).html();
+        $(this).html(dayname.substr(0, 3));
+      });
+
       // Refresh event row and current date.
       $(document).on('click', '.calendar-view-day', function (ev) {
         var el = $(ev.currentTarget);
