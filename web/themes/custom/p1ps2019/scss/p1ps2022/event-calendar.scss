@@ -270,14 +270,140 @@
     text-align: center;
   }
 
+}
 
 
-
-
-  .btn.active{
-    border-color: $text-white;
-    color: $text-main-color;
-    background-color: $background-white
+//
+#views-exposed-form-agenda-block-1 {
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  @include breakpoint($large - 1 down) {
+    display: block;
   }
-
+  .form-item {
+    margin: 0;
+    &:not(.form-actions) {
+      width: auto !important;
+    }
+  }
+  .agenda-form-item-1 {
+    display: flex;
+    align-items: flex-end;
+    @include breakpoint($large - 1 down) {
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .grp-top {
+      span {
+        font-family: $font-headings;
+        @include setFont($fontType-bold);
+        font-size: rem-calc(18px) !important;
+        line-height: 1.2;
+        color: $text-main-color;
+        display: block;
+        margin-bottom: 0.5rem;
+        white-space: nowrap;
+      }
+      input#agenda_datepicker {
+        border-width: 1px;
+        border-color: $gray2;
+        width: calc(100% - 1rem);
+        background-image: url(../images/p1ps2022/picto-calendar.png);
+        background-repeat: no-repeat;
+        background-position: 16px center;
+        padding-left: rem-calc(48px);
+        font-size: rem-calc(16px) !important;
+        line-height: 1.22 !important;
+        font-style: normal;
+        @include breakpoint($large - 1 down) {
+          width: 100%;
+        }
+        &::placeholder {
+          font-size: rem-calc(16px) !important;
+          line-height: 1.22 !important;
+          font-style: normal;
+        }
+      }
+    }
+    
+    .grp-btn {
+      display: flex;
+      button {
+        margin: 0 1rem 0 0;
+        white-space: nowrap;
+        color: $text-main-color;
+        background-color: $white;
+        border-color: $text-main-color;
+        padding: rem-calc(12px 12px);
+        font-size: rem-calc(14px) !important;
+        line-height: 1.22 !important;
+        &:hover,
+        &:focus,
+        &.active {
+          color: $white;
+          background-color: $background-main-color;
+        }
+      }
+      @include breakpoint($large - 1 down) {
+        display: none;
+      }
+    }
+  }
+  .agenda-form-item-2 {
+    flex-grow: 1;
+    .chosen-container {
+      margin-bottom: 1rem;
+      @include breakpoint($large) {
+        margin-bottom: 0;
+        width: auto !important;
+        padding: 0 1rem;
+        border-left: 1px solid $gray2;
+        border-right: 1px solid $gray2;
+      }
+      .chosen-single {
+        border-width: 1px;
+        border-color: $gray2;
+        span {
+          font-size: rem-calc(16px);
+          font-style: normal;
+        }
+      }
+      .chosen-drop {
+        white-space: nowrap;
+      }
+    }
+  }
+  input[type=submit]:not(.reset-btn) {
+    width: 100%;
+    border-width: 1px;
+    padding: rem-calc(12px 12px);
+    font-size: rem-calc(14px) !important;
+    line-height: 1.22 !important;
+    margin: 0;
+    @include breakpoint($large) {
+      margin-left: 1rem;
+      width: auto;
+    }
+  }
+  > input[type=submit]:not(.reset-btn) {
+    @include breakpoint($large) {
+      width: 45px;
+      margin-bottom: 0;
+    }
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    padding: 0;
+    overflow: hidden;
+    text-indent: -500px;
+    background-color: $white;
+    background-image: url("../images/p1ps2022/picto-refresh.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    &:hover,
+    &:focus {
+      background-color: $background-main-color;
+      background-image: url("../images/p1ps2022/picto-refresh-white.svg");
+    }
+  }
 }
