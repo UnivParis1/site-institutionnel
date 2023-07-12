@@ -12,6 +12,7 @@ dependencies:
     - node
     - taxonomy
     - user
+    - views_custom_cache_tag
     - views_infinite_scroll
 id: agenda
 label: Agenda
@@ -145,8 +146,9 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
-        options: {  }
+        type: custom_tag
+        options:
+          custom_tag: "time:daily\r\nnode_list:event"
       empty:
         area:
           id: area
