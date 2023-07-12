@@ -409,3 +409,96 @@
 }
 
 // DATE PICKER
+.ui-widget.ui-widget-content {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  width: auto;
+  box-shadow: 0px 20px 25px 0px rgba($background-main-color,0.75);
+  @include breakpoint($large - 1 down) {
+    width: calc(100% - 64px);
+  }
+  font-family: $font-main;
+  @include setFont($fontType-medium);
+  .ui-datepicker-header {
+    background-color: transparent;
+    border: none;
+    margin-top: 1rem;
+    .ui-datepicker-title {
+      font-family: $font-headings;
+      @include setFont($fontType-bold);
+      font-size: rem-calc(24px);
+      line-height: 1.2;
+      color: $text-main-color;
+    }
+    .ui-datepicker-prev,
+    .ui-datepicker-next {
+      span {
+        display: none;
+      }
+      &:before {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        text-indent: 0;
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+      }
+      &:hover,
+      &:focus,
+      &.ui-state-hover {
+        border: none;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    }
+    .ui-datepicker-prev {
+      &:before {
+        content: "\f053";
+      }
+    }
+    .ui-datepicker-next {
+      &:before {
+        content: "\f054";
+      }
+    }
+  }
+  table {
+    margin: 0;
+    font-size: rem-calc(16px);
+    thead {
+      background-color: transparent;
+      color: $text-main-color;
+       span {
+        @include setFont($fontType-medium);
+      }
+    }
+    tr {
+      td {
+        padding: 0;
+        text-align: center;
+        vertical-align: middle;
+        a {
+          border: none;
+          background-color: transparent;
+          text-align: center;
+          color: $text-main-color;
+          padding: rem-calc(20px 26px);
+          @include breakpoint($large - 1 down) {
+            padding: rem-calc(20px 5px);
+          }
+          &.ui-state-highlight {
+            color: $white;
+            background-color: $background-main-color;
+          }
+          &:hover,
+          &:focus,
+          &.ui-state-active {
+            background-color: rgba($background-main-color, 0.5);
+          }
+        }
+      }
+    }
+  }
+}
