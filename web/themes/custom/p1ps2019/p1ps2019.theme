@@ -44,7 +44,7 @@ function p1ps2019_preprocess_html(&$variables)
   } catch (Exception $e) {
     $variables['is_front'] = FALSE;
   }
-  if (preg_match('/site/', $variables['root_path']) && !isset($variables['node_type'])) {
+  if (preg_match('/site/', $variables['root_path']) && !isset($variables['node_type']) && !preg_match('/sitemap/', $variables['root_path'])) {
     $variables['is_front_mini_site'] = TRUE;
   }
   else $variables['is_front_mini_site'] = FALSE;
