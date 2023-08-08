@@ -40,6 +40,28 @@
         }
       }
     }
+    @include breakpoint($large - 1 down) {
+      .grid-container {
+        max-width: calc(100vw - 0.75rem);
+      }
+      form {
+        margin-left: 0.75rem;
+        .form-item {
+          width: 100%;
+          overflow: auto;
+          ul {
+            flex-wrap: nowrap;
+            li {
+              a {
+                word-break: normal;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+    }
+
     .form-actions {
       display: none;
     }
@@ -56,7 +78,7 @@
       width: 100%;
       @extend .large-6;
       @extend .grid-container;
-      height: 580px;
+      height: 485px;
     }
     .view-calendar {
       position: relative;
@@ -161,7 +183,8 @@
         }
         td {
           padding: 0;
-          min-height: 75px;
+          //min-height: 75px;
+          min-height: 60px;
           &.previous-month,
           &.next-month {
             background-color: transparent;
@@ -171,6 +194,9 @@
             .calendar-view-day__number {
               color: $white;
             }
+          }
+          .calendar-view-day {
+            padding: 0;
           }
           .calendar-view-day__number {
             font-size: 1rem;
@@ -264,16 +290,14 @@
       }
     }
   }
-
-  .view-footer {
-    width: 100%;
-    text-align: center;
-  }
-
+}
+.btn.active{
+  border-color: $text-white;
+  color: $text-main-color;
+  background-color: $background-white
 }
 
 
-//
 #views-exposed-form-agenda-block-1 {
   justify-content: flex-start;
   align-items: flex-end;
@@ -391,7 +415,7 @@
             padding: 5px 20px 5px 5px;
             border: 1px solid $gray2;
             //background: url(chosen-sprite.png) no-repeat 100% -20px;
-            background: url("../images/p1ps2022/chosen-search.png") no-repeat right center;
+            background: url("../images/p1ps2022/chosen-search.png") no-repeat right center / 19px 13px !important;
             font-size: 1rem;
             font-family: $font-main;
           }

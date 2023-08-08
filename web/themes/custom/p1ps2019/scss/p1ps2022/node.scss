@@ -1,4 +1,4 @@
-// NEWS AND EVENTS FILTERS
+// NEWS, EVENTS AND AGENDA FILTERS
 .news-filters-form-container,
 .home-agenda .bef-exposed-form,
 .event-filters-form-container {
@@ -39,7 +39,8 @@
   }
 
   @include breakpoint($large - 1 down) {
-    width: 100%;
+    width: calc(100% - 0.75rem);
+    margin-left: 0.75rem;
     .views-exposed-form{
       .form-item:not(.form-actions){
         width: 100%;
@@ -177,6 +178,9 @@
     }
     h2 {
       margin-bottom: rem-calc(24px);
+      &.h4-style {
+        font-size: rem-calc(24px);
+      }
     }
   }
 }

@@ -9,6 +9,13 @@
 .paragraph--type--bookmarks {
   position: relative;
   z-index: 1;
+  h2 {
+    text-align: center;
+    margin-bottom: rem-calc(24px);
+    @include breakpoint($medium - 1 down) {
+      font-size: rem-calc(36px);
+    }
+  }
   .cell {
     transform: translateY(-50%);
     &.large-2 {
@@ -39,6 +46,11 @@
           background-color: $white;
           color: $text-main-color;
         }
+      }
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+        color: $white;
       }
     }
     body.path-frontpage {
@@ -86,6 +98,13 @@
       background-color: $background-light-gray;
       .col-media {
         margin-left: 0;
+        @include breakpoint($medium - 1 down) {
+          margin-right: 0;
+          width: 100%;
+          img {
+            width: 100%;
+          }
+        }
       }
       .col-content {
         margin-right: 0;
@@ -93,6 +112,9 @@
         flex-direction: column;
         justify-content: center;
         padding: rem-calc(16px 0);
+        h2.h4-style {
+          font-size: rem-calc(24px);
+        }
         h2, p {
           margin-bottom: 1rem;
         }

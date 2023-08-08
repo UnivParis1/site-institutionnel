@@ -64,7 +64,7 @@
     p{line-height: 1;}
   }
   .legende{
-    font-size: rem-calc(20px);
+    font-size: rem-calc(16px);
   }
 }//close .key-figures-section
 
@@ -165,9 +165,9 @@
             #{$margin-left}: rem-calc(16px);
             #{$margin-right}: 0;
           }
-          &:nth-child(n+3){
-            margin-bottom: 0;
-          }
+          //&:nth-child(n+3){
+          //  margin-bottom: 0;
+          //}
         }
         &.two-elements{
           .cell{
@@ -197,10 +197,17 @@
   background-size: cover;
   background-position: center center;
   height: 100%;
+  padding: rem-calc(16px);
   .infos{
     color: $text-white; position: relative; z-index: 2;
     h3, a{
       color: $text-white;
+      &.h4-style {
+        font-size: rem-calc(24px);
+        @include breakpoint($large - 1 down) {
+          font-size: rem-calc(20px);
+        }
+      }
     }
   }
 }
@@ -407,6 +414,7 @@
   .paragraph--type--files-media {
     text-align: center;
     display: block;
+    width: 240px;
     padding: 4.5rem rem-calc(15px);
     span.fa::before {
       font-size: 3.125rem;
