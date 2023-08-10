@@ -78,6 +78,10 @@
       @extend .large-6;
       @extend .grid-container;
       height: 485px;
+      @include breakpoint($large - 1 down) {
+        height: auto;
+        max-height: 485px;
+      }
     }
     .view-calendar {
       position: relative;
@@ -262,7 +266,7 @@
             align-items: flex-start;
             &:before {
               content: "";
-              background: url("../images/p1ps2022/picto-calendar.png") no-repeat center center / 100% auto;
+              background: url("../images/p1ps2022/picto-calendar.svg") no-repeat center center / 100% auto;
               width: 15px;
               height: 20px;
               display: inline-block;
@@ -336,7 +340,7 @@
         border-width: 1px;
         border-color: $gray2;
         width: calc(100% - 1rem);
-        background-image: url(../images/p1ps2022/picto-calendar.png);
+        background-image: url(../images/p1ps2022/picto-calendar.svg);
         background-repeat: no-repeat;
         background-position: 16px center;
         padding-left: rem-calc(48px);
