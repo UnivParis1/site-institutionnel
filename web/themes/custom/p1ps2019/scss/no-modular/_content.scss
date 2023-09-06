@@ -7,7 +7,7 @@
 /* Ebizproduction : content */
 body{
   &:not(.transparent){
-    padding-top: rem-calc(82px);
+    padding-top: rem-calc(142px);
   }
   &.adminimal-admin-toolbar {
     #admin-toolbar-search-tab {
@@ -307,9 +307,37 @@ article{
     .event-details {
       margin-bottom: rem-calc(16px);
       .date-style {
-        font-size: .9rem;
-        font-weight: 700;
+        font-size: 100%;
+        font-weight: $regular;
         margin-bottom: rem-calc(16px);
+        > span {
+          display: flex;
+          align-items: flex-start;
+          &.date-wrapper {
+            margin-bottom: 0;
+            padding: 0;
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/picto-calendar.svg") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
+            }
+          }
+          &.lieu-wrapper {
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/pointer-icon.svg") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
+            }
+          }
+        }
       }
     }
     .categ-style {

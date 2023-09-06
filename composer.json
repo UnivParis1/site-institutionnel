@@ -27,6 +27,7 @@
         "drupal/body_node_id_class": "^2.0",
         "drupal/bootstrap": "^3.19",
         "drupal/bootstrap_paragraphs": "^2.0@beta",
+        "drupal/calendar_view": "^2.1",
         "drupal/captcha": "^1.1",
         "drupal/cas": "^1.7",
         "drupal/cas_attributes": "^2.0@beta",
@@ -108,6 +109,7 @@
         "drupal/slick": "^2.6",
         "drupal/slick_entityreference": "^2.1",
         "drupal/slick_views": "^2.6",
+        "drupal/smart_trim": "^2.1",
         "drupal/smtp": "^1.0",
         "drupal/social_simple": "^2.0",
         "drupal/token_filter": "^1.1",
@@ -116,6 +118,7 @@
         "drupal/upgrade_status": "^3.11",
         "drupal/views_bootstrap": "^5.4",
         "drupal/views_bulk_edit": "^2.6",
+        "drupal/views_custom_cache_tag": "^1.3",
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/views_templates": "^1.1",
         "drupal/webform": "^6.1",
@@ -165,7 +168,8 @@
               "string_patch": "https://www.drupal.org/files/issues/2020-08-05/2719553-35.patch",
               "translations_not_save": "https://www.drupal.org/files/issues/2020-02-12/translations_not_save_invalid_path-3101344-20.patch",
               "entity_system": "https://www.drupal.org/files/issues/2019-09-23/drupal-accommodate-numeric-query-parameter-values-3083077-2-D8.patch",
-		      "views": "https://www.drupal.org/files/issues/2021-12-18/unsupported-types-2952261-26.patch"
+	      "views": "https://www.drupal.org/files/issues/2021-12-18/unsupported-types-2952261-26.patch",
+	      "Notice: Undefined index: type in Date::processDate()":"https://www.drupal.org/files/issues/2022-08-19/3189302-24.patch"
             },
             "drupal/micro_theme": [
                 "patches/modules/micro_theme/micro_theme-focal_point_issue.patch"
@@ -179,7 +183,12 @@
             "drupal/ics_field" : [
                 "https://www.drupal.org/files/issues/2022-05-24/ics_field-if_file_exists-3267032_3.patch"
             ],
-	    "drupal/fullcalendar" : ["https://www.drupal.org/files/issues/2021-06-04/3215841-5.patch"]
+            "drupal/calendar_view" : [
+              "patches/modules/calendar_view/date_offset.patch"
+            ],
+	    "drupal/fullcalendar" : [
+        "https://www.drupal.org/files/issues/2021-06-04/3215841-5.patch"
+      ]
         },
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
@@ -198,5 +207,8 @@
                 "web-root": "web/"
             }
         }
+    },
+    "require-dev": {
+        "drupal/stage_file_proxy": "^2.0"
     }
 }

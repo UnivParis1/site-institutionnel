@@ -4,6 +4,7 @@
   	}
   	&.header-medium {
     	height: 75vh;
+    	min-height: 620px;
   	}
   	&.header-small {
     	height: 35vh;
@@ -60,6 +61,8 @@
 					display: flex;
 					align-items: center;
 					margin-top: 0;
+					 padding: rem-calc(0px 24px);
+					 height: 42px;
 					&:before {
 						content: "";
 						margin-right: 0.5rem;
@@ -332,6 +335,7 @@
 		    visibility: hidden;
 		    top: rem-calc(64px);
 		    position: absolute;
+		    z-index: 405;
 		    width: rem-calc(240px);
 		    #{$left}: 50%;
 		    transform: translateX(-50%);
@@ -348,6 +352,12 @@
 		    span{
 		      font-size: rem-calc(16px); line-height: 1.14;
 		      @extend .semi-infos-sep; display: block;
+		    }
+		    .btns-wrapper {
+		    	display: flex;
+		    	button {
+		    		word-break: initial;
+		    	}
 		    }
 		  }
 			&.overlay-show{

@@ -6,9 +6,16 @@
         input {
           &.form-text {
             width: 40vw;
+            @include breakpoint($large - 1 down) {
+              width: calc(100vw - 80px - 5rem);
+            }
+            @include breakpoint($small-medium down){
+              width: calc(100vw - 80px - 3rem);
+            }
           }
           &.form-submit {
-            padding: rem-calc(12px 16px);
+            padding: rem-calc(0px 16px);
+            margin-top: 0;
           }
         }
       }

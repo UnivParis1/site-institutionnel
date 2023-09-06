@@ -11,7 +11,7 @@ body.path-frontpage {
       background-color: rgba($white, 0.15);
       border-radius: 50rem;
       padding: rem-calc(3px 12px);
-      margin: rem-calc(0 4px);
+      margin: rem-calc(0 4px 12px 4px);
     }
   }
 }
@@ -29,10 +29,10 @@ body.path-frontpage {
     max-width: calc(100% + 2rem);
     margin-left: -1rem;
     margin-right: -1rem;
-    @include breakpoint($large - 1 down) {
-      min-width: calc(100% + 4rem);
-      max-width: calc(100% + 4rem);
-      margin-left: -2rem;
+    @include breakpoint($small-medium + 1 down) {
+      min-width: calc(100% + 3rem);
+      max-width: calc(100% + 3rem);
+      margin-left: -1rem;
       margin-right: -2rem;
     }
     &:before {
@@ -48,11 +48,14 @@ body.path-frontpage {
     .slick-list {
       overflow: visible;
       min-width: 100%;
+      @include breakpoint($medium - 1 down) {
+        padding-right: 4rem;
+      }
       .slick-track {
         display: flex !important;
         .slide {
           height: inherit !important;
-          @extend .grid-container;
+          padding: 0 1rem;
         }
       }
     }
@@ -162,5 +165,29 @@ body.path-frontpage {
     &:focus {
       text-decoration: none;
     }
+  }
+}
+
+
+
+.date-wrapper {
+  margin-bottom: rem-calc(21px);
+  display: flex;
+  padding: 3px 0;
+  &:before {
+    content: "";
+    width: 22px;
+    height: 24px;
+    display: block;
+    background-image: url(../images/p1ps2022/picto-calendar.svg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    flex-grow: 0;
+    margin-right: rem-calc(8px);
+  }
+  .date-style {
+    line-height: 1.25;
+    color: $text-main-color;
+    padding: 3px 0;
   }
 }

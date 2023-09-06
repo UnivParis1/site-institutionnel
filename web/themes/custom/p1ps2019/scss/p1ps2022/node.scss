@@ -1,5 +1,6 @@
-// NEWS AND EVENTS FILTERS
+// NEWS, EVENTS AND AGENDA FILTERS
 .news-filters-form-container,
+.home-agenda .bef-exposed-form,
 .event-filters-form-container {
   width: calc(100% - 180px);
   margin: 0;
@@ -36,8 +37,10 @@
       }
     }
   }
+
   @include breakpoint($large - 1 down) {
-    width: 100%;
+    width: calc(100% - 0.75rem);
+    margin-left: 0.75rem;
     .views-exposed-form{
       .form-item:not(.form-actions){
         width: 100%;
@@ -95,7 +98,7 @@
         width: 22px;
         height: 24px;
         display: block;
-        background-image: url(../images/p1ps2022/picto-calendar.png);
+        background-image: url(../images/p1ps2022/picto-calendar.svg);
         background-repeat: no-repeat;
         background-size: 100% auto;
         flex-grow: 0;
@@ -157,7 +160,7 @@
         width: 22px;
         height: 24px;
         display: block;
-        background-image: url(../images/p1ps2022/picto-calendar.png);
+        background-image: url(../images/p1ps2022/picto-calendar.svg);
         background-repeat: no-repeat;
         background-size: 100% auto;
         flex-grow: 0;
@@ -175,6 +178,9 @@
     }
     h2 {
       margin-bottom: rem-calc(24px);
+      &.h4-style {
+        font-size: rem-calc(24px);
+      }
     }
   }
 }

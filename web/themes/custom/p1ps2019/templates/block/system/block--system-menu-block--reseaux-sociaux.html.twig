@@ -62,7 +62,10 @@
     {{ title_prefix }}
     {% if label %}
       <div{{ title_attributes.addClass('block-title margin-vertical-2') }}>
-        <a href="{{ host_url }}" title="{{ label }}">{{ label }}</a>
+        <a href="{{ host_url }}" title="{{ label|replace({'%eol%': ''}) }}">
+          {% set label_display = {'#type': 'markup', '#markup': label|replace({'%eol%': '<br/>'})} %}
+          {{ label_display }}
+        </a>
       </div>
     {% endif %}
     {{ title_suffix }}

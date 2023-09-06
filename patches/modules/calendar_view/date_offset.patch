@@ -1,0 +1,16 @@
+diff --git a/src/Plugin/views/style/CalendarViewBase.php b/src/Plugin/views/style/CalendarViewBase.php
+index 15e3ff4..fe5ae51 100644
+--- a/src/Plugin/views/style/CalendarViewBase.php
++++ b/src/Plugin/views/style/CalendarViewBase.php
+@@ -532,9 +532,9 @@ abstract class CalendarViewBase extends DefaultStyle implements CalendarViewInte
+ 
+     foreach ($filters as $filter_id => $filter) {
+       // @todo Better check date filter/fields.
+-      if (!in_array($filter['field'] ?? NULL, $date_fields)) {
++     /* if (!in_array($filter['field'] ?? NULL, $date_fields)) {
+         continue;
+-      }
++      }*/
+ 
+       // Relative dates only for offset filters (e.g. `-1 week`).
+       if (($filter['value']['type'] ?? NULL) !== 'offset') {
