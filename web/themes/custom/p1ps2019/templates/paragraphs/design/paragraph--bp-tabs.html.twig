@@ -51,7 +51,7 @@ set classes = [
 {% set paragraph_id = 'tab-' ~ paragraph.id.value %}
 
 {# Prints Tabs template. #}
-<div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }} aria-multiselectable="true">
+<div{{ attributes.addClass(classes).setAttribute('id', paragraph_id) }}>
 <ul class="accordion-tabs" data-responsive-accordion-tabs="accordion large-tabs" data-allow-all-closed="true" role="tablist">
   {% for key, item in content.bp_tab_section if key|first != '#' %}
     <li role="tab" class="accordion-item {% if loop.first %}is-active{% endif %}" data-accordion-item>
