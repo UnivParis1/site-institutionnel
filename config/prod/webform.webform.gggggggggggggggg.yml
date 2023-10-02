@@ -1,48 +1,18 @@
-uuid: 5a12cdd4-0c0c-400a-9480-cb147bbaf08e
+uuid: e054ee9b-5459-4e9f-bb34-00d3813e86a4
 langcode: fr
-status: scheduled
+status: open
 dependencies: {  }
 weight: 0
-open: '2023-08-28T10:00:00'
+open: null
 close: null
-uid: 7710
+uid: 435
 template: false
 archive: false
-id: 10_inscription_lecteurs_exterieu
-title: '10 - Inscription lecteurs extérieurs samedi'
-description: ''
-category: 'Inscription pour entrer à la bibliothèque'
-elements: |-
-  nom_prenom:
-    '#type': webform_name
-    '#title': 'Nom, prénom'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#title__access': false
-    '#first__title': Prénom
-    '#first__required': true
-    '#middle__access': false
-    '#last__title': Nom
-    '#last__required': true
-    '#suffix__access': false
-    '#degree__access': false
-  adresse_courriel:
-    '#type': email
-    '#title': 'Adresse courriel'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  telephone:
-    '#type': tel
-    '#title': Téléphone
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
-    '#required': true
-    '#terms_content': '<p><span class="field-prefix">En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de ma demande d''inscription.</span></p>'
-  captcha:
-    '#type': captcha
+id: gggggggggggggggg
+title: gggggggggggggggg
+description: '<p>222</p>'
+category: ''
+elements: null
 css: ''
 javascript: ''
 settings:
@@ -55,9 +25,9 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
-  form_open_message: "<p>Les bibliothèques sont fermées du 21 juillet au soir au 28 août au matin. Le formulaire sera de nouveau accessible à partir du lundi 28 août.</p>\r\n\r\n<p>Nous vous souhaitons un bel été !</p>"
+  form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
@@ -127,7 +97,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -149,8 +119,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Accès à la bibliothèque le samedi : confirmation de votre inscription'
-  confirmation_message: "<p>Votre inscription a bien été prise en compte. Vous allez recevoir un <strong>courriel </strong>de confirmation. Veuillez le <strong>conserver,</strong> car il vous sera demandé à l'entrée du centre PMF.</p>\r\n\r\n<p>Le jour de l'inscription, merci de vous munir d'une <strong>pièce d'identité en cours de validité</strong> et d'un <strong>justificatif de domicile de moins de 3 mois</strong>.</p>\r\n\r\n<p>Vous pourrez ensuite accéder à la bibliothèque Pierre Mendès France, le samedi uniquement, muni de votre <strong>carte de lecteur</strong>.</p>"
+  confirmation_title: ''
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -226,42 +196,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  pretbu:
-    id: email
-    handler_id: pretbu
-    label: prêtbu
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:adresse_courriel:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: pretbu@univ-paris1.fr
-      cc_options: {  }
-      from_mail: pretbu@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Pret BU'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Accès à la bibliothèque PMF - Confirmation'
-      body: "<p>Votre demande de rendez-vous a bien été prise en compte.</p>\r\n\r\n<p>Veuillez <strong>conserver ce mail</strong>, il vous sera demandé à l'entrée du centre PMF.</p>\r\n\r\n<p>Le jour de l'inscription, merci de vous munir d'une <strong>pièce d'identité en cours de validité</strong> et d'un <strong>justificatif de domicile de moins de 3 mois</strong>.</p>\r\n\r\n<p>Vous pourrez ensuite accéder à la bibliothèque Pierre Mendès France, muni de votre <strong>carte de lecteur</strong>.</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Récapitulatif d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

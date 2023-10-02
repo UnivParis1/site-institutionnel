@@ -10,48 +10,76 @@ plugins:
     enabled: true
     weight: -50
     settings:
-      title: 'Front page'
-      rss: /rss.xml
+      title: Accueil
+      rss: ''
     id: frontpage
     provider: sitemap
   'menu:menu-liens-utiles-haut':
     enabled: true
-    weight: -46
+    weight: -49
     settings:
-      title: 'Menu liens utiles haut'
+      title: 'Accès rapide'
       show_disabled: false
     id: 'menu:menu-liens-utiles-haut'
     provider: sitemap
   'menu:mega-menu':
     enabled: true
-    weight: -45
+    weight: -48
     settings:
-      title: mega-menu
+      title: 'Menu principal'
       show_disabled: false
     id: 'menu:mega-menu'
     provider: sitemap
-  'menu:footer':
-    enabled: true
-    weight: -44
-    settings:
-      title: 'Pied de page'
-      show_disabled: false
-    id: 'menu:footer'
-    provider: sitemap
   'menu:liens-utiles':
     enabled: true
-    weight: -43
+    weight: -47
     settings:
       title: 'Liens utiles'
       show_disabled: false
     id: 'menu:liens-utiles'
     provider: sitemap
-  'menu:site-67':
+  'menu:footer':
     enabled: true
-    weight: -47
+    weight: -46
     settings:
-      title: 'Menu Chaire stratégique'
+      title: 'Pied de page'
       show_disabled: false
-    id: 'menu:site-67'
+    id: 'menu:footer'
+    provider: sitemap
+  'vocabulary:events_types':
+    enabled: true
+    weight: 0
+    settings:
+      title: Évènements
+      show_description: false
+      show_count: true
+      display_unpublished: false
+      term_depth: 9
+      term_count_threshold: 0
+      customize_link: false
+      term_link: entity.taxonomy_term.canonical|taxonomy_term
+      always_link: false
+      enable_rss: false
+      rss_link: view.taxonomy_term.feed_1|arg_0
+      rss_depth: 9
+    id: 'vocabulary:events_types'
+    provider: sitemap
+  'vocabulary:news_topics':
+    enabled: true
+    weight: 0
+    settings:
+      title: Actualités
+      show_description: false
+      show_count: true
+      display_unpublished: false
+      term_depth: 9
+      term_count_threshold: 0
+      customize_link: false
+      term_link: entity.taxonomy_term.canonical|taxonomy_term
+      always_link: false
+      enable_rss: false
+      rss_link: view.taxonomy_term.feed_1|arg_0
+      rss_depth: 9
+    id: 'vocabulary:news_topics'
     provider: sitemap
 include_css: true

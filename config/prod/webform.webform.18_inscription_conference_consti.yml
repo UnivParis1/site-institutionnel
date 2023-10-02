@@ -1,89 +1,52 @@
-uuid: 7761c472-ecb9-4e1e-9d7d-8542f2b8fe84
+uuid: 7a658ea0-8c26-4f9a-ac5f-8a2fdeb28a52
 langcode: fr
 status: scheduled
 dependencies: {  }
 weight: 0
-open: '2023-08-28T10:00:00'
-close: null
-uid: 7710
+open: '2023-09-19T17:00:00'
+close: '2023-10-03T12:00:00'
+uid: 452
 template: false
 archive: false
-id: 10_demande_de_consultation_de_th
-title: '10 - Demande de consultation de thèse - Colliard'
-description: "<p>Arborescence : Menu direction &gt; Bibliothèque Jean-Claude Colliard<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Bibliothèque Jean-Claude Colliard</em> &gt; rubrique <em>Conditions d'accès et de prêt</em></p>"
-category: Contact
+id: 18_inscription_conference_consti
+title: '18 - Inscription conférence constitution'
+description: ''
+category: 'Inscription événement'
 elements: |-
-  coordonnees:
-    '#type': webform_section
-    '#title': Coordonnées
-    nom_prenom:
-      '#type': webform_name
-      '#title': 'Nom, prénom'
-      '#required': true
-      '#title__access': false
-      '#first__title': Prénom
-      '#first__required': true
-      '#middle__access': false
-      '#last__title': Nom
-      '#last__required': true
-      '#suffix__access': false
-      '#degree__access': false
-    telephone:
-      '#type': tel
-      '#title': Téléphone
-      '#required': true
-    courriel:
-      '#type': email
-      '#title': Courriel
-      '#required': true
-  references_de_la_these:
-    '#type': webform_section
-    '#title': 'Références de la thèse'
-    titre_de_la_these:
-      '#type': textfield
-      '#title': 'Titre de la thèse'
-      '#required': true
-    auteur_de_la_these:
-      '#type': textfield
-      '#title': 'Auteur de la thèse'
-      '#required': true
-  date_souhaitee_pour_le_rendez_vous:
-    '#type': webform_section
-    '#title': 'Date souhaitée pour le rendez-vous  à la bibliothèque Jean-Claude Colliard'
-    choisir_une_date:
-      '#type': date
-      '#title': 'Choisir une date (délai minimum de 72h)'
-      '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-      '#date_days':
-        - '1'
-        - '2'
-        - '3'
-        - '4'
-        - '5'
-        - '6'
-      '#datepicker': true
-      '#datepicker_button': true
-      '#date_date_format': 'l, F j, Y'
-    creneau_souhaite:
-      '#type': radios
-      '#title': 'Créneau souhaité'
-      '#options':
-        Matin: Matin
-        Après-midi: Après-midi
-      '#required': true
-      '#options__properties': ''
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Name
     '#required': true
-    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de consultation de th&egrave;se.</span>'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': 'First name'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': Courriel
+    '#placeholder': Email
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  statut_ou_fonction:
+    '#type': textfield
+    '#title': 'Statut ou fonction'
+    '#placeholder': Role
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  rattachement_institutionnel:
+    '#type': textfield
+    '#title': 'Rattachement institutionnel'
+    '#placeholder': Institution
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   captcha:
     '#type': captcha
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Envoyer la demande'
+    '#submit__label': 'Valider l''inscription'
 css: ''
 javascript: ''
 settings:
@@ -92,14 +55,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: true
+  page: false
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: false
-  form_open_message: "<p>Les bibliothèques sont fermées du 21 juillet au soir au 28 août au matin. Le formulaire sera de nouveau accessible à partir du lundi 28 août.</p>\r\n\r\n<p>Nous vous souhaitons un bel été !</p>"
-  form_close_message: ''
+  form_submit_once: true
+  form_open_message: ''
+  form_close_message: '<p>Les inscriptions à cet événement sont closes.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -138,7 +101,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: false
+  submission_exclude_empty: true
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -188,10 +151,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: message
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "Votre demande de rendez-vous pour une consultation de th&egrave;se a &eacute;t&eacute; prise en compte. Nous vous r&eacute;pondrons dans les meilleurs d&eacute;lais, du lundi au vendredi, de 9h &agrave; 17h.<br />\r\nPour rappel : votre rendez-vous doit &ecirc;tre pris au minimum 24h &agrave; l&#39;avance."
+  confirmation_title: 'Inscription confirmée'
+  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -199,15 +162,15 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 45
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <strong><a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a></strong>. Après votre inscription sur cette liste d'attente, nous vous contacterons uniquement si une place se libère. Sans nouvelles de notre part, il est inutile de vous déplacer.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false
-  entity_limit_total: null
+  entity_limit_total: 45
   entity_limit_total_interval: null
   entity_limit_user: null
   entity_limit_user_interval: null
@@ -268,35 +231,33 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email:
+  courriel_aux_personnes_inscrites_en_presentiel:
     id: email
-    handler_id: email
-    label: bucolliard@univ-paris1.fr
+    handler_id: courriel_aux_personnes_inscrites_en_presentiel
+    label: 'Courriel aux personnes inscrites'
     notes: ''
     status: true
     conditions: {  }
-    weight: 0
+    weight: 1
     settings:
       states:
         - completed
-      to_mail: bucolliard@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
-      bcc_mail: ''
+      bcc_mail: marine.conde@univ-paris1.fr
       bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: marine.conde@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom_prenom:value]'
-      reply_to: ''
+      from_name: 'Marine Condé'
+      reply_to: marine.conde@univ-paris1.fr
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Votre demande de consultation de thèse'
-      body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Veuillez conserver ce mail. Il vous sera n&eacute;cessaire pour acc&eacute;der au centre.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
-      excluded_elements:
-        terms_of_service: terms_of_service
-        captcha: captcha
+      subject: 'Inscription enregistrée pour [webform_submission:source-title]'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre inscription, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>Vos informations d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>En cas d'empêchement, je vous serais reconnaissante de m'en informer au plus vite.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marine Condé</p>"
+      excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false

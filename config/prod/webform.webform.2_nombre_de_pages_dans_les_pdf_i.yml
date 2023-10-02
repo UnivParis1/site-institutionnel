@@ -1,89 +1,67 @@
-uuid: 7761c472-ecb9-4e1e-9d7d-8542f2b8fe84
+uuid: 0cdd44b2-ccf4-4458-84f3-aeb2f672baa7
 langcode: fr
-status: scheduled
+status: open
 dependencies: {  }
 weight: 0
-open: '2023-08-28T10:00:00'
+open: null
 close: null
-uid: 7710
+uid: 13
 template: false
 archive: false
-id: 10_demande_de_consultation_de_th
-title: '10 - Demande de consultation de thèse - Colliard'
-description: "<p>Arborescence : Menu direction &gt; Bibliothèque Jean-Claude Colliard<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Bibliothèque Jean-Claude Colliard</em> &gt; rubrique <em>Conditions d'accès et de prêt</em></p>"
-category: Contact
+id: 2_nombre_de_pages_dans_les_pdf_i
+title: '2 - Nombre de pages dans les PDF indispensable'
+description: ''
+category: ''
 elements: |-
-  coordonnees:
-    '#type': webform_section
-    '#title': Coordonnées
-    nom_prenom:
-      '#type': webform_name
-      '#title': 'Nom, prénom'
-      '#required': true
-      '#title__access': false
-      '#first__title': Prénom
-      '#first__required': true
-      '#middle__access': false
-      '#last__title': Nom
-      '#last__required': true
-      '#suffix__access': false
-      '#degree__access': false
-    telephone:
-      '#type': tel
-      '#title': Téléphone
-      '#required': true
-    courriel:
-      '#type': email
-      '#title': Courriel
-      '#required': true
-  references_de_la_these:
-    '#type': webform_section
-    '#title': 'Références de la thèse'
-    titre_de_la_these:
+  identifiez_vous:
+    '#type': webform_wizard_page
+    '#title': Identifiez-vous
+    nom:
       '#type': textfield
-      '#title': 'Titre de la thèse'
+      '#title': 'Nom et prénom'
       '#required': true
-    auteur_de_la_these:
-      '#type': textfield
-      '#title': 'Auteur de la thèse'
-      '#required': true
-  date_souhaitee_pour_le_rendez_vous:
-    '#type': webform_section
-    '#title': 'Date souhaitée pour le rendez-vous  à la bibliothèque Jean-Claude Colliard'
-    choisir_une_date:
-      '#type': date
-      '#title': 'Choisir une date (délai minimum de 72h)'
-      '#required': true
+      '#required_error': 'Votre prénom et nom sont obligatoires'
+      '#default_value': '[cas:attribute:givenname] [cas:attribute:sn]'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-      '#date_days':
-        - '1'
-        - '2'
-        - '3'
-        - '4'
-        - '5'
-        - '6'
-      '#datepicker': true
-      '#datepicker_button': true
-      '#date_date_format': 'l, F j, Y'
-    creneau_souhaite:
-      '#type': radios
-      '#title': 'Créneau souhaité'
-      '#options':
-        Matin: Matin
-        Après-midi: Après-midi
+    votre_courriel:
+      '#type': email
+      '#title': 'Votre courriel'
       '#required': true
-      '#options__properties': ''
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
-    '#required': true
-    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de consultation de th&egrave;se.</span>'
-  captcha:
-    '#type': captcha
-  actions:
-    '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Envoyer la demande'
+      '#required_error': 'Votre courriel est obligatoire'
+      '#default_value': '[current-user:mail]'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    url_de_votre_site_:
+      '#type': url
+      '#title': 'URL de votre site :'
+      '#required': true
+      '#required_error': 'L''URL de votre site est obligatoire'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  pagequantity:
+    '#type': webform_wizard_page
+    '#title': Estimation
+    textquantity:
+      '#type': webform_markup
+      '#markup': '<p>Afin d''évaluer la charge de travail et le coût de mise en conformité des PDFs sur chaque site, merci d''indiquer ci-dessous, la quantité de PDF qui vous semble indispensable (ceux qui concernent le plus grand nombre de personnes, qui sont à lire absolument, etc.) et d''indiquer pour chacun d''entre eux, leur nombre de pages.</p>'
+    quantite_de_pdfs_important:
+      '#type': number
+      '#title': 'Quantité de PDFs important :'
+      '#field_suffix': PDFs
+      '#placeholder': '3'
+      '#required': true
+      '#required_error': 'Indiquez la quantité de PDF important'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#attributes':
+        style: 'display: inline;'
+    somme_totale_du_nombre_de_pages_de_ces_pdfs:
+      '#type': number
+      '#title': 'Somme totale du nombre de pages dans ces PDFs :'
+      '#field_suffix': pages
+      '#placeholder': '26'
+      '#required': true
+      '#required_error': 'Indiquez le nombre complet de page'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#attributes':
+        style: 'display: inline;'
 css: ''
 javascript: ''
 settings:
@@ -96,9 +74,9 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
-  form_open_message: "<p>Les bibliothèques sont fermées du 21 juillet au soir au 28 août au matin. Le formulaire sera de nouveau accessible à partir du lundi 28 août.</p>\r\n\r\n<p>Nous vous souhaitons un bel été !</p>"
+  form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
@@ -168,7 +146,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -191,7 +169,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "Votre demande de rendez-vous pour une consultation de th&egrave;se a &eacute;t&eacute; prise en compte. Nous vous r&eacute;pondrons dans les meilleurs d&eacute;lais, du lundi au vendredi, de 9h &agrave; 17h.<br />\r\nPour rappel : votre rendez-vous doit &ecirc;tre pris au minimum 24h &agrave; l&#39;avance."
+  confirmation_message: "<p>Merci pour votre participation.</p>\r\n\r\n<p>Je reviendrai vers vous lors d'un prochain petit déjeuner pour vous donner le résultat des courses....</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -267,44 +245,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  email:
-    id: email
-    handler_id: email
-    label: bucolliard@univ-paris1.fr
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: bucolliard@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom_prenom:value]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Votre demande de consultation de thèse'
-      body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Veuillez conserver ce mail. Il vous sera n&eacute;cessaire pour acc&eacute;der au centre.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
-      excluded_elements:
-        terms_of_service: terms_of_service
-        captcha: captcha
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }
