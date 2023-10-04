@@ -1,0 +1,86 @@
+uuid: 81f834c4-8f9b-46a5-92a4-c45ad20721fc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.homepage_carousel
+    - field.field.node.news.comment
+    - field.field.node.news.field_categories
+    - field.field.node.news.field_disable_canonical_url
+    - field.field.node.news.field_lead
+    - field.field.node.news.field_media
+    - field.field.node.news.field_news_date
+    - field.field.node.news.field_news_topic
+    - field.field.node.news.field_paragraphs
+    - field.field.node.news.field_publish_master
+    - field.field.node.news.field_related_news
+    - field.field.node.news.field_signature
+    - field.field.node.news.field_sites
+    - field.field.node.news.field_sites_all
+    - field.field.node.news.field_tag
+    - node.type.news
+  module:
+    - datetime
+    - text
+    - user
+_core:
+  default_config_hash: Gp86l3QzHHkplQwGqvKFBgU2ItCGjdOkbfoXt12bVBw
+id: node.news.homepage_carousel
+targetEntityType: node
+bundle: news
+mode: homepage_carousel
+content:
+  field_lead:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: homepage
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_news_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: news_date
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_news_topic:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  social_simple_buttons:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  comment: true
+  content_moderation_control: true
+  field_categories: true
+  field_disable_canonical_url: true
+  field_paragraphs: true
+  field_publish_master: true
+  field_related_news: true
+  field_signature: true
+  field_sites: true
+  field_sites_all: true
+  field_tag: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  site_id: true

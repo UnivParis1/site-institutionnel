@@ -4,9 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
-    - field.field.node.page.field_diapo_homepage
     - field.field.node.page.field_disable_canonical_url
     - field.field.node.page.field_display_node_changed
+    - field.field.node.page.field_highlight_link
+    - field.field.node.page.field_highlight_news
     - field.field.node.page.field_indexrobots
     - field.field.node.page.field_media
     - field.field.node.page.field_paragraphs
@@ -15,9 +16,11 @@ dependencies:
     - field.field.node.page.field_sites
     - field.field.node.page.field_sites_all
     - field.field.node.page.field_sub_title
+    - field.field.node.page.field_video
     - node.type.page
   module:
     - entity_reference_revisions
+    - link
     - user
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
@@ -31,6 +34,28 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_highlight_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_highlight_news:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
     label: visually_hidden
@@ -40,6 +65,15 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_video:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -47,7 +81,6 @@ content:
     region: content
 hidden:
   body: true
-  field_diapo_homepage: true
   field_disable_canonical_url: true
   field_display_node_changed: true
   field_indexrobots: true
