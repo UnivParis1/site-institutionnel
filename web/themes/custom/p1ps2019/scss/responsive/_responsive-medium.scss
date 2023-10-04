@@ -78,7 +78,27 @@
   }
   body{
     &:not(.transparent){
-      padding-top: rem-calc(64px);
+      padding-top: rem-calc(72px);
+    }
+  }
+  #navbar{
+    &.header-medium {
+      height: calc(30vh - 72px);
+      min-height: 375px;
+      .path-frontpage & {
+        height: calc(100vh - 72px);
+        min-height: 620px;
+      }
+    }
+    .screen-medium-height{
+      .header-img *{
+        height: calc(30vh - 72px);
+        min-height: 275px;
+        .path-frontpage & {
+          height: calc(100vh - 72px);
+          min-height: 620px;
+        }
+      }
     }
   }
   #breadcrumbs{
@@ -87,25 +107,25 @@
   }
   /* TYPOGRAPHY -- BEGIN */
   h1, .h1-style {
-    font-size: rem-calc(32px); line-height: 1.33;
+    font-size: rem-calc(48px); line-height: 1.33;
   }
   .path-site h1, .path-site .h1-style {
     font-size: rem-calc(48px); line-height: 1.33;
   }
   h2, .h2-style, .event h1, .news h1{
-    font-size: rem-calc(22px); line-height: 1.18;
+    font-size: rem-calc(36px); line-height: 1.18;
   }
   h3, .h3-style{
-    font-size: rem-calc(18px); line-height: 1.44;
+    font-size: rem-calc(24px); line-height: 1.44;
   }
   h4, .h4-style{
-    font-size: rem-calc(14px);  line-height: 1.5;
+    font-size: rem-calc(20px);  line-height: 1.5;
   }
   h5, .h5-style{
-    font-size: rem-calc(13px);
+    font-size: rem-calc(18px);
   }
   h6, .h6-style{
-    font-size: rem-calc(13px);
+    font-size: rem-calc(16px);
   }
   /* TYPOGRAPHY -- END */
 
@@ -143,7 +163,6 @@
     margin-top: rem-calc(32px);
   }
 
-
   .no-padding-mobile.column-wrapper{
     .grid-x, .cell{
       margin: 0; width: 100%;
@@ -158,7 +177,6 @@
       }
     }
   }
-
 
   .paragraph--type--key-figures-section,
   .paragraph--type--section-presentation,
@@ -373,8 +391,8 @@
     .btn, .button--primary,
     button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
     input[type="submit"].button {
-      font-size: rem-calc(17px); line-height: 1.71;
-      margin-top: rem-calc(16px);
+      //font-size: rem-calc(17px); line-height: 1.71;
+      //margin-top: rem-calc(16px);
       &.margin-gutter{
         margin-top: rem-calc(16px);
       }
@@ -708,7 +726,7 @@
   }
 
   .tuile-avec-texte{
-    min-height: rem-calc(465px);
+    //min-height: rem-calc(465px);
     padding: rem-calc(32px);
     background-repeat: no-repeat; background-size: cover;
     .infos{

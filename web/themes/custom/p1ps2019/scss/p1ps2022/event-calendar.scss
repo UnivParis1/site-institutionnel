@@ -89,7 +89,10 @@
         content: "";
         position: absolute;
         z-index: 0;
-        background-color: $white;
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
         top: 0;
         bottom: 0;
         left: 1rem;
@@ -105,23 +108,37 @@
       .calendar-view-table {
         position: relative;
         z-index: 1;
-        background-color: $white;
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
         caption {
           .calendar-view-pager {
             background-color: transparent;
             border: none;
             flex-direction: row !important;
             .pager__item {
+              flex-grow: 0;
+              display: flex;
+              align-items: center;
               > * {
                 padding: 0;
               }
-              &.pager__current > div {
-                font-family: $font-headings;
-                @include setFont($fontType-bold);
-                font-size: rem-calc(24px);
-                line-height: 1.2;
-                color: $text-main-color;
-              }
+              &.pager__current {
+                flex-grow: 1;
+                justify-content: center;
+                > div {
+                  font-family: $font-headings;
+                  @include setFont($fontType-bold);
+                  font-size: rem-calc(24px);
+                  line-height: 1.2;
+                  color: $text-main-color;
+                  .accessibility-mode & {
+                    color: $white;
+                  }
+                  word-break: normal;
+                }
+              } 
               &.pager__previous,
               &.pager__next {
                 a {
@@ -170,6 +187,9 @@
             th {
               background-color: transparent;
               color: $text-main-color;
+              .accessibility-mode & {
+                color: $white;
+              }
             }
           }
         }
@@ -194,6 +214,9 @@
           }
           &.current-day {
             background-color: $background-main-color;
+            .accessibility-mode & {
+              background-color: $black;
+            }
             .calendar-view-day__number {
               color: $white;
             }
@@ -205,6 +228,9 @@
             font-size: 1rem;
             background: transparent;
             color: $text-main-color;
+            .accessibility-mode & {
+              color: $white;
+            }
             @include setFont($fontType-medium);
             margin-bottom: 0;
             cursor: pointer;
@@ -231,7 +257,10 @@
     .view-results {
       overflow: auto;
       .views-row {
-        background-color: $white;
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
         margin-bottom: 1rem;
         padding: 1rem;
         .views-field-field-event-type {
@@ -301,7 +330,10 @@
 .btn.active{
   border-color: $text-white;
   color: $text-main-color;
-  background-color: $background-white
+  background-color: $background-white;
+  .accessibility-mode & {
+    background-color: #868483;
+  }
 }
 
 
@@ -364,7 +396,10 @@
         margin: 0 1rem 0 0;
         white-space: nowrap;
         color: $text-main-color;
-        background-color: $white;
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
         border-color: $text-main-color;
         padding: rem-calc(12px 12px);
         font-size: rem-calc(14px) !important;
@@ -415,7 +450,10 @@
           border: none !important;
           border-radius: 0;
           padding: 0.5rem 0 0 0;
-          background-color: $white;
+          background-color: $background-white;
+          .accessibility-mode & {
+            background-color: #868483;
+          }
           box-shadow: 0px 20px 25px 0px rgba($background-main-color,0.75);
           .chosen-search input[type="text"] {
             margin: 0 0 0.5rem 0;
@@ -452,7 +490,10 @@
     padding: 0;
     overflow: hidden;
     text-indent: -500px;
-    background-color: $white;
+    background-color: $background-white;
+    .accessibility-mode & {
+      background-color: #868483;
+    }
     background-image: url("../images/p1ps2022/picto-refresh.svg");
     background-repeat: no-repeat;
     background-position: center center;
