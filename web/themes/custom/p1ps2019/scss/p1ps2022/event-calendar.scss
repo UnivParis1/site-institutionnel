@@ -1,0 +1,601 @@
+.view-display-id-block_calendar {
+  align-items: center;
+  .view-filters {
+    display: flex;
+    flex-grow: 1;
+    form {
+      flex-wrap: nowrap;
+      .form-item {
+        display: flex;
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          li {
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            a {
+              font-family: $font-main;
+              text-align: center;
+              font-size: rem-calc(13px);
+              line-height: 1.2;
+              @include setFont($fontType-medium);
+              padding: rem-calc(4px 12px);
+              display: inline-block;
+              border-radius: 50rem;
+              border: 1px solid $gray2;
+              &:hover,
+              &:focus {
+                text-decoration: none;
+                color: $gold-p1ps;
+                border-color: $gold-p1ps;
+              }
+              &.bef-link--selected {
+                text-decoration: none;
+                color: $white;
+                background-color: $gold-p1ps;
+                border-color: $gold-p1ps;
+              }
+            }
+          }
+        }
+      }
+    }
+    @include breakpoint($large - 1 down) {
+      .grid-container {
+        max-width: calc(100vw - 0.75rem);
+      }
+      form {
+        margin-left: 0.75rem;
+        .form-item {
+          width: 100%;
+          overflow: auto;
+          ul {
+            flex-wrap: nowrap;
+            li {
+              a {
+                word-break: normal;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+    }
+    .form-actions {
+      display: none;
+    }
+  }
+
+  .two-col-calendar {
+    display: flex;
+    width: 100%;
+    @include breakpoint($large - 1 down) {
+      flex-direction: column;
+    }
+    .view-calendar,
+    .view-results {
+      width: 100%;
+      @extend .large-6;
+      @extend .grid-container;
+      height: 485px;
+      @include breakpoint($large - 1 down) {
+        height: auto;
+        max-height: 485px;
+      }
+    }
+    .view-calendar {
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
+        top: 0;
+        bottom: 0;
+        left: 1rem;
+        right: 1rem;
+        @include breakpoint($large - 1 down) {
+          left: 0;
+          right: 0;
+        }
+      }
+      @include breakpoint($large - 1 down) {
+        margin-bottom: 1rem;
+      }
+      .calendar-view-table {
+        position: relative;
+        z-index: 1;
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
+        caption {
+          .calendar-view-pager {
+            background-color: transparent;
+            border: none;
+            flex-direction: row !important;
+            .pager__item {
+              flex-grow: 0;
+              display: flex;
+              align-items: center;
+              > * {
+                padding: 0;
+              }
+              &.pager__current {
+                flex-grow: 1;
+                justify-content: center;
+                > div {
+                  font-family: $font-headings;
+                  @include setFont($fontType-bold);
+                  font-size: rem-calc(24px);
+                  line-height: 1.2;
+                  color: $text-main-color;
+                  .accessibility-mode & {
+                    color: $white;
+                  }
+                  word-break: normal;
+                }
+              } 
+              &.pager__previous,
+              &.pager__next {
+                a {
+                  width: 50px;
+                  display: inline-block;
+                  overflow: hidden;
+                  text-indent: -500px;
+                  text-align: left;
+                  position: relative;
+                  &:before {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                    text-indent: 0;
+                    font-family: "Font Awesome 6 Free";
+                    font-weight: 900;
+                  }
+                }
+              }
+              &.pager__previous {
+                a {
+                  &:before {
+                    content: "\f053";
+                  }
+                }
+              }
+               &.pager__next {
+                a {
+                  &:before {
+                    content: "\f054";
+                  }
+                }
+              }
+            }
+          }
+        }
+        thead,
+        .next-month,
+        .previous-month {
+          display: flex !important;
+        }
+        thead {
+          background-color: transparent;
+          tr {
+            th {
+              background-color: transparent;
+              color: $text-main-color;
+              .accessibility-mode & {
+                color: $white;
+              }
+            }
+          }
+        }
+        tr {
+          @include breakpoint($large - 1 down) {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr !important;
+          }
+        }
+        th, td {
+          border: none;
+          min-height: 0;
+          align-items: center;
+          text-align: center;
+        }
+        td {
+          padding: 0;
+          //min-height: 75px;
+          min-height: 60px;
+          &.previous-month,
+          &.next-month {
+            background-color: transparent;
+          }
+          &.current-day {
+            background-color: $background-main-color;
+            .accessibility-mode & {
+              background-color: $black;
+            }
+            .calendar-view-day__number {
+              color: $white;
+            }
+          }
+          .calendar-view-day {
+            padding: 0;
+          }
+          .calendar-view-day__number {
+            font-size: 1rem;
+            background: transparent;
+            color: $text-main-color;
+            .accessibility-mode & {
+              color: $white;
+            }
+            @include setFont($fontType-medium);
+            margin-bottom: 0;
+            cursor: pointer;
+          }
+          .calendar-view-day__rows {
+            span {
+              color: transparent;
+              &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: $gold-p1ps;
+              }
+            }
+          }
+        }
+      }
+    }
+    .view-results {
+      overflow: auto;
+      .views-row {
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
+        margin-bottom: 1rem;
+        padding: 1rem;
+        .views-field-field-event-type {
+          margin-bottom: 1rem;
+          .event_type {
+            a {
+              font-family: $font-main;
+              text-align: center;
+              font-size: rem-calc(13px);
+              line-height: 1.2;
+              @include setFont($fontType-medium);
+              padding: rem-calc(4px 12px);
+              display: inline-block;
+              border-radius: 50rem;
+              color: $white;
+              background-color: $gold-p1ps;
+            }
+          }
+        }
+        .views-field-title {
+          margin-bottom: 1rem;
+          span {
+            font-family: $font-headings;
+            @include setFont($fontType-bold);
+            font-size: rem-calc(24px);
+            line-height: 1.2;
+          }
+        }
+        .views-field-field-event-date {
+          .field-content {
+            display: flex;
+            align-items: flex-start;
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/picto-calendar.svg") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
+            }
+          }
+        }
+        .views-field-field-event-address {
+          .field-content {
+            display: flex;
+            align-items: flex-start;
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/pointer-icon.svg") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .view-footer {
+    width: 100%;
+    text-align: center;
+  }
+}
+.btn.active{
+  border-color: $text-white;
+  color: $text-main-color;
+  background-color: $background-white;
+  .accessibility-mode & {
+    background-color: #868483;
+  }
+}
+
+
+#views-exposed-form-agenda-block-1 {
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  @include breakpoint($large - 1 down) {
+    display: block;
+  }
+  .form-item {
+    margin: 0;
+    &:not(.form-actions) {
+      width: auto !important;
+    }
+  }
+  .agenda-form-item-1 {
+    display: flex;
+    align-items: flex-end;
+    @include breakpoint($large - 1 down) {
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .grp-top {
+      span {
+        font-family: $font-headings;
+        @include setFont($fontType-bold);
+        font-size: rem-calc(18px) !important;
+        line-height: 1.2;
+        color: $text-main-color;
+        display: block;
+        margin-bottom: 0.5rem;
+        white-space: nowrap;
+      }
+      input#agenda_datepicker {
+        border-width: 1px;
+        border-color: $gray2;
+        width: calc(100% - 1rem);
+        background-image: url(../images/p1ps2022/picto-calendar.svg);
+        background-repeat: no-repeat;
+        background-position: 16px center;
+        padding-left: rem-calc(48px);
+        font-size: rem-calc(16px) !important;
+        line-height: 1.22 !important;
+        font-style: normal;
+        @include breakpoint($large - 1 down) {
+          width: 100%;
+        }
+        &::placeholder {
+          font-size: rem-calc(16px) !important;
+          line-height: 1.22 !important;
+          font-style: normal;
+        }
+      }
+    }
+    
+    .grp-btn {
+      display: flex;
+      button {
+        margin: 0 1rem 0 0;
+        white-space: nowrap;
+        color: $text-main-color;
+        background-color: $background-white;
+        .accessibility-mode & {
+          background-color: #404040
+        }
+        border-color: $text-main-color;
+        padding: rem-calc(12px 12px);
+        font-size: rem-calc(14px) !important;
+        line-height: 1.22 !important;
+        &:hover,
+        &:focus,
+        &.active {
+          color: $white;
+          background-color: $background-main-color;
+        }
+      }
+      @include breakpoint($large - 1 down) {
+        display: none;
+      }
+    }
+  }
+  .agenda-form-item-2 {
+    flex-grow: 1;
+    .chosen-container {
+      margin-bottom: 1rem;
+      @include breakpoint($large) {
+        margin-bottom: 0;
+        width: auto !important;
+        padding: 0 1rem;
+        border-left: 1px solid $gray2;
+        border-right: 1px solid $gray2;
+      }
+      .chosen-single {
+        border-width: 1px;
+        border-color: $gray2;
+        span {
+          font-size: rem-calc(16px);
+          font-style: normal;
+        }
+      }
+      .chosen-drop {
+        white-space: nowrap;
+      }
+      &.chosen-container-active.chosen-with-drop {
+        .chosen-single {
+          background-image: none;
+          box-shadow: none;
+          border-bottom-right-radius: 50rem;
+          border-bottom-left-radius: 50rem;
+        }
+        .chosen-drop {
+          margin-top: 0;
+          border: none !important;
+          border-radius: 0;
+          padding: 0.5rem 0 0 0;
+          background-color: $background-white;
+          .accessibility-mode & {
+            background-color: #868483;
+          }
+          box-shadow: 0px 20px 25px 0px rgba($background-main-color,0.75);
+          .chosen-search input[type="text"] {
+            margin: 0 0 0.5rem 0;
+            padding: 5px 20px 5px 5px;
+            border: 1px solid $gray2;
+            //background: url(chosen-sprite.png) no-repeat 100% -20px;
+            background: url("../images/p1ps2022/chosen-search.png") no-repeat right center / 19px 13px !important;
+            font-size: 1rem;
+            font-family: $font-main;
+          }
+        }
+      }
+    }
+  }
+  input[type=submit]:not(.reset-btn) {
+    width: 100%;
+    border-width: 1px;
+    padding: rem-calc(12px 12px);
+    font-size: rem-calc(14px) !important;
+    line-height: 1.22 !important;
+    margin: 0;
+    @include breakpoint($large) {
+      margin-left: 1rem;
+      width: auto;
+    }
+  }
+  > input[type=submit]:not(.reset-btn) {
+    @include breakpoint($large) {
+      width: 45px;
+      margin-bottom: 0;
+    }
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    padding: 0;
+    overflow: hidden;
+    text-indent: -500px;
+    background-color: $background-white;
+    .accessibility-mode & {
+      background-color: #868483;
+    }
+    background-image: url("../images/p1ps2022/picto-refresh.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    &:hover,
+    &:focus {
+      background-color: $background-main-color;
+      background-image: url("../images/p1ps2022/picto-refresh-white.svg");
+    }
+  }
+}
+
+// DATE PICKER
+.ui-widget.ui-widget-content {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  width: auto;
+  box-shadow: 0px 20px 25px 0px rgba($background-main-color,0.75);
+  @include breakpoint($large - 1 down) {
+    width: calc(100% - 64px);
+  }
+  font-family: $font-main;
+  @include setFont($fontType-medium);
+  .ui-datepicker-header {
+    background-color: transparent;
+    border: none;
+    margin-top: 1rem;
+    .ui-datepicker-title {
+      font-family: $font-headings;
+      @include setFont($fontType-bold);
+      font-size: rem-calc(24px);
+      line-height: 1.2;
+      color: $text-main-color;
+    }
+    .ui-datepicker-prev,
+    .ui-datepicker-next {
+      span {
+        display: none;
+      }
+      &:before {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        text-indent: 0;
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+      }
+      &:hover,
+      &:focus,
+      &.ui-state-hover {
+        border: none;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    }
+    .ui-datepicker-prev {
+      &:before {
+        content: "\f053";
+      }
+    }
+    .ui-datepicker-next {
+      &:before {
+        content: "\f054";
+      }
+    }
+  }
+  table {
+    margin: 0;
+    font-size: rem-calc(16px);
+    thead {
+      background-color: transparent;
+      color: $text-main-color;
+       span {
+        @include setFont($fontType-medium);
+      }
+    }
+    tr {
+      td {
+        padding: 0;
+        text-align: center;
+        vertical-align: middle;
+        a {
+          border: none;
+          background-color: transparent;
+          text-align: center;
+          color: $text-main-color;
+          padding: rem-calc(20px 26px);
+          @include breakpoint($large - 1 down) {
+            padding: rem-calc(20px 5px);
+          }
+          &.ui-state-highlight {
+            color: $white;
+            background-color: $background-main-color;
+          }
+          &:hover,
+          &:focus,
+          &.ui-state-active {
+            background-color: rgba($background-main-color, 0.5);
+          }
+        }
+      }
+    }
+  }
+}

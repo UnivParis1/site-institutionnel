@@ -1,0 +1,119 @@
+#views-exposed-form-listings-page-2 {
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  @include breakpoint($large - 1 down) {
+    display: block;
+  }
+  .form-item-title {
+    margin-bottom: 1rem;
+    @include breakpoint($large) {
+      margin-bottom: 0;
+    }
+    input {
+      border-width: 1px;
+      border-color: $gray2;
+      width: 100%;
+      padding-left: rem-calc(24px);
+      font-size: rem-calc(16px) !important;
+      line-height: 1.22 !important;
+      font-style: normal;
+      @include breakpoint($large - 1 down) {
+        width: 100%;
+      }
+      &::placeholder {
+        font-size: rem-calc(16px) !important;
+        line-height: 1.22 !important;
+        font-style: normal;
+      }
+    }
+  }
+  .form-item-topic {
+    //flex-grow: 1;
+    @include breakpoint($large - 1 down) {
+      margin-left: 0;
+    }
+    .chosen-container {
+      @include breakpoint($large) {
+        width: auto !important;
+      }
+      .chosen-single {
+        border-width: 1px;
+        border-color: $gray2;
+        span {
+          font-size: rem-calc(16px);
+          font-style: normal;
+        }
+      }
+      .chosen-drop {
+        white-space: nowrap;
+      }
+      &.chosen-container-active.chosen-with-drop {
+        .chosen-single {
+          background-image: none;
+          box-shadow: none;
+          border-bottom-right-radius: 50rem;
+          border-bottom-left-radius: 50rem;
+        }
+        .chosen-drop {
+          margin-top: 0;
+          border: none !important;
+          border-radius: 0;
+          padding: 0.5rem 0 0 0;
+          background-color: $white;
+          box-shadow: 0px 20px 25px 0px rgba($background-main-color,0.75);
+          .chosen-search input[type="text"] {
+            margin: 0 0 0.5rem 0;
+            padding: 5px 20px 5px 5px;
+            border: 1px solid $gray2;
+            //background: url(chosen-sprite.png) no-repeat 100% -20px;
+            background: url("../images/p1ps2022/chosen-search.png") no-repeat right center / 19px 13px !important;
+            font-size: 1rem;
+            font-family: $font-main;
+          }
+        }
+      }
+    }
+  }
+
+  .form-item-date {
+    flex-grow: 1;
+    @include breakpoint($large - 1 down) {
+      margin-top: 1rem;
+      margin-left: 0;
+      display: block;
+    }
+    input {
+      border-width: 1px;
+      border-color: $gray2;
+      width: auto;
+      padding-left: rem-calc(24px);
+      font-size: rem-calc(16px) !important;
+      line-height: 1.22 !important;
+      font-style: normal;
+      @include breakpoint($large - 1 down) {
+        width: 100%;
+      }
+      &::placeholder {
+        font-size: rem-calc(16px) !important;
+        line-height: 1.22 !important;
+        font-style: normal;
+      }
+    }
+  }
+
+  .form-actions {
+    input {
+      max-width: calc(100% - 1rem);
+      @include breakpoint($large - 1 down) {
+        margin-left: 0;
+        max-width: none;
+      }
+      @include breakpoint($xlarge - 1 down) {
+        line-height: 1.22;
+        font-size: rem-calc(14px) !important;
+      }
+    }
+  }
+
+}

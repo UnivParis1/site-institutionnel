@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_search_api.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+/**
+ * Implements hook_help().
+ */
+function up1_search_api_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_search_api module.
+    case 'help.page.up1_search_api':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Defines combined facets for more readable facets.') . '</p>';
+      $output .= '<p>' . t('Defines aggregated dates in the index.') . '</p>';
+      return $output;
+
+    default:
+  }
+}

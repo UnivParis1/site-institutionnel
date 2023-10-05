@@ -1,0 +1,37 @@
+uuid: 2166e411-f2e2-4502-bdfd-e6d2ed588225
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - taxonomy
+id: term_path
+label: 'term path'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:vocabulary:name]/[term:name]'
+selection_criteria:
+  c019d169-bd9e-4fe1-902d-5d4841d7d6a3:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: c019d169-bd9e-4fe1-902d-5d4841d7d6a3
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      categories: categories
+      collections: collections
+      offers: offers
+      press: press
+      publishers: publishers
+  a18c4d7f-3629-47a3-9571-60dbb94b30ad:
+    id: language
+    negate: false
+    uuid: a18c4d7f-3629-47a3-9571-60dbb94b30ad
+    context_mapping:
+      language: 'taxonomy_term:langcode:language'
+    langcodes:
+      fr: fr
+selection_logic: and
+weight: -5
+relationships:
+  'taxonomy_term:langcode:language':
+    label: Langue

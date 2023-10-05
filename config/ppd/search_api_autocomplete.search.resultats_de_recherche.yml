@@ -1,0 +1,52 @@
+uuid: 1530dbee-02a3-4f89-923c-8bd5f01f5a1a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - search_api.index.preprod_data
+    - views.view.resultats_de_recherche
+  module:
+    - views
+    - search_api_autocomplete
+id: resultats_de_recherche
+label: Recherche
+index_id: preprod_data
+suggester_settings:
+  live_results:
+    fields:
+      - title
+    highlight:
+      enabled: false
+      field: ''
+    suggest_keys: false
+    view_modes:
+      'entity:node':
+        event: ''
+        news: ''
+        offer: ''
+        page: ''
+        press: ''
+        publication: ''
+        second_level_pages: ''
+        viva: ''
+  server:
+    fields:
+      - title
+suggester_weights:
+  live_results: 0
+  server: 0
+suggester_limits:
+  live_results: 10
+  server: 15
+search_settings:
+  'views:resultats_de_recherche':
+    displays:
+      default: true
+      selected: {  }
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true

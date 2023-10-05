@@ -1,0 +1,42 @@
+uuid: 35e66beb-215e-418a-99f6-fda1e7bd1c03
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.search_index
+    - field.field.paragraph.rich_content.bp_background
+    - field.field.paragraph.rich_content.bp_link
+    - field.field.paragraph.rich_content.field_image_position
+    - field.field.paragraph.rich_content.field_media_image
+    - field.field.paragraph.rich_content.field_text
+    - field.field.paragraph.rich_content.field_title
+    - paragraphs.paragraphs_type.rich_content
+  module:
+    - text
+id: paragraph.rich_content.search_index
+targetEntityType: paragraph
+bundle: rich_content
+mode: search_index
+content:
+  field_text:
+    type: text_trimmed
+    label: visually_hidden
+    settings:
+      trim_length: 250
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  bp_background: true
+  bp_link: true
+  field_image_position: true
+  field_media_image: true
+  search_api_excerpt: true

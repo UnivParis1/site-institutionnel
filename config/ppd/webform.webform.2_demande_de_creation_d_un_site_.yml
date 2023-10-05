@@ -1,0 +1,412 @@
+uuid: 4573cd8c-f6e7-4671-a25f-3f45bfd025ad
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 13
+template: false
+archive: false
+id: 2_demande_de_creation_d_un_site_
+title: '2 - Demande de création d''un site drupal'
+description: ''
+category: ''
+elements: |-
+  titre_du_formulaire:
+    '#type': webform_markup
+    '#markup': '<h2>Demande de cr&eacute;ation de site Drupal</h2>'
+  votre_nom_:
+    '#type': textfield
+    '#title': 'Votre nom :'
+    '#required': true
+    '#required_error': 'Merci d''indiquer votre nom'
+    '#default_value': '[cas:attribute:sn]'
+  votre_prenom_:
+    '#type': textfield
+    '#title': 'Votre prénom :'
+    '#required': true
+    '#required_error': 'Merci d''indiquer votre prénom'
+    '#default_value': '[cas:attribute:givenname]'
+  votre_adresse_courriel_:
+    '#type': email
+    '#title': 'Votre adresse courriel :'
+    '#required': true
+    '#required_error': 'Merci d''indiquer votre courriel'
+    '#default_value': '[current-user:mail]'
+  type_de_site_:
+    '#type': radios
+    '#title': 'Type de site :'
+    '#options':
+      Départements: Départements
+      Instituts: Instituts
+      Directions: Directions
+      'Unité de recherche (UMR, EA)': 'Unité de recherche (UMR, EA)'
+      'École doctorale': 'École doctorale'
+      'Axe de recherches': 'Axe de recherches'
+      Diplôme: Diplôme
+      Association: Association
+      Autre: 'Autre -- (si vous cochez cette case, utilisez le champ remarques éventuelles pour explicité votre choix)'
+    '#options_display': two_columns
+    '#required': true
+    '#required_error': 'Merci d''indiquer le type de site'
+  url_de_la_page_du_diplome_sur_le_catalogue_de_l_offre_de_formati:
+    '#type': url
+    '#title': 'URL de la page du diplôme sur le catalogue de l''offre de formation :'
+    '#placeholder': 'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/...'
+    '#required': true
+    '#required_error': 'Merci d''indiquer l''URL de la page diplôme sur https://formations.pantheonsorbonne.fr/'
+    '#states':
+      visible:
+        ':input[name="type_de_site_"]':
+          value: Diplôme
+  url_souhaitee_:
+    '#type': textfield
+    '#title': 'URL souhaitée pour ce site :'
+    '#description': |
+      Attention, <strong>le nommage de cette URL doit imp&eacute;rativement respecter les r&egrave;gles</strong> que vous retrouvez ici :<br />
+      <a href="https://aide-siteweb.univ-paris1.fr/mettre-en-place-son-mini-site" target="_blank">https://aide-siteweb.univ-paris1.fr/mettre-en-place-son-mini-site</a>
+      
+    '#placeholder': 'https://nomdusite.pantheonsorbonne.fr'
+    '#required': true
+    '#required_error': 'Merci d''indiquer l''URL'
+  flexbox:
+    '#type': container
+    multiliguisme_selectionnez_la_les_langue_s_de_ce_site_:
+      '#type': checkboxes
+      '#title': 'Multiliguisme : sélectionnez la(les) langue(s) de ce site :'
+      '#options':
+        Français: Français
+        Anglais: Anglais
+        Allemand: Allemand
+        Arabe: Arabe
+        Chinois: Chinois
+        Espagnol: Espagnol
+        Italien: Italien
+      '#options_display': three_columns
+      '#required': true
+      '#required_error': 'Merci d''indiquer la langue du site'
+      '#flex': 2
+      '#default_value':
+        - Français
+    souhaitez_vous_utiliser_l_annuaire_dynamique_pour_lister_vos_ens:
+      '#type': radios
+      '#title': 'Souhaitez-vous utiliser l''annuaire dynamique pour lister vos enseignants titulaires ou vos doctorants ?'
+      '#description': 'Cet annuaire est uniquement possible si votre structure est mod&eacute;lis&eacute;e dans l&#39;annuaire LDAP de l&#39;universit&eacute;.'
+      '#options':
+        Oui: Oui
+        Non: Non
+      '#options_display': two_columns
+      '#flex': 2
+    pour_quel_public_souhaitez_vous_cet_annuaire_:
+      '#type': radios
+      '#title': 'Qui sera affiché dans cet annuaire ?'
+      '#options':
+        'Vos enseignants': 'Vos enseignants'
+        'Vos doctorants': 'Vos doctorants'
+        'Les deux': 'Les deux'
+      '#options_display': three_columns
+      '#required': true
+      '#required_error': 'Merci d''indiquer le public pour l''annuaire'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_utiliser_l_annuaire_dynamique_pour_lister_vos_ens"]':
+            value: Oui
+    indiquez_la_structure_de_rattachement:
+      '#type': textfield
+      '#title': 'Indiquez la structure de rattachement'
+      '#description': 'Par exemple <strong>s&#39;il s&#39;agit de doctorant, indiquez le nom de l&#39;&eacute;cole doctorale</strong> (car les doctorants sont rattach&eacute;s aux ED) afin d&#39;afficher tous les doctorants de cette ED. Et si <strong>c&#39;est des enseignants, mettez la composante ou l&#39;unit&eacute; de recherche.</strong>'
+      '#placeholder': 'Nom de la structure dans laquelle ces personnes sont inscrites/rattachées'
+      '#required': true
+      '#flex': 2
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_utiliser_l_annuaire_dynamique_pour_lister_vos_ens"]':
+            value: Oui
+    declarer_des_reseaux_sociaux_:
+      '#type': textarea
+      '#title': 'Déclarer des réseaux sociaux :'
+      '#placeholder': 'indiquez ici, une par ligne, les URLs des réseaux sociaux (YouTube, Twitter, Facebook, HAL, Hypothèse, etc.) qui sont associées à ce site.'
+      '#flex': 2
+  nom_et_prenom_du_webmestre_:
+    '#type': textfield
+    '#title': 'Nom et prénom du webmestre :'
+    '#description': 'Attention <strong>cette personne doit avoir un compte Paris 1</strong>. Si c&#39;est un prestataire exterieur, vous devez d&#39;abord faire <a href="https://glpi-front.univ-paris1.fr/plugins/formcreator/front/formdisplay.php?id=17">une demande de compte de prestataire.</a>'
+    '#placeholder': 'Nom de la personne (ayant un compte Paris 1) qui va s''occuper du site'
+    '#required': true
+    '#required_error': 'Indiquez qui va s''occuper du site'
+  courriel_du_webmestre:
+    '#type': email
+    '#title': 'Courriel du webmestre'
+    '#placeholder': 'Indiquez son courriel de Paris 1 si le webmestre n''est pas vous.'
+  remarques_eventuelles_:
+    '#type': textarea
+    '#title': 'Remarques éventuelles :'
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'J''ai lu et j''accepte les {conditions de service}.'
+    '#required': true
+    '#required_error': 'Vous devez accepter les conditions de ce service.'
+    '#terms_title': 'Conditions de service des mini-sites sous Drupal'
+    '#terms_content': 'Je reconnais avoir lu les 4 &eacute;tapes pr&eacute;sent&eacute;es sur cette page et je m&#39;engage &agrave; tout faire pour les respecter.'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Envoyer
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: 'Message de confirmation'
+  confirmation_message: "Votre demande a bien &eacute;t&eacute; transmise et un ticket a automatiquement &eacute;t&eacute; cr&eacute;&eacute;.<br />\r\n<br />\r\nVous allez recevoir deux courriels automatique &agrave; la suite de cette demande. <strong>Le premier pour vous confirmer que votre demande a bien &eacute;t&eacute; transmise. Le deuxi&egrave;me sera la confirmation qu&#39;un ticket de demande d&#39;intervention</strong> aupr&egrave;s des &eacute;quipes de la DSIUN <strong>a &eacute;t&eacute; g&eacute;n&eacute;r&eacute;.</strong><br />\r\n<strong>En cas de question, celles-ci seront pos&eacute;es via ce ticket.</strong><br />\r\n<strong>La r&eacute;ponse finale</strong> (classiquement une solution vous indiquant que votre site est cr&eacute;&eacute;) <strong>sera envoy&eacute; aussi via ce ticket.</strong><br />\r\n<br />\r\nBonne journ&eacute;e"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel_du_webmestre:raw]'
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Confirmation envoi formulaire de demande de création de site Drupal'
+      body: "Bonjour,<br />\r\nVous recevez ce courriel de confirmation automatique car vous avez rempli le&nbsp;[webform_submission:created], le formulaire pr&eacute;sent sur la page suivante :<br />\r\n<a href=\"https://aide-siteweb.pantheonsorbonne.fr/mettre-en-place-son-mini-site\">https://aide-siteweb.pantheonsorbonne.fr/mettre-en-place-son-mini-site</a><br />\r\nvoici les informations que vous nous avez transf&eacute;r&eacute; :<br />\r\n[webform_submission:values]<br />\r\nMerci et bonne journ&eacute;e<br />\r\nMarc-Olivier Lagadic"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_a_assistance_dsiun_univ_paris1_fr:
+    id: email
+    handler_id: email_a_assistance_dsiun_univ_paris1_fr
+    label: 'Email  à assistance-dsiun@univ-paris1.fr'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: assistance-dsiun@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: _default
+      cc_options: {  }
+      from_mail: '[webform_submission:values:votre_adresse_courriel_:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:votre_nom_:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Demande de Création mini-site Drupal'
+      body: "<p>A l&#39;attention de l&#39;&eacute;quipe DSIUN-PAS : PAS-Web</p>\r\n\r\n<ul>\r\n\t<li>Marc-Olivier Lagadic</li>\r\n\t<li>Liliana Helmany</li>\r\n</ul>\r\nEnvoy&eacute; le [webform_submission:created]<br />\r\nEnvoy&eacute; par : [webform_submission:user]<br />\r\nLes valeurs soumises sont :<br />\r\n[webform_submission:values]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

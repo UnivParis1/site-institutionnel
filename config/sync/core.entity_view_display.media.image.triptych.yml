@@ -1,0 +1,36 @@
+uuid: 348c43ae-1af1-4608-b1f4-661154ca1741
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.triptych
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - image.style.triptych
+    - media.type.image
+  module:
+    - image
+id: media.image.triptych
+targetEntityType: media
+bundle: image
+mode: triptych
+content:
+  field_media_image:
+    type: image_url
+    label: hidden
+    settings:
+      image_style: triptych
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_credits: true
+  field_legende: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

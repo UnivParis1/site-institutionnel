@@ -1,0 +1,351 @@
+uuid: 8b8d647d-dce5-4296-b940-4566d69c0288
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 51
+template: false
+archive: false
+id: pret_entre_bibliotheques
+title: '10 - Prêt entre bibliothèques'
+description: "Arborescence : Menu Direction &gt; Services &gt; Emprunter et rendre des documents &gt; Pr&ecirc;t entre biblioth&egrave;ques (PEB)<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Nous contacter</em>, rubrique &quot;Demander un pr&ecirc;t entre biblioth&egrave;ques&quot;<br />\r\n<br />\r\nLien vers ce formulaire depuis les pages de pr&eacute;sentation de chaque biblioth&egrave;ques (module tabs, rubrique &quot;Nos services&quot;, &quot;Demander un pr&ecirc;t entre biblioth&egrave;ques (PEB)&quot;) :\r\n<ul>\r\n\t<li>Biblioth&egrave;que Pierre Mend&egrave;s France</li>\r\n\t<li>Biblioth&egrave;que Jean-Claude Colliard</li>\r\n\t<li>Biblioth&egrave;que Cuzin</li>\r\n\t<li>Biblioth&egrave;que Lagroye</li>\r\n\t<li>Biblioth&egrave;que de l&#39;Ecole des arts de la Sorbonne</li>\r\n\t<li>Biblioth&egrave;que Lavisse</li>\r\n</ul>"
+category: Contact
+elements: |-
+  coordonnees:
+    '#type': webform_section
+    '#title': Coordonnées
+    '#required': true
+    nom_prenom:
+      '#type': webform_name
+      '#title': 'Nom, prénom'
+      '#required': true
+      '#title__access': false
+      '#first__title': Nom
+      '#first__title_display': inline
+      '#first__required': true
+      '#middle__access': false
+      '#last__title': Prénom
+      '#last__title_display': inline
+      '#last__required': true
+      '#suffix__access': false
+      '#degree__access': false
+    vous_etes:
+      '#type': select
+      '#title': 'Vous êtes'
+      '#options':
+        'Etudiant à Paris 1': 'Etudiant à Paris 1'
+        'Enseignant à Paris 1': 'Enseignant à Paris 1'
+        'Chercheur à Paris 1': 'Chercheur à Paris 1'
+        'Personnel administratif à Paris 1': 'Personnel administratif à Paris 1'
+        'Lecteur extérieur inscrit à la bibliothèque': 'Lecteur extérieur inscrit à la bibliothèque'
+      '#required': true
+      '#required_error': 'Choisir un élément'
+    numero_d_etudiant_ou_de_lecteur:
+      '#type': textfield
+      '#title': 'Numéro d''étudiant ou de lecteur'
+      '#prepopulate': true
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+    telephone:
+      '#type': tel
+      '#title': Téléphone
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+    courriel:
+      '#type': email
+      '#title': Courriel
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+  document:
+    '#type': webform_section
+    '#title': Document
+    type_de_demande:
+      '#type': radios
+      '#title': 'Type de demande'
+      '#options':
+        'Prêt (livre, thèse, mémoire, autre) ': 'Prêt (livre, thèse, mémoire, autre) '
+        'Reproduction (article, chapitre) ': 'Reproduction (article, chapitre) '
+      '#options_display': side_by_side
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+      '#options__properties': ''
+    titre_livre_these_memoire_revue_:
+      '#type': textfield
+      '#title': 'Titre (livre, thèse, mémoire, revue)'
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+    auteur_livre_these_memoire_:
+      '#type': textfield
+      '#title': 'Auteur (livre, thèse, mémoire)'
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+    annee_de_publication:
+      '#type': textfield
+      '#title': 'Année de publication'
+    reproduction_references_precises_de_l_article_ou_du_chapitre_:
+      '#type': textarea
+      '#title': 'Reproduction (références précises de l''article ou du chapitre)'
+    localisation_du_document:
+      '#type': textarea
+      '#title': 'Localisation du document'
+    bibliotheque_dans_laquelle_recuperer_consulter_le_document:
+      '#type': select
+      '#title': 'Bibliothèque dans laquelle récupérer / consulter le document'
+      '#options':
+        'Pierre Mendès France': 'Pierre Mendès France'
+        'Jean-Claude Colliard': 'Jean-Claude Colliard'
+        Cuzin: Cuzin
+        'Ecole des arts de la Sorbonne': 'Ecole des arts de la Sorbonne'
+        'Jacques Lagroye': 'Jacques Lagroye'
+        'Maison des sciences économiques (MSE)': 'Maison des sciences économiques (MSE)'
+        'Institut Pierre Renouvin': 'Institut Pierre Renouvin'
+      '#required': true
+      '#required_error': 'Choisir une bibliothèque'
+  validation_et_envoi:
+    '#type': webform_section
+    '#title': 'Validation et envoi'
+    verification:
+      '#type': checkboxes
+      '#title': Vérification
+      '#options':
+        'J''ai vérifié que je ne peux pas consulter ce document dans une autre bibliothèque de Paris ou d''Ile de France': 'J''ai vérifié que je ne peux pas consulter ce document dans une autre bibliothèque de Paris ou d''Ile de France'
+      '#required': true
+      '#required_error': 'Validation obligatoire'
+      '#options__properties': ''
+    terms_of_service:
+      '#type': webform_terms_of_service
+      '#title': 'J''accepte les {conditions de service}.'
+      '#required': true
+      '#required_error': 'Validation obligatoire'
+      '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de PEB</span>'
+    captcha:
+      '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Envoyer la demande'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: "<span style=\"-webkit-text-stroke-width:0px; background-color:#ffffff; color:#333333; display:inline !important; float:none; font-family:Montserrat; font-size:medium; font-style:normal; font-variant-caps:normal; font-variant-ligatures:normal; font-weight:400; letter-spacing:normal; orphans:2; text-align:start; text-decoration-color:initial; text-decoration-style:initial; text-decoration-thickness:initial; text-indent:0px; text-transform:none; white-space:normal; widows:2; word-spacing:0px\">Le service du PEB est ferm&eacute; pendant les f&ecirc;tes de fin d&#39;ann&eacute;e, du 10 d&eacute;cembre au 2 janvier 2022</span>. La reprise est pr&eacute;vue le 3 janvier 2022.<br />\r\nMerci de votre compr&eacute;hension."
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "Votre demande a &eacute;t&eacute; prise en compte. Un r&eacute;capitulatif de votre demande vous a &eacute;t&eacute; adress&eacute; par courriel.<br />\r\nUn d&eacute;lai moyen d&#39;1 semaine &agrave; 10 jours est n&eacute;cessaire pour obtenir un document. Vous serez pr&eacute;venu de son arriv&eacute;e par t&eacute;l&eacute;phone ou par courriel."
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: pebup1@univ-paris1.fr
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: pebup1@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom_prenom:value]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Votre demande de prêt entre bibliothèques'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
+      excluded_elements:
+        verification: verification
+        terms_of_service: terms_of_service
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

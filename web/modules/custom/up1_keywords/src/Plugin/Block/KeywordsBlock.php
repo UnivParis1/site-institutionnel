@@ -20,7 +20,8 @@ class KeywordsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return [] + parent::defaultConfiguration();
+    return [
+      ] + parent::defaultConfiguration();
   }
 
   /**
@@ -28,21 +29,27 @@ class KeywordsBlock extends BlockBase {
    */
   public function build() {
     $build = [];
-    $config = \Drupal::config('up1_keywords.keywordsconfig');
+    $config = \Drupal::config('up1_keywords.settings');
+    $keywords = $config->get('keywords_links');
+    foreach ($keywords as $key => $keyword) {
+      if (empty($keyword['title']) || empty($keyword['uri'])) {
+        unset($keywords[$key]);
+      }
+    }
 
     $current_path = \Drupal::service('path.current')->getPath();
-        $search_form = [];
-        if (!preg_match('/resultats-recherche/', $current_path)) {
-		      $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
-		          }
-	$menu =_up1_keywords_render_menu_navigation('mots-cles-page-d-accueil');
+    $search_form = [];
+    if (!preg_match('/resultats-recherche/', $current_path)) {
+      $search_form = \Drupal::formBuilder()->getForm('Drupal\up1_keywords\Form\HomepageSearchForm');
+    }
+
     $build['up1_keywords'] = [
       '#theme' => 'up1_keywords',
+      '#keywords' =>  $keywords,
       '#search' => $search_form,
-      '#menu' =>$menu,
-      '#url' => $config->get('url_resultat_de_recherche'),
     ];
 
     return $build;
   }
+
 }

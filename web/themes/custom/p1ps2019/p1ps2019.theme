@@ -35,7 +35,7 @@ function p1ps2019_preprocess_html(&$variables)
     $site_id = $site->id();
     if (preg_match('/node\/36841/', $system_path) && $site_id == 115) {
       $variables['web_component'] = TRUE;
-    }
+     }
   }
   $variables['page_mini_site'] = $page_mini_site;
 
@@ -66,6 +66,7 @@ function p1ps2019_preprocess_page(&$variables)
   $print_hp_image = FALSE;
   $preview = FALSE;
   $node_type = FALSE;
+  $is_search_page = FALSE;
   $site_id = 0;
   $variables['site_name'] = "";
 
@@ -81,6 +82,11 @@ function p1ps2019_preprocess_page(&$variables)
   if ($variables['is_front']) {
     $print_hp_image = TRUE;
   }
+  if (preg_match('/resultats-de-recherche/', $system_path)) {
+    $print_hp_image = TRUE;
+    $is_search_page = TRUE;
+  }
+
   if (preg_match('/node\/preview/', $system_path)) {
     $preview = TRUE;
   }
@@ -135,21 +141,24 @@ function p1ps2019_preprocess_page(&$variables)
 
 function p1ps2019_preprocess_node(&$variables) {
   if (isset($site) && !empty($site)) {
+    $site_id = $site->id();
     $variables['is_page_m'] = TRUE;
   }
   $node = $variables['node'];
 
   if ($variables['elements']['#view_mode'] == 'search_index') {
+    $node_paragraphs = NULL;
     switch ($node->getType()) {
       case "news" :
-      case "news2018" :
         $variables['node_type_text'] = t("Actualité");
+        $node_paragraphs = $node->field_paragraphs->getValue();
         break;
       case "page_personnelle" :
         $variables['node_type_text'] = t("Page Personnelle");
         break;
       case "event" :
         $variables['node_type_text'] = t("Évènement");
+        $node_paragraphs = $node->field_blocs_medias->getValue();
         break;
       case "viva" :
         $variables['node_type_text'] = t("Soutenance de thèse");
@@ -158,12 +167,38 @@ function p1ps2019_preprocess_node(&$variables) {
         $variables['node_type_text'] = t("Offre d'emploi");
         break;
       case "page" :
+        $node_paragraphs = $node->field_paragraphs->getValue();
+        $variables['node_type_text'] = t("Page");
+        break;
       case "second_level_pages" :
+        $node_paragraphs = $node->field_editorial_blocks->getValue();
         $variables['node_type_text'] = t("Page");
         break;
       case "publication":
         $variables['node_type_text'] = t("Publication");
         break;
+    }
+
+    if (!empty($node_paragraphs)) {
+      foreach ($node_paragraphs as $key => $value) {
+        $paragraph = FALSE;
+        if (!empty($value['entity'])) {
+          // Use that, we're probably previewing.
+          $paragraph = $value['entity'];
+        }
+        elseif (!empty($value['target_id'])) {
+          $paragraph = Paragraph::load($value['target_id']);
+        }
+        if (!empty($paragraph) && $paragraph instanceof Paragraph) {
+          $view_builder = \Drupal::entityTypeManager()->getViewBuilder('paragraph');
+          $array = $view_builder->view($paragraph, 'search_index');
+          $array['#cache']['tags'][] = 'node:' . $node->id();
+          if (in_array($paragraph->bundle(), ['bp_simple', 'jumbotron', 'rich_content', 'bp_columns'])) {
+            $text_paragraphs[] = $array;
+          }
+        }
+      }
+      if (!empty($text_paragraphs)) $variables['text_paragraphs'] = $text_paragraphs;
     }
   }
   if ($node->getType() == 'page_personnelle') {
@@ -314,10 +349,10 @@ function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $varia
 {
   if (isset($variables["attributes"]["region"])) {
     $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
-$negotiator = \Drupal::service('micro_site.negotiator');
+    $negotiator = \Drupal::service('micro_site.negotiator');
     $site = $negotiator->getActiveSite();
     if ($site) {
-    $suggestions[] = "menu__mini_site__" . $variables["attributes"]["region"];
+      $suggestions[] = "menu__mini_site__" . $variables["attributes"]["region"];
     }
   }
 }
@@ -372,6 +407,23 @@ function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
     $original_theme_hook = $variables['theme_hook_original'];
     array_unshift($suggestions, $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']));
   }
+  switch ($hook) {
+    case 'form_element':
+      if (isset($variables['element']['#parents'])) {
+        $parent_slug_list = $variables['element']['#parents'];
+        foreach ($parent_slug_list as $slug) {
+          if (is_string($slug)) {
+            $parent_slug = $slug;
+            break;
+          }
+        }
+        if (isset($parent_slug) && !empty($parent_slug)) {
+          $suggestions[] = 'form_element__' . str_replace('-', '_', $parent_slug);
+        }
+      }
+      break;
+
+  }
 }
 
 /**
@@ -401,6 +453,17 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
   }
 }
 
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * @param $suggestions
+ * @param $variables
+ */
+function p1ps2019_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  $view = $variables['view'];
+  $view_display = $view->getDisplay();
+  $suggestions[] = 'views_view__' . $view->id() . '__' . $view->current_display;
+}
 /*
 * Implements template_preprocess_views_view()
 * @param array $variables
@@ -443,6 +506,13 @@ function p1ps2019_preprocess_views_view(&$variables)
       'link-style', 'with-arrow'
     );
     $variables["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
+  }
+  if ($variables['id'] == 'resultats_de_recherche') {
+    $variables['show_view_header'] = FALSE;
+    if (!empty (\Drupal::request()->query->get('text'))) {
+      $variables['show_view_header'] = TRUE;
+      $variables['request'] = \Drupal::request()->query->get('text');
+    }
   }
 }
 
@@ -496,10 +566,15 @@ function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id)
   }
 }
 
+function p1ps2019_form_views_exposed_form_alter(&$form, $form_state, $form_id){
+  if($form['#id'] === "views-exposed-form-agenda-block-1"){
+    $form['reset'] = $form['actions']['reset'];
+    //$form['reset']['#weight'] = 0;
+    unset($form['actions']['reset']);
+  }
+}
 
-function p1ps2019_theme_suggestions_field_alter(&$suggestions, $variables)
+function p1ps2019_theme_suggestions_field_alter(array &$suggestions, array $variables, $hook)
 {
-  $suggestions[] = 'field__' .
-    $variables['element']['#field_name'] . '__' .
-    $variables['element']['#view_mode'];
+  $suggestions[] = 'field__' . $variables['element']['#field_name'] . '__' . $variables['element']['#view_mode'];
 }

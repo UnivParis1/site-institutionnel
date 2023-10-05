@@ -1,0 +1,35 @@
+uuid: 021e876f-8137-40ca-b7a0-e82de73ee310
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - taxonomy
+id: thematique_pattern
+label: 'Thematique pattern'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'thematique/[term:name]'
+selection_criteria:
+  55caaf78-0b32-41be-ab27-603684edef70:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 55caaf78-0b32-41be-ab27-603684edef70
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      events_types: events_types
+      news_topics: news_topics
+      publication_topics: publication_topics
+  49fc76f0-56ce-4df8-9b0c-397acc9333ae:
+    id: language
+    negate: false
+    uuid: 49fc76f0-56ce-4df8-9b0c-397acc9333ae
+    context_mapping:
+      language: 'taxonomy_term:langcode:language'
+    langcodes:
+      fr: fr
+selection_logic: and
+weight: -10
+relationships:
+  'taxonomy_term:langcode:language':
+    label: Langue

@@ -1,0 +1,195 @@
+// HOME PAGE
+body.path-frontpage {
+  #breadcrumbs {
+    display: none;
+  }
+  .homepage-search-keywords {
+    .keywords a {
+      width: auto;
+      display: inline-block;
+      border: 1px solid $white;
+      background-color: rgba($white, 0.15);
+      border-radius: 50rem;
+      padding: rem-calc(3px 12px);
+      margin: rem-calc(0 4px 12px 4px);
+    }
+  }
+}
+
+// SLICK HOME PAGE
+.paragraph-wrapper-full {
+  .path-frontpage & {
+    padding: 3rem 0;
+    margin: 3rem 0;
+  }
+  overflow: hidden;
+  h2 {
+    margin-bottom: 2rem;
+  }
+  .slick--optionset--homepage-carousel {
+    min-width: calc(100% + 2rem);
+    max-width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    @include breakpoint($small-medium + 1 down) {
+      min-width: calc(100% + 3rem);
+      max-width: calc(100% + 3rem);
+      margin-left: -1rem;
+      margin-right: -2rem;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: calc(100% - 1rem);
+      width : 50vw;
+      background-color: $white;
+      z-index: 1;
+    }
+    .slick-list {
+      overflow: visible;
+      min-width: 100%;
+      @include breakpoint($medium - 1 down) {
+        padding-right: 4rem;
+      }
+      .slick-track {
+        display: flex !important;
+        .slide {
+          height: inherit !important;
+          padding: 0 1rem;
+        }
+      }
+    }
+    .slick__arrow {
+      //bottom: auto;
+      height: 62px;
+      left: auto;
+      right: 1rem;
+      margin-top: 0;
+      //pointer-events: none;
+      //position: absolute;
+      top: -102px;
+      transform: translateY(0);
+      width: 140px;
+      //z-index: 2;
+      button {
+        &.slick-arrow {
+          margin: 0 !important;
+          padding: 0 !important;
+          border: 1px solid $gray2 !important;
+          height: 62px;
+          width: 62px;
+          background-color: transparent !important;
+        }
+        &:before {
+          content: "";
+          width: 24px;
+          height: 15px;
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+        &.slick-prev {
+          &:before {
+            background: url("../images/p1ps2022/slick-arrow-prev.svg") no-repeat center center / 100% auto;
+          }
+        }
+        &.slick-next {
+          &:before {
+            background: url("../images/p1ps2022/slick-arrow-next.svg") no-repeat center center / 100% auto;
+          }
+        }
+      }
+    }
+    @include breakpoint($large - 1 down) {
+      padding-bottom: 80px;
+      .slick__arrow {
+        left: 50%;
+        right: auto;
+        top: auto;
+        bottom: 0;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  }
+  footer {
+    text-align: center;
+    .btn {
+      display: inline-block;
+    }
+  }
+  &.paris1-bg-soft-grey {
+    .slick--optionset--homepage-carousel {
+      &:before {
+        background-color: $background-light-gray;
+      }
+    }
+  }
+}
+
+.paragraph--type--hit-list{
+  .paragraph__column{
+    .paragraph__column{
+      background-color: $white;
+      height: 100%;
+      padding: rem-calc(40px) !important;
+      text-align: center;
+    }
+    .btn-wrapper {
+      background-color: $gold-p1ps;
+      a {
+        height: 100%;
+        padding: rem-calc(40px);
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+}
+
+
+
+.block-micro-social-media {
+  position: absolute;
+  right:  1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  a {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
+
+
+
+.date-wrapper {
+  margin-bottom: rem-calc(8px);
+  display: flex;
+  padding: 3px 0;
+  &:before {
+    content: "";
+    width: 22px;
+    height: 24px;
+    display: block;
+    background-image: url(../images/p1ps2022/picto-calendar.svg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    flex-grow: 0;
+    margin-right: rem-calc(8px);
+  }
+  .date-style {
+    line-height: 1.25;
+    color: $text-main-color;
+    padding: 3px 0;
+  }
+}

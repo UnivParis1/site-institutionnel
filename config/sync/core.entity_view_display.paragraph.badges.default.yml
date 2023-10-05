@@ -1,0 +1,66 @@
+uuid: a88c0f24-7dee-4301-b3f7-e0037ceffc75
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.badges.bp_link
+    - field.field.paragraph.badges.field_badge
+    - field.field.paragraph.badges.field_bg_color
+    - field.field.paragraph.badges.field_catchphrase
+    - field.field.paragraph.badges.field_title
+    - paragraphs.paragraphs_type.badges
+  module:
+    - entity_reference_revisions
+    - link
+    - options
+id: paragraph.badges.default
+targetEntityType: paragraph
+bundle: badges
+mode: default
+content:
+  bp_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_badge:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_bg_color:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_catchphrase:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -8,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.bp_tab_section
   module:
     - paragraphs
+    - paragraphs_ee
+    - paragraphs_features
 _core:
   default_config_hash: yvnAACcaIIRPeeS7YVtS-Z8Pbuatcftmox25-8I5Llw
 id: paragraph.bp_tab_section.default
@@ -16,17 +18,34 @@ bundle: bp_tab_section
 mode: default
 content:
   bp_tab_section_body:
-    type: entity_reference_paragraphs
+    type: paragraphs
     weight: 2
     region: content
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: closed
-      add_mode: dropdown
+      title: Paragraphe
+      title_plural: Paragraphes
+      edit_mode: closed_expand_nested
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: modal
       form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
+      default_paragraph_type: bp_simple
+      features:
+        add_above: add_above
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: true
+        add_in_between_link_count: 3
+        delete_confirmation: true
+        split_text: false
+        show_drag_and_drop: true
+      paragraphs_ee:
+        paragraphs_ee:
+          dialog_off_canvas: false
+          dialog_style: tiles
   bp_tab_section_title:
     type: string_textfield
     weight: 0
@@ -34,6 +53,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

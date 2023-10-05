@@ -44,7 +44,7 @@
 
 {%
     set classes = [
-    'paragraph', 'box-mobile',
+    'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
      view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
@@ -52,7 +52,7 @@
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
-          <div class="chiffre"> {{ content.field_number.0 }} </div>
+          <div class="chiffre headings-font-family"> {{ content.field_number.0 }} </div>
           <div class="legende"> {{ content.field_text.0 }} </div>
         {% endblock %}
     </div>

@@ -10,6 +10,9 @@ use Drupal\Core\Form\FormStateInterface;
 use \Drupal\node\NodeInterface;
 use Drupal\Core\Url;
 
+
+use Drupal\Core\Cache\Cache;
+
 /**
  * Implements hook_help().
  */
@@ -89,5 +92,20 @@ function up1_global_language_switch_links_alter(array &$links, $type, Url $url) 
         unset($links[$langcode]);
       }
     }
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function up1_global_cron() {
+  $request_time = \Drupal::time()->getCurrentTime();
+  $state_service = \Drupal::state();
+  // Invalidate homepage agenda Cache every day.
+  $next_daily_cron = $state_service->get('up1_global.cache_cron_daily', 0);
+  if ($next_daily_cron < $request_time) {
+    $tomorrow = strtotime('tomorrow 0:59:00');
+    $state_service->set('up1_global.cache_cron_daily', $tomorrow);
+    Cache::invalidateTags(['time:daily']);
   }
 }

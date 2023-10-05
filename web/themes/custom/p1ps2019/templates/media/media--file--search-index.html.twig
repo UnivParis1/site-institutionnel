@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if content %}
+  {% set ext = content.field_extension|render %}
+  {% if ext matches '/pdf/' %}
+    {% set type = "PDF" %}
+    {% set faType = "-pdf" %}
+  {% elseif ext matches '/word/' %}
+    {% set faType = "-word" %}
+    {% set type = "Word" %}
+  {% elseif ext matches '/excel/' %}
+    {% set faType = "-excel" %}
+    {% set type = "Excel" %}
+  {% elseif ext matches '/powerpoint/' %}
+    {% set faType = "-powerpoint" %}
+    {% set type = "Powerpoint" %}
+  {% else %}
+    {% set faType = "" %}
+    {% set type = "Fichier" %}
+  {% endif %}
+
+  <p class="si-file">
+    <i class="fa-regular fa-file{{ faType }}"></i>
+    <span><a href="{{ content.field_media_file.0|render }}" target="_blank" title="Lien de téléchargement du fichier" class="mediafichierlien">
+        {{ name }} [{{ type }},&nbsp;{{ content.field_size.0 }}]
+      </a></span>
+ </p>
+{% endif %}

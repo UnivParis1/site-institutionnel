@@ -1,0 +1,538 @@
+uuid: e010b803-c93b-46dd-8ead-686d94d3a7a6
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 51
+template: false
+archive: false
+id: 10_bib_n_go
+title: '10 - Bib''n''go'
+description: "<p>Arborescence : Menu Direction &gt; Services &gt; Bib'n'go<br />\r\n<br />\r\nLien vers ce formulaire depuis les pages de présentation de chaque bibliothèques (module tabs, rubrique \"Nos services\", Bib'n'go</p>\r\n\r\n<ul>\r\n\t<li>Bibliothèque Pierre Mendès France</li>\r\n\t<li>Bibliothèque Jean-Claude Colliard</li>\r\n\t<li>Bibliothèque de l'Ecole des arts de la Sorbonne</li>\r\n</ul>"
+category: Contact
+elements: |-
+  coordonnees:
+    '#type': webform_section
+    '#title': Coordonnées
+    '#required': true
+    nom_prenom:
+      '#type': webform_name
+      '#title': 'Nom, prénom'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#title__access': false
+      '#first__title': Nom
+      '#first__title_display': inline
+      '#first__required': true
+      '#middle__access': false
+      '#last__title': Prénom
+      '#last__title_display': inline
+      '#last__required': true
+      '#suffix__access': false
+      '#degree__access': false
+    numero_d_etudiant_ou_de_lecteur:
+      '#type': textfield
+      '#title': 'Numéro d''étudiant ou de lecteur'
+      '#prepopulate': true
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+    telephone:
+      '#type': tel
+      '#title': Téléphone
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+    courriel:
+      '#type': email
+      '#title': Courriel
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+  document:
+    '#type': webform_section
+    '#title': Ouvrages
+    titre_livre_these_memoire_revue_:
+      '#type': textfield
+      '#title': Titre
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    auteur_livre_these_memoire_:
+      '#type': textfield
+      '#title': Auteur
+      '#required': true
+      '#required_error': 'Champ obligatoire'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    annee_de_publication:
+      '#type': textfield
+      '#title': Cote
+      '#description': '<p>Trouver la cote du document sur Mikado (disponible depuis votre ENT ou depuis la <a href="https://bibliotheques.pantheonsorbonne.fr/">page d''accueil des bibliothèques</a>)</p>'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    titre:
+      '#type': textfield
+      '#title': 'Titre du 2e ouvrage'
+      '#states':
+        visible:
+          ':input[name="annee_de_publication"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    auteur_du_2e_ouvrage:
+      '#type': textfield
+      '#title': 'Auteur du 2e ouvrage'
+      '#states':
+        visible:
+          ':input[name="annee_de_publication"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    cote_du_2e_ouvrage:
+      '#type': textfield
+      '#title': 'Cote du 2e ouvrage'
+      '#description': '<p>Trouver la cote du document sur Mikado (disponible depuis votre ENT ou depuis la <a href="https://bibliotheques.pantheonsorbonne.fr/">page d''accueil des bibliothèques</a>)</p>'
+      '#states':
+        visible:
+          ':input[name="annee_de_publication"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    titre_du_3e_ouvrage:
+      '#type': textfield
+      '#title': 'Titre du 3e ouvrage'
+      '#states':
+        visible:
+          ':input[name="cote_du_2e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    auteur_du_3e_ouvrage:
+      '#type': textfield
+      '#title': 'Auteur du 3e ouvrage'
+      '#states':
+        visible:
+          ':input[name="cote_du_2e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    cote_du_3e_ouvrage:
+      '#type': textfield
+      '#title': 'Cote du 3e ouvrage'
+      '#description': '<p>Trouver la cote du document sur Mikado (disponible depuis votre ENT ou depuis la <a href="https://bibliotheques.pantheonsorbonne.fr/">page d''accueil des bibliothèques</a>)</p>'
+      '#states':
+        visible:
+          ':input[name="cote_du_2e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    titre_du_4e_ouvrage:
+      '#type': textfield
+      '#title': 'Titre du 4e ouvrage'
+      '#states':
+        visible:
+          ':input[name="cote_du_3e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    auteur_du_4e_ouvrage:
+      '#type': textfield
+      '#title': 'Auteur du 4e ouvrage'
+      '#states':
+        visible:
+          ':input[name="cote_du_3e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    cote_du_4e_ouvrage:
+      '#type': textfield
+      '#title': 'Cote du 4e ouvrage'
+      '#description': '<p>Trouver la cote du document sur Mikado (disponible depuis votre ENT ou depuis la <a href="https://bibliotheques.pantheonsorbonne.fr/">page d''accueil des bibliothèques</a>)</p>'
+      '#states':
+        visible:
+          ':input[name="cote_du_3e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    titre_du_5e_ouvrage:
+      '#type': textfield
+      '#title': 'Titre du 5e ouvrage'
+      '#states':
+        visible:
+          ':input[name="cote_du_4e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    auteur_du_5e_ouvrage:
+      '#type': textfield
+      '#title': 'Auteur du 5e ouvrage'
+      '#states':
+        visible:
+          ':input[name="cote_du_4e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    cote_du_5e_ouvrage:
+      '#type': textfield
+      '#title': 'Cote du 5e ouvrage'
+      '#description': '<p>Trouver la cote du document sur Mikado (disponible depuis votre ENT ou depuis la <a href="https://bibliotheques.pantheonsorbonne.fr/">page d''accueil des bibliothèques</a>)</p>'
+      '#states':
+        visible:
+          ':input[name="cote_du_4e_ouvrage"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    modalites_d_emprunt:
+      '#type': webform_section
+      '#title': 'Modalités d''emprunt'
+      choisir_une_bibliotheque:
+        '#type': select
+        '#title': 'Choisir une bibliothèque'
+        '#options':
+          'Pierre Mendès France': 'Pierre Mendès France'
+        '#required': true
+      choisir_un_jour:
+        '#type': select
+        '#title': 'Choisir un jour'
+        '#description': '<p>La demande doit être faite <strong>la veille avant 12h</strong> pour le lendemain.</p>'
+        '#options':
+          Lundi: Lundi
+          Mardi: Mardi
+          Mercredi: Mercredi
+          Jeudi: Jeudi
+          Vendredi: Vendredi
+        '#required': true
+        '#states':
+          visible:
+            ':input[name="choisir_une_bibliotheque"]':
+              value: 'Pierre Mendès France'
+      choisir_un_creneau_horaire:
+        '#type': select
+        '#title': 'Choisir un créneau'
+        '#options':
+          Matin: Matin
+          Après-midi: Après-midi
+        '#required': true
+        '#states':
+          visible:
+            ':input[name="choisir_une_bibliotheque"]':
+              value: 'Pierre Mendès France'
+  validation_et_envoi:
+    '#type': webform_section
+    '#title': 'Validation et envoi'
+    verification:
+      '#type': checkboxes
+      '#title': 'Retour de documents'
+      '#options':
+        'J''ai des livres à rendre en même temps': 'J''ai des livres à rendre en même temps'
+      '#options__properties': ''
+    terms_of_service:
+      '#type': webform_terms_of_service
+      '#title': 'J''accepte les {conditions de service}.'
+      '#required': true
+      '#required_error': 'Validation obligatoire'
+      '#terms_content': '<p><span class="field-prefix">En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de ma demande de réservation de documents.</span></p>'
+    captcha:
+      '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Envoyer la demande'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "<p>Votre demande a été prise en compte. Une confirmation de votre demande va vous être adressée par courriel.</p>\r\n\r\n<p>Nous attirons cependant votre attention sur le fait que votre réservation ne pourra être traitée que si elle a été faite dans les délais requis (au plus tard la veille avant 12h pour le lendemain) et si votre compte lecteur est en règle.</p>"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: guichet-PMF@univ-paris1.fr
+    notes: ''
+    status: true
+    conditions:
+      enabled:
+        ':input[name="choisir_une_bibliotheque"]':
+          value: 'Pierre Mendès France'
+    weight: -50
+    settings:
+      states:
+        - completed
+      to_mail: guichet-PMF@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom_prenom:value]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Bib''n''go - Votre demande de réservation de document'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Votre demande de réservation a bien été prise en compte. Ceci est un mail de confirmation : vos documents sont à retirer à l'accueil de la bibliothèque. Merci de bien vouloir respecter votre créneau de rendez-vous.</p>\r\n\r\n<p><em>Nous attirons cependant votre attention sur le fait que votre réservation ne pourra être traitée que si elle a été faite dans les délais requis (au plus tard la veille avant 12h pour le lendemain) et si votre compte lecteur est en règle.</em></p>\r\n\r\n<p>Rappel des informations saisies:</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements:
+        terms_of_service: terms_of_service
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  bib_arts_univ_paris1_fr:
+    id: email
+    handler_id: bib_arts_univ_paris1_fr
+    label: bib.arts@univ-paris1.fr
+    notes: ''
+    status: false
+    conditions:
+      enabled:
+        ':input[name="choisir_une_bibliotheque"]':
+          value: 'Ecole des arts de la Sorbonne'
+    weight: -48
+    settings:
+      states:
+        - completed
+      to_mail: bib.arts@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom_prenom:value]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Bib''n''go - Votre demande de réservation de document'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Nous allons vous recontacter pour vous donner un rendez-vous.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements:
+        terms_of_service: terms_of_service
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  bucolliard_univ_paris1_fr:
+    id: email
+    handler_id: bucolliard_univ_paris1_fr
+    label: bucolliard@univ-paris1.fr
+    notes: ''
+    status: false
+    conditions:
+      enabled:
+        ':input[name="choisir_une_bibliotheque"]':
+          value: 'Jean-Claude Colliard'
+    weight: -49
+    settings:
+      states:
+        - completed
+      to_mail: bucolliard@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom_prenom:value]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Bib''n''go - Votre demande de réservation de document'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Nous allons vous recontacter pour vous donner un rendez-vous.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements:
+        choisir_un_jour: choisir_un_jour
+        choisir_un_creneau_horaire: choisir_un_creneau_horaire
+        terms_of_service: terms_of_service
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

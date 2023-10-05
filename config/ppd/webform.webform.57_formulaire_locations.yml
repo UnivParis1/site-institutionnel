@@ -1,0 +1,672 @@
+uuid: 5f57c885-e544-4dd5-bcaf-9488da437862
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 5486
+template: false
+archive: false
+id: 57_formulaire_locations
+title: '90 - formulaire_locations'
+description: ''
+category: ''
+elements: |-
+  vous_etes_:
+    '#type': webform_section
+    '#title': 'Vous êtes :'
+    '#title_display': invisible
+    vous_etes:
+      '#type': radios
+      '#title': 'Vous êtes :'
+      '#options':
+        'ORGANISME EXTERNE': 'ORGANISME EXTERNE'
+        PRESSE: PRESSE
+      '#options_display': buttons_horizontal
+      '#options__properties': ''
+    un_tournage:
+      '#type': radios
+      '#title': 'Votre location concerne :'
+      '#title_display': before
+      '#options':
+        'UN TOURNAGE': 'UN TOURNAGE'
+        'UN EVENEMENT': 'UN EVENEMENT'
+      '#options_display': buttons
+      '#states':
+        visible:
+          ':input[name="vous_etes"]':
+            value: 'ORGANISME EXTERNE'
+      '#options__properties': ''
+  le_demandeur_:
+    '#type': webform_section
+    '#title': 'Le demandeur :'
+    '#description': '<h3>Le demandeur :</h3>'
+    '#title_display': invisible
+    '#title_tag': h3
+    '#states':
+      visible:
+        ':input[name="un_tournage"]':
+          value: 'UN TOURNAGE'
+    societe_de_production:
+      '#type': textfield
+      '#title': 'Société de production'
+      '#required': true
+      '#required_error': 'société de production est obligatoire'
+    adresse_de_l_organisme_:
+      '#type': textfield
+      '#title': 'Adresse de l''organisme'
+      '#required': true
+    reference_de_l_organisme_siret_:
+      '#type': textfield
+      '#title': 'Référence de l''organisme (SIRET)'
+      '#required': true
+    telephone_:
+      '#type': tel
+      '#title': Téléphone
+      '#required': true
+    courriel_:
+      '#type': email
+      '#title': Courriel
+      '#required': true
+    directeur_de_societe_:
+      '#type': textfield
+      '#title': 'Directeur de société'
+      '#required': true
+    telephone_directeur_de_societe:
+      '#type': tel
+      '#title': Téléphone
+      '#required': true
+      '#admin_title': 'Téléphone Directeur de société'
+    courriel_directeur_de_societe:
+      '#type': email
+      '#title': Courriel
+      '#required': true
+    regisseur_ou_contact_:
+      '#type': textfield
+      '#title': 'Régisseur (ou contact)'
+    telephone_regisseur_ou_contact:
+      '#type': tel
+      '#title': Téléphone
+    courriel_regisseur:
+      '#type': email
+      '#title': Courriel
+  le_projet:
+    '#type': webform_section
+    '#title': 'Le projet'
+    '#states':
+      visible:
+        ':input[name="un_tournage"]':
+          value: 'UN TOURNAGE'
+    type:
+      '#type': radios
+      '#title': Type
+      '#options':
+        'Long-métrage fiction': 'Long-métrage fiction'
+        Téléfilm: Téléfilm
+        'Série TV': 'Série TV'
+        'Emission / reportage TV': 'Emission / reportage TV'
+        Court-métrage: Court-métrage
+        'Spot publicitaire': 'Spot publicitaire'
+        Documentaire: Documentaire
+        'Clip musical': 'Clip musical'
+        'Contenu web': 'Contenu web'
+        Autre: Autre
+      '#options_display': buttons_horizontal
+      '#required': true
+      '#options__properties': ''
+    titre_du_projet:
+      '#type': textfield
+      '#title': 'Titre du projet'
+      '#required': true
+    realisateur:
+      '#type': textfield
+      '#title': Réalisateur
+      '#required': true
+    diffuseur:
+      '#type': textfield
+      '#title': Diffuseur
+      '#required': true
+    acteurs_principaux:
+      '#type': textfield
+      '#title': 'Acteurs principaux'
+      '#required': true
+    synopsis:
+      '#type': managed_file
+      '#title': Synopsis
+      '#file_preview': file
+      '#file_extensions': 'pdf doc docx ppt pptx xls xlsx'
+  le_s_decor_s_recherche_s_:
+    '#type': webform_section
+    '#title': 'Le(s) décor(s) recherché(s)'
+    '#states':
+      visible:
+        ':input[name="un_tournage"]':
+          value: 'UN TOURNAGE'
+    type_decors_recherches:
+      '#type': checkboxes
+      '#title': Type
+      '#options':
+        'Amphithéâtre boisé': 'Amphithéâtre boisé'
+        'Amphithéâtre moderne': 'Amphithéâtre moderne'
+        'Salle de cours': 'Salle de cours'
+        'Salle prestigieuse': 'Salle prestigieuse'
+        Bureau: Bureau
+        Bibliothèque: Bibliothèque
+        Escalier: Escalier
+        Couloir/galerie: Couloir/galerie
+        'Cour (extérieur)': 'Cour (extérieur)'
+      '#options_display': buttons_horizontal
+      '#required': true
+      '#options__properties': ''
+    avez_vous_des_precisions_a_apporter:
+      '#type': textarea
+      '#title': 'Avez-vous des précisions à apporter'
+    date_s_ou_periode_s_de_tournage_envisagee_s_:
+      '#type': textfield
+      '#title': 'Date(s) ou période(s) de tournage envisagée(s)'
+      '#required': true
+    nombre_de_journee_s_de_tournage_envisagee_s_:
+      '#type': textfield
+      '#title': 'Nombre de journée(s) de tournage envisagée(s)'
+      '#required': true
+    avez_vous_des_questions_:
+      '#type': textfield
+      '#title': 'Avez-vous des questions'
+    nombre_de_personne_de_l_equipe_technique_:
+      '#type': textfield
+      '#title': 'Nombre de personnes de l’équipe technique'
+      '#required': true
+      '#required_error': ' nombre de personne de l’équipe technique est requis'
+    nombre_d_acteurs_:
+      '#type': textfield
+      '#title': 'Nombre d’acteurs'
+      '#required': true
+      '#required_error': 'Nombre d’acteurs est requis'
+    nombre_de_figurants_:
+      '#type': textfield
+      '#title': 'Nombre de figurants'
+      '#required': true
+      '#required_error': 'Nombre de figurants est requis'
+  markup:
+    '#type': webform_markup
+    '#states':
+      visible:
+        - ':input[name="vous_etes"]':
+            value: 'ETUDIANT OU ASSOCIATION PARIS 1'
+        - xor
+        - ':input[name="un_tournage"]':
+            value: 'UN TOURNAGE'
+    '#markup': '<p><strong>Important : votre demande doit se faire au minimum 3 semaines avant la date de tournage.</strong></p>'
+  demandeur_evenement_organisme:
+    '#type': webform_section
+    '#title': Demandeur
+    '#states':
+      visible:
+        ':input[name="un_tournage"]':
+          value: 'UN EVENEMENT'
+    nature_de_la_demande_evement_organisme:
+      '#type': radios
+      '#title': 'Nature de la demande'
+      '#options':
+        Conférence/Colloque: Conférence/Colloque
+        Séminaire: Séminaire
+        'Cérémonie/Soirée de gala': 'Cérémonie/Soirée de gala'
+        Congrès/Assemblées: Congrès/Assemblées
+        Exposition: Exposition
+        Autre: Autre
+      '#options_display': buttons_horizontal
+      '#required': true
+      '#options__properties': ''
+    societe_ou_association_evenement_organisme:
+      '#type': textfield
+      '#title': 'Société ou association responsable de l''évènement'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    adresse_evenement_organisme:
+      '#type': textfield
+      '#title': Adresse
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    reference_de_l_organisme_siret_evenement_organisme:
+      '#type': textfield
+      '#title': Siret
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    nom_du_directeur_de_la_societe:
+      '#type': textfield
+      '#title': 'Nom du signataire de la convention (Président/Directeur ou personne ayant la délégation de signature) '
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    regisseur_ou_contact_evenement_organisme:
+      '#type': textfield
+      '#title': 'Nom de la personne responsable de l''évènement'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    courriel_evenement_organisme:
+      '#type': email
+      '#title': 'Courriel de la personne responsable de l’évènement '
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    telephone_evenement_organisme:
+      '#type': tel
+      '#title': 'Téléphone du responsable de l’évènement '
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    nom_du_contact_si_different_du_responsable_de_l_evenement:
+      '#type': textfield
+      '#title': 'Nom du contact si différent du responsable de l’évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    courriel_regisseur_evenement_organisme:
+      '#type': email
+      '#title': 'Courriel du contact si différent du responsable de l’évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    telephone_regisseur_evenement_organisme:
+      '#type': tel
+      '#title': 'Téléphone du contact si différent du responsable de l’évènement '
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  objet_de_la_demande_demandeur_evenement_organisme:
+    '#type': webform_section
+    '#title': 'Détails de l’évènement'
+    '#title_display': invisible
+    '#states':
+      visible:
+        ':input[name="un_tournage"]':
+          value: 'UN EVENEMENT'
+    objet_de_l_evenement_themes_sujets_objectifs_abordes_:
+      '#type': textarea
+      '#title': 'Objet de l’évènement (thèmes/sujets/objectifs abordés) '
+      '#title_display': invisible
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    dates_et_horaires_de_l_evenement:
+      '#type': textarea
+      '#title': 'Dates et horaires de l''évènement (installation et désinstallation comprises) '
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    lieu_s_souhaite_s_:
+      '#type': select
+      '#title': 'Lieu(s) souhaité(s) '
+      '#multiple': true
+      '#placeholder': Sélectionner
+      '#options':
+        Sorbonne: Sorbonne
+        'Centre Panthéon ': 'Centre Panthéon '
+        'Centre PMF (Pierre Mendes France) ': 'Centre PMF (Pierre Mendes France) '
+        'Centre René Cassin ': 'Centre René Cassin '
+        'Centre Lourcine ': 'Centre Lourcine '
+        'Centre Broca ': 'Centre Broca '
+        'Centre de Bourg-La-Reine ': 'Centre de Bourg-La-Reine '
+        'Institut de géographie ': 'Institut de géographie '
+        'Centre Saint-Charles ': 'Centre Saint-Charles '
+      '#select2': true
+      '#required': true
+    _salles_souhaitees_:
+      '#type': select
+      '#title': 'Salles souhaitées '
+      '#multiple': true
+      '#placeholder': Sélectionner
+      '#options':
+        Amphithéâtres: Amphithéâtres
+        'Salle(s) de conférence ': 'Salle(s) de conférence '
+        'Salle(s) de classe ': 'Salle(s) de classe '
+        'Espaces de cocktails': 'Espaces de cocktails'
+      '#select2': true
+      '#required': true
+    nombre_d_espaces_souhaites:
+      '#type': textfield
+      '#title': 'Nombre d''espaces souhaités'
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="_salles_souhaitees_[]"]':
+            filled: true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    nombre_de_participants_sur_site:
+      '#type': textarea
+      '#title': 'Nombre de personnes attendues  (invités et organisateurs)'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    nom_des_intervenants:
+      '#type': textarea
+      '#title': 'Liste des intervenants'
+      '#required': true
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    evenement_payant:
+      '#type': radios
+      '#title': 'L’évènement sera-t-il payant ? '
+      '#options':
+        Oui: Oui
+        Non: Non
+      '#options_display': buttons_horizontal
+      '#required': true
+      '#options__properties': ''
+    informations_complementaires_:
+      '#type': textarea
+      '#title': 'Informations complémentaires '
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    besoins_materiels_sonorisation_videoprojecteur_:
+      '#type': textarea
+      '#title': 'Besoins matériels (Sonorisation, vidéoprojecteur…)'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  presse:
+    '#type': webform_section
+    '#title': PRESSE
+    '#states':
+      visible:
+        ':input[name="vous_etes"]':
+          value: PRESSE
+    processed_text_01:
+      '#type': processed_text
+      '#text': |
+        <p>Certains membres du corps professoral acceptent de donner des interviews et de répondre aux questions de journalistes relatives à leur domaine d’expertise. <strong>Les journalistes doivent obtenir l'autorisation de la Présidence de l'université pour filmer dans chaque centre de Paris 1 Panthéon-Sorbonne.</strong></p>
+      '#format': full_html
+    sujet:
+      '#type': textfield
+      '#title': Sujet
+      '#required': true
+    personnes_a_int:
+      '#type': textfield
+      '#title': 'Personnes à interroger'
+      '#required': true
+    date:
+      '#type': date
+      '#title': Date
+      '#datepicker': true
+      '#required': true
+    lieu:
+      '#type': textfield
+      '#title': Lieu
+      '#required': true
+    votre_courriel:
+      '#type': email
+      '#title': 'Votre courriel'
+      '#required': true
+    votre_numero_telephone:
+      '#type': tel
+      '#title': 'Votre numéro de téléphone'
+      '#required': true
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#states':
+      visible:
+        - ':input[name="un_tournage"]':
+            value: 'UN EVENEMENT'
+        - xor
+        - ':input[name="un_tournage"]':
+            value: 'UN TOURNAGE'
+        - xor
+        - ':input[name="un_tournage_etudiant"]':
+            value: 'UN TOURNAGE'
+        - xor
+        - ':input[name="un_tournage_etudiant"]':
+            value: 'UN EVENEMENT'
+        - xor
+        - ':input[name="vous_etes"]':
+            value: PRESSE
+    '#submit__label': ENVOYER
+  markup_01:
+    '#type': webform_markup
+    '#states':
+      visible:
+        ':input[name="vous_etes"]':
+          value: PRESSE
+    '#markup': 'Pour toute information compl&eacute;mentaire, rendez-vous sur la&nbsp;<a href="http://www.pantheonsorbonne.fr/espace-presse">page d&eacute;di&eacute;e &agrave; la presse</a>'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: locations@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: locations@univ-paris1.fr
+      from_options: {  }
+      from_name: Locations
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[Réponse automatique] Demande de location'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: true
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs_1:
+    id: email
+    handler_id: email_aux_organisateurs_1
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel_:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Demande de location'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: true
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

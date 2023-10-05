@@ -1,0 +1,65 @@
+uuid: 5033f585-8da7-435e-9d07-710b83e939df
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.panel.field_button_label
+    - field.field.paragraph.panel.field_media_image
+    - field.field.paragraph.panel.field_panel_description
+    - field.field.paragraph.panel.field_panel_link
+    - field.field.paragraph.panel.field_panel_title
+    - paragraphs.paragraphs_type.panel
+  module:
+    - link
+id: paragraph.panel.default
+targetEntityType: paragraph
+bundle: panel
+mode: default
+content:
+  field_button_label:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_media_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: triptych
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_panel_description:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_panel_link:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_panel_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

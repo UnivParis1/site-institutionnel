@@ -74,71 +74,76 @@
   page.sidebar_first is empty and page.sidebar_second is empty ? 'small-12'
 ]
 %}
-
+{% if is_search_page %}
+  {% set header_size = 'small' %}
+{% else %}
+  {% set header_size = 'medium' %}
+{% endif %}
 {% set hasBlock = '' %}
 {% if print_hp_image %}
-  {% set hasBlock = ' has-image' %}
+  {% set hasBlock = 'has-image' %}
 {% endif %}
 
 {% set siteNameClass = '' %}
 {# Header #}
 {% if site_name|length > 30 %}
-  {% set siteNameClass = ' long' %}
+  {% set siteNameClass = 'long' %}
 {% endif %}
 {% if page.header or page.header_left or page.header_center or page.header_right or page.hp_image %}
-  <header id="navbar"{% if print_hp_image %} class="header-full{{ hasBlock }}{{ siteNameClass }}"{% endif %}>
-    {% if print_hp_image %}
-      <div class="grid-x screen-height full-height">
-        <div class="cell small-12 full-height">
-          <div class="mask no-hover relative-wrapper full-height">
-            <div class="header-img img-container full-height">{{ page.hp_image }}</div>
-            <div class="main-overlay-infos">
-              {{ page.header }}
-              <div class="anchor-header">
-                <a href="#page-content" data-smooth-scroll="" data-offset="80" class="fa fa-chevron-down">
-                  <span class="sr-only">Chevron qui renvoi vers le contenu de cette page</span>
-                </a>
+  <header id="navbar" {% if print_hp_image %} class="header-{{ header_size }} {{ hasBlock }} {{ siteNameClass }}" {% endif %}>
+    {% if page.header or print_hp_image %}
+      <div class="hp-image-container">
+        {% if print_hp_image %}
+          <div class="grid-x screen-{{ header_size }}-height full-height">
+            <div class="cell small-12 full-height">
+              <div class="mask no-hover relative-wrapper {{ header_size }}-height">
+                <div class="header-img img-container full-height">{{ page.hp_image }}</div>
+                <div class="main-overlay-infos">
+                  {{ page.header }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    {% elseif page.header %}
-      <div class="grid-x">
-        <div class="cell small-12">
-          <div class="mask no-hover relative-wrapper">
-            <div class="main-overlay-infos">
-              <div class="header-content">
-                {{ page.header }}
+        {% elseif page.header %}
+          <div class="grid-x">
+            <div class="cell small-12">
+              <div class="mask no-hover relative-wrapper">
+                <div class="main-overlay-infos">
+                  <div class="header-content">
+                    {{ page.header }}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          {#endif print_hp_image and page.header #}
+        {% endif %}
       </div>
-      {#endif print_hp_image and page.header #}
     {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
-      <div id="top-header" {% if not page_mini_site and not is_front_mini_site %} class="grid-x align-justify" {% endif %}>
-        {% if page_mini_site or is_front_mini_site %} <div class="grid-x align-justify top-header-infos"> {% endif %}
-          <div class="cell shrink header-left">
-            {% if page_mini_site %}
-              <a href="{{ path('<front>') }}" class="mini-site-back-wrapper" title=" {{ site_name }}">
-                <span class="fa fa-chevron-left mini-site-circle"></span>
-                <p class="h3-style">{{ 'Retour'|t }}</p>
-              </a>
-            {% elseif not page_mini_site and not is_front_mini_site %}
-              <button class="icon-menu reset-btn" aria-label="Menu navigation principale">
-                <span class="visually-hidden">Navigation principale</span>
-                <span class="toggle-container">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-              </button>
+      <div id="top-header">
+        <div class="grid-x align-justify align-middle top-header-infos">
+          {# Refonte#2617 menu accès direct (site principal) #}
+          <div class="cell shrink header-left show-for-large">
+            {% if not page_mini_site and not is_front_mini_site %}
+              {% if page.header_left %}
+                <button href="#" class="button direct-access-btn">
+                  <span class="mini-site-back-wrapper">{{ "Accès directs"|t }}</span>
+                </button>
+                <div class="direct-access-wrapper">
+                  {{ page.header_left }}
+                </div>
+              {% endif %}
+              {# Refonte#2617 menu accès direct (mini-sites) #}
+            {% elseif page_mini_site or is_front_mini_site %}
+              <div class="site-name {{ siteNameClass }}">
+                <a href="{{ path('<front>') }}" class="" title=" {{ site_name }}">
+                  <h2 class="title">{{ site_name }}</h2>
+                </a>
+              </div>
             {% endif %}
-            {{ page.header_left }}
           </div>
+          {# End Refonte#2617 menu accès direct #}
           {% if page.header_center %}
             <div class="cell shrink header-center">
               {{ page.header_center }}
@@ -146,63 +151,31 @@
           {% endif %}
           {% if page.header_right %}
             <div class="cell shrink header-right">
+
               {{ page.header_right }}
+              <span class="mobile-nav-control hide-for-large icon-menu"></span>
+
             </div>
           {% endif %}
-          {# end grid-x if page-mini-site #}{% if page_mini_site or is_front_mini_site %} </div> {% endif %}
-        {% if page_mini_site or is_front_mini_site %}
-          <div class="grid-x bottom-header-infos">
-            <div class="cell small-12 header-micro" >
-              <div class="grid-x space-between display-flex valign-center">
-                <div class="micro-left">
-                  <button class="icon-menu reset-btn">
-                    <span class="visually-hidden">Navigation principale</span>
-                    <span class="toggle-container">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </span>
-                  </button>
-                  {% if page.header_micro_left %}
-                    {{ page.header_micro_left }}
-                  {% endif %}
-                  <div class="site-name {{ siteNameClass }}">
-                    <a href="{{ path('<front>') }}" class="" title=" {{ site_name }}">
-                      <p class=" title">{{ site_name }}</p>
-                    </a>
-                  </div>
-                </div>
-                {% if page.header_micro_right %}
-                <div class="micro-right">
-                  {{ page.header_micro_right }}
-                </div>
-                {% endif %}
-              </div>
+          {# end grid-x if page-mini-site #}
+        </div>
+        {# Refonte#2616 same structure for master & mini-sites main menus #}
+        <div class="grid-x bottom-header-infos">
+          {# Navbar #}
+          {% if page.navigation %}
+            <div id="navbar-header" class="navbar-header-region">
+              {% if page.navigation %}
+                <div class="navigation-region cell small-12">{{ page.navigation }}</div>
+              {% endif %}
             </div>
-          </div>
-          {#endif header micro left or right #}
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
       {# endif page headers left right center #}
     {% endif %}
   </header>
   {#if all regions of header #}
 {% endif %}
-
-{# Navbar #}
-  {% if page.navigation or page.navigation_left %}
-    <div id="navbar-header" class="navbar-header-region">
-      {% if page.navigation_left %}
-        <div class="navigation-left-region cell small-12 {{ colWidth }}">
-          {{ page.navigation_left }}
-        </div>
-      {% endif %}
-      {% if page.navigation %}
-        <div class="navigation-region cell small-12 {{ colWidth }}">{{ page.navigation }}</div>
-      {% endif %}
-    </div>
-  {% endif %}
 
   {% if page.breadcrumbs %}
     <div id="breadcrumbs" class="breadcrumbs-region">
@@ -218,9 +191,9 @@
 
 {# Main #}
   {% block main %}
-    <main class="main-container" id="page-content">
+    <div role="main" class="main-container" id="page-content">
       {# Content #}
-      <div {{ content_attributes.addClass(content_classes) }}>
+      <section {{ content_attributes.addClass(content_classes) }}>
         {# Highlighted #}
         {% if page.highlighted %}
           {% block highlighted %}
@@ -240,15 +213,15 @@
           {% if page.content_left %}
             <div class="grid-container block-sep">
               <div class="grid-x grid-margin-x">
-                <div class="cell small-12 large-4">
+                <div class="cell small-12 large-4 col-filters">
                   <div class="txt medium infos-sep">{{ 'Filtres'|t }}</div>
                   <div class="content-left box-style auto-height">
-                    <div class="box-content white">
+                    <div class="box-content">
                       {{ page.content_left }}
                     </div>
                   </div>
                 </div>
-                <div class="cell small-12 large-8">
+                <div class="cell small-12 large-8 col-results">
                   {{ page.content }}
                 </div>
               </div>
@@ -261,24 +234,24 @@
         {% if page.after_content %}
           {{ page.after_content }}
         {% endif %}
-      </div>
-    </main>
+      </section>
+    </div>
   {% endblock %}
 {% if page.footer or page.footer_left or page.footer_center or page.footer_right %}
   {% block footer %}
-    <footer class="footer {{ container }}">
-      <div class="footer-wrapper">
+    <footer class="footer {{ container }}" role="contentinfo">
+      <div class="footer-wrapper grid-container">
         <div class="grid-x grid-margin-x align-justify">
-          <div class="cell small-3 large-2 logo-wrapper">
-            <div class="logo-footer">
-              {{ source(directory ~ '/logo.svg') }}
-            </div>
-          </div>
           {% if page.footer %}
-            <div class="cell small-9 medium-4 large-3">{{ page.footer }}</div>
+            <div class="cell small-10 medium-3">
+              <div class="logo-footer">
+                {{ source(directory ~ '/logo.svg') }}
+              </div>
+              {{ page.footer }}
+            </div>
           {% endif %}
           {% if page.footer_left %}
-            <div class="cell small-12 medium-4 two-columns-wrapper show-for-large">
+            <div class="cell small-10 medium-6 two-columns-wrapper">
               <div class="two-columns-content">
                 <div class="two-columns">
                   {{ page.footer_left }}
@@ -287,7 +260,7 @@
             </div>
           {% endif %}
           {% if page.footer_right %}
-            <div class="cell small-12 medium-2 large-3 txt-gold show-for-large">
+            <div class="cell small-10 medium-3">
               {{ page.footer_right }}
             </div>
           {% endif %}
