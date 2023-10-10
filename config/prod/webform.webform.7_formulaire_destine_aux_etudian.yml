@@ -74,11 +74,13 @@ elements: |-
       'Semestre 1': 'Semestre 1'
       'Semestre 2': 'Semestre 2'
     '#options__properties': ''
+    '#required': true
   intitule_precis_de_l_enseignement_concerne_par_votre_demande:
     '#type': textfield
     '#title': 'Intitulé précis de l’enseignement concerné par votre demande'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#format_items': comma
+    '#required': true
   session_d_examen_concernee:
     '#type': radios
     '#title': 'Session d’examen concernée'
@@ -86,21 +88,6 @@ elements: |-
       'Session du délestage': 'Session du délestage'
       'Session 1': 'Session 1'
       'Session du rattrapage': 'Session du rattrapage'
-    '#options__properties': ''
-  motif_de_votre_recours_:
-    '#type': tableselect
-    '#title': 'Motif de votre recours '
-    '#help_title': 'Quel autre motif ?'
-    '#options':
-      'Contestation de ma note ': 'Contestation de ma note '
-      'Demande de point de bonus': 'Demande de point de bonus'
-      'Demande de double correction': 'Demande de double correction'
-    '#js_select': false
-    '#other__type': textarea
-    '#other__option_label': ''
-    '#other__placeholder': ''
-    '#required': true
-    '#required_error': 'Vous devez préciser le motif de votre demande svp.'
     '#options__properties': ''
   votre_courrier_de_recours:
     '#type': managed_file
@@ -139,6 +126,14 @@ elements: |-
       Oui: Oui
       Non: Non
     '#options__properties': ''
+    '#required': true
+  motif_recours:
+    '#type': webform_select_other
+    '#title': 'Motif de votre recours : '
+    '#options':
+      'Contestation de ma note ': 'Contestation de ma note '
+    '#other__option_label': 'Autre motif (à préciser)'
+    '#other__placeholder': 'Merci de préciser ici le motif de votre recours.'
     '#required': true
   captcha:
     '#type': captcha
@@ -341,7 +336,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sevim.essiz@univ-paris1.fr
+      to_mail: recours.ied@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -384,14 +379,14 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ied@univ-paris1.fr
+      from_mail: recours.ied@univ-paris1.fr
       from_options: {  }
       from_name: 'Institut d''Etudes à Distance (IED-EDS)'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Réponse automatique à votre demande de recours suite à un refus d''admission ou d''inscription'
+      subject: 'Réponse automatique à votre demande de recours concernant un résultat d''examen'
       body: "<p>Bonjour,<br />\r\n<br />\r\nVotre demande a bien été prise en compte.<br />\r\nNous vous répondrons dans les meilleurs délais.<br />\r\n<br />\r\nCordialement.<br />\r\n<br />\r\nLe service administratif de l’Institut d’Etudes à Distance de l’Ecole de Droit de la Sorbonne (IED-EDS)</p>"
       excluded_elements: {  }
       ignore_access: false

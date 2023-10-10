@@ -1,89 +1,54 @@
-uuid: 7761c472-ecb9-4e1e-9d7d-8542f2b8fe84
+uuid: 6d7b0eb6-1737-4a7a-a814-e5e934eed0e2
 langcode: fr
-status: scheduled
+status: closed
 dependencies: {  }
 weight: 0
-open: '2023-08-28T10:00:00'
+open: null
 close: null
-uid: 7710
+uid: 5486
 template: false
 archive: false
-id: 10_demande_de_consultation_de_th
-title: '10 - Demande de consultation de thèse - Colliard'
-description: "<p>Arborescence : Menu direction &gt; Bibliothèque Jean-Claude Colliard<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Bibliothèque Jean-Claude Colliard</em> &gt; rubrique <em>Conditions d'accès et de prêt</em></p>"
-category: Contact
+id: 0_nuit_du_droit_de_l_eds_2023
+title: '0 - Nuit du droit de l''EDS 2023'
+description: ''
+category: ''
 elements: |-
-  coordonnees:
-    '#type': webform_section
-    '#title': Coordonnées
-    nom_prenom:
-      '#type': webform_name
-      '#title': 'Nom, prénom'
-      '#required': true
-      '#title__access': false
-      '#first__title': Prénom
-      '#first__required': true
-      '#middle__access': false
-      '#last__title': Nom
-      '#last__required': true
-      '#suffix__access': false
-      '#degree__access': false
-    telephone:
-      '#type': tel
-      '#title': Téléphone
-      '#required': true
-    courriel:
-      '#type': email
-      '#title': Courriel
-      '#required': true
-  references_de_la_these:
-    '#type': webform_section
-    '#title': 'Références de la thèse'
-    titre_de_la_these:
-      '#type': textfield
-      '#title': 'Titre de la thèse'
-      '#required': true
-    auteur_de_la_these:
-      '#type': textfield
-      '#title': 'Auteur de la thèse'
-      '#required': true
-  date_souhaitee_pour_le_rendez_vous:
-    '#type': webform_section
-    '#title': 'Date souhaitée pour le rendez-vous  à la bibliothèque Jean-Claude Colliard'
-    choisir_une_date:
-      '#type': date
-      '#title': 'Choisir une date (délai minimum de 72h)'
-      '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-      '#date_days':
-        - '1'
-        - '2'
-        - '3'
-        - '4'
-        - '5'
-        - '6'
-      '#datepicker': true
-      '#datepicker_button': true
-      '#date_date_format': 'l, F j, Y'
-    creneau_souhaite:
-      '#type': radios
-      '#title': 'Créneau souhaité'
-      '#options':
-        Matin: Matin
-        Après-midi: Après-midi
-      '#required': true
-      '#options__properties': ''
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<h2>Formulaire d''inscription</h2>'
+  nom:
+    '#type': textfield
+    '#title': Nom
     '#required': true
-    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de consultation de th&egrave;se.</span>'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  prenom:
+    '#type': textfield
+    '#title': 'Prénom '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': 'Courriel '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  statut:
+    '#type': textfield
+    '#title': Statut
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#type': checkbox
+    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#required': true
   captcha:
     '#type': captcha
+  markup:
+    '#type': webform_markup
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Envoyer la demande'
+    '#submit__label': Soumettre
+    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -98,8 +63,8 @@ settings:
   page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
-  form_open_message: "<p>Les bibliothèques sont fermées du 21 juillet au soir au 28 août au matin. Le formulaire sera de nouveau accessible à partir du lundi 28 août.</p>\r\n\r\n<p>Nous vous souhaitons un bel été !</p>"
-  form_close_message: ''
+  form_open_message: ''
+  form_close_message: '<p>Les inscriptions sont closes.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -190,8 +155,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "Votre demande de rendez-vous pour une consultation de th&egrave;se a &eacute;t&eacute; prise en compte. Nous vous r&eacute;pondrons dans les meilleurs d&eacute;lais, du lundi au vendredi, de 9h &agrave; 17h.<br />\r\nPour rappel : votre rendez-vous doit &ecirc;tre pris au minimum 24h &agrave; l&#39;avance."
+  confirmation_title: 'Confirmation d''inscription'
+  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>L'Ecole de Droit de la Sorbonne</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -199,9 +164,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 320
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: '<p><strong>Plus de places disponibles.</strong></p>'
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -248,7 +213,8 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles: {  }
+    roles:
+      - anonymous
     users: {  }
     permissions: {  }
   delete_own:
@@ -257,21 +223,24 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 76
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 76
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 76
     permissions: {  }
 handlers:
-  email:
+  email_aux_demandeurs:
     id: email
-    handler_id: email
-    label: bucolliard@univ-paris1.fr
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -279,24 +248,22 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: bucolliard@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: dir-ecole-droit-sorbonne@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom_prenom:value]'
+      from_name: 'Ecole de Droit de la Sorbonne '
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Votre demande de consultation de thèse'
-      body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Veuillez conserver ce mail. Il vous sera n&eacute;cessaire pour acc&eacute;der au centre.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
-      excluded_elements:
-        terms_of_service: terms_of_service
-        captcha: captcha
+      subject: '[Réponse automatique] Confirmation d''inscription à la nuit du droit 2023'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>L'Ecole de Droit de la Sorbonne</p>"
+      excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
