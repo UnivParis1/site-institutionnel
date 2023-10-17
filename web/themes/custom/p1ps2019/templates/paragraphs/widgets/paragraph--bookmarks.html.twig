@@ -43,8 +43,9 @@
 {% endif %}
 
 {% set sticky = content.field_stick_it.0 %}
+
 {# Background field. #}
-{% if content.bp_background|render and not sticky %}
+{% if content.bp_background['#items'].getString() is not null and sticky.0 == 0 %}
   {% set background_field = content.bp_background|render %}
 
   {% set layout_background = content.bp_background['#items'].getString() %}

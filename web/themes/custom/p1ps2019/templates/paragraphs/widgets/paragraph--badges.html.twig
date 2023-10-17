@@ -56,32 +56,50 @@
 {% set title = content.field_title.0 %}
 {% set classColumns = content.field_nb_columns.0 %}
 
-{# Prints div with classes, and content without Width and Background. #}
-<div{{ attributes.addClass(classes) }}>
-  <div class="paragraph__column padding-mobile">
-    {% if content.field_title|render %}
+{# Merges Background field with classes. #}
+{% if content.bp_background|render %}
+  {% set background_field = content.bp_background|render %}
+
+  {% set layout_background = content.bp_background['#items'].getString() %}
+  {% set layout_background_classes = [
+    'paris1-bg-soft-grey' == layout_background ? 'paragraph--color paris1-bg-soft-grey',
+    'paris1-bg-blue' == layout_background ? 'paragraph--color paris1-bg-blue',
+  ]
+  %}
+{% endif %}
+
+{% if background_field %}
+<div class="{{ layout_background_classes|join(' ') }}">
+  {% endif %}
+  {# Prints div with classes, and content without Width and Background. #}
+  <div{{ attributes.addClass(classes) }}>
+    <div class="paragraph__column padding-mobile">
+      {% if content.field_title|render %}
+        <div class="grid-container">
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-12 parag-sep parag-sep-top">
+              <h2 class="titre txt-center">{{ content.field_title.0 }}</h2>
+            </div>
+          </div>
+        </div>
+      {% endif %}
       <div class="grid-container">
-        <div class="grid-x grid-margin-x">
-          <div class="cell small-12 parag-sep parag-sep-top">
-            <h2 class="titre txt-center">{{ content.field_title.0 }}</h2>
+        <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
+          {% for key, badge in  content.field_badge if key|first != '#' %}
+            <div class="cell small-12 large-3 bg-white box-style">{{ badge }}</div>
+          {% endfor %}
+          <div class="cell small-12 large-3 box-style cta-wrapper {{ content.field_bg_color['#items'].getString() }}">
+            <div class="box-style txt-center">
+              <span class="h5-style text-white">{{ content.field_catchphrase.0 }}</span>
+              <a class="btn btn-primary" href="{{ content.bp_link.0['#url'] }}" title="{{ content.field_catchphrase.0 }}" >>
+                {{ content.bp_link.0['#title'] }}
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    {% endif %}
-    <div class="grid-container">
-      <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
-        {% for key, badge in  content.field_badge if key|first != '#' %}
-          <div class="cell small-12 large-3 bg-white box-style">{{ badge }}</div>
-        {% endfor %}
-        <div class="cell small-12 large-3 box-style cta-wrapper {{ content.field_bg_color['#items'].getString() }}">
-          <div class="box-style txt-center">
-            <span class="h5-style text-white">{{ content.field_catchphrase.0 }}</span>
-            <a class="btn btn-primary" href="{{ content.bp_link.0['#url'] }}" title="{{ content.field_catchphrase.0 }}" >>
-              {{ content.bp_link.0['#title'] }}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div><!-- grid container -->
-  </div> <!-- col parags -->
+      </div><!-- grid container -->
+    </div> <!-- col parags -->
+  </div>
+  {% if background_field %}
 </div>
+{% endif %}
