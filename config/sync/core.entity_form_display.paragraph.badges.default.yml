@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.badges.bp_background
     - field.field.paragraph.badges.bp_link
     - field.field.paragraph.badges.field_badge
     - field.field.paragraph.badges.field_bg_color
@@ -19,9 +20,15 @@ targetEntityType: paragraph
 bundle: badges
 mode: default
 content:
+  bp_background:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   bp_link:
     type: link_default
-    weight: 2
+    weight: 3
     region: content
     settings:
       placeholder_url: ''
@@ -29,7 +36,7 @@ content:
     third_party_settings: {  }
   field_badge:
     type: paragraphs
-    weight: 1
+    weight: 2
     region: content
     settings:
       title: Paragraph
@@ -50,7 +57,6 @@ content:
         add_in_between: false
         add_in_between_link_count: 3
         delete_confirmation: false
-        split_text: false
         show_drag_and_drop: true
       paragraphs_ee:
         paragraphs_ee:
@@ -58,13 +64,13 @@ content:
           dialog_style: tiles
   field_bg_color:
     type: options_select
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   field_catchphrase:
     type: string_textfield
-    weight: 4
+    weight: 5
     region: content
     settings:
       size: 60

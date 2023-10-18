@@ -3,16 +3,13 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
     - field.storage.node.field_media
     - field.storage.node.field_short_desc
     - field.storage.node.field_sub_title
     - node.type.page
-    - node.type.slick_content
   module:
     - micro_site
     - node
-    - slick_views
     - user
 id: header_block
 label: 'Bloc entete pages de base'
@@ -377,20 +374,14 @@ display:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          columns:
-            field_media: field_media
-          default: '-1'
-          info:
-            field_media:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
+          uses_fields: false
+          columns: {  }
+          default: ''
+          info: {  }
           override: true
           sticky: false
           summary: ''
+          order: asc
           empty_table: false
           caption: ''
           description: ''

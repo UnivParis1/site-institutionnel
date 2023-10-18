@@ -5,9 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_index
     - field.field.node.page.body
-    - field.field.node.page.field_diapo_homepage
     - field.field.node.page.field_disable_canonical_url
-    - field.field.node.page.field_display_node_changed
     - field.field.node.page.field_indexrobots
     - field.field.node.page.field_media
     - field.field.node.page.field_paragraphs
@@ -18,7 +16,8 @@ dependencies:
     - field.field.node.page.field_sub_title
     - node.type.page
   module:
-    - entity_reference_revisions
+    - paragraphs
+    - text
     - user
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
@@ -27,21 +26,18 @@ targetEntityType: node
 bundle: page
 mode: search_index
 content:
-  field_media:
-    type: entity_reference_entity_view
+  body:
+    type: text_trimmed
     label: hidden
     settings:
-      view_mode: search_index
-      link: false
+      trim_length: 250
     third_party_settings: {  }
     weight: 0
     region: content
   field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    label: visually_hidden
-    settings:
-      view_mode: search_index
-      link: ''
+    type: paragraph_summary
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
     weight: 1
     region: content
@@ -51,12 +47,10 @@ content:
     weight: 2
     region: content
 hidden:
-  body: true
   content_moderation_control: true
-  field_diapo_homepage: true
   field_disable_canonical_url: true
-  field_display_node_changed: true
   field_indexrobots: true
+  field_media: true
   field_publish_master: true
   field_short_desc: true
   field_sites: true
