@@ -42,9 +42,7 @@
   {{ attach_library('bootstrap_paragraphs/bp-columns') }}
 {% endif %}
 
-{% set sticky = content.field_stick_it['#items'].getString() == 1 ? 'true' : 'false' %}
-
-{{ content.field_stick_it['#items'].getString() }}
+{% set sticky = content.field_stick_it['#items'].getString() %}
 
 {# Background field. #}
 {% if sticky == 1 %}
