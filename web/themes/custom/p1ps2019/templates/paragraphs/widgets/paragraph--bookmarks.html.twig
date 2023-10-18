@@ -42,10 +42,14 @@
   {{ attach_library('bootstrap_paragraphs/bp-columns') }}
 {% endif %}
 
-{% set sticky = content.field_stick_it.0 %}
+{% set sticky = content.field_stick_it['#items'].getString() == 1 ? 'true' : 'false' %}
+
+{{ content.field_stick_it['#items'].getString() }}
 
 {# Background field. #}
-{% if content.bp_background['#items'].getString() is not null and sticky.0 == 0 %}
+{% if sticky == 1 %}
+  {% set layout_background_classes = ['sticky-bookmarks', 'bg-transparent'] %}
+{% else %}
   {% set background_field = content.bp_background|render %}
 
   {% set layout_background = content.bp_background['#items'].getString() %}
@@ -57,8 +61,6 @@
     'bg-transparent' == layout_background ?  'bg-transparent',
   ]
   %}
-  {% else %}
-    {% set layout_background_classes = ['sticky-bookmarks', 'bg-transparent'] %}
 {% endif %}
 
 {# Renders Width field. #}
