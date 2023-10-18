@@ -1,21 +1,18 @@
-uuid: b1180be1-869d-46eb-be67-de28920fe28a
+uuid: c1a75979-97e1-417b-8c70-3b94ecfb7d25
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 927
 template: false
 archive: false
-id: 0_rentree_solennelle_de_l_eds_20
-title: '0 - Rentrée Solennelle de l''EDS 2023'
-description: ''
+id: seminaire_de_l_iredies_ndeg_45_p
+title: 'Séminaire de l’IREDIES n° 45 - Peer Zumbasen'
+description: '<p>Séminaire de l''IREDIES - Mardi 17 octobre, salle 13, Lourcine - 12h30 - 14h30</p>'
 category: ''
 elements: |-
-  markup_01:
-    '#type': webform_markup
-    '#markup': '<h2>Formulaire d''inscription</h2>'
   nom:
     '#type': textfield
     '#title': Nom
@@ -23,50 +20,19 @@ elements: |-
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
-    '#type': email
-    '#title': 'Courriel '
+    '#title': Prénom
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   statut:
     '#type': textfield
-    '#title': Structure
+    '#title': Statut
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  fonction_:
+  courriel_de_contact:
     '#type': textfield
-    '#title': 'Fonction '
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  souhaitez_vous_participer_a_la_ceremonie_:
-    '#type': radios
-    '#title': 'Souhaitez-vous participer à la cérémonie ?'
-    '#options':
-      OUI: OUI
-      NON: NON
-    '#options__properties': ''
-  souhaitez_vous_participer_au_cocktail_:
-    '#type': radios
-    '#title': 'Souhaitez-vous participer au cocktail  ? '
-    '#options':
-      OUI: OUI
-      NON: NON
-    '#options__properties': ''
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
-    '#type': checkbox
-    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#title': 'Courriel de contact'
     '#required': true
-  captcha:
-    '#type': captcha
-  markup:
-    '#type': webform_markup
-  actions:
-    '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
 css: ''
 javascript: ''
 settings:
@@ -79,10 +45,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Les inscriptions sont closes.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -151,7 +117,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -173,8 +139,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Confirmation d''inscription'
-  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>L'Ecole de Droit de la Sorbonne</p>"
+  confirmation_title: ''
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -182,9 +148,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: 250
+  limit_total: null
   limit_total_interval: null
-  limit_total_message: '<p><strong>Plus de places disponibles.</strong></p>'
+  limit_total_message: ''
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -231,8 +197,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -241,55 +206,15 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 76
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 76
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 76
+    users: {  }
     permissions: {  }
-handlers:
-  email_aux_demandeurs:
-    id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: dir-ecole-droit-sorbonne@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Ecole de Droit de la Sorbonne '
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la rentrée solennelle de l''Ecole de Droit de la Sorbonne'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>L'Ecole de Droit de la Sorbonne</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }
