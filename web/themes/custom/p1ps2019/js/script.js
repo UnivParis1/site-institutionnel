@@ -167,7 +167,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
           $('body').addClass('scroll');
         }
         setTimeout(function () {
-          $('#views-exposed-form-recherche-db-page-1 #edit-text').focus()
+          $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
         }, 30);
       }
     });
@@ -245,7 +245,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
         if($(window).width() < 1024){
           $('.block-views-exposed-filter-blockresultats-de-recherche-page-1').addClass('overlay-show');
           setTimeout(function () {
-            $('#views-exposed-form-recherche-db-page-1 #edit-text').focus()
+            $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
           }, 30);
         }
         $('body').addClass('noscroll');
@@ -315,7 +315,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
           $('.block-views-exposed-filter-blockresultats-de-recherche-page-1').addClass('overlay-show');
           //Ajouté après...
           setTimeout(function () {
-            $('#views-exposed-form-recherche-db-page-1 #edit-text').focus()
+            $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
           }, 30);
         }
       });//close resize
