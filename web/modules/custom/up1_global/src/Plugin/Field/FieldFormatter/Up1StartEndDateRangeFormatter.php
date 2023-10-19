@@ -64,7 +64,7 @@ class Up1StartEndDateRangeFormatter extends DateTimeCustomFormatter {
               <div class='end-date'>
               <span class=''>" . t("To: ") . "</span> " .
                 $end_date->format('l j F Y ') . "<i class='fa fa-arrow-right'>
-              <span class='sr-only'>" . t( ' at ') . "</span> </i> $end_hour </div>",
+              <span class='sr-only'>" . t( ' at ') . "</span> </i> $end_hour </div></div>",
             ],
           ];
         }

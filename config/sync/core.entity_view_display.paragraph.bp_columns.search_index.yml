@@ -1,0 +1,64 @@
+uuid: aac24500-91b3-476c-bd3d-b65e927d7afb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.search_index
+    - field.field.paragraph.bp_columns.bp_background
+    - field.field.paragraph.bp_columns.bp_column_content
+    - field.field.paragraph.bp_columns.bp_header
+    - field.field.paragraph.bp_columns.bp_width
+    - field.field.paragraph.bp_columns.field_column_number
+    - paragraphs.paragraphs_type.bp_columns
+  module:
+    - entity_reference_revisions
+    - options
+_core:
+  default_config_hash: wIDWPSouhITkH6QV8vXzWJ-cbN-dEYeBvMGBS0jV4x0
+id: paragraph.bp_columns.search_index
+targetEntityType: paragraph
+bundle: bp_columns
+mode: search_index
+content:
+  bp_background:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  bp_column_content:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: search_index
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  bp_header:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  bp_width:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_column_number:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  created: true
+  search_api_excerpt: true
+  uid: true

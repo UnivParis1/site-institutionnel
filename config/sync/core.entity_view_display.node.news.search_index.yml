@@ -36,18 +36,20 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_categories:
-    type: entity_reference_label
+  field_lead:
+    type: text_trimmed
     label: hidden
     settings:
-      link: false
+      trim_length: 200
     third_party_settings: {  }
     weight: 2
     region: content
-  field_lead:
-    type: text_default
+  field_media:
+    type: entity_reference_entity_view
     label: hidden
-    settings: {  }
+    settings:
+      view_mode: search_index
+      link: false
     third_party_settings: {  }
     weight: 1
     region: content
@@ -76,8 +78,8 @@ content:
     region: content
 hidden:
   comment: true
+  field_categories: true
   field_disable_canonical_url: true
-  field_media: true
   field_news_date: true
   field_publish_master: true
   field_related_news: true

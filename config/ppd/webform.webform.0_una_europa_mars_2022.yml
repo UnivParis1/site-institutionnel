@@ -1,0 +1,602 @@
+uuid: 9d0e8c64-77fd-44b8-b543-bdff11f94b18
+langcode: fr
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 5486
+template: false
+archive: false
+id: 0_una_europa_mars_2022
+title: '0 - Una Europa mars 2022'
+description: ''
+category: ''
+elements: |-
+  personal_information:
+    '#type': webform_section
+    '#title': 'Name of the participant'
+    '#title_tag': h3
+    first_name:
+      '#type': textfield
+      '#title': 'First Name'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    last_name:
+      '#type': textfield
+      '#title': 'Last Name'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    email:
+      '#type': email
+      '#title': Email
+      '#placeholder': example@example.com
+      '#required': true
+    markup:
+      '#type': webform_markup
+      '#markup': '<hr>'
+    how_will_you_participate_in_the_meetings_events_:
+      '#type': radios
+      '#title': 'How will you participate in the meetings/events?'
+      '#options':
+        'I will participate physically': 'I will participate physically'
+        'I will participate virtually': 'I will participate virtually'
+      '#options__properties': ''
+      '#required': true
+    please_mark_all_the_meetings_and_events_you_will_join_virtually_:
+      '#type': label
+      '#title': 'You are all very welcome to attend the Una Europa Talk on 16 March at 17:00 CET, which will be live streamed on the Una Europa YouTube channel. Registration is not required.'
+      '#states':
+        visible:
+          ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+            value: 'I will participate virtually'
+    attend_the_una_europa_talk_on_16_march_virtual:
+      '#type': checkboxes
+      '#title': 'Please mark all the meetings and events you will join virtually. The links to join will be provided in due time by the coordinator of each meeting.  (Multiple choice question).'
+      '#options':
+        '1Europe Project Steering Committee (15 March, 14:00 – 17:00 CET)': '1Europe Project Steering Committee (15 March, 14:00 – 17:00 CET)'
+        'Una Europa Board of Directors (16 March, 09:00 – 12:30 CET)': 'Una Europa Board of Directors (16 March, 09:00 – 12:30 CET)'
+        'Una Europa Student Board (16 March, 09:00 – 12:30 CET)': 'Una Europa Student Board (16 March, 09:00 – 12:30 CET)'
+        'Mobility Cluster (16 March, 09:00 – 12:30 CET)': 'Mobility Cluster (16 March, 09:00 – 12:30 CET)'
+        'IT for Education Cluster (16 March, 09:00 – 12:30 CET)': 'IT for Education Cluster (16 March, 09:00 – 12:30 CET)'
+        'WP Coordination (16 March, 09:00 – 12:30 CET)': 'WP Coordination (16 March, 09:00 – 12:30 CET)'
+        'SSC One Health (16 March, 09:00 – 12:30 CET)': 'SSC One Health (16 March, 09:00 – 12:30 CET)'
+        'Una Europa Board of Directors + External Advisors (16 March, 13:30 – 16:30 CET)': 'Una Europa Board of Directors + External Advisors (16 March, 13:30 – 16:30 CET)'
+        'Una Europa Student Board (16 March, 13:30 – 16:30 CET)': 'Una Europa Student Board (16 March, 13:30 – 16:30 CET)'
+        'Mobility Cluster (16 March, 13:30 – 16:30 CET)': 'Mobility Cluster (16 March, 13:30 – 16:30 CET)'
+        'Continuous Education sub-group (16 March, 13:30 – 16:30 CET)': 'Continuous Education sub-group (16 March, 13:30 – 16:30 CET)'
+        'IT for Education Cluster (16 March, 13:30 – 16:30 CET)': 'IT for Education Cluster (16 March, 13:30 – 16:30 CET)'
+        'Doctoral Training Cluster (16 March, 13:30 – 16:30 CET)': 'Doctoral Training Cluster (16 March, 13:30 – 16:30 CET)'
+        'Teaching and Learning Cluster (16 March, 13:30 – 16:30 CET)': 'Teaching and Learning Cluster (16 March, 13:30 – 16:30 CET)'
+        'SSC One Health (16 March, 13:30 – 16:30 CET)': 'SSC One Health (16 March, 13:30 – 16:30 CET)'
+        'SSC DSAI (16 March, 13:30 – 16:30 CET)': 'SSC DSAI (16 March, 13:30 – 16:30 CET)'
+        'SSC Sustainability (16 March, 13:30 – 16:30 CET)': 'SSC Sustainability (16 March, 13:30 – 16:30 CET)'
+        'Operational Leads meeting (16 March, 13:30 – 16:30 CET)': 'Operational Leads meeting (16 March, 13:30 – 16:30 CET)'
+        'SSC European studies (16 March, 14:00 – 16:00 CET)': 'SSC European studies (16 March, 14:00 – 16:00 CET)'
+        'Mobility Cluster (17 March, 09:00 -12:30 CET)': 'Mobility Cluster (17 March, 09:00 -12:30 CET)'
+        'Research Coordination Cluster (17 March, 09:00 -12:30 CET)': 'Research Coordination Cluster (17 March, 09:00 -12:30 CET)'
+        'Student Administration Cluster (17 March, 09:00 -12:30 CET)': 'Student Administration Cluster (17 March, 09:00 -12:30 CET)'
+        'Teaching and Learning Cluster + sub-group CE (17 March, 09:00 -12:30 CET)': 'Teaching and Learning Cluster + sub-group CE (17 March, 09:00 -12:30 CET)'
+        'IT for Education Cluster (17 March, 09:00 -12:30 CET)': 'IT for Education Cluster (17 March, 09:00 -12:30 CET)'
+        'Doctoral Training Cluster & Legal Cluster (joint meeting) (17 March, 09:00 -12:30 CET)': 'Doctoral Training Cluster & Legal Cluster (joint meeting) (17 March, 09:00 -12:30 CET)'
+        'Communications Leads (17 March, 09:00 -12:30 CET)': 'Communications Leads (17 March, 09:00 -12:30 CET)'
+        'SSC One Health (17 March, 09:00 -12:30 CET)': 'SSC One Health (17 March, 09:00 -12:30 CET)'
+        'SSC DSAI (17 March, 09:00 -12:30 CET)': 'SSC DSAI (17 March, 09:00 -12:30 CET)'
+        'SSC Sustainability (17 March, 09:00 -12:30 CET)': 'SSC Sustainability (17 March, 09:00 -12:30 CET)'
+        'Research Coordination Cluster (17 March, 13:30 – 17:00 CET)': 'Research Coordination Cluster (17 March, 13:30 – 17:00 CET)'
+        'Legal Cluster (17 March, 13:30 – 17:00 CET)': 'Legal Cluster (17 March, 13:30 – 17:00 CET)'
+        'IT for Education Cluster (17 March, 13:30 – 17:00 CET)': 'IT for Education Cluster (17 March, 13:30 – 17:00 CET)'
+        'SSC One Health (17 March, 13:30 – 17:00 CET)': 'SSC One Health (17 March, 13:30 – 17:00 CET)'
+        'Roll-out writing Team (17 March, 13:30 – 17:00 CET)': 'Roll-out writing Team (17 March, 13:30 – 17:00 CET)'
+        'Communications Leads (17 March, 13:30 – 17:00 CET)': 'Communications Leads (17 March, 13:30 – 17:00 CET)'
+      '#states':
+        visible:
+          ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+            value: 'I will participate virtually'
+      '#options__properties': ''
+    markup_04:
+      '#type': webform_markup
+      '#states':
+        visible:
+          ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+            value: 'I will participate virtually'
+    physical_events:
+      '#type': webform_section
+      '#title': 'Physical meetings'
+      '#title_display': invisible
+      '#states':
+        visible:
+          ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+            value: 'I will participate physically'
+      arrival_to_paris_time_in_cet_:
+        '#type': datetime
+        '#title': 'Arrival to Paris (time in CET) '
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+        '#date_date_format': ''
+        '#date_time_element': timepicker
+        '#date_time_placeholder': 'hh:mm'
+        '#date_time_format': 'H:i'
+      departure_time_in_cet_:
+        '#type': datetime
+        '#title': 'Departure (time in CET) '
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+        '#date_date_format': ''
+        '#date_time_element': timepicker
+        '#date_time_placeholder': 'hh:mm'
+        '#date_time_format': 'H:i'
+      if_already_booked_name_of_accommodation:
+        '#type': textfield
+        '#title': 'If already booked, Name of accommodation'
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      markup_03:
+        '#type': webform_markup
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#markup': '<hr />'
+      please_mark_all_the_meetings_and_events_you_will_join_physically:
+        '#type': label
+        '#title': 'Please mark all the meetings and events you will join. (Multiple choice question).'
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+      on_15_march_multiple_choice_question_:
+        '#type': webform_section
+        '#title': 'On 15 March '
+        '#description': '<h4>On 15 March&nbsp;</h4>'
+        '#title_display': invisible
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        virtual_meeting:
+          '#type': checkbox
+          '#title': '1Europe Project Steering Committee (15 March, 14:00 – 17:00 CET)'
+          '#states':
+            visible:
+              ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+                value: 'I will participate physically'
+      markup_02:
+        '#type': webform_markup
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#markup': '<hr />'
+      16_march:
+        '#type': webform_section
+        '#title': '16 March'
+        '#description': '<h4>On 16 March</h4>'
+        '#title_display': invisible
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        you_are_all_very_welcome_to_attend_the_una_europa_talk_on_16_mar:
+          '#type': checkboxes
+          '#title': 'On 16 March'
+          '#title_display': invisible
+          '#options':
+            'Una Europa Board of Directors (16 March, 09:00 – 12:30 CET)': 'Una Europa Board of Directors (16 March, 09:00 – 12:30 CET)'
+            'Una Europa Student Board (16 March, 09:00 – 12:30 CET)': 'Una Europa Student Board (16 March, 09:00 – 12:30 CET)'
+            'Mobility Cluster (16 March, 09:00 – 12:30 CET)': 'Mobility Cluster (16 March, 09:00 – 12:30 CET)'
+            'IT for Education Cluster (16 March, 09:00 – 12:30 CET)': 'IT for Education Cluster (16 March, 09:00 – 12:30 CET)'
+            'WP Coordination (16 March, 09:00 – 12:30 CET)': 'WP Coordination (16 March, 09:00 – 12:30 CET)'
+            'SSC One Health (16 March, 09:00 – 12:30 CET)': 'SSC One Health (16 March, 09:00 – 12:30 CET)'
+            'Una Europa Board of Directors + External Advisors (16 March, 13:30 – 16:30 CET)': 'Una Europa Board of Directors + External Advisors (16 March, 13:30 – 16:30 CET)'
+            'Una Europa Student Board (16 March, 13:30 – 16:30 CET)': 'Una Europa Student Board (16 March, 13:30 – 16:30 CET)'
+            'Mobility Cluster (16 March, 13:30 – 16:30 CET)': 'Mobility Cluster (16 March, 13:30 – 16:30 CET)'
+            'Continuous Education sub-group (16 March, 13:30 – 16:30 CET)': 'Continuous Education sub-group (16 March, 13:30 – 16:30 CET)'
+            'IT for Education Cluster (16 March, 13:30 – 16:30 CET)': 'IT for Education Cluster (16 March, 13:30 – 16:30 CET)'
+            'Doctoral Training Cluster (16 March, 13:30 – 16:30 CET)': 'Doctoral Training Cluster (16 March, 13:30 – 16:30 CET)'
+            'Teaching and Learning Cluster (16 March, 13:30 – 16:30 CET)': 'Teaching and Learning Cluster (16 March, 13:30 – 16:30 CET)'
+            'SSC One Health (16 March, 13:30 – 16:30 CET)': 'SSC One Health (16 March, 13:30 – 16:30 CET)'
+            'SSC DSAI (16 March, 13:30 – 16:30 CET)': 'SSC DSAI (16 March, 13:30 – 16:30 CET)'
+            'SSC Sustainability (16 March, 13:30 – 16:30 CET)': 'SSC Sustainability (16 March, 13:30 – 16:30 CET)'
+            'Operational Leads meeting (16 March, 13:30 – 16:30 CET) (TBC)': 'Operational Leads meeting (16 March, 13:30 – 16:30 CET) (TBC)'
+            'SSC European studies (16 March, 14:00 – 16:00 CET)': 'SSC European studies (16 March, 14:00 – 16:00 CET)'
+            'Una Europa Talk (16 March, 17:00 – 18:30 CET)': 'Una Europa Talk (16 March, 17:00 – 18:30 CET)'
+            'Cocktail after the Una Europa Talk (16 March, 19:00 – 20:00 CET )': 'Cocktail after the Una Europa Talk (16 March, 19:00 – 20:00 CET )'
+          '#states':
+            visible:
+              ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+                value: 'I will participate physically'
+          '#options__properties': ''
+      markup_01:
+        '#type': webform_markup
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#markup': '<hr />'
+      17_mars:
+        '#type': webform_section
+        '#title': '17 March'
+        '#description': '<h4>On 17 March</h4>'
+        '#title_display': invisible
+        '#title_tag': h3
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        on_17_march_multiple_choice_question_:
+          '#type': checkboxes
+          '#title': 'On 17 March (multiple choice question)'
+          '#title_display': invisible
+          '#options':
+            'Operational Lead  (17 March, 09:00 – 12:30 CET)': 'Operational Lead  (17 March, 09:00 – 12:30 CET)'
+            'Mobility Cluster (17 March, 09:00 – 12:30 CET)': 'Mobility Cluster (17 March, 09:00 – 12:30 CET)'
+            'Research Coordination Cluster (17 March, 09:00 – 12:30 CET)': 'Research Coordination Cluster (17 March, 09:00 – 12:30 CET)'
+            'Student Administration Cluster (17 March, 09:00 – 12:30 CET)': 'Student Administration Cluster (17 March, 09:00 – 12:30 CET)'
+            'Teaching and Learning Cluster + sub-group CE (17 March, 09:00 – 12:30 CET)': 'Teaching and Learning Cluster + sub-group CE (17 March, 09:00 – 12:30 CET)'
+            'IT for Education Cluster (17 March, 09:00 – 12:30 CET)': 'IT for Education Cluster (17 March, 09:00 – 12:30 CET)'
+            'Doctoral Training Cluster & Legal Cluster (joint meeting) (17 March, 09:00 – 12:30 CET)': 'Doctoral Training Cluster & Legal Cluster (joint meeting) (17 March, 09:00 – 12:30 CET)'
+            'Communications Leads (17 March, 09:00 – 12:30 CET)': 'Communications Leads (17 March, 09:00 – 12:30 CET)'
+            'SSC One Health (17 March, 09:00 – 12:30 CET)': 'SSC One Health (17 March, 09:00 – 12:30 CET)'
+            'SSC DSAI (17 March, 09:00 – 12:30 CET)': 'SSC DSAI (17 March, 09:00 – 12:30 CET)'
+            'SSC Sustainability (17 March, 09:00 – 12:30 CET)': 'SSC Sustainability (17 March, 09:00 – 12:30 CET)'
+            'Research Coordination Cluster (17 March, 13:30 – 17:00 CET)': 'Research Coordination Cluster (17 March, 13:30 – 17:00 CET)'
+            'Legal Cluster (17 March, 13:30 – 17:00 CET)': 'Legal Cluster (17 March, 13:30 – 17:00 CET)'
+            'IT for Education Cluster (17 March, 13:30 – 17:00 CET)': 'IT for Education Cluster (17 March, 13:30 – 17:00 CET)'
+            'SSC One Health (17 March, 13:30 – 17:00 CET)': 'SSC One Health (17 March, 13:30 – 17:00 CET)'
+            'Communications Leads (17 March, 13:30 – 17:00 CET)': 'Communications Leads (17 March, 13:30 – 17:00 CET)'
+            'Roll-out writing team (17 March, 13:30 – 17:00 CET)': 'Roll-out writing team (17 March, 13:30 – 17:00 CET)'
+          '#states':
+            visible:
+              ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+                value: 'I will participate physically'
+          '#options__properties': ''
+      markup_05:
+        '#type': webform_markup
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#markup': '<hr />'
+      dinners:
+        '#type': label
+        '#title': Dinners
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+      are_you_available_for_an_informal_dinner_on_15_march_:
+        '#type': radios
+        '#title': 'Are you available for an informal dinner on 15 March?'
+        '#options':
+          'YES': 'YES'
+          'NO': 'NO'
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#options__properties': ''
+        '#required': true
+      are_you_available_for_an_informal_dinner_on_16_march_:
+        '#type': radios
+        '#title': 'Are you available for an informal dinner on 16 March?'
+        '#options':
+          'YES': 'YES'
+          'NO': 'NO'
+        '#options__properties': ''
+        '#required': true
+      are_you_available_for_an_informal_dinner_on_17_march_:
+        '#type': radios
+        '#title': 'Are you available for an informal dinner on 17 March?'
+        '#options':
+          'YES': 'YES'
+          'NO': 'NO'
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#options__properties': ''
+        '#required': true
+      there_will_be_a_formal_dinner_organized_for_the_directors_extern:
+        '#type': radios
+        '#title': 'There will be a formal dinner organized for the Directors, External Advisors and Una Europa Talk panelists on 16 March. If you or the participant is one of the invitees, please confirm participation.'
+        '#options':
+          'YES': 'YES'
+          'NO': 'NO'
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#options__properties': ''
+        '#required': true
+      if_applicable_please_inform_us_about_any_dietary_restrictions_of:
+        '#type': textarea
+        '#title': 'If applicable, please inform us about any dietary restrictions of the participant. (Vegetarian, vegan, gluten-free, allergies..).'
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      do_you_have_any_comments_:
+        '#type': textarea
+        '#title': 'Do you have any comments?'
+        '#states':
+          visible:
+            ':input[name="how_will_you_participate_in_the_meetings_events_"]':
+              value: 'I will participate physically'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  by_submitting_this_form_i_agree_that_the_list_of_registrants_wil:
+    '#type': checkbox
+    '#title': 'By submitting this form, I agree that the list of registrants will be communicated to the organisers and group''s coordinators'
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_description': 'Captcha is a system for checking that a human and not a machine is using a computer. '
+  markup_06:
+    '#type': webform_markup
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: 'Registration confirmation'
+  confirmation_message: "<p>Thank you for your registration !</p>\r\n\r\n<p>The organizing team.</p>"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: unaeuropa@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: melissa.claessens@una-europa.eu
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:email:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Una Europa, meetings and events, 16 -17 March 2022'
+      body: "<p>Sent [webform_submission:created]</p>\r\n\r\n<p>Sent by : [webform_submission:user]</p>\r\n\r\n<p>Values sent are :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_demandeurs:
+    id: email
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: unaeuropa@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Una Europa'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[No reply] Registration confirmation'
+      body: "<img alt=\"Bandeau image Una meetings\" data-align=\"center\" data-entity-type=\"file\" data-entity-uuid=\"fe857958-ee21-43ca-a673-e59942805d9b\" src=\"/sites/default/files/inline-images/22-034_-_una_meetings-decli-num-v3_-_bandeau_mail.png\" />\r\n<p class=\"text-align-center\">Your registration is confirmed.</p>\r\n\r\n<p class=\"text-align-center\">Thank you for your participation.</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

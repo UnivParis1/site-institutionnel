@@ -315,9 +315,10 @@ display:
               allow_secondary: false
               secondary_label: 'Options avancées'
               secondary_open: false
+              reset_button_always_show: false
             filter:
               field_type_patrimoine_target_id:
-                plugin_id: bef
+                plugin_id: bef_links
                 advanced:
                   sort_options: true
                   rewrite:
@@ -325,8 +326,6 @@ display:
                   collapsible: false
                   is_secondary: false
                 select_all_none: false
-                select_all_none_nested: false
-                display_inline: true
       access:
         type: perm
         options:
@@ -381,44 +380,14 @@ display:
           id: type
           table: paragraphs_item_field_data
           field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
           entity_type: paragraph
           entity_field: type
           plugin_id: bundle
-          operator: in
           value:
             patrimoine_immobilier: patrimoine_immobilier
-          group: 1
-          exposed: false
           expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         field_type_patrimoine_target_id:
           id: field_type_patrimoine_target_id
           table: paragraph__field_type_patrimoine
@@ -472,34 +441,42 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        parent_field_name:
-          id: parent_field_name
+        parent_type:
+          id: parent_type
           table: paragraphs_item_field_data
-          field: parent_field_name
+          field: parent_type
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: paragraph
-          entity_field: parent_field_name
+          entity_field: parent_type
           plugin_id: string
           operator: '='
-          value: field_patrimoine_immobilier
+          value: paragraph
           group: 1
           exposed: false
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: parent_type_op
+            label: 'Type du parent'
             description: ''
             use_operator: false
-            operator: ''
+            operator: parent_type_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: ''
+            identifier: parent_type
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+              enseignant_doctorant: '0'
             placeholder: ''
           is_grouped: false
           group_info:

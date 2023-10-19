@@ -3,16 +3,25 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.content_block.bp_background
     - field.field.paragraph.content_block.field_content_block
     - field.field.paragraph.content_block.field_title
     - paragraphs.paragraphs_type.content_block
   module:
+    - options
     - viewsreference
 id: paragraph.content_block.default
 targetEntityType: paragraph
 bundle: content_block
 mode: default
 content:
+  bp_background:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_content_block:
     type: viewsreference_formatter
     label: visually_hidden
@@ -20,7 +29,7 @@ content:
       plugin_types:
         - block
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_title:
     type: string
@@ -28,7 +37,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   search_api_excerpt: true

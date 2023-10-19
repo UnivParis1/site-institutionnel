@@ -1,7 +1,7 @@
 .centres-up1-form, .center-wrapper {
   .map-centre {
     width: 100%;
-    min-height: rem-calc(250px);
+    //min-height: rem-calc(250px);
     display: flex;
     flex-direction: row-reverse;
     .center-form {
@@ -18,6 +18,7 @@
       }
       .chosen-container-single {
         .chosen-single {
+          padding: 0 4.5rem 0 1rem;
           &:after {
             font-size: rem-calc(14px);
           }
@@ -25,8 +26,38 @@
             font-size: rem-calc(15px);
           }
         }
+        &.chosen-container-active {
+          .chosen-single {
+            border-radius: 50rem;
+          }
+        }
+        .chosen-drop {
+          margin-top: 0;
+          border: none !important;
+          border-radius: 0;
+          padding: 0.5rem 0 0 0;
+          background-color: $white;
+          box-shadow: 0px 20px 25px 0px rgba($background-main-color,0.75);
+          .chosen-search input[type="text"] {
+            margin: 0 0 0.5rem 0;
+            padding: 5px 20px 5px 5px;
+            border: 1px solid $gray2;
+            //background: url(chosen-sprite.png) no-repeat 100% -20px;
+            background: url("../images/p1ps2022/chosen-search.png") no-repeat right center / 19px 13px !important;
+            font-size: 1rem;
+            font-family: $font-main;
+          }
+        }
       }
       .overlay-infos {
+
+        > div {
+          display: flex;
+          align-items: center;
+        }
+
+
+
         a {
           color: #fff
         }
@@ -44,7 +75,12 @@
         }
         .form-item{
           label{
-            @extend .h2-style; margin-bottom: rem-calc(16px);
+            @extend .h2-style;
+            margin-bottom: rem-calc(0px);
+            white-space: nowrap;
+          }
+          .chosen-container {
+            margin-left: rem-calc(100px);
           }
         }
         input[type="submit"]{
@@ -57,9 +93,16 @@
       }
     }
   }
+  .center-wrapper {
+    background-color: #00326e;
+    @include breakpoint($xlarge) {
+      padding-bottom: rem-calc(32px);
+    }
+  }
   .details-centre {
     display: flex;
     font-size: rem-calc(16px);
+    @extend .grid-container;
     .image-centre {
       width: 65%;
       &:after {

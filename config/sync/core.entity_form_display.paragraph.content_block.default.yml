@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.content_block.bp_background
     - field.field.paragraph.content_block.field_content_block
     - field.field.paragraph.content_block.field_title
     - paragraphs.paragraphs_type.content_block
@@ -13,9 +14,15 @@ targetEntityType: paragraph
 bundle: content_block
 mode: default
 content:
+  bp_background:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_content_block:
     type: viewsreference_select
-    weight: 1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -26,6 +33,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

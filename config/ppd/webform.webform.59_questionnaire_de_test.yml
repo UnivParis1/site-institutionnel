@@ -1,0 +1,324 @@
+uuid: 33916890-5d6e-4319-8a6f-a6956badc17f
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 2430
+template: false
+archive: false
+id: 59_questionnaire_de_test
+title: '75 - Formulaire Carte de voeux'
+description: 'Pour permettre l&#39;envoi de carte de voeux &eacute;lectronique.'
+category: ''
+elements: |-
+  votre_prenom_:
+    '#type': textfield
+    '#title': 'Votre prénom :'
+    '#placeholder': Marcel
+    '#required': true
+    '#default_value': '[cas:attribute:givenname]'
+  votre_nom_:
+    '#type': textfield
+    '#title': 'Votre nom :'
+    '#placeholder': Dupont
+    '#required': true
+    '#default_value': '[cas:attribute:sn]'
+  merci_de_le_confirmer:
+    '#type': webform_email_confirm
+    '#title': 'Votre courriel'
+    '#placeholder': dupont@gmail.com
+    '#required': true
+    '#default_value': '[current-user:mail]'
+    '#confirm__placeholder': 'Merci de la ressaisir pour la confirmer'
+  a_combien_de_personne_souhaitez_vous_envoyer_votre_carte_:
+    '#type': radios
+    '#title': 'A combien de personne souhaitez-vous envoyer votre carte ?'
+    '#options':
+      'Une personne': 'Une personne'
+      'Plusieurs personnes': 'Plusieurs personnes'
+    '#required': true
+    '#default_value': 'Une personne'
+  message_explicatif_courriel_multiple:
+    '#type': webform_markup
+    '#states':
+      visible:
+        ':input[name="a_combien_de_personne_souhaitez_vous_envoyer_votre_carte_"]':
+          value: 'Plusieurs personnes'
+    '#markup': 'Si vous souhaitez envoyer ce message &agrave; plusieurs personnes, indiquez dans le champ ci-dessous les adresses courriels de ces personnes, s&eacute;par&eacute;es par des virgules.'
+  indiquer_les_destinataires:
+    '#type': textarea
+    '#title': 'Indiquer les courriels des destinataires :'
+    '#placeholder': 'dupont@gmail.com, stephlomos@laposte.net, prenom.nom@univ-paris1.fr'
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="a_combien_de_personne_souhaitez_vous_envoyer_votre_carte_"]':
+          value: 'Plusieurs personnes'
+  a_qui_voulez_vous_envoyer_votre_carte_:
+    '#type': textfield
+    '#title': 'Indiquez le courriel du destinataire :'
+    '#placeholder': adupont@laposte.net
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="a_combien_de_personne_souhaitez_vous_envoyer_votre_carte_"]':
+          value: 'Une personne'
+  horizontal_rule:
+    '#type': webform_horizontal_rule
+  container:
+    '#type': container
+    '#format': container
+    message_explicatif_limitation_caractere:
+      '#type': webform_markup
+      '#markup': 'Indiquez votre message dans le champ ci-dessous. Pour des raisons de mise en forme, celui-ci est limit&eacute; &agrave; 300 caract&egrave;res.'
+    votre_message_de_voeux:
+      '#type': textarea
+      '#title': 'Votre message de voeux'
+      '#required': true
+      '#required_error': 'Vous devez indiquer un message.'
+      '#counter_type': character
+      '#counter_maximum': 300
+      '#counter_maximum_message': '%d caractères restants.'
+  image_voeux_2022:
+    '#type': webform_attachment_url
+    '#title': 'Image Voeux 2022'
+    '#filename': Carte-de-voeux-2022.gif
+    '#download': true
+    '#url': 'https://com-web.univ-paris1.fr/images/voeux/Carte-de-voeux-2022.gif'
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#states_clear': false
+    '#submit__label': Envoyer
+    '#reset_hide': true
+    '#reset__label': Effacer
+    '#update_hide': true
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: 'D&eacute;sol&eacute;, le formulaire est d&eacute;sactiv&eacute; en cette p&eacute;riode de l&#39;ann&eacute;e.'
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: true
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: true
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: false
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: 'Envoi effectué.'
+  confirmation_message: 'Votre carte vient d&#39;&ecirc;tre envoy&eacute;e &agrave; vous et en copie &agrave; la, ou aux, personne(s) a qui vous avez souhait&eacute; envoyer cette carte.'
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  carte_envoyee_aux_personnes:
+    id: email
+    handler_id: carte_envoyee_aux_personnes
+    label: 'Carte envoyée aux personnes'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:merci_de_le_confirmer:raw]'
+      to_options: {  }
+      bcc_mail: '[webform_submission:values:indiquer_les_destinataires:raw]'
+      bcc_options: {  }
+      cc_mail: '[webform_submission:values:a_qui_voulez_vous_envoyer_votre_carte_:raw]'
+      cc_options: {  }
+      from_mail: '[webform_submission:values:merci_de_le_confirmer:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:votre_prenom_:raw] [webform_submission:values:votre_nom_:raw] '
+      reply_to: '[webform_submission:values:merci_de_le_confirmer:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[webform_submission:values:votre_prenom_:raw] [webform_submission:values:votre_nom_:raw]  vous a envoyé une carte'
+      body: "<h1 style=\"font-size:1rem;text-align:center;color:#999;font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'\">[webform_submission:values:votre_prenom_] [webform_submission:values:votre_nom_] vous a envoy&eacute; une carte :</h1>\r\n\r\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"display:block;width:100%;max-width:800px;border:0 none;margin: 1rem auto;\" width=\"100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td><img alt=\"Université Paris 1 Panthéon Sorbonne\" src=\"https://com-web.univ-paris1.fr/images/voeux/21-204-Carte-de-voeux_01.png\" style=\"width:100%;max-width:800px;height:auto;max-height:311px;\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"background:url('https://com-web.univ-paris1.fr/images/voeux/21-204-Carte-de-voeux_02.png') repeat-y scroll 0% 0% / contain; display:block; max-width:800px; width:100%\">\r\n\t\t\t<div style=\"display:block;width:50%;margin:0 auto;\">\r\n\t\t\t<p style=\"text-align:center;font-size:1.5rem;color:#00326E;\">[webform_submission:values:votre_message_de_voeux]</p>\r\n\t\t\t</div>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td><img alt=\"Meilleurs voeux 2022\" src=\"https://com-web.univ-paris1.fr/images/voeux/21-204-Carte-de-voeux_03.png\" style=\"width:100%;max-width:800px;height:auto;max-height:465px;\" /></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<div style=\"display:block; width:100%; text-align:center\">\r\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#c89018;color:#FFF;padding:1.5rem 1rem;margin:0 auto;font-family: font-family: 'brandon grotesque', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif';text-decoration: none;\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td><a data-widget=\"image\" href=\"https://mediatheque.univ-paris1.fr/video/2962-vux-2022/?autoplay=true&amp;loop=true;volume=5;\" style=\"color:#FFF;text-decoration: none;\" target=\"_blank\" title=\"Cliquez pour aller voir la vidéo\">L&#39;universit&eacute; Paris 1 Panth&eacute;on-Sorbonne<br />\r\n\t\t\tvous pr&eacute;sente ses meilleurs voeux en vid&eacute;o</a></td>\r\n\t\t\t<td><a href=\"https://mediatheque.univ-paris1.fr/video/2962-vux-2022/?autoplay=true&amp;loop=true;volume=5;\" style=\"color:#FFF;text-decoration: none;\" target=\"_blank\" title=\"Cliquez pour aller voir la vidéo\"><img alt=\"\" src=\"https://com-web.univ-paris1.fr/images/voeux/play-video-or.png\" style=\"display:block;width:42px;height:42px;margin:0 auto;\" /></a></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n</div>"
+      excluded_elements:
+        votre_prenom_: votre_prenom_
+        votre_nom_: votre_nom_
+        a_combien_de_personne_souhaitez_vous_envoyer_votre_carte_: a_combien_de_personne_souhaitez_vous_envoyer_votre_carte_
+        message_explicatif_courriel_multiple: message_explicatif_courriel_multiple
+        horizontal_rule: horizontal_rule
+        message_explicatif_limitation_caractere: message_explicatif_limitation_caractere
+        image_voeux_2022: image_voeux_2022
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

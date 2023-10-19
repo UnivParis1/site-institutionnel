@@ -31,11 +31,12 @@
     {% set type = "Fichier" %}
   {% endif %}
 
-  <div>
+  <div class="mediafichierwrapper">
     <span class="fa fa-file{{ faType }}"></span>
     <a href="{{ content.field_media_file.0|render }}" target="_blank" title="Lien de téléchargement du fichier"
        class="mediafichierlien">{{ name }}</a>
-    <span class="mediafichiertype">{{ "Type de fichier : "|t }} {{ type }}</span>
-    <span class="mediafichierpoids">{{ "Poids du fichier : "|t }} {{ content.field_size }}</span>
+    <div class="mediafichiertype">
+      ({{ type }}, {{ content.field_size.0 }})
+    </div>
   </div>
 {% endif %}
