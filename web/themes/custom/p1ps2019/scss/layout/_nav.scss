@@ -33,16 +33,22 @@
       transform: translateX(-50%);
     }
     ul{
+      &.menu {
+        span {
+          padding: rem-calc(16px) rem-calc(25px);
+          display: block;
+        }
+      }
       li{
         &.is-dropdown-submenu-parent {
           position: static;
         }
         &.is-active {
-          a, a:hover {
+          a, a:hover, span:hover {
             background-color: $light-blue;
           }
         }
-        a{
+        a, span{
           font-family: $font-main;
           font-size: rem-calc(18px);
           line-height: 1.2;
@@ -117,7 +123,7 @@
                   &:hover {
                     padding: 0.7rem 0.5rem;
                     background-color: lighten($light-blue, 3%);
-                  } 
+                  }
                 }
               }
               &:nth-child(-n+3) {
