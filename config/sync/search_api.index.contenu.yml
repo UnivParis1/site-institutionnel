@@ -1,38 +1,39 @@
 uuid: 597dbe68-063a-4035-a8bf-964672c791f3
 langcode: fr
-status: true
+status: false
 dependencies:
   config:
-    - field.storage.node.field_paragraphs
+    - field.storage.node.body
     - field.storage.node.field_editorial_blocks
     - field.storage.paragraph.bp_accordion_section_title
-    - field.storage.paragraph.field_campus_description
+    - field.storage.node.field_paragraphs
     - field.storage.paragraph.bp_header
-    - field.storage.paragraph.field_subtitle
     - field.storage.paragraph.bp_tab_section_title
     - field.storage.paragraph.bp_text
-    - field.storage.paragraph.field_text
-    - field.storage.paragraph.field_simple_text
-    - field.storage.paragraph.field_title
-    - field.storage.node.field_lead
-    - field.storage.node.field_collection_term
-    - field.storage.node.field_short_desc
-    - field.storage.node.field_news_date
     - field.storage.node.field_event_date
-    - field.storage.node.field_publishing_date
-    - field.storage.node.field_publication_topics
-    - field.storage.node.body
-    - field.storage.node.field_isbn
-    - field.storage.node.field_subtitle
-    - field.storage.node.field_sub_title
-    - field.storage.node.field_news_topic
+    - field.storage.paragraph.field_campus_description
+    - field.storage.node.field_collection_term
     - field.storage.node.field_event_type
+    - field.storage.node.field_isbn
+    - field.storage.node.field_lead
+    - field.storage.node.field_news_date
+    - field.storage.node.field_news_topic
+    - field.storage.node.field_publishing_date
+    - field.storage.node.field_short_desc
+    - field.storage.paragraph.field_simple_text
+    - field.storage.node.field_sub_title
+    - field.storage.node.field_subtitle
+    - field.storage.paragraph.field_subtitle
+    - field.storage.paragraph.field_text
+    - field.storage.paragraph.field_title
+    - field.storage.node.field_publication_topics
     - search_api.server.database_search
   module:
     - paragraphs
-    - taxonomy
     - node
+    - taxonomy
     - search_api
+    - up1_search_api
 id: contenu
 name: Contenu
 description: ''
@@ -427,6 +428,7 @@ datasource_settings:
       selected: {  }
 processor_settings:
   add_url: {  }
+  aggregated_dates: {  }
   aggregated_field: {  }
   content_access:
     weights:

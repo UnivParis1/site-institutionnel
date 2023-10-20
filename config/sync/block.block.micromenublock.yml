@@ -1,25 +1,32 @@
-uuid: df645686-aeea-4dcd-b795-9c4e0aaa3a97
+uuid: 9da2563a-f553-4a2b-9e89-32acde645c73
 langcode: fr
 status: true
 dependencies:
   module:
+    - micro_menu
     - micro_path
     - micro_site
-    - micro_social_media
   theme:
     - p1ps2019
-id: socialmediablock
+id: micromenublock
 theme: p1ps2019
-region: header
+region: navigation_left
 weight: -14
 provider: null
-plugin: social_media_block
+plugin: micro_menu_block
 settings:
-  id: social_media_block
-  label: 'Social Media block'
+  id: micro_menu_block
+  label: 'Micro menu block'
   label_display: '0'
-  provider: micro_social_media
+  provider: micro_menu
 visibility:
+  'entity_bundle:site':
+    id: 'entity_bundle:site'
+    negate: false
+    context_mapping:
+      site: '@micro_site.current_site_context:site'
+    bundles:
+      mini_site: mini_site
   site_type:
     id: site_type
     negate: false
