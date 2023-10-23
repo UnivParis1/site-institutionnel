@@ -168,7 +168,7 @@ class KeywordsConfigForm extends ConfigFormBase {
    * @returns array $form.
    */
   public function add_keyword_item_ajax_callback($form, $form_state) {
-    return $form['container'];
+    return $form['keywords']['container'];
   }
 
   /**
