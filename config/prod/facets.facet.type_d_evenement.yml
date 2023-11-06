@@ -1,21 +1,21 @@
-uuid: cb6a6bb9-c19f-4a8c-8986-99cef18599a5
+uuid: 0e632883-19f7-44d3-b4fd-f15486ebe122
 langcode: fr
 status: true
 dependencies:
   config:
-    - search_api.index.preprod_data
+    - search_api.index.sherlock
     - views.view.resultats_de_recherche
   module:
     - search_api
-id: type_de_contenu
-name: Type
-weight: -2
+id: type_d_evenement
+name: 'Type d''événement'
+weight: 0
 min_count: 1
 missing: false
 missing_label: others
-url_alias: type
+url_alias: event_type
 facet_source_id: 'search_api:views_page__resultats_de_recherche__page_1'
-field_identifier: type
+field_identifier: field_event_type
 query_operator: or
 hard_limit: 0
 exclude: false
@@ -29,49 +29,62 @@ enable_parent_when_child_gets_disabled: true
 widget:
   type: checkbox
   config:
-    show_numbers: true
+    show_numbers: false
     soft_limit: 0
     show_reset_link: false
-    reset_text: 'Tout afficher'
+    reset_text: 'Voir tout'
     hide_reset_when_no_selection: false
     soft_limit_settings:
       show_less_label: 'Show less'
       show_more_label: 'Show more'
 empty_behavior:
-  behavior: text
-  text_format: full_html
-  text: "<p>Aucun contenu ne correspond à votre recherche.</p>\r\n"
-only_visible_when_facet_source_is_visible: false
+  behavior: none
+only_visible_when_facet_source_is_visible: true
 show_only_one_result: false
 show_title: false
 processor_configs:
+  active_widget_order:
+    processor_id: active_widget_order
+    weights:
+      sort: 20
+    settings:
+      sort: DESC
   count_widget_order:
     processor_id: count_widget_order
     weights:
       sort: 30
     settings:
       sort: DESC
+  dependent_processor:
+    processor_id: dependent_processor
+    weights:
+      build: 5
+    settings:
+      news_date:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      topics:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      type:
+        enable: true
+        condition: values
+        values: event
+        negate: false
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:
       sort: 40
     settings:
       sort: ASC
-  facets_custom_label:
-    processor_id: facets_custom_label
-    weights:
-      build: 50
-    settings:
-      replacement_values: "r|news|Actualité\r\nr|event|Évènement\r\nr|page|Page\r\nr|second_level_pages|Page\r\nr|page_personnelle|Page personnelle"
   hierarchy_processor:
     processor_id: hierarchy_processor
     weights:
       build: 100
-    settings: {  }
-  list_item:
-    processor_id: list_item
-    weights:
-      build: 5
     settings: {  }
   translate_entity:
     processor_id: translate_entity

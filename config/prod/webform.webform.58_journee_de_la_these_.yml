@@ -1,16 +1,16 @@
 uuid: 691689d9-7bcf-4f7f-b3d3-21535d171807
 langcode: fr
-status: open
+status: scheduled
 dependencies: {  }
 weight: 0
-open: null
-close: null
+open: '2023-11-01T08:00:00'
+close: '2023-11-08T08:00:00'
 uid: 133
 template: false
 archive: false
 id: 58_journee_de_la_these_
 title: '58 - Journée de la thèse '
-description: 'Formulaire d&#39;inscription pour les doctorants et autres personnalit&eacute;s, &agrave; la Journ&eacute;e de la th&egrave;se 2021, organis&eacute; par l&#39;&Eacute;cole doctorale de droit de la Sorbonne.'
+description: '<p>Formulaire d''inscription pour les doctorants et autres personnalités, à la Journée de la thèse 2023, organisée par l''École doctorale de droit de la Sorbonne.</p>'
 category: 'Inscription événement'
 elements: |-
   informations_personnelles:
@@ -18,9 +18,11 @@ elements: |-
     '#title': 'Informations personnelles'
     '#multiple': true
     '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#multiple__sorting': false
     '#multiple__operations': false
     '#multiple__add_more': false
+    '#format': list
     '#title__access': false
     '#first__title': NOM
     '#first__placeholder': 'Saisissez votre nom'
@@ -30,6 +32,7 @@ elements: |-
     '#last__title_display': inline
     '#suffix__access': false
     '#degree__access': false
+    '#flexbox': '0'
   quel_est_votre_departement_de_rattachement_:
     '#type': textfield
     '#title': 'Quel est votre département de rattachement ?'
@@ -90,7 +93,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -165,6 +168,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -182,8 +187,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: ''
+  confirmation_title: 'Confirmation d''inscription'
+  confirmation_message: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande a bien été prise en compte.</p>\r\n\r\n<p><strong>EDDS</strong></p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''

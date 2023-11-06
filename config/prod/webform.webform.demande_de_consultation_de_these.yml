@@ -190,7 +190,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "Votre demande de rendez-vous pour une consultation de th&egrave;se a &eacute;t&eacute; prise en compte. Nous vous r&eacute;pondrons dans les meilleurs d&eacute;lais, du lundi au vendredi, de 9h &agrave; 17h.<br />\r\nPour rappel : votre rendez-vous doit &ecirc;tre pris au minimum 24h &agrave; l&#39;avance."
+  confirmation_message: "<p>Votre demande de rendez-vous pour une consultation de thèse a été prise en compte. Nous vous répondrons dans les meilleurs délais, du lundi au vendredi, de 9h à 17h.<br />\r\nPour rappel : votre rendez-vous doit être pris au minimum 48h à l'avance.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -274,7 +274,46 @@ handlers:
   email:
     id: email
     handler_id: email
-    label: pretbu@univ-paris1.fr
+    label: 'Confirmation d''envoi du formulaire pour les usagers'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Votre demande de consultation de thèse'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande a bien été prise en compte. Nous préparons votre visite.</p>\r\n\r\n<ul>\r\n\t<li>Lors de votre venue, présentez ce mail à l'entrée du centre PMF (accès rue Baudricourt).</li>\r\n\t<li>En remplissant ce formulaire, vous vous engagez à honorer votre rendez-vous ou à nous avertir en cas d'empêchement ou de report de date.&nbsp;</li>\r\n</ul>\r\n\r\n<p><em>Ceci est un message automatique.</em></p>\r\n\r\n<p>Pour tout renseignement complémentaire, veuillez contacter l'adresse suivante : <a href=\"mailto:pretbu@univ-paris1.fr\">pretbu@univ-paris1.fr</a></p>\r\n\r\n<p>Cordialement,</p>\r\n\r\n<p>&nbsp;</p>"
+      excluded_elements:
+        terms_of_service: terms_of_service
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  notification_d_envoi_de_formulaire_pour_le_sicoco:
+    id: email
+    handler_id: notification_d_envoi_de_formulaire_pour_le_sicoco
+    label: 'Notification d''envoi de formulaire pour le SICOCO'
     notes: ''
     status: true
     conditions: {  }
@@ -286,26 +325,25 @@ handlers:
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom_prenom:value]'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Votre demande de consultation de thèse'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Votre demande a bien été prise en compte.</p>\r\n\r\n<p>Veuillez conserver ce mail. Il vous sera nécessaire pour accéder au centre Pierre Mendès France.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>&nbsp;</p>"
+      subject: 'Formulaire Demande de consultation de thèse - PMF - Nouvelle demande'
+      body: _default
       excluded_elements:
-        terms_of_service: terms_of_service
         captcha: captcha
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
       exclude_attachments: false
       html: true
-      attachments: false
+      attachments: true
       twig: false
       theme_name: ''
       parameters: {  }

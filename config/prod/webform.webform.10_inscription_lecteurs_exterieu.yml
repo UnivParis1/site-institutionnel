@@ -230,7 +230,7 @@ handlers:
   pretbu:
     id: email
     handler_id: pretbu
-    label: prêtbu
+    label: 'Confirmation d''envoi du formulaire pour les usagers'
     notes: ''
     status: true
     conditions: {  }
@@ -252,8 +252,47 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: 'Accès à la bibliothèque PMF - Confirmation'
-      body: "<p>Votre demande de rendez-vous a bien été prise en compte.</p>\r\n\r\n<p>Veuillez <strong>conserver ce mail</strong>, il vous sera demandé à l'entrée du centre PMF.</p>\r\n\r\n<p>Le jour de l'inscription, merci de vous munir d'une <strong>pièce d'identité en cours de validité</strong> et d'un <strong>justificatif de domicile de moins de 3 mois</strong>.</p>\r\n\r\n<p>Vous pourrez ensuite accéder à la bibliothèque Pierre Mendès France, muni de votre <strong>carte de lecteur</strong>.</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Récapitulatif d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande de rendez-vous a bien été prise en compte.</p>\r\n\r\n<ul>\r\n\t<li>Lors de votre venue, présentez ce courriel à l'entrée du centre PMF (accès rue Baudricourt).</li>\r\n\t<li>Justificatifs à fournir lors de votre inscription : une <strong>pièce d'identité en cours de validité</strong> et un <strong>justificatif de domicile de moins de 3 mois.</strong></li>\r\n</ul>\r\n\r\n<p><em>Ceci est un message automatique.</em></p>\r\n\r\n<p>Nos agents restent à votre disposition pour toute demande de renseignement à l'adresse suivante : <a href=\"mailto:pretbu@univ-paris1.fr\">pretbu@univ-paris1.fr</a></p>\r\n\r\n<p>Cordialement,</p>"
+      excluded_elements:
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  notification_d_envoi_de_formulaire_pour_le_sicoco:
+    id: email
+    handler_id: notification_d_envoi_de_formulaire_pour_le_sicoco
+    label: 'Notification d''envoi de formulaire pour le SICOCO'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: pretbu@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Formulaire Inscription lecteurs extérieurs samedi - Nouvelle demande'
+      body: _default
+      excluded_elements:
+        captcha: captcha
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false

@@ -1,9 +1,9 @@
-uuid: 13434dcb-2689-42ff-88d1-6ad12058ff20
+uuid: a4724ec2-cc7e-44f7-b998-7644bc08a0ac
 langcode: fr
-status: false
+status: true
 dependencies:
   config:
-    - facets.facet.news_topic
+    - facets.facet.news_date
   module:
     - facets
     - micro_path
@@ -11,19 +11,19 @@ dependencies:
     - system
   theme:
     - p1ps2019
-id: sujetdactualite
+id: datedelactualite
 theme: p1ps2019
 region: content_left
-weight: -15
+weight: -16
 provider: null
-plugin: 'facet_block:news_topic'
+plugin: 'facet_block:news_date'
 settings:
-  id: 'facet_block:news_topic'
-  label: 'Sujet d''actualité'
+  id: 'facet_block:news_date'
+  label: Date
   label_display: visible
   provider: facets
   context_mapping: {  }
-  block_id: sujetdactualite
+  block_id: datedelactualite
 visibility:
   site_type:
     id: site_type
@@ -39,5 +39,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    context_mapping: {  }
     pages: "/resultats-de-recherche\r\n/resultats-de-recherche*"

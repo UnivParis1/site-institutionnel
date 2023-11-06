@@ -1,0 +1,32 @@
+uuid: 6bfb14ff-90d8-4787-86fd-696d220a8dee
+langcode: fr
+status: true
+dependencies:
+  config:
+    - search_api.index.sherlock
+    - views.view.resultats_de_recherche
+  module:
+    - views
+    - search_api_autocomplete
+id: resultats_de_recherche
+label: 'Résultats de recherche'
+index_id: sherlock
+suggester_settings:
+  server:
+    fields: {  }
+suggester_weights:
+  server: 0
+suggester_limits: {  }
+search_settings:
+  'views:resultats_de_recherche':
+    displays:
+      default: true
+      selected:
+        - page_1
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true

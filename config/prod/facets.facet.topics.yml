@@ -1,21 +1,21 @@
-uuid: ccf53f2f-fd6b-4208-badf-0fc6c8404008
+uuid: fab742f3-1d7d-4a98-9308-ee7557ded21f
 langcode: fr
 status: true
 dependencies:
   config:
-    - search_api.index.preprod_data
+    - search_api.index.sherlock
     - views.view.resultats_de_recherche
   module:
     - search_api
-id: news_topic
+id: topics
 name: 'Sujet d''actualité'
-weight: -1
+weight: 0
 min_count: 1
 missing: false
 missing_label: others
-url_alias: news_topic
+url_alias: topics
 facet_source_id: 'search_api:views_page__resultats_de_recherche__page_1'
-field_identifier: news_topics_name
+field_identifier: field_news_topic
 query_operator: or
 hard_limit: 0
 exclude: false
@@ -29,10 +29,10 @@ enable_parent_when_child_gets_disabled: true
 widget:
   type: checkbox
   config:
-    show_numbers: true
+    show_numbers: false
     soft_limit: 0
     show_reset_link: false
-    reset_text: 'Tout afficher'
+    reset_text: 'Voir tout'
     hide_reset_when_no_selection: false
     soft_limit_settings:
       show_less_label: 'Show less'
@@ -49,13 +49,6 @@ processor_configs:
       sort: 20
     settings:
       sort: DESC
-  count_limit:
-    processor_id: count_limit
-    weights:
-      build: 50
-    settings:
-      minimum_items: 1
-      maximum_items: null
   count_widget_order:
     processor_id: count_widget_order
     weights:
@@ -67,20 +60,25 @@ processor_configs:
     weights:
       build: 5
     settings:
-      categorie:
+      news_date:
         enable: false
         condition: null
         values: ''
         negate: false
-      event_type:
+      news_topics:
         enable: false
         condition: null
         values: ''
         negate: false
-      type_de_contenu:
+      type:
         enable: true
         condition: values
         values: news
+        negate: false
+      type_d_evenement:
+        enable: false
+        condition: null
+        values: ''
         negate: false
   display_value_widget_order:
     processor_id: display_value_widget_order
@@ -93,8 +91,8 @@ processor_configs:
     weights:
       build: 100
     settings: {  }
-  list_item:
-    processor_id: list_item
+  translate_entity:
+    processor_id: translate_entity
     weights:
       build: 5
     settings: {  }

@@ -1,6 +1,6 @@
 uuid: b703d218-d248-49e3-9355-192b8883c926
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
@@ -43,16 +43,25 @@ elements: |-
     '#type': checkboxes
     '#title': 'A quelle(s) matinée(s) d''étude souhaitez-vous assister ?'
     '#options':
-      'Mardi 16 novembre': 'Mardi 16 novembre'
-      'Mercredi 17 novembre': 'Mercredi 17 novembre'
-      'Jeudi 18 novembre': 'Jeudi 18 novembre'
+      'Lundi 13 novembre': 'Lundi 13 novembre'
+      'Mardi 14 novembre': 'Mardi 14 novembre'
+      'Mercredi 15 novembre': 'Mercredi 15 novembre'
+      'Jeudi 16 novembre': 'Jeudi 16 novembre'
+      'Vendredi 17 novembre': 'Vendredi 17 novembre'
     '#required': true
+    '#options__properties': ''
+  _souhaitez_vous_assister_a_un_atelier_:
+    '#type': checkboxes
+    '#title': ' Souhaitez-vous assister à un atelier ?'
+    '#options':
+      '- ': 'Mardi 14 novembre - Dépôt dans HAL'
+      '-': 'Mardi 14 novembre - Protection des données'
     '#options__properties': ''
   terms_of_service:
     '#type': webform_terms_of_service
     '#title': 'J''accepte les {conditions de service}.'
     '#required': true
-    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de mon inscription aux matin&eacute;es d&#39;&eacute;tude de la Semaine internationale de l&#39;acc&egrave;s ouvert.</span>'
+    '#terms_content': '<p><span class="field-prefix">En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de mon inscription aux matinées d''étude de la Semaine internationale de l''accès ouvert.</span></p>'
   captcha:
     '#type': captcha
   actions:
@@ -246,7 +255,7 @@ handlers:
   email:
     id: email
     handler_id: email
-    label: Email
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -254,11 +263,11 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: appui-recherche-scd@univ-paris1.fr
+      to_mail: open-access-week@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_mail: ''
       cc_options: {  }
       from_mail: '[webform_submission:values:courriel:raw]'
       from_options: {  }
@@ -267,8 +276,45 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: _default
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
+      subject: 'Semaine de la science ouverte – Nouvelle inscription'
+      body: "<p>Envoyé le [webform_submission:created]<br />\r\n<br />\r\nEnvoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_demandeurs:
+    id: email
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Semaine de la science ouverte'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[Réponse automatique ] Semaine de la science ouverte – Confirmation d''inscription'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est bien enregistrée.<br />\r\nMerci pour votre participation.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
