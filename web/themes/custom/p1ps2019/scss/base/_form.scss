@@ -413,31 +413,86 @@ label, .label-style{
   }
 }
 
-  //Webform
-  .field--type-webform {
-    .form-item:not(.form-item-centre-name) {
-      margin: 1rem 0;
-      label {
-        display: initial;
-      }
-      &:before {
-        background-color: transparent;
-      }
-      textarea,  .chosen-container-single .chosen-single, input[type="text"], input[type="email"], input[type="tel"],
-      input[type="submit"]:not(.reset-btn), input[type="number"], input[type="button"], input[type="password"], input[type="url"], input[type="file"],
-      input[type="search"], .form-date, select.form-select .file-widget {
-        padding: 0 1rem;
-      }
-      input[type="number"] {
-        width: initial;
-      }
+//Webform
+.field--type-webform {
+  .form-item:not(.form-item-centre-name) {
+    margin: 1rem 0;
+    label {
+      display: initial;
     }
-    .chosen-container-single::before {
+    &:before {
       background-color: transparent;
     }
+    textarea,  .chosen-container-single .chosen-single, input[type="text"], input[type="email"], input[type="tel"],
+    input[type="submit"]:not(.reset-btn), input[type="number"], input[type="button"], input[type="password"], input[type="url"], input[type="file"],
+    input[type="search"], .form-date, select.form-select .file-widget {
+      padding: 0 1rem;
+    }
+    input[type="number"] {
+      width: initial;
+    }
   }
-  .site-content-wrapper .field--type-webform input[type="submit"]:not(.reset-btn) {
-    margin-left: 0;
-    width: initial;
-    display: inline-block;
+  .chosen-container-single::before {
+    background-color: transparent;
   }
+}
+.site-content-wrapper .field--type-webform input[type="submit"]:not(.reset-btn) {
+  margin-left: 0;
+  width: initial;
+  display: inline-block;
+}
+
+//Webform
+.paris1-bg-blue {
+  .field--type-webform {
+    .form-type-radio, .form-type-checkbox, [class*="form-type-radio"] {
+      label, .label-style {
+        &:hover {
+          color: $text-main-color;
+        }
+      }
+    }
+    .checkboxes--wrapper {
+      .form-type-checkbox, [class*="form-type-checkbox"], [class*="form-type-radio"] {
+        .label-style, label {
+          :hover {
+            color: $text-main-color;
+          }
+        }
+      }
+    }
+  }
+  .webform-options-display-buttons {
+    input:checked + label.webform-options-display-buttons-label {
+      color: $text-white;
+      background-color: $gold-p1ps;
+    }
+    label.webform-options-display-buttons-label {
+      &:hover, &:active {
+        border: 3px solid $linkedin-color;
+      }
+    }
+  }
+  .paragraph--type--bp-webform {
+    textarea {
+      border-radius: 1rem;
+    }
+  }
+}
+.site-content-wrapper {
+  .paris1-bg-blue {
+    .paragraph--type--bp-webform {
+      .button--primary, input[type="submit"]:not(.reset-btn) {
+        color: $text-white;
+        background-color: $background-main-color;
+        border-color: $text-white;
+        margin-bottom: rem(8px);
+        &:hover {
+          color: $text-main-color;
+          background-color: $text-white;
+          border-color: $gold-p1ps;
+        }
+      }
+    }
+  }
+}
