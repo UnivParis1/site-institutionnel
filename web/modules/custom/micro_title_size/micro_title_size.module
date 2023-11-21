@@ -37,6 +37,7 @@ function micro_title_size_module_implements_alter(&$implementations, $hook) {
 function micro_title_size_preprocess_block__system_branding_block(&$variables){
   /** @var \Drupal\micro_site\SiteNegotiatorInterface $negotiator */
   $negotiator = \Drupal::service('micro_site.negotiator');
+  $url_generator = \Drupal::service('file_url_generator');
   if ($site = $negotiator->getActiveSite()) {
     $site = \Drupal::service('entity.repository')->getTranslationFromContext($site);
     // Override the site logo.
@@ -46,7 +47,8 @@ function micro_title_size_preprocess_block__system_branding_block(&$variables){
       /** @var \Drupal\Core\Image\Image $image */
       $image = \Drupal::service('image.factory')->get($file->getFileUri());
       if ($image->isValid()) {
-        $variables['site_logo'] = file_url_transform_relative(file_create_url($image->getSource()));
+        $file_url =  $url_generator->generateAbsoluteString($image->getSource());
+        $variables['site_logo'] = $url_generator->generateString($file_url);
       }
     }
     // Override the site name and slogan.
@@ -54,7 +56,8 @@ function micro_title_size_preprocess_block__system_branding_block(&$variables){
     $variables['site_slogan'] = $site->getSlogan();
 
     if (empty($variables['site_logo'])){
-      $variables['site_logo'] = file_url_transform_relative(file_create_url(theme_get_setting('logo.url')));
+      $file_url =  $url_generator->generateAbsoluteString(theme_get_setting('logo.url'));
+      $variables['site_logo'] = $url_generator->generateString($file_url);
     }
   }
 

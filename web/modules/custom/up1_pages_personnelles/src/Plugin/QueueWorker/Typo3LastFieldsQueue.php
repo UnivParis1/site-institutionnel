@@ -89,6 +89,7 @@ class Typo3LastFieldsQueue extends QueueWorkerBase implements ContainerFactoryPl
       $ids = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
         ->condition('uid', $author)
+        ->accessCheck(FALSE)
         ->execute();
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {

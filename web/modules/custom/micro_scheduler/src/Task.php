@@ -49,6 +49,7 @@ abstract class Task
     $userIds = $userStorage->getQuery()
       ->condition('status', 1)
       ->condition('roles', $roles , 'IN')
+      ->accessCheck(FALSE)
       ->execute();
     $users = User::loadMultiple($userIds);
 

@@ -812,6 +812,7 @@ class WsGroupsController extends ControllerBase
 
     $ids = \Drupal::entityQuery('user')
       ->condition('roles', 'enseignant_doctorant')
+      ->accessCheck(FALSE)
       ->execute();
     $users = User::loadMultiple($ids);
 
@@ -822,7 +823,8 @@ class WsGroupsController extends ControllerBase
         if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid')) === false) {
           $query = \Drupal::entityQuery('node')
             ->condition('type', 'page_personnelle')
-            ->condition('uid', $user->id());
+            ->condition('uid', $user->id())
+            ->accessCheck(FALSE);
           $result = $query->execute();
           //The request must retrieve a unique page perso. But due to previous mistakes, we will disable all pages persos.
           if (!empty($result)) {
@@ -857,7 +859,8 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
-        ->condition('uid', $user->id());
+        ->condition('uid', $user->id())
+        ->accessCheck(FALSE);
       $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
         $nid = reset($result);
@@ -903,7 +906,8 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
-        ->condition('uid', $user->id());
+        ->condition('uid', $user->id())
+        ->accessCheck(TRUE);
       $nids = $query->execute();
       if ($nids) {
         foreach ($nids as $nid) {

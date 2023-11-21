@@ -81,8 +81,6 @@ class CentresUp1Form extends FormBase {
   }
 
   public function getCentresJson() {
-    //$protocol = \Drupal::config('up1.settings')->get('webservice_centres.protocol');
-    //$hostname = \Drupal::config('up1.settings')->get('webservice_centres.hostname');
     $url = "https://ws-centres.univ-paris1.fr/new_liste_centres_up1.json";
 
     $json = file_get_contents($url);
@@ -92,12 +90,7 @@ class CentresUp1Form extends FormBase {
   }
 
   public function getCentreImage($code) {
-    //$protocol = \Drupal::config('up1.settings')->get('webservice_centres.protocol');
-    //$path = \Drupal::config('up1.settings')->get('webservice_centres.images_path');
     $url = "https://ws-centres.univ-paris1.fr/new_liste_centres_up1.json";
-
-    $image_path = "";
-
     $file = "$url$code.jpg";
     $file_headers = @get_headers($file);
 
@@ -170,7 +163,7 @@ class CentresUp1Form extends FormBase {
         </div>";
     }
     $block_info .= "</div>";
-    $img = file_create_url($image_url);
+    $img = \Drupal::service('file_url_generator')->generateAbsoluteString($image_url);
     $htmlCentre .= "<div class='image-centre mask no-hover relative-wrapper'>
         <img src='$img' />
     </div>";

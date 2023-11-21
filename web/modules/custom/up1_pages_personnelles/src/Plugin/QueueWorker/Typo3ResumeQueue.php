@@ -89,6 +89,7 @@ class Typo3ResumeQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       $ids = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
         ->condition('uid', $author)
+        ->accessCheck(FALSE)
         ->execute();
       $pages = Node::loadMultiple($ids);
       if (!empty($pages)) {
