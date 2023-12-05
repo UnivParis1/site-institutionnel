@@ -85,15 +85,16 @@ class WsGroupsController extends ControllerBase
         $users = $response['users'];
       }
       else {
+        $siteStorage = $this->entityTypeManager->getStorage('site');
+        $currentSite = $siteStorage->load($siteId);
+        $consent = $currentSite->get('supannConsentement')->value;
         switch ($group) {
           case 'observatoireIA':
-        $response = $this->wsGroupsService->getUserListWithConsent("{PROJ:OBSIA}CGU", $siteId, $trombi_settings) ;
-        break;
           case 'sante-shs':
-            $response = $this->wsGroupsService->getUserListWithConsent("{PROJ:SANTESHS}CGU", $siteId, $trombi_settings) ;
+            $response = $this->wsGroupsService->getUserListWithConsent($consent, $siteId, $trombi_settings) ;
             break;
           default:
-        $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
+            $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
         }
 
 
@@ -276,7 +277,6 @@ class WsGroupsController extends ControllerBase
   {
     $siteId = $this->getSiteId();
     if (isset($siteId) && $this->getFieldEc()) {
-      //Get site group to see if we are on obsia site.
       $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
       $site = $siteStorage->load($siteId);
       $group = $site->get('groups')->value;
