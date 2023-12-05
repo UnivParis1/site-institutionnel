@@ -89,12 +89,15 @@ class WsGroupsService implements WsGroupsServiceInterface {
    * @param $trombi_settings
    * @return array
    */
-  public function getUserListForAI($siteId = '', $trombi_settings = NULL) {
+  public function getUserListWithConsent($consent, $affiliation, $siteId = '', $trombi_settings = NULL) {
     $request = $this->getRequest(NULL, FALSE);
 
-    //filter_supannConsentement={PROJ:OBSIA}CGU
+    /**
+     * {PROJ:OBSIA}CGU Observatoire IA
+     *
+     */
     $params = [
-      'filter_supannConsentement' => '{PROJ:OBSIA}CGU',
+      'filter_supannConsentement' => $consent,
       'attrs' => 'sn,givenName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
       'showExtendedInfo' => true
     ];

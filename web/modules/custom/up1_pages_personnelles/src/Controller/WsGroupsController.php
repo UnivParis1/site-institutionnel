@@ -83,41 +83,20 @@ class WsGroupsController extends ControllerBase
       if ($cachedUser) {
         $response = $cachedUser->data;
         $users = $response['users'];
-      } else {
-
-        $group == 'observatoireIA'?
-          $response = $this->wsGroupsService->getUserListForAI($affiliation, $siteId, $trombi_settings) :
-          $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
-
-        $users = $response['users'];
-        $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
       }
-    } else {
-      $cachedUser = $cache->get('labeledURI_' . $affiliation);
-
-      if ($cachedUser) {
-        $response = $cachedUser->data;
-        $users = $response['users'];
-      } else {
-        $response = $this->wsGroupsService->getUserList($affiliation);
-        $users = $response['users'];
-        $cache->set('labeledURI_' . $affiliation, $response, time() + 60 * 60);
-      }
-    }
-
-    return $users;
-  }
-
-  private function getCachedUsersIA($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL) {
-    $cache = \Drupal::cache();
-
-    if ($siteId) {
-      $cachedUser = $cache->get('labeledURI_' . $siteId . '_' . $affiliation);
-      if ($cachedUser) {
-        $response = $cachedUser->data;
-        $users = $response['users'];
-      } else {
+      else {
+        switch ($group) {
+          case 'observatoireIA':
+        $response = $this->wsGroupsService->getUserListWithConsent("{PROJ:OBSIA}CGU", $siteId, $trombi_settings) ;
+        break;
+          case 'sante-shs':
+            $response = $this->wsGroupsService->getUserListWithConsent("{PROJ:SANTESHS}CGU", $siteId, $trombi_settings) ;
+            break;
+          default:
         $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
+        }
+
+
         $users = $response['users'];
         $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
       }
