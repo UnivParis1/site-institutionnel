@@ -85,9 +85,7 @@ class WsGroupsController extends ControllerBase
         $users = $response['users'];
       }
       else {
-        $siteStorage = $this->entityTypeManager->getStorage('site');
-        $currentSite = $siteStorage->load($siteId);
-        $consent = $currentSite->get('supannConsentement')->value;
+        $consent = $this->wsGroupsService->getSiteField($siteId, 'supannConsentement');
         switch ($group) {
           case 'observatoireIA':
           case 'sante-shs':

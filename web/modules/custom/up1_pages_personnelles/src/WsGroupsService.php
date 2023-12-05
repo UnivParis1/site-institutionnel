@@ -165,4 +165,12 @@ class WsGroupsService implements WsGroupsServiceInterface {
     return array_merge($faculty['users'], $student['users']);
   }
 
+  public function getSiteField($siteId, $field) {
+    $siteStorage = $this->entityTypeManager->getStorage('site');
+    $currentSite = $siteStorage->load($siteId);
+    $value = $currentSite->get($field)->value;
+
+    return $value;
+  }
+
 }
