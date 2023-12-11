@@ -71,6 +71,7 @@ class ArchiveSettings extends ConfigFormBase {
     $secret_key = $config->get('secret_key');
     $url_node = $config->get('url_node');
     $nid = $config->get('nid');
+    $pages_to_archive = $config->get('pages_to_archive');
 
     $form['archive'] = [
       '#type' => 'details',
@@ -105,12 +106,68 @@ class ArchiveSettings extends ConfigFormBase {
       '#default_value' => isset($secret_key) ? $secret_key : "",
       '#required' => TRUE
     ];
+
+    $nb_pages_to_archive = count($pages_to_archive );
     $form['node'] = [
       '#type' => 'details',
       '#title' => t('Page(s) to archive'),
       '#weight' => 50,
       '#open' => TRUE,
     ];
+    $form['node']['container'] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => 'pages-to-archive-container']
+    ];
+    if ($this->additionnal_rows < 4) {
+      $form['node']['container']['actions'] = [
+        '#type' => 'actions'
+      ];
+      $form['node']['container']['actions']['add_item'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Add new page to archive'),
+        '#submit' => ['::add_page_to_archive'],
+        '#ajax' => [
+          'callback' => '::add_page_to_archive_ajax_callback',
+          'wrapper' => 'pages-to-archive-container',
+        ],
+      ];
+    }
+    $form['node']['container']['pages_to_archive'] = [
+      '#type' => 'table',
+    ];
+
+    for ($i = 0; $i < $nb_pages_to_archive; $i++) {
+      $form['node']['container']['pages_to_archive'][$i]['#attributes']['class'][] = 'draggable';
+      $form['node']['container']["pages_to_archive"][$i]["url_node"] = [
+        '#type' => "url",
+        '#title' => $this->t("URL du node à archiver."),
+        '#default_value' => $pages_to_archive[$i]["url_node"],
+        '#description' => $this->t('Par exemple : "https://pantheonsorbonne.fr/universite/publications-reglementaires"'),
+        '#required' => TRUE,
+      ];
+      $form['node']['container']["pages_to_archive"][$i]["nid"] = [
+        '#type' => "textfield",
+        '#default_value' => $pages_to_archive[$i]["title"],
+        '#title' => $this->t('Id du noeud à archiver.'),
+        '#description' => $this->t('Par exemple : 31866'),
+        '#maxlength' => 10,
+        '#size' => 64,
+        '#required' => TRUE
+      ];
+    }
+
+    for($i=0; $i < $this->additionnal_rows; $i++){
+      $form['node']['container']['pages_to_archive'][$nb_pages_to_archive+$i]['#attributes']['class'][] = 'draggable';
+      $form['node']['container']["pages_to_archive"][$nb_pages_to_archive+$i]["url_node"] = [
+        '#type' => "url",
+        '#title' => $this->t("URL du node à archiver."),
+      ];
+      $form['node']['container']["pages_to_archive"][$nb_pages_to_archive+$i]["nid"] = [
+        '#type' => "textfield",
+        '#title' => $this->t('Id du noeud à archiver.'),
+      ];
+    }
+
     $form['node']['url_node'] = [
       '#type' => 'textfield',
       '#title' => $this->t('URL du node à archiver.'),
@@ -130,6 +187,7 @@ class ArchiveSettings extends ConfigFormBase {
       '#required' => TRUE
     ];
 
+    $form_state->setCached(false);
     return parent::buildForm($form, $form_state);
   }
 }
