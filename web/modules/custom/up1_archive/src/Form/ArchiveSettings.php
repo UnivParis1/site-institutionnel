@@ -56,6 +56,7 @@ class ArchiveSettings extends ConfigFormBase {
       ->set('secret_key', $form_state->getValue('secret_key'))
       ->set('url_node', $form_state->getValue('url_node'))
       ->set('nid', $form_state->getValue('nid'))
+      ->set('pages_to_archive',  $form_state->getValue('pages_to_archive'))
       ->save();
   }
 
@@ -137,7 +138,6 @@ class ArchiveSettings extends ConfigFormBase {
     ];
 
     for ($i = 0; $i < $nb_pages_to_archive; $i++) {
-      $form['node']['container']['pages_to_archive'][$i]['#attributes']['class'][] = 'draggable';
       $form['node']['container']["pages_to_archive"][$i]["url_node"] = [
         '#type' => "url",
         '#title' => $this->t("URL du node à archiver."),
@@ -189,5 +189,24 @@ class ArchiveSettings extends ConfigFormBase {
 
     $form_state->setCached(false);
     return parent::buildForm($form, $form_state);
+  }
+
+  /**
+   * Function add_page_to_archive_ajax_callback().
+   *
+   * @returns array $form.
+   */
+  public function add_page_to_archive_ajax_callback($form, $form_state) {
+    return $form['node']['container'];
+  }
+
+  /**
+   * Function add_page_to_archive
+   */
+  public function add_page_to_archive(array &$form, FormStateInterface $form_state) {
+    if ($this->additionnal_rows < 6) {
+      $this->additionnal_rows++;
+      $form_state->setRebuild();
+    }
   }
 }
