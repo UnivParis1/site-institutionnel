@@ -168,25 +168,6 @@ class ArchiveSettings extends ConfigFormBase {
       ];
     }
 
-    $form['node']['url_node'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('URL du node à archiver.'),
-      '#description' => $this->t('Par exemple : "https://pantheonsorbonne.fr/universite/publications-reglementaires"'),
-      '#maxlength' => 256,
-      '#size' => 64,
-      '#default_value' =>  isset($url_node) ? $url_node : "",
-      '#required' => TRUE
-    ];
-    $form['node']['nid'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Id du noeud à archiver.'),
-      '#description' => $this->t('Par exemple : 31866'),
-      '#maxlength' => 10,
-      '#size' => 64,
-      '#default_value' => isset($nid) ? $nid : "",
-      '#required' => TRUE
-    ];
-
     $form_state->setCached(false);
     return parent::buildForm($form, $form_state);
   }
