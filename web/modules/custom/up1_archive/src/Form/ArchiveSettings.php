@@ -147,7 +147,7 @@ class ArchiveSettings extends ConfigFormBase {
       ];
       $form['node']['container']["pages_to_archive"][$i]["nid"] = [
         '#type' => "textfield",
-        '#default_value' => $pages_to_archive[$i]["title"],
+        '#default_value' => $pages_to_archive[$i]["nid"],
         '#title' => $this->t('Id du noeud à archiver.'),
         '#description' => $this->t('Par exemple : 31866'),
         '#maxlength' => 10,
