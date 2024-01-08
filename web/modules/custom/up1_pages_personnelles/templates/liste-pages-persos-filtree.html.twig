@@ -32,11 +32,11 @@
                 <div>
                   <b>
                     {% if user.labeledURI is empty %}
-                      {{ user.sn|upper }} {{ user.givenName }}
+                      {{ user.displayName }}
                     {% else %}
                       <a href="{{ user.labeledURI[0] }}"  target="_blank"
-                         title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
-                        {{ user.sn|upper }} {{ user.givenName }}
+                         title="{{ "Page personnelle de"|t }} {{ user.displayName }}">
+                        {{ user.displayName }}
                       </a>
                     {% endif %}
                   </b>

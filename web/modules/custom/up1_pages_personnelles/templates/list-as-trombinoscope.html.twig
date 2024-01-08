@@ -11,10 +11,10 @@
               (not Trusted and user.sn != 'supannListeRouge')) %}
               <article class="trombi-item">
                 <a href="{{ user.labeledURI[0] }}"  target="_blank"
-                   title="{{ "Page personnelle de"|t }} {{ user.givenName }} {{ user.sn|upper }}">
-                  <img src=" {{ user.photo }} " alt="{{ user.givenName }} {{ user.sn|upper }}" />
+                   title="{{ "Page personnelle de"|t }} {{ user.displayName }}">
+                  <img src=" {{ user.photo }} " alt="{{ user.displayName }}" />
                   <div class="trombi-infos">
-                    <h2>{{ user.givenName }} {{ user.sn|upper }}</h2>
+                    <h2>{{ user.displayName }}</h2>
                     <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
                     {% if user.role %}<p class="trombi-role">
                       {{ user.role }}</p>
