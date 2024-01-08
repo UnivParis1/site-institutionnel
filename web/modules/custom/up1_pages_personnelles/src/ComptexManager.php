@@ -211,10 +211,7 @@ class ComptexManager implements ComptexInterface {
     ];
 
     $information = $this->curl_request($ws, $params);
-    if ($information) {
-      $information = reset($information);
-      $this->formatEmails($information);
-
+    if (!empty($information)) {
       return $information['mail'];
     }
 
