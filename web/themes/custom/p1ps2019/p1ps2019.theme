@@ -206,7 +206,7 @@ function p1ps2019_preprocess_node(&$variables) {
     $user = User::load($uid);
     $comptex = new ComptexManager();
     $mail = $comptex->getUserEmail($user->getAccountName());
-    $variables['mail'] = $mail();
+    $variables['mail'] = $mail;
     $user->setEmail($mail);
     $user->save();
 
