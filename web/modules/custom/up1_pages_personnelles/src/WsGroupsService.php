@@ -98,7 +98,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
      */
     $params = [
       'filter_supannConsentement' => $consent,
-      'attrs' => 'sn,givenName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
+      'attrs' => 'sn,givenName,displayName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
       'showExtendedInfo' => true
     ];
     if (!empty($trombi_settings)) {
