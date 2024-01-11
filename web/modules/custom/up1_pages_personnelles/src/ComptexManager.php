@@ -26,7 +26,7 @@ class ComptexManager implements ComptexInterface {
    */
   public function getUserInformation($username) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username&profile_eduPersonAffiliation=faculty";
     $params = [
       'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
       'allowNoAffiliationAccounts' => true,
@@ -53,7 +53,7 @@ class ComptexManager implements ComptexInterface {
   public function getUserAttributes($username, $attributes = []) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
 
-    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username&profile_eduPersonAffiliation=faculty";
     $params = [
       'attrs' => implode(',', $attributes),
       'allowNoAffiliationAccounts' => true,
@@ -66,7 +66,7 @@ class ComptexManager implements ComptexInterface {
   public function userHasPagePerso($username) {
     $has_page_perso = FALSE;
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username&profile_eduPersonAffiliation=faculty";
 
     $params = [
       'attrs' => "labeledURI"
@@ -221,7 +221,7 @@ class ComptexManager implements ComptexInterface {
   public function getUserAttribute($uid,  $attr) {
     if (isset($uid) && isset($attr) && is_string($attr)) {
       $config = \Drupal::config('up1_pages_personnelles.settings');
-      $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid";
+      $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid&profile_eduPersonAffiliation=faculty";
       $params = ['attrs' => $attr];
 
       $result = $this->curl_request($ws, $params);
