@@ -17,26 +17,17 @@ elements: |-
     '#type': webform_section
     '#title': 'Vous êtes :'
     '#title_display': invisible
-    vous_etes:
-      '#type': radios
-      '#title': 'Vous êtes :'
-      '#options':
-        'ORGANISME EXTERNE': 'ORGANISME EXTERNE'
-        PRESSE: PRESSE
-      '#options_display': buttons_horizontal
-      '#options__properties': ''
+    votre_location_concerne:
+      '#type': webform_markup
+      '#markup': '<h3>Votre location concerne :</h3>'
     un_tournage:
       '#type': radios
       '#title': 'Votre location concerne :'
-      '#title_display': before
+      '#title_display': invisible
       '#options':
         'UN TOURNAGE': 'UN TOURNAGE'
         'UN EVENEMENT': 'UN EVENEMENT'
       '#options_display': buttons
-      '#states':
-        visible:
-          ':input[name="vous_etes"]':
-            value: 'ORGANISME EXTERNE'
       '#options__properties': ''
   le_demandeur_:
     '#type': webform_section
@@ -352,43 +343,6 @@ elements: |-
       '#type': textarea
       '#title': 'Besoins matériels (Sonorisation, vidéoprojecteur…)'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  presse:
-    '#type': webform_section
-    '#title': PRESSE
-    '#states':
-      visible:
-        ':input[name="vous_etes"]':
-          value: PRESSE
-    processed_text_01:
-      '#type': processed_text
-      '#text': |
-        <p>Certains membres du corps professoral acceptent de donner des interviews et de répondre aux questions de journalistes relatives à leur domaine d’expertise. <strong>Les journalistes doivent obtenir l'autorisation de la Présidence de l'université pour filmer dans chaque centre de Paris 1 Panthéon-Sorbonne.</strong></p>
-      '#format': full_html
-    sujet:
-      '#type': textfield
-      '#title': Sujet
-      '#required': true
-    personnes_a_int:
-      '#type': textfield
-      '#title': 'Personnes à interroger'
-      '#required': true
-    date:
-      '#type': date
-      '#title': Date
-      '#datepicker': true
-      '#required': true
-    lieu:
-      '#type': textfield
-      '#title': Lieu
-      '#required': true
-    votre_courriel:
-      '#type': email
-      '#title': 'Votre courriel'
-      '#required': true
-    votre_numero_telephone:
-      '#type': tel
-      '#title': 'Votre numéro de téléphone'
-      '#required': true
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
@@ -399,23 +353,7 @@ elements: |-
         - xor
         - ':input[name="un_tournage"]':
             value: 'UN TOURNAGE'
-        - xor
-        - ':input[name="un_tournage_etudiant"]':
-            value: 'UN TOURNAGE'
-        - xor
-        - ':input[name="un_tournage_etudiant"]':
-            value: 'UN EVENEMENT'
-        - xor
-        - ':input[name="vous_etes"]':
-            value: PRESSE
     '#submit__label': ENVOYER
-  markup_01:
-    '#type': webform_markup
-    '#states':
-      visible:
-        ':input[name="vous_etes"]':
-          value: PRESSE
-    '#markup': 'Pour toute information compl&eacute;mentaire, rendez-vous sur la&nbsp;<a href="http://www.pantheonsorbonne.fr/espace-presse">page d&eacute;di&eacute;e &agrave; la presse</a>'
 css: ''
 javascript: ''
 settings:

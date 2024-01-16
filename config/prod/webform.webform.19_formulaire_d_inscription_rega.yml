@@ -1,52 +1,46 @@
-uuid: ae8adb62-edde-47fe-8384-889774f9f051
+uuid: 42988e1c-a66f-4a3e-aabe-f0ec1741e598
 langcode: fr
-status: scheduled
+status: open
 dependencies: {  }
 weight: 0
-open: '2023-11-28T08:00:00'
-close: '2023-12-13T23:59:59'
-uid: 452
+open: null
+close: null
+uid: 46
 template: false
 archive: false
-id: 18_inscription_seminaire_actu_ax
-title: '18 - Inscription séminaire axe RSE'
-description: ''
+id: 19_formulaire_d_inscription_rega
+title: '19 - Formulaire d''inscription Regards sur l’exil'
+description: '<p>Formulaire d''inscription à la journée Regards sur l’exil.</p>'
 category: 'Inscription événement'
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Nom
-    '#placeholder': Name
+  vos_coordonnees:
+    '#type': webform_contact
+    '#title': 'Vos coordonnées'
+    '#title_display': before
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
-    '#type': textfield
-    '#title': Prénom
-    '#placeholder': 'First name'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
-    '#type': email
-    '#title': Courriel
-    '#placeholder': Email
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut_ou_fonction:
-    '#type': textfield
-    '#title': 'Statut ou fonction'
-    '#placeholder': Role
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  rattachement_institutionnel:
-    '#type': textfield
-    '#title': 'Rattachement institutionnel'
-    '#placeholder': Institution
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#name__title': 'Prénom et nom de famille'
+    '#name__placeholder': 'Nadia Giraud'
+    '#name__help': 'Indiquez ici votre prénom suivi de votre nom.'
+    '#name__title_display': inline
+    '#name__required': true
+    '#company__access': false
+    '#email__title': 'Adresse courriel'
+    '#email__placeholder': Nadia.Giraud@protonmail.com
+    '#email__help': 'Votre adresse électronique'
+    '#email__title_display': after
+    '#email__required': true
+    '#phone__access': false
+    '#address__access': false
+    '#address_2__access': false
+    '#city__access': false
+    '#state_province__access': false
+    '#postal_code__access': false
+    '#country__access': false
   captcha:
     '#type': captcha
-  actions:
-    '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Valider l''inscription'
+    '#captcha_type': captcha/Math
+    '#captcha_title': 'Combien fait l''addition simple ?'
 css: ''
 javascript: ''
 settings:
@@ -55,14 +49,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: false
+  page: true
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: true
   form_open_message: ''
-  form_close_message: '<p>Les inscriptions à cet événement sont closes.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -73,7 +67,7 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_unsaved: false
+  form_unsaved: true
   form_disable_back: false
   form_submit_back: false
   form_disable_autocomplete: false
@@ -101,7 +95,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: true
+  submission_exclude_empty: false
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -131,7 +125,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -151,10 +145,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: message
   confirmation_url: ''
-  confirmation_title: 'Inscription confirmée'
-  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
+  confirmation_title: ''
+  confirmation_message: '<h2 class="text-align-center">Votre inscription est bien enregistrée.</h2>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -162,15 +156,15 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: 40
+  limit_total: 150
   limit_total_interval: null
-  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a>. Nous vous contacterons uniquement si une place se libère.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
+  limit_total_message: "<p>Nous vous remercions pour l'intérêt que vous portez à notre évènement.<br />\r\nLe nombre de places maximale disponible étant atteint, il n'est plus possible de s'inscrire.</p>"
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false
-  entity_limit_total: null
+  entity_limit_total: 150
   entity_limit_total_interval: null
   entity_limit_user: null
   entity_limit_user_interval: null
@@ -231,32 +225,32 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  courriel_aux_personnes_inscrites_en_presentiel:
+  copie_d_inscription_a_la_journee_d_etude:
     id: email
-    handler_id: courriel_aux_personnes_inscrites_en_presentiel
-    label: 'Courriel aux personnes inscrites'
-    notes: ''
+    handler_id: copie_d_inscription_a_la_journee_d_etude
+    label: Emmanuel.Charrier@univ-paris1.fr
+    notes: 'Envoi à l''organisateur'
     status: true
     conditions: {  }
-    weight: 1
+    weight: 0
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: _default
       to_options: {  }
-      bcc_mail: marine.conde@univ-paris1.fr
+      bcc_mail: ''
       bcc_options: {  }
-      cc_mail: ''
+      cc_mail: Emmanuel.Charrier@univ-paris1.fr
       cc_options: {  }
-      from_mail: marine.conde@univ-paris1.fr
+      from_mail: _default
       from_options: {  }
-      from_name: 'Marine Condé'
-      reply_to: marine.conde@univ-paris1.fr
+      from_name: _default
+      reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription enregistrée pour [webform_submission:source-title]'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre inscription, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>Vos informations d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>En cas d'empêchement, je vous serais reconnaissante de m'en informer au plus vite.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marine Condé</p>"
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

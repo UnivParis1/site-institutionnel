@@ -1,50 +1,39 @@
-uuid: c1a75979-97e1-417b-8c70-3b94ecfb7d25
+uuid: a0adbfdb-f9e2-4188-a7c5-f129632f77d0
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 927
+uid: 100
 template: false
 archive: false
-id: seminaire_de_l_iredies_ndeg_45_p
-title: 'Séminaire de l’IREDIES n° 45 - Peer Zumbasen'
-description: '<p>Séminaire de l''IREDIES - Mardi 17 octobre, salle 13, Lourcine - 12h30 - 14h30</p>'
-category: ''
+id: 63_seminaire_la_science_politiqu
+title: '63 - Séminaire « La science politique des “autres” »'
+description: '<p>Organisé et animé par Laurent Jeanpierre et Antoine Vauchez</p>'
+category: 'Inscription événement'
 elements: |-
   nom:
     '#type': textfield
     '#title': Nom
-    '#required': true
+    '#help_title': 'Votre nom'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': Prénom
-    '#required': true
+    '#help_title': 'Votre prénom'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  institution_de_rattachement:
-    '#type': textfield
-    '#title': 'Institution de rattachement'
-    '#required': true
+  votre_mail:
+    '#type': email
+    '#title': Courriel
+    '#help_title': 'Votre mail'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut:
-    '#type': textfield
-    '#title': Statut
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel_de_contact:
-    '#type': textfield
-    '#title': 'Courriel de contact'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  presence_:
-    '#type': checkbox
-    '#title': Zoom
-    '#title_display': inline
-  presentiel_:
-    '#type': checkbox
-    '#title': 'Présentiel '
+  captcha:
+    '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Envoyer
 css: ''
 javascript: ''
 settings:
@@ -59,8 +48,8 @@ settings:
   page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
-  form_open_message: ''
-  form_close_message: ''
+  form_open_message: '<p>Veuillez procéder à l''inscription au Séminaire</p>'
+  form_close_message: '<p>Inscription validée</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -160,11 +149,11 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 60
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: '<p>Le nombre de places étant limité vous ne pouvez plus vous inscrire.</p>'
   limit_total_unique: false
-  limit_user: null
+  limit_user: 1
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false

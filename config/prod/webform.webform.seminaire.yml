@@ -1,55 +1,44 @@
-uuid: 068c886a-7f33-4af4-a835-8e1b87b0c26f
+uuid: f39d9065-3fe5-45b6-9f21-e7f2d58dc9fb
 langcode: fr
 status: scheduled
 dependencies: {  }
 weight: 0
-open: '2023-11-06T13:00:00'
-close: '2023-11-08T17:00:00'
-uid: 452
+open: '2023-11-21T11:00:00'
+close: '2023-12-08T10:00:00'
+uid: 927
 template: false
 archive: false
-id: 18_inscription_envt
-title: '18 - Inscription brunch environnement'
+id: seminaire
+title: 'Séminaire LBL -Alexandra HUNEEUS - 11/12'
 description: ''
-category: 'Inscription événement'
+category: ''
 elements: |-
-  markup:
-    '#type': webform_markup
-    '#markup': '<h2>Inscription avant le 08/11 à 17h pour assister au séminaire en présentiel</h2>'
   nom:
     '#type': textfield
     '#title': Nom
-    '#placeholder': Name
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': Prénom
-    '#placeholder': 'First name'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
-    '#type': email
-    '#title': Courriel
-    '#placeholder': Email
+  statut:
+    '#type': textfield
+    '#title': Statut
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut_ou_fonction:
+  courriel_de_contact:
     '#type': textfield
-    '#title': 'Statut ou fonction'
-    '#placeholder': Role
+    '#title': 'Courriel de contact'
+    '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  rattachement_institutionnel:
-    '#type': textfield
-    '#title': 'Rattachement institutionnel'
-    '#placeholder': Institution
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  captcha:
-    '#type': captcha
-  actions:
-    '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Valider l''inscription'
+  zoom:
+    '#type': checkbox
+    '#title': Zoom
+  presentiel_:
+    '#type': checkbox
+    '#title': 'Présentiel '
 css: ''
 javascript: ''
 settings:
@@ -58,14 +47,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: false
+  page: true
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: true
+  form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Les inscriptions à cet événement sont closes.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -104,7 +93,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: true
+  submission_exclude_empty: false
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -134,7 +123,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -154,10 +143,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: message
+  confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Inscription confirmée'
-  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
+  confirmation_title: ''
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -165,9 +154,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: 10
+  limit_total: null
   limit_total_interval: null
-  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
+  limit_total_message: ''
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -233,42 +222,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  courriel_aux_personnes_inscrites_en_presentiel:
-    id: email
-    handler_id: courriel_aux_personnes_inscrites_en_presentiel
-    label: 'Courriel aux personnes inscrites'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 1
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
-      to_options: {  }
-      bcc_mail: marine.conde@univ-paris1.fr
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: marine.conde@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Marine Condé'
-      reply_to: marine.conde@univ-paris1.fr
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Inscription enregistrée pour [webform_submission:source-title]'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre inscription, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>Vos informations d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>En cas d'empêchement, je vous serais reconnaissante de m'en informer au plus vite.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marine Condé</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

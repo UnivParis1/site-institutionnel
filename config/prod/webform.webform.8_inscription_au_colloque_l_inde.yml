@@ -1,52 +1,65 @@
-uuid: ae8adb62-edde-47fe-8384-889774f9f051
+uuid: 5178a154-b4be-423c-9264-6c5b9dfd40a0
 langcode: fr
-status: scheduled
+status: open
 dependencies: {  }
 weight: 0
-open: '2023-11-28T08:00:00'
-close: '2023-12-13T23:59:59'
-uid: 452
+open: null
+close: null
+uid: 7845
 template: false
 archive: false
-id: 18_inscription_seminaire_actu_ax
-title: '18 - Inscription séminaire axe RSE'
-description: ''
-category: 'Inscription événement'
+id: 8_inscription_au_colloque_l_inde
+title: '8 - Inscription au colloque "L''indépendance de la Catalogne : état des lieux et avenir"'
+description: '<p>Formulaire d''inscription au colloque "L''indépendance de la Catalogne : état des lieux et avenir" du mercredi 6 mars 2024.</p>'
+category: 'Inscription à un colloque '
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Nom
-    '#placeholder': Name
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
+  votreprenom:
     '#type': textfield
     '#title': Prénom
-    '#placeholder': 'First name'
+    '#placeholder': Jean
     '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
+  nom2:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Dupond
+    '#required': true
+    '#required_error': 'Vous devez saisir votre nom.'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  votre_adresse_de_messagerie:
     '#type': email
-    '#title': Courriel
-    '#placeholder': Email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
     '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut_ou_fonction:
+  fonction:
     '#type': textfield
-    '#title': 'Statut ou fonction'
-    '#placeholder': Role
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre fonction.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  rattachement_institutionnel:
-    '#type': textfield
-    '#title': 'Rattachement institutionnel'
-    '#placeholder': Institution
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  captcha:
-    '#type': captcha
+  droits_d_image:
+    '#type': checkbox
+    '#title': 'Droits à l''image'
+    '#description': '<p>En cochant cette case, vous acceptez la captation et la diffusion vidéo de votre image dans le cadre du colloque.</p>'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': 'Conditions d''inscription'
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription au colloque&nbsp;</p>'
+    '#required': true
+    '#required_error': 'Vous devez accepter les conditions d''inscription.'
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Valider l''inscription'
+    '#submit__label': 'S''inscrire au colloque'
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -55,14 +68,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: false
+  page: true
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: true
+  form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Les inscriptions à cet événement sont closes.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -101,7 +114,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: true
+  submission_exclude_empty: false
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -131,7 +144,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -153,8 +166,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Inscription confirmée'
-  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
+  confirmation_title: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -162,9 +175,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: 40
+  limit_total: null
   limit_total_interval: null
-  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a>. Nous vous contacterons uniquement si une place se libère.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
+  limit_total_message: ''
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -188,75 +201,97 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
 handlers:
-  courriel_aux_personnes_inscrites_en_presentiel:
+  email_au_demandeur:
     id: email
-    handler_id: courriel_aux_personnes_inscrites_en_presentiel
-    label: 'Courriel aux personnes inscrites'
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
-    weight: 1
+    weight: 0
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
-      bcc_mail: marine.conde@univ-paris1.fr
+      bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: marine.conde@univ-paris1.fr
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: 'Marine Condé'
-      reply_to: marine.conde@univ-paris1.fr
+      from_name: ''
+      reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription enregistrée pour [webform_submission:source-title]'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre inscription, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>Vos informations d'inscription :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>En cas d'empêchement, je vous serais reconnaissante de m'en informer au plus vite.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marine Condé</p>"
+      subject: 'Inscription au colloque "L''indépendance de la Catalogne : état des lieux et avenir"'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription au colloque \"L'indépendance de la Catalogne : état des lieux et avenir\" du mercredi 6 mars 2024 a bien été validée.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
