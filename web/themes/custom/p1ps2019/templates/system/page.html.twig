@@ -91,35 +91,6 @@
 {% endif %}
 {% if page.header or page.header_left or page.header_center or page.header_right or page.hp_image %}
   <header id="navbar" {% if print_hp_image %} class="header-{{ header_size }} {{ hasBlock }} {{ siteNameClass }}" {% endif %}>
-    {% if page.header or print_hp_image %}
-      <div class="hp-image-container">
-        {% if print_hp_image %}
-          <div class="grid-x screen-{{ header_size }}-height full-height">
-            <div class="cell small-12 full-height">
-              <div class="mask no-hover relative-wrapper {{ header_size }}-height">
-                <div class="header-img img-container full-height">{{ page.hp_image }}</div>
-                <div class="main-overlay-infos">
-                  {{ page.header }}
-                </div>
-              </div>
-            </div>
-          </div>
-        {% elseif page.header %}
-          <div class="grid-x">
-            <div class="cell small-12">
-              <div class="mask no-hover relative-wrapper">
-                <div class="main-overlay-infos">
-                  <div class="header-content">
-                    {{ page.header }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {#endif print_hp_image and page.header #}
-        {% endif %}
-      </div>
-    {% endif %}
     {% if page.header_left or page.header_center or page.header_right %}
       <div id="top-header">
         <div class="grid-x align-justify align-middle top-header-infos">
@@ -172,6 +143,35 @@
         </div>
       </div>
       {# endif page headers left right center #}
+    {% endif %}
+    {% if page.header or print_hp_image %}
+      <div class="hp-image-container">
+        {% if print_hp_image %}
+          <div class="grid-x screen-{{ header_size }}-height full-height">
+            <div class="cell small-12 full-height">
+              <div class="mask no-hover relative-wrapper {{ header_size }}-height">
+                <div class="header-img img-container full-height">{{ page.hp_image }}</div>
+                <div class="main-overlay-infos">
+                  {{ page.header }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% elseif page.header %}
+          <div class="grid-x">
+            <div class="cell small-12">
+              <div class="mask no-hover relative-wrapper">
+                <div class="main-overlay-infos">
+                  <div class="header-content">
+                    {{ page.header }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {#endif print_hp_image and page.header #}
+        {% endif %}
+      </div>
     {% endif %}
   </header>
   {#if all regions of header #}
@@ -242,7 +242,6 @@
     <footer class="footer {{ container }}" role="contentinfo">
       <div class="footer-wrapper grid-container">
         <div class="grid-x grid-margin-x align-justify">
-
           {% if page.footer %}
             <div class="cell small-10 medium-3">
               <div class="logo-footer">
@@ -251,7 +250,6 @@
               {{ page.footer }}
             </div>
           {% endif %}
-
           {% if page.footer_left %}
             <div class="cell small-10 medium-6 two-columns-wrapper">
               <div class="two-columns-content">
@@ -261,13 +259,11 @@
               </div>
             </div>
           {% endif %}
-
           {% if page.footer_right %}
             <div class="cell small-10 medium-3">
               {{ page.footer_right }}
             </div>
           {% endif %}
-
         </div>
       </div>
     </footer>
