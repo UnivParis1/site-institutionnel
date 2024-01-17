@@ -1,15 +1,15 @@
-uuid: ae8adb62-edde-47fe-8384-889774f9f051
+uuid: d17e7898-9652-464d-b642-adb1997462f5
 langcode: fr
 status: scheduled
 dependencies: {  }
 weight: 0
-open: '2023-11-28T08:00:00'
-close: '2023-12-13T23:59:59'
+open: '2023-12-22T15:00:00'
+close: '2024-02-08T23:59:59'
 uid: 452
 template: false
 archive: false
-id: 18_inscription_seminaire_actu_ax
-title: '18 - Inscription séminaire axe RSE'
+id: 18_inscription_pot_alpha
+title: '18 - Inscription pot Alpha'
 description: ''
 category: 'Inscription événement'
 elements: |-
@@ -30,16 +30,6 @@ elements: |-
     '#title': Courriel
     '#placeholder': Email
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut_ou_fonction:
-    '#type': textfield
-    '#title': 'Statut ou fonction'
-    '#placeholder': Role
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  rattachement_institutionnel:
-    '#type': textfield
-    '#title': 'Rattachement institutionnel'
-    '#placeholder': Institution
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   captcha:
     '#type': captcha
@@ -151,10 +141,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
-  confirmation_url: ''
+  confirmation_type: modal
+  confirmation_url: 'https://isjps.pantheonsorbonne.fr/'
   confirmation_title: 'Inscription confirmée'
-  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée.</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
+  confirmation_message: "<p><strong>Votre inscription a bien été enregistrée. Merci pour votre présence !</strong></p>\r\n\r\n<p><strong>En cas d'empêchement, merci de nous informer au plus tôt.</strong></p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -162,17 +152,17 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: 40
+  limit_total: null
   limit_total_interval: null
-  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a>. Nous vous contacterons uniquement si une place se libère.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
+  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <strong><a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a></strong>. Après votre inscription sur cette liste d'attente, nous vous contacterons uniquement si une place se libère. Sans nouvelles de notre part, il est inutile de vous déplacer.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
   limit_total_unique: false
-  limit_user: null
+  limit_user: 1
   limit_user_interval: null
-  limit_user_message: ''
+  limit_user_message: '<p>Votre inscription a déjà été enregistrée.</p>'
   limit_user_unique: false
   entity_limit_total: null
   entity_limit_total_interval: null
-  entity_limit_user: null
+  entity_limit_user: 1
   entity_limit_user_interval: null
   purge: none
   purge_days: null

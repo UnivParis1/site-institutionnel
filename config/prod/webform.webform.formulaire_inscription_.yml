@@ -1,6 +1,6 @@
-uuid: 1341baa8-41fb-4a20-809a-7a06355f7c11
+uuid: 8ca4ad35-714b-4876-9d36-de757e204abb
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
@@ -8,193 +8,205 @@ close: null
 uid: 2584
 template: false
 archive: false
-id: chairestrategique_form_2023
-title: 'chairestrategique - Formulaire inscription 2023'
+id: formulaire_inscription_
+title: 'chairestrategique - Formulaire inscription 2024'
 description: ''
-category: 'Inscription à un colloque '
+category: ''
 elements: |-
-  _h3_informations_personnelles_h3_:
-    '#type': label
-    '#title': '<h3>Informations personnelles</h3>'
-  flexbox:
-    '#type': webform_flexbox
-    nom:
-      '#type': textfield
-      '#title': 'Votre Nom'
-      '#placeholder': 'Saisissez votre nom '
+  informations_personnelles2:
+    '#type': webform_section
+    '#title': 'Informations personnelles'
+    flexbox:
+      '#type': webform_flexbox
+      civilite:
+        '#type': select
+        '#title': 'Votre Civilité'
+        '#options':
+          Madame: Madame
+          'Monsieur ': 'Monsieur '
+        '#empty_value': Sélectionner
+        '#required': true
+        '#required_error': 'Veuillez renseigner la civilité '
+    flexbox_01:
+      '#type': webform_flexbox
+      nom:
+        '#type': textfield
+        '#title': 'Votre Nom'
+        '#required': true
+        '#required_error': 'Veuillez renseigner votre nom '
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      prenom:
+        '#type': textfield
+        '#title': 'Votre Prénom'
+        '#required': true
+        '#required_error': 'Veuillez renseigner votre prénom'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    flexbox_02:
+      '#type': webform_flexbox
+      entreprise:
+        '#type': textfield
+        '#title': 'Votre Entreprise / Organisme / École '
+        '#required': true
+        '#required_error': 'Veuillez renseigner le nom de votre entreprise / organisme'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      fonction:
+        '#type': textfield
+        '#title': 'Votre Fonction'
+        '#required': true
+        '#required_error': 'Veuillez renseigner votre fonction'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    flexbox_05:
+      '#type': webform_flexbox
+      votre_statut_:
+        '#type': select
+        '#title': 'Votre Statut '
+        '#options':
+          Apprenti: Apprenti
+          Étudiant: Étudiant
+          'Fonction publique': 'Fonction publique'
+          'Militaire ': 'Militaire '
+          'Salarié ': 'Salarié '
+          'Indépendant ': 'Indépendant '
+          Retraite: Retraite
+        '#required': true
+        '#required_error': 'Veuillez renseigner votre statut '
+      telephone:
+        '#type': tel
+        '#title': 'Votre Téléphone'
+        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    email:
+      '#type': webform_email_confirm
+      '#title': 'Votre Courriel '
       '#required': true
-      '#required_error': 'Veuillez saisir votre nom'
-    prenom:
-      '#type': textfield
-      '#title': 'Votre Prénom'
-      '#placeholder': 'Saisissez votre prénom'
-      '#required': true
-      '#required_error': 'Veuillez saisir votre prénom'
-  flexbox_01:
-    '#type': webform_flexbox
-    organisme:
-      '#type': textfield
-      '#title': 'Votre Entreprise'
-      '#placeholder': 'Saisissez le nom de votre entreprise '
-      '#required': true
-      '#required_error': 'Veuillez saisir le nom de votre entreprise '
-    fonction:
-      '#type': textfield
-      '#title': 'Votre Fonction'
-      '#placeholder': 'Saisissez votre fonction au sein de l''entreprise '
-      '#required': true
-      '#required_error': 'Veuillez saisir votre fonction '
-  votre_telephone:
-    '#type': tel
-    '#title': 'Votre Téléphone'
-    '#required': true
-    '#required_error': 'Veuillez saisir votre numéro de téléphone '
-  courriel:
-    '#type': webform_email_confirm
-    '#title': 'Votre Courriel'
-    '#required': true
-    '#required_error': 'Veuillez saisir votre courriel '
-    '#confirm__title': 'Vérification du courriel'
-    '#confirm__description': 'Veuillez ressaisir votre courriel&nbsp;'
-    '#confirm__placeholder': 'Saisissez votre courriel '
+      '#required_error': 'Veuillez renseigner l''adresse de votre messageire électronique '
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   horizontal_rule:
     '#type': webform_horizontal_rule
-  _h3_conferences_h3_:
-    '#type': label
-    '#title': '<h3>Conférences</h3>'
-    '#description': 'Veuillez indiqu&eacute; les conf&eacute;rences auxquelles vous souhaitez participer.&nbsp;'
+  conferences_:
+    '#type': webform_section
+    '#title': 'Conférences '
   veuillez_indiquer_les_conferences_auxquelles_vous_souhaitez_part:
     '#type': label
     '#title': 'Veuillez indiquer les conférences auxquelles vous souhaitez participer :'
-  flexbox_02:
+  flexbox_03:
     '#type': webform_flexbox
-    16_01_2023_francois_hollande_lecon_inaugurale:
+    22_01_2024_thierry_burkhard:
       '#type': radios
-      '#title': '<b>16/01/2023 François Hollande</b> - Leçon inaugurale'
-      '#disabled': true
+      '#title': '<b>22/01/2024 - Thierry Burkhard</b> - Leçon inaugurale '
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_:
+    c1_votre_participation_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
-      '#disabled': true
       '#options':
-        Présentiel: 'Présentiel (Complet)'
+        Présentiel: Présentiel
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="16_01_2023_francois_hollande_lecon_inaugurale"]':
+          ':input[name="22_01_2024_thierry_burkhard"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_01:
     '#type': webform_horizontal_rule
-  flexbox_03:
+  flexbox_04:
     '#type': webform_flexbox
-    _b_23_01_2023_thierry_de_montbrial_russie_ukraine_guerre_et_paix:
+    _b_29_01_2024_elie_barnavi_b_la_guerre_d_israel_contre_le_hamas_:
       '#type': radios
-      '#title': '<b>23/01/2023 Thierry de Montbrial</b> - Russie – Ukraine : guerre et paix'
-      '#disabled': true
+      '#title': '<b>29/01/2024 - Elie Barnavi</b> - La guerre d’Israël contre le Hamas. Quelles leçons pour la région et l’ordre mondial ?'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_03:
+    c2_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
-      '#disabled': true
       '#options':
         Présentiel: Présentiel
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_23_01_2023_thierry_de_montbrial_russie_ukraine_guerre_et_paix"]':
+          ':input[name="_b_29_01_2024_elie_barnavi_b_la_guerre_d_israel_contre_le_hamas_"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_02:
     '#type': webform_horizontal_rule
-  flexbox_04:
+  flexbox_06:
     '#type': webform_flexbox
-    _b_30_01_2023_nathalie_tocci_b_une_europe_verte_imperatif_de_sec:
+    _b_05_02_2024_ulrike_franke_b_transformation_technologique_et_st:
       '#type': radios
-      '#title': '<b>30/01/2023 Nathalie Tocci</b> - Une Europe verte, impératif de sécurité !'
-      '#disabled': true
+      '#title': '<b>05/02/2024 - Ulrike Franke</b> - Transformation technologique et stratégique de la guerre notamment en relation avec les conflits actuels'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_04:
+    c3_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
-      '#disabled': true
       '#options':
         Présentiel: Présentiel
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_30_01_2023_nathalie_tocci_b_une_europe_verte_imperatif_de_sec"]':
+          ':input[name="_b_05_02_2024_ulrike_franke_b_transformation_technologique_et_st"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_03:
     '#type': webform_horizontal_rule
-  flexbox_05:
+  flexbox_07:
     '#type': webform_flexbox
-    _b_06_02_2023_peter_sloterdijk_b_entre_la_guerre_et_la_paix_le_g:
+    _b_12_02_2024_barbara_kunz_b_l_europe_et_son_futur_ordre_de_secu:
       '#type': radios
-      '#title': '<b>06/02/2023  Alain Frachon - La contestation par les puissances révisionnistes du système international fondé en 1945</b>'
-      '#disabled': true
+      '#title': '<b>12/02/2024 - Barbara Kunz</b> - L’Europe et son futur ordre de sécurité : existe-t-il une vision partagée ?'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_05:
+    c4_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
       '#options':
-        Présentiel: 'Présentiel '
+        Présentiel: Présentiel
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_06_02_2023_peter_sloterdijk_b_entre_la_guerre_et_la_paix_le_g"]':
+          ':input[name="_b_12_02_2024_barbara_kunz_b_l_europe_et_son_futur_ordre_de_secu"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_04:
     '#type': webform_horizontal_rule
-  flexbox_06:
+  flexbox_08:
     '#type': webform_flexbox
-    _b_13_02_2023_bertrand_badie_b_pour_un_apprentissage_de_la_secur:
+    _b_19_02_2024_g_john_ikenberry_b_le_destin_de_l_ordre_internatio:
       '#type': radios
-      '#title': '<b>13/02/2023 Bertrand Badie</b> - Pour un apprentissage de la sécurité globale'
-      '#disabled': true
+      '#title': '<b>19/02/2024 - G. John Ikenberry</b> - Le destin de l''ordre international libéral : a-t-il une perspective d''avenir ?'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_06:
+    c5_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
-      '#disabled': true
       '#options':
-        Présentiel: 'Présentiel '
+        Présentiel: Présentiel
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_13_02_2023_bertrand_badie_b_pour_un_apprentissage_de_la_secur"]':
+          ':input[name="_b_19_02_2024_g_john_ikenberry_b_le_destin_de_l_ordre_internatio"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_05:
     '#type': webform_horizontal_rule
-  flexbox_07:
+  flexbox_09:
     '#type': webform_flexbox
-    _b_20_02_2023_bruno_tertrais_b_la_paix_par_la_dissuasion_:
+    _b_26_02_2024_mehran_kamrava_b_l_emergence_du_golfe_persique_et_:
       '#type': radios
-      '#title': '<b>20/02/2023 Bruno Tertrais</b> - La paix par la dissuasion ?'
-      '#disabled': true
+      '#title': '<b>26/02/2024 - Mehran Kamrava</b> - L''émergence du golfe Persique et le nouveau jeu d''équilibre au Moyen-Orient'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_07:
+    c6_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
       '#options':
@@ -202,22 +214,21 @@ elements: |-
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_20_02_2023_bruno_tertrais_b_la_paix_par_la_dissuasion_"]':
+          ':input[name="_b_26_02_2024_mehran_kamrava_b_l_emergence_du_golfe_persique_et_"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_06:
     '#type': webform_horizontal_rule
-  flexbox_08:
+  flexbox_10:
     '#type': webform_flexbox
-    _b_27_02_2023_louis_gautier_b_la_paix_n_a_qu_un_passe_la_guerre_:
+    _b_04_03_2024_nobumasa_akiyama_b_confrontations_strategiques_et_:
       '#type': radios
-      '#title': '<b>27/02/2023 Louis Gautier</b> - La paix n’a qu’un passé, la guerre n’a pas d’avenir'
-      '#disabled': true
+      '#title': '<b>04/03/2024 - Nobumasa Akiyama</b> - Confrontations stratégiques et risques nucléaires en Asie de l''Est'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_08:
+    c7_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
       '#options':
@@ -225,22 +236,21 @@ elements: |-
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_27_02_2023_louis_gautier_b_la_paix_n_a_qu_un_passe_la_guerre_"]':
+          ':input[name="_b_04_03_2024_nobumasa_akiyama_b_confrontations_strategiques_et_"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_07:
     '#type': webform_horizontal_rule
-  flexbox_09:
+  flexbox_11:
     '#type': webform_flexbox
-    _b_06_03_2023_thomas_diez_b_l_eclatement_du_monde_la_guerre_russ:
+    _b_11_03_2024_john_bew_b_la_strategie_britannique_dans_un_monde_:
       '#type': radios
-      '#title': '<b>06/03/2023 Thomas Diez</b> - L’éclatement du monde - La guerre russe et le défi à l’ordre international'
-      '#disabled': true
+      '#title': '<b>11/03/2024 - John Bew</b> - La stratégie britannique dans un monde en mutation : passé, présent et futur'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_09:
+    c8_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
       '#options':
@@ -248,22 +258,21 @@ elements: |-
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_06_03_2023_thomas_diez_b_l_eclatement_du_monde_la_guerre_russ"]':
+          ':input[name="_b_11_03_2024_john_bew_b_la_strategie_britannique_dans_un_monde_"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_08:
     '#type': webform_horizontal_rule
-  flexbox_10:
+  flexbox_12:
     '#type': webform_flexbox
-    _b_13_03_2023_jean_maurice_ripert_b_le_multilateralisme_et_la_pa:
+    _b_18_03_2024_gustav_gressel_b_la_guerre_russo_ukrainienne_et_l_:
       '#type': radios
-      '#title': '<b>13/03/2023 Jean-Maurice Ripert</b> - Le multilatéralisme et la paix'
-      '#disabled': true
+      '#title': '<b>18/03/2024 - Gustav Gressel</b> - La guerre russo-ukrainienne et l''équilibre militaire futur en Europe'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_10:
+    c9_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
       '#options':
@@ -271,22 +280,21 @@ elements: |-
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_13_03_2023_jean_maurice_ripert_b_le_multilateralisme_et_la_pa"]':
+          ':input[name="_b_18_03_2024_gustav_gressel_b_la_guerre_russo_ukrainienne_et_l_"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_09:
     '#type': webform_horizontal_rule
-  flexbox_11:
+  flexbox_13:
     '#type': webform_flexbox
-    _b_20_03_2023_stephane_bouillon_b_les_nouvelles_conditions_de_la:
+    _b_25_04_2024_rose_gottemoeller_b_la_resurgence_des_intimidation:
       '#type': radios
-      '#title': '<b>20/03/2023 Stéphane Bouillon</b> - Les nouvelles conditions de la paix et les défis de sécurité nationale'
-      '#disabled': true
+      '#title': '<b>25/03/2024 - Rose Gottemoeller</b> - La résurgence des intimidations nucléaires et la pression qui en découle sur les stratégies de dissuasion nucléaire'
       '#options': yes_no
       '#default_value': Non
       '#options__properties': ''
-    _b_votre_participation_b_11:
+    c10_b_votre_participation_b_:
       '#type': radios
       '#title': '<b>Votre Participation</b>'
       '#options':
@@ -294,79 +302,34 @@ elements: |-
         'Par Internet': 'Par Internet'
       '#states':
         visible:
-          ':input[name="_b_20_03_2023_stephane_bouillon_b_les_nouvelles_conditions_de_la"]':
+          ':input[name="_b_25_04_2024_rose_gottemoeller_b_la_resurgence_des_intimidation"]':
             value: Oui
       '#default_value': 'Par Internet'
       '#options__properties': ''
   horizontal_rule_10:
     '#type': webform_horizontal_rule
-  flexbox_12:
-    '#type': webform_flexbox
-    _b_27_03_2023_barry_r_posen_b_structure_de_la_puissance_mondiale:
-      '#type': radios
-      '#title': '<b>27/03/2023 Barry R. Posen</b> - Structure de la puissance mondiale'
-      '#disabled': true
-      '#options': yes_no
-      '#default_value': Non
-      '#options__properties': ''
-    _b_votre_participation_b_12:
-      '#type': radios
-      '#title': '<b>Votre Participation</b>'
-      '#options':
-        Présentiel: Présentiel
-        'Par Internet': 'Par Internet'
-      '#states':
-        visible:
-          ':input[name="_b_27_03_2023_barry_r_posen_b_structure_de_la_puissance_mondiale"]':
-            value: Oui
-      '#default_value': 'Par Internet'
-      '#options__properties': ''
-  horizontal_rule_11:
-    '#type': webform_horizontal_rule
-  flexbox_13:
-    '#type': webform_flexbox
-    _b_03_04_2023_azar_gat_b_le_declin_de_la_guerre_est_il_illusoire:
-      '#type': radios
-      '#title': '<b>03/04/2023 Azar Gat</b> - Le déclin de la guerre est-il illusoire – tout en étant l’avenir de l’ordre mondial libéral ?'
-      '#options': yes_no
-      '#default_value': Non
-      '#options__properties': ''
-    _b_votre_participation_b_13:
-      '#type': radios
-      '#title': '<b>Votre Participation</b>'
-      '#options':
-        Présentiel: Présentiel
-        'Par Internet': 'Par Internet'
-      '#states':
-        visible:
-          ':input[name="_b_03_04_2023_azar_gat_b_le_declin_de_la_guerre_est_il_illusoire"]':
-            value: Oui
-      '#default_value': 'Par Internet'
-      '#options__properties': ''
-  _b_collecte_de_donnees_a_caractere_personnel_b_:
+  collecte_de_donnees_a_caractere_personnel:
     '#type': radios
-    '#title': '<h3>Collecte de données à caractère personnel</h3>'
-    '#description': 'En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es (uniquement) dans le cadre de mon inscription au cycle de la Chaire Grands enjeux strat&eacute;giques contemporains :'
+    '#title': 'Collecte de données à caractère personnel'
+    '#description': '<p>En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de mon inscription au cycle de la Chaire Grands enjeux stratégiques contemporains.</p>'
     '#options': yes_no
-    '#options_display': buttons_horizontal
     '#required': true
-    '#required_error': 'Vous n''avez pas accepté les conditions d''utilisations de vos données personnelles'
+    '#required_error': 'Veuillez accepter la collecte de vos données à caractère personnel pour continuer'
     '#default_value': Non
     '#options__properties': ''
   captcha:
     '#type': captcha
     '#captcha_type': recaptcha/reCAPTCHA
+  horizontal_rule_11:
+    '#type': webform_horizontal_rule
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
     '#states':
-      enabled:
-        ':input[name="_b_collecte_de_donnees_a_caractere_personnel_b_"]':
-          value: Oui
       disabled:
-        ':input[name="_b_collecte_de_donnees_a_caractere_personnel_b_"]':
+        ':input[name="collecte_de_donnees_a_caractere_personnel"]':
           value: Non
-    '#submit__label': Envoyer
+    '#submit__label': 'S''inscrire '
 css: ''
 javascript: ''
 settings:
@@ -379,10 +342,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Les inscriptions pour le programme 2022 sont désormais fermées.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -451,7 +414,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -473,8 +436,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Confirmation inscription'
-  confirmation_message: "<p><strong>Nous vous confirmons avoir bien pris en compte votre inscription. </strong></p>\r\n\r\n<p><strong>Un courriel récapitulatif de votre inscription vous a été envoyé. </strong></p>"
+  confirmation_title: ''
+  confirmation_message: "<p><strong>Nous vous confirmons avoir bien pris en compte votre inscription. </strong></p>\r\n\r\n<p><strong>Un courriel récapitulatif de votre inscription vous sera envoyé sous peu. </strong></p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -551,10 +514,10 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  confirmation_inscription:
+  email:
     id: email
-    handler_id: confirmation_inscription
-    label: 'Confirmation inscription'
+    handler_id: email
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -562,7 +525,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: '[webform_submission:values:email:raw]'
       to_options: {  }
       bcc_mail: 'contact@chairestrategique.fr,armelleceglec@aol.com'
       bcc_options: {  }
@@ -575,11 +538,10 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation inscription'
-      body: "<img alt=\"Logo Chaire Grands enjeux stratégiques contemporains\" data-align=\"center\" data-entity-type=\"file\" data-entity-uuid=\"93538e76-e435-457b-97a1-16886c27cf91\" src=\"/sites/default/files/inline-images/Logo-Email_0.jpg\" />\r\n<p>&nbsp;</p>\r\n\r\n<p>Bonjour,<br />\r\n<br />\r\nNous vous confirmons avoir bien pris en compte votre inscription à la<br />\r\nChaire Grands enjeux stratégiques contemporains.<br />\r\n<br />\r\nPour rappel, voici les informations dont vous nous avez fait part :&nbsp;<br />\r\n[webform_submission:values]</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>**********************************************</p>\r\n\r\n<p>Accédez à la conférence en diffusion par Internet :</p>\r\n\r\n<p><o:p><a href=\"https://youtube.com/live/3LVNnix65fY?feature=share\">https://youtube.com/live/3LVNnix65fY?feature=share</a></o:p></p>\r\n\r\n<p>**********************************************<br />\r\n<br />\r\n<br />\r\nVous remerciant de votre inscription.&nbsp;<br />\r\nChaire Grands enjeux stratégiques contemporains&nbsp;</p>"
+      subject: 'Confirmation de votre inscription'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous confirmons avoir bien pris en compte votre inscription à la<br />\r\nChaire Grands enjeux stratégiques contemporains.<br />\r\n<br />\r\nPour rappel, voici les informations dont vous nous avez fait part :&nbsp;<br />\r\n[webform_submission:values]</p>\r\n\r\n<p>Vous remerciant de votre inscription.&nbsp;<br />\r\nChaire Grands enjeux stratégiques contemporains&nbsp;</p>"
       excluded_elements:
-        horizontal_rule_01: horizontal_rule_01
-        horizontal_rule_02: horizontal_rule_02
+        captcha: captcha
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
