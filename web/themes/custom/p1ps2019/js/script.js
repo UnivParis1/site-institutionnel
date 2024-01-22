@@ -278,6 +278,9 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
         });
       }//close scroll
 
+      if ($('.nod').length > 0 || $('.vid').length > 0) {
+       $('#block-p1ps2019-motsclessaisonniers').hide();
+      }
 
       BrowserDetection();
 
@@ -326,6 +329,10 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
           .removeClass('large-4')
           .addClass('medium-12');
       }
+	    if (($('.path-frontpage').length != 0 || $('.path-site').length != 0) && 
+		    ($('.nod').length != 0 || $('.vid').length != 0)) {
+	    	$('#block-p1ps2019-motsclessaisonniers').hide();
+	    }
     }
   };//close myBehavior
 
