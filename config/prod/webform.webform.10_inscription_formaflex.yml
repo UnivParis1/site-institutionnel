@@ -1,46 +1,112 @@
-uuid: 42988e1c-a66f-4a3e-aabe-f0ec1741e598
+uuid: 32526493-34c6-4978-b2b0-ada5bf1dd613
 langcode: fr
 status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 46
+uid: 7710
 template: false
 archive: false
-id: 19_formulaire_d_inscription_rega
-title: '19 - Formulaire d''inscription Regards sur l’exil'
-description: '<p>Formulaire d''inscription à la journée Regards sur l’exil.</p>'
-category: 'Inscription événement'
+id: 10_inscription_formaflex
+title: '10 - Inscription FormaFlex'
+description: "<p>Formulaire localisé sur la page FormaFlex</p>\r\n\r\n<p>Formation &gt; FormaFlex</p>"
+category: 'Inscription à une formation'
 elements: |-
-  vos_coordonnees:
-    '#type': webform_contact
-    '#title': 'Vos coordonnées'
-    '#title_display': before
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#description': '<p>Votre nom de famille</p>'
+    '#placeholder': 'Votre nom de famille'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#name__title': 'Prénom et nom de famille'
-    '#name__placeholder': 'Nadia Giraud'
-    '#name__help': 'Indiquez ici votre prénom suivi de votre nom.'
-    '#name__title_display': inline
-    '#name__required': true
-    '#company__access': false
-    '#email__title': 'Adresse courriel'
-    '#email__placeholder': Nadia.Giraud@protonmail.com
-    '#email__help': 'Votre adresse électronique'
-    '#email__title_display': after
-    '#email__required': true
-    '#phone__access': false
-    '#address__access': false
-    '#address_2__access': false
-    '#city__access': false
-    '#state_province__access': false
-    '#postal_code__access': false
-    '#country__access': false
-  captcha:
-    '#type': captcha
-    '#captcha_type': captcha/Math
-    '#captcha_title': 'Combien fait l''addition simple ?'
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#description': '<p>Votre prénom d''usage</p>'
+    '#placeholder': 'Votre prénom d''usage'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  filiere:
+    '#type': textfield
+    '#title': Filière
+    '#description': '<p>Votre domaine d''études</p>'
+    '#placeholder': 'Économie, Sciences sociales, Histoire, MIASHS...'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  niveau:
+    '#type': textfield
+    '#title': Niveau
+    '#description': '<p>Votre niveau d''études</p>'
+    '#placeholder': 'Licence 1, Master 2, Doctorat...'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
+    '#type': email
+    '#title': Courriel
+    '#description': '<p>Votre adresse courriel</p>'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  nom_et_adresse_courriel_des_autres_participant_es:
+    '#type': textarea
+    '#title': 'Nom et adresse courriel des autres participant·es'
+    '#multiple': 3
+    '#description': '<p>Précisez le nom, prénom et adresse courriel des autres participant·es (3 personnes maximum)</p>'
+    '#placeholder': |-
+      Nom, Prénom, adresse courriel
+      Nom, Prénom, adresse courriel
+      Nom, Prénom, adresse courriel
+    '#states':
+      visible:
+        ':input[name="formation[en groupe]"]':
+          checked: true
+      required:
+        ':input[name="formation[en groupe]"]':
+          checked: true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  formation:
+    '#type': checkboxes
+    '#title': Formation
+    '#multiple': 2
+    '#multiple_error': 'Vous ne pouvez cocher qu''une seule case'
+    '#title_display': inline
+    '#description_display': after
+    '#options':
+      individuelle: 'individuelle -- Vous demandez une session d''accompagnement pour vous uniquement'
+      'en groupe': 'en groupe -- Vous demandez une session d''accompagnement pour un groupe de 2 à 4 personnes maximum'
+    '#required': true
+    '#options__properties': ''
+  disponibilites_pour_le_rendez_vous:
+    '#type': datelist
+    '#title': 'Disponibilités pour le rendez-vous'
+    '#description': |-
+      <p>Saisissez <u>toutes</u> vos disponibilités pour que nous puissions vous proposer une date de rendez-vous.<br />
+      N'hésitez pas à saisir le maximum de dates pour avoir plus de chances d'avoir un créneau rapidement.</p>
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#date_days':
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+    '#date_part_order':
+      - month
+      - day
+      - ampm
+    '#date_year_range': '2024:2050'
+  formation_en:
+    '#type': checkboxes
+    '#title': 'Formation en'
+    '#multiple': 2
+    '#description': '<p>Choisissez votre modalité de formation : en présentiel à la bibliothèque ou en visio. Un seul choix possible.</p>'
+    '#title_display': inline
+    '#description_display': after
+    '#options':
+      présentiel: 'présentiel -- Vous demandez une session d''accompagnement dans une salle de la bibliothèque'
+      visio: 'visio -- Vous demandez une session d''accompagnement en ligne, nous vous enverrons un lien de connexion avant le rendez-vous'
+    '#required': true
+    '#options__properties': ''
 css: ''
 javascript: ''
 settings:
@@ -53,10 +119,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
-  form_submit_once: true
+  form_title: both
+  form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>L''inscription à l''évènement est fermée.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -67,7 +133,7 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_unsaved: true
+  form_unsaved: false
   form_disable_back: false
   form_submit_back: false
   form_disable_autocomplete: false
@@ -145,10 +211,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: message
+  confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<h2 class="text-align-center">Votre inscription est bien enregistrée.</h2>'
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -156,15 +222,15 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: 150
+  limit_total: null
   limit_total_interval: null
-  limit_total_message: "<p>Nous vous remercions pour l'intérêt que vous portez à notre évènement.<br />\r\nLe nombre de places maximale disponible étant atteint, il n'est plus possible de s'inscrire.</p>"
+  limit_total_message: ''
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false
-  entity_limit_total: 150
+  entity_limit_total: null
   entity_limit_total_interval: null
   entity_limit_user: null
   entity_limit_user_interval: null
@@ -224,42 +290,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  copie_d_inscription_a_la_journee_d_etude:
-    id: email
-    handler_id: copie_d_inscription_a_la_journee_d_etude
-    label: Emmanuel.Charrier@univ-paris1.fr
-    notes: 'Envoi à l''organisateur'
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: _default
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: Emmanuel.Charrier@univ-paris1.fr
-      cc_options: {  }
-      from_mail: _default
-      from_options: {  }
-      from_name: _default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: _default
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }
