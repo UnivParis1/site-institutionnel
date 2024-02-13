@@ -20,7 +20,6 @@
   //search toggle
   if($('#search-toggle').length > 0){
     $('#search-toggle').click(function(){
-      if ($('.img').length === 0 && $('body').hasClass('path-frontpage')) {
         var scrollTop = $(window).scrollTop();
         if ($('.block-views-exposed-filter-blockresultats-de-recherche-page-1.overlay-show').length > 0) {
           overlayClose();
@@ -31,7 +30,6 @@
             $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
           }, 30);
         }
-      }
     });
   }
   //language-switcher set current lang
