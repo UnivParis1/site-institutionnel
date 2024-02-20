@@ -112,9 +112,20 @@ class ComptexManager implements ComptexInterface {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
-        $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
-        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
-        $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
+        foreach ($information['supannRoleEntite-all'] as $key => $supannRoleEntite) {
+          if (isset($supannRoleEntite['role'])) {
+            $information['supannRole'][$key]['role'] = reset($supannRoleEntite['role']);
+          }
+          if (isset($supannRoleEntite['structure']['name'])) {
+            $information['supannRole'][$key]['name'] = reset($supannRoleEntite['structure']['name']);
+          }
+          if (isset($supannRoleEntite['structure']['description'])) {
+            $information['supannRole'][$key]['structure'] = reset($supannRoleEntite['structure']['description']);
+          }
+          if (isset($supannRoleEntite['structure']['labeledURI'])) {
+            $information['supannRole'][$key]['labeledURI'] = reset($supannRoleEntite['structure']['labeledURI']);
+          }
+        }
       }
       if ($information['eduPersonPrimaryAffiliation'] == 'student') {
         $information['employeeType'] = ($information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant");
