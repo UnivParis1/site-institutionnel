@@ -35,7 +35,7 @@ function p1ps2019_preprocess_html(&$variables)
     $site_id = $site->id();
     if (preg_match('/node\/36841/', $system_path) && $site_id == 115) {
       $variables['web_component'] = TRUE;
-     }
+    }
   }
   $variables['page_mini_site'] = $page_mini_site;
 
@@ -204,14 +204,11 @@ function p1ps2019_preprocess_node(&$variables) {
   if ($node->getType() == 'page_personnelle') {
     $uid = $node->getOwnerId();
     $user = User::load($uid);
-    $umail = $user->getEmail();
-    if (empty ($umail)) {
-      $comptex = new ComptexManager();
-      $mail = $comptex->getUserEmail($user->getAccountName());
-      $user->setEmail($mail);
-      $user->save();
-    }
-    $variables['mail'] = $user->getEmail();
+    $comptex = new ComptexManager();
+    $mail = $comptex->getUserEmail($user->getAccountName());
+    $variables['mail'] = $mail;
+    $user->setEmail($mail);
+    $user->save();
 
     if ($node->hasField('field_skills')) {
       $skills = $node->get('field_skills')->getValue();
@@ -251,7 +248,7 @@ function p1ps2019_preprocess_node(&$variables) {
   }
 
   //preprocess_node publications
-    if ($node->getType() == 'publication') {
+  if ($node->getType() == 'publication') {
     $authors = $node->get('field_authors_list')->getValue();
     $list = [];
     foreach ($authors as $key => $author) {

@@ -26,7 +26,7 @@ class ComptexManager implements ComptexInterface {
    */
   public function getUserInformation($username) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username&profile_eduPersonAffiliation=faculty";
     $params = [
       'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
       'allowNoAffiliationAccounts' => true,
@@ -53,7 +53,7 @@ class ComptexManager implements ComptexInterface {
   public function getUserAttributes($username, $attributes = []) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
 
-    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username&profile_eduPersonAffiliation=faculty";
     $params = [
       'attrs' => implode(',', $attributes),
       'allowNoAffiliationAccounts' => true,
@@ -66,7 +66,7 @@ class ComptexManager implements ComptexInterface {
   public function userHasPagePerso($username) {
     $has_page_perso = FALSE;
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username&profile_eduPersonAffiliation=faculty";
 
     $params = [
       'attrs' => "labeledURI"
@@ -112,9 +112,20 @@ class ComptexManager implements ComptexInterface {
         $information['supannActivite'] = reset($information['supannActivite']);
       }
       if (isset($information['supannRoleEntite-all']) && is_array($information['supannRoleEntite-all'])) {
-        $information['supannRole']['role'] = $information['supannRoleEntite-all'][0]['role'];
-        $information['supannRole']['name'] = $information['supannRoleEntite-all'][0]['structure']['name'];
-        $information['supannRole']['structure'] = $information['supannRoleEntite-all'][0]['structure']['description'];
+	      foreach ($information['supannRoleEntite-all'] as $key => $supannRoleEntite) {
+          if (isset($supannRoleEntite['role'])) {
+            $information['supannRole'][$key]['role'] = $supannRoleEntite['role'];
+          }
+          if (isset($supannRoleEntite['structure']['name'])) {
+            $information['supannRole'][$key]['name'] = $supannRoleEntite['structure']['name'];
+          }
+          if (isset($supannRoleEntite['structure']['description'])) {
+            $information['supannRole'][$key]['structure'] = $supannRoleEntite['structure']['description'];
+          }
+          if (isset($supannRoleEntite['structure']['labeledURI'])) {
+            $information['supannRole'][$key]['labeledURI'] = $supannRoleEntite['structure']['labeledURI'];
+          }
+	}
       }
       if ($information['eduPersonPrimaryAffiliation'] == 'student') {
         $information['employeeType'] = ($information['supannCivilite'] == "Mme" ? "Doctorante" : "Doctorant");
@@ -211,10 +222,7 @@ class ComptexManager implements ComptexInterface {
     ];
 
     $information = $this->curl_request($ws, $params);
-    if ($information) {
-      $information = reset($information);
-      $this->formatEmails($information);
-
+    if (!empty($information)) {
       return $information['mail'];
     }
 
@@ -224,7 +232,7 @@ class ComptexManager implements ComptexInterface {
   public function getUserAttribute($uid,  $attr) {
     if (isset($uid) && isset($attr) && is_string($attr)) {
       $config = \Drupal::config('up1_pages_personnelles.settings');
-      $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid";
+      $ws = $config->get('url_ws') . $config->get('search_user_page') . "&id=$uid&profile_eduPersonAffiliation=faculty";
       $params = ['attrs' => $attr];
 
       $result = $this->curl_request($ws, $params);

@@ -85,3 +85,21 @@ function up1_pages_personnelles_update_8002(&$sandbox) {
   $definition_manager->installFieldStorageDefinition('supannRole', 'site', 'site', $supannRole);
   $definition_manager->installFieldStorageDefinition('about_me', 'site', 'site', $about_me);
 }
+
+/**
+ * Add SupannConsentement field.
+ */
+function up1_pages_personnelles_update_8003(&$sandbox) {
+  $supannConsentement = BaseFieldDefinition::create('string')
+    ->setLabel(t('supannConsentement'))
+    ->setDescription(t('Value of supannConsentement field in ldap for this grouper group.'))
+    ->setSettings([
+      'max_length' => 50,
+      'text_processing' => 0,
+    ])
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition_manager->installFieldStorageDefinition('supannConsentement', 'site', 'site', $supannConsentement);
+}

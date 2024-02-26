@@ -52,8 +52,10 @@
   {{ content.field_title }}
 {% endset %}
 {# Prints div with classes, and content without Width and Background. #}
+{% if paragraph.id.value != 71414 %}
 <div class="no-padding-mobile paragraph grid-container column-wrapper">
-  {% if paragTitle|striptags|trim %}<h2 class="title-sep big padding-mobile">{{ content.field_title }}</h2>{% endif %}
+{% endif %}
+  {% if paragTitle|striptags|trim and paragraph.id.value != 71414 %}<h2 class="title-sep big padding-mobile">{{ content.field_title }}</h2>{% endif %}
   <div{{ attributes.addClass(classes) }}>
     {# {% if content.bp_view['#items']|length > 1 %}
        {% for key, item in content.bp_view if key|first != '#' %}
@@ -72,4 +74,6 @@
       </div>
     {% endfor %}
   </div>
+{% if paragraph.id.value != 71414 %}
 </div>
+{% endif %}

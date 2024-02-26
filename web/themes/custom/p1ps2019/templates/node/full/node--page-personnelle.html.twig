@@ -184,7 +184,17 @@
             {% if supannActivite %}<p class="cnu">{{ supannActivite }}</p>{% endif %}
             {% if supannRole %}
               <div class="infos-sep">
-                <span>{{ supannRole.role }}</span> <span>{{ supannRole.structure }}</span>
+                <ul class="supannRoleEntites">
+                {% for key, item in supannRole %}
+                  <li>
+                  {% if item.labeledURI is not empty %}
+                    <span>{{ item.role }}</span> <a href="{{ item.labeledURI }}" title="{{ item.name }}" target="_blank">{{ item.structure }}</a>
+                    {% else %}
+                      <span>{{ item.role }}</span><span>{{ item.structure }}</span>
+                  {% endif %}
+                  </li>
+                {% endfor %}
+                </ul>
               </div>
             {% endif %}
 
