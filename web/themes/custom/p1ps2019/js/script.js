@@ -154,22 +154,16 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
   //search toggle
   if($('#search-toggle').length > 0){
     $('#search-toggle').click(function(){
-      var scrollTop = $(window).scrollTop();
-      if ($('.block-views-exposed-filter-blockresultats-de-recherche-page-1.overlay-show').length > 0) {
-        overlayClose();
-        if (scrollTop <= 0 || $(window).width() < 1024) {
-          $('body').removeClass('scroll');
+        var scrollTop = $(window).scrollTop();
+        if ($('.block-views-exposed-filter-blockresultats-de-recherche-page-1.overlay-show').length > 0) {
+          overlayClose();
+        } else {
+          overlayClose();
+          $('.block-views-exposed-filter-blockresultats-de-recherche-page-1, #search-toggle').addClass('overlay-show');
+          setTimeout(function () {
+            $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
+          }, 30);
         }
-      } else {
-        overlayClose();
-        $('.block-views-exposed-filter-blockresultats-de-recherche-page-1, #search-toggle').addClass('overlay-show');
-        if (scrollTop <= 0 || $(window).width() < 1024) {
-          $('body').addClass('scroll');
-        }
-        setTimeout(function () {
-          $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
-        }, 30);
-      }
     });
   }
   //language-switcher set current lang
@@ -278,6 +272,9 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
         });
       }//close scroll
 
+      if ($('.nod').length > 0 || $('.vid').length > 0) {
+       $('#block-p1ps2019-motsclessaisonniers').hide();
+      }
 
       BrowserDetection();
 
@@ -326,6 +323,10 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
           .removeClass('large-4')
           .addClass('medium-12');
       }
+	    if (($('.path-frontpage').length != 0 || $('.path-site').length != 0) &&
+		    ($('.nod').length != 0 || $('.vid').length != 0)) {
+	    	$('#block-p1ps2019-motsclessaisonniers').hide();
+	    }
     }
   };//close myBehavior
 
@@ -495,56 +496,4 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
       });
     }
   }
-// function checkOnSwipers(){
-//   if($('.swiper-container:not(.one-slide) .swiper-wrapper').length > 0){
-//     $('.swiper-wrapper').each(function(){
-//       var swiperContainer = $(this).parent();
-//       var swiperContainerWidth = swiperContainer.outerWidth();
-//       //var swiperWrapperWidth = $(this).outerWidth();
-//
-//       //console.log('============== swiperContainer: '+swiperContainer.attr('class'));
-//
-//       var swiperSlidesWidth = 0;
-//       //console.log('==========> '+swiperContainer.attr('class'));
-//       var slidesCount = $(this).children('.swiper-slide').length;
-//       var sliderMargin = $(this).children('.swiper-slide:first-child').css('margin-right');
-//       //console.log('sliderMargin: '+sliderMargin);
-//       if(sliderMargin !== undefined) {
-//       var slideMargin = parseInt(sliderMargin.replace('px', ''));
-//       var slidesMargin = slideMargin * (slidesCount -1);
-//
-//       //console.log('slides COunt : '+slidesCount+' slideMargin: '+slideMargin+' Margins: '+slidesMargin);
-//       swiperSlidesWidth += slidesMargin;}
-//
-//       $(this).children('.swiper-slide').each(function(){
-//         //swiperSlidesWidth += $(this).outerWidth();
-//         swiperSlidesWidth += $(this).width();
-//         //swiperSlidesWidth += parseInt($(this).css('margin-right').replace('px', ''));
-//         //console.log('SLIDE WIDTH: '+ $(this).outerWidth());
-//       });
-//
-//
-//       /*//if(swiperContainer.attr('class').indexOf('swiper-tarifs') != -1){
-//         console.log('--------------->'+swiperContainer.attr('class'));
-//         console.log('TOT SLIDES WIDTH: '+swiperSlidesWidth);
-//         console.log('swiperContainerWidth: '+swiperContainerWidth);
-//         console.log('----------');
-//       //}*/
-//
-//       if(swiperSlidesWidth < swiperContainerWidth || $(window).width() > 1200){
-//         if(!swiperContainer.hasClass('swiper-no-swiping')){
-//           swiperContainer.addClass('swiper-no-swiping ');
-//           if($('.tabs-style .swiper-wrapper.swiper-align').length > 0) $('.tabs-style .swiper-wrapper.swiper-align').removeClass('swiper-align');
-//         }
-//       }
-//       else{
-//         if(swiperContainer.hasClass('swiper-no-swiping')){
-//           swiperContainer.removeClass('swiper-no-swiping');
-//           $('.tabs-style .swiper-wrapper').addClass('swiper-align');
-//         }
-//       }
-//       //console.log('ENDDD------> '+swiperContainer.attr('class'));
-//     });
-//   }
-// }
 })(jQuery);

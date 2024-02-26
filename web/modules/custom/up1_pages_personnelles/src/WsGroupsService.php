@@ -53,7 +53,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $request = $this->getRequest($affiliation);
 
     $params = [
-      'attrs' => 'sn,givenName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
+      'attrs' => 'sn,givenName,displayName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
     ];
     if (!empty($trombi_settings)) {
       if ($trombi_settings['supannRole']) {
@@ -89,13 +89,16 @@ class WsGroupsService implements WsGroupsServiceInterface {
    * @param $trombi_settings
    * @return array
    */
-  public function getUserListForAI($siteId = '', $trombi_settings = NULL) {
+  public function getUserListWithConsent($consent, $affiliation, $siteId = '', $trombi_settings = NULL) {
     $request = $this->getRequest(NULL, FALSE);
 
-    //filter_supannConsentement={PROJ:OBSIA}CGU
+    /**
+     * {PROJ:OBSIA}CGU Observatoire IA
+     *
+     */
     $params = [
-      'filter_supannConsentement' => '{PROJ:OBSIA}CGU',
-      'attrs' => 'sn,givenName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
+      'filter_supannConsentement' => $consent,
+      'attrs' => 'sn,givenName,displayName,labeledURI,employeeType,info,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge',
       'showExtendedInfo' => true
     ];
     if (!empty($trombi_settings)) {
@@ -160,6 +163,14 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $student = $this->getUsers('student');
 
     return array_merge($faculty['users'], $student['users']);
+  }
+
+  public function getSiteField($siteId, $field) {
+    $siteStorage = $this->entityTypeManager->getStorage('site');
+    $currentSite = $siteStorage->load($siteId);
+    $value = $currentSite->get($field)->value;
+
+    return $value;
   }
 
 }

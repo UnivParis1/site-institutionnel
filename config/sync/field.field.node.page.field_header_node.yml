@@ -1,0 +1,31 @@
+uuid: 69c92a26-db58-4c68-b878-59775dc0d626
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_node
+    - node.type.event
+    - node.type.news
+    - node.type.page
+id: node.page.field_header_node
+field_name: field_header_node
+entity_type: node
+bundle: page
+label: 'Actualité ou évènement à la une'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      news: news
+      event: event
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: news
+field_type: entity_reference

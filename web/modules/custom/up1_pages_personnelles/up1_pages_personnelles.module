@@ -142,6 +142,18 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
         'weight' => 100,
       ])
       ->setDisplayConfigurable('form', TRUE);
+
+    $fields['supannConsentement'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('supannConsentement'))
+      ->setDescription(t('Value of supannConsentement field in ldap for this grouper group.'))
+      ->setRevisionable(FALSE)
+      ->setSettings([
+        'text_type' => 'text',
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => -10,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
   }
 
   return $fields;
@@ -183,7 +195,9 @@ function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface 
   if (isset($form['groups'])) {
     $form['groups']['#group'] = 'pages_personnelles';
   }
-
+  if (isset($form['supannConsentement'])) {
+    $form['supannConsentement']['#group'] = 'pages_personnelles';
+  }
   if (isset($form['ec_enabled'])) {
     $form['ec_enabled']['#group'] = 'staff_ec';
   }

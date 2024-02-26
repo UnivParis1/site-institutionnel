@@ -78,6 +78,12 @@
   {% set btn_style = 'paris1-bg-soft-grey' == layout_background ? 'inline' : 'outline' %}
 {% endif %}
 
+{% set link_attributes = content.bp_link.0['#options'].attributes %}
+{% if link_attributes.target is not empty %}
+  {% set link_target = link_attributes.target %}
+{% else %}
+  {% set link_target = "_self" %}
+{% endif %}
 {% if background_field %}
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
@@ -91,7 +97,8 @@
           <div>{{ content.bp_text }}</div>
           {% if content.bp_link|render %}
             <span class="{{ content.field_cta_icon.0 }}">{{ icon }}</span>
-            <a class=" btn {{ btn_style }} with-icon" href="{{ content.bp_link.0['#url'] }}" title="{{ content.bp_link.0['#title'] }}" >
+            <a class=" btn {{ btn_style }} with-icon" href="{{ content.bp_link.0['#url'] }}"
+               title="{{ content.bp_link.0['#title'] }}" target="{{ link_target }}" >
               {{ content.bp_link.0['#title'] }}
             </a>
           {% endif %}

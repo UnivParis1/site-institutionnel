@@ -36,28 +36,31 @@ function up1_archive_help($route_name, \Drupal\Core\Routing\RouteMatchInterface 
     $id = $entity->id();
 
     $config = \Drupal::config('up1_archive.settings');
-    $nid = $config->get('nid');
+    $pages_to_archive = $config->get('pages_to_archive');
 
-    if ((int)$id === (int)$nid) {
-      $webservice_url = $config->get('url_web');
-      $target_url = $config->get('url_node');
-      $access_key =  $config->get('access_key');
-      $secret = $config->get('secret_key');
+    foreach ($pages_to_archive as $key => $page_to_archive) {
+      $nid = $page_to_archive['nid'];
+      if ((int)$id === (int)$nid) {
+        $webservice_url = $config->get('url_web');
+        $target_url = $page_to_archive['url_node'];
+        $access_key = $config->get('access_key');
+        $secret = $config->get('secret_key');
 
-      $http_header = [
-        "Content-Type: application/x-www-form-urlencoded",
-        "authorization: LOW $access_key:$secret"
-      ];
+        $http_header = [
+          "Content-Type: application/x-www-form-urlencoded",
+          "authorization: LOW $access_key:$secret"
+        ];
 
-      $data = "url=$target_url&capture_all=on&capture_outlinks=1&capture_screenshot=on&wm-save-mywebarchive=on&email_result=on";
+        $data = "url=$target_url&capture_all=on&capture_outlinks=1&capture_screenshot=on&wm-save-mywebarchive=on&email_result=on";
 
-      $curl = curl_init ( $webservice_url );
-      curl_setopt($curl, CURLOPT_URL, $webservice_url);
-      curl_setopt($curl, CURLOPT_POST, true);
-      curl_setopt($curl, CURLOPT_HTTPHEADER, $http_header);
-      curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        $curl = curl_init($webservice_url);
+        curl_setopt($curl, CURLOPT_URL, $webservice_url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $http_header);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
-      curl_exec ( $curl );
-      curl_close( $curl );
+        curl_exec($curl);
+        curl_close($curl);
+      }
     }
   }

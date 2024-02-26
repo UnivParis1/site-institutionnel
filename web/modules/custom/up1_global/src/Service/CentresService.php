@@ -59,7 +59,7 @@ class CentresService {
         $centre['image_path'] = $file;
       }
       else {
-        $centre['image_path'] = file_create_url($url_images . "default_white.jpg");
+        $centre['image_path'] = \Drupal::service('file_url_generator')->generateAbsoluteString($url_images . "default_white.jpg");
       }
     }
 

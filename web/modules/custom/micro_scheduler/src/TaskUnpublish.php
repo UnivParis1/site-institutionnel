@@ -25,6 +25,7 @@ class TaskUnpublish extends Task {
     $siteOutdatedIds = $siteStorage->getQuery()
       ->condition('status', TRUE)
       ->condition('schedule_end', $currentDate->format('Y-m-d'), '<=')
+      ->accessCheck(FALSE)
       ->execute();
 
     $adminTo = $this->_getAdminMailTo();

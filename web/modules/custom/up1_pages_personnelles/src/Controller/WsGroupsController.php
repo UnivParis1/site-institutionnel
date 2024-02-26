@@ -83,41 +83,19 @@ class WsGroupsController extends ControllerBase
       if ($cachedUser) {
         $response = $cachedUser->data;
         $users = $response['users'];
-      } else {
-
-        $group == 'observatoireIA'?
-          $response = $this->wsGroupsService->getUserListForAI($affiliation, $siteId, $trombi_settings) :
-          $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
-
-        $users = $response['users'];
-        $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
       }
-    } else {
-      $cachedUser = $cache->get('labeledURI_' . $affiliation);
+      else {
+        $consent = $this->wsGroupsService->getSiteField($siteId, 'supannConsentement');
+        switch ($group) {
+          case 'observatoireIA':
+          case 'sante-shs':
+            $response = $this->wsGroupsService->getUserListWithConsent($consent, $siteId, $trombi_settings) ;
+            break;
+          default:
+            $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
+        }
 
-      if ($cachedUser) {
-        $response = $cachedUser->data;
-        $users = $response['users'];
-      } else {
-        $response = $this->wsGroupsService->getUserList($affiliation);
-        $users = $response['users'];
-        $cache->set('labeledURI_' . $affiliation, $response, time() + 60 * 60);
-      }
-    }
 
-    return $users;
-  }
-
-  private function getCachedUsersIA($affiliation = NULL, $siteId = NULL, $trombi_settings = NULL) {
-    $cache = \Drupal::cache();
-
-    if ($siteId) {
-      $cachedUser = $cache->get('labeledURI_' . $siteId . '_' . $affiliation);
-      if ($cachedUser) {
-        $response = $cachedUser->data;
-        $users = $response['users'];
-      } else {
-        $response = $this->wsGroupsService->getUserList($affiliation, $siteId, $trombi_settings);
         $users = $response['users'];
         $cache->set('labeledURI_' . $siteId . '_' . $affiliation, $response, time() + 60 * 60);
       }
@@ -297,7 +275,6 @@ class WsGroupsController extends ControllerBase
   {
     $siteId = $this->getSiteId();
     if (isset($siteId) && $this->getFieldEc()) {
-      //Get site group to see if we are on obsia site.
       $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
       $site = $siteStorage->load($siteId);
       $group = $site->get('groups')->value;
@@ -812,6 +789,7 @@ class WsGroupsController extends ControllerBase
 
     $ids = \Drupal::entityQuery('user')
       ->condition('roles', 'enseignant_doctorant')
+      ->accessCheck(FALSE)
       ->execute();
     $users = User::loadMultiple($ids);
 
@@ -822,7 +800,8 @@ class WsGroupsController extends ControllerBase
         if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid')) === false) {
           $query = \Drupal::entityQuery('node')
             ->condition('type', 'page_personnelle')
-            ->condition('uid', $user->id());
+            ->condition('uid', $user->id())
+            ->accessCheck(FALSE);
           $result = $query->execute();
           //The request must retrieve a unique page perso. But due to previous mistakes, we will disable all pages persos.
           if (!empty($result)) {
@@ -857,7 +836,8 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
-        ->condition('uid', $user->id());
+        ->condition('uid', $user->id())
+        ->accessCheck(FALSE);
       $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
         $nid = reset($result);
@@ -903,7 +883,8 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
-        ->condition('uid', $user->id());
+        ->condition('uid', $user->id())
+        ->accessCheck(TRUE);
       $nids = $query->execute();
       if ($nids) {
         foreach ($nids as $nid) {

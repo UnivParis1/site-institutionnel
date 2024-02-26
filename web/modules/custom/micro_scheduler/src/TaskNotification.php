@@ -32,6 +32,7 @@ class TaskNotification extends Task {
         $siteOutdatedIds = $siteStorage->getQuery()
           ->condition('status', TRUE)
           ->condition('schedule_end', $inDays->format('Y-m-d'), '=' )
+          ->accessCheck(FALSE)
           ->execute();
         $sitesOutdated = $siteStorage->loadMultiple($siteOutdatedIds);
         foreach ($sitesOutdated as $siteOutdated) {

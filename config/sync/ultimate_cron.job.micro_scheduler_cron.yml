@@ -11,7 +11,19 @@ module: micro_scheduler
 callback: micro_scheduler_cron
 scheduler:
   id: simple
+  configuration:
+    rules:
+      - '0+@ 0 * * *'
 launcher:
   id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
 logger:
   id: database
+  configuration:
+    method: '3'
+    expire: 604800
+    retain: 1000

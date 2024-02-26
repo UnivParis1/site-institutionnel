@@ -1,0 +1,26 @@
+diff --git a/micro_menu.info.yml b/micro_menu.info.yml
+index 89e0df6..ea2b4cf 100644
+--- a/micro_menu.info.yml
++++ b/micro_menu.info.yml
+@@ -1,7 +1,7 @@
+ name: Micro Menu
+ type: module
+ description: 'Manage menu per micro site.'
+-core_version_requirement: ^8.8 || ^9
++core_version_requirement: ^9.3 || ^10
+ package: 'Micro Site'
+ dependencies:
+   - micro_site:micro_site
+diff --git a/tests/src/Functional/LoadTest.php b/tests/src/Functional/LoadTest.php
+index c69b743..39d5521 100644
+--- a/tests/src/Functional/LoadTest.php
++++ b/tests/src/Functional/LoadTest.php
+@@ -57,7 +57,7 @@ class LoadTest extends MicroSiteBase {
+    */
+   public function testLoad() {
+     $this->drupalGet(Url::fromRoute('<front>'));
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+   }
+ 
+ }

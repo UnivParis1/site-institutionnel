@@ -1,0 +1,167 @@
+diff --git a/micro_site.info.yml b/micro_site.info.yml
+index 116378d..f4879b6 100644
+--- a/micro_site.info.yml
++++ b/micro_site.info.yml
+@@ -1,7 +1,7 @@
+ name: 'Micro site'
+ type: module
+ description: 'Provide the content entity type site.'
+-core_version_requirement: ^8 || ^9
++core_version_requirement: ^9.3 || ^10
+ package: 'Micro Site'
+ configure: micro_site.settings
+ dependencies:
+diff --git a/micro_site.module b/micro_site.module
+index 1da944f..78c707d 100644
+--- a/micro_site.module
++++ b/micro_site.module
+@@ -93,7 +93,7 @@ function micro_site_preprocess_block__system_branding_block(&$variables) {
+       /** @var \Drupal\Core\Image\Image $image */
+       $image = \Drupal::service('image.factory')->get($file->getFileUri());
+       if ($image->isValid()) {
+-        $variables['site_logo'] = file_url_transform_relative(file_create_url($image->getSource()));
++        $variables['site_logo'] = \Drupal::service('file_url_generator')->generateString($image->getSource());
+       }
+     }
+     // Override the site name and slogan.
+@@ -381,7 +381,7 @@ function micro_site_preprocess_maintenance_page(&$variables) {
+     $logo_url = '';
+     if ($logo instanceof \Drupal\file\FileInterface) {
+       $logo_uri = $logo->getFileUri();
+-      $logo_url = file_url_transform_relative(file_create_url($logo_uri));
++      $logo_url = \Drupal::service('file_url_generator')->generateString($logo_uri);
+     }
+     $variables['logo'] = $logo_url;
+     $variables['site_name'] = $site->getName();
+diff --git a/src/Entity/Site.php b/src/Entity/Site.php
+index a8c7e92..bbbab9e 100644
+--- a/src/Entity/Site.php
++++ b/src/Entity/Site.php
+@@ -721,7 +721,7 @@ class Site extends RevisionableContentEntityBase implements SiteInterface {
+    */
+   public function cssFilePathRelativeToDrupalRoot() {
+     // @todo See if we can simplify this via file_url_transform_relative().
+-    $path = parse_url(file_create_url($this->cssInternalFileUri()), PHP_URL_PATH);
++    $path = parse_url(\Drupal::service('file_url_generator')->generateAbsoluteString($this->cssInternalFileUri()), PHP_URL_PATH);
+     $path = str_replace(base_path(), '/', $path);
+     return $path;
+   }
+diff --git a/src/Plugin/Validation/Constraint/RegisteredFieldConstraintValidator.php b/src/Plugin/Validation/Constraint/RegisteredFieldConstraintValidator.php
+index d8e4443..6ea3b19 100644
+--- a/src/Plugin/Validation/Constraint/RegisteredFieldConstraintValidator.php
++++ b/src/Plugin/Validation/Constraint/RegisteredFieldConstraintValidator.php
+@@ -25,7 +25,7 @@ class RegisteredFieldConstraintValidator extends ConstraintValidator {
+     $entity = $items->getEntity();
+     $registered = $item->value;
+     if ($registered) {
+-      $url = $entity->getSitePath() . '/' . drupal_get_path('module', 'micro_site') . '/tests/200.png';
++      $url = $entity->getSitePath() . '/' . \Drupal::service('extension.list.module')->getPath('micro_site') . '/tests/200.png';
+       try {
+         $request = \Drupal::httpClient()->get($url);
+         $status_code = $request->getStatusCode();
+diff --git a/tests/src/Functional/BaseTest.php b/tests/src/Functional/BaseTest.php
+index d566491..8f743de 100644
+--- a/tests/src/Functional/BaseTest.php
++++ b/tests/src/Functional/BaseTest.php
+@@ -41,7 +41,7 @@ class BaseTest extends MicroSiteBase {
+    */
+   public function testHome() {
+     $this->drupalGet(Url::fromUri($this->masterUrl));
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+   }
+ 
+   /**
+@@ -49,18 +49,18 @@ class BaseTest extends MicroSiteBase {
+    */
+   public function testSiteAccess() {
+     $this->drupalGet(Url::fromUri($this->masterUrl));
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+ 
+     $generic = $this->createSiteType('generic', 'Generic', 'Generic site type');
+     $settings = ['user_id' => $this->microSiteAdminUser->id(), 'registered' => TRUE];
+     $site_one = $this->createSite('generic', 'Site One', 'Site one slogan', 'domain', 'one.microsite.local', 'siteone@microsite.local', $settings);
+     $expected = 'http://one.microsite.local';
+-    $this->assertEqual($site_one->getSitePath(), $expected);
++    $this->assertEquals($site_one->getSitePath(), $expected);
+ 
+     // Nobody is logged in on the site one.
+     $this->drupalGet(Url::fromUri($site_one->getSitePath()));
+-    $this->assertResponse(403);
+-    $this->assertText('Site One');
++    $this->assertSession()->statusCodeEquals(403);
++    $this->assertSession()->pageTextContains('Site One');
+ 
+     $this->fillField('edit-name', $this->globalAdminUser->getAccountName());
+     $this->fillField('edit-pass', $this->password);
+@@ -70,42 +70,42 @@ class BaseTest extends MicroSiteBase {
+ 
+     // Reload the master.
+     $this->drupalGet(Url::fromUri($this->masterUrl));
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+ 
+     $this->drupalGet(Url::fromUri($site_one->getSitePath()));
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+ 
+     $this->clickLink('Edit');
+     $this->checkField('edit-status-value');
+     $this->pressButton('Save');
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+     $this->assertSession()->pageTextContains('Saved the ' . $site_one->label() .' Site.');
+ 
+     $this->clickLink('Log out');
+     $this->drupalGet(Url::fromUri($site_one->getSitePath()));
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+ 
+     $this->fillField('edit-name', $this->user->getAccountName());
+     $this->fillField('edit-pass', $this->password);
+     $this->pressButton('edit-submit');
+     $this->assertSession()->statusCodeEquals(200);
+     $this->drupalGet($site_one->getSitePath() . "/site/{$site_one->id()}/edit");
+-    $this->assertResponse(403);
++    $this->assertSession()->statusCodeEquals(403);
+ 
+     $this->logOutLogInUser($this->microSiteOwnerUser);
+     $this->drupalGet($site_one->getSitePath() . "/site/{$site_one->id()}/edit");
+-    $this->assertResponse(403);
++    $this->assertSession()->statusCodeEquals(403);
+ 
+     $this->logOutLogInUser($this->globalAdminUser);
+     // Add owner user as site admin.
+     $edit['field_site_administrator[0][target_id]'] = $this->microSiteOwnerUser->getAccountName() . ' ('. $this->microSiteOwnerUser->id() . ')';
+-    $this->drupalPostForm($site_one->getSitePath() ."/site/{$site_one->id()}/edit", $edit, 'Save');
+-    $this->assertResponse(200);
++    $this->submitForm($site_one->getSitePath() ."/site/{$site_one->id()}/edit", $edit, 'Save');
++    $this->assertSession()->statusCodeEquals(200);
+     $this->drupalGet($site_one->getSitePath() . "/site/{$site_one->id()}/edit");
+ 
+     $this->logOutLogInUser($this->microSiteOwnerUser);
+     $this->drupalGet($site_one->getSitePath() . "/site/{$site_one->id()}/edit");
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+   }
+ 
+   /**
+@@ -121,14 +121,14 @@ class BaseTest extends MicroSiteBase {
+     $site_one = $this->createSite('generic', 'Site One', 'Site one slogan', 'domain', 'one.microsite.local', 'siteone@microsite.local', $settings);
+     $site_one->setCss('body {background-color: red !important;');
+     $expected = 'http://one.microsite.local';
+-    $this->assertEqual($site_one->getSitePath(), $expected);
++    $this->assertEquals($site_one->getSitePath(), $expected);
+     $name = 'site-' . $site_one->id();
+     $css_file = $name . '-' . md5($name) . '.css';
+     $this->drupalGet(Url::fromUri($site_one->getSitePath()));
+-    $this->assertResponse(200);
++    $this->assertSession()->statusCodeEquals(200);
+     $this->assertSession()->responseContains($css_file);
+     $xpath = $this->xpath("//link[contains(@href, '" . $css_file . "')]");
+-    $this->assertEqual(count($xpath), 1, 'Exactly one ' . $css_file . ' css file asset found.');
++    $this->assertEquals(count($xpath), 1, 'Exactly one ' . $css_file . ' css file asset found.');
+   }
+ 
+ }

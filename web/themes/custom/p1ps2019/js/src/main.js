@@ -20,22 +20,16 @@
   //search toggle
   if($('#search-toggle').length > 0){
     $('#search-toggle').click(function(){
-      var scrollTop = $(window).scrollTop();
-      if ($('.block-views-exposed-filter-blockresultats-de-recherche-page-1.overlay-show').length > 0) {
-        overlayClose();
-        if (scrollTop <= 0 || $(window).width() < 1024) {
-          $('body').removeClass('scroll');
+        var scrollTop = $(window).scrollTop();
+        if ($('.block-views-exposed-filter-blockresultats-de-recherche-page-1.overlay-show').length > 0) {
+          overlayClose();
+        } else {
+          overlayClose();
+          $('.block-views-exposed-filter-blockresultats-de-recherche-page-1, #search-toggle').addClass('overlay-show');
+          setTimeout(function () {
+            $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
+          }, 30);
         }
-      } else {
-        overlayClose();
-        $('.block-views-exposed-filter-blockresultats-de-recherche-page-1, #search-toggle').addClass('overlay-show');
-        if (scrollTop <= 0 || $(window).width() < 1024) {
-          $('body').addClass('scroll');
-        }
-        setTimeout(function () {
-          $('#views-exposed-form-resultats-de-recherche-page-1 #edit-text').focus()
-        }, 30);
-      }
     });
   }
   //language-switcher set current lang
@@ -144,6 +138,9 @@
         });
       }//close scroll
 
+      if ($('.nod').length > 0 || $('.vid').length > 0) {
+       $('#block-p1ps2019-motsclessaisonniers').hide();
+      }
 
       BrowserDetection();
 
@@ -192,6 +189,10 @@
           .removeClass('large-4')
           .addClass('medium-12');
       }
+	    if (($('.path-frontpage').length != 0 || $('.path-site').length != 0) &&
+		    ($('.nod').length != 0 || $('.vid').length != 0)) {
+	    	$('#block-p1ps2019-motsclessaisonniers').hide();
+	    }
     }
   };//close myBehavior
 
