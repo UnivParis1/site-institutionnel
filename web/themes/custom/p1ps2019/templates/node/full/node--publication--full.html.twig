@@ -174,7 +174,7 @@
             {% if publisher_term|striptags|trim %}
               <div class="details txt-second publisher">
                 <h3 class="publication-label">{{ "Publisher"|t }} : </h3>
-                {% for key, aPublisher in content.field_publisher_term if key|first != '#' %}
+                {% for key, aPublisher in content.field_publisher_term|filter((value, key) => key|first != '#') %}
                   <span> {{ aPublisher }}</span>
                 {% endfor %}
               </div>
@@ -182,7 +182,7 @@
             {% if collection_term|striptags|trim %}
               <div class="details txt-second collection">
                 <h3 class="publication-label">{{ "Collection"|t }} : </h3>
-                {% for key, aCollection in content.field_collection_term if key|first != '#' %}
+                {% for key, aCollection in content.field_collection_term|filter((value, key) => key|first != '#') %}
                   <span> {{ aCollection }}</span>
                 {% endfor %}
               </div>
@@ -219,7 +219,7 @@
             {% endif %}
             {% if publicationTags|striptags|trim %}
               <div class="details txt-second">
-                {% for key, item in content.field_tags if key|first != '#' %}
+                {% for key, item in content.field_tags|filter((value, key) => key|first != '#') %}
                   <div class="categ-style block-title-sep">{{ item }}</div>
                 {% endfor %}
               </div>
@@ -246,7 +246,7 @@
       <section class="cell small-12 large-8 semi-infos-sep-mobile">
         {% if topics|striptags|trim %}
           <div class="details txt-second">
-            {% for key, topic in content.field_publication_topics if key|first != '#' %}
+            {% for key, topic in content.field_publication_topics|filter((value, key) => key|first != '#') %}
               <div class="categ-style block-title-sep">{{ topic }}</div>
             {% endfor %}
           </div>

@@ -88,7 +88,7 @@
     {% endif %}
     <div class="grid-container">
       <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
-        {% for key, bookmark in  content.field_bookmark if key|first != '#' %}
+        {% for key, bookmark in  content.field_bookmark|filter((value, key) => key|first != '#') %}
           <div class="cell small-12 large-{{ classColumns }}">{{ bookmark }}</div>
         {% endfor %}
       </div>

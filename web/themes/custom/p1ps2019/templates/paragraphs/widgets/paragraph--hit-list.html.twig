@@ -85,7 +85,7 @@
                 <h2 class="text-center margin-vertical-3">{{ content.field_title.0 }}</h2>
               {% endif %}
             </div>
-            {% for key, item in  content.field_ranking if key|first != '#' %}
+            {% for key, item in  content.field_ranking|filter((value, key) => key|first != '#') %}
               <div class="cell large-3 medium-6 small-12 margin-y-mobile">
                 {{ item }}
               </div>

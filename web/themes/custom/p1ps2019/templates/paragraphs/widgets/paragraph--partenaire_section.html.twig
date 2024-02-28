@@ -112,7 +112,7 @@
 
     <div class="grid-container {{ layout_width_classes_partenaire }}">
       <div class="grid-x grid-margin-x grid-margin-y partenaire-layout">
-          {% for key, item in  content.field_partenaire if key|first != '#' %}
+          {% for key, item in  content.field_partenaire|filter((value, key) => key|first != '#') %}
             <div class="{{ element_class }}">{{ item }}</div>
           {% endfor %}
 
