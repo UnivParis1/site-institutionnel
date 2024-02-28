@@ -64,7 +64,7 @@
       <div{{ title_attributes.addClass('block-title margin-vertical-2') }}>
         <a href="{{ host_url }}" title="{{ label|replace({'%eol%': ''}) }}">
           {% set label_display = {'#type': 'markup', '#markup': label|replace({'%eol%': '<br/>'})} %}
-          {{ label_display }}
+          <span class="visually-hidden">{{ label_display }}</span>
         </a>
       </div>
     {% endif %}
