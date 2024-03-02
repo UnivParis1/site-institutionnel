@@ -9,3 +9,8 @@ services:
     arguments: ['@micro_site.negotiator']
     tags:
       - { name: event_subscriber }
+  micro_homepage.homepage_node_subscriber:
+    class: Drupal\micro_homepage\EventSubscriber\HomepageAsNodeSubscriber
+    arguments: [ '@micro_site.negotiator', '@entity_type.manager', '@current_user' ]
+    tags:
+      - { name: event_subscriber }
