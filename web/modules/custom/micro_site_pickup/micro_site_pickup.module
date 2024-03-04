@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\micro_site\Entity\SiteInterface;
+use Drupal\micro_site_pickup\Plugin\EntityReferenceSelection\PickupSiteSelection;
 
 /**
  * Implements hook_help().
@@ -78,4 +79,10 @@ function micro_site_pickup_form_views_exposed_form_alter(&$form, FormStateInterf
   $form[$field_sites]['#empty_option'] = t('-- Select a secondary site --');
   $form[$field_sites]['#options'] = $options;
   unset($form[$field_sites]['#size']);
+}
+
+function micro_site_pickup_entity_reference_selection_alter(&$definitions) {
+  if (isset($definitions['default:site'])) {
+    $definitions['default:site']['class'] = PickupSiteSelection::class;
+  }
 }
