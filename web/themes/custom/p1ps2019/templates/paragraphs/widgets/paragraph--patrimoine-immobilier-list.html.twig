@@ -40,7 +40,7 @@
 
 <div{{ attributes.addClass("grid-container")}}>
   <ul class="list-patimmo">
-  {% for key, item in  content.field_patrimoine_immobilier if key|first != '#' %}
+  {% for key, item in  content.field_patrimoine_immobilier|filter((value, key) => key|first != '#') %}
     {{ item }}
   {% endfor %}
   </ul>

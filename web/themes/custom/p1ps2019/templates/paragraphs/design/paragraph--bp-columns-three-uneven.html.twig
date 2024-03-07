@@ -128,7 +128,7 @@
           </div>
         {% endif %}
         <div class="cell small-12 column-uneven-wrapper">
-          {% for key, column in content.bp_column_content_3 if key|first != '#' %}
+          {% for key, column in content.bp_column_content_3|filter((value, key) => key|first != '#') %}
             <div class="{% if key == 0 %}{{ first_col }}{% elseif key == 1 %}{{ sec_col }}{% else %}{{ third_col }}{% endif %}">
               {{ column }}
             </div>

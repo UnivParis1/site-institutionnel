@@ -47,7 +47,7 @@
   {%- else -%}
   <ul{{ attributes.removeAttribute('region') }}>
   {%- endif -%}
-    {%- for key, item in links if key != 'comment-add' -%}
+    {%- for key, item in links|filter((value, key) => key != 'comment-add') -%}
       <li{{ item.attributes.addClass(key|clean_class).removeAttribute('hreflang') }}>
         {%- if item.link -%}
           {{ item.link }}
