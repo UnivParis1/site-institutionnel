@@ -76,7 +76,7 @@ class PickupContentAccessCheck implements AccessInterface, PickupContentAccessCh
       'account' => $account,
     ];
     $pickup_content_access = new PickupContentAccessEvent($access, $context);
-    $this->eventDispatcher->dispatch(MicroSitePickupEvents::PICKUP_CONTENT_ACCESS_CHECK, $pickup_content_access);
+    $this->eventDispatcher->dispatch($pickup_content_access, MicroSitePickupEvents::PICKUP_CONTENT_ACCESS_CHECK);
     $access = $pickup_content_access->getAccess();
     return $access;
   }
