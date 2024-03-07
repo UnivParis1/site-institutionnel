@@ -8,7 +8,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\micro_multilingue\LanguageValidatorInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Drupal\Core\Routing\RouteMatch;
 use Drupal\Core\Url;
@@ -54,10 +54,10 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
   /**
    * Kernel request event handler.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Response event.
    */
-  public function onKernelRequest(GetResponseEvent $event) {
+  public function onKernelRequest(RequestEvent $event) {
     $request = $event->getRequest();
 
     $default_language = $this->languageManager->getDefaultLanguage();
