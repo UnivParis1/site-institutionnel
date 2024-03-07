@@ -170,7 +170,7 @@ class CentresUp1Form extends FormBase {
         </div>";
     }
     $block_info .= "</div>";
-    $img = file_create_url($image_url);
+    $img = \Drupal::service('file_url_generator')->generateAbsoluteString($image_url);
     $htmlCentre .= "<div class='image-centre mask no-hover relative-wrapper'>
         <img src='$img' />
     </div>";

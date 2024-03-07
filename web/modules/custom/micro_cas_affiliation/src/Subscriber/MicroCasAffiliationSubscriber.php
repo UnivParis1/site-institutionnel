@@ -84,10 +84,11 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
             $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
             // on recherche les sites dont le champ groups contient le code recupéré dans le cn
             $siteIds = $siteStorage->getQuery()
-              ->condition('status', TRUE)
+		->condition('status', TRUE)
+		->accessCheck(FALSE)
               // TODO s'assurer qu'on ne recupere pas de "mauvais" groupes
-              ->condition('groups', $group, 'CONTAINS')
-              ->execute();
+             	 ->condition('groups', $group, 'CONTAINS')
+              	->execute();
             $sites = $siteStorage->loadMultiple($siteIds);
             // TODO supprimer les roles pour les remplacer ?
             // pour chaque minisite on affecte un role drupal ainsi qu'un role pour le minisite

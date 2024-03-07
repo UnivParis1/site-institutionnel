@@ -788,8 +788,9 @@ class WsGroupsController extends ControllerBase
     $users_ws_groups = $this->wsGroupsService->getAllUsers();
 
     $ids = \Drupal::entityQuery('user')
-      ->condition('roles', 'enseignant_doctorant')
-      ->execute();
+	->condition('roles', 'enseignant_doctorant')
+	->accessCheck(FALSE)
+	->execute();
     $users = User::loadMultiple($ids);
 
     if (!empty($users_ws_groups) && !empty($users)) {
@@ -797,7 +798,8 @@ class WsGroupsController extends ControllerBase
         //If Drupal User doesn't exist in ldap, we disable his page_perso.
         $name = $user->get('name')->value;
         if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid')) === false) {
-          $query = \Drupal::entityQuery('node')
+		$query = \Drupal::entityQuery('node')
+			->accessCheck(FALSE)
             ->condition('type', 'page_personnelle')
             ->condition('uid', $user->id());
           $result = $query->execute();
@@ -833,7 +835,8 @@ class WsGroupsController extends ControllerBase
 
     if ($user) {
       $query = \Drupal::entityQuery('node')
-        ->condition('type', 'page_personnelle')
+	      ->condition('type', 'page_personnelle')
+      ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
@@ -879,7 +882,8 @@ class WsGroupsController extends ControllerBase
     $fields = [];
     if ($user) {
       $query = \Drupal::entityQuery('node')
-        ->condition('type', 'page_personnelle')
+	      ->condition('type', 'page_personnelle')
+      ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $nids = $query->execute();
       if ($nids) {
