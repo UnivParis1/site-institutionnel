@@ -75,6 +75,9 @@
 {% set id = node.id() %}
 {% set htmlId = 'page-' ~ id %}
 
+<div id="breadcrumbs">
+  {{ drupal_block('system_breadcrumb_block') }}
+</div>
 <article{{ attributes.setAttribute('id', htmlId).addClass(classes) }}>
   <div class="grid-container">
     <div class="grid-x grid-margin-x">
@@ -91,9 +94,6 @@
       {{ changed }}
     </div>
   {% endif %}
-  <div id="breadcrumbs">
-    {{ drupal_block('system_breadcrumb_block') }}
-  </div>
   <div{{ content_attributes }}>
     {{ content }}
   </div>
