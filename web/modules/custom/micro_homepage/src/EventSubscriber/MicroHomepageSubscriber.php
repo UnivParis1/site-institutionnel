@@ -2,10 +2,10 @@
 
 namespace Drupal\micro_homepage\EventSubscriber;
 
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Drupal\micro_site\SiteNegotiatorInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**

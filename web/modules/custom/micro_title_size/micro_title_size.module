@@ -40,6 +40,8 @@ function micro_title_size_preprocess_block__system_branding_block(&$variables){
   $url_generator = \Drupal::service('file_url_generator');
   if ($site = $negotiator->getActiveSite()) {
     $site = \Drupal::service('entity.repository')->getTranslationFromContext($site);
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
     // Override the site logo.
     $variables['site_logo'] = '';
     /** @var \Drupal\file\FileInterface $file */
@@ -47,17 +49,15 @@ function micro_title_size_preprocess_block__system_branding_block(&$variables){
       /** @var \Drupal\Core\Image\Image $image */
       $image = \Drupal::service('image.factory')->get($file->getFileUri());
       if ($image->isValid()) {
-        $file_url =  $url_generator->generateAbsoluteString($image->getSource());
-        $variables['site_logo'] = $url_generator->generateString($file_url);
+        $variables['site_logo'] = $file_url_generator->generateString($image->getSource());
       }
     }
     // Override the site name and slogan.
     $variables['site_name'] = (empty($site->get('field_complete_name')->value)?$site->getName():$site->get('field_complete_name')->value);
     $variables['site_slogan'] = $site->getSlogan();
 
-    if (empty($variables['site_logo'])){
-      $file_url =  $url_generator->generateAbsoluteString(theme_get_setting('logo.url'));
-      $variables['site_logo'] = $url_generator->generateString($file_url);
+    if (empty($variables['site_logo'])) {
+      $variables['site_logo'] = $file_url_generator->generateString(theme_get_setting('logo.url'));
     }
   }
 

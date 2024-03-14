@@ -3,7 +3,7 @@
 namespace Drupal\micro_site_pickup\Event;
 
 use Drupal\Core\Access\AccessResultInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Defines the pickup content access event.

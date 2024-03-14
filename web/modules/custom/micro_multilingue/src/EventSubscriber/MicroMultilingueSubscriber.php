@@ -2,13 +2,13 @@
 
 namespace Drupal\micro_multilingue\EventSubscriber;
 
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Drupal\Console\Bootstrap\Drupal;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\micro_multilingue\LanguageValidatorInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Drupal\Core\Routing\RouteMatch;
 use Drupal\Core\Url;
