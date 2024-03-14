@@ -84,14 +84,14 @@
   {{ content.field_event_address }}
 {% endset %}
 
-<div id="breadcrumbs">
-  {{ drupal_block('system_breadcrumb_block') }}
-</div>
 <article{{ attributes.addClass(classes).removeAttribute('role') }}>
   <div class="img-container section-sep small">
     {{ content.field_media }}
   </div>
   <div class="grid-container field-sep">
+    <div id="breadcrumbs">
+      {{ drupal_block('system_breadcrumb_block') }}
+    </div>
     <div class="top-infos">
       <div class="categ-wrapper infos-entry semi-infos-sep">
         <div class="tag categ-style"> {{ content.field_event_type.0 }} </div>
