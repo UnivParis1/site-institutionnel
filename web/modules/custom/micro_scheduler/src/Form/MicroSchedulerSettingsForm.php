@@ -31,7 +31,20 @@ class MicroSchedulerSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
+  $form['sender'] = [
+    '#type' => 'email',
+    '#title' => $this->t('E-mail of the sender'),
+    '#description' => $this->t('E-mail address from which the mails will be sent'),
+    '#default_value' => $this->config('micro_scheduler.settings')->get('sender'),
+    '#required' => TRUE
+  ];
+  $form['reply_to'] = [
+    '#type' => 'email',
+    '#title' => $this->t('Reply-to address'),
+    '#description' => $this->t('E-mail address to which the recipient will be able to reply'),
+    '#default_value' => $this->config('micro_scheduler.settings')->get('reply_to'),
+    '#required' => TRUE
+  ];
     $form['default_life_time'] = [
       '#type' => 'number',
       '#title' => $this->t('Default Life Time'),
@@ -196,6 +209,8 @@ To postpone this release, you must contact your administrator.')),
 
 
     $this->config('micro_scheduler.settings')
+      ->set('sender', $form_state->getValue('sender'))
+      ->set('reply_to', $form_state->getValue('reply_to'))
       ->set('default_life_time', $form_state->getValue('default_life_time'))
       ->set('notification_timing',  $form_state->getValue('notification_timing'))
       ->set('unpublish_mail_admin.admin_roles', $form_state->getValue('admin_roles'))
