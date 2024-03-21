@@ -235,6 +235,37 @@
             }
           }
         }
+	&.pager {
+          ul.pager__items {
+            li {
+		     &:first-child {
+              margin-right: 0;
+            }
+            &:last-child {
+              margin-left: 0;
+            }
+              a {
+                color: $text-main-color;
+                background: $background-light-gray;
+                border-radius: 50rem;
+                padding: rem-calc(4px 12px);
+                font-size: rem-calc(13px);
+
+                &:hover {
+                  color: $gold-p1ps;
+                  background: none;
+                }
+              }
+
+              &.is-active {
+                a {
+                  color: $gold-p1ps;
+                  background: none;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
