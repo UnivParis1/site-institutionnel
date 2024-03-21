@@ -1,6 +1,6 @@
 uuid: 32526493-34c6-4978-b2b0-ada5bf1dd613
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
@@ -16,97 +16,178 @@ elements: |-
   nom:
     '#type': textfield
     '#title': Nom
-    '#description': '<p>Votre nom de famille</p>'
+    '#description_display': before
     '#placeholder': 'Votre nom de famille'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': Prénom
-    '#description': '<p>Votre prénom d''usage</p>'
+    '#description_display': before
     '#placeholder': 'Votre prénom d''usage'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  filiere:
-    '#type': textfield
-    '#title': Filière
-    '#description': '<p>Votre domaine d''études</p>'
-    '#placeholder': 'Économie, Sciences sociales, Histoire, MIASHS...'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  niveau:
-    '#type': textfield
-    '#title': Niveau
-    '#description': '<p>Votre niveau d''études</p>'
-    '#placeholder': 'Licence 1, Master 2, Doctorat...'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
     '#title': Courriel
-    '#description': '<p>Votre adresse courriel</p>'
+    '#description_display': before
+    '#placeholder': 'par exemple : monadresse@courriel.com'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  filiere:
+    '#type': textfield
+    '#title': 'Niveau d''études et filière'
+    '#description': '<p>Votre année et domaine d''études</p>'
+    '#description_display': before
+    '#placeholder': 'par exemple : L1 MIASHS, M2 Sciences sociales, Doctorat en Histoire, ...'
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  horizontal_rule_01:
+    '#type': webform_horizontal_rule
+  formation:
+    '#type': checkboxes
+    '#title': 'Type d''accompagnement'
+    '#multiple': 2
+    '#multiple_error': 'Vous ne pouvez cocher qu''une seule case'
+    '#help': '<p>Un seul choix possible</p>'
+    '#title_display': inline
+    '#help_display': title_after
+    '#options':
+      Individuel: 'Individuel -- Vous demandez une session d''accompagnement pour vous uniquement'
+      'En groupe': 'En groupe -- Vous demandez une session d''accompagnement pour un groupe de 2 à 4 personnes maximum'
+    '#options_display': side_by_side
+    '#required': true
+    '#options__properties': ''
   nom_et_adresse_courriel_des_autres_participant_es:
-    '#type': textarea
+    '#type': textfield
     '#title': 'Nom et adresse courriel des autres participant·es'
     '#multiple': 3
     '#description': '<p>Précisez le nom, prénom et adresse courriel des autres participant·es (3 personnes maximum)</p>'
-    '#placeholder': |-
-      Nom, Prénom, adresse courriel
-      Nom, Prénom, adresse courriel
-      Nom, Prénom, adresse courriel
+    '#description_display': before
+    '#placeholder': 'Nom, Prénom, monadresse@courriel.com'
     '#states':
       visible:
-        ':input[name="formation[en groupe]"]':
+        ':input[name="formation[En groupe]"]':
           checked: true
       required:
-        ':input[name="formation[en groupe]"]':
+        ':input[name="formation[En groupe]"]':
           checked: true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  formation:
-    '#type': checkboxes
-    '#title': Formation
-    '#multiple': 2
-    '#multiple_error': 'Vous ne pouvez cocher qu''une seule case'
-    '#title_display': inline
-    '#description_display': after
-    '#options':
-      individuelle: 'individuelle -- Vous demandez une session d''accompagnement pour vous uniquement'
-      'en groupe': 'en groupe -- Vous demandez une session d''accompagnement pour un groupe de 2 à 4 personnes maximum'
-    '#required': true
-    '#options__properties': ''
-  disponibilites_pour_le_rendez_vous:
-    '#type': datelist
-    '#title': 'Disponibilités pour le rendez-vous'
+    '#multiple__sorting': false
+    '#multiple__add_more': false
+    '#multiple__add_more_input': false
+  horizontal_rule:
+    '#type': webform_horizontal_rule
+  disponibilites_pour_un_rendez_vous:
+    '#type': date
+    '#title': 'Vos disponibilités pour un rendez-vous'
+    '#multiple': true
     '#description': |-
-      <p>Saisissez <u>toutes</u> vos disponibilités pour que nous puissions vous proposer une date de rendez-vous.<br />
+      <div class="description">
+      <div class="webform-element-description" id="edit-dates-pour-un-rendez-vous--description">
+      <p>Possibilités de rendez-vous <strong>du lundi au vendredi de 10h à 12h et de 14h à 18h</strong> en période d'ouverture de la bibliothèque.</p>
+
+      <p>Saisissez <u>toutes</u> vos disponibilités pour que nous puissions vous proposer un rendez-vous.<br />
       N'hésitez pas à saisir le maximum de dates pour avoir plus de chances d'avoir un créneau rapidement.</p>
+      </div>
+      </div>
+    '#help': '<p>Les boutons + et - à droite permettent d''ajouter ou supprimer un créneau.</p>'
+    '#description_display': before
+    '#help_display': title_before
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#multiple__sorting': false
+    '#multiple__add_more': false
+    '#multiple__add_more_input': false
     '#date_days':
       - '1'
       - '2'
       - '3'
       - '4'
       - '5'
-    '#date_part_order':
-      - month
-      - day
-      - ampm
-    '#date_year_range': '2024:2050'
+    '#date_date_format': ''
   formation_en:
     '#type': checkboxes
-    '#title': 'Formation en'
+    '#title': 'Indiquez votre préférence de modalité de formation'
     '#multiple': 2
-    '#description': '<p>Choisissez votre modalité de formation : en présentiel à la bibliothèque ou en visio. Un seul choix possible.</p>'
+    '#help': '<p>Un seul choix possible</p>'
     '#title_display': inline
-    '#description_display': after
+    '#description_display': before
+    '#help_display': title_after
     '#options':
-      présentiel: 'présentiel -- Vous demandez une session d''accompagnement dans une salle de la bibliothèque'
-      visio: 'visio -- Vous demandez une session d''accompagnement en ligne, nous vous enverrons un lien de connexion avant le rendez-vous'
+      présentiel: 'En présentiel -- Vous demandez une session d''accompagnement dans une salle de la bibliothèque'
+      visio: 'En visio -- Vous demandez une session d''accompagnement en ligne, nous vous enverrons un lien de connexion avant le rendez-vous'
+    '#options_display': side_by_side
     '#required': true
     '#options__properties': ''
+  indiquez_la_bibliotheque_dans_laquelle_vous_souhaitez_vous_rendr:
+    '#type': select
+    '#title': 'Indiquez la bibliothèque dans laquelle vous souhaitez vous rendre'
+    '#help': '<p>Un seul choix possible</p>'
+    '#help_display': title_before
+    '#options':
+      'Bibliothèque de l''École des Arts de la Sorbonne': 'Bibliothèque de l''École des Arts de la Sorbonne'
+      'Bibliothèque Ernest-Lavisse': 'Bibliothèque Ernest-Lavisse'
+      'Bibliothèque François-Cuzin': 'Bibliothèque François-Cuzin'
+      'Bibliothèque Jean-Claude-Colliard': 'Bibliothèque Jean-Claude-Colliard'
+      'Bibliothèque Pierre-Mendès-France': 'Bibliothèque Pierre-Mendès-France'
+    '#states':
+      visible:
+        ':input[name="formation_en[présentiel]"]':
+          checked: true
+      required:
+        ':input[name="formation_en[présentiel]"]':
+          checked: true
+  horizontal_rule_02:
+    '#type': webform_horizontal_rule
+  thematique_de_la_formation:
+    '#type': webform_select_other
+    '#title': 'Thématique de la formation'
+    '#description': |-
+      <p>Choisissez une thématique de formation parmi cette liste, ou signalez-nous ce dont vous avez besoin en cliquant sur "Autre..."<br />
+      Si vous êtes doctorant·e, <a href="https://bibliotheques.pantheonsorbonne.fr/formation/cycladoc">les formations Cycladoc</a> peuvent aussi répondre à certaines de vos demandes, n'hésitez pas !</p>
+    '#description_display': before
+    '#options':
+      'Débuter une recherche': 'Débuter une recherche'
+      'Trouver un document dans Mikado': 'Trouver un document dans Mikado'
+      '« SOS, c’est pas dans Mikado ! »': '« SOS, c’est pas dans Mikado ! »'
+      'Les ressources numériques en économie-gestion': 'Les ressources numériques en économie-gestion'
+      'Les ressources numériques en histoire de l’art': 'Les ressources numériques en histoire de l’art'
+      'La presse en ligne': 'La presse en ligne'
+      Zotero: Zotero
+      Antidote: Antidote
+      'La prise de notes': 'La prise de notes'
+      'Organiser ses révisions de partiel': 'Organiser ses révisions de partiel'
+      'Consulter une thèse': 'Consulter une thèse'
+      'Mon parcours de thèse : après avoir suivi Cycladoc': 'Mon parcours de thèse : après avoir suivi Cycladoc'
+    '#other__placeholder': 'Par exemple : s''exprimer à l''oral, méthodologie de la fiche de lecture, ...'
+  detaillez_votre_demande:
+    '#type': textarea
+    '#title': 'Détaillez votre demande'
+    '#description': '<p>Vous pouvez préciser la thématique que vous souhaitez aborder, si nécessaire, et/ou vos questions et vos attentes.</p>'
+    '#description_display': before
+    '#placeholder': 'Dites-nous tout !'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  votre_sujet_de_recherche:
+    '#type': textarea
+    '#title': 'Votre sujet de recherche'
+    '#description': '<p>Si nécessaire</p>'
+    '#description_display': before
+    '#placeholder': 'Par exemple : Le couvre-chef en Haute-Bretagne et dans le Berry au XVIIIe siècle'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'Je comprends et accepte les conditions de ma demande d''inscription à FormaFlex, décrites ci-dessus'
+    '#help_display': title_before
+    '#required': true
+    '#terms_content': '<p>Les conditions sont décrites en haut de cette page : nombre de participant·es, nature de l''accompagnement, modalités de prise de rendez-vous et de réponse de l''équipe formatrice, créneaux disponibles.</p>'
+  info_rgpd:
+    '#type': webform_message
+    '#message_message': '<p>➜&nbsp;<em>Information sur le <a href="https://donnees-personnelles.pantheonsorbonne.fr/">traitement des données personnelles à l''université</a></em></p>'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Envoyer la demande d''inscription'
 css: ''
 javascript: ''
 settings:
@@ -119,7 +200,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -213,8 +294,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: ''
+  confirmation_title: 'Votre demande a bien été envoyée !'
+  confirmation_message: "<p><img alt=\"Logo du programme FormaFlex\" data-align=\"left\" data-entity-type=\"file\" data-entity-uuid=\"4b754776-f775-4a34-8944-96bbd37d6cb6\" height=\"255\" src=\"/sites/default/files/inline-images/Logo_VDef_marge_0.png\" width=\"344\" /><strong>Merci pour votre confiance.</strong></p>\r\n\r\n<p>Vous recevrez un courriel de confirmation automatique, puis nous vous contacterons dans un délai maximal de 72h pour répondre à votre demande.</p>\r\n\r\n<p>À très bientôt !</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -290,5 +371,79 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  confirmation_d_envoi_du_formulaire_pour_les_usagers:
+    id: email
+    handler_id: confirmation_d_envoi_du_formulaire_pour_les_usagers
+    label: 'Confirmation d''envoi du formulaire pour les usagers'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ne-pas-repondre@univ-paris1.fr
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Demande de rendez-vous FormaFlex - Confirmation'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande de rendez-vous FormaFlex a bien été prise en compte.</p>\r\n\r\n<p>Nous reviendrons vers vous dans un délai maximal de 72 heures pour apporter une réponse à votre demande.</p>\r\n\r\n<p><em>Ceci est un message automatique.</em></p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'équipe de formateurs et formatrices du Service commun de la documentation</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  notification_d_envoi_de_formulaire_formaflex_pour_le_sfu:
+    id: email
+    handler_id: notification_d_envoi_de_formulaire_formaflex_pour_le_sfu
+    label: 'Notification d''envoi de formulaire FormaFlex pour le SFU'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: formationscd@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'FormaFlex - Nouvelle demande'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }
