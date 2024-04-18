@@ -671,32 +671,28 @@ class WsGroupsController extends ControllerBase
   private function formatTrombiData($data_to_get, $user, $settings) {
     $drupal_user = user_load_by_name($user['uid']);
     $result = '';
-    switch ($data_to_get) {
-      case 'skills' :
-        if ($settings['skills_lists'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+    $pp = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+    $page_perso = reset($pp);
+
+    if ($page_perso) {
+      switch ($data_to_get) {
+        case 'skills' :
+          if ($settings['skills_lists']) {
             if (!empty($terms = $page_perso->get('field_skills')->referencedEntities())) {
               foreach ($terms as $term) {
                 $result .= '<li>' . $term->getName() . '</li>';
               }
             }
+
           }
-        }
-        break;
-      case 'skillsIA' :
-        if ($settings['skills_lists'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+          break;
+        case 'skillsIA' :
+          if ($settings['skills_lists']) {
             $ia_skills = $page_perso->get('field_ia_skills')->getString();
             $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
-            if(!empty($ia_skills)) {
+            if (!empty($ia_skills)) {
               $selected_skills = explode(', ', $ia_skills);
               $result_skills = [];
               foreach ($selected_skills as $a_skill) {
@@ -704,83 +700,76 @@ class WsGroupsController extends ControllerBase
               }
               $result = implode('', $result_skills);
             }
+
           }
-        }
-        break;
-      case 'aboutIA' :
-        if ($settings['about_me'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+          break;
+        case 'aboutIA' :
+          if ($settings['about_me'] ) {
             $result = (!empty($page_perso->get('field_short_bio')->value)) ? $page_perso->get('field_short_bio')->value : '';
+
           }
-        }
-        break;
-      case 'about' :
-        if ($settings['about_me'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+          break;
+        case 'about' :
+          if ($settings['about_me']) {
             $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
           }
-        }
-        break;
-      case 'research' :
-        if ($settings['supannEntite_research'] == 1) {
-          $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_filter($affectation, function ($item) {
-            return $item['businessCategory'] == 'research';
-          });
-          if (!empty($key_search)) {
-            $key_search = reset($key_search);
-            $result = $key_search[0]['description'];
+          break;
+        case 'research' :
+          if ($settings['supannEntite_research'] == 1) {
+            $affectation = $user['supannEntiteAffectation-all'];
+            $key_search = array_filter($affectation, function ($item) {
+              return $item['businessCategory'] == 'research';
+            });
+            if (!empty($key_search)) {
+              $key_search = reset($key_search);
+              $result = $key_search[0]['description'];
+            }
           }
-        }
-        break;
-      case 'pedagogy' :
-        if ($settings['supannEntite_pedagogy'] == 1) {
-          $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_filter($affectation, function ($item) {
-            return $item['businessCategory'] == 'pedagogy';
-          });
-          if (!empty($key_search)) {
-            $key_search = reset($key_search);
-            $result = $key_search['description'];
+          break;
+        case 'pedagogy' :
+          if ($settings['supannEntite_pedagogy'] == 1) {
+            $affectation = $user['supannEntiteAffectation-all'];
+            $key_search = array_filter($affectation, function ($item) {
+              return $item['businessCategory'] == 'pedagogy';
+            });
+            if (!empty($key_search)) {
+              $key_search = reset($key_search);
+              $result = $key_search['description'];
+            }
           }
-        }
-        break;
-      case 'doctoralSchool' :
-        if ($settings['supannEntite_doctoralSchool'] == 1) {
-          $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_filter($affectation, function ($item) {
-            return $item['businessCategory'] == 'doctoralSchool';
-          });
-          if (!empty($key_search)) {
-            $key_search = reset($key_search);
-            $result = $key_search['description'];
+          break;
+        case 'doctoralSchool' :
+          if ($settings['supannEntite_doctoralSchool'] == 1) {
+            $affectation = $user['supannEntiteAffectation-all'];
+            $key_search = array_filter($affectation, function ($item) {
+              return $item['businessCategory'] == 'doctoralSchool';
+            });
+            if (!empty($key_search)) {
+              $key_search = reset($key_search);
+              $result = $key_search['description'];
+            }
           }
-        }
-        break;
-      case 'role' :
-        if ($settings['supannRole'] == 1) {
-          if(!empty($user['supannRoleEntite-all'])) {
-            $role = $user['supannRoleEntite-all'][0];
-            $result = $role['role'] . ' ' . $role['structure']['description'];
+          break;
+        case 'role' :
+          if ($settings['supannRole'] == 1) {
+            if (!empty($user['supannRoleEntite-all'])) {
+              $role = $user['supannRoleEntite-all'][0];
+              $result = $role['role'] . ' ' . $role['structure']['description'];
+            }
           }
-        }
-      case 'discipline' :
-        if ($settings['discipline_enseignement'] == 1) {
-          if(!empty($user['info'])) {
-            $result = implode(', ', $user['info']);
+          break;
+        case 'discipline' :
+          if ($settings['discipline_enseignement'] == 1) {
+            if (!empty($user['info'])) {
+              $result = implode(', ', $user['info']);
+            }
           }
-        }
-      default:
-        break;
+          break;
+        default:
+          break;
+      }
     }
+
     return $result;
   }
 
