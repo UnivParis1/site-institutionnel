@@ -103,3 +103,14 @@ function up1_pages_personnelles_update_8003(&$sandbox) {
   $definition_manager = \Drupal::entityDefinitionUpdateManager();
   $definition_manager->installFieldStorageDefinition('supannConsentement', 'site', 'site', $supannConsentement);
 }
+
+function up1_pages_personnelles_updates_8004(){
+  $trombi_students_enable = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Enable trombinoscope for students'))
+    ->setDescription(t('List of all students displayed as trombinoscope.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition_manager->installFieldStorageDefinition('trombi_ec_enable', 'site', 'site', $trombi_students_enable);
+}
