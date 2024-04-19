@@ -7,7 +7,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\piwik_reports\PiwikData;
+use Drupal\matomo_reports\MatomoData;
 
 /**
  * Implements hook_help().
@@ -62,14 +62,14 @@ function micro_reports_preprocess_piwik_reports(&$variables) {
     }
   }
   else {
-    $token_auth = PiwikData::getToken();
+    $token_auth = MatomoData::getToken();
 
     if (!$token_auth) {
       $_SESSION['piwik_reports_site'] = '';
       $variables['data_url'][0]['empty_text'] = t('You cannot access any data on the selected Piwik server. Please check authentication string and permissions with your Piwik server administrator.');
     }
     else {
-      $sites = PiwikData::getSites($token_auth);
+      $sites = MatomoData::getSites($token_auth);
       if (!$sites) {
         $variables['data_url'][0]['empty_text'] = t('You cannot access any data on the selected Piwik server. Please check with your Drupal administrator for allowed sites.');
       }
