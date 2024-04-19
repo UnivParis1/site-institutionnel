@@ -36,6 +36,10 @@ function p1ps2019_preprocess_html(&$variables)
     if (preg_match('/node\/36841/', $system_path) && $site_id == 115) {
       $variables['web_component'] = TRUE;
     }
+    $variables['custom_favicon'] = FALSE;
+    if ( !empty($site->getFavicon()) ) {
+      $variables['custom_favicon'] = TRUE;
+    }
   }
   $variables['page_mini_site'] = $page_mini_site;
 

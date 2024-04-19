@@ -155,6 +155,15 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
       ])
       ->setDisplayConfigurable('form', TRUE);
   }
+  $fields['trombi_students_enable'] = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Enable trombinoscope for students'))
+    ->setDescription(t('List of all students displayed as trombinoscope.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE)
+    ->setDisplayOptions('form', [
+      'weight' => 100,
+    ])
+    ->setDisplayConfigurable('form', TRUE);
 
   return $fields;
 }
@@ -225,6 +234,9 @@ function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface 
 
   if (isset($form['doc_enabled'])) {
     $form['doc_enabled']['#group'] = 'staff_doc';
+  }
+  if (isset($form['trombi_students_enable'])) {
+    $form['trombi_students_enable']['#group'] = 'staff_doc';
   }
 }
 

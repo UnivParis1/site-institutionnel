@@ -1,21 +1,18 @@
-uuid: fd52f77a-fdea-461a-9c18-93d16e98d74e
+uuid: b427cad9-8063-4b25-949d-dd613d88b679
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.body
-    - search_api.index.sherlock
+    - search_api.index.watson
   module:
     - better_exposed_filters
     - search_api
-    - text
-    - views_infinite_scroll
 id: resultats_de_recherche
 label: 'Résultats de recherche'
 module: views
 description: ''
 tag: ''
-base_table: search_api_index_sherlock
+base_table: search_api_index_watson
 base_field: search_api_id
 display:
   default:
@@ -26,16 +23,16 @@ display:
     display_options:
       title: 'Résultats de recherche'
       fields:
-        body:
-          id: body
-          table: search_api_index_sherlock
-          field: body
+        aggregated_fields_event:
+          id: aggregated_fields_event
+          table: search_api_index_watson
+          field: aggregated_fields_event
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: null
           entity_field: null
-          plugin_id: search_api_field
+          plugin_id: search_api
           label: ''
           exclude: false
           alter:
@@ -77,36 +74,22 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
+          link_to_item: false
+          use_highlighting: false
           multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
+          multi_separator: ', '
       pager:
-        type: infinite_scroll
+        type: full
         options:
           offset: 0
-          items_per_page: 25
+          items_per_page: 15
           total_pages: null
           id: 0
           tags:
-            next: ››
-            previous: ‹‹
+            next: ' ›'
+            previous: '‹ '
+            first: '« '
+            last: »
           expose:
             items_per_page: false
             items_per_page_label: 'Éléments par page'
@@ -115,10 +98,7 @@ display:
             items_per_page_options_all_label: '- Tout -'
             offset: false
             offset_label: Décalage
-          views_infinite_scroll:
-            button_text: 'Afficher plus'
-            automatically_load_content: true
-            initially_load_all_pages: false
+          quantity: 9
       exposed_form:
         type: bef
         options:
@@ -142,12 +122,25 @@ display:
               secondary_label: 'Options avancées'
               secondary_open: false
               reset_button_always_show: false
+            filter:
+              search_api_fulltext:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: ''
+                  collapsible: false
+                  is_secondary: false
       access:
         type: none
         options: {  }
       cache:
-        type: none
-        options: {  }
+        type: search_api_time
+        options:
+          results_lifespan: 300
+          results_lifespan_custom: 0
+          output_lifespan: 0
+          output_lifespan_custom: 0
       empty:
         area:
           id: area
@@ -165,47 +158,8 @@ display:
       sorts:
         search_api_relevance:
           id: search_api_relevance
-          table: search_api_index_sherlock
+          table: search_api_index_watson
           field: search_api_relevance
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        field_news_date:
-          id: field_news_date
-          table: search_api_index_sherlock
-          field: field_news_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        field_event_date:
-          id: field_event_date
-          table: search_api_index_sherlock
-          field: field_event_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        field_publishing_date:
-          id: field_publishing_date
-          table: search_api_index_sherlock
-          field: field_publishing_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -219,7 +173,7 @@ display:
       filters:
         search_api_fulltext:
           id: search_api_fulltext
-          table: search_api_index_sherlock
+          table: search_api_index_watson
           field: search_api_fulltext
           relationship: none
           group_type: group
@@ -231,14 +185,14 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Rechercher
+            label: 'Recherche en texte intégral'
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: text
-            required: false
+            required: true
             remember: false
             multiple: false
             remember_roles:
@@ -268,221 +222,10 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           parse_mode: terms
-          min_length: null
+          min_length: 3
           fields:
-            - body
-            - collection_name
-            - eb_accordion_title
-            - eb_bp_text
-            - eb_field_title
-            - eb_header
-            - eb_link
-            - eb_simple_text
-            - eb_subtitle
-            - eb_tab_title
-            - eb_text
-            - event_type_name
-            - field_collection_term
-            - field_complete_name
-            - field_event_type
-            - field_isbn
-            - field_lead
-            - field_legende
-            - field_news_topic
-            - field_paragraphs
-            - field_publisher_term
-            - field_short_desc
-            - field_simple_text
-            - name
-            - news_topics_name
-            - p_accordion_title
-            - p_bp_text
-            - p_field_title
-            - p_header
-            - p_link
-            - p_subtitle
-            - p_tab_title
-            - p_text
-            - publisher_name
-            - sub_title
-            - subtitle
+            - rendered_page
             - title
-            - type
-            - url
-        status:
-          id: status
-          table: search_api_index_sherlock
-          field: status
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_boolean
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        id:
-          id: id
-          table: search_api_index_sherlock
-          field: id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_string
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '2'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        id_1:
-          id: id_1
-          table: search_api_index_sherlock
-          field: id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_string
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '3'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        id_2:
-          id: id_2
-          table: search_api_index_sherlock
-          field: id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_string
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '59'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
       style:
         type: default
       row:
@@ -494,9 +237,11 @@ display:
               news: search_index
               offer: search_index
               page: search_index
+              page_personnelle: search_index
               press: search_index
               publication: search_index
               second_level_pages: search_index
+              viva: search_index
       query:
         type: search_api_query
         options:
@@ -525,15 +270,13 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.body'
-        - 'config:search_api.index.sherlock'
-        - 'search_api_list:sherlock'
+        - 'config:search_api.index.watson'
+        - 'search_api_list:watson'
   page_1:
     id: page_1
     display_title: Page
@@ -544,14 +287,18 @@ display:
       display_extenders: {  }
       path: resultats-de-recherche
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.body'
-        - 'config:search_api.index.sherlock'
-        - 'search_api_list:sherlock'
+        - 'config:facets.facet.event'
+        - 'config:facets.facet.news_topics'
+        - 'config:facets.facet.publication_type'
+        - 'config:facets.facet.type'
+        - 'config:search_api.index.watson'
+        - 'config:views.view.resultats_de_recherche'
+        - search-results
+        - 'search_api_list:watson'
