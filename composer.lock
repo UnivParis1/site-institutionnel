@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10daabd5bf0d363dd0f9daef371940fb",
+    "content-hash": "1f71c1807fff64147e8f48b89aad14f9",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5683,6 +5683,121 @@
             "support": {
                 "source": "https://git.drupal.org/project/geolocation.git",
                 "issues": "https://www.drupal.org/project/issues/geolocation"
+            }
+        },
+        {
+            "name": "drupal/helpdesk_integration",
+            "version": "1.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/helpdesk_integration.git",
+                "reference": "1.1.10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/helpdesk_integration-1.1.10.zip",
+                "reference": "1.1.10",
+                "shasum": "ad917020d86f4261fc304c1901e51fe9dcf61c00"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10",
+                "php": ">=7.2"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.1.10",
+                    "datestamp": "1688039294",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9 || ^10"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "danielspeicher",
+                    "homepage": "https://www.drupal.org/user/3621778"
+                },
+                {
+                    "name": "jurgenhaas",
+                    "homepage": "https://www.drupal.org/user/168924"
+                }
+            ],
+            "description": "Helpdesk integration base module for several platform providers.",
+            "homepage": "https://www.drupal.org/project/helpdesk_integration",
+            "keywords": [
+                "Drupal",
+                "Helpdesk",
+                "Issue"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/helpdesk_integration"
+            }
+        },
+        {
+            "name": "drupal/helpdesk_zammad",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/helpdesk_zammad.git",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/helpdesk_zammad-1.0.1.zip",
+                "reference": "1.0.1",
+                "shasum": "6847e0c35b1f592f5dd2364b3c13e39df0c5b06a"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9",
+                "drupal/helpdesk_integration": "^1.0",
+                "zammad/zammad-api-client-php": "^1.5"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.1",
+                    "datestamp": "1599814593",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "danielspeicher",
+                    "homepage": "https://www.drupal.org/user/3621778"
+                },
+                {
+                    "name": "jurgenhaas",
+                    "homepage": "https://www.drupal.org/user/168924"
+                }
+            ],
+            "description": "Helpdesk integration module for platform provider Zammad.",
+            "homepage": "https://www.drupal.org/project/helpdesk_zammad",
+            "keywords": [
+                "Drupal",
+                "Helpdesk",
+                "Issue",
+                "Zammad"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/helpdesk_zammad"
             }
         },
         {
@@ -17524,6 +17639,55 @@
             },
             "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
+        },
+        {
+            "name": "zammad/zammad-api-client-php",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zammad/zammad-api-client-php.git",
+                "reference": "912d494d40eece3f7dd42cc93a4f9052101c1f5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zammad/zammad-api-client-php/zipball/912d494d40eece3f7dd42cc93a4f9052101c1f5c",
+                "reference": "912d494d40eece3f7dd42cc93a4f9052101c1f5c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=5.7 <8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZammadAPIClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Zammad GmbH",
+                    "homepage": "https://zammad.com"
+                }
+            ],
+            "description": "Zammad API client for PHP",
+            "homepage": "https://github.com/zammad/zammad-api-client-php",
+            "keywords": [
+                "api",
+                "zammad"
+            ],
+            "support": {
+                "issues": "https://github.com/zammad/zammad-api-client-php/issues",
+                "source": "https://github.com/zammad/zammad-api-client-php/tree/1.6.1"
+            },
+            "time": "2020-09-28T06:57:00+00:00"
         },
         {
             "name": "zaporylie/composer-drupal-optimizations",
