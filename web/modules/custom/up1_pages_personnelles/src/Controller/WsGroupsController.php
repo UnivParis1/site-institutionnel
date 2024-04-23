@@ -337,15 +337,13 @@ class WsGroupsController extends ControllerBase
 
   public function microStudentList($letter)
   {
-    $siteId = $this->getSiteId();
-    if (isset($siteId) && $this->getFieldDoc()) {
-      $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
-      $site = $siteStorage->load($siteId);
+    if ($this->getFieldDoc()) {
+      $site = $this->getCurrentSite();
       $group = $site->get('groups')->value;
       if ($this->getFieldTrombiStudents()) {
-        return $this->getStudentsTrombiList('list_as_trombinoscope', 'up1_pages_personnelles.micro_student_list', $group, $siteId);
+        return $this->getStudentsTrombiList('list_as_trombinoscope', 'up1_pages_personnelles.micro_student_list', $group, $site->id());
       } else {
-        return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $siteId);
+        return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $site->id());
       }
     } else {
       throw new NotFoundHttpException();
