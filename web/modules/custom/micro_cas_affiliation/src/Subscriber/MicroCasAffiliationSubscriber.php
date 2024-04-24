@@ -4,9 +4,13 @@ namespace Drupal\micro_cas_affiliation\Subscriber;
 
 
 use Drupal\cas\Event\CasPostLoginEvent;
+use Drupal\cas\Event\CasPreLoginEvent;
 use Drupal\cas\Service\CasHelper;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\up1_pages_personnelles\ComptexManager;
+use Drupal\user\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -15,6 +19,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * Class MicroCasAffiliationSubscriber.
  */
 class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
+
+  use StringTranslationTrait;
 
   /**
    * Drupal\Core\Config\ConfigFactoryInterface definition.
@@ -28,6 +34,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
    * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
+
   /**
    * Constructs a new MicroCasAffiliationSubscriber object.
    */
@@ -55,16 +62,45 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
    * @return array The event names to listen to
    */
   public static function getSubscribedEvents() {
-    $events[CasHelper::EVENT_POST_LOGIN][] = ['affectationRoleetMiniSite', -10];
+    $events[CasHelper::EVENT_PRE_LOGIN][] = ['affectationRoleetMiniSite', -10];
+    $events[CasHelper::EVENT_PRE_LOGIN][] = ['checkLogin', -20];
     return $events;
   }
 
   /**
-   * @param \Drupal\cas\Event\CasPostLoginEvent $casPostLoginEvent
+   * @param \Drupal\cas\Event\CasPreLoginEvent $casPreLoginEvent
    */
-  public function affectationRoleetMiniSite(CasPostLoginEvent $casPostLoginEvent){
+  public function checkLogin(CasPreLoginEvent $event){
+    /** @var \Drupal\micro_site\SiteNegotiatorInterface $negotiator */
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    $configMicroUser = \Drupal::config('micro_user.settings');
+    $account = $event->getAccount();
+    if ($site = $negotiator->getActiveSite()) {
+      if ($account instanceof AccountInterface) {
+        $site_users = $site->getAllUsersId();
+        if (!in_array($account->id(), $site_users)) {
+          $event->cancelLogin($this->t('Unrecognized username on this site.'));
+        }
+      }
+    }
+    else {
+      if ($account instanceof AccountInterface) {
+        if ($account->hasPermission('administer site entities')) {
+          return;
+        }
+        if ($configMicroUser->get('prevent_login_master_host') && !$account->hasPermission('login master host')) {
+          $event->cancelLogin($this->t('Unrecognized username on this site.'));
+        }
+      }
+    }
+  }
+
+  /**
+   * @param \Drupal\cas\Event\CasPreLoginEvent $casPreLoginEvent
+   */
+  public function affectationRoleetMiniSite(CasPreLoginEvent $casPreLoginEvent){
     // TODO verifier que l'evenement post login est declenché en cas de creation du user
-    $account = $casPostLoginEvent->getAccount();
+    $account = $casPreLoginEvent->getAccount();
     $memberOf = $account->get('field_group');
     if (!empty($memberOf) && !empty($memberOf[0]->value)) {
       $CNs = explode('cn=', $memberOf[0]->value);

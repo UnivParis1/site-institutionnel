@@ -2,12 +2,10 @@
 
 namespace Drupal\micro_homepage\EventSubscriber;
 
-use Drupal\Core\Messenger\MessengerInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Drupal\micro_site\SiteNegotiatorInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -35,10 +33,10 @@ class MicroHomepageSubscriber implements EventSubscriberInterface {
   /**
    * Kernel request event handler.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Response event.
    */
-  public function onKernelRequest(GetResponseEvent $event) {
+  public function onKernelRequest(RequestEvent $event) {
     $site = $event->getRequest()->get('site');
     if(!empty($site)&& !empty($site->get('homepage')->entity)) {
       /**
