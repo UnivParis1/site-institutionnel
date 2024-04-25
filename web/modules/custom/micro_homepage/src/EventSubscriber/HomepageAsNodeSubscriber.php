@@ -68,6 +68,8 @@ class HomepageAsNodeSubscriber implements EventSubscriberInterface {
       return;
     }
 
+   $route_name = \Drupal::routeMatch()->getRouteName();  
+
     // If we've got an exception, nothing to do here.
     if ($request->get('exception') != NULL) {
       return;
@@ -81,6 +83,7 @@ class HomepageAsNodeSubscriber implements EventSubscriberInterface {
     if (!$node instanceof NodeInterface) {
       return;
     }
+
     $query = $this->entityTypeManager->getStorage('site')->getQuery()->accessCheck(FALSE);
     $query->condition('status', TRUE);
     $query->condition('registered', TRUE);
@@ -89,8 +92,9 @@ class HomepageAsNodeSubscriber implements EventSubscriberInterface {
 
     if (!empty($site_ids)) {
       $site_id = reset($site_ids);
+      $route_name = \Drupal::routeMatch()->getRouteName();  
       $site = $this->entityTypeManager->getStorage('site')->load($site_id);
-      if ($site instanceof SiteInterface) {
+      if ($site instanceof SiteInterface && $route_name != 'entity.node.edit_form') {
         $url = $site->getSitePath();
         $response = new TrustedRedirectResponse($url);
         $event->setResponse($response);
