@@ -154,16 +154,17 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
         'weight' => -10,
       ])
       ->setDisplayConfigurable('form', TRUE);
+
+    $fields['trombi_students_enable'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Enable trombinoscope for students'))
+      ->setDescription(t('List of all students displayed as trombinoscope.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
   }
-  $fields['trombi_students_enable'] = BaseFieldDefinition::create('boolean')
-    ->setLabel(t('Enable trombinoscope for students'))
-    ->setDescription(t('List of all students displayed as trombinoscope.'))
-    ->setDefaultValue(FALSE)
-    ->setRevisionable(TRUE)
-    ->setDisplayOptions('form', [
-      'weight' => 100,
-    ])
-    ->setDisplayConfigurable('form', TRUE);
 
   return $fields;
 }

@@ -104,7 +104,7 @@ function up1_pages_personnelles_update_8003(&$sandbox) {
   $definition_manager->installFieldStorageDefinition('supannConsentement', 'site', 'site', $supannConsentement);
 }
 
-function up1_pages_personnelles_updates_8004(){
+function up1_pages_personnelles_update_8004(&$sandbox){
   $trombi_students_enable = BaseFieldDefinition::create('boolean')
     ->setLabel(t('Enable trombinoscope for students'))
     ->setDescription(t('List of all students displayed as trombinoscope.'))
@@ -112,5 +112,18 @@ function up1_pages_personnelles_updates_8004(){
     ->setRevisionable(TRUE);
 
   $definition_manager = \Drupal::entityDefinitionUpdateManager();
-  $definition_manager->installFieldStorageDefinition('trombi_ec_enable', 'site', 'site', $trombi_students_enable);
+  $definition_manager->installFieldStorageDefinition('trombi_students_enable', 'site', 'site', $trombi_students_enable);
+}
+
+function up1_pages_personnelles_update_8005(&$sandbox) {
+  $update_manager = \Drupal::entityDefinitionUpdateManager();
+  $update_manager->uninstallFieldStorageDefinition($update_manager->getFieldStorageDefinition('trombi_students_enable', 'site'));
+
+  $trombi_students_enable = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Enable trombinoscope for students'))
+    ->setDescription(t('List of all students displayed as trombinoscope.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $update_manager->installFieldStorageDefinition('trombi_students_enable', 'site', 'site', $trombi_students_enable);
 }
