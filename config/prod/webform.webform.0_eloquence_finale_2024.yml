@@ -1,4 +1,4 @@
-uuid: e5b08855-e0dd-4e18-bf57-522b4643868e
+uuid: 07ca1476-b2c9-4a83-9380-34a8a157145c
 langcode: fr
 status: closed
 dependencies: {  }
@@ -8,76 +8,46 @@ close: null
 uid: 5486
 template: false
 archive: false
-id: 0_ceremonie_des_docteurs_2022
-title: '0 - Cérémonie des docteurs 2022'
+id: 0_eloquence_finale_2024
+title: '0 - Eloquence finale 2024'
 description: ''
 category: ''
 elements: |-
-  markup_01:
-    '#type': webform_markup
-    '#markup': '<h2>Formulaire d''inscription :</h2>'
-  nom:
+  nom_:
     '#type': textfield
     '#title': 'Nom :'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
+    '#required_error': 'Nom est requis'
+  prenom_:
     '#type': textfield
     '#title': 'Prénom :'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel:
+    '#required_error': 'Prénom est requis'
+  courriel_:
     '#type': email
     '#title': 'Courriel :'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  ecole_doctorale_de_rattachement:
+    '#required_error': 'Courriel est requis'
+  vous_etes_:
     '#type': select
-    '#title': 'École doctorale de rattachement :'
+    '#title': 'Vous êtes :'
     '#options':
-      'Archéologie (ED 112)': 'Archéologie (ED 112)'
-      'Arts plastiques, esthétiques et sciences de l''art (ED 279)': 'Arts plastiques, esthétiques et sciences de l''art (ED 279)'
-      'Droit (ED 565)': 'Droit (ED 565)'
-      'Économie Panthéon-Sorbonne (ED 465)': 'Économie Panthéon-Sorbonne (ED 465)'
-      'Géographie de Paris (ED 434)': 'Géographie de Paris (ED 434)'
-      'Histoire (ED 113)': 'Histoire (ED 113)'
-      'Histoire de l''art (ED 441)': 'Histoire de l''art (ED 441)'
-      'Management Panthéon-Sorbonne (ED 559)': 'Management Panthéon-Sorbonne (ED 559)'
-      'Philosophie (ED 280)': 'Philosophie (ED 280)'
-      'Science politique (ED 119)': 'Science politique (ED 119)'
-    '#required': true
-  nom_du_directeur_de_these:
-    '#type': textfield
-    '#title': 'Nom du directeur de thèse :'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  sujet_de_these:
-    '#type': textfield
-    '#title': 'Sujet de thèse :'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  invite_1_nom_et_prenom_:
-    '#type': textfield
-    '#title': 'Invité 1 (nom et prénom) :'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  invite_2_nom_et_prenom_:
-    '#type': textfield
-    '#title': 'Invité 2 (nom et prénom) :'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
-    '#type': checkbox
-    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+      'Personnel de l’université ': 'Personnel de l’université '
+      Etudiant: Etudiant
+      'Public extérieur à l’université': 'Public extérieur à l’université'
     '#required': true
   captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-  markup:
-    '#type': webform_markup
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
+    '#type': checkbox
+    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
+    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
+    '#required': true
+    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis'
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#submit__label': ENVOYER
 css: ''
 javascript: ''
 settings:
@@ -93,7 +63,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: '<p>Le formulaire d''inscription est fermé. Plus de places disponibles.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -184,8 +154,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre inscription a bien été prise en compte, vous allez recevoir un courriel de confirmation.<br />\r\nMerci pour votre participation !</p>"
+  confirmation_title: 'Confirmation d''inscription'
+  confirmation_message: "<p>Votre demande d'inscription a bien été enregistrée.<br />\r\nVous allez recevoir un mail de confirmation.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -193,7 +163,7 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 350
   limit_total_interval: null
   limit_total_message: ''
   limit_total_unique: false
@@ -242,8 +212,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -257,8 +226,7 @@ access:
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
@@ -266,46 +234,9 @@ access:
       - 6746
     permissions: {  }
 handlers:
-  email_aux_demandeurs:
+  email:
     id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: evenements@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Paris 1 Panthéon-Sorbonne'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la cérémonie des docteurs 2022'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>Bien cordialement,<br />\r\nLa direction de la Communication</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
+    handler_id: email
     label: 'Email aux organisateurs'
     notes: ''
     status: true
@@ -320,15 +251,52 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: '[webform_submission:values:courriel_:raw]'
       from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
+      from_name: '[webform_submission:values:nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Cérémonie des docteurs 2022 - Nouvelle inscription'
-      body: _default
+      subject: 'Finale du Concours international d''éloquence 2024 - nouvelle inscription '
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel_:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: evenements@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Paris 1 Panthéon-Sorbonne'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[Réponse automatique ] Finale du Concours international d''éloquence 2024 - Demande d''inscription'
+      body: "<p><span style=\"font-size:11pt; font-variant:normal; white-space:pre-wrap\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:#000000\"><span style=\"font-weight:400\"><span style=\"font-style:normal\"><span style=\"text-decoration:none\">Madame, Monsieur,</span></span></span></span></span></span></p>\r\n\r\n<p style=\"line-height:1.38\"><span style=\"font-size:11pt; font-variant:normal; white-space:pre-wrap\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:#000000\"><span style=\"font-weight:400\"><span style=\"font-style:normal\"><span style=\"text-decoration:none\">Nous vous remercions pour votre demande d’inscription à la finale du Concours international d’éloquence de l’université Paris 1 Panthéon-Sorbonne. Vous recevrez prochainement un courriel vous informant de l’état de votre inscription (inscription validée ou si vous êtes sur liste d’attente).</span></span></span></span></span></span></p>\r\n\r\n<p style=\"line-height:1.38\"><span style=\"font-size:11pt; font-variant:normal; white-space:pre-wrap\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:#000000\"><span style=\"font-weight:400\"><span style=\"font-style:normal\"><span style=\"text-decoration:none\">Bien cordialement,</span></span></span></span></span></span></p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

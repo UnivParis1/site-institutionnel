@@ -1,6 +1,6 @@
-uuid: 05e17f18-1f41-4d1f-8d28-ad4229f5e9e2
+uuid: 85d6d2b1-c44f-42ba-8306-c699a004094b
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
@@ -8,44 +8,47 @@ close: null
 uid: 48
 template: false
 archive: false
-id: ___atelier_vege_campus___
-title: '🌱🌍 Atelier "Végé campus" 🌍🌱'
-description: '<p>Organisé dans le cadre du "Mois du développement durable et de la responsabilité sociétale" par direction du développement durable.</p>'
+id: 0_up1ps_mois_du_dd_conference_en
+title: '0 - UP1PS - Mois du DD - Conférence "Enjeux et défis autour de la constitution d''indicateurs climat relatifs à l''écosystème des entreprises"'
+description: '<p>Évènement organisé dans le cadre du "Mois du développement durable".</p>'
 category: ''
 elements: |-
-  ___inscription_a_l_atelier_vege_campus____:
+  vos_coordonnees:
     '#type': webform_wizard_page
-    '#title': '🌱🌍 Inscription à l''atelier "Végé campus" 🌍🌱 '
-    nom:
+    '#title': 'Vos coordonnées'
+    '#open': true
+    markup:
+      '#type': webform_markup
+      '#markup': '<p>Conférence réservée aux membres de l''Université Paris 1 Panthéon-Sorbonne.</p>'
+    votre_nom_et_prenom:
       '#type': textfield
-      '#title': Nom
+      '#title': 'Votre nom et prénom'
+      '#placeholder': 'Votre nom et prénom'
       '#required': true
-      '#required_error': 'Votre nom est obligatoire'
+      '#required_error': 'Champ obligatoire'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    prenom:
-      '#type': textfield
-      '#title': Prénom
-      '#required': true
-      '#required_error': 'Votre prénom est obligatoire'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    courriel_universitaire_:
+    votre_courriel_paris_1_pantheon_sorbonne:
       '#type': email
-      '#title': 'Courriel universitaire '
+      '#title': 'Votre courriel Paris 1 Panthéon-Sorbonne'
+      '#placeholder': '@etu.univ-paris1.fr / @univ-paris1.fr'
       '#required': true
-      '#required_error': 'Uniquement votre adresse courriel "@univ-paris1.fr" / @etu.univ-paris1.fr"'
+      '#required_error': 'Champ obligatoire'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    je_souhaite_m_inscrire_a_l_atelier_vege_campus_:
-      '#type': webform_entity_radios
-      '#title': 'Je souhaite m''inscrire à l''atelier "Végé campus" '
-      '#options_display': buttons
+  votre_inscription_a_la_conference_enjeux_et_defis_autour_de_la_c:
+    '#type': webform_wizard_page
+    '#title': 'Votre inscription à la conférence "Enjeux et défis autour de la constitution d’indicateurs climat relatifs à l’écosystème des entreprises "'
+    '#open': true
+    je_souhaite_m_inscrire_a_la_conference_enjeux_et_defis_autour_de:
+      '#type': radios
+      '#title': 'Je souhaite m''inscrire à la conférence "Enjeux et défis autour de la constitution d’indicateurs climat relatifs à l’écosystème des entreprises "'
+      '#options':
+        Oui: Oui
+        Non: Non
       '#required': true
-      '#required_error': 'Votre inscription est obligatoire'
+      '#required_error': 'Champ obligatoire'
       '#options__properties': ''
-      '#target_type': node
-      '#selection_handler': 'default:node'
-      '#selection_settings':
-        target_bundles:
-          event: event
+    captcha:
+      '#type': captcha
 css: ''
 javascript: ''
 settings:
@@ -58,8 +61,8 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
-  form_submit_once: false
+  form_title: source_entity_webform
+  form_submit_once: true
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
@@ -78,7 +81,7 @@ settings:
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
-  form_required: false
+  form_required: true
   form_autofocus: false
   form_details_toggle: false
   form_reset: false
@@ -153,7 +156,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Nous vous remercions pour votre inscription à l''atelier<em> </em>"Végé campus"<em class="placeholder"> </em>!</p>'
+  confirmation_message: '<p>En vous remerciant de votre inscription à la conférence "<span style="font-size:11.0pt"><span style="line-height:107%"><span style="font-family:&quot;Arial&quot;,sans-serif">Enjeux et défis autour de la constitution d’indicateurs climat relatifs à l’écosystème des entreprises" ! </span></span></span></p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -161,11 +164,11 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 35
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: "<p>Le nombre de places disponibles pour la conférence \"<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Enjeux et défis autour de la constitution d’indicateurs climat relatifs à l’écosystème des entreprises&nbsp;</span></span></span>\" a été atteint, nous tenons à vous remercier pour votre intérêt à cet atelier. Nous vous invitons à découvrir les autres événements organisés dans le cadre du \" Mois du développement durable\".</p>\r\n\r\n<p>&nbsp;</p>"
   limit_total_unique: false
-  limit_user: null
+  limit_user: 1
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false
@@ -229,5 +232,42 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: developpement.durable@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: Medy-Orlison.Desiral@etu.univ-paris1.fr
+      cc_options: {  }
+      from_mail: '[webform_submission:values:votre_courriel_paris_1_pantheon_sorbonne:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:votre_nom_et_prenom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[réponse automatique ] Conférence 22 avril 2024 - nouvelle inscription'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

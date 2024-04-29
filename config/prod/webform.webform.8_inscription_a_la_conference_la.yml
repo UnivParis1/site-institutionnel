@@ -1,30 +1,65 @@
-uuid: 5a11828f-5c22-48bb-b99a-1f163d4a3967
+uuid: 8854c1ed-5119-41aa-a4ec-0fbf56036b80
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 48
+uid: 7792
 template: false
 archive: false
-id: deposer_une_offre_de_stage
-title: 'Déposer une offre de stage'
-description: '<p>Cet espace permettra aux entreprises de déposer directement leur offre de stage pour les étudiants du Master 2 D2A sur le site.</p>'
-category: 'Déposer une offre de stage'
+id: 8_inscription_a_la_conference_la
+title: '8 - Inscription à la conférence "La mise en oeuvre des règles de non-discrimination au travail : regard brésilien" '
+description: '<p>Formulaire d''inscription à la conférence "La mise en oeuvre des règles de non-discrimination au travail : regard brésilien"</p>'
+category: 'Inscription à un colloque '
 elements: |-
-  deposer_une_offre_de_stage:
+  votreprenom:
     '#type': textfield
-    '#title': 'Déposer une offre de stage'
-    '#multiple': true
-    '#description': |-
-      <p>Bonjour,</p>
-
-      <p>Sur cet espace, vous pouvez déposer votre offre de stage pour les étudiants du Master 2 D2A</p>
+    '#title': Prénom
+    '#placeholder': Jean
+    '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  nom2:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Dupond
+    '#required': true
+    '#required_error': 'Vous devez saisir votre nom.'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre fonction.'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  droits_d_image:
+    '#type': checkbox
+    '#title': 'Droits à l''image'
+    '#description': '<p>En cochant cette case, vous acceptez la captation et la diffusion vidéo de votre image dans le cadre du colloque.</p>'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': 'Conditions d''inscription'
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription au colloque&nbsp;</p>'
+    '#required': true
+    '#required_error': 'Vous devez accepter les conditions d''inscription.'
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'S''inscrire au colloque'
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -51,7 +86,7 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_unsaved: true
+  form_unsaved: false
   form_disable_back: false
   form_submit_back: false
   form_disable_autocomplete: false
@@ -109,10 +144,12 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
-  preview: 2
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
   preview_label: ''
   preview_title: ''
   preview_message: ''
@@ -130,7 +167,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -164,53 +201,86 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
+      - 7845
     permissions: {  }
 handlers:
-  stage_1:
+  email_au_demandeur:
     id: email
-    handler_id: stage_1
-    label: 'Déposer une offre de stage'
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
@@ -218,21 +288,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: d2a.eds@univ-paris1.fr
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: _default
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: _default
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: _default
-      body: _default
+      subject: 'Inscription au colloque'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription à la conférence \"La mise en oeuvre des règles de non-discrimination au travail : regard brésilien\" du mercredi 24 avril a bien été validée.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

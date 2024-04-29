@@ -9,7 +9,7 @@ uid: 6770
 template: false
 archive: false
 id: 57_formulaire_de_contact_site_cr
-title: '57 - Formulaire de contact site CRISalid'
+title: '141 - Formulaire de contact site CRISalid'
 description: ''
 category: ''
 elements: |-
@@ -20,9 +20,11 @@ elements: |-
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#title__access': false
     '#first__title': Prénom
+    '#first__placeholder': Patrick
     '#first__required': true
     '#middle__access': false
     '#last__title': Nom
+    '#last__placeholder': Dupont
     '#last__required': true
     '#suffix__access': false
     '#degree__access': false
@@ -34,6 +36,13 @@ elements: |-
   adresse_electronique:
     '#type': email
     '#title': 'Adresse électronique'
+    '#placeholder': patrick.dupont@mail.org
+    '#required': true
+    '#required_error': 'Votre courriel est obligatoire'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  votre_demande:
+    '#type': textarea
+    '#title': 'Votre demande'
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   terms_of_service:
@@ -260,7 +269,8 @@ handlers:
       sender_name: ''
       subject: _default
       body: _default
-      excluded_elements: {  }
+      excluded_elements:
+        captcha: captcha
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false

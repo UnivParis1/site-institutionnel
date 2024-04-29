@@ -43,6 +43,45 @@ elements: |-
         'Accessibilité web (RGAA)': 'Accessibilité web (RGAA)'
         Limesurvey: Limesurvey
       '#required': true
+    markupdrupal:
+      '#type': webform_markup
+      '#states':
+        visible:
+          ':input[name="pour_quel_logiciel_"]':
+            value: Drupal
+      '#display_on': both
+      '#markup': |-
+        <p><strong>Les ateliers spécifiques pour Drupal sont proposés lors des Petits déjeuners des webmestres.</strong></p>
+
+        <p><strong>Pour rappel, si vous avez accepté le rôle de webmestre, vous avez aussi accepté de suivre les Petits déjeuners des webmestres qui sont une formation mensuelle de 2h.</strong></p>
+
+        <p><strong>Pour rappel aussi, ces Petits déjeuners sont enregistrés, vous avez donc la possibilité de les visionner même si vous n'étiez pas disponible le jour J.</strong></p>
+
+        <p><strong>Si vous êtes débutant, regardez la vidéo de formation :</strong><br />
+        <a href="https://mediatheque.univ-paris1.fr/video/3301-formation-drupal-2022/">https://mediatheque.univ-paris1.fr/video/3301-formation-drupal-2022/</a></p>
+
+        <p><strong>et sinon, cherchez un thème dans la page qui présente les sujets qui ont été traités lors des Petits déjeuners :</strong><br />
+        <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1a82b184-4362-494d-8ad6-6f0ede5cea5c" href="/node/36561">https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/petits-dejeuners-webmestres</a></p>
+
+        <p><strong>ou depuis la page qui liste les petits déjeuners :</strong><br />
+        <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="0e0d7cf8-f68b-49c5-bcf7-df3cab56cbf8" href="/node/42322">https://aide-siteweb.pantheonsorbonne.fr/creer-mini-site/blog-webmestres</a></p>
+
+        <p>Merci.</p>
+    markupametys:
+      '#type': webform_markup
+      '#states':
+        visible:
+          ':input[name="pour_quel_logiciel_"]':
+            value: Ametys
+      '#markup': |-
+        <p>L'équipe de la Direction des études et de la vie étudiante (DEVE) est désormais l'équipe fonctionnelle de cette application.</p>
+
+        <p>De ce fait, je vous invite à contacter l'équipe du pôle DEVE-Pôle OF : Offre de formation et pilotage, au travers du courriel <a href="mailto:ametys@univ-paris1.fr">ametys@univ-paris1.fr</a>, si vous souhaitez qu'ils vous accompagnent.</p>
+
+        <p>Sinon les vidéos tutorielles sont toujours disponibles sur la médiathèque :<br />
+        <a href="https://mediatheque.univ-paris1.fr/videos/?type=tutoriel">https://mediatheque.univ-paris1.fr/videos/?type=tutoriel</a></p>
+
+        <p>&nbsp;</p>
     votre_besoin_sur_ce_logiciel_:
       '#type': radios
       '#title': 'Votre besoin ?'
@@ -51,6 +90,13 @@ elements: |-
         'Niveau avancé': 'Niveau avancé -- Vous maîtrisez la base mais vous avez du mal avec la suite.'
         'Niveau expert': 'Niveau expert -- Vous maîtrisez tout ce qui a été expliqué dans les différentes formations et vous souhaitez aller plus loin.'
       '#required': true
+      '#states':
+        invisible:
+          - ':input[name="pour_quel_logiciel_"]':
+              value: Ametys
+          - xor
+          - ':input[name="pour_quel_logiciel_"]':
+              value: Drupal
     qu_est_ce_que_vous_souhaiteriez_savoir_en_plus_:
       '#type': textarea
       '#title': 'Qu''est ce que vous souhaiteriez savoir en plus ?'
@@ -63,8 +109,23 @@ elements: |-
     si_vous_avez_des_besoins_specifiques_merci_des_les_expliciter_ic:
       '#type': textarea
       '#title': 'Si vous avez des besoins spécifiques, merci des les expliciter ici'
+      '#states':
+        invisible:
+          - ':input[name="pour_quel_logiciel_"]':
+              value: Ametys
+          - xor
+          - ':input[name="pour_quel_logiciel_"]':
+              value: Drupal
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   container_organisation:
     '#type': container
+    '#states':
+      invisible:
+        - ':input[name="pour_quel_logiciel_"]':
+            value: Ametys
+        - xor
+        - ':input[name="pour_quel_logiciel_"]':
+            value: Drupal
     avez_vous_des_jours_de_predilections_:
       '#type': checkboxes
       '#title': 'Avez-vous des jours de prédilections ?'
@@ -87,6 +148,13 @@ elements: |-
       '#required': true
   container_validation:
     '#type': container
+    '#states':
+      invisible:
+        - ':input[name="pour_quel_logiciel_"]':
+            value: Ametys
+        - xor
+        - ':input[name="pour_quel_logiciel_"]':
+            value: Drupal
     terms_of_service:
       '#type': webform_terms_of_service
       '#title': 'Je certifie {avoir suivi la formation en ligne dédié au logiciel sélectionné avant l''atelier}.'
@@ -96,6 +164,13 @@ elements: |-
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
+    '#states':
+      invisible:
+        - ':input[name="pour_quel_logiciel_"]':
+            value: Ametys
+        - xor
+        - ':input[name="pour_quel_logiciel_"]':
+            value: Drupal
     '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
