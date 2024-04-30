@@ -8,6 +8,9 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\user\UserInterface;
 use \Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -25,3 +28,27 @@ function micro_cas_affiliation_help($route_name, RouteMatchInterface $route_matc
   }
 }
 
+function micro_cas_affiliation_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'site') {
+    $fields['bypass_site_users'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Bypass site users check for this site.'))
+      ->setDescription(t('Authorize users to login on this site even if they are not in the site users list.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+  }
+
+  return $fields;
+}
+
+function micro_cas_affiliation_form_site_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+	
+  if (isset($form['bypass_site_users'])) {
+    $form['bypass_site_users']['#group'] = 'shield_info';
+  }
+}

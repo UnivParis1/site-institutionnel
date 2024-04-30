@@ -75,9 +75,13 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     $negotiator = \Drupal::service('micro_site.negotiator');
     $configMicroUser = \Drupal::config('micro_user.settings');
     $account = $event->getAccount();
-    if ($site = $negotiator->getActiveSite()) {
+
+    if ($site = $negotiator->getActiveSite() ) {
       if ($account instanceof AccountInterface) {
         $site_users = $site->getAllUsersId();
+        if ($site->get('bypass_site_users')->value) {
+          return;
+        }
         if (!in_array($account->id(), $site_users)) {
           $event->cancelLogin($this->t('Unrecognized username on this site.'));
         }
@@ -85,6 +89,11 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     }
     else {
       if ($account instanceof AccountInterface) {
+        $comptex = new ComptexManager();
+
+        if (in_array('enseignant_doctorant', $account->getRoles()) && $comptex->userHasPagePerso($account->name->value)) {
+          return;
+        }
         if ($account->hasPermission('administer site entities')) {
           return;
         }

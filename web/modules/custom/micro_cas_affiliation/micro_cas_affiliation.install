@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * install micro_cas_affiliation.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
+/**
+ * Add "bypass_site_users_check" field to micro site entity.
+ */
+function micro_cas_affiliation_update_8001(&$sandbox) {
+  $bypass_site_users = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Bypass site users check'))
+    ->setDescription(t('Bypass site users check on login.'))
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition_manager->installFieldStorageDefinition('bypass_site_users', 'site', 'site', $bypass_site_users);
+}
