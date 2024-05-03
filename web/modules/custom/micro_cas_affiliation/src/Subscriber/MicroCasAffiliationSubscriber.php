@@ -85,6 +85,12 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     }
     else {
       if ($account instanceof AccountInterface) {
+        $comptex = new ComptexManager();
+
+        if (in_array('enseignant_doctorant', $account->getRoles()) && $comptex->userHasPagePerso($account->name->value)) {
+          return;
+        }
+
         if ($account->hasPermission('administer site entities')) {
           return;
         }
