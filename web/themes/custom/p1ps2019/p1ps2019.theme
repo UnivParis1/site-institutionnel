@@ -99,6 +99,8 @@ function p1ps2019_preprocess_page(&$variables)
   $site = $negotiator->getActiveSite();
 
   if (isset($site) && !empty($site)) {
+    $site = \Drupal::service('entity.repository')->getTranslationFromContext($site);
+
     $specific_pages = [
       '/actualites',
       '/evenements',
