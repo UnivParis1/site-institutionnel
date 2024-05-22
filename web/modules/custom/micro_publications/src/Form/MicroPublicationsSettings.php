@@ -2,6 +2,9 @@
 
 namespace Drupal\micro_publications\Form;
 
+use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\FormStateInterface;
+
 class MicroPublicationsSettings extends ConfigFormBase {
 
   const FORMID = "micro_publications_settings";
@@ -40,15 +43,14 @@ class MicroPublicationsSettings extends ConfigFormBase {
         'xml' => $this->t('XML'),
       ],
     ];
-    $form['parameters']['rows'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Nombre de publications à récupérer'),
-      '#description' => $this->t('Nombre de publications à récupérer. Mettre 0 pour tout récupérer.'),
-      '#size' => 60,
-      '#default_value' => $config->get('parameters.rows'),
-    ];
 
     return parent::buildForm($form, $form_state);
   }
 
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $this->config('micro_publications.settings')
+      ->set('webservice.hostname', $form_state->getValue('hostname'))
+      ->set('parameters.wt', $form_state->getValue('wt'))
+      ->save();
+  }
 }
