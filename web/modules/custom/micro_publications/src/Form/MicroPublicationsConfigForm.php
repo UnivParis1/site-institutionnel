@@ -22,8 +22,11 @@ class MicroPublicationsConfigForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, $site = NULL) {
     $this->site = $site;
 
-    $request = $site->get("field_requests")->getValue();
-    $nbRowsWithValue = count($request);
+    $labstructname = $site->get('field_labstructname_t')->getValue();
+    $request_fields = $site->get('field_request_fields')->getValue();
+    $types = $site->get('field_doctype')->getValue();
+    $nbRowsWithValue = count($types);
+    \Drupal::logger('micro_publications')->info('field_doctype' . print_r($types, 1));
 
     $form['general_settings'] = [
       '#type' => 'fieldset',
@@ -35,45 +38,44 @@ class MicroPublicationsConfigForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Nom de la structure'),
       '#size' => 60,
-      '#default_value' => $form_state->getValue('field_labstructname_t') ?
-        $form_state->getValue('field_labstructname_t') : '',
+      '#default_value' => !empty($labstructname) ? $labstructname[0]['value'] : '',
     ];
     $form['general_settings']['field_request_fields'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Champs à récupérer'),
       '#size' => 60,
-      '#default_value' => $form_state->getValue('field_request_fields') ?
-        $form_state->getValue('field_request_fields') : '',
+      '#default_value' => !empty($request_fields) ? $request_fields[0]['value'] : '',
     ];
 
-    $form['container'] = [
-      '#type' => 'container',
-      '#attributes' => ['id' => 'publications-form-container']
+    $form["container"] = [
+      "#type" => "container",
+      '#attributes' => ['id' => 'footer-form-container']
     ];
-    $form['container']['add'] = [
-      '#type' => 'button',
-      '#value' => $this->t('Ajouter une récupération de publications'),
+
+    $form["container"]['actions'] = [
+      '#type' => 'actions'
+    ];
+
+    $form['container']['actions']['add_item'] = [
+      '#type'   => 'submit',
+      '#value'  => $this->t('Add document Type'),
       '#submit' => ['::add_request_item'],
-      '#ajax' => [
+      '#ajax'   => [
         'callback' => '::addRow_callback',
-        'wrapper' => 'publications-form-container',
+        'wrapper'  => 'footer-form-container',
       ],
     ];
-    $form['container']['actions'] = [
-      '#type' => 'actions',
-    ];
 
-    $form['container']['publications'] = [
+    $form["container"]["publications"] = [
       '#type' => 'table',
-      '#tabledrap' => [
+      '#tabledrag' => [
         [
           'action' => 'order',
           'relationship' => 'sibling',
           'group' => 'table-sort-weight',
-        ]
-      ]
+        ],
+      ],
     ];
-
 
     //Génération du formulaire
     for($i=0; $i < $nbRowsWithValue; $i++){
@@ -83,14 +85,14 @@ class MicroPublicationsConfigForm extends FormBase {
         '#type' => "select",
         '#title' => $this->t("Type de document"),
         '#options' => $this->_getDocTypes(),
-        '#default_value' => $request[$i]["v"],
+        '#default_value' => $types[$i]["value"],
       ];
     }
 
     for($i=0; $i < $this->additionnal_rows; $i++){
       $form['container']['publications'][$nbRowsWithValue+$i]['#attributes']['class'][] = 'draggable';
 
-      $form['container']['publications'][$nbRowsWithValue+$i]["docType"] = [
+      $form['container']['publications'][$nbRowsWithValue+$i]["doctype"] = [
         '#type' => "select",
         '#title' => $this->t("Type de document"),
         '#options' => $this->_getDocTypes(),
@@ -113,14 +115,16 @@ class MicroPublicationsConfigForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var @var FieldItemList $values $values */
-    $values = $form_state->getValues()['publications'];
+    $values = $form_state->getValue('publications');
+    \Drupal::logger('micro_publications')->info('form_state publications : ' . print_r($values,1));
     $publications = [];
     foreach ($values as $key => $value) {
-      $publications[] = [
-        'docType_s' => $value['docType_s'],
-      ];
+      $publications[] =['value' => $value['doctype']];
     }
-    $this->site->set('field_requests', $publications);
+    \Drupal::logger('micro_publications')->info('form_state publications : ' . print_r($form_state->getValues()['publications'],1));
+    \Drupal::logger('micro_publications')->info('$publications : ' . print_r($publications,1));
+
+    $this->site->field_doctype = $publications;
     $this->site->field_labstructname_t = $form_state->getValue('field_labstructname_t');
     $this->site->field_request_fields = $form_state->getValue('field_request_fields');
     $this->site->save();
