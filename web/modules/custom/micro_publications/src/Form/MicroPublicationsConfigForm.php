@@ -25,13 +25,26 @@ class MicroPublicationsConfigForm extends FormBase {
     $request = $site->get("field_requests")->getValue();
     $nbRowsWithValue = count($request);
 
-    $form['field_labstructname_t'] = [
+    $form['general_settings'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Paramètres généraux de la requête'),
+      '#collapsible' => TRUE,
+      '#open' => TRUE
+    ];
+    $form['general_settings']['field_labstructname_t'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Nom de la structure'),
       '#size' => 60,
-      '#default_value' => $form_state->getValue('field_labstructname_t') ? $form_state->getValue('field_labstructname_t') : '',
+      '#default_value' => $form_state->getValue('field_labstructname_t') ?
+        $form_state->getValue('field_labstructname_t') : '',
     ];
-
+    $form['general_settings']['field_request_fields'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Champs à récupérer'),
+      '#size' => 60,
+      '#default_value' => $form_state->getValue('field_request_fields') ?
+        $form_state->getValue('field_request_fields') : '',
+    ];
 
     $form['container'] = [
       '#type' => 'container',
@@ -66,51 +79,17 @@ class MicroPublicationsConfigForm extends FormBase {
     for($i=0; $i < $nbRowsWithValue; $i++){
       $form['container']['publications'][$i]['#attributes']['class'][] = 'draggable';
 
-      $form['container']['publications'][$i]["fl"] = [
-        '#type' => "textfield",
-        '#title' => $this->t("Champs à récupérer"),
-        '#default_value' => $request[$i]["fl"],
-      ];
-      $form['container']['publications'][$i]["rows"] = [
-        '#type' => "textfield",
-        '#title' => $this->t("Nombre de résultats. Mettre 0 pour tout récupérer."),
-        '#default_value' => $request[$i]["rows"],
-      ];
-      $form['container']['publications'][$i]["docType"] = [
+      $form['container']['publications'][$i]["doctype"] = [
         '#type' => "select",
         '#title' => $this->t("Type de document"),
         '#options' => $this->_getDocTypes(),
-        '#default_value' => $request[$i]["docType_s"],
+        '#default_value' => $request[$i]["v"],
       ];
-
-      /*$form['container']['publications'][$i]["text"] = [
-        '#type' => "textfield",
-        '#title' => $this->t("Link text"),
-        '#default_value' => $footerArray[$i]["title"],
-      ];
-
-      $form['container']['publications'][$i]['weight'] = [
-        '#type' => 'weight',
-        '#title' => $this->t("Weight"),
-        '#title_display' => 'invisible',
-        '#default_value' => $i,
-        '#attributes' => [
-          'class' => ['table-sort-weight',]
-        ],
-      ];*/
     }
 
     for($i=0; $i < $this->additionnal_rows; $i++){
       $form['container']['publications'][$nbRowsWithValue+$i]['#attributes']['class'][] = 'draggable';
 
-      $form['container']["'publications'"][$nbRowsWithValue+$i]["fl"] = [
-        '#type' => "textfield",
-        '#title' => $this->t("Champs à récupérer"),
-      ];
-      $form['container']['publications'][$nbRowsWithValue+$i]["rows"] = [
-        '#type' => "textfield",
-        '#title' => $this->t("Nombre de résultats. Mettre 0 pour tout récupérer."),
-      ];
       $form['container']['publications'][$nbRowsWithValue+$i]["docType"] = [
         '#type' => "select",
         '#title' => $this->t("Type de document"),
@@ -139,11 +118,11 @@ class MicroPublicationsConfigForm extends FormBase {
     foreach ($values as $key => $value) {
       $publications[] = [
         'docType_s' => $value['docType_s'],
-        'rows' => $value['rows'],
       ];
     }
     $this->site->set('field_requests', $publications);
-    $this->site->set('field_labstructname_t', $form_state->getValue('field_labstructname_t'));
+    $this->site->field_labstructname_t = $form_state->getValue('field_labstructname_t');
+    $this->site->field_request_fields = $form_state->getValue('field_request_fields');
     $this->site->save();
 
     \Drupal::messenger()->addMessage($this->t("Requests saved"));
