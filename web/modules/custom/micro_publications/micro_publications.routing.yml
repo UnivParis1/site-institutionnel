@@ -1,0 +1,22 @@
+micro_publications.settings:
+  path: '/admin/config/up1/publications-hal'
+  defaults:
+    _form: '\Drupal\up1_theses\Form\Up1PublicationsSettings'
+    _title: 'Configuration de la remontée des publications HAL'
+  requirements:
+    _permission: 'configure up1 settings'
+
+entity.site.edit_publications:
+  path: '/site/{site}/publications'
+  defaults:
+    _form: '\Drupal\micro_footer\Form\MicroPublicationsConfig'
+    _title: 'Micro publications settings'
+  requirements:
+    site: \d+
+    _permission: 'manage microsite footer'
+  options:
+    _admin_route: true
+    parameters:
+      site:
+        type: 'entity:site'
+        with_config_overrides: TRUE
