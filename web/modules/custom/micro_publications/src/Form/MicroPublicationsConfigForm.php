@@ -40,7 +40,7 @@ class MicroPublicationsConfigForm extends FormBase {
     $form['container']['add'] = [
       '#type' => 'button',
       '#value' => $this->t('Ajouter une récupération de publications'),
-      '#submit' => ['::add_publication_item'],
+      '#submit' => ['::add_request_item'],
       '#ajax' => [
         'callback' => '::addRow_callback',
         'wrapper' => 'publications-form-container',
@@ -113,7 +113,7 @@ class MicroPublicationsConfigForm extends FormBase {
     return $form['container'];
   }
 
-  function add_publication_item(array &$form, FormStateInterface $form_state) {
+  function add_request_item(array &$form, FormStateInterface $form_state) {
     $this->additionnal_rows++;
     $form_state->setRebuild();
   }
