@@ -23,14 +23,14 @@ class MicroPublicationsConfigForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, $site = NULL) {
     $this->site = $site;
 
-    $request = $site->get("field_publications_request")->getValue();
+    $request = $site->get("field_requests")->getValue();
     $nbRowsWithValue = count($request);
 
-    $form['labStructName_t'] = [
+    $form['field_labStructName_t'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Nom de la structure'),
       '#size' => 60,
-      '#default_value' => $form_state->get('labStructName_t') ? $form_state->get('labStructName_t') : '',
+      '#default_value' => $form_state->get('field_labStructName_t') ? $form_state->get('field_labStructName_t') : '',
     ];
 
     $form['container'] = [
@@ -40,7 +40,7 @@ class MicroPublicationsConfigForm extends FormBase {
     $form['container']['add'] = [
       '#type' => 'button',
       '#value' => $this->t('Ajouter une récupération de publications'),
-      '#submit' => ['::add_publication_item'],
+      '#submit' => ['::add_request_item'],
       '#ajax' => [
         'callback' => '::addRow_callback',
         'wrapper' => 'publications-form-container',
@@ -102,29 +102,20 @@ class MicroPublicationsConfigForm extends FormBase {
         'rows' => $value['rows'],
       ];
     }
-    $this->site->set('field_publications_request', $publications);
-    $this->site->set('labStructName_t', $publications);
+    $this->site->set('field_requests', $publications);
+    $this->site->set('field_labstructname_t', $publications);
     $this->site->save();
 
-    \Drupal::messenger()->addMessage($this->t("Publications element(s) saved"));
-    $config = $this->config('up1_publications.settings');
-
-    $config->save();
-
-    parent::submitForm($form, $form_state);
+    \Drupal::messenger()->addMessage($this->t("Requests saved"));
   }
 
   function addRow_callback($form, $form_state) {
     return $form['container'];
-
   }
-  function add_publication_item(array &$form, FormStateInterface $form_state) {
+
+  function add_request_item(array &$form, FormStateInterface $form_state) {
     $this->additionnal_rows++;
     $form_state->setRebuild();
-  }
-
-  protected function getEditableConfigNames() {
-    return ['up1_publications.settings'];
   }
 
   protected function _getDocTypes() {
