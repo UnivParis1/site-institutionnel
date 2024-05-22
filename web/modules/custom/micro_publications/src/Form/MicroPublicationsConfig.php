@@ -2,8 +2,12 @@
 
 namespace Drupal\micro_publications\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Field\FieldItemList;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\link\Plugin\Field\FieldType\LinkItem;
 
 class MicroPublicationsConfig extends FormBase {
   protected $additionnal_rows = 0;
@@ -36,7 +40,7 @@ class MicroPublicationsConfig extends FormBase {
     $form['container']['add'] = [
       '#type' => 'button',
       '#value' => $this->t('Ajouter une récupération de publications'),
-      '#submit' => ['::addRow'],
+      '#submit' => ['::add_publication_item'],
       '#ajax' => [
         'callback' => '::addRow_callback',
         'wrapper' => 'publications-form-container',
@@ -57,27 +61,37 @@ class MicroPublicationsConfig extends FormBase {
       ]
     ];
 
-    for ($i = 0; $i < $nbRowsWithValue; $i++) {
-      $form['container']['publications'][$i]['#attributes']['class'][] = 'draggable';
+    for ($i = 0; $i < $this->additionnal_rows; $i++) {
+      $form['container']['publications'][$nbRowsWithValue+$i]['#attributes']['class'][] = 'draggable';
       //$form['container']['publications'][$i]
-      $form['container']['publications'][$i]['docType_s'] = [
+      $form['container']['publications'][$nbRowsWithValue+$i]['docType_s'] = [
         '#type' => 'select',
         '#title' => $this->t('Type de document'),
         '#options' => _getDocTypes(),
-        '#default_value' => $request[$i]['docType_s'],
+        '#default_value' => $request[$nbRowsWithValue+$i]['docType_s'],
       ];
-      $form['container']['publications'][$i]['rows'] = [
+      $form['container']['publications'][$nbRowsWithValue+$i]['rows'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Nombre de publications à récupérer. 0 pour tout récupérer.'),
         '#size' => 60,
-        '#default_value' => $request[$i]['rows'],
+        '#default_value' => $request[$nbRowsWithValue+$i]['rows'],
       ];
     }
+    $form["container"]['actions']["submit"] = [
+      "#type" => "submit",
+      '#value' => $this->t("Save")
+    ];
+
+    $form_state->setCached(false);
 
     return $form;
   }
 
-
+  /**
+   * @param array $form
+   * @param FormStateInterface $form_state
+   * @return void
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var @var FieldItemList $values $values */
     $values = $form_state->getValues()['publications'];
@@ -90,17 +104,23 @@ class MicroPublicationsConfig extends FormBase {
     }
     $this->site->set('field_publications_request', $publications);
     $this->site->set('labStructName_t', $publications);
-
     $this->site->save();
+
     \Drupal::messenger()->addMessage($this->t("Publications element(s) saved"));
     $config = $this->config('up1_publications.settings');
-    $config->set('webservice.hostname', $form_state->getValue(['webservice', 'hostname']));
-    $config->set('parameters.wt', $form_state->getValue(['parameters', 'wt']));
-    $config->set('parameters.rows', $form_state->getValue(['parameters', 'rows']));
-    $config->set('parameters.fl', $form_state->getValue(['parameters', 'fl']));
+
     $config->save();
 
     parent::submitForm($form, $form_state);
+  }
+
+  function addRow_callback($form, $form_state) {
+    return $form['container'];
+
+  }
+  function add_publication_item(array &$form, FormStateInterface $form_state) {
+    $this->additionnal_rows++;
+    $form_state->setRebuild();
   }
 
   protected function getEditableConfigNames() {
