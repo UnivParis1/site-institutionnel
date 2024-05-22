@@ -7,12 +7,18 @@ use Drupal\Core\Form\FormStateInterface;
 
 class MicroPublicationsSettings extends ConfigFormBase {
 
-  const FORMID = "micro_publications_settings";
+  const FORMID = 'micro_publications_settings';
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormId() {
     return self::FORMID;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('micro_publications.settings');
 
@@ -42,15 +48,25 @@ class MicroPublicationsSettings extends ConfigFormBase {
         'json' => $this->t('JSON'),
         'xml' => $this->t('XML'),
       ],
+      '#default_value' => $config->get('parameters.wt'),
     ];
 
     return parent::buildForm($form, $form_state);
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    parent::submitForm($form, $form_state);
+
     $this->config('micro_publications.settings')
-      ->set('webservice.hostname', $form_state->getValue('hostname'))
-      ->set('parameters.wt', $form_state->getValue('wt'))
+      ->set('hostname', $form_state->getValue(['webservice','hostname']))
+      ->set('wt', $form_state->getValue(['parameters','wt']))
       ->save();
+  }
+
+  protected function getEditableConfigNames(): array
+  {
+    return [
+      'micro_publications.settings',
+    ];
   }
 }
