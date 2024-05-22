@@ -26,11 +26,11 @@ class MicroPublicationsConfigForm extends FormBase {
     $request = $site->get("field_requests")->getValue();
     $nbRowsWithValue = count($request);
 
-    $form['field_labStructName_t'] = [
+    $form['field_labstructname_t'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Nom de la structure'),
       '#size' => 60,
-      '#default_value' => $form_state->get('field_labStructName_t') ? $form_state->get('field_labStructName_t') : '',
+      '#default_value' => $form_state->get('field_labstructname_t') ? $form_state->get('field_labstructname_t') : '',
     ];
 
     $form['container'] = [
