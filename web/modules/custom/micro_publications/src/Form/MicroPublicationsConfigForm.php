@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\link\Plugin\Field\FieldType\LinkItem;
 
-class MicroPublicationsConfig extends FormBase {
+class MicroPublicationsConfigForm extends FormBase {
   protected $additionnal_rows = 0;
   protected $site;
 
