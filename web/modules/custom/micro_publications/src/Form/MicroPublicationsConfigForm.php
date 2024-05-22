@@ -7,13 +7,12 @@ use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Field\FieldItemList;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\link\Plugin\Field\FieldType\LinkItem;
 
 class MicroPublicationsConfigForm extends FormBase {
   protected $additionnal_rows = 0;
   protected $site;
 
-  const FORMID = "MicroPublicationsConfig";
+  const FORMID = "MicroPublicationsConfigForm";
 
   public function getFormId() {
     return self::FORMID;
@@ -32,6 +31,7 @@ class MicroPublicationsConfigForm extends FormBase {
       '#size' => 60,
       '#default_value' => $form_state->getValue('field_labstructname_t') ? $form_state->getValue('field_labstructname_t') : '',
     ];
+
 
     $form['container'] = [
       '#type' => 'container',
@@ -61,29 +61,69 @@ class MicroPublicationsConfigForm extends FormBase {
       ]
     ];
 
-    for ($i = 0; $i < $this->additionnal_rows; $i++) {
-      $form['container']['publications'][$nbRowsWithValue+$i]['#attributes']['class'][] = 'draggable';
-      //$form['container']['publications'][$i]
-      $form['container']['publications'][$nbRowsWithValue+$i]['docType_s'] = [
-        '#type' => 'select',
-        '#title' => $this->t('Type de document'),
-        '#options' => _getDocTypes(),
-        '#default_value' => $request[$nbRowsWithValue+$i]['docType_s'],
+
+    //Génération du formulaire
+    for($i=0; $i < $nbRowsWithValue; $i++){
+      $form['container']['publications'][$i]['#attributes']['class'][] = 'draggable';
+
+      $form['container']['publications'][$i]["fl"] = [
+        '#type' => "textfield",
+        '#title' => $this->t("Champs à récupérer"),
+        '#default_value' => $request[$i]["fl"],
       ];
-      $form['container']['publications'][$nbRowsWithValue+$i]['rows'] = [
-        '#type' => 'textfield',
-        '#title' => $this->t('Nombre de publications à récupérer. 0 pour tout récupérer.'),
-        '#size' => 60,
-        '#default_value' => $request[$nbRowsWithValue+$i]['rows'],
+      $form['container']['publications'][$i]["rows"] = [
+        '#type' => "textfield",
+        '#title' => $this->t("Nombre de résultats. Mettre 0 pour tout récupérer."),
+        '#default_value' => $request[$i]["rows"],
+      ];
+      $form['container']['publications'][$i]["docType"] = [
+        '#type' => "select",
+        '#title' => $this->t("Type de document"),
+        '#options' => $this->_getDocTypes(),
+        '#default_value' => $request[$i]["docType_s"],
+      ];
+
+      /*$form['container']['publications'][$i]["text"] = [
+        '#type' => "textfield",
+        '#title' => $this->t("Link text"),
+        '#default_value' => $footerArray[$i]["title"],
+      ];
+
+      $form['container']['publications'][$i]['weight'] = [
+        '#type' => 'weight',
+        '#title' => $this->t("Weight"),
+        '#title_display' => 'invisible',
+        '#default_value' => $i,
+        '#attributes' => [
+          'class' => ['table-sort-weight',]
+        ],
+      ];*/
+    }
+
+    for($i=0; $i < $this->additionnal_rows; $i++){
+      $form['container']['publications'][$nbRowsWithValue+$i]['#attributes']['class'][] = 'draggable';
+
+      $form['container']["'publications'"][$nbRowsWithValue+$i]["fl"] = [
+        '#type' => "textfield",
+        '#title' => $this->t("Champs à récupérer"),
+      ];
+      $form['container']['publications'][$nbRowsWithValue+$i]["rows"] = [
+        '#type' => "textfield",
+        '#title' => $this->t("Nombre de résultats. Mettre 0 pour tout récupérer."),
+      ];
+      $form['container']['publications'][$nbRowsWithValue+$i]["docType"] = [
+        '#type' => "select",
+        '#title' => $this->t("Type de document"),
+        '#options' => $this->_getDocTypes(),
       ];
     }
-    $form["container"]['actions']["submit"] = [
+
+    $form['container']['actions']["submit"] = [
       "#type" => "submit",
       '#value' => $this->t("Save")
     ];
 
     $form_state->setCached(false);
-
     return $form;
   }
 
