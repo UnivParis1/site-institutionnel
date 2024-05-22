@@ -30,7 +30,7 @@ class MicroPublicationsConfigForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Nom de la structure'),
       '#size' => 60,
-      '#default_value' => $form_state->get('field_labstructname_t') ? $form_state->get('field_labstructname_t') : '',
+      '#default_value' => $form_state->getValue('field_labstructname_t') ? $form_state->getValue('field_labstructname_t') : '',
     ];
 
     $form['container'] = [
@@ -103,7 +103,7 @@ class MicroPublicationsConfigForm extends FormBase {
       ];
     }
     $this->site->set('field_requests', $publications);
-    $this->site->set('field_labstructname_t', $publications);
+    $this->site->set('field_labstructname_t', $form_state->getValue('field_labstructname_t'));
     $this->site->save();
 
     \Drupal::messenger()->addMessage($this->t("Requests saved"));
