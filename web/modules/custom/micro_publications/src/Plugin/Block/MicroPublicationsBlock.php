@@ -29,7 +29,7 @@ class MicroPublicationsBlock extends BlockBase {
       $fl =  $site->get('field_request_fields')->getValue();
       $labStructName = $site->get('field_labstructname_t')->getValue();
       $rows = $site->get('field_rows')->getValue();
-      
+
       $list = [];
       $types = [];
 

@@ -24,7 +24,9 @@ class MicroPublicationsConfigForm extends FormBase {
 
     $labstructname = $site->get('field_labstructname_t')->getValue();
     $request_fields = $site->get('field_request_fields')->getValue();
-    $types = $site->get('field_doctype')->getValue();
+    $rows = $site->get('field_doctype')->getValue();
+    $types = $site->get('field_rows')->getValue();
+
     $nbRowsWithValue = count($types);
 
     $form['general_settings'] = [
@@ -44,6 +46,12 @@ class MicroPublicationsConfigForm extends FormBase {
       '#title' => $this->t('Champs à récupérer'),
       '#size' => 60,
       '#default_value' => !empty($request_fields) ? $request_fields[0]['value'] : '',
+    ];
+    $form['general_settings']['field_rows'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Nombre de résultats à afficher'),
+      '#size' => 60,
+      '#default_value' => !empty($rows) ? $rows[0]['value'] : '',
     ];
 
     $form["container"] = [
@@ -123,6 +131,7 @@ class MicroPublicationsConfigForm extends FormBase {
     $this->site->field_doctype = $publications;
     $this->site->field_labstructname_t = $form_state->getValue('field_labstructname_t');
     $this->site->field_request_fields = $form_state->getValue('field_request_fields');
+    $this->site->field_rows = $form_state->getValue('field_rows');
     $this->site->save();
 
     \Drupal::messenger()->addMessage($this->t("Requests saved"));
