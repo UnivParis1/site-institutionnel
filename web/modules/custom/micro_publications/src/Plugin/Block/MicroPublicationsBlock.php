@@ -28,8 +28,6 @@ class MicroPublicationsBlock extends BlockBase {
       $request = $config->get('hostname') . '?wt='. $config->get('wt');
       $fl =  $site->get('field_request_fields')->getValue();
       $labStructName = $site->get('field_labstructname_t')->getValue();
-      $rows = $site->get('field_rows')->getValue();
-
       $list = [];
       $types = [];
 
@@ -38,9 +36,6 @@ class MicroPublicationsBlock extends BlockBase {
         'fl'    => $fl[0]['value'],
         'sort'  => 'producedDate_tdate desc',
       ];
-      if (isset($rows) && $rows > 0) {
-        $params['rows'] = $rows;
-      }
 
       foreach ($site->get('field_doctype')->getValue() as $key => $doctype) {
         $params['fq'] = 'docType_s:' . $doctype['value'];
