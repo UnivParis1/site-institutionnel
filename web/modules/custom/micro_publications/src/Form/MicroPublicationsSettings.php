@@ -33,7 +33,7 @@ class MicroPublicationsSettings extends ConfigFormBase {
       '#title' => $this->t('Hostname'),
       '#description' => $this->t('Hostname or IP Address of the web service.'),
       '#size' => 60,
-      '#default_value' => $config->get('webservice.hostname'),
+      '#default_value' => $config->get('hostname'),
     ];
     $form['parameters'] = [
       '#type' => 'details',
@@ -48,7 +48,7 @@ class MicroPublicationsSettings extends ConfigFormBase {
         'json' => $this->t('JSON'),
         'xml' => $this->t('XML'),
       ],
-      '#default_value' => $config->get('parameters.wt'),
+      '#default_value' => $config->get('wt'),
     ];
 
     return parent::buildForm($form, $form_state);
