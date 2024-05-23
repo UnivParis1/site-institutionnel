@@ -47,8 +47,6 @@ class MicroPublicationsBlock extends BlockBase {
       }
     }
 
-    \Drupal::logger('micro_publications')->info('list : ' . print_r($types, 1));
-
     $build['micro_publications'] = [
       '#theme' => 'micro_publications',
       '#publications' => $list,
