@@ -63,7 +63,8 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     $events[CasHelper::EVENT_PRE_LOGIN][] = ['affectationRoleetMiniSite', -10];
-    $events[CasHelper::EVENT_PRE_LOGIN][] = ['checkLogin', -20];
+    //$events[CasHelper::EVENT_PRE_LOGIN][] = ['checkLogin', -20];
+    
     return $events;
   }
 
