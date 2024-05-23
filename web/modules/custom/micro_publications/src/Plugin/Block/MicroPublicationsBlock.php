@@ -34,21 +34,24 @@ class MicroPublicationsBlock extends BlockBase {
         'sort'  => 'producedDate_tdate desc',
         'rows'  => 30,
       ];
+      $list = [];
+      $types = [];
       foreach ($site->get('field_doctype')->getValue() as $key => $doctype) {
         $params['fq'] = 'docType_s:' . $doctype['value'];
         $data =$this->curl_request($request, $params);
+        $types[$doctype['value']] = $this->getDocType($doctype['value']);
         if (!empty($data)) {
-          $list = [];
           $list[$doctype['value']] = $this->format_data($data);
         }
       }
     }
 
+    \Drupal::logger('micro_publications')->info('list : ' . print_r($types, 1));
 
     $build['micro_publications'] = [
       '#theme' => 'micro_publications',
       '#publications' => $list,
-      '#types' =>$this->getDocType(),
+      '#types' => $types,
     ];
 
     return $build;
@@ -71,9 +74,13 @@ class MicroPublicationsBlock extends BlockBase {
     $data = [];
 
     foreach ($curl_request['response']['docs'] as $key => $doc) {
+      if (count($doc['title_s']) > 1) {
+        unset($doc['title_s'][0]);
+        $other_titles = implode(', ', $doc['title_s']);
+      }
       $data[$key] = [
         'title' => $doc['title_s'][0],
-        'other_titles' => (count($doc['title_s']) > 1) ? implode(', ', $doc['title_s']) : '',
+        'other_titles' => $other_titles ?? '',
         'authors' => implode(', ', $doc['authFullName_s']),
         'docType' => $this->getDocType($doc['docType_s']),
         'uri' => $doc['uri_s'],
@@ -85,9 +92,9 @@ class MicroPublicationsBlock extends BlockBase {
 
   /**
    * @param $code
-   * @return string| array[]
+   * @return string
    */
-  private function getDocType($code = NULL) {
+  private function getDocType($code) {
      $types = [
         'ART' => 'Article dans une revue',
         'COMM' => 'Communication dans un congrès',
@@ -121,8 +128,7 @@ class MicroPublicationsBlock extends BlockBase {
         'REPACT' => 'Rapport d\'activité',
         'SYNTHESE' => 'Notes de synthèse',
       ];
-     !empty($code) ? $value = $types[$code] : $value = $types;
 
-     return $value;
+     return $types[$code];
   }
 }

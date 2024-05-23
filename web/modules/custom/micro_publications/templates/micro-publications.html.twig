@@ -1,21 +1,36 @@
 {{ attach_library('micro_publications/publications') }}
-<div class="publications-hal">
-  {% for key, publication in publications  %}
-    <div class="publication-hal">
-      <div class="publication-hal-title">
-        <h3 class="h5-style">
-          <a href="{{ publication.uri }}" {{ publication.title }} target="_blank">{{ publication.title }}</a>
-        </h3>
-        {% if publication.other_titles is not empty %}
-          <em>{{ publication.other_titles }}</em>
-        {% endif %}
-      </div>
-      <div class="publication-hal-authors">
-        {{ publication.authors }}
-      </div>
-      <div class="publication-hal-doctype">
-        <span>{{ publication.docType }}</span>
-      </div>
-    </div>
-  {% endfor %}
+<div class="accordion-wrapper publications-hal-wrapper">
+  <ul class="accordion" data-accordion data-allow-all-closed="true" role="tablist">
+    {% for key, publications_type in publications  %}
+      <li class="accordion-item semi-field-sep" data-accordion-item>
+        <a href="#" class="accordion-title" aria-controls="{{ key|lower }}-accordion"
+           role="tab" id="{{ key|lower }}-label" aria-expanded="false">
+          <span class="h4-style">{{ types[key] }}</span>
+        </a>
+        <div class="accordion-content txt" data-tab-content role="tabpanel" aria-labelledby="{{ key|lower }}-label"
+             aria-hidden="true" id="{{ key|lower }}-accordion">
+          <div class="publications-hal-content {{ types[key] }}">
+            {% for key, publication in publications_type %}
+              <div class="publication-hal">
+                <div class="publication-hal-title">
+                  <h4 class="h5-style">
+                    <a href="{{ publication.uri }}" {{ publication.title }} target="_blank">{{ publication.title }}</a>
+                  </h4>
+                  {% if publication.other_titles is not empty %}
+                    <em>{{ publication.other_titles }}</em>
+                  {% endif %}
+                </div>
+                <div class="publication-hal-authors">
+                  {{ publication.authors }}
+                </div>
+                <div class="publication-hal-doctype">
+                  <span>{{ publication.docType }}</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
