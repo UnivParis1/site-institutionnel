@@ -1,0 +1,22 @@
+micro_publications.settings:
+  path: '/admin/config/micro_site/publications'
+  defaults:
+    _form: '\Drupal\micro_publications\Form\MicroPublicationsSettings'
+    _title: 'Micro publications settings'
+  requirements:
+    _permission: 'manage microsite publications'
+
+entity.site.edit_publications:
+  path: '/site/{site}/publications'
+  defaults:
+    _form: '\Drupal\micro_publications\Form\MicroPublicationsConfigForm'
+    _title: 'Micro publications settings'
+  requirements:
+    site: \d+
+    _permission: 'manage microsite footer'
+  options:
+    _admin_route: true
+    parameters:
+      site:
+        type: 'entity:site'
+        with_config_overrides: TRUE
