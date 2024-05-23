@@ -73,18 +73,20 @@ class MicroPublicationsBlock extends BlockBase {
     $data = [];
 
     foreach ($curl_request['response']['docs'] as $key => $doc) {
+	$title = $doc['title_s'][0];    
       if (count($doc['title_s']) > 1) {
         unset($doc['title_s'][0]);
-        $other_titles = implode(', ', $doc['title_s']);
       }
       $data[$key] = [
-        'title' => $doc['title_s'][0],
-        'other_titles' => $other_titles ?? '',
+        'title' => $title,
+        'other_titles' => ( count( $doc['title_s'] ) > 1 ) ? implode(', ', $doc['title_s']) : '',
         'authors' => implode(', ', $doc['authFullName_s']),
         'docType' => $this->getDocType($doc['docType_s']),
         'uri' => $doc['uri_s'],
       ];
     }
+
+    unset($other_titles);
 
     return $data;
   }
