@@ -43,7 +43,7 @@ class MicroPublicationsSettings extends ConfigFormBase {
     ];
     $form['parameters']['wt'] = [
       '#type' => 'radios',
-      'title' => $this->t('Format de retour'),
+      '#title' => $this->t('Format de retour'),
       '#options' => [
         'json' => $this->t('JSON'),
         'xml' => $this->t('XML'),
