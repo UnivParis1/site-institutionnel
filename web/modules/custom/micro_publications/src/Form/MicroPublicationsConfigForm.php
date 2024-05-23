@@ -26,7 +26,6 @@ class MicroPublicationsConfigForm extends FormBase {
     $request_fields = $site->get('field_request_fields')->getValue();
     $types = $site->get('field_doctype')->getValue();
     $nbRowsWithValue = count($types);
-    \Drupal::logger('micro_publications')->info('field_doctype' . print_r($types, 1));
 
     $form['general_settings'] = [
       '#type' => 'fieldset',
