@@ -116,13 +116,10 @@ class MicroPublicationsConfigForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var @var FieldItemList $values $values */
     $values = $form_state->getValue('publications');
-    \Drupal::logger('micro_publications')->info('form_state publications : ' . print_r($values,1));
     $publications = [];
     foreach ($values as $key => $value) {
       $publications[] =['value' => $value['doctype']];
     }
-    \Drupal::logger('micro_publications')->info('form_state publications : ' . print_r($form_state->getValues()['publications'],1));
-    \Drupal::logger('micro_publications')->info('$publications : ' . print_r($publications,1));
 
     $this->site->field_doctype = $publications;
     $this->site->field_labstructname_t = $form_state->getValue('field_labstructname_t');
