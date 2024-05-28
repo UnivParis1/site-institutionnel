@@ -104,6 +104,14 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
 
       $route_match = RouteMatch::createFromRequest($request);
       $route_name = $route_match->getRouteName();
+
+      $excluded_route_names = [
+      'image.style_public',
+      ];
+      if (in_array($route_name, $excluded_route_names)) {
+	      return;
+      }
+
       $parameters = $route_match->getRawParameters()->all();
       if(\Drupal::service('path.matcher')->isFrontPage()) {
         $url = Url::fromRoute('<front>', [], ['language' => $default_language]);
