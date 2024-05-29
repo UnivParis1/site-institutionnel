@@ -557,6 +557,16 @@ function p1ps2019_preprocess_paragraph(&$variables)
   }
 }
 
+function p1ps2019_preprocess_media_oembed_iframe(&$variables) {
+  $resource = $variables['resource'];
+
+  if ($resource->getProvider()->getName() === 'YouTube') {
+    $new_string = str_replace('?feature=oembed', '?feature=oembed&enablejsapi=1', (string) $variables['media']);
+    $new_media = $variables['media']::create($new_string);
+    $variables['media'] = $new_media;
+  }
+}
+
 function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id)
 {
   if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
