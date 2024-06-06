@@ -338,6 +338,10 @@ function p1ps2019_preprocess_block(&$variables)
         $variables['host_url'] = $site->getSiteScheme() . "://" . $site->getHostPublicUrl();
       } else $variables['host_url'] = '';
     }
+
+    if ($block_id == 'p1ps2019_siteswitcher') {
+      $variables['site_language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    }
   }
 }
 
