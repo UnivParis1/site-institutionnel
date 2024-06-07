@@ -51,7 +51,7 @@
   }
 
   if( $('.language-switcher-language-url.custom-language-switcher').length > 0){
-    $('.language-custom-language-switcher .block-title')
+    $('.custom-language-switcher .block-title')
       .addClass('circle')
       .click(function(){
         if($(this).next('ul.overlay-show').length > 0){
@@ -60,7 +60,7 @@
         else{
           overlayClose();
           $(this).next('ul').addClass('overlay-show');
-          $('.language-switcher-language-url .block-title').addClass('overlay-show');
+          $('.custom-language-switcher .block-title').addClass('overlay-show');
         }
       });
   }

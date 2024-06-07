@@ -325,21 +325,36 @@ function p1ps2019_preprocess_block(&$variables)
     $block_id = $variables["elements"]["#id"];
 
     $path = \Drupal::service('path.current')->getPath();
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    $site = $negotiator->getActiveSite();
+
     $block = \Drupal\block\Entity\Block::load($block_id);
     $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     if ($block) {
       $variables["content"]["#attributes"]["region"] = $block->getRegion();
     }
-    if ($block_id == 'p1ps2019_branding' || $block_id == 'p1ps2019_reseauxsociaux') {
-      $negotiator = \Drupal::service('micro_site.negotiator');
-      $site = $negotiator->getActiveSite();
+    if ( in_array($block_id, ['p1ps2019_branding','p1ps2019_reseauxsociaux']) ) {
       if ($site) {
         $variables['host_url'] = $site->getSiteScheme() . "://" . $site->getHostPublicUrl();
       } else $variables['host_url'] = '';
     }
 
-    if ($block_id == 'p1ps2019_siteswitcher') {
+    if (in_array($block_id, ['p1ps2019_siteswitcher', 'site_switcher_master']) ) {
+      $content = $variables['elements']['content'];
+      $display_master = $content['#block_content']->get('field_display_on_master')->getValue();
+      $field_microsites = $content['#block_content']->get('field_display_on_microsites')->getValue();
+      foreach ( $field_microsites as $key => $value) {
+        $display_microsites[] = $value['target_id'];
+      }
+
+      if ( ( (empty($site) || !isset($site)) && $display_master[0]['value'] == 1 ) ||
+            ( isset($site) && (in_array($site->id(), $display_microsites)) ) ) {
+        $variables['display'] = TRUE;
+      } else {
+        $variables['display'] = FALSE;
+      }
+
       $variables['site_language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
     }
   }
