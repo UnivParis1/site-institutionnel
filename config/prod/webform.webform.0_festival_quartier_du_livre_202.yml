@@ -1,6 +1,6 @@
-uuid: 6315fd10-b251-46f0-b54c-7e10f36961ff
+uuid: fb20b355-9be6-4222-8388-58c083977340
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
@@ -8,43 +8,49 @@ close: null
 uid: 5486
 template: false
 archive: false
-id: 1_eds_partenariat_entreprises
-title: '1 - EDS Partenariat entreprises'
+id: 0_festival_quartier_du_livre_202
+title: '0 - Festival Quartier du Livre 2024'
 description: ''
 category: ''
 elements: |-
-  prenom_nom_:
+  votre_prenom_:
     '#type': textfield
-    '#title': 'Prénom Nom :'
+    '#title': 'Votre prénom :'
     '#required': true
+    '#required_error': 'Merci d''indiquer votre prénom'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  entreprise_:
+  votre_nom_:
     '#type': textfield
-    '#title': 'Entreprise :'
+    '#title': 'Votre nom :'
+    '#required': true
+    '#required_error': 'Merci d''indiquer votre nom'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  votre_adresse_de_courriel_:
+  votre_adresse_courriel:
     '#type': email
-    '#title': 'Votre adresse de courriel :'
+    '#title': 'Votre adresse courriel :'
     '#required': true
-    '#required_error': 'Le courriel est requis'
+    '#required_error': 'Merci d''indiquer votre courriel'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  objet_:
-    '#type': textfield
-    '#title': 'Objet :'
+  vous_souhaitez_assister_a_:
+    '#type': checkboxes
+    '#title': 'Vous souhaitez assister à :'
+    '#options':
+      'Jackie Kennedy, un destin américain d’Hélène Harter, rencontre avec l’autrice et débat, lundi 3 juin de 17 h 30 à 18 h 30': 'Jackie Kennedy, un destin américain d’Hélène Harter, rencontre avec l’autrice et débat, lundi 3 juin de 17 h 30 à 18 h 30'
+      'Nina Companeez : Petit écran et grande histoire sous la direction d’Aurore Renaut et Myriam Tsikounas, lundi 3 juin de 18 h 30 à 20 h ': 'Nina Companeez : Petit écran et grande histoire sous la direction d’Aurore Renaut et Myriam Tsikounas, lundi 3 juin de 18 h 30 à 20 h '
+      'L’art et la manière de Barbara Carlotti, rencontre avec l’autrice et débat, mardi 4 juin de 17 h 30 à 19 h 30': 'L’art et la manière de Barbara Carlotti, rencontre avec l’autrice et débat, mardi 4 juin de 17 h 30 à 19 h 30'
     '#required': true
-    '#required_error': 'L''objet est requis'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  message_:
-    '#type': textarea
-    '#title': 'Message :'
+    '#required_error': 'Vous devez sélectionnez à minima une rencontre'
+    '#options__properties': ''
+  collecte_de_donnees_a_caractere_personnel:
+    '#type': checkboxes
+    '#title': 'Collecte de données à caractère personnel'
+    '#options':
+      'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de mon inscription à cet événement, le Festival Quartier du Livre.': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de mon inscription à cet événement, le Festival Quartier du Livre.'
     '#required': true
-    '#required_error': 'Message est requis'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  piece_jointe:
-    '#type': managed_file
-    '#title': 'Pièce jointe'
+    '#required_error': 'Vous devez accepter que nous puissions traiter vos données pour pouvoir vous inscrire.'
   captcha:
     '#type': captcha
+    '#captcha_description': 'Cette question sert à vérifier si vous êtes un visiteur humain ou non afin d''éviter les soumissions de pourriel (spam) automatisées. '
 css: ''
 javascript: ''
 settings:
@@ -60,7 +66,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Le formulaire est clos</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -151,8 +157,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre demande a bien été prise en compte.<br />\r\nVous allez recevoir un courriel de confirmation.</p>"
+  confirmation_title: 'Confirmation inscription'
+  confirmation_message: "<p>Vos données ont bien été enregistré pour cet évènement.</p>\r\n\r\n<p>Un courriel automatique vous a été envoyé à l'adresse courriel que vous avez saisi.</p>\r\n\r\n<p>Merci</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -218,7 +224,9 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 5486
+      - 6746
     permissions: {  }
   test:
     roles: {  }
@@ -226,9 +234,49 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 5486
+      - 6746
     permissions: {  }
 handlers:
+  email_a_la_personne_qui_s_est_inscrit_:
+    id: email
+    handler_id: email_a_la_personne_qui_s_est_inscrit_
+    label: 'Email à la personne qui s''est inscrit.'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Paris 1 Panthéon-Sorbonne'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Festival du Quartier du livre 2024 - Confirmation inscription'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à l'évènement Festival du Quartier du Livre à l'université Paris 1 Panthéon-Sorbonne a bien été prise en compte.</p>\r\n\r\n<p><strong>Veuillez vous munir de cette confirmation lors de votre venue.</strong></p>\r\n\r\n<p>Vous avez rempli, le formulaire le [webform_submission:created] et voici les valeurs que vous nous avez soumises :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Merci et bonne journée</p>\r\n\r\n<p>L'équipe organisatrice.</p>"
+      excluded_elements:
+        captcha: captcha
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
   email_aux_organisateurs:
     id: email
     handler_id: email_aux_organisateurs
@@ -240,58 +288,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: dip.eds@univ-paris1.fr
+      to_mail: culture@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
+      from_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
       from_options: {  }
-      from_name: '[webform_submission:values:prenom_nom_:raw]'
+      from_name: '[webform_submission:values:votre_nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Formulaire de contact Partenariat entreprises - nouvelle demande'
+      subject: 'Festival du Quartier du livre 2024 - nouvelle inscription'
       body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: true
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_demandeurs:
-    id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: dip.eds@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Ecole de droit de la Sorbonne - Partenariat entreprises'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[Réponse automatique]'
-      body: "<p style=\"text-align:left\">Bonjour,</p>\r\n\r\n<p style=\"text-align:left\">Votre demande de contact a bien été envoyée. Nous vous répondrons dans les meilleurs délais.</p>\r\n\r\n<p>Vous pouvez également nous joindre au <a href=\"tel:+33%201%2044%2007%2077%2039\">01 44 07 77 39</a>.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'École de droit de la Sorbonne</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

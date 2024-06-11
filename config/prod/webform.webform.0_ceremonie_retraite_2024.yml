@@ -1,4 +1,4 @@
-uuid: 6315fd10-b251-46f0-b54c-7e10f36961ff
+uuid: 60116555-5618-4858-9f61-09ea5a357a33
 langcode: fr
 status: open
 dependencies: {  }
@@ -8,43 +8,112 @@ close: null
 uid: 5486
 template: false
 archive: false
-id: 1_eds_partenariat_entreprises
-title: '1 - EDS Partenariat entreprises'
+id: 0_ceremonie_retraite_2024
+title: '0 - Cérémonie de départ à la retraite 2024'
 description: ''
 category: ''
 elements: |-
-  prenom_nom_:
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<h2>Formulaire d''inscription :</h2>'
+  nom:
     '#type': textfield
-    '#title': 'Prénom Nom :'
+    '#title': Nom
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  entreprise_:
+  prenom:
     '#type': textfield
-    '#title': 'Entreprise :'
+    '#title': 'Prénom '
+    '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  votre_adresse_de_courriel_:
+  courriel:
     '#type': email
-    '#title': 'Votre adresse de courriel :'
+    '#title': 'Courriel '
     '#required': true
-    '#required_error': 'Le courriel est requis'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  objet_:
+  venez_vous_accompagne_maximum_1_personne_:
+    '#type': radios
+    '#title': 'Souhaitez-vous venir accompagné ? (maximum 5 invités) '
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#required': true
+    '#options__properties': ''
+  noms_prenoms_invites_retraite:
+    '#type': processed_text
+    '#states':
+      visible:
+        ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
+          value: OUI
+    '#text': |
+      <h4><span style="color:black">Précisez les prénoms et noms de vos invités</span></h4>
+    '#format': full_html
+  invite_1:
     '#type': textfield
-    '#title': 'Objet :'
-    '#required': true
-    '#required_error': 'L''objet est requis'
+    '#title': 'Invité 1 (précisez son prénom et nom)'
+    '#states':
+      visible:
+        ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
+          value: Oui
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  message_:
-    '#type': textarea
-    '#title': 'Message :'
-    '#required': true
-    '#required_error': 'Message est requis'
+  invite_2_retraite:
+    '#type': textfield
+    '#title': 'Invité 2 (précisez son prénom et nom)'
+    '#states':
+      visible:
+        ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
+          value: Oui
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  piece_jointe:
-    '#type': managed_file
-    '#title': 'Pièce jointe'
+  invite_3_retraite:
+    '#type': textfield
+    '#title': 'Invité 3 (précisez son prénom et nom)'
+    '#states':
+      visible:
+        ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
+          value: Oui
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  invite_4_retraite:
+    '#type': textfield
+    '#title': 'Invité 4 (précisez son prénom et nom)'
+    '#states':
+      visible:
+        ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
+          value: Oui
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  invite_5_retraite:
+    '#type': textfield
+    '#title': 'Invité 5 (précisez son prénom et nom)'
+    '#states':
+      visible:
+        ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
+          value: Oui
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  processed_text:
+    '#type': processed_text
+    '#text': |
+      <h3>La Fête de l’été des personnels se tiendra également au Jardin d’agronomie tropicale le mardi 2 juillet, à partir de 17 h, à l’issue de la cérémonie de départ à la retraite. Au programme : animations, food-trucks et DJ set.</h3>
+    '#format': full_html
+  souhaitez_vous_y_participer_cette_invitation_est_egalement_valab:
+    '#type': radios
+    '#title': 'Souhaitez-vous y participer ?'
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#options__properties': ''
+  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#type': checkbox
+    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#required': true
   captcha:
     '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  markup:
+    '#type': webform_markup
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Soumettre
+    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -60,7 +129,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Le formulaire est clos</p>'
+  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -129,7 +198,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -152,7 +221,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre demande a bien été prise en compte.<br />\r\nVous allez recevoir un courriel de confirmation.</p>"
+  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci de votre participation !</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -209,7 +278,8 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles: {  }
+    roles:
+      - anonymous
     users: {  }
     permissions: {  }
   delete_own:
@@ -229,43 +299,6 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: dip.eds@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:prenom_nom_:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Formulaire de contact Partenariat entreprises - nouvelle demande'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: true
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
   email_aux_demandeurs:
     id: email
     handler_id: email_aux_demandeurs
@@ -277,21 +310,58 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: dip.eds@univ-paris1.fr
+      from_mail: evenements@univ-paris1.fr
       from_options: {  }
-      from_name: 'Ecole de droit de la Sorbonne - Partenariat entreprises'
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique]'
-      body: "<p style=\"text-align:left\">Bonjour,</p>\r\n\r\n<p style=\"text-align:left\">Votre demande de contact a bien été envoyée. Nous vous répondrons dans les meilleurs délais.</p>\r\n\r\n<p>Vous pouvez également nous joindre au <a href=\"tel:+33%201%2044%2007%2077%2039\">01 44 07 77 39</a>.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'École de droit de la Sorbonne</p>"
+      subject: '[Réponse automatique] Confirmation d''inscription à la cérémonie de départ à la retraite'
+      body: "<p>Madame, Monsieur,</p>\r\n\r\n<p><span style=\"font-size:12pt; font-variant:normal; white-space:pre-wrap\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:#000000\"><span style=\"font-weight:400\"><span style=\"font-style:normal\"><span style=\"text-decoration:none\">Nous vous remercions pour votre inscription.</span></span></span></span></span></span></p>\r\n\r\n<p><span style=\"font-size:12pt; font-variant:normal; white-space:pre-wrap\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:#000000\"><span style=\"font-weight:400\"><span style=\"font-style:normal\"><span style=\"text-decoration:none\">Bien cordialement,</span></span></span></span></span></span></p>\r\n\r\n<p>&nbsp;</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: evenements@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Cérémonie de départ à la retraite - Nouvelle inscription'
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

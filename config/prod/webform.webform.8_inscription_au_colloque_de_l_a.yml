@@ -1,50 +1,61 @@
-uuid: 6315fd10-b251-46f0-b54c-7e10f36961ff
+uuid: 786273ed-5f43-4d90-85ea-9fb88a94fcb2
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 7845
 template: false
-archive: false
-id: 1_eds_partenariat_entreprises
-title: '1 - EDS Partenariat entreprises'
-description: ''
-category: ''
+archive: true
+id: 8_inscription_au_colloque_de_l_a
+title: '8 - Inscription au colloque de l’Association du Master de droit public des affaires du lundi 10 juin 2024'
+description: '<p>Formulaire d''inscription au colloque de l’Association du Master de droit public des affaires du lundi 10 juin 2024.</p>'
+category: 'Inscription à un colloque '
 elements: |-
-  prenom_nom_:
+  votreprenom:
     '#type': textfield
-    '#title': 'Prénom Nom :'
+    '#title': Prénom
+    '#placeholder': Jean
     '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  entreprise_:
+  nom2:
     '#type': textfield
-    '#title': 'Entreprise :'
+    '#title': Nom
+    '#placeholder': Dupond
+    '#required': true
+    '#required_error': 'Vous devez saisir votre nom.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  votre_adresse_de_courriel_:
+  votre_adresse_de_messagerie:
     '#type': email
-    '#title': 'Votre adresse de courriel :'
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
     '#required': true
-    '#required_error': 'Le courriel est requis'
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  objet_:
+  fonction:
     '#type': textfield
-    '#title': 'Objet :'
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
     '#required': true
-    '#required_error': 'L''objet est requis'
+    '#required_error': 'Vous devez saisir votre fonction.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  message_:
-    '#type': textarea
-    '#title': 'Message :'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': 'Conditions d''inscription'
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription au colloque de l’Association du Master de droit public des affaires du lundi 10 juin 2024.&nbsp;</p>'
     '#required': true
-    '#required_error': 'Message est requis'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  piece_jointe:
-    '#type': managed_file
-    '#title': 'Pièce jointe'
-  captcha:
-    '#type': captcha
+    '#required_error': 'Vous devez accepter les conditions d''inscription.'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'S''inscrire au colloque'
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -60,7 +71,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Le formulaire est clos</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -152,7 +163,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre demande a bien été prise en compte.<br />\r\nVous allez recevoir un courriel de confirmation.</p>"
+  confirmation_message: "<p>Votre demande d'inscription&nbsp;au colloque de l’Association du Master de droit public des affaires du lundi 10 juin 2024. a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -186,53 +197,75 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
 handlers:
-  email_aux_organisateurs:
+  email_au_demandeur:
     id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
@@ -240,58 +273,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: dip.eds@univ-paris1.fr
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:prenom_nom_:raw]'
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Formulaire de contact Partenariat entreprises - nouvelle demande'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: true
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_demandeurs:
-    id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: dip.eds@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Ecole de droit de la Sorbonne - Partenariat entreprises'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[Réponse automatique]'
-      body: "<p style=\"text-align:left\">Bonjour,</p>\r\n\r\n<p style=\"text-align:left\">Votre demande de contact a bien été envoyée. Nous vous répondrons dans les meilleurs délais.</p>\r\n\r\n<p>Vous pouvez également nous joindre au <a href=\"tel:+33%201%2044%2007%2077%2039\">01 44 07 77 39</a>.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'École de droit de la Sorbonne</p>"
+      subject: 'Inscription au colloque'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription au colloque de l’Association du Master de droit public des affaires du lundi 10 juin 2024&nbsp;a bien été validée.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

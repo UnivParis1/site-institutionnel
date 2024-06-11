@@ -1,50 +1,50 @@
-uuid: 6315fd10-b251-46f0-b54c-7e10f36961ff
+uuid: 1fc7cf81-b658-4bb4-8662-1d1d63c1bb3b
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 452
 template: false
 archive: false
-id: 1_eds_partenariat_entreprises
-title: '1 - EDS Partenariat entreprises'
+id: 18_colloque_droits_nature_5_juin
+title: '18 - Colloque Droits nature 5 juin'
 description: ''
-category: ''
+category: 'Inscription événement'
 elements: |-
-  prenom_nom_:
+  nom:
     '#type': textfield
-    '#title': 'Prénom Nom :'
+    '#title': Nom
+    '#placeholder': Name
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  entreprise_:
+  prenom:
     '#type': textfield
-    '#title': 'Entreprise :'
+    '#title': Prénom
+    '#placeholder': 'First name'
+    '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  votre_adresse_de_courriel_:
+  courriel:
     '#type': email
-    '#title': 'Votre adresse de courriel :'
+    '#title': Courriel
+    '#placeholder': Email
     '#required': true
-    '#required_error': 'Le courriel est requis'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  objet_:
-    '#type': textfield
-    '#title': 'Objet :'
+  confirmation_ou_annulation:
+    '#type': radios
+    '#title': 'Confirmation ou annulation'
+    '#options':
+      'Je confirme ma venue mercredi 5 juin': 'Je confirme ma venue mercredi 5 juin'
+      'J''annule ma venue mercredi 5 juin': 'J''annule ma venue mercredi 5 juin'
     '#required': true
-    '#required_error': 'L''objet est requis'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  message_:
-    '#type': textarea
-    '#title': 'Message :'
-    '#required': true
-    '#required_error': 'Message est requis'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  piece_jointe:
-    '#type': managed_file
-    '#title': 'Pièce jointe'
+    '#options__properties': ''
   captcha:
     '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Envoyer la réponse'
 css: ''
 javascript: ''
 settings:
@@ -53,14 +53,14 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: true
+  page: false
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: false
+  form_submit_once: true
   form_open_message: ''
-  form_close_message: '<p>Le formulaire est clos</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -99,7 +99,7 @@ settings:
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
-  submission_exclude_empty: false
+  submission_exclude_empty: true
   submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
@@ -129,7 +129,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -149,10 +149,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
-  confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre demande a bien été prise en compte.<br />\r\nVous allez recevoir un courriel de confirmation.</p>"
+  confirmation_type: modal
+  confirmation_url: 'https://isjps.pantheonsorbonne.fr/'
+  confirmation_title: 'Réponse envoyée'
+  confirmation_message: '<p><strong>Votre réponse a bien été enregistrée.</strong></p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -162,15 +162,15 @@ settings:
   confirmation_update: false
   limit_total: null
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: "<p>Le nombre maximum de places disponibles pour cet événement est atteint.</p>\r\n\r\n<p>Vous pouvez vous inscrire sur liste d'attente en complétant <strong><a href=\"https://isjps.pantheonsorbonne.fr/inscription-liste-dattente\">ce formulaire</a></strong>. Après votre inscription sur cette liste d'attente, nous vous contacterons uniquement si une place se libère. Sans nouvelles de notre part, il est inutile de vous déplacer.</p>\r\n\r\n<p>Merci pour votre compréhension.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
   limit_total_unique: false
-  limit_user: null
+  limit_user: 1
   limit_user_interval: null
-  limit_user_message: ''
+  limit_user_message: '<p>Votre inscription a déjà été enregistrée.</p>'
   limit_user_unique: false
   entity_limit_total: null
   entity_limit_total_interval: null
-  entity_limit_user: null
+  entity_limit_user: 1
   entity_limit_user_interval: null
   purge: none
   purge_days: null
@@ -229,69 +229,32 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_aux_organisateurs:
+  courriel_aux_personnes_inscrites_en_presentiel:
     id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
+    handler_id: courriel_aux_personnes_inscrites_en_presentiel
+    label: 'Courriel aux personnes inscrites'
     notes: ''
     status: true
     conditions: {  }
-    weight: 0
+    weight: 1
     settings:
       states:
         - completed
-      to_mail: dip.eds@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
-      bcc_mail: ''
+      bcc_mail: marine.conde@univ-paris1.fr
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
+      from_mail: marine.conde@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:prenom_nom_:raw]'
-      reply_to: ''
+      from_name: 'Marine Condé'
+      reply_to: marine.conde@univ-paris1.fr
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Formulaire de contact Partenariat entreprises - nouvelle demande'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: true
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_demandeurs:
-    id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_courriel_:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: dip.eds@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Ecole de droit de la Sorbonne - Partenariat entreprises'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[Réponse automatique]'
-      body: "<p style=\"text-align:left\">Bonjour,</p>\r\n\r\n<p style=\"text-align:left\">Votre demande de contact a bien été envoyée. Nous vous répondrons dans les meilleurs délais.</p>\r\n\r\n<p>Vous pouvez également nous joindre au <a href=\"tel:+33%201%2044%2007%2077%2039\">01 44 07 77 39</a>.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'École de droit de la Sorbonne</p>"
+      subject: 'Colloque Droits nature 5 juin – Merci pour votre réponse'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Merci pour votre réponse, enregistrée le [webform_submission:created]</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marine Condé</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

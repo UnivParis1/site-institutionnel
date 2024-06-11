@@ -167,8 +167,6 @@ third_party_settings:
         direction: vertical
     group_presentation:
       children:
-        - field_firstname
-        - field_name
         - field_fonction
         - field_affiliation
         - field_other_affiliation
@@ -256,7 +254,7 @@ third_party_settings:
       label: 'Intelligence Artificielle'
       region: hidden
       parent_name: ''
-      weight: 21
+      weight: 22
       format_type: accordion_item
       format_settings:
         classes: ''
@@ -345,14 +343,6 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
-    third_party_settings: {  }
-  field_firstname:
-    type: string_textfield
-    weight: 3
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_fonction:
     type: string_textfield
@@ -447,14 +437,6 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: medias
-    third_party_settings: {  }
-  field_name:
-    type: string_textfield
-    weight: 4
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_other_affiliation:
     type: string_textfield
@@ -708,9 +690,11 @@ content:
 hidden:
   body: true
   deleted: true
+  field_firstname: true
   field_formations_ia: true
   field_get_hal_publications: true
   field_ia_skills: true
+  field_name: true
   field_projects_ia: true
   field_short_bio: true
   trombi_students_enable: true
