@@ -53,13 +53,18 @@
   'custom-language-switcher',
 ]
 %}
-<section{{ attributes.addClass(classes) }}>
-  {{ title_prefix }}
-  {% block content %}
-    <button{{ title_attributes.addClass('block-title reset-btn circle') }}>
-    {{ site_language }}
-    </button>
-    {{ content }}
-  {% endblock %}
-  {{ title_suffix }}
-</section>
+
+{% if display %}
+
+  <section{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {% block content %}
+      <button{{ title_attributes.addClass('block-title reset-btn circle') }}>
+      {{ site_language }}
+      </button>
+      {{ content.field_links }}
+    {% endblock %}
+    {{ title_suffix }}
+  </section>
+
+{% endif %}
