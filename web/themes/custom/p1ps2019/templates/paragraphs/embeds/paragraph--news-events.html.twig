@@ -58,7 +58,7 @@
     </h2>
   {% endif %}
   <div{{ attributes.addClass(classes) }}>
-      {% for key, item in content.field_news_events if key|first != '#' %}
+      {% for key, item in content.field_news_events|filter((value, key) => key|first != '#') %}
         {% set rowClass = key is even ? 'large-8 custom-padding':'large-4' %}
         <div class="cell small-12 {{ rowClass }}">
           <div class="same-height full-height">{{ item }}</div>

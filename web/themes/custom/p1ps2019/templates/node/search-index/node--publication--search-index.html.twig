@@ -99,7 +99,7 @@
       {% endif %}</p>
     <p>{{ content.body.0 }}</p>
     {% if content.field_publication_topics|render %}
-      {% for key, topic in content.field_publication_topics if key|first != '#' %}
+      {% for key, topic in content.field_publication_topics|filter((value, key) => key|first != '#') %}
           <span>{{ topic }}</span>
       {% endfor %}
     {% endif %}
