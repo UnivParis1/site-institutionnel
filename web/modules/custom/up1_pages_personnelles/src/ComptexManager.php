@@ -261,8 +261,10 @@ class ComptexManager implements ComptexInterface {
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
     $userInformation = json_decode(curl_exec($ch), TRUE);
-    $userInformation = reset($userInformation);
-
+    if ( !empty($userInformation) ) {
+    	$userInformation = reset($userInformation);
+    }
+    else $userInformation = [];
     curl_close($ch);
 
     return $userInformation;
