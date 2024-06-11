@@ -63,7 +63,8 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     $events[CasHelper::EVENT_PRE_LOGIN][] = ['affectationRoleetMiniSite', -10];
-    $events[CasHelper::EVENT_PRE_LOGIN][] = ['checkLogin', -20];
+    //$events[CasHelper::EVENT_PRE_LOGIN][] = ['checkLogin', -20];
+    
     return $events;
   }
 
@@ -85,6 +86,12 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     }
     else {
       if ($account instanceof AccountInterface) {
+        $comptex = new ComptexManager();
+
+        if (in_array('enseignant_doctorant', $account->getRoles()) && $comptex->userHasPagePerso($account->name->value)) {
+          return;
+        }
+
         if ($account->hasPermission('administer site entities')) {
           return;
         }

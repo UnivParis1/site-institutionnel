@@ -1,0 +1,1027 @@
+uuid: 51c3fb6d-89f4-4759-8e57-0d1ea8c4e325
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 74
+template: false
+archive: false
+id: 30_ametys_iaes
+title: '30 - Amétys IAES'
+description: '<p>Formulaire de collecte des mises à jour portant sur notre offre de formation</p>'
+category: ''
+elements: |-
+  identifiez_vous:
+    '#type': webform_contact
+    '#title': Identifiez-vous
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#name__title': 'NOM et Prénom'
+    '#name__placeholder': 'NOM et Prénom'
+    '#name__required': true
+    '#company__access': false
+    '#email__placeholder': prenom.nom@univ-paris1.fr
+    '#email__required': true
+    '#phone__access': false
+    '#address__access': false
+    '#address_2__access': false
+    '#city__access': false
+    '#state_province__access': false
+    '#postal_code__access': false
+    '#country__access': false
+  diplome:
+    '#type': fieldset
+    '#title': Diplôme
+    '#description': |-
+      <p>Sélectionnez dans cet ordre</p>
+
+      <ol>
+      	<li>Diplôme</li>
+      	<li>Semestre</li>
+      	<li>Elément pédagogique</li>
+      </ol>
+    '#help': |-
+      <p>Sélectionnez dans cet ordre</p>
+
+      <ol>
+      	<li>Diplôme</li>
+      	<li>Semestre</li>
+      	<li>Elément pédagogique</li>
+      </ol>
+    '#description_display': tooltip
+    '#required': true
+    licence:
+      '#type': details
+      '#title': Licence
+      '#more_title': B
+      '#states':
+        invisible:
+          'details[data-webform-key="master"]':
+            filled: true
+      '#format': fieldset
+      licence_1:
+        '#type': details
+        '#title': 'Licence 1'
+        '#more_title': .
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence_2"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="licence_3"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master"]':
+                filled: true
+        licence_1_semestre_1:
+          '#type': fieldset
+          '#title': 'Licence 1 Semestre 1'
+          l1_s1:
+            '#type': select
+            '#title': 'L1 S1'
+            '#options':
+              'N''exite pas 1': 'L1 - M1011914 Ateliers de méthodologie 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT89W31/histoire-contemporaine-1-KBT89WME.html': 'L1 - M1011714 Histoire contemporaine 1'
+              'N''exite pas 2': 'L1 - M1012114 Initiation à la gestion de l''entreprise 1'
+              'N''exite pas 3': 'L1 - M1012314 Institutions politiques 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT89W31/introduction-a-l-analyse-economique-1-KBT89X9A.html': 'L1 - M1011314 Introduction à l''analyse économique 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT89W31/introduction-generale-au-droit-KBT89Y1C.html': 'L1 - M1011114 Introduction générale au droit 1'
+              'N''exite pas 4': 'L1 - M1012522 Méthodes quantitatives appliquées aux sciences sociales 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT89W31/sociologie-des-groupes-sociaux-1-KBT89YRP.html': 'L1 - M1011514 Sociologie des groupes sociaux 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+        licence_1_semestre_2:
+          '#type': fieldset
+          '#title': 'Licence 1 Semestre 2'
+          '#more_title': .
+          l1_s2:
+            '#type': select
+            '#title': 'L1 S2'
+            '#options':
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT8A48E/droit-prive-KBT8A4NH.html': 'L1 - M1011219 Droit privé 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT8A48E/histoire-contemporaine-2-KBT8A5A5.html': 'L1 - M1011814 Histoire contemporaine 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue2-enseignements-d-ouverture-KBT8A7DD/initiation-a-la-gestion-des-entreprises-KBT8A8ES.html': 'L1 - M1012614 Initiation à la gestion de l''entreprise 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue2-enseignements-d-ouverture-KBT8A7DD/institutions-politiques-2-KBT8A8PJ.html': 'L1 - M1012219 Institutions politiques 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT8A48E/introduction-a-l-analyse-economique-2-KBT8A5WI.html': 'L1 - M1011414 Introduction à l''analyse économique 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue2-enseignements-d-ouverture-KBT8A7DD/methodes-quantitatives-appliquees-aux-sciences-sociales-2-L5Q22ZD3.html': 'L1 - M1012422 Méthodes quantitatives appliquées aux sciences sociales 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/ue1-enseignements-fondamentaux-KBT8A48E/sociologie-des-groupes-sociaux-2-KBT8A6IR.html': 'L1 - M1011614 Sociologie des groupes sociaux 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+      licence_2:
+        '#type': details
+        '#title': 'Licence 2'
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence_1"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="licence_3"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master"]':
+                filled: true
+        licence_2_semestre_1:
+          '#type': fieldset
+          '#title': 'Licence 2 Semestre 1'
+          l2_s1:
+            '#type': select
+            '#title': 'L2 S1'
+            '#options':
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AAR9/ue2-enseignements-complementaires-KBT8ADRP/choix-2-matieres-KBT8AE7W/analyse-des-documents-financiers-de-l-entreprise-1-KBT8AEV8.html': 'L2 - M2012514 Analyse des documents financiers de l''entreprise 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AAR9/ue1-enseignements-fondamentaux-KBT8AB2L/analyse-economique-approfondie-1-KBT8ABEB.html': 'L2 - M2011319 Analyse économique approfondie 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AAR9/ue3-enseignements-transversaux-KBT8AHKY/culture-et-outils-numeriques-1-KBT8AI0K.html': 'L2 - M2012919 Culture et outils numériques 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AAR9/ue1-enseignements-fondamentaux-KBT8AB2L/droit-administratif-1-KBT8AC0Y.html': 'L2 - M2011114 Droit administratif 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue2-enseignements-complementaires-KBT8AP5H/droit-prive-2-KBT8AR2Q.html': 'L2 - M2011914 Droit privé 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AAR9/ue1-enseignements-fondamentaux-KBT8AB2L/histoire-contemporaine-1-KBT8ACON.html': 'L2 - M2011714 Histoire contemporaine 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-sociologie-avec-td-KBT8AKF9/ue2-enseignements-complementaires-KBT8AM01/histoire-contemporaine-sans-td-1-KBT8AMBI.html': 'L2 - M2013319 Histoire contemporaine sans td 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AAR9/ue2-enseignements-complementaires-KBT8ADRP/choix-2-matieres-KBT8AE7W/management-et-strategie-1-KBT8AFJU.html': 'L2 - M2013119 Techniques d''expression écrite/orale 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AAR9/ue2-enseignements-complementaires-KBT8ADRP/choix-2-matieres-KBT8AE7W/theorie-des-faits-economiques-KBT8AFZC.html': 'L2 - M2012319 Théories et faits économiques 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+        licence_2_semestre_2:
+          '#type': fieldset
+          '#title': 'Licence 2 Semestre 2'
+          l2hhjjjkk:
+            '#type': select
+            '#title': 'L2 S2'
+            '#options':
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue2-enseignements-complementaires-KBT8AP5H/choix-2-matieres-KBT8APHF/analyse-des-documents-financiers-de-l-entreprise-2-KBT8APUF.html': 'L2 - M2012614 Analyse des documents financiers de l''entreprise 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue1-enseignements-fondamentaux-KBT8AND7/analyse-economique-approfondie-2-KBT8ANOT.html': 'L2 - M2011419 Analyse économique approfondie 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue3-enseignements-transversaux-KBT8ARZ6/culture-et-outils-numeriques-2-KBT8ASG4.html': 'L2 - M2013019 Culture et outils numériques 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue1-enseignements-fondamentaux-KBT8AND7/droit-administratif-2-KBT8AODA.html': 'L2 - M2011214 Droit administratif 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue2-enseignements-complementaires-KBT8AP5H/droit-prive-2-KBT8AR2Q.html': 'L2 - M2012014 Droit privé 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue2-enseignements-complementaires-KBT8AP5H/choix-2-matieres-KBT8APHF/economie-internationale-KBT8AQ7P.html': 'L2 - M2012414 Economie internationale 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue1-enseignements-fondamentaux-KBT8AND7/histoire-contemporaine-2-KBT8AONI.html': 'L2 - M2011814 Histoire contemporaine 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-sociologie-avec-td-KBT8AUDA/ue2-enseignements-complementaires-KBT8AW7G/histoire-contemporaine-sans-td-2-KBT8AWRZ.html': 'L2 - M2013419 Histoire contemporaine sans td 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue2-enseignements-complementaires-KBT8AP5H/choix-2-matieres-KBT8APHF/management-strategie-2-KBT8AQLD.html': 'L2 - M2012814 Management et stratégie 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-sociologie-avec-td-KBT8AUDA/ue1-enseignements-fondamentaux-KBT8AUW4/sociologie-des-relations-sociales-2-KBT8AVD4.html': 'L2 - M2011614 Sociologie des relations sociales 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue2-enseignements-complementaires-KBT8AP5H/sociologie-des-relations-sociales-sans-td-2-KBT8ARMD.html': 'L2 - M2013619 Sociologie des relations sociales sans td 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AN1H/ue3-enseignements-transversaux-KBT8ARZ6/technique-d-expression-2-KBT8ATQ9.html': 'L2 - M2013019 Technique d''expression écrite/orale 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+      licence_3:
+        '#type': details
+        '#title': 'Licence 3'
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence_1"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="licence_2"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master"]':
+                filled: true
+        licence_3_semestre_1:
+          '#type': fieldset
+          '#title': 'Licence 3 Semestre 1'
+          l3_s1:
+            '#type': select
+            '#title': 'L3 S1'
+            '#options':
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue3-enseignements-de-professionnalisation-KBT8B70B/choix-d-option-KBT8B7JN/communication-1-KBT8B81J.html': 'L3 - M3014116 Communication 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-2-enseignements-de-specialisation-KBT8B1Q4/parcours-travail-management-KBT8B45T/droit-commercial-1-KBT8B6AU.html': 'L3 - M3012916 Droit commercial 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-1-enseignements-fondamentaux-s1-KBT8AYVS/droit-du-travail-1-KBT8AZHR.html': 'L3 - M3011116 Droit du travail 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue3-enseignements-de-professionnalisation-KBT8B70B/gestion-des-ressources-humaines-1-KBT8B9RG.html': 'L3 - M3013516 Gestion des Ressources Humaines 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-sociologie-avec-td-KBT8BCC3/ue-2-enseignements-de-specialisation-KBT8BEH1/parcours-administration-publique-et-sociale-KBT8BEXL/histoire-du-travail-sans-td-1-KBT8BFG6.html': 'L3 - M3012516 Histoire du travail sans td 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-2-enseignements-de-specialisation-KBT8B1Q4/parcours-travail-management-KBT8B45T/choix-gestion-financiere-debutant-ou-avance-KBT8B4O9/gestion-financiere-debutants-1-KBT8B5R3.html': 'L3 - M3013116 Gestion financière débutants 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-2-enseignements-de-specialisation-KBT8B1Q4/parcours-travail-management-KBT8B45T/choix-gestion-financiere-debutant-ou-avance-KBT8B4O9/gestion-financiere-avances-1-KBT8B55O.html': 'L3 - M3013316 Gestion financière avancés 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue3-enseignements-de-professionnalisation-KBT8B70B/choix-d-option-KBT8B7JN/gestion-appliquee-1-KBT8B8K0.html': 'L3 - M3010916 Gestion appliquée 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-2-enseignements-de-specialisation-KBT8B1Q4/parcours-administration-publique-et-sociale-KBT8B2CW/finances-publiques-KBT8B3AT.html': 'L3 - M3011919 Finances publiques 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-1-enseignements-fondamentaux-s1-KBT8AYVS/economie-du-travail-et-de-la-protection-sociale-1-KBT8B05W.html': 'L3 - M3011319 Economie du travail et de la protection sociale 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-2-enseignements-de-specialisation-KBT8B1Q4/parcours-administration-publique-et-sociale-KBT8B2CW/droit-public-economique-1-KBT8B2V7.html': 'L3 - M3012719 Droit public économique 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-1-enseignements-fondamentaux-s1-KBT8AYVS/histoire-du-travail-td-1-KBT8B0UN.html': 'L3 - M3011716 Histoire du travail td 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue3-enseignements-de-professionnalisation-KBT8B70B/rapport-de-stage-KBT8BBH7.html': 'L3 - M3014316 Méthodologie du rapport de stage'
+              'N''exite pas': 'L3 - M3014519 Rédaction du rapport de stage'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue-2-enseignements-de-specialisation-KBT8B1Q4/parcours-administration-publique-et-sociale-KBT8B2CW/sociologie-du-travail-sans-td-1-KBT8B3QG.html': 'L3 - M3012316 Sociologie  du travail  sans td 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-sociologie-avec-td-KBT8BCC3/ue-1-enseignements-fondamentaux-s1-KBT8BCWG/sociologie-du-travail-td-1-KBT8BDMB.html': 'L3 - M3011516 Sociologie  du travail  td 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8AYD5/ue3-enseignements-de-professionnalisation-KBT8B70B/choix-d-option-KBT8B7JN/sociologie-de-la-formation1-KBT8B959.html': 'L3 - M3013916 Sociologie de la formation 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+        licence_3_semestre_2:
+          '#type': fieldset
+          '#title': 'Licence 3 Semestre 2'
+          l3_s2:
+            '#type': select
+            '#title': 'L3 S2'
+            '#options':
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue3-enseignements-de-professionnalisation-KBT8BQRQ/choix-de-1-matiere-KBT8BRBO/communication-2-KBT8BRXM.html': 'L3 - M3014216 Communication 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-travail-managementt-KBT8BN4D/droit-commercial-2-KBT8BPN0.html': 'L3 - M3012219 Droit commercial 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-1-enseignements-fondamentaux-s2-KBT8BHLY/droit-du-travail-2-KBT8BI69.html': 'L3 - M3011216 Droit du travail 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue3-enseignements-de-professionnalisation-KBT8BQRQ/choix-de-1-matiere-KBT8BRBO/methodes-quantitatives-appliquees-aux-sciences-sociales-KBT8BT0O.html': 'L3 - M3014019 Méthodes quantitatives appliquées aux sciences sociales 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-travail-managementt-KBT8BN4D/le-capitalisme-mutation-et-diversite-KBT8BQ43.html': 'L3 - M3013019 Le capitalisme : mutation et diversité'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-1-enseignements-fondamentaux-s2-KBT8BHLY/histoire-du-travail-td-2-KBT8BJVL.html': 'L3 - M3012019 Histoire du travail td 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-sociologie-avec-td-KBT8BUZQ/ue-2-enseignements-de-specialisation-KBT8BX00/parcours-administration-publique-et-sociales-KBT8BXIV/histoire-du-travail-sans-td-2-KBT8BY6S.html': 'L3 - M3012616 Histoire du travail sans td 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue3-enseignements-de-professionnalisation-KBT8BQRQ/choix-de-1-matiere-KBT8BRBO/grh-appliquee-KBT8BSIH.html': 'L3 - M3013819 GRH appliquée'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-travail-managementt-KBT8BN4D/choix-gestion-financiere-debutant-ou-avance-KBT8BNT7/gestion-financiere-debutants-2-KBT8BP3V.html': 'L3 - M3013216 Gestion financière débutants 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-travail-managementt-KBT8BN4D/choix-gestion-financiere-debutant-ou-avance-KBT8BNT7/gestion-financiere-avances-2-KBT8BOKN.html': 'L3 - M3013416 Gestion financière avancés 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue3-enseignements-de-professionnalisation-KBT8BQRQ/gestion-des-ressources-humaines-2-KBT8BTKH.html': 'L3 - M3013616 Gestion des Ressources Humaines 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-administration-publique-et-sociales-KBT8BKH2/economie-sociale-solidaire-KBT8BLEK.html': 'L3 - M3012019 Economie sociale et solidaire 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-1-enseignements-fondamentaux-s2-KBT8BHLY/economie-du-travail-et-de-la-protection-sociale-2-KBT8BJDO.html': 'L3 - M3011419 Economie du travail et de la protection sociale 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-administration-publique-et-sociales-KBT8BKH2/droit-public-economique-2-KBT8BKV6.html': 'L3 - M3012816 Droit public économique 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-administration-publique-et-sociales-KBT8BKH2/politiques-economiques-KBT8BLYT.html': 'L3 - M3014419 Politiques économiques 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-histoire-avec-td-KBT8BH5I/ue-2-enseignements-de-specialisation-KBT8BK6Q/parcours-administration-publique-et-sociales-KBT8BKH2/sociologie-du-travail-sans-td-2-KBT8BMMY.html': 'L3 - M3012416 Sociologie  du travail  sans td 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/licence-L/licence-aes-KBT89S2Q/licence-aes-parcours-ressources-humaines-KBT89TAC/choix-sociologie-avec-td-KBT8BUZQ/ue-1-enseignements-fondamentaux-s2-KBT8BVGZ/sociologie-du-travail-td-2-KBT8BVZA.html': 'L3 - M3011616 Sociologie  du travail  td 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+  masters:
+    '#type': webform_wizard_page
+    '#title': Masters
+    '#prev_button_label': Licence
+    '#next_button_label': 'Envoyer '
+    master:
+      '#type': details
+      '#title': Master
+      '#states':
+        invisible:
+          'details[data-webform-key="licence"]':
+            filled: true
+      master_1:
+        '#type': details
+        '#title': 'Master 1'
+        '#states':
+          invisible:
+            'details[data-webform-key="master_2"]':
+              filled: true
+            'details[data-webform-key="licence"]':
+              filled: true
+        master_1_semestre_1:
+          '#type': fieldset
+          '#title': 'Master 1 Semestre 1'
+          m1_s1:
+            '#type': select
+            '#title': 'M1 S1'
+            '#options':
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJGU4/choix-d-une-matiere-KBTIJH1H/communication-dans-l-entreprise-KBTIJHI1.html': 'M1 - M4012519 Communication dans l''entreprise 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-de-la-mutualite-des-assurances-et-de-la-prevoyance-delocalise-a-abidjan-KULT1MWG/ue-3-enseignement-de-specialisation-et-transversaux-KBTIJVIK/controle-de-gestion-sociale-et-systeme-d-information-de-gest-KPQZ24ST.html': 'M1 - M4012321 Contrôle de gestion sociale et Système d''information de GRH 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJGU4/croissance-repartition-inegalites-KBTIJIWT.html': 'M1 - M4083719 Croissance, répartition, inégalités 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJGU4/droit-de-la-securite-sociale-KBTIJJBG.html': 'M1 - M4083519 Droit de la sécurité sociale 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue1-enseignements-fondamentaux-KBTIJK9Y/droit-du-travail-KBTIJKTA.html': 'M1 - M4011119 Droit du travail 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJGU4/choix-d-une-matiere-KBTIJH1H/economie-de-l-entreprise-KBTIJHWA.html': 'M1 - M4012719 Économie de l''entreprise 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-de-la-mutualite-des-assurances-et-de-la-prevoyance-delocalise-a-abidjan-KULT1MWG/ue-3-enseignement-de-specialisation-et-transversaux-KBTIJVIK/formation-qualification-et-competences-KBTIJWAG.html': 'M1 - M4011919 Formation, qualification et compétences 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-de-la-mutualite-des-assurances-et-de-la-prevoyance-delocalise-a-abidjan-KULT1MWG/ue-3-enseignement-de-specialisation-et-transversaux-KBTIJVIK/gestion-des-ressources-humaines-KBTIJWFH.html': 'M1 - M4012119 Gestion des ressources humaines 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJGU4/choix-d-une-matiere-KBTIJH1H/histoire-de-l-impot-et-de-la-justice-sociale-KBTIJI7U.html': 'M1 - M4012919 Histoire de l''impôt et de la justice sociale 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue1-enseignements-fondamentaux-KBTIJK9Y/histoire-des-relations-sociales-en-europe-KBTIJLHR.html': 'M1 - M4011519 Histoire des relations sociales en Europe 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue1-enseignements-fondamentaux-KBTIJK9Y/politique-de-l-emploi-KBTIJM31.html': 'M1 - M4011319 Politique de l''emploi 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJGU4/sociologie-des-inegalites-KBTIJJOR.html': 'M1 - M4083919 Sociologie des inégalités 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue1-enseignements-fondamentaux-KBTIJK9Y/sociologie-des-problemes-sociaux-KBTIJMP0.html': 'M1 - M4011719 Sociologie des problèmes sociaux 1'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJGU4/choix-d-une-matiere-KBTIJH1H/techniques-quantitatives-KBTIJII8.html': 'M1 - B4020115 Techniques quantitatives 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+        master_1_semestre_2:
+          '#type': fieldset
+          '#title': 'Master 1 Semestre 2'
+          m1_s2:
+            '#type': select
+            '#title': 'M1 S2'
+            '#options':
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue3-enseignements-de-specialisaton-et-transversaux-KBTIJS0X/choix-d-une-matiere-KBTIJSJK/communication-publique-KBTIJT0G.html': 'M1 - M4012619 Communication publique 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue3-enseignements-de-specialisaton-et-transversaux-KBTIJS0X/droit-de-la-protection-sociale-complementaire-KBTIJU9J.html': 'M1 - M4013619 Droit de la protection sociale complémentaire 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue1-enseignements-fondamentaux-KBTIJK9Y/droit-du-travail-KBTIJKTA.html': 'M1 - M4011219 Droit du travail 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue3-enseignements-de-specialisaton-et-transversaux-KBTIJS0X/economie-des-inegalites-et-de-la-redistribution-KBTIJUKU.html': 'M1 - M4084019 Économie des inégalités et de la redistribution 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue3-enseignements-de-specialisaton-et-transversaux-KBTIJS0X/choix-d-une-matiere-KBTIJSJK/economie-europeenne-KBTIJTF5.html': 'M1 - M4012819 Économie européenne 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue3-enseignements-de-specialisaton-et-transversaux-KBTIJS0X/economie-sociale-et-solidaire-KBTIJUSL.html': 'M1 - M4083819 Économie sociale et solidaire 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJXVK/gestion-de-l-entreprise-KBTIJZ5B.html': 'M1 - M4012019 Gestion de l''entreprise 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-de-la-mutualite-des-assurances-et-de-la-prevoyance-delocalise-a-abidjan-KULT1MWG/ue-3-enseignement-de-specialisation-et-transversaux-KBTIJVIK/gestion-des-ressources-humaines-KBTIJWFH.html': 'M1 - M4012219 Gestion des ressources humaines 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-enseignements-fondamentaux-KBTIJNW1/histoire-des-relations-sociales-KBTIJP63.html': 'M1 - M4011619 Histoire des relations sociales 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue1-enseignements-fondamentaux-KBTIJK9Y/politique-de-l-emploi-KBTIJM31.html': 'M1 - M4011419 Politiques sociales 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-3-enseignements-de-specialisation-et-transversaux-KBTIJXVK/sante-travail-performance-ergonomie-pychologie-KBTIK0CF.html': 'M1 - M4012419 Santé, travail, performance (ergonomie, psychologie) 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue1-enseignements-fondamentaux-KBTIJK9Y/sociologie-des-problemes-sociaux-KBTIJMP0.html': 'M1 - M4011819 Sociologie des problèmes sociaux 2'
+              'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue3-enseignements-de-specialisaton-et-transversaux-KBTIJS0X/choix-d-une-matiere-KBTIJSJK/sociologie-des-relations-professionnelles-KBTIJTSB.html': 'M1 - M4013019 Sociologie des relations professionnelles 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+      master_2:
+        '#type': details
+        '#title': 'Master 2'
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master_1"]':
+                filled: true
+        master_2_agec:
+          '#type': details
+          '#title': 'Master 2 AGEC'
+          '#states':
+            invisible:
+              'details[data-webform-key="master_1"]':
+                filled: true
+              'details[data-webform-key="licence"]':
+                filled: true
+              'details[data-webform-key="master_2_coss"]':
+                filled: true
+          master_2_agec_semestre_1:
+            '#type': fieldset
+            '#title': 'Master 2 AGEC Semestre 1'
+            m2_agec_s1:
+              '#type': select
+              '#title': 'M2 AGEC S1'
+              '#options':
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK205/accompagnement-et-intermediation-sur-le-marche-du-travail-KBTIK2IO.html': 'M2 AGEC - M5P91719 - Accompagnement et intermédiation sur le marché du travail 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-2-KBTIK45F/ateliers-KBTIK4ED.html': 'M2 AGEC - M5P92116 - Ateliers 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK205/droit-de-l-emploi-KBTIK300.html': 'M2 AGEC - M5P91116 - Droit de l''emploi 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK205/economie-de-l-emploi-et-des-ressources-humaines-KBTIK3ET.html': 'M2 AGEC - M5P91316 - Economie de l''emploi et des ressources humaines 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK205/management-des-ressources-humaines-KBTIK3PY.html': 'M2 AGEC - M5P91516 - Management des Ressources Humaines 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-2-KBTIK45F/methodologie-et-accompagnement-professionnel-KPMIW5KL.html': 'M2 AGEC - M5P92321 - Méthodologie et accompagnement professionnel 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK205/modelisations-de-donnees-et-outils-quantitatifs-KBTIK3XN.html': 'M2 AGEC - M5P91916 - Modélisations de données et outils quantitatifs 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-2-KBTIK45F/semaine-d-observation-duservice-public-emploi-KPMIW5N0.html': 'M2 AGEC - M5P9ST21 - Semaine d''observation du Service Public Emploi'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      checked: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      checked: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      checked: true
+          master_2_agec_semestre_2:
+            '#type': fieldset
+            '#title': 'Master 2 AGEC Semestre 2'
+            m2_agec_s2:
+              '#type': select
+              '#title': 'M2 AGEC S2'
+              '#options':
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK67S/anglais-des-ressources-humaines-KBTIK6QR.html': 'M2 AGEC - M5P9L216 - Anglais des Ressources Humaines 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-2-KBTIK8KV/ateliers-KBTIK94H.html': 'M2 AGEC - M5P91816 - Ateliers 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK67S/gestion-anticipee-de-l-emploi-et-des-competences-KBTIK780.html': 'M2 AGEC - M5P91219 - Gestion anticipée de l''emploi et des compétences 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-2-KBTIK8KV/memoire-professionnel-alternance-ou-stage-memoire-de-fin-d-KJ08YHER.html': 'M2 AGEC - M5P9M220 - Mémoire professionnel (alternance ou stage) mémoire de fin d''études 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-2-KBTIK8KV/methodologie-et-accompagnement-professionnel-KPMIW8DR.html': 'M2 AGEC - M5P92021 - Méthodologie et accompagnement professionnel 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK67S/negociations-collectives-KBTIK7OE.html': 'M2 AGEC - M5P91419 - Négociations collectives 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-anticipation-et-gestion-de-l-emploi-et-des-competences-KBTIJFIT/ue-1-KBTIK67S/politiques-de-formation-KBTIK83Q.html': 'M2 AGEC - M5P91619 - Politiques de formation 2'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      checked: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      checked: true
+        master_2_coss:
+          '#type': details
+          '#title': 'Master 2 COSS'
+          '#states':
+            invisible:
+              - 'details[data-webform-key="licence"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_1"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_2_agec"]':
+                  filled: true
+          master_2_coss_semestre_1:
+            '#type': fieldset
+            '#title': 'Master 2 COSS Semestre 1'
+            m2_coss_s1:
+              '#type': select
+              '#title': 'M2 COSS S1'
+              '#options':
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue1-les-enjeux-les-acteurs-KBTIKNGL/connaissance-des-publics-KBTIKNZ4.html': 'M2 COSS - M5P81719 - Connaissance des publics 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue1-les-enjeux-les-acteurs-KBTIKNGL/histoire-du-corps-de-l-hygiene-de-la-sante-publique-KBTIKO6Y.html': 'M2 COSS - M5P82319 - Histoire du corps. de l''hygiène & de la santé publique 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue1-les-enjeux-les-acteurs-KBTIKNGL/introduction-aux-politiques-sociales-KBTIKOCB.html': 'M2 COSS - M5P81116 - Introduction aux politiques sociales 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue1-les-enjeux-les-acteurs-KBTIKNGL/les-grands-enjeux-des-politiques-sociales-KBTIKOQL.html': 'M2 COSS - M5P81316 - Les grands enjeux des politiques sociales 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue1-les-enjeux-les-acteurs-KBTIKNGL/les-logiques-de-reforme-sante-retraites-KBTIKP9F.html': 'M2 COSS - M5P82116 - Les logiques de réforme: santé. Retraites 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue3-insertion-eco-integration-sociale-et-politiques-d-emploi-KBTIKS32/les-politiques-d-emploi-KBTIKSJH.html': 'M2 COSS - M5P82916 - Les politiques d''emploi 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue3-insertion-eco-integration-sociale-et-politiques-d-emploi-KBTIKS32/les-politiques-d-insertion-de-luttre-contre-la-pauvrete-KBTIKT0K.html': 'M2 COSS - M5P83116 - Les politiques d''insertion & de luttre contre la pauvreté 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue2-les-enjeux-europeens-KBTIKQNJ/les-politiques-sociales-en-europe-1-KBTIKR46.html': 'M2 COSS - M5P82519 - Les politiques sociales en Europe 1 - 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue1-les-enjeux-les-acteurs-KBTIKNGL/theories-des-organisations-KBTIKQ2N.html': 'M2 COSS - M5P81916 - Théories des organisations 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue2-les-enjeux-europeens-KBTIKQNJ/les-politiques-sociales-en-europe-2-KBTIKRK8.html': 'M2 COSS - M5P82719 - Les politiques sociales en Europe 2 - 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue3-insertion-eco-integration-sociale-et-politiques-d-emploi-KBTIKS32/methodes-d-evaluation-des-politiques-publiques-KBTIKTRA.html': 'M2 COSS - M5P83316 - Méthodes d''évaluation des politiques publiques 1'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue1-les-enjeux-les-acteurs-KBTIKNGL/politiques-sociales-regulation-economique-KBTIKPPJ.html': 'M2 COSS - M5P81316 - Politiques sociales & régulation économique 1'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+          master_2_coss_semestre_2:
+            '#type': fieldset
+            '#title': 'Master 2 COSS Semestre 2'
+            m2_coss_s2:
+              '#type': select
+              '#title': 'M2 COSS S2'
+              '#options':
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue6-mise-en-situation-professionnelle-KBTIL1H3/accompagnement-a-la-recherche-de-stage-KBTIL20J.html': 'M2 COSS - M5P83416 - Accompagnement à la recherche de stage 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue5-decentralisation-politiques-sociales-locales-KBTIKZ6D/action-sociale-familiale-et-protection-de-l-enfance-KBTIKZJP.html': 'M2 COSS - M5P83019 - Action sociale familiale et protection de l''enfance 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue4-gestion-des-risques-sante-retraite-dependance-KBTIKW28/association-gestion-des-structures-et-collectivites-locales-KBTIKWKN.html': 'M2 COSS - M5P82016 - Association. gestion des structures et collectivités locales 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue6-mise-en-situation-professionnelle-KBTIL1H3/ateliers-de-professionnalisation-KBTIL2FT.html': 'M2 COSS - M5P83616 - Ateliers de professionnalisation 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue5-decentralisation-politiques-sociales-locales-KBTIKZ6D/intervenants-partenaires-KBTIL02P.html': 'M2 COSS - M5P82816 - Intervenants & partenaires 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue6-mise-en-situation-professionnelle-KBTIL1H3/langues-etrangeres-appliquees-KBTIL2S3.html': 'M2 COSS - M5P8L216 - Langues étrangères appliquées 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue5-decentralisation-politiques-sociales-locales-KBTIKZ6D/le-role-des-collectivites-territoriales-KBTIL0KZ.html': 'M2 COSS - M5P82416 - Le rôle des collectivités territoriales 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue4-gestion-des-risques-sante-retraite-dependance-KBTIKW28/le-role-des-mutuelles-sante-des-retraites-complementaires-KBTIKX0Q.html': 'M2 COSS - M5P81816 - Le rôle des mutuelles santé & des retraites complémentaires 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue4-gestion-des-risques-sante-retraite-dependance-KBTIKW28/les-etablissements-hospi-KBTIKXGD.html': 'M2 COSS - M5P81216 - Les établissements hospitaliers 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue4-gestion-des-risques-sante-retraite-dependance-KBTIKW28/les-services-a-la-personne-KBTIKXSB.html': 'M2 COSS - M5P82216 - Les services à la personne 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue6-mise-en-situation-professionnelle-KBTIL1H3/management-public-L5Q4NTUG.html': 'M2 COSS - M5P83822 - Management public 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue4-gestion-des-risques-sante-retraite-dependance-KBTIKW28/planification-de-l-offre-regulation-hospitaliere-regionale-KBTIKY5X.html': 'M2 COSS - M5P81416 - Planification de l''offre & régulation hospitalière régionale 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue5-decentralisation-politiques-sociales-locales-KBTIKZ6D/politiques-de-la-ville-KBTIL0ZQ.html': 'M2 COSS - M5P82616 - Politiques de la ville 2'
+                'https://formations.pantheonsorbonne.fr/fr/catalogue-des-formations/master-M/master-administration-economique-et-sociale-KBTIJF6F/master-parcours-cadres-des-organismes-du-secteur-social-coss-domaine-deg-KBTIKLXA/ue4-gestion-des-risques-sante-retraite-dependance-KBTIKW28/responsabilite-cadre-juridique-KBTIKYKP.html': 'M2 COSS - M5P81616 - Responsabilité & cadre juridique 2'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+  resume_de_cours:
+    '#type': textarea
+    '#title': 'Résumé de cours'
+    '#multiple': 5
+    '#description': '<p>Pour une meilleure de lisibilité, limitez votre texte à 2000 caractères ou 25 lignes ou 300 mots.</p>'
+    '#description_display': tooltip
+    '#maxlength': 2000
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  soutez_vous_faire_une_mise_a_jour_de_votre_resume_de_cours:
+    '#type': checkboxes
+    '#title': 'Soutez-vous faire une mise à jour de votre résumé de cours'
+    '#multiple': 2
+    '#options': yes_no
+    '#options_display': buttons_horizontal
+    '#options__properties': ''
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: modal
+  confirmation_url: ''
+  confirmation_title: 'Confirmation de Réception - Mise à Jour de Cours sur AMETYS'
+  confirmation_message: "<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Nous vous informons par la présente que votre demande de mise à jour de cours sur la plateforme AMETYS a bien été réceptionnée. Nous tenons à exprimer notre gratitude pour votre initiative visant à maintenir nos ressources pédagogiques à jour.</p>\r\n\r\n<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Votre demande est désormais entre les mains de notre équipe technique, qui la traitera avec diligence.</p>\r\n\r\n<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Cordialement,</p>\r\n\r\n<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Communication IAES</p>"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: communication.iaes@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: nicolas.fortune@univ-paris1.fr
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

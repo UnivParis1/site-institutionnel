@@ -1,6 +1,6 @@
 uuid: 0aa764fa-2c4d-4813-9144-22036a4e82ce
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
@@ -109,18 +109,6 @@ elements: |-
     joindre_une_photo_id_format_jpeg_attach_a_photo_id_jpeg_format_:
       '#type': webform_image_file
       '#title': 'Joindre une Photo (ID, format jpeg) / Attach a Photo (ID, jpeg format) '
-      '#required': true
-    numero_passeport_ou_id_card_si_vous_n_etes_pas_de_l_universite_p:
-      '#type': textfield
-      '#title': 'Numéro passeport ou ID Card (si vous n''êtes pas de l''université Paris 1 Panthéon-Sorbonne) / Passport or ID Card number (if you are not from Paris 1 Panthéon-Sorbonne)'
-      '#states':
-        visible:
-          - ':input[name="organisation[select]"]':
-              '!value': 'Université Paris 1 Panthéon-Sorbonne'
-          - xor
-          - ':input[name="organisation[other]"]':
-              filled: true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
   participation:
     '#type': webform_section

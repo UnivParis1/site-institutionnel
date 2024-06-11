@@ -1,0 +1,42 @@
+<?php
+
+
+/**
+ * @file
+ * Contains micro_publications.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function micro_publications_help($route_name, RouteMatchInterface $route_match)
+{
+  switch ($route_name) {
+    // Main module help for the micro_footer module.
+    case 'help.page.micro_publications':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Block affichant les publications HAL d\'un mini site.') . '</p>';
+      $output .= '<p>' . t('Documentation disponible sur : ') . '
+       <a href="https://api.archives-ouvertes.fr/docs/search/" target="_blank">
+       ' . t('Le site API HAL') . '</a></p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function micro_publications_theme()
+{
+  return [
+    'micro_publications' => [
+      'template' => 'micro-publications',
+      'variables' => ['publications' => [], 'types' => []],
+    ],
+  ];
+}

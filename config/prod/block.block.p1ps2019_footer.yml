@@ -5,6 +5,7 @@ dependencies:
   config:
     - system.menu.footer
   module:
+    - language
     - micro_path
     - micro_site
     - system
@@ -20,7 +21,7 @@ provider: null
 plugin: 'system_menu_block:footer'
 settings:
   id: 'system_menu_block:footer'
-  label: 'Menu Pied de page'
+  label: 'Menu Pied de page FR'
   label_display: '0'
   provider: system
   level: 1
@@ -43,3 +44,10 @@ visibility:
       121: '121'
       130: '130'
     sites_front_page: 0
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr

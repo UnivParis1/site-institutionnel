@@ -36,6 +36,10 @@ function p1ps2019_preprocess_html(&$variables)
     if (preg_match('/node\/36841/', $system_path) && $site_id == 115) {
       $variables['web_component'] = TRUE;
     }
+    $variables['custom_favicon'] = FALSE;
+    if ( !empty($site->getFavicon()) ) {
+      $variables['custom_favicon'] = TRUE;
+    }
   }
   $variables['page_mini_site'] = $page_mini_site;
 
@@ -95,6 +99,8 @@ function p1ps2019_preprocess_page(&$variables)
   $site = $negotiator->getActiveSite();
 
   if (isset($site) && !empty($site)) {
+    $site = \Drupal::service('entity.repository')->getTranslationFromContext($site);
+
     $specific_pages = [
       '/actualites',
       '/evenements',
@@ -548,6 +554,16 @@ function p1ps2019_preprocess_paragraph(&$variables)
       $infos[] = $variables['centre']['informations'];
     }
     $variables['centre']['informations'] = $infos;
+  }
+}
+
+function p1ps2019_preprocess_media_oembed_iframe(&$variables) {
+  $resource = $variables['resource'];
+
+  if ($resource->getProvider()->getName() === 'YouTube') {
+    $new_string = str_replace('?feature=oembed', '?feature=oembed&enablejsapi=1', (string) $variables['media']);
+    $new_media = $variables['media']::create($new_string);
+    $variables['media'] = $new_media;
   }
 }
 

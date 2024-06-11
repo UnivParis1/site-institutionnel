@@ -113,7 +113,7 @@ class CentresUp1Form extends FormBase {
       }
       else {
         $random = rand(0, 1) ? 'blue' : 'white';
-        $image_path = $url."default_$random.jpg";
+        $image_path = $url."default_$random.svg";
       }
     }
 

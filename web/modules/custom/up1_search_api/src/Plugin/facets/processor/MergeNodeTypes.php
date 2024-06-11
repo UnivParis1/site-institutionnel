@@ -264,7 +264,7 @@ class MergeNodeTypes extends ProcessorPluginBase implements BuildProcessorInterf
         $filter = "content_type:{$item}";
 
         // Look-up for query string.
-        if (!in_array($filter, $query['sitewide'])) {
+        if (isset($query['sitewide']) && !in_array($filter, $query['sitewide'])) {
           // Inject filter to current query.
           $updated = TRUE;
           $query['sitewide'][] = $filter;

@@ -1,7 +1,12 @@
+{% if affiliation == 'faculty' %}
+  {% set category = "Enseignants-Chercheurs" %}
+{% else %}
+  {% set category = "Doctorants" %}
+{% endif %}
 <div id="trombi" class="cell small-12">
   <div class="grid-x grid-margin-x grid-margin-y">
     <div class="grid-container">
-      <h1>{{ 'Enseignants-Chercheurs'|t }}</h1>
+      <h1>{{ category }}</h1>
       <div class="annuaire-content mb-5">
         {% if users|length < 1 %}
           <div>{{ "Aucun résultat n'a été trouvé."|t }}</div>
@@ -15,25 +20,33 @@
                   <img src=" {{ user.photo }} " alt="{{ user.displayName }}" />
                   <div class="trombi-infos">
                     <h2>{{ user.displayName }}</h2>
-                    <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
+                    {% if affiliation == 'faculty' %}
+                      <p class="trombi-employeetype">{{ user.employeeType[0] }}</p>
+                    {% endif %}
                     {% if user.role %}<p class="trombi-role">
                       {{ user.role }}</p>
                     {% endif %}
+                    {% if user.doctoralSchool %}<p class="trombi-affectation">
+                      {{ user.doctoralSchool | raw }} </p>
+                    {% endif %}
                     {% if user.research %}<p class="trombi-affectation">
-                        {{ user.research | raw }} </p>
+                      {{ user.research | raw }} </p>
                     {% endif %}
                     {% if user.pedagogy %}<p class="trombi-affectation">
-                        {{ user.pedagogy }}</p>
+                      {{ user.pedagogy }}</p>
                     {% endif %}
-                    {% if user.skills is not empty %}
-                    <ul class="trombi-skills">
-                      {{ user.skills | raw }}
-                    </ul>
-                    {% endif %}
-                    {% if user.about %}<div class="trombi-apropos">
-                      {{ user.about | raw }}
-                    </div>
+                    {% if affiliation == 'faculty' %}
+                      {% if user.skills is not empty %}
+                        <ul class="trombi-skills">
+                          {{ user.skills | raw }}
+                        </ul>
                       {% endif %}
+                      {% if user.about %}
+                        <div class="trombi-apropos">
+                          {{ user.about | raw }}
+                        </div>
+                      {% endif %}
+                    {% endif %}
                   </div>
                   <div class="trombi-btn">
                     <div class="faux-btn">{{ "See page"|t }}</div>

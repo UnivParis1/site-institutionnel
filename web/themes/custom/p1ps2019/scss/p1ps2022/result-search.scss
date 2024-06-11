@@ -117,7 +117,8 @@
               margin-top: rem-calc(10px);
             }
             h2 {
-              @extend .h4-style;
+	      font-size: 1.4rem;
+  	      margin-top: 1rem;	      
             }
           }
         }
@@ -135,7 +136,7 @@
             }
           }
         }
-        &.event {
+        &.event, &.page-personnelle {
           .si-image {
             background-color: rgba($gold-p1ps, 0.25);
             svg,
@@ -231,6 +232,37 @@
             }
             &:last-child {
               margin-left: rem-calc(10px);
+            }
+          }
+        }
+	&.pager {
+          ul.pager__items {
+            li {
+		     &:first-child {
+              margin-right: 0;
+            }
+            &:last-child {
+              margin-left: 0;
+            }
+              a {
+                color: $text-main-color;
+                background: $background-light-gray;
+                border-radius: 50rem;
+                padding: rem-calc(4px 12px);
+                font-size: rem-calc(13px);
+
+                &:hover {
+                  color: $gold-p1ps;
+                  background: none;
+                }
+              }
+
+              &.is-active {
+                a {
+                  color: $gold-p1ps;
+                  background: none;
+                }
+              }
             }
           }
         }

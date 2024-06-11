@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.event.field_subscription_link
     - field.field.node.event.field_tag
     - node.type.event
+    - workflows.workflow.publication
   module:
     - content_moderation
     - datetime_range
@@ -564,7 +565,7 @@ content:
     third_party_settings: {  }
   field_disable_canonical_url:
     type: boolean_checkbox
-    weight: 43
+    weight: 29
     region: content
     settings:
       display_label: true
@@ -606,14 +607,14 @@ content:
     third_party_settings: {  }
   field_publish_master:
     type: boolean_checkbox
-    weight: 42
+    weight: 28
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_sites:
     type: entity_reference_autocomplete
-    weight: 40
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
@@ -623,7 +624,7 @@ content:
     third_party_settings: {  }
   field_sites_all:
     type: boolean_checkbox
-    weight: 41
+    weight: 27
     region: content
     settings:
       display_label: true
@@ -674,18 +675,18 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 30
+    weight: 24
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 20
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -738,15 +739,16 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 30
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   body: true
+  trombi_students_enable: true

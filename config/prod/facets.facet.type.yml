@@ -1,21 +1,21 @@
-uuid: c7e6b238-9e19-47b2-aad0-8df86be78846
+uuid: e5f64873-17d6-427c-867b-cbf8ab9544b8
 langcode: fr
 status: true
 dependencies:
   config:
-    - search_api.index.sherlock
+    - search_api.index.watson
     - views.view.resultats_de_recherche
   module:
     - search_api
 id: type
 name: 'Type de contenu'
-weight: -1
+weight: -2
 min_count: 1
 missing: false
 missing_label: others
 url_alias: type
 facet_source_id: 'search_api:views_page__resultats_de_recherche__page_1'
-field_identifier: type
+field_identifier: content_type
 query_operator: or
 hard_limit: 0
 exclude: false
@@ -31,15 +31,15 @@ widget:
   config:
     show_numbers: false
     soft_limit: 0
-    show_reset_link: true
-    reset_text: 'Tous les contenus'
+    show_reset_link: false
+    reset_text: ''
     hide_reset_when_no_selection: false
     soft_limit_settings:
       show_less_label: 'Show less'
       show_more_label: 'Show more'
 empty_behavior:
   behavior: none
-only_visible_when_facet_source_is_visible: true
+only_visible_when_facet_source_is_visible: false
 show_only_one_result: false
 show_title: false
 processor_configs:
@@ -49,6 +49,13 @@ processor_configs:
       sort: 20
     settings:
       sort: DESC
+  count_limit:
+    processor_id: count_limit
+    weights:
+      build: 50
+    settings:
+      minimum_items: 1
+      maximum_items: null
   count_widget_order:
     processor_id: count_widget_order
     weights:
@@ -66,7 +73,7 @@ processor_configs:
     weights:
       build: 50
     settings:
-      replacement_values: "r|news|Actualité\r\nr|event|Évènement\r\nr|second_level_pages|Page\r\nr|press|Presse\r\nr|publication|Publication\r\nr|offer|Recrutement\r\nr|viva|Soutenance de thèse"
+      replacement_values: "r|news|Actualité\r\nr|event|Évènement\r\nr|offer|Offre d'emploi\r\nr|page_personnelle|Page Personnelle\r\nr|press|Presse\r\nr|publication|Publication\r\nr|viva|Soutenance"
   hierarchy_processor:
     processor_id: hierarchy_processor
     weights:

@@ -139,6 +139,12 @@ class WsGroupsController extends ControllerBase
     return $site->get('trombi_ec_enable')->value;
   }
 
+  private function getFieldTrombiStudents()
+  {
+    $site = $this->getCurrentSite();
+    return $site->get('trombi_students_enable')->value;
+  }
+
   private function getTrombiFields() {
     $trombi_fields = [];
     if ($this->getFieldTrombiEc()) {
@@ -151,6 +157,12 @@ class WsGroupsController extends ControllerBase
         'skills_lists' => $site->get('skills_lists')->value,
         'supannRole' => $site->get('supannRole')->value,
         'about_me' => $site->get('about_me')->value,
+      ];
+    }
+    if ($this->getFieldTrombiStudents()) {
+      $trombi_fields = [
+        'supannEntite_doctoralSchool' => 1,
+        'supannEntite_research' => 1,
       ];
     }
 
@@ -185,6 +197,8 @@ class WsGroupsController extends ControllerBase
   public function getTrombiList($theme, $path, $group, $siteId = NULL) {
     $site_settings = $this->getTrombiFields();
     $users = $this->getCachedUsers('faculty', $siteId, $group, $site_settings);
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $user_photo = $config->get('url_userphoto');
 
     foreach ($users as &$user) {
       if ($group == 'observatoireIA') {
@@ -199,8 +213,7 @@ class WsGroupsController extends ControllerBase
       $user['pedagogy'] = $this->formatTrombiData('pedagogy', $user, $site_settings);
       $user['role'] = $this->formatTrombiData('role', $user, $site_settings);
       $user['discipline'] = $this->formatTrombiData('discipline', $user, $site_settings);
-      $config = \Drupal::config('up1_pages_personnelles.settings');
-      $user['photo'] = $config->get('url_userphoto') . $user['uid'];
+      $user['photo'] = $user_photo . $user['uid'];
     }
 
     usort($users, function ($a, $b) {
@@ -211,6 +224,39 @@ class WsGroupsController extends ControllerBase
       '#theme' => $theme,
       '#users' => $users,
       '#affiliation' => 'faculty',
+      '#link' => $path,
+      '#Trusted' => FALSE,
+      '#trombi_settings' => [],
+      '#attached' => [
+        'library' => [
+          'up1_pages_personnelles/trombi'
+        ]
+      ]
+    ];
+
+    return $build;
+  }
+
+  public function getStudentsTrombiList($theme, $path, $group, $siteId = NULL) {
+    $users = $this->getCachedUsers('student', $siteId, $group);
+    $site_settings = $this->getTrombiFields();
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $user_photo = $config->get('url_userphoto');
+
+    foreach ($users as &$user) {
+      $user['doctoralSchool'] = $this->formatTrombiData('doctoralSchool', $user, $site_settings);
+      $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
+      $user['photo'] = $user_photo . $user['uid'];
+    }
+
+    usort($users, function ($a, $b) {
+      return strnatcasecmp($a['sn'], $b['sn']);
+    });
+
+    $build['item_list'] = [
+      '#theme' => $theme,
+      '#users' => $users,
+      '#affiliation' => 'student',
       '#link' => $path,
       '#Trusted' => FALSE,
       '#trombi_settings' => [],
@@ -291,9 +337,14 @@ class WsGroupsController extends ControllerBase
 
   public function microStudentList($letter)
   {
-    $siteId = $this->getSiteId();
-    if (isset($siteId) && $this->getFieldDoc()) {
-      return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $siteId);
+    if ($this->getFieldDoc()) {
+      $site = $this->getCurrentSite();
+      $group = $site->get('groups')->value;
+      if ($this->getFieldTrombiStudents()) {
+        return $this->getStudentsTrombiList('list_as_trombinoscope', 'up1_pages_personnelles.micro_student_list', $group, $site->id());
+      } else {
+        return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $site->id());
+      }
     } else {
       throw new NotFoundHttpException();
     }
@@ -618,32 +669,28 @@ class WsGroupsController extends ControllerBase
   private function formatTrombiData($data_to_get, $user, $settings) {
     $drupal_user = user_load_by_name($user['uid']);
     $result = '';
-    switch ($data_to_get) {
-      case 'skills' :
-        if ($settings['skills_lists'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+    $pp = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+    $page_perso = reset($pp);
+
+    if ($page_perso) {
+      switch ($data_to_get) {
+        case 'skills' :
+          if ($settings['skills_lists']) {
             if (!empty($terms = $page_perso->get('field_skills')->referencedEntities())) {
               foreach ($terms as $term) {
                 $result .= '<li>' . $term->getName() . '</li>';
               }
             }
+
           }
-        }
-        break;
-      case 'skillsIA' :
-        if ($settings['skills_lists'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+          break;
+        case 'skillsIA' :
+          if ($settings['skills_lists']) {
             $ia_skills = $page_perso->get('field_ia_skills')->getString();
             $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
-            if(!empty($ia_skills)) {
+            if (!empty($ia_skills)) {
               $selected_skills = explode(', ', $ia_skills);
               $result_skills = [];
               foreach ($selected_skills as $a_skill) {
@@ -651,71 +698,76 @@ class WsGroupsController extends ControllerBase
               }
               $result = implode('', $result_skills);
             }
+
           }
-        }
-        break;
-      case 'aboutIA' :
-        if ($settings['about_me'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+          break;
+        case 'aboutIA' :
+          if ($settings['about_me'] ) {
             $result = (!empty($page_perso->get('field_short_bio')->value)) ? $page_perso->get('field_short_bio')->value : '';
+
           }
-        }
-        break;
-      case 'about' :
-        if ($settings['about_me'] && $drupal_user) {
-          $pp = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-          $page_perso = reset($pp);
-          if ($page_perso) {
+          break;
+        case 'about' :
+          if ($settings['about_me']) {
             $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
           }
-        }
-        break;
-      case 'research' :
-        if ($settings['supannEntite_research'] == 1) {
-          $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_filter($affectation, function ($item) {
-            return $item['businessCategory'] == 'research';
-          });
-          if (!empty($key_search)) {
-            $key_search = reset($key_search);
-            $result = $key_search[0]['description'];
+          break;
+        case 'research' :
+          if ($settings['supannEntite_research'] == 1) {
+            $affectation = $user['supannEntiteAffectation-all'];
+            $key_search = array_filter($affectation, function ($item) {
+              return $item['businessCategory'] == 'research';
+            });
+            if (!empty($key_search)) {
+              $key_search = reset($key_search);
+              $result = $key_search[0]['description'];
+            }
           }
-        }
-        break;
-      case 'pedagogy' :
-        if ($settings['supannEntite_pedagogy'] == 1) {
-          $affectation = $user['supannEntiteAffectation-all'];
-          $key_search = array_filter($affectation, function ($item) {
-            return $item['businessCategory'] == 'pedagogy';
-          });
-          if (!empty($key_search)) {
-            $key_search = reset($key_search);
-            $result = $key_search['description'];
+          break;
+        case 'pedagogy' :
+          if ($settings['supannEntite_pedagogy'] == 1) {
+            $affectation = $user['supannEntiteAffectation-all'];
+            $key_search = array_filter($affectation, function ($item) {
+              return $item['businessCategory'] == 'pedagogy';
+            });
+            if (!empty($key_search)) {
+              $key_search = reset($key_search);
+              $result = $key_search['description'];
+            }
           }
-        }
-        break;
-      case 'role' :
-        if ($settings['supannRole'] == 1) {
-          if(!empty($user['supannRoleEntite-all'])) {
-            $role = $user['supannRoleEntite-all'][0];
-            $result = $role['role'] . ' ' . $role['structure']['description'];
+          break;
+        case 'doctoralSchool' :
+          if ($settings['supannEntite_doctoralSchool'] == 1) {
+            $affectation = $user['supannEntiteAffectation-all'];
+            $key_search = array_filter($affectation, function ($item) {
+              return $item['businessCategory'] == 'doctoralSchool';
+            });
+            if (!empty($key_search)) {
+              $key_search = reset($key_search);
+              $result = $key_search['description'];
+            }
           }
-        }
-      case 'discipline' :
-        if ($settings['discipline_enseignement'] == 1) {
-          if(!empty($user['info'])) {
-            $result = implode(', ', $user['info']);
+          break;
+        case 'role' :
+          if ($settings['supannRole'] == 1) {
+            if (!empty($user['supannRoleEntite-all'])) {
+              $role = $user['supannRoleEntite-all'][0];
+              $result = $role['role'] . ' ' . $role['structure']['description'];
+            }
           }
-        }
-      default:
-        break;
+          break;
+        case 'discipline' :
+          if ($settings['discipline_enseignement'] == 1) {
+            if (!empty($user['info'])) {
+              $result = implode(', ', $user['info']);
+            }
+          }
+          break;
+        default:
+          break;
+      }
     }
+
     return $result;
   }
 

@@ -10,12 +10,7 @@
       <div class="pager pager-top">
         {% for letter in 'a'|upper .. 'z'|upper %}
           <span class="letter">
-            {% if affiliation == 'faculty' %}
               <a href="{{ path(link,{'letter': letter}) }}">{{ letter }}</a>
-              {% else %}
-              {% set category = "Doctorants" %}
-              <a href="{{ path(link,{'letter': letter}) }}">{{ letter }}</a>
-            {% endif %}
           </span>
         {% endfor %}
       </div>

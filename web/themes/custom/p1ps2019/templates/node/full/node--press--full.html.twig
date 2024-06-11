@@ -75,10 +75,12 @@
   not node.isPublished() ? 'is-unpublished',
   view_mode ? view_mode|clean_class,
   'clearfix',
-
 ]
 %}
 
+<div id="breadcrumbs">
+  {{ drupal_block('system_breadcrumb_block') }}
+</div>
 <article{{ attributes.addClass(classes).removeAttribute('role') }}>
   <div class="grid-container">
     <div class="cell small-12">

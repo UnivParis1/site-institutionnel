@@ -75,7 +75,6 @@
   'clearfix'
 ]
 %}
-{{ attach_library('p1ps2019/match_height') }}
 {% set other_affiliation = content.field_other_affiliation|render %}
 {% set about_me = content.field_about_me|render %}
 {% set research_directions = content.field_research_directions|render %}
@@ -116,7 +115,12 @@
 {% set projects_ia = content.field_projects_ia|render %}
 {% set ia_skills = content.field_ia_skills|render %}
 
+{{ attach_library('p1ps2019/match_height') }}
 {{ attach_library('up1_pages_personnelles/front') }}
+
+<div id="breadcrumbs">
+  {{ drupal_block('system_breadcrumb_block') }}
+</div>
 <article{{ attributes.addClass(classes) }}>
   <div class="small-12 page_personnelle">
     <div class="grid-x">

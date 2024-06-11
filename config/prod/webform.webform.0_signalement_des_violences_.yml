@@ -1,6 +1,6 @@
 uuid: 28842572-b9af-43f0-a2a2-9e93b11ce16f
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
@@ -9,7 +9,7 @@ uid: 5486
 template: false
 archive: false
 id: 0_signalement_des_violences_
-title: '0 - Signalement des violences - étudiants'
+title: '0 - Signalement des violences - étudiants (archive)'
 description: ''
 category: ''
 elements: |-
@@ -23,6 +23,7 @@ elements: |-
         Témoin: Témoin
         Victime: Victime
       '#required': true
+      '#required_error': 'Veuillez sélectionner dans le champ intitulé "Vous êtes", si vous êtes victime ou témoin.'
   est_ce_votre_premier_signalement_pour_ces_faits_:
     '#type': radios
     '#title': 'Est-ce votre premier signalement pour ces faits ?'
@@ -242,6 +243,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -350,13 +353,13 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: mission-egalite@univ-paris1.fr
+      to_mail: Laure.Christophe@univ-paris1.fr
       to_options: {  }
-      bcc_mail: marianne.blidon@univ-paris1.fr
+      bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: mission-egalite@univ-paris1.fr
+      from_mail: no-reply@univ-paris1.fr
       from_options: {  }
       from_name: 'Signalement des violences sexistes et sexuelles (VSS)'
       reply_to: ''

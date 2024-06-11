@@ -30,11 +30,10 @@ elements: |-
       '#options_display': buttons
       '#options__properties': ''
   le_demandeur_:
-    '#type': webform_section
+    '#type': container
     '#title': 'Le demandeur :'
     '#description': '<h3>Le demandeur :</h3>'
     '#title_display': invisible
-    '#title_tag': h3
     '#states':
       visible:
         ':input[name="un_tournage"]':
@@ -56,10 +55,16 @@ elements: |-
       '#type': tel
       '#title': Téléphone
       '#required': true
-    courriel_:
-      '#type': email
+    courriel_tournage:
+      '#type': textfield
       '#title': Courriel
       '#required': true
+      '#required_error': 'l''email est requis'
+      '#states':
+        visible:
+          ':input[name="un_tournage"]':
+            value: 'UN TOURNAGE'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     directeur_de_societe_:
       '#type': textfield
       '#title': 'Directeur de société'
@@ -83,7 +88,7 @@ elements: |-
       '#type': email
       '#title': Courriel
   le_projet:
-    '#type': webform_section
+    '#type': container
     '#title': 'Le projet'
     '#states':
       visible:
@@ -128,7 +133,7 @@ elements: |-
       '#file_preview': file
       '#file_extensions': 'pdf doc docx ppt pptx xls xlsx'
   le_s_decor_s_recherche_s_:
-    '#type': webform_section
+    '#type': container
     '#title': 'Le(s) décor(s) recherché(s)'
     '#states':
       visible:
@@ -188,9 +193,9 @@ elements: |-
         - xor
         - ':input[name="un_tournage"]':
             value: 'UN TOURNAGE'
-    '#markup': '<p><strong>Important : votre demande doit se faire au minimum 3 semaines avant la date de tournage.</strong></p>'
+    '#markup': '<p><strong>Important : votre demande doit se faire au minimum 2 mois avant la date de tournage.</strong></p>'
   demandeur_evenement_organisme:
-    '#type': webform_section
+    '#type': container
     '#title': Demandeur
     '#states':
       visible:
@@ -260,7 +265,7 @@ elements: |-
       '#title': 'Téléphone du contact si différent du responsable de l’évènement '
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   objet_de_la_demande_demandeur_evenement_organisme:
-    '#type': webform_section
+    '#type': container
     '#title': 'Détails de l’évènement'
     '#title_display': invisible
     '#states':
@@ -343,16 +348,17 @@ elements: |-
       '#type': textarea
       '#title': 'Besoins matériels (Sonorisation, vidéoprojecteur…)'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    demande_date_tournage_evenement:
+      '#type': webform_markup
+      '#markup': '<p><strong>Important : votre demande doit se faire au minimum 4 semaines avant la date de l''évènement.</strong></p>'
   actions:
     '#type': webform_actions
     '#title': 'Bouton(s) d''envoi'
     '#states':
       visible:
-        - ':input[name="un_tournage"]':
-            value: 'UN EVENEMENT'
-        - xor
-        - ':input[name="un_tournage"]':
-            value: 'UN TOURNAGE'
+        ':input[name="un_tournage"]':
+          checked: true
+    '#states_clear': false
     '#submit__label': ENVOYER
 css: ''
 javascript: ''
@@ -541,7 +547,7 @@ handlers:
   email_aux_organisateurs:
     id: email
     handler_id: email_aux_organisateurs
-    label: 'Email aux demandeurs'
+    label: 'Email aux demandeurs tournage'
     notes: ''
     status: true
     conditions: {  }
@@ -549,7 +555,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: locations@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel_tournage:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -603,6 +609,43 @@ handlers:
       body: _default
       excluded_elements: {  }
       ignore_access: true
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_demandeurs_evenement:
+    id: email
+    handler_id: email_aux_demandeurs_evenement
+    label: 'Email aux demandeurs evenement'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel_evenement_organisme:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: locations@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Paris 1 Panthéon-Sorbonne'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[Réponse automatique] Demande de location'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande de location a bien été enregistrée.<br />\r\nNous vous recontacterons dans les meilleurs délais.</p>\r\n\r\n<p>Détails de la demande :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements: {  }
+      ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
       exclude_attachments: false
