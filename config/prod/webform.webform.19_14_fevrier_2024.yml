@@ -1,46 +1,46 @@
-uuid: cc0524e9-71b8-4ebd-aa45-5a6fccbbcf05
+uuid: 3f89f3be-1d3e-44d0-975e-4ac8c8811c41
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 927
+uid: 46
 template: false
 archive: false
-id: conference_en_hommage_de_madame_
-title: 'Conférence en hommage de Madame Françoise Tulken'
-description: '<p>Conférence en hommage de Madame Françoise Tulken, ancienne Vice-Président de la Cour européenne des droits de l’homme, le 27 octobre 2023 à l''Université Paris 1 Panthéon-Sorbonne au Centre Lourcine</p>'
-category: 'Inscription à un colloque '
+id: 19_14_fevrier_2024
+title: '19 - 14 février 2024'
+description: '<p>Représentation théâtrale Marie Curie, la traversée d''une vie</p>'
+category: 'Inscription événement'
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Nom
-    '#title_display': inline
+  vos_coordonnees:
+    '#type': webform_contact
+    '#title': 'Vos coordonnées'
+    '#title_display': before
     '#required': true
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
-    '#type': textfield
-    '#title': Prénom
-    '#title_display': inline
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel_de_contact:
-    '#type': textfield
-    '#title': 'Courriel de contact'
-    '#title_display': inline
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  institution_de_rattachement:
-    '#type': textfield
-    '#title': 'Institution de rattachement'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut_:
-    '#type': textfield
-    '#title': 'Statut '
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#name__title': 'Nom de famille et prénom'
+    '#name__placeholder': 'Giraud Nadia '
+    '#name__help': 'Indiquez ici votre prénom suivi de votre nom.'
+    '#name__title_display': before
+    '#name__required': true
+    '#company__access': false
+    '#email__title': 'Adresse courriel'
+    '#email__placeholder': Nadia.Giraud@protonmail.com
+    '#email__help': 'Votre adresse électronique'
+    '#email__title_display': after
+    '#email__required': true
+    '#phone__access': false
+    '#address__access': false
+    '#address_2__access': false
+    '#city__access': false
+    '#state_province__access': false
+    '#postal_code__access': false
+    '#country__access': false
+  captcha:
+    '#type': captcha
+    '#captcha_type': captcha/Math
+    '#captcha_title': 'Combien fait l''addition simple ?'
 css: ''
 javascript: ''
 settings:
@@ -53,10 +53,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
-  form_submit_once: false
+  form_title: source_entity_webform
+  form_submit_once: true
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: '<p>L''inscription à l''évènement est fermée.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -67,7 +67,7 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_unsaved: false
+  form_unsaved: true
   form_disable_back: false
   form_submit_back: false
   form_disable_autocomplete: false
@@ -145,10 +145,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: inline
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: '<h2 class="text-align-center">Votre inscription est bien enregistrée.</h2>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -156,15 +156,15 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 300
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: "<p>Nous vous remercions pour l'intérêt que vous portez à notre évènement.<br />\r\nLe nombre de places maximale disponible étant atteint, il n'est plus possible de s'inscrire.</p>"
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false
-  entity_limit_total: null
+  entity_limit_total: 300
   entity_limit_total_interval: null
   entity_limit_user: null
   entity_limit_user_interval: null
@@ -224,5 +224,42 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  copie_d_inscription_a_la_journee_d_etude:
+    id: email
+    handler_id: copie_d_inscription_a_la_journee_d_etude
+    label: Emmanuel.Charrier@univ-paris1.fr
+    notes: 'Envoi à l''organisateur'
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: Emmanuel.Charrier@univ-paris1.fr
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

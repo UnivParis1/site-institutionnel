@@ -53,19 +53,25 @@ textarea::placeholder, .chosen-container-single .chosen-single::placeholder, inp
 	#navbar-header .navigation-left-region ul.menu.large-vertical li ul li a {
     pointer-events: auto;
 	}
-}
-/* Correction car en mobile le bouton du bloc palmares était en blanc sur blanc */
-@media screen and (max-width: 63.9375em) {
 	.site-content-wrapper .paragraph--type--hit-list .btn.outline {
     border-color: #00326F;
     color: #00326F;
-}
+  }
 }
 /** Correction pour le module webform **/
+.field--type-webform .form-item:not(.form-item-centre-name) input[type=tel] {
+  padding: 0 3rem;
+}
+.field--type-webform .form-item:not(.form-item-centre-name) input[type=file] {
+  padding: .5rem 1rem;
+}
+.field--type-webform .form-item:not(.form-item-centre-name) input[type="submit"].form-submit:not(.reset-btn) {
+    color: #fff;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
 .webform-submission-form .fieldset-legend {
-    color: #333;
     font-size: 1.25rem;
-    font-family: "Montserrat";
     font-weight: 700;
 }
 .webform-submission-form .form-type-radio input, .webform-submission-form .form-type-checkbox input, .webform-submission-form [class*="form-type-checkbox"] input, .webform-submission-form [class*="form-type-radio"] input {
@@ -1007,6 +1013,12 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
 .paragraph .paragraph--type--files-media {
   margin: 0.5rem;
 }
+paragraph--type--rich-content .field--name-field-credits {
+  height: auto!important;
+}
+.paragraph--type--bp-view .field--name-field-credits {
+  display: none;
+}
 /**** correction habillage smartphone **/
 @media screen and (max-width: 46.1875em) {
     .site-content-wrapper .top-header-infos .branding .logo {
@@ -1047,6 +1059,7 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
         bottom: 0;
         right: 0;
         font-size: 0.7rem;
+        height: auto!important;
     }
     .accordion .paragraph--type--bp-simple {
         padding: 0 !important;
@@ -1076,9 +1089,7 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
     }
     .paragraph--type--content-block .views-element-container .event .bottom-infos {
         position: relative;
-        border-bottom: 1px solid #00326E;
         padding-bottom: 1rem;
-        text-align: center;
         margin: 0 auto;
     }
     .paragraph--type--content-block .views-element-container .event .same-height {
@@ -1104,9 +1115,7 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
         cursor: pointer;
     }
     .paragraph--type--content-block .views-element-container .news-teaser {
-        border-bottom: 1px solid #00326E;
         padding-bottom: 0.5rem;
-        text-align: center;
         margin: 0 auto;
     }
 }
@@ -1144,3 +1153,213 @@ textarea, .chosen-container-single .chosen-single, input[type="text"], input[typ
   top: 6px;
   right: 2.5rem;
 }
+@media screen and (max-width: 2025px) {
+.site--type--mini-site.scroll #navbar #top-header .top-header-infos .header-right #block-selecteurdelangue {
+    display: none;
+}
+}
+@media screen and (max-width: 1920px) {
+.site--type--mini-site.scroll #navbar #top-header .top-header-infos .header-right #block-p1ps2019-switchercsspouraccessibilite {
+    display: none;
+}
+}
+@media screen and (max-width: 1820px) {
+.site--type--mini-site.scroll #navbar #top-header .top-header-infos .header-right #ent-search .loupe {
+        display: none;
+}
+}
+@media screen and (max-width: 1732px) {
+.path-frontpage.scroll #navbar #top-header .top-header-infos .header-right #block-p1ps2019-switchercsspouraccessibilite, .path-node.scroll #navbar #top-header .top-header-infos .header-right #block-p1ps2019-switchercsspouraccessibilite {
+    display: none;
+}
+}
+@media screen and (max-width: 1720px) {
+.site--type--mini-site.scroll #navbar #top-header .top-header-infos .header-right #ent-search {
+        display: none;
+}
+}
+@media screen and (max-width: 1630px) {
+.path-frontpage.scroll #navbar #top-header .top-header-infos .header-right #ent-search .loupe, .path-node.scroll #navbar #top-header .top-header-infos .header-right #ent-search .loupe  {
+        display: none;
+}
+}
+@media screen and (max-width: 1635px) {
+.scroll #navbar #top-header .top-header-infos .header-left .direct-access-btn {
+        display: none;
+}
+}
+@media screen and (max-width: 1580px) {
+.site--type--mini-site.scroll #navbar #top-header .top-header-infos .header-left .site-name {
+        display: none;
+}
+}
+@media screen and (max-width: 1510px) {
+.path-frontpage.scroll #navbar #top-header .top-header-infos .header-right #ent-search, .path-node.scroll #navbar #top-header .top-header-infos .header-right #ent-search {
+        display: none;
+}
+}
+
+/* bug affichage textarea dans formulaire */
+.paragraph--type--bp-webform textarea {
+  border-radius: 0.5rem;
+}
+
+@media screen and (max-width: 74.9375em) {
+  .path-site .title.h1-style {
+    font-size: 2.3125rem;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .path-site .title.h1-style {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .path-site .title.h1-style {
+    font-size: 2.5rem;
+  }
+  .paragraph--type--triptych .wrapper-tiles .cell .infos {
+    padding: 2rem;
+  }
+}
+
+/*** Frontpage new look  ***/
+.path-site #breadcrumbs, .node-preview-container #breadcrumbs {
+  display: none;
+}
+.node-preview-container .sticky-bookmarks {
+  margin-top: -13vh;
+  margin-bottom: 3rem;
+}
+/* IMAGE FULL WIDTH */
+.path-frontpage .main-overlay-infos {
+  transform: translate(-50%, -70%);
+}
+.screen-medium-height .header-img * {
+  max-height: 575px;
+}
+/* NODE FULL HEIGHT */
+.homepage-carousel .nod .mask .header-nod {
+  max-height: 620px;
+  overflow: hidden;
+}
+.homepage-carousel .nod .mask .header-nod .field--name-field-media figure img {
+  width:100%;
+}
+.homepage-carousel .nod .mask .main-overlay-infos .grid-container {
+  max-width: 50rem;
+  margin-left: 10%;
+}
+.homepage-carousel .nod .mask .main-overlay-infos {
+  text-align: left;
+}
+.homepage-carousel .nod .mask .main-overlay-infos .btn {
+  color: #00326e;
+  background-color: #fff;
+  border-color: #00326e;
+}
+.homepage-carousel .nod .mask .main-overlay-infos .date-wrapper::before {
+  background-image: url(/themes/custom/p1ps2019/images/p1ps2022/picto-calendar-white.svg) !important;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.homepage-carousel .nod .mask .main-overlay-infos .date-wrapper {
+  display: inline-block;
+  margin-left:2rem;
+}
+/* VIDEO FULL HEIGHT */
+.vid.full-height {
+  background-color: #00326e;
+}
+.header-vid, .header-vid * {
+  max-height: none !important;
+  overflow: visible !important;
+}
+.header-vid {
+  width: 100%;
+}
+/* sur la DIV avant l'iframe */
+.header-vid  .field--name-field-media-oembed-video {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+/* sur l'iframe */
+.header-vid .field--name-field-media-oembed-video .media-oembed-content {
+  opacity: .6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#navbar .screen-height .header-img * iframe, #navbar .screen-medium-height .header-img * iframe, #navbar .screen-small-height .header-img * iframe,
+.header-vid * iframe, .header-vid * iframe, .header-vid * iframe{
+  max-height: none!important;
+}
+.vid.screen-height .mask::after {
+  display:none;
+}
+
+/**** correction habillage smartphone **/
+@media screen and (max-width: 46.1875em) {
+  .homepage-carousel .nod .main-overlay-infos, .path-frontpage .img .main-overlay-infos {
+    display: block;
+  }
+  .homepage-carousel .nod .main-overlay-infos .grid-container {
+    margin: 5%;
+  }
+  .homepage-carousel .nod .main-overlay-infos .grid-container h2 {
+    font-size: 1.25rem;
+  }
+  .path-frontpage .site-content-wrapper #page-content {
+    margin-top: 0;
+  }
+
+.path-frontpage .main-overlay-infos {
+  transform: translate(-50%, -50%);
+}
+  .path-frontpage .img .main-overlay-infos h1 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  .path-frontpage .homepage-search-keywords .hp-search-form input {
+    height: 3rem;
+  }
+  .homepage-carousel .nod .main-overlay-infos .grid-container a.btn {
+    margin-top: .5rem;
+  }
+  .path-site .paragraph--type--bookmarks.sticky-bookmarks .cell,.path-frontpage .paragraph--type--bookmarks.sticky-bookmarks .cell {
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 63.9375em) {
+  .txt.big {
+    display:none;
+  }
+  .path-frontpage .main-overlay-infos h1 {
+    max-width: 85%;
+    font-size: 2rem;
+    margin-top: 6rem;
+  }
+  body.path-frontpage .homepage-search-keywords .keywords a {
+    display: none;
+  }
+  #block-p1ps2019-motsclessaisonniers {
+    margin-top: 5rem;
+  }
+  .subtitle {
+    display:none;
+  }
+  #navbar #top-header {
+    min-height: 5.125rem;
+  }
+}
+#navbar .block-views-exposed-filter-blockresultats-de-recherche-page-1 {
+	top:0;
+}
+>>>>>>> d10_work

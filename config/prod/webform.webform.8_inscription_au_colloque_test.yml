@@ -1,50 +1,65 @@
-uuid: c1a75979-97e1-417b-8c70-3b94ecfb7d25
+uuid: 274dee9f-6e9c-471d-a1b3-f2ed35377aef
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 927
+uid: 7845
 template: false
 archive: false
-id: seminaire_de_l_iredies_ndeg_45_p
-title: 'Séminaire de l’IREDIES n° 45 - Peer Zumbasen'
-description: '<p>Séminaire de l''IREDIES - Mardi 17 octobre, salle 13, Lourcine - 12h30 - 14h30</p>'
-category: ''
+id: 8_inscription_au_colloque_test
+title: '8 - Inscription au colloque'
+description: '<p>Formulaire d''inscription au colloque.</p>'
+category: 'Inscription à un colloque '
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Nom
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  prenom:
+  votreprenom:
     '#type': textfield
     '#title': Prénom
+    '#placeholder': Jean
     '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  institution_de_rattachement:
+  nom2:
     '#type': textfield
-    '#title': 'Institution de rattachement'
+    '#title': Nom
+    '#placeholder': Dupond
     '#required': true
+    '#required_error': 'Vous devez saisir votre nom.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  statut:
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  fonction:
     '#type': textfield
-    '#title': Statut
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
     '#required': true
+    '#required_error': 'Vous devez saisir votre fonction.'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  courriel_de_contact:
-    '#type': textfield
-    '#title': 'Courriel de contact'
-    '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  presence_:
+  droits_d_image:
     '#type': checkbox
-    '#title': Zoom
-    '#title_display': inline
-  presentiel_:
+    '#title': 'Droits à l''image'
+    '#description': '<p>En cochant cette case, vous acceptez la captation et la diffusion vidéo de votre image dans le cadre du colloque.</p>'
+  conditions_d_inscription:
     '#type': checkbox
-    '#title': 'Présentiel '
+    '#title': 'Conditions d''inscription'
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription au colloque&nbsp;</p>'
+    '#required': true
+    '#required_error': 'Vous devez accepter les conditions d''inscription.'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'S''inscrire au colloque'
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -152,7 +167,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -186,47 +201,106 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 7847
+      - 7792
     permissions: {  }
-handlers: {  }
+handlers:
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription au colloque'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription au colloque a bien été validée.</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }
