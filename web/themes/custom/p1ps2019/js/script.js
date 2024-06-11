@@ -167,7 +167,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     });
   }
   //language-switcher set current lang
-  if( $('.language-switcher-language-url').length > 0){
+  if( $('.language-switcher-language-url').length > 0 && $('.language-switcher-language-url.custom-language-switcher').length === 0 ){
     $('.language-switcher-language-url .block-title')
       .addClass('circle')
       .wrapInner('<span class="visually-hidden"></span>')
@@ -180,6 +180,21 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
           overlayClose();
           $(this).next('ul').addClass('overlay-show');
           $('.language-switcher-language-url .block-title').addClass('overlay-show');
+        }
+      });
+  }
+
+  if( $('.language-switcher-language-url.custom-language-switcher').length > 0){
+    $('.custom-language-switcher .block-title')
+      .addClass('circle')
+      .click(function(){
+        if($(this).next('ul.overlay-show').length > 0){
+          overlayClose();
+        }
+        else{
+          overlayClose();
+          $(this).next('ul').addClass('overlay-show');
+          $('.custom-language-switcher .block-title').addClass('overlay-show');
         }
       });
   }
