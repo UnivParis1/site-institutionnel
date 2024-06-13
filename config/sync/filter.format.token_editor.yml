@@ -3,18 +3,18 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - slick
     - token_filter
 name: 'token editor'
 format: token_editor
 weight: -7
 filters:
-  token_filter:
-    id: token_filter
-    provider: token_filter
+  filter_autop:
+    id: filter_autop
+    provider: filter
     status: true
     weight: 0
-    settings:
-      replace_empty: '0'
+    settings: {  }
   filter_html:
     id: filter_html
     provider: filter
@@ -24,9 +24,18 @@ filters:
       allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <img src alt data-entity-type data-entity-uuid data-entity-substitution>'
       filter_html_help: true
       filter_html_nofollow: false
-  filter_autop:
-    id: filter_autop
-    provider: filter
+  slick_filter:
+    id: slick_filter
+    provider: slick
+    status: false
+    weight: 4
+    settings:
+      optionset: default
+      media_switch: ''
+  token_filter:
+    id: token_filter
+    provider: token_filter
     status: true
     weight: 0
-    settings: {  }
+    settings:
+      replace_empty: '0'

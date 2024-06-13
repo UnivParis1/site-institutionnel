@@ -26,7 +26,6 @@ dependencies:
     - field.field.node.offer.field_sites
     - field.field.node.offer.field_sites_all
     - node.type.offer
-    - workflows.workflow.publication
   module:
     - conditional_fields
     - content_moderation
@@ -108,7 +107,7 @@ content:
               geocoder: photon
               settings:
                 label: Adresse
-                description: 'Saisir l''adresse à localiser.'
+                description: "Saisir l'adresse à localiser."
             enabled: true
           leaflet_control_layer:
             weight: 0
@@ -710,18 +709,18 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 35
+    weight: 52
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 33
+    weight: 53
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 22
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -774,15 +773,14 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 37
+    weight: 54
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 36
+    weight: 55
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  trombi_students_enable: true
+hidden: {  }

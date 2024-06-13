@@ -53,8 +53,6 @@ dependencies:
     - link
     - paragraphs
     - path
-    - scheduler
-    - scheduler_content_moderation_integration
     - text
 third_party_settings:
   field_group:
@@ -167,6 +165,8 @@ third_party_settings:
         direction: vertical
     group_presentation:
       children:
+        - field_firstname
+        - field_name
         - field_fonction
         - field_affiliation
         - field_other_affiliation
@@ -254,7 +254,7 @@ third_party_settings:
       label: 'Intelligence Artificielle'
       region: hidden
       parent_name: ''
-      weight: 22
+      weight: 19
       format_type: accordion_item
       format_settings:
         classes: ''
@@ -343,6 +343,14 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_firstname:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_fonction:
     type: string_textfield
@@ -437,6 +445,14 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: medias
+    third_party_settings: {  }
+  field_name:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_other_affiliation:
     type: string_textfield
@@ -611,18 +627,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  publish_on:
-    type: datetime_timestamp_no_default
-    weight: 17
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 15
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
     weight: 4
@@ -670,18 +674,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  unpublish_on:
-    type: datetime_timestamp_no_default
-    weight: 14
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 16
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   url_redirects:
     weight: 19
     region: content
@@ -690,11 +682,12 @@ content:
 hidden:
   body: true
   deleted: true
-  field_firstname: true
   field_formations_ia: true
   field_get_hal_publications: true
   field_ia_skills: true
-  field_name: true
   field_projects_ia: true
   field_short_bio: true
-  trombi_students_enable: true
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true

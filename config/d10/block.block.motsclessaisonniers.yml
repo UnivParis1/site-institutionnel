@@ -1,0 +1,44 @@
+uuid: 8cdf5ff7-4e2f-40d1-9c7e-0fb70181bcdf
+langcode: fr
+status: false
+dependencies:
+  module:
+    - micro_path
+    - micro_site
+    - system
+    - up1_keywords
+  theme:
+    - p1ps2019
+id: motsclessaisonniers
+theme: p1ps2019
+region: before_content
+weight: -15
+provider: null
+plugin: keywords_block
+settings:
+  id: keywords_block
+  label: Recherche
+  label_display: visible
+  provider: up1_keywords
+  mot_cle_1: 'Aides étudiantes'
+  mot_cle_2: Inscription
+  mot_cle_3: 'Semaine #P1PS'
+  mot_cle_4: Formation
+  mot_cle_5: 'Una Europa'
+visibility:
+  site_type:
+    id: site_type
+    negate: false
+    context_mapping: {  }
+    site_type: {  }
+  site:
+    id: site
+    negate: false
+    context_mapping: {  }
+    sites: {  }
+    sites_front_page: 0
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/resultats-recherche\r\n/resultats-recherche*\r\n/new-resultats-recherche\r\n/new-resultats-recherche*"
