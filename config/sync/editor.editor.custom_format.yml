@@ -1,0 +1,48 @@
+uuid: 4669a432-a368-4916-abb2-40a666596b01
+langcode: fr
+status: true
+dependencies:
+  config:
+    - filter.format.custom_format
+  module:
+    - ckeditor
+format: custom_format
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formats
+          items:
+            - Blockquote
+            - Bold
+            - Italic
+            - NumberedList
+            - BulletedList
+            - PasteText
+        -
+          name: Liens
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Média
+          items:
+            - DrupalImage
+        -
+          name: Tools
+          items:
+            - Maximize
+  plugins:
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: site_content
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null
