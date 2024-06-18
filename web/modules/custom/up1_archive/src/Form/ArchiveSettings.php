@@ -108,7 +108,10 @@ class ArchiveSettings extends ConfigFormBase {
       '#required' => TRUE
     ];
 
-    $nb_pages_to_archive = count($pages_to_archive );
+    if (!empty($pages_to_archive) ) {
+      $nb_pages_to_archive = count($pages_to_archive );
+    }
+    else $nb_pages_to_archive = 0;
     $form['node'] = [
       '#type' => 'details',
       '#title' => t('Page(s) to archive'),
