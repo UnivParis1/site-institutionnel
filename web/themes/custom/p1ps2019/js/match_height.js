@@ -101,4 +101,4 @@
       $(scrollTarget).animate({scrollTop: (offset.top - 10)}, 500);
     }
   };
-})(window, window.document, window.$, window.Drupal);
+})(window, window.document, window.jQuery, window.Drupal);

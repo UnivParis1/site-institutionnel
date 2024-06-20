@@ -214,4 +214,4 @@
     else $('body').addClass('browser-'+browser);
   }
 
-})(window, document, window.$, window.once, window.Drupal);
+})(window, document, window.jQuery, window.once, window.Drupal);

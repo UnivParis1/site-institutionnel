@@ -59,4 +59,4 @@
 		setBgImage();
 	}
 
-})(window, window.$);
+})(window, window.jQuery);

@@ -75,4 +75,4 @@
       });
     }
   }
-})(window, window.$,window.Drupal);
+})(window, window.jQuery,window.Drupal);

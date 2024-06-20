@@ -119,4 +119,4 @@
     resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
     return resultDate;
   }
-})(window, document, window.$, window.Drupal);
+})(window, document, window.jQuery, window.Drupal);

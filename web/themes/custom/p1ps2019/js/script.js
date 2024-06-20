@@ -124,7 +124,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
     return resultDate;
   }
-})(window, document, window.$, window.Drupal);
+})(window, document, window.jQuery, window.Drupal);
 
 ;(function(W, D, $, once, Drupal) {
   'use strict';
@@ -342,7 +342,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     else $('body').addClass('browser-'+browser);
   }
 
-})(window, document, window.$, window.once, window.Drupal);
+})(window, document, window.jQuery, window.once, window.Drupal);
 
 (function(W, $) {
 	'use strict';
@@ -405,7 +405,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 		setBgImage();
 	}
 
-})(window, window.$);
+})(window, window.jQuery);
 
 (function(W, $, Drupal) {
   let $W = $(W);
@@ -484,4 +484,4 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
       });
     }
   }
-})(window, window.$,window.Drupal);
+})(window, window.jQuery,window.Drupal);
