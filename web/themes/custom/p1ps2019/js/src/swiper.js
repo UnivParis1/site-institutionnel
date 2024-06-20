@@ -1,4 +1,5 @@
-(function($) {
+(function(W, $, Drupal) {
+  let $W = $(W);
 
   Drupal.behaviors.bluedropSwiper = {
     attach: function (context, settings) {
@@ -36,13 +37,11 @@
       }
 
 
-      $(window).resize(function() {
+      $W.resize(function() {
         //  setTimeout(checkOnSwipers, 2000);
         noSwiping();
         reinitSwiper(carouselSwiper);
       });//close resize
-
-
 
       if($('.tabs, .accordion').length > 0){
         $(".tabs li a, .accordion li a").on("click",function(){
@@ -57,7 +56,7 @@
   //setTimeout(checkOnSwipers, 2000);
 
   function noSwiping(){
-    if($(window).width() > 1024){
+    if($W.width() > 1024){
       if($('.swiper-tiles.swiper-no-swiping').length <= 0){
         $('.swiper-tiles').addClass('swiper-no-swiping');
       }
@@ -76,4 +75,4 @@
       });
     }
   }
-})(jQuery);
+})(window, window.$,window.Drupal);

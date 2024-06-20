@@ -1,9 +1,10 @@
-(function($) {
+(function(W, $) {
 	'use strict';
+  let $W = $(W),
+    $html = $('html');
 
 	// the css selector for the container that the image should be attached to as a background-image
-	var imgContainer = '.img-container';
-
+	var imgContainer = $('.img-container');
 	function getCurrentSrc(element, cb)
 	{
 		var getSrc;
@@ -37,8 +38,7 @@
 	}
 
 	function setBgImage() {
-		$(imgContainer).each(function()
-		{
+		imgContainer.each(function() {
 			var $this = $(this), img = $this.find('img').get(0);
 
 			getCurrentSrc(img, function(elementSource)
@@ -48,10 +48,10 @@
 		});
 	}
 
-	if ('objectFit' in document.documentElement.style === false) {
+	if (!('objectFit' in document.documentElement.style)) {
 
-		$('html').addClass('no-objectfit');
-		$(window).resize(function()
+		$html.addClass('no-objectfit');
+		$W.resize(function()
 		{
 			setBgImage();
 		});
@@ -59,4 +59,4 @@
 		setBgImage();
 	}
 
-})(jQuery);
+})(window, window.$);

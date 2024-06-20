@@ -1,8 +1,8 @@
-/**
- * @file
- * A JavaScript file for the site with globally used scripts.
- */
-(function ($) {
+;(function (W, D, $, Drupal) {
+  'use strict';
+  let $W = $(W),
+      $D = $(D);
+
   Drupal.behaviors.breakpoints = {
     attach: function (context, settings) {
       // Define breakpoints on the global window object so we can use them later.
@@ -16,23 +16,17 @@
       }
     }
   };
-})(jQuery, Drupal);
 
-/**
- * @file
- * A JavaScript file for the site, specifically for the match height plugin.
- */
-(function ($) {
   Drupal.behaviors.match_height = {
     attach: function (context, settings) {
       // Match Height Scripts
       runMatchHeight();
 
-      $(document).ready(function() {
+      $D.ready(function() {
         runMatchHeight();
       });
 
-      $(window).resize(function() {
+      $W.resize(function() {
         runMatchHeight();
       });
 
@@ -49,13 +43,13 @@
       // Match height for the search results page
       $('.sm-teaser__title').matchHeight();
       $('.sm-teaser__title').matchHeight();
-      if ($(window).width() > window.breakpoints.bp1) {
+      if ($W.width() > window.breakpoints.bp1) {
         $('.matchheight-desktop').matchHeight({
           byRow: false
         });
       };
 
-      if ($(window).width() < window.breakpoints.bp1) {
+      if ($W.width() < window.breakpoints.bp1) {
         $('.matchheight-mobile').matchHeight({
           byRow: false
         });
@@ -63,10 +57,7 @@
     }
   };
 
-})(jQuery, Drupal);
-(function ($, Drupal) {
-
-  matchHeight = function () {
+  let matchHeight = function () {
     $('.sm-teaser__title').matchHeight();
     $('.sm-teaser__img-link').matchHeight();
     $('.sm-teaser').matchHeight();
@@ -78,8 +69,9 @@
     if (ajax.element.className == 'results__link') {
       // Set temporary min-height on body to prevent page from jockeying around
       // when AJAX content is inserted.
-      var body = $('body');
-      var initHeight = body.css('min-height');
+      var body = $('body'),
+          initHeight = body.css('min-height');
+
       body.css('min-height', body.height());
       setTimeout(function () {
         body.css('min-height', initHeight);
@@ -109,4 +101,4 @@
       $(scrollTarget).animate({scrollTop: (offset.top - 10)}, 500);
     }
   };
-})(jQuery, Drupal);
+})(window, window.document, window.$, window.Drupal);
