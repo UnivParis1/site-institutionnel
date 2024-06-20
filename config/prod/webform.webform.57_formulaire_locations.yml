@@ -13,6 +13,9 @@ title: '90 - formulaire_locations'
 description: ''
 category: ''
 elements: |-
+  information_champs_obligatoires:
+    '#type': webform_markup
+    '#markup': '<p><strong>Les champs marqués par une astérix rouge sont obligatoires</strong></p>'
   vous_etes_:
     '#type': webform_section
     '#title': 'Vous êtes :'
@@ -42,24 +45,31 @@ elements: |-
       '#type': textfield
       '#title': 'Société de production'
       '#required': true
-      '#required_error': 'société de production est obligatoire'
+      '#required_error': 'Le champ "Société de production" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     adresse_de_l_organisme_:
       '#type': textfield
       '#title': 'Adresse de l''organisme'
       '#required': true
+      '#required_error': 'Le champ "Adresse de l''organisme" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     reference_de_l_organisme_siret_:
       '#type': textfield
       '#title': 'Référence de l''organisme (SIRET)'
       '#required': true
+      '#required_error': 'Le champ "Référence de l''organisme (SIRET)" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     telephone_:
       '#type': tel
-      '#title': Téléphone
+      '#title': 'Téléphone de l''organisme'
       '#required': true
+      '#required_error': 'Le champ "Téléphone" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     courriel_tournage:
       '#type': textfield
-      '#title': Courriel
+      '#title': 'Courriel de l''organisme'
       '#required': true
-      '#required_error': 'l''email est requis'
+      '#required_error': 'Le champ "courriel" est requis'
       '#states':
         visible:
           ':input[name="un_tournage"]':
@@ -69,24 +79,32 @@ elements: |-
       '#type': textfield
       '#title': 'Directeur de société'
       '#required': true
+      '#required_error': 'Le champ "Directeur de société" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     telephone_directeur_de_societe:
       '#type': tel
-      '#title': Téléphone
+      '#title': 'Téléphone du directeur de société'
       '#required': true
+      '#required_error': 'Le champ "Téléphone" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#admin_title': 'Téléphone Directeur de société'
     courriel_directeur_de_societe:
       '#type': email
-      '#title': Courriel
+      '#title': 'Courriel du directeur de société'
       '#required': true
+      '#required_error': 'Le champ courriel est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     regisseur_ou_contact_:
       '#type': textfield
       '#title': 'Régisseur (ou contact)'
     telephone_regisseur_ou_contact:
       '#type': tel
-      '#title': Téléphone
+      '#title': 'Téléphone du régisseur'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     courriel_regisseur:
       '#type': email
-      '#title': Courriel
+      '#title': 'Courriel du régisseur'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   le_projet:
     '#type': container
     '#title': 'Le projet'
@@ -110,23 +128,32 @@ elements: |-
         Autre: Autre
       '#options_display': buttons_horizontal
       '#required': true
+      '#required_error': 'Le champ "type" est requis'
       '#options__properties': ''
     titre_du_projet:
       '#type': textfield
       '#title': 'Titre du projet'
       '#required': true
+      '#required_error': 'Le champ "Titre du projet" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     realisateur:
       '#type': textfield
       '#title': Réalisateur
       '#required': true
+      '#required_error': 'Le champ "Réalisateur" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     diffuseur:
       '#type': textfield
       '#title': Diffuseur
       '#required': true
+      '#required_error': 'Le champ "Diffuseur" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     acteurs_principaux:
       '#type': textfield
       '#title': 'Acteurs principaux'
       '#required': true
+      '#required_error': 'Le champ "Acteurs principaux" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     synopsis:
       '#type': managed_file
       '#title': Synopsis
@@ -141,7 +168,7 @@ elements: |-
           value: 'UN TOURNAGE'
     type_decors_recherches:
       '#type': checkboxes
-      '#title': Type
+      '#title': 'Types de décors'
       '#options':
         'Amphithéâtre boisé': 'Amphithéâtre boisé'
         'Amphithéâtre moderne': 'Amphithéâtre moderne'
@@ -153,6 +180,7 @@ elements: |-
         'Cour (extérieur)': 'Cour (extérieur)'
       '#options_display': buttons_horizontal
       '#required': true
+      '#required_error': 'Le champ "Types de décors" est requis'
       '#options__properties': ''
     avez_vous_des_precisions_a_apporter:
       '#type': textarea
@@ -161,29 +189,36 @@ elements: |-
       '#type': textfield
       '#title': 'Date(s) ou période(s) de tournage envisagée(s)'
       '#required': true
+      '#required_error': 'Le champ "Date(s) ou période(s) de tournage envisagée(s)" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nombre_de_journee_s_de_tournage_envisagee_s_:
       '#type': textfield
       '#title': 'Nombre de journée(s) de tournage envisagée(s) (installation et désinstallation comprises)'
       '#required': true
+      '#required_error': 'Le champ "Nombre de journée(s) de tournage envisagée(s) (installation et désinstallation comprises)" est requis'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     avez_vous_des_questions_:
       '#type': textfield
-      '#title': 'Avez-vous des questions'
+      '#title': 'Avez-vous des questions ?'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nombre_de_personne_de_l_equipe_technique_:
       '#type': textfield
       '#title': 'Nombre de personnes de l’équipe technique'
       '#required': true
       '#required_error': ' nombre de personne de l’équipe technique est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nombre_d_acteurs_:
       '#type': textfield
       '#title': 'Nombre d’acteurs'
       '#required': true
       '#required_error': 'Nombre d’acteurs est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nombre_de_figurants_:
       '#type': textfield
       '#title': 'Nombre de figurants'
       '#required': true
       '#required_error': 'Nombre de figurants est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   markup:
     '#type': webform_markup
     '#states':
@@ -216,41 +251,49 @@ elements: |-
         Autre: Autre
       '#options_display': buttons_horizontal
       '#required': true
+      '#required_error': 'nature de la demande est requis'
       '#options__properties': ''
     societe_ou_association_evenement_organisme:
       '#type': textfield
       '#title': 'Société ou association responsable de l''évènement'
       '#required': true
+      '#required_error': 'Société ou association responsable de l''évènement est requis'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     adresse_evenement_organisme:
       '#type': textfield
       '#title': Adresse
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
+      '#required_error': 'le champ "adresse" est requis'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     reference_de_l_organisme_siret_evenement_organisme:
       '#type': textfield
       '#title': Siret
       '#required': true
+      '#required_error': 'Le champ "siret" est requis'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nom_du_directeur_de_la_societe:
       '#type': textfield
       '#title': 'Nom du signataire de la convention (Président/Directeur ou personne ayant la délégation de signature) '
       '#required': true
+      '#required_error': 'Nom du signataire de la convention est requis'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     regisseur_ou_contact_evenement_organisme:
       '#type': textfield
       '#title': 'Nom de la personne responsable de l''évènement'
       '#required': true
+      '#required_error': 'Nom de la personne responsable de l''évènement est requis'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     courriel_evenement_organisme:
       '#type': email
       '#title': 'Courriel de la personne responsable de l’évènement '
       '#required': true
+      '#required_error': 'Courriel de la personne responsable de l’évènement '
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     telephone_evenement_organisme:
       '#type': tel
       '#title': 'Téléphone du responsable de l’évènement '
       '#required': true
+      '#required_error': 'Téléphone du responsable de l’évènement '
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nom_du_contact_si_different_du_responsable_de_l_evenement:
       '#type': textfield
@@ -276,11 +319,13 @@ elements: |-
       '#type': textarea
       '#title': 'Objet de l’évènement (thèmes/sujets/objectifs abordés) '
       '#required': true
+      '#required_error': 'Objet de l’évènement'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     dates_et_horaires_de_l_evenement:
       '#type': textarea
       '#title': 'Dates et horaires de l''évènement (installation et désinstallation comprises) '
       '#required': true
+      '#required_error': 'Dates et horaires de l''évènement'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     lieu_s_souhaite_s_:
       '#type': select
@@ -300,6 +345,7 @@ elements: |-
         MSE: MSE
       '#select2': true
       '#required': true
+      '#required_error': 'Lieu(s) souhaité(s) '
     _salles_souhaitees_:
       '#type': select
       '#title': 'Salles souhaitées '
@@ -312,10 +358,12 @@ elements: |-
         'Espaces de cocktails': 'Espaces de cocktails'
       '#select2': true
       '#required': true
+      '#required_error': 'Salles souhaitées '
     nombre_d_espaces_souhaites:
       '#type': textfield
       '#title': 'Nombre d''espaces souhaités'
       '#required': true
+      '#required_error': 'Nombre d''espaces souhaités est requis'
       '#states':
         visible:
           ':input[name="_salles_souhaitees_[]"]':
@@ -325,11 +373,13 @@ elements: |-
       '#type': textarea
       '#title': 'Nombre de personnes attendues  (invités et organisateurs)'
       '#required': true
+      '#required_error': 'Nombre de personnes attendues  (invités et organisateurs) est requis'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nom_des_intervenants:
       '#type': textarea
       '#title': 'Liste des intervenants'
       '#required': true
+      '#required_error': 'Liste des intervenants est requis'
       '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     evenement_payant:
       '#type': radios
@@ -339,6 +389,7 @@ elements: |-
         Non: Non
       '#options_display': buttons_horizontal
       '#required': true
+      '#required_error': 'L’évènement sera-t-il payant ?  est requis'
       '#options__properties': ''
     informations_complementaires_:
       '#type': textarea

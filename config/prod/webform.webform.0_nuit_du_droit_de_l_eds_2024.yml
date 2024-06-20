@@ -1,81 +1,54 @@
-uuid: 5a19fae2-2ab3-480b-bfb7-e5448dd8878c
+uuid: e287800e-9fd1-47d3-9eeb-0f100d32d831
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 2430
+uid: 76
 template: false
 archive: false
-id: 59_formulaire_de_contact
-title: '59 - Formulaire de contact'
+id: 0_nuit_du_droit_de_l_eds_2024
+title: '0 - Nuit du droit de l''EDS 2024'
 description: ''
 category: ''
 elements: |-
-  votre_nom:
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<h2>Formulaire d''inscription</h2>'
+  nom:
     '#type': textfield
-    '#title': 'Votre nom'
-    '#placeholder': Dupont
-    '#autocomplete': name
+    '#title': Nom
     '#required': true
-    '#required_error': 'Champ obligatoire : merci de saisir votre nom'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  votre_courriel:
+  prenom:
+    '#type': textfield
+    '#title': 'Prénom '
+    '#required': true
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel:
     '#type': email
-    '#title': 'Votre courriel'
-    '#help_title': 'Saisissez votre adresse de messagerie'
-    '#help': '<p>Merci de mettre une adresse valide car nous vous répondrons sur cette adresse.</p>'
-    '#placeholder': dupont@gmail.com
-    '#autocomplete': email
+    '#title': 'Courriel '
     '#required': true
-    '#required_error': 'Merci de mettre votre courriel'
     '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-  votre_question:
-    '#type': textarea
-    '#title': 'Votre question'
+  statut:
+    '#type': textfield
+    '#title': Statut
     '#required': true
-    '#required_error': 'Merci de mettre une question'
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': 'Je suis avec ces {termes de service}.'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#type': checkbox
+    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
     '#required': true
-    '#terms_title': 'Traitement des données personnelles'
-    '#terms_content': 'J&#39;accepte ...'
   captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-    '#captcha_admin_mode': true
-  info:
-    '#type': webform_message
-    '#message_message': 'Message explicatif'
-  ou_habitez_vous_:
-    '#type': webform_address
-    '#title': 'Où habitez-vous ?'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
-    '#address__placeholder': '12 place du panthéon'
-    '#address__required': true
-    '#address_2__access': false
-    '#city__placeholder': Paris
-    '#city__required': true
-    '#state_province__access': false
-    '#postal_code__placeholder': '75005'
-    '#postal_code__required': true
-    '#country__placeholder': France
-    '#choices': true
-  adresse:
-    '#type': textfield
-    '#title': Adresse
-    '#autocomplete': address-line1
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  markup:
+    '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Submit button(s)'
-    '#states':
-      invisible:
-        ':input[name="etes_vous_d_accord_"]':
-          value: Non
-    '#submit__label': 'Envoyer votre réponse'
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': Soumettre
+    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -88,10 +61,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: '<p>Les inscriptions sont closes.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -160,9 +133,11 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -180,8 +155,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: ''
+  confirmation_title: 'Confirmation d''inscription'
+  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>L'Ecole de Droit de la Sorbonne</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -189,9 +164,9 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 320
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: '<p><strong>Plus de places disponibles.</strong></p>'
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
@@ -238,7 +213,8 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles: {  }
+    roles:
+      - anonymous
     users: {  }
     permissions: {  }
   delete_own:
@@ -247,21 +223,24 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 76
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 76
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 76
     permissions: {  }
 handlers:
-  email:
+  email_aux_demandeurs:
     id: email
-    handler_id: email
-    label: 'me prévenir'
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -269,65 +248,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: lagadic@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: _default
+      from_mail: dir-ecole-droit-sorbonne@univ-paris1.fr
       from_options: {  }
-      from_name: _default
+      from_name: 'Ecole de Droit de la Sorbonne '
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: Confirmation
-      body: _default
-      excluded_elements:
-        votre_nom: votre_nom
-        votre_courriel: votre_courriel
-        terms_of_service: terms_of_service
-        captcha: captcha
-        info: info
-        ou_habitez_vous_: ou_habitez_vous_
-        etes_vous_d_accord_: etes_vous_d_accord_
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_1:
-    id: email
-    handler_id: email_1
-    label: 'Confirmation à l''internaute'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_courriel:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: _default
-      from_options: {  }
-      from_name: _default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: _default
-      body: _default
+      subject: '[Réponse automatique] Confirmation d''inscription à la nuit du droit 2023'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci pour votre participation.</p>\r\n\r\n<p>L'Ecole de Droit de la Sorbonne</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

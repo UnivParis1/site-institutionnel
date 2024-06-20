@@ -5,6 +5,7 @@ dependencies:
   config:
     - system.menu.footer-en
   module:
+    - language
     - micro_path
     - micro_site
     - system
@@ -36,3 +37,10 @@ visibility:
     context_mapping: {  }
     sites: {  }
     sites_front_page: 0
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
