@@ -22,10 +22,10 @@ gulp.task('styles', function() {
 
     .pipe(sourcemaps.init()) // added by Tuesday
 
-    .pipe($.sass({
+    .pipe(sass({
       includePaths: sassPaths
     })
-    .on('error', $.sass.logError))
+    .on('error', sass.logError))
     .pipe(autoprefixer({ browsers: ['last 2 versions', 'ie >= 9'] }))
 	  .pipe(gulp.dest('css'))
     .pipe(csso())
