@@ -132,12 +132,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     return resultDate;
   }
 })(jQuery,Drupal);
-/*
-  Scripts jQuery et Javascript
-  Par Ebizproduction
-*/
-
-(function($) {
+;(function(W, D, $, once, Drupal) {
   //accessibility toggler
   if($('#accessibility-toggle').length > 0){
     $('#accessibility-toggle').click(function(){
@@ -255,8 +250,8 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
-
-      $(document, context).once('foundation-init').each(function() {
+      const init = once('foundation-init', context);
+      init.forEach(function() {
         $(document).foundation();
       });
       //ADD SCROLL CLASS
@@ -353,7 +348,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
     else $('body').addClass('browser-'+browser);
   }
 
-})(jQuery);
+})(window, document, window.$, window.once, window.Drupal);
 
 (function($) {
 	'use strict';

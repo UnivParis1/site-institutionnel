@@ -1,9 +1,4 @@
-/*
-  Scripts jQuery et Javascript
-  Par Ebizproduction
-*/
-
-(function($) {
+;(function(W, D, $, once, Drupal) {
   //accessibility toggler
   if($('#accessibility-toggle').length > 0){
     $('#accessibility-toggle').click(function(){
@@ -121,8 +116,8 @@
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
-
-      $(document, context).once('foundation-init').each(function() {
+      const init = once('foundation-init', context);
+      init.forEach(function() {
         $(document).foundation();
       });
       //ADD SCROLL CLASS
@@ -219,4 +214,4 @@
     else $('body').addClass('browser-'+browser);
   }
 
-})(jQuery);
+})(window, document, window.$, window.once, window.Drupal);
