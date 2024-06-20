@@ -93,7 +93,7 @@
     <div>{{ fonction }}</div>
     {% if expertises %}
       <p class="skills">
-        {% for key, expertise in expertises if key|first != '#' %}
+        {% for key, expertise in expertises|filter((value, key) => key|first != '#') %}
           <span>{{ expertise|raw }}</span>
         {% endfor %}
       </p>

@@ -81,7 +81,7 @@ display:
         type: infinite_scroll
         options:
           offset: 0
-          items_per_page: 12
+          items_per_page: 10
           total_pages: null
           id: 0
           tags:
@@ -109,7 +109,7 @@ display:
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Sélectionnez n''importe quel filtre et cliquez sur Appliquer pour voir les résultats'
+          text_input_required: "Sélectionnez n'importe quel filtre et cliquez sur Appliquer pour voir les résultats"
           text_input_required_format: full_html
           bef:
             general:
@@ -128,19 +128,23 @@ display:
                 advanced:
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
               field_event_date_end_value:
                 plugin_id: default
                 advanced:
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
               field_event_type_target_id:
                 plugin_id: default
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
       access:
         type: perm
         options:
@@ -474,7 +478,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -492,26 +495,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  page_1:
-    id: page_1
-    display_title: Page
-    display_plugin: page
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: agenda
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

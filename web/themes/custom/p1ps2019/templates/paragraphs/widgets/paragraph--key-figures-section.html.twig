@@ -63,7 +63,7 @@
                   <h2 class="text-center">{{ content.field_title.0 }}</h2>
                 </div>
                 {% endif %}
-                {% for key, item in  content.field_key_figure if key|first != '#' %}
+                {% for key, item in  content.field_key_figure|filter((value, key) => key|first != '#') %}
                   <div class="groupeinfo cell large-{{ nbCols }} small-6 margin-y-mobile">
                       {{ item }}
                   </div>

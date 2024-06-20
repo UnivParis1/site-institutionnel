@@ -58,6 +58,7 @@ class ThesesService {
     $uids = $user_storage->getQuery()
       ->condition('status', 1)
       ->condition('roles', 'admin_dir_com')
+      ->accessCheck(FALSE)
       ->execute();
     $users = $user_storage->loadMultiple($uids);
 

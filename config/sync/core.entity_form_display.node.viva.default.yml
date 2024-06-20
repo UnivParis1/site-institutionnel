@@ -26,8 +26,6 @@ dependencies:
     - datetime
     - ics_field
     - path
-    - scheduler
-    - scheduler_content_moderation_integration
 id: node.viva.default
 targetEntityType: node
 bundle: viva
@@ -158,18 +156,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  publish_on:
-    type: datetime_timestamp_no_default
-    weight: 25
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 23
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
     weight: 14
@@ -217,18 +203,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  unpublish_on:
-    type: datetime_timestamp_no_default
-    weight: 24
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 26
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   url_redirects:
     weight: 28
     region: content
@@ -240,4 +214,7 @@ hidden:
   field_publish_master: true
   field_sites: true
   field_sites_all: true
-  trombi_students_enable: true
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true
