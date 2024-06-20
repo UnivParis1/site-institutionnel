@@ -137,7 +137,7 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
   Par Ebizproduction
 */
 
-(function($) {
+(function($, Drupal, once) {
   //accessibility toggler
   if($('#accessibility-toggle').length > 0){
     $('#accessibility-toggle').click(function(){
@@ -255,8 +255,8 @@ return(this.options.end-this.options.start)*t+this.options.start}},{key:"_logTra
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
-
-      $(document, context).once('foundation-init').each(function() {
+      const init = once('foundation-init', context);
+      init.forEach(function() {
         $(document).foundation();
       });
       //ADD SCROLL CLASS
