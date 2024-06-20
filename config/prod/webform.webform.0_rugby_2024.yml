@@ -1,0 +1,441 @@
+uuid: 0aa764fa-2c4d-4813-9144-22036a4e82ce
+langcode: fr
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 5486
+template: false
+archive: false
+id: 0_rugby_2024
+title: '0 - Rugby 2024'
+description: ''
+category: ''
+elements: |-
+  information:
+    '#type': webform_section
+    '#title': 'Informations générales / General information'
+    vous_etes:
+      '#type': radios
+      '#title': 'Vous êtes / You are'
+      '#options':
+        'M / Mr.': 'M / Mr.'
+        'Mme / Mrs.': 'Mme / Mrs.'
+      '#attributes':
+        style: '<span style="font-size:1.4rem">'
+      '#options__properties': ''
+      '#required': true
+    nom_identite:
+      '#type': textfield
+      '#title': 'Nom / Last name'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    prenom:
+      '#type': textfield
+      '#title': 'Prénom / First name'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    date_de_naissance:
+      '#type': date
+      '#title': 'Date de naissance (JJ/MM/AAAA) / Date of birth (DD/MM/YYYY)'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#date_date_format': ''
+      '#required': true
+    organisation:
+      '#type': webform_select_other
+      '#title': Organisation
+      '#options':
+        'Una Europa': 'Una Europa'
+        'Freie Universität Berlin': 'Freie Universität Berlin'
+        'Alma mater Studiorum Università di Bologna': 'Alma mater Studiorum Università di Bologna'
+        'University of Edinburgh': 'University of Edinburgh'
+        'Leiden University': 'Leiden University'
+        'Uniwersytet Jagielloński w Krakowie': 'Uniwersytet Jagielloński w Krakowie'
+        'Helsingin Yliopisto': 'Helsingin Yliopisto'
+        'KU Leuven': 'KU Leuven'
+        'Universidad Complutense de Madrid': 'Universidad Complutense de Madrid'
+        'University College Dublin': 'University College Dublin'
+        'University of Zurich': 'University of Zurich'
+        'Université Paris 1 Panthéon-Sorbonne': 'Université Paris 1 Panthéon-Sorbonne'
+      '#empty_option': 'Sélectionner / Choose'
+      '#other__option_label': Autre/Other
+      '#required': true
+    statut_inforrmation:
+      '#type': select
+      '#title': 'Statut / Status'
+      '#options':
+        Étudiant: Étudiant
+        Enseignant: Enseignant
+        Administratif: Administratif
+      '#empty_option': 'Sélectionner / Choose'
+      '#required': true
+    direction_composante:
+      '#type': textfield
+      '#title': 'Direction/Composante // Management/Component'
+      '#states':
+        visible:
+          - ':input[name="statut_inforrmation"]':
+              value: Enseignant
+          - xor
+          - ':input[name="statut_inforrmation"]':
+              value: Administratif
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    fonction:
+      '#type': textfield
+      '#title': 'Fonction / Function'
+      '#states':
+        visible:
+          - ':input[name="statut_inforrmation"]':
+              value: Enseignant
+          - xor
+          - ':input[name="statut_inforrmation"]':
+              value: Administratif
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    courriel:
+      '#type': email
+      '#title': 'Courriel / Email'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+    telephone_portable:
+      '#type': tel
+      '#title': 'Téléphone portable / Mobile phone number'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#international': true
+      '#international_initial_country': FR
+      '#required': true
+    joindre_une_photo_id_format_jpeg_attach_a_photo_id_jpeg_format_:
+      '#type': webform_image_file
+      '#title': 'Joindre une Photo (ID, format jpeg) / Attach a Photo (ID, jpeg format) '
+      '#required': true
+  participation:
+    '#type': webform_section
+    '#title': ' Informations participations / Participation information'
+    inscrit_en_tant_que_registered_as_:
+      '#type': select
+      '#title': 'Inscrit en tant que : / Registered as:'
+      '#options':
+        Joueur: Joueur
+        'Accompagnant délégation / Delegation accompanying person': 'Accompagnant délégation / Delegation accompanying person'
+        'Student Board': 'Student Board'
+        'Membre des équipes de direction/Présidence d''une université // Member of the management team/President of a university': 'Membre des équipes de direction/Présidence d''une université // Member of the management team/President of a university'
+        'Volontaire / Volunteer': 'Volontaire / Volunteer'
+        'Una Europa': 'Una Europa'
+      '#empty_option': 'Sélectionner / Choose'
+      '#required': true
+    taille_t_shirt:
+      '#type': select
+      '#title': 'Taille t-shirt'
+      '#options':
+        XS: XS
+        S: S
+        M: M
+        L: L
+        XL: XL
+        XXL: XXL
+        XXXL: XXXL
+        XXXXL: XXXXL
+      '#empty_option': 'Sélectionner / Choose'
+      '#states':
+        visible:
+          - ':input[name="inscrit_en_tant_que_registered_as_"]':
+              value: Joueur
+          - xor
+          - ':input[name="inscrit_en_tant_que_registered_as_"]':
+              value: 'Volontaire / Volunteer'
+      '#required': true
+  informations_specifiques:
+    '#type': webform_section
+    '#title': 'Autres / Other'
+    '#required': true
+    regime_alimentaire_particulier_ou_allergie_s_alimentaire_s_speci:
+      '#type': radios
+      '#title': 'Régime alimentaire particulier ou allergie(s) alimentaire(s) / Special diet or food allergy(ies) '
+      '#options':
+        'Oui / Yes': 'Oui / Yes'
+        'Non / No': 'Non / No'
+      '#options__properties': ''
+      '#required': true
+    precisez_specify:
+      '#type': textarea
+      '#title': 'Précisez / Specify'
+      '#states':
+        visible:
+          ':input[name="regime_alimentaire_particulier_ou_allergie_s_alimentaire_s_speci"]':
+            value: 'Oui / Yes'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required': true
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<p>Pour toute question, contactez l''équipe organisatrice à l''adresse / If you have any questions, please contact the organising team at: <a href="mailto:rugbychallenge@univ-paris1.fr">rugbychallenge@univ-paris1.fr</a></p>'
+  captcha:
+    '#type': captcha
+  markup:
+    '#type': webform_markup
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'Soumettre / Submit'
+    '#update__label': 'Mettre à jour'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: '<p>This form is now closed to new submissions.</p>'
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "<p>\r\n<style type=\"text/css\"><!--td {border: 1px solid #cccccc;}br {mso-data-placement:same-cell;}-->\r\n</style>\r\nMadame, Monsieur,<br />\r\nMerci pour votre demande d'inscription.<br />\r\nNous reviendrons vers vous pour les phases suivantes d'inscription de votre équipe.<br />\r\nBien cordialement,<br />\r\nl'équipe d'Una Europa Rugby Challenge</p>\r\n\r\n<p>Dear Sir or Madam,<br />\r\nThank you for your registration request.<br />\r\nWe will get back to you as soon as possible to register your team.<br />\r\nSincerely, the Una Europa Rugby Challenge team</p>"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles:
+      - anonymous
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_aux_demandeurs:
+    id: email
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: rugbychallenge@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Una Europa Rugby Challenge '
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[Réponse automatique] Una Europa Rugby Challenge - Confirmation de votre demande d''inscription / Confirmation of your registration request'
+      body: "<p>Madame, Monsieur,<br />\r\nMerci pour votre demande d'inscription.<br />\r\nNous reviendrons vers vous pour les phases suivantes d'inscription de votre équipe.<br />\r\nBien cordialement,<br />\r\nl'équipe d'Una Europa Rugby Challenge</p>\r\n\r\n<p>Dear Sir or Madam,<br />\r\nThank you for your registration request. We will get back to you as soon as possible to register your team.<br />\r\nSincerely, the Una Europa Rugby Challenge team</p>\r\n\r\n<p>\r\n<style type=\"text/css\"><!--td {border: 1px solid #cccccc;}br {mso-data-placement:same-cell;}-->\r\n</style>\r\n</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: rugbychallenge@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:courriel:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Una Europa Rugby Challenge - nouvelle inscription'
+      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

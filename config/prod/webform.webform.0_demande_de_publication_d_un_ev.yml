@@ -1,0 +1,557 @@
+uuid: b82dcbf5-dcdc-488b-9baa-eaf5432e500d
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 5486
+template: false
+archive: false
+id: 0_demande_de_publication_d_un_ev
+title: '2 - Demande de publication d''un évènement ou publication'
+description: ''
+category: ''
+elements: |-
+  nom_prenom_:
+    '#type': textfield
+    '#title': 'Nom prénom :'
+    '#required': true
+    '#required_error': 'Nom prénom est obligatoire'
+    '#default_value': '[cas:attribute:givenname] [cas:attribute:sn]'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  courriel_:
+    '#type': textfield
+    '#title': 'Courriel : '
+    '#required': true
+    '#required_error': 'Le courriel est obligatoire'
+    '#default_value': '[current-user:mail]'
+    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  souhaitez_vous_publier_un_evenement_ou_une_publication_:
+    '#type': radios
+    '#title': 'Souhaitez-vous publier un évènement ou une publication ?'
+    '#options':
+      'Un évènement': 'Un évènement'
+      'Une publication': 'Une publication'
+    '#options__properties': ''
+  evenement:
+    '#type': webform_section
+    '#title': Evènement
+    '#title_display': invisible
+    titre_de_votre_evenement_:
+      '#type': textfield
+      '#title': 'Titre de votre évènement :'
+      '#required': true
+      '#required_error': 'Titre de votre évènement est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    date_et_heure_de_debut:
+      '#type': datetime
+      '#title': 'Date de début :'
+      '#required': true
+      '#required_error': 'Date de début est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#date_date_format': ''
+      '#date_time_element': none
+    heure_de_debut_:
+      '#type': textfield
+      '#title': 'Heure de début :'
+      '#required': true
+      '#required_error': 'Heure de début est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    date_et_heure_de_fin_:
+      '#type': datetime
+      '#title': 'Date de fin :'
+      '#required': true
+      '#required_error': 'Date et heure de fin est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#date_date_format': ''
+      '#date_time_element': none
+    heure_de_fin_:
+      '#type': textfield
+      '#title': 'Heure de fin :'
+      '#required': true
+      '#required_error': 'Heure de fin est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    type_d_evenement_:
+      '#type': select
+      '#title': 'Type d''évènement :'
+      '#options':
+        Atelier: Atelier
+        Cérémonie: Cérémonie
+        Colloque: Colloque
+        Conférence: Conférence
+        Débat: Débat
+        Exposition: Exposition
+        Rencontre: Rencontre
+        Séminaire: Séminaire
+        Spectacle: Spectacle
+        'Table ronde': 'Table ronde'
+      '#required': true
+      '#required_error': 'Type d''évènement est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+    image_d_illustration_:
+      '#type': webform_image_file
+      '#title': 'Image d''illustration :'
+      '#description': |-
+        <p>Taille recommandée pour l'image : 1920 x 462 pixels</p>
+
+        <p>&nbsp;</p>
+      '#required': true
+      '#required_error': 'Image d''illustration est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#max_filesize': '2'
+    chapo:
+      '#type': textarea
+      '#title': 'Chapô :'
+      '#required': true
+      '#required_error': 'Chapô est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    texte_descriptif_:
+      '#type': textarea
+      '#title': 'Texte descriptif :'
+      '#required': true
+      '#required_error': 'Texte descriptif est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    programme_facultatif_:
+      '#type': webform_document_file
+      '#title': 'Programme :'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+    lien_d_inscription_:
+      '#type': textfield
+      '#title': 'Lien d''inscription ou contact :'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    lien_zoom_:
+      '#type': textfield
+      '#title': 'Lien zoom :'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    adresse:
+      '#type': textfield
+      '#title': 'Adresse de l''évènement :'
+      '#required': true
+      '#required_error': 'Adresse de l''évènement est requis'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  publication:
+    '#type': webform_section
+    '#title': Publication
+    '#title_display': invisible
+    '#states':
+      visible:
+        ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+          value: 'Une publication'
+    titre_:
+      '#type': textfield
+      '#title': 'Titre :'
+      '#required': true
+      '#required_error': 'Titre est obligatoire'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    sous_titre_:
+      '#type': textfield
+      '#title': 'Sous-titre :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    vignette_:
+      '#type': webform_image_file
+      '#title': 'Vignette :'
+      '#required': true
+      '#required_error': 'La vignette est requise'
+    editeur_:
+      '#type': textfield
+      '#title': 'Éditeur :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    collection_:
+      '#type': textfield
+      '#title': 'Collection :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    discipline_:
+      '#type': select
+      '#title': 'Discipline :'
+      '#options':
+        Archéologie: Archéologie
+        Assurance: Assurance
+        Démographie: Démographie
+        Droit: Droit
+        Économie: Économie
+        'Études judiciaires': 'Études judiciaires'
+        Géographie: Géographie
+        Histoire: Histoire
+        'Histoire de l''art': 'Histoire de l''art'
+        Informatique: Informatique
+        Jubilé: Jubilé
+        Langues: Langues
+        Littérature: Littérature
+        Management: Management
+        Mathématiques: Mathématiques
+        Philosophie: Philosophie
+        'Science Politique': 'Science Politique'
+        'Sciences sociales': 'Sciences sociales'
+        Sociologie: Sociologie
+        Tourisme: Tourisme
+      '#empty_option': Choisissez
+    type_:
+      '#type': select
+      '#title': 'Type :'
+      '#options':
+        Article: Article
+        'Article dans une revue': 'Article dans une revue'
+        'Autre publication': 'Autre publication'
+        'Chapitre d''ouvrage': 'Chapitre d''ouvrage'
+        'Communication dans un congrès': 'Communication dans un congrès'
+        'Direction d''ouvrage': 'Direction d''ouvrage'
+        HDR: HDR
+        Ouvrage: Ouvrage
+        Rapport: Rapport
+        Revue: Revue
+      '#empty_option': Choisissez
+    auteur_s_de_la_publication:
+      '#type': textarea
+      '#title': 'Auteur(s) de la publication :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    date_de_publication_:
+      '#type': date
+      '#title': 'Date de publication :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#date_date_format': ''
+    isbn_:
+      '#type': textfield
+      '#title': 'ISBN :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    nombre_de_pages_:
+      '#type': textfield
+      '#title': 'Nombre de pages :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    resume_:
+      '#type': textarea
+      '#title': 'Résumé :'
+      '#required': true
+      '#required_error': 'Résumé est obligatoire'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    prix:
+      '#type': textfield
+      '#title': 'Prix :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    lien_d_achat_:
+      '#type': textfield
+      '#title': 'Lien d''achat :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    lien_consultation:
+      '#type': textfield
+      '#title': 'Lien de consultation :'
+      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+  actions:
+    '#type': webform_actions
+    '#title': 'Bouton(s) d''envoi'
+    '#states':
+      visible:
+        - ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Un évènement'
+        - xor
+        - ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
+            value: 'Une publication'
+    '#submit__label': Soumettre
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: inline
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "<p>Votre demande a bien été prise en compte.<br />\r\nVous allez recevoir un courriel de confirmation.</p>"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users:
+      - 6746
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users:
+      - 6746
+    permissions: {  }
+handlers:
+  email_aux_demandeurs:
+    id: email
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel_:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: noreply@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Direction de la Communication'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Envoi de votre demande de publication'
+      body: "<p>Bonjour,</p>\r\n\r\n<p>Nous vous confirmons la bonne réception de votre demande. Nous vous recontacterons si nous avons besoin d'informations complémentaires et lorsque votre actualité/évènement sera planifié.</p>\r\n\r\n<p>Cordialement,</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: web@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel_:raw]'
+      from_options: {  }
+      from_name: 'Direction de la Communication'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Nouvelle demande de publication'
+      body: "<p>Voici une nouvelle demande de publication :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
