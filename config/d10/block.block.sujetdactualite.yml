@@ -1,0 +1,36 @@
+uuid: 13434dcb-2689-42ff-88d1-6ad12058ff20
+langcode: fr
+status: false
+dependencies:
+  config:
+    - facets.facet.news_topic
+  module:
+    - facets
+    - micro_path
+    - system
+  theme:
+    - p1ps2019
+id: sujetdactualite
+theme: p1ps2019
+region: content_left
+weight: -15
+provider: null
+plugin: 'facet_block:news_topic'
+settings:
+  id: 'facet_block:news_topic'
+  label: "Sujet d'actualité"
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: sujetdactualite
+visibility:
+  site_type:
+    id: site_type
+    negate: false
+    context_mapping: {  }
+    site_type: {  }
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/resultats-de-recherche\r\n/resultats-de-recherche*"

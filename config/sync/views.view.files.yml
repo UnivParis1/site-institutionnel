@@ -335,6 +335,15 @@ display:
             date_format: medium
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
         changed:
           id: changed
           table: file_managed
@@ -391,6 +400,15 @@ display:
             date_format: medium
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
         count:
           id: count
           table: file_usage
@@ -735,7 +753,7 @@ display:
       tags: {  }
   page_1:
     id: page_1
-    display_title: 'Vue d''ensemble des fichiers'
+    display_title: "Vue d'ensemble des fichiers"
     display_plugin: page
     position: 1
     display_options:
@@ -836,7 +854,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: standard
-          label: 'Type d''entité'
+          label: "Type d'entité"
           exclude: false
           alter:
             alter_text: false
@@ -934,7 +952,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: numeric
-          label: 'Nombre d''utilisations'
+          label: "Nombre d'utilisations"
           exclude: false
           alter:
             alter_text: false
@@ -1019,11 +1037,10 @@ display:
             title_enable: false
             title: Tout
           title_enable: true
-          title: 'Information d''utilisation du fichier {{ arguments.fid }}'
+          title: "Information d'utilisation du fichier {{ arguments.fid }}"
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true

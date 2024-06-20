@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - slick
     - token_filter
 _core:
   default_config_hash: KUjJ8Ti_ZJSlhGM88E_mhJP-8mmQRNUB6RFof615Kt0
@@ -10,6 +11,12 @@ name: 'HTML restreint'
 format: restricted_html
 weight: -8
 filters:
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: true
+    weight: 0
+    settings: {  }
   filter_html:
     id: filter_html
     provider: filter
@@ -19,12 +26,6 @@ filters:
       allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id>'
       filter_html_help: true
       filter_html_nofollow: false
-  filter_autop:
-    id: filter_autop
-    provider: filter
-    status: true
-    weight: 0
-    settings: {  }
   filter_url:
     id: filter_url
     provider: filter
@@ -32,6 +33,14 @@ filters:
     weight: 0
     settings:
       filter_url_length: 72
+  slick_filter:
+    id: slick_filter
+    provider: slick
+    status: false
+    weight: 4
+    settings:
+      optionset: default
+      media_switch: ''
   token_filter:
     id: token_filter
     provider: token_filter

@@ -1,13 +1,8 @@
-/**
- FullCalendar override for event calendar.
-*/
+;(function(W, D, $, Drupal) {
+  'use strict';
 
-(function($) {
-  
-  
   Drupal.behaviors.event_calendar = {
     attach: function (context, settings) {
-
       // Move pager in calendar div.
       var pager_elm = $('#calendar-month-pager').clone();
       $('.calendar-view-table caption').html(pager_elm.html());
@@ -30,8 +25,8 @@
       });
 
       // Refresh event row and current date.
-      $(document).on('click', '.calendar-view-day', function (ev) {
-        
+      $(D).on('click', '.calendar-view-day', function (ev) {
+
         $('.current-day').removeClass('current-day');
         var el = $(ev.currentTarget);
         el.parent('td').addClass('current-day');
@@ -40,7 +35,7 @@
 
       function refresh_event_rows( el ){
         $('[data-nid]').hide();
-        
+
         var event_to_display = el.find('.calendar-view-day__rows').attr('data-nids-day');
         if (typeof event_to_display != "undefined") {
           if(event_to_display != ""){
@@ -54,22 +49,20 @@
             // if no event, display empty message.
             $('.no-event').show();
           }
-          
+
         }else{
           // if no event, display empty message.
           $('.no-event').show();
         }
       }
-  
+
     }
   };
-  
-  
+
+
 
   Drupal.behaviors.agenda = {
     attach: function (context, settings) {
-
-
       function refresh_buttons_states(){
         var btn_type = $('[data-drupal-selector="edit-field-event-date-value"]').parents().find('body').attr('data-search');
         if( typeof btn_type != undefined && btn_type != ""){
@@ -78,7 +71,7 @@
         }
       }
       refresh_buttons_states();
-    
+
 
       $('.today').click(function(){
         $(this).parents().find('body').attr('data-search','today');
@@ -87,7 +80,7 @@
         $('[data-drupal-selector="edit-field-event-date-end-value"]').val(moment().format('YYYY-MM-DD') );
         refresh_buttons_states();
       });
-    
+
       $('.tomorrow').click(function(){
         $(this).parents().find('body').attr('data-search','tomorrow');
         $('#agenda_datepicker').datepicker('setDate', '');
@@ -119,11 +112,11 @@
     }
   };
 
-  
+
 
   function getNextDayOfWeek(date, dayOfWeek) {
     var resultDate = new Date(date.getTime());
     resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
     return resultDate;
   }
-})(jQuery,Drupal);
+})(window, document, window.jQuery, window.Drupal);

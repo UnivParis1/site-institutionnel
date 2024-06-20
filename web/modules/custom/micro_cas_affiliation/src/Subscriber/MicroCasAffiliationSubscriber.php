@@ -128,6 +128,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
             // on recherche les sites dont le champ groups contient le code recupéré dans le cn
             $siteIds = $siteStorage->getQuery()
               ->condition('status', TRUE)
+              ->accessCheck(FALSE)
               // TODO s'assurer qu'on ne recupere pas de "mauvais" groupes
               ->condition('groups', $group, 'CONTAINS')
               ->execute();

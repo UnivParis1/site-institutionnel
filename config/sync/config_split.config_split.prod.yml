@@ -1,11 +1,14 @@
 uuid: 8140a6b7-f66e-40c6-b5d4-b0139632d1b2
 langcode: fr
-status: true
+status: false
 dependencies: {  }
 id: prod
 label: prod
 description: ''
 weight: 0
+stackable: false
+no_patching: false
+storage: folder
 folder: ../config/prod
 module:
   cas: 0
@@ -19,7 +22,7 @@ module:
   webform: 0
   piwik_reports: 0
 theme: {  }
-blacklist:
+complete_list:
   - cas.settings
   - micro_site.settings
   - smtp.settings
@@ -33,6 +36,5 @@ blacklist:
   - micro_annuaire_sorbonne.annuaireconfig
   - 'block.block.p1ps2019*'
   - block.block.nuagedemotscle
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: false
+  - 'webform.*'
+partial_list: {  }

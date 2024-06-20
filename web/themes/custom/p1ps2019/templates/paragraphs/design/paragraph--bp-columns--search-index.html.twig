@@ -37,7 +37,7 @@
  */
 #}
 
-{% for key, item in content.bp_column_content if key|first != '#' %}
+{% for key, item in content.bp_column_content|filter((value, key) => key|first != '#') %}
   {% if loop.index < 2 %}
     {{ item }}
   {% endif %}

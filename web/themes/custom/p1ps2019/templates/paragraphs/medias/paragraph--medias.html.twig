@@ -49,7 +49,7 @@
   <div class="paragraph__column grid-x grid-margin-x">
     <div class="grid-container">
       <div class="grid-container no-padding-mobile grid-x grid-margin-x grid-margin-y">
-        {% for key, item in content.field_media_blocks if key|first != '#' %}
+        {% for key, item in content.field_media_blocks|filter((value, key) => key|first != '#') %}
         <div class="a-media cell large-6 medium-6 small-12 margin-y-mobile">
           {{ item }}
         </div>

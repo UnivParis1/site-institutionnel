@@ -3,13 +3,51 @@ langcode: fr
 status: true
 dependencies:
   module:
-    - media
+    - blazy
+    - linkit
     - nbsp
+    - slick
     - token_filter
 name: 'Édito simple'
 format: custom_format
 weight: -9
 filters:
+  blazy_filter:
+    id: blazy_filter
+    provider: blazy
+    status: false
+    weight: 3
+    settings:
+      media_switch: ''
+      hybrid_style: ''
+      box_style: ''
+      box_media_style: ''
+      box_caption: ''
+      filter_tags:
+        img: img
+        iframe: iframe
+      use_data_uri: '0'
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: true
+    weight: 0
+    settings: {  }
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<em> <strong> <b> <i> <cite> <blockquote cite> <ul type> <ol type start> <li> <a href hreflang !href accesskey id rel target title data-entity-type data-entity-uuid data-entity-substitution> <img src alt data-entity-type data-entity-uuid>'
+      filter_html_help: true
+      filter_html_nofollow: false
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }
   filter_url:
     id: filter_url
     provider: filter
@@ -17,49 +55,6 @@ filters:
     weight: 0
     settings:
       filter_url_length: 72
-  token_filter:
-    id: token_filter
-    provider: token_filter
-    status: false
-    weight: 0
-    settings:
-      replace_empty: '0'
-  filter_html:
-    id: filter_html
-    provider: filter
-    status: true
-    weight: -10
-    settings:
-      allowed_html: '<em> <strong> <b> <i> <cite> <blockquote cite> <ul type> <ol type start> <li> <a href hreflang !href accesskey id rel target title data-entity-type data-entity-uuid data-entity-substitution data-entity-type data-entity-uuid data-entity-substitution>'
-      filter_html_help: true
-      filter_html_nofollow: false
-  filter_autop:
-    id: filter_autop
-    provider: filter
-    status: true
-    weight: 0
-    settings: {  }
-  filter_htmlcorrector:
-    id: filter_htmlcorrector
-    provider: filter
-    status: true
-    weight: 10
-    settings: {  }
-  media_embed:
-    id: media_embed
-    provider: media
-    status: false
-    weight: 100
-    settings:
-      default_view_mode: default
-      allowed_view_modes: {  }
-      allowed_media_types: {  }
-  nbsp_cleaner_filter:
-    id: nbsp_cleaner_filter
-    provider: nbsp
-    status: true
-    weight: 0
-    settings: {  }
   linkit:
     id: linkit
     provider: linkit
@@ -67,3 +62,60 @@ filters:
     weight: -11
     settings:
       title: false
+  nbsp_cleaner_filter:
+    id: nbsp_cleaner_filter
+    provider: nbsp
+    status: true
+    weight: 0
+    settings: {  }
+  slick_filter:
+    id: slick_filter
+    provider: slick
+    status: false
+    weight: 4
+    settings:
+      caption:
+        alt: '0'
+        title: '0'
+      optionset: default
+      layout: ''
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      loading: ''
+      responsive_image_style: ''
+      box_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      grid: ''
+      grid_medium: ''
+      grid_small: ''
+      style: ''
+      skin: ''
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      optionset_thumbnail: ''
+      skin_thumbnail: ''
+      thumbnail_caption: ''
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      override: false
+      preserve_keys: false
+      visible_items: null
+  token_filter:
+    id: token_filter
+    provider: token_filter
+    status: false
+    weight: 0
+    settings:
+      replace_empty: '0'

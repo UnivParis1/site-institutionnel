@@ -87,7 +87,7 @@
       {% endif %}
       <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
-          {% for key, badge in  content.field_badge if key|first != '#' %}
+          {% for key, badge in  content.field_badge|filter((value, key) => key|first != '#') %}
             <div class="cell small-12 large-3 bg-white box-style">{{ badge }}</div>
           {% endfor %}
           <div class="cell small-12 large-3 box-style cta-wrapper {{ content.field_bg_color['#items'].getString() }}">

@@ -124,7 +124,7 @@
 
     <div class="grid-container {{ layout_width_classes_tiles }}">
       <div class="grid-x grid-margin-x grid-margin-y tiles-layout">
-          {% for key, item in  content.field_tile if key|first != '#' %}
+          {% for key, item in  content.field_tile|filter((value, key) => key|first != '#') %}
             <div class="{{ element_class }}">{{ item }}</div>
           {% endfor %}
 
