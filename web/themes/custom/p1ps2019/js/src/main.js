@@ -116,10 +116,10 @@
 
   Drupal.behaviors.myBehavior = {
     attach: function (context, settings) {
-      const init = once('foundation-init', context);
-      init.forEach(function() {
+      if (!window.p1ps_foundation_init_done) {
+        window.p1ps_foundation_init_done = true;
         $(document).foundation();
-      });
+      }
       //ADD SCROLL CLASS
       if ($(window).width() > 1024){
         $(document).scroll(function() {
