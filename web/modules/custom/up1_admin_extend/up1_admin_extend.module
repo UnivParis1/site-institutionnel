@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implements hook_page_attachments().
+ */
+function up1_admin_extend_page_attachments(array &$attachments) {
+  $config = \Drupal::config('system.theme');
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  if ($config->get('admin') == $theme) {
+    $attachments['#attached']['library'][] = 'up1_admin_extend/theme_admin_extend';
+  }
+}
