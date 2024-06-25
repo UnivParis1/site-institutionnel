@@ -886,6 +886,7 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
+        ->checkAccess(FALSE)
         ->condition('uid', $user->id());
       $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
@@ -932,6 +933,7 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
+        ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $nids = $query->execute();
       if ($nids) {
