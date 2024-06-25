@@ -675,6 +675,7 @@ class WsGroupsController extends ControllerBase
     $page_perso = reset($pp);
 
     if ($page_perso) {
+
       switch ($data_to_get) {
         case 'skills' :
           if ($settings['skills_lists']) {
@@ -715,36 +716,42 @@ class WsGroupsController extends ControllerBase
         case 'research' :
           if ($settings['supannEntite_research'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'research';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search[0]['description'];
+            if (!empty($affectation)) {
+              $key_search = array_filter($affectation, function ($item) {
+                return $item['businessCategory'] == 'research';
+              });
+              if (!empty($key_search)) {
+                $key_search = reset($key_search);
+                $result = $key_search[0]['description'];
+              }
             }
           }
           break;
         case 'pedagogy' :
           if ($settings['supannEntite_pedagogy'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'pedagogy';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search['description'];
+            if (!empty($affectation)) {
+              $key_search = array_filter($affectation, function ($item) {
+                return $item['businessCategory'] == 'pedagogy';
+              });
+              if (!empty($key_search)) {
+                $key_search = reset($key_search);
+                $result = $key_search['description'];
+              }
             }
           }
           break;
         case 'doctoralSchool' :
           if ($settings['supannEntite_doctoralSchool'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'doctoralSchool';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search['description'];
+            if (!empty($affectation)) {
+              $key_search = array_filter($affectation, function ($item) {
+                return $item['businessCategory'] == 'doctoralSchool';
+              });
+              if (!empty($key_search)) {
+                $key_search = reset($key_search);
+                $result = $key_search['description'];
+              }
             }
           }
           break;
