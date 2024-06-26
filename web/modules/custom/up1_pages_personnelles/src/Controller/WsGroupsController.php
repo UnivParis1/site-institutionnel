@@ -784,7 +784,8 @@ class WsGroupsController extends ControllerBase
    * @return mixed
    */
   public function getParcoursObsia($username) {
-    if (!$this->maintenancePagePersos()) {
+	  if (!$this->maintenancePagePersos()) {
+		  \Drupal::logger('pages_persos')->info('On passe là');
       return new JsonResponse([ 'data' => $this->getObsiaFields($username), 'method' => 'GET', 'status'=> 200]);
     }
     else {
@@ -943,8 +944,9 @@ class WsGroupsController extends ControllerBase
         ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $nids = $query->execute();
+      \Drupal::logger('pages_persos')->info(print_r($nids,1));
       if ($nids) {
-        foreach ($nids as $nid) {
+	      foreach ($nids as $nid) {
           $page_perso = Node::load($nid);
           $fields[] = [
             'username' => $username,

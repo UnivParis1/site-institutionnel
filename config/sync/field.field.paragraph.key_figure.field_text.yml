@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_text
+    - filter.format.full_html
     - paragraphs.paragraphs_type.key_figure
   module:
     - text
@@ -20,5 +21,7 @@ default_value:
     value: "<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n"
     format: full_html
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - full_html
 field_type: text_long

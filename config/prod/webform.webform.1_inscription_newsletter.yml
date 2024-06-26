@@ -11,7 +11,7 @@ archive: false
 id: 1_inscription_newsletter
 title: '1 - Inscription newsletter EDS'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   confirmez_votre_courriel:
     '#type': webform_email_confirm
@@ -19,14 +19,13 @@ elements: |-
     '#placeholder': jeandupont@gmail.com
     '#required': true
     '#required_error': 'Vous devez saisir votre adresse de messagerie'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#confirm__placeholder': jeandupont@gmail.com
   captcha:
     '#type': captcha
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'S''ABONNER'
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'ABONNER"
 css: ''
 javascript: ''
 settings:
@@ -114,6 +113,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -270,7 +271,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription à la newsletter de l''EDS'
+      subject: "Inscription à la newsletter de l'EDS"
       body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à la newsletter a bien été prise en compte.</p>\r\n\r\n<p>L'Ecole de Droit de la Sorbonne</p>"
       excluded_elements: {  }
       ignore_access: false

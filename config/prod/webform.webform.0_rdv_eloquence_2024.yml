@@ -11,7 +11,7 @@ archive: false
 id: 0_rdv_eloquence_2024
 title: '0 - RDV Eloquence 2024'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   nom_:
     '#type': textfield
@@ -43,7 +43,6 @@ elements: |-
       visible:
         ':input[name="vous_etes"]':
           value: 'autre public'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#required': true
   courriel_:
     '#type': email
@@ -61,7 +60,7 @@ elements: |-
     '#format': full_html
   quel_s_creneau_x_d_atelier_souhaitez_vous_reserver_amphitheatre_:
     '#type': checkboxes
-    '#title': 'Introduction à l''éloquence parlementaire, par le Parlement des étudiants'
+    '#title': "Introduction à l'éloquence parlementaire, par le Parlement des étudiants"
     '#options':
       '14 h à 14 h 45 (centre Panthéon, salle 1)': '14 h à 14 h 45 (centre Panthéon, salle 1)'
       '16 h 30 à 17 h 15 (centre Sorbonne, salle D633)': '16 h 30 à 17 h 15 (centre Sorbonne, salle D633)'
@@ -102,7 +101,7 @@ elements: |-
     '#options__properties': ''
   rhetorique_et_improvisation_par_sorb_heraut_:
     '#type': checkboxes
-    '#title': 'Rhétorique et improvisation, par Sorb''Héraut '
+    '#title': "Rhétorique et improvisation, par Sorb'Héraut "
     '#options':
       '14 h à 15 h (centre Sorbonne, salle D633)': '14 h à 15 h (centre Sorbonne, salle D633)'
       '15 h 15 à 16 h 15 (centre Sorbonne, salle D633)': '15 h 15 à 16 h 15 (centre Sorbonne, salle D633)'
@@ -125,13 +124,13 @@ elements: |-
     '#type': captcha
   j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
     '#type': checkbox
-    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
+    '#title': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. "
     '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
     '#required': true
-    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis'
+    '#required_error': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis"
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': ENVOYER
 css: ''
 javascript: ''
@@ -148,7 +147,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Le formulaire d''inscription est fermé.</p>'
+  form_close_message: "<p>Le formulaire d'inscription est fermé.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -239,8 +238,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Confirmation d''inscription'
-  confirmation_message: '<p>Nous vous remercions pour votre inscription au Rendez-vous de l''éloquence. Vous allez recevoir un mail de confirmation à présenter à l''entrée du centre Panthéon et de la Sorbonne, avec une pièce d''identité.</p>'
+  confirmation_title: "Confirmation d'inscription"
+  confirmation_message: "<p>Nous vous remercions pour votre inscription au Rendez-vous de l'éloquence. Vous allez recevoir un mail de confirmation à présenter à l'entrée du centre Panthéon et de la Sorbonne, avec une pièce d'identité.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -343,7 +342,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Rendez-vous de l''éloquence 2024 - nouvelle inscription '
+      subject: "Rendez-vous de l'éloquence 2024 - nouvelle inscription "
       body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
@@ -380,7 +379,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique ] Rendez-vous de l''éloquence - Confirmation d''inscription'
+      subject: "[Réponse automatique ] Rendez-vous de l'éloquence - Confirmation d'inscription"
       body: "<p>Madame, Monsieur,</p>\r\n\r\n<p>Nous vous remercions pour votre inscription au Rendez-vous de l'éloquence. Vous allez recevoir un mail de confirmation à présenter à l'entrée du centre Panthéon et de la Sorbonne, avec une pièce d'identité.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false

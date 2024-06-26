@@ -11,7 +11,8 @@ archive: false
 id: 10_demande_de_consultation_de_th
 title: '10 - Demande de consultation de thèse - Colliard'
 description: "<p>Arborescence : Menu direction &gt; Bibliothèque Jean-Claude Colliard<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Bibliothèque Jean-Claude Colliard</em> &gt; rubrique <em>Conditions d'accès et de prêt</em></p>"
-category: Contact
+categories:
+  - Contact
 elements: |-
   coordonnees:
     '#type': webform_section
@@ -54,7 +55,6 @@ elements: |-
       '#type': date
       '#title': 'Choisir une date (délai minimum de 72h)'
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#date_days':
         - '1'
         - '2'
@@ -75,14 +75,14 @@ elements: |-
       '#options__properties': ''
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
+    '#title': "J'accepte les {conditions de service}."
     '#required': true
     '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de consultation de th&egrave;se.</span>'
   captcha:
     '#type': captcha
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
@@ -271,7 +271,7 @@ handlers:
   email:
     id: email
     handler_id: email
-    label: 'Confirmation d''envoi du formulaire pour les usagers'
+    label: "Confirmation d'envoi du formulaire pour les usagers"
     notes: ''
     status: true
     conditions: {  }
@@ -310,7 +310,7 @@ handlers:
   notification_d_envoi_de_formulaire_pour_le_service:
     id: email
     handler_id: notification_d_envoi_de_formulaire_pour_le_service
-    label: 'Notification d''envoi de formulaire pour le service'
+    label: "Notification d'envoi de formulaire pour le service"
     notes: ''
     status: true
     conditions: {  }

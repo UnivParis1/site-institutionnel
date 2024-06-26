@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.bp_text
+    - filter.format.custom_format
     - paragraphs.paragraphs_type.jumbotron
   module:
     - text
@@ -15,10 +16,9 @@ label: Texte
 description: ''
 required: true
 translatable: true
-default_value:
-  -
-    value: "<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n"
-    format: full_html
+default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - custom_format
 field_type: text_long

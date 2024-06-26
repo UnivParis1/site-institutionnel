@@ -9,16 +9,16 @@ uid: 46
 template: false
 archive: false
 id: 19_form_inscription_ecolefle2024
-title: '19 - Formulaire d''inscription cours d''été en FLE 2024'
-description: '<p>Formulaire d''inscription pour les cours d''été en FLE 2024.</p>'
-category: ''
+title: "19 - Formulaire d'inscription cours d'été en FLE 2024"
+description: "<p>Formulaire d'inscription pour les cours d'été en FLE 2024.</p>"
+categories: {  }
 elements: |-
   field2:
     '#type': textfield
     '#title': 'Votre prénom :'
     '#placeholder': Jean
     '#required': true
-    '#required_error': 'Merci d''indiquer votre prénom'
+    '#required_error': "Merci d'indiquer votre prénom"
   field1:
     '#type': textfield
     '#title': 'Votre nom :'
@@ -31,13 +31,12 @@ elements: |-
     '#description': 'Indiquez une adresse de messagerie valide car c&#39;est avec celle-ci que nous vous contacterons et c&#39;est sur celle-ci que vous recevrez votre ticket de paiement.'
     '#placeholder': jeandupont@monfai.com
     '#required': true
-    '#required_error': 'Merci d''indiquer votre courriel'
+    '#required_error': "Merci d'indiquer votre courriel"
   date_naissance:
     '#type': datetime
     '#title': 'Date naissance'
     '#required': true
     '#required_error': 'Vous devez indiquer votre date de naissance'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#date_date_format': ''
     '#date_year_range': '1940:2012'
     '#date_time_element': none
@@ -69,17 +68,17 @@ elements: |-
     '#options__properties': ''
   j_ai_deja_un_compte_paris_1:
     '#type': checkbox
-    '#title': 'J''ai déjà un compte Paris 1'
+    '#title': "J'ai déjà un compte Paris 1"
     '#description': 'Si vous &ecirc;tes d&eacute;j&agrave; &eacute;tudiant &agrave; l&#39;universit&eacute; Paris 1 Panth&eacute;on-Sorbonne cochez cette case.'
     '#return_value': Oui
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'J''accepte les {Conditions générales de vente}'
+    '#title': "J'accepte les {Conditions générales de vente}"
     '#help_title': 'Cliquez sur Conditions génrérales de vente pour les parcourir.'
     '#help_display': title_before
     '#required': true
     '#required_error': 'Vous devez accepter les conditions pour valider ce formulaire'
-    '#return_value': 'J''accepte les CGV'
+    '#return_value': "J'accepte les CGV"
     '#terms_title': CGV
     '#terms_content': |-
       <h3>Tarifs :</h3>
@@ -144,40 +143,40 @@ elements: |-
       '#title': Prénom
       '#placeholder': Jean
       '#required': true
-      '#required_error': 'Merci d''indiquer le prénom pour la facturation'
+      '#required_error': "Merci d'indiquer le prénom pour la facturation"
     billinglastname:
       '#type': textfield
       '#title': Nom
       '#placeholder': Dupont
       '#required': true
-      '#required_error': 'Merci d''indiquer le nom pour la facturation'
+      '#required_error': "Merci d'indiquer le nom pour la facturation"
     billingaddress1:
       '#type': textfield
       '#title': 'Adresse postale'
       '#placeholder': '90 rue du paradis'
       '#required': true
-      '#required_error': 'Merci d''indiquer l''adresse postale pour la facturation'
+      '#required_error': "Merci d'indiquer l'adresse postale pour la facturation"
     billingzipcode:
       '#type': textfield
       '#title': 'Code postal'
       '#placeholder': '77500'
       '#required': true
-      '#required_error': 'Merci d''indiquer le code postal pour la facturation'
+      '#required_error': "Merci d'indiquer le code postal pour la facturation"
     billingcity:
       '#type': textfield
       '#title': Ville
       '#placeholder': Chelles
       '#required': true
-      '#required_error': 'Merci d''indiquer la ville pour la facturation'
+      '#required_error': "Merci d'indiquer la ville pour la facturation"
     billingcountrycode:
       '#type': select
       '#title': Pays
       '#options': liste_pays_code_numerique_
       '#required': true
-      '#required_error': 'Merci d''indiquer le pays pour la facturation'
+      '#required_error': "Merci d'indiquer le pays pour la facturation"
   piaement_par_virement_bancaire:
     '#type': textfield
-    '#title': 'Nom du donneur d''ordre'
+    '#title': "Nom du donneur d'ordre"
     '#description': 'Inscrivez ici le nom du donneur d&#39;ordre.'
     '#help': 'Le &laquo;nom du donneur d&#39;ordre&raquo; qui peut-&ecirc;tre diff&eacute;rent de celui de la personne d&eacute;sirant s&#39;inscrire.'
     '#required': true
@@ -187,7 +186,7 @@ elements: |-
           value: virement
   en_soumettant_ce_formulaire_j_accepte_que_les_informations_saisi:
     '#type': checkbox
-    '#title': 'En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de mon inscription aux cours d''été en Français Langue Étrangère :'
+    '#title': "En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées dans le cadre de mon inscription aux cours d'été en Français Langue Étrangère :"
     '#title_display': before
     '#required': true
     '#required_error': 'Vous devez accepter les conditions pour valider ce formulaire'
@@ -418,7 +417,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Début d''inscription au cours d''été de FLE'
+      subject: "Début d'inscription au cours d'été de FLE"
       body: "<p>Un personne a initié une inscription, voici les données qu'elle a saisie :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements:
         captcha: captcha
@@ -451,12 +450,12 @@ handlers:
       cc_options: {  }
       from_mail: ecoledetefle.ddl@univ-paris1.fr
       from_options: {  }
-      from_name: 'Cours d''été en FLE'
+      from_name: "Cours d'été en FLE"
       reply_to: ecoledetefle.ddl@univ-paris1.fr
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription au cours d''été de FLE - Confirmation remplissage formulaire'
+      subject: "Inscription au cours d'été de FLE - Confirmation remplissage formulaire"
       body: "<p>Bonjour [webform_submission:values:field2:raw],</p>\r\n\r\n<p>Vous avez rempli le formulaire d'inscription pour les cours d'été en FLE.</p>\r\n\r\n<p>Votre demande a été envoyé le [webform_submission:created]</p>\r\n\r\n<p>et voici les données que vous nous avez transmises :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Merci.</p>\r\n\r\n<p>N'oubliez pas de régulariser cette inscription afin de valider votre demande.</p>\r\n\r\n<p>Cordialement,</p>\r\n\r\n<p>L'équipe organisatrice du FLE</p>"
       excluded_elements: {  }
       ignore_access: false

@@ -10,8 +10,9 @@ template: false
 archive: false
 id: inscription_a_la_newsletter_irjs
 title: '8 - Inscription à la newsletter IRJS'
-description: '<p>Formulaire d''inscription à la newsletter de l''IRJS</p>'
-category: 'Abonnement à une newsletter'
+description: "<p>Formulaire d'inscription à la newsletter de l'IRJS</p>"
+categories:
+  - 'Abonnement à une newsletter'
 elements: |-
   votreprenom:
     '#type': textfield
@@ -19,25 +20,22 @@ elements: |-
     '#placeholder': Jean
     '#required': true
     '#required_error': 'Votre prénom est obligatoire'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   nom2:
     '#type': textfield
     '#title': Nom
     '#placeholder': Dupond
     '#required': true
     '#required_error': 'Votre prénom est obligatoire'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_adresse_de_messagerie:
     '#type': email
     '#title': 'Votre adresse de messagerie'
     '#placeholder': ' jeandupond@mail.com'
     '#required': true
     '#required_error': 'Vous devez saisir votre adresse de messagerie'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'S''inscrire à la newsletter'
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire à la newsletter"
     '#submit__attributes':
       class:
         - form--inline
@@ -310,7 +308,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription à la newsletter de l''IRJS'
+      subject: "Inscription à la newsletter de l'IRJS"
       body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à la newsletter de l'IRJS a bien été validée.</p>"
       excluded_elements: {  }
       ignore_access: false

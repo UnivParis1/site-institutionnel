@@ -11,13 +11,12 @@ archive: false
 id: 56_formulaire_de_contact_site_sc
 title: '56 - Formulaire de contact site Science ouverte'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   nom_prenom:
     '#type': webform_name
     '#title': 'Nom, prénom'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#title__access': false
     '#first__title': Prénom
     '#first__required': true
@@ -30,12 +29,10 @@ elements: |-
     '#type': textfield
     '#title': Organisme
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   adresse_electronique:
     '#type': email
     '#title': 'Adresse électronique'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   description_de_votre_demande_:
     '#type': webform_section
     '#title': 'Description de votre demande '
@@ -55,10 +52,9 @@ elements: |-
       '#type': textarea
       '#title': 'Votre demande'
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
+    '#title': "J'accepte les {conditions de service}."
     '#required': true
     '#terms_content': '<p><span class="field-prefix">En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de ma demande.</span></p>'
   captcha:
@@ -66,7 +62,7 @@ elements: |-
     '#captcha_type': captcha/Math
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': Envoyer
 css: ''
 javascript: ''
@@ -155,6 +151,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

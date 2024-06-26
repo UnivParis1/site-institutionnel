@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_number
+    - filter.format.restricted_html
     - paragraphs.paragraphs_type.key_figure
   module:
     - text
@@ -15,10 +16,9 @@ label: Chiffre
 description: 'Chiffre mis en forme'
 required: true
 translatable: true
-default_value:
-  -
-    value: "\r\n"
-    format: restricted_html
+default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - restricted_html
 field_type: text_long

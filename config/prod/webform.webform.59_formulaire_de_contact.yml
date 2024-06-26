@@ -11,7 +11,7 @@ archive: false
 id: 59_formulaire_de_contact
 title: '59 - Formulaire de contact'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   votre_nom:
     '#type': textfield
@@ -20,7 +20,6 @@ elements: |-
     '#autocomplete': name
     '#required': true
     '#required_error': 'Champ obligatoire : merci de saisir votre nom'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_courriel:
     '#type': email
     '#title': 'Votre courriel'
@@ -30,7 +29,6 @@ elements: |-
     '#autocomplete': email
     '#required': true
     '#required_error': 'Merci de mettre votre courriel'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_question:
     '#type': textarea
     '#title': 'Votre question'
@@ -52,7 +50,6 @@ elements: |-
   ou_habitez_vous_:
     '#type': webform_address
     '#title': 'Où habitez-vous ?'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#address__placeholder': '12 place du panthéon'
     '#address__required': true
     '#address_2__access': false
@@ -67,7 +64,6 @@ elements: |-
     '#type': textfield
     '#title': Adresse
     '#autocomplete': address-line1
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
@@ -163,6 +159,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -305,7 +303,7 @@ handlers:
   email_1:
     id: email
     handler_id: email_1
-    label: 'Confirmation à l''internaute'
+    label: "Confirmation à l'internaute"
     notes: ''
     status: true
     conditions: {  }
