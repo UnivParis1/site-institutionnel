@@ -11,7 +11,7 @@ archive: false
 id: 130_formulaire_de_contact
 title: '130 - Formulaire de contact'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   vos_coordonnees:
     '#type': webform_contact
@@ -19,7 +19,6 @@ elements: |-
     '#title_display': before
     '#description_display': before
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#name__title': 'Nom, Prénom'
     '#company__title': Organisme
     '#phone__access': false
@@ -36,14 +35,13 @@ elements: |-
     '#title_display': before
     '#required': true
     '#states_clear': false
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'J''accepte les conditions de service'
+    '#title': "J'accepte les conditions de service"
     '#required': true
     '#required_error': 'Élément requis '
     '#terms_title': 'Conditions de service'
-    '#terms_content': '<p><em>Conditions de service&nbsp;: En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de ma demande.</em></p>'
+    '#terms_content': "<p><em>Conditions de service&nbsp;: En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées dans le cadre de ma demande.</em></p>"
   captcha:
     '#type': captcha
     '#captcha_type': captcha/Math
@@ -234,7 +232,7 @@ handlers:
   email_a_l_organisateur:
     id: email
     handler_id: email_a_l_organisateur
-    label: 'Email à l''organisateur'
+    label: "Email à l'organisateur"
     notes: ''
     status: true
     conditions: {  }

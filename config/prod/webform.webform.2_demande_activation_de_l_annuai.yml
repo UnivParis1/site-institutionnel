@@ -9,9 +9,9 @@ uid: 13
 template: false
 archive: false
 id: 2_demande_activation_de_l_annuai
-title: '2 - Demande activation de l''annuaire trombinoscope'
+title: "2 - Demande activation de l'annuaire trombinoscope"
 description: ''
-category: ''
+categories: {  }
 elements: |-
   nom_et_prenom_du_webmestre_:
     '#type': textfield
@@ -19,32 +19,29 @@ elements: |-
     '#required': true
     '#required_error': 'Indiquez qui est le demandeur.'
     '#default_value': '[cas:attribute:givenname] [cas:attribute:sn]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel_du_webmestre:
     '#type': textfield
     '#title': 'Courriel du webmestre'
     '#required': true
-    '#required_error': 'Merci d''indiquer votre courriel'
+    '#required_error': "Merci d'indiquer votre courriel"
     '#default_value': '[current-user:mail]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   pour_quel_mini_site_souhaitez_vous_activer_l_annuaire_:
     '#type': url
-    '#title': 'Pour quel mini-site souhaitez-vous activer l''annuaire ?'
-    '#help': '<p>Recopiez l''URL de votre mini-site.</p>'
+    '#title': "Pour quel mini-site souhaitez-vous activer l'annuaire ?"
+    '#help': "<p>Recopiez l'URL de votre mini-site.</p>"
     '#required': true
-    '#required_error': 'Merci d''indiquer l''URL de votre mini-site.'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#required_error': "Merci d'indiquer l'URL de votre mini-site."
   souhaitez_vous_faire_apparaitre_des_informations_supplementaires:
     '#type': checkboxes
     '#title': 'Souhaitez-vous faire apparaitre des informations supplémentaires ?'
-    '#description': '<p>Par défaut, le nom, prénom, grade, la photo (si l''enseignant l''a autorisé) et le lien vers la page perso s''affichera.</p>'
+    '#description': "<p>Par défaut, le nom, prénom, grade, la photo (si l'enseignant l'a autorisé) et le lien vers la page perso s'affichera.</p>"
     '#title_display': before
     '#description_display': before
     '#options':
-      'Afficher le département': 'Afficher le département d''appartenance'
-      'Afficher l''unité de recherche': 'Afficher l''Unité de recherche de rattachement'
-      'Afficher la discipline': 'Afficher la discipline d''enseignement'
-      'Afficher les expertises': 'Afficher les domaines d''expertise'
+      'Afficher le département': "Afficher le département d'appartenance"
+      "Afficher l'unité de recherche": "Afficher l'Unité de recherche de rattachement"
+      'Afficher la discipline': "Afficher la discipline d'enseignement"
+      'Afficher les expertises': "Afficher les domaines d'expertise"
       'Afficher la fonction': 'Afficher la fonction'
       'Afficher texte A propos de moi.': 'Afficher le début du texte de "A propos de moi"'
     '#options_display': two_columns
@@ -73,12 +70,11 @@ elements: |-
       visible:
         ':input[name="souhaitez_vous_limiter_l_affichage_du_texte_de_ce_champ_a_un_cer"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#min': 1
     '#max': 10
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
@@ -167,6 +163,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -184,7 +182,7 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Merci d''avoir rempli ce formulaire.'
+  confirmation_title: "Merci d'avoir rempli ce formulaire."
   confirmation_message: "<p>Votre demande a été envoyé à assistance-dsiun@univ-paris1.fr afin qu'un ticket de demande d'intervention soit créé avec votre demande et les paramètres que vous avez saisis.</p>\r\n\r\n<p>Dès que l'opération sera effectuée vous en serez informé via le ticket.</p>\r\n\r\n<p>Bonne journée.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
@@ -286,7 +284,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[DRUPAL] Demande d''activation de l''annuaire trombinoscope.'
+      subject: "[DRUPAL] Demande d'activation de l'annuaire trombinoscope."
       body: "<p>Bonjour,<br />\r\n<br />\r\nVous avez envoyé le [webform_submission:created] une demande d'activation de l'affichage de l'annuaire trombinoscope sur votre mini-site.</p>\r\n\r\n<p>Voici les informations et paramètres que vous nous avez transmis :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Vous allez recevoir suite à ce courriel, un 2e courriel vous confirmant qu'un ticket de demande d'intervention a été créé. C'est via ce ticket que vous aurez ensuite la résolution de votre demande et que vous pouvez revenir sur le paramétrage de votre demande si, au final, elle ne vous convient pas.</p>\r\n\r\n<p>Bonne journée</p>"
       excluded_elements: {  }
       ignore_access: false
@@ -323,7 +321,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[DRUPAL] Demande d''activation de l''annuaire trombinoscope.'
+      subject: "[DRUPAL] Demande d'activation de l'annuaire trombinoscope."
       body: "<p>Pour PAS-WEB.</p>\r\n\r\n<p>Merci d'attribuer cette demande à Marc-olivier Lagadic.</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false

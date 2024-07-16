@@ -1,4 +1,4 @@
-uuid: cb87c7ff-8d7a-487e-bd67-ab5f771ff74a
+uuid: a8b25f49-b871-4676-9710-502d0126a478
 langcode: fr
 status: true
 dependencies:
@@ -11,47 +11,47 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
-      - style
-      - nbsp
+      - heading
       - bold
       - italic
       - underline
-      - strikethrough
-      - superscript
-      - subscript
       - removeFormat
-      - '|'
+      - subscript
+      - superscript
       - blockQuote
       - abbreviation
-      - anchor
+      - redo
+      - undo
       - '|'
       - link
       - drupalInsertImage
-      - '|'
-      - bulletedList
+      - drupalInsertFile
       - numberedList
-      - alignment
-      - '|'
-      - undo
-      - redo
-      - '|'
+      - bulletedList
+      - textPartLanguage
+      - '-'
       - insertTable
       - outdent
       - indent
+      - alignment
       - '|'
       - horizontalLine
-      - '|'
-      - textPartLanguage
-      - a11ychecker
-      - code
+      - nbsp
+      - specialCharacters
       - sourceEditing
   plugins:
     ckeditor5_alignment:
       enabled_alignments:
         - center
-        - justify
         - left
         - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
     ckeditor5_imageResize:
       allow_resize: true
     ckeditor5_language:
@@ -63,31 +63,17 @@ settings:
       multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags: {  }
-    ckeditor5_style:
-      styles:
-        -
-          label: 'Titre 2'
-          element: '<p class="h2-style">'
-        -
-          label: 'Titre 3'
-          element: '<p class="h3-style">'
-        -
-          label: 'Titre 4'
-          element: '<p class="h4-style">'
-        -
-          label: 'Titre 5'
-          element: '<p class="h5-style">'
-        -
-          label: 'Titre 6'
-          element: '<p class="h6-style">'
-        -
-          label: Adresse
-          element: '<p class="address">'
+    editor_file_file:
+      status: true
+      scheme: public
+      directory: /inline-files
+      extensions: 'pdf jpg jpeg png doc docx xls xlsx'
+      max_size: ''
     linkit_extension:
       linkit_enabled: true
       linkit_profile: site_content
 image_upload:
-  status: true
+  status: false
   scheme: public
   directory: inline-images
   max_size: ''

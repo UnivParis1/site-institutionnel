@@ -1,48 +1,26 @@
-uuid: 4669a432-a368-4916-abb2-40a666596b01
+uuid: 078afbc5-3a4b-41d5-9fd4-942f35189d7f
 langcode: fr
 status: true
 dependencies:
   config:
     - filter.format.custom_format
   module:
-    - ckeditor
+    - ckeditor5
 format: custom_format
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: Formats
-          items:
-            - Blockquote
-            - Bold
-            - Italic
-            - NumberedList
-            - BulletedList
-            - PasteText
-        -
-          name: Liens
-          items:
-            - DrupalLink
-            - DrupalUnlink
-        -
-          name: Média
-          items:
-            - DrupalImage
-        -
-          name: Tools
-          items:
-            - Maximize
+    items:
+      - bold
+      - italic
+      - removeFormat
+      - nbsp
+      - link
+      - textPartLanguage
   plugins:
-    drupallink:
+    ckeditor5_language:
+      language_list: all
+    linkit_extension:
       linkit_enabled: true
       linkit_profile: site_content
-image_upload:
-  status: true
-  scheme: public
-  directory: inline-images
-  max_size: ''
-  max_dimensions:
-    width: null
-    height: null
+image_upload: {  }

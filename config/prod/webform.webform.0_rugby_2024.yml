@@ -1,6 +1,6 @@
 uuid: 0aa764fa-2c4d-4813-9144-22036a4e82ce
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
@@ -11,7 +11,7 @@ archive: false
 id: 0_rugby_2024
 title: '0 - Rugby 2024'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   information:
     '#type': webform_section
@@ -29,17 +29,14 @@ elements: |-
     nom_identite:
       '#type': textfield
       '#title': 'Nom / Last name'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     prenom:
       '#type': textfield
       '#title': 'Prénom / First name'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     date_de_naissance:
       '#type': date
       '#title': 'Date de naissance (JJ/MM/AAAA) / Date of birth (DD/MM/YYYY)'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#date_date_format': ''
       '#required': true
     organisation:
@@ -80,7 +77,6 @@ elements: |-
           - xor
           - ':input[name="statut_inforrmation"]':
               value: Administratif
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     fonction:
       '#type': textfield
@@ -92,17 +88,14 @@ elements: |-
           - xor
           - ':input[name="statut_inforrmation"]':
               value: Administratif
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     courriel:
       '#type': email
       '#title': 'Courriel / Email'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     telephone_portable:
       '#type': tel
       '#title': 'Téléphone portable / Mobile phone number'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#international': true
       '#international_initial_country': FR
       '#required': true
@@ -120,7 +113,7 @@ elements: |-
         Joueur: Joueur
         'Accompagnant délégation / Delegation accompanying person': 'Accompagnant délégation / Delegation accompanying person'
         'Student Board': 'Student Board'
-        'Membre des équipes de direction/Présidence d''une université // Member of the management team/President of a university': 'Membre des équipes de direction/Présidence d''une université // Member of the management team/President of a university'
+        "Membre des équipes de direction/Présidence d'une université // Member of the management team/President of a university": "Membre des équipes de direction/Présidence d'une université // Member of the management team/President of a university"
         'Volontaire / Volunteer': 'Volontaire / Volunteer'
         'Una Europa': 'Una Europa'
       '#empty_option': 'Sélectionner / Choose'
@@ -165,7 +158,6 @@ elements: |-
         visible:
           ':input[name="regime_alimentaire_particulier_ou_allergie_s_alimentaire_s_speci"]':
             value: 'Oui / Yes'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
   markup_01:
     '#type': webform_markup
@@ -176,7 +168,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Soumettre / Submit'
     '#update__label': 'Mettre à jour'
 css: ''
@@ -388,7 +380,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Una Europa Rugby Challenge - Confirmation de votre demande d''inscription / Confirmation of your registration request'
+      subject: "[Réponse automatique] Una Europa Rugby Challenge - Confirmation de votre demande d'inscription / Confirmation of your registration request"
       body: "<p>Madame, Monsieur,<br />\r\nMerci pour votre demande d'inscription.<br />\r\nNous reviendrons vers vous pour les phases suivantes d'inscription de votre équipe.<br />\r\nBien cordialement,<br />\r\nl'équipe d'Una Europa Rugby Challenge</p>\r\n\r\n<p>Dear Sir or Madam,<br />\r\nThank you for your registration request. We will get back to you as soon as possible to register your team.<br />\r\nSincerely, the Una Europa Rugby Challenge team</p>\r\n\r\n<p>\r\n<style type=\"text/css\"><!--td {border: 1px solid #cccccc;}br {mso-data-placement:same-cell;}-->\r\n</style>\r\n</p>"
       excluded_elements: {  }
       ignore_access: false

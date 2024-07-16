@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_lead
+    - filter.format.custom_format
     - node.type.news
   module:
     - text
@@ -15,10 +16,9 @@ label: Chapô
 description: 'Merci de ne pas dépasser deux lignes de texte.'
 required: true
 translatable: true
-default_value:
-  -
-    value: "<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n"
-    format: custom_format
+default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - custom_format
 field_type: text_long

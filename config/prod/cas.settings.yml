@@ -13,11 +13,13 @@ server:
   verify: 0
   cert: ''
 gateway:
-  check_frequency: -2
+  enabled: false
+  recheck_time: 720
   paths:
     id: request_path
     negate: false
     pages: ''
+  method: server_side
 forced_login:
   enabled: true
   paths:
@@ -27,6 +29,7 @@ forced_login:
 user_accounts:
   prevent_normal_login: false
   auto_register: true
+  auto_register_follow_registration_policy: false
   email_assignment_strategy: 1
   email_hostname: ''
   email_attribute: mail

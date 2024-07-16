@@ -11,7 +11,7 @@ archive: false
 id: 2_nombre_de_pages_dans_les_pdf_i
 title: '2 - Nombre de pages dans les PDF indispensable'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   identifiez_vous:
     '#type': webform_wizard_page
@@ -22,26 +22,23 @@ elements: |-
       '#required': true
       '#required_error': 'Votre prénom et nom sont obligatoires'
       '#default_value': '[cas:attribute:givenname] [cas:attribute:sn]'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_courriel:
       '#type': email
       '#title': 'Votre courriel'
       '#required': true
       '#required_error': 'Votre courriel est obligatoire'
       '#default_value': '[current-user:mail]'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     url_de_votre_site_:
       '#type': url
       '#title': 'URL de votre site :'
       '#required': true
-      '#required_error': 'L''URL de votre site est obligatoire'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "L'URL de votre site est obligatoire"
   pagequantity:
     '#type': webform_wizard_page
     '#title': Estimation
     textquantity:
       '#type': webform_markup
-      '#markup': '<p>Afin d''évaluer la charge de travail et le coût de mise en conformité des PDFs sur chaque site, merci d''indiquer ci-dessous, la quantité de PDF qui vous semble indispensable (ceux qui concernent le plus grand nombre de personnes, qui sont à lire absolument, etc.) et d''indiquer pour chacun d''entre eux, leur nombre de pages.</p>'
+      '#markup': "<p>Afin d'évaluer la charge de travail et le coût de mise en conformité des PDFs sur chaque site, merci d'indiquer ci-dessous, la quantité de PDF qui vous semble indispensable (ceux qui concernent le plus grand nombre de personnes, qui sont à lire absolument, etc.) et d'indiquer pour chacun d'entre eux, leur nombre de pages.</p>"
     quantite_de_pdfs_important:
       '#type': number
       '#title': 'Quantité de PDFs important :'
@@ -49,7 +46,6 @@ elements: |-
       '#placeholder': '3'
       '#required': true
       '#required_error': 'Indiquez la quantité de PDF important'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#attributes':
         style: 'display: inline;'
     somme_totale_du_nombre_de_pages_de_ces_pdfs:
@@ -59,7 +55,6 @@ elements: |-
       '#placeholder': '26'
       '#required': true
       '#required_error': 'Indiquez le nombre complet de page'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#attributes':
         style: 'display: inline;'
 css: ''

@@ -675,6 +675,7 @@ class WsGroupsController extends ControllerBase
     $page_perso = reset($pp);
 
     if ($page_perso) {
+
       switch ($data_to_get) {
         case 'skills' :
           if ($settings['skills_lists']) {
@@ -715,36 +716,42 @@ class WsGroupsController extends ControllerBase
         case 'research' :
           if ($settings['supannEntite_research'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'research';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search[0]['description'];
+            if (!empty($affectation)) {
+              $key_search = array_filter($affectation, function ($item) {
+                return $item['businessCategory'] == 'research';
+              });
+              if (!empty($key_search)) {
+                $key_search = reset($key_search);
+                $result = $key_search[0]['description'];
+              }
             }
           }
           break;
         case 'pedagogy' :
           if ($settings['supannEntite_pedagogy'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'pedagogy';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search['description'];
+            if (!empty($affectation)) {
+              $key_search = array_filter($affectation, function ($item) {
+                return $item['businessCategory'] == 'pedagogy';
+              });
+              if (!empty($key_search)) {
+                $key_search = reset($key_search);
+                $result = $key_search['description'];
+              }
             }
           }
           break;
         case 'doctoralSchool' :
           if ($settings['supannEntite_doctoralSchool'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'doctoralSchool';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search['description'];
+            if (!empty($affectation)) {
+              $key_search = array_filter($affectation, function ($item) {
+                return $item['businessCategory'] == 'doctoralSchool';
+              });
+              if (!empty($key_search)) {
+                $key_search = reset($key_search);
+                $result = $key_search['description'];
+              }
             }
           }
           break;
@@ -777,7 +784,8 @@ class WsGroupsController extends ControllerBase
    * @return mixed
    */
   public function getParcoursObsia($username) {
-    if (!$this->maintenancePagePersos()) {
+	  if (!$this->maintenancePagePersos()) {
+		  \Drupal::logger('pages_persos')->info('On passe là');
       return new JsonResponse([ 'data' => $this->getObsiaFields($username), 'method' => 'GET', 'status'=> 200]);
     }
     else {
@@ -886,6 +894,7 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
+        ->checkAccess(FALSE)
         ->condition('uid', $user->id());
       $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
@@ -932,10 +941,12 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
+        ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $nids = $query->execute();
+      \Drupal::logger('pages_persos')->info(print_r($nids,1));
       if ($nids) {
-        foreach ($nids as $nid) {
+	      foreach ($nids as $nid) {
           $page_perso = Node::load($nid);
           $fields[] = [
             'username' => $username,

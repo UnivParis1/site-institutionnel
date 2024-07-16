@@ -11,7 +11,7 @@ archive: false
 id: 0_signalement_des_violences_
 title: '0 - Signalement des violences - étudiants (archive)'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   caracterisation_de_votre_signalement:
     '#type': webform_section
@@ -34,12 +34,11 @@ elements: |-
     '#required': true
   pouvez_vous_preciser_l_autre_dispositif_utilise_pour_le_signalem:
     '#type': textfield
-    '#title': 'Pouvez-vous préciser l''autre dispositif utilisé pour le signalement  ?'
+    '#title': "Pouvez-vous préciser l'autre dispositif utilisé pour le signalement  ?"
     '#states':
       visible:
         ':input[name="est_ce_votre_premier_signalement_pour_ces_faits_"]':
           value: NON
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   choisissez_la_categorie_des_faits_la_plus_proche_:
     '#type': checkboxes
     '#title': 'Choisissez la catégorie des faits la plus proche :'
@@ -51,7 +50,7 @@ elements: |-
       'Propositions de nature sexuelle non désirée': 'Propositions de nature sexuelle non désirée'
       'Comportement ouvertement sexiste, grivois, obscène ou portant atteinte à la dignité': 'Comportement ouvertement sexiste, grivois, obscène ou portant atteinte à la dignité'
       'Envoi de messages, objets, images à connotation sexuelle': 'Envoi de messages, objets, images à connotation sexuelle'
-      'Pressions dans le but réel ou apparent d''obtenir un acte de nature sexuelle': 'Pressions dans le but réel ou apparent d''obtenir un acte de nature sexuelle'
+      "Pressions dans le but réel ou apparent d'obtenir un acte de nature sexuelle": "Pressions dans le but réel ou apparent d'obtenir un acte de nature sexuelle"
       'Agression sexuelle, et/ou agression physique': 'Agression sexuelle, et/ou agression physique'
       Viol: Viol
       Autre: Autre
@@ -63,22 +62,18 @@ elements: |-
       visible:
         ':input[name="choisissez_la_categorie_des_faits_la_plus_proche_[Autre]"]':
           checked: true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   description_des_faits_votre_temoignage:
     '#type': webform_section
     '#title': 'DESCRIPTION DES FAITS, VOTRE TÉMOIGNAGE'
     vous_avez_la_possibilite_de_decrire_succinctement_les_faits:
       '#type': textarea
       '#title': 'Vous avez la possibilité de décrire succinctement les faits.'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     a_quelle_date_se_sont_deroules_les_faits_ou_pendant_quelle_perio:
       '#type': textarea
       '#title': 'À quelle date se sont déroulés les faits ou pendant quelle période ?'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     lieu_de_la_situation_ou_des_faits:
       '#type': textarea
       '#title': 'Le lieu de la situation ou des faits.'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     vous_pouvez_egalement_envoyer_un_fichier_avec_votre_temoignage_:
       '#type': managed_file
       '#title': 'Vous pouvez également envoyer un fichier avec votre témoignage.'
@@ -86,7 +81,6 @@ elements: |-
     indiquez_quels_sont_vos_attentes_et_vos_besoins_vis_a_vis_du_dis:
       '#type': textarea
       '#title': 'Indiquez quels sont vos attentes et vos besoins vis-à-vis du dispositif de signalement (écoute, conseils juridiques, aide psychologique, etc.).'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   vous_contacter:
     '#type': webform_section
     '#title': 'VOUS CONTACTER'
@@ -104,7 +98,6 @@ elements: |-
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     votre_prenom:
       '#type': textfield
@@ -113,7 +106,6 @@ elements: |-
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     votre_courriel:
       '#type': email
@@ -122,7 +114,6 @@ elements: |-
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     votre_numero_de_telephone:
       '#type': tel
@@ -131,7 +122,6 @@ elements: |-
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_ufr_composante:
       '#type': textfield
       '#title': 'Votre UFR/composante'
@@ -139,7 +129,6 @@ elements: |-
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   markup_12:
     '#type': webform_markup
     '#markup': '<p><em>La confidentialité de votre identité est garantie par l’équipe écoutante de l’université.</em></p>'
@@ -150,7 +139,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#states':
       visible:
         ':input[name="deux_options_possibles_"]':

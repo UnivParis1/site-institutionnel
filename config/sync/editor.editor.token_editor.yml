@@ -1,50 +1,20 @@
-uuid: 28c7b3e5-c1b6-4a5f-ad15-ab8863a3cbf1
+uuid: 0f49e27e-d30d-40ce-bddc-7042a444790e
 langcode: fr
 status: true
 dependencies:
   config:
     - filter.format.token_editor
   module:
-    - ckeditor
+    - ckeditor5
 format: token_editor
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: Formats
-          items:
-            - Bold
-            - Italic
-        -
-          name: Liens
-          items:
-            - DrupalLink
-            - DrupalUnlink
-        -
-          name: Listes
-          items:
-            - BulletedList
-            - NumberedList
-        -
-          name: Média
-          items:
-            - Blockquote
-            - DrupalImage
-        -
-          name: Tools
-          items:
-            - Source
+    items:
+      - bold
+      - italic
+      - tokenBrowser
   plugins:
-    drupallink:
-      linkit_enabled: false
-      linkit_profile: ''
-image_upload:
-  status: false
-  scheme: public
-  directory: inline-images
-  max_size: ''
-  max_dimensions:
-    width: null
-    height: null
+    token_filter_token_browser:
+      token_types: {  }
+image_upload: {  }

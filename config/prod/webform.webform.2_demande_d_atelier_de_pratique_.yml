@@ -9,9 +9,9 @@ uid: 13
 template: false
 archive: false
 id: 2_demande_d_atelier_de_pratique_
-title: '2 - demande d''atelier de pratique à une formation'
+title: "2 - demande d'atelier de pratique à une formation"
 description: 'Des ateliers pratiques peuvent &ecirc;tre organis&eacute;s afin de r&eacute;pondre aux questions de ceux qui ont suivi une formation en ligne.'
-category: ''
+categories: {  }
 elements: |-
   titre_du_formulaire:
     '#type': webform_markup
@@ -99,7 +99,7 @@ elements: |-
               value: Drupal
     qu_est_ce_que_vous_souhaiteriez_savoir_en_plus_:
       '#type': textarea
-      '#title': 'Qu''est ce que vous souhaiteriez savoir en plus ?'
+      '#title': "Qu'est ce que vous souhaiteriez savoir en plus ?"
       '#description': 'Le niveau expert &eacute;tant du sur-mesure, il est imp&eacute;ratif d&#39;expliciter le besoin.'
       '#required': true
       '#states':
@@ -116,7 +116,6 @@ elements: |-
           - xor
           - ':input[name="pour_quel_logiciel_"]':
               value: Drupal
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   container_organisation:
     '#type': container
     '#states':
@@ -140,10 +139,10 @@ elements: |-
       '#required': true
     preferez_vous_le_matin_ou_l_apres_midi_:
       '#type': select
-      '#title': 'Préferez-vous le matin ou l''après-midi ?'
+      '#title': "Préferez-vous le matin ou l'après-midi ?"
       '#options':
         'Le matin (de 9h30 à 12h30)': 'Le matin (de 9h30 à 12h30)'
-        'L''après-midi (de 13h30 à 16h30)': 'L''après-midi (de 13h30 à 16h30)'
+        "L'après-midi (de 13h30 à 16h30)": "L'après-midi (de 13h30 à 16h30)"
         'Pas de préférence': 'Pas de préférence'
       '#required': true
   container_validation:
@@ -157,13 +156,13 @@ elements: |-
             value: Drupal
     terms_of_service:
       '#type': webform_terms_of_service
-      '#title': 'Je certifie {avoir suivi la formation en ligne dédié au logiciel sélectionné avant l''atelier}.'
+      '#title': "Je certifie {avoir suivi la formation en ligne dédié au logiciel sélectionné avant l'atelier}."
       '#required': true
       '#terms_title': Obligatoire
       '#terms_content': 'Afin de ne pas faire perdre de temps aux autres participants, il est obligatoire que vous ayez regard&eacute; en entier la(les) formation(s) en ligne qui porte sur le sujet avant l&#39;atelier. Les formations sont disponibles en haut de cette page.'
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#states':
       invisible:
         - ':input[name="pour_quel_logiciel_"]':
@@ -259,6 +258,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

@@ -61,7 +61,7 @@ class CentresService {
       else {
 	$random = rand(0, 1) ? 'blue' : 'white';
         $image_path = $url_images."default_$random.svg";
-        $centre['image_path'] = file_create_url($image_path);
+        $centre['image_path'] = \Drupal::service('file_url_generator')->generateAbsoluteString($image_path);
       }
     }
 

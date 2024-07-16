@@ -11,7 +11,7 @@ archive: false
 id: 2_matomo_droits_et_carte_de_chal
 title: '2 - Matomo - droits et carte de chaleur'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   titreformulaire:
     '#type': webform_markup
@@ -20,28 +20,24 @@ elements: |-
     '#type': textfield
     '#title': 'Votre prénom et nom :'
     '#required': true
-    '#required_error': 'Merci d''indiquer votre nom & prénom'
+    '#required_error': "Merci d'indiquer votre nom & prénom"
     '#default_value': '[cas:attribute:givenname] [cas:attribute:sn]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_courriel_:
     '#type': textfield
     '#title': 'Votre courriel :'
     '#required': true
     '#required_error': 'Vous devez saisir votre adresse de messagerie'
     '#default_value': '[current-user:mail]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_login_:
     '#type': textfield
     '#title': 'Votre login :'
     '#default_value': '[current-user:display-name]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   url_de_votre_site_:
     '#type': url
     '#title': 'URL de votre site :'
     '#placeholder': 'https://droit.pantheonsorbonne.fr/'
     '#required': true
     '#required_error': 'Indiquez votre site principal'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   en_afficher_plus:
     '#type': radios
     '#title': 'En afficher plus'
@@ -57,7 +53,6 @@ elements: |-
       visible:
         ':input[name="en_afficher_plus"]':
           checked: true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   url_de_votre_3e_site_:
     '#type': url
     '#title': 'URL de votre 3e site :'
@@ -66,7 +61,6 @@ elements: |-
       visible:
         ':input[name="en_afficher_plus"]':
           checked: true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   url_de_votre_4e_site_:
     '#type': url
     '#title': 'URL de votre 4e site :'
@@ -75,10 +69,9 @@ elements: |-
       visible:
         ':input[name="en_afficher_plus"]':
           checked: true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
@@ -167,6 +160,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

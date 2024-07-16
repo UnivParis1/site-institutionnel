@@ -9,9 +9,9 @@ uid: 5486
 template: false
 archive: false
 id: 0_demande_de_publication_d_un_ev
-title: '2 - Demande de publication d''un évènement ou publication'
+title: "2 - Demande de publication d'un évènement ou publication"
 description: ''
-category: ''
+categories: {  }
 elements: |-
   nom_prenom_:
     '#type': textfield
@@ -19,14 +19,12 @@ elements: |-
     '#required': true
     '#required_error': 'Nom prénom est obligatoire'
     '#default_value': '[cas:attribute:givenname] [cas:attribute:sn]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel_:
     '#type': textfield
     '#title': 'Courriel : '
     '#required': true
     '#required_error': 'Le courriel est obligatoire'
     '#default_value': '[current-user:mail]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   souhaitez_vous_publier_un_evenement_ou_une_publication_:
     '#type': radios
     '#title': 'Souhaitez-vous publier un évènement ou une publication ?'
@@ -47,7 +45,6 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     date_et_heure_de_debut:
       '#type': datetime
       '#title': 'Date de début :'
@@ -57,7 +54,6 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#date_date_format': ''
       '#date_time_element': none
     heure_de_debut_:
@@ -69,7 +65,6 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     date_et_heure_de_fin_:
       '#type': datetime
       '#title': 'Date de fin :'
@@ -79,7 +74,6 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#date_date_format': ''
       '#date_time_element': none
     heure_de_fin_:
@@ -91,10 +85,9 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     type_d_evenement_:
       '#type': select
-      '#title': 'Type d''évènement :'
+      '#title': "Type d'évènement :"
       '#options':
         Atelier: Atelier
         Cérémonie: Cérémonie
@@ -107,20 +100,20 @@ elements: |-
         Spectacle: Spectacle
         'Table ronde': 'Table ronde'
       '#required': true
-      '#required_error': 'Type d''évènement est requis'
+      '#required_error': "Type d'évènement est requis"
       '#states':
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
     image_d_illustration_:
       '#type': webform_image_file
-      '#title': 'Image d''illustration :'
+      '#title': "Image d'illustration :"
       '#description': |-
         <p>Taille recommandée pour l'image : 1920 x 462 pixels</p>
 
         <p>&nbsp;</p>
       '#required': true
-      '#required_error': 'Image d''illustration est requis'
+      '#required_error': "Image d'illustration est requis"
       '#states':
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
@@ -135,7 +128,6 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     texte_descriptif_:
       '#type': textarea
       '#title': 'Texte descriptif :'
@@ -145,7 +137,6 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     programme_facultatif_:
       '#type': webform_document_file
       '#title': 'Programme :'
@@ -155,12 +146,11 @@ elements: |-
             value: 'Un évènement'
     lien_d_inscription_:
       '#type': textfield
-      '#title': 'Lien d''inscription ou contact :'
+      '#title': "Lien d'inscription ou contact :"
       '#states':
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     lien_zoom_:
       '#type': textfield
       '#title': 'Lien zoom :'
@@ -168,17 +158,15 @@ elements: |-
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     adresse:
       '#type': textfield
-      '#title': 'Adresse de l''évènement :'
+      '#title': "Adresse de l'évènement :"
       '#required': true
-      '#required_error': 'Adresse de l''évènement est requis'
+      '#required_error': "Adresse de l'évènement est requis"
       '#states':
         visible:
           ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
             value: 'Un évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   publication:
     '#type': webform_section
     '#title': Publication
@@ -192,11 +180,9 @@ elements: |-
       '#title': 'Titre :'
       '#required': true
       '#required_error': 'Titre est obligatoire'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     sous_titre_:
       '#type': textfield
       '#title': 'Sous-titre :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     vignette_:
       '#type': webform_image_file
       '#title': 'Vignette :'
@@ -205,11 +191,9 @@ elements: |-
     editeur_:
       '#type': textfield
       '#title': 'Éditeur :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     collection_:
       '#type': textfield
       '#title': 'Collection :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     discipline_:
       '#type': select
       '#title': 'Discipline :'
@@ -222,7 +206,7 @@ elements: |-
         'Études judiciaires': 'Études judiciaires'
         Géographie: Géographie
         Histoire: Histoire
-        'Histoire de l''art': 'Histoire de l''art'
+        "Histoire de l'art": "Histoire de l'art"
         Informatique: Informatique
         Jubilé: Jubilé
         Langues: Langues
@@ -242,9 +226,9 @@ elements: |-
         Article: Article
         'Article dans une revue': 'Article dans une revue'
         'Autre publication': 'Autre publication'
-        'Chapitre d''ouvrage': 'Chapitre d''ouvrage'
+        "Chapitre d'ouvrage": "Chapitre d'ouvrage"
         'Communication dans un congrès': 'Communication dans un congrès'
-        'Direction d''ouvrage': 'Direction d''ouvrage'
+        "Direction d'ouvrage": "Direction d'ouvrage"
         HDR: HDR
         Ouvrage: Ouvrage
         Rapport: Rapport
@@ -253,41 +237,33 @@ elements: |-
     auteur_s_de_la_publication:
       '#type': textarea
       '#title': 'Auteur(s) de la publication :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     date_de_publication_:
       '#type': date
       '#title': 'Date de publication :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#date_date_format': ''
     isbn_:
       '#type': textfield
       '#title': 'ISBN :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     nombre_de_pages_:
       '#type': textfield
       '#title': 'Nombre de pages :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     resume_:
       '#type': textarea
       '#title': 'Résumé :'
       '#required': true
       '#required_error': 'Résumé est obligatoire'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     prix:
       '#type': textfield
       '#title': 'Prix :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     lien_d_achat_:
       '#type': textfield
-      '#title': 'Lien d''achat :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#title': "Lien d'achat :"
     lien_consultation:
       '#type': textfield
       '#title': 'Lien de consultation :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#states':
       visible:
         - ':input[name="souhaitez_vous_publier_un_evenement_ou_une_publication_"]':
@@ -383,6 +359,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
