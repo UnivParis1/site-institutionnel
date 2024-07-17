@@ -10,8 +10,9 @@ template: false
 archive: false
 id: demande_de_diplome_
 title: '88-Demande de diplôme'
-description: '<p>Recensement des demandes de diplôme de l''EDPH</p>'
-category: 'Demande de diplôme'
+description: "<p>Recensement des demandes de diplôme de l'EDPH</p>"
+categories:
+  - 'Demande de diplôme'
 elements: |-
   nom_prenom:
     '#type': textfield
@@ -19,7 +20,6 @@ elements: |-
     '#description': '<p>Nom Prénom</p>'
     '#title_display': invisible
     '#description_display': before
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   email:
     '#type': email
     '#title': Email
@@ -27,18 +27,16 @@ elements: |-
     '#title_display': invisible
     '#description_display': before
     '#placeholder': edph-theses@univ-paris1.fr
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   ndegetudiant:
     '#type': textfield
     '#title': N°Etudiant
     '#description': '<p>N°Etudiant</p>'
     '#title_display': invisible
     '#description_display': before
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   annee_d_obtention:
     '#type': select
-    '#title': 'Année d''obtention'
-    '#description': '<p>Année d''obtention</p>'
+    '#title': "Année d'obtention"
+    '#description': "<p>Année d'obtention</p>"
     '#title_display': invisible
     '#description_display': before
     '#options':
@@ -61,20 +59,17 @@ elements: |-
     '#description': '<p>Date de Soutenance JJ/MM/AAAA</p>'
     '#title_display': invisible
     '#description_display': before
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   nom_du_president_du_jury:
     '#type': textfield
     '#title': 'Nom du président du Jury'
     '#description': '<p>Nom du président du Jury</p>'
     '#title_display': invisible
     '#description_display': before
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   adresse_postal:
     '#type': webform_address
     '#title': 'Adresse Postal'
     '#description': '<p>Adresse Postal</p>'
     '#description_display': invisible
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#address_2__access': false
     '#city__access': false
     '#state_province__access': false
@@ -167,6 +162,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

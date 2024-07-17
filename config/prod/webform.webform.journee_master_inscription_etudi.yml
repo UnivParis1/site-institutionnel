@@ -11,29 +11,26 @@ archive: false
 id: journee_master_inscription_etudi
 title: '63 - Journée Master - inscription étudiants P1'
 description: ''
-category: 'Inscription événement'
+categories:
+  - 'Inscription événement'
 elements: |-
   votre_ndeg_etudiant:
     '#type': textfield
     '#title': 'Votre n° étudiant Paris 1'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_nom:
     '#type': textfield
     '#title': 'Votre nom'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_prenom:
     '#type': textfield
     '#title': 'Votre prénom'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_courriel_paris_1:
     '#type': email
     '#title': 'Votre courriel Paris 1'
     '#description': '<p>adresse mail @etu.univ-paris1.fr</p>'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   vous_etes_inscrit_e_en_l3:
     '#type': webform_select_other
     '#title': 'Vous êtes inscrit(e) en L3 ou M1'
@@ -48,7 +45,7 @@ elements: |-
     '#type': captcha
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': Envoyer
 css: ''
 javascript: ''
@@ -137,6 +134,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -165,7 +164,7 @@ settings:
   confirmation_update: false
   limit_total: 220
   limit_total_interval: null
-  limit_total_message: '<p>Les capacités d''accueil sont atteintes.</p>'
+  limit_total_message: "<p>Les capacités d'accueil sont atteintes.</p>"
   limit_total_unique: false
   limit_user: 1
   limit_user_interval: null

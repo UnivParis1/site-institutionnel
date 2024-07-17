@@ -11,7 +11,8 @@ archive: false
 id: 57_formulaire_inscription_format
 title: '57 - Formulaire inscription Formations'
 description: 'Formulaire Formations SUN'
-category: 'Inscription événement'
+categories:
+  - 'Inscription événement'
 elements: |-
   nom:
     '#type': textfield
@@ -150,6 +151,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -249,7 +252,7 @@ handlers:
     id: email
     handler_id: email
     label: 'Alerte inscritpion formation'
-    notes: 'Il s''agit du courriel d''alerte envoyé automatiquement aux gestionnaires des formations lorsqu''un internaute s''inscrit via le formulaire'
+    notes: "Il s'agit du courriel d'alerte envoyé automatiquement aux gestionnaires des formations lorsqu'un internaute s'inscrit via le formulaire"
     status: true
     conditions: {  }
     weight: -50
@@ -291,8 +294,8 @@ handlers:
   email_1:
     id: email
     handler_id: email_1
-    label: 'Email de confirmation d''inscription'
-    notes: 'Il s''agit de l''email envoyé automatiquement à la personne qui s''inscrit à la formation'
+    label: "Email de confirmation d'inscription"
+    notes: "Il s'agit de l'email envoyé automatiquement à la personne qui s'inscrit à la formation"
     status: true
     conditions: {  }
     weight: -48
@@ -312,7 +315,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation d''inscription formation SUN'
+      subject: "Confirmation d'inscription formation SUN"
       body: "Bravo,<br />\r\nVous vous &ecirc;tes inscrit avec succ&egrave;s &agrave; la formation de votre choix.<br />\r\nVous recevrez un email de rappel quelques jours avant la date de formation dans lequel l&#39;animateur de cette formation vous indiquera le lien de connexion s&#39;il s&#39;agit d&#39;une formation en ligne ou les coordonn&eacute;es de la salle &agrave; rejoindre s&#39;il s&#39;agit d&#39;une formation en pr&eacute;sence.<br />\r\nBien cordialement &agrave; vous,<br />\r\nL&#39;&eacute;quipe de formation du SUN"
       excluded_elements:
         email: email
@@ -336,7 +339,7 @@ handlers:
     id: email
     handler_id: email_2
     label: 'Infos inscriptions formation SUN'
-    notes: 'Il s''agit du courriel envoyé automatiquement au service RH de l''université lorsqu''un internaute s''inscrit à une formation'
+    notes: "Il s'agit du courriel envoyé automatiquement au service RH de l'université lorsqu'un internaute s'inscrit à une formation"
     status: true
     conditions: {  }
     weight: -49

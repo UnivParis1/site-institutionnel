@@ -9,9 +9,9 @@ uid: 13
 template: false
 archive: false
 id: 59_formulaire_d_inscription_test
-title: '59 - Formulaire d''inscription test pour PSME'
-description: '<p>Formulaire d''inscription pour paiement</p>'
-category: ''
+title: "59 - Formulaire d'inscription test pour PSME"
+description: "<p>Formulaire d'inscription pour paiement</p>"
+categories: {  }
 elements: |-
   field1:
     '#type': textfield
@@ -19,15 +19,13 @@ elements: |-
     '#placeholder': Dupont
     '#required': true
     '#required_error': 'Merci de renseigner votre nom'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   mail:
     '#type': email
     '#title': 'E-mail / Courriel'
-    '#description': '<p>Indiquez une adresse de messagerie valide car c''est avec celle-ci que nous vous contacterons et c''est sur celle-ci que vous recevrez votre ticket de paiement.</p>'
+    '#description': "<p>Indiquez une adresse de messagerie valide car c'est avec celle-ci que nous vous contacterons et c'est sur celle-ci que vous recevrez votre ticket de paiement.</p>"
     '#placeholder': jeandupont@monfai.com
     '#required': true
-    '#required_error': 'Please indict your email / Merci d''indiquer votre courriel'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#required_error': "Please indict your email / Merci d'indiquer votre courriel"
   field2:
     '#type': radios
     '#title': 'Fees payment / Tarifs'
@@ -43,12 +41,12 @@ elements: |-
     '#required_error': 'Select Fee payment / Sélectionnez le Tarif'
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'I'' accept the terms / J''accepte les {Conditions générales de vente}'
+    '#title': "I' accept the terms / J'accepte les {Conditions générales de vente}"
     '#help_title': 'Cliquez sur Conditions génrérales de vente pour les parcourir.'
     '#help_display': title_before
     '#required': true
     '#required_error': 'You have to accept the terms / Vous devez accepter les conditions pour valider ce formulaire'
-    '#return_value': 'J''accepte les CGV'
+    '#return_value': "J'accepte les CGV"
     '#terms_title': CGV
     '#terms_content': |-
       <p>The Université Paris 1 Panthéon-Sorbonne reserves the right to invoice bank handling charges, if any.</p>
@@ -128,57 +126,51 @@ elements: |-
       '#title': 'First name / Prénom'
       '#placeholder': Jean
       '#required': true
-      '#required_error': 'Merci d''indiquer le prénom pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer le prénom pour la facturation"
     billinglastname:
       '#type': textfield
       '#title': 'Last name / Nom'
       '#placeholder': Dupont
       '#required': true
-      '#required_error': 'Merci d''indiquer le nom pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer le nom pour la facturation"
     billingaddress1:
       '#type': textfield
       '#title': 'Address / Adresse postale'
       '#placeholder': '90 rue du paradis'
       '#required': true
-      '#required_error': 'Merci d''indiquer l''adresse postale pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer l'adresse postale pour la facturation"
     billingzipcode:
       '#type': textfield
       '#title': 'Zip Code / Code postal'
       '#placeholder': '77500'
       '#required': true
-      '#required_error': 'Merci d''indiquer le code postal pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer le code postal pour la facturation"
     billingcity:
       '#type': textfield
       '#title': 'City / Ville'
       '#placeholder': Chelles
       '#required': true
-      '#required_error': 'Merci d''indiquer la ville pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer la ville pour la facturation"
     billingcountrycode:
       '#type': select
       '#title': 'Country / Pays'
       '#options': liste_pays_code_numerique_
       '#required': true
-      '#required_error': 'Merci d''indiquer le pays pour la facturation'
+      '#required_error': "Merci d'indiquer le pays pour la facturation"
   piaement_par_virement_bancaire:
     '#type': textfield
-    '#title': 'Name of the contractor and student/ Nom du donneur d''ordre et de l''étudiant :'
-    '#description': '<p>Inscrivez ici le nom du donneur d''ordre.</p>'
-    '#help': '<p>Le «nom du donneur d''ordre» qui peut-être différent de celui de la personne désirant s''inscrire.</p>'
+    '#title': "Name of the contractor and student/ Nom du donneur d'ordre et de l'étudiant :"
+    '#description': "<p>Inscrivez ici le nom du donneur d'ordre.</p>"
+    '#help': "<p>Le «nom du donneur d'ordre» qui peut-être différent de celui de la personne désirant s'inscrire.</p>"
     '#required': true
-    '#required_error': 'Indict the name of the contractor / Indiquez le nom du donneur d''ordre'
+    '#required_error': "Indict the name of the contractor / Indiquez le nom du donneur d'ordre"
     '#states':
       visible:
         ':input[name="comment_voulez_vous_payer_"]':
           value: virement
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   en_soumettant_ce_formulaire_j_accepte_que_les_informations_saisi:
     '#type': checkbox
-    '#title': 'En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de mon inscription au PSME'
+    '#title': "En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées dans le cadre de mon inscription au PSME"
     '#title_display': before
     '#required': true
     '#required_error': 'Vous devez accepter les conditions pour valider ce formulaire'
@@ -409,7 +401,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Début d''inscription au cours d''été de FLE 2022'
+      subject: "Début d'inscription au cours d'été de FLE 2022"
       body: "<p>Un personne a initié une inscription, voici les données qu'elle a saisie :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements:
         captcha: captcha
@@ -442,12 +434,12 @@ handlers:
       cc_options: {  }
       from_mail: ecoledetefle.ddl@univ-paris1.fr
       from_options: {  }
-      from_name: 'Cours d''été en FLE'
+      from_name: "Cours d'été en FLE"
       reply_to: ecoledetefle.ddl@univ-paris1.fr
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription au cours d''été de FLE 2022 - Confirmation remplissage formulaire'
+      subject: "Inscription au cours d'été de FLE 2022 - Confirmation remplissage formulaire"
       body: "<p>Bonjour [webform_submission:values:field2:raw],</p>\r\n\r\n<p>Vous avez rempli le formulaire d'inscription pour les cours d'été en FLE.</p>\r\n\r\n<p>Votre demande a été envoyé le [webform_submission:created]</p>\r\n\r\n<p>et voici les données que vous nous avez transmises :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Merci.</p>\r\n\r\n<p>N'oubliez pas de régulariser cette inscription afin de valider votre demande.</p>\r\n\r\n<p>Cordialement,</p>\r\n\r\n<p>L'équipe organisatrice du FLE</p>"
       excluded_elements: {  }
       ignore_access: false

@@ -11,7 +11,8 @@ archive: false
 id: 18_abonnement_agenda_et_lettre
 title: '18 - Abonnement Agenda et Lettre'
 description: ''
-category: 'Abonnement à une newsletter'
+categories:
+  - 'Abonnement à une newsletter'
 elements: |-
   markup:
     '#type': webform_markup
@@ -21,26 +22,23 @@ elements: |-
     '#title': Nom
     '#placeholder': Name
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': Prénom
     '#placeholder': 'First name'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
     '#title': Courriel
     '#placeholder': Email
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   captcha:
     '#type': captcha
     '#captcha_type': recaptcha/reCAPTCHA
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'S''abonner'
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'abonner"
 css: ''
 javascript: ''
 settings:
@@ -128,6 +126,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -263,7 +263,7 @@ handlers:
   confirmation_d_inscription_a_l_agenda_et_a_la_lettre_de_l_isjps:
     id: email
     handler_id: confirmation_d_inscription_a_l_agenda_et_a_la_lettre_de_l_isjps
-    label: 'Confirmation d''abonnement à l''Agenda et à la Lettre de l''ISJPS'
+    label: "Confirmation d'abonnement à l'Agenda et à la Lettre de l'ISJPS"
     notes: ''
     status: true
     conditions: {  }
@@ -284,7 +284,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Confirmation d''inscription à l''Agenda et à la Lettre de l''ISJPS'
+      subject: "Confirmation d'inscription à l'Agenda et à la Lettre de l'ISJPS"
       body: "<p>Bonjour,</p>\r\n\r\n<p>La demande d'abonnement du [webform_submission:created] à l'<em>Agenda</em> mensuel et à la <em>Lettre</em> bimestrielle de l'ISJPS a été transmise pour :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Merci de l'intérêt que vous portez aux actualités de l'ISJPS.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>Marine Condé</p>"
       excluded_elements: {  }
       ignore_access: false

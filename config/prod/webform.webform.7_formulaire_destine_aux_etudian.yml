@@ -11,15 +11,14 @@ archive: false
 id: 7_formulaire_destine_aux_etudian
 title: '7 - Formulaire destiné aux étudiants qui souhaitent contester un résultat aux examens'
 description: "<p><meta charset=\"UTF-8\" />Formulaire destiné aux étudiants qui souhaitent <span style=\"font-size:medium\"><span style=\"font-family:&quot;Times New Roman&quot;, serif\"><span style=\"color:#000000\"><span style=\"font-style:normal\"><span style=\"font-weight:400\"><span style=\"white-space:normal\"><span style=\"text-decoration:none\"><b><span style=\"font-family:Arial, sans-serif\">contester un résultat aux examens de l'IED-EDS.</span></b></span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:start\"><span style=\"font-size:medium\"><span style=\"font-family:&quot;Times New Roman&quot;, serif\"><span style=\"color:#000000\"><span style=\"font-style:normal\"><span style=\"font-weight:400\"><span style=\"white-space:normal\"><span style=\"text-decoration:none\"><span style=\"font-family:Arial, sans-serif\">A adresser au plus tard dans les xx semaines après la publication des résultats..</span></span></span></span></span></span></span></span></p>"
-category: ''
+categories: {  }
 elements: |-
   nom:
     '#type': textfield
     '#title': NOM
     '#help_title': Dupont
     '#required': true
-    '#required_error': 'Ce champ est obligatoire. Merci d''indiquer votre nom'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#required_error': "Ce champ est obligatoire. Merci d'indiquer votre nom"
     '#format_items': comma
   prenom:
     '#type': textfield
@@ -27,32 +26,28 @@ elements: |-
     '#help_title': Daniel
     '#required': true
     '#required_error': 'Champs obligatoire. Merci de préciser votre prénom.'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#format_items': comma
   votre_e_mail:
     '#type': email
     '#title': 'Votre e-mail '
     '#placeholder': daniel.dupond@gmail.com
     '#required': true
-    '#required_error': 'Champ obligatoire. Merci d''indiquer votre adresse électronique.'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#required_error': "Champ obligatoire. Merci d'indiquer votre adresse électronique."
     '#format_items': comma
   votre_ndeg_de_telephone:
     '#type': tel
     '#title': 'Votre n° de téléphone'
     '#help_title': 'Préciser votre numéro de téléphone'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#format_items': comma
   votre_numero_de_candidat_:
     '#type': textfield
-    '#title': 'Votre numéro d''étudiant '
+    '#title': "Votre numéro d'étudiant "
     '#help_title': 12345678H
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#format_items': comma
     '#required': true
   pour_quelle_formation_a_l_ied_eds_souhaitez_vous_faire_une_reque:
     '#type': select
-    '#title': 'Quelle année d''études à  l''IED-EDS est concernée par votre requête ?'
+    '#title': "Quelle année d'études à  l'IED-EDS est concernée par votre requête ?"
     '#options':
       'Capacité en droit 1ere année': 'Capacité en droit 1ere année'
       'Capacité en droit 2eme année': 'Capacité en droit 2eme année'
@@ -78,7 +73,6 @@ elements: |-
   intitule_precis_de_l_enseignement_concerne_par_votre_demande:
     '#type': textfield
     '#title': 'Intitulé précis de l’enseignement concerné par votre demande'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#format_items': comma
     '#required': true
   session_d_examen_concernee:
@@ -112,9 +106,9 @@ elements: |-
     '#sanitize': true
   autre_piece_eventuelle_permettant_l_examen_de_votre_demande:
     '#type': webform_document_file
-    '#title': 'Autre(s) pièce(s) éventuelle(s) permettant l''examen de votre demande'
+    '#title': "Autre(s) pièce(s) éventuelle(s) permettant l'examen de votre demande"
     '#multiple': 3
-    '#description': '<p>N''hésitez pas à nous transmettre d''autres pièces (maximum 3 fichiers au format PDF ou JPG) si vous les jugez pertinentes pour l''étude de votre demande.</p>'
+    '#description': "<p>N'hésitez pas à nous transmettre d'autres pièces (maximum 3 fichiers au format PDF ou JPG) si vous les jugez pertinentes pour l'étude de votre demande.</p>"
     '#file_placeholder': '<p style="text-align:start"><font color="#000000" face="Arial, sans-serif" size="3">Exemple pour le point de bonus, preuve de <span style="caret-color: rgb(0, 0, 0);">votre e</span>ngagement associatif ou syndical contraignant ..</font></p>'
     '#max_filesize': '10'
     '#file_extensions': 'pdf jpg'
@@ -140,7 +134,7 @@ elements: |-
     '#captcha_type': recaptcha/reCAPTCHA
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
 css: ''
 javascript: ''
 settings:
@@ -365,7 +359,7 @@ handlers:
   accuse_de_reception_de_la_demande:
     id: email
     handler_id: accuse_de_reception_de_la_demande
-    label: 'Accusé de réception de la demande de l''étudiant'
+    label: "Accusé de réception de la demande de l'étudiant"
     notes: ''
     status: true
     conditions: {  }
@@ -381,12 +375,12 @@ handlers:
       cc_options: {  }
       from_mail: recours.ied@univ-paris1.fr
       from_options: {  }
-      from_name: 'Institut d''Etudes à Distance (IED-EDS)'
+      from_name: "Institut d'Etudes à Distance (IED-EDS)"
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Réponse automatique à votre demande de recours concernant un résultat d''examen'
+      subject: "Réponse automatique à votre demande de recours concernant un résultat d'examen"
       body: "<p>Bonjour,<br />\r\n<br />\r\nVotre demande a bien été prise en compte.<br />\r\nNous vous répondrons dans les meilleurs délais.<br />\r\n<br />\r\nCordialement.<br />\r\n<br />\r\nLe service administratif de l’Institut d’Etudes à Distance de l’Ecole de Droit de la Sorbonne (IED-EDS)</p>"
       excluded_elements: {  }
       ignore_access: false

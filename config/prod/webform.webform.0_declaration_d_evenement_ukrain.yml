@@ -9,19 +9,17 @@ uid: 5486
 template: false
 archive: false
 id: 0_declaration_d_evenement_ukrain
-title: '0 - Déclaration d''évènement Ukraine'
+title: "0 - Déclaration d'évènement Ukraine"
 description: ''
-category: ''
+categories: {  }
 elements: |-
   nom:
     '#type': textfield
     '#title': Nom
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#required': true
   courriel:
     '#type': email
     '#title': Courriel
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#required': true
   deux_options_possibles_:
     '#type': radios
@@ -42,7 +40,6 @@ elements: |-
       visible:
         ':input[name="deux_options_possibles_"]':
           value: 'L’initiative est déjà publiée dans l’agenda de l’un des mini-sites de l’université'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   evenement:
     '#type': webform_section
     '#title': Initiative
@@ -53,16 +50,14 @@ elements: |-
     resume_en_quelques_lignes:
       '#type': textarea
       '#title': 'Résumé en quelques lignes'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     titre:
       '#type': textfield
       '#title': Titre
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     type_d_evenement:
       '#type': radios
-      '#title': 'Type d''initiative'
+      '#title': "Type d'initiative"
       '#options':
         Atelier: Atelier
         'Action solidaire': 'Action solidaire'
@@ -79,48 +74,41 @@ elements: |-
     date_de_debut:
       '#type': date
       '#title': 'Date de début'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     heure_de_debut:
       '#type': webform_time
       '#title': 'Heure de début'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     date_de_fin:
       '#type': datetime
       '#title': 'Date de fin'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#date_date_format': ''
       '#date_time_element': none
       '#required': true
     heure_de_fin:
       '#type': webform_time
       '#title': 'Heure de fin'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     markup_09:
       '#type': webform_markup
-      '#markup': '<h3>Image d''illustration</h3>'
+      '#markup': "<h3>Image d'illustration</h3>"
     image_d_illustration_pour_l_evenement_1920x467_pixels_:
       '#type': webform_image_file
-      '#title': 'Envoyer l''image (1920 x 467 pixels)'
+      '#title': "Envoyer l'image (1920 x 467 pixels)"
       '#file_extensions': 'jpeg jpg png'
     ou_nom_de_l_image_lien_vers_le_dossier:
       '#type': textfield
-      '#title': 'Ou nom de l''image + lien vers le dossier'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#title': "Ou nom de l'image + lien vers le dossier"
     texte_de_presentation:
       '#type': textarea
       '#title': 'Texte de présentation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     adresse_evenement:
       '#type': webform_markup
-      '#markup': '<h3>Adresse de l''initiative</h3>'
+      '#markup': "<h3>Adresse de l'initiative</h3>"
     adresse_de_l_evenement:
       '#type': webform_address
-      '#title': 'Adresse de l''évènement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#title': "Adresse de l'évènement"
       '#address_2__access': false
       '#city__access': false
       '#state_province__access': false
@@ -128,11 +116,10 @@ elements: |-
       '#country__access': false
     lien_vers_l_initiative_page_d_inscription_ou_descriptif_:
       '#type': textarea
-      '#title': 'Lien vers l''initiative (page d''inscription ou descriptif)'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#title': "Lien vers l'initiative (page d'inscription ou descriptif)"
   by_submitting_this_form_i_agree_that_the_list_of_registrants_wil:
     '#type': checkbox
-    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
     '#required': true
   captcha:
     '#type': captcha
@@ -141,7 +128,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#states':
       visible:
         ':input[name="deux_options_possibles_"]':
@@ -234,6 +221,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -353,7 +342,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Nouvelle demande de déclaration d''évènement'
+      subject: "[Réponse automatique] Nouvelle demande de déclaration d'évènement"
       body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
@@ -390,7 +379,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Demande de déclaration d''évènement'
+      subject: "[Réponse automatique] Demande de déclaration d'évènement"
       body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande a bien été prise en compte.</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les réponses soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false

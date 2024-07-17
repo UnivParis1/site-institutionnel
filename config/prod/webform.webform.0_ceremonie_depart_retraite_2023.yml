@@ -11,26 +11,23 @@ archive: false
 id: 0_ceremonie_depart_retraite_2023
 title: '0 - Cérémonie de départ à la retraite 2023'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   markup_01:
     '#type': webform_markup
-    '#markup': '<h2>Formulaire d''inscription :</h2>'
+    '#markup': "<h2>Formulaire d'inscription :</h2>"
   nom:
     '#type': textfield
     '#title': Nom
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': 'Prénom '
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
     '#title': 'Courriel '
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   venez_vous_accompagne_maximum_1_personne_:
     '#type': radios
     '#title': 'Souhaitez-vous venir accompagné ? (maximum 5 invités) '
@@ -55,7 +52,6 @@ elements: |-
       visible:
         ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_2_retraite:
     '#type': textfield
     '#title': 'Invité 2 (précisez son prénom et nom)'
@@ -63,7 +59,6 @@ elements: |-
       visible:
         ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_3_retraite:
     '#type': textfield
     '#title': 'Invité 3 (précisez son prénom et nom)'
@@ -71,7 +66,6 @@ elements: |-
       visible:
         ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_4_retraite:
     '#type': textfield
     '#title': 'Invité 4 (précisez son prénom et nom)'
@@ -79,7 +73,6 @@ elements: |-
       visible:
         ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_5_retraite:
     '#type': textfield
     '#title': 'Invité 5 (précisez son prénom et nom)'
@@ -87,7 +80,6 @@ elements: |-
       visible:
         ':input[name="venez_vous_accompagne_maximum_1_personne_"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   processed_text:
     '#type': processed_text
     '#text': |
@@ -116,7 +108,6 @@ elements: |-
       visible:
         ':input[name="souhaitez_vous_y_participer_cette_invitation_est_egalement_valab"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_2:
     '#type': textfield
     '#title': 'Invité 2 (précisez son prénom et nom)'
@@ -124,7 +115,6 @@ elements: |-
       visible:
         ':input[name="souhaitez_vous_y_participer_cette_invitation_est_egalement_valab"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_3:
     '#type': textfield
     '#title': 'Invité 3 (précisez son prénom et nom)'
@@ -132,7 +122,6 @@ elements: |-
       visible:
         ':input[name="souhaitez_vous_y_participer_cette_invitation_est_egalement_valab"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_4:
     '#type': textfield
     '#title': 'Invité 4 (précisez son prénom et nom)'
@@ -140,7 +129,6 @@ elements: |-
       visible:
         ':input[name="souhaitez_vous_y_participer_cette_invitation_est_egalement_valab"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   invite_5:
     '#type': textfield
     '#title': 'Invité 5 (précisez son prénom et nom)'
@@ -148,10 +136,9 @@ elements: |-
       visible:
         ':input[name="souhaitez_vous_y_participer_cette_invitation_est_egalement_valab"]':
           value: Oui
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
     '#type': checkbox
-    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
     '#required': true
   captcha:
     '#type': captcha
@@ -160,7 +147,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': Soumettre
     '#update__label': 'Mettre à jour'
 css: ''
@@ -372,7 +359,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la cérémonie de départ à la retraite'
+      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie de départ à la retraite"
       body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>&nbsp;</p>"
       excluded_elements: {  }
       ignore_access: false

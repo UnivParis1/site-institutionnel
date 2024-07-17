@@ -11,7 +11,7 @@ archive: false
 id: 0_signlemt_des_violences_pers_te
 title: '0 - Signalement des violences - personnels 2'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   caracterisation_de_votre_signalement:
     '#type': webform_section
@@ -43,7 +43,7 @@ elements: |-
   violences_sexistes_et_sexuelles:
     '#type': radios
     '#title': 'Violence(s) sexiste(s) et sexuelle(s)'
-    '#description': '<p>(Geste ou propos injurieux à connotation sexuelle, proposition de nature sexuelle non désirée, comportement ouvertement sexiste, obscène ou portant atteinte à la dignité, envoi de messages ou d''images à connotation sexuelle, pression dans le but réel ou apparent d''obtenir un acte de nature sexuelle, agression sexuelle et/ou agression physique, viol)</p>'
+    '#description': "<p>(Geste ou propos injurieux à connotation sexuelle, proposition de nature sexuelle non désirée, comportement ouvertement sexiste, obscène ou portant atteinte à la dignité, envoi de messages ou d'images à connotation sexuelle, pression dans le but réel ou apparent d'obtenir un acte de nature sexuelle, agression sexuelle et/ou agression physique, viol)</p>"
     '#description_display': before
     '#options':
       Oui: Oui
@@ -92,8 +92,8 @@ elements: |-
     '#options__properties': ''
   risques_pyschosociaux_:
     '#type': radios
-    '#title': 'Risques pyschosociaux '
-    '#description': '<p style="margin-left:8px">(liés aux conditions d’emploi, à l’organisation du travail et aux relations de travail qui mettent en jeu l’intégrité physique et la santé mentale des agents)</p>'
+    '#title': 'Risques psychosociaux '
+    '#description': '<p style="margin-left:8px;">(liés aux conditions d’emploi, à l’organisation du travail et aux relations de travail qui mettent en jeu l’intégrité physique et la santé mentale des agents)</p>'
     '#description_display': before
     '#options':
       Oui: Oui
@@ -102,12 +102,11 @@ elements: |-
     '#options__properties': ''
   pouvez_vous_preciser_l_autre_dispositif_utilise_pour_le_signalem:
     '#type': textfield
-    '#title': 'Pouvez-vous préciser l''autre dispositif utilisé pour le signalement  ?'
+    '#title': "Pouvez-vous préciser l'autre dispositif utilisé pour le signalement  ?"
     '#states':
       visible:
         ':input[name="est_ce_votre_premier_signalement_pour_ces_faits_"]':
           value: NON
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   description_des_faits_votre_temoignage:
     '#type': webform_section
     '#title': 'DESCRIPTION DES FAITS, VOTRE TÉMOIGNAGE'
@@ -116,23 +115,19 @@ elements: |-
       '#title': 'Veuillez décrire succinctement les faits.'
       '#required': true
       '#required_error': 'Le champ "Veuillez décrire succinctement les faits" est requis'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     a_quelle_date_se_sont_deroules_les_faits_ou_pendant_quelle_perio:
       '#type': textarea
       '#title': 'À quelle date se sont déroulés les faits ou pendant quelle période ?'
       '#required': true
       '#required_error': 'Le champ "À quelle date se sont déroulés les faits ou pendant quelle période ?" est requis.'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     lieu_de_la_situation_ou_des_faits:
       '#type': textarea
       '#title': 'Le lieu de la situation ou des faits :'
       '#required': true
       '#required_error': 'Le champ "Le lieu de la situation ou des faits :" est requis'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     indiquez_quels_sont_vos_attentes_et_vos_besoins_vis_a_vis_du_dis:
       '#type': textarea
       '#title': ' Avez-vous des attentes et des besoins particuliers à cette étape de la procédure ? '
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   vous_contacter:
     '#type': webform_section
     '#title': 'VOUS CONTACTER'
@@ -142,35 +137,30 @@ elements: |-
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#markup': '<p><strong>Afin que la cellule d''écoute de l’université puisse donner suite à votre signalement, nous vous remercions de nous communiquer les coordonnées, personnelles ou professionnelles, auxquelles vous souhaitez être contacté.</strong></p>'
+      '#markup': "<p><strong>Afin que la cellule d'écoute de l’université puisse donner suite à votre signalement, nous vous remercions de nous communiquer les coordonnées, personnelles ou professionnelles, auxquelles vous souhaitez être contacté.</strong></p>"
     votre_nom:
       '#type': textfield
       '#title': 'Votre nom'
       '#required': true
       '#required_error': 'Le champ "Votre nom" est requis'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_prenom:
       '#type': textfield
       '#title': 'Votre prénom'
       '#required': true
       '#required_error': 'Le champ "Votre prénom" est requis'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_courriel:
       '#type': email
       '#title': 'Votre courriel'
       '#required': true
       '#required_error': 'Le champ "Votre courriel" est requis'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_numero_de_telephone:
       '#type': tel
       '#title': 'Votre numéro de téléphone'
       '#required': true
       '#required_error': 'Le champ "Votre numéro de téléphone" est requis'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_ufr_composante:
       '#type': textfield
       '#title': 'Votre structure de rattachement'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   markup_11:
     '#type': webform_markup
     '#markup': '<p><em>La confidentialité de votre identité est garantie par l’équipe écoutante de l’université.</em></p>'
@@ -181,7 +171,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#states':
       visible:
         ':input[name="deux_options_possibles_"]':

@@ -11,13 +11,13 @@ archive: false
 id: 10_inscription_lecteurs_exterieu
 title: '10 - Inscription lecteurs extérieurs samedi'
 description: ''
-category: 'Inscription pour entrer à la bibliothèque'
+categories:
+  - 'Inscription pour entrer à la bibliothèque'
 elements: |-
   nom_prenom:
     '#type': webform_name
     '#title': 'Nom, prénom'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#title__access': false
     '#first__title': Prénom
     '#first__required': true
@@ -30,15 +30,13 @@ elements: |-
     '#type': email
     '#title': 'Adresse courriel'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   telephone:
     '#type': tel
     '#title': Téléphone
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
+    '#title': "J'accepte les {conditions de service}."
     '#required': true
     '#terms_content': '<p><span class="field-prefix">En soumettant ce formulaire, j''accepte que les informations saisies soient exploitées dans le cadre de ma demande d''inscription.</span></p>'
   captcha:
@@ -230,7 +228,7 @@ handlers:
   pretbu:
     id: email
     handler_id: pretbu
-    label: 'Confirmation d''envoi du formulaire pour les usagers'
+    label: "Confirmation d'envoi du formulaire pour les usagers"
     notes: ''
     status: true
     conditions: {  }
@@ -268,7 +266,7 @@ handlers:
   notification_d_envoi_de_formulaire_pour_le_sicoco:
     id: email
     handler_id: notification_d_envoi_de_formulaire_pour_le_sicoco
-    label: 'Notification d''envoi de formulaire pour le SICOCO'
+    label: "Notification d'envoi de formulaire pour le SICOCO"
     notes: ''
     status: true
     conditions: {  }

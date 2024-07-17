@@ -11,26 +11,23 @@ archive: false
 id: 0_ceremonie_de_depart_a_la_retra
 title: '0 - Cérémonie de départ à la retraite'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   markup_01:
     '#type': webform_markup
-    '#markup': '<h2>Formulaire d''inscription :</h2>'
+    '#markup': "<h2>Formulaire d'inscription :</h2>"
   nom:
     '#type': textfield
     '#title': Nom
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': 'Prénom '
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
     '#title': 'Courriel '
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   venez_vous_accompagne_maximum_1_personne_:
     '#type': radios
     '#title': 'Venez-vous accompagné ? (maximum 1 personne) '
@@ -41,7 +38,7 @@ elements: |-
     '#required': true
   j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
     '#type': checkbox
-    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
     '#required': true
   captcha:
     '#type': captcha
@@ -50,7 +47,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': Soumettre
     '#update__label': 'Mettre à jour'
 css: ''
@@ -140,6 +137,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -260,7 +259,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la cérémonie de départ à la retraite'
+      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie de départ à la retraite"
       body: "<img alt=\"Bandeau cérémonie de départ à la retraite\" data-align=\"center\" data-entity-type=\"file\" data-entity-uuid=\"41b8eb90-ce8d-4f6b-814a-0188aceb92f0\" src=\"/sites/default/files/inline-images/22-098-Bandea-formulaire-.png\" />\r\n<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>&nbsp;</p>"
       excluded_elements: {  }
       ignore_access: false

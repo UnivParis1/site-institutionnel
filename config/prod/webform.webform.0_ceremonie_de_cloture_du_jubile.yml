@@ -11,20 +11,18 @@ archive: false
 id: 0_ceremonie_de_cloture_du_jubile
 title: '0_Ceremonie de cloture du Jubile'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   nom_:
     '#type': textfield
     '#title': 'Nom '
     '#required': true
     '#required_error': 'Nom est requis'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom_:
     '#type': textfield
     '#title': 'Prénom '
     '#required': true
     '#required_error': 'Prénom est requis'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel_:
     '#type': email
     '#title': 'Courriel '
@@ -43,13 +41,13 @@ elements: |-
     '#type': captcha
   j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
     '#type': checkbox
-    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
+    '#title': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. "
     '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
     '#required': true
-    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis'
+    '#required_error': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis"
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': ENVOYER
 css: ''
 javascript: ''
@@ -66,7 +64,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>En raison d''un trop grand nombre d''inscrits à l''événement, le formulaire est clôturé.</p>'
+  form_close_message: "<p>En raison d'un trop grand nombre d'inscrits à l'événement, le formulaire est clôturé.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -138,6 +136,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -294,7 +294,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique ] Confirmation d''inscription à la cérémonie de clôture du jubilé'
+      subject: "[Réponse automatique ] Confirmation d'inscription à la cérémonie de clôture du jubilé"
       body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Bien cordialement</p>"
       excluded_elements: {  }
       ignore_access: false

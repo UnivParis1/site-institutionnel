@@ -11,7 +11,8 @@ archive: false
 id: demande_de_contact
 title: 'Demande de contact'
 description: '<p>Pour déposer une offre (stage, emploi) ou entrer en contact avec le Pôle Insertion Professionnelle, vous pouvez nous laisser vos coordonnées. Nous vous adresserons un retour par courriel.</p>'
-category: Contact
+categories:
+  - Contact
 elements: |-
   votre_nom_:
     '#type': webform_autocomplete
@@ -20,41 +21,36 @@ elements: |-
     '#title_display': before
     '#required': true
     '#required_error': 'Merci de compléter ce champ'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   nom_de_l_entreprise:
     '#type': textfield
-    '#title': 'Nom de l''entreprise'
+    '#title': "Nom de l'entreprise"
     '#multiple': true
     '#title_display': before
     '#required': true
     '#required_error': 'Merci de compléter ce champ'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_adresse_de_courriel:
     '#type': email
     '#title': 'Votre adresse de courriel'
     '#title_display': before
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   sujet:
     '#type': textfield
     '#title': Sujet
     '#multiple': true
     '#required': true
     '#required_error': 'Merci de compléter ce champ'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   message:
     '#type': textfield
     '#title': Message
     '#multiple': true
     '#required': true
     '#required_error': 'Merci de compléter ce champ'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   piece_s_jointe_s_:
     '#type': managed_file
     '#title': 'Pièce(s) jointe(s)'
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Envoyez le message'
 css: ''
 javascript: ''
@@ -143,6 +139,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
