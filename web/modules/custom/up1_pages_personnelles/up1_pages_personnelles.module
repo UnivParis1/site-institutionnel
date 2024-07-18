@@ -271,6 +271,18 @@ function up1_pages_personnelles_preprocess_node(&$variables) {
         $variables[$key] = $information;
       }
 
+      $title = $node->getTitle();
+      $new_title = $userInformation['supannCivilite'] . ' ' . $userInformation['displayName'];
+
+      if (trim($title) !== trim($new_title)) {
+        $node->set('title', $userInformation['supannCivilite'] . ' ' . $userInformation['displayName']);
+        $node->setNewRevision(TRUE);
+        $node->revision_log = ' Mise à jour du titre suite à modification supannCivilite et / ou displayName dans ldap.';
+        $node->setRevisionCreationTime(REQUEST_TIME);
+        $node->setRevisionUserId($owner->id());
+        $node->save();
+      }
+
       $get_publications = $node->get('field_my_hal_publications')->getValue();
 
       if (!empty($get_publications) && $get_publications[0]['value'] && !empty($userInformation['givenName'])
