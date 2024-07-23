@@ -675,10 +675,9 @@ class WsGroupsController extends ControllerBase
     $page_perso = reset($pp);
 
     if ($page_perso) {
-
       switch ($data_to_get) {
         case 'skills' :
-          if ($settings['skills_lists']) {
+          if (!empty($settings['skills_lists']) && $settings['skills_lists']) {
             if (!empty($terms = $page_perso->get('field_skills')->referencedEntities())) {
               foreach ($terms as $term) {
                 $result .= '<li>' . $term->getName() . '</li>';
@@ -688,7 +687,7 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'skillsIA' :
-          if ($settings['skills_lists']) {
+          if (!empty($settings['skills_lists']) && $settings['skills_lists']) {
             $ia_skills = $page_perso->get('field_ia_skills')->getString();
             $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
             if (!empty($ia_skills)) {
@@ -703,18 +702,18 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'aboutIA' :
-          if ($settings['about_me'] ) {
+          if (!empty($settings['about_me']) && $settings['about_me'] ) {
             $result = (!empty($page_perso->get('field_short_bio')->value)) ? $page_perso->get('field_short_bio')->value : '';
 
           }
           break;
         case 'about' :
-          if ($settings['about_me']) {
+          if (!empty($settings['about_me']) && $settings['about_me']) {
             $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
           }
           break;
         case 'research' :
-          if ($settings['supannEntite_research'] == 1) {
+          if (!empty($settings['supannEntite_research']) && $settings['supannEntite_research'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
             if (!empty($affectation)) {
               $key_search = array_filter($affectation, function ($item) {
@@ -728,7 +727,7 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'pedagogy' :
-          if ($settings['supannEntite_pedagogy'] == 1) {
+          if (!empty($settings['supannEntite_pedagogy']) && $settings['supannEntite_pedagogy'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
             if (!empty($affectation)) {
               $key_search = array_filter($affectation, function ($item) {
@@ -742,7 +741,7 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'doctoralSchool' :
-          if ($settings['supannEntite_doctoralSchool'] == 1) {
+          if (!empty($settings['supannEntite_doctoralSchool']) && $settings['supannEntite_doctoralSchool'] == 1) {
             $affectation = $user['supannEntiteAffectation-all'];
             if (!empty($affectation)) {
               $key_search = array_filter($affectation, function ($item) {
@@ -756,7 +755,7 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'role' :
-          if ($settings['supannRole'] == 1) {
+          if (!empty($settings['supannRole']) && $settings['supannRole'] == 1) {
             if (!empty($user['supannRoleEntite-all'])) {
               $role = $user['supannRoleEntite-all'][0];
               $result = $role['role'] . ' ' . $role['structure']['description'];
@@ -764,7 +763,7 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'discipline' :
-          if ($settings['discipline_enseignement'] == 1) {
+          if (!empty($settings['discipline_enseignement']) && $settings['discipline_enseignement'] == 1) {
             if (!empty($user['info'])) {
               $result = implode(', ', $user['info']);
             }
