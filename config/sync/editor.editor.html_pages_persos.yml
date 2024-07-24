@@ -1,0 +1,60 @@
+uuid: 1c56511d-39b7-4c43-811a-27d946ac9237
+langcode: fr
+status: true
+dependencies:
+  config:
+    - filter.format.html_pages_persos
+  module:
+    - ckeditor5
+format: html_pages_persos
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - heading
+      - bold
+      - italic
+      - '|'
+      - link
+      - blockQuote
+      - code
+      - bulletedList
+      - numberedList
+      - sourceEditing
+  plugins:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_list:
+      properties:
+        reversed: false
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<cite>'
+        - '<dl>'
+        - '<dt>'
+        - '<dd>'
+        - '<a hreflang>'
+        - '<blockquote cite>'
+        - '<ul type>'
+        - '<ol type>'
+        - '<h2 id>'
+        - '<h3 id>'
+        - '<h4 id>'
+        - '<h5 id>'
+        - '<h6 id>'
+    editor_advanced_link_link:
+      enabled_attributes:
+        - aria-label
+        - rel
+        - target
+        - title
+    linkit_extension:
+      linkit_enabled: false
+image_upload: {  }
