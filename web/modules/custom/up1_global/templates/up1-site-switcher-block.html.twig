@@ -53,10 +53,12 @@
     </button>
     <ul>
       <li class="en is-active">
-        <a href="{{ english_version }}" class="language-link" hreflang="en">{{ "English"|t }}</a>
+        <a href="//{{ english_version }}" hreflang="en" class="language-link
+          {% if current_language == 'fr' %}is-active{% endif %}">{{ "English"|t }}</a>
       </li>
       <li class="fr is-active">
-        <a href="{{ french_version }}" class="language-link" hreflang="fr">{{ "French"|t }}</a>
+        <a href="//{{ french_version }}" hreflang="fr" class="language-link
+          {% if current_language == 'fr' %}is-active{% endif %}">{{ "French"|t }}</a>
       </li>
     </ul>
   {% endblock %}
