@@ -154,16 +154,46 @@ function up1_pages_personnelles_entity_base_field_info(EntityTypeInterface $enti
         'weight' => -10,
       ])
       ->setDisplayConfigurable('form', TRUE);
-  
- $fields['trombi_students_enable'] = BaseFieldDefinition::create('boolean')
-    ->setLabel(t('Enable trombinoscope for students'))
-    ->setDescription(t('List of all students displayed as trombinoscope.'))
-    ->setDefaultValue(FALSE)
-    ->setRevisionable(TRUE)
-    ->setDisplayOptions('form', [
-      'weight' => 100,
-    ])
-    ->setDisplayConfigurable('form', TRUE);
+
+    $fields['trombi_students_enable'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Enable trombinoscope for students'))
+      ->setDescription(t('List of all students displayed as trombinoscope.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['display_viva_subject'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Display thesis subject'))
+      ->setDescription(t('Display the subject of student\'s thesis'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['display_viva_director'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Display thesis supervisor\'s name'))
+      ->setDescription(t('Display thesis supervisor\'s name.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['display_doctoral_school'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Display doctoral school label'))
+      ->setDescription(t('Display doctoral school label.'))
+      ->setDefaultValue(FALSE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
   }
 
   return $fields;
@@ -238,6 +268,15 @@ function up1_pages_personnelles_form_site_form_alter(&$form, FormStateInterface 
   }
   if (isset($form['trombi_students_enable'])) {
     $form['trombi_students_enable']['#group'] = 'staff_doc';
+  }
+  if (isset($form['display_viva_subject'])) {
+    $form['display_viva_subject']['#group'] = 'staff_doc';
+  }
+  if (isset($form['display_viva_director'])) {
+    $form['display_viva_director']['#group'] = 'staff_doc';
+  }
+  if (isset($form['display_doctoral_school'])) {
+    $form['display_doctoral_school']['#group'] = 'staff_doc';
   }
 }
 

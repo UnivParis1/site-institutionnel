@@ -163,6 +163,8 @@ class WsGroupsController extends ControllerBase
       $trombi_fields = [
         'supannEntite_doctoralSchool' => 1,
         'supannEntite_research' => 1,
+        'viva_subject' => $site->get('display_viva_subject')->value,
+        'viva_director' => $site->get('display_viva_director')->value
       ];
     }
 
@@ -174,6 +176,27 @@ class WsGroupsController extends ControllerBase
     $site = $this->getCurrentSite();
 
     return $site->get('doc_enabled')->value;
+  }
+
+  private function getDisplayVivaSubject()
+  {
+    $site = $this->getCurrentSite();
+
+    return $site->get('display_viva_subject')->value;
+  }
+
+  private function getDisplayVivaDirector()
+  {
+    $site = $this->getCurrentSite();
+
+    return $site->get('display_viva_director')->value;
+  }
+
+  private function getDisplayDoctoralSchool()
+  {
+    $site = $this->getCurrentSite();
+
+    return $site->get('display_doctoral_school')->value;
   }
 
   private function getSiteId()
@@ -246,6 +269,8 @@ class WsGroupsController extends ControllerBase
     foreach ($users as &$user) {
       $user['doctoralSchool'] = $this->formatTrombiData('doctoralSchool', $user, $site_settings);
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
+      $user['subject'] = $this->formatTrombiData('subject', $user, $site_settings);
+      $user['director'] = $this->formatTrombiData('director', $user, $site_settings);
       $user['photo'] = $user_photo . $user['uid'];
     }
 
@@ -741,7 +766,9 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'doctoralSchool' :
-          if (!empty($settings['supannEntite_doctoralSchool']) && $settings['supannEntite_doctoralSchool'] == 1) {
+          if (!empty($settings['supannEntite_doctoralSchool']) && $settings['supannEntite_doctoralSchool'] == 1
+          && !empty($settings['display_doctoral_school']) && $settings['display_doctoral_school'] == 1 )
+          {
             $affectation = $user['supannEntiteAffectation-all'];
             if (!empty($affectation)) {
               $key_search = array_filter($affectation, function ($item) {
@@ -767,6 +794,16 @@ class WsGroupsController extends ControllerBase
             if (!empty($user['info'])) {
               $result = implode(', ', $user['info']);
             }
+          }
+          break;
+        case 'subject' :
+          if (!empty($settings['subject']) && $settings['subject'] == 1 ) {
+            $result = $page_perso->get('field_thesis_subject')->value;
+          }
+          break;
+        case 'director':
+          if (!empty($settings['director']) && $settings['director'] == 1 ) {
+            $result = $page_perso->get('field_phd_supervisor')->value;
           }
           break;
         default:
