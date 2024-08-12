@@ -163,6 +163,7 @@ class WsGroupsController extends ControllerBase
       $trombi_fields = [
         'supannEntite_doctoralSchool' => 1,
         'supannEntite_research' => 1,
+        'display_school' => $site->get('display_doctoral_school')->value, 
         'viva_subject' => $site->get('display_viva_subject')->value,
         'viva_director' => $site->get('display_viva_director')->value
       ];
@@ -767,7 +768,7 @@ class WsGroupsController extends ControllerBase
           break;
         case 'doctoralSchool' :
           if (!empty($settings['supannEntite_doctoralSchool']) && $settings['supannEntite_doctoralSchool'] == 1
-          && !empty($settings['display_doctoral_school']) && $settings['display_doctoral_school'] == 1 )
+          && !empty($settings['display_school']) && $settings['display_school'] == 1 )
           {
             $affectation = $user['supannEntiteAffectation-all'];
             if (!empty($affectation)) {
@@ -797,12 +798,12 @@ class WsGroupsController extends ControllerBase
           }
           break;
         case 'subject' :
-          if (!empty($settings['subject']) && $settings['subject'] == 1 ) {
+          if (!empty($settings['viva_subject']) && $settings['viva_subject'] == 1 ) {
             $result = $page_perso->get('field_thesis_subject')->value;
           }
           break;
         case 'director':
-          if (!empty($settings['director']) && $settings['director'] == 1 ) {
+          if (!empty($settings['viva_director']) && $settings['viva_director'] == 1 ) {
             $result = $page_perso->get('field_phd_supervisor')->value;
           }
           break;
@@ -821,7 +822,6 @@ class WsGroupsController extends ControllerBase
    */
   public function getParcoursObsia($username) {
 	  if (!$this->maintenancePagePersos()) {
-		  \Drupal::logger('pages_persos')->info('On passe là');
       return new JsonResponse([ 'data' => $this->getObsiaFields($username), 'method' => 'GET', 'status'=> 200]);
     }
     else {
@@ -982,7 +982,6 @@ class WsGroupsController extends ControllerBase
         ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $nids = $query->execute();
-      \Drupal::logger('pages_persos')->info(print_r($nids,1));
       if ($nids) {
 	      foreach ($nids as $nid) {
           $page_perso = Node::load($nid);
