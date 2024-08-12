@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains up1_pages_persos.module
+ */
+ use Drupal\Core\Routing\RouteMatchInterface;
+
+ /** * Implements hook_help(). */
+
+function up1_pages_persos_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+
+    // Main module help for the up1_pages_persos module.
+    case 'help.page.up1_pages_persos':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module for Pages persps') . '</p>';
+      return $output;
+      default:
+  }
+}
+

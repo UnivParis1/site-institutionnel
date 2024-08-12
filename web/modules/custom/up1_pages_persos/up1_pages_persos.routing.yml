@@ -1,0 +1,30 @@
+
+up1_pages_persos.student_has_page_perso:
+  path: '/up1-pages-persos/student-has-page-perso/{username}'
+  defaults:
+    _title: 'Student has page perso'
+    _controller: '\Drupal\up1_pages_persos\Controller\StudentsController::checkWsGroupsPagePerso'
+  requirements:
+    _permission: 'access content'
+
+up1_pages_persos.teacher_has_page_perso:
+  path: '/up1-pages-persos/teacher-has-page-perso/{username}'
+  defaults:
+    _title: 'Teacher has page perso'
+    _controller: '\Drupal\up1_pages_persos\Controller\TeachersController::checkWsGroupsPagePerso'
+  requirements:
+    _permission: 'access content'
+
+up1_pages_persos.comptex_my_page_perso:
+  path: '/up1-pages-persos/modifier-ma-page-perso/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages_persos\Controller\Up1PagesPersosController::editPagePerso'
+  requirements:
+    _permission: 'administer nodes'
+
+up1_pages_persos.autocomplete.person:
+  path: '/admin/up1-pages-persos/autocomplete/person'
+  defaults:
+    _controller: '\Drupal\up1_pages_persos\Controller\Up1PagesPersosController::handleAutocomplete'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,8 @@
+services:
+  up1_pages_persos.pages_persos_gateway:
+    class: Drupal\up1_pages_persos\Gateway\PagesPersosGateway
+    arguments: ['@entity_type.manager']
+
+  up1_pages_persos.pages_persos_manager:
+    class: Drupal\up1_pages_persos\Manager\PagePersoManager
+    arguments: ['@up1_pages_persos.pages_persos_gateway']

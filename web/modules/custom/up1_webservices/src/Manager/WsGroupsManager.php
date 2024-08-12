@@ -26,8 +26,11 @@ class WsGroupsManager {
 
   public function getUsersList($affiliation, $siteId = '', $settings_trombinoscope = NULL): array
   {
-    // TODO: Implement getUsersList() method.
+    return [];
   }
 
+  public function getUserAttrs($username, $attrs, $affiliation = NULL): array {
+    return $this->wsGroupsGateway->getUserAttrs($username, $attrs, $affiliation);
+  }
 
 }
