@@ -51,6 +51,7 @@ final class SearchPagePersoForm extends FormBase {
       '#attributes' => [
         'class' => ['pages-persos-autocomplete'],
       ],
+      '#description' => $this->t("Enter the person's first or last name and select from the list. You will then be automatically redirected to the personal page.")
     ];
 
     // Add module's library

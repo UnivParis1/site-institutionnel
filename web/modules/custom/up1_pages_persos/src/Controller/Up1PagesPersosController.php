@@ -76,7 +76,7 @@ final class Up1PagesPersosController extends ControllerBase {
           $label = "<span class='userItem'><span class='match'>$title</span>&nbsp;";
           if ($user_attrs['eduPersonPrimaryAffiliation'] == 'student' ) {
             $label .=
-              "<span class='details'>" . implode(', ', $user_attrs['supannEntiteAffectation']) ."</span>";
+              "<span class='details'>" . $this->t('Student') . " - " . implode(', ', $user_attrs['supannEntiteAffectation']) ."</span>";
           }
           else {
             $employeeType =  $user_attrs['employeeType'][0];
