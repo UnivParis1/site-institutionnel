@@ -58,8 +58,8 @@ class Up1StartEndDateRangeFormatter extends DateTimeCustomFormatter {
               '#markup' => "<div class='event-date'>
               <div class='start-date'>
                 <span class=''>" . t("From: ") . "</span> " .
-                $start_date->format('l j F Y') . "<i class='fa fa-arrow-right'>
-                <span class='sr-only'>" . t( ' at ') . "</span></i> $start_hour
+                $start_date->format('l j F Y') . "<i title='" . $this->t(' jusqu\'à ')  . "' class='fa fa-arrow-right'>
+               </i> $start_hour
               </div>
               <div class='end-date'>
               <span class=''>" . t("To: ") . "</span> " .
@@ -80,7 +80,7 @@ class Up1StartEndDateRangeFormatter extends DateTimeCustomFormatter {
             'date' => [
               '#markup' => "<div>" . $start_date->format('l j F Y') . "</div>
               <div><span>$start_hour</span>
-              <i class='fa fa-arrow-right'><span class='sr-only'>" .  $this->t(' at ') . "</span></i>
+              <abbr class='fa fa-arrow-right' title='à'></abbr>
               <span>$end_hour</span></div>",
             ],
           ];

@@ -28,6 +28,12 @@
                     {% if user.doctoralSchool %}<p class="trombi-affectation">
                       {{ user.doctoralSchool | raw }} </p>
                     {% endif %}
+                    {% if user.subject %}
+                     <p class="trombi-thesis"><span>{{ "Subject of thesis: " |t }}</span>{{ user.subject | raw }} </p>
+                    {% endif %}
+                    {% if user.director %}
+                     <p class="trombi-thesis"><span>{{ "Director of thesis: " |t }}</span>{{ user.director | raw }} </p>
+                    {% endif %}
                     {% if user.research %}<p class="trombi-affectation">
                       {{ user.research | raw }} </p>
                     {% endif %}

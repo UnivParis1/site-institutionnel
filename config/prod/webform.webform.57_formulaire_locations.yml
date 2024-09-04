@@ -203,11 +203,8 @@ elements: |-
     '#type': webform_markup
     '#states':
       visible:
-        - ':input[name="vous_etes"]':
-            value: 'ETUDIANT OU ASSOCIATION PARIS 1'
-        - xor
-        - ':input[name="un_tournage"]':
-            value: 'UN TOURNAGE'
+        ':input[name="un_tournage"]':
+          value: 'UN TOURNAGE'
     '#markup': '<p><strong>Important : votre demande doit se faire au minimum 2 mois avant la date de tournage.</strong></p>'
   demandeur_evenement_organisme:
     '#type': container
@@ -332,10 +329,6 @@ elements: |-
       '#title': "Nombre d'espaces souhaités"
       '#required': true
       '#required_error': "Nombre d'espaces souhaités est requis"
-      '#states':
-        visible:
-          ':input[name="_salles_souhaitees_[]"]':
-            filled: true
     nombre_de_participants_sur_site:
       '#type': textarea
       '#title': 'Nombre de personnes attendues  (invités et organisateurs)'
@@ -598,28 +591,31 @@ handlers:
   email_aux_organisateurs_1:
     id: email
     handler_id: email_aux_organisateurs_1
-    label: 'Email aux organisateurs'
+    label: 'Email aux organisateurs - demande tournage'
     notes: ''
     status: true
-    conditions: {  }
+    conditions:
+      enabled:
+        ':input[name="un_tournage"]':
+          value: 'UN TOURNAGE'
     weight: 0
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel_:raw]'
+      to_mail: locations@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: _default
+      from_mail: '[webform_submission:values:courriel_tournage:raw]'
       from_options: {  }
-      from_name: _default
+      from_name: '[webform_submission:values:societe_de_production:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Demande de location'
+      subject: 'Demande de location - tournage'
       body: _default
       excluded_elements: {  }
       ignore_access: true
@@ -660,6 +656,73 @@ handlers:
       body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande de location a bien été enregistrée.<br />\r\nNous vous recontacterons dans les meilleurs délais.</p>\r\n\r\n<p>Détails de la demande :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs_demande_evenement:
+    id: email
+    handler_id: email_aux_organisateurs_demande_evenement
+    label: 'Email aux organisateurs - demande evenement'
+    notes: ''
+    status: true
+    conditions:
+      enabled:
+        ':input[name="un_tournage"]':
+          value: 'UN EVENEMENT'
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: locations@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel_evenement_organisme:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:societe_ou_association_evenement_organisme:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Demande de location - évènement'
+      body: _default
+      excluded_elements:
+        un_tournage: un_tournage
+        societe_de_production: societe_de_production
+        adresse_de_l_organisme_: adresse_de_l_organisme_
+        reference_de_l_organisme_siret_: reference_de_l_organisme_siret_
+        telephone_: telephone_
+        courriel_tournage: courriel_tournage
+        directeur_de_societe_: directeur_de_societe_
+        telephone_directeur_de_societe: telephone_directeur_de_societe
+        courriel_directeur_de_societe: courriel_directeur_de_societe
+        regisseur_ou_contact_: regisseur_ou_contact_
+        telephone_regisseur_ou_contact: telephone_regisseur_ou_contact
+        courriel_regisseur: courriel_regisseur
+        type: type
+        titre_du_projet: titre_du_projet
+        realisateur: realisateur
+        diffuseur: diffuseur
+        acteurs_principaux: acteurs_principaux
+        synopsis: synopsis
+        type_decors_recherches: type_decors_recherches
+        avez_vous_des_precisions_a_apporter: avez_vous_des_precisions_a_apporter
+        date_s_ou_periode_s_de_tournage_envisagee_s_: date_s_ou_periode_s_de_tournage_envisagee_s_
+        nombre_de_journee_s_de_tournage_envisagee_s_: nombre_de_journee_s_de_tournage_envisagee_s_
+        avez_vous_des_questions_: avez_vous_des_questions_
+        nombre_de_personne_de_l_equipe_technique_: nombre_de_personne_de_l_equipe_technique_
+        nombre_d_acteurs_: nombre_d_acteurs_
+        nombre_de_figurants_: nombre_de_figurants_
+        markup: markup
+      ignore_access: true
       exclude_empty: true
       exclude_empty_checkbox: false
       exclude_attachments: false

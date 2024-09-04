@@ -1,0 +1,48 @@
+uuid: 4099e0a6-a3ba-4a56-9306-3fd0cd3dbd85
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.cke_media_resize_small
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - image.style.cke_media_resize_small
+    - media.type.image
+  module:
+    - image
+_core:
+  default_config_hash: tPHds8IMvNZaOSlQ-JaYnyYu9n1i5RrWlBZuzObYedY
+id: media.image.cke_media_resize_small
+targetEntityType: media
+bundle: image
+mode: cke_media_resize_small
+content:
+  field_media_image:
+    type: image
+    label: visually_hidden
+    settings:
+      image_link: ''
+      image_style: cke_media_resize_small
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  site_id:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_credits: true
+  field_legende: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

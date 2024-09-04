@@ -132,3 +132,31 @@ function up1_pages_personnelles_update_8006(&$sandbox){
   $definition_manager = \Drupal::entityDefinitionUpdateManager();
   $definition_manager->installFieldStorageDefinition('trombi_students_enable', 'site', 'site', $trombi_students_enable);
 }
+
+/**
+ * Install display_viva_director, display_viva_director, display_doctoral_school fields.
+ */
+function up1_pages_personnelles_update_8007(&$sandbox) {
+  $display_viva_subject = BaseFieldDefinition::create('boolean')
+    ->setLabel('Display thesis subject')
+    ->setDescription('Display the subject of student\'s thesis')
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $display_viva_director = BaseFieldDefinition::create('boolean')
+    ->setLabel('Display thesis supervisor\'s name')
+    ->setDescription('Display thesis supervisor\'s name')
+    ->setDefaultValue(FALSE)
+    ->setRevisionable(TRUE);
+
+  $display_doctoral_school = BaseFieldDefinition::create('boolean')
+    ->setLabel('Display doctoral school label')
+    ->setDescription('Display doctoral school label')
+    ->setDefaultValue(TRUE)
+    ->setRevisionable(TRUE);
+
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition_manager->installFieldStorageDefinition('display_viva_subject', 'site', 'site', $display_viva_subject);
+  $definition_manager->installFieldStorageDefinition('display_viva_director', 'site', 'site', $display_viva_director);
+  $definition_manager->installFieldStorageDefinition('display_doctoral_school', 'site', 'site', $display_doctoral_school);
+}
