@@ -5,13 +5,13 @@
  * Contains up1_global.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Form\FormStateInterface;
-use \Drupal\node\NodeInterface;
-use Drupal\Core\Url;
-
-
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use \Drupal\node\NodeInterface;
 
 /**
  * Implements hook_help().
@@ -116,4 +116,19 @@ function up1_global_cron() {
     $state_service->set('up1_global.cache_cron_daily', $tomorrow);
     Cache::invalidateTags(['time:daily']);
   }
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function mymodule_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  if (!$node->hasTranslation($langcode)) {
+    $access = AccessResult::forbidden();
+  }
+  else {
+    $access = AccessResult::neutral();
+  }
+  $access->addCacheableDependency($node);
+  return $access;
 }
