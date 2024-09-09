@@ -121,7 +121,7 @@ function up1_global_cron() {
 /**
  * Implements hook_node_access().
  */
-function mymodule_node_access(NodeInterface $node, $op, AccountInterface $account) {
+function up1_global_node_access(NodeInterface $node, $op, AccountInterface $account) {
   $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
   if (!$node->hasTranslation($langcode)) {
     $access = AccessResult::forbidden();
