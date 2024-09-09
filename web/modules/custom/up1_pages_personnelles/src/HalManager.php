@@ -3,6 +3,8 @@
 namespace Drupal\up1_pages_personnelles;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use GuzzleHttp\Exception\RequestException;
+use Drupal\Core\Cache\CacheBackendInterface;
 
 class HalManager implements HalInterface {
 
@@ -19,43 +21,73 @@ class HalManager implements HalInterface {
    *
    * @return array|mixed
    */
-  public function getUserPublications($method, $firstname, $lastname, $id_hal = NULL) {
+   public function getUserPublications($method, $firstname, $lastname, $id_hal = NULL) {
 
-    switch ($method) {
-      case 'idhal':
-        $author = "idHal=$id_hal";
-        break;
-      case 'nomprenom':
-        $firstname = $this->removeSpecialChars($firstname);
-        $lastname = $this->removeSpecialChars($lastname);
-        $author = "auteur_exp=$firstname+$lastname&collection_exp=UNIV-PARIS1";
-        break;
+   $cache_key = "user_publications:" . md5($method . $firstname . $lastname . $id_hal);
+
+    //Récupération du cache
+    $cache = \Drupal::cache()->get($cache_key);
+    if ($cache) {
+      return $cache->data;
     }
-    $config = \Drupal::config('up1_pages_personnelles.settings');
-    $ws = $config->get('url_hal_api');
-
-    $searchUser = "$ws?$author";
-
-    $params = [
-      "CB_auteur" => "oui",
-      "CB_titre" => "oui",
-      "CB_typdoc" => "oui",
-      "CB_article" => "oui",
-      "CB_pubmedId" => "oui",
-      "langue" => "Francais",
-      "tri_exp" => "annee_publi",
-      "tri_exp2" => "typdoc",
-      "tri_exp3" => "date_publi",
-      "ordre_aff" => "TA",
-      "Fen" => "Aff",
-    ];
-
-    $url = $searchUser . '&' . http_build_query($params) . "&noheader";
-    if (file_get_contents($url)) {
-      $publications = file_get_contents($url);
-    }
-    else
+    else {
       $publications = FALSE;
+
+      switch ($method) {
+        case 'idhal':
+          $author = "idHal=$id_hal";
+          break;
+        case 'nomprenom':
+          $firstname = $this->removeSpecialChars($firstname);
+          $lastname = $this->removeSpecialChars($lastname);
+          $author = "auteur_exp=$firstname+$lastname&collection_exp=UNIV-PARIS1";
+          break;
+      }
+      $config = \Drupal::config('up1_pages_personnelles.settings');
+      $ws = $config->get('url_hal_api');
+
+      $searchUser = "$ws?$author";
+
+      $params = [
+        "CB_auteur" => "oui",
+        "CB_titre" => "oui",
+        "CB_typdoc" => "oui",
+        "CB_article" => "oui",
+        "CB_pubmedId" => "oui",
+        "langue" => "Francais",
+        "tri_exp" => "annee_publi",
+        "tri_exp2" => "typdoc",
+        "tri_exp3" => "date_publi",
+        "ordre_aff" => "TA",
+        "Fen" => "Aff",
+      ];
+
+      $url = $searchUser . '&' . http_build_query($params) . "&noheader";
+
+      try {
+        $response = \Drupal::httpClient()->get($url, [
+          'timeout' => 15,
+          'connect_timeout' => 10, 
+        ]);
+
+        if ($response->getStatusCode() == 200) {
+          $publications = $response->getBody()->getContents();
+          \Drupal::cache()->set($cache_key, $publications, time() + 86400);
+        } else {
+          \Drupal::logger('up1_pages_personnelles')->error('Error while fetching HAL data for user : @user', [
+            '@user' => $firstname . ' ' . $lastname
+          ]);
+        }
+      } catch (ConnectException $e) {
+        \Drupal::logger('up1_pages_personnelles')->error('Connexion error for user : @user', [
+          '@user' => $firstname . ' ' . $lastname
+        ]);
+      } catch (RequestException $e) {
+        \Drupal::logger('up1_pages_personnelles')->error('CError while fetching HAL data for user : @user', [
+          '@user' => $firstname . ' ' . $lastname
+        ]);
+      } 
+    }
 
     return $publications;
   }
