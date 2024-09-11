@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Queue\QueueWorkerManager;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
@@ -41,6 +42,11 @@ class WsGroupsController extends ControllerBase
    * @var QueueWorkerManager
    */
   protected $queueManager;
+
+  /**
+   * @var $requestStack;
+   */ 
+  protected $request_stack;
 
   /**
    * @param QueueFactory $queue
@@ -842,12 +848,13 @@ class WsGroupsController extends ControllerBase
    */
   public function setParcoursObsia($username) {
     if (!$this->maintenancePagePersos()) {
+      $request = $this->requestStack->getCurrentRequest();
       $data = [];
 
-      $data['bio'] = \Drupal::request()->query->get('bio');
-      $data['formations'] = \Drupal::request()->query->get('formations');
-      $data['projets'] = \Drupal::request()->query->get('projets');
-      $data['skills'] = \Drupal::request()->query->get('skills');
+      $data['bio'] = $request->query->get('bio');
+      $data['formations'] = $request->query->get('formations');
+      $data['projets'] = $request->query->get('projets');
+      $data['skills'] = $request->query->get('skills');
 
       $message = $this->updateObsiaFields($username, $data);
     }
