@@ -14,5 +14,6 @@ interface PagesPersosGatewayInterface {
   public function hasPagePerso(string $username);
   public function getPagePerso(string $username);
   public function getPagesPersosAutocomplete($query): array;
+  public function getUnassignedUsers(): array;
 
 }

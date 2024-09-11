@@ -4,9 +4,16 @@
  * @file
  * Contains up1_pages_persos.module
  */
- use Drupal\Core\Routing\RouteMatchInterface;
 
- /** * Implements hook_help(). */
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Queue\QueueFactory;
+use Drupal\Core\Queue\SuspendQueueException;
+use Drupal\node\NodeInterface;
+use Drupal\up1_pages_persos\Entity\Node\PagePersoInterface;
+use \Drupal\up1_pages_persos\Manager\PagePersoManager;
+use Drupal\up1_webservices\Manager\WsGroupsManager;
+
+/** * Implements hook_help(). */
 
 function up1_pages_persos_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
@@ -19,5 +26,90 @@ function up1_pages_persos_help($route_name, RouteMatchInterface $route_match) {
       return $output;
       default:
   }
+}
+
+function up1_pages_persos_add_missing_enseignant_doctorant_role($wsgroups_manager, $pages_persos_manager) {
+
+  $users = $pages_persos_manager->getUnassignedUsers();
+  if (count($users) > 0) {
+    $nb = 0;
+    foreach ($users as $user) {
+      $username = $user->get('name')->value;
+      if ($wsgroups_manager->hasPagePersoInWsGroups($username)) {
+        $user->addRole('enseignant_doctorant');
+        $user->save();
+        $nb++;
+      }
+    }
+    \Drupal::logger('up1_pages_persos')
+      ->notice('up1_pages_persos_add_missing_enseignant_doctorant_role. 
+      @nb utilisateurs ont obtenu le rôle enseignant_doctorant', [
+        '@nb' => $nb
+      ]);
+  }
+  else {
+    \Drupal::logger('up1_pages_persos')
+      ->notice('Aucun utilisateur à mettre à jour');
+  }
+}
+
+/*
+function up1_pages_persos_remove_role_enseignant_doctorant($wsgroups_manager, $pages_persos_manager) {
+
+  $users = $pages_persos_manager->getEnseignantsDoctorants();
+  if (count($users) > 0) {
+    $nb = 0;
+    foreach ($users as $user) {
+      $username = $user->get('name')->value;
+      if (!$wsgroups_manager->hasPagePersoInWsGroups($username)) {
+        if ($user)
+        $user->removeRole('enseignant_doctorant');
+        $user->save();
+        $user_page_persos = $pages_persos_manager->getPagePersoWebsite($username);
+        foreach ($user_page_persos as $user_page_perso) {
+          $user_page_perso->set(PagePersoInterface::FIELD_STATUS, NodeInterface::NOT_PUBLISHED);
+          $user_page_perso->save();
+        }
+        $nb++;
+      }
+    }
+    \Drupal::logger('up1_pages_persos')
+      ->notice('up1_pages_persos_remove_role_enseignant_doctorant exécuté. 
+      @nb utilisateurs ont perdu le rôle enseignant_doctorant. La page associée désactivée.', [
+        '@nb' => $nb
+      ]);
+  }
+  else {
+    \Drupal::logger('up1_pages_persos')
+      ->notice('Aucun utilisateur à mettre à jour.');
+  }
+}*/
+
+/**
+* Ajoute les utilisateurs avec le rôle enseignant_doctorant dans une file d'attente.
+ */
+function up1_pages_persos_enqueue_users_for_role_removal($wsgroups_manager, $pages_persos_manager) {
+  // Obtenir la file d'attente.
+$queue = \Drupal::service('queue')->get('up1_remove_enseignant_doctorant_role_queue');
+
+  // Obtenir les utilisateurs avec le rôle enseignant_doctorant.
+  $users = $pages_persos_manager->getEnseignantsDoctorants();
+
+  // Ajouter chaque utilisateur à la file d'attente.
+  foreach ($users as $user) {
+    $username = $user->get('name')->value;
+    $queue->createItem(['uid' => $user->id(), 'username' => $username]);
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function up1_pages_persos_cron() {
+  $wsgroups_manager = WsGroupsManager::me();
+  $pages_persos_manager = PagePersoManager::me();
+
+  up1_pages_persos_remove_role_enseignant_doctorant($wsgroups_manager, $pages_persos_manager);
+  //up1_pages_persos_add_missing_enseignant_doctorant_role($wsgroups_manager, $pages_persos_manager);
 }
 

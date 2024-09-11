@@ -6,8 +6,14 @@ use Drupal\up1_webservices\Gateway\WsGroupsGatewayInterface;
 
 class WsGroupsManager {
 
+  const SERVICE_NAME = 'up1_webservices.wsgroups_manager';
+
   public function __construct(
     private readonly WsGroupsGatewayInterface $wsGroupsGateway) {
+  }
+
+  public static function me(): self {
+    return \Drupal::service(self::SERVICE_NAME);
   }
 
   public function getUserInformation($username, $affiliation) {

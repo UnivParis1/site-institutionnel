@@ -11,17 +11,19 @@ use Drupal\up1_pages_persos\Gateway\PagesPersosGatewayInterface;
  */
 final class PagePersoManager {
 
-  const SERVICE_NAME = 'up1_pages_persos.pages_persos_gateway';
+  const SERVICE_NAME = 'up1_pages_persos.pages_persos_manager';
 
   public function __construct(
     private readonly PagesPersosGatewayInterface $pagesPersosGateway
   ) {
   }
 
-  public function me(): self {
+  public static function me(): self {
     return \Drupal::service(self::SERVICE_NAME);
   }
-  public function updatePagesPersosStatuses() {}
+  public function updatePagePersosStatus($username, $from_status, $to_status) {
+    $this->pagesPersosGateway->updatePagePersoStatus($username, $from_status, $to_status);
+  }
 
   public function isPagePersoPublished($username) {
     $this->pagesPersosGateway->isPagePublished($username);
@@ -37,5 +39,13 @@ final class PagePersoManager {
 
   public function getPagesPersosAutocomplete($query) {
     return $this->pagesPersosGateway->getPagesPersosAutocomplete($query);
+  }
+
+  public function getUnassignedUsers() {
+    return $this->pagesPersosGateway->getUnassignedUsers();
+  }
+
+  public function getEnseignantsDoctorants() {
+    return $this->pagesPersosGateway->getEnseignantsDoctorants();
   }
 }

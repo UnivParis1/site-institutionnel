@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\node\NodeInterface;
 use Drupal\up1_pages_persos\Entity\Node\PagePersoInterface;
+use Drupal\user\Entity\User;
 
 final class PagesPersosGateway implements PagesPersosGatewayInterface {
 
@@ -94,7 +95,6 @@ final class PagesPersosGateway implements PagesPersosGatewayInterface {
   }
 
   public function getPagesPersosAutocomplete($query): array {
-
     $query = $this->getPagesPersosBaseQuery()
       ->condition('type', 'page_personnelle')
       ->accessCheck(TRUE)
@@ -108,4 +108,32 @@ final class PagesPersosGateway implements PagesPersosGatewayInterface {
     return $nid ? $this->nodeStorage->loadMultiple($nid) : [];
   }
 
+  public function getUnassignedUsers(): array {
+    $query = \Drupal::entityQuery('user')
+      ->accessCheck(FALSE)
+      ->condition('status', 1);
+    $query->notExists('roles');
+
+    $uids = $query->execute();
+    $users = User::loadMultiple($uids);
+
+    return $users ?: [];
+  }
+
+  public function getEnseignantsDoctorants(): array {
+    $query = \Drupal::entityQuery('user')
+      ->accessCheck(FALSE)
+      ->condition('status', 1)
+    ->condition('roles', 'enseignant_doctorant');
+
+    $uids = $query->execute();
+    $users = User::loadMultiple($uids);
+
+    return $users ?: [];
+  }
+
+  public function updatePagePersoStatus($username, $from_status, $to_status) {
+
+
+  }
 }
