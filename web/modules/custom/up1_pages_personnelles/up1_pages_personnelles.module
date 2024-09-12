@@ -5,18 +5,19 @@
  * Contains up1_pages_personnelles.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Form\FormStateInterface;
-use \Drupal\up1_pages_personnelles\ComptexManager;
-use \Drupal\up1_pages_personnelles\HalManager;
-use \Drupal\user\Entity\User;
-use \Drupal\User\UserInterface;
-use \Drupal\Node\NodeInterface;
-use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
-use \Drupal\Core\Url;
-use \Drupal\Core\Link;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\up1_pages_personnelles\ComptexManager;
+use Drupal\up1_pages_personnelles\WsGroupsService;
+use Drupal\up1_pages_personnelles\HalManager;
+use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
 
 /**
  * Implements hook_help().
@@ -522,5 +523,50 @@ function up1_pages_personnelles_theme() {
       ]
     ]
   ];
+}
+
+/**
+ * Cron function to update the pages personnelles.
+ */
+function up1_pages_personnelles_cron()
+{
+  $wsgroups_service = WsGroupsService::me();
+  $query = \Drupal::entityQuery('user')
+    ->accessCheck(FALSE)
+    ->condition('status', 1);
+  $query->notExists('roles');
+
+  $uids = $query->execute();
+  $users = User::loadMultiple($uids);
+
+  if (count($users) > 0) {
+    // Tableau pour stocker les noms d'utilisateur.
+    $usernames = [];
+
+    // Parcourir chaque utilisateur pour obtenir le nom d'utilisateur.
+    foreach ($users as $user) {
+      // Récupérer le nom d'utilisateur en utilisant le champ 'name'.
+      $usernames[$user->id()] = $user->get('name')->value;
+    }
+
+    $nb = 0;
+    foreach ($usernames as $id => $username) {
+      if ($wsgroups_service->userHasPagePersoWsGroups($username)) {
+        $user = User::load($id);
+        $user->addRole('enseignant_doctorant');
+        $user->save();
+        $nb++;
+      }
+    }
+    \Drupal::logger('up1_pages_persos')
+      ->notice('up1_pages_persos_add_missing_enseignant_doctorant_role.
+      @nb utilisateurs ont obtenu le rôle enseignant_doctorant', [
+        '@nb' => $nb
+      ]);
+  }
+  else {
+    \Drupal::logger('up1_pages_persos')
+      ->notice('Aucun utilisateur à mettre à jour');
+  }
 }
 
