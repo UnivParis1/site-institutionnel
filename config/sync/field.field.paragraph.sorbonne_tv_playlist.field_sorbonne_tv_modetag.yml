@@ -1,0 +1,29 @@
+uuid: 8df3ecc8-6e5b-4c8b-bd1e-62ece63bbbfb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_sorbonne_tv_modetag
+    - paragraphs.paragraphs_type.sorbonne_tv_playlist
+    - taxonomy.vocabulary.tag_sorbonne_tv
+id: paragraph.sorbonne_tv_playlist.field_sorbonne_tv_modetag
+field_name: field_sorbonne_tv_modetag
+entity_type: paragraph
+bundle: sorbonne_tv_playlist
+label: 'Sorbonne TV - Tag'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tag_sorbonne_tv: tag_sorbonne_tv
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

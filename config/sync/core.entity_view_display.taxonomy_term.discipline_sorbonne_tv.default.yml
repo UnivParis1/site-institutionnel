@@ -1,0 +1,44 @@
+uuid: 33cb26a4-ab5a-4f19-8864-a9fa21010dae
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.discipline_sorbonne_tv.field_icon_discipline
+    - field.field.taxonomy_term.discipline_sorbonne_tv.field_id_discipline
+    - taxonomy.vocabulary.discipline_sorbonne_tv
+  module:
+    - text
+id: taxonomy_term.discipline_sorbonne_tv.default
+targetEntityType: taxonomy_term
+bundle: discipline_sorbonne_tv
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_icon_discipline:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_id_discipline:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  include_master: true
+  langcode: true
+  search_api_excerpt: true
+  site_all: true
+  site_id: true

@@ -1,0 +1,243 @@
+uuid: 33d88a4d-4126-4561-9f4b-a10594965f38
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.page_sorbonne_tv.body
+    - field.field.node.page_sorbonne_tv.field_annee_depot
+    - field.field.node.page_sorbonne_tv.field_api_sync
+    - field.field.node.page_sorbonne_tv.field_collections
+    - field.field.node.page_sorbonne_tv.field_date_maj
+    - field.field.node.page_sorbonne_tv.field_discipline
+    - field.field.node.page_sorbonne_tv.field_duree
+    - field.field.node.page_sorbonne_tv.field_id_video
+    - field.field.node.page_sorbonne_tv.field_langue
+    - field.field.node.page_sorbonne_tv.field_media
+    - field.field.node.page_sorbonne_tv.field_metatags
+    - field.field.node.page_sorbonne_tv.field_paragraphs
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_date_depot
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_langue
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_mosaic_filters
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_mosaic_hidedescr
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_share_image
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_type
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_video_audio
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_video_directedby
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_video_slug
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_video_trans
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_video_vtt
+    - field.field.node.page_sorbonne_tv.field_sorb_tv_video_with
+    - field.field.node.page_sorbonne_tv.field_sorbonne_tv_time_lapse
+    - field.field.node.page_sorbonne_tv.field_tag_video
+    - field.field.node.page_sorbonne_tv.field_url_video
+    - field.field.node.page_sorbonne_tv.field_video_type
+    - image.style.sorbonne_tv_video_thumb
+    - node.type.page_sorbonne_tv
+  module:
+    - datetime
+    - entity_reference_revisions
+    - field_formatter_class
+    - like
+    - link
+    - media
+    - options
+    - text
+    - user
+id: node.page_sorbonne_tv.default
+targetEntityType: node
+bundle: page_sorbonne_tv
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: body-field
+    weight: 11
+    region: content
+  field_annee_depot:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_collections:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_date_maj:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_discipline:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_duree:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_langue:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_media:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: sorbonne_tv_video_thumb
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: stv_ct_img
+    weight: 2
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: stv-prg-field
+    weight: 14
+    region: content
+  field_sorb_tv_date_depot:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  field_sorb_tv_langue:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 17
+    region: content
+  field_sorb_tv_mosaic_filters:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 19
+    region: content
+  field_sorb_tv_video_directedby:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      field_formatter_class:
+        class: 'video_main_bottom_field video-directedby'
+    weight: 12
+    region: content
+  field_sorb_tv_video_slug:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_sorb_tv_video_trans:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_sorb_tv_video_with:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      field_formatter_class:
+        class: 'video_main_bottom_field video-directedby'
+    weight: 13
+    region: content
+  field_tag_video:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_url_video:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_video_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  likes:
+    type: like_default
+    label: visually_hidden
+    settings:
+      default_state: ''
+      liked_state: ''
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 18
+    region: content
+hidden:
+  field_api_sync: true
+  field_id_video: true
+  field_metatags: true
+  field_sorb_tv_mosaic_hidedescr: true
+  field_sorb_tv_share_image: true
+  field_sorb_tv_type: true
+  field_sorb_tv_video_audio: true
+  field_sorb_tv_video_vtt: true
+  field_sorbonne_tv_time_lapse: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  site_id: true

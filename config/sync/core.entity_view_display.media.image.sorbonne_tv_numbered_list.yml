@@ -1,0 +1,42 @@
+uuid: a46e5e63-6358-488f-b3b1-83bb89289077
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.sorbonne_tv_numbered_list
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - media.type.image
+    - responsive_image.styles.sorbonne_tv_thumb_numbered_list
+  module:
+    - field_formatter_class
+    - responsive_image
+id: media.image.sorbonne_tv_numbered_list
+targetEntityType: media
+bundle: image
+mode: sorbonne_tv_numbered_list
+content:
+  field_media_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: sorbonne_tv_thumb_numbered_list
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: media-img-field
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_credits: true
+  field_legende: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

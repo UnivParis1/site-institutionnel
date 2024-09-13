@@ -1,0 +1,30 @@
+uuid: f6aae57a-56c9-444b-ae9a-9501cbf231b3
+langcode: en
+status: true
+dependencies:
+  module:
+    - sorbonne_tv
+title: 'Sorbonne TV - Synchronisation Multimedia'
+id: sorbonne_tv__sync_multimedia
+weight: 0
+module: sorbonne_tv
+callback: sorbonne_tv_syncMultimedia_cronjob
+scheduler:
+  id: crontab
+  configuration:
+    rules:
+      - '0 23 * * *'
+    catch_up: 0
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

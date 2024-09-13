@@ -1,0 +1,35 @@
+uuid: 3cb3c3ba-e8e9-49ac-954a-19e1930b7ca5
+langcode: fr
+status: true
+dependencies:
+  module:
+    - micro_path
+    - node
+  theme:
+    - sorbonne_tv_lmc
+id: sorbonne_tv_lmc_ongletstabs
+theme: sorbonne_tv_lmc
+region: highlighted
+weight: 0
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Onglets (Tabs)'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility:
+  site_type:
+    id: site_type
+    negate: false
+    context_mapping: {  }
+    site_type: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      page_sorbonne_tv: page_sorbonne_tv
