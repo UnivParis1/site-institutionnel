@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('<front>') }}">
+            <img src="/{{ base_path ~ directory }}/assets/img/logo-header.svg" alt="Sorbonne TV" width="254" height="45">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+            {% block content %}
+                {{ content }}
+            {% endblock %}
+
+            {% if search_form_blk %}
+                {{ search_form_blk }}
+            {% endif %}
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,34 @@
+
+
+{% if liens|length > 0 %}
+      <ul class="nav justify-content-center">
+      {% for lien in liens %}
+        {% if "facebook" in lien.uri %}
+          {% set class = "bi bi-facebook" %}
+        {% elseif "x.com" in lien.uri %}
+          {% set class = "bi bi-twitter-x" %}
+        {% elseif "linkedin" in lien.uri %}
+          {% set class = "bi bi-linkedin" %}
+        {% elseif "youtube" in lien.uri %}
+          {% set class = "bi bi-youtube" %}
+        {% elseif "youtu.be" in lien.uri %}
+          {% set class = "bi bi-youtube" %}
+        {% elseif "instagram" in lien.uri %}
+          {% set class = "bi bi-instagram" %}
+        {% elseif "viadeo" in lien.uri %}
+          {% set class = "fab fa-viadeo" %}
+        {% elseif "hypotheses" in lien.uri %}
+          {% set class = "icon-rs up1-hypotheses" %}
+        {% elseif "hal-paris1" in lien.uri %}
+          {% set class = "icon-rs up1-hal" %}
+        {% elseif "hal.science" in lien.uri %}
+          {% set class = "icon-rs up1-hal" %}
+        {% elseif "archives-ouvertes" in lien.uri %}
+          {% set class = "icon-rs up1-hal" %}
+        {% endif %}
+        <li class="nav-item social-nav-item">
+            <a href="{{ lien.uri }}" class="{{ class }} nav-link" title="{{ lien.title }}" target="_blank"></a>
+        </li>
+      {% endfor %}
+    </ul>
+{% endif %}

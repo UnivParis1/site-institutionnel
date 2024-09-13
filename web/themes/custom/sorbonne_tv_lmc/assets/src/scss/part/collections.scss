@@ -1,0 +1,136 @@
+.page_sorbonne_tv_collection {
+  .page-title {
+    margin-bottom: 32px;
+
+    &.bullet-title {
+      .title-bullet {
+        background-color: $danger;
+      }
+    }
+  }
+
+  .stv_ct_img_wrapper {
+    margin-bottom: 32px;
+    border-radius: 16px;
+    overflow: hidden;
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 0;
+
+      &.col-lg-6 {
+        padding-right: 16px;
+      }
+    }
+
+    picture, img {
+      border-radius: 16px !important;
+      overflow: hidden;
+    }
+  }
+
+  .collection-body-wrapper {
+    border-bottom: 1px solid $light;
+    padding-bottom: 32px;
+
+    &.col-lg-6 {
+      @include media-breakpoint-up(lg) {
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+.collections_videos_section {
+  margin-top: 48px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  background-color: $light;
+
+  @include media-breakpoint-up(lg) {
+    /*
+    margin-top: 72px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+    */
+    margin-top: 60px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+.collections_recommanded_videos_section {
+  padding: 48px 0;
+
+  @include media-breakpoint-up(lg) {
+    padding: 72px 0;
+  }
+
+  .recommended-collection-tpl {
+    .videoscollec-list {
+      // Surchage styles de la part video
+      .video-item-row {
+        width: 242px;
+        padding: 0;
+
+        &:not(:first-child) {
+          margin-top: 0;
+        }
+
+        .video-thumb {
+          margin-bottom: 24px;
+        }
+
+        @include media-breakpoint-up(md) {
+          //width: 280px;
+          width: 300px;
+          margin: 0 16px
+        }
+      }
+    }
+  }
+
+}
+
+.collection_recommanded_videos_blk {
+  display: flex;
+  flex-wrap: wrap;
+
+  .bullet-title {
+    width: calc(100% - 120px); // 100% - les fleches slider
+  }
+  .blk-content {
+    width: 100%;
+  }
+
+  .recommended-collection-tpl {
+    .video-thumb {
+      max-width: 300px;
+    }
+  }
+
+  @include slider-arrows();
+
+  .videoscollec-item-list {
+    position: relative;
+
+    .videoscollec-slider-arrows {
+      margin: 0;
+      padding: 0;
+
+      .slick-arrow {
+        position: absolute;
+        top: 68px;
+        margin: 0;
+        z-index: 100;
+        background-color: $white;
+
+        &.custo-prev-slide {
+          left: -24px;
+        }
+        &.custo-next-slide {
+          right: -24px;
+        }
+      }
+    }
+  }
+}
