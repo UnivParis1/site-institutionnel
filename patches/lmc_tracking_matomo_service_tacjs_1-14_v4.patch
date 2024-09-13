@@ -1,0 +1,32 @@
+diff --git a/assets/vendor/tarteaucitron.js/tarteaucitron.services.js b/assets/vendor/tarteaucitron.js/tarteaucitron.services.js
+index 5790e71..0733fd6 100644
+--- a/assets/vendor/tarteaucitron.js/tarteaucitron.services.js
++++ b/assets/vendor/tarteaucitron.js/tarteaucitron.services.js
+@@ -5343,6 +5343,8 @@ tarteaucitron.services.matomocloud = {
+         window._paq = window._paq || [];
+         window._paq.push(["requireConsent"]);
+         window._paq.push(["setConsentGiven"]);
++        //N'autoriser les cookies que pour les utilisateurs qui consentent :
++        window._paq.push(['requireCookieConsent']);
+         window._paq.push(["setSiteId", tarteaucitron.user.matomoId]);
+         window._paq.push(["setTrackerUrl", tarteaucitron.user.matomoHost + "matomo.php"]);
+         window._paq.push(["trackPageView"]);
+@@ -5384,6 +5386,11 @@ tarteaucitron.services.matomocloud = {
+ 
+         window._paq = window._paq || [];
+         window._paq.push(["requireConsent"]);
++        window._paq.push(["setConsentGiven"]);
++        // Call disableCookies before calling trackPageView
++        window._paq.push(['requireCookieConsent']);
++        window._paq.push(['forgetCookieConsentGiven']);
++
+         window._paq.push(["setSiteId", tarteaucitron.user.matomoId]);
+         window._paq.push(["setTrackerUrl", tarteaucitron.user.matomoHost + "matomo.php"]);
+         window._paq.push(["trackPageView"]);
+@@ -6595,4 +6602,4 @@ tarteaucitron.services.klaviyo = {
+         }
+         tarteaucitron.addScript('//static.klaviyo.com/onsite/js/klaviyo.js?company_id=' + tarteaucitron.user.klaviyoCompanyId);
+     }
+-};
+\ No newline at end of file
++};
