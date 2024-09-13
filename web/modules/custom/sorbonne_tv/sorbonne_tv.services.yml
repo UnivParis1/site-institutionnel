@@ -1,0 +1,14 @@
+services:
+  sorbonne_tv.sorbonne_tv_service:
+    class: Drupal\sorbonne_tv\Service\SorbonneTvService
+  sorbonne_tv.api_mediatheque_service:
+    class: Drupal\sorbonne_tv\Service\SorbonneTvMediathequeApiService
+    arguments: ['@http_client']
+  sorbonne_tv.api_visionnaire_service:
+    class: Drupal\sorbonne_tv\Service\SorbonneTvVisionnaireApiService
+    arguments: [ '@http_client' ]
+  sorbonne_tv.videos_service:
+    class: Drupal\sorbonne_tv\Service\SorbonneTvVideosService
+  sorbonne_tv.mailing:
+    class: Drupal\sorbonne_tv\Service\SorbonneTvMailingService
+    arguments: ['@entity_type.manager']

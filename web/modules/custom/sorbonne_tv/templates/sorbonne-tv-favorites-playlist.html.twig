@@ -1,0 +1,61 @@
+
+{%
+  set classes = [
+    'false-prg',
+    'paragraph',
+    'paragraph--type--sorbonne-tv-playlist',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  <div class="grid-container container">
+    <div class="paragraph__column grid-x grid-margin-x">
+      <div class="grid-container-playlist no-padding-mobile">
+
+        {% if title %}
+          <div class="prg_stv_title">{{ title }}</div>
+        {% endif %}
+
+        <div class="playlist_by_collection_blk">
+          <div class="playlist-collection-tpl">
+            {% if playlist %}
+              <div class="playlist-item-list">{{ playlist }}</div>
+            {% endif %}
+          </div>
+        </div>
+
+        {#
+        {% if playlist_blk %}
+          {% if content.field_prg_linked_title|render is not empty %}
+            {{ content.field_prg_linked_title }}
+          {% else %}
+            {{ content.field_title }}
+          {% endif %}
+
+          {% if prg_tpl == '2_lines' and playlist_edito %}
+            {{ playlist_edito }}
+          {% endif %}
+
+          {{ playlist_blk }}
+        {% else %}
+
+          {% if playlist_edito %}
+            {% if content.field_prg_linked_title|render is not empty %}
+              {{ content.field_prg_linked_title }}
+            {% else %}
+              {{ content.field_title }}
+            {% endif %}
+            
+            {{ playlist_edito }}
+            {{ content|without('field_title', 'field_prg_linked_title') }}
+          {% else %}
+            {{ content }}
+          {% endif %}
+          
+        {% endif %}
+        #}
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,736 @@
+<?php
+
+/**
+ * @file
+ * Contains sorbonne_tv.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Access\AccessResult;
+use Drupal\block\Entity\Block;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\Core\Render\Markup;
+
+/**
+ * Add custom email keys.
+ *
+ * @param array $keys
+ *   New keys array.
+ *
+ * @return void
+ */
+function sorbonne_tv_lmc_mail_keys_alter(array &$keys) {
+    // Add custom keys.
+    $keys['sorbonne_tv_alert_synchro_video'] = t('Sorbonne TV : Notification synchronisation des vidéos');
+}
+
+/**
+ * Implements hook_help().
+ */
+function sorbonne_tv_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the sorbonne_tv module.
+    case 'help.page.sorbonne_tv':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Bloc affichant les partenaires dans le footer du mini site associé.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sorbonne_tv_theme() {
+  return [
+    'sorbonne_tv_footer_partenaires' => [
+      'template' => 'sorbonne-tv-footer-partenaires',
+      'variables' => ['logos' => [] ],
+    ],
+   'sorbonne_tv_flux_video' => [
+      'template' => 'sorbonne-tv-flux-video',
+      'variables' => [
+        'url' => [],
+        'links' => [
+            'link1' => '',
+            'link2' => '',
+            'link3' => '',
+        ],
+      ],
+    ],
+    'sorbonne_tv_favorites_playlist' => [
+        'template' => 'sorbonne-tv-favorites-playlist',
+        'variables' => [
+            'title' => '',
+            'playlist' => [],
+        ],
+    ],
+    'sorbonne_tv_favorites_mosaic' => [
+        'template' => 'sorbonne-tv-favorites-mosaic',
+        'variables' => [
+            'title' => '',
+            'mosaic' => [],
+        ],
+    ],
+  ];
+}
+
+
+function sorbonne_tv_syncMultimedia_cronjob() {
+
+    $queue = \Drupal::service('queue')->get('sorbonne_tv_sync_multimedia_queue');
+    //$queue->deleteQueue();
+    $videos = \Drupal::service('sorbonne_tv.api_mediatheque_service')->getVideos();
+
+    if(!empty($videos)) {
+
+        $query = \Drupal::entityQuery('node')
+            ->condition('type', 'page_sorbonne_tv')
+            ->condition('field_sorb_tv_type', 'video')
+            ->accessCheck(FALSE);
+        $results = $query->execute();
+
+        $nodes = Node::loadMultiple($results);
+
+        if($nodes) {
+
+            foreach ($nodes as $node) {
+                $node->field_api_sync->setValue(0);
+                $node->save();
+
+            }
+
+        }
+
+        $queueItem = new \stdClass();
+
+        foreach ($videos as $video) {
+
+            $queueItem->video = $video;
+            $queue->createItem($queueItem);
+
+            //\Drupal::logger('sorbonne_tv_SYNC:OK')->notice('<pre>' . print_r($queueItem->video, TRUE) . '</pre>');
+        }
+
+
+        $queueItem->delete = 'TRUE';
+        $queue->createItem($queueItem);
+
+        // Notification automatique après synchronisation des videos
+        $mailingService = \Drupal::service('sorbonne_tv.mailing');
+        $mailManager = \Drupal::service('plugin.manager.mail');
+        $langcode = 'fr';
+        $destinataires = [];
+        $params = [];
+
+        $destinataires = $mailingService->getUsersMailByRole('webmestre_sous_site');
+
+        foreach ($destinataires as $destinataire) {
+            //\Drupal::logger('sorbonne_tv_SYNC:Notif')->notice('<pre>-//DEST//--' . print_r($destinataire, TRUE) . '---</pre>');
+            $mailManager->mail('lmc_mail', 'sorbonne_tv_alert_synchro_video', $destinataire, $langcode, $params, NULL, TRUE);
+        }
+
+    }else{
+
+        \Drupal::logger('sorbonne_tv_SYNC:NULL')->notice('Aucune vidéo à sync');
+
+    }
+
+
+}
+
+
+function sorbonne_tv_syncProgrammej_cronjob()
+{
+
+    $params['date'] = date('Y-m-d');
+    $params['days'] = 1;
+    $params['format'] = 'json';
+
+    $queue = \Drupal::service('queue')->get('sorbonne_tv_sync_programme_queue');
+    $programme = \Drupal::service('sorbonne_tv.api_visionnaire_service')->getProgramme('getCustomEPG.php/', $params);
+
+    if(!empty($programme)) {
+
+        $queueItem = new \stdClass();
+        $queueItem->date = $params['date'];
+        $queueItem->programme = $programme;
+        $queue->createItem($queueItem);
+
+    }
+
+
+
+}
+
+function sorbonne_tv_syncProgramme_cronjob()
+{
+
+    $directory = 'private://sorbonne-tv/programmes/';
+    $files = scandir($directory);
+    foreach ($files as $file){
+        if(!is_dir($file)){
+            $jsonfile = str_replace(".json", "", $file);
+            $datefile= new DateTime($jsonfile);
+            $datej = new DateTime(date('Y-m-d'));
+            if($datefile<$datej ){
+                unlink($directory . $file);
+            }
+        }
+    }
+
+
+
+    $params['days'] = 1;
+    $params['format'] = 'json';
+
+    $queue = \Drupal::service('queue')->get('sorbonne_tv_sync_programme_queue');
+
+
+    for ($i=1; $i<7; $i++) {
+
+        $dateJ = date('Y-m-d');
+        $date = new DateTime($dateJ);
+        $date->modify('+'.$i.' day');
+        $params['date'] = $date->format('Y-m-d') ;
+
+        $programme = \Drupal::service('sorbonne_tv.api_visionnaire_service')->getProgramme('getCustomEPG.php/', $params);
+
+        if(!empty($programme)) {
+
+            $queueItem = new \stdClass();
+            $queueItem->date = $params['date'];
+            $queueItem->programme = $programme;
+            $queue->createItem($queueItem);
+
+        }
+
+    }
+
+
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function sorbonne_tv_page_attachments(array &$variables) {
+    $currentRoute = \Drupal::service('current_route_match')->getRouteName();
+
+    if($currentRoute == 'sorbonne_tv.grille_programmes') {
+        $programMetas = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->getProgramsMetatags();
+
+        foreach($programMetas as $meta_k => $meta_vals) {
+            if(isset($meta_vals[0]) && isset($meta_vals[1])) {
+                $variables['#attached']['html_head'][] = [$meta_vals[0], $meta_vals[1]];
+            }
+        }
+    }
+
+    if($currentRoute == 'sorbonne_tv.favorite_list') {
+        $favoritesMetas = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->getMyFavoritesMetatags();
+
+        foreach($favoritesMetas as $meta_k => $meta_vals) {
+            if(isset($meta_vals[0]) && isset($meta_vals[1])) {
+                $variables['#attached']['html_head'][] = [$meta_vals[0], $meta_vals[1]];
+            }
+        }
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function sorbonne_tv_preprocess_node(&$variables) {
+    $view_mode = $variables['view_mode'];
+    $node = $variables['node'];
+    $node_type = $node->getType();
+    $videoService = \Drupal::service('sorbonne_tv.videos_service');
+
+    if($node_type == 'page_sorbonne_tv') {
+        // get sorbonne tv sstype
+        $ss_type = (isset($node->field_sorb_tv_type->value) ? $node->field_sorb_tv_type->value : FALSE);
+
+        switch($ss_type) {
+            case 'page_hp':
+                // Get config flux video
+                $config = \Drupal::config('sorbonne_tv.settings');
+                $api_flux_video = $config->get('sorbonne_tv.settings.api_flux_video');
+
+                $links = [];
+                if (!empty($api_flux_video['link1'])) {
+                    $links['link1'] = $api_flux_video['link1'];
+                }
+                if (!empty($api_flux_video['link2'])) {
+                    $links['link2'] = $api_flux_video['link2'];
+                }
+                if (!empty($api_flux_video['link3'])) {
+                    $links['link3'] = $api_flux_video['link3'];
+                }
+
+                $variables['flux_video'] = [
+                    '#theme' => 'sorbonne_tv_flux_video',
+                    '#url' => $api_flux_video,
+                    '#links' => $links,
+                ];
+            break;
+
+            case 'video':
+              $variables['#attached']['library'][] = 'sorbonne_tv/sharelinks';
+
+              /* $likeMarkup = Markup::create('<a href="#"><span class="bi bi-hand-thumbs-up"></span></a>');
+              $variables['sorbonne_like'] = $likeMarkup; */
+
+              $favorites = isset($_COOKIE['sorbonnefavorites']) ? json_decode($_COOKIE['sorbonnefavorites'], TRUE) : [];
+
+              $link_options = [
+                'attributes' => [
+                  'class' => [
+                    'add-to-favorites',
+                  ],
+                ],
+              ];
+              $class_picto = 'bi-heart';
+              if (in_array($node->id(), $favorites)) {
+                $class_picto = 'bi-heart-fill';
+              }
+              $url_object = Url::fromRoute('sorbonne_tv.favorite_add', ['nid' => $node->id()]);
+              $url_object->setOptions($link_options);
+              $favoriteMarkup = Markup::create('<span class="bi ' . $class_picto . '"></span>');
+              $link_object = Link::fromTextAndUrl($favoriteMarkup, $url_object);
+              $variables['sorbonne_favorites'] = $link_object->toRenderable();
+              $variables['sorbonne_favorites']['#cache']['contexts'][] = 'cookies:sorbonnefavorites';
+
+              // Affichage de la description des vignettes de liste sur page sstype mosaic
+              if($current_node = \Drupal::routeMatch()->getParameter('node')) {
+                $mosaic_hide_descr = $videoService->getItemsHiddenDescrVal($current_node);
+                $variables['mosaic_hide_descr'] = $mosaic_hide_descr;
+              }
+            break;
+
+            case 'mosaic':
+              $view = \Drupal\views\Views::getView('sorbonne_tv_search');
+              $view->setExposedInput([
+                // 'disciplines' => 1717,
+              ]);
+              $variables['mosaic'] = [
+                '#type' => 'view',
+                '#name' => 'sorbonne_tv_search',
+                '#view' => $view,
+                '#display_id' => 'stv_mosaique_block',
+                //'#arguments' => [CONTEXTUAL_FILTER_1, CONTEXTUAL_FILTER_2, ...],
+              ];
+            break;
+
+            default:
+            break;
+        }
+
+    }
+}
+
+/**
+ * Implements hook_field_group_form_process().
+ */
+function sorbonne_tv_field_group_form_process(array &$element, &$group, &$complete_form) {
+    // Voir => https://www.drupal.org/project/field_group/issues/1053174#comment-14948892
+
+    if ($element['#parents'][0]=='group_video') {
+        $typeSelector = 'field_sorb_tv_type';
+
+        // Add form states to the field group.
+        $element['#states'] = [
+            'visible' => [
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'video']],
+                'or',
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'mosaic']],
+            ],
+        ];
+    }
+
+    if ($element['#parents'][0]=='group_mosaic') {
+        $typeSelector = 'field_sorb_tv_type';
+
+        // Add form states to the field group.
+        $element['#states'] = [
+            'visible' => [
+                'select[name="' . $typeSelector . '"]' => ['value' => 'mosaic'],
+            ],
+        ];
+    }
+
+    if ($element['#parents'][0]=='group_video_mosaic_filters') {
+        $typeSelector = 'field_sorb_tv_type';
+
+        // Add form states to the field group.
+        $element['#states'] = [
+            'visible' => [
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'video']],
+                'or',
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'mosaic']],
+            ],
+        ];
+    }
+}
+
+
+function sorbonne_tv_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+    $adminTheme   = \Drupal::config('system.theme')->get('admin');
+    $currentTheme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+
+    if(
+        $form_id == 'node_page_sorbonne_tv_edit_form'
+        || $form_id == 'node_page_sorbonne_tv_form'
+    ) {
+        // Sans utilisation de simplify pour ne le faire que sur ce type de ct
+        $form['menu']['#attributes']['class'][] = 'hidden';
+
+        $typeSelector = 'field_sorb_tv_type';
+
+        // Affichage champ blocs éditoriaux en fonction du type
+        $form['field_paragraphs']['#states'] = [
+            'visible' => [
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'page_hp']],
+                'or',
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'page']],
+            ],
+        ];
+
+        $form['field_api_sync']['#states'] = [
+            'visible' => [
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'video']],
+                'or',
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'collection']],
+            ],
+        ];
+
+        $form['field_discipline']['#states'] = [
+            'visible' => [
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'video']],
+                'or',
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'collection']],
+                'or',
+                ['select[name="' . $typeSelector . '"]' => ['value' => 'mosaic']],
+            ],
+        ];
+
+        $form['field_sorb_tv_mosaic_filters']['#states'] = [
+          'visible' => [
+              'select[name="' . $typeSelector . '"]' => ['value' => 'mosaic'],
+          ],
+      ];
+
+    }
+
+    if($form_id == 'webform_submission_sorbonne_tv_contact_add_form') {
+        $form['#attributes']['class'][] = 'sorbonnetv-form-styles';
+    }
+
+    if ($form_id == 'views_exposed_form') {
+
+        // Partie haute : Filtres exposes
+        if($form['#id'] == 'views-exposed-form-sorbonne-tv-search-stv-search-page--3') {
+            $form['#attributes']['class'][] = 'search-filters-form';
+
+            if (isset($form['sort_by'])) {
+                $form['sort_by']['#wrapper_attributes']['class'][] = 'hidden';
+            }
+            if (isset($form['sort_order'])) {
+                $form['sort_order']['#wrapper_attributes']['class'][] = 'hidden';
+            }
+
+            $hidden_lbl = [
+                'search_api_fulltext',
+                'disciplines',
+                'type',
+                'timelapse',
+                'langue',
+                'date_depot',
+                'collections',
+            ];
+
+            foreach($hidden_lbl as $hf_k => $hf_val) {
+                if(isset($form[$hf_val])) {
+                    $form[$hf_val]['#title_display'] = 'invisible';
+                }
+            }
+
+            $fields36 = ['disciplines', 'type', 'langue', 'collections'];
+            $fields28 = ['timelapse', 'date_depot'];
+
+            foreach($fields36 as $k36 => $val36) {
+                if(isset($form[$val36])) {
+                    $form[$val36]['#wrapper_attributes']['class'][] = 'field_36';
+                }
+            }
+            foreach($fields28 as $k28 => $val28) {
+                if(isset($form[$val28])) {
+                    $form[$val28]['#wrapper_attributes']['class'][] = 'field_28';
+                }
+            }
+
+            if(isset($form['type'])) {
+                $form['type']['#options']['All'] = $form['type']['#title'];
+            }
+            if(isset($form['disciplines'])) {
+                $form['disciplines']['#attributes']['data-placeholder'] = $form['disciplines']['#title'];
+            }
+            if(isset($form['timelapse'])) {
+                $form['timelapse']['#options']['All'] = $form['timelapse']['#title'];
+                /*
+                $disciplines_def = [
+                    'All' => $form['timelapse']['#title'],
+                ];
+                $new_opts = $disciplines_def + $form['timelapse']['#options'];
+                $form['timelapse']['#options'] = $new_opts;
+                $form['timelapse']['#default_value'] = 'All';
+                */
+            }
+            if(isset($form['langue'])) {
+                $form['langue']['#options']['All'] = $form['langue']['#title'];
+                /*$disciplines_def = [
+                    'All' => $form['langue']['#title'],
+                ];
+                $new_opts = $disciplines_def + $form['timelapse']['#options'];
+                $form['langue']['#options'] = $new_opts;
+                $form['langue']['#default_value'] = 'All';
+                */
+            }
+
+            if(isset($form['collections'])) {
+                $form['collections']['#type'] = 'select';
+
+                $query = \Drupal::entityQuery('node')
+                  ->condition('type', 'page_sorbonne_tv')
+                  ->condition('field_sorb_tv_type', 'collection')
+                  ->condition('status', 1)
+                  ->accessCheck(FALSE);
+                $results = $query->execute();
+
+                $collections = [
+                  '' => $form['collections']['#title'],
+                ];
+                $nodes = Node::loadMultiple($results);
+                if($nodes) {
+                    foreach ($nodes as $node) {
+                        $collections[$node->id()] = $node->getTitle();
+                    }
+                }
+
+                $form['collections']['#options'] = $collections;
+                //$form['collections']['#default_value'] = '_none';
+                //$form['collections']['#attributes']['data-placeholder'] = $form['collections']['#title'];
+            }
+        }
+
+        // Partie basse : Ordre expose
+        if($form['#id'] == 'views-exposed-form-sorbonne-tv-search-stv-search-page--2') {
+            $form['#attributes']['class'][] = 'search-sort-filters-form';
+            $res_title_html = '<h2 class="bullet-title results-title"><span class="title-txt">'. t('Results') .'</span><span class="title-bullet"></span></h2>';
+            $form['#suffix'] = Markup::create($res_title_html);
+
+            $hidden_fields = [
+                'search_api_fulltext',
+                'disciplines',
+                'type',
+                'timelapse',
+                'langue',
+                'date_depot',
+                'collections',
+            ];
+
+            foreach($hidden_fields as $hf_k => $hf_val) {
+                if(isset($form[$hf_val])) {
+                    $form[$hf_val]['#wrapper_attributes']['class'][] = 'hidden';
+                }
+            }
+
+            if (isset($form['sort_order'])) {
+                $form['sort_order']['#title_display'] = 'invisible';
+            }
+
+            if(isset($form['actions']['reset'])) {
+                $form['actions']['reset']['#attributes']['class'][] = 'hidden';
+            }
+        }
+
+        // ----- Mosaique Partie haute : Filtres exposes ----- //
+        if (
+            $form['#id'] == 'views-exposed-form-sorbonne-tv-search-stv-mosaique-block' 
+            || $form['#id'] == 'views-exposed-form-sorbonne-tv-search-stv-mosaique-block--2' 
+        ) {
+          $form['#attributes']['class'][] = 'search-filters-form';
+          $form['#attributes']['class'][] = 'mosaic-filters-form';
+          $form['#action'] = Url::fromRoute('<current>')->toString();
+
+          $hidden_lbl = [
+            'discipline',
+            'type',
+            'collection',
+            //'date_depot',
+            'annee',
+            'langue',
+            'timelapse',
+            'sort_by',
+            'sort_order',
+            'tag',
+          ];
+
+          foreach($hidden_lbl as $hf_k => $hf_val) {
+            if(isset($form[$hf_val])) {
+              $form[$hf_val]['#title_display'] = 'invisible';
+            }
+          }
+
+        if(isset($form['type'])) {
+            $form['type']['#options']['All'] = $form['type']['#title'];
+        }
+        if(isset($form['discipline'])) {
+            $form['discipline']['#attributes']['data-placeholder'] = $form['discipline']['#title'];
+        }
+        if(isset($form['timelapse'])) {
+            $form['timelapse']['#options']['All'] = $form['timelapse']['#title'];
+        }
+        if(isset($form['langue'])) {
+            $form['langue']['#options']['All'] = $form['langue']['#title'];
+        }
+        if(isset($form['tag'])) {
+            $form['tag']['#options']['All'] = $form['tag']['#title'];
+        }
+
+        if(isset($form['collection'])) {
+            $form['collection']['#type'] = 'select';
+
+            $query = \Drupal::entityQuery('node')
+              ->condition('type', 'page_sorbonne_tv')
+              ->condition('field_sorb_tv_type', 'collection')
+              ->condition('status', 1)
+              ->accessCheck(FALSE);
+            $results = $query->execute();
+
+            $collections = [
+              '' => $form['collection']['#title'],
+            ];
+            $nodes = Node::loadMultiple($results);
+            if($nodes) {
+                foreach ($nodes as $node) {
+                    $collections[$node->id()] = $node->getTitle();
+                }
+            }
+
+            $form['collection']['#options'] = $collections;
+        }
+
+          $node = \Drupal::routeMatch()->getParameter('node');
+          if (isset($node->field_sorb_tv_mosaic_filters->value)) {
+            $activeFiltersValues = $node->field_sorb_tv_mosaic_filters->getValue();
+            $activeFilters = [];
+
+            foreach($activeFiltersValues as $afv_k => $afv_val) {
+                $activeFilters[] = $afv_val['value'];
+            }
+
+            // Attention : L'id de chaque filtre et de la select liste d'options sur le noeud mosaïque doivent êtres identiques
+            $defaultFilters = [
+              'discipline',
+              'type',
+              'collection',
+              //'date_depot',
+              'annee',
+              'langue',
+              'timelapse',
+              'tag',
+            ];
+
+            foreach($defaultFilters as $df_k => $df_val) {
+                if(!in_array($df_val, $activeFilters)) {
+                    $form[$df_val]['#attributes']['class'][] = 'hidden';
+                    $form[$df_val]['#wrapper_attributes']['class'][] = 'hidden';
+                }
+            }
+          }
+
+            if (isset($form['sort_order'])) {
+                $form['sort_order']['#wrapper_attributes']['class'][] = 'hidden';
+            }
+        }
+
+        // ----- Mosaique : Partie basse : Ordre expose ----- //
+        /*
+        if ($form['#id'] == 'views-exposed-form-sorbonne-tv-search-stv-mosaique-block--2') {
+            $form['#attributes']['class'][] = 'search-sort-filters-form';
+
+            $hidden_fields = [
+                'discipline',
+                'type',
+                'collections',
+                'date_depot',
+                'langue',
+                'timelapse',
+            ];
+
+            foreach($hidden_fields as $hf_k => $hf_val) {
+                if(isset($form[$hf_val])) {
+                    $form[$hf_val]['#wrapper_attributes']['class'][] = 'hidden';
+                }
+            }
+
+            if (isset($form['sort_order'])) {
+                $form['sort_order']['#title_display'] = 'invisible';
+            }
+
+            if(isset($form['actions']['reset'])) {
+                $form['actions']['reset']['#attributes']['class'][] = 'hidden';
+            }
+        }*/
+    }
+
+    if ($form_id == 'like_form') {
+      $form['label']['icon']['#attributes']['class'] = ['bi', 'bi-hand-thumbs-up'];
+      $form['label']['txt']['#attributes']['class'][] = 'hidden';
+      $form['num']['#value'] = str_replace(['Likes', '(', ')'], ['', '', ''], $form['num']['#value']);
+    }
+}
+
+/**
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
+ */
+function sorbonne_tv_field_widget_single_element_form_alter(&$element, &$form_state, $context) {
+    if (isset($element['#paragraph_type'])) {
+
+        if ($element['#paragraph_type'] == 'sorbonne_tv_filters') {
+          if (isset($element['subform']['#parents'])) {
+            $parents = $element['subform']['#parents'];
+            $first = array_shift($parents);
+            $selector = $first . '[' . implode('][', $parents) . '][field_sorbonne_tv_filter_type]';
+
+            $element['subform']['field_sorbonne_tv_videos_types']['widget']['#states'] = [
+              'visible' => [
+                'select[name="' . $selector . '"]' => ['value' => 'types'],
+              ],
+              /* 'required' => [
+                'select[name="' . $selector . '"]' => ['value' => 'category'],
+              ], */
+            ];
+            $element['subform']['field_sorbonne_tv_disciplines']['widget']['#states'] = [
+                'visible' => [
+                  'select[name="' . $selector . '"]' => ['value' => 'disciplines'],
+                ],
+                /* 'required' => [
+                  'select[name="' . $selector . '"]' => ['value' => 'category'],
+                ], */
+              ];
+          }
+        }
+
+        /*if($element['#paragraph_type'] == 'sorbonne_tv_playlist') {
+            $prg_delta = $element['#delta'];
+           dpm($element);
+        }*/
+    }
+}

@@ -1,0 +1,45 @@
+sorbonne_tv.config_form:
+  path: '/admin/config/sorbonne-tv'
+  defaults:
+    _form: '\Drupal\sorbonne_tv\Form\SorbonneTvConfigForm'
+    _title: 'Sorbonne TV Configuration Form'
+  requirements:
+    _permission: 'administer site configuration'
+
+sorbonne_tv.api_test_page:
+  path: '/admin/config/sorbonne-tv/test-page'
+  defaults:
+    _controller: '\Drupal\sorbonne_tv\Controller\SorbonneTvTestController::testPage'
+  requirements:
+    _role: 'administrator'
+
+sorbonne_tv.grille_programmes:
+  path: '/grille-programmes'
+  defaults:
+    _controller: '\Drupal\sorbonne_tv\Controller\SorbonneTvGrilleProgrammesController::GetGrilleProgrammesContent'
+    _title_callback: '\Drupal\sorbonne_tv\Controller\SorbonneTvGrilleProgrammesController::GetGrilleProgrammesTitle'
+  requirements:
+    _permission: 'access content'
+
+sorbonne_tv.video:
+  path: '/video/{videoId}'
+  defaults:
+    _controller: '\Drupal\sorbonne_tv\Controller\SorbonneTvVideoController::redirectToNode'
+  requirements:
+    _permission: 'access content'
+
+sorbonne_tv.favorite_add:
+  path: '/favorite/add/{nid}'
+  defaults:
+    _controller: '\Drupal\sorbonne_tv\Controller\SorbonneTvSharelinksController::add'
+    _title: 'Add to Favorites'
+  requirements:
+    _permission: 'access content'
+
+sorbonne_tv.favorite_list:
+  path: '/favorite/list'
+  defaults:
+    _controller: '\Drupal\sorbonne_tv\Controller\SorbonneTvSharelinksController::list'
+    _title: 'My Favorites'
+  requirements:
+    _permission: 'access content'
