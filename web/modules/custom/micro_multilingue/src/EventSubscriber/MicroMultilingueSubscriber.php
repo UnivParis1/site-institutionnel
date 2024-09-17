@@ -106,7 +106,7 @@ class MicroMultilingueSubscriber implements EventSubscriberInterface {
       $route_name = $route_match->getRouteName();
 
       $excluded_route_names = [
-	      'image.style_public',
+	      'image.style_public', 'system.css_asset', 'system.js_asset',
       ];
       if (in_array($route_name, $excluded_route_names)) {
 	      return;

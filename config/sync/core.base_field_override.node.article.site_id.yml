@@ -1,0 +1,20 @@
+uuid: 88b7330e-1651-4b2a-8a08-e75576982c13
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.article
+id: node.article.site_id
+field_name: site_id
+entity_type: node
+bundle: article
+label: Site
+description: 'The site on which the node is created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\micro_node\MicroNodeManager::getCurrentSiteId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

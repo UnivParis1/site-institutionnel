@@ -11,55 +11,50 @@ archive: false
 id: 71_formulaire_de_paiement_psme
 title: '71 - Formulaire de paiement PSME'
 description: '<p>Formulaire de paiement 2023 : Drupal &gt; Esup-pay</p>'
-category: ''
+categories: {  }
 elements: |-
   field2:
     '#type': textfield
     '#title': 'First name / Prénom :'
     '#placeholder': Jean
     '#required': true
-    '#required_error': 'Merci d''indiquer votre prénom'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#required_error': "Merci d'indiquer votre prénom"
   field1:
     '#type': textfield
     '#title': 'Last name / Nom :'
     '#placeholder': Dupont
     '#required': true
     '#required_error': 'Merci de renseigner votre nom'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   mail:
     '#type': email
     '#title': 'E-mail / Courriel :'
     '#description': '<p><span dir="ltr" lang="en">Indicate a valid e-mail address because it is with this one that we will contact you and it is on this one that you will receive your payment receipt.</span> / Indiquez une adresse de messagerie valide car c''est avec celle-ci que nous vous contacterons et c''est sur celle-ci que vous recevrez votre ticket de paiement.</p>'
     '#placeholder': jeandupont@monfai.com
     '#required': true
-    '#required_error': 'Merci d''indiquer votre courriel'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+    '#required_error': "Merci d'indiquer votre courriel"
   date_naissance:
     '#type': datetime
     '#title': 'Date of birth / Date de naissance :'
     '#required': true
     '#required_error': 'Vous devez indiquer votre date de naissance'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#date_date_format': ''
     '#date_year_range': '1940:2013'
     '#date_time_element': none
   j_ai_deja_un_compte_paris_1:
     '#type': checkbox
-    '#title': 'I already have a Paris 1 account / J''ai déjà un compte Paris 1'
-    '#description': '<p>Si vous êtes déjà étudiant à l''université Paris 1 Panthéon-Sorbonne cochez cette case.</p>'
+    '#title': "I already have a Paris 1 account / J'ai déjà un compte Paris 1"
+    '#description': "<p>Si vous êtes déjà étudiant à l'université Paris 1 Panthéon-Sorbonne cochez cette case.</p>"
     '#return_value': Oui
   my_login_paris_mon_identifiant_paris_1:
     '#type': textfield
     '#title': 'My Login Paris / Mon identifiant Paris 1'
     '#placeholder': e0100123456
     '#required': true
-    '#required_error': 'Please indict your login / Merci d''indiquer votre identifiant'
+    '#required_error': "Please indict your login / Merci d'indiquer votre identifiant"
     '#states':
       visible:
         ':input[name="j_ai_deja_un_compte_paris_1"]':
           checked: true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   habitez_vous_dans_l_union_europeenne_:
     '#type': radios
     '#title': 'Do you live in the European Union / Habitez-vous dans l’union européenne ?'
@@ -68,7 +63,7 @@ elements: |-
       'No': 'No / Non'
     '#options_display': buttons
     '#required': true
-    '#required_error': 'Please indict if you live in EU / Merci d''indiquersi vous habitez en EU'
+    '#required_error': "Please indict if you live in EU / Merci d'indiquersi vous habitez en EU"
   fees_payment_tarifs:
     '#type': radios
     '#title': 'Fees payment / Tarifs'
@@ -80,7 +75,7 @@ elements: |-
       4thPayment: '4th payment - 4e versement -- before July 15th / avant le 15 juillet - 1499€'
       TheTotality: 'The totality fees - la totalité -- before June 30th / avant le 30 juin - 6000€'
     '#required': true
-    '#required_error': 'Please indict your payment / Merci d''indiquer votre paiement'
+    '#required_error': "Please indict your payment / Merci d'indiquer votre paiement"
     '#states':
       invisible:
         ':input[name="habitez_vous_dans_l_union_europeenne_"]':
@@ -96,7 +91,7 @@ elements: |-
       4thPaymentDSP2: '4th payment - 4e versement -- before July 15th / avant le 15 juillet - 1499€'
       TheTotalityDSP2: 'The totality fees - la totalité -- before June 30th / avant le 30 juin - 6000€'
     '#required': true
-    '#required_error': 'Please indict your payment / Merci d''indiquer votre paiement'
+    '#required_error': "Please indict your payment / Merci d'indiquer votre paiement"
     '#states':
       visible:
         ':input[name="habitez_vous_dans_l_union_europeenne_"]':
@@ -106,12 +101,11 @@ elements: |-
     '#title': 'CVEC attesting document number / Numéro de votre attestation CVEC :'
     '#placeholder': 'CVEC number / Numéro CVEC'
     '#required': true
-    '#required_error': 'Please indict your CVEC Number / Merci d''indiquer votre numéro CVEC'
+    '#required_error': "Please indict your CVEC Number / Merci d'indiquer votre numéro CVEC"
     '#states':
       visible:
         ':input[name="fees_payment_tarifs"]':
           value: 1st-payment
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   comment_voulez_vous_payer_:
     '#type': radios
     '#title': '  Choose one of the following methods of payment / Choisissez l’une des méthodes ci-jointe :'
@@ -144,53 +138,47 @@ elements: |-
       '#title': 'First name / Prénom :'
       '#placeholder': Jean
       '#required': true
-      '#required_error': 'Merci d''indiquer le prénom pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer le prénom pour la facturation"
     billinglastname:
       '#type': textfield
       '#title': 'Last name / Nom :'
       '#placeholder': Dupont
       '#required': true
-      '#required_error': 'Merci d''indiquer le nom pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer le nom pour la facturation"
     billingaddress1:
       '#type': textfield
       '#title': 'Address / Adresse postale :'
       '#placeholder': '90 rue du paradis'
       '#required': true
-      '#required_error': 'Merci d''indiquer l''adresse postale pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer l'adresse postale pour la facturation"
     billingzipcode:
       '#type': textfield
       '#title': 'Zip Code / Code postal :'
       '#placeholder': '77500'
       '#required': true
-      '#required_error': 'Merci d''indiquer le code postal pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer le code postal pour la facturation"
     billingcity:
       '#type': textfield
       '#title': 'City / Ville :'
       '#placeholder': Chelles
       '#required': true
-      '#required_error': 'Merci d''indiquer la ville pour la facturation'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': "Merci d'indiquer la ville pour la facturation"
     billingcountrycode:
       '#type': select
       '#title': 'Country / Pays :'
       '#options': liste_pays_code_numerique_
       '#required': true
-      '#required_error': 'Merci d''indiquer le pays pour la facturation'
+      '#required_error': "Merci d'indiquer le pays pour la facturation"
   piaement_par_virement_bancaire:
     '#type': textfield
-    '#title': 'Name of the contractor and student/ Nom du donneur d''ordre et de l''étudiant :'
-    '#description': '<p>Inscrivez ici le nom du donneur d''ordre.</p>'
-    '#help': '<p>Le «nom du donneur d''ordre» qui peut-être différent de celui de la personne désirant s''inscrire.</p>'
+    '#title': "Name of the contractor and student/ Nom du donneur d'ordre et de l'étudiant :"
+    '#description': "<p>Inscrivez ici le nom du donneur d'ordre.</p>"
+    '#help': "<p>Le «nom du donneur d'ordre» qui peut-être différent de celui de la personne désirant s'inscrire.</p>"
     '#required': true
     '#states':
       visible:
         ':input[name="comment_voulez_vous_payer_"]':
           value: virement
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   infobanktransfert:
     '#type': webform_markup
     '#states':
@@ -206,12 +194,12 @@ elements: |-
       Bank address : DRFIP ILE DE FRANCE ET DE PARIS 94 RUE REAUMUR F-75104 PARIS CEDEX 02</p>
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'I accept {the general sales conditions} / J''accepte les {Conditions générales de vente}'
+    '#title': "I accept {the general sales conditions} / J'accepte les {Conditions générales de vente}"
     '#help_title': 'Cliquez sur Conditions génrérales de vente pour les parcourir.'
     '#help_display': title_before
     '#required': true
     '#required_error': 'Vous devez accepter les conditions pour valider ce formulaire'
-    '#return_value': 'J''accepte les CGV'
+    '#return_value': "J'accepte les CGV"
     '#terms_title': CGV
     '#terms_content': |-
       <p>The Université Paris 1 Panthéon-Sorbonne reserves the right to invoice bank handling charges, if any.</p>
@@ -466,7 +454,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Début d''inscription au PSME'
+      subject: "Début d'inscription au PSME"
       body: "<p>Un personne a initié une inscription, voici les données qu'elle a saisie :</p>\r\n\r\n<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements:
         captcha: captcha

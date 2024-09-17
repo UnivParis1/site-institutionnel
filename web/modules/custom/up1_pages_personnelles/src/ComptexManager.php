@@ -158,6 +158,7 @@ class ComptexManager implements ComptexInterface {
             $ids = \Drupal::entityQuery('site')
               ->condition('type', 'mini_site')
               ->condition('groups', $site_group)
+              ->accessCheck(FALSE)
               ->execute();
             $site = Site::loadMultiple($ids);
             if (count($site) == 1) {
@@ -178,22 +179,23 @@ class ComptexManager implements ComptexInterface {
         }
         $order = ['doctoralSchool',  'research',  'pedagogy'];
 
-        usort($entites, function($a, $b) use ($order) {
-          $pos_a = array_search($a['businessCategory'], $order);
-          $pos_b = array_search($b['businessCategory'], $order);
-          return $pos_a - $pos_b;
-        });
-
         $information['entites'] = [];
-        foreach ($entites as $entite) {
-          if (!empty($entite['labeledURI'])) {
-            $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['description'] . "' target='_blank'>"
-              . $entite['description'] . "</a></p>";
+        if (isset($entites) && !empty($entites)) {
+          usort($entites, function ($a, $b) use ($order) {
+            $pos_a = array_search($a['businessCategory'], $order);
+            $pos_b = array_search($b['businessCategory'], $order);
+            return $pos_a - $pos_b;
+          });
+
+          foreach ($entites as $entite) {
+            if (!empty($entite['labeledURI'])) {
+              $affectation[] = "<p><a href='" . $entite['labeledURI'] . "' title='" . $entite['description'] . "' target='_blank'>"
+                . $entite['description'] . "</a></p>";
+            } else {
+              $affectation[] = "<p>" . $entite['description'] . "</p>";
+            }
+            $information['entites'] = implode('', $affectation);
           }
-          else {
-            $affectation[] = "<p>" . $entite['description'] . "</p>";
-          }
-          $information['entites'] = implode('', $affectation);
         }
       }
 

@@ -11,26 +11,23 @@ archive: false
 id: 0_dhc_2022
 title: '0 - DHC 2022'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   markup_01:
     '#type': webform_markup
-    '#markup': '<h2>Formulaire d''inscription&nbsp;</h2>'
+    '#markup': "<h2>Formulaire d'inscription&nbsp;</h2>"
   nom:
     '#type': textfield
     '#title': Nom
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': 'Prénom '
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
     '#title': 'Courriel '
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   statut:
     '#type': radios
     '#title': Statut
@@ -38,15 +35,14 @@ elements: |-
       Étudiant: Étudiant
       Personnel: Personnel
       'Enseignant et enseignant chercheur': 'Enseignant et enseignant chercheur'
-      'Public externe à l''université': 'Public externe à l''université'
+      "Public externe à l'université": "Public externe à l'université"
     '#required': true
     '#options__properties': ''
   date_de_naissance:
     '#type': date
     '#title': 'Date de naissance'
-    '#description': '<p>Dans le cadre d''un contrôle de sécurité à l''entrée de la cérémonie, votre date de naissance est requise.</p>'
+    '#description': "<p>Dans le cadre d'un contrôle de sécurité à l'entrée de la cérémonie, votre date de naissance est requise.</p>"
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#date_date_format': ''
   aurez_vous_besoin_d_un_acces_pmr_:
     '#type': radios
@@ -64,7 +60,7 @@ elements: |-
     '#markup': '<p>Si oui, merci de bien vouloir nous avertir à l''adresse suivante :&nbsp;<a aria-expanded="false" aria-haspopup="menu" data-remove-tab-index="true" data-sk="tooltip_parent" data-stringify-link="mailto:evenements@univ-paris1.fr" delay="150" href="mailto:evenements@univ-paris1.fr" rel="noopener noreferrer" tabindex="-1" target="_blank">evenements@univ-paris1.fr</a></p>'
   j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
     '#type': checkbox
-    '#title': 'J''accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire.'
+    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
     '#required': true
   captcha:
     '#type': captcha
@@ -73,7 +69,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': Soumettre
     '#update__label': 'Mettre à jour'
 css: ''
@@ -163,6 +159,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -285,7 +283,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[Réponse automatique] Confirmation d''inscription à la Cérémonie de remise des insignes de Docteur Honoris Causa '
+      subject: "[Réponse automatique] Confirmation d'inscription à la Cérémonie de remise des insignes de Docteur Honoris Causa "
       body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>&nbsp;</p>"
       excluded_elements: {  }
       ignore_access: false

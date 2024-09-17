@@ -2,9 +2,16 @@ uuid: 8f534724-2b47-481a-a503-54d85115e20e
 langcode: fr
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.cke_media_resize_large
+    - core.entity_view_mode.media.cke_media_resize_medium
+    - core.entity_view_mode.media.cke_media_resize_small
+    - core.entity_view_mode.media.cke_media_resize_xl
   module:
     - blazy
+    - ckeditor_media_resize
     - linkit
+    - media
     - nbsp
     - slick
     - token_filter
@@ -36,10 +43,10 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: true
+    status: false
     weight: -10
     settings:
-      allowed_html: '<em> <strong> <b> <i> <cite> <blockquote cite> <ul type> <ol type start> <li> <a href hreflang !href accesskey id rel target title data-entity-type data-entity-uuid data-entity-substitution> <img src alt data-entity-type data-entity-uuid>'
+      allowed_html: '<br> <p class="text-align-left text-align-center text-align-right text-align-justify"> <strong> <em> <blockquote> <a href data-entity-uuid data-entity-type data-entity-substitution> <ul> <ol start> <li> <table> <tr> <td rowspan colspan> <th rowspan colspan> <thead> <tbody> <tfoot> <caption> <span dir> <nbsp>'
       filter_html_help: true
       filter_html_nofollow: false
   filter_htmlcorrector:
@@ -47,6 +54,12 @@ filters:
     provider: filter
     status: true
     weight: 10
+    settings: {  }
+  filter_resize_media:
+    id: filter_resize_media
+    provider: ckeditor_media_resize
+    status: true
+    weight: 90
     settings: {  }
   filter_url:
     id: filter_url
@@ -61,7 +74,21 @@ filters:
     status: true
     weight: -11
     settings:
-      title: false
+      title: true
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_view_modes:
+        cke_media_resize_large: cke_media_resize_large
+        cke_media_resize_medium: cke_media_resize_medium
+        cke_media_resize_small: cke_media_resize_small
+        cke_media_resize_xl: cke_media_resize_xl
+      allowed_media_types:
+        image: image
   nbsp_cleaner_filter:
     id: nbsp_cleaner_filter
     provider: nbsp

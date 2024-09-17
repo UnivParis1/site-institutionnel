@@ -1,4 +1,4 @@
-uuid: cb87c7ff-8d7a-487e-bd67-ab5f771ff74a
+uuid: a8b25f49-b871-4676-9710-502d0126a478
 langcode: fr
 status: true
 dependencies:
@@ -11,49 +11,47 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
-      - style
-      - nbsp
+      - heading
       - bold
       - italic
       - underline
-      - strikethrough
-      - superscript
-      - subscript
       - removeFormat
-      - '|'
+      - subscript
+      - superscript
       - blockQuote
       - abbreviation
-      - anchor
+      - redo
+      - undo
       - '|'
       - link
-      - drupalInsertImage
-      - '|'
-      - bulletedList
+      - drupalMedia
+      - drupalInsertFile
       - numberedList
-      - alignment
-      - '|'
-      - undo
-      - redo
-      - '|'
+      - bulletedList
+      - textPartLanguage
+      - '-'
       - insertTable
       - outdent
       - indent
+      - alignment
       - '|'
       - horizontalLine
-      - '|'
-      - textPartLanguage
-      - a11ychecker
-      - code
+      - nbsp
+      - specialCharacters
       - sourceEditing
   plugins:
     ckeditor5_alignment:
       enabled_alignments:
         - center
-        - justify
         - left
         - right
-    ckeditor5_imageResize:
-      allow_resize: true
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
     ckeditor5_language:
       language_list: all
     ckeditor5_list:
@@ -63,31 +61,32 @@ settings:
       multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags: {  }
-    ckeditor5_style:
-      styles:
-        -
-          label: 'Titre 2'
-          element: '<p class="h2-style">'
-        -
-          label: 'Titre 3'
-          element: '<p class="h3-style">'
-        -
-          label: 'Titre 4'
-          element: '<p class="h4-style">'
-        -
-          label: 'Titre 5'
-          element: '<p class="h5-style">'
-        -
-          label: 'Titre 6'
-          element: '<p class="h6-style">'
-        -
-          label: Adresse
-          element: '<p class="address">'
+    ckeditor_media_resize_mediaResize:
+      apply_image_styles: true
+      image_styles:
+        - cke_media_resize_small
+        - cke_media_resize_medium
+        - cke_media_resize_large
+        - cke_media_resize_xl
+    editor_advanced_link_link:
+      enabled_attributes:
+        - aria-label
+        - rel
+        - target
+        - title
+    editor_file_file:
+      status: true
+      scheme: public
+      directory: /inline-files
+      extensions: 'pdf jpg jpeg png doc docx xls xlsx'
+      max_size: ''
     linkit_extension:
       linkit_enabled: true
       linkit_profile: site_content
+    media_media:
+      allow_view_mode_override: false
 image_upload:
-  status: true
+  status: false
   scheme: public
   directory: inline-images
   max_size: ''

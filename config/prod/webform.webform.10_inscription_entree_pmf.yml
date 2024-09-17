@@ -11,7 +11,8 @@ archive: false
 id: 10_inscription_entree_pmf
 title: '10 - Inscription entrée PMF'
 description: "<p>Arborescence : Menu Direction &gt; Services &gt; Dès le 2 mai 2023 : s'inscrire pour accéder à la BU PMF<br />\r\n<br />\r\nLien vers ce formulaire depuis la page d'accueil du mini-site du SCD et la page de présentation de la BU Pierre-Mendès-France.</p>"
-category: 'Inscription pour entrer à la bibliothèque'
+categories:
+  - 'Inscription pour entrer à la bibliothèque'
 elements: |-
   coordonnees:
     '#type': webform_section
@@ -21,7 +22,6 @@ elements: |-
       '#type': webform_name
       '#title': 'Nom, Prénom'
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#title__access': false
       '#first__title': Nom
       '#first__required': true
@@ -32,20 +32,17 @@ elements: |-
       '#degree__access': false
     numero_d_etudiant_ou_de_lecteur:
       '#type': textfield
-      '#title': 'Numéro d''étudiant ou de lecteur'
-      '#description': '<p>Ce numéro est inscrit sur votre carte d''étudiant ou de lecteur</p>'
+      '#title': "Numéro d'étudiant ou de lecteur"
+      '#description': "<p>Ce numéro est inscrit sur votre carte d'étudiant ou de lecteur</p>"
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     telephone:
       '#type': tel
       '#title': Téléphone
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     courriel:
       '#type': email
       '#title': Courriel
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   inscription:
     '#type': webform_section
     '#title': Inscription
@@ -69,7 +66,7 @@ elements: |-
       '#type': captcha
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''
@@ -262,7 +259,7 @@ handlers:
   mail_de_confirmation_d_envoi_du_formulaire:
     id: email
     handler_id: mail_de_confirmation_d_envoi_du_formulaire
-    label: 'Mail de confirmation d''envoi du formulaire'
+    label: "Mail de confirmation d'envoi du formulaire"
     notes: ''
     status: true
     conditions: {  }

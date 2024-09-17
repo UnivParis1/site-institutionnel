@@ -11,23 +11,21 @@ archive: false
 id: 63_journee_master_inscription_et
 title: '63 - Journée Master - inscription étudiants hors P1'
 description: ''
-category: 'Inscription événement'
+categories:
+  - 'Inscription événement'
 elements: |-
   votre_nom:
     '#type': textfield
     '#title': 'Votre nom'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_prenom:
     '#type': textfield
     '#title': 'Votre prénom'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_courriel_paris_1:
     '#type': email
     '#title': 'Votre courriel'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   vous_etes_inscrit_e_en_l3:
     '#type': webform_select_other
     '#title': 'Vous êtes inscrit(e) en L3/M1/autre'
@@ -36,19 +34,18 @@ elements: |-
       'L3 autres parcours ': 'L3 autres parcours '
       'M1 Science politique': 'M1 Science politique'
       'M1 autres parcours': 'M1 autres parcours'
-      'Reprise d''étude': 'Reprise d''étude'
+      "Reprise d'étude": "Reprise d'étude"
     '#required': true
   votre_universite_d_origine:
     '#type': textfield
-    '#title': 'Votre université d''origine'
+    '#title': "Votre université d'origine"
     '#description': '<p>Dans quelle université êtes-vous inscrit(e) actuellement?</p>'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#required': true
   captcha:
     '#type': captcha
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': Envoyer
 css: ''
 javascript: ''
@@ -100,7 +97,7 @@ settings:
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
-  submission_exception_message: '<p>Les capacités d''accueil sont atteintes.</p>'
+  submission_exception_message: "<p>Les capacités d'accueil sont atteintes.</p>"
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
@@ -137,6 +134,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

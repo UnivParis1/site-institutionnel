@@ -2,10 +2,14 @@
 
 namespace Drupal\up1_pages_personnelles;
 
-use  Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\Url;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Class WsGroupsService.
@@ -21,6 +25,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
 
   protected $entityTypeManager;
 
+  const SERVICE_NAME = 'up1_pages_personnelles.wsgroups';
   /**
    * Constructs a AnnuaireService object.
    *
@@ -29,6 +34,10 @@ class WsGroupsService implements WsGroupsServiceInterface {
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager) {
     $this->entityTypeManager = $entity_type_manager;
+  }
+
+  public static function me(): self {
+    return \Drupal::service(self::SERVICE_NAME);
   }
 
   /**
@@ -53,7 +62,7 @@ class WsGroupsService implements WsGroupsServiceInterface {
     $request = $this->getRequest($affiliation);
 
     $params = [
-      'attrs' => 'sn,givenName,displayName,labeledURI,employeeType,supannEntiteAffectation,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
+      'attrs' => 'sn,givenName,displayName,labeledURI,employeeType,supannEntiteAffectation-all,eduPersonPrimaryAffiliation,supannListeRouge,supannConsentement'
     ];
     if (!empty($trombi_settings)) {
       if ($trombi_settings['supannRole']) {
@@ -173,4 +182,34 @@ class WsGroupsService implements WsGroupsServiceInterface {
     return $value;
   }
 
+
+  public function userHasPagePersoWsGroups($username): bool {
+    $config = \Drupal::config('up1_pages_personnelles.settings');
+    $ws = $config->get('url_ws');
+    $searchUser = $config->get('search_user');
+
+    if (!empty($ws) && !empty($searchUser)) {
+      $filter = '&id=' . trim($username);
+      $params = [
+        'attrs' => 'labeledURI,supannListeRouge',
+      ];
+
+      $parsed_url = UrlHelper::parse($ws . $searchUser . $filter . '&' . http_build_query($params));
+      $url = Url::fromUri($parsed_url['path'], ['query' => $parsed_url['query']]);
+
+      $client = \Drupal::httpClient();
+      try {
+        $response = $client->get($url->toString());
+        $user = json_decode($response->getBody()->getContents(), TRUE);
+
+        if (!empty($user[0]['labeledURI'])) {
+          return TRUE;
+        }
+      } catch (RequestException $e) {
+        return FALSE;
+      }
+    }
+
+    return FALSE;
+  }
 }

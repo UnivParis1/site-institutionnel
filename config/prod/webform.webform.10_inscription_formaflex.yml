@@ -11,7 +11,8 @@ archive: false
 id: 10_inscription_formaflex
 title: '10 - Inscription FormaFlex'
 description: "<p>Formulaire localisé sur la page FormaFlex</p>\r\n\r\n<p>Formation &gt; FormaFlex</p>"
-category: 'Inscription à une formation'
+categories:
+  - 'Inscription à une formation'
 elements: |-
   nom:
     '#type': textfield
@@ -19,42 +20,38 @@ elements: |-
     '#description_display': before
     '#placeholder': 'Votre nom de famille'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   prenom:
     '#type': textfield
     '#title': Prénom
     '#description_display': before
-    '#placeholder': 'Votre prénom d''usage'
+    '#placeholder': "Votre prénom d'usage"
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
     '#title': Courriel
     '#description_display': before
     '#placeholder': 'par exemple : monadresse@courriel.com'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   filiere:
     '#type': textfield
-    '#title': 'Niveau d''études et filière'
-    '#description': '<p>Votre année et domaine d''études</p>'
+    '#title': "Niveau d'études et filière"
+    '#description': "<p>Votre année et domaine d'études</p>"
     '#description_display': before
     '#placeholder': 'par exemple : L1 MIASHS, M2 Sciences sociales, Doctorat en Histoire, ...'
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   horizontal_rule_01:
     '#type': webform_horizontal_rule
   formation:
     '#type': checkboxes
-    '#title': 'Type d''accompagnement'
+    '#title': "Type d'accompagnement"
     '#multiple': 2
-    '#multiple_error': 'Vous ne pouvez cocher qu''une seule case'
+    '#multiple_error': "Vous ne pouvez cocher qu'une seule case"
     '#help': '<p>Un seul choix possible</p>'
     '#title_display': inline
     '#help_display': title_after
     '#options':
-      Individuel: 'Individuel -- Vous demandez une session d''accompagnement pour vous uniquement'
-      'En groupe': 'En groupe -- Vous demandez une session d''accompagnement pour un groupe de 2 à 4 personnes maximum'
+      Individuel: "Individuel -- Vous demandez une session d'accompagnement pour vous uniquement"
+      'En groupe': "En groupe -- Vous demandez une session d'accompagnement pour un groupe de 2 à 4 personnes maximum"
     '#options_display': side_by_side
     '#required': true
     '#options__properties': ''
@@ -72,7 +69,6 @@ elements: |-
       required:
         ':input[name="formation[En groupe]"]':
           checked: true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#multiple__sorting': false
     '#multiple__add_more': false
     '#multiple__add_more_input': false
@@ -91,11 +87,10 @@ elements: |-
       N'hésitez pas à saisir le maximum de dates pour avoir plus de chances d'avoir un créneau rapidement.</p>
       </div>
       </div>
-    '#help': '<p>Les boutons + et - à droite permettent d''ajouter ou supprimer un créneau.</p>'
+    '#help': "<p>Les boutons + et - à droite permettent d'ajouter ou supprimer un créneau.</p>"
     '#description_display': before
     '#help_display': title_before
     '#required': true
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#multiple__sorting': false
     '#multiple__add_more': false
     '#multiple__add_more_input': false
@@ -115,8 +110,8 @@ elements: |-
     '#description_display': before
     '#help_display': title_after
     '#options':
-      présentiel: 'En présentiel -- Vous demandez une session d''accompagnement dans une salle de la bibliothèque'
-      visio: 'En visio -- Vous demandez une session d''accompagnement en ligne, nous vous enverrons un lien de connexion avant le rendez-vous'
+      présentiel: "En présentiel -- Vous demandez une session d'accompagnement dans une salle de la bibliothèque"
+      visio: "En visio -- Vous demandez une session d'accompagnement en ligne, nous vous enverrons un lien de connexion avant le rendez-vous"
     '#options_display': side_by_side
     '#required': true
     '#options__properties': ''
@@ -126,7 +121,7 @@ elements: |-
     '#help': '<p>Un seul choix possible</p>'
     '#help_display': title_before
     '#options':
-      'Bibliothèque de l''École des Arts de la Sorbonne': 'Bibliothèque de l''École des Arts de la Sorbonne'
+      "Bibliothèque de l'École des Arts de la Sorbonne": "Bibliothèque de l'École des Arts de la Sorbonne"
       'Bibliothèque Ernest-Lavisse': 'Bibliothèque Ernest-Lavisse'
       'Bibliothèque François-Cuzin': 'Bibliothèque François-Cuzin'
       'Bibliothèque Jean-Claude-Colliard': 'Bibliothèque Jean-Claude-Colliard'
@@ -160,34 +155,32 @@ elements: |-
       'Organiser ses révisions de partiel': 'Organiser ses révisions de partiel'
       'Consulter une thèse': 'Consulter une thèse'
       'Mon parcours de thèse : après avoir suivi Cycladoc': 'Mon parcours de thèse : après avoir suivi Cycladoc'
-    '#other__placeholder': 'Par exemple : s''exprimer à l''oral, méthodologie de la fiche de lecture, ...'
+    '#other__placeholder': "Par exemple : s'exprimer à l'oral, méthodologie de la fiche de lecture, ..."
   detaillez_votre_demande:
     '#type': textarea
     '#title': 'Détaillez votre demande'
     '#description': '<p>Vous pouvez préciser la thématique que vous souhaitez aborder, si nécessaire, et/ou vos questions et vos attentes.</p>'
     '#description_display': before
     '#placeholder': 'Dites-nous tout !'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   votre_sujet_de_recherche:
     '#type': textarea
     '#title': 'Votre sujet de recherche'
     '#description': '<p>Si nécessaire</p>'
     '#description_display': before
     '#placeholder': 'Par exemple : Le couvre-chef en Haute-Bretagne et dans le Berry au XVIIIe siècle'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'Je comprends et accepte les conditions de ma demande d''inscription à FormaFlex, décrites ci-dessus'
+    '#title': "Je comprends et accepte les conditions de ma demande d'inscription à FormaFlex, décrites ci-dessus"
     '#help_display': title_before
     '#required': true
-    '#terms_content': '<p>Les conditions sont décrites en haut de cette page : nombre de participant·es, nature de l''accompagnement, modalités de prise de rendez-vous et de réponse de l''équipe formatrice, créneaux disponibles.</p>'
+    '#terms_content': "<p>Les conditions sont décrites en haut de cette page : nombre de participant·es, nature de l'accompagnement, modalités de prise de rendez-vous et de réponse de l'équipe formatrice, créneaux disponibles.</p>"
   info_rgpd:
     '#type': webform_message
     '#message_message': '<p>➜&nbsp;<em>Information sur le <a href="https://donnees-personnelles.pantheonsorbonne.fr/">traitement des données personnelles à l''université</a></em></p>'
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': 'Envoyer la demande d''inscription'
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "Envoyer la demande d'inscription"
 css: ''
 javascript: ''
 settings:
@@ -375,7 +368,7 @@ handlers:
   confirmation_d_envoi_du_formulaire_pour_les_usagers:
     id: email
     handler_id: confirmation_d_envoi_du_formulaire_pour_les_usagers
-    label: 'Confirmation d''envoi du formulaire pour les usagers'
+    label: "Confirmation d'envoi du formulaire pour les usagers"
     notes: ''
     status: true
     conditions: {  }
@@ -412,7 +405,7 @@ handlers:
   notification_d_envoi_de_formulaire_formaflex_pour_le_sfu:
     id: email
     handler_id: notification_d_envoi_de_formulaire_formaflex_pour_le_sfu
-    label: 'Notification d''envoi de formulaire FormaFlex pour le SFU'
+    label: "Notification d'envoi de formulaire FormaFlex pour le SFU"
     notes: ''
     status: true
     conditions: {  }

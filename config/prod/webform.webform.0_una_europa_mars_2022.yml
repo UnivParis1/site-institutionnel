@@ -11,7 +11,7 @@ archive: false
 id: 0_una_europa_mars_2022
 title: '0 - Una Europa mars 2022'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   personal_information:
     '#type': webform_section
@@ -20,12 +20,10 @@ elements: |-
     first_name:
       '#type': textfield
       '#title': 'First Name'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     last_name:
       '#type': textfield
       '#title': 'Last Name'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     email:
       '#type': email
@@ -115,7 +113,6 @@ elements: |-
           visible:
             ':input[name="how_will_you_participate_in_the_meetings_events_"]':
               value: 'I will participate physically'
-        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
         '#date_date_format': ''
         '#date_time_element': timepicker
         '#date_time_placeholder': 'hh:mm'
@@ -127,7 +124,6 @@ elements: |-
           visible:
             ':input[name="how_will_you_participate_in_the_meetings_events_"]':
               value: 'I will participate physically'
-        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
         '#date_date_format': ''
         '#date_time_element': timepicker
         '#date_time_placeholder': 'hh:mm'
@@ -139,7 +135,6 @@ elements: |-
           visible:
             ':input[name="how_will_you_participate_in_the_meetings_events_"]':
               value: 'I will participate physically'
-        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       markup_03:
         '#type': webform_markup
         '#states':
@@ -325,7 +320,6 @@ elements: |-
           visible:
             ':input[name="how_will_you_participate_in_the_meetings_events_"]':
               value: 'I will participate physically'
-        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       do_you_have_any_comments_:
         '#type': textarea
         '#title': 'Do you have any comments?'
@@ -333,10 +327,9 @@ elements: |-
           visible:
             ':input[name="how_will_you_participate_in_the_meetings_events_"]':
               value: 'I will participate physically'
-        '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   by_submitting_this_form_i_agree_that_the_list_of_registrants_wil:
     '#type': checkbox
-    '#title': 'By submitting this form, I agree that the list of registrants will be communicated to the organisers and group''s coordinators'
+    '#title': "By submitting this form, I agree that the list of registrants will be communicated to the organisers and group's coordinators"
     '#required': true
   captcha:
     '#type': captcha
@@ -430,6 +423,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

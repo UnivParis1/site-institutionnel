@@ -270,7 +270,7 @@ class MergeNodeTypes extends ProcessorPluginBase implements BuildProcessorInterf
           $query['sitewide'][] = $filter;
         }
         // Verify when current facet is active.
-        elseif ($first->isActive()) {
+        elseif ($first->isActive() && !empty($query['sitewide']) ) {
           // Remove duplication filter values.
           $updated = TRUE;
           $query['sitewide'] = array_filter($query['sitewide'], function ($param) use ($filter) {

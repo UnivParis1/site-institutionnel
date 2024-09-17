@@ -11,26 +11,23 @@ archive: false
 id: 59_remplir_en_plusieurs_fois_un_
 title: '59 - Remplir en plusieurs fois un formulaire.'
 description: '<p>Webform de test pour valider paramétrage : l’internaute puisse revenir sur les champs renseignés, les modifier et re-soumettre le formulaire.</p>'
-category: ''
+categories: {  }
 elements: |-
   nom_et_prenom_:
     '#type': textfield
     '#title': 'Nom et prénom :'
     '#required': true
-    '#required_error': 'Merci d''indiquer votre nom & prénom'
+    '#required_error': "Merci d'indiquer votre nom & prénom"
     '#default_value': '[current-user:display-name]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   courriel:
     '#type': email
     '#title': Courriel
     '#required': true
-    '#required_error': 'Merci d''indiquer votre courriel'
+    '#required_error': "Merci d'indiquer votre courriel"
     '#default_value': '[current-user:mail]'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   indiquez_le_titre_de_votre_actualite_preferee_:
     '#type': entity_autocomplete
     '#title': 'Indiquez le titre de votre actualité préférée :'
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     '#target_type': node
     '#selection_handler': 'default:node'
     '#selection_settings':
@@ -38,7 +35,7 @@ elements: |-
         news: news
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Envoyer votre réponse'
     '#draft__label': 'Sauvegardez pour revenir + tard'
     '#update__label': 'Mettre à jour votre réponse'
@@ -131,6 +128,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -149,7 +148,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci d''avoir rempli ce formulaire. Votre réponse a été enregistrée.</p>'
+  confirmation_message: "<p>Merci d'avoir rempli ce formulaire. Votre réponse a été enregistrée.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''

@@ -2,10 +2,17 @@ uuid: 2f0c49b8-6c01-4bc7-ad39-be7159da2ce1
 langcode: fr
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.cke_media_resize_large
+    - core.entity_view_mode.media.cke_media_resize_medium
+    - core.entity_view_mode.media.cke_media_resize_small
+    - core.entity_view_mode.media.cke_media_resize_xl
   module:
     - blazy
+    - ckeditor_media_resize
     - editor
     - linkit
+    - media
     - nbsp
     - slick
     - token_filter
@@ -19,7 +26,7 @@ filters:
     id: blazy_filter
     provider: blazy
     status: false
-    weight: 3
+    weight: -35
     settings:
       media_switch: ''
       hybrid_style: ''
@@ -46,7 +53,7 @@ filters:
     id: filter_autop
     provider: filter
     status: false
-    weight: -43
+    weight: -37
     settings: {  }
   filter_caption:
     id: filter_caption
@@ -58,22 +65,22 @@ filters:
     id: filter_html
     provider: filter
     status: false
-    weight: -45
+    weight: -39
     settings:
-      allowed_html: '<p class="h2-style h3-style h4-style h5-style h6-style address">'
+      allowed_html: ''
       filter_html_help: true
       filter_html_nofollow: false
   filter_html_escape:
     id: filter_html_escape
     provider: filter
     status: false
-    weight: -44
+    weight: -38
     settings: {  }
   filter_html_image_secure:
     id: filter_html_image_secure
     provider: filter
     status: false
-    weight: -41
+    weight: -36
     settings: {  }
   filter_htmlcorrector:
     id: filter_htmlcorrector
@@ -84,6 +91,12 @@ filters:
   filter_image_lazy_load:
     id: filter_image_lazy_load
     provider: filter
+    status: true
+    weight: -44
+    settings: {  }
+  filter_resize_media:
+    id: filter_resize_media
+    provider: ckeditor_media_resize
     status: true
     weight: -46
     settings: {  }
@@ -98,20 +111,34 @@ filters:
     id: linkit
     provider: linkit
     status: true
-    weight: -46
+    weight: -43
     settings:
       title: true
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: -45
+    settings:
+      default_view_mode: default
+      allowed_view_modes:
+        cke_media_resize_large: cke_media_resize_large
+        cke_media_resize_medium: cke_media_resize_medium
+        cke_media_resize_small: cke_media_resize_small
+        cke_media_resize_xl: cke_media_resize_xl
+      allowed_media_types:
+        image: image
   nbsp_cleaner_filter:
     id: nbsp_cleaner_filter
     provider: nbsp
     status: true
-    weight: 0
+    weight: -41
     settings: {  }
   slick_filter:
     id: slick_filter
     provider: slick
     status: false
-    weight: 4
+    weight: -34
     settings:
       caption:
         alt: '0'
@@ -155,6 +182,6 @@ filters:
     id: token_filter
     provider: token_filter
     status: false
-    weight: -46
+    weight: -40
     settings:
       replace_empty: '0'

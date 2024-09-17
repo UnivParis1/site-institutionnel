@@ -1,5 +1,6 @@
 <!-- Add you custom twig html here -->
-<div class="footer"><ul>
+<nav role="navigation" aria-label="{{ "Liens utiles footer"|t }}" class="footer">  
+  <ul>
     {% for lien in liens %}
         {% if lien.uri starts with 'http' %}
                 <li><a href="{{ lien.uri }}">{{ lien.title }}</a></li> {# % if not loop.last %}|{ % endif % #}
@@ -7,4 +8,5 @@
 		<li>{{ link(lien.title, lien.uri) }} {# % if not loop.last %}|{ % endif % #}</li>
         {% endif %}
     {% endfor %}
-</ul></div>
+  </ul>
+</nav>

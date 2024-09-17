@@ -1,0 +1,79 @@
+uuid: d192dcc9-8534-49a8-878f-1ba4485bf6c2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.article.body
+    - field.field.node.article.comment
+    - field.field.node.article.field_disable_canonical_url
+    - field.field.node.article.field_image
+    - field.field.node.article.field_publish_master
+    - field.field.node.article.field_sites
+    - field.field.node.article.field_sites_all
+    - field.field.node.article.field_tags
+    - image.style.medium
+    - node.type.article
+  module:
+    - image
+    - text
+    - user
+_core:
+  default_config_hash: 4NcL2hSQZBpJbYtNuh5jC6kyQTcAc1m5bQpTegEWEso
+id: node.article.teaser
+targetEntityType: node
+bundle: article
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: medium
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: -1
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    weight: 100
+    region: content
+  site_id:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  comment: true
+  field_disable_canonical_url: true
+  field_publish_master: true
+  field_sites: true
+  field_sites_all: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true

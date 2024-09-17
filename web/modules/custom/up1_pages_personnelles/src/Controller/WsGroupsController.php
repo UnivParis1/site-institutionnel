@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Queue\QueueWorkerManager;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
@@ -41,6 +42,11 @@ class WsGroupsController extends ControllerBase
    * @var QueueWorkerManager
    */
   protected $queueManager;
+
+  /**
+   * @var $requestStack;
+   */ 
+  protected $request_stack;
 
   /**
    * @param QueueFactory $queue
@@ -147,9 +153,9 @@ class WsGroupsController extends ControllerBase
 
   private function getTrombiFields() {
     $trombi_fields = [];
-    if ($this->getFieldTrombiEc()) {
-      $site = $this->getCurrentSite();
+    $site = $this->getCurrentSite();
 
+    if ($this->getFieldTrombiEc()) {
       $trombi_fields = [
         'supannEntite_pedagogy' => $site->get('supannEntite_pedagogy')->value,
         'supannEntite_research' => $site->get('supannEntite_research')->value,
@@ -163,6 +169,9 @@ class WsGroupsController extends ControllerBase
       $trombi_fields = [
         'supannEntite_doctoralSchool' => 1,
         'supannEntite_research' => 1,
+        'display_school' => ($site->get('display_doctoral_school')->value) ? $site->get('display_doctoral_school')->value : 0, 
+        'viva_subject' => ($site->get('display_viva_subject')->value) ? $site->get('display_viva_subject')->value : 0,
+        'viva_director' => ($site->get('display_viva_director')->value) ? $site->get('display_viva_director')->value : 0
       ];
     }
 
@@ -174,6 +183,27 @@ class WsGroupsController extends ControllerBase
     $site = $this->getCurrentSite();
 
     return $site->get('doc_enabled')->value;
+  }
+
+  private function getDisplayVivaSubject()
+  {
+    $site = $this->getCurrentSite();
+
+    return $site->get('display_viva_subject')->value;
+  }
+
+  private function getDisplayVivaDirector()
+  {
+    $site = $this->getCurrentSite();
+
+    return $site->get('display_viva_director')->value;
+  }
+
+  private function getDisplayDoctoralSchool()
+  {
+    $site = $this->getCurrentSite();
+
+    return $site->get('display_doctoral_school')->value;
   }
 
   private function getSiteId()
@@ -246,6 +276,8 @@ class WsGroupsController extends ControllerBase
     foreach ($users as &$user) {
       $user['doctoralSchool'] = $this->formatTrombiData('doctoralSchool', $user, $site_settings);
       $user['research'] = $this->formatTrombiData('research', $user, $site_settings);
+      $user['subject'] = $this->formatTrombiData('subject', $user, $site_settings);
+      $user['director'] = $this->formatTrombiData('director', $user, $site_settings);
       $user['photo'] = $user_photo . $user['uid'];
     }
 
@@ -669,102 +701,122 @@ class WsGroupsController extends ControllerBase
   private function formatTrombiData($data_to_get, $user, $settings) {
     $drupal_user = user_load_by_name($user['uid']);
     $result = '';
-    $pp = \Drupal::entityTypeManager()
-      ->getStorage('node')
-      ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
-    $page_perso = reset($pp);
+    if (!empty($drupal_user)) {
+      $pp = \Drupal::entityTypeManager()
+        ->getStorage('node')
+        ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+      $page_perso = reset($pp);
 
-    if ($page_perso) {
-      switch ($data_to_get) {
-        case 'skills' :
-          if ($settings['skills_lists']) {
-            if (!empty($terms = $page_perso->get('field_skills')->referencedEntities())) {
-              foreach ($terms as $term) {
-                $result .= '<li>' . $term->getName() . '</li>';
+      if ($page_perso) {
+        switch ($data_to_get) {
+          case 'skills' :
+            if (!empty($settings['skills_lists']) && $settings['skills_lists']) {
+              if (!empty($terms = $page_perso->get('field_skills')->referencedEntities())) {
+                foreach ($terms as $term) {
+                  $result .= '<li>' . $term->getName() . '</li>';
+                }
+              }
+
+            }
+            break;
+          case 'skillsIA' :
+            if (!empty($settings['skills_lists']) && $settings['skills_lists']) {
+              $ia_skills = $page_perso->get('field_ia_skills')->getString();
+              $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
+              if (!empty($ia_skills)) {
+                $selected_skills = explode(', ', $ia_skills);
+                $result_skills = [];
+                foreach ($selected_skills as $a_skill) {
+                  $result_skills[] = '<li>' . $all_skills[$a_skill] . '</li>';
+                }
+                $result = implode('', $result_skills);
+              }
+
+            }
+            break;
+          case 'aboutIA' :
+            if (!empty($settings['about_me']) && $settings['about_me'] ) {
+              $result = (!empty($page_perso->get('field_short_bio')->value)) ? $page_perso->get('field_short_bio')->value : '';
+
+            }
+            break;
+          case 'about' :
+            if (!empty($settings['about_me']) && $settings['about_me']) {
+              $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
+            }
+            break;
+          case 'research' :
+            if (!empty($settings['supannEntite_research']) && $settings['supannEntite_research'] == 1) {
+              $affectation = $user['supannEntiteAffectation-all'];
+              if (!empty($affectation)) {
+                $key_search = array_filter($affectation, function ($item) {
+                  return $item['businessCategory'] == 'research';
+                });
+                if (!empty($key_search)) {
+                  $key_search = reset($key_search);
+                  $result = $key_search['description'];
+                }
               }
             }
-
-          }
-          break;
-        case 'skillsIA' :
-          if ($settings['skills_lists']) {
-            $ia_skills = $page_perso->get('field_ia_skills')->getString();
-            $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
-            if (!empty($ia_skills)) {
-              $selected_skills = explode(', ', $ia_skills);
-              $result_skills = [];
-              foreach ($selected_skills as $a_skill) {
-                $result_skills[] = '<li>' . $all_skills[$a_skill] . '</li>';
+            break;
+          case 'pedagogy' :
+            if (!empty($settings['supannEntite_pedagogy']) && $settings['supannEntite_pedagogy'] == 1) {
+              $affectation = $user['supannEntiteAffectation-all'];
+              if (!empty($affectation)) {
+                $key_search = array_filter($affectation, function ($item) {
+                  return $item['businessCategory'] == 'pedagogy';
+                });
+                if (!empty($key_search)) {
+                  $key_search = reset($key_search);
+                  $result = $key_search['description'];
+                }
               }
-              $result = implode('', $result_skills);
             }
-
-          }
-          break;
-        case 'aboutIA' :
-          if ($settings['about_me'] ) {
-            $result = (!empty($page_perso->get('field_short_bio')->value)) ? $page_perso->get('field_short_bio')->value : '';
-
-          }
-          break;
-        case 'about' :
-          if ($settings['about_me']) {
-            $result = (!empty($page_perso->get('field_about_me')->value)) ? $page_perso->get('field_about_me')->value : '';
-          }
-          break;
-        case 'research' :
-          if ($settings['supannEntite_research'] == 1) {
-            $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'research';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search[0]['description'];
+            break;
+          case 'doctoralSchool' :
+            if (!empty($settings['supannEntite_doctoralSchool']) && $settings['supannEntite_doctoralSchool'] == 1
+            && !empty($settings['display_school']) && $settings['display_school'] == 1 )
+            {
+              $affectation = $user['supannEntiteAffectation-all'];
+              if (!empty($affectation)) {
+                $key_search = array_filter($affectation, function ($item) {
+                  return $item['businessCategory'] == 'doctoralSchool';
+                });
+                if (!empty($key_search)) {
+                  $key_search = reset($key_search);
+                  $result = $key_search['description'];
+                }
+              }
             }
-          }
-          break;
-        case 'pedagogy' :
-          if ($settings['supannEntite_pedagogy'] == 1) {
-            $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'pedagogy';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search['description'];
+            break;
+          case 'role' :
+            if (!empty($settings['supannRole']) && $settings['supannRole'] == 1) {
+              if (!empty($user['supannRoleEntite-all'])) {
+                $role = $user['supannRoleEntite-all'][0];
+                $result = $role['role'] . ' ' . $role['structure']['description'];
+              }
             }
-          }
-          break;
-        case 'doctoralSchool' :
-          if ($settings['supannEntite_doctoralSchool'] == 1) {
-            $affectation = $user['supannEntiteAffectation-all'];
-            $key_search = array_filter($affectation, function ($item) {
-              return $item['businessCategory'] == 'doctoralSchool';
-            });
-            if (!empty($key_search)) {
-              $key_search = reset($key_search);
-              $result = $key_search['description'];
+            break;
+          case 'discipline' :
+            if (!empty($settings['discipline_enseignement']) && $settings['discipline_enseignement'] == 1) {
+              if (!empty($user['info'])) {
+                $result = implode(', ', $user['info']);
+              }
             }
-          }
-          break;
-        case 'role' :
-          if ($settings['supannRole'] == 1) {
-            if (!empty($user['supannRoleEntite-all'])) {
-              $role = $user['supannRoleEntite-all'][0];
-              $result = $role['role'] . ' ' . $role['structure']['description'];
+            break;
+          case 'subject' :
+            if (!empty($settings['viva_subject']) && $settings['viva_subject'] == 1 ) {
+              $result = $page_perso->get('field_thesis_subject')->value;
             }
-          }
-          break;
-        case 'discipline' :
-          if ($settings['discipline_enseignement'] == 1) {
-            if (!empty($user['info'])) {
-              $result = implode(', ', $user['info']);
+            break;
+          case 'director':
+            if (!empty($settings['viva_director']) && $settings['viva_director'] == 1 ) {
+              $result = $page_perso->get('field_phd_supervisor')->value;
             }
-          }
-          break;
-        default:
-          break;
+            break;
+          default:
+            break;
+        }
       }
     }
 
@@ -777,7 +829,7 @@ class WsGroupsController extends ControllerBase
    * @return mixed
    */
   public function getParcoursObsia($username) {
-    if (!$this->maintenancePagePersos()) {
+	  if (!$this->maintenancePagePersos()) {
       return new JsonResponse([ 'data' => $this->getObsiaFields($username), 'method' => 'GET', 'status'=> 200]);
     }
     else {
@@ -796,12 +848,13 @@ class WsGroupsController extends ControllerBase
    */
   public function setParcoursObsia($username) {
     if (!$this->maintenancePagePersos()) {
+      $request = $this->requestStack->getCurrentRequest();
       $data = [];
 
-      $data['bio'] = \Drupal::request()->query->get('bio');
-      $data['formations'] = \Drupal::request()->query->get('formations');
-      $data['projets'] = \Drupal::request()->query->get('projets');
-      $data['skills'] = \Drupal::request()->query->get('skills');
+      $data['bio'] = $request->query->get('bio');
+      $data['formations'] = $request->query->get('formations');
+      $data['projets'] = $request->query->get('projets');
+      $data['skills'] = $request->query->get('skills');
 
       $message = $this->updateObsiaFields($username, $data);
     }
@@ -841,6 +894,7 @@ class WsGroupsController extends ControllerBase
 
     $ids = \Drupal::entityQuery('user')
       ->condition('roles', 'enseignant_doctorant')
+      ->accessCheck(FALSE)
       ->execute();
     $users = User::loadMultiple($ids);
 
@@ -851,6 +905,7 @@ class WsGroupsController extends ControllerBase
         if (array_search($user->get('name')->value, array_column($users_ws_groups, 'uid')) === false) {
           $query = \Drupal::entityQuery('node')
             ->condition('type', 'page_personnelle')
+            ->accessCheck(FALSE)
             ->condition('uid', $user->id());
           $result = $query->execute();
           //The request must retrieve a unique page perso. But due to previous mistakes, we will disable all pages persos.
@@ -886,6 +941,7 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
+        ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $result = $query->execute();
       if (!empty($result) && count($result) == 1) {
@@ -932,10 +988,11 @@ class WsGroupsController extends ControllerBase
     if ($user) {
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'page_personnelle')
+        ->accessCheck(FALSE)
         ->condition('uid', $user->id());
       $nids = $query->execute();
       if ($nids) {
-        foreach ($nids as $nid) {
+	      foreach ($nids as $nid) {
           $page_perso = Node::load($nid);
           $fields[] = [
             'username' => $username,

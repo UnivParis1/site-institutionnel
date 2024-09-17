@@ -14,7 +14,6 @@ dependencies:
     - taxonomy.vocabulary.collections
     - taxonomy.vocabulary.events_types
     - taxonomy.vocabulary.news_topics
-    - taxonomy.vocabulary.offers
     - taxonomy.vocabulary.publication_topics
     - taxonomy.vocabulary.publication_type
     - taxonomy.vocabulary.publishers
@@ -157,7 +156,9 @@ display:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Type -'
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_publication_topics_target_id:
                 plugin_id: default
@@ -165,7 +166,9 @@ display:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Discipline -'
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_publisher_term_target_id:
                 plugin_id: default
@@ -173,7 +176,9 @@ display:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Éditeur -'
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_collection_term_target_id:
                 plugin_id: default
@@ -181,7 +186,9 @@ display:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Collection -'
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
       access:
         type: perm
@@ -402,7 +409,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -677,7 +683,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1090,7 +1095,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1149,18 +1153,22 @@ display:
                 plugin_id: default
                 advanced:
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_news_topic_target_id:
                 plugin_id: default
                 advanced:
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Thématique -'
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_news_date_value:
                 plugin_id: default
                 advanced:
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
       arguments: {  }
       filters:
@@ -1451,7 +1459,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1490,18 +1497,22 @@ display:
                 plugin_id: default
                 advanced:
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_event_type_target_id:
                 plugin_id: default
                 advanced:
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Thématique -'
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_event_date_value:
                 plugin_id: default
                 advanced:
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
       sorts:
         sticky:
@@ -1824,7 +1835,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -2023,17 +2033,21 @@ display:
                 advanced:
                   rewrite:
                     filter_rewrite_values: '- Tout -|- Thématique -'
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               field_event_date_value:
                 plugin_id: default
                 advanced:
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               title:
                 plugin_id: default
                 advanced:
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
       sorts:
         field_event_date_value:
@@ -2380,7 +2394,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -2794,7 +2807,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -3053,7 +3065,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -3203,27 +3214,34 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-        field_offer_type_target_id:
-          id: field_offer_type_target_id
-          table: node__field_offer_type
-          field: field_offer_type_target_id
+        field_category_value:
+          id: field_category_value
+          table: node__field_category
+          field: field_category_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: taxonomy_index_tid
+          plugin_id: list_field
           operator: or
-          value: {  }
+          value:
+            all: all
+            a: a
+            b+a-: b+a-
+            b: b
+            c: c
+            o: o
+            na: na
           group: 1
           exposed: true
           expose:
-            operator_id: field_offer_type_target_id_op
-            label: "Type d'offre"
+            operator_id: field_category_value_op
+            label: Catégorie
             description: ''
             use_operator: false
-            operator: field_offer_type_target_id_op
+            operator: field_category_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: offer
+            identifier: field_category_value
             required: false
             remember: false
             multiple: false
@@ -3236,6 +3254,8 @@ display:
               webmestre_general: '0'
               admin_dir_com: '0'
               administrator: '0'
+              enseignant_doctorant: '0'
+              charge_recrutement: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -3250,11 +3270,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          vid: offers
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
         field_contract_type_value:
           id: field_contract_type_value
           table: node__field_contract_type
@@ -3335,7 +3350,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

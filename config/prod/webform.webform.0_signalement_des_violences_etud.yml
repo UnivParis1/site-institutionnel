@@ -11,7 +11,7 @@ archive: false
 id: 0_signalement_des_violences_etud
 title: '0 - Signalement des violences - etudiants 2'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   caracterisation_de_votre_signalement:
     '#type': webform_section
@@ -41,7 +41,7 @@ elements: |-
   violences_sexistes_et_sexuelles:
     '#type': radios
     '#title': 'Violence(s) sexiste(s) et sexuelle(s)'
-    '#description': '<p>(Geste ou propos injurieux à connotation sexuelle, proposition de nature sexuelle non désirée, comportement ouvertement sexiste, obscène ou portant atteinte à la dignité, envoi de messages ou d''images à connotation sexuelle, pression dans le but réel ou apparent d''obtenir un acte de nature sexuelle, agression sexuelle et/ou agression physique, viol)</p>'
+    '#description': "<p>(Geste ou propos injurieux à connotation sexuelle, proposition de nature sexuelle non désirée, comportement ouvertement sexiste, obscène ou portant atteinte à la dignité, envoi de messages ou d'images à connotation sexuelle, pression dans le but réel ou apparent d'obtenir un acte de nature sexuelle, agression sexuelle et/ou agression physique, viol)</p>"
     '#description_display': before
     '#options':
       Oui: Oui
@@ -90,12 +90,11 @@ elements: |-
     '#options__properties': ''
   pouvez_vous_preciser_l_autre_dispositif_utilise_pour_le_signalem:
     '#type': textfield
-    '#title': 'Pouvez-vous préciser l''autre dispositif utilisé pour le signalement  ?'
+    '#title': "Pouvez-vous préciser l'autre dispositif utilisé pour le signalement  ?"
     '#states':
       visible:
         ':input[name="est_ce_votre_premier_signalement_pour_ces_faits_"]':
           value: NON
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   description_des_faits_votre_temoignage:
     '#type': webform_section
     '#title': 'DESCRIPTION DES FAITS, VOTRE TÉMOIGNAGE'
@@ -103,21 +102,17 @@ elements: |-
       '#type': textarea
       '#title': 'Veuillez décrire succinctement les faits.'
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     a_quelle_date_se_sont_deroules_les_faits_ou_pendant_quelle_perio:
       '#type': textarea
       '#title': 'À quelle date se sont déroulés les faits ou pendant quelle période ?'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     lieu_de_la_situation_ou_des_faits:
       '#type': textarea
       '#title': 'Le lieu de la situation ou des faits :'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
       '#required': true
     indiquez_quels_sont_vos_attentes_et_vos_besoins_vis_a_vis_du_dis:
       '#type': textarea
       '#title': 'Avez-vous des attentes et des besoins particuliers à cette étape de la procédure ?'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   vous_contacter:
     '#type': webform_section
     '#title': 'VOUS CONTACTER'
@@ -127,45 +122,41 @@ elements: |-
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#markup': '<p><strong>Afin que la cellule d''écoute de l’université puisse donner suite à votre signalement, nous vous remercions de nous communiquer les coordonnées sur lesquelles vous souhaitez être contacté.</strong></p>'
+      '#markup': "<p><strong>Afin que la cellule d'écoute de l’université puisse donner suite à votre signalement, nous vous remercions de nous communiquer les coordonnées sur lesquelles vous souhaitez être contacté.</strong></p>"
     votre_nom:
       '#type': textfield
       '#title': 'Votre nom'
       '#required': true
       '#required_error': 'champ obligatoire'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_prenom:
       '#type': textfield
       '#title': 'Votre prénom'
       '#required': true
       '#required_error': 'champ obligatoire'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_courriel:
       '#type': email
       '#title': 'Votre courriel'
+      '#placeholder': marcel.dupont@etu.univ-paris1.fr
+      '#autocomplete': email
       '#required': true
-      '#required_error': 'champ obligatoire'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
+      '#required_error': 'Merci de saisir le champ avec votre adresse courriel du type marcel@bmail.com'
     votre_numero_de_telephone:
       '#type': tel
       '#title': 'Votre numéro de téléphone'
       '#required': true
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     votre_ufr_composante:
       '#type': textfield
-      '#title': 'Votre structure d''inscription (UFR/composante/institut/école doctorale, etc.)'
+      '#title': "Votre structure d'inscription (UFR/composante/institut/école doctorale, etc.)"
       '#states':
         visible:
           ':input[name="je_souhaite_etre_contacte_e_de_maniere_confidentielle_par_l_equi"]':
             value: OUI
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
     numero_etudiant:
       '#type': textfield
       '#title': 'Numéro étudiant'
-      '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   markup_11:
     '#type': webform_markup
-    '#markup': '<p><em>La confidentialité de votre signalement est garantie par la cellule d''écoute de l’université.</em></p>'
+    '#markup': "<p><em>La confidentialité de votre signalement est garantie par la cellule d'écoute de l’université.</em></p>"
   captcha:
     '#type': captcha
     '#captcha_description': 'Le Captcha est un système permettant de vérifier que ce soit bien un humain, et non une machine, qui remplisse le formulaire.'
@@ -173,7 +164,7 @@ elements: |-
     '#type': webform_markup
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#states':
       visible:
         ':input[name="deux_options_possibles_"]':

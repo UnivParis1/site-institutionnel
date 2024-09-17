@@ -9,9 +9,10 @@ uid: 41
 template: false
 archive: false
 id: 11_iedes_eadi_france_journee_d_e
-title: '11 - IEDES - EADI France > Journée d''étude internationale le 31 mars 2022'
+title: "11 - IEDES - EADI France > Journée d'étude internationale le 31 mars 2022"
 description: ''
-category: 'Inscription à un colloque '
+categories:
+  - 'Inscription à un colloque '
 elements: |-
   prenom:
     '#type': textfield
@@ -27,7 +28,6 @@ elements: |-
       visible:
         '':
           empty: ''
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   nom:
     '#type': textfield
     '#title': 'Nom / Last Name'
@@ -42,7 +42,6 @@ elements: |-
       visible:
         '':
           empty: ''
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   fonction_institution:
     '#type': textfield
     '#title': 'Fonction, institution / Function, institution'
@@ -58,7 +57,6 @@ elements: |-
       visible:
         '':
           empty: ''
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   adresse_courriel_e_mail:
     '#type': email
     '#title': 'Adresse courriel / e-mail'
@@ -72,11 +70,10 @@ elements: |-
       visible:
         '':
           '': ''
-    '#multiple__no_items_message': '<p>Aucun élément saisi. Veuillez ajouter des éléments ci-dessous.</p>'
   participation_en_distanciel:
     '#type': checkbox
     '#title': 'participera en distanciel (Zoom) / will follow online'
-    '#description': '<p>participera en distanciel (Zoom) - lien zoom envoyé par courriel la veille de l''événement / will follow online - link to be sent by e-mail the day before the event</p>'
+    '#description': "<p>participera en distanciel (Zoom) - lien zoom envoyé par courriel la veille de l'événement / will follow online - link to be sent by e-mail the day before the event</p>"
     '#description_display': tooltip
     '#required': true
     '#states':
@@ -87,7 +84,7 @@ elements: |-
     '#type': captcha
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': Envoyer
     '#update__label': Reprendre
 css: ''
@@ -177,6 +174,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -291,12 +290,12 @@ handlers:
       cc_options: {  }
       from_mail: iedesevent@univ-paris1.fr
       from_options: {  }
-      from_name: 'Institut d''études du développement de la Sorbonne - EADI France'
+      from_name: "Institut d'études du développement de la Sorbonne - EADI France"
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[réponse automatique/automatic reply] IEDES - EADI France > Journée d''étude internationale / International seminar - 31 March 2022'
+      subject: "[réponse automatique/automatic reply] IEDES - EADI France > Journée d'étude internationale / International seminar - 31 March 2022"
       body: "<img alt=\"IEDES - EADI France &gt; Journée d'étude internationale 31 mars 2022\" data-align=\"center\" data-entity-type=\"file\" data-entity-uuid=\"8084a827-9327-4629-9f54-e1934680fdb2\" height=\"181\" src=\"/sites/default/files/inline-images/Visuel%20JE%2031%2003%202022.png\" width=\"503\" />\r\n<p>Your registration is confirmed.<br />\r\nThe link for online participation (Zoom) will be sent by e-mail the day before the event.</p>\r\n\r\n<hr />\r\n<p>Votre inscription a été prise en compte.<br />\r\nLe lien de connexion pour participer en distanciel (Zoom) vous sera envoyé la veille de l'événement.</p>\r\n\r\n<p>Le comité d'organisation</p>"
       excluded_elements: {  }
       ignore_access: false
