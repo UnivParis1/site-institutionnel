@@ -1,0 +1,285 @@
+uuid: 7bdfb623-5206-46aa-a6e5-edd9fe727448
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sorb_tv_video_with
+    - field.storage.node.field_paragraphs
+    - field.storage.paragraph.field_title
+    - field.storage.node.field_collections
+    - field.storage.node.field_sorb_tv_date_depot
+    - field.storage.node.field_discipline
+    - field.storage.node.field_duree
+    - field.storage.node.field_sorbonne_tv_time_lapse
+    - field.storage.node.field_langue
+    - field.storage.node.field_sorb_tv_langue
+    - field.storage.node.field_sorb_tv_video_directedby
+    - field.storage.node.field_sorb_tv_type
+    - field.storage.node.field_tag_video
+    - field.storage.node.field_video_type
+    - search_api.server.sorbonne_tv
+  module:
+    - paragraphs
+    - node
+    - taxonomy
+    - search_api
+    - up1_search_api
+id: sorbonne_tv_search
+name: 'Sorbonne TV - Search'
+description: ''
+read_only: false
+field_settings:
+  collection_title:
+    label: 'Collections » Contenu » Titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_collections:entity:title'
+    type: text
+    boost: 3.0
+    dependencies:
+      config:
+        - field.storage.node.field_collections
+      module:
+        - node
+  field_collections:
+    label: Collections
+    datasource_id: 'entity:node'
+    property_path: field_collections
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_collections
+  field_discipline:
+    label: Discipline
+    datasource_id: 'entity:node'
+    property_path: field_discipline
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_discipline
+  field_duree:
+    label: Durée
+    datasource_id: 'entity:node'
+    property_path: field_duree
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_duree
+  field_langue:
+    label: Langue
+    datasource_id: 'entity:node'
+    property_path: field_langue
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_langue
+  field_sorb_tv_date_depot:
+    label: 'Date de dépot'
+    datasource_id: 'entity:node'
+    property_path: field_sorb_tv_date_depot
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_sorb_tv_date_depot
+  field_sorb_tv_langue:
+    label: 'Langue (sorb_tv_langue)'
+    datasource_id: 'entity:node'
+    property_path: field_sorb_tv_langue
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_sorb_tv_langue
+  field_sorb_tv_type:
+    label: 'Sorbonne TV - Type'
+    datasource_id: 'entity:node'
+    property_path: field_sorb_tv_type
+    type: text
+    boost: 3.0
+    dependencies:
+      config:
+        - field.storage.node.field_sorb_tv_type
+  field_sorb_tv_video_directedby:
+    label: 'Réalisé par'
+    datasource_id: 'entity:node'
+    property_path: field_sorb_tv_video_directedby
+    type: text
+    boost: 3.0
+    dependencies:
+      config:
+        - field.storage.node.field_sorb_tv_video_directedby
+  field_sorb_tv_video_with:
+    label: Avec
+    datasource_id: 'entity:node'
+    property_path: field_sorb_tv_video_with
+    type: text
+    boost: 3.0
+    dependencies:
+      config:
+        - field.storage.node.field_sorb_tv_video_with
+  field_sorbonne_tv_time_lapse:
+    label: 'Durée (Laps de temps)'
+    datasource_id: 'entity:node'
+    property_path: field_sorbonne_tv_time_lapse
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_sorbonne_tv_time_lapse
+  field_tag_video:
+    label: Tag
+    datasource_id: 'entity:node'
+    property_path: field_tag_video
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_tag_video
+  field_title:
+    label: 'Blocs éditoriaux » Paragraph » Titre'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_title'
+    type: text
+    boost: 8.0
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_title
+      module:
+        - paragraphs
+  field_video_type:
+    label: 'Vidéo type'
+    datasource_id: 'entity:node'
+    property_path: field_video_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_video_type
+  name:
+    label: 'Tag » Terme de taxonomie » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_tag_video:entity:name'
+    type: text
+    boost: 3.0
+    dependencies:
+      config:
+        - field.storage.node.field_tag_video
+      module:
+        - taxonomy
+  node_grants:
+    label: "Information d'accès du nœud."
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Titre
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: 21.0
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - page_sorbonne_tv
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_dates: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -50
+  custom_value: {  }
+  entity_status: {  }
+  entity_type: {  }
+  html_filter:
+    weights:
+      preprocess_index: -50
+      preprocess_query: -48
+    all_fields: true
+    fields:
+      - collection_title
+      - field_langue
+      - field_sorb_tv_langue
+      - field_sorb_tv_type
+      - field_sorb_tv_video_directedby
+      - field_sorb_tv_video_with
+      - field_sorbonne_tv_time_lapse
+      - field_title
+      - name
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+  ignorecase:
+    weights:
+      preprocess_index: -47
+      preprocess_query: -47
+    all_fields: true
+    fields:
+      - collection_title
+      - field_langue
+      - field_sorb_tv_langue
+      - field_sorb_tv_type
+      - field_sorb_tv_video_directedby
+      - field_sorb_tv_video_with
+      - field_sorbonne_tv_time_lapse
+      - field_title
+      - name
+      - title
+  language_with_fallback: {  }
+  rendered_item: {  }
+  transliteration:
+    weights:
+      preprocess_index: -49
+      preprocess_query: -46
+    all_fields: true
+    fields:
+      - collection_title
+      - field_langue
+      - field_sorb_tv_langue
+      - field_sorb_tv_type
+      - field_sorb_tv_video_directedby
+      - field_sorb_tv_video_with
+      - field_sorbonne_tv_time_lapse
+      - field_title
+      - name
+      - title
+tracker_settings:
+  default:
+    indexing_order: lifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
+server: sorbonne_tv

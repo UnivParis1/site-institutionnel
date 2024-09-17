@@ -1,0 +1,85 @@
+uuid: d522d584-280d-4a49-b985-dec22bbf2826
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_ctas.field_button_item
+    - field.field.paragraph.sorbonne_tv_ctas.field_prg_linked_title
+    - field.field.paragraph.sorbonne_tv_ctas.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_ctas.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_ctas
+  module:
+    - field_formatter_class
+    - jquery_minicolors
+    - link_attributes
+    - paragraphs
+id: paragraph.sorbonne_tv_ctas.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_ctas
+mode: default
+content:
+  field_button_item:
+    type: entity_reference_paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+  field_prg_linked_title:
+    type: link_attributes
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+        title: false
+      widget_default_open: expandIfValuesSet
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+  field_sorbonne_tv_prg_color:
+    type: jquery_minicolors_widget
+    weight: 2
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

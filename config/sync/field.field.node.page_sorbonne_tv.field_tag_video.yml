@@ -1,0 +1,29 @@
+uuid: 6999548e-ee72-4260-920d-423ce81d0149
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tag_video
+    - node.type.page_sorbonne_tv
+    - taxonomy.vocabulary.tag_sorbonne_tv
+id: node.page_sorbonne_tv.field_tag_video
+field_name: field_tag_video
+entity_type: node
+bundle: page_sorbonne_tv
+label: Tag
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'site_default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tag_sorbonne_tv: tag_sorbonne_tv
+    sort:
+      field: name
+      direction: asc
+    auto_create: 0
+    auto_create_bundle: ''
+field_type: entity_reference

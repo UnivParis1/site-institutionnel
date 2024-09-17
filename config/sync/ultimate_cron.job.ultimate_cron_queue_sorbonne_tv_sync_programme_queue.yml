@@ -1,0 +1,20 @@
+uuid: 5662c100-e1c1-482c-a3ed-d5cb0ad3a6ac
+langcode: fr
+status: true
+dependencies:
+  module:
+    - sorbonne_tv
+title: 'Queue: Sorbonne TV - Synchro des programmes (API Visionnaire)'
+id: ultimate_cron_queue_sorbonne_tv_sync_programme_queue
+weight: 10
+module: sorbonne_tv
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

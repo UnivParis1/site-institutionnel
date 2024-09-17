@@ -1,0 +1,42 @@
+@mixin radio-as-link($bgcolor, $txtcolor) {
+	[type="radio"] {
+		display: none;
+	}
+
+	/*
+	[type="radio"]:not(:checked) + label {
+		padding: 0 16px !important;
+		background-color: $txtcolor;
+		border-radius: 300px;
+		border: 1px solid $bgcolor;
+		color: $bgcolor;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 700;
+		height: 38px;
+		cursor: pointer;
+	}
+	*/
+
+	[type="radio"] + label {
+		padding: 0 16px !important;
+		background-color: $txtcolor;
+		border-radius: 300px;
+		border: 1px solid $bgcolor;
+		color: $bgcolor;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 700;
+		height: 38px;
+		cursor: pointer;
+	}
+
+	[type="radio"]:checked + label {
+		background-color: $bgcolor;
+		color: $txtcolor;
+	}
+}

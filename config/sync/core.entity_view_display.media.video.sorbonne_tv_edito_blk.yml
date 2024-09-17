@@ -1,0 +1,43 @@
+uuid: ca4c2437-a288-45af-b560-3228333bbd11
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.sorbonne_tv_edito_blk
+    - field.field.media.video.field_media_video_file
+    - media.type.video
+  module:
+    - blazy
+    - field_formatter_class
+    - file
+id: media.video.sorbonne_tv_edito_blk
+targetEntityType: media
+bundle: video
+mode: sorbonne_tv_edito_blk
+content:
+  field_media_video_file:
+    type: file_video
+    label: visually_hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: tags
+      muted: false
+      width: 534
+      height: 314
+    third_party_settings:
+      field_formatter_class:
+        class: video-edito
+      blazy:
+        blazy: false
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

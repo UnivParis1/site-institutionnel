@@ -1,0 +1,69 @@
+uuid: 9dfdb9fb-671b-41c1-a3e8-a6b4740d9e73
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_sorbonne_tv_prg_media
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_text
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_prg_edito
+  module:
+    - jquery_minicolors
+    - text
+id: paragraph.sorbonne_tv_prg_edito.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_prg_edito
+mode: default
+content:
+  field_sorbonne_tv_prg_color:
+    type: jquery_minicolors_widget
+    weight: 1
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_sorbonne_tv_prg_media:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_text:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,25 @@
+<?php
+
+$theme_path = \Drupal::service('theme.manager')->getActiveTheme()->getPath();
+
+include_once $theme_path . '/includes/template.functions.php';
+include_once $theme_path . '/includes/custom.functions.php';
+
+function sorbonne_tv_lmc_preprocess_block__sorbonne_tv_lmc_fluxvideoblock(&$variables) {
+    //$config = \Drupal::config('sorbonne_tv.settings');
+    //$api_flux_video = $config->get('sorbonne_tv.settings.api_flux_video')->getString();
+    //var_dump($api_flux_video);
+}
+
+function sorbonne_tv_lmc_preprocess_field__node__field_media__page_sorbonne_tv(&$variables) {
+    $element = $variables['element'];
+    $view_mode = $element['#view_mode'];
+    $variables['field_vm'] = $view_mode;
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if($node){
+        $variables['node_title'] = $node->getTitle();
+        $variables['node_type'] = $node->get('field_sorb_tv_type')->getString();
+    }
+
+}

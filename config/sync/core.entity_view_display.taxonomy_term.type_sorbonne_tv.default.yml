@@ -1,0 +1,47 @@
+uuid: e8c8fdf8-f996-44e6-bafd-a4b11305a93e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.type_sorbonne_tv.field_icon_type
+    - field.field.taxonomy_term.type_sorbonne_tv.field_id_type
+    - field.field.taxonomy_term.type_sorbonne_tv.field_sorbonne_tv_color
+    - field.field.taxonomy_term.type_sorbonne_tv.field_sorbonne_tv_color_txt
+    - field.field.taxonomy_term.type_sorbonne_tv.field_sorbonne_tv_picto
+    - taxonomy.vocabulary.type_sorbonne_tv
+  module:
+    - media
+    - text
+id: taxonomy_term.type_sorbonne_tv.default
+targetEntityType: taxonomy_term
+bundle: type_sorbonne_tv
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_sorbonne_tv_picto:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_icon_type: true
+  field_id_type: true
+  field_sorbonne_tv_color: true
+  field_sorbonne_tv_color_txt: true
+  include_master: true
+  langcode: true
+  search_api_excerpt: true
+  site_all: true
+  site_id: true

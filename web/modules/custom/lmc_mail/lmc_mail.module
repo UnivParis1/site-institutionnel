@@ -1,0 +1,446 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\file\Entity\File;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
+use Drupal\Core\Form\FormStateInterface;
+
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\Core\Entity\ContentEntityInterface;
+
+/**
+ * Implements hook_mail().
+ */
+function lmc_mail_mail($key, &$message, $params)
+{
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $recipient = user_load_by_mail($message['to']);
+
+  if (is_object($recipient)) {
+    $message['langcode'] = $recipient->getPreferredLangcode();
+  }
+
+  $message_language = (isset($params['language']) ? $params['language'] : (isset($message['langcode']) ? $message['langcode'] : $language));
+  $message['langcode'] = $message_language;
+
+  // From
+  $message['from'] = \Drupal::config('system.site')->get('mail');
+
+  // Chargement du contenu du mail
+  if (!lmc_mail_load_by_key($key, $message, $params, $recipient)) {
+    \Drupal::logger('lmc_mail')->notice('Error loading email @key', ['@key' => $key]);
+  }
+}
+
+
+/**
+ * Set dynamic allowed values for the email_key field.
+ *
+ * @param \Drupal\field\Entity\FieldStorageConfig $definition
+ *   The field definition.
+ * @param \Drupal\Core\Entity\ContentEntityInterface|null $entity
+ *   The entity being created if applicable.
+ * @param bool $cacheable
+ *   Boolean indicating if the results are cacheable.
+ *
+ * @return array
+ *   An array of possible key and value options.
+ *
+ * @see options_allowed_values()
+ */
+function lmc_mail_key_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable)
+{
+  $keys = [];
+
+  $keys['default'] = 'Default key';
+
+
+  \Drupal::moduleHandler()->invokeAll('lmc_mail_keys_alter', [&$keys]);
+
+  return $keys;
+}
+
+/**
+ * Implements hook_mail_alter().
+ */
+function lmc_mail_mail_alter(&$message)
+{
+  global $base_url;
+  $host = \Drupal::request()->getHost();
+  $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'lmc_mail');
+  $img_folder_path = 'https://'. $host .'/'. $module_path .'/images';
+
+  if (!isset($message['lmc_template_disable']) || !$message['lmc_template_disable']) {
+
+    $message['headers']['Return-Path'] = \Drupal::config('system.site')->get('mail');
+    $message['headers']['Sender'] = \Drupal::config('system.site')->get('mail');
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $message_language = (isset($message['langcode']) ? $message['langcode'] : $language);
+
+    // Attachments
+    $attachments = [];
+    if (isset($message['params']['attachments'])) {
+      // Custom attachments set in email parameters
+      foreach ($message['params']['attachments'] as $attachmentKey => $attachmentPath) {
+        if (is_array(($attachmentPath))) {
+          $realpath = \Drupal::service('file_system')->realpath($attachmentPath['filepath']);
+          $attachments[] = [
+            'filecontent' => file_get_contents($realpath),
+            'filename'    => $attachmentPath['filename'],
+            'filemime'    => $attachmentPath['filemime'],
+          ];
+        } else {
+          $attachments[] = [
+            'filecontent' => file_get_contents($attachmentPath),
+            'filename'    => basename($attachmentPath),
+            'filemime'    => mime_content_type($attachmentPath)
+          ];
+        }
+        //  unset($message['params']['attachments'][$attachmentKey]);
+      }
+    }
+    $message['params']['attachments'] = $attachments;
+
+
+    // Attachments configured in email template
+    $email = lmc_mail_getEmailByKey($message['key'], $message['langcode']);
+
+    if (!empty($email)) {
+      if (is_array($email)) {
+        $attachmentIds = explode(',', $email['attachmentIds']);
+      } else {
+        $attachmentIds = array_column($email->get('field_email_attachments')->getValue(), 'target_id');
+      }
+
+      if (!empty($attachmentIds)) {
+        $attachments = File::loadMultiple($attachmentIds);
+
+        foreach ($attachments as $attachment) {
+          $attachmentPath = \Drupal::service('file_system')->realpath($attachment->getFileUri());
+
+          $message['params']['attachments'][] = [
+            'filecontent' => file_get_contents($attachmentPath),
+            'filename'    => basename($attachmentPath),
+            'filemime'    => mime_content_type($attachmentPath)
+          ];
+        }
+      }
+    }
+
+    $config = \Drupal::config('lmc_mail.settings');
+    $disclamer_txts_conf = $config->get('lmc_mail.settings.disclamer');
+    $mail_bottom_disclamer = ''; //'This message is being sent from a law firm and may contain confidential or privileged information. If you are not the intended recipient, please advise the sender immediately and delete this message and any attachments without retaining a copy.';
+
+    if (isset($disclamer_txts_conf['bottom_mail_disclamer']['value'])) {
+      $mail_bottom_disclamer = $disclamer_txts_conf['bottom_mail_disclamer']['value'];
+    }
+
+    $message_start = [];
+
+
+
+    $message_start[] = '<div id="email_content" bgcolor="#ebebeb" style="background-color: #ebebeb; padding: 20px; width: 100%;">'
+      . '<div id="email_content_inner" style="width: 80%; max-width: 1000px; margin: 0 auto;">';
+
+    $logo_mail = $img_folder_path .'/site-logo.png';
+
+    /* Ajout du logo au template de mails */
+    $message_start[] = '<div id="logomail" style="text-align: center; margin-bottom: 20px;">'
+      //. '<a href="' . $base_url . '" title="Centre Hubertine Auclert"><img src="' . file_create_url(theme_get_setting('logo', 'cha')['path']) . '" width="150" style="max-width: 150px; width: 150px; height: auto;" /></a>'
+      . '<a href="' . $base_url . '" title="Sorboonne TV"><img src="' . $logo_mail . '" width="250" style="max-width: 250px; width: 250px; height: auto;" /></a>'
+      . '</div>';
+
+    $message_start[] = '<div id="email_content_box" bgcolor="#ffffff" style="background-color: #ffffff; font-size: 16px; border-color: #dddddd; border-style: solid; border-width: 1px; padding: 20px;">';
+
+    if (count($message['body']) == 1) {
+      $message_body_defaut = [str_replace("\r\n", "<br />", $message['body'][0])];
+    } else {
+      $message_body_defaut = $message['body'];
+    }
+
+    $message_end = [];
+    $message_end[] = '</div>'; /* End of #email_content_box */
+
+    if (!empty($mail_bottom_disclamer)) {
+      $message_end[] = '<div id="footer_mail" style="font-size: 12px; margin-top: 20px;">'
+        . '<div id="disclaimer">' . t($mail_bottom_disclamer, [], ['langcode' => $message_language]) . '</div>'
+        . '</div>';
+    }
+
+    $message_end[] = '</div>' /* End of #email_content_inner */
+      . '</div>'; /* End of #email_content */
+
+    $message_body_start = array_merge($message_start, $message_body_defaut);
+
+    $message['body'] = array_merge($message_body_start, $message_end);
+  }
+}
+
+function lmc_mail_send($key, $mail, $params)
+{
+  if (!empty($mail)) {
+    if (isset($params['language'])) {
+      $langcode = $params['language'];
+    } else {
+      $user = user_load_by_mail($mail);
+
+      if ($user) {
+        $langcode = $user->getPreferredLangcode();
+      } else {
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      }
+    }
+
+    $email = lmc_mail_getEmailByKey($key, $langcode);
+
+    if ($email) {
+      $mailItem = new \stdClass();
+      $mailItem->key    = $key;
+      $mailItem->mail   = $mail;
+      $mailItem->params = $params;
+
+      $queue = \Drupal::service('queue')->get('lmc_mail_direct_queue');
+      $queue->createItem($mailItem);
+
+      \Drupal::logger('lmc_mail')->notice('Queue Mail: @key > @email', ['@key' => $key, '@email' => $mail]);
+    }
+  }
+}
+
+function lmc_mail_load_by_key($key, &$message, $params, $recipient)
+{
+  $email = lmc_mail_getEmailByKey($key, $message['langcode']);
+
+  if ($email) {
+    $emailLoaded = true;
+
+    $params['email'] = $email;
+
+    $tokens = lmc_mail_load_tokens($params);
+
+    if (is_array($email)) {
+      $subject   = lmc_mail_replace_tokens($email['subject'], $tokens);
+      $body      = lmc_mail_replace_tokens($email['body'], $tokens);
+      $add_notif = $email['add_notif'] ?? FALSE;
+    } else {
+      $subject   = lmc_mail_replace_tokens($email->field_email_subject->value, $tokens);
+      $body      = lmc_mail_replace_tokens($email->body->value, $tokens);
+      $add_notif = (isset($email->field_email_add_notification->value) ? $email->field_email_add_notification->value : FALSE);
+    }
+
+    $message['subject'] = $subject;
+    $message['body'][]  = $body;
+
+    // Notifications.
+    if (\Drupal::service('module_handler')->moduleExists('lmc_mail_notifications') && $add_notif && is_object($recipient)) {
+      \Drupal::service('lmc_mail_notifications.service')->addNotificationInfo($subject, $body, $recipient);
+    }
+
+  } else {
+    $emailLoaded = false;
+  }
+
+  return $emailLoaded;
+}
+
+function lmc_mail_getEmailByKey($key, $langcode)
+{
+  $email = null;
+
+  $query = \Drupal::database()->select('node__field_email_key', 'm');
+  $query->addField('m', 'entity_id');
+  $query->condition('m.bundle', 'email', '=');
+  $query->condition('m.field_email_key_value', $key, '=');
+  $email_id = $query->execute()->fetchField();
+
+  if (!empty($email_id)) {
+    try {
+      $email = Node::load($email_id);
+      if ($email->hasTranslation($langcode)) {
+        $email = $email->getTranslation($langcode);
+      }
+    } catch (InvalidArgumentException $exception) {
+      $query = \Drupal::database()->select('node__field_email_key', 'm');
+      $query->addField('m', 'entity_id');
+      $query->addField('emailSubjects', 'field_email_subject_value', 'subject');
+      $query->addField('nodeBodies', 'body_value', 'body');
+      $query->addExpression("GROUP_CONCAT(DISTINCT field_email_attachments_target_id SEPARATOR ',')", 'attachmentIds');
+      $query->join('node__field_email_subject', 'emailSubjects', 'emailSubjects.entity_id = m.entity_id');
+      $query->join('node__body', 'nodeBodies', 'nodeBodies.entity_id = emailSubjects.entity_id');
+      $query->leftJoin('node__field_email_attachments', 'emailAttachments', 'emailAttachments.entity_id = emailSubjects.entity_id');
+      $query->leftJoin('node__field_email_add_notification', 'emailNotif', 'emailNotif.entity_id = emailSubjects.entity_id');
+      $query->addField('emailNotif', 'field_email_add_notification_value', 'add_notif');
+      $query->condition('m.bundle', 'email', '=');
+      $query->condition('m.field_email_key_value', $key, '=');
+      $query->condition('m.langcode', $langcode, '=');
+      $query->groupBy('m.entity_id, field_email_subject_value, nodeBodies.body_value');
+      $email = $query->execute()->fetchAssoc();
+    }
+  } else {
+    \Drupal::logger('lmc_mail')->notice('Email key @key not found', array('@key' => $key));
+  }
+
+  return $email;
+}
+
+function lmc_mail_get_entity_tokens($entityType, $entity)
+{
+  $tokens             = [];
+  $entityFieldManager = \Drupal::service('entity_field.manager');
+
+  $entityBaseType = 'node';
+  if (in_array($entityType, array('user', 'account', 'recipient', 'created_user'))) {
+    //$fields = $entityFieldManager->getFieldDefinitions('user', 'user');
+    $entityBaseType = 'user';
+    $entityBundle = 'user';
+  } else if ($entityType == 'commerce_product') {
+    //$fields = $entityFieldManager->getFieldDefinitions('commerce_product', 'default');
+    $entityBaseType = 'commerce_product';
+    $entityBundle = 'default';
+  } else {
+    $entityBaseType = 'node';
+    $entityBundle = $entityType;
+  }
+  $fields = $entityFieldManager->getFieldDefinitions($entityBaseType, $entityBundle);
+
+  foreach ($fields as $fieldName => $field) {
+    $fieldValue = $entity->get($fieldName)->getValue();
+
+    $tokens[$fieldName] = $fieldValue;
+
+    if ($field->getType() == 'list_string' && isset($fieldValue[0]['value'])) {
+      /*if (in_array($entityType, array('account', 'recipient', 'created_user'))) {
+        $listValues = FieldConfig::load('user.user.' . $fieldName)->getFieldStorageDefinition()->getSettings()['allowed_values'];
+      } else {
+        $listValues = FieldConfig::load('node.' . $entityType . '.' . $fieldName)->getFieldStorageDefinition()->getSettings()['allowed_values'];
+      }*/
+      $listValues = FieldConfig::load($entityBaseType . '.' . $entityBundle . '.' . $fieldName)->getFieldStorageDefinition()->getSettings()['allowed_values'];
+
+      if (is_array($listValues) && array_key_exists($fieldValue[0]['value'], $listValues)) {
+        $tokens[$fieldName][0]['value'] = $listValues[$fieldValue[0]['value']];
+      }
+    } elseif ($field->getType() == 'entity_reference') {
+      $fieldSettings = $field->getSettings();
+
+      if ($fieldSettings['target_type'] == 'taxonomy_term') {
+        if (isset($fieldValue[0]['target_id'])) {
+          $term = Term::load($fieldValue[0]['target_id']);
+
+          if (!empty($term)) {
+            $tokens[$fieldName][0]['value'] = $term->getName();
+          }
+        }
+      } elseif ($fieldSettings['target_type'] == 'user') {
+        $userNames = array();
+        $userIds   = array_column($tokens[$fieldName], 'target_id');
+
+        if (!empty($userIds)) {
+          $users = User::loadMultiple($userIds);
+
+          foreach ($users as $user) {
+            $user_fname = (isset($user->field_user_first_name) ? $user->field_user_first_name->value : '');
+            $user_lname = (isset($user->field_user_last_name) ? $user->field_user_last_name->value : '');
+
+            $userNames[] = $user_fname . ' ' . $user_lname;
+          }
+        }
+
+        $tokens[$fieldName][0]['value'] = implode(', ', $userNames);
+      }
+    }
+  }
+
+    //\Drupal::logger('lmc_mail')->notice('<pre>' . print_r($tokens, TRUE) . '</pre>');
+  return $tokens;
+}
+
+function lmc_mail_load_tokens($emailParameters)
+{
+  $platformURL = Url::fromRoute('<front>', [], ['absolute' => true]);
+  $tokens      = [
+    'general' => [
+      'base_url' => [
+        [
+          'value' => $platformURL->toString()
+        ]
+      ]
+    ]
+  ];
+
+  $entityTypes   = array_keys(\Drupal\node\Entity\NodeType::loadMultiple());
+
+  foreach ($emailParameters as $entityType => $entity) {
+    if (in_array($entityType, $entityTypes)) {
+      $tokens[$entityType] = lmc_mail_get_entity_tokens($entityType, $entity);
+    }
+    elseif ($entityType == 'product') {
+      $tokens[$entityType] = lmc_mail_get_entity_tokens('commerce_product', $entity);
+    }
+    elseif (is_array($entity)) {
+      $tokens[$entityType] = $entity;
+    }
+  }
+
+  // Custom tokens
+  if (isset($emailParameters['custom'])) {
+    foreach ($emailParameters['custom'] as $tokenKey => $tokenValue) {
+      $tokens['custom'][$tokenKey] = [
+        0 => ['value' => $tokenValue]
+      ];
+    }
+  }
+
+  // Permet aux autres modules de déclarer leur propre tokens
+  \Drupal::moduleHandler()->invokeAll('load_lmc_mail_tokens', [&$tokens, $emailParameters]);
+
+  return $tokens;
+}
+
+function lmc_mail_replace_tokens($text, $tokens)
+{
+  $matches = [];
+
+  preg_match_all("/\[[^\]]*\]/", $text, $matches);
+
+  if (isset($matches[0])) {
+    $emailTokens = $matches[0];
+
+    foreach ($emailTokens as $mtk) {
+      $split = explode(':', trim($mtk, '[]'));
+
+      if (isset($split[0]) && $split[0] == 'tk') {
+        $tokenReplaced = false;
+        $mtkEntity     = $split[1];
+        $mtkField      = $split[2];
+
+        if (isset($tokens[$mtkEntity][$mtkField][0]['value'])) {
+          $text          = str_replace($mtk, $tokens[$mtkEntity][$mtkField][0]['value'], $text);
+          $tokenReplaced = true;
+        }
+
+        // Removes token from email body if not found
+        if (!$tokenReplaced) {
+          $text = str_replace($mtk, '', $text);
+        }
+      }
+    }
+  }
+
+  return $text;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function lmc_mail_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  if (in_array($form_id, ['node_email_form', 'node_email_edit_form'])) {
+
+    // Hide notifications field if module is disabled.
+    if (!\Drupal::service('module_handler')->moduleExists('lmc_mail_notifications')) {
+      $form['field_email_add_notification']['#access'] = FALSE;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+uuid: d61d5f20-148d-4a7d-9792-4cb2521c730a
+langcode: fr
+status: false
+dependencies:
+  module:
+    - micro_path
+    - micro_site
+    - sorbonne_tv
+    - system
+  theme:
+    - sorbonne_tv_lmc
+id: sorbonne_tv_lmc_fluxvideoblock
+theme: sorbonne_tv_lmc
+region: content
+weight: -2
+provider: null
+plugin: flux_video_block
+settings:
+  id: flux_video_block
+  label: 'Flux Video Block'
+  label_display: '0'
+  provider: sorbonne_tv
+visibility:
+  site_type:
+    id: site_type
+    negate: false
+    context_mapping: {  }
+    site_type: {  }
+  site:
+    id: site
+    negate: false
+    context_mapping: {  }
+    sites:
+      126: '126'
+    sites_front_page: 0
+  request_path:
+    id: request_path
+    negate: true
+    pages: '/node/*'

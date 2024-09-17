@@ -1,0 +1,29 @@
+uuid: 18cc23ea-90c7-4167-b0be-303c215fe5a3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_sorbonne_tv_playlist_items
+    - node.type.page_sorbonne_tv
+    - paragraphs.paragraphs_type.sorbonne_tv_playlist
+id: paragraph.sorbonne_tv_playlist.field_sorbonne_tv_playlist_items
+field_name: field_sorbonne_tv_playlist_items
+entity_type: paragraph
+bundle: sorbonne_tv_playlist
+label: 'Sorbonne TV - Playlist items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      page_sorbonne_tv: page_sorbonne_tv
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

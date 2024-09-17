@@ -1,0 +1,33 @@
+uuid: ffa90de6-cdf6-41da-99df-9f469dbb2824
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_sorbonne_tv_prg_media
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - paragraphs.paragraphs_type.sorbonne_tv_prg_edito
+id: paragraph.sorbonne_tv_prg_edito.field_sorbonne_tv_prg_media
+field_name: field_sorbonne_tv_prg_media
+entity_type: paragraph
+bundle: sorbonne_tv_prg_edito
+label: 'Sorbonne TV - Media'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      remote_video: remote_video
+      video: video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

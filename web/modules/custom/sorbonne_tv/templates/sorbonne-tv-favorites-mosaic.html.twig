@@ -1,0 +1,17 @@
+
+{%
+  set classes = [
+    'recommended-collection-tpl',
+    'stv-mosaic-tpl',
+    'favorites-tpl',
+    'container',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {% if mosaic %}
+    <div class="videoscollec-item-list mosaic-item-list favorites-item-list">
+      {{ mosaic }}
+    </div>
+  {% endif %}
+</div>
