@@ -71,8 +71,18 @@ class HalManager implements HalInterface {
         ]);
 
         if ($response->getStatusCode() == 200) {
-          $publications = $response->getBody()->getContents();
-          \Drupal::cache()->set($cache_key, $publications, time() + 86400);
+          $contents = $response->getBody()->getContents();
+          $dom = new \DOMDocument();
+          @$dom->loadHTML($contents);
+          $publications = $dom->getElementById('res_script');
+          if ($publications) {
+            $res_script = trim($publications->textContent);
+            if ($res_script != '' && $res_script !== '\u{00A0}') {
+              \Drupal::cache()->set($cache_key, $dom->saveHTML($publications), time() + 86400);
+              return $dom->saveHTML($publications);
+            }
+          }
+          return NULL;
         } else {
           \Drupal::logger('up1_pages_personnelles')->error('Error while fetching HAL data for user : @user', [
             '@user' => $firstname . ' ' . $lastname
