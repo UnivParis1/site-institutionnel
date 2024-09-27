@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup promotrans_tracking
+ */
+function lmc_mail_notifications_schema() {
+  $schema['lmc_mail_notifications'] = [
+    'description' => 'Stores users notifications information',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique notification ID.',
+        'unsigned' => TRUE,
+      ],
+      'uid' => [
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => "User's {users}.uid",
+        'unsigned'    => TRUE,
+      ],
+      'timestamp' => [
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'default'     => \Drupal::time()->getRequestTime(),
+        'description' => 'Notification timestamp',
+        'unsigned'    => TRUE,
+      ],
+      'subject' => [
+        'type'        => 'varchar',
+        'length'      => 255,
+        'not null'    => TRUE,
+        'default'     => '',
+        'description' => 'Notification subject.',
+      ],
+      'body' => [
+        'type'        => 'text',
+        'not null'    => FALSE,
+        'size'        => 'big',
+        'default'     => NULL,
+        'description' => 'Notification text.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'uid'        => ['uid'],
+      'timestamp'  => ['timestamp'],
+    ],
+  ];
+
+  return $schema;
+}
