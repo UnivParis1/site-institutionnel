@@ -78,6 +78,13 @@ function sorbonne_tv_lmc_preprocess_html(&$variables) {
 
     if($ss_type) {
       $variables['attributes']['class'][] = 'stv-sstype-'. $ss_type;
+
+      if($ss_type == 'mosaic') {
+        // Si présence bloc intro
+        if(isset($current_node->body->value) || isset($current_node->field_media->entity)) {
+          $variables['attributes']['class'][] = 'mosaic_w_intro';
+        }
+      }
     }
   }
 
