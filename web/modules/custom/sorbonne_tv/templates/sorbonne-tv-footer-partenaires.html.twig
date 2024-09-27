@@ -1,0 +1,11 @@
+{% if logos|length > 0 %}
+    <ul class="nav d-flex justify-content-center">
+        {% for logo in logos %}
+            {% if logo.image %}
+                <li class="nav-item px-2 col-6 col-md-3">
+                    <a href="{{ logo.lien }}" class="nav-link" target="_blank"><img src="{{ logo.image }}"></a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
