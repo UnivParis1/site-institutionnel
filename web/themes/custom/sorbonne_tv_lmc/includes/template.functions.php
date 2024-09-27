@@ -626,30 +626,7 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
       break;
 
       case 'mosaic':
-        $page_intro_wrapper['mosaic_intro_wrapper'] = [
-          '#type' => 'container',
-          '#attributes' => [
-            'class' => [
-              'mosaic_intro_wrapper',
-            ],
-          ],
-        ];
-
-        if(isset($node->body->value)) {
-          $page_intro_wrapper['mosaic_intro_wrapper']['page-intro'] = [
-            '#type' => 'container',
-            '#attributes' => [
-              'class' => [
-                'page-intro',
-              ]
-            ],
-            'body' => $node->body->view('full'),
-          ];
-        }
-
         if(isset($node->field_media->entity)) {
-          $page_intro_wrapper['mosaic_intro_wrapper']['#attributes']['class'][] = 'col-lg-6';
-
           $page_header_img = $node->field_media->view('sorbonne_tv_notice_page');
 
           $page_intro_wrapper['mosaic_introimg_wrapper'] = [
@@ -664,8 +641,40 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
           ];
         }
 
+        $page_intro_wrapper['mosaic_intro_wrapper'] = [
+          '#type' => 'container',
+          '#attributes' => [
+            'class' => [
+              'mosaic_intro_wrapper',
+            ],
+          ],
+        ];
+
+        if(isset($node->field_media->entity)) {
+          $page_intro_wrapper['mosaic_intro_wrapper']['#attributes']['class'][] = 'col-lg-6';
+        }
+
+        if(isset($node->body->value)) {
+          $page_intro_wrapper['mosaic_intro_wrapper']['page-intro'] = [
+            '#type' => 'container',
+            '#attributes' => [
+              'class' => [
+                'page-intro',
+              ]
+            ],
+            'body' => $node->body->view('full'),
+          ];
+        }
+
         if(isset($node->body->value) || isset($node->field_media->entity)) {
           $variables['page_intro_wrapper'] = $page_intro_wrapper;
+
+          $stc_lighten = 0.3;
+          $empty_color = '#FFD700';
+          $lighten_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->hex2rgba($empty_color, $stc_lighten);
+          $mosaic_intro_wrapper_style = 'background-color: '. $lighten_color .';';
+
+          $variables['mosaic_intro_wrapper_style'] = $mosaic_intro_wrapper_style;
         }
       break;
 

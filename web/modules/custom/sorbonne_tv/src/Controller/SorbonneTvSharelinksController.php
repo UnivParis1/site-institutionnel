@@ -48,6 +48,7 @@ class SorbonneTvSharelinksController extends ControllerBase
       $prg_title_str = '<h2 class="bullet-title"><span class="title-txt">'. t('Ma liste') .'</span><span class="title-bullet"></span></h2>';
 
       $output = '<ul>';
+      $i_count = 1;
       foreach ($nodes as $node) {
         $nid = $node->id();
 
@@ -60,8 +61,9 @@ class SorbonneTvSharelinksController extends ControllerBase
         $date_depot = $node->get('field_sorb_tv_date_depot')->getValue();
         $time_depot = strtotime($date_depot[0]['value']);
 
-        $items[$time_depot] = $article;
+        $items[$time_depot + $i_count] = $article;
         //$items[$time_depot]['#attributes']['class'] = ['video-item-row', 'field--item'];
+        $i_count++;
       }
 
       krsort($items);
@@ -97,7 +99,6 @@ class SorbonneTvSharelinksController extends ControllerBase
         ],
         '#cache' => [
           'contexts' => [
-            'user',
             'cookies:sorbonnefavorites'
           ]
         ]

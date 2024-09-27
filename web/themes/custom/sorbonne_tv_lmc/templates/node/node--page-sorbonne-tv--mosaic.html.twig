@@ -66,23 +66,31 @@
  * @see template_preprocess_node()
  *
  * @ingroup themeable
+ *
+ * Custom variables:
+ *  - mosaic_intro_wrapper_style
+ *
+ *
  */
 #}
 
 <article{{ attributes.addClass('row gx-0') }}>
     <div class="col-12">
+      
+      {% if page_intro_wrapper %}
+        <div class="mosaic_intro_blk d-lg-flex align-items-lg-center" style="{{ mosaic_intro_wrapper_style }}">
+          <div class="container d-lg-flex align-items-lg-center">
+            {{ page_intro_wrapper }}
+          </div>
+        </div>
+      {% endif %}
+      
       <div{{ content_attributes.addClass('container') }}>
         {#
         {% if content.body %}
           <div class="body-wrapper container">{{ content.body }}</div>
         {% endif %}
         #}
-
-        {% if page_intro_wrapper %}
-          <div class="mosaic_intro_blk d-lg-flex align-items-lg-center">
-            {{ page_intro_wrapper }}
-          </div>
-        {% endif %}
 
         {% if content.field_paragraphs %}
           {{ content.field_paragraphs }}
