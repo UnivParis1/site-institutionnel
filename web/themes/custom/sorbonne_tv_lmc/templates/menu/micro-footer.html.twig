@@ -1,0 +1,10 @@
+<!-- Add you custom twig html here -->
+<ul class="nav justify-content-center d-block d-md-flex">
+        {% for lien in liens %}
+            {% if lien.uri starts with 'http' %}
+                <li class="nav-item px-2 col-md-3"><a class="nav-link" href="{{ lien.uri }}">{{ lien.title }}</a></li> {# % if not loop.last %}|{ % endif % #}
+            {% else %}
+                <li class="nav-item px-2 col-md-3">{{ link(lien.title, lien.uri, attributes.addClass('nav-link')) }} {# % if not loop.last %}|{ % endif % #}</li>
+            {% endif %}
+        {% endfor %}
+</ul>

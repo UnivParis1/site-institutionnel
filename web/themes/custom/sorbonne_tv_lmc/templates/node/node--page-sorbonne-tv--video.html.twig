@@ -1,0 +1,221 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ *
+ * Custom variables:
+ *  - ss_type
+ *  - video_thumb
+ *  - video_collections
+ *  - anne_depot
+ *  - date_diffu
+ *  - has_vtt
+ *  - vtt_src
+ *  - vtt_kind
+ *  - vtt_srclang
+ *  - has_audio_for_video
+ *  - is_podcast
+ *  - video_language
+ *  - share_link
+ *  - social_simple_blk
+ *  - browse_collection_blk
+ *  - recommanded_collection_blk
+ *  - is_sensitive
+ *  - sensitive_tag
+ *
+ * @ingroup themeable
+ */
+#}
+
+<article{{ attributes.addClass('row gx-0') }}>
+    <div class="col-12">
+        <div{{ content_attributes.addClass('container', 'd-lg-flex') }}>
+            <div class="notice_video_main col-lg-9">
+
+                {# ------------- VIDEO Player --------------- #}
+                {#
+                {% if node.field_url_video.0.url %}
+                    <div class="video_player">
+                        <div class="video-container">
+                            <video controls src="{{ node.field_url_video.0.url }}" poster="{{ video_thumb }}">
+                                {% if has_vtt and vtt_src %}
+                                    <track label="French" kind="{{ vtt_kind }}" srclang="{{ vtt_srclang }}" src="/themes/custom/sorbonne_tv_lmc/assets/pix.vtt" default />
+                                {% endif %}
+                            </video>
+                        </div>
+                    </div>
+                {% endif %}
+                #}
+
+                {% if node.field_sorb_tv_video_slug.value %}
+                {# ---------------IFRAME Avec src url slug :-------------------------- #}
+                    <div class="video_player">
+                        <div class="video-container">
+                            <iframe src="https://mediatheque.univ-paris1.fr/video/{{ node.field_sorb_tv_video_slug.value }}/?is_iframe=true" width="640" height="360" style="padding: 0; margin: 0; border:0" allowfullscreen title="{{ node.label }}" ></iframe>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {# ------------- VIDEO MAIN --------------- #}
+                <div class="video_main_top d-md-flex">
+                    <div class="video_main_top_l col-md-9">
+                        <h1 class="page-title video-title">{{ label }}</h1>
+
+                        <ul class="video-misc-info d-flex flex-wrap align-items-center">
+
+                            {% if video_collections %}
+                                {% for collection in video_collections %}
+                                    <li class="info-item">{{ collection }}</li>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if anne_depot %}
+                                <li class="info-item">{{ anne_depot }}</li>
+                            {% endif %}
+
+                            {% if video_duration %}
+                                <li class="info-item">{{ video_duration }}</li>
+                            {% endif %}
+
+                            {% if video_language %}
+                                <li class="info-item">{{ video_language }}</li>
+                            {% endif %}
+                        </ul>
+
+                        <div class="video-labels d-flex">
+                            {% if is_sensitive %}
+                                <div class="video-label-item">{{ sensitive_tag }}</div>
+                            {% endif %}
+
+                            {% if is_podcast %}
+                                <div class="video-label-item">Podcast</div>
+                            {% endif %}
+
+                            {% if has_audio_for_video %}
+                                <div class="video-label-item"><span class="icon-ear"></span></div>
+                            {% endif %}
+
+                            {% if has_vtt %}
+                                <div class="video-label-item"><span class="icon-ad"></span></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="video_main_top_r col-md-3">
+                      <ul>
+                        {% if share_link and social_simple_blk %}
+                            <li class="share-item">
+                                {{ share_link }}
+                                {{ social_simple_blk }}
+                            </li>
+                        {% endif %}
+
+                        {% if sorbonne_favorites %}
+                          <li class="fav-item">{{ sorbonne_favorites }}</li>
+                        {% endif %}
+
+                        {% if content.likes %}
+                          <li class="like-item">{{ content.likes }}</li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                </div>
+
+                <div class="video_main_ct">
+                    {% if date_diffu %}
+                        <h2 class="title2 video-date-diffu">
+                            {% trans %}Mis à jour le {{ date_diffu }}{% endtrans %}
+                        </h2>
+                    {% endif %}
+
+                    {% if content.body %}
+                        <div class="video-descr">{{ content.body }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="video_main_bottom">
+                    {% if content.field_sorb_tv_video_directedby %}
+                        {{ content.field_sorb_tv_video_directedby }}
+                    {% endif %}
+                    {% if content.field_sorb_tv_video_with %}
+                        {{ content.field_sorb_tv_video_with }}
+                    {% endif %}
+                </div>
+
+                {# ------------- Parcourir la collection --------------- #}
+                {% if browse_collection_blk %}
+                    {{ browse_collection_blk }}
+                {% endif %}
+            </div>
+
+            {# ------------- VIDEO RIGHT --------------- #}
+            <div class="notice_video_sidebar col-lg-3">
+                {% if recommanded_collection_blk %}
+                    {{ recommanded_collection_blk }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</article>

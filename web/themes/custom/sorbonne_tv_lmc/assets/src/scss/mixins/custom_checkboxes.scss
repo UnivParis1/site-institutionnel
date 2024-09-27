@@ -1,0 +1,46 @@
+@mixin custom-checkboxes-like-link($bgcolor, $txtcolor) {
+
+	[type="checkbox"] {
+		display: none;
+	}
+
+	[type="checkbox"]:not(:checked) + label, [type="checkbox"]:checked + label,
+	[type="checkbox"]:not(:checked) + .facetapi-checkbox, [type="checkbox"]:checked + .facetapi-checkbox {
+		padding: 0 16px !important;
+		background-color: $txtcolor;
+		border-radius: 300px;
+		border: 1px solid $bgcolor;
+		color: $bgcolor;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 700;
+		height: 38px;
+		cursor: pointer;
+	}
+
+	[type="checkbox"]:checked + label,
+	[type="checkbox"]:checked + .facetapi-checkbox {
+		background-color: $bgcolor;
+		color: $txtcolor;
+	}
+
+	[type="checkbox"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before,
+	[type="checkbox"]:not(:checked) + .facetapi-checkbox:before, [type="checkbox"]:checked + .facetapi-checkbox:before {
+		content: none;
+	}
+
+	[type="checkbox"]:not(:checked) + label:after, [type="checkbox"]:checked + label:after,
+	[type="checkbox"]:not(:checked) + .facetapi-checkbox:after, [type="checkbox"]:checked + .facetapi-checkbox:after {
+		content: none;
+	}
+
+	// Focus
+	/*
+	[type="checkbox"]:focus + label,
+	[type="checkbox"]:focus + .facetapi-checkbox {
+		outline: 2px solid $bgcolor;
+	}
+	*/
+}

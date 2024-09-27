@@ -1,0 +1,35 @@
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0 pe-5">
+{% import _self as menus %}
+{{ menus.menu_links(items, attributes, 0) }}
+{% macro menu_links(items, attributes, menu_level) %}
+{% import _self as menus %}
+{% if items %}
+    {% for item in items %}
+        {% if item.below %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{{ item.url }}" role="button" aria-expanded="false">{{ item.title }} <span></span></a>
+                <ul class="dropdown-menu">
+                    {{ menus.menu_links(item.below, item.below.attributes, menu_level + 1) }}
+                </ul>
+            </li>
+        {% else %}
+            <li{{ attributes.addClass('nav-item') }}>
+                {{ link(item.title, item.url, item.attributes.addClass('nav-link')) }}
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endmacro %}
+
+    <li class="shortcuts">
+        {% if shortcuts_links.link1 %}
+            <a href="{{ shortcuts_links.link1 }}" target="_blank"><img src="/themes/custom/sorbonne_tv_lmc/assets/img/icon-embed-1.png"></a>
+        {% endif %}
+        {% if shortcuts_links.link2 %}
+            <a href="{{ shortcuts_links.link2 }}" target="_blank"><img src="/themes/custom/sorbonne_tv_lmc/assets/img/icon-embed-2.png"></a>
+        {% endif %}
+        {% if shortcuts_links.link3 %}
+            <a href="{{ shortcuts_links.link3 }}" target="_blank"><img src="/themes/custom/sorbonne_tv_lmc/assets/img/icon-embed-3.png"></a>
+        {% endif %}
+    </li>
+</ul>

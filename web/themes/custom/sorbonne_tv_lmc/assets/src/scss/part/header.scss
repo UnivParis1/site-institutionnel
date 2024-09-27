@@ -1,0 +1,383 @@
+header {
+  background: white !important;
+
+  @include media-breakpoint-down(lg) {
+    position: relative;
+  }
+
+  // Barre de recherche (Styles globaux)
+  .sorbonne-tv-search-form {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+
+    .form-item-search {
+      @include media-breakpoint-up(lg) {
+        width: calc(100% - 48px); // 100% - taille btn
+      }
+    }
+
+    input.form-text, .form-submit {
+      height: 48px;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin: 0;
+    }
+
+    input.form-text {
+      border-left: none;
+      background: none;
+      padding-left: 5px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+      }
+    }
+
+    .form-submit {
+      border: 1px solid #C3CEDC;
+      border-radius: 16px;
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      background-color: transparent;
+      background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/search.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      font-size: 0;
+      text-indent: -9999px;
+      padding: 0;
+      width: 48px;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  input[type=search], input.form-text {
+    width: 280px;
+    box-sizing: border-box;
+    border: 1px solid #C3CEDC;
+    border-radius: 16px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/search.png');
+    background-position: 16px 16px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+
+    &::placeholder {
+      font-family: "Quicksand", sans-serif;
+      font-optical-sizing: auto;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 25px;
+      color: #506278;
+    }
+
+    &::-webkit-input-placeholder {
+      font-family: "Quicksand", sans-serif;
+      font-optical-sizing: auto;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 25px;
+      color: #506278;
+    }
+  }
+
+  .navbar {
+    background-color: white !important;
+    opacity: 1 !important;
+
+    @include media-breakpoint-down(lg) {
+      padding: 16px 0;
+
+      & > .container {
+        position: relative;
+      }
+      .navbar-toggler {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        color: $black;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $heather;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 0;
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        &[aria-expanded="true"] {
+          .navbar-toggler-icon {
+            background-image: url('../../img/icons/menu_close.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+        }
+      }
+    }
+    @include media-breakpoint-down(md) {
+      .navbar-toggler {
+        left: 15px;
+        right: auto;
+        position: absolute;
+        top: -8px;
+      }
+    }
+
+    .navbar-brand {
+      @include media-breakpoint-down(lg) {
+        display: block;
+        line-height: 0;
+        padding-right: 10px;
+        text-align: left;
+        max-width: 254px;
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+      @include media-breakpoint-down(md) {
+        padding: 0;
+        text-align: center;
+        max-width: 168px;
+        margin: 0 auto;
+      }
+    }
+
+    #navbarMain {
+      @include media-breakpoint-down(lg) {
+        //position: fixed;
+        position: absolute;
+        top: 61px;
+        left: 0;
+        width: 100%;
+        background: $white;
+        color: $secondary;
+        padding: 0 24px;
+
+        a {
+          color: $secondary;
+        }
+      }
+      @include media-breakpoint-down(md) {
+        position: absolute;
+        top: 45px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: calc(100% - 72px); // moins logo et marge
+      }
+    }
+
+    .navbar-nav {
+      .nav-item {
+        @include media-breakpoint-up(lg) {
+          padding: 0 8px;
+        }
+        .nav-link {
+          font-family: "Quicksand", sans-serif;
+          font-optical-sizing: auto;
+          font-size: 16px;
+          font-weight: 400;
+          font-style: normal;
+          line-height: 25px;
+
+          @include media-breakpoint-down(lg) {
+            &.dropdown-toggle {
+              display: flex;
+              align-items: center;
+            }
+          }
+
+          span {
+            background-color: white;
+            background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/chevron.png');
+            background-position: 8px 16px;
+            background-repeat: no-repeat;
+            padding: 8px 16px 0px 16px;
+
+            @include media-breakpoint-down(lg) {
+              display: block;
+              padding: 0;
+              width: 20px;
+              height: 20px;
+              background-position: center;
+              margin-left: auto;
+            }
+          }
+        }
+      }
+
+      .shortcuts {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid $heather;
+
+        a {
+          display: inline-block;
+          margin: 0 8px;
+        }
+
+        @include media-breakpoint-up(lg) {
+          display: none;
+        }
+      }
+
+      @include media-breakpoint-down(lg) {
+        padding: 24px 0 !important;
+
+        & > .nav-item {
+          &:not(:first-child) {
+            border-top: 1px solid $heather;
+            margin-top: 15px;
+            padding-top: 15px;
+          }
+
+          .nav-link {
+            padding: 6px 0;
+          }
+
+          & > .nav-link {
+            font-family: $font-family-Expletus;
+            font-size: 18px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .dropdown{
+      .dropdown-toggle {
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    .dropdown-item {
+      font-family: "Quicksand", sans-serif;
+      font-optical-sizing: auto;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 25px;
+      color: $secondary;
+      padding: 11px 24px 11px 30px !important;
+      background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-editorial.png');
+      background-repeat: no-repeat;
+      background-position: left center;
+
+      @include media-breakpoint-up(lg) {
+        background-position: 10px center;
+        padding-left: 40px !important;
+      }
+
+      &.dropdown-item-editorial {
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-editorial.png');
+      }
+      &.dropdown-item-redaction{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-redaction.png');
+      }
+      &.dropdown-item-projet{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-projet.png');
+      }
+      &.dropdown-item-contact{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-contact.png');
+      }
+      &.dropdown-item-programme{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-programme.png');
+      }
+      .dropdown-item-direct{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-direct.png');
+      }
+      &.dropdown-item-bientot{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-bientot.png');
+      }
+      &.dropdown-item-top{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-top.png');
+      }
+      &.dropdown-item-vu{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-vu.png');
+      }
+      &.dropdown-item-coeur{
+        background-image: url('/themes/custom/sorbonne_tv_lmc/assets/img/dropdown-item-coeur.png');
+      }
+    }
+
+    // Barre de recherche (desktop)
+    .sorbonne-tv-search-form {
+      display: none !important;
+  
+      @include media-breakpoint-up(lg) {
+        display: flex !important;
+        width: 30%;
+      }
+    }
+
+  }
+
+  // Barre de recherche Mobile
+  & > .sorbonne-tv-search-form {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1030;
+    max-width: 24px;
+
+    @include media-breakpoint-up(md) {
+      //right: 86px;
+      right: auto;
+      left: calc(100% - 360px);
+      width: 100%;
+      max-width: 250px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: none !important;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+    .form-item {
+      width: calc(100% - 48px);
+      display: none;
+
+      @include media-breakpoint-up(md) {
+        display: block;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+    .form-submit {
+      @include media-breakpoint-down(md) {
+        width: 24px;
+        height: 24px;
+        border: none;
+      }
+    }
+  }
+}
