@@ -1,0 +1,198 @@
+uuid: 063ce1e1-d02e-455f-b874-c5ceb66f6beb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_filters.field_prg_linked_title
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_disciplines
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_filter_on
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_filter_type
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_prg_bg_color
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_videos_types
+    - field.field.paragraph.sorbonne_tv_filters.field_stv_links_filter_ref
+    - field.field.paragraph.sorbonne_tv_filters.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_filters
+  module:
+    - entity_browser_entity_form
+    - field_formatter_class
+    - inline_entity_form
+    - jquery_minicolors
+    - link_attributes
+    - paragraphs
+    - paragraphs_ee
+    - paragraphs_features
+id: paragraph.sorbonne_tv_filters.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_filters
+mode: default
+content:
+  field_prg_linked_title:
+    type: link_attributes
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+        title: false
+      widget_default_open: expandIfValuesSet
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+  field_sorbonne_tv_disciplines:
+    type: paragraphs
+    weight: 8
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 3
+        delete_confirmation: false
+        show_drag_and_drop: true
+        show_collapse_all: true
+      paragraphs_ee:
+        paragraphs_ee:
+          dialog_off_canvas: false
+          dialog_style: tiles
+  field_sorbonne_tv_filter_on:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sorbonne_tv_filter_type:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sorbonne_tv_prg_bg_color:
+    type: jquery_minicolors_widget
+    weight: 1
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_sorbonne_tv_prg_color:
+    type: jquery_minicolors_widget
+    weight: 0
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_sorbonne_tv_videos_types:
+    type: inline_entity_form_complex
+    weight: 7
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: false
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  field_stv_links_filter_ref:
+    type: paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: sorbonne_tv_links_filter_prg
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 3
+        delete_confirmation: false
+        show_drag_and_drop: true
+        show_collapse_all: true
+      paragraphs_ee:
+        paragraphs_ee:
+          dialog_off_canvas: false
+          dialog_style: tiles
+  field_title:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
