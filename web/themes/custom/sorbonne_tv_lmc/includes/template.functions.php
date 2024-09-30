@@ -689,9 +689,10 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
           $variables['page_intro_wrapper'] = $page_intro_wrapper;
 
           $stc_lighten = 0.3;
-          $empty_color = '#FFD700';
-          $lighten_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->hex2rgba($empty_color, $stc_lighten);
-          $mosaic_intro_wrapper_style = 'background-color: '. $lighten_color .';';
+          $empty_color = '#F1F4F6';
+          //$empty_color = '#FFD700';
+          //$lighten_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->hex2rgba($empty_color, $stc_lighten);
+          $mosaic_intro_wrapper_style = 'background-color: '. $empty_color .';';
 
           $variables['mosaic_intro_wrapper_style'] = $mosaic_intro_wrapper_style;
         }
