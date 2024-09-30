@@ -50,6 +50,7 @@ class SorbonneTvGrilleProgrammesController extends ControllerBase {
                     array_search('morning', $SelectedPeriodArr) !== FALSE 
                     && array_search('noon', $SelectedPeriodArr) !== FALSE 
                     && array_search('evening', $SelectedPeriodArr) !== FALSE
+                    && array_search('night', $SelectedPeriodArr) !== FALSE
                 ) {
                     $allPeriod = TRUE;
                 }
@@ -60,6 +61,13 @@ class SorbonneTvGrilleProgrammesController extends ControllerBase {
 
             foreach($SelectedPeriodArr as $per_k => $per_val) {
                 switch ($per_val) {
+                    case 'night':
+                        $periodFiltersVals[$per_val] = [
+                            'hmin' => 0,
+                            'hmax' => 6,
+                        ];
+                    break;
+
                     case 'morning':
                         $periodFiltersVals[$per_val] = [
                             //'hmin' => 0,

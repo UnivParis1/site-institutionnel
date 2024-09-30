@@ -240,6 +240,66 @@
 
         });
       }
+
+      // Slider prg Filtres "Liens"
+      var filterLinks = [];
+      if ($('.prg_stv_cta_filters_wrapper.prg_stv_cta_filter_links_wrapper').length > 0) {
+        $('.prg_stv_cta_filters_wrapper.prg_stv_cta_filter_links_wrapper').each(function(index) {
+          let ssFilterLinksContainer = $(this);
+
+          if($(this).find('> .field--item').length > 0) {
+            if( $(this).parents('.paragraph--type--sorbonne-tv-filters').find('#filters-links-'+ index +'-slider-arrows').length <= 0 ) {
+              $(this).wrap('<div class="filters-and-arrows container"></div>');
+              $(this).before('<div id="filters-links-'+ index +'-slider-arrows" class="filters-links-slider-arrows"></div>');
+            }
+
+            var responsiveOptions = [];
+
+            var slickOptions = {
+              mobileFirst: false,
+              slidesToShow: 1,
+              //slidesToScroll: 1,
+              centerMode: false,
+              variableWidth: true,
+              accessibility: true,
+              autoplay: false,
+              autoplaySpeed: 5000,
+              infinite: false,
+              equalizeHeight: true,
+              centerPadding: '0',
+              arrows: true,
+              appendArrows: $('#filters-links-'+ index +'-slider-arrows'),
+              prevArrow: '<button class="custo-prev-slide" aria-label="Précédent" type="button"><span class="bi bi-chevron-left"></span></button>',
+              nextArrow: '<button class="custo-next-slide" aria-label="Suivant" type="button"><span class="bi bi-chevron-right"></span></button>',
+              dots: false,
+              responsive: [
+                {
+                  breakpoint: 992,
+                  settings: 'unslick',
+                }
+              ]
+            };
+
+            const ssFilterLinks = $(ssFilterLinksContainer).slick(slickOptions);
+
+            filterLinks[index] = {
+              'ssContainer' : ssFilterLinksContainer,
+              'ss' : ssFilterLinks,
+              'slickOptions' : slickOptions,
+            };
+
+            $(window).on('resize', function() {
+              $.each(filterLinks, function(key, filterLinksElmt) {
+              // on resize, if the width is up than 992, and has no init class, re initialize.
+              if( $(window).width() > 992 && !filterLinksElmt.ss.hasClass('slick-initialized')) {
+                $(filterLinksElmt.ssContainer).slick(filterLinksElmt.slickOptions);
+              }
+              });
+            });
+
+          }
+        });
+      }
       
       var filterTypes = [];
       // Slider prg Filtres par type

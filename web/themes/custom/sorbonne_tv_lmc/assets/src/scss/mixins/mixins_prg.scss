@@ -27,6 +27,7 @@
 
       .thumb_link {
         position: relative;
+        margin-bottom: 24px;
 
         .collection_tag {
           display: inline-flex;
@@ -42,6 +43,9 @@
           height: 34px;
         }
 
+        .video-thumb {
+          margin-bottom: 0;
+        }
         .video-thumb.empty_thumb {
           height: 100%;
         }
@@ -128,7 +132,8 @@
         flex-direction: column;
 
         .item_fields {
-          margin-top: auto
+          //margin-top: auto;
+          //margin-top: 24px;
         }
       }
     }
@@ -365,6 +370,14 @@
             //width: 58%;
             width: calc(100% - 288px);
           }
+
+          .playlist_edito_wrapper + .playlist-and-arrows {
+            width: calc(100% - 288px);
+
+            .playlist_by_collection_blk, .playlist_by_tag_blk, .field--name-field-sorbonne-tv-playlist-items {
+              width: auto;
+            }
+          }
         }
       }  
     }
@@ -552,7 +565,7 @@
   }
 
   // ----- Filtres par type ----- //
-  &.filters_type_types {
+  &.filters_type_types, &.filters_on_mosaic {
     display: flex;
     flex-wrap: wrap;
 
@@ -566,8 +579,14 @@
         width: calc(100% - 120px); // 100% - les fleches slider
       }
     }
-    .prg_stv_cta_filter_types {
+    .prg_stv_cta_filter_types, .prg_stv_cta_filter_links_wrapper {
       width: 100%;
+
+      .paragraph--type--sorbonne-tv-links-filter-prg {
+        @include media-breakpoint-up(lg) {
+          margin-bottom: 16px;
+        }
+      }
     }
     @include slider-arrows();
 
@@ -584,7 +603,7 @@
       position: relative;
       padding: 0;
 
-      .filters-bytypes-slider-arrows {
+      .filters-bytypes-slider-arrows, .filters-links-slider-arrows {
         margin: 0;
         padding: 0;
 
@@ -606,7 +625,7 @@
     }
   }
 
-  .prg_stv_cta_filter_types {
+  .prg_stv_cta_filter_types, .prg_stv_cta_filter_links_wrapper {
     @include media-breakpoint-up(md) {
       display: flex;
       flex-wrap: wrap;
@@ -630,7 +649,7 @@
       font-weight: 700;
       overflow-wrap: anywhere;
 
-      & > a {
+      & > a, .prg_stv_cta_filter_links > a {
         display: flex;
         align-items: center;
         padding: 24px;
@@ -642,6 +661,14 @@
         &:hover {
           text-decoration: underline;
         }
+      }
+
+      .prg_stv_cta_filter_links {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        overflow: hidden;
       }
 
       &:not(:first-child) {
@@ -887,6 +914,26 @@
       width: auto;
       margin-left: 0;
       margin-right: 0;
+
+      .thumb_link {
+        position: relative;
+        display: block;
+        width: 100%;
+
+        .collection_tag {
+          display: inline-flex;
+          align-items: center;
+          padding: 0 10px;
+          border-radius: 100px;
+          background-color: $secondary;
+          color: $white;
+          position: absolute;
+          top: 20px;
+          right: 25px;
+          font-size: 16px;
+          height: 34px;
+        }
+      }
 
       .video-thumb {
         margin-bottom: 24px;

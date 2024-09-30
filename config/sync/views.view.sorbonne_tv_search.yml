@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.storage.node.field_collections
     - field.storage.node.field_sorb_tv_type
     - search_api.index.sorbonne_tv_search
     - taxonomy.vocabulary.discipline_sorbonne_tv
@@ -793,19 +794,6 @@ display:
             label: 'Date de diffusion'
             field_identifier: date_depot
           exposed: true
-        search_api_relevance:
-          id: search_api_relevance
-          table: search_api_index_sorbonne_tv_search
-          field: search_api_relevance
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
       filters:
         field_sorb_tv_type:
           id: field_sorb_tv_type
@@ -925,7 +913,7 @@ display:
             identifier: type
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1086,7 +1074,7 @@ display:
             identifier: langue
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1135,7 +1123,7 @@ display:
             identifier: timelapse
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1184,7 +1172,7 @@ display:
             identifier: tag
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1260,13 +1248,166 @@ display:
         - 'config:field.storage.node.field_sorb_tv_type'
         - 'config:search_api.index.sorbonne_tv_search'
         - 'search_api_list:sorbonne_tv_search'
-  stv_mosaique_page:
-    id: stv_mosaique_page
-    display_title: 'Mosaique Page'
-    display_plugin: page
+  stv_mosaique_collection_block:
+    id: stv_mosaique_collection_block
+    display_title: 'Mosaique Block Collections'
+    display_plugin: block
     position: 1
     display_options:
-      enabled: false
+      enabled: true
+      fields:
+        field_collections:
+          id: field_collections
+          table: search_api_datasource_sorbonne_tv_search_entity_node
+          field: field_collections
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              article:
+                display_method: label
+                view_mode: default
+              email:
+                display_method: label
+                view_mode: default
+              event:
+                display_method: label
+                view_mode: default
+              news:
+                display_method: label
+                view_mode: default
+              offer:
+                display_method: label
+                view_mode: default
+              page:
+                display_method: label
+                view_mode: default
+              page_personnelle:
+                display_method: label
+                view_mode: default
+              page_sorbonne_tv:
+                display_method: label
+                view_mode: default
+              press:
+                display_method: label
+                view_mode: default
+              publication:
+                display_method: label
+                view_mode: default
+              second_level_pages:
+                display_method: label
+                view_mode: default
+              viva:
+                display_method: label
+                view_mode: default
+      pager:
+        type: none
+        options:
+          offset: 0
+      sorts:
+        title:
+          id: title
+          table: search_api_index_sorbonne_tv_search
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: 'Ordre alphabétique'
+            field_identifier: title
+          exposed: true
+        field_duree:
+          id: field_duree
+          table: search_api_index_sorbonne_tv_search
+          field: field_duree
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: Durée
+            field_identifier: timelapse
+          exposed: true
+        field_sorb_tv_date_depot:
+          id: field_sorb_tv_date_depot
+          table: search_api_index_sorbonne_tv_search
+          field: field_sorb_tv_date_depot
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: 'Date de diffusion'
+            field_identifier: date_depot
+          exposed: true
       filters:
         field_sorb_tv_type:
           id: field_sorb_tv_type
@@ -1329,7 +1470,7 @@ display:
             operator: field_discipline_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: disciplines
+            identifier: discipline
             required: false
             remember: false
             multiple: true
@@ -1386,7 +1527,7 @@ display:
             identifier: type
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1441,7 +1582,7 @@ display:
             operator: field_sorb_tv_date_depot_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: date_depot
+            identifier: annee
             required: false
             remember: false
             multiple: false
@@ -1494,7 +1635,7 @@ display:
             operator: field_collections_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: collections
+            identifier: collection
             required: false
             remember: false
             multiple: false
@@ -1547,7 +1688,7 @@ display:
             identifier: langue
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1596,7 +1737,7 @@ display:
             identifier: timelapse
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1622,29 +1763,108 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
+        field_tag_video:
+          id: field_tag_video
+          table: search_api_index_sorbonne_tv_search
+          field: field_tag_video
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_tag_video_op
+            label: Tag
+            description: ''
+            use_operator: false
+            operator: field_tag_video_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: tag
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+              enseignant_doctorant: '0'
+              charge_recrutement: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: tag_sorbonne_tv
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       filter_groups:
         operator: AND
         groups:
           1: AND
+      style:
+        type: html_list
+        options:
+          grouping:
+            -
+              field: field_collections
+              rendered: true
+              rendered_strip: false
+          row_class: 'search-item video-item-row'
+          default_row_class: true
+          uses_fields: true
+          type: ul
+          wrapper_class: 'videoscollec-item-list mosaic-item-list'
+          class: 'search-items videoscollec-list'
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:node':
+              page_sorbonne_tv: sorbonne_tv_mosaic
       defaults:
+        css_class: false
+        pager: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
         filters: false
         filter_groups: false
+      css_class: 'recommended-collection-tpl stv-mosaic-tpl'
       display_description: ''
-      exposed_block: false
+      exposed_block: true
       display_extenders: {  }
-      path: mosaique-videos
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.field_sorb_tv_type'
+        - 'config:field.storage.node.field_collections'
         - 'config:search_api.index.sorbonne_tv_search'
         - 'search_api_list:sorbonne_tv_search'
   stv_search_page:

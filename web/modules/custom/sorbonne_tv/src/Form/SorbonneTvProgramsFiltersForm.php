@@ -54,6 +54,7 @@ class SorbonneTvProgramsFiltersForm extends FormBase
             'morning' => t('Morning'),
             'noon' => t('Noon'),
             'evening' => t('Evening'),
+            'night' => t('Night'),
         ];
         /*
         $form['period'] = [

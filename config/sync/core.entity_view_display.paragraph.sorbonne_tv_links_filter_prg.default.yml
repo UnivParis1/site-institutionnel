@@ -1,0 +1,37 @@
+uuid: 3ddf6c6d-6c38-4aab-b12a-b2cccfd1f5fa
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_links_filter_prg.field_sorbonne_tv_color_txt
+    - field.field.paragraph.sorbonne_tv_links_filter_prg.field_sorbonne_tv_links_filter
+    - field.field.paragraph.sorbonne_tv_links_filter_prg.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_links_filter_prg.field_stv_link_filter_picto
+    - paragraphs.paragraphs_type.sorbonne_tv_links_filter_prg
+  module:
+    - field_formatter_class
+    - link
+id: paragraph.sorbonne_tv_links_filter_prg.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_links_filter_prg
+mode: default
+content:
+  field_sorbonne_tv_links_filter:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      field_formatter_class:
+        class: 'prg_stv_cta_filters_wrapper prg_stv_cta_filter_links'
+    weight: 0
+    region: content
+hidden:
+  field_sorbonne_tv_color_txt: true
+  field_sorbonne_tv_prg_color: true
+  field_stv_link_filter_picto: true
+  search_api_excerpt: true

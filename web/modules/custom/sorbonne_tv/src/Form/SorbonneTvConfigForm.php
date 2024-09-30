@@ -50,6 +50,13 @@ class SorbonneTvConfigForm extends ConfigFormBase
             '#default_value' => isset($api_mediatheque['pwd']) ? $api_mediatheque['pwd'] : '',
             '#required'      => TRUE,
         ];
+        $form['api_mediatheque']['recipients_mail_after_sync'] = [
+            '#type'          => 'textfield',
+            '#title'         => $this->t('Destinataire confirmation synchronisation'),
+            '#default_value' => isset($api_mediatheque['recipients_mail_after_sync']) ? $api_mediatheque['recipients_mail_after_sync'] : '',
+            '#required'      => TRUE,
+            '#description'   => t('Pour renseigner plusieurs valeurs, vous pouvez séparer les adresses mail par une virgule.')
+        ];
 
         $form['api_visionnaire'] = [
             '#type' => 'fieldset',

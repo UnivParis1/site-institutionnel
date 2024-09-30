@@ -37,4 +37,17 @@ class SorbonneTvMailingService
 
     return $users_mails;
   }
+
+  public function getVideosSynchroRecipients():array {
+    $mails = [];
+
+    $config = \Drupal::config('sorbonne_tv.settings');
+    $api_mediatheque = $config->get('sorbonne_tv.settings.api_mediatheque');
+
+    if(isset($api_mediatheque['recipients_mail_after_sync'])) {
+      $mails = explode(',', $api_mediatheque['recipients_mail_after_sync']);
+    }
+
+    return $mails;
+  }
 }

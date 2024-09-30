@@ -109,7 +109,10 @@ class SorbonneTvTitleBlock extends BlockBase {
 
         $block_manager = \Drupal::service('plugin.manager.block');
         $config = [];
-        $plugin_block = $block_manager->createInstance('views_exposed_filter_block:sorbonne_tv_search-stv_mosaique_block', $config);
+        // regroupement par collection du noeud mosaic activé ou non
+        $view_block_name = 'views_exposed_filter_block:sorbonne_tv_search-' . ((isset($current_node->field_sorb_tv_mosaic_colgroup->value) && $current_node->field_sorb_tv_mosaic_colgroup->value) ? 'stv_mosaique_collection_block' : 'stv_mosaique_block');
+
+        $plugin_block = $block_manager->createInstance($view_block_name, $config);
         $access_result = $plugin_block->access(\Drupal::currentUser());
 
         $filters_form = $plugin_block->build();

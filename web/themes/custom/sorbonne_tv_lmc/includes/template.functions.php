@@ -78,6 +78,13 @@ function sorbonne_tv_lmc_preprocess_html(&$variables) {
 
     if($ss_type) {
       $variables['attributes']['class'][] = 'stv-sstype-'. $ss_type;
+
+      if($ss_type == 'mosaic') {
+        // Si présence bloc intro
+        if(isset($current_node->body->value) || isset($current_node->field_media->entity)) {
+          $variables['attributes']['class'][] = 'mosaic_w_intro';
+        }
+      }
     }
   }
 
@@ -309,6 +316,72 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
             $variables['video_thumb_recom_img'] = $video_thumb_recom_img;
           }
         }
+        elseif ($view_mode == 'sorbonne_tv_mosaique_collection') {
+          $collections = $node->field_collections->referencedEntities();
+          $collection = reset($collections);
+
+          // Mosaic regroupée par collections : on remplace les variables du template par les valeurs de la collection du noeud video
+          if ($collection) {
+            // thumbnail
+            if(isset($collection->field_media->target_id)) {
+              $collec_thumb_mosaic_img = $collection->field_media->view('sorbonne_tv_video_grid');
+
+              $variables['collect_thumb'] = $collec_thumb_mosaic_img;
+            }
+            else {
+              $stc_lighten = 0.3;
+              $empty_color = '#ffd661';
+              $lighten_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->hex2rgba($empty_color, $stc_lighten);
+              $theme_path = \Drupal::service('extension.list.theme')->getPath('sorbonne_tv_lmc');
+
+              // TODO : Essayer si possible de générer une img avec style d'image à partir d'image source dans le theme
+              $empty_img_url = '';
+              $empty_img = '';
+
+              /*
+              $image_relative_path = 'collection_empty_thumb.png';
+              $image_uri = 'public://' . $image_relative_path;
+              $empty_img_arr = [
+                '#theme' => 'image_style',
+                '#style_name' => 'sorbonne_tv_notice_collection_video_list_large',
+                '#uri' => '/'. $theme_path .'/img/elements/collection_empty_thumb.png',
+              ];
+              $empty_img = \Drupal::service('renderer')->render($empty_img_arr);
+              */
+
+              /*
+              $original_image = '/'. $theme_path .'/assets/img/elements/collection_empty_thumb.png';
+              //$oi_uri = \Drupal::service('file_url_generator')->generateAbsoluteString($original_image);
+              $style = \Drupal::entityTypeManager()->getStorage('image_style')->load('sorbonne_tv_notice_collection_video_list_large');
+              $destination = $style->buildUri($original_image);
+              if (!file_exists($destination)) {
+                $style->createDerivative($original_image, $destination);
+              }
+              $empty_img_url = $style->buildUrl($original_image);
+              */
+              
+
+              $collection_empty_thumb = '<div class="video-thumb empty_thumb" style="background-color: '. $lighten_color .';"><div class="empty_thumb_inner">'
+                .$empty_img
+                //.'<img src="'. $empty_img_url .'" />'
+              .'</div></div>';
+              $variables['collect_thumb'] = Markup::create($collection_empty_thumb);
+    
+            }
+            // titre
+            $variables['label'] = $collection->getTitle();
+            // lien
+            $url = Url::fromRoute('entity.node.canonical', ['node' => $collection->id()], []);
+            $variables['url'] = $url->toString();
+            // body
+            $variables['content']['body'] = $collection->get('body')->view('sorbonne_tv_mosaique_collection');
+
+            // c'est un regroupement
+            $variables['collection_tag'] = TRUE;
+          }
+
+          $variables['#cache']['max-age'] = 0;
+        }
 
         // Get Disciplines & Collections Filters
         $disciplinesFilter = \Drupal::service('sorbonne_tv.videos_service')->getVideoDisciplinesContextualFiltersFormat($node);
@@ -514,7 +587,7 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
         $sensitive_tag = '';
         if(isset($node->field_tag_video->target_id)) {
           if($video_tag_terms = $node->field_tag_video->ReferencedEntities()) {
-          
+
             foreach($video_tag_terms as $tag_k => $tag) {
               if( strtolower($tag->getName()) == 'contenu sensible') {
                 $is_sensitive = TRUE;
@@ -560,6 +633,21 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
       break;
 
       case 'mosaic':
+        if(isset($node->field_media->entity)) {
+          $page_header_img = $node->field_media->view('sorbonne_tv_notice_page');
+
+          $page_intro_wrapper['mosaic_introimg_wrapper'] = [
+            '#type' => 'container',
+            '#attributes' => [
+              'class' => [
+                'mosaic_introimg_wrapper',
+                'col-lg-6',
+              ],
+            ],
+            $page_header_img,
+          ];
+        }
+
         $page_intro_wrapper['mosaic_intro_wrapper'] = [
           '#type' => 'container',
           '#attributes' => [
@@ -568,6 +656,10 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
             ],
           ],
         ];
+
+        if(isset($node->field_media->entity)) {
+          $page_intro_wrapper['mosaic_intro_wrapper']['#attributes']['class'][] = 'col-lg-6';
+        }
 
         if(isset($node->body->value)) {
           $page_intro_wrapper['mosaic_intro_wrapper']['page-intro'] = [
@@ -581,25 +673,15 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
           ];
         }
 
-        if(isset($node->field_media->entity)) {
-          $page_intro_wrapper['mosaic_intro_wrapper']['#attributes']['class'][] = 'col-lg-6';
-
-          $page_header_img = $node->field_media->view('sorbonne_tv_notice_page');
-          
-          $page_intro_wrapper['mosaic_introimg_wrapper'] = [
-            '#type' => 'container',
-            '#attributes' => [
-              'class' => [
-                'mosaic_introimg_wrapper',
-                'col-lg-6',
-              ],
-            ],
-            $page_header_img,
-          ];
-        }
-
         if(isset($node->body->value) || isset($node->field_media->entity)) {
           $variables['page_intro_wrapper'] = $page_intro_wrapper;
+
+          $stc_lighten = 0.3;
+          $empty_color = '#FFD700';
+          $lighten_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->hex2rgba($empty_color, $stc_lighten);
+          $mosaic_intro_wrapper_style = 'background-color: '. $lighten_color .';';
+
+          $variables['mosaic_intro_wrapper_style'] = $mosaic_intro_wrapper_style;
         }
       break;
 
@@ -634,7 +716,7 @@ function sorbonne_tv_lmc_preprocess_media(&$variables) {
 
   if($vm == 'sorbonne_tv_numbered_list') {
     $media_bundle = $the_media->bundle();
-    
+
     if($media_bundle == 'image') {
     }
   }
@@ -707,7 +789,7 @@ function sorbonne_tv_lmc_preprocess_paragraph(&$variables) {
         $prg_styles = 'background-color: '. $paragraph->field_sorbonne_tv_prg_bg_color->value .';';
         $variables['attributes']['class'][] = 'has_bgcolor';
       }
-      
+
       if(!empty($prg_styles)) {
         $variables['attributes']['style'] = $prg_styles;
       }
@@ -806,7 +888,7 @@ function sorbonne_tv_lmc_preprocess_paragraph(&$variables) {
         if($args_spe) {
           $playlist_blk['block_content']['playlist']['#arguments'][] = $args_spe;
         }
-        
+
         if($args_disciplines) {
           $playlist_blk['block_content']['playlist']['#arguments'][] = implode(',', $args_disciplines);
         }
@@ -827,16 +909,21 @@ function sorbonne_tv_lmc_preprocess_paragraph(&$variables) {
 
     case 'sorbonne_tv_filters':
       $prg_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->get_prg_color($paragraph);
-      
+
       // Couleur de fond
       $prg_styles = '';
       if(isset($paragraph->field_sorbonne_tv_prg_bg_color->value)) {
         $prg_styles = 'background-color: '. $paragraph->field_sorbonne_tv_prg_bg_color->value .';';
         $variables['attributes']['class'][] = 'has_bgcolor';
       }
-      
+
       if(!empty($prg_styles)) {
         $variables['attributes']['style'] = $prg_styles;
+      }
+
+      if(isset($paragraph->field_sorbonne_tv_filter_on->value)) {
+        $filter_on = $paragraph->field_sorbonne_tv_filter_on->value;
+        $variables['attributes']['class'][] = 'filters_on_'. $filter_on;
       }
 
       if(isset($paragraph->field_sorbonne_tv_filter_type->value)) {
@@ -869,7 +956,7 @@ function sorbonne_tv_lmc_preprocess_paragraph(&$variables) {
         }
       }
     break;
-    
+
     case 'stv_discipline_filters_item':
       $prg_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->get_prg_color($paragraph);
 
@@ -963,7 +1050,7 @@ function sorbonne_tv_lmc_preprocess_paragraph(&$variables) {
         }
       }
     break;
-    
+
     default:
     break;
   }
@@ -980,12 +1067,12 @@ function sorbonne_tv_lmc_preprocess_field (&$variables, $hook) {
 
   switch($field_name) {
     case 'field_date_maj':
-      
+
       if(
-        $view_mode == 'sorbonne_tv_video_notice_recommanded' 
-        || $view_mode == 'sorbonne_tv_video_grid' 
-        || $view_mode == 'sorbonne_tv_numbered_list' 
-        || $view_mode == 'sorbonne_tv_playlist' 
+        $view_mode == 'sorbonne_tv_video_notice_recommanded'
+        || $view_mode == 'sorbonne_tv_video_grid'
+        || $view_mode == 'sorbonne_tv_numbered_list'
+        || $view_mode == 'sorbonne_tv_playlist'
       ) {
         $def_oput = $variables['items'][0]['content'];
 
@@ -1009,10 +1096,10 @@ function sorbonne_tv_lmc_preprocess_field (&$variables, $hook) {
           $parent_bundle = $parent_paragraph->bundle();
 
           if(
-            $parent_bundle == 'sorbonne_tv_prg_numbered_list' 
-            || $parent_bundle == 'sorbonne_tv_playlist' 
-            || $parent_bundle == 'sorbonne_tv_ctas' 
-            || $parent_bundle == 'sorbonne_tv_filters' 
+            $parent_bundle == 'sorbonne_tv_prg_numbered_list'
+            || $parent_bundle == 'sorbonne_tv_playlist'
+            || $parent_bundle == 'sorbonne_tv_ctas'
+            || $parent_bundle == 'sorbonne_tv_filters'
           ) {
             $prg_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->get_prg_color($parent_paragraph);
             $prg_lighten_color = FALSE;
@@ -1043,10 +1130,10 @@ function sorbonne_tv_lmc_preprocess_field (&$variables, $hook) {
           $parent_bundle = $parent_paragraph->bundle();
 
           if(
-            $parent_bundle == 'sorbonne_tv_prg_numbered_list' 
-            || $parent_bundle == 'sorbonne_tv_playlist' 
-            || $parent_bundle == 'sorbonne_tv_ctas' 
-            || $parent_bundle == 'sorbonne_tv_filters' 
+            $parent_bundle == 'sorbonne_tv_prg_numbered_list'
+            || $parent_bundle == 'sorbonne_tv_playlist'
+            || $parent_bundle == 'sorbonne_tv_ctas'
+            || $parent_bundle == 'sorbonne_tv_filters'
           ) {
 
             $prg_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->get_prg_color($parent_paragraph);
@@ -1112,7 +1199,7 @@ function sorbonne_tv_lmc_preprocess_field (&$variables, $hook) {
       if (isset($element['#object'])) {
         if ($parent_paragraph = $element['#object']) {
           $parent_bundle = $parent_paragraph->bundle();
-          
+
           if($parent_bundle == 'sorbonne_tv_playlist') {
             $prg_tpl = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->get_prg_playlist_tpl($parent_paragraph);
             $variables['prg_tpl'] = $prg_tpl;
@@ -1182,8 +1269,61 @@ function sorbonne_tv_lmc_preprocess_field (&$variables, $hook) {
         $searchQuery['type'] = $item_term->id();
         $filter_mk = Markup::create($new_output);
         $filter_link_str = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->set_views_filter_link('view.sorbonne_tv_search.stv_search_page', $searchQuery, 'link_string', $filter_mk);
-        
+
         $variables['items'][$delta]['content'] = Markup::create($filter_link_str);
+      }
+    break;
+
+    case 'field_sorbonne_tv_links_filter':
+      if (isset($element['#object'])) {
+        if ($parent_paragraph = $element['#object']) {
+          $parent_bundle = $parent_paragraph->bundle();
+
+          if($parent_bundle == 'sorbonne_tv_links_filter_prg') {
+            $picto = FALSE;
+            $color = FALSE;
+            $bgcolor = FALSE;
+            if (isset($parent_paragraph->field_stv_link_filter_picto->entity->field_media_image_3->entity)) {
+              $picto_obj = $parent_paragraph->field_stv_link_filter_picto->entity->field_media_image_3->entity;
+
+              if ($picto_obj) {
+                $picto_uri = $picto_obj->getFileUri();
+                $picto_url = ImageStyle::load('sorbonne_tv_picto')->buildUrl($picto_uri);
+
+                $picto = '<img src="'. $picto_url .'" width="" height="" />';
+              }
+            }
+
+            if(isset($parent_paragraph->field_sorbonne_tv_color_txt->value)) {
+              $color = $parent_paragraph->field_sorbonne_tv_color_txt->value;
+            }
+            if(isset($parent_paragraph->field_sorbonne_tv_prg_color->value)) {
+              $bgcolor = $parent_paragraph->field_sorbonne_tv_prg_color->value;
+            }
+
+            foreach ($variables['items'] as $delta => $item) {
+              $def_content = $variables['items'][$delta]['content'];
+
+              $new_title = ($picto ? '<span class="item_icon">'. $picto .'</span>' : '') .'<span class="item_title">'. $def_content['#title'] .'</span>';
+              $filter_mk = Markup::create($new_title);
+
+              $variables['items'][$delta]['content']['#title'] = $filter_mk;
+              $link_style = '';
+
+              if($color) {
+                $link_style .= (!empty($link_style) ? ' ' : '') .'color: '. $color .';';
+              }
+              if($bgcolor) {
+                $link_style .= (!empty($link_style) ? ' ' : '') .'background-color: '. $bgcolor .';';
+              }
+
+              if(!empty($link_style)) {
+                $variables['items'][$delta]['content']['#options']['attributes']['style'] = $link_style;
+              }
+
+            }
+          }
+        }
       }
     break;
 
@@ -1204,6 +1344,23 @@ function sorbonne_tv_lmc_preprocess_views_view(&$variables) {
   if ($view_id == 'sorbonne_tv_search' && $display_id == 'stv_search_page') {
     $variables['attributes']['class'][] = 'programs-page-wrapper';
     $variables['attributes']['class'][] = 'container';
+  }
+}
+
+function sorbonne_tv_lmc_preprocess_views_view_list(&$variables) {
+  $view = $variables['view'];
+  $view_id    = $view->storage->id();
+  $display_id = $view->current_display;
+  $rows = $variables['rows'];
+
+  if ($view_id == 'sorbonne_tv_search' && $display_id == 'stv_mosaique_collection_block') {
+    $nb_rows = count($rows); // rows correspond à un regroupement
+    if($nb_rows > 1) { // S'il y a plus d'une video dans le regroupement par collection
+      foreach ($rows as $id => $row) {
+        // Change le display mode du noeud video
+        $variables['rows'][$id]['content']['#view_mode'] = 'sorbonne_tv_mosaique_collection';
+      }
+    }
   }
 }
 

@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.paragraph.sorbonne_tv_filters.field_prg_linked_title
     - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_disciplines
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_filter_on
     - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_filter_type
     - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_prg_bg_color
     - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_prg_color
     - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_videos_types
+    - field.field.paragraph.sorbonne_tv_filters.field_stv_links_filter_ref
     - field.field.paragraph.sorbonne_tv_filters.field_title
     - paragraphs.paragraphs_type.sorbonne_tv_filters
   module:
@@ -47,7 +49,7 @@ content:
         class: ''
   field_sorbonne_tv_disciplines:
     type: paragraphs
-    weight: 6
+    weight: 8
     region: content
     settings:
       title: Paragraph
@@ -75,9 +77,15 @@ content:
         paragraphs_ee:
           dialog_off_canvas: false
           dialog_style: tiles
-  field_sorbonne_tv_filter_type:
+  field_sorbonne_tv_filter_on:
     type: options_select
     weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sorbonne_tv_filter_type:
+    type: options_select
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -127,7 +135,7 @@ content:
     third_party_settings: {  }
   field_sorbonne_tv_videos_types:
     type: inline_entity_form_complex
-    weight: 5
+    weight: 7
     region: content
     settings:
       form_mode: default
@@ -145,6 +153,38 @@ content:
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
+  field_stv_links_filter_ref:
+    type: paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: sorbonne_tv_links_filter_prg
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 3
+        delete_confirmation: false
+        show_drag_and_drop: true
+        show_collapse_all: true
+      paragraphs_ee:
+        paragraphs_ee:
+          dialog_off_canvas: false
+          dialog_style: tiles
   field_title:
     type: string_textfield
     weight: 3

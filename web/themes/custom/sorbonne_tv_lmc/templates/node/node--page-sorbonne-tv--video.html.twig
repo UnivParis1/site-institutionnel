@@ -171,12 +171,13 @@
                                 {{ social_simple_blk }}
                             </li>
                         {% endif %}
-                        {% if content.likes %}
-                          <li class="like-item">{{ content.likes }}</li>
-                        {% endif %}
 
                         {% if sorbonne_favorites %}
                           <li class="fav-item">{{ sorbonne_favorites }}</li>
+                        {% endif %}
+
+                        {% if content.likes %}
+                          <li class="like-item">{{ content.likes }}</li>
                         {% endif %}
                       </ul>
                     </div>
@@ -185,7 +186,7 @@
                 <div class="video_main_ct">
                     {% if date_diffu %}
                         <h2 class="title2 video-date-diffu">
-                            {% trans %}Diffusé le {{ date_diffu }}{% endtrans %}
+                            {% trans %}Mis à jour le {{ date_diffu }}{% endtrans %}
                         </h2>
                     {% endif %}
 
