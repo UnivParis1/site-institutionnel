@@ -152,6 +152,7 @@ function sorbonne_tv_lmc_preprocess_block(&$variables) {
  * Implements hook_preprocess_HOOK() for page templates.
  */
 function sorbonne_tv_lmc_preprocess_node(&$variables) {
+  $currentRoute = \Drupal::service('current_route_match')->getRouteName();
   $view_mode = $variables['view_mode'];
   $node = $variables['node'];
   $node_type = $node->getType();
@@ -275,6 +276,17 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
 
               $variables['empty_thumb_attr'] = $empty_thumb_attr;
             }
+          }
+          elseif($currentRoute == 'sorbonne_tv.grille_programmes') {
+            // Si on est sur la sidebar de la grille de programme
+            $stc_prg_lighten = 0.3;
+            $empty_thumb_attr = new Attribute();
+            $prg_color = '#ffd661';
+            $prg_lighten_color = \Drupal::service('sorbonne_tv.sorbonne_tv_service')->hex2rgba($prg_color, $stc_prg_lighten);
+
+            $empty_thumb_attr->setAttribute('style', 'background-color: '. $prg_lighten_color .';');
+
+            $variables['empty_thumb_attr'] = $empty_thumb_attr;
           }
         }
       break;

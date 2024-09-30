@@ -86,13 +86,50 @@
             background-size: 60px auto;
           }
 
+          .empty-date {
+            @include media-breakpoint-down(md) {
+              min-height: 0;
+              margin: 0;
+              display: none;
+            }
+
+            @include media-breakpoint-up(lg) {
+              min-height: 0;
+              margin: 0;
+              display: none;
+            }
+          }
+
+          .thumb_link {
+            .video-thumb {
+              margin-bottom: 16px;
+
+              @include media-breakpoint-up(md) {
+                margin-bottom: 16px;
+              }
+
+              @include media-breakpoint-up(lg) {
+                margin-bottom: 0;
+              }
+            }
+          }
+
           &.page_sorbonne_tv_collection {
             .thumb_link {
               @include media-breakpoint-up(md) {
-                min-height: 121px; // 97 + 24 de marge
+                min-height: 100px;
+                margin-bottom: 16px;
+
+                .video-thumb.empty_thumb {
+                  min-height: 100px;
+                }
               }
               @include media-breakpoint-up(lg) {
-                min-height: 160px;
+                min-height: 140px;
+                
+                .video-thumb.empty_thumb {
+                  min-height: 140px;
+                }
               }
             }
           }
