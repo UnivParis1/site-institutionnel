@@ -21,7 +21,7 @@ elements: |-
   code_etape_diplome:
     '#type': textfield
     '#title': 'code étape/diplôme'
-    '#description': "<p>Code de ton diplôme inscrit sur la dernière ligne du papillon autocollant de ta carte d'étudiant. En dessous de 2023-2024</p>"
+    '#description': "<p>Code de ton diplôme inscrit sur la dernière ligne du papillon autocollant de ta carte d'étudiant. En dessous de 2024-2025</p>"
     '#placeholder': L2B101
     '#required': true
     '#required_error': 'Ton code étape stp.'
@@ -100,6 +100,7 @@ elements: |-
       Non: Non
     '#options_display': buttons_horizontal
     '#required': true
+    '#options__properties': ''
   demande_de_licence_ffsu:
     '#type': radios
     '#title': 'Demande de licence FFSU'
@@ -149,18 +150,18 @@ elements: |-
   processed_text:
     '#type': processed_text
     '#display_on': both
-    '#text': |
-      <p style="color:#fff;padding:1rem;background-color:#00326E;font-size:1.2em;font-weight:bold;">Pour rappel : Paiement en Espèces ou 2 chèques à l'ordre de "Association Sportive Paris 1". Cotisation 2022-2023 : 30 euros - Veste : 20 euros.</p>
+    '#text': '<p style="background-color:#00326E;color:#fff;font-size:1.2em;padding:1rem;"><strong>Pour rappel : Paiement en Espèces ou 2 chèques à l''ordre de "Association Sportive Paris 1". Cotisation 2024-2025 : 30 euros - Veste : 20 euros.</strong></p>'
     '#format': full_html
   date_fait_a_paris:
     '#type': date
     '#title': 'Fait à Paris le :'
-    '#prepopulate': true
+    '#placeholder': 15/09/2024
     '#required': true
     '#required_error': 'Indique la date ... stp'
+    '#states_clear': false
     '#datepicker': true
     '#datepicker_button': true
-    '#date_date_format': 'l, F j, Y'
+    '#date_date_format': d/m/Y
   captcha:
     '#type': captcha
     '#captcha_type': recaptcha/reCAPTCHA

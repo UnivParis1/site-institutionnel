@@ -1,0 +1,29 @@
+uuid: 5f515e42-9e0e-4610-a5be-cd75da878573
+langcode: fr
+status: true
+dependencies:
+  module:
+    - up1_pages_personnelles
+title: 'Default cron handler'
+id: up1_pages_personnelles_cron
+weight: 0
+module: up1_pages_personnelles
+callback: up1_pages_personnelles_cron
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '0+@ */6 * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '2'
+    expire: 1209600
+    retain: 1000
