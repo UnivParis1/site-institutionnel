@@ -334,7 +334,7 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: field
-          label: 'Langue de traduction'
+          label: Langue
           exclude: false
           alter:
             alter_text: false
@@ -393,6 +393,7 @@ display:
       pager:
         type: full
         options:
+          pagination_heading_level: h4
           items_per_page: 50
           tags:
             next: 'Suivant ›'
@@ -1619,7 +1620,7 @@ display:
           admin_label: ''
           entity_type: node
           entity_field: site_id
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: default
           exception:
             value: all
@@ -1645,6 +1646,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: site
       defaults:
         access: false
         title: false

@@ -1,16 +1,16 @@
-uuid: cc7b40e8-2a25-418e-b961-826d4ef0ea57
+uuid: a62f35bf-ad35-46f9-a5c8-ffed9c5c99d9
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 1101
+uid: 100
 template: false
 archive: false
-id: 43e_ea_du_5_juin_2024
-title: '43e EA du 5 juin 2024'
-description: ''
+id: 63_conference_debat_rentree_mast
+title: '63 - Conférence-débat rentrée Master 2024'
+description: '<h2 class="text-align-center">Le peuple en mouvement&nbsp;</h2><h3 class="text-align-center">Masse, peuple et multitude dans les luttes constitutionnelles chiliennes (2019-2023)<br><br>Conférence-débat&nbsp;<br><br><span style="font-family:&quot;Calibri&quot;,sans-serif;">Par&nbsp;Alfredo Joignant</span><br><span style="font-family:&quot;Calibri&quot;,sans-serif;font-size:13.5pt;font-weight:normal;">professeur de science politique à l’Université Diego Portales (Santiago du Chili)</span></h3>'
 categories: {  }
 elements: |-
   nom:
@@ -19,26 +19,28 @@ elements: |-
     '#required': true
   prenom:
     '#type': textfield
-    '#title': Prénom
+    '#title': PRENOM
     '#required': true
-  adresse_email:
-    '#type': textfield
-    '#title': 'Adresse email'
+  courriel:
+    '#type': email
+    '#title': Courriel
     '#required': true
-  qualite:
-    '#type': textfield
-    '#title': Qualité
-    '#required': true
-  institution_de_rattachement:
-    '#type': textfield
-    '#title': 'Institution de rattachement'
-    '#required': true
-  presentiel:
-    '#type': checkbox
-    '#title': Présentiel
-  distanciel:
-    '#type': checkbox
-    '#title': Distanciel
+  niveau_master_1_ou_master_2:
+    '#type': checkboxes
+    '#title': 'Niveau Master 1 ou Master 2 ou Doctorat'
+    '#multiple': 2
+    '#options':
+      'Master 1': 'Master 1'
+      'Master 2': 'Master 2'
+      Doctorat: Doctorat
+    '#unique': true
+    '#options__properties': ''
+  captcha:
+    '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "m'inscrire"
 css: ''
 javascript: ''
 settings:
@@ -51,10 +53,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
-  form_open_message: ''
-  form_close_message: ''
+  form_open_message: "<p>Veuillez vous inscrire à l'évènement du :</p><p>23 septembre 2024 à partir de 17h salle 216, centre Panthéon&nbsp;</p>"
+  form_close_message: '<p>Le nombre de places a été atteint.&nbsp;</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -146,7 +148,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci pour votre inscription, le lien Zoom vous sera envoyé prochainement</p>'
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -154,7 +156,7 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 55
   limit_total_interval: null
   limit_total_message: ''
   limit_total_unique: false

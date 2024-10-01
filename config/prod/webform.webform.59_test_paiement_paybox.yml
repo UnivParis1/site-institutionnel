@@ -13,6 +13,13 @@ title: '59  - Test paiement paybox'
 description: 'formulaire de test pour passerelle payonline'
 categories: {  }
 elements: |-
+  importance:
+    '#type': webform_table_sort
+    '#title': Importance
+    '#options':
+      1: '1 - Argent'
+      2: '2 - Congés'
+      3: '3 - Vie perso'
   nom:
     '#type': textfield
     '#title': Nom
@@ -26,6 +33,13 @@ elements: |-
     '#title': mail
     '#required': true
     '#format': value
+  satisfaction_pantheon_sorbonne:
+    '#type': tableselect
+    '#title': 'Satisfaction Panthéon-Sorbonne'
+    '#options':
+      1: '1 - Très satisfaite'
+      2: '2 - Satisfaite'
+      3: '3 - Non satisfaite'
   methode_de_paiement:
     '#type': radios
     '#title': 'Methode de paiement'
@@ -36,12 +50,12 @@ elements: |-
     '#default_value': CB
   nom_du_donneur_d_ordre:
     '#type': textfield
-    '#title': 'Nom du donneur d''ordre'
+    '#title': "Nom du donneur d'ordre"
     '#help_title': 'Nom et prénom de la personne qui va faire le virement'
     '#help': 'Si c&#39;est vous indiquez le et si c&#39;est une personne de votre entourage, indiquez son nom et pr&eacute;nom'
     '#placeholder': 'Bertrand Dupont'
     '#required': true
-    '#required_error': 'Afin que l''on puisse faire le rapprochement entre le virement qui arrive et votre inscription, ce champ est obligatoire'
+    '#required_error': "Afin que l'on puisse faire le rapprochement entre le virement qui arrive et votre inscription, ce champ est obligatoire"
     '#states':
       invisible:
         ':input[name="methode_de_paiement"]':
