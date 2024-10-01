@@ -1,0 +1,89 @@
+uuid: 47992181-dabd-4a37-8931-1104c288fa5f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_prg_linked_title
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_stv_prg_numbered_list_type
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_stv_prg_video
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_prg_numbered_list
+  module:
+    - field_formatter_class
+    - jquery_minicolors
+    - link_attributes
+id: paragraph.sorbonne_tv_prg_numbered_list.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_prg_numbered_list
+mode: default
+content:
+  field_prg_linked_title:
+    type: link_attributes
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+        title: false
+      widget_default_open: expandIfValuesSet
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+  field_sorbonne_tv_prg_color:
+    type: jquery_minicolors_widget
+    weight: 1
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_stv_prg_numbered_list_type:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_stv_prg_video:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

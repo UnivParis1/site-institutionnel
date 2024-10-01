@@ -1,0 +1,27 @@
+uuid: 94432c36-ee1e-4182-b35c-65f4bd1c31a9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email_attachments
+    - node.type.email
+  module:
+    - file
+id: node.email.field_email_attachments
+field_name: field_email_attachments
+entity_type: node
+bundle: email
+label: 'Pièce(s) jointe(s)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: 'emails_attachments/[date:custom:Y]-[date:custom:m]-[date:custom:d]_[date:custom:H]-[date:custom:i]'
+  file_extensions: 'txt csv pdf doc docx xls xlsx'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

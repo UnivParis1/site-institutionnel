@@ -1,0 +1,189 @@
+uuid: 83fc16fc-558a-4030-8db9-ac020cef5044
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_playlist.field_prg_linked_title
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_modecollection
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_modediscipline
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_modetag
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_playlist_items
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_playlist_mode
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_playlist_text
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_playlist_title
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_playlist_type
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_prg_bg_color
+    - field.field.paragraph.sorbonne_tv_playlist.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_playlist.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_playlist
+  module:
+    - field_formatter_class
+    - field_group
+    - jquery_minicolors
+    - link_attributes
+    - text
+third_party_settings:
+  field_group:
+    group_playlist_edito:
+      children:
+        - field_sorbonne_tv_playlist_title
+        - field_sorbonne_tv_playlist_text
+      label: 'Playlist édito'
+      region: content
+      parent_name: ''
+      weight: 10
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: "Dans le cas d'un affichage sur 2 lignes, il est possible d'ajouter un bloc d'édito"
+        required_fields: true
+id: paragraph.sorbonne_tv_playlist.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_playlist
+mode: default
+content:
+  field_prg_linked_title:
+    type: link_attributes
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+        title: false
+      widget_default_open: expandIfValuesSet
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+  field_sorbonne_tv_modecollection:
+    type: entity_reference_autocomplete
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sorbonne_tv_modediscipline:
+    type: entity_reference_autocomplete
+    weight: 8
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sorbonne_tv_modetag:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sorbonne_tv_playlist_items:
+    type: entity_reference_autocomplete
+    weight: 9
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sorbonne_tv_playlist_mode:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sorbonne_tv_playlist_text:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_sorbonne_tv_playlist_title:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sorbonne_tv_playlist_type:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sorbonne_tv_prg_bg_color:
+    type: jquery_minicolors_widget
+    weight: 3
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_sorbonne_tv_prg_color:
+    type: jquery_minicolors_widget
+    weight: 2
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

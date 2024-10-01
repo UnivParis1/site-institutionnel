@@ -1,0 +1,159 @@
+<?php
+
+/**
+ * Implements hook_views_data()
+ */
+function lmc_mail_notifications_views_data() {
+
+  $data = [];
+
+  // The outermost keys of $data are Views table names, which should usually
+  // be the same as the hook_schema() table names.
+  $data['lmc_mail_notifications'] = [];
+
+  // The value corresponding to key 'table' gives properties of the table
+  // itself.
+  $data['lmc_mail_notifications']['table'] = [];
+
+  // Within 'table', the value of 'group' (translated string) is used as a
+  // prefix in Views UI for this table's fields, filters, etc. When adding
+  // a field, filter, etc. you can also filter by the group.
+  $data['lmc_mail_notifications']['table']['group'] = t('LMC mail notifications');
+
+  // Within 'table', the value of 'provider' is the module that provides schema
+  // or the entity type that causes the table to exist. Setting this ensures
+  // that views have the correct dependencies. This is automatically set to the
+  // module that implements hook_views_data().
+  $data['lmc_mail_notifications']['table']['provider'] = 'lmc_mail_notifications';
+
+  // Some tables are "base" tables, meaning that they can be the base tables
+  // for views. Non-base tables can only be brought in via relationships in
+  // views based on other tables. To define a table to be a base table, add
+  // key 'base' to the 'table' array:
+  $data['lmc_mail_notifications']['table']['base'] = [
+    // Identifier (primary) field in this table for Views.
+    'field' => 'id',
+    // Label in the UI.
+    'title' => t('LMC mail notifications'),
+    // Longer description in the UI. Required.
+    'help' => t('Stores notifications information.'),
+    'weight' => -10,
+  ];
+
+  // Numeric field, exposed as a field, sort, filter, and argument.
+  $data['lmc_mail_notifications']['id'] = [
+    'title' => t('Id'),
+    'help' => t('Id.'),
+    'field' => [
+      // ID of field handler plugin to use.
+      'id' => 'numeric',
+    ],
+    'sort' => [
+      // ID of sort handler plugin to use.
+      'id' => 'standard',
+    ],
+    'filter' => [
+      // ID of filter handler plugin to use.
+      'id' => 'numeric',
+    ],
+    'argument' => [
+      // ID of argument handler plugin to use.
+      'id' => 'numeric',
+    ],
+  ];
+
+  // Numeric field, exposed as a field, sort, filter, and argument.
+  $data['lmc_mail_notifications']['uid'] = [
+    'title' => t('Uid'),
+    'help' => t('Tracking user\'s {users}.uid.'),
+    'field' => [
+      // ID of field handler plugin to use.
+      'id' => 'numeric',
+    ],
+    'sort' => [
+      // ID of sort handler plugin to use.
+      'id' => 'standard',
+    ],
+    'filter' => [
+      // ID of filter handler plugin to use.
+      'id' => 'numeric',
+    ],
+    'argument' => [
+      // ID of argument handler plugin to use.
+      'id' => 'numeric',
+    ],
+  ];
+
+  // Integer timestamp field, exposed as a field, sort, and filter.
+  $data['lmc_mail_notifications']['timestamp'] = [
+    'title' => t('Notification timestamp'),
+    'help' => t('Timestamp when the notifications was added.'),
+    'field' => [
+      // ID of field handler plugin to use.
+      'id' => 'date',
+    ],
+    'sort' => [
+      // ID of sort handler plugin to use.
+      'id' => 'date',
+    ],
+    'filter' => [
+      // ID of filter handler plugin to use.
+      'id' => 'date',
+    ],
+  ];
+
+  // Plain text field, exposed as a field, sort, filter, and argument.
+  $data['lmc_mail_notifications']['subject'] = [
+    'title' => t('Subject'),
+    'help' => t('Notification subject.'),
+    'field' => [
+      // ID of field handler plugin to use.
+      'id' => 'standard',
+    ],
+    'sort' => [
+      // ID of sort handler plugin to use.
+      'id' => 'standard',
+    ],
+    'filter' => [
+      // ID of filter handler plugin to use.
+      'id' => 'string',
+    ],
+    'argument' => [
+      // ID of argument handler plugin to use.
+      'id' => 'string',
+    ],
+  ];
+
+  $data['lmc_mail_notifications']['body'] = [
+    'title' => t('Body'),
+    'help' => t('Notification body.'),
+    'field' => [
+      // ID of field handler plugin to use.
+      'id' => 'standard',
+    ],
+    'sort' => [
+      // ID of sort handler plugin to use.
+      'id' => 'standard',
+    ],
+    'filter' => [
+      // ID of filter handler plugin to use.
+      'id' => 'string',
+    ],
+    'argument' => [
+      // ID of argument handler plugin to use.
+      'id' => 'string',
+    ],
+  ];
+
+  return $data;
+}
+
+/**
+ * LMC mail notifications cleanup.
+ */
+function lmc_mail_notifications_cleanup_cronjob() {
+  // Removes all the notifications older than one month.
+  $one_month_ago = strtotime('1 month ago');
+  \Drupal::service('lmc_mail_notifications.service')->deleteNotificationEntriesOlderThanTimestamp($one_month_ago);
+  \Drupal::logger('LMC mail notifications cleanup')->notice('Cron launched : ' . date('d/m/Y H:i:s'));
+}

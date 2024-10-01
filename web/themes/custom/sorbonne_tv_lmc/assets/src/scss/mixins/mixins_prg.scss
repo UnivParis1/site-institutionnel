@@ -1,0 +1,987 @@
+@mixin prg_numbered_list() {
+  .prg_stv_title {
+    .bullet-title {
+      .title-bullet {
+        background-color: $primary;
+      }
+    }
+  }
+
+  .prg_stv_numbered_list, .slick-track {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & > .field--item {
+      max-width: 372px;
+      padding: 0 16px;
+
+      @include media-breakpoint-up(lg) {
+        width: 33.33%;
+        max-width: none;
+
+        &:nth-child(n+4) {
+          margin-top: 32px;
+        }
+      }
+
+      .thumb_link {
+        position: relative;
+        margin-bottom: 24px;
+
+        .collection_tag {
+          display: inline-flex;
+          align-items: center;
+          padding: 0 10px;
+          border-radius: 100px;
+          background-color: $secondary;
+          color: $white;
+          position: absolute;
+          top: 20px;
+          right: 25px;
+          font-size: 16px;
+          height: 34px;
+        }
+
+        .video-thumb {
+          margin-bottom: 0;
+        }
+        .video-thumb.empty_thumb {
+          height: 100%;
+        }
+      }
+
+      article.sorbonne_tv_numbered_list {
+        padding-left: 68px;
+        background-image: url('../../img/icons/num_list/icon_num_1.png');
+        background-position: left top;
+        background-repeat: no-repeat;
+        //background-size: 122px auto;
+        background-size: 90px auto;
+
+        &.page_sorbonne_tv_collection {
+          // Thumb empty sur les collections
+          .thumb_link {
+            display: block;
+            width: 100%;
+            min-height: 160px;
+
+            .video-thumb.empty_thumb {
+              min-height: 160px;
+            }
+
+            @include media-breakpoint-up(lg) {
+              min-height: 126px;
+
+              .video-thumb.empty_thumb {
+                min-height: auto;
+              }
+            }
+            @include media-breakpoint-up(xl) {
+              min-height: 162px;
+            }
+            @include media-breakpoint-up(xxl) {
+              min-height: 198px;
+            }
+          }
+          .video-date.empty-date {
+            min-height: 15px;
+            background: none;
+          }
+        }
+      }
+
+      &:nth-child(1) article.sorbonne_tv_numbered_list {
+        background-image: url('../../img/icons/num_list/icon_num_1.png');
+      }
+      &:nth-child(2) article.sorbonne_tv_numbered_list {
+        background-image: url('../../img/icons/num_list/icon_num_2.png');
+      }
+      &:nth-child(3) article.sorbonne_tv_numbered_list {
+        background-image: url('../../img/icons/num_list/icon_num_3.png');
+      }
+      &:nth-child(4) article.sorbonne_tv_numbered_list {
+        background-image: url('../../img/icons/num_list/icon_num_4.png');  
+      }
+      &:nth-child(5) article.sorbonne_tv_numbered_list {
+        background-image: url('../../img/icons/num_list/icon_num_5.png');
+      }
+    }
+
+    &.no_slider {
+      display: block;
+
+      @include media-breakpoint-up(lg) {
+        display: flex;
+      }
+    }
+  }
+
+  .slick-track {
+    display: block;
+  }
+  @include slick-dots();
+
+  article.sorbonne_tv_numbered_list {
+    @include media-breakpoint-up(lg) {
+      height: 100%;
+
+      & > div {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .item_fields {
+          //margin-top: auto;
+          //margin-top: 24px;
+        }
+      }
+    }
+  }
+
+  @include video-vignette-list-default();
+}
+
+@mixin prg_edito() {
+  .prg_inner_container {
+    padding: 40px;
+    border-radius: 16px;
+    color: $secondary;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prg_stv_title, .prg_stv_txt, .prg_stv_media {
+    position: relative;
+    z-index: 10;
+  }
+  .prg_stv_title {
+    font-family: $font-family-Expletus;
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .prg_stv_txt {
+    line-height: 1.4;
+
+    a {
+      font-weight: 600;
+    }
+  }
+
+  .graphic_circle {
+    width: 368px;
+    height: 368px;
+    border-radius: 50%;
+    position: absolute;
+    top: -185px;
+    left: -120px;
+    z-index: 1;
+  }
+
+  &.has_media {
+    .prg_fields {
+      margin-bottom: 40px;
+
+      @include media-breakpoint-up(md) {
+        padding-right: 40px;
+        margin-bottom: 0;
+      }
+    }
+    .prg_media {
+      border-radius: 16px;
+      overflow: hidden;
+
+      video, iframe {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@mixin prg_playlist() {
+  .grid-container-playlist {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include media-breakpoint-up(md) {
+      .prg_stv_title {
+        width: calc(100% - 120px); // 100% - les fleches slider
+      }
+    }
+    .playlist_by_collection_blk, .playlist_by_tag_blk, .field--name-field-sorbonne-tv-playlist-items, 
+    .playlist_edito_wrapper {
+      width: 100%;
+    }
+  }
+  @include slider-arrows();
+
+  .playlist-and-arrows {
+    position: relative;
+    padding: 0;
+
+    & > .playlist-slider-arrows {
+      margin: 0;
+      padding: 0;
+
+      .slick-arrow {
+        position: absolute;
+        top: 92px;
+        margin: 0;
+        z-index: 100;
+        background-color: $white;
+
+        &.custo-prev-slide {
+          left: -24px;
+        }
+        &.custo-next-slide {
+          right: -24px;
+        }
+      }
+
+    }
+  }
+
+  .prg-stv-playlist-wrapper {
+    display: flex;
+    padding: 0;
+    margin: 0;
+
+    & > .field--item, .slick-track > .field--item {
+      width: 272px;
+      margin: 0 8px;
+      list-style-type: none;
+      list-style-image: none;
+
+      @include media-breakpoint-up(md) {
+        margin: 0 16px;
+      }
+
+      // Playlist 2 lines
+      &.item-wrapper-2lines {
+        display: flex;
+        flex-direction: column;
+
+        .field--item:last-child {
+          //margin-top: auto;
+        }
+        .field--item:first-child {
+          margin-bottom: 40px;
+          margin-top: 0;
+        }
+
+        .video-date, .video-descr {
+          font-size: 0;
+          opacity: 0;
+          display: none;
+          visibility: hidden;
+        }
+        .video-thumb {
+          margin-bottom: 16px;
+        }
+        .video-item-title {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .slick-track {
+      display: flex;
+    
+      & > .field--item {
+        float: none;
+        height: auto;
+      }
+    }
+
+    @include video-vignette-list-default();
+
+    .playlist-item-collection {
+      padding: 24px;
+      border-radius: 16px;
+
+      & > article {
+        height: 100%;
+
+        & > div {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .video-item-title {
+        font-size: 24px;
+        font-weight: 700;
+        font-family: $font-family-Expletus;
+
+        a {
+          color: inherit;
+        }
+      }
+
+      .collection_cta_wrapper {
+        margin-top: auto;
+
+        a {
+          @include stv_cta_btn($secondary, $white, $white, $secondary);
+        }
+      }
+
+    }
+  }
+
+  .playlist_edito_wrapper {
+    margin-bottom: 32px;
+    color: $secondary;
+
+    .playlist_edito {
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .edito_title {
+      font-size: 24px;
+      font-weight: 700;
+      font-family: $font-family-Expletus;
+      margin-bottom: 16px;
+    }
+    .edito_text {
+      font-size: 16px;
+    }
+  }
+
+  &.prg_tpl_2_lines {
+
+    &:not(.playlist_2_lines_noedito) {
+      @include media-breakpoint-up(md) {
+        .grid-container-playlist {
+          .playlist_edito_wrapper {
+            padding-right: 16px;
+            //width: 42%;
+            width: 288px;
+            min-width: 288px;
+
+            .playlist_edito {
+              height: 100%;
+            }
+          }
+          .playlist_by_collection_blk, .playlist_by_tag_blk, .field--name-field-sorbonne-tv-playlist-items {
+            //width: 58%;
+            width: calc(100% - 288px);
+          }
+
+          .playlist_edito_wrapper + .playlist-and-arrows {
+            width: calc(100% - 288px);
+
+            .playlist_by_collection_blk, .playlist_by_tag_blk, .field--name-field-sorbonne-tv-playlist-items {
+              width: auto;
+            }
+          }
+        }
+      }  
+    }
+
+    @include media-breakpoint-up(md) {
+      .grid-container-playlist {
+        .playlist_edito_wrapper {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    /*
+    @include media-breakpoint-up(lg) {
+      .grid-container-playlist {
+        .playlist_edito_wrapper {
+          width: 24%;
+        }
+        .playlist_by_collection_blk, .playlist_by_tag_blk, .field--name-field-sorbonne-tv-playlist-items {
+          width: 76%;
+        }
+      }
+    }
+    */
+
+    .playlist-and-arrows {
+      & > .playlist-slider-arrows {
+        .slick-arrow {
+          top: calc(50% - 24px);
+        }
+      }
+    }
+
+  }
+}
+
+@mixin prg_ctas() {
+  .prg_stv_ctas_wrapper {
+    @include media-breakpoint-up(md) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+
+    .cta-item-wrapper {
+      display: flex;
+      flex-direction: column;
+      background-color: $secondary; // default color
+      color: $white;
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 206px;
+
+      &:not(:first-child) {
+        margin-top: 32px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .field--name-bp-link {
+        font-size: 24px;
+        font-weight: 700;
+        font-family: $font-family-Expletus;
+      }
+
+      .cta_wrapper {
+        margin-top: auto;
+
+        a {
+          @include stv_cta_btn($secondary, $white, $white, $secondary);
+        }
+      }
+
+      @include media-breakpoint-up(md) {
+        width: calc(50% - 24px);
+        margin: 0 12px;
+
+        &:not(:first-child) {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+@mixin prg_filters() {
+  // ----- Filtres par disciplines ----- //
+  .prg_stv_cta_filter_disciplines {
+    @include media-breakpoint-up(md) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+
+    & > .cta-item-wrapper {
+      display: flex;
+      align-items: center;
+      border-radius: 16px;
+      background-color: $secondary; // default color
+      color: $white;
+      font-family: $font-family-Expletus;
+      font-size: 24px;
+      font-weight: 700;
+
+      &:not(:first-child) {
+        margin-top: 32px;
+      }
+
+      & > a {
+        display: flex;
+        align-items: center;
+        padding: 24px;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .item_icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 56px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        margin-right: 12px;
+        @include transparent-bg($white, 0.24);
+
+        @include media-breakpoint-up(md) {
+          margin-right: 24px;
+        }
+      }
+
+      @include media-breakpoint-up(md) {
+        width: calc(33.33% - 24px);
+        margin: 0 12px;
+        flex-direction: column;
+        align-items: flex-start;
+
+        & > a {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .item_icon {
+          margin-right: 0;
+          margin-bottom: 24px;
+        }
+
+        &:not(:first-child) {
+          margin-top: 0;
+        }
+        &:nth-child(n+4) {
+          margin-top: 24px;
+        }
+      }
+      @include media-breakpoint-up(lg) {
+        flex-direction: row;
+        align-items: center;
+
+        & > a {
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .item_icon {
+          margin-right: 24px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // ----- Filtres par type ----- //
+  &.filters_type_types, &.filters_on_mosaic {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .prg_stv_title {
+      @include media-breakpoint-up(md) {
+        width: calc(100% - 120px); // 100% - les fleches slider
+      }
+    }
+    .prg_stv_cta_filter_types, .prg_stv_cta_filter_links_wrapper {
+      width: 100%;
+
+      .paragraph--type--sorbonne-tv-links-filter-prg {
+        @include media-breakpoint-up(lg) {
+          margin-bottom: 16px;
+        }
+      }
+    }
+    @include slider-arrows();
+
+    .slick-track {
+      display: flex;
+    
+      & > .field--item {
+        float: none;
+        height: auto;
+      }
+    }
+
+    .filters-and-arrows {
+      position: relative;
+      padding: 0;
+
+      .filters-bytypes-slider-arrows, .filters-links-slider-arrows {
+        margin: 0;
+        padding: 0;
+
+        .slick-arrow {
+          position: absolute;
+          top: calc(50% - 24px);
+          margin: 0;
+          z-index: 100;
+          background-color: $white;
+  
+          &.custo-prev-slide {
+            left: -24px;
+          }
+          &.custo-next-slide {
+            right: -24px;
+          }
+        }
+      }
+    }
+  }
+
+  .prg_stv_cta_filter_types, .prg_stv_cta_filter_links_wrapper {
+    @include media-breakpoint-up(md) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -8px;
+      margin-right: -8px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    & > .field--item, .slick-track > .field--item {
+      display: flex;
+      align-items: center;
+      border-radius: 16px;
+      background-color: $secondary; // default color
+      color: $white;
+      font-family: $font-family-Expletus;
+      font-size: 20px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+
+      & > a, .prg_stv_cta_filter_links > a {
+        display: flex;
+        align-items: center;
+        padding: 24px;
+        width: 100%;
+        height: 100%;
+        min-height: 104px;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .prg_stv_cta_filter_links {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      &:not(:first-child) {
+        margin-top: 8px;
+      }
+
+      .item_icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 56px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        margin-right: 12px;
+        @include transparent-bg($white, 0.24);
+
+        @include media-breakpoint-up(md) {
+          margin-right: 18px;
+        }
+      }
+
+      @include media-breakpoint-up(md) {
+        width: calc(50% - 16px);
+        margin: 0 8px;
+
+        &:not(:first-child) {
+          margin-top: 0;
+        }
+        &:nth-child(n+3) {
+          margin-top: 16px;
+        }
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: 272px;
+        margin: 0 16px;
+
+        &:nth-child(n+3) {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  // ----- Filtres par durée ----- //
+  .time_lapse_filters_blk {
+    margin-left: -4px;
+    margin-right: -4px;
+
+    @include media-breakpoint-up(lg) {
+      margin-left: -16px;
+      margin-right: -16px;
+    }
+
+    .timelapse_items {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: 0;
+
+      li {
+        width: 33.33%;
+        padding: 4px;
+        list-style-type: none;
+        list-style-image: none;
+        margin: 0;
+
+        @include media-breakpoint-up(md) {
+          width: 16.66%;
+        }
+        @include media-breakpoint-up(lg) {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .timelapse {
+          border-radius: 16px;
+          font-size: 18px;
+          font-family: $font-family-Expletus;
+          font-weight: 700;
+          color: $secondary;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+
+          & > a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-decoration: none;
+            padding: 16px;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          .timelapse_icon {
+            margin-bottom: 8px;
+            font-size: 22px;
+            color: $secondary;
+          }
+          .timelapse_txt {
+            margin-top: auto;
+          }
+
+          @include media-breakpoint-up(lg) {
+            flex-direction: row;
+            min-height: 100px;
+
+            & > a {
+              flex-direction: row;
+              min-height: 100px;
+            }
+
+            .timelapse_icon {
+              margin-bottom: 0;
+              margin-right: 16px;
+            }
+            .timelapse_txt {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+@mixin prg_rich_content() {
+  .img-container {
+    img {
+      overflow: hidden;
+      border-radius: 24px !important;
+    }
+  }
+  .title2 {
+    font-size: 28px;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 32px;
+    }
+    @include media-breakpoint-up(lg) {
+      font-size: 38px
+    }
+  }
+
+  .field--name-field-text {
+    font-size: 16px;
+    color: $secondary;
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 16px;
+      line-height: 1.6;
+
+      @include media-breakpoint-up(md) {
+        margin-bottom: 32px;
+      }
+    }
+  }
+
+  .stv_cta_wrapper a {
+    @include stv_cta_btn($white, $secondary, $secondary, $white);
+  }
+
+  .col-md-6 {
+    &:nth-child(odd) {
+      padding-bottom: 32px;
+    }
+
+    @include media-breakpoint-up(md) {
+      &:nth-child(odd) {
+        padding-bottom: 0;
+        padding-right: 16px;
+      }
+      &:nth-child(even) {
+        padding-left: 16px;
+      }
+    }
+    @include media-breakpoint-up(lg) {
+      &:nth-child(even) {
+        //max-width: 542px;
+        max-width: 600px;
+      }
+    }
+
+    .img-container {
+      @include media-breakpoint-up(lg) {
+        max-width: 526px;
+      }
+    }
+  }
+
+  &.row-reverse-position {
+    .col-md-6 {
+
+      @include media-breakpoint-up(md) {
+        &:nth-child(odd) {
+          padding-bottom: 0;
+          padding-left: 16px;
+          padding-right: 0;
+        }
+        &:nth-child(even) {
+          padding-right: 16px;
+          padding-left: 0;
+        }
+      }
+
+      .img-container {
+        @include media-breakpoint-up(lg) {
+          margin-left: auto;
+        }
+      }
+      
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    justify-content: space-between;
+  }
+
+  &.column-position {
+    .cell:first-child {
+      margin-bottom: 32px;
+    }
+  }
+  
+}
+
+@mixin video-grid-tpl() {
+  .videoscollec-list {
+    display: block;
+    margin: 0;
+
+    li {
+      width: auto;
+      margin-left: 0;
+      margin-right: 0;
+
+      .thumb_link {
+        position: relative;
+        display: block;
+        width: 100%;
+
+        .collection_tag {
+          display: inline-flex;
+          align-items: center;
+          padding: 0 10px;
+          border-radius: 100px;
+          background-color: $secondary;
+          color: $white;
+          position: absolute;
+          top: 20px;
+          right: 25px;
+          font-size: 16px;
+          height: 34px;
+        }
+      }
+
+      .video-thumb {
+        margin-bottom: 24px;
+        max-width: 280px;
+      }
+      .video-item-title {
+        margin-bottom: 10px;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -12px;
+      margin-right: -12px;
+
+      li {
+        width: 50%;
+        margin: 0;
+        padding-left: 12px;
+        padding-right: 12px;
+
+        &:nth-child(n+3) {
+          margin-top: 24px;
+        }
+
+        .video-thumb {
+          max-width: none;
+        }
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-left: -16px;
+      margin-right: -16px;
+
+      li {
+        width: 25%;
+        padding-left: 16px;
+        padding-right: 16px;
+
+        &:nth-child(n+3) {
+          margin-top: 0;
+        }
+        &:nth-child(n+5) {
+          margin-top: 24px;
+        }
+      }
+    }
+  }
+}

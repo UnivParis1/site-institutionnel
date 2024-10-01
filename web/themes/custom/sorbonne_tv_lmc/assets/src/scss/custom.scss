@@ -1,0 +1,315 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+@import "mixins/mixins";
+@import "mixins/mixins_prg";
+@import "mixins/custom_checkboxes";
+@import "mixins/custom_radios";
+
+// ----- Colors ----- //
+$primary:#FFD700;
+//$secondary:#00326E;
+$secondary:#00386e;
+$success:#248484;
+$info:#58D1F9;
+$warning:#fd7e14;
+$danger:#DF2D64;
+$light:#F1F4F6;
+$dark:#000000;
+$white: #ffffff;
+$blue_bayoux: #506278;
+$geyser: #D5DCE3;
+$heather: #C3CEDC;
+$dark: #001227;
+$athens_gray: #E5E9EE;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('/themes/custom/sorbonne_tv_lmc/assets/fonts/icomoon.eot?vsnbmj');
+  src:  url('/themes/custom/sorbonne_tv_lmc/assets/fonts/icomoon.eot?vsnbmj#iefix') format('embedded-opentype'),
+  url('/themes/custom/sorbonne_tv_lmc/assets/fonts/icomoon.ttf?vsnbmj') format('truetype'),
+  url('/themes/custom/sorbonne_tv_lmc/assets/fonts/icomoon.woff?vsnbmj') format('woff'),
+  url('/themes/custom/sorbonne_tv_lmc/assets/fonts/icomoon.svg?vsnbmj#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+// ----- Fonts ----- //
+@import url('//fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('//fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&display=swap');
+$font-family-Quicksand: "Quicksand", sans-serif;
+$font-family-Expletus: "Expletus Sans", sans-serif;
+$font-family-base: $font-family-Quicksand;
+
+body {
+  font-family: $font-family-base;
+}
+
+.primary {
+  color: $primary;
+}
+.secondary {
+  color: $secondary;
+}
+.blue_bayoux {
+  color: $blue_bayoux;
+}
+
+// ----- Titles ----- //
+h1 {
+  font-family: "Expletus Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 50px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 50px;
+  color: $secondary;
+}
+
+h2 {
+  font-family: "Expletus Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 38px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 55px;
+  color: $secondary;
+}
+
+.title2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: $secondary;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  font-family: $font-family-Expletus;
+}
+
+.bullet-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: $secondary;
+  margin-bottom: 32px;
+  //padding-right: 44px;
+  //display: flex;
+  //align-items: center;
+  line-height: normal;
+
+  .title-bullet {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: $secondary;
+    border-radius: 50%;
+    margin-left: 16px;
+    font-family: $font-family-Expletus;
+  }
+
+  &.bullet-left {
+    .title-bullet {
+      margin-left: 0;
+      margin-right: 16px;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 28px;
+    //line-height: 1.9;
+    
+    .title-bullet {
+      min-width: 32px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.page-title {
+  font-size: 26px;
+  margin-bottom: 16px;
+  font-family: $font-family-Expletus;
+
+  @include media-breakpoint-up(md) {
+    font-size: 32px;
+  }
+
+  &.bullet-title {
+    font-size: 36px;
+    padding: 0;
+
+    .title-bullet {
+      min-width: 32px;
+      width: 32px;
+      height: 32px;
+      margin-left: 16px;
+    }
+
+    &.bullet-left {
+      .title-bullet {
+        margin-left: 0;
+        margin-right: 24px;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 36px;
+    }
+    @include media-breakpoint-up(lg) {
+      font-size: 50px;
+
+      .title-bullet {
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
+
+.stv_txt_mea {
+  color: $secondary;
+  font-family: $font-family-Expletus;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+video {
+  width: 100%;
+  height: auto;
+
+  &::cue {
+    font-size: 1rem;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .controls {
+    button[data-state="subtitles"] {
+      height: 85%;
+      text-indent: 0;
+      font-size: 16px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #666;
+      background: #000;
+      border-radius: 2px;
+    }
+  }
+}
+
+.puce-primary {
+  display: inline-block;
+  padding: 15px;
+  background-color: $primary;
+  border-radius: 50%;
+}
+
+.puce-secondary {
+  display: inline-block;
+  padding: 15px;
+  background-color: $secondary;
+  border-radius: 50%;
+}
+
+.puce-danger{
+  display: inline-block;
+  padding: 15px;
+  background-color: $danger;
+  border-radius: 50%;
+}
+
+.puce-info{
+  display: inline-block;
+  padding: 15px;
+  background-color: $info;
+  border-radius: 50%;
+}
+
+.puce-success{
+  display: inline-block;
+  padding: 15px;
+  background-color: $success;
+  border-radius: 50%;
+}
+
+#block-sorbonne-tv-lmc-ongletstabs {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+    li {
+      list-style-type: none;
+      list-style-image: none;
+
+      a {
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        height: 100%;
+        color: $white;
+        text-decoration: none;
+        background-color: $secondary;
+        border: 1px solid $secondary;
+
+        &:hover, &.is-active {
+          background-color: $heather;
+          color: $secondary;
+          border-color: $heather;
+        }
+      }
+    }
+  }
+}
+
+// ----- Body texts ----- //
+.body-field {
+  @include body-txt-style();
+}
+
+.pager {
+  @include pager();
+}
+
+/* HEADER */
+@import "part/header";
+
+/* HOME */
+@import "part/home";
+
+// ----- Menus ----- //
+@import "part/menus";
+
+// ----- Paragraphs ----- //
+@import "part/paragraphs";
+
+/* PAGE */
+@import "part/page";
+@import "part/programs";
+@import "part/video";
+@import "part/collections";
+@import "part/search_videos";
+@import "part/messages_box";
+@import "part/forms";
+@import "part/user_forms";
+@import "part/maintenance";
+
+/* FOOTER */
+@import "part/footer";

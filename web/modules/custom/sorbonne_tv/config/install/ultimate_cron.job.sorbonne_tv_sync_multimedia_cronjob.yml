@@ -1,0 +1,19 @@
+langcode: en
+status: true
+title: 'Sorbonne TV - Synchronisation Multimedia'
+id: sorbonne_tv__sync_multimedia
+module: sorbonne_tv
+callback: sorbonne_tv_syncMultimedia_cronjob
+scheduler:
+  id: crontab
+  configuration:
+    rules:
+      - '*/10 * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+      max_execution_time: 3600
+    launcher:
+      max_threads: 1

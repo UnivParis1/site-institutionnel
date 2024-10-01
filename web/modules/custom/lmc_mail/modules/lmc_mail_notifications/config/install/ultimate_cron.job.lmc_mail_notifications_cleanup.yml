@@ -1,0 +1,29 @@
+﻿langcode: en
+status: true
+dependencies:
+  module:
+    - lmc_mail_notifications
+title: 'LMC mail notifications - Cleanup (removes notifications older than 1 month)'
+id: lmc_mail_notifications_cleanup
+weight: 0
+module: lmc_mail_notifications
+callback: lmc_mail_notifications_cleanup_cronjob
+scheduler:
+  id: crontab
+  configuration:
+    rules:
+      - '0 8 * * *'
+    catch_up: 0
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

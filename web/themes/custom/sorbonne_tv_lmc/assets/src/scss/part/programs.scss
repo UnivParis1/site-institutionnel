@@ -1,0 +1,305 @@
+.programs_page {
+  .sorbonne_tv_title_blk {
+    .page-title {
+      &.bullet-title {
+        .title-bullet {
+          background-color: $primary;
+        }
+      }
+    }
+  }
+}
+
+.program-sidebar {
+  background-color: $light;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 32px 0;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .paragraph--type--sorbonne-tv-prg-numbered-list {
+    .prg_stv_title {
+      h2 {
+        text-align: center;
+        font-size: 18px;
+        line-height: normal;
+        margin-bottom: 32px;
+      }
+    }
+    
+    .prg_stv_numbered_list {
+      display: block;
+
+      @include media-breakpoint-up(md) {
+        display: flex;
+      }
+
+      @include media-breakpoint-up(lg) {
+        display: block;
+      }
+
+      & > .field--item {
+        width: auto;
+        padding: 0;
+        margin-bottom: 32px;
+        margin-left: auto;
+        margin-right: auto;
+
+        @include media-breakpoint-up(md) {
+          width: 33.33%;
+          max-width: none;
+          margin-bottom: 0;
+          margin-left: 0;
+          margin-right: 0;
+          padding: 0 16px;
+
+          &:nth-child(n+4) {
+            margin-top: 32px;
+          }
+        }
+        @include media-breakpoint-up(lg) {
+          width: auto;
+          padding: 0;
+          margin-bottom: 32px;
+
+          &:nth-child(n+4) {
+            margin-top: 0;
+          }
+        }
+
+        article.sorbonne_tv_numbered_list {
+          padding-left: 43px;
+          //background-size: 80px auto;
+          background-size: 60px auto;
+
+          @include media-breakpoint-up(md) {
+            padding-left: 20px;
+            background-size: 35px auto;
+          }
+          @include media-breakpoint-up(lg) {
+            padding-left: 43px;
+            //background-size: 80px auto;
+            background-size: 60px auto;
+          }
+
+          .empty-date {
+            @include media-breakpoint-down(md) {
+              min-height: 0;
+              margin: 0;
+              display: none;
+            }
+
+            @include media-breakpoint-up(lg) {
+              min-height: 0;
+              margin: 0;
+              display: none;
+            }
+          }
+
+          .thumb_link {
+            .video-thumb {
+              margin-bottom: 16px;
+
+              @include media-breakpoint-up(md) {
+                margin-bottom: 16px;
+              }
+
+              @include media-breakpoint-up(lg) {
+                margin-bottom: 0;
+              }
+            }
+          }
+
+          &.page_sorbonne_tv_collection {
+            .thumb_link {
+              @include media-breakpoint-up(md) {
+                min-height: 100px;
+                margin-bottom: 16px;
+
+                .video-thumb.empty_thumb {
+                  min-height: 100px;
+                }
+              }
+              @include media-breakpoint-up(lg) {
+                min-height: 140px;
+                
+                .video-thumb.empty_thumb {
+                  min-height: 140px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.program-items {
+  list-style-type: none;
+  list-style-image: none;
+  color: $blue_bayoux;
+  padding-left: 0;
+
+  li {
+    list-style-type: none;
+    list-style-image: none;
+
+    &:not(:first-child) {
+      margin-top: 32px;
+    }
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+    @include media-breakpoint-up(lg) {
+      padding-right: 32px;
+    }
+  }
+
+  .item-thumb {
+    line-height: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    max-width: 214px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @include media-breakpoint-up(md) {
+      width: 25%;
+    }
+  }
+  .item-main {
+    margin-top: 20px;
+
+    @include media-breakpoint-up(md) {
+      padding-right: 24px;
+      width: 75%;
+      margin-top: 0;
+      display: flex;
+    }
+  }
+
+  .item-start {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: $font-family-Expletus;
+    margin-bottom: 8px;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 0;
+      padding: 0 5px;
+      text-align: center;
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-play-btn {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background-color: $primary;
+      color: $secondary;
+      margin: 16px auto;
+
+      @include media-breakpoint-up(md) {
+        display: flex;
+      }
+
+      & > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .bi {
+        font-size: 22px;
+      }
+
+      .btn-icon {
+        background-image: url('../../img/icons/play_secondary_40.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 20px auto;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .item-line {
+      display: none;
+
+      @include media-breakpoint-up(md) {
+        display: block;
+        flex: 1;
+        width: 2px;
+        min-height: 20px;
+        margin: 0 auto;
+        background-color: $geyser;
+      }
+    }
+  }
+  .item-fields {
+    @include media-breakpoint-up(md) {
+      width: 80%;
+    }
+  }
+
+  .item-title {
+    color: $secondary;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: $font-family-Expletus;
+    margin-bottom: 0;
+    line-height: 1.2;
+
+    a {
+      text-decoration: none;
+      color: $secondary;
+      
+      &:hover{
+        text-decoration: underline;
+        color: $secondary;
+      }
+    }
+  }
+  .item-descr {
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 1.3;
+  }
+
+  &.search-items {
+    padding: 0;
+
+    .search-item {
+      .item-thumb {
+        @include media-breakpoint-up(md) {
+          width: 214px;
+        }
+      }
+      .item-main {
+        @include media-breakpoint-up(md) {
+          width: calc(100% - 214px);
+        }
+      }
+    }
+  }
+}

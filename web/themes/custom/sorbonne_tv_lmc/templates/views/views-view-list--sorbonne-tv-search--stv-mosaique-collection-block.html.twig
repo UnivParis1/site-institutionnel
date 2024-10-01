@@ -1,0 +1,50 @@
+{#
+/**
+  * @file
+  * Default theme implementation for a view template to display a list of rows.
+  *
+  * Available variables:
+  * - attributes: HTML attributes for the container.
+  * - rows: A list of rows for this list.
+  *   - attributes: The row's HTML attributes.
+  *   - content: The row's contents.
+  * - title: The title of this group of rows. May be empty.
+  * - list: @todo.
+  *   - type: Starting tag will be either a ul or ol.
+  *   - attributes: HTML attributes for the list element.
+  *
+  * @see template_preprocess_views_view_list()
+  *
+  * @ingroup themeable
+  */
+#}
+{#
+{% if attributes -%}
+  <div{{ attributes }}>
+{% endif %}
+#}
+
+  {# src : https://drupal.stackexchange.com/questions/304199/unable-to-check-if-variable-is-empty-in-views-twig #}
+  {% if title|trim|spaceless|striptags|length != 0 %}
+    {% for row in rows %}
+      {% if loop.first %}
+        <li{{ row.attributes }}>
+          {{- row.content -}}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {# <{{ list.type }}{{ list.attributes }}> #}
+      {% for row in rows %}
+        <li{{ row.attributes }}>
+          {{- row.content -}}
+        </li>
+      {% endfor %}
+    {# </{{ list.type }}> #}
+  {% endif %}
+
+{#
+{% if attributes -%}
+  </div>
+{% endif %}
+#}

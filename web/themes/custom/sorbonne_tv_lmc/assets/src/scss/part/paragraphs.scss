@@ -1,0 +1,145 @@
+.body-wrapper {
+  color: $secondary;
+  margin-bottom: 42px;
+
+  @include media-breakpoint-up(md) {
+    //margin-bottom: 64px;
+    margin-bottom: 60px;
+  }
+  @include media-breakpoint-up(lg) {
+    //margin-bottom: 78px;
+  }
+}
+
+.stv-prg-field {
+  & > .paragraph {
+    margin-bottom: 42px;
+
+    @include media-breakpoint-up(md) {
+      //margin-bottom: 64px;
+      margin-bottom: 60px;
+    }
+    @include media-breakpoint-up(lg) {
+      //margin-bottom: 78px;
+    }
+
+    // 2 prg blancs doivent êtres séparés par une bordures
+    &:not(.paragraph--type--sorbonne-tv-prg-edito):not(.has_bgcolor) {
+      & + .paragraph:not(.paragraph--type--sorbonne-tv-prg-edito):not(.has_bgcolor) {
+        //.container > div:first-child {
+        .container {
+          border-top: 1px solid $heather;
+          padding-top: 42px;
+
+          @include media-breakpoint-up(md) {
+            //padding-top: 64px;
+            padding-top: 60px;
+          }
+          @include media-breakpoint-up(lg) {
+            //padding-top: 78px;
+          }
+
+          .container {
+            border-top: none;
+            padding-top: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.prg_stv_title {
+  .bullet-title {
+    @include media-breakpoint-up(md) {
+      font-size: 32px;
+
+      .title-bullet {
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      //font-size: 38px;
+      font-size: 30px;
+
+      .title-bullet {
+        width: 35px;
+        min-width: 35px;
+        height: 35px;
+      }
+    }
+  }
+
+  &.prg_stv_title_linked {
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Simple
+.paragraph--type--bp-simple {
+  .field--type-text-long {
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// Liste numerote
+.paragraph--type--sorbonne-tv-prg-numbered-list {
+  @include prg_numbered_list();
+}
+
+// Edito
+.paragraph--type--sorbonne-tv-prg-edito {
+  @include prg_edito();
+}
+
+// Playlist
+.paragraph--type--sorbonne-tv-playlist {
+  @include prg_playlist();
+}
+
+// CTAs
+.paragraph--type--sorbonne-tv-ctas {
+  @include prg_ctas();
+}
+
+// Filters
+.paragraph--type--sorbonne-tv-filters {
+  @include prg_filters();
+}
+
+// Rich content
+.paragraph--type--rich-content {
+  @include prg_rich_content();
+}
+
+.paragraph--type--sorbonne-tv-playlist, 
+.paragraph--type--sorbonne-tv-filters {
+  &.has_bgcolor {
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    @include media-breakpoint-up(md) {
+      //padding-top: 64px;
+      //padding-bottom: 64px;
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+    @include media-breakpoint-up(lg) {
+      //padding-top: 72px;
+      //padding-bottom: 72px;
+    }
+  }
+}
