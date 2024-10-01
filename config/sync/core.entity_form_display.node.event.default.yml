@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.event.field_subscription_link
     - field.field.node.event.field_tag
     - node.type.event
+    - workflows.workflow.publication
   module:
     - content_moderation
     - datetime_range
@@ -564,7 +565,7 @@ content:
     third_party_settings: {  }
   field_disable_canonical_url:
     type: boolean_checkbox
-    weight: 29
+    weight: 43
     region: content
     settings:
       display_label: true
@@ -606,14 +607,14 @@ content:
     third_party_settings: {  }
   field_publish_master:
     type: boolean_checkbox
-    weight: 28
+    weight: 42
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_sites:
     type: entity_reference_autocomplete
-    weight: 26
+    weight: 40
     region: content
     settings:
       match_operator: CONTAINS
@@ -623,7 +624,7 @@ content:
     third_party_settings: {  }
   field_sites_all:
     type: boolean_checkbox
-    weight: 27
+    weight: 41
     region: content
     settings:
       display_label: true

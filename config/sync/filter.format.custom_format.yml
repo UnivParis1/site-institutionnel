@@ -14,7 +14,6 @@ dependencies:
     - media
     - nbsp
     - slick
-    - token_filter
 name: 'Édito simple'
 format: custom_format
 weight: -9
@@ -46,7 +45,7 @@ filters:
     status: false
     weight: -10
     settings:
-      allowed_html: '<br> <p class="text-align-left text-align-center text-align-right text-align-justify"> <strong> <em> <blockquote> <a href data-entity-uuid data-entity-type data-entity-substitution> <ul> <ol start> <li> <table> <tr> <td rowspan colspan> <th rowspan colspan> <thead> <tbody> <tfoot> <caption> <span dir> <nbsp>'
+      allowed_html: ''
       filter_html_help: true
       filter_html_nofollow: false
   filter_htmlcorrector:
@@ -139,10 +138,3 @@ filters:
       override: false
       preserve_keys: false
       visible_items: null
-  token_filter:
-    id: token_filter
-    provider: token_filter
-    status: false
-    weight: 0
-    settings:
-      replace_empty: '0'

@@ -62,9 +62,9 @@ elements: |-
       '#type': select
       '#title': 'Statut / Status'
       '#options':
-        Étudiant: Étudiant
-        Enseignant: Enseignant
-        Administratif: Administratif
+        'Étudiant / Student': 'Étudiant / Student'
+        'Enseignant / Teacher': 'Enseignant / Teacher'
+        'Administratif / Administrative': 'Administratif / Administrative'
       '#empty_option': 'Sélectionner / Choose'
       '#required': true
     direction_composante:
@@ -110,35 +110,31 @@ elements: |-
       '#type': select
       '#title': 'Inscrit en tant que : / Registered as:'
       '#options':
-        Joueur: Joueur
+        'Joueur / player': 'Joueur / player'
         'Accompagnant délégation / Delegation accompanying person': 'Accompagnant délégation / Delegation accompanying person'
         'Student Board': 'Student Board'
         "Membre des équipes de direction/Présidence d'une université // Member of the management team/President of a university": "Membre des équipes de direction/Présidence d'une université // Member of the management team/President of a university"
-        'Volontaire / Volunteer': 'Volontaire / Volunteer'
+        'Recteur / Rector': 'Recteur / Rector'
+        'Membre du board Una Europa / Una Europa board member': 'Membre du board Una Europa / Una Europa board member'
         'Una Europa': 'Una Europa'
+        "Membre d'une association / Association member": "Membre d'une association / Association member"
       '#empty_option': 'Sélectionner / Choose'
       '#required': true
     taille_t_shirt:
       '#type': select
-      '#title': 'Taille t-shirt'
+      '#title': 'Taille t-shirt / T-shirt size'
       '#options':
-        XS: XS
         S: S
         M: M
         L: L
         XL: XL
         XXL: XXL
-        XXXL: XXXL
-        XXXXL: XXXXL
       '#empty_option': 'Sélectionner / Choose'
+      '#required': true
       '#states':
         visible:
-          - ':input[name="inscrit_en_tant_que_registered_as_"]':
-              value: Joueur
-          - xor
-          - ':input[name="inscrit_en_tant_que_registered_as_"]':
-              value: 'Volontaire / Volunteer'
-      '#required': true
+          ':input[name="inscrit_en_tant_que_registered_as_"]':
+            value: 'Joueur / player'
   informations_specifiques:
     '#type': webform_section
     '#title': 'Autres / Other'
@@ -381,7 +377,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: "[Réponse automatique] Una Europa Rugby Challenge - Confirmation de votre demande d'inscription / Confirmation of your registration request"
-      body: "<p>Madame, Monsieur,<br />\r\nMerci pour votre demande d'inscription.<br />\r\nNous reviendrons vers vous pour les phases suivantes d'inscription de votre équipe.<br />\r\nBien cordialement,<br />\r\nl'équipe d'Una Europa Rugby Challenge</p>\r\n\r\n<p>Dear Sir or Madam,<br />\r\nThank you for your registration request. We will get back to you as soon as possible to register your team.<br />\r\nSincerely, the Una Europa Rugby Challenge team</p>\r\n\r\n<p>\r\n<style type=\"text/css\"><!--td {border: 1px solid #cccccc;}br {mso-data-placement:same-cell;}-->\r\n</style>\r\n</p>"
+      body: "<p>Message automatique :<br>Madame, Monsieur,<br>Merci pour votre demande d'inscription à l'Una Europa Rugby Challenge. Votre badge d'accréditation vous sera donné lors de l'événement,<br>Bien cordialement, l'équipe d'Una Europa Rugby Challenge</p><p>Dear Sir or Madam<br>Thank you for registering for the Una Europa Rugby Challenge. Your accreditation badge will be given to you at the event,<br>Sincerely, the Una Europa Rugby Challenge team</p><p><style type=\"text/css\"><!--td {border: 1px solid #cccccc;}br {mso-data-placement:same-cell;}-->\r\n</style></p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

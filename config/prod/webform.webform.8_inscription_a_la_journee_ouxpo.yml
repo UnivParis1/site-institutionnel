@@ -1,38 +1,58 @@
-uuid: f33f7d66-dcdf-475a-baac-22b70d1b90e2
+uuid: 09baffb8-8668-49e4-af03-f74f1f1535b7
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 1101
+uid: 7845
 template: false
 archive: false
-id: l_zevounou_04_06_unis_dans_la_di
-title: 'L Zevounou 04.06 Unis dans la diversité'
-description: ''
-categories: {  }
+id: 8_inscription_a_la_journee_ouxpo
+title: "8 - Inscription à la journée d'étude Ouxpo du samedi 5 octobre 2024"
+description: "<p>Formulaire d'inscription à la journée d'étude Ouxpo du samedi 5 octobre 2024.</p>"
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': NOM
-    '#required': true
-  prenom:
+  votreprenom:
     '#type': textfield
     '#title': Prénom
+    '#placeholder': Jean
     '#required': true
-  adresse_email:
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
     '#type': textfield
-    '#title': 'Adresse email'
+    '#title': Nom
+    '#placeholder': Dupond
     '#required': true
-  qualite:
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
     '#type': textfield
-    '#title': Qualité
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
     '#required': true
-  institution_de_rattachement:
-    '#type': textfield
-    '#title': 'Institution de rattachement'
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': "Conditions d'inscription"
+    '#description': "<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription à la journée d'étude Ouxpo du samedi 5 octobre 2024&nbsp;</p>"
     '#required': true
+    '#required_error': "Vous devez accepter les conditions d'inscription."
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -45,7 +65,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -140,7 +160,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Merci pour votre inscription, le lien Zoom vous sera envoyé prochainement</p>'
+  confirmation_message: "<p>Votre demande d'inscription à la journée d'étude Ouxpo du samedi 5 octobre 2024 a bien été prise en compte.</p><p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -174,47 +194,95 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
-handlers: {  }
+handlers:
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription au colloque'
+      body: "<p>Bonjour,</p><p>Votre inscription à la journée d'étude Ouxpo du samedi 5 octobre 2024 a bien été validée.</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }
