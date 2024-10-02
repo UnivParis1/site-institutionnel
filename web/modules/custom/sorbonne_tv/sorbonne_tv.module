@@ -133,7 +133,7 @@ function sorbonne_tv_syncMultimedia_cronjob() {
         $destinataires = $mailingService->getVideosSynchroRecipients();
 
         foreach ($destinataires as $destinataire) {
-            \Drupal::logger('sorbonne_tv_SYNC:Notif')->notice('<pre>-//DEST//--' . print_r($destinataire, TRUE) . '---</pre>');
+            //\Drupal::logger('sorbonne_tv_SYNC:Notif')->notice('<pre>-//DEST//--' . print_r($destinataire, TRUE) . '---</pre>');
             $mailManager->mail('lmc_mail', 'sorbonne_tv_alert_synchro_video', $destinataire, $langcode, $params, NULL, TRUE);
         }
 

@@ -68,114 +68,122 @@ function lmc_mail_key_allowed_values(FieldStorageConfig $definition, ContentEnti
  */
 function lmc_mail_mail_alter(&$message)
 {
-  global $base_url;
-  $host = \Drupal::request()->getHost();
-  $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'lmc_mail');
-  $img_folder_path = 'https://'. $host .'/'. $module_path .'/images';
+  $negotiator = \Drupal::service('micro_site.negotiator');
+  if (!empty($negotiator->getActiveSite())) {
+    $currentSiteId = $negotiator->getActiveId();
 
-  if (!isset($message['lmc_template_disable']) || !$message['lmc_template_disable']) {
+    if ($currentSiteId == 126) {
+      global $base_url;
+      $host = \Drupal::request()->getHost();
+      $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'lmc_mail');
+      $img_folder_path = 'https://'. $host .'/'. $module_path .'/images';
 
-    $message['headers']['Return-Path'] = \Drupal::config('system.site')->get('mail');
-    $message['headers']['Sender'] = \Drupal::config('system.site')->get('mail');
-    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $message_language = (isset($message['langcode']) ? $message['langcode'] : $language);
 
-    // Attachments
-    $attachments = [];
-    if (isset($message['params']['attachments'])) {
-      // Custom attachments set in email parameters
-      foreach ($message['params']['attachments'] as $attachmentKey => $attachmentPath) {
-        if (is_array(($attachmentPath))) {
-          $realpath = \Drupal::service('file_system')->realpath($attachmentPath['filepath']);
-          $attachments[] = [
-            'filecontent' => file_get_contents($realpath),
-            'filename'    => $attachmentPath['filename'],
-            'filemime'    => $attachmentPath['filemime'],
-          ];
+      if (!isset($message['lmc_template_disable']) || !$message['lmc_template_disable']) {
+
+        $message['headers']['Return-Path'] = \Drupal::config('system.site')->get('mail');
+        $message['headers']['Sender'] = \Drupal::config('system.site')->get('mail');
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $message_language = (isset($message['langcode']) ? $message['langcode'] : $language);
+
+        // Attachments
+        $attachments = [];
+        if (isset($message['params']['attachments'])) {
+          // Custom attachments set in email parameters
+          foreach ($message['params']['attachments'] as $attachmentKey => $attachmentPath) {
+            if (is_array(($attachmentPath))) {
+              $realpath = \Drupal::service('file_system')->realpath($attachmentPath['filepath']);
+              $attachments[] = [
+                'filecontent' => file_get_contents($realpath),
+                'filename'    => $attachmentPath['filename'],
+                'filemime'    => $attachmentPath['filemime'],
+              ];
+            } else {
+              $attachments[] = [
+                'filecontent' => file_get_contents($attachmentPath),
+                'filename'    => basename($attachmentPath),
+                'filemime'    => mime_content_type($attachmentPath)
+              ];
+            }
+            //  unset($message['params']['attachments'][$attachmentKey]);
+          }
+        }
+        $message['params']['attachments'] = $attachments;
+
+
+        // Attachments configured in email template
+        $email = lmc_mail_getEmailByKey($message['key'], $message['langcode']);
+
+        if (!empty($email)) {
+          if (is_array($email)) {
+            $attachmentIds = explode(',', $email['attachmentIds']);
+          } else {
+            $attachmentIds = array_column($email->get('field_email_attachments')->getValue(), 'target_id');
+          }
+
+          if (!empty($attachmentIds)) {
+            $attachments = File::loadMultiple($attachmentIds);
+
+            foreach ($attachments as $attachment) {
+              $attachmentPath = \Drupal::service('file_system')->realpath($attachment->getFileUri());
+
+              $message['params']['attachments'][] = [
+                'filecontent' => file_get_contents($attachmentPath),
+                'filename'    => basename($attachmentPath),
+                'filemime'    => mime_content_type($attachmentPath)
+              ];
+            }
+          }
+        }
+
+        $config = \Drupal::config('lmc_mail.settings');
+        $disclamer_txts_conf = $config->get('lmc_mail.settings.disclamer');
+        $mail_bottom_disclamer = ''; //'This message is being sent from a law firm and may contain confidential or privileged information. If you are not the intended recipient, please advise the sender immediately and delete this message and any attachments without retaining a copy.';
+
+        if (isset($disclamer_txts_conf['bottom_mail_disclamer']['value'])) {
+          $mail_bottom_disclamer = $disclamer_txts_conf['bottom_mail_disclamer']['value'];
+        }
+
+        $message_start = [];
+
+
+
+        $message_start[] = '<div id="email_content" bgcolor="#ebebeb" style="background-color: #ebebeb; padding: 20px; width: 100%;">'
+          . '<div id="email_content_inner" style="width: 80%; max-width: 1000px; margin: 0 auto;">';
+
+        $logo_mail = $img_folder_path .'/site-logo.png';
+
+        /* Ajout du logo au template de mails */
+        $message_start[] = '<div id="logomail" style="text-align: center; margin-bottom: 20px;">'
+          //. '<a href="' . $base_url . '" title="Centre Hubertine Auclert"><img src="' . file_create_url(theme_get_setting('logo', 'cha')['path']) . '" width="150" style="max-width: 150px; width: 150px; height: auto;" /></a>'
+          . '<a href="' . $base_url . '" title="Sorboonne TV"><img src="' . $logo_mail . '" width="250" style="max-width: 250px; width: 250px; height: auto;" /></a>'
+          . '</div>';
+
+        $message_start[] = '<div id="email_content_box" bgcolor="#ffffff" style="background-color: #ffffff; font-size: 16px; border-color: #dddddd; border-style: solid; border-width: 1px; padding: 20px;">';
+
+        if (count($message['body']) == 1) {
+          $message_body_defaut = [str_replace("\r\n", "<br />", $message['body'][0])];
         } else {
-          $attachments[] = [
-            'filecontent' => file_get_contents($attachmentPath),
-            'filename'    => basename($attachmentPath),
-            'filemime'    => mime_content_type($attachmentPath)
-          ];
+          $message_body_defaut = $message['body'];
         }
-        //  unset($message['params']['attachments'][$attachmentKey]);
-      }
-    }
-    $message['params']['attachments'] = $attachments;
 
+        $message_end = [];
+        $message_end[] = '</div>'; /* End of #email_content_box */
 
-    // Attachments configured in email template
-    $email = lmc_mail_getEmailByKey($message['key'], $message['langcode']);
-
-    if (!empty($email)) {
-      if (is_array($email)) {
-        $attachmentIds = explode(',', $email['attachmentIds']);
-      } else {
-        $attachmentIds = array_column($email->get('field_email_attachments')->getValue(), 'target_id');
-      }
-
-      if (!empty($attachmentIds)) {
-        $attachments = File::loadMultiple($attachmentIds);
-
-        foreach ($attachments as $attachment) {
-          $attachmentPath = \Drupal::service('file_system')->realpath($attachment->getFileUri());
-
-          $message['params']['attachments'][] = [
-            'filecontent' => file_get_contents($attachmentPath),
-            'filename'    => basename($attachmentPath),
-            'filemime'    => mime_content_type($attachmentPath)
-          ];
+        if (!empty($mail_bottom_disclamer)) {
+          $message_end[] = '<div id="footer_mail" style="font-size: 12px; margin-top: 20px;">'
+            . '<div id="disclaimer">' . t($mail_bottom_disclamer, [], ['langcode' => $message_language]) . '</div>'
+            . '</div>';
         }
+
+        $message_end[] = '</div>' /* End of #email_content_inner */
+          . '</div>'; /* End of #email_content */
+
+        $message_body_start = array_merge($message_start, $message_body_defaut);
+
+        $message['body'] = array_merge($message_body_start, $message_end);
       }
     }
-
-    $config = \Drupal::config('lmc_mail.settings');
-    $disclamer_txts_conf = $config->get('lmc_mail.settings.disclamer');
-    $mail_bottom_disclamer = ''; //'This message is being sent from a law firm and may contain confidential or privileged information. If you are not the intended recipient, please advise the sender immediately and delete this message and any attachments without retaining a copy.';
-
-    if (isset($disclamer_txts_conf['bottom_mail_disclamer']['value'])) {
-      $mail_bottom_disclamer = $disclamer_txts_conf['bottom_mail_disclamer']['value'];
-    }
-
-    $message_start = [];
-
-
-
-    $message_start[] = '<div id="email_content" bgcolor="#ebebeb" style="background-color: #ebebeb; padding: 20px; width: 100%;">'
-      . '<div id="email_content_inner" style="width: 80%; max-width: 1000px; margin: 0 auto;">';
-
-    $logo_mail = $img_folder_path .'/site-logo.png';
-
-    /* Ajout du logo au template de mails */
-    $message_start[] = '<div id="logomail" style="text-align: center; margin-bottom: 20px;">'
-      //. '<a href="' . $base_url . '" title="Centre Hubertine Auclert"><img src="' . file_create_url(theme_get_setting('logo', 'cha')['path']) . '" width="150" style="max-width: 150px; width: 150px; height: auto;" /></a>'
-      . '<a href="' . $base_url . '" title="Sorboonne TV"><img src="' . $logo_mail . '" width="250" style="max-width: 250px; width: 250px; height: auto;" /></a>'
-      . '</div>';
-
-    $message_start[] = '<div id="email_content_box" bgcolor="#ffffff" style="background-color: #ffffff; font-size: 16px; border-color: #dddddd; border-style: solid; border-width: 1px; padding: 20px;">';
-
-    if (count($message['body']) == 1) {
-      $message_body_defaut = [str_replace("\r\n", "<br />", $message['body'][0])];
-    } else {
-      $message_body_defaut = $message['body'];
-    }
-
-    $message_end = [];
-    $message_end[] = '</div>'; /* End of #email_content_box */
-
-    if (!empty($mail_bottom_disclamer)) {
-      $message_end[] = '<div id="footer_mail" style="font-size: 12px; margin-top: 20px;">'
-        . '<div id="disclaimer">' . t($mail_bottom_disclamer, [], ['langcode' => $message_language]) . '</div>'
-        . '</div>';
-    }
-
-    $message_end[] = '</div>' /* End of #email_content_inner */
-      . '</div>'; /* End of #email_content */
-
-    $message_body_start = array_merge($message_start, $message_body_defaut);
-
-    $message['body'] = array_merge($message_body_start, $message_end);
   }
 }
 
