@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.page_sorbonne_tv.field_api_sync
     - field.field.node.page_sorbonne_tv.field_collections
     - field.field.node.page_sorbonne_tv.field_date_maj
+    - field.field.node.page_sorbonne_tv.field_disable_canonical_url
     - field.field.node.page_sorbonne_tv.field_discipline
     - field.field.node.page_sorbonne_tv.field_duree
     - field.field.node.page_sorbonne_tv.field_id_video
@@ -16,6 +17,9 @@ dependencies:
     - field.field.node.page_sorbonne_tv.field_media
     - field.field.node.page_sorbonne_tv.field_metatags
     - field.field.node.page_sorbonne_tv.field_paragraphs
+    - field.field.node.page_sorbonne_tv.field_publish_master
+    - field.field.node.page_sorbonne_tv.field_sites
+    - field.field.node.page_sorbonne_tv.field_sites_all
     - field.field.node.page_sorbonne_tv.field_sorb_tv_date_depot
     - field.field.node.page_sorbonne_tv.field_sorb_tv_langue
     - field.field.node.page_sorbonne_tv.field_sorb_tv_mosaic_colgroup
@@ -161,6 +165,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_disable_canonical_url:
+    type: boolean_checkbox
+    weight: 43
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_discipline:
     type: entity_reference_autocomplete
     weight: 10
@@ -248,6 +259,30 @@ content:
         paragraphs_ee:
           dialog_off_canvas: false
           dialog_style: tiles
+  field_publish_master:
+    type: boolean_checkbox
+    weight: 42
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_sites:
+    type: entity_reference_autocomplete
+    weight: 40
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sites_all:
+    type: boolean_checkbox
+    weight: 41
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_sorb_tv_date_depot:
     type: datetime_default
     weight: 11
