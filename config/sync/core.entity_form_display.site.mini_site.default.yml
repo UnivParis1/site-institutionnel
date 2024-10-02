@@ -7,6 +7,7 @@ dependencies:
     - field.field.site.mini_site.field_doctype
     - field.field.site.mini_site.field_family
     - field.field.site.mini_site.field_footer
+    - field.field.site.mini_site.field_footer_partenaires
     - field.field.site.mini_site.field_label
     - field.field.site.mini_site.field_labstructname_t
     - field.field.site.mini_site.field_request_fields
@@ -22,6 +23,7 @@ dependencies:
     - datetime
     - field_group
     - image
+    - inline_entity_form
     - link
 third_party_settings:
   field_group:
@@ -31,7 +33,7 @@ third_party_settings:
       label: Publications
       region: content
       parent_name: ''
-      weight: 43
+      weight: 44
       format_type: accordion
       format_settings:
         classes: ''
@@ -64,7 +66,7 @@ mode: default
 content:
   about_me:
     type: boolean_checkbox
-    weight: 35
+    weight: 36
     region: content
     settings:
       display_label: true
@@ -79,21 +81,42 @@ content:
     third_party_settings: {  }
   discipline_enseignement:
     type: boolean_checkbox
-    weight: 37
+    weight: 38
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  display_doctoral_school:
+    type: boolean_checkbox
+    weight: 47
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  display_viva_director:
+    type: boolean_checkbox
+    weight: 46
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  display_viva_subject:
+    type: boolean_checkbox
+    weight: 45
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   doc_enabled:
     type: boolean_checkbox
-    weight: 34
+    weight: 35
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   ec_enabled:
     type: boolean_checkbox
-    weight: 33
+    weight: 34
     region: content
     settings:
       display_label: true
@@ -136,6 +159,19 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_footer_partenaires:
+    type: inline_entity_form_simple
+    weight: 33
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+      revision: false
     third_party_settings: {  }
   field_label:
     type: options_select
@@ -329,7 +365,7 @@ content:
     third_party_settings: {  }
   skills_lists:
     type: boolean_checkbox
-    weight: 36
+    weight: 37
     region: content
     settings:
       display_label: true
@@ -359,21 +395,21 @@ content:
     third_party_settings: {  }
   supannEntite_pedagogy:
     type: boolean_checkbox
-    weight: 39
+    weight: 40
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   supannEntite_research:
     type: boolean_checkbox
-    weight: 38
+    weight: 39
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   supannRole:
     type: boolean_checkbox
-    weight: 41
+    weight: 42
     region: content
     settings:
       display_label: true
@@ -391,14 +427,14 @@ content:
     third_party_settings: {  }
   trombi_ec_enable:
     type: boolean_checkbox
-    weight: 40
+    weight: 41
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   trombi_students_enable:
     type: boolean_checkbox
-    weight: 42
+    weight: 43
     region: content
     settings:
       display_label: true

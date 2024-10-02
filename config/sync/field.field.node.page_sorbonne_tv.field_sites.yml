@@ -1,0 +1,25 @@
+uuid: 0076ec18-ef68-4494-9abf-d2953b1f98c8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sites
+    - node.type.page_sorbonne_tv
+id: node.page_sorbonne_tv.field_sites
+field_name: field_sites
+entity_type: node
+bundle: page_sorbonne_tv
+label: 'Autres sites'
+description: "Publier le contenu sur d'autres sites."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:site'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: id
+      direction: ASC
+field_type: entity_reference
