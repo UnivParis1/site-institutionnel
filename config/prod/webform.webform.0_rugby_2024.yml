@@ -44,17 +44,11 @@ elements: |-
       '#title': Organisation
       '#options':
         'Una Europa': 'Una Europa'
-        'Freie Universität Berlin': 'Freie Universität Berlin'
-        'Alma mater Studiorum Università di Bologna': 'Alma mater Studiorum Università di Bologna'
-        'University of Edinburgh': 'University of Edinburgh'
-        'Leiden University': 'Leiden University'
-        'Uniwersytet Jagielloński w Krakowie': 'Uniwersytet Jagielloński w Krakowie'
-        'Helsingin Yliopisto': 'Helsingin Yliopisto'
-        'KU Leuven': 'KU Leuven'
+        'Sorbonne Université': 'Sorbonne Université'
         'Universidad Complutense de Madrid': 'Universidad Complutense de Madrid'
         'University College Dublin': 'University College Dublin'
-        'University of Zurich': 'University of Zurich'
         'Université Paris 1 Panthéon-Sorbonne': 'Université Paris 1 Panthéon-Sorbonne'
+        'Université Paris-Panthéon-Assas ': 'Université Paris-Panthéon-Assas '
       '#empty_option': 'Sélectionner / Choose'
       '#other__option_label': Autre/Other
       '#required': true
@@ -120,6 +114,13 @@ elements: |-
         "Membre d'une association / Association member": "Membre d'une association / Association member"
       '#empty_option': 'Sélectionner / Choose'
       '#required': true
+    veuillez_preciser:
+      '#type': textfield
+      '#title': "Veuillez indiquer le nom de l'association :"
+      '#states':
+        visible:
+          ':input[name="inscrit_en_tant_que_registered_as_"]':
+            value: "Membre d'une association / Association member"
     taille_t_shirt:
       '#type': select
       '#title': 'Taille t-shirt / T-shirt size'
