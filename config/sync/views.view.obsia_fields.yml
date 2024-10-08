@@ -4,13 +4,14 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_formations_ia
+    - field.storage.node.field_ia_skills
     - field.storage.node.field_projects_ia
     - field.storage.node.field_short_bio
-    - field.storage.node.field_skills
     - field.storage.node.field_uid_ldap
     - node.type.page_personnelle
   module:
     - node
+    - options
     - rest
     - serialization
     - text
@@ -279,15 +280,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_skills:
-          id: field_skills
-          table: node__field_skills
-          field: field_skills
+        field_ia_skills:
+          id: field_ia_skills
+          table: node__field_ia_skills
+          field: field_ia_skills
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: skills
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -328,14 +329,13 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
           group_columns: {  }
           group_rows: true
-          delta_limit: 0
+          delta_limit: 5
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
@@ -490,9 +490,9 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_formations_ia'
+        - 'config:field.storage.node.field_ia_skills'
         - 'config:field.storage.node.field_projects_ia'
         - 'config:field.storage.node.field_short_bio'
-        - 'config:field.storage.node.field_skills'
         - 'config:field.storage.node.field_uid_ldap'
   rest_export_1:
     id: rest_export_1
@@ -525,7 +525,7 @@ display:
             field_projects_ia:
               alias: projets
               raw_output: true
-            field_skills:
+            field_ia_skills:
               alias: skills
               raw_output: false
       display_extenders: {  }
@@ -541,7 +541,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_formations_ia'
+        - 'config:field.storage.node.field_ia_skills'
         - 'config:field.storage.node.field_projects_ia'
         - 'config:field.storage.node.field_short_bio'
-        - 'config:field.storage.node.field_skills'
         - 'config:field.storage.node.field_uid_ldap'

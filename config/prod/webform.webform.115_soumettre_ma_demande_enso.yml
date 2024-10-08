@@ -1,58 +1,37 @@
-uuid: 63a4e6be-aaf5-46d3-bdb3-16f6a5b0348c
+uuid: 4f260bce-e1d1-4896-9293-976e5155fc54
 langcode: fr
-status: open
-dependencies: {  }
+status: closed
+dependencies:
+  module:
+    - zammad_webform_handler
 weight: 0
 open: null
 close: null
-uid: 7845
+uid: 6770
 template: false
-archive: true
-id: 8_inscription_a_la_seance_du_sem
-title: '8 - Inscription à la séance du séminaire "Penser le droit social" du 07/10/2024'
-description: '<p>Formulaire d''inscription à la séance du séminaire "Penser le droit social" du 07/10/2024.</p>'
-categories:
-  - 'Inscription à un colloque '
+archive: false
+id: 115_soumettre_ma_demande_enso
+title: '115 - Soumettre ma demande ENSO'
+description: ''
+categories: {  }
 elements: |-
-  votreprenom:
-    '#type': textfield
-    '#title': Prénom
-    '#placeholder': Jean
-    '#required': true
-    '#required_error': 'Vous devez saisir votre prénom.'
-  nom2:
-    '#type': textfield
-    '#title': Nom
-    '#placeholder': Dupond
-    '#required': true
-    '#required_error': 'Vous devez saisir votre nom.'
-  votre_adresse_de_messagerie:
+  email:
     '#type': email
-    '#title': 'Votre adresse de messagerie'
-    '#placeholder': ' jeandupond@mail.com'
+    '#title': E-mail
+    '#title_display': before
+    '#placeholder': 'Saisissez votre adresse e-mail '
     '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
-  fonction:
-    '#type': textfield
-    '#title': Fonction
-    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
+    '#required_error': 'Ce champ est requis'
+  description_du_projet:
+    '#type': textarea
+    '#title': 'Description du projet'
+    '#title_display': before
     '#required': true
-    '#required_error': 'Vous devez saisir votre fonction.'
-  conditions_d_inscription:
-    '#type': checkbox
-    '#title': "Conditions d'inscription"
-    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription à la séance du séminaire "Penser le droit social" du 07/10/2024.&nbsp;</p>'
-    '#required': true
-    '#required_error': "Vous devez accepter les conditions d'inscription."
+    '#required_error': 'Ce champ est requis'
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire"
-    '#submit__attributes':
-      class:
-        - form--inline
-        - clearfix
-    '#update_hide': true
+    '#submit__label': 'Soumettre ma demande'
 css: ''
 javascript: ''
 settings:
@@ -61,11 +40,11 @@ settings:
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: true
+  page: false
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -160,7 +139,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Votre demande d''inscription à la séance du séminaire "Penser le droit social" du 07/10/2024 a bien été prise en compte.</p><p>Un mail de confirmation a été envoyé à l''adresse que vous avez saisie.</p>'
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -194,106 +173,110 @@ access:
     roles:
       - anonymous
       - authenticated
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   view_any:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   update_any:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   delete_any:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   purge_any:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   view_own:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   update_own:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   delete_own:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 7847
-      - 7792
+    users: {  }
     permissions: {  }
 handlers:
-  email_au_demandeur:
-    id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+  zammad_ticket:
+    id: zammad
+    handler_id: zammad_ticket
+    label: 'Demande ENSO'
     notes: ''
     status: true
     conditions: {  }
     weight: 0
     settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Inscription au colloque'
-      body: '<p>Bonjour,</p><p>Votre inscription à la séance du séminaire "Penser le droit social" du 07/10/2024 a bien été validée.</p>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+      ticket_title: 'Nouvelle demande ENSO de recherche.pantheonsorbonne.fr'
+      ticket_body: '[webform_submission:values: description_du_projet]'
+      ticket_group: Users
+      ticket_type: web
+      ticket_customer_mail_simple: ''
+      ticket_customer_mail_complex: '[webform_submission:values:e_mail]'
+      additional_ticket_field_0:
+        '': ''
+      additional_ticket_field_1:
+        '': ''
+      additional_ticket_field_2:
+        '': ''
+      additional_ticket_field_3:
+        '': ''
+      additional_ticket_field_4:
+        '': ''
+      additional_ticket_field_5:
+        '': ''
+      additional_ticket_field_6:
+        '': ''
+      additional_ticket_field_7:
+        '': ''
+      additional_ticket_field_8:
+        '': ''
+      additional_ticket_field_9:
+        '': ''
+      user_creation_fallback: complex-user
+      user_first_name: ''
+      user_second_name: ''
+      user_web: ''
+      user_telephone: ''
+      user_mobile: ''
+      user_fax: ''
+      user_notes: ''
+      additional_user_field_0:
+        '': ''
+      additional_user_field_1:
+        '': ''
+      additional_user_field_2:
+        '': ''
+      additional_user_field_3:
+        '': ''
+      additional_user_field_4:
+        '': ''
+      additional_user_field_5:
+        '': ''
+      additional_user_field_6:
+        '': ''
+      additional_user_field_7:
+        '': ''
+      additional_user_field_8:
+        '': ''
+      additional_user_field_9:
+        '': ''
 variants: {  }
