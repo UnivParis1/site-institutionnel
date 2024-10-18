@@ -455,6 +455,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
 
             $collection_video = [];
             $thumbnail_collection_medias = [];
+            $collection_array = [];
 
             if(!empty($item->video['theme'])) {
                 $i = 0;
@@ -490,7 +491,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                     if($collection['channel'] == 81) {
 
                         //\Drupal::logger('channel')->notice("<pre>". print_r($collection, true)."</pre>");
-
+                        $node_collection = NULL;
 
                         $nid_collection = \Drupal::entityQuery('node')
                             ->condition('type', 'page_sorbonne_tv')
@@ -508,12 +509,12 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                                 'field_id_video' => $collection['id'],
                                 'site_id' => 126,
                             ]);
+                            $op = 'CREATE';
 
                         } else {
-
+                            $op = 'UPDATE';
                             $nid_collection = reset($nid_collection);
                             $node_collection = Node::load($nid_collection);
-                            $node_collection->set('site_id', 126);
                         }
 
 
@@ -590,7 +591,13 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                               $node_collection->set('field_sorb_tv_share_image', $thumbnail_collection_medias);
                             }
                             $node_collection->set('field_discipline', $taxo_discipline_ids);
+                            $node_collection->set('site_id', 126);
+                            $node_collection->changed = time();
                             $node_collection->save();
+
+
+
+                            \Drupal::logger('sorbonne_tv_syncMultimedia::processItem')->notice('@op collection @id', ['@op' => $op, '@id' => $node_collection->id()]);
 
                             $collection_video[] = $node_collection->id();
 
