@@ -6,6 +6,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\media\Entity\Media;
 use Drupal\Core\File\FileSystemInterface;
@@ -49,6 +50,19 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
             }
 
         }else {
+
+            $owner_id = 1;
+            $owner = NULL;
+            $negotiator = \Drupal::service('micro_site.negotiator');
+
+            $site = $negotiator->getActiveSite();
+            if ($site) {
+              $mail = $site->getEmail();
+              $owner = user_load_by_mail($mail);
+              if ($owner) {
+                $owner_id = $owner->id();
+              }
+            }
 
 
             /*
@@ -508,6 +522,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                                 'field_sorb_tv_type' => 'collection',
                                 'field_id_video' => $collection['id'],
                                 'site_id' => [126],
+                                'uid' => $owner_id,
                             ]);
                             $op = 'CREATE';
 
@@ -548,7 +563,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                                 $thumbnail_media_collection = Media::create([
                                     'name' => $filename_collection,
                                     'bundle' => 'image',
-                                    'uid' => 1,
+                                    'uid' => $owner_id,
                                     'langcode' => 'fr',
                                     'status' => 1,
                                     'field_media_image' => [
@@ -562,6 +577,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                                 $thumbnail_media_collection = reset($medias_collection);
                                 $thumbnail_media_collection->set('field_media_image', ['target_id' => $thumbnail_collection->id()]);
                                 $thumbnail_media_collection->set('site_id', [126]);
+                                $thumbnail_media_collection->setOwner($owner);
 
                             }
 
@@ -592,6 +608,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                             }
                             $node_collection->set('field_discipline', $taxo_discipline_ids);
                             $node_collection->set('site_id', [126]);
+                            $node_collection->setOwner($owner);
                             $node_collection->changed = time();
                             $node_collection->save();
 
@@ -619,7 +636,8 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                     'title' => $title,
                     'field_sorb_tv_type' => $type,
                     'field_id_video' => $id,
-                    'site_id', [126],
+                    'site_id' => [126],
+                    'uid' => $owner_id,
                 ]);
 
             } else {
@@ -627,6 +645,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                 $nid = reset($nid);
                 $node = Node::load($nid);
                 $node->set('site_id', [126]);
+                $node->setOwner($owner);
 
             }
 
@@ -652,13 +671,13 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                     $thumbnail_media = Media::create([
                         'name' => $filename,
                         'bundle' => 'image',
-                        'uid' => 1,
+                        'uid' => $owner_id,
                         'langcode' => 'fr',
                         'status' => 1,
                         'field_media_image' => [
                             'target_id' => $thumbnail->id(),
                         ],
-                        'site_id', [126],
+                        'site_id' => [126],
                     ]);
 
                 }else{
@@ -666,6 +685,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                     $thumbnail_media = reset($medias);
                     $thumbnail_media->set('field_media_image', ['target_id' => $thumbnail->id()]);
                     $thumbnail_media->set('site_id', [126]);
+                    $thumbnail_media->setOwner($owner);
 
                 }
 
