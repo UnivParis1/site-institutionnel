@@ -21,9 +21,11 @@ class HalManager implements HalInterface {
    *
    * @return array|mixed
    */
-   public function getUserPublications($method, $firstname, $lastname, $id_hal = NULL) {
+  public function getUserPublications($method, $firstname, $lastname, $id_hal = NULL) {
+    $firstname = iconv('UTF-8','ASCII//TRANSLIT',$firstname);
+    $lastname = iconv('UTF-8','ASCII//TRANSLIT',$lastname);
 
-   $cache_key = "user_publications:" . md5($method . $firstname . $lastname . $id_hal);
+    $cache_key = "user_publications:" . md5($method . $firstname . $lastname . $id_hal);
 
     //Récupération du cache
     $cache = \Drupal::cache()->get($cache_key);
@@ -38,8 +40,6 @@ class HalManager implements HalInterface {
           $author = "idHal=$id_hal";
           break;
         case 'nomprenom':
-          $firstname = $this->removeSpecialChars($firstname);
-          $lastname = $this->removeSpecialChars($lastname);
           $author = "auteur_exp=$firstname+$lastname&collection_exp=UNIV-PARIS1";
           break;
       }
@@ -67,7 +67,7 @@ class HalManager implements HalInterface {
       try {
         $response = \Drupal::httpClient()->get($url, [
           'timeout' => 15,
-          'connect_timeout' => 10, 
+          'connect_timeout' => 10,
         ]);
 
         if ($response->getStatusCode() == 200) {
@@ -96,7 +96,7 @@ class HalManager implements HalInterface {
         \Drupal::logger('up1_pages_personnelles')->error('CError while fetching HAL data for user : @user', [
           '@user' => $firstname . ' ' . $lastname
         ]);
-      } 
+      }
     }
 
     return $publications;
