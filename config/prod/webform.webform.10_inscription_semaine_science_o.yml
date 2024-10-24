@@ -1,4 +1,4 @@
-uuid: b3752b03-3767-4d47-8394-0f03240500ef
+uuid: 949b897e-c2f3-4c4f-9835-8b2900db6637
 langcode: fr
 status: open
 dependencies: {  }
@@ -8,56 +8,69 @@ close: null
 uid: 5486
 template: false
 archive: false
-id: 0_dhc_4_novembre_2024
-title: '0 - DHC 4 novembre 2024 VIP'
+id: 10_inscription_semaine_science_o
+title: '10 - Inscription Semaine science ouverte 2024'
 description: ''
-categories: {  }
+categories:
+  - 'Inscription événement'
 elements: |-
   nom:
-    '#type': textfield
+    '#type': webform_name
     '#title': Nom
-    '#autocomplete': name
     '#required': true
-  prenom:
-    '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
+    '#title__access': false
+    '#first__title': Prénom
+    '#first__required': true
+    '#middle__access': false
+    '#last__title': Nom
+    '#last__required': true
+    '#suffix__access': false
+    '#degree__access': false
   courriel:
     '#type': email
-    '#title': 'Courriel '
+    '#title': Courriel
     '#required': true
-  aurez_vous_besoin_d_un_acces_pmr_:
-    '#type': radios
-    '#title': 'Aurez-vous besoin d’un accès PMR ?'
+  structure_ou_service_de_rattachement_laboratoire_unite_de_recher:
+    '#type': textfield
+    '#title': 'Structure ou service de rattachement'
+    '#placeholder': ' Laboratoire, unité de recherche, composante...'
+    '#required': true
+  qualite:
+    '#type': textfield
+    '#title': Qualité
+    '#placeholder': 'Directeur de laboratoire, enseignant chercheur, personnel Paris 1, doctorant...'
+    '#required': true
+  a_quelle_matinee_d_etude_souhaitez_vous_assister_:
+    '#type': checkboxes
+    '#title': "A quelle(s) matinée(s) d'étude souhaitez-vous assister ?"
     '#options':
-      Oui: Oui
-      Non: Non
+      'Lundi 25 novembre': 'Lundi 25 novembre'
+      'Mardi 26 novembre': 'Mardi 26 novembre'
+      'Mercredi 27 novembre': 'Mercredi 27 novembre'
+      'Jeudi 28 novembre': 'Jeudi 28 novembre'
+      'Vendredi 29 novembre': 'Vendredi 29 novembre'
+    '#required': true
     '#options__properties': ''
-  markup_02:
-    '#type': webform_markup
-    '#markup': '<p>Si oui, merci de bien vouloir nous avertir à l''adresse suivante :&nbsp;<a href="mailto:evenements@univ-paris1.fr" target="_blank" rel="noopener noreferrer" aria-expanded="false" aria-haspopup="menu" data-remove-tab-index="true" data-sk="tooltip_parent" data-stringify-link="mailto:evenements@univ-paris1.fr" delay="150" tabindex="-1">evenements@univ-paris1.fr</a></p>'
-  souhaitez_vous_participer_au_cocktail_:
-    '#type': radios
-    '#title': 'Souhaitez-vous participer au cocktail ?'
+  _souhaitez_vous_assister_a_un_atelier_:
+    '#type': checkboxes
+    '#title': "Souhaitez-vous assister à un ou plusieurs ateliers de l'après-midi ?"
     '#options':
-      Oui: Oui
-      Non: Non
-    '#required': true
+      'Mardi 26 novembre Atelier RGPD': 'Mardi 26 novembre Atelier "RGPD"'
+      'Mardi 26 novembre Atelier dépôt dans HAL et identifiants-chercheurs': 'Mardi 26 novembre Atelier "dépôt dans HAL et identifiants-chercheurs"'
+      'Jeudi 28 novembre Atelier "méthodes et outils pour mieux gérer son matériel de recherche"': 'Jeudi 28 novembre Atelier "méthodes et outils pour mieux gérer son matériel de recherche"'
+      'Vendredi 29 novembre Atelier "des données et des jeux': 'Vendredi 29 novembre Atelier "des données et des jeux"'
     '#options__properties': ''
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
-    '#type': checkbox
-    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': "J'accepte les {conditions de service}."
     '#required': true
+    '#terms_content': "<p><span class=\"field-prefix\">En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées dans le cadre de mon inscription aux matinées d'étude de la Semaine internationale de l'accès ouvert.</span></p>"
   captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-  markup:
-    '#type': webform_markup
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
     '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -73,7 +86,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -164,8 +177,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie de remise des insignes de docteur<em> honoris causa</em>.<br>Vous allez recevoir un email de confirmation.</p><p>Bien cordialement,</p>'
+  confirmation_title: 'Inscription enregistée'
+  confirmation_message: "Merci pour votre participation &agrave; la Semaine internationale de l&#39;acc&egrave;s ouvert !<br />\r\nVous recevrez prochainement un courriel de confirmation de votre demande d&#39;inscription."
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -222,8 +235,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -232,8 +244,7 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
@@ -241,10 +252,46 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
 handlers:
+  email:
+    id: email
+    handler_id: email
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: open-access-week@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom:value]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Semaine de la science ouverte 2024 – Nouvelle inscription'
+      body: '<p>Envoyé le [webform_submission:created]<br><br>Envoyé par : [webform_submission:user]</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
   email_aux_demandeurs:
     id: email
     handler_id: email_aux_demandeurs
@@ -262,52 +309,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: evenements@univ-paris1.fr
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
       from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie de remise des insignes de docteur honoris causa - lundi 4 novembre 2024 "
-      body: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie de remise des insignes de docteur <em>honoris causa</em> qui se déroulera le lundi 4 novembre 2024, en Sorbonne.</p><p>Bien cordialement,</p><p>&nbsp;</p><p>&nbsp;</p>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: evenements@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: cabpresi@univ-paris1.fr
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'DHC 4 novembre 2024 - Nouvelle inscription (VIP)'
-      body: _default
+      subject: "[Réponse automatique ] Semaine de la science ouverte 2024 – Confirmation d'inscription"
+      body: '<p>Bonjour,</p><p>Votre inscription est bien enregistrée.<br>Merci pour votre participation.</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

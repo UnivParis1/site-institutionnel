@@ -1,63 +1,58 @@
-uuid: b3752b03-3767-4d47-8394-0f03240500ef
+uuid: bbf471ad-e34c-44a8-ae26-cc318d0d08c7
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 7845
 template: false
 archive: false
-id: 0_dhc_4_novembre_2024
-title: '0 - DHC 4 novembre 2024 VIP'
-description: ''
-categories: {  }
+id: 8_inscription_recherche_empiriqu
+title: '8 - Inscription à la séance du séminaire "La Recherche Empirique en Droit" du 27 novembre 2024'
+description: '<p>Formulaire d''inscription à la séance du séminaire "La Recherche Empirique en Droit" du 27 novembre 2024.</p>'
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  nom:
+  votreprenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': Jean
+    '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
     '#type': textfield
     '#title': Nom
-    '#autocomplete': name
+    '#placeholder': Dupond
     '#required': true
-  prenom:
-    '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
-  courriel:
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
     '#type': email
-    '#title': 'Courriel '
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
     '#required': true
-  aurez_vous_besoin_d_un_acces_pmr_:
-    '#type': radios
-    '#title': 'Aurez-vous besoin d’un accès PMR ?'
-    '#options':
-      Oui: Oui
-      Non: Non
-    '#options__properties': ''
-  markup_02:
-    '#type': webform_markup
-    '#markup': '<p>Si oui, merci de bien vouloir nous avertir à l''adresse suivante :&nbsp;<a href="mailto:evenements@univ-paris1.fr" target="_blank" rel="noopener noreferrer" aria-expanded="false" aria-haspopup="menu" data-remove-tab-index="true" data-sk="tooltip_parent" data-stringify-link="mailto:evenements@univ-paris1.fr" delay="150" tabindex="-1">evenements@univ-paris1.fr</a></p>'
-  souhaitez_vous_participer_au_cocktail_:
-    '#type': radios
-    '#title': 'Souhaitez-vous participer au cocktail ?'
-    '#options':
-      Oui: Oui
-      Non: Non
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
     '#required': true
-    '#options__properties': ''
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
     '#type': checkbox
-    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription à la séance du séminaire "La Recherche Empirique en Droit" du 27 novembre 2024.</p>'
     '#required': true
-  captcha:
-    '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-  markup:
-    '#type': webform_markup
+    '#required_error': "Vous devez accepter les conditions d'inscription."
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -73,7 +68,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -142,7 +137,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -165,7 +160,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie de remise des insignes de docteur<em> honoris causa</em>.<br>Vous allez recevoir un email de confirmation.</p><p>Bien cordialement,</p>'
+  confirmation_message: '<p>Votre demande d''inscription à la séance du séminaire "La Recherche Empirique en Droit" du 27 novembre 2024 a bien été prise en compte.</p><p>Un mail de confirmation a été envoyé à l''adresse que vous avez saisie.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -199,56 +194,64 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
-    users: {  }
+    roles: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   administer:
     roles: {  }
     users:
-      - 6746
+      - 7792
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   configuration:
     roles: {  }
     users:
-      - 6746
+      - 7792
     permissions: {  }
 handlers:
-  email_aux_demandeurs:
+  email_au_demandeur:
     id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
@@ -256,58 +259,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: evenements@univ-paris1.fr
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: 'Paris 1 Panthéon-Sorbonne'
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie de remise des insignes de docteur honoris causa - lundi 4 novembre 2024 "
-      body: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie de remise des insignes de docteur <em>honoris causa</em> qui se déroulera le lundi 4 novembre 2024, en Sorbonne.</p><p>Bien cordialement,</p><p>&nbsp;</p><p>&nbsp;</p>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: evenements@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: cabpresi@univ-paris1.fr
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'DHC 4 novembre 2024 - Nouvelle inscription (VIP)'
-      body: _default
+      subject: 'Inscription au colloque'
+      body: '<p>Bonjour,</p><p>Votre inscription à la séance du séminaire "La Recherche Empirique en Droit" du 27 novembre 2024 a bien été validée.</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

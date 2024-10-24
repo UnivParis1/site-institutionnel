@@ -1,63 +1,48 @@
-uuid: b3752b03-3767-4d47-8394-0f03240500ef
+uuid: c52354af-a18e-4b31-ae64-d8c708307c3c
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 93
 template: false
 archive: false
-id: 0_dhc_4_novembre_2024
-title: '0 - DHC 4 novembre 2024 VIP'
-description: ''
-categories: {  }
+id: inscription
+title: '61 - Inscription'
+description: "<p>Bonjour,</p><p>Votre demande d’inscription à la Journée d’étude :&nbsp;</p><p>La formation syndicale entre technique et politique - qui aura lieu le Mercredi 13 novembre (9h-17h30) à l'ISST, 16 Bd Carnot, 92340 Bourg-la-Reine&nbsp;</p><p>est bien pris en compte.</p><p>Nous vous remercions d'avoir compléter ce formulaire.</p><p>Bien cordialement</p>"
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': Nom
-    '#autocomplete': name
-    '#required': true
-  prenom:
-    '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
-  courriel:
+  votre_nom_et_prenom:
+    '#type': webform_name
+    '#title': 'Votre Nom'
+    '#title__access': false
+    '#first__access': false
+    '#middle__access': false
+    '#last__access': false
+    '#suffix__access': false
+    '#degree__access': false
+  votre_prenom:
+    '#type': webform_name
+    '#title': 'Votre Prénom'
+    '#title__access': false
+    '#first__access': false
+    '#middle__access': false
+    '#last__access': false
+    '#suffix__access': false
+    '#degree__access': false
+  votre_adresse_mail:
     '#type': email
-    '#title': 'Courriel '
-    '#required': true
-  aurez_vous_besoin_d_un_acces_pmr_:
-    '#type': radios
-    '#title': 'Aurez-vous besoin d’un accès PMR ?'
-    '#options':
-      Oui: Oui
-      Non: Non
-    '#options__properties': ''
-  markup_02:
-    '#type': webform_markup
-    '#markup': '<p>Si oui, merci de bien vouloir nous avertir à l''adresse suivante :&nbsp;<a href="mailto:evenements@univ-paris1.fr" target="_blank" rel="noopener noreferrer" aria-expanded="false" aria-haspopup="menu" data-remove-tab-index="true" data-sk="tooltip_parent" data-stringify-link="mailto:evenements@univ-paris1.fr" delay="150" tabindex="-1">evenements@univ-paris1.fr</a></p>'
-  souhaitez_vous_participer_au_cocktail_:
-    '#type': radios
-    '#title': 'Souhaitez-vous participer au cocktail ?'
-    '#options':
-      Oui: Oui
-      Non: Non
-    '#required': true
-    '#options__properties': ''
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
-    '#type': checkbox
-    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
-    '#required': true
+    '#title': 'Votre adresse mail'
+  votre_statut:
+    '#type': textarea
+    '#title': 'Votre statut'
+  votre_instituion_de_rattachement:
+    '#type': textarea
+    '#title': 'Votre instituion de rattachement'
   captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-  markup:
-    '#type': webform_markup
-  actions:
-    '#type': webform_actions
-    '#title': "Bouton(s) d'envoi"
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -72,8 +57,8 @@ settings:
   page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
-  form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_open_message: "<p>Bonjour,</p><p>Votre demande d’inscription à la Journée d’étude :&nbsp;</p><p>La formation syndicale entre technique et politique - qui aura lieu le Mercredi 13 novembre (9h-17h30) à l'ISST, 16 Bd Carnot, 92340 Bourg-la-Reine&nbsp;</p><p>est bien pris en compte.</p><p>Nous vous remercions d'avoir compléter ce formulaire.</p><p>Bien cordialement</p>"
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -108,7 +93,7 @@ settings:
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
-  submission_exception_message: ''
+  submission_exception_message: "<p>Bonjour,</p><p>Votre demande d’inscription à la Journée d’étude :&nbsp;</p><p>La formation syndicale entre technique et politique - qui aura lieu le Mercredi 13 novembre (9h-17h30) à l'ISST, 16 Bd Carnot, 92340 Bourg-la-Reine&nbsp;</p><p>est bien pris en compte.</p><p>Nous vous remercions d'avoir compléter ce formulaire.</p><p>Bien cordialement</p>"
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
@@ -142,7 +127,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -165,7 +150,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie de remise des insignes de docteur<em> honoris causa</em>.<br>Vous allez recevoir un email de confirmation.</p><p>Bien cordialement,</p>'
+  confirmation_message: "<p>Bonjour,</p><p>Votre demande d’inscription à la Journée d’étude :&nbsp;</p><p>La formation syndicale entre technique et politique - qui aura lieu le Mercredi 13 novembre (9h-17h30) à l'ISST, 16 Bd Carnot, 92340 Bourg-la-Reine&nbsp;</p><p>est bien pris en compte.</p><p>Nous vous remercions d'avoir compléter ce formulaire.</p><p>Bien cordialement</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -222,8 +207,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -232,8 +216,7 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
@@ -241,82 +224,7 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 6746
+    users: {  }
     permissions: {  }
-handlers:
-  email_aux_demandeurs:
-    id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: evenements@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Paris 1 Panthéon-Sorbonne'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie de remise des insignes de docteur honoris causa - lundi 4 novembre 2024 "
-      body: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie de remise des insignes de docteur <em>honoris causa</em> qui se déroulera le lundi 4 novembre 2024, en Sorbonne.</p><p>Bien cordialement,</p><p>&nbsp;</p><p>&nbsp;</p>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: evenements@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: cabpresi@univ-paris1.fr
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'DHC 4 novembre 2024 - Nouvelle inscription (VIP)'
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

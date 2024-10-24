@@ -1,49 +1,58 @@
-uuid: c9c39005-0757-441e-9da8-0e46ecb9a79d
+uuid: 707d1d75-4540-4e8c-8ffc-fde952cf684b
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 1101
+uid: 7845
 template: false
 archive: false
-id: 54_opening_the_road_to_the_acces
-title: '54 - Opening the road to the accession of the EU to the European Convention of Human Rights. And what next?'
-description: ''
-categories: {  }
+id: 8_inscription_je_13_novembre
+title: '8 - Inscription à la journée d''étude "Archéologie et pensée juridique" du mercredi 13 novembre 2024'
+description: '<p>Formulaire d''inscription à la journée d''étude "Archéologie et pensée juridique" du mercredi 13 novembre 2024.</p>'
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': NOM
-    '#placeholder': DUPONT
-    '#required': true
-  prenom:
+  votreprenom:
     '#type': textfield
     '#title': Prénom
     '#placeholder': Jean
     '#required': true
-  adresse_email:
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
     '#type': textfield
-    '#title': 'Adresse email'
-    '#placeholder': Jean.Dupont@univ-paris1.fr
+    '#title': Nom
+    '#placeholder': Dupond
     '#required': true
-  qualite:
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
     '#type': textfield
-    '#title': Qualité
-    '#placeholder': Doctorant/Etudiant...
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
     '#required': true
-  institution_de_rattachement:
-    '#type': textfield
-    '#title': 'Institution de rattachement'
-    '#placeholder': 'Université Paris 1/EFB...'
-    '#required': true
-  presentiel:
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
     '#type': checkbox
-    '#title': Présentiel
-  distanciel:
-    '#type': checkbox
-    '#title': Distanciel
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription à la journée d''étude "Archéologie et pensée juridique" du mercredi 13 novembre 2024&nbsp;</p>'
+    '#required': true
+    '#required_error': "Vous devez accepter les conditions d'inscription."
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -148,10 +157,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: message
+  confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Merci pour votre inscription.'
-  confirmation_message: '<p>Merci pour votre inscription.</p>'
+  confirmation_title: ''
+  confirmation_message: "<p>Votre demande d'inscription à la journée d'étude \"Archéologie et pensée juridique\" du mercredi 13 novembre 2024 a bien été prise en compte.</p><p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -185,47 +194,95 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
-handlers: {  }
+handlers:
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription au colloque'
+      body: '<p>Bonjour,</p><p>Votre inscription au colloque à la journée d''étude "Archéologie et pensée juridique" du mercredi 13 novembre 2024 a bien été validée.</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

@@ -1,4 +1,4 @@
-uuid: b3752b03-3767-4d47-8394-0f03240500ef
+uuid: 96a2ca8f-b863-40e7-9756-7599e20ddab6
 langcode: fr
 status: open
 dependencies: {  }
@@ -8,11 +8,14 @@ close: null
 uid: 5486
 template: false
 archive: false
-id: 0_dhc_4_novembre_2024
-title: '0 - DHC 4 novembre 2024 VIP'
+id: 0_dhc_novembre_2024_public
+title: '0 - DHC novembre 2024 public'
 description: ''
 categories: {  }
 elements: |-
+  markup_01:
+    '#type': webform_markup
+    '#markup': "<h2>Formulaire d'inscription&nbsp;</h2>"
   nom:
     '#type': textfield
     '#title': Nom
@@ -26,6 +29,10 @@ elements: |-
     '#type': email
     '#title': 'Courriel '
     '#required': true
+  date_de_naissance:
+    '#type': date
+    '#title': 'Date de naissance'
+    '#required': true
   aurez_vous_besoin_d_un_acces_pmr_:
     '#type': radios
     '#title': 'Aurez-vous besoin d’un accès PMR ?'
@@ -35,7 +42,11 @@ elements: |-
     '#options__properties': ''
   markup_02:
     '#type': webform_markup
-    '#markup': '<p>Si oui, merci de bien vouloir nous avertir à l''adresse suivante :&nbsp;<a href="mailto:evenements@univ-paris1.fr" target="_blank" rel="noopener noreferrer" aria-expanded="false" aria-haspopup="menu" data-remove-tab-index="true" data-sk="tooltip_parent" data-stringify-link="mailto:evenements@univ-paris1.fr" delay="150" tabindex="-1">evenements@univ-paris1.fr</a></p>'
+    '#states':
+      visible:
+        ':input[name="aurez_vous_besoin_d_un_acces_pmr_"]':
+          value: Oui
+    '#markup': '<p>Si oui, merci de bien vouloir nous avertir à l''adresse suivante :&nbsp;<a aria-expanded="false" aria-haspopup="menu" data-remove-tab-index="true" data-sk="tooltip_parent" data-stringify-link="mailto:evenements@univ-paris1.fr" delay="150" href="mailto:evenements@univ-paris1.fr" rel="noopener noreferrer" tabindex="-1" target="_blank">evenements@univ-paris1.fr</a></p>'
   souhaitez_vous_participer_au_cocktail_:
     '#type': radios
     '#title': 'Souhaitez-vous participer au cocktail ?'
@@ -165,7 +176,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie de remise des insignes de docteur<em> honoris causa</em>.<br>Vous allez recevoir un email de confirmation.</p><p>Bien cordialement,</p>'
+  confirmation_message: '<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription .<br>Vous allez recevoir un email de confirmation.</p><p>Bien cordialement,</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -297,7 +308,7 @@ handlers:
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: cabpresi@univ-paris1.fr
+      cc_mail: ''
       cc_options: {  }
       from_mail: '[webform_submission:values:courriel:raw]'
       from_options: {  }
@@ -306,7 +317,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'DHC 4 novembre 2024 - Nouvelle inscription (VIP)'
+      subject: ' DHC 4 novembre 2024 - Nouvelle inscription (grand public)'
       body: _default
       excluded_elements: {  }
       ignore_access: false
