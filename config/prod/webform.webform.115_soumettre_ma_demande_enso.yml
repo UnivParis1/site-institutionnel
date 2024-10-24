@@ -1,6 +1,6 @@
 uuid: 4f260bce-e1d1-4896-9293-976e5155fc54
 langcode: fr
-status: closed
+status: open
 dependencies:
   module:
     - zammad_webform_handler
@@ -17,9 +17,10 @@ categories: {  }
 elements: |-
   email:
     '#type': email
-    '#title': E-mail
+    '#title': Courriel
     '#title_display': before
-    '#placeholder': 'Saisissez votre adresse e-mail '
+    '#placeholder': prenom.nom@univ-paris1.fr
+    '#autocomplete': email
     '#required': true
     '#required_error': 'Ce champ est requis'
   description_du_projet:
@@ -28,6 +29,8 @@ elements: |-
     '#title_display': before
     '#required': true
     '#required_error': 'Ce champ est requis'
+  captcha:
+    '#type': captcha
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
@@ -44,12 +47,12 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
-  form_previous_submissions: true
+  form_previous_submissions: false
   form_confidential: false
   form_confidential_message: ''
   form_disable_remote_addr: false
@@ -136,12 +139,12 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: inline
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: '<p class="txt medium">Votre demande a bien été envoyée.</p>'
   confirmation_attributes: {  }
-  confirmation_back: true
+  confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
@@ -225,12 +228,12 @@ handlers:
     conditions: {  }
     weight: 0
     settings:
-      ticket_title: 'Nouvelle demande ENSO de recherche.pantheonsorbonne.fr'
-      ticket_body: '[webform_submission:values: description_du_projet]'
+      ticket_title: 'Nouvelle demande ENSO depuis recherche.pantheonsorbonne.fr'
+      ticket_body: '[webform_submission:values:description_du_projet]'
       ticket_group: Users
       ticket_type: web
       ticket_customer_mail_simple: ''
-      ticket_customer_mail_complex: '[webform_submission:values:e_mail]'
+      ticket_customer_mail_complex: '[webform_submission:values:email]'
       additional_ticket_field_0:
         '': ''
       additional_ticket_field_1:
