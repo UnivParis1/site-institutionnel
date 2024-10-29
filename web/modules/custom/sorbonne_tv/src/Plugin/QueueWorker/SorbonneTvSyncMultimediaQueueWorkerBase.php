@@ -11,6 +11,8 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\media\Entity\Media;
 use Drupal\Core\File\FileSystemInterface;
 
+define("SORBONNETV_SITE_ID", 126);
+
 
 class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements ContainerFactoryPluginInterface
 {
@@ -55,7 +57,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
             $owner = NULL;
             $negotiator = \Drupal::service('micro_site.negotiator');
 
-            $site = $negotiator->getActiveSite();
+            $site = $negotiator->loadById(SORBONNETV_SITE_ID);
             if ($site) {
               $mail = $site->getEmail();
               $owner = user_load_by_mail($mail);
@@ -242,7 +244,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                                 $taxo_tags = Term::create([
                                     'vid' => 'tag_sorbonne_tv',
                                     'name' => $tag,
-                                    'site_id' => [126],
+                                    'site_id' => [SORBONNETV_SITE_ID],
                                 ]);
 
 
@@ -250,7 +252,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
 
                                 $taxo_tags_id = reset($taxo_tags_id);
                                 $taxo_tags = Term::load($taxo_tags_id);
-                                $taxo_tags->set('site_id', [126]);
+                                $taxo_tags->set('site_id', [SORBONNETV_SITE_ID]);
 
                             }
                             $taxo_tags->save();
@@ -287,7 +289,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                         'description' => $taxo_type_description,
                         'field_id_type' => $taxo_type_id,
                         'field_icon_type' => $taxo_type_icon,
-                        'site_id' => [126],
+                        'site_id' => [SORBONNETV_SITE_ID],
                     ]);
                     $taxo_type->save();
 
@@ -300,7 +302,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                         $taxo_type->name->setValue($taxo_type_title);
                         $taxo_type->description->setValue($taxo_type_description);
                         $taxo_type->field_icon_type->setValue($taxo_type_icon);
-                        $taxo_type->set('site_id', [126]);
+                        $taxo_type->set('site_id', [SORBONNETV_SITE_ID]);
                         $taxo_type->save();
                     }
 
@@ -338,7 +340,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                             'description' => $discipline['description'],
                             'field_id_discipline' => $discipline['id'],
                             'field_icon_discipline' => $discipline['icon'],
-                            'site_id' => [126],
+                            'site_id' => [SORBONNETV_SITE_ID],
                         ]);
                         $taxo_discipline->save();
 
@@ -352,7 +354,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                             $taxo_discipline->name->setValue($discipline['title']);
                             $taxo_discipline->description->setValue($discipline['description']);
                             $taxo_discipline->field_icon_discipline->setValue($discipline['icon']);
-                            $taxo_discipline->set('site_id', [126]);
+                            $taxo_discipline->set('site_id', [SORBONNETV_SITE_ID]);
                             $taxo_discipline->save();
 
                         }
@@ -478,18 +480,20 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                     $var_theme = explode("/", $var_theme);
                     $themeApi = \Drupal::service('sorbonne_tv.api_mediatheque_service')->getValue('themes/' . $var_theme[3]);
 
-                    $collection_array[$i]['id'] = $themeApi['id'];
-                    $collection_array[$i]['title'] = $themeApi['title'];
-                    $collection_array[$i]['description'] = $themeApi['description'] ?? null;
-                    $collection_array[$i]['headband'] = $themeApi['headband'] ?? null;
+                    if (is_array($themeApi)) {
+                        $collection_array[$i]['id'] = $themeApi['id'];
+                        $collection_array[$i]['title'] = $themeApi['title'];
+                        $collection_array[$i]['description'] = $themeApi['description'] ?? null;
+                        $collection_array[$i]['headband'] = $themeApi['headband'] ?? null;
 
-                    if(isset($themeApi['channel']) && $themeApi['channel'] != '' ){
-                        $var_theme_channel = str_replace('https://', '', $themeApi['channel']);
-                        $var_theme_channel = explode("/", $var_theme_channel);
-                        $collection_array[$i]['channel'] = $var_theme_channel[3];
+                        if(isset($themeApi['channel']) && $themeApi['channel'] != '' ){
+                            $var_theme_channel = str_replace('https://', '', $themeApi['channel']);
+                            $var_theme_channel = explode("/", $var_theme_channel);
+                            $collection_array[$i]['channel'] = $var_theme_channel[3];
 
-                    }else{
-                        $collection_array[$i]['channel'] = null;
+                        }else{
+                            $collection_array[$i]['channel'] = null;
+                        }
                     }
 
                     $i++;
@@ -521,7 +525,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                                 'title' => $collection['title'],
                                 'field_sorb_tv_type' => 'collection',
                                 'field_id_video' => $collection['id'],
-                                'site_id' => [126],
+                                'site_id' => [SORBONNETV_SITE_ID],
                                 'uid' => $owner_id,
                             ]);
                             $op = 'CREATE';
@@ -569,14 +573,14 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                                     'field_media_image' => [
                                         'target_id' => $thumbnail_collection->id(),
                                     ],
-                                    'site_id' => [126],
+                                    'site_id' => [SORBONNETV_SITE_ID],
                                 ]);
 
                             } else {
 
                                 $thumbnail_media_collection = reset($medias_collection);
                                 $thumbnail_media_collection->set('field_media_image', ['target_id' => $thumbnail_collection->id()]);
-                                $thumbnail_media_collection->set('site_id', [126]);
+                                $thumbnail_media_collection->set('site_id', [SORBONNETV_SITE_ID]);
                                 $thumbnail_media_collection->setOwner($owner);
 
                             }
@@ -607,7 +611,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                               $node_collection->set('field_sorb_tv_share_image', $thumbnail_collection_medias);
                             }
                             $node_collection->set('field_discipline', $taxo_discipline_ids);
-                            $node_collection->set('site_id', [126]);
+                            $node_collection->set('site_id', [SORBONNETV_SITE_ID]);
                             $node_collection->setOwner($owner);
                             $node_collection->changed = time();
                             $node_collection->save();
@@ -636,7 +640,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                     'title' => $title,
                     'field_sorb_tv_type' => $type,
                     'field_id_video' => $id,
-                    'site_id' => [126],
+                    'site_id' => [SORBONNETV_SITE_ID],
                     'uid' => $owner_id,
                 ]);
 
@@ -644,7 +648,7 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
 
                 $nid = reset($nid);
                 $node = Node::load($nid);
-                $node->set('site_id', [126]);
+                $node->set('site_id', [SORBONNETV_SITE_ID]);
                 $node->setOwner($owner);
 
             }
@@ -677,14 +681,14 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
                         'field_media_image' => [
                             'target_id' => $thumbnail->id(),
                         ],
-                        'site_id' => [126],
+                        'site_id' => [SORBONNETV_SITE_ID],
                     ]);
 
                 }else{
 
                     $thumbnail_media = reset($medias);
                     $thumbnail_media->set('field_media_image', ['target_id' => $thumbnail->id()]);
-                    $thumbnail_media->set('site_id', [126]);
+                    $thumbnail_media->set('site_id', [SORBONNETV_SITE_ID]);
                     $thumbnail_media->setOwner($owner);
 
                 }
