@@ -7,6 +7,7 @@ use Drupal\node\NodeInterface;
 
 interface PagesPersosGatewayInterface {
 
+  public function is_student_or_teacher($username): bool;
   public function getStudentsPagesPersos(): array;
   public function getTeachersPagesPersos(): array;
   public function isPagePublished($username): bool;

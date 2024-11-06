@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Drupal\up1_pages_persos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\up1_pages_persos\Entity\Node\PagePerso;
 use Drupal\up1_webservices\Manager\WsGroupsManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,9 +26,7 @@ final class TeachersController extends ControllerBase {
   }
 
   public function checkWsGroupsPagePerso(string $username): JsonResponse {
-    $hasPagePerso = $this->wsGroupsManager->hasPagePerso($username, 'teacher');
-
-
+    $hasPagePerso = $this->wsGroupsManager->hasPagePersoInWsGroups($username);
 
     return new JsonResponse([
       'hasPagePerso' => $hasPagePerso,

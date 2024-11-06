@@ -4,7 +4,6 @@ namespace Drupal\up1_pages_persos\Gateway;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\node\NodeInterface;
 use Drupal\up1_pages_persos\Entity\Node\PagePersoInterface;
@@ -115,9 +114,9 @@ final class PagesPersosGateway implements PagesPersosGatewayInterface {
     $query->notExists('roles');
 
     $uids = $query->execute();
-    $users = User::loadMultiple($uids);
 
-    return $users ?: [];
+
+    return $this->getUsernames($uids);
   }
 
   public function getEnseignantsDoctorants(): array {
@@ -127,13 +126,38 @@ final class PagesPersosGateway implements PagesPersosGatewayInterface {
     ->condition('roles', 'enseignant_doctorant');
 
     $uids = $query->execute();
-    $users = User::loadMultiple($uids);
 
-    return $users ?: [];
+    return $this->getUsernames($uids);
   }
 
   public function updatePagePersoStatus($username, $from_status, $to_status) {
+  }
 
+  public function updatePagePersoFields(string $username, array $data) {
 
   }
+
+  private function getUsernames($uids): array {
+    $users = User::loadMultiple($uids);
+    $usernames = [];
+
+    if ( !empty($users) ) {
+      foreach ($users as $user) {
+        $usernames[$user->id()] = $user->get('name')->value;
+      }
+    }
+
+    return $usernames;
+  }
+
+  public function is_student_or_teacher($username): bool {
+    if (is_numeric($username)) {
+     $user = User::load($username);
+    } else {
+      $user = user_load_by_name($username);
+    }
+
+    return ($user && $user->hasRole('enseignant_doctorant'));
+  }
+
 }

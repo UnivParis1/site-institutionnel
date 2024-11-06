@@ -48,4 +48,8 @@ final class PagePersoManager {
   public function getEnseignantsDoctorants() {
     return $this->pagesPersosGateway->getEnseignantsDoctorants();
   }
+
+  public function is_student_or_teacher($username) {
+    return $this->pagesPersosGateway->is_student_or_teacher($username);
+  }
 }

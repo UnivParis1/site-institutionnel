@@ -2,7 +2,6 @@
 
 namespace Drupal\up1_webservices\Gateway;
 
-use Drupal\up1_webservices\Gateway\WsGroupsGatewayInterface;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Url;
@@ -34,12 +33,13 @@ class WsGroupsGateway implements WsGroupsGatewayInterface {
     $ws_groups = $this->settings->get('wsgroups-api');
     $filter = $ws_groups['filter_student'];
     $params = [
-      'attrs' => "mail, supannCivilite,displayName,givenName,sn,supannEntiteAffectation-all,labeledURI,supannMailPerso,supannListeRouge",
+      'attrs' => "mail,supannCivilite,displayName,givenName,sn,supannEntiteAffectation-all,labeledURI,supannMailPerso,supannListeRouge",
       'allowNoAffiliationAccounts' => true,
       'showExtendedInfo'=> 2,
     ];
     $parsed_url = UrlHelper::parse( $ws_groups['url'] . $filter . http_build_query($params) );
     $url = Url::fromUri($parsed_url['path'], [$parsed_url['query']]);
+
     try {
       $response = $this->httpClient->get($url->toString());
 

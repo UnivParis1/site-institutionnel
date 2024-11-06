@@ -15,7 +15,6 @@ interface PagePersoInterface extends NodeInterface {
 
   public const FIELD_NAME = 'field_name';
   public const FIELD_FIRSTNAME = 'field_firstname';
-  public const FIELD_ID_HAL = 'field_id_hal';
   public const FIELD_OTHER_EMAIL = 'field_other_email_address';
 
   /**
