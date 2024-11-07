@@ -163,14 +163,15 @@ final class Up1PagesPersosController extends ControllerBase {
     if (!empty($node) || $node) {
       $projets = $node->get('field_projects_ia')->getValue();
       $formations = $node->get('field_formations_ia')->getValue();
+      $skills = $node->field_ia_skills->getValue();
 
       // Extraire les champs demandés.
       $fields = [
         'username' => $user,
         'bio' => $node->get('field_short_bio')->value,
-        'projets' => $projets[0]['value'],
-        'formations' => $formations[0]['value'],
-        'skills' => $this->getListFieldLabels($node, 'field_ia_skills'),
+        'projets' => !empty($projets) ? $projets[0]['value']: '',
+        'formations' => !empty($formations) ? $formations[0]['value']: '',
+        'skills' =>!empty($skills) ? $skills: '',
       ];
     }
     else {
@@ -241,7 +242,7 @@ final class Up1PagesPersosController extends ControllerBase {
       $node->set('field_short_bio', NULL);
       $node->set('field_projects_ia', NULL);
       $node->set('field_formations_ia', NULL);
-      $node->set('field_ia_skills', explode(',', NULL));
+      $node->set('field_ia_skills', explode(',', ''));
       $node->save();
 
       // Retourner une réponse JSON de succès.
