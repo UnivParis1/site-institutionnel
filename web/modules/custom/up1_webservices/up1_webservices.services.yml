@@ -1,0 +1,8 @@
+services:
+  up1_webservices.wsgroups_gateway:
+    class: Drupal\up1_webservices\Gateway\WsGroupsGateway
+    arguments: ['@http_client', '@settings']
+
+  up1_webservices.wsgroups_manager:
+    class: Drupal\up1_webservices\Manager\WsGroupsManager
+    arguments: ['@up1_webservices.wsgroups_gateway']
