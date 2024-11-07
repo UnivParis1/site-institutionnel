@@ -26,7 +26,7 @@ class ComptexManager implements ComptexInterface {
    */
   public function getUserInformation($username) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username&profile_eduPersonAffiliation=faculty";
+    $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
     $params = [
       'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
       'allowNoAffiliationAccounts' => true,
