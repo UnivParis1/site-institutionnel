@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ * Contains up1_webservices.module
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function up1_webservices_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the up1_webservices module.
+    case 'help.page.up1_webservices':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module for Webservices Panthéon-Sorbonne') . '</p>';
+      return $output;
+
+    default:
+  }
+}
