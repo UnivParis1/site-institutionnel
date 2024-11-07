@@ -101,6 +101,7 @@ class SorbonneTvMediathequeApiService
 
         return $finalResults;
     }
+
     public function getVideoContributors($id) {
       $endpoint = 'contributors';
       $params['page'] = 1;
@@ -109,8 +110,9 @@ class SorbonneTvMediathequeApiService
       $finalResults = [];
       $results = $this->getValue($endpoint, $params);
 
-      $finalResults = array_merge($finalResults , $results['results']);
-
+      if (isset($results['results'])) {
+        $finalResults = array_merge($finalResults , $results['results']);
+      }
       while (isset($results['next'])) {
           $parts = parse_url($results['next']);
           parse_str($parts['query'], $query);
@@ -118,8 +120,9 @@ class SorbonneTvMediathequeApiService
           $params['page'] = $query['page'];
 
           $results = $this->getValue($endpoint, $params);
-
-          $finalResults = array_merge($finalResults, $results['results']);
+          if (isset($results['results'])) {
+            $finalResults = array_merge($finalResults, $results['results']);
+          }
       }
 
       return $finalResults;
