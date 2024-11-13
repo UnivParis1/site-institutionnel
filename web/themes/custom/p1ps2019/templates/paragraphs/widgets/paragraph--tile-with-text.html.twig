@@ -44,8 +44,9 @@
   <div class="paragraph__column mask no-hover relative-wrapper tuile-avec-texte" style="background-image: url('{{ imgUrl|striptags|trim }}')">
     <div class="infos">
       <div class="top-infos">
+        {{ content.field_heading_level.0 }}
         {% if content.field_title|render %}
-          <p class="h3-style semi-field-sep">{{ content.field_title.0 }}</p>
+          <h3 class="h3-style semi-field-sep">{{ content.field_title.0 }}</h3>
         {% endif %}
         <div class="parag-title-sep txt medium">{{ content.bp_text.0 }}</div>
       </div>
