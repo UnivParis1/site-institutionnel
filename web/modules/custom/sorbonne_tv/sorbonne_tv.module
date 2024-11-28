@@ -428,7 +428,10 @@ function sorbonne_tv_form_alter(&$form, FormStateInterface &$form_state, $form_i
 
     }
 
-    if($form_id == 'webform_submission_sorbonne_tv_contact_add_form') {
+    if(
+        $form_id == 'webform_submission_sorbonne_tv_contact_add_form' 
+        || str_contains($form_id, 'webform_submission_sorbonne_tv_contact_node_')
+    ) {
         $form['#attributes']['class'][] = 'sorbonnetv-form-styles';
     }
 
