@@ -97,13 +97,13 @@ class SorbonneTvGrilleProgrammesController extends ControllerBase {
         }
 
         if( $json_k = array_search($json_date .'.json', $json_files) ) {
-            $program_file = file_get_contents($json_files_folder .'/'. $json_files[$json_k]);
-            $program_datas = json_decode($program_file, true);
 
-            if($program_datas) {
+            $program_file = file_get_contents($json_files_folder .'/'. $json_files[$json_k]);
+
+            if($program_datas = json_decode($program_file, true)) {
                 foreach($program_datas[$json_date] as $datas_key => $data) {
                     $data_title = (isset($data['title']) ? $data['title'] : '');
-                    $data_thum = (isset($data['image']) ? $data['image'] : ''); // Par Defaut
+                    $data_thum = (isset($data['image']) ? $data['image'] : '');
                     $data_descr = (isset($data['description']) ? $data['description'] : '');
                     $data_start = (isset($data['start']) ? $data['start'] : '');
 
@@ -138,14 +138,20 @@ class SorbonneTvGrilleProgrammesController extends ControllerBase {
                         $video_title = '';
                         $video_node = FALSE;
                         if(isset($data['id'])) {
-                            $video_id = str_replace('.mp4', '', $data['id']);
+                            $video_id = explode(".", $data['id']);
+                            $video_id = $video_id[0];
+
+
                             if( $video_node = \Drupal::service('sorbonne_tv.videos_service')->getStvNodeByVideoId($video_id, 'video') ) {
                                 $video_nid = $video_node->id();
                                 $video_title = $video_node->getTitle();
 
-                                if ($node_couv_media = $video_node->field_media->entity) {
-                                    if ($node_couv_file = $node_couv_media->field_media_image->entity) {
-                                        if ($node_couv_file_uri = $node_couv_file->getFileUri()) {
+                                if ($video_node->field_media->entity) {
+                                    $node_couv_media = $video_node->field_media->entity;
+                                    if ($node_couv_media->field_media_image->entity) {
+                                        $node_couv_file = $node_couv_media->field_media_image->entity;
+                                        if ($node_couv_file->getFileUri()) {
+                                            $node_couv_file_uri = $node_couv_file->getFileUri();
                                             $image_style_name = 'sorbonne_tv_program_list';
 
                                             //$data_thum = ImageStyle::load($image_style_name)->buildUrl($node_couv_file_uri);
@@ -164,13 +170,22 @@ class SorbonneTvGrilleProgrammesController extends ControllerBase {
                                     }
                                 }
 
+                                if(!empty($data_thum)) { // Si on a une correspondance video et une image
+                                    $item_thumb = '<img src="' . $data_thum . '" alt="' . ($data_title ? $data_title : '') . '" />';
+                                    $item_thumb_markup = Markup::create($item_thumb);
+                                }else {
+                                    $item_thumb = '<div class="video-thumb empty_thumb" style="min-height: 120px; width:100%; background-color: rgba(255, 214, 97, 0.3);display:flex;align-items:center;justify-content: center;line-height: 1rem;"></div>';
+                                    $item_thumb_markup = Markup::create($item_thumb);
+                                }
+
+
+                            }else{
+                                $item_thumb = '<div class="video-thumb empty_thumb" style="min-height: 120px; width:100%; background-color: rgba(255, 214, 97, 0.3);display:flex;align-items:center;justify-content: center;line-height: 1rem;"></div>';
+                                $item_thumb_markup = Markup::create($item_thumb);
                             }
                         }
 
-                        if($video_node && !empty($data_thum)) { // Si on a une correspondance video et une image
-                            $item_thumb = '<img src="'. $data_thum .'" alt="'. ($data_title ? $data_title : '') .'" />';
-                            $item_thumb_markup = Markup::create($item_thumb);
-                        }
+
 
                         $item_play_btn = '<span class="bi bi-play-circle-fill"></span>';
                         //$item_play_btn = '<span class="btn-icon"></span>';

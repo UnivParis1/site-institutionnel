@@ -21,6 +21,7 @@
                             hls.loadSource('{{ url.url }}');
                             hls.attachMedia(video);
                             hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                                video.muted = true;
                                 video.play();
                             });
                         }
@@ -32,6 +33,7 @@
                         else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                             video.src = '{{ url.url }}';
                             video.addEventListener('loadedmetadata',function() {
+                                video.muted = true;
                                 video.play();
                             });
                         }
