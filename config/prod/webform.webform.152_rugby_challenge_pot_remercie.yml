@@ -1,49 +1,57 @@
-uuid: e474f05d-8a35-450e-be52-fd9fb9ec2c4a
+uuid: 72e4ddf4-ae49-45b9-995b-14c2522c9985
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 1101
+uid: 5486
 template: false
 archive: false
-id: 54_1er_seminaire_csrd_et_csdd_la
-title: '54 - 1er séminaire CSRD et CSDD - La mesure des exigences concernant les droits sociaux'
+id: 152_rugby_challenge_pot_remercie
+title: '152 - Rugby challenge pot remerciement novembre 2024'
 description: ''
 categories: {  }
 elements: |-
   nom:
     '#type': textfield
-    '#title': NOM
-    '#placeholder': DUPONT
+    '#title': Nom
     '#required': true
   prenom:
     '#type': textfield
-    '#title': Prénom
-    '#placeholder': Jean
+    '#title': 'Prénom '
     '#required': true
-  adresse_email:
+  courriel:
+    '#type': email
+    '#title': 'Courriel '
+    '#required': true
+  vous_etes:
     '#type': textfield
-    '#title': 'Adresse email'
-    '#placeholder': Jean.Dupont@univ-paris1.fr
+    '#title': 'Vous êtes'
+    '#placeholder': '(partenaire, étudiant volontaire, association, joueur, direction, artiste...)'
     '#required': true
-  qualite:
-    '#type': textfield
-    '#title': Qualité
-    '#placeholder': Doctorant/Etudiant...
+  aurez_vous_besoin_d_un_acces_pmr_:
+    '#type': radios
+    '#title': 'Je souhaite participer au pot de remerciement '
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#options__properties': ''
     '#required': true
-  institution_de_rattachement:
-    '#type': textfield
-    '#title': 'Institution de rattachement'
-    '#placeholder': 'Université Paris 1/EFB...'
-    '#required': true
-  presentiel:
+  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
     '#type': checkbox
-    '#title': Présentiel
-  distanciel:
-    '#type': checkbox
-    '#title': Distanciel
+    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  markup:
+    '#type': webform_markup
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': Soumettre
+    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -59,7 +67,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -128,7 +136,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -148,10 +156,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: message
+  confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Merci pour votre inscription.'
-  confirmation_message: '<p>Merci pour votre inscription.</p>'
+  confirmation_title: ''
+  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;<br />\r\nVous allez recevoir un courriel de confirmation.</p>\r\n\r\n<p>Merci de votre participation !</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -208,7 +216,8 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles: {  }
+    roles:
+      - anonymous
     users: {  }
     permissions: {  }
   delete_own:
@@ -217,7 +226,8 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
   test:
     roles: {  }
@@ -225,7 +235,82 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
-handlers: {  }
+handlers:
+  email_aux_demandeurs:
+    id: email
+    handler_id: email_aux_demandeurs
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: evenements@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Paris 1 Panthéon-Sorbonne'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "[Réponse automatique] Confirmation d'inscription au pot de remerciement de l'Una Europa Rugby Challenge"
+      body: "<p><meta charset=\"utf-8\"></p><p>Madame, Monsieur,</p><p>Nous vous remercions pour votre réponse,</p><p>Bien cordialement,</p><p>L'équipe d'organisation de l'Una Europa Rugby Challenge</p><p>&nbsp;</p><p>&nbsp;</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_aux_organisateurs:
+    id: email
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: evenements@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: cabpresi@univ-paris1.fr
+      cc_options: {  }
+      from_mail: '[webform_submission:values:courriel:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:nom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Rugby Challenge - pot de remerciement  - Nouvelle inscription '
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }
