@@ -1,0 +1,33 @@
+uuid: f02d9659-41e6-4850-a700-f2a3bfa20df5
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_candidate_profile
+field_name: field_candidate_profile
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: tenured_junior_researcher
+      label: 'Jeune chercheur ou chercheuse permanent(e)'
+    -
+      value: non_tenured_junior_researcher
+      label: 'Jeune chercheur ou chercheuse non-permanent(e)'
+    -
+      value: tenured_senior_researcher
+      label: 'Chercheur ou chercheuse confirmé permanent'
+    -
+      value: non_tenured_senior_researcher
+      label: 'Chercheur ou chercheuse confirmé non-permanent'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 4
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

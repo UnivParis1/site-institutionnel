@@ -6,6 +6,7 @@ dependencies:
     - entity_browser.browser.image_browser
     - field.field.paragraph.tile_with_text.bp_link
     - field.field.paragraph.tile_with_text.bp_text
+    - field.field.paragraph.tile_with_text.field_heading_level
     - field.field.paragraph.tile_with_text.field_media_image
     - field.field.paragraph.tile_with_text.field_title
     - paragraphs.paragraphs_type.tile_with_text
@@ -34,18 +35,25 @@ content:
         class: false
         accesskey: false
         aria-label: false
+      widget_default_open: expandIfValuesSet
     third_party_settings: {  }
   bp_text:
     type: text_textarea
-    weight: 2
+    weight: 3
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_heading_level:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_media_image:
     type: entity_browser_entity_reference
-    weight: 1
+    weight: 2
     region: content
     settings:
       entity_browser: image_browser

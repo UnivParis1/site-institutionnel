@@ -182,8 +182,11 @@ elements: |-
         '#type': select
         '#title': 'Choisir un créneau'
         '#options':
-          Matin: Matin
-          Après-midi: Après-midi
+          10h55-11h15: 10h55-11h15
+          11h55-12h15: 11h55-12h15
+          14h55-15h15: 14h55-15h15
+          15h55-16h15: 15h55-16h15
+          16h55-17h15: 16h55-17h15
         '#required': true
         '#states':
           visible:
@@ -422,7 +425,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: "Bib'n'go - Votre demande de réservation de document"
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Votre demande de réservation a bien été prise en compte. Ceci est un mail de confirmation : vos documents sont à retirer à l'accueil de la bibliothèque. Merci de bien vouloir respecter votre créneau de rendez-vous.</p>\r\n\r\n<p><em>Nous attirons cependant votre attention sur le fait que votre réservation ne pourra être traitée que si elle a été faite dans les délais requis (au plus tard la veille avant 12h pour le lendemain) et si votre compte lecteur est en règle.</em></p>\r\n\r\n<p>Rappel des informations saisies:</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Votre demande de réservation a bien été prise en compte. Ceci est un mail de confirmation : vos documents sont à retirer dans le hall au rez-de-chaussée du centre PMF. Merci de bien vouloir respecter votre créneau de rendez-vous.</p><p><em>Nous attirons cependant votre attention sur le fait que votre réservation ne pourra être traitée que si elle a été faite dans les délais requis (au plus tard la veille avant 12h pour le lendemain) et si votre compte lecteur est en règle.</em></p><p>Rappel des informations saisies :</p><p>[webform_submission:values]</p>'
       excluded_elements:
         terms_of_service: terms_of_service
         captcha: captcha

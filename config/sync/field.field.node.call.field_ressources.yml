@@ -1,0 +1,36 @@
+uuid: a8f18f98-42e5-4b27-be60-f23e98b8f485
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ressources
+    - node.type.call
+    - node.type.news
+    - node.type.page
+    - node.type.publication
+    - node.type.second_level_pages
+id: node.call.field_ressources
+field_name: field_ressources
+entity_type: node
+bundle: call
+label: 'Ressources liées'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      news: news
+      call: call
+      page: page
+      second_level_pages: second_level_pages
+      publication: publication
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: news
+field_type: entity_reference

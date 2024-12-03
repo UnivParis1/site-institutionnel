@@ -37,6 +37,12 @@ elements: |-
       '#type': email
       '#title': Courriel
       '#required': true
+    etes_vous_etudiant_e_a_paris_1:
+      '#type': checkbox
+      '#title': 'Etes-vous étudiant·e à Paris 1'
+      '#title_display': before
+      '#field_prefix': Oui
+      '#field_suffix': Non
   references_de_la_these:
     '#type': webform_section
     '#title': 'Références de la thèse'
@@ -47,6 +53,10 @@ elements: |-
     auteur_de_la_these:
       '#type': textfield
       '#title': 'Auteur de la thèse'
+      '#required': true
+    cote:
+      '#type': textfield
+      '#title': Cote
       '#required': true
   date_souhaitee_pour_le_rendez_vous:
     '#type': webform_section
@@ -75,14 +85,14 @@ elements: |-
       '#options__properties': ''
   terms_of_service:
     '#type': webform_terms_of_service
-    '#title': 'J''accepte les {conditions de service}.'
+    '#title': "J'accepte les {conditions de service}."
     '#required': true
     '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de consultation de th&egrave;se.</span>'
   captcha:
     '#type': captcha
   actions:
     '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
+    '#title': "Bouton(s) d'envoi"
     '#submit__label': 'Envoyer la demande'
 css: ''
 javascript: ''

@@ -1,0 +1,102 @@
+uuid: bbe92f81-3132-4b75-b1cc-1af5e43b9172
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.call.body
+    - field.field.node.call.field_body_en
+    - field.field.node.call.field_candidate_profile
+    - field.field.node.call.field_candidate_profile_en
+    - field.field.node.call.field_deadline
+    - field.field.node.call.field_deadline_en
+    - field.field.node.call.field_duration
+    - field.field.node.call.field_duration_en
+    - field.field.node.call.field_funder
+    - field.field.node.call.field_lead
+    - field.field.node.call.field_lead_en
+    - field.field.node.call.field_links
+    - field.field.node.call.field_links_en
+    - field.field.node.call.field_main_objectives
+    - field.field.node.call.field_main_objectives_en
+    - field.field.node.call.field_max_amount
+    - field.field.node.call.field_maximum_amount_en
+    - field.field.node.call.field_ressources
+    - field.field.node.call.field_title_en
+    - node.type.call
+  module:
+    - smart_trim
+    - text
+    - user
+id: node.call.teaser
+targetEntityType: node
+bundle: call
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_lead:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 15
+      trim_type: words
+      trim_suffix: ...
+      wrap_output: false
+      wrap_class: trimmed
+      more:
+        display_link: false
+        target_blank: false
+        link_trim_only: false
+        class: more-link
+        text: More
+        aria_label: 'Read more about [node:title]'
+        token_browser: ''
+      summary_handler: full
+      trim_options:
+        text: true
+        trim_zero: false
+        replace_tokens: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  site_id:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_body_en: true
+  field_candidate_profile: true
+  field_candidate_profile_en: true
+  field_deadline: true
+  field_deadline_en: true
+  field_duration: true
+  field_duration_en: true
+  field_funder: true
+  field_lead_en: true
+  field_links: true
+  field_links_en: true
+  field_main_objectives: true
+  field_main_objectives_en: true
+  field_max_amount: true
+  field_maximum_amount_en: true
+  field_ressources: true
+  field_title_en: true
+  langcode: true
+  likes: true
+  search_api_excerpt: true
