@@ -28,7 +28,7 @@ class ComptexManager implements ComptexInterface {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     $searchUser = $config->get('url_ws') . $config->get('search_user_page') . "&id=$username";
     $params = [
-      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement",
+      'attrs' => "supannCivilite,displayName,sn,givenName,mail,supannEntiteAffectation-all,supannActivite,supannRoleEntite-all,info,employeeType,buildingName,telephoneNumber,postalAddress,labeledURI,eduPersonPrimaryAffiliation,supannMailPerso,supannConsentement,supannListeRouge",
       'allowNoAffiliationAccounts' => true,
       'showExtendedInfo'=> 2
     ];
@@ -88,10 +88,14 @@ class ComptexManager implements ComptexInterface {
    */
   private function formatComptexData(&$information) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
-
     if ($information && !empty($information)) {
-      if (isset($information['uid'])) {
-        $information['userPhoto'] = $config->get('url_userphoto') . $information['uid'];
+      if (!$information['supannListeRouge']) {
+        if (isset($information['uid'])) {
+          $information['userPhoto'] = $config->get('url_userphoto') . $information['uid'];
+        }
+        if (isset($information['telephoneNumber']) && is_array($information['telephoneNumber'])) {
+          $information['telephoneNumber'] = reset($information['telephoneNumber']);
+        }
       }
       if (isset($information['supannCivilite']) && is_array($information['supannCivilite'])) {
         $information['supannCivilite'] = reset($information['supannCivilite']);
@@ -140,9 +144,6 @@ class ComptexManager implements ComptexInterface {
       }
       if (isset($information['postalAddress']) && is_array($information['postalAddress'])) {
         $information['postalAddress'] = reset($information['postalAddress']);
-      }
-      if (isset($information['telephoneNumber']) && is_array($information['telephoneNumber'])) {
-        $information['telephoneNumber'] = reset($information['telephoneNumber']);
       }
       if (isset($information['eduPersonPrimaryAffiliation']) && is_array($information['eduPersonPrimaryAffiliation'])) {
         $information['eduPersonPrimaryAffiliation'] = reset($information['eduPersonPrimaryAffiliation']);
