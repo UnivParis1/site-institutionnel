@@ -89,14 +89,12 @@ class ComptexManager implements ComptexInterface {
   private function formatComptexData(&$information) {
     $config = \Drupal::config('up1_pages_personnelles.settings');
     if ($information && !empty($information)) {
-      if (!$information['supannListeRouge']) {
         if (isset($information['uid'])) {
           $information['userPhoto'] = $config->get('url_userphoto') . $information['uid'];
         }
         if (isset($information['telephoneNumber']) && is_array($information['telephoneNumber'])) {
           $information['telephoneNumber'] = reset($information['telephoneNumber']);
         }
-      }
       if (isset($information['supannCivilite']) && is_array($information['supannCivilite'])) {
         $information['supannCivilite'] = reset($information['supannCivilite']);
       }
