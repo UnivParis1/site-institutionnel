@@ -36,6 +36,19 @@ class Up1HomepageNodeDateFormatter extends DateTimeCustomFormatter {
         /** @var \Drupal\Core\Datetime\DrupalDateTime $start_date */
         $start_date = $item->start_date;
         $start_date->setTimezone(timezone_open(date_default_timezone_get()));
+        /** @var \Drupal\Core\Datetime\DrupalDateTime $end_date */
+        $end_date = $item->end_date;
+        $end_date->setTimezone(timezone_open(date_default_timezone_get()));
+          $elements[$delta] = [
+            'date' => [
+              '#markup' => "<div class='date-day-entry'><span>" . $start_date->format('j F Y') . " - " . $end_date->format('j F Y') . "</span></div>",
+            ],
+          ];
+        }
+      if (!empty($item->start_date) && empty($item->end_date)) {
+        /** @var \Drupal\Core\Datetime\DrupalDateTime $start_date */
+        $start_date = $item->start_date;
+        $start_date->setTimezone(timezone_open(date_default_timezone_get()));
           $elements[$delta] = [
             'date' => [
               '#markup' => "<div class='date-day-entry'><span>" . $start_date->format('j F Y') . "</span></div>",
