@@ -9,7 +9,7 @@ uid: 5486
 template: false
 archive: false
 id: 0_ceremonie_des_docteurs_2023
-title: '0 - Cérémonie des docteurs 2023'
+title: '0 - Cérémonie des docteurs 2024'
 description: ''
 categories: {  }
 elements: |-
@@ -51,18 +51,26 @@ elements: |-
     '#type': textfield
     '#title': 'Sujet de thèse :'
     '#required': true
-  invite_1_nom_et_prenom_:
-    '#type': textfield
-    '#title': 'Invité 1 (nom) :'
-  invite_1_prenom_:
-    '#type': textfield
-    '#title': 'Invité 1 (prénom) :'
-  invite_2_nom_et_prenom_:
-    '#type': textfield
-    '#title': 'Invité 2 (nom) :'
-  invite_2_nom_:
-    '#type': textfield
-    '#title': 'Invité 2 (prénom) :'
+  invite_1:
+    '#type': fieldset
+    '#title': 'Invité 1'
+    '#attributes':
+      style: 'fieldset {border: none;}'
+    invite_1_nom_et_prenom_:
+      '#type': textfield
+      '#title': 'Invité 1 (nom) :'
+    invite_1_prenom_:
+      '#type': textfield
+      '#title': 'Invité 1 (prénom) :'
+  invite_2:
+    '#type': fieldset
+    '#title': 'Invité 2'
+    invite_2_nom_et_prenom_:
+      '#type': textfield
+      '#title': 'Invité 2 (nom) :'
+    invite_2_nom_:
+      '#type': textfield
+      '#title': 'Invité 2 (prénom) :'
   j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
     '#type': checkbox
     '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
@@ -292,8 +300,8 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie des docteurs 2023"
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>Bien cordialement,<br />\r\nLa direction de la Communication</p>"
+      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie des docteurs 2024"
+      body: '<p>Bonjour,</p><p>Votre inscription est confirmée.</p><p>Merci de votre participation.</p><p>Bien cordialement,<br>La direction de la Communication</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -329,7 +337,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Cérémonie des docteurs 2023 - Nouvelle inscription'
+      subject: 'Cérémonie des docteurs 2024 - Nouvelle inscription'
       body: _default
       excluded_elements: {  }
       ignore_access: false

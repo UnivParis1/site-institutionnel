@@ -9,26 +9,33 @@ uid: 74
 template: false
 archive: false
 id: securite_routiere_droit_assuranc
-title: "30 - Sécurité routière droit, assurance FORMULAIRE D'INSCRIPTION"
-description: "<p>9 juin 2023 de 09:15 à 17:45</p>\r\n\r\n<p>Centre de la Sorbonne, amphithéâtre Gaston Bachelard, galerie Gerson</p>\r\n\r\n<p>75005 PARIS</p>\r\n\r\n<p>&nbsp;</p>"
-categories: {  }
+title: '30 - André Citroën pour l’Histoire :  grandeurs d’un destin français'
+description: '<p>Mercredi 19 février 2025, de 18h00 à 20h00</p><p>Site Sorbonne, cour d’honneur, entrée par le 17, rue de la Sorbonne</p><p>Amphithéâtre Richelieu</p><p>75005 PARIS</p><p>&nbsp;</p>'
+categories:
+  - 'Inscription événement'
 elements: |-
   nom:
     '#type': textfield
     '#title': Nom
     '#description': '<p>Nom de famille</p>'
     '#help_title': 'Nom de famille'
+    '#required': true
   prenom:
     '#type': textfield
     '#title': Prénom
     '#description': '<p>Prénom</p>'
+    '#required': true
   email:
     '#type': webform_email_confirm
     '#title': Email
     '#confirm__title': 'Veuillez confirmer votre adresse courriel'
+    '#required': true
   je_souhaite_participer_:
     '#type': checkbox
-    '#title': 'Je souhaite participer '
+    '#title': 'Je souhaite participer à la conférence'
+  je_souhaite_participer_au_verre_convivial:
+    '#type': checkbox
+    '#title': 'Je souhaite participer au verre convivial'
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
@@ -45,7 +52,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -68,7 +75,7 @@ settings:
   form_required: false
   form_autofocus: false
   form_details_toggle: false
-  form_reset: false
+  form_reset: true
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
@@ -82,8 +89,8 @@ settings:
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
-  submission_label: ''
-  submission_exception_message: ''
+  submission_label: 'Confirmation inscription -  André Citroën pour l’Histoire : grandeurs d’un destin français'
+  submission_exception_message: '<p>Madame, Monsieur,</p><p>Nous avons le plaisir de confirmer votre inscription à l’événement :</p><p>"André Citroën pour l’Histoire : grandeurs d’un destin français"<br><strong>Date :</strong> Mercredi 19 février 2025<br><strong>Heure :</strong> 18h00 à 20h00<br><strong>Lieu </strong>: Amphithéâtre Richelieu, Centre de la Sorbonne<br><strong>Adresse :</strong> 17, rue de la Sorbonne, 75005 Paris</p><p><strong>L’accueil débutera à 17h30</strong>, et l’entrée vous sera accordée sur présentation de cette confirmation.</p><p>Nous vous remercions pour votre intérêt et votre participation à cet hommage historique et culturel.&nbsp;<br>Dans l’attente de vous accueillir, nous vous prions d’agréer, Madame, Monsieur, l’expression de nos salutations distinguées.<br>&nbsp;</p>'
   submission_locked_message: ''
   submission_log: false
   submission_excluded_elements: {  }
@@ -139,8 +146,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: ''
+  confirmation_title: 'Objet : Confirmation de votre inscription à l’événement "André Citroën pour l’Histoire"'
+  confirmation_message: '<p>&nbsp;</p><p>Bonjour [webform_submission:values:nom], [webform_submission:values:prenom]</p><p>&nbsp;</p><p>Nous avons le plaisir de confirmer votre inscription à l’événement :</p><p><strong>"André Citroën pour l’Histoire : grandeurs d’un destin français"</strong><br><strong>Date :</strong> Mercredi 19 février 2025<br><strong>Heure :</strong> 18h00 à 20h00<br><strong>Lieu :</strong> Amphithéâtre Richelieu, Centre de la Sorbonne<br><strong>Adresse :</strong> 17, rue de la Sorbonne, 75005 Paris</p><p>L’accueil sera ouvert à partir de 17h30, et l’accès à l’événement se fera sur présentation de la confirmation qui vous a été transmise par courriel.</p><p>Nous vous remercions pour l’intérêt que vous portez à cet hommage historique et culturel.<br>Dans l’attente de vous accueillir, nous vous prions d’agréer, Madame, Monsieur, l’expression de nos salutations les plus distinguées.</p><p><strong>Service communication</strong></p><p>Institut Administration Économique et Sociale</p><p>École de Droit de la Sorbonne</p><p>&nbsp;</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -216,5 +223,42 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: 'Confirmation de votre inscription à l’événement "André Citroën pour l’Histoire"'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: communication.iaes@univ-paris1.fr
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: '[webform_submission:values:nom:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p><p style="margin-bottom:0cm;text-align:justify;">Bonjour [webform_submission:values:nom], [webform_submission:values:prenom]</p><p style="margin-bottom:0cm;text-align:justify;">Nous avons le plaisir de confirmer votre inscription à l’événement :</p><p style="margin-bottom:0cm;text-align:justify;">"<strong>André Citroën pour l’Histoire : grandeurs d’un destin français</strong>"</p><p style="margin-bottom:0cm;text-align:justify;"><strong>Date</strong> : Mercredi 19 février 2025</p><p style="margin-bottom:0cm;text-align:justify;"><strong>Heure</strong> : 18h00 à 20h00</p><p style="margin-bottom:0cm;text-align:justify;"><strong>Lieu</strong> : Amphithéâtre Richelieu, Centre de la Sorbonne</p><p style="margin-bottom:0cm;text-align:justify;"><strong>Adresse</strong> : 17, rue de la Sorbonne, 75005 Paris</p><p style="margin-bottom:0cm;text-align:justify;">&nbsp;</p><p style="margin-bottom:0cm;text-align:justify;"><strong>L’accueil sera ouvert à partir de 17h30</strong>, et l’accès à l’événement se fera sur présentation de cette confirmation.</p><p style="margin-bottom:0cm;text-align:justify;">Nous vous remercions pour l’intérêt que vous portez à cet hommage historique et culturel.</p><p style="margin-bottom:0cm;text-align:justify;">Dans l’attente de vous accueillir, nous vous prions d’agréer, Madame, Monsieur, l’expression de nos salutations les plus distinguées.</p><p style="margin-bottom:0cm;text-align:justify;">&nbsp;</p><p style="margin-bottom:0cm;text-align:justify;">Service communication</p><p style="margin-bottom:0cm;text-align:justify;">Institut Administration Économique et Sociale</p><p style="margin-bottom:0cm;text-align:justify;">École de Droit de la Sorbonne</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

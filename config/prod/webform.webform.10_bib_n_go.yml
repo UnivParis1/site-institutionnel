@@ -163,6 +163,15 @@ elements: |-
         '#options':
           'Pierre Mendès France': 'Pierre Mendès France'
         '#required': true
+      terms_of_service_01:
+        '#type': webform_terms_of_service
+        '#title': 'Les rendez-vous ne peuvent pas être pris durant les périodes de fermeture de la bibliothèque, du 21 décembre 2024 au 6 janvier 2025'
+        '#required': true
+        '#states':
+          visible:
+            ':input[name="choisir_une_bibliotheque"]':
+              filled: true
+        '#terms_content': '<p><strong>Les rendez-vous ne peuvent pas être pris durant les périodes de fermeture de la bibliothèque, du 21 décembre 2024 au 6 janvier 2025</strong></p>'
       choisir_un_jour:
         '#type': select
         '#title': 'Choisir un jour'

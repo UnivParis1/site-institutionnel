@@ -253,16 +253,16 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: testeur.lmc+sorbonne@gmail.com
+      to_mail: sorbonne.tv@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@lmcfrance.com
+      from_mail: no-reply@univ-paris1.fr
       from_options: {  }
       from_name: '[webform_submission:values:stv_contact_name:raw]'
-      reply_to: ''
+      reply_to: '[webform_submission:values:stv_contact_mail:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
@@ -270,8 +270,6 @@ handlers:
       body: '<p>[webform_submission:values:stv_contact_subject:raw]</p><p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements:
         stv_contact_legend: stv_contact_legend
-        stv_contact_subject: stv_contact_subject
-        stv_contact_message: stv_contact_message
         stv_contact_terms_of_service: stv_contact_terms_of_service
         stv_contact_captcha: stv_contact_captcha
       ignore_access: false

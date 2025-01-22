@@ -1,65 +1,58 @@
-uuid: b0189754-fb29-4030-9d1c-0382b50030f2
+uuid: 2fc7b326-a76b-41e3-8b3f-1c280ca88bf9
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 7845
 template: false
 archive: false
-id: 126_formulaire_de_contact_sorbon
-title: '126 - Formulaire de contact Sorbonne TV marco'
-description: ''
-categories: {  }
+id: 8_inscription_cycle_procedure_pe
+title: '8 - Inscription à la deuxième séance du cycle de conférences : "La réforme du code de procédure pénale français à l’aune des expériences étrangères"'
+description: '<p>Formulaire d''inscription à la deuxième séance du cycle de conférences : "La réforme du code de procédure pénale français à l’aune des expériences étrangères" : "La réforme du code de procédure pénale belge".</p>'
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  markup:
-    '#type': webform_markup
-    '#markup': '<p style="font-weight:bold;">Les champs indiqués par un astérisque <span style="color:red;">*</span> sont des champs obligatoires.</p>'
-  votre_adresse_courriel:
+  votreprenom:
     '#type': textfield
-    '#title': 'Votre adresse courriel'
-    '#placeholder': thomas.dupont@votremail.com
+    '#title': Prénom
+    '#placeholder': Jean
     '#required': true
-    '#required_error': 'Votre courriel est obligatoire'
-  votre_nom:
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
     '#type': textfield
-    '#title': 'Votre nom'
-    '#placeholder': Dupont
+    '#title': Nom
+    '#placeholder': Dupond
     '#required': true
-    '#required_error': 'Votre nom est obligatoire'
-  votre_prenom:
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
     '#type': textfield
-    '#title': 'Votre prénom'
-    '#placeholder': Thomas
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
-  objet_de_votre_demande_:
-    '#type': textfield
-    '#title': 'Objet de votre demande '
-    '#help_title': 'Ce champ est limité à 50 caractères'
-    '#maxlength': 50
-    '#placeholder': 'Peut-on contacter les réalisateurs des vidéos ?'
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription à la deuxième séance du cycle de conférences : "La réforme du code de procédure pénale français à l’aune des expériences étrangères"&nbsp;</p>'
     '#required': true
-    '#required_error': "L'objet de votre demande est obligatoire"
-  votre_message:
-    '#type': textarea
-    '#title': 'Votre message'
-    '#required': true
-    '#required_error': 'Merci de saisir votre message dans le champ dédié'
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': "J'accepte que mes données personnelles soient collectées et traitées conformément à {la politique de confidentialité et aux termes du RGPD}"
-    '#required': true
-    '#required_error': 'Vous devez accpter les termes de consentement RGPD'
-    '#terms_title': 'Termes du consentement RGPD '
-    '#terms_content': '<p>J''accepte que les informations recueillies à partir de ce formulaire soient transmises à l’Université Paris 1 Panthéon-Sorbonne dans le cadre de la relation qui découle de cette prise de contact. Pour plus d’informations, consultez les <a href="https://sorbonne.tv/mentions-legales" title="mentions légales">mentions légales</a>.</p>'
-  captcha:
-    '#type': captcha
+    '#required_error': "Vous devez accepter les conditions d'inscription."
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': 'Envoyer la demande'
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -72,7 +65,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -167,7 +160,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: '<p>Votre demande d''inscription à la deuxième séance du cycle de conférences : "La réforme du code de procédure pénale français à l’aune des expériences étrangères" a bien été prise en compte.</p><p>Un mail de confirmation a été envoyé à l''adresse que vous avez saisie.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -201,61 +194,64 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_any:
     roles: {  }
     users:
-      - 6335
-      - 8720
+      - 7792
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
     permissions: {  }
   administer:
     roles: {  }
     users:
-      - 6335
-      - 8720
+      - 7792
     permissions: {  }
   test:
     roles: {  }
     users:
-      - 6335
-      - 8720
+      - 7792
     permissions: {  }
   configuration:
     roles: {  }
     users:
-      - 6335
-      - 8720
+      - 7792
     permissions: {  }
 handlers:
-  email_formulaire_contact_sorbonne_tv:
+  email_au_demandeur:
     id: email
-    handler_id: email_formulaire_contact_sorbonne_tv
-    label: 'Email formulaire contact Sorbonne TV'
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
@@ -263,26 +259,22 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sorbonne.tv@univ-paris1.fr
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: testeur.lmc+sorbonne@gmail.com
+      cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:votre_nom:raw]'
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[webform_submission:values:objet_de_votre_demande_:raw]'
-      body: '[webform_submission:values:votre_message:value]'
-      excluded_elements:
-        markup: markup
-        objet_de_votre_demande_: objet_de_votre_demande_
-        terms_of_service: terms_of_service
-        captcha: captcha
+      subject: 'Inscription au colloque'
+      body: '<p>Bonjour,</p><p>Votre inscription à la deuxième séance du cycle de conférences : "La réforme du code de procédure pénale français à l’aune des expériences étrangères" a bien été validée.</p>'
+      excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
