@@ -13,53 +13,53 @@ use \Drupal\up1_pages_personnelles\ComptexManager;
  */
 function p1ps2019_preprocess_html(&$variables)
 {
-  $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $negotiator = \Drupal::service('micro_site.negotiator');
-  $system_path = \Drupal::service('path.current')->getPath();
-  $page_mini_site = FALSE;
-  $variables['web_component'] = FALSE;
+    $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    $system_path = \Drupal::service('path.current')->getPath();
+    $page_mini_site = FALSE;
+    $variables['web_component'] = FALSE;
 
-  $site = $negotiator->getActiveSite();
-  if (isset($site) && !empty($site)) {
-    $specific_pages = [
-      '/actualites',
-      '/evenements',
-      '/publications',
-      '/evenements/archives',
-      '/recrutement',
-      '/equipe/doctorant',
-      '/equipe/enseignant-chercheur'
-    ];
-    if (in_array($system_path, $specific_pages)) {
-      $page_mini_site = TRUE;
+    $site = $negotiator->getActiveSite();
+    if (isset($site) && !empty($site)) {
+        $specific_pages = [
+            '/actualites',
+            '/evenements',
+            '/publications',
+            '/evenements/archives',
+            '/recrutement',
+            '/equipe/doctorant',
+            '/equipe/enseignant-chercheur'
+        ];
+        if (in_array($system_path, $specific_pages)) {
+            $page_mini_site = TRUE;
+        }
+
+        $site_id = $site->id();
+        if (preg_match('/node\/36841/', $system_path) && $site_id == 115) {
+            $variables['web_component'] = TRUE;
+        }
+        $variables['custom_favicon'] = FALSE;
+        if ( !empty($site->getFavicon()) ) {
+            $variables['custom_favicon'] = TRUE;
+        }
     }
+    $variables['page_mini_site'] = $page_mini_site;
 
-    $site_id = $site->id();
-    if (preg_match('/node\/36841/', $system_path) && $site_id == 115) {
-      $variables['web_component'] = TRUE;
+    try {
+        $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+    } catch (Exception $e) {
+        $variables['is_front'] = FALSE;
     }
-    $variables['custom_favicon'] = FALSE;
-    if ( !empty($site->getFavicon()) ) {
-      $variables['custom_favicon'] = TRUE;
+    if (preg_match('/site/', $variables['root_path']) && !isset($variables['node_type']) && !preg_match('/sitemap/', $variables['root_path'])) {
+        $variables['is_front_mini_site'] = TRUE;
     }
-  }
-  $variables['page_mini_site'] = $page_mini_site;
+    else $variables['is_front_mini_site'] = FALSE;
 
-  try {
-    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  } catch (Exception $e) {
-    $variables['is_front'] = FALSE;
-  }
-  if (preg_match('/site/', $variables['root_path']) && !isset($variables['node_type']) && !preg_match('/sitemap/', $variables['root_path'])) {
-    $variables['is_front_mini_site'] = TRUE;
-  }
-  else $variables['is_front_mini_site'] = FALSE;
-
-  $is_error_page = FALSE;
-  if (\Drupal::routeMatch()->getRouteName() == 'view.erreur_404.page_1') {
-    $is_error_page = TRUE;
-  }
-  $variables['is_error_page'] = $is_error_page;
+    $is_error_page = FALSE;
+    if (\Drupal::routeMatch()->getRouteName() == 'view.erreur_404.page_1') {
+        $is_error_page = TRUE;
+    }
+    $variables['is_error_page'] = $is_error_page;
 }
 
 /**
@@ -67,86 +67,86 @@ function p1ps2019_preprocess_html(&$variables)
  */
 function p1ps2019_preprocess_page(&$variables)
 {
-  $page_mini_site = FALSE;
-  $is_front_mini_site = FALSE;
-  $print_hp_image = FALSE;
-  $preview = FALSE;
-  $node_type = FALSE;
-  $is_search_page = FALSE;
-  $site_id = 0;
-  $variables['site_name'] = "";
+    $page_mini_site = FALSE;
+    $is_front_mini_site = FALSE;
+    $print_hp_image = FALSE;
+    $preview = FALSE;
+    $node_type = FALSE;
+    $is_search_page = FALSE;
+    $site_id = 0;
+    $variables['site_name'] = "";
 
-  if (isset($variables['node'])) {
-    $node = $variables['node'];
-  } else $node = FALSE;
+    if (isset($variables['node'])) {
+        $node = $variables['node'];
+    } else $node = FALSE;
 
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $system_path = \Drupal::service('path.current')->getPath();
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $system_path = \Drupal::service('path.current')->getPath();
 
-  $variables['#attached']['drupalSettings']['language'] = $language;
+    $variables['#attached']['drupalSettings']['language'] = $language;
 
-  if ($variables['is_front']) {
-    $print_hp_image = TRUE;
-  }
-  if (preg_match('/resultats-de-recherche/', $system_path)) {
-    $print_hp_image = TRUE;
-    $is_search_page = TRUE;
-  }
-
-  if (preg_match('/node\/preview/', $system_path)) {
-    $preview = TRUE;
-  }
-
-  $negotiator = \Drupal::service('micro_site.negotiator');
-  $site = $negotiator->getActiveSite();
-
-  if (isset($site) && !empty($site)) {
-    $site = \Drupal::service('entity.repository')->getTranslationFromContext($site);
-
-    $specific_pages = [
-      '/actualites',
-      '/evenements',
-      '/publications',
-      '/evenements/archives',
-      '/recrutement',
-      '/equipe/doctorant',
-      '/equipe/enseignant-chercheur'
-    ];
-    if (in_array($system_path, $specific_pages)) {
-      $page_mini_site = TRUE;
+    if ($variables['is_front']) {
+        $print_hp_image = TRUE;
     }
-    $site_id = $site->id();
-
-    $complete_name = $site->get('field_complete_name')->getValue();
-    if (!empty($complete_name)) {
-      $variables['site_name'] = $complete_name[0]['value'];
-    } else {
-      $variables['site_name'] = $site->getName();
+    if (preg_match('/resultats-de-recherche/', $system_path)) {
+        $print_hp_image = TRUE;
+        $is_search_page = TRUE;
     }
-  }
 
-  if (isset($node) && is_object($node)) {
-    $node_type = $node->getType();
-    if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
-      && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
-      $print_hp_image = TRUE;
+    if (preg_match('/node\/preview/', $system_path)) {
+        $preview = TRUE;
     }
-    if ($site_id != 0) {
-      $page_mini_site = TRUE;
-    }
-  }
-  if ($variables['is_front'] && !$node && $site_id != 0) {
-    $is_front_mini_site = TRUE;
-  }
-  if (preg_match('/user/', $system_path) && $site_id != 0) {
-    $page_mini_site = TRUE;
-  }
 
-  $variables['node_type'] = $node_type;
-  $variables['print_hp_image'] = $print_hp_image;
-  $variables['preview'] = $preview;
-  $variables['page_mini_site'] = $page_mini_site;
-  $variables['is_front_mini_site'] = $is_front_mini_site;
+    $negotiator = \Drupal::service('micro_site.negotiator');
+    $site = $negotiator->getActiveSite();
+
+    if (isset($site) && !empty($site)) {
+        $site = \Drupal::service('entity.repository')->getTranslationFromContext($site);
+
+        $specific_pages = [
+            '/actualites',
+            '/evenements',
+            '/publications',
+            '/evenements/archives',
+            '/recrutement',
+            '/equipe/doctorant',
+            '/equipe/enseignant-chercheur'
+        ];
+        if (in_array($system_path, $specific_pages)) {
+            $page_mini_site = TRUE;
+        }
+        $site_id = $site->id();
+
+        $complete_name = $site->get('field_complete_name')->getValue();
+        if (!empty($complete_name)) {
+            $variables['site_name'] = $complete_name[0]['value'];
+        } else {
+            $variables['site_name'] = $site->getName();
+        }
+    }
+
+    if (isset($node) && is_object($node)) {
+        $node_type = $node->getType();
+        if (!in_array($node_type, ['news', 'news2018', 'event', 'publication'])
+            && $node->hasField('field_media') && !empty($node->get('field_media')->getValue())) {
+            $print_hp_image = TRUE;
+        }
+        if ($site_id != 0) {
+            $page_mini_site = TRUE;
+        }
+    }
+    if ($variables['is_front'] && !$node && $site_id != 0) {
+        $is_front_mini_site = TRUE;
+    }
+    if (preg_match('/user/', $system_path) && $site_id != 0) {
+        $page_mini_site = TRUE;
+    }
+
+    $variables['node_type'] = $node_type;
+    $variables['print_hp_image'] = $print_hp_image;
+    $variables['preview'] = $preview;
+    $variables['page_mini_site'] = $page_mini_site;
+    $variables['is_front_mini_site'] = $is_front_mini_site;
 }
 
 function p1ps2019_preprocess_node(&$variables) {
@@ -192,140 +192,138 @@ function p1ps2019_preprocess_node(&$variables) {
                 break;
         }
         if (!empty($paragraph) && $paragraph instanceof Paragraph) {
-          $view_builder = \Drupal::entityTypeManager()->getViewBuilder('paragraph');
-          $array = $view_builder->view($paragraph, 'search_index');
-          $array['#cache']['tags'][] = 'node:' . $node->id();
-          if (in_array($paragraph->bundle(), ['bp_simple', 'jumbotron', 'rich_content', 'bp_columns'])) {
-            $text_paragraphs[] = $array;
-          }
+            $view_builder = \Drupal::entityTypeManager()->getViewBuilder('paragraph');
+            $array = $view_builder->view($paragraph, 'search_index');
+            $array['#cache']['tags'][] = 'node:' . $node->id();
+            if (in_array($paragraph->bundle(), ['bp_simple', 'jumbotron', 'rich_content', 'bp_columns'])) {
+                $text_paragraphs[] = $array;
+            }
         }
-      }
-      if (!empty($text_paragraphs)) $variables['text_paragraphs'] = $text_paragraphs;
     }
-  }
-  if ($node->getType() == 'page_personnelle') {
-    $uid = $node->getOwnerId();
-    $user = User::load($uid);
-    $comptex = new ComptexManager();
-    $mail = $comptex->getUserEmail($user->getAccountName());
-    $variables['mail'] = $mail;
-    $user->setEmail($mail);
-    $user->save();
+    if (!empty($text_paragraphs)) $variables['text_paragraphs'] = $text_paragraphs;
+    if ($node->getType() == 'page_personnelle') {
+        $uid = $node->getOwnerId();
+        $user = User::load($uid);
+        $comptex = new ComptexManager();
+        $mail = $comptex->getUserEmail($user->getAccountName());
+        $variables['mail'] = $mail;
+        $user->setEmail($mail);
+        $user->save();
 
-    if ($node->hasField('field_skills')) {
-      $skills = $node->get('field_skills')->getValue();
-      $expertises = [];
-      if (!empty($skills)) {
-        foreach ($skills as $key => $skill) {
-          $tid = $skill['target_id'];
-          $term = Term::load($tid);
-          if ($term) {
-            $url = Url::fromRoute('view.skills.page', ['skills[' . $tid . ']' => $tid]);
-            $expertises[$key] =
-              '<a href="' . $url->toString() . '"
+        if ($node->hasField('field_skills')) {
+            $skills = $node->get('field_skills')->getValue();
+            $expertises = [];
+            if (!empty($skills)) {
+                foreach ($skills as $key => $skill) {
+                    $tid = $skill['target_id'];
+                    $term = Term::load($tid);
+                    if ($term) {
+                        $url = Url::fromRoute('view.skills.page', ['skills[' . $tid . ']' => $tid]);
+                        $expertises[$key] =
+                            '<a href="' . $url->toString() . '"
           title="' . t('Link to @term_name page', ['@term_name' => $term->get('name')->value]) . '"
           target="_blank">'
-              . $term->get('name')->value . '</a>';
-          }
+                            . $term->get('name')->value . '</a>';
+                    }
+                }
+            }
+            $variables['expertises'] = $expertises;
         }
-      }
-      $variables['expertises'] = $expertises;
-    }
-    if ($node->hasField('field_highlight_publications')) {
-      $publications = $node->get('field_highlight_publications')->getValue();
-      $col_length = 12;
-      switch (count($publications)) {
-        case 1:
-          $col_length = "8";
-          break;
-        case 2:
-          $col_length = "6";
-          break;
-        case 3:
-          $col_length = "4";
-          break;
-      }
-      $variables['col_length'] = $col_length;
-    }
-  }
-
-  //preprocess_node publications
-  if ($node->getType() == 'publication') {
-    $authors = $node->get('field_authors_list')->getValue();
-    $list = [];
-    foreach ($authors as $key => $author) {
-      $list[$key] = $author['first'];
-      if (!empty($author['second'])) {
-        $user = user_load_by_name($author['second']);
-
-        $comptex = new ComptexManager();
-        $displayName = $comptex->getUserAttribute($author['second'], 'displayName');
-        if (!empty($displayName)) {
-          $query = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties([
-              'uid' => $user->id(),
-              'type' => 'page_personnelle',
-              'status' => 1
-            ]);
-          $page_perso = reset($query);
-          if ($page_perso) {
-            $page_perso_url = Url::fromRoute('entity.node.canonical',
-              ['node' => $page_perso->id()])->toString();
-            $name = (!empty($author['first'])) ? $author['first'] : $displayName;
-            $list[$key] =
-              "<a href='$page_perso_url' target='_blank' title='Page personnelle de $displayName'>$name</a>";
-          }
-        }
-      }
-    }
-    $variables['df_authors'] = implode(', ', $list);
-  }
-
-  if (in_array($node->getType(), ['page', 'second_level_pages'])) {
-    if ($node->hasField('field_display_node_changed')) {
-      $display_changed = $node->field_display_node_changed->getValue();
-      if (!empty($display_changed[0]['value'])) {
-        $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long_date_hour');
-        $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0 ;
-      }
-    }
-    if ($node->getType() == 'call') {
-        if ($node->hasField('field_funder') && !$node->get('field_funder')->isEmpty()) {
-            $funder = $node->get('field_funder')->value;
-            switch ($funder) {
-                case 'ce':
-                    $bg = 'bg-blue';
+        if ($node->hasField('field_highlight_publications')) {
+            $publications = $node->get('field_highlight_publications')->getValue();
+            $col_length = 12;
+            switch (count($publications)) {
+                case 1:
+                    $col_length = "8";
                     break;
-                case 'anr':
-                case 'mesr':
-                    $bg = 'bg-red';
+                case 2:
+                    $col_length = "6";
                     break;
-                case 'region_idf':
-                case 'ville_de_paris':
-                    $bg = 'bg-gold';
-                    break;
-                default:
-                    $bg = 'bg-green';
+                case 3:
+                    $col_length = "4";
                     break;
             }
-            $variables['funder_color'] = $bg;
+            $variables['col_length'] = $col_length;
         }
-        if (!empty($variables['content']['field_main_objectives'])) {
-            $field_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions('node');
-            if (isset($field_definitions['field_main_objectives'])) {
-                $field_definition = $field_definitions['field_main_objectives'];
-                $allowed_values = $field_definition->getSettings()['allowed_values'] ?? [];
-                // Vérifiez que les valeurs autorisées existent
-                if (!empty($allowed_values)) {
-                    $variables['main_objectives_label'] = $allowed_values;
-                } else {
-                    $variables['main_objectives_label'] = [];
+    }
+
+    //preprocess_node publications
+    if ($node->getType() == 'publication') {
+        $authors = $node->get('field_authors_list')->getValue();
+        $list = [];
+        foreach ($authors as $key => $author) {
+            $list[$key] = $author['first'];
+            if (!empty($author['second'])) {
+                $user = user_load_by_name($author['second']);
+
+                $comptex = new ComptexManager();
+                $displayName = $comptex->getUserAttribute($author['second'], 'displayName');
+                if (!empty($displayName)) {
+                    $query = \Drupal::entityTypeManager()
+                        ->getStorage('node')
+                        ->loadByProperties([
+                            'uid' => $user->id(),
+                            'type' => 'page_personnelle',
+                            'status' => 1
+                        ]);
+                    $page_perso = reset($query);
+                    if ($page_perso) {
+                        $page_perso_url = Url::fromRoute('entity.node.canonical',
+                            ['node' => $page_perso->id()])->toString();
+                        $name = (!empty($author['first'])) ? $author['first'] : $displayName;
+                        $list[$key] =
+                            "<a href='$page_perso_url' target='_blank' title='Page personnelle de $displayName'>$name</a>";
+                    }
+                }
+            }
+        }
+        $variables['df_authors'] = implode(', ', $list);
+    }
+
+    if (in_array($node->getType(), ['page', 'second_level_pages'])) {
+        if ($node->hasField('field_display_node_changed')) {
+            $display_changed = $node->field_display_node_changed->getValue();
+            if (!empty($display_changed[0]['value'])) {
+                $variables['changed'] = \Drupal::service('date.formatter')->format($node->getChangedTime(), 'long_date_hour');
+                $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0;
+            }
+        }
+        if ($node->getType() == 'call') {
+            if ($node->hasField('field_funder') && !$node->get('field_funder')->isEmpty()) {
+                $funder = $node->get('field_funder')->value;
+                switch ($funder) {
+                    case 'ce':
+                        $bg = 'bg-blue';
+                        break;
+                    case 'anr':
+                    case 'mesr':
+                        $bg = 'bg-red';
+                        break;
+                    case 'region_idf':
+                    case 'ville_de_paris':
+                        $bg = 'bg-gold';
+                        break;
+                    default:
+                        $bg = 'bg-green';
+                        break;
+                }
+                $variables['funder_color'] = $bg;
+            }
+            if (!empty($variables['content']['field_main_objectives'])) {
+                $field_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions('node');
+                if (isset($field_definitions['field_main_objectives'])) {
+                    $field_definition = $field_definitions['field_main_objectives'];
+                    $allowed_values = $field_definition->getSettings()['allowed_values'] ?? [];
+                    // Vérifiez que les valeurs autorisées existent
+                    if (!empty($allowed_values)) {
+                        $variables['main_objectives_label'] = $allowed_values;
+                    } else {
+                        $variables['main_objectives_label'] = [];
+                    }
                 }
             }
         }
     }
-
 }
 
 /**
@@ -333,12 +331,12 @@ function p1ps2019_preprocess_node(&$variables) {
  */
 function p1ps2019_preprocess_menu(&$variables)
 {
-  $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  try {
-    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  } catch (Exception $e) {
-    $variables['is_front'] = FALSE;
-  }
+    $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    try {
+        $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+    } catch (Exception $e) {
+        $variables['is_front'] = FALSE;
+    }
 }
 
 /**
@@ -348,51 +346,51 @@ function p1ps2019_preprocess_menu(&$variables)
  */
 function p1ps2019_theme_suggestions_block_alter(array &$suggestions, array $variables)
 {
-  // Block suggestions for custom block bundles.
-  if (isset($variables['elements']['content']['#block_content'])) {
-    array_splice($suggestions, 1, 0,
-      'block__' . $variables['elements']['content']['#block_content']->bundle());
-  }
+    // Block suggestions for custom block bundles.
+    if (isset($variables['elements']['content']['#block_content'])) {
+        array_splice($suggestions, 1, 0,
+            'block__' . $variables['elements']['content']['#block_content']->bundle());
+    }
 }
 
 function p1ps2019_preprocess_block(&$variables)
 {
-  if (isset($variables["elements"]["#id"])) {
-    $block_id = $variables["elements"]["#id"];
+    if (isset($variables["elements"]["#id"])) {
+        $block_id = $variables["elements"]["#id"];
 
-    $path = \Drupal::service('path.current')->getPath();
-    $block = \Drupal\block\Entity\Block::load($block_id);
-    $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $path = \Drupal::service('path.current')->getPath();
+        $block = \Drupal\block\Entity\Block::load($block_id);
+        $variables['lang'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    if ($block) {
-      $variables["content"]["#attributes"]["region"] = $block->getRegion();
+        if ($block) {
+            $variables["content"]["#attributes"]["region"] = $block->getRegion();
+        }
+        if ($block_id == 'p1ps2019_branding' || $block_id == 'p1ps2019_reseauxsociaux') {
+            $negotiator = \Drupal::service('micro_site.negotiator');
+            $site = $negotiator->getActiveSite();
+            if ($site) {
+                $variables['host_url'] = $site->getSiteScheme() . "://" . $site->getHostPublicUrl();
+            } else $variables['host_url'] = '';
+        }
     }
-    if ($block_id == 'p1ps2019_branding' || $block_id == 'p1ps2019_reseauxsociaux') {
-      $negotiator = \Drupal::service('micro_site.negotiator');
-      $site = $negotiator->getActiveSite();
-      if ($site) {
-        $variables['host_url'] = $site->getSiteScheme() . "://" . $site->getHostPublicUrl();
-      } else $variables['host_url'] = '';
-    }
-  }
 }
 
 // add a template suggestion based on region name
 function p1ps2019_theme_suggestions_menu_alter(array &$suggestions, array $variables)
 {
-  if (isset($variables["attributes"]["region"])) {
-    $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
-    $negotiator = \Drupal::service('micro_site.negotiator');
-    $site = $negotiator->getActiveSite();
-    if ($site) {
-      $suggestions[] = "menu__mini_site__" . $variables["attributes"]["region"];
+    if (isset($variables["attributes"]["region"])) {
+        $suggestions[] = $variables["theme_hook_original"] . "__" . $variables["attributes"]["region"];
+        $negotiator = \Drupal::service('micro_site.negotiator');
+        $site = $negotiator->getActiveSite();
+        if ($site) {
+            $suggestions[] = "menu__mini_site__" . $variables["attributes"]["region"];
+        }
     }
-  }
 }
 
 function p1ps2019_preprocess_block__welcome_message_block(&$variables)
 {
-  $variables['isHome'] = \Drupal::service('path.matcher')->isFrontPage();
+    $variables['isHome'] = \Drupal::service('path.matcher')->isFrontPage();
 }
 
 /*
@@ -401,9 +399,9 @@ function p1ps2019_preprocess_block__welcome_message_block(&$variables)
 */
 function p1ps2019_preprocess_image(&$variables)
 {
-  if (!isset($variables['alt'])) {
-    $variables['attributes']['alt'] = "";
-  }
+    if (!isset($variables['alt'])) {
+        $variables['attributes']['alt'] = "";
+    }
 }
 
 /**
@@ -411,20 +409,20 @@ function p1ps2019_preprocess_image(&$variables)
  */
 function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $variables)
 {
-  $name = '';
-  $display_id = '';
-  $pieces = [];
+    $name = '';
+    $display_id = '';
+    $pieces = [];
 
-  if (isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
-  if (isset($variables['element']['#display_id']) && $variables['element']['#display_id']) $display_id = $variables['element']['#display_id'];
+    if (isset($variables['element']['#name']) && $variables['element']['#name']) $name = $variables['element']['#name'];
+    if (isset($variables['element']['#display_id']) && $variables['element']['#display_id']) $display_id = $variables['element']['#display_id'];
 
-  if (isset($variables['element']['#type']) && !empty($variables['element']['#type'])) {
-    $pieces[] = $variables['element']['#type'];
-  }
-  if ($name != '') $pieces[] = $name;
-  if ($display_id != '') $pieces[] = $display_id;
+    if (isset($variables['element']['#type']) && !empty($variables['element']['#type'])) {
+        $pieces[] = $variables['element']['#type'];
+    }
+    if ($name != '') $pieces[] = $name;
+    if ($display_id != '') $pieces[] = $display_id;
 
-  if (!empty($pieces)) $suggestions[] = 'container__' . implode('_', $pieces);
+    if (!empty($pieces)) $suggestions[] = 'container__' . implode('_', $pieces);
 }
 
 /**
@@ -436,27 +434,27 @@ function p1ps2019_theme_suggestions_container_alter(array &$suggestions, array $
  */
 function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
 {
-  if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
-    $original_theme_hook = $variables['theme_hook_original'];
-    array_unshift($suggestions, $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']));
-  }
-  switch ($hook) {
-    case 'form_element':
-      if (isset($variables['element']['#parents'])) {
-        $parent_slug_list = $variables['element']['#parents'];
-        foreach ($parent_slug_list as $slug) {
-          if (is_string($slug)) {
-            $parent_slug = $slug;
+    if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
+        $original_theme_hook = $variables['theme_hook_original'];
+        array_unshift($suggestions, $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']));
+    }
+    switch ($hook) {
+        case 'form_element':
+            if (isset($variables['element']['#parents'])) {
+                $parent_slug_list = $variables['element']['#parents'];
+                foreach ($parent_slug_list as $slug) {
+                    if (is_string($slug)) {
+                        $parent_slug = $slug;
+                        break;
+                    }
+                }
+                if (isset($parent_slug) && !empty($parent_slug)) {
+                    $suggestions[] = 'form_element__' . str_replace('-', '_', $parent_slug);
+                }
+            }
             break;
-          }
-        }
-        if (isset($parent_slug) && !empty($parent_slug)) {
-          $suggestions[] = 'form_element__' . str_replace('-', '_', $parent_slug);
-        }
-      }
-      break;
 
-  }
+    }
 }
 
 /**
@@ -468,22 +466,22 @@ function p1ps2019_theme_suggestions_alter(&$suggestions, $variables, $hook)
 function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
 {
 
-  // Define the view mode.
-  $mode = $variables['elements']['#view_mode'];
+    // Define the view mode.
+    $mode = $variables['elements']['#view_mode'];
 
-  // Create a theme hook suggestion which has the view mode name in it.
-  $suggestions[] = 'user__' . $mode;
+    // Create a theme hook suggestion which has the view mode name in it.
+    $suggestions[] = 'user__' . $mode;
 
-  // Get current user.
-  $current_user = $variables['elements']['#user'];
+    // Get current user.
+    $current_user = $variables['elements']['#user'];
 
-  // Get current user's roles.
-  $roles = $current_user->getRoles();
+    // Get current user's roles.
+    $roles = $current_user->getRoles();
 
-  // Add suggestion per role.
-  foreach ($roles as $role) {
-    $suggestions[] = 'user__' . $mode . '__' . $role;
-  }
+    // Add suggestion per role.
+    foreach ($roles as $role) {
+        $suggestions[] = 'user__' . $mode . '__' . $role;
+    }
 }
 
 /**
@@ -493,9 +491,9 @@ function p1ps2019_theme_suggestions_user_alter(&$suggestions, $variables)
  * @param $variables
  */
 function p1ps2019_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
-  $view = $variables['view'];
-  $view_display = $view->getDisplay();
-  $suggestions[] = 'views_view__' . $view->id() . '__' . $view->current_display;
+    $view = $variables['view'];
+    $view_display = $view->getDisplay();
+    $suggestions[] = 'views_view__' . $view->id() . '__' . $view->current_display;
 }
 /*
 * Implements template_preprocess_views_view()
@@ -503,121 +501,121 @@ function p1ps2019_theme_suggestions_views_view_alter(array &$suggestions, array 
 */
 function p1ps2019_preprocess_views_view(&$variables)
 {
-  $variables['is_listing_page'] = FALSE;
-  $views = ['travailler_universite', 'listings', 'viva'];
-  if (in_array($variables['id'], $views)) {
-    $variables['is_listing_page'] = TRUE;
-    $variables['view_title'] = $variables['view']->getTitle();
-  }
-  $view_display = $variables['view']->getDisplay();
-  if ($variables['id'] == 'annuaire_des_mini_sites' && $view_display->display['display_title'] == 'Page') {
-    $variables['is_listing_page'] = TRUE;
-    $variables['view_title'] = $variables['view']->getTitle();
-  }
-  $variables['is_master_view'] = FALSE;
-  if ($variables['id'] == 'actualite') {
-    $variables['is_master_view'] = TRUE;
-    $variables['view_title'] = $variables['view']->getTitle();
-  }
-  $variables['archives'] = FALSE;
-  if ($variables['id'] == 'listings') {
-    $view_display = $variables['view']->getDisplay();
-    if (in_array($view_display->display['display_title'],
-      ['Évènements mini-sites', 'Évènements'])) {
-      $variables['archives'] = TRUE;
+    $variables['is_listing_page'] = FALSE;
+    $views = ['travailler_universite', 'listings', 'viva'];
+    if (in_array($variables['id'], $views)) {
+        $variables['is_listing_page'] = TRUE;
+        $variables['view_title'] = $variables['view']->getTitle();
     }
-  }
-  if (in_array($variables['id'], ['skills', 'annuaire_des_mini_sites'])) {
-    $variables['view_title'] = $variables['view']->getTitle();
-  }
-  if ($variables['id'] == 'recent_contents') {
     $view_display = $variables['view']->getDisplay();
-    $variables['view_display'] = $view_display->display['display_title'];
-  }
-  if ($variables['more']) {
-    $variables['more']['#options']['attributes']['class'] = array(
-      'link-style', 'with-arrow'
-    );
-    $variables["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
-  }
-  if ($variables['id'] == 'resultats_de_recherche') {
-    $variables['show_view_header'] = FALSE;
-    if (!empty (\Drupal::request()->query->get('text'))) {
-      $variables['show_view_header'] = TRUE;
-      $variables['request'] = \Drupal::request()->query->get('text');
+    if ($variables['id'] == 'annuaire_des_mini_sites' && $view_display->display['display_title'] == 'Page') {
+        $variables['is_listing_page'] = TRUE;
+        $variables['view_title'] = $variables['view']->getTitle();
     }
-  }
+    $variables['is_master_view'] = FALSE;
+    if ($variables['id'] == 'actualite') {
+        $variables['is_master_view'] = TRUE;
+        $variables['view_title'] = $variables['view']->getTitle();
+    }
+    $variables['archives'] = FALSE;
+    if ($variables['id'] == 'listings') {
+        $view_display = $variables['view']->getDisplay();
+        if (in_array($view_display->display['display_title'],
+            ['Évènements mini-sites', 'Évènements'])) {
+            $variables['archives'] = TRUE;
+        }
+    }
+    if (in_array($variables['id'], ['skills', 'annuaire_des_mini_sites'])) {
+        $variables['view_title'] = $variables['view']->getTitle();
+    }
+    if ($variables['id'] == 'recent_contents') {
+        $view_display = $variables['view']->getDisplay();
+        $variables['view_display'] = $view_display->display['display_title'];
+    }
+    if ($variables['more']) {
+        $variables['more']['#options']['attributes']['class'] = array(
+            'link-style', 'with-arrow'
+        );
+        $variables["more"]['#wrapper_attributes'] = ['class' => 'section-footer-wrapper'];
+    }
+    if ($variables['id'] == 'resultats_de_recherche') {
+        $variables['show_view_header'] = FALSE;
+        if (!empty (\Drupal::request()->query->get('text'))) {
+            $variables['show_view_header'] = TRUE;
+            $variables['request'] = \Drupal::request()->query->get('text');
+        }
+    }
 }
 
 function p1ps2019_preprocess_views_view_table(&$variables)
 {
-  try {
-    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  } catch (Exception $e) {
-    $variables['is_front'] = FALSE;
-  }
+    try {
+        $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+    } catch (Exception $e) {
+        $variables['is_front'] = FALSE;
+    }
 }
 
 function p1ps2019_preprocess_paragraph(&$variables)
 {
-  $paragraph = $variables['paragraph'];
-  if (in_array($paragraph->bundle(), ['contact','contact_free'])){
-    $service = \Drupal::service('up1_global.centres');
-    $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
+    $paragraph = $variables['paragraph'];
+    if (in_array($paragraph->bundle(), ['contact','contact_free'])){
+        $service = \Drupal::service('up1_global.centres');
+        $variables['centre'] = $service->getACentre($paragraph->field_centre->value);
 
-    if (!empty($paragraph->field_phone->value)) {
-      $variables['centre']['telephone'] = [];
-      $variables['centre']['telephone'][] = $paragraph->field_phone->value;
-    }
+        if (!empty($paragraph->field_phone->value)) {
+            $variables['centre']['telephone'] = [];
+            $variables['centre']['telephone'][] = $paragraph->field_phone->value;
+        }
 
-    $email = [];
-    if (!empty($variables['centre']['email'])) {
-      $email[] = $variables['centre']['email'];
-    }
-    if (!empty($paragraph->field_email_address->value)) {
-      array_unshift($email, $paragraph->field_email_address->value);
-    }
-    $variables['centre']['email'] = $email;
+        $email = [];
+        if (!empty($variables['centre']['email'])) {
+            $email[] = $variables['centre']['email'];
+        }
+        if (!empty($paragraph->field_email_address->value)) {
+            array_unshift($email, $paragraph->field_email_address->value);
+        }
+        $variables['centre']['email'] = $email;
 
-    $infos = [];
-    if (!empty($variables['centre']['informations'])) {
-      $infos[] = $variables['centre']['informations'];
+        $infos = [];
+        if (!empty($variables['centre']['informations'])) {
+            $infos[] = $variables['centre']['informations'];
+        }
+        $variables['centre']['informations'] = $infos;
     }
-    $variables['centre']['informations'] = $infos;
-  }
 }
 
 function p1ps2019_preprocess_media_oembed_iframe(&$variables) {
-  $resource = $variables['resource'];
+    $resource = $variables['resource'];
 
-  if ($resource->getProvider()->getName() === 'YouTube') {
-    $new_string = str_replace('?feature=oembed', '?feature=oembed&enablejsapi=1', (string) $variables['media']);
-    $new_media = $variables['media']::create($new_string);
-    $variables['media'] = $new_media;
-  }
+    if ($resource->getProvider()->getName() === 'YouTube') {
+        $new_string = str_replace('?feature=oembed', '?feature=oembed&enablejsapi=1', (string) $variables['media']);
+        $new_media = $variables['media']::create($new_string);
+        $variables['media'] = $new_media;
+    }
 }
 
 function p1ps2019_form_user_login_form_alter(&$form, $form_state, $form_id)
 {
-  if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
-    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
-    unset($form['name']['#title'], $form['name']['#description']);
-  }
-  if (isset($form['pass']) && $form['name']['#type'] == 'textfield') {
-    $form['pass']['#attributes']['placeholder'][] = $form['pass']['#title'] . ' *';
-    unset($form['pass']['#title'], $form['pass']['#description']);
-  }
+    if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
+        $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
+        unset($form['name']['#title'], $form['name']['#description']);
+    }
+    if (isset($form['pass']) && $form['name']['#type'] == 'textfield') {
+        $form['pass']['#attributes']['placeholder'][] = $form['pass']['#title'] . ' *';
+        unset($form['pass']['#title'], $form['pass']['#description']);
+    }
 }
 
 function p1ps2019_form_views_exposed_form_alter(&$form, $form_state, $form_id){
-  if($form['#id'] === "views-exposed-form-agenda-block-1"){
-    $form['reset'] = $form['actions']['reset'];
-    //$form['reset']['#weight'] = 0;
-    unset($form['actions']['reset']);
-  }
+    if($form['#id'] === "views-exposed-form-agenda-block-1"){
+        $form['reset'] = $form['actions']['reset'];
+        //$form['reset']['#weight'] = 0;
+        unset($form['actions']['reset']);
+    }
 }
 
 function p1ps2019_theme_suggestions_field_alter(array &$suggestions, array $variables, $hook)
 {
-  $suggestions[] = 'field__' . $variables['element']['#field_name'] . '__' . $variables['element']['#view_mode'];
+    $suggestions[] = 'field__' . $variables['element']['#field_name'] . '__' . $variables['element']['#view_mode'];
 }
