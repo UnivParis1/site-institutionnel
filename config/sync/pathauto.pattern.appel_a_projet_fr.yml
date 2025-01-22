@@ -1,0 +1,42 @@
+uuid: 4323f45b-0f5f-47d4-acb0-144f7bb2a359
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - micro_path
+    - node
+id: appel_a_projet_fr
+label: 'Appel à projet FR'
+type: 'canonical_entities:node'
+pattern: 'appels-projets/[node:title]'
+selection_criteria:
+  fb7185d4-7e30-44c1-bd4e-0e232be5f394:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: fb7185d4-7e30-44c1-bd4e-0e232be5f394
+    context_mapping:
+      node: node
+    bundles:
+      call: call
+  698e9041-873a-43e7-b41e-cf0bf41b097f:
+    id: language
+    negate: false
+    uuid: 698e9041-873a-43e7-b41e-cf0bf41b097f
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      fr: fr
+  5380c436-e464-41fe-97ab-43e7bcfefbfe:
+    id: site_type
+    negate: false
+    uuid: 5380c436-e464-41fe-97ab-43e7bcfefbfe
+    context_mapping:
+      node: node
+    site_type:
+      mini_site: mini_site
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Langue

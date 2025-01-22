@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.call.body
     - field.field.node.call.field_body_en
+    - field.field.node.call.field_call_type
     - field.field.node.call.field_candidate_profile
     - field.field.node.call.field_candidate_profile_en
     - field.field.node.call.field_deadline
@@ -24,6 +25,7 @@ dependencies:
     - field.field.node.call.field_title_en
     - node.type.call
   module:
+    - field_formatter_class
     - link
     - options
     - text
@@ -42,21 +44,28 @@ content:
     region: content
   field_body_en:
     type: text_default
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 112
     region: content
+  field_call_type:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 120
+    region: content
   field_candidate_profile:
     type: list_default
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 103
     region: content
   field_candidate_profile_en:
     type: list_default
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 117
@@ -71,7 +80,7 @@ content:
     region: content
   field_deadline_en:
     type: string
-    label: inline
+    label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -87,7 +96,7 @@ content:
     region: content
   field_duration_en:
     type: string
-    label: inline
+    label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -140,14 +149,14 @@ content:
     region: content
   field_main_objectives:
     type: list_default
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 104
     region: content
   field_main_objectives_en:
     type: list_default
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 116
@@ -169,11 +178,14 @@ content:
     weight: 118
     region: content
   field_ressources:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
+      view_mode: teaser
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
     weight: 107
     region: content
   field_title_en:

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.call.body
     - field.field.node.call.field_body_en
+    - field.field.node.call.field_call_type
     - field.field.node.call.field_candidate_profile
     - field.field.node.call.field_candidate_profile_en
     - field.field.node.call.field_deadline
@@ -41,6 +42,7 @@ third_party_settings:
         - field_max_amount
         - field_deadline
         - field_duration
+        - field_links
       label: Français
       region: content
       parent_name: group_details_appels_a_projets
@@ -81,6 +83,7 @@ third_party_settings:
         - field_maximum_amount_en
         - field_deadline_en
         - field_duration_en
+        - field_links_en
       label: English
       region: content
       parent_name: group_details_appels_a_projets
@@ -96,8 +99,8 @@ third_party_settings:
         required_fields: true
     group_commun:
       children:
+        - field_call_type
         - field_funder
-        - field_links
         - field_ressources
       label: Commun
       region: content
@@ -119,7 +122,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 5
     region: content
     settings:
       rows: 9
@@ -143,6 +146,12 @@ content:
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
+  field_call_type:
+    type: options_select
+    weight: 35
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_candidate_profile:
     type: options_select
     weight: 4
@@ -157,7 +166,7 @@ content:
     third_party_settings: {  }
   field_deadline:
     type: string_textfield
-    weight: 8
+    weight: 7
     region: content
     settings:
       size: 60
@@ -173,7 +182,7 @@ content:
     third_party_settings: {  }
   field_duration:
     type: string_textfield
-    weight: 9
+    weight: 8
     region: content
     settings:
       size: 60
@@ -189,7 +198,7 @@ content:
     third_party_settings: {  }
   field_funder:
     type: options_select
-    weight: 21
+    weight: 36
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -211,7 +220,7 @@ content:
     third_party_settings: {  }
   field_links:
     type: link_default
-    weight: 22
+    weight: 9
     region: content
     settings:
       placeholder_url: ''
@@ -239,7 +248,7 @@ content:
     third_party_settings: {  }
   field_max_amount:
     type: string_textfield
-    weight: 7
+    weight: 6
     region: content
     settings:
       size: 60
@@ -255,7 +264,7 @@ content:
     third_party_settings: {  }
   field_ressources:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 37
     region: content
     settings:
       match_operator: CONTAINS

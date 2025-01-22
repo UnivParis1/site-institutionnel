@@ -1,0 +1,239 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+{%  set classes = [
+    'call',
+    node.bundle|clean_class,
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+]
+%}
+
+{{ attach_library('p1ps2019/calls') }}
+<div id="breadcrumbs">
+    {{ drupal_block('system_breadcrumb_block') }}
+</div>
+<div class="grid-container call-toggle">
+    {# <label for="call-toggle-language">
+        {{ 'This content is also available in English language. Click below. '|t }}
+    </label> #}    
+    <span class="en h5-style">{{ "Click here to see this content in english"|t }}</span>
+    <span class="fr h5-style">{{ "Cliquer pour voir ce contenu en français"|t }}</span>
+    <input type="checkbox" class="check" name="call-toggle-language" id="call-toggle-language" />
+</div>
+<div class="grid-container field-sep offre-emploi call-content callFR">
+    <article{{ attributes.removeAttribute('role').addClass(classes) }}>
+        <div class="grid-x grid-margin-x content">
+            <section{{ content_attributes.addClass('small-12 large-8') }}>
+                {{ title_prefix }}
+                <h1{{ title_attributes.addClass('h2-style') }}>{{ label }}</h1>
+                {{ title_suffix }}
+                <div class="categ-style {{ funder_color }} semi-infos-sep">
+                    {{ content.field_funder.0 }}
+                </div>
+                {% if content.field_lead|render %}
+                    <div>{{ content.field_lead.0 }}</div>
+                {% endif %}
+                {% if content.field_main_objectives|render %}
+                    <h3>{{ "Main objectives"|t }}</h3>
+                    {{ content.field_main_objectives|render }}
+                {% endif %}
+                {% if content.body|render %}
+                    <h3>{{ "Eligibility criteria"|t }}</h3>
+                    {{ content.body.0 }}
+                {% endif %}
+                {% if content.field_ressources|render %}
+                    <h3 class="h4-style">{{ "Resources"|t }}</h3>
+                    <div class="grid-x grid-margin-x grid-margin-y">
+                        {% for key, resource in content.field_ressources|filter((value, key) => key|first != '#') %}
+                            <div class="cell small-12 medium-6 large-4">
+                                {{ resource }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </section>
+            <aside class="large-4 medium-12 small-12 grid-x full-height same-height">
+                {% if content.field_candidate_profile|render  %}
+                    <div class="call-details candidate">
+                        <span class="fas fa-user"></span>
+                        <h3 class="h4-style">
+                            {{ "Candidate's profile"|t }}
+                        </h3>
+                        {{ content.field_candidate_profile|render }}
+                    </div>
+                {% endif %}
+                {% if content.field_duration|render or content.field_deadline|render %}
+                    <div class="call-details info">
+                        <span class="fas fa-hourglass-start"></span>
+                        {% if content.field_duration|render %}
+                            <h3 class="h4-style">
+                            {{ "Duration "|t }}
+                            </h3>{{ content.field_duration.0 }}
+                        {% endif %}
+                        {% if content.field_deadline|render %}
+                            <h3 class="h4-style">
+                            {{ "Deadline "|t }}
+                            </h3>{{ content.field_deadline.0 }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if content.field_max_amount|render  %}
+                    <div class="call-details budget">
+                        <span class="fas fa-coins"></span>
+                        <h3 class="h4-style">
+                            {{ "Maximum amount "|t }}
+                        </h3>{{ content.field_max_amount.0 }}
+                    </div>
+                {% endif %}
+                {% if content.field_links|render %}
+                    <div class="call-details links">
+                        <span class="fas fa-link"></span>
+                        <h3 class="h4-style">
+                            {{ "Links"|t }}
+                        </h3>{{ content.field_links }}
+                    </div>
+                {% endif %}
+            </aside>
+        </div>
+    </article>
+</div>
+<div class="grid-container field-sep offre-emploi call-content callEN">
+    <article{{ attributes.removeAttribute('role').addClass(classes) }}>
+        <div class="grid-x grid-margin-x content">
+            <section{{ content_attributes.addClass('small-12 large-8') }}>
+                {{ title_prefix }}
+                <h1{{ title_attributes.addClass('h2-style') }}>{{ content.field_title_en }}</h1>
+                {{ title_suffix }}
+                <div class="categ-style {{ funder_color }} semi-infos-sep">
+                    {{ content.field_funder.0 }}
+                </div>
+                {% if content.field_lead_en|render %}
+                    <div>{{ content.field_lead_en.0 }}</div>
+                {% endif %}
+
+                {% if content.field_main_objectives_en|render %}
+                    <h3>{{ "Main objectives"|t }}</h3>
+                    {{ content.field_main_objectives_en|render }}
+                {% endif %}
+
+                {% if content.field_body_en|render %}
+                    <h3>{{ "Eligibility criteria"|t }}</h3>
+                    {{ content.field_body_en.0 }}
+                {% endif %}
+
+                {% if content.field_ressources|render %}
+                    <h3 class="h4-style">{{ "Resources"|t }}</h3>
+                    <div class="grid-x grid-margin-x grid-margin-y">
+                        {% for key, resource in content.field_ressources|filter((value, key) => key|first != '#') %}
+                            <div class="cell small-12 medium-6 large-4">
+                                {{ resource }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </section>
+            <aside class="large-4 medium-12 small-12 grid-x full-height same-height">
+                <div class="call-details candidate">
+                    <span class="fas fa-user"></span>
+                    <h3 class="h4-style">
+                        {{ "Candidate's profile"|t }}
+                    </h3>
+                    {{ content.field_candidate_profile_en|render }}
+                </div>
+                {% if content.field_deadline_en|render or content.field_duration_en|render %}
+                    <div class="call-details info">
+                        <span class="fas fa-hourglass-start"></span>
+                        {% if content.field_deadline_en|render %}
+                            <h3 class="h4-style">
+                            {{ "Duration "|t }}
+                            </h3>{{ content.field_duration_en.0 }}
+                        {% endif %}
+                        {% if content.field_duration_en|render %}
+                            <h3 class="h4-style">
+                            {{ "Deadline "|t }}
+                            </h3>{{ content.field_deadline_en.0 }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if content.field_max_amount_en|render %}
+                    <div class="call-details budget">
+                        <span class="fas fa-coins"></span>
+                        <h3 class="h4-style">
+                            {{ "Maximum amount "|t }}
+                        </h3>{{ content.field_max_amount_en.0 }}
+                    </div>
+                {% endif %}
+                {% if content.field_links_en|render %}
+                    <div class="call-details links">
+                        <span class="fas fa-link"></span>
+                        <h3 class="h4-style">
+                            {{ "Links"|t }}
+                        </h3>{{ content.field_links_en }}
+                    </div>
+                {% endif %}
+            </aside>
+        </div>
+    </article>
+</div>

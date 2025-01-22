@@ -150,54 +150,46 @@ function p1ps2019_preprocess_page(&$variables)
 }
 
 function p1ps2019_preprocess_node(&$variables) {
-  if (isset($site) && !empty($site)) {
-    $site_id = $site->id();
-    $variables['is_page_m'] = TRUE;
-  }
-  $node = $variables['node'];
-
-  if ($variables['elements']['#view_mode'] == 'search_index') {
-    $node_paragraphs = NULL;
-    switch ($node->getType()) {
-      case "news" :
-        $variables['node_type_text'] = t("Actualité");
-        $node_paragraphs = $node->field_paragraphs->getValue();
-        break;
-      case "page_personnelle" :
-        $variables['node_type_text'] = t("Page Personnelle");
-        break;
-      case "event" :
-        $variables['node_type_text'] = t("Évènement");
-        $node_paragraphs = $node->field_blocs_medias->getValue();
-        break;
-      case "viva" :
-        $variables['node_type_text'] = t("Soutenance de thèse");
-        break;
-      case "offer" :
-        $variables['node_type_text'] = t("Offre d'emploi");
-        break;
-      case "page" :
-        $node_paragraphs = $node->field_paragraphs->getValue();
-        $variables['node_type_text'] = t("Page");
-        break;
-      case "second_level_pages" :
-        $node_paragraphs = $node->field_editorial_blocks->getValue();
-        $variables['node_type_text'] = t("Page");
-        break;
-      case "publication":
-        $variables['node_type_text'] = t("Publication");
-        break;
+    if (isset($site) && !empty($site)) {
+        $site_id = $site->id();
+        $variables['is_page_m'] = TRUE;
     }
+    $node = $variables['node'];
 
-    if (!empty($node_paragraphs)) {
-      foreach ($node_paragraphs as $key => $value) {
-        $paragraph = FALSE;
-        if (!empty($value['entity'])) {
-          // Use that, we're probably previewing.
-          $paragraph = $value['entity'];
-        }
-        elseif (!empty($value['target_id'])) {
-          $paragraph = Paragraph::load($value['target_id']);
+    if ($variables['elements']['#view_mode'] == 'search_index') {
+        $node_paragraphs = NULL;
+        switch ($node->getType()) {
+            case "news" :
+                $variables['node_type_text'] = t("Actualité");
+                $node_paragraphs = $node->field_paragraphs->getValue();
+                break;
+            case "page_personnelle" :
+                $variables['node_type_text'] = t("Page Personnelle");
+                break;
+            case "event" :
+                $variables['node_type_text'] = t("Évènement");
+                $node_paragraphs = $node->field_blocs_medias->getValue();
+                break;
+            case "viva" :
+                $variables['node_type_text'] = t("Soutenance de thèse");
+                break;
+            case "offer" :
+                $variables['node_type_text'] = t("Offre d'emploi");
+                break;
+            case "page" :
+                $node_paragraphs = $node->field_paragraphs->getValue();
+                $variables['node_type_text'] = t("Page");
+                break;
+            case "second_level_pages" :
+                $node_paragraphs = $node->field_editorial_blocks->getValue();
+                $variables['node_type_text'] = t("Page");
+                break;
+            case "publication":
+                $variables['node_type_text'] = t("Publication");
+                break;
+            case "call":
+                $variables['node_type_text'] = t("Appels à projets");
+                break;
         }
         if (!empty($paragraph) && $paragraph instanceof Paragraph) {
           $view_builder = \Drupal::entityTypeManager()->getViewBuilder('paragraph');
@@ -298,7 +290,42 @@ function p1ps2019_preprocess_node(&$variables) {
         $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0 ;
       }
     }
-  }
+    if ($node->getType() == 'call') {
+        if ($node->hasField('field_funder') && !$node->get('field_funder')->isEmpty()) {
+            $funder = $node->get('field_funder')->value;
+            switch ($funder) {
+                case 'ce':
+                    $bg = 'bg-blue';
+                    break;
+                case 'anr':
+                case 'mesr':
+                    $bg = 'bg-red';
+                    break;
+                case 'region_idf':
+                case 'ville_de_paris':
+                    $bg = 'bg-gold';
+                    break;
+                default:
+                    $bg = 'bg-green';
+                    break;
+            }
+            $variables['funder_color'] = $bg;
+        }
+        if (!empty($variables['content']['field_main_objectives'])) {
+            $field_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions('node');
+            if (isset($field_definitions['field_main_objectives'])) {
+                $field_definition = $field_definitions['field_main_objectives'];
+                $allowed_values = $field_definition->getSettings()['allowed_values'] ?? [];
+                // Vérifiez que les valeurs autorisées existent
+                if (!empty($allowed_values)) {
+                    $variables['main_objectives_label'] = $allowed_values;
+                } else {
+                    $variables['main_objectives_label'] = [];
+                }
+            }
+        }
+    }
+
 }
 
 /**
