@@ -69,6 +69,7 @@
  * Custom variables:
  *  - ss_type
  *  - video_thumb
+ *  - audio_thumb
  *  - video_collections
  *  - anne_depot
  *  - date_diffu
@@ -97,45 +98,21 @@
 <article{{ attributes.addClass('row gx-0') }}>
     <div class="col-12">
         <div{{ content_attributes.addClass('container', 'd-lg-flex') }}>
-            <div class="notice_video_main col-lg-9">
-
-                {# ------------- VIDEO Player --------------- #}
-                {#
-                {% if node.field_url_video.0.url %}
-                    <div class="video_player">
-                        <div class="video-container">
-                            <video controls src="{{ node.field_url_video.0.url }}" poster="{{ video_thumb }}">
-                                {% if has_vtt and vtt_src %}
-                                    <track label="French" kind="{{ vtt_kind }}" srclang="{{ vtt_srclang }}" src="/themes/custom/sorbonne_tv_lmc/assets/pix.vtt" default />
-                                {% endif %}
-                            </video>
-                        </div>
-                    </div>
-                {% endif %}
-                #}
-
-                {% if node.field_sorb_tv_video_slug.value %}
-                {# ---------------IFRAME Avec src url slug :-------------------------- #}
-                    <div class="video_player">
-                        <div class="video-container">
-                            <iframe src="https://mediatheque.univ-paris1.fr/video/{{ node.field_sorb_tv_video_slug.value }}/?is_iframe=true" width="640" height="360" style="padding: 0; margin: 0; border:0" allowfullscreen title="{{ node.label }}" ></iframe>
-                        </div>
-                    </div>
-                {% endif %}
+            <div class="notice_video_main notice_audio_main col-lg-9">
 
                 {# ------------- VIDEO MAIN --------------- #}
                 <div class="video_main_top d-md-flex">
                     <div class="video_main_top_l col-md-9">
                         <h1 class="page-title video-title">{{ label }}</h1>
 
-                        <ul class="video-misc-info d-flex flex-wrap align-items-center">
+                        <ul class="video-misc-info audio-misc-info d-flex flex-wrap align-items-center">
                             {% if video_collections %}
                                 {% for collection in video_collections %}
                                     <li class="info-item info-item-collection">{{ collection }}</li>
                                 {% endfor %}
                             {% endif %}
                         </ul>
-                        <ul class="video-misc-info d-flex flex-wrap align-items-center">
+                        <ul class="video-misc-info audio-misc-info d-flex flex-wrap align-items-center">
                             {# {% if video_types or video_disciplines %}
                                 <li class="info-item info-vid-typesanddisciplines">
                                     {% if video_types %}
@@ -155,7 +132,7 @@
                                 <li class="info-item info-vid-typesanddisciplines">{{ video_disciplines }}</li>
                             {% endif %}
                         </ul>
-                        <ul class="video-misc-info d-flex flex-wrap align-items-center">
+                        <ul class="video-misc-info audio-misc-info d-flex flex-wrap align-items-center">
                             {% if anne_depot %}
                                 <li class="info-item">{{ anne_depot }}</li>
                             {% endif %}
@@ -206,6 +183,15 @@
                       </ul>
                     </div>
                 </div>
+
+                {% if node.field_sorb_tv_video_slug.value %}
+                {# ---------------IFRAME Avec src url slug :-------------------------- #}
+                    <div class="audio_player">
+                        <div class="audio-container">
+                            <iframe src="https://mediatheque.univ-paris1.fr/video/{{ node.field_sorb_tv_video_slug.value }}/?is_iframe=true&controls=true" width="640" height="360" style="padding: 0; margin: 0; border:0" allowfullscreen title="{{ node.label }}" ></iframe>
+                        </div>
+                    </div>
+                {% endif %}
 
                 <div class="video_main_ct">
                     {% if date_diffu %}
