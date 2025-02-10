@@ -14,6 +14,16 @@ article.page_sorbonne_tv_video {
     padding-right: 32px;
   }
 }
+/*
+.notice_audio_main {
+  .video_main_top {
+    background-color: $light;
+    min-height: 342px;
+    border-radius: 16px;
+    padding: 25px;
+  }
+}
+*/
 
 .video_player {
   @include video-player-ratio();
@@ -28,6 +38,21 @@ article.page_sorbonne_tv_video {
 
   .video-container {
     padding-top: 15px;
+  }
+}
+.audio_player {
+  @include audio-player-ratio();
+  border-radius: 16px;
+  overflow: hidden;
+  line-height: 0;
+  margin-bottom: 40px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 32px;
+  }
+
+  .audio-container {
+    padding-top: 0;
   }
 }
 
@@ -319,18 +344,39 @@ article.page_sorbonne_tv_video {
     display: flex;
     align-items: center;
 
-    &:not(:last-child) {
-      &:after {
+    &:not(:first-child) {
+      &:before {
         //content: '\2022';
         content: '';
         display: inline-block;
         width: 4px;
+        min-width: 4px;
         height: 4px;
         border-radius: 50%;
         margin: 0 8px;
         background-color: $blue_bayoux;
       }
     }
+
+    a {
+      color: $blue_bayoux;
+      text-decoration: underline;
+
+      &:hover {
+        color: $secondary;
+        text-decoration: none;
+      }
+    }
+
+    &.info-item-collection {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  &.audio-misc-info {
+    font-size: 16px;
+    margin-bottom: 0;
   }
 }
 
@@ -386,6 +432,28 @@ article.page_sorbonne_tv_video {
 
     & > .field--item {
       margin-right: 8px;
+    }
+  }
+}
+ul.video_tags {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  list-style-image: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-flex;
+    list-style-type: none;
+    list-style-image: none;
+    margin-bottom: 10px;
+
+    &:not(:first-child) {
+      &::before {
+        content: ',';
+        margin-right: 5px;
+      }
     }
   }
 }
