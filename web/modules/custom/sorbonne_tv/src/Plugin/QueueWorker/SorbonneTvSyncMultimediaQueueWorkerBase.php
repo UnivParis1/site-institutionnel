@@ -35,23 +35,26 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
          */
 
         if(isset($item->delete) && $item->delete == 'TRUE' ){
+          // 04/02/2025 : Suppression des noeuds désactivée
+           $ids = \Drupal::entityQuery('node')
+              ->condition('type', 'page_sorbonne_tv')
+              ->condition('field_sorb_tv_type', 'video')
+              ->condition('field_api_sync', 0)
+              ->accessCheck(FALSE)
+              ->execute();
 
-            $ids = \Drupal::entityQuery('node')
-                ->condition('type', 'page_sorbonne_tv')
-                ->condition('field_sorb_tv_type', 'video')
-                ->condition('field_api_sync', 0)
-                ->accessCheck(FALSE)
-                ->execute();
+          \Drupal::logger('sorbonnetv::sync')->notice('Suppression des noeuds désactivée : @ids', ['@ids' => '<pre>' . print_r($ids, TRUE) . '</pre>']);
 
-            $nodes = Node::loadMultiple($ids);
-
-            if ($nodes) {
-                foreach ($nodes as $node) {
-                    $node->delete();
-                }
-            }
-
-        }else {
+          /*
+          $nodes = Node::loadMultiple($ids);
+          if ($nodes) {
+              foreach ($nodes as $node) {
+                  $node->delete();
+              }
+          } */
+          // 04/02/2025 : Suppression des noeuds désactivée
+        }
+        else {
 
             $owner_id = 1;
             $owner = NULL;

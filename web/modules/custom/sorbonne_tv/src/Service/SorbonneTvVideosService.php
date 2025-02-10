@@ -4,6 +4,8 @@ namespace Drupal\sorbonne_tv\Service;
 
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 class SorbonneTvVideosService {
 
@@ -76,6 +78,25 @@ class SorbonneTvVideosService {
           $collections = Node::loadMultiple($collectionsIds);
           foreach($collections as $coll_k => $collection) {
             $video_collections[$collection->id()] = $collection->getTitle();
+          }
+        }
+
+        return $video_collections;
+    }
+
+    // ----- Donne la/les collections du noeud video avec lien ----- //
+    public function getVideoCollectsLinks($node) {
+        $video_collections = [];
+
+        if(isset($node->field_collections->target_id)) {
+          $collectionsIds = array_column($node->field_collections->getValue(), 'target_id');
+
+          $collections = Node::loadMultiple($collectionsIds);
+          foreach($collections as $coll_k => $collection) {
+            $collec_title = $collection->getTitle();
+            $collect_url = Url::fromRoute('entity.node.canonical', ['node' => $collection->id()]);
+            $collect_link = Link::fromTextAndUrl($collec_title, $collect_url);
+            $video_collections[$collection->id()] = $collect_link->toString();
           }
         }
 

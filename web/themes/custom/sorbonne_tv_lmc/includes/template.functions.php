@@ -117,10 +117,24 @@ function sorbonne_tv_lmc_theme_suggestions_node_alter(array &$suggestions, array
     $node_type = $node->getType();
 
     if($node_type == 'page_sorbonne_tv') {
+      $node_media_type == FALSE;
+      if($media_url = $node->field_url_video->uri) {
+        $node_media_type = detectFileType($media_url);
+      }
+
       // Suggestions by sorbonne tv sstype
       $ss_type = (isset($node->field_sorb_tv_type->value) ? $node->field_sorb_tv_type->value : FALSE);
+
       $suggestions[] = $original_theme_hook . '__' . $node_type . '__' . $ss_type;
+      if($ss_type == 'video' && $node_media_type == 'audio') {
+        $suggestions[] = $original_theme_hook . '__' . $node_type . '__' . $ss_type .'__replaceby_audio';
+      }
+
       $suggestions[] = $original_theme_hook . '__' . $node_type . '__' . $ss_type . '__' . $sanitized_view_mode;
+      if($ss_type == 'video' && $node_media_type == 'audio') {
+        $suggestions[] = $original_theme_hook . '__' . $node_type . '__' . $ss_type . '__' . $sanitized_view_mode .'__replaceby_audio';
+      }
+      
     }
   }
 }
@@ -294,14 +308,17 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
       case 'video':
         // Video Thumb
         $video_thumb = FALSE;
+        $audio_thumb = FALSE;
         if ($node_couv_media = $node->field_media->entity) {
           if ($node_couv_file = $node_couv_media->field_media_image->entity) {
             if ($node_couv_file_uri = $node_couv_file->getFileUri()) {
               $video_thumb = ImageStyle::load('sorbonne_tv_video_thumb')->buildUrl($node_couv_file_uri);
+              $audio_thumb = ImageStyle::load('sorbonne_tv_audio_thumb')->buildUrl($node_couv_file_uri);
             }
           }
         }
         $variables['video_thumb'] = $video_thumb;
+        $variables['audio_thumb'] = $audio_thumb;
 
         // Pour le format "Recommande pour vous" et "Liste num"
         $video_thumb_recom_img = FALSE;
@@ -399,6 +416,12 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
         $disciplinesFilter = \Drupal::service('sorbonne_tv.videos_service')->getVideoDisciplinesContextualFiltersFormat($node);
         $collectsFilter = \Drupal::service('sorbonne_tv.videos_service')->getVideoCollectsContextualFiltersFormat($node);
         if($view_mode == 'full') {
+          // Type of media source
+          if($media_url = $node->field_url_video->value) {
+            $node_media_type = detectFileType($media_url);
+            $variables['node_media_type'] = $node_media_type;
+          }
+
           // Compte le resultat des vues afin de savoir si les blocs doivent êtres affichés
           $arg_nid = $node->id();
           $browse_args = [
@@ -537,9 +560,32 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
           $variables['social_simple_blk'] = $social_simple_blk;
         }
 
+        // Video types
+        $video_types = FALSE;
+        if(isset($node->field_video_type->target_id)) {
+          if($video_types_terms = $node->field_video_type->ReferencedEntities()) {
+            foreach($video_types_terms as $vid_type_k => $vid_type) {
+              $video_types .= ($video_types != FALSE ? ' / ' : '') . $vid_type->getName();
+            }
+          }
+        }
+        $variables['video_types'] = $video_types;
+
+        // Disciplines
+        $video_disciplines = FALSE;
+        if(isset($node->field_discipline->target_id)) {
+          if($video_disciplines_terms = $node->field_discipline->ReferencedEntities()) {
+            foreach($video_disciplines_terms as $discipline_k => $discipline) {
+              $video_disciplines .= ($video_disciplines != FALSE ? ' / ' : '') . $discipline->getName();
+            }
+          }
+        }
+        $variables['video_disciplines'] = $video_disciplines;
+
         // Titres Collections
         $video_collections = [];
-        if( $video_collections = \Drupal::service('sorbonne_tv.videos_service')->getVideoCollects($node) ) {
+        //if( $video_collections = \Drupal::service('sorbonne_tv.videos_service')->getVideoCollects($node) ) {
+        if( $video_collections = \Drupal::service('sorbonne_tv.videos_service')->getVideoCollectsLinks($node) ) {
           $variables['video_collections'] = $video_collections;
         }
 
@@ -597,6 +643,7 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
         // Contenu sensible
         $is_sensitive = FALSE;
         $sensitive_tag = '';
+        $all_tags = [];
         if(isset($node->field_tag_video->target_id)) {
           if($video_tag_terms = $node->field_tag_video->ReferencedEntities()) {
 
@@ -604,13 +651,16 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
               if( strtolower($tag->getName()) == 'contenu sensible') {
                 $is_sensitive = TRUE;
                 $sensitive_tag = $tag->getName();
-                break;
+                //break;
               }
+
+              $all_tags[] = $tag->getName();
             }
           }
         }
         $variables['is_sensitive'] = $is_sensitive;
         $variables['sensitive_tag'] = $sensitive_tag;
+        $variables['all_tags'] = $all_tags;
 
         // Pictos sourds / malentendants
         $has_vtt = FALSE;
