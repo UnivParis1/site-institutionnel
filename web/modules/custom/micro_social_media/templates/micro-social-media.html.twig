@@ -4,6 +4,10 @@
       {% for lien in liens %}
         {% if "facebook" in lien.uri %}
           {% set class = "fab fa-facebook-square" %}
+        {% elseif "bsky" in lien.uri %}
+          {% set class = "fab fa-bluesky" %}
+        {% elseif "x.com" in lien.uri %}
+          {% set class = "fab fa-x-twitter" %}
         {% elseif "twitter" in lien.uri %}
           {% set class = "fab fa-twitter" %}
         {% elseif "linkedin" in lien.uri %}
