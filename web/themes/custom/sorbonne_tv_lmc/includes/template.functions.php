@@ -117,7 +117,7 @@ function sorbonne_tv_lmc_theme_suggestions_node_alter(array &$suggestions, array
     $node_type = $node->getType();
 
     if($node_type == 'page_sorbonne_tv') {
-      $node_media_type == FALSE;
+      $node_media_type = FALSE;
       if($media_url = $node->field_url_video->uri) {
         $node_media_type = detectFileType($media_url);
       }
@@ -312,8 +312,12 @@ function sorbonne_tv_lmc_preprocess_node(&$variables) {
         if ($node_couv_media = $node->field_media->entity) {
           if ($node_couv_file = $node_couv_media->field_media_image->entity) {
             if ($node_couv_file_uri = $node_couv_file->getFileUri()) {
-              $video_thumb = ImageStyle::load('sorbonne_tv_video_thumb')->buildUrl($node_couv_file_uri);
-              $audio_thumb = ImageStyle::load('sorbonne_tv_audio_thumb')->buildUrl($node_couv_file_uri);
+              if (ImageStyle::load('sorbonne_tv_video_thumb')) {
+                $video_thumb = ImageStyle::load('sorbonne_tv_video_thumb')->buildUrl($node_couv_file_uri);  
+              }
+              if (ImageStyle::load('sorbonne_tv_audio_thumb')) {
+                $audio_thumb = ImageStyle::load('sorbonne_tv_audio_thumb')->buildUrl($node_couv_file_uri);
+              }
             }
           }
         }
