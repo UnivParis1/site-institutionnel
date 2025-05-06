@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
+use Collator;
 
 /**
  * Class WsGroupsController.
@@ -246,8 +247,12 @@ class WsGroupsController extends ControllerBase
       $user['photo'] = $user_photo . $user['uid'];
     }
 
-    usort($users, function ($a, $b) {
-      return strnatcasecmp($a['sn'], $b['sn']);
+    /** Activation de l'extension php intl pour utiliser la classe Collator
+     *  qui permet de faire le tri alphabétique, caractères accentués compris
+     */
+    $collator = new Collator('fr_FR.UTF-8');
+    usort($users, function ($a, $b) use ($collator) {
+      return $collator->compare($a['sn'], $b['sn']);
     });
 
     $build['item_list'] = [
