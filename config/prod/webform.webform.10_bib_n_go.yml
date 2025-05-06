@@ -165,13 +165,13 @@ elements: |-
         '#required': true
       terms_of_service_01:
         '#type': webform_terms_of_service
-        '#title': 'Les rendez-vous ne peuvent pas être pris durant les périodes de fermeture de la bibliothèque, du 21 décembre 2024 au 6 janvier 2025'
+        '#title': 'Les rendez-vous ne peuvent pas être pris durant les périodes de fermeture de la bibliothèque'
         '#required': true
         '#states':
           visible:
             ':input[name="choisir_une_bibliotheque"]':
               filled: true
-        '#terms_content': '<p><strong>Les rendez-vous ne peuvent pas être pris durant les périodes de fermeture de la bibliothèque, du 21 décembre 2024 au 6 janvier 2025</strong></p>'
+        '#terms_content': '<p><strong>Les rendez-vous ne peuvent pas être pris durant les périodes de fermeture de la bibliothèque. </strong><a href="https://bibliotheques.pantheonsorbonne.fr/liste-bibliotheques/bibliotheque-pierre-mendes-france"><strong>Consulter les horaires actuels de la BU PMF</strong></a></p>'
       choisir_un_jour:
         '#type': select
         '#title': 'Choisir un jour'
@@ -191,11 +191,8 @@ elements: |-
         '#type': select
         '#title': 'Choisir un créneau'
         '#options':
-          10h55-11h15: 10h55-11h15
-          11h55-12h15: 11h55-12h15
-          14h55-15h15: 14h55-15h15
-          15h55-16h15: 15h55-16h15
-          16h55-17h15: 16h55-17h15
+          Matin: Matin
+          Après-midi: Après-midi
         '#required': true
         '#states':
           visible:
@@ -206,9 +203,16 @@ elements: |-
     '#title': 'Validation et envoi'
     verification:
       '#type': checkboxes
+      '#title': 'Mon compte lecteur'
+      '#options':
+        "Je n'ai pas de document en retard": "Je n'ai pas de document en retard"
+      '#required': true
+      '#options__properties': ''
+    retour_de_documents:
+      '#type': checkboxes
       '#title': 'Retour de documents'
       '#options':
-        "J'ai des livres à rendre en même temps": "J'ai des livres à rendre en même temps"
+        'Je rends des documents en même temps': 'Je rends des documents en même temps'
       '#options__properties': ''
     terms_of_service:
       '#type': webform_terms_of_service
@@ -409,7 +413,7 @@ handlers:
   email:
     id: email
     handler_id: email
-    label: pretbu@univ-paris1.fr
+    label: 'Mail de confirmation envoyé à PMF et aux usagers'
     notes: ''
     status: true
     conditions:
@@ -434,7 +438,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: "Bib'n'go - Votre demande de réservation de document"
-      body: '<p>Envoyé le [webform_submission:created]</p><p>Votre demande de réservation a bien été prise en compte. Ceci est un mail de confirmation : vos documents sont à retirer dans le hall au rez-de-chaussée du centre PMF. Merci de bien vouloir respecter votre créneau de rendez-vous.</p><p><em>Nous attirons cependant votre attention sur le fait que votre réservation ne pourra être traitée que si elle a été faite dans les délais requis (au plus tard la veille avant 12h pour le lendemain) et si votre compte lecteur est en règle.</em></p><p>Rappel des informations saisies :</p><p>[webform_submission:values]</p>'
+      body: "<p>Envoyé le [webform_submission:created]</p><p>Votre demande de réservation a bien été prise en compte. Ceci est un mail de confirmation : vos documents sont à retirer à l'accueil de la bibliothèque au 5e étage du centre PMF. Merci de bien vouloir respecter votre créneau de rendez-vous.</p><p><em>Nous attirons cependant votre attention sur le fait que votre réservation ne pourra être traitée que si elle a été faite dans les délais requis (au plus tard la veille avant 12h pour le lendemain) et si votre compte lecteur est en règle.</em></p><p>Rappel des informations saisies :</p><p>[webform_submission:values]</p>"
       excluded_elements:
         terms_of_service: terms_of_service
         captcha: captcha
@@ -451,7 +455,7 @@ handlers:
   bib_arts_univ_paris1_fr:
     id: email
     handler_id: bib_arts_univ_paris1_fr
-    label: bib.arts@univ-paris1.fr
+    label: "Mail de confirmation envoyé à l'EAS et aux usagers"
     notes: ''
     status: false
     conditions:
@@ -476,7 +480,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: "Bib'n'go - Votre demande de réservation de document"
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Nous allons vous recontacter pour vous donner un rendez-vous.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Nous allons vous recontacter pour vous donner un rendez-vous.</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements:
         terms_of_service: terms_of_service
         captcha: captcha
@@ -493,7 +497,7 @@ handlers:
   bucolliard_univ_paris1_fr:
     id: email
     handler_id: bucolliard_univ_paris1_fr
-    label: bucolliard@univ-paris1.fr
+    label: 'Mail de confirmation envoyé à Colliard et aux usagers'
     notes: ''
     status: false
     conditions:
@@ -518,7 +522,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: "Bib'n'go - Votre demande de réservation de document"
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Nous allons vous recontacter pour vous donner un rendez-vous.</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Nous allons vous recontacter pour vous donner un rendez-vous.</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements:
         choisir_un_jour: choisir_un_jour
         choisir_un_creneau_horaire: choisir_un_creneau_horaire

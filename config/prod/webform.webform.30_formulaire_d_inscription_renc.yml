@@ -1,0 +1,433 @@
+uuid: 9f823690-7b83-4a58-9474-e2045746e8fd
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 74
+template: false
+archive: false
+id: 30_formulaire_d_inscription_renc
+title: "30 - Formulaire d'inscription – Rencontre Pro IAES 2025"
+description: "<p>Ce formulaire a pour objectif de recueillir les inscriptions des structures souhaitant participer à la Rencontre Professionnelle IAES 2025, organisée par l'IAES-EDS. L’événement se tiendra le mardi 6 mai 2025 de 10h à 13h au centre Pierre Mendès-France (Paris 13e) Amphi I. Il permettra aux entreprises, administrations et associations de rencontrer des étudiants à la recherche d’un stage entre juin et août 2025 (durée minimum : 2 mois). Les informations recueillies permettront d’organiser au mieux leur accueil et de faciliter les échanges avec les étudiants.</p><p>&nbsp;</p>"
+categories: {  }
+elements: |-
+  informations_sur_votre_structure:
+    '#type': fieldset
+    '#title': 'INFORMATION SUR VOTRE STRUCTURE'
+    raison_sociale_ou_denomination_sociale:
+      '#type': textfield
+      '#title': 'Raison sociale ou dénomination sociale'
+      '#title_display': before
+      '#minlength': 1
+      '#maxlength': 50
+      '#required': true
+    type_de_structure:
+      '#type': webform_select_other
+      '#title': 'Type de structure'
+      '#description': '<p>Veuillez indiquer la nature juridique ou organisationnelle de votre structure. Cette information nous permet de mieux orienter les étudiants en fonction de leurs intérêts et des secteurs représentés (ex. : cabinet d’avocat, service RH d’une entreprise, association loi 1901, collectivité territoriale, ministère, etc.).</p>'
+      '#help': '<p>Veuillez indiquer la nature juridique ou organisationnelle de votre structure. Cette information nous permet de mieux orienter les étudiants en fonction de leurs intérêts et des secteurs représentés (ex. : cabinet d’avocat, service RH d’une entreprise, association loi 1901, collectivité territoriale, ministère, etc.).</p>'
+      '#description_display': tooltip
+      '#options':
+        101: 'Cabinet d’avocat'
+        102: 'Service RH'
+        103: Association
+        104: 'Administration publique'
+        105: Autre
+      '#select2': true
+      '#required': true
+    secteur_d_activite:
+      '#type': textfield
+      '#title': "Secteur d'activité"
+      '#description': '<p>Secteur d’activité : Veuillez indiquer le domaine spécifique dans lequel votre structure évolue (par exemple, droit, santé, éducation, finance, environnement, etc.). Cela nous permet de mieux comprendre vos activités et d’orienter les étudiants vers des stages en adéquation avec leurs aspirations professionnelles.</p>'
+      '#help': '<p>Secteur d’activité : Veuillez indiquer le domaine spécifique dans lequel votre structure évolue (par exemple, droit, santé, éducation, finance, environnement, etc.). Cela nous permet de mieux comprendre vos activités et d’orienter les étudiants vers des stages en adéquation avec leurs aspirations professionnelles.</p>'
+      '#description_display': tooltip
+      '#required': true
+  personne_referente:
+    '#type': fieldset
+    '#title': 'PERSONNE REFERENTE'
+    nom:
+      '#type': textfield
+      '#title': Nom
+      '#help': '<p>Nom de famille de la personne référente au sein de votre structure</p>'
+      '#minlength': 1
+      '#maxlength': 50
+      '#required': true
+    prenom:
+      '#type': textfield
+      '#title': Prénom
+      '#help': '<p>Prénom de la personne référente au sein de votre structure</p>'
+      '#minlength': 1
+      '#maxlength': 50
+      '#required': true
+    fonction:
+      '#type': textfield
+      '#title': Fonction
+      '#help': '<p>Fonction de la personne référente au sein de votre structure</p>'
+      '#minlength': 1
+      '#maxlength': 50
+      '#required': true
+    telephone:
+      '#type': webform_telephone
+      '#title': Téléphone
+      '#description': '<p class="text-align-right">+ indicatif du pays suivi du Numéro de téléphone (Fixe ou portable)</p><p class="text-align-right">Exemple <strong>+33</strong>612345123</p><p class="text-align-right">Exemple <strong>+33</strong>144077737</p><p>&nbsp;</p>'
+      '#help': '<p class="text-align-right">+ indicatif du pays suivi du Numéro de téléphone (Fixe ou portable)</p><p class="text-align-right">Exemple <strong>+33</strong>612345123</p><p class="text-align-right">Exemple <strong>+33</strong>144077737</p><p>&nbsp;</p>'
+      '#required': true
+      '#type__access': false
+      '#phone__help': Téléphone
+      '#ext__access': false
+      '#choices': true
+      '#phone__international_initial_country': FR
+    confimez_votre_adresse_courriel:
+      '#type': webform_email_confirm
+      '#title': 'Adresse courriel'
+      '#required': true
+      '#confirm__title': 'Confirmez votre adresse courriel'
+  rencontre_pro_2025:
+    '#type': fieldset
+    '#title': 'RENCONTRE PRO 2025'
+    participation_a_l_evenement:
+      '#type': radios
+      '#title': ' Participation à l’événement'
+      '#options':
+        201: 'Je souhaite être présent.e le 6 mai 2025 (10h-13h)'
+        202: "Je ne souhaite pas être présent.e mais je souhaite être informé.e d'autres évènements"
+      '#options__properties': ''
+    nombre_de_representants_presents_le_jour_j:
+      '#type': number
+      '#title': 'Nombre de représentants présents le jour J'
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="participation_a_l_evenement"]':
+            value: '201'
+      '#min': 1
+      '#max': 10
+      '#step': 1
+  offre_de_stage:
+    '#type': fieldset
+    '#title': 'OFFRE DE STAGE'
+    '#states':
+      visible:
+        ':input[name="participation_a_l_evenement"]':
+          '!value': '202'
+    souhaitez_vous_proposer_des_offres_de_stage_a_cette_occasion:
+      '#type': radios
+      '#title': 'Souhaitez-vous proposer des offres de stage à cette occasion ?'
+      '#options':
+        301: Oui
+        302: Non
+        304: 'Pas encore défini'
+      '#states':
+        visible:
+          ':input[name="participation_a_l_evenement"]':
+            value: '201'
+      '#options__properties': ''
+    periode_s_de_stage_proposee_s:
+      '#type': radios
+      '#title': 'Période(s) de stage proposée(s)'
+      '#description': '<p>La période de stage obligatoire pour nos étudiants est au minimum de 2 mois et ne peut excéder 6 mois&nbsp;</p>'
+      '#help': '<p>La période de stage obligatoire pour nos étudiants est au minimum de 2 mois et ne peut excéder 6 mois &nbsp;</p>'
+      '#options':
+        401: 'Juin – Juillet'
+        402: 'Juillet – Août'
+        404: 'Juin – Août'
+        405: 'Autre :'
+      '#states':
+        visible:
+          ':input[name="souhaitez_vous_proposer_des_offres_de_stage_a_cette_occasion"]':
+            value: '301'
+      '#options__properties': ''
+  autre:
+    '#type': fieldset
+    '#title': Autre
+    '#states':
+      visible:
+        ':input[name="periode_s_de_stage_proposee_s"]':
+          value: '405'
+    date_de_debut:
+      '#type': date
+      '#title': 'Date de début'
+    date_de_fin:
+      '#type': date
+      '#title': 'Date de fin'
+    druee_du_stage:
+      '#type': fieldset
+      '#title': 'Druée du stage'
+      la_duree_du_stage_est_superieure_a_2_mois:
+        '#type': checkbox
+        '#title': 'La durée du stage est supérieure à 2 mois'
+      nombre_de_mois:
+        '#type': number
+        '#title': 'Nombre de mois'
+        '#states':
+          visible:
+            ':input[name="la_duree_du_stage_est_superieure_a_2_mois"]':
+              unchecked: true
+        '#min': 0
+        '#max': 1
+      nombre_de_mois0:
+        '#type': number
+        '#title': 'Nombre de mois.'
+        '#states':
+          visible:
+            ':input[name="la_duree_du_stage_est_superieure_a_2_mois"]':
+              checked: true
+        '#min': 2
+        '#max': 6
+      et_nombre_de_jour:
+        '#type': number
+        '#title': 'Et nombre de jour'
+        '#states':
+          visible:
+            ':input[name="la_duree_du_stage_est_superieure_a_2_mois"]':
+              checked: true
+        '#min': 1
+        '#max': 31
+      et_nombre_de_jour0:
+        '#type': number
+        '#title': 'Et nombre de jour.'
+        '#states':
+          visible:
+            ':input[name="la_duree_du_stage_est_superieure_a_2_mois"]':
+              unchecked: true
+        '#min': 0
+        '#max': 31
+      une_gratification_est_prevue:
+        '#type': radios
+        '#title': 'Une gratification est prévue'
+        '#multiple': false
+        '#description': '<p>Article 5 – Gratification - Avantages<br>En France, lorsque la durée du stage est supérieure à deux mois consécutifs ou non, celui-ci fait obligatoirement l’objet d’une gratification, sauf en cas de règles particulières applicables dans certaines collectivités d’outre-mer françaises et pour les stages relevant de l’article L4381-1 du code de la santé publique</p>'
+        '#description_display': after
+        '#options':
+          701: Oui
+          702: Non
+        '#options_display': buttons_horizontal
+        '#states':
+          invisible:
+            ':input[name="la_duree_du_stage_est_superieure_a_2_mois"]':
+              unchecked: true
+        '#options__properties': ''
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: 'Confirmation de votre inscription à la Rencontre Professionnelle IAES 2025'
+  submission_exception_message: "<p>Madame, Monsieur,</p><p>Nous vous remercions chaleureusement pour votre inscription à la Rencontre Pro 2025, organisée par l'IAES-EDS Université Paris 1 Panthéon-Sorbonne.<br>Nous accusons bonne réception de votre formulaire, et sommes ravis de compter votre structure parmi les participants à cette 8ᵉ édition, qui se tiendra le mardi 6 mai 2025 de 10h à 13h, au centre Pierre Mendès-France, Amphithéâtre I, 31 rue Baudricourt 75013 Paris.</p><p>Votre engagement à accompagner nos étudiants dans leur parcours professionnel est précieux, et nous nous réjouissons des échanges à venir.</p><p>Nous reviendrons très prochainement vers vous avec les dernières informations logistiques liées à l’événement.</p><p>Avec nos sincères remerciements,<br>L’équipe des stages – Institut AES<br>Université Paris 1 Panthéon-Sorbonne</p>"
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: "Rencontre Pro 2025 - Confirmation d'inscription - 06/05/2025 Amph I centre PMF"
+  confirmation_message: '<p>Chère/cher [webform_submission:values:prenom] [webform_submission:values:nom],</p><p>Nous avons le plaisir de confirmer votre inscription à l’événement :</p><p>&nbsp;</p><p><strong>"Rencontre Professionnelle IAES 2025"</strong></p><ul><li><strong>Date :</strong> Mardi 6 mai 2025</li><li><strong>Heure :</strong> 10h00 à 13h00</li><li><strong>Lieu :</strong> Amphithéâtre I, Centre Pierre Mendès France</li><li><strong>Adresse :</strong> 31, rue Baudricourt, 75013 Paris</li></ul><p>&nbsp;</p><p>L’accueil sera ouvert à partir de 09h15, et l’accès à l’événement se fera sur présentation de la confirmation qui vous a été transmise par courriel.</p><p>&nbsp;</p><p>Nous vous remercions pour l’intérêt que vous portez à la formation de nos étudiants</p><p>&nbsp;</p><p>Dans l’attente de vous accueillir, nous vous prions d’agréer, Chère/cher [webform_submission:values:prenom] [webform_submission:values:nom], l’expression de nos salutations les plus distinguées.</p><p>&nbsp;</p><p><strong>L’équipe des stages – Institut AES</strong><br>Institut Administration Économique et Sociale<br>École de Droit de la Sorbonne<br>Email contact : evenementsIAES@univ-paris1.fr<br>&nbsp;</p>'
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: "Confirmation d'inscription à Rencontre Pro 2025 - IAES EDS "
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:confimez_votre_adresse_courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: evenementsIAES@univ-paris1.fr
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: '<p style="margin-bottom:0cm;">Chère/cher [webform_submission:values:prenom] [webform_submission:values:nom],</p><p style="margin-bottom:0cm;">Nous avons le plaisir de confirmer votre inscription à l’événement :</p><p style="margin-bottom:0cm;">&nbsp;</p><p style="margin-bottom:0cm;"><strong>"Rencontre Professionnelle IAES 2025"</strong></p><p style="margin-bottom:0cm;">Date : Mardi 6 mai 2025</p><p style="margin-bottom:0cm;">Heure : 10h00 à 13h00</p><p style="margin-bottom:0cm;">Lieu : Amphithéâtre I, Centre Pierre Mendès France</p><p style="margin-bottom:0cm;">Adresse : 31, rue Baudricourt, 75013 Paris</p><p style="margin-bottom:0cm;">&nbsp;</p><p style="margin-bottom:0cm;">L’accueil sera ouvert à partir de 09h15, et l’accès à l’événement se fera sur présentation de la confirmation qui vous a été transmise par courriel.</p><p style="margin-bottom:0cm;">&nbsp;</p><p style="margin-bottom:0cm;">Nous vous remercions pour l’intérêt que vous portez à la formation de nos étudiants</p><p style="margin-bottom:0cm;">&nbsp;</p><p style="margin-bottom:0cm;">Dans l’attente de vous accueillir, nous vous prions d’agréer, Chère/cher [webform_submission:values:prenom] [webform_submission:values:nom], l’expression de nos salutations les plus distinguées.</p><p style="margin-bottom:0cm;">&nbsp;</p><p style="margin-bottom:0cm;">L’équipe des stages – Institut AES</p><p style="margin-bottom:0cm;">Institut Administration Économique et Sociale</p><p style="margin-bottom:0cm;">École de Droit de la Sorbonne</p><p style="margin-bottom:0cm;">Email contact : evenementsIAES@univ-paris1.fr</p><p>&nbsp;</p><p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

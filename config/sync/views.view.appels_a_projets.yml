@@ -270,55 +270,7 @@ display:
           plugin_id: bundle
           value:
             call: call
-        field_funder_value:
-          id: field_funder_value
-          table: node__field_funder
-          field: field_funder_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: list_field
-          operator: or
-          value: {  }
           group: 1
-          exposed: true
-          expose:
-            operator_id: field_funder_value_op
-            label: Financeur
-            description: ''
-            use_operator: false
-            operator: field_funder_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: funder
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              contributeur: '0'
-              contributeur_sous_site: '0'
-              webmestre_sous_site: '0'
-              webmestre_general: '0'
-              admin_dir_com: '0'
-              administrator: '0'
-              enseignant_doctorant: '0'
-              charge_recrutement: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
         field_main_objectives_value:
           id: field_main_objectives_value
           table: node__field_main_objectives
@@ -382,7 +334,7 @@ display:
           exposed: true
           expose:
             operator_id: field_candidate_profile_value_op
-            label: 'Profil du candidat / de la candidate'
+            label: 'Votre profil'
             description: ''
             use_operator: false
             operator: field_candidate_profile_value_op
@@ -417,6 +369,59 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
+        field_funder_value:
+          id: field_funder_value
+          table: node__field_funder
+          field: field_funder_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_funder_value_op
+            label: Financeur
+            description: ''
+            use_operator: false
+            operator: field_funder_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: funder
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributeur: '0'
+              contributeur_sous_site: '0'
+              webmestre_sous_site: '0'
+              webmestre_general: '0'
+              admin_dir_com: '0'
+              administrator: '0'
+              enseignant_doctorant: '0'
+              charge_recrutement: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: default
         options:
