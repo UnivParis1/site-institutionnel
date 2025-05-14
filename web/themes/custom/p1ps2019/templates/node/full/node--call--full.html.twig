@@ -87,11 +87,8 @@
         <div class="grid-x grid-margin-x content">
             <section{{ content_attributes.addClass('small-12 large-8') }}>
                 {{ title_prefix }}
-                <h1{{ title_attributes.addClass('h2-style') }}>{{ label }}</h1>
+                <h1{{ title_attributes.addClass('h2-style field-sep') }}>{{ label }}</h1>
                 {{ title_suffix }}
-                <div class="categ-style {{ funder_color }} semi-infos-sep">
-                    {{ content.field_funder.0 }}
-                </div>
                 {% if content.field_lead|render %}
                     <div>{{ content.field_lead.0 }}</div>
                 {% endif %}
@@ -115,10 +112,20 @@
                 {% endif %}
             </section>
             <aside class="large-4 medium-12 small-12 grid-x full-height same-height">
+                {% if content.field_funder|render  %}
+                    <div class="call-details funder bg-{{ funder_color }} border-{{ funder_color }}">
+                        <h3 class="h4-style txt-white semi-field-sep">
+                            {{ "Funder"|t }}
+                        </h3>
+                        <span>{{ content.field_funder.0 }}</span>
+                        <br/>
+                        <span>&nbsp;</span>{{ funder_stage }}
+                    </div>
+                {% endif %}
                 {% if content.field_candidate_profile|render  %}
                     <div class="call-details candidate">
                         <span class="fas fa-user"></span>
-                        <h3 class="h4-style">
+                        <h3 class="h4-style semi-field-sep">
                             {{ "Candidate's profile"|t }}
                         </h3>
                         {{ content.field_candidate_profile|render }}
@@ -150,7 +157,7 @@
                 {% if content.field_links|render %}
                     <div class="call-details links">
                         <span class="fas fa-link"></span>
-                        <h3 class="h4-style">
+                        <h3 class="h4-style semi-field-sep">
                             {{ "Links"|t }}
                         </h3>{{ content.field_links }}
                     </div>
@@ -166,25 +173,22 @@
                 {{ title_prefix }}
                 <h1{{ title_attributes.addClass('h2-style') }}>{{ content.field_title_en }}</h1>
                 {{ title_suffix }}
-                <div class="categ-style {{ funder_color }} semi-infos-sep">
-                    {{ content.field_funder.0 }}
-                </div>
                 {% if content.field_lead_en|render %}
                     <div>{{ content.field_lead_en.0 }}</div>
                 {% endif %}
 
                 {% if content.field_main_objectives_en|render %}
-                    <h3>{{ "Main objectives"|t }}</h3>
+                    <h3>Main objectives</h3>
                     {{ content.field_main_objectives_en|render }}
                 {% endif %}
 
                 {% if content.field_body_en|render %}
-                    <h3>{{ "Eligibility criteria"|t }}</h3>
+                    <h3>Eligibility criteria</h3>
                     {{ content.field_body_en.0 }}
                 {% endif %}
 
                 {% if content.field_ressources|render %}
-                    <h3 class="h4-style">{{ "Resources"|t }}</h3>
+                    <h3 class="h4-style">Resources</h3>
                     <div class="grid-x grid-margin-x grid-margin-y">
                         {% for key, resource in content.field_ressources|filter((value, key) => key|first != '#') %}
                             <div class="cell small-12 medium-6 large-4">
@@ -195,42 +199,46 @@
                 {% endif %}
             </section>
             <aside class="large-4 medium-12 small-12 grid-x full-height same-height">
+                {% if content.field_funder|render  %}
+                    <div class="call-details candidate bg-{{ funder_color }} border-{{ funder_color }}">
+                        <h3 class="h4-style semi-field-sep txt-white">Funder</h3>
+                        <span>{{ content.field_funder.0 }}</span>
+                        <br/>
+                        <span>&nbsp;</span>{{ funder_stage }}
+                    </div>
+                {% endif %}
+                {% if content.field_candidate_profile_en|render  %}
                 <div class="call-details candidate">
                     <span class="fas fa-user"></span>
-                    <h3 class="h4-style">
-                        {{ "Candidate's profile"|t }}
-                    </h3>
+                    <h3 class="h4-style semi-field-sep">Candidate's profile</h3>
                     {{ content.field_candidate_profile_en|render }}
                 </div>
+                {% endif %}
                 {% if content.field_deadline_en|render or content.field_duration_en|render %}
                     <div class="call-details info">
                         <span class="fas fa-hourglass-start"></span>
                         {% if content.field_deadline_en|render %}
-                            <h3 class="h4-style">
-                            {{ "Duration "|t }}
-                            </h3>{{ content.field_duration_en.0 }}
+                            <h3 class="h4-style">Maximum duration</h3>
+                            {{ content.field_duration_en.0 }}
                         {% endif %}
                         {% if content.field_duration_en|render %}
-                            <h3 class="h4-style">
-                            {{ "Deadline "|t }}
-                            </h3>{{ content.field_deadline_en.0 }}
+                            <h3 class="h4-style">Deadline</h3>
+                            {{ content.field_deadline_en.0 }}
                         {% endif %}
                     </div>
                 {% endif %}
                 {% if content.field_max_amount_en|render %}
                     <div class="call-details budget">
                         <span class="fas fa-coins"></span>
-                        <h3 class="h4-style">
-                            {{ "Maximum amount "|t }}
-                        </h3>{{ content.field_max_amount_en.0 }}
+                        <h3 class="h4-style">Maximum amount</h3>
+                        {{ content.field_max_amount_en.0 }}
                     </div>
                 {% endif %}
                 {% if content.field_links_en|render %}
                     <div class="call-details links">
                         <span class="fas fa-link"></span>
-                        <h3 class="h4-style">
-                            {{ "Links"|t }}
-                        </h3>{{ content.field_links_en }}
+                        <h3 class="h4-style semi-field-sep">Links</h3>
+                        {{ content.field_links_en }}
                     </div>
                 {% endif %}
             </aside>

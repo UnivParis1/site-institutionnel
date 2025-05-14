@@ -288,42 +288,50 @@ function p1ps2019_preprocess_node(&$variables) {
                 $node->isNew() ? $variables['isNew'] = "1" : $variables['isNew'] = 0;
             }
         }
-        if ($node->getType() == 'call') {
-            if ($node->hasField('field_funder') && !$node->get('field_funder')->isEmpty()) {
-                $funder = $node->get('field_funder')->value;
-                switch ($funder) {
-                    case 'ce':
-                        $bg = 'bg-blue';
-                        break;
-                    case 'anr':
-                    case 'mesr':
-                        $bg = 'bg-red';
-                        break;
-                    case 'region_idf':
-                    case 'ville_de_paris':
-                        $bg = 'bg-gold';
-                        break;
-                    default:
-                        $bg = 'bg-green';
-                        break;
-                }
-                $variables['funder_color'] = $bg;
+    }
+    if ($node->getType() == 'call') {
+        if ($node->hasField('field_funder') && !$node->get('field_funder')->isEmpty()) {
+            $funder = $node->get('field_funder')->value;
+            switch ($funder) {
+                case 'ce':
+                case 'auf':
+                    $bg = 'blue';
+                    $dimension = t('European and international');
+                    break;
+                case 'anr':
+                case 'mesr':
+                case 'fmsh':
+                    $bg = 'red-call';
+                    $dimension = t('National');
+                    break;
+                case 'region_idf':
+                case 'paris':
+                    $bg = 'gold-call';
+                    $dimension = t('Territorial');
+                    break;
+                default:
+                    $bg = 'green-call';
+                    $dimension = t('Internal and grouped');
+                    break;
             }
-            if (!empty($variables['content']['field_main_objectives'])) {
-                $field_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions('node');
-                if (isset($field_definitions['field_main_objectives'])) {
-                    $field_definition = $field_definitions['field_main_objectives'];
-                    $allowed_values = $field_definition->getSettings()['allowed_values'] ?? [];
-                    // Vérifiez que les valeurs autorisées existent
-                    if (!empty($allowed_values)) {
-                        $variables['main_objectives_label'] = $allowed_values;
-                    } else {
-                        $variables['main_objectives_label'] = [];
-                    }
+            $variables['funder_color'] = $bg;
+            $variables['funder_stage'] = $dimension;
+        }
+        if (!empty($variables['content']['field_main_objectives'])) {
+            $field_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions('node');
+            if (isset($field_definitions['field_main_objectives'])) {
+                $field_definition = $field_definitions['field_main_objectives'];
+                $allowed_values = $field_definition->getSettings()['allowed_values'] ?? [];
+                // Vérifiez que les valeurs autorisées existent
+                if (!empty($allowed_values)) {
+                    $variables['main_objectives_label'] = $allowed_values;
+                } else {
+                    $variables['main_objectives_label'] = [];
                 }
             }
         }
     }
+    
 }
 
 /**

@@ -78,7 +78,7 @@
 
 {{ attach_library('p1ps2019/calls') }}
 <article{{ attributes.addClass(classes).removeAttribute('role') }}>
-    <div class="box-content blue-box same-height {{ funder_color }}">
+    <div class="box-content blue-box same-height bg-{{ funder_color }}">
         <div class="top-infos">
             {{ title_prefix }}
             <h2 class="title semi-infos-sep">
@@ -89,12 +89,12 @@
         <div class="bottom-infos">
             {% if content.field_candidate_profile|render %}
             <div class="candidates"> 
-                <span class="offer-service-teaser semi-infos-sep">
-                    {% for key, profile in content.field_candidate_profile|filter((value, key) => key|first != '#') %}
-                        {{ profile }}
-                        {% if not loop.last %}, {% endif %}
-                    {% endfor %}
-                </span>
+                {% for key, profile in content.field_candidate_profile|filter((value, key) => key|first != '#') %}
+                    <span class="offer-service-teaser semi-infos-sep">
+                            {{ profile }}
+                    </span>
+                    {% if not loop.last %}<br/>{% endif %}
+                {% endfor %}
             </div>
             {% endif %}
             {% if content.field_main_objectives|render %}
