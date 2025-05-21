@@ -12,8 +12,13 @@ use Drupal\node\NodeInterface;
 use Drupal\up1_pages_persos\Entity\Node\PagePersoInterface;
 use \Drupal\up1_pages_persos\Manager\PagePersoManager;
 use Drupal\up1_webservices\Manager\WsGroupsManager;
+use Drupal\cas_attributes\Service\CasAttributesManager;
+use \Drupal\up1_pages_personnelles\ComptexManager;
+use Drupal\Core\Render\Markup;
 
-/** * Implements hook_help(). */
+/**
+ * Implements hook_help().
+ */
 
 function up1_pages_persos_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
@@ -22,7 +27,7 @@ function up1_pages_persos_help($route_name, RouteMatchInterface $route_match) {
     case 'help.page.up1_pages_persos':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Module for Pages persps') . '</p>';
+      $output .= '<p>' . t('Module for Pages persos') . '</p>';
       return $output;
       default:
   }
@@ -111,3 +116,58 @@ function up1_pages_persos_cron() {
   up1_pages_persos_add_missing_enseignant_doctorant_role($wsgroups_manager, $pages_persos_manager);
 }
 
+/**
+ * Implemetns hook_token_info().
+ */
+function up1_pages_persos_token_info() {
+  // Found in the node replacement patterns
+  $info['tokens']['node']['usermailtoken'] = array(
+      'name' => t('User mail token'),
+      'description' => t('Get the user\'s mail address'),
+  );
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function up1_pages_persos_tokens($type, $tokens, array $data = [], array $options = []) {
+  $replacements = [];
+
+  if ($type === 'node' && !empty($data['node']) && $data['node'] instanceof \Drupal\node\NodeInterface) {
+    $node = $data['node'];
+
+    foreach ($tokens as $name => $original) {
+      if ($name === 'usermailtoken') {
+        $username =$node->get('field_uid_ldap')->value;
+        $comptex = new ComptexManager();
+        $email = $comptex->getUserEmail($username);
+        if ($email) {
+          $base_domain = 'univ-paris1.fr';
+          $base_domain2 = 'pantheonsorbonne.fr';
+
+          [$local_part, $domain_part] = explode('@', $email, 2);
+          if (($domain_part === $base_domain)) {
+            $transformed = $local_part . '@';
+          }
+          elseif (str_ends_with($domain_part, '.' . $base_domain)) {
+            $sub = str_replace('.' . $base_domain, '', $domain_part);
+            $transformed = $local_part . '@' . $sub;
+          }
+          elseif ($domain_part === $base_domain2) {
+            $transformed = $local_part . '@';
+          }
+          elseif(str_ends_with($domain_part, '.' . $base_domain)) {
+            $sub = str_replace('.' . $base_domain2, '', $domain_part);
+            $transformed = $local_part . '@' . $sub;
+          }
+
+          $replacements[$original] = Markup::create($transformed);
+        }
+      }
+    }
+  }
+
+  return $replacements;
+}
