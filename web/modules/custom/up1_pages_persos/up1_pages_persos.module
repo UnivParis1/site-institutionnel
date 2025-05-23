@@ -162,6 +162,9 @@ function up1_pages_persos_tokens($type, $tokens, array $data = [], array $option
             $sub = str_replace('.' . $base_domain2, '', $domain_part);
             $transformed = $local_part . '@' . $sub;
           }
+          else {
+              $transformed = $email;
+          }
 
           $replacements[$original] = Markup::create($transformed);
         }
