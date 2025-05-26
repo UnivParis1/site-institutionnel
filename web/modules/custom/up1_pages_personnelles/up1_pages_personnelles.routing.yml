@@ -8,49 +8,14 @@ up1_pages_personnelles.pages_personnelles_settings_form:
   options:
     _admin_route: TRUE
 
-up1_pages_personnelles.wsgroups_faculty_list_default:
-  path: '/page-perso/enseignant-chercheur'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterFacultyList'
-    _title: 'Pages Personnelles Enseignants-Chercheurs, chercheurs'
-    letter: 'A'
-  requirements:
-    _permission: 'access content'
-
 up1_pages_personnelles.wsgroups_pp_default:
   path: '/page-perso'
   defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterFacultyList'
-    _title: 'Pages Personnelles Enseignants-Chercheurs, chercheurs'
-    letter: 'A'
+    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::gotoPagesPersonnelles'
+    _title: 'Pages Personnelles de nos enseignants-Chercheurs, chercheurs et doctorants'
   requirements:
     _permission: 'access content'
-
-up1_pages_personnelles.wsgroups_faculty_list:
-  path: '/page-perso/enseignant-chercheur/{letter}'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterFacultyList'
-    _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.wsgroups_student_list_default:
-  path: '/page-perso/doctorant'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterStudentList'
-    _title: 'Pages Personnelles Doctorants'
-    letter: 'A'
-  requirements:
-    _permission: 'access content'
-
-up1_pages_personnelles.wsgroups_student_list:
-  path: '/page-perso/doctorant/{letter}'
-  defaults:
-    _controller: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::masterStudentList'
-    _title_callback: '\Drupal\up1_pages_personnelles\Controller\WsGroupsController::getPageLetterTitle'
-  requirements:
-    _permission: 'access content'
-
+    
 up1_pages_personnelles.micro_faculty_list_default:
   path: '/equipe/enseignant-chercheur'
   defaults:

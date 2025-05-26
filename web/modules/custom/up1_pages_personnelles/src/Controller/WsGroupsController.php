@@ -307,48 +307,14 @@ class WsGroupsController extends ControllerBase
     return $build;
   }
 
-  public function getList($type, $letter, $theme, $path, $siteId = NULL)
-  {
-    $filtered_users = [];
-
-    $users = $this->getCachedUsers($type, $siteId);
-    if (!empty($users)) {
-      foreach ($users as $user) {
-        if (strcasecmp(substr($user['sn'], 0, 1), $letter) == 0) {
-          $filtered_users[] = $user;
-        }
-      }
-
-      // on trie les utilisateurs par ordre alphabetique des cn
-      usort($filtered_users, function ($a, $b) {
-        return strnatcasecmp($a['sn'], $b['sn']);
-      });
-    }
-
-    $build['item_list'] = [
-      '#theme' => $theme,
-      '#users' => $filtered_users,
-      '#affiliation' => $type,
-      '#link' => $path,
-      '#Trusted' => FALSE,
-      '#attached' => [
-        'library' => [
-          'up1_pages_personnelles/liste'
-        ]
-      ]
-    ];
-
-    return $build;
-  }
-
-  public function masterFacultyList($letter)
-  {
-    return $this->getList('faculty', $letter, 'liste_pages_persos_filtree', 'up1_pages_personnelles.wsgroups_faculty_list');
-  }
-
-  public function masterStudentList($letter)
-  {
-    return $this->getList('student', $letter, 'liste_pages_persos_filtree', 'up1_pages_personnelles.wsgroups_student_list');
+  public function gotoPagesPersonnelles() {
+    $response = new RedirectResponse(
+      \Drupal\Core\Url::fromRoute(
+        'entity.node.canonical', 
+        ['node' => 745]
+      )->toString());
+   
+    $response->send();
   }
 
   /**
