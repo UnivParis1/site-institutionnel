@@ -331,7 +331,7 @@ class WsGroupsController extends ControllerBase
       if ($this->getFieldTrombiEc()) {
         return $this->getTrombiList('list_as_trombinoscope', 'up1_pages_personnelles.micro_faculty_list', $group, $siteId);
       } else {
-        return $this->getList('faculty', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_faculty_list', $siteId);
+          $this->gotoPagesPersonnelles();
       }
     } else {
       throw new NotFoundHttpException();
@@ -346,7 +346,7 @@ class WsGroupsController extends ControllerBase
       if ($this->getFieldTrombiStudents()) {
         return $this->getStudentsTrombiList('list_as_trombinoscope', 'up1_pages_personnelles.micro_student_list', $group, $site->id());
       } else {
-        return $this->getList('student', $letter, 'list_with_employee_type', 'up1_pages_personnelles.micro_student_list', $site->id());
+        $this->gotoPagesPersonnelles();
       }
     } else {
       throw new NotFoundHttpException();
