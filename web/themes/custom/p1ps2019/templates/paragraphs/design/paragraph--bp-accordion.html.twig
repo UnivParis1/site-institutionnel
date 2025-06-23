@@ -56,7 +56,7 @@
 {# Prints Accordion template. #}
 
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
     {% block content %}
       <div class="paragraph__column">
         <div class="grid-container">

@@ -75,7 +75,7 @@
 {% set classColumns = content.field_nb_columns.0 %}
 
 {# Prints div with classes, and content without Width and Background. #}
-<div{{ attributes.addClass(classes|merge(layout_background_classes)) }}>
+<div{{ attributes.addClass(classes|merge(layout_background_classes)).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
   <div class="paragraph__column padding-mobile">
     {% if title %}
       <div class="grid-container">

@@ -73,7 +73,7 @@
 {% if background_field %}
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
     <div class="grid-container">
       <div class="paragraph__column grid-x grid-margin-x">
         <div class="{{ paragraph_width|join(' ') }}">

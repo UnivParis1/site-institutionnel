@@ -47,7 +47,7 @@
 {% set title = content.field_title|render %}
 {% set nbCols = content.field_column_number.0 %}
 
-<div{{ attributes.addClass(classes) }}>
+<div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
   <div class="paragraph__column">
     <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y">

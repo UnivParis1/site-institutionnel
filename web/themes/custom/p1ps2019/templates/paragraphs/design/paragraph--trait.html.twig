@@ -70,7 +70,7 @@
 
 {% block paragraph %}
   <div class="{{ layout_background_classes|join(' ') }}">
-    <div{{ attributes.addClass(classes) }}>
+    <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
       <div class="paragraph__column">
         <div class="grid-container">
           <hr class="{{ hr_class|join(' ') }}" />

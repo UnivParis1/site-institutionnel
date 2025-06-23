@@ -59,7 +59,7 @@
  {% set btn_style = 'paris1-bg-blue' == layout_background ? 'outline' : 'inline' %}
 {% block paragraph %}
   <div class="{{ layout_background_classes|join(' ') }}">
-    <div{{ attributes.addClass(classes) }}>
+    <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
       <div class="paragraph__column">
         <div class="grid-container">
           <div class="grid-button-x grid-margin-x grid-margin-y">

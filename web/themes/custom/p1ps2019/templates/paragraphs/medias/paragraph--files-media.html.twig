@@ -45,7 +45,7 @@ set classes = [
 %}
 
 {% block paragraph %}
-<div{{ attributes.addClass(classes) }}>
+<div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
     {{ content.field_media_fichier }}
 </div>
 {% endblock %}
