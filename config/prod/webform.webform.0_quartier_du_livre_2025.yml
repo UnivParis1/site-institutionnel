@@ -1,46 +1,95 @@
-uuid: 625a1e21-45af-498a-96fb-37f3b2ad5c53
+uuid: 23315618-1d2e-4481-bc9a-9f56ae09f49b
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7845
+uid: 5486
 template: false
 archive: false
-id: inscription_a_la_newsletter_irjs
-title: '8 - Inscription à la newsletter IRJS'
-description: "<p>Formulaire d'inscription à la newsletter de l'IRJS</p>"
-categories:
-  - 'Abonnement à une newsletter'
+id: 0_quartier_du_livre_2025
+title: '0 - Festival Quartier du Livre 2025'
+description: ''
+categories: {  }
 elements: |-
-  votreprenom:
+  votre_prenom_:
     '#type': textfield
-    '#title': Prénom
-    '#placeholder': Jean
+    '#title': 'Votre prénom :'
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
-  nom2:
+    '#required_error': "Merci d'indiquer votre prénom"
+  votre_nom_:
     '#type': textfield
-    '#title': Nom
-    '#placeholder': Dupond
+    '#title': 'Votre nom :'
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
-  votre_adresse_de_messagerie:
+    '#required_error': "Merci d'indiquer votre nom"
+  votre_adresse_courriel:
     '#type': email
-    '#title': 'Votre adresse de messagerie'
-    '#placeholder': ' jeandupond@mail.com'
+    '#title': 'Votre adresse courriel :'
     '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie'
-  actions:
-    '#type': webform_actions
-    '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire à la newsletter"
-    '#submit__attributes':
-      class:
-        - form--inline
-        - clearfix
-    '#update_hide': true
+    '#required_error': "Merci d'indiquer votre courriel"
+  vous_etes:
+    '#type': select
+    '#title': 'Vous êtes'
+    '#options':
+      'Membre de la communauté Paris 1 (étudiant, enseignant-chercheur, personnel BIATSS)': 'Membre de la communauté Paris 1 (étudiant, enseignant-chercheur, personnel BIATSS)'
+      'Membre d’une autre université': 'Membre d’une autre université'
+      'Habitant du 5e arrondissement de Paris': 'Habitant du 5e arrondissement de Paris'
+      Autre: Autre
+    '#empty_option': Sélectionner
+    '#empty_value': Sélectionner
+    '#required': true
+  veuillez_preciser:
+    '#type': textfield
+    '#title': 'Veuillez préciser :'
+    '#states':
+      visible:
+        ':input[name="vous_etes"]':
+          value: Autre
+  vous_avez_pris_connaissance_de_l_evenement_par:
+    '#type': select
+    '#title': 'Vous avez pris connaissance de l’évènement par :'
+    '#options':
+      'Un site internet': 'Un site internet'
+      'Les réseaux sociaux': 'Les réseaux sociaux'
+      'La presse / les médias': 'La presse / les médias'
+      'La plaquette de présentation du Festival Quartier du Livre': 'La plaquette de présentation du Festival Quartier du Livre'
+      'Le bouche-à-oreille': 'Le bouche-à-oreille'
+    '#empty_option': Sélectionner
+    '#empty_value': Sélectionner
+    '#required': true
+  precisez_quel_site_universite_mairie_du_5e_festival_quartier_du:
+    '#type': textfield
+    '#title': 'Précisez quel site (université, Mairie du 5e, Festival Quartier du Livre) :'
+    '#states':
+      visible:
+        ':input[name="vous_avez_pris_connaissance_de_l_evenement_par"]':
+          value: 'Un site internet'
+  precisez_quelle_structure_universite_mairie_du_5e_festival_quart:
+    '#type': textfield
+    '#title': 'Précisez quelle structure (université, Mairie du 5e, Festival Quartier du Livre) :'
+    '#states':
+      visible:
+        ':input[name="vous_avez_pris_connaissance_de_l_evenement_par"]':
+          value: 'Les réseaux sociaux'
+  je_souhaite_participer_a:
+    '#type': checkboxes
+    '#title': 'Je souhaite participer à :'
+    '#options':
+      'Notre-Dame de Paris. L’œuvre des siècles, le mercredi 4 juin 2025, de 17 h 30 à 19 h': 'Notre-Dame de Paris. L’œuvre des siècles, le mercredi 4 juin 2025, de 17 h 30 à 19 h'
+      'La haine des fonctionnaires, le mardi 10 juin 2025, de 18 h à 19 h 30': 'La haine des fonctionnaires, le mardi 10 juin 2025, de 18 h à 19 h 30'
+    '#required': true
+    '#options__properties': ''
+  collecte_de_donnees_a_caractere_personnel:
+    '#type': checkboxes
+    '#title': 'Collecte de données à caractère personnel'
+    '#options':
+      "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de mon inscription à cet événement, le Festival Quartier du Livre.": "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de mon inscription à cet événement, le Festival Quartier du Livre."
+    '#required': true
+    '#required_error': 'Vous devez accepter que nous puissions traiter vos données pour pouvoir vous inscrire.'
+  captcha:
+    '#type': captcha
+    '#captcha_description': "Cette question sert à vérifier si vous êtes un visiteur humain ou non afin d'éviter les soumissions de pourriel (spam) automatisées. "
 css: ''
 javascript: ''
 settings:
@@ -56,7 +105,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: "<p>Le formulaire d'inscription est clos.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -147,8 +196,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
+  confirmation_title: 'Confirmation inscription'
+  confirmation_message: "<p>Vos données ont bien été enregistré pour cet évènement.</p>\r\n\r\n<p>Un courriel automatique vous a été envoyé à l'adresse courriel que vous avez saisi.</p>\r\n\r\n<p>Merci</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -182,64 +231,57 @@ access:
     roles:
       - anonymous
       - authenticated
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   view_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   update_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   delete_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   purge_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   view_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   update_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   delete_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   administer:
     roles: {  }
     users:
-      - 7792
+      - 5486
+      - 6746
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
     users:
-      - 7792
+      - 5486
+      - 6746
     permissions: {  }
 handlers:
-  email_a_sympa:
+  email_a_la_personne_qui_s_est_inscrit_:
     id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
+    handler_id: email_a_la_personne_qui_s_est_inscrit_
+    label: "Email à la personne qui s'est inscrit."
     notes: ''
     status: true
     conditions: {  }
@@ -247,22 +289,23 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sympa@listes.univ-paris1.fr
+      to_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: ''
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'subscribe newsletter-irjs'
-      body: _default
-      excluded_elements: {  }
+      subject: 'Festival du Quartier du livre 2025 - Confirmation inscription'
+      body: "<p>Bonjour,</p><p>Votre demande d'inscription à l'évènement Festival du Quartier du Livre à l'université Paris 1 Panthéon-Sorbonne a bien été prise en compte.</p><p><strong>Veuillez vous munir de cette confirmation lors de votre venue.</strong></p><p>Vous avez rempli, le formulaire le [webform_submission:created] et voici les valeurs que vous nous avez soumises :</p><p>[webform_submission:values]</p><p>Merci et bonne journée</p><p>L'équipe organisatrice.</p>"
+      excluded_elements:
+        captcha: captcha
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
@@ -273,10 +316,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_au_demandeur:
+  email_aux_organisateurs:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: email_aux_organisateurs
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -284,21 +327,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_mail: culture@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
       from_options: {  }
-      from_name: ''
+      from_name: '[webform_submission:values:votre_nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "Inscription à la newsletter de l'IRJS"
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à la newsletter de l'IRJS a bien été validée.</p>"
+      subject: 'Festival du Quartier du livre 2025 - nouvelle inscription'
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

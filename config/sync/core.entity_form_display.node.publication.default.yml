@@ -38,6 +38,7 @@ dependencies:
     - content_moderation
     - datetime
     - entity_browser
+    - field_formatter_class
     - link
     - paragraphs
     - paragraphs_ee
@@ -144,21 +145,26 @@ content:
       closed_mode_threshold: 0
       add_mode: modal
       form_display_mode: default
-      default_paragraph_type: bp_accordion
+      default_paragraph_type: _none
       features:
         add_above: add_above
         collapse_edit_all: collapse_edit_all
+        convert: '0'
         duplicate: duplicate
     third_party_settings:
+      field_formatter_class:
+        class: ''
       paragraphs_features:
         add_in_between: false
         add_in_between_link_count: 3
         delete_confirmation: false
         show_drag_and_drop: true
+        show_collapse_all: true
       paragraphs_ee:
         paragraphs_ee:
           dialog_off_canvas: false
           dialog_style: tiles
+          drag_drop: false
   field_nb_pages:
     type: number
     weight: 14

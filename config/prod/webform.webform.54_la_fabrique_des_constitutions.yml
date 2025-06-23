@@ -1,46 +1,44 @@
-uuid: 625a1e21-45af-498a-96fb-37f3b2ad5c53
+uuid: 41cd3046-9d8b-43a4-97a5-c2fa21cabbae
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7845
+uid: 8800
 template: false
 archive: false
-id: inscription_a_la_newsletter_irjs
-title: '8 - Inscription à la newsletter IRJS'
-description: "<p>Formulaire d'inscription à la newsletter de l'IRJS</p>"
-categories:
-  - 'Abonnement à une newsletter'
+id: 54_la_fabrique_des_constitutions
+title: '54-La fabrique des constitutions'
+description: ''
+categories: {  }
 elements: |-
-  votreprenom:
+  nom:
+    '#type': textfield
+    '#title': NOM
+    '#required': true
+  prenom:
     '#type': textfield
     '#title': Prénom
-    '#placeholder': Jean
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
-  nom2:
+  adresse_mail:
     '#type': textfield
-    '#title': Nom
-    '#placeholder': Dupond
+    '#title': 'Adresse mail'
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
-  votre_adresse_de_messagerie:
-    '#type': email
-    '#title': 'Votre adresse de messagerie'
-    '#placeholder': ' jeandupond@mail.com'
+  qualite:
+    '#type': textfield
+    '#title': Qualité
     '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie'
-  actions:
-    '#type': webform_actions
-    '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire à la newsletter"
-    '#submit__attributes':
-      class:
-        - form--inline
-        - clearfix
-    '#update_hide': true
+  institution_de_rattachement:
+    '#type': textfield
+    '#title': 'Institution de rattachement'
+    '#required': true
+  presentiel:
+    '#type': checkbox
+    '#title': Présentiel
+  distanciel:
+    '#type': checkbox
+    '#title': Distanciel
 css: ''
 javascript: ''
 settings:
@@ -53,7 +51,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -148,7 +146,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -182,132 +180,47 @@ access:
     roles:
       - anonymous
       - authenticated
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   view_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   update_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   delete_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   purge_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   view_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   update_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   delete_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
-handlers:
-  email_a_sympa:
-    id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: sympa@listes.univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'subscribe newsletter-irjs'
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_au_demandeur:
-    id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: "Inscription à la newsletter de l'IRJS"
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à la newsletter de l'IRJS a bien été validée.</p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

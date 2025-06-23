@@ -1,46 +1,81 @@
-uuid: 625a1e21-45af-498a-96fb-37f3b2ad5c53
+uuid: cd74b907-1651-4df9-980d-9d63d786a7f6
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7845
+uid: 5486
 template: false
 archive: false
-id: inscription_a_la_newsletter_irjs
-title: '8 - Inscription à la newsletter IRJS'
-description: "<p>Formulaire d'inscription à la newsletter de l'IRJS</p>"
-categories:
-  - 'Abonnement à une newsletter'
+id: 0_cycle_de_conferences_actualite
+title: '0 - Cycle de conférences Actualité de Marc Bloch'
+description: ''
+categories: {  }
 elements: |-
-  votreprenom:
+  nom_:
     '#type': textfield
-    '#title': Prénom
-    '#placeholder': Jean
+    '#title': 'Nom :'
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
-  nom2:
+    '#required_error': 'Nom est requis'
+  prenom_:
     '#type': textfield
-    '#title': Nom
-    '#placeholder': Dupond
+    '#title': 'Prénom :'
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
-  votre_adresse_de_messagerie:
+    '#required_error': 'Prénom est requis'
+  courriel_:
     '#type': email
-    '#title': 'Votre adresse de messagerie'
-    '#placeholder': ' jeandupond@mail.com'
+    '#title': 'Courriel :'
     '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie'
+    '#required_error': 'Courriel est requis'
+  vous_etes:
+    '#type': radios
+    '#title': 'Vous êtes :'
+    '#options':
+      Enseignant-chercheur: Enseignant-chercheur
+      Personnel: Personnel
+      'Etudiant ': 'Etudiant '
+      "Extérieur à l'université": "Extérieur à l'université"
+    '#other__option_label': Précisez...
+    '#other__placeholder': Précisez...
+    '#required': true
+    '#required_error': 'Le champ Vous êtes est requis'
+    '#options__properties': ''
+  veuillez_preciser_:
+    '#type': textfield
+    '#title': "Veuillez préciser l'institution ou l'organisme :"
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="vous_etes"]':
+          value: "Extérieur à l'université"
+  merci_de_bien_vouloir_preciser_le_nom_de_votre_association_ou_de:
+    '#type': textfield
+    '#title': 'Merci de bien vouloir préciser le nom de votre association ou de votre établissement :'
+    '#required': true
+    '#required_error': 'Le champ "préciser le nom de votre association ou établissement" est requis'
+    '#states':
+      visible:
+        - ':input[name="vous_etes"]':
+            value: "Membre d'une association d'éloquence partenaire"
+        - xor
+        - ':input[name="vous_etes"]':
+            value: Partenaire
+  processed_text_02:
+    '#type': processed_text
+    '#format': full_html
+  captcha:
+    '#type': captcha
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
+    '#type': checkbox
+    '#title': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. "
+    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
+    '#required': true
+    '#required_error': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis"
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire à la newsletter"
-    '#submit__attributes':
-      class:
-        - form--inline
-        - clearfix
-    '#update_hide': true
+    '#submit__label': ENVOYER
 css: ''
 javascript: ''
 settings:
@@ -56,7 +91,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: "<p>Le formulaire d'inscription est fermé.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -125,7 +160,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -147,8 +182,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
+  confirmation_title: "Confirmation d'inscription"
+  confirmation_message: '<p>Nous vous remercions pour votre inscription. Vous allez recevoir un mail de confirmation.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -182,64 +217,55 @@ access:
     roles:
       - anonymous
       - authenticated
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   view_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   update_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   delete_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   purge_any:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   view_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   update_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   delete_own:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   administer:
     roles: {  }
     users:
-      - 7792
+      - 6746
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 7792
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
     users:
-      - 7792
+      - 6746
     permissions: {  }
 handlers:
-  email_a_sympa:
+  email:
     id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
+    handler_id: email
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -247,21 +273,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sympa@listes.univ-paris1.fr
+      to_mail: Sheba.Itoua@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      from_mail: '[webform_submission:values:courriel_:raw]'
       from_options: {  }
-      from_name: ''
+      from_name: '[webform_submission:values:nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'subscribe newsletter-irjs'
-      body: _default
+      subject: 'Conférence Marc Bloch 3 juillet - nouvelle inscription '
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les réponses soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -273,10 +299,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_au_demandeur:
+  email_1:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: email_1
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -284,21 +310,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_mail: '[webform_submission:values:courriel_:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: no-reply@univ-paris1.fr
       from_options: {  }
-      from_name: ''
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "Inscription à la newsletter de l'IRJS"
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à la newsletter de l'IRJS a bien été validée.</p>"
+      subject: "[Réponse automatique ] Confirmation d'inscription à la conférence Actualité de Marc Bloch - 3 juillet 2025"
+      body: '<div style="background-color:#F4F4F4;display:block;margin:1rem;padding:1rem;width:calc(100% - 2rem);"><div style="margin:0 auto;max-width:600px;width:100%;"><header style="text-align:center;" id="header" role="banner"><p class="text-align-center" style="background-color:transparent;color:rgb(114, 114, 114);font-size:0.8rem;">&nbsp;</p></header><main role="main" id="page-content"><table style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-collapse:collapse;color:rgb(59, 63, 68);font-family:Helvetica;font-size:1rem;font-style:normal;font-weight:400;letter-spacing:normal;max-width:600px;orphans:auto;text-align:left;text-decoration:none;text-transform:none;white-space:normal;widows:auto;width:100%;word-spacing:0px;" align="center" cellspacing="0" cellpadding="0" border="0" role="presentation" width="600px"><tbody><tr><td style="border-collapse:collapse;width:100%;" colspan="2" width="100%"><img style="display:block;margin:0 auto;max-width:300px;width:50%;" src="http://com-web.univ-paris1.fr/logos/Logotype-2024-RVB.svg" alt="Logo Université Paris 1 Panthéon-Sorbonne"></td></tr><tr><td style="border-collapse:collapse;padding:2rem;" colspan="2"><p>Madame, Monsieur,</p><p>Nous vous confirmons votre inscription à la première journée du cycle de conférences <em>Actualité de Marc Bloch</em> du 3 juillet 2025 de 9 h à 18 h au centre Panthéon, salle 6.</p><p>Bien cordialement,</p></td></tr></tbody></table></main></div></div>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

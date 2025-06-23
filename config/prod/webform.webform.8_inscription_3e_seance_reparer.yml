@@ -1,4 +1,4 @@
-uuid: 625a1e21-45af-498a-96fb-37f3b2ad5c53
+uuid: c254fd6f-f254-4495-bbe0-96b6bb621d3a
 langcode: fr
 status: open
 dependencies: {  }
@@ -8,34 +8,46 @@ close: null
 uid: 7845
 template: false
 archive: false
-id: inscription_a_la_newsletter_irjs
-title: '8 - Inscription à la newsletter IRJS'
-description: "<p>Formulaire d'inscription à la newsletter de l'IRJS</p>"
+id: 8_inscription_3e_seance_reparer
+title: '8 - Inscription à la troisième séance du séminaire "Réparer. Question(s) de justice sociale"'
+description: '<p>Formulaire d''inscription à la troisième séance du séminaire "Réparer. Question(s) de justice sociale" du 17 juin 2025.</p>'
 categories:
-  - 'Abonnement à une newsletter'
+  - 'Inscription à un colloque '
 elements: |-
   votreprenom:
     '#type': textfield
     '#title': Prénom
     '#placeholder': Jean
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
+    '#required_error': 'Vous devez saisir votre prénom.'
   nom2:
     '#type': textfield
     '#title': Nom
     '#placeholder': Dupond
     '#required': true
-    '#required_error': 'Votre prénom est obligatoire'
+    '#required_error': 'Vous devez saisir votre nom.'
   votre_adresse_de_messagerie:
     '#type': email
     '#title': 'Votre adresse de messagerie'
     '#placeholder': ' jeandupond@mail.com'
     '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie'
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription.</p>'
+    '#required': true
+    '#required_error': "Vous devez accepter les conditions d'inscription."
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire à la newsletter"
+    '#submit__label': "S'inscrire"
     '#submit__attributes':
       class:
         - form--inline
@@ -236,43 +248,6 @@ access:
       - 7792
     permissions: {  }
 handlers:
-  email_a_sympa:
-    id: email
-    handler_id: email_a_sympa
-    label: 'Email à sympa'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: sympa@listes.univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'subscribe newsletter-irjs'
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
   email_au_demandeur:
     id: email
     handler_id: email_au_demandeur
@@ -297,8 +272,8 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "Inscription à la newsletter de l'IRJS"
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à la newsletter de l'IRJS a bien été validée.</p>"
+      subject: 'Inscription à la troisième séance du séminaire "Réparer. Question(s) de justice sociale"'
+      body: '<p>Bonjour,</p><p>Votre inscription à la troisième séance du séminaire "Réparer. Question(s) de justice sociale" a bien été validée.</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
