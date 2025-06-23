@@ -79,7 +79,7 @@
 {% if background_field %}
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
     {% if header %}<h2 class="bp-col-header">{{ content.bp_header.0 }}</h2>{% endif %}
     <div class="grid-x grid-margin-y">
       {%- for key, item in content.bp_column_content|filter((value, key) => key|first != '#') -%}

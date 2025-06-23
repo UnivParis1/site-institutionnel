@@ -53,7 +53,7 @@
 {% set nbCols = content.field_column_number.0 %}
 {% set title = content.field_title|render %}
 {% block paragraph %}
-    <div{{ attributes.addClass(classes) }}>
+    <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
         {% block content %}
           <div class="paragraph__column">
             <div class="grid-container">

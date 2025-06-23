@@ -50,7 +50,7 @@
 {% set paragraph_id = 'myCarousel-' ~ paragraph.id.value %}
 
 {# Prints Carousel template. #}
-<div{{ attributes.addClass(classes) }}>
+<div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
   <div class="grid-x">
     {% if content.field_title|render %}
       <h2 class="titre field-sep"> {{ content.field_title }} </h2>

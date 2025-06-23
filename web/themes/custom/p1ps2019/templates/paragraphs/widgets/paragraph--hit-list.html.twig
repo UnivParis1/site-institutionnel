@@ -75,7 +75,7 @@
 
 {% block paragraph %}
   {# Prints div with classes, and content without Width and Background. #}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
     <div class="paragraph__column no-hover relative-wrapper">
       <div class="hitlist-overlay">
         <div class="grid-container">

@@ -43,7 +43,7 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
 ]
 %}
-<div{{ attributes.addClass(classes) }}>
+<div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
   <div class="grid-container">
     <div class="paragraph__column grid-x grid-margin-x align-center wrapper-title">
       {% if content.field_title|render %}

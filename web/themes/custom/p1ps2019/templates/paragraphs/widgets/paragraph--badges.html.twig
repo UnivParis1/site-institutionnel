@@ -74,7 +74,7 @@
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
   {# Prints div with classes, and content without Width and Background. #}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
     <div class="paragraph__column padding-mobile">
       {% if content.field_title|render %}
         <div class="grid-container">

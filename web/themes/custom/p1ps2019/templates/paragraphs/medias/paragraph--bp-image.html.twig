@@ -79,7 +79,7 @@
 <div class="{{ layout_background_classes|join(' ') }}">
   {% endif %}
   {# Prints div with classes, and content without Width and Background. #}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
     <div class="paragraph__column">
       {% if content.bp_link|render is not empty %}
       <a href="{{ content.bp_link.0['#url'] }}">
