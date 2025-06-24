@@ -73,10 +73,14 @@
   {% set cta_classes = 'with-icon fa fa-' ~ icon %}
 {% endif %}
 
+{% set imgUrl %}
+  {{ content.field_media_image.0 }}
+{% endset %}
+
 {% block paragraph %}
   {# Prints div with classes, and content without Width and Background. #}
   <div{{ attributes.addClass(classes).setAttribute('id', 'parag-' ~ paragraph.id.value) }}>
-    <div class="paragraph__column no-hover relative-wrapper">
+    <div class="paragraph__column no-hover relative-wrapper mask" style="background-image: url('{{ imgUrl|striptags|trim }}')">>
       <div class="hitlist-overlay">
         <div class="grid-container">
           <div class="grid-x grid-margin-x grid-margin-y">
