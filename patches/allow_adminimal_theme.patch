@@ -1,0 +1,22 @@
+diff --git a/src/ParagraphsFeatures.php b/src/ParagraphsFeatures.php
+index 7144693..993a64e 100644
+--- a/src/ParagraphsFeatures.php
++++ b/src/ParagraphsFeatures.php
+@@ -55,7 +55,7 @@ class ParagraphsFeatures {
+    */
+   public static function registerFormWidgetFeatures(array &$elements, ParagraphsWidget $widget, $fieldWrapperId) {
+     if (!in_array(\Drupal::theme()->getActiveTheme()->getName(),
+-      ['claro', 'gin'])) {
++      ['claro', 'gin', 'adminimal_theme'])) {
+       return;
+     }
+     foreach (static::$availableFeatures as $feature) {
+@@ -126,7 +126,7 @@ class ParagraphsFeatures {
+     $elements = [];
+     $disabled = FALSE;
+     if (!in_array(\Drupal::theme()->getActiveTheme()->getName(),
+-      ['claro', 'gin'])) {
++      ['claro', 'gin', 'adminimal_theme'])) {
+       $disabled = TRUE;
+     }
+ 
