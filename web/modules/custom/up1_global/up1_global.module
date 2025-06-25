@@ -180,5 +180,12 @@ function up1_global_hotfix_author_pages_sorbonnetv() {
     }
 }
 
-
+/**
+ * Implements hook_page_attachments().
+ */
+function up1_global_page_attachments(array &$attachments) {
+    if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+        $attachments['#attached']['library'][] = 'up1_global/admin_css';
+    }
+}
 
