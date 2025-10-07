@@ -1,0 +1,58 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\migrate\MigrateExecutable;
+use Drupal\migrate\MigrateMessage;
+use Drupal\node\Entity\Node;
+use Drupal\webform\Utility\WebformFormHelper;
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function lmc_recruitment_form_webform_submission_job_submit_application_add_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // Flattening the elements makes it much easier to access nested elements.
+  $elements = &WebformFormHelper::flattenElements($form['elements']);
+
+  // Get query parameter 'job' from URL.
+  $request = \Drupal::request();
+  $job_id = $request->query->get('job');
+
+  if ($job_id) {
+    // Load the node by ID.
+    $node = Node::load($job_id);
+
+    if ($node && $node->bundle() === 'offer' && !$node->field_email_address->isEmpty()) {
+      $elements['job_offer_email']['#default_value'] = $node->field_email_address->value;
+    }
+    else {
+      // Node not found or wrong type - deny access.
+      throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+    }
+  }
+  else {
+    // No job query string - deny access.
+    throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+  }
+
+  // Some basic stylling.
+  $form['#attributes']['class'][] = 'grid-container';
+  $form['#attached']['library'][] = 'lmc_recruitment/lmc_recruitment';
+
+}
+
+/**
+ * Implements hook_cron().
+ */
+function lmc_recruitment_cron() {
+  // Get the migration plugin manager service.
+  $pluginManagerMigration = \Drupal::service('plugin.manager.migration');
+
+  // Create the migration of your choice.
+  $articleMigration = $pluginManagerMigration->createInstance('recruitment_job');
+  $articleMigration->getIdMap()->prepareUpdate();
+  $articleMigrationExecutable = new MigrateExecutable($articleMigration, new MigrateMessage());
+
+  // Run the migration.
+  $result = $articleMigrationExecutable->import();
+}
