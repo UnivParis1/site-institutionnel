@@ -1,0 +1,216 @@
+# This migration demonstrates importing from multiple XML files.
+id: recruitment_job
+label: XML feed of jobs
+migration_group: recruitment
+source:
+  plugin: recruitment_job
+  data_fetcher_plugin: http
+  data_parser_plugin: xml
+  request_options:
+    allow_redirects: false
+  item_selector: /jobs/job
+  fields:
+    -
+      name: title
+      label: Title
+      selector: title
+    -
+      name: id
+      label: ID
+      selector: meta/id
+    -
+      name: postal_code
+      label: Postal Code
+      selector: location/postalCode
+    -
+      name: city
+      label: City
+      selector: location/city
+    -
+      name: rangeMinValue
+      label: City
+      selector: salary/rangeMinValue
+    -
+      name: rangeMaxValue
+      label: City
+      selector: salary/rangeMaxValue
+    -
+      name: salary_unit
+      label: City
+      selector: salary/unit
+    -
+      name: body
+      label: Body
+      selector: descriptions/company
+    -
+      name: mission
+      label: Mission
+      selector: descriptions/mission
+    -
+      name: profile
+      label: Profile
+      selector: descriptions/profile
+    -
+      name: email
+      label: Application Email
+      selector: application/applicationEmail
+    -
+      name: id_beetween
+      label: Beetween ID
+      selector: meta/id
+    -
+      name: created
+      label: Creation date
+      selector: meta/creationDate
+    -
+      name: last_modification_date
+      label: Last Modification date
+      selector: meta/lastModificationDate
+    -
+      name: starting_date
+      label: Job starting date
+      selector: contract/starting_date
+    -
+      name: latitude
+      label: latitude
+      selector: location/latitude
+    -
+      name: longitude
+      label: longitude
+      selector: location/longitude
+    -
+      name: service
+      label: Service
+      selector: activityAreas/element/name
+    -
+      name: main_activity_area
+      label: Main activity area
+      selector: main_activity_area
+    -
+      name: secondary_activity_area
+      label: Secondary activity area
+      selector: secondary_activity_area
+    -
+      name: contract
+      label: Contract Duration
+      selector: contract/duration
+    -
+      name: contractUnit
+      label: Contract Duration Unit
+      selector: contract/durationUnit
+    -
+      name: experience
+      label: Experience
+      selector: experience
+    -
+      name: cf_nature_de_l_emploi
+      label: Job type
+      selector: customFields/cf_nature_de_l_emploi
+    -
+      name: cf_categorie
+      label: Catégorie
+      selector: customFields/cf_cat_gorie
+    -
+      name: cf_corps
+      label: Corps
+      selector: customFields/cf_corps
+    -
+      name: cf_sites
+      label: Sites
+      selector: customFields/cf_sites
+    -
+      name: studyLevel
+      label: Study Level
+      selector: studyLevel
+    -
+      name: job_title
+      label: Job Title
+      selector: job_title
+    -
+      name: job_application_url
+      label: Job Application url
+      selector: application/applicationUrl
+  ids:
+    id:
+      type: string
+
+process:
+  title: title
+  field_address:
+    - plugin: callback
+      callable: array_filter
+      source:
+        - postal_code
+        - city
+    - plugin: concat
+      delimiter: ' '
+  body/value: body
+  body/format:
+    plugin: default_value
+    default_value: full_html
+  field_position_details/value: mission
+  field_position_details/format:
+    plugin: default_value
+    default_value: full_html
+  field_contract_duration: _contract_duration
+  field_email_address: email
+  field_profile/value: profile
+  field_job_type: cf_nature_de_l_emploi
+  field_profile/format:
+    plugin: default_value
+    default_value: full_html
+  created:
+    plugin: callback
+    # The 'registered' timestamp in the source data is a string of the form
+    # 'yyyy-mm-dd hh:mm:ss', but Drupal wants a UNIX timestamp for 'created'.
+    source: created
+    callable: strtotime
+  changed:
+    plugin: callback
+    source: last_modification_date
+    callable: strtotime
+  field_job_date:
+    plugin: format_date
+    from_format: 'Y-m-d H:i:s O'
+    to_format: 'Y-m-d'
+    to_timezone: 'UTC'
+    source: starting_date
+  field_address_map/lng: longitude
+  field_address_map/lat: latitude
+  field_salary_range: _salary_range
+  field_job_study_level: studyLevel
+  field_service: service
+  field_job_experience: _experience
+  field_job_categorie: cf_categorie
+  field_job_paris1_site: cf_sites
+  field_job_grade: cf_corps
+  field_id_beetween: id_beetween
+  field_job_title: job_title
+  field_job_application_url: job_application_url
+  type:
+    plugin: default_value
+    default_value: offer
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  publish_state:
+    plugin: default_value
+    default_value: '_none'
+  unpublish_state:
+    plugin: default_value
+    default_value: '_none'
+  moderation_state:
+    plugin: default_value
+    default_value: 'published'
+  site_id:
+    plugin: default_value
+    default_value: '105'
+destination:
+  plugin: entity:node
+dependencies:
+  enforced:
+    module:
+      - migrate_plus
