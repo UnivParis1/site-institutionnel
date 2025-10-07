@@ -75,10 +75,6 @@
   'clearfix',
 ]
 %}
-
-<div id="breadcrumbs">
-  {{ drupal_block('system_breadcrumb_block') }}
-</div>
 <div class="grid-container field-sep offre-emploi">
   <article{{ attributes.addClass(classes).removeAttribute('role') }}>
     {{ title_prefix }}
@@ -103,9 +99,13 @@
           <span class="fas fa-info-circle"></span>
           <h3>{{ "More information"|t }}</h3>
           {{ content.field_job_type }}
-          {{ content.field_category }}
+          {{ content.field_job_category }}
           {{ content.field_bap }}
-          {{ content.field_grade }}
+          {{ content.field_job_grade }}
+          {{ content.field_job_title }}
+          {{ content.field_job_experience }}
+          {{ content.field_job_paris1_site }}
+          {{ content.field_job_study_level }}
           {{ content.field_job_date }}
           {{ content.field_application_deadline }}
           {{ content.field_contract_type }}
@@ -115,8 +115,9 @@
         <div class="event-details toapp">
           <span class="fa fa-envelope"></span>
           <h3>{{ "To apply"|t }}</h3>
-          {{ content.field_email_address }}
-          {{ content.field_reference_offer }}
+          <a class="button button--primary" href="{{ path('entity.webform.canonical', {'webform': 'job_submit_application'}) ~ '?job=' ~ node.id() }}">
+            Postuler
+          </a>
         </div>
         <div class="event-details location">
           <span class="fas fa-map-signs"></span>
