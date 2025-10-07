@@ -16,9 +16,16 @@ dependencies:
     - field.field.node.offer.field_fa_icon
     - field.field.node.offer.field_grade
     - field.field.node.offer.field_id_beetween
-    - field.field.node.offer.field_job_custom_paris1_sites
+    - field.field.node.offer.field_job_application_url
+    - field.field.node.offer.field_job_categorie
     - field.field.node.offer.field_job_date
+    - field.field.node.offer.field_job_experience
+    - field.field.node.offer.field_job_grade
+    - field.field.node.offer.field_job_paris1_site
+    - field.field.node.offer.field_job_study_level
+    - field.field.node.offer.field_job_title
     - field.field.node.offer.field_job_type
+    - field.field.node.offer.field_job_unsync
     - field.field.node.offer.field_offer_type
     - field.field.node.offer.field_position_details
     - field.field.node.offer.field_profile
@@ -33,6 +40,7 @@ dependencies:
     - datetime
     - fontawesome
     - geolocation
+    - link
     - options
     - text
     - user
@@ -59,7 +67,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 18
+    weight: 19
     region: content
   field_address_map:
     type: geolocation_map
@@ -536,7 +544,7 @@ content:
         width: 100%
       data_provider_settings: {  }
     third_party_settings: {  }
-    weight: 19
+    weight: 20
     region: content
   field_application_deadline:
     type: datetime_default
@@ -567,7 +575,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 16
+    weight: 17
     region: content
   field_contract_type:
     type: list_default
@@ -589,7 +597,7 @@ content:
     settings:
       layers: false
     third_party_settings: {  }
-    weight: 20
+    weight: 21
     region: content
   field_grade:
     type: list_default
@@ -598,22 +606,25 @@ content:
     third_party_settings: {  }
     weight: 6
     region: content
-  field_id_beetween:
+  field_job_application_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 24
+    region: content
+  field_job_categorie:
     type: string
-    label: hidden
+    label: above
     settings:
       link_to_entity: false
-    third_party_settings:
-      field_formatter_class:
-        class: ''
-    weight: 22
-    region: content
-  field_job_custom_paris1_sites:
-    type: list_default
-    label: above
-    settings: {  }
     third_party_settings: {  }
-    weight: 23
+    weight: 28
     region: content
   field_job_date:
     type: datetime_default
@@ -622,7 +633,46 @@ content:
       timezone_override: ''
       format_type: news_date
     third_party_settings: {  }
-    weight: 21
+    weight: 22
+    region: content
+  field_job_experience:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  field_job_grade:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 29
+    region: content
+  field_job_paris1_site:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 27
+    region: content
+  field_job_study_level:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 26
+    region: content
+  field_job_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 23
     region: content
   field_job_type:
     type: list_default
@@ -630,6 +680,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 15
+    region: content
+  field_job_unsync:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 25
     region: content
   field_offer_type:
     type: entity_reference_label
@@ -667,7 +727,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 17
+    weight: 18
     region: content
   field_service:
     type: string
@@ -692,6 +752,7 @@ content:
     region: content
 hidden:
   field_disable_canonical_url: true
+  field_id_beetween: true
   field_sites: true
   field_sites_all: true
   langcode: true
