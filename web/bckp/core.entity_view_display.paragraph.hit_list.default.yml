@@ -1,0 +1,85 @@
+uuid: 86ebb189-3d5a-4325-8732-9d6933ef26ab
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.hit_list.bp_link
+    - field.field.paragraph.hit_list.bp_width
+    - field.field.paragraph.hit_list.field_column_number
+    - field.field.paragraph.hit_list.field_cta_icon
+    - field.field.paragraph.hit_list.field_media_image
+    - field.field.paragraph.hit_list.field_ranking
+    - field.field.paragraph.hit_list.field_title
+    - paragraphs.paragraphs_type.hit_list
+  module:
+    - entity_reference_revisions
+    - link
+    - options
+id: paragraph.hit_list.default
+targetEntityType: paragraph
+bundle: hit_list
+mode: default
+content:
+  bp_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  bp_width:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_column_number:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_cta_icon:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_media_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: palmares
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_ranking:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_button_label: true
+  field_catchphrase: true
+  search_api_excerpt: true

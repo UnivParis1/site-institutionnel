@@ -1,0 +1,67 @@
+uuid: 5b32f94e-3d31-413b-96d4-004be5c0fa63
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.audio.field_media_audio_file
+    - field.field.media.audio.field_transcription_textuelle
+    - media.type.audio
+  module:
+    - file
+id: media.audio.default
+targetEntityType: media
+bundle: audio
+mode: default
+content:
+  field_media_audio_file:
+    type: file_generic
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_transcription_textuelle:
+    type: file_generic
+    weight: 4
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  is_global:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  publish_on: true
+  publish_state: true
+  site_id: true
+  status: true
+  trombi_students_enable: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true

@@ -1,0 +1,51 @@
+uuid: 501f8c62-f12d-4073-8962-0c097bae9c0c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.partenaire_section.field_column_number
+    - field.field.paragraph.partenaire_section.field_icon_width
+    - field.field.paragraph.partenaire_section.field_partenaire
+    - field.field.paragraph.partenaire_section.field_title
+    - paragraphs.paragraphs_type.partenaire_section
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.partenaire_section.default
+targetEntityType: paragraph
+bundle: partenaire_section
+mode: default
+content:
+  field_column_number:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_icon_width:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_partenaire:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

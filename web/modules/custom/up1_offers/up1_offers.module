@@ -1,0 +1,126 @@
+<?php
+/**
+ * @file
+ * Primary module hooks for UP1 Offers module.
+ */
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Site\Settings;
+use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
+
+function up1_offers_import_from_beetween() {
+  $xml_url = Settings::get('beetween-offers')['url'] ?? NULL;
+
+  if (!$xml_url) {
+    \Drupal::logger('up1_offers')->warning('XML Url no défined.');
+    return;
+  }
+  $xml_content = file_get_contents($xml_url);
+  if ($xml_content === FALSE) {
+  \Drupal::logger('up1_offers')->warning('Could not load XML file.');
+    return;
+  }
+
+  $xml_string = simplexml_load_string($xml_content);
+  if ($xml_string === FALSE) {
+    \Drupal::logger('up1_offers')->warning('Could not load XML file.');
+  }
+
+  $username = Settings::get('up1-offers')['username'];
+  $users = \Drupal::entityTypeManager()
+    ->getStorage('user')
+    ->loadByProperties(['name' => $username]);
+
+  $user = reset($users);
+  $uid = $user->id() ?? 5486;
+
+  foreach ($xml_string->children() as $item) {
+    $existing = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadByProperties(['title' => (string)$item->title]);
+
+    if (!empty($existing)) {
+      \Drupal::logger('up1_offers')->info('offer : %title already imported', ['%title' => (string)$item->title]);
+      continue; // Déjà importé
+    }
+
+    try {
+      $values = _up1_get_xml_values($item);
+      \Drupal::logger('up1_offers')->info(print_r($values, TRUE));
+
+      $node = Node::create([
+        'type' => 'offer', // Remplace par ton type de contenu
+        'title' => $values['title'],
+        'body' => [
+          'value' => $values['body'],
+          'format' => 'full_html',
+        ],
+        'uid' => $uid,
+        'status' => 1,
+        'created' => $values['creation_date'],
+        'field_email_address' => $values['email_address'],
+        'field_salary_range' => $values['salary'],
+        'field_position_details' => $values['position_details'],
+        'field_profile' => $values['profile'],
+        'field_address' => $values['address'],
+        'field_id_beetween' => $values['id'],
+        'field_job_date' => $values['job_date'],
+        'field_contract_type' => $values['contract_type'],
+      ]);
+
+      $node->save();
+    } catch (\Exception $e) {
+      \Drupal::logger('up1_offers')->error('Could not import offer : %title ', ['%title' => $values['title']]);
+    }
+  }
+
+  \Drupal::logger('import_xml')->notice('Import XML terminé.');
+}
+
+function up1_offers_cron() {
+  up1_offers_import_from_beetween();
+}
+
+function _up1_get_xml_values($item)
+{
+  $date = (string) $item->creation_date;
+  $date = trim($date);
+  $creation_date = new DrupalDateTime($date);
+  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', 'offer');
+  $contract_type_values = $definitions['field_contract_type']->getFieldStorageDefinition()->getSetting('allowed_values');
+
+  foreach ($item->job_description as $description) {
+    $values = [
+      'body' => (string) $description->company,
+      'position_details' => (string) $description->mission,
+      'profile' => (string) $description->profile,
+    ];
+  }
+  foreach ($item->location as $location) {
+    $values = array_merge($values, [
+      'address' => (string) $location->display,
+    ]);
+  }
+  foreach ($item->contract as $contract) {
+    $starting_date = (string) $contract->starting_date;
+    $starting_date = trim($starting_date);
+    $job_date = new DrupalDateTime($starting_date);
+
+    $values = array_merge($values, [
+      'contract_type' => array_search((string) $contract->type, $contract_type_values),
+      'rythm' => (string) $contract->rythm,
+      'job_date' => $job_date->format('Y-m-d'),
+    ]);
+  }
+
+  $values = array_merge($values, [
+    'title' => (string) $item->title,
+    'id' => $item->id,
+    'email_address' => (string) $item->application_email,
+    'salary' => (string)  $item->salary,
+    'creation_date' => $creation_date->format('Y-m-d H:i:s'),
+    ]);
+
+  return $values;
+}

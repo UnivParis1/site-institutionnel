@@ -1,0 +1,30 @@
+uuid: bbae3031-a0fe-4a2f-9f29-8fc8152ca2f2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_image
+    - media.type.image
+    - media.type.mediatheque
+    - paragraphs.paragraphs_type.tile
+id: paragraph.tile.field_media_image
+field_name: field_media_image
+entity_type: paragraph
+bundle: tile
+label: 'Image de fond'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      mediatheque: mediatheque
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

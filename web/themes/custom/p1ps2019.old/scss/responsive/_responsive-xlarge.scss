@@ -1,0 +1,41 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > Xlarge
+    Par Ebizproduction
+*/
+
+/* Ebizproduction : Responsive > large */
+@include breakpoint($xxlarge - 1 down) {
+  //change fgutter value
+  $fgutter : 32px;
+  h1{
+    font-size: rem-calc(64px);
+  }
+
+  #navbar-header{
+    /*
+    .navigation-left-region, .navigation-region{
+      padding: rem-calc(48px);
+    }
+    */
+    .navigation-left-region{
+       ul.menu.large-vertical {
+        > li {
+          > a, > span{
+            font-size: rem-calc(20px); max-width: 35%;
+          }
+          &.opens-right{
+            ul.is-dropdown-submenu{
+              li{
+                a{
+                  font-size: rem-calc(18px);
+                }
+              }
+            }
+          }
+        }
+       }
+      }
+  }
+
+} //close 1440

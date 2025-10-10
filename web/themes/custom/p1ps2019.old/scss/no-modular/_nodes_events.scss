@@ -1,0 +1,87 @@
+.event {
+  .bottom-infos{
+    @include flexDisplay();
+    @include flexDisplayAlign('space-between');
+  }
+
+  .field-add-to-cal{
+    @include setFont($fontType-bold);
+    a{
+      font-family: $font-main;
+      font-size: rem-calc(16px);
+      line-height: 1.22;
+      color: $gold-p1ps;
+    }
+  }
+  .social-and-calendar {
+    @include flexDisplay();
+    @include flexDisplayAlign('center-middle');
+    .field-add-to-cal{
+      #{$padding-right}: rem-calc(32px);
+      max-width: rem-calc(152px);
+    }
+  }
+  .social-buttons{
+    #{$padding-left}: rem-calc(32px);
+    @include flexDisplay(); @include flexDisplayAlign('start');
+    @include flexDisplayAlign('vcenter'); width: rem-calc(150px);
+    .social-buttons-title{display: none;}
+    .links {
+      margin: 0;
+      a{
+        background: transparent;
+      }
+    }
+  }
+  .social-buttons-links{
+    @include flexDisplay();
+    li{
+      display: inline-flex; align-items: center;
+      a{
+        width: auto;
+        padding: 0; @include flexDisplay();
+        i {
+          &.fa-facebook {
+            &:before {
+              content: "\f082";
+            }
+          }
+          &:before{font-size: rem-calc(32px);
+          }
+        }
+      }
+      &:not(:last-of-type){
+        #{$margin-right}: rem-calc(16px);
+      }
+    }
+  }
+  .event-date, .end-date, .event-details{
+    span{
+      @include font-bold();
+    }
+    i{margin-left: rem-calc(6px);}
+  }
+  &.teaser {
+    .box-content {
+      .date-style {
+        font-size: rem-calc(18px);
+      }
+    }
+  }
+  &.bootstrap-cards{
+    .box-content{
+      padding: rem-calc(20px 24px 24px 24px);
+      h2{
+        font-size: rem-calc(20px); line-height: 1.2;
+        *{font-size: rem-calc(20px); line-height: 1.2;}
+      }
+      .field--name-field-event-date{
+        text-align: #{$right};
+        .date-day-entry{
+          display: inline-block;
+        }
+        >div:last-child{#{$margin-left}: rem-calc(6px);}
+      }
+    }
+  }
+}

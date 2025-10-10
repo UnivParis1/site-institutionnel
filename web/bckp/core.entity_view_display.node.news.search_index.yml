@@ -1,0 +1,93 @@
+uuid: e6704776-e699-4f0a-9c63-8afecfc8854b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.news.comment
+    - field.field.node.news.field_categories
+    - field.field.node.news.field_disable_canonical_url
+    - field.field.node.news.field_lead
+    - field.field.node.news.field_media
+    - field.field.node.news.field_news_date
+    - field.field.node.news.field_news_topic
+    - field.field.node.news.field_paragraphs
+    - field.field.node.news.field_publish_master
+    - field.field.node.news.field_related_news
+    - field.field.node.news.field_signature
+    - field.field.node.news.field_sites
+    - field.field.node.news.field_sites_all
+    - field.field.node.news.field_tag
+    - node.type.news
+  module:
+    - micro_node
+    - paragraphs
+    - text
+    - user
+_core:
+  default_config_hash: Gp86l3QzHHkplQwGqvKFBgU2ItCGjdOkbfoXt12bVBw
+id: node.news.search_index
+targetEntityType: node
+bundle: news
+mode: search_index
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_lead:
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: search_index
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_news_topic:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_paragraphs:
+    type: paragraph_summary
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  site_id:
+    type: entity_reference_label_site
+    label: hidden
+    settings:
+      link: 0
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  comment: true
+  field_categories: true
+  field_disable_canonical_url: true
+  field_news_date: true
+  field_publish_master: true
+  field_related_news: true
+  field_signature: true
+  field_sites: true
+  field_sites_all: true
+  field_tag: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  social_simple_buttons: true

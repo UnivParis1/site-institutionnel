@@ -1,0 +1,59 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the UP1 Micro sites extends module.
+ */
+
+use Drupal\Core\Field\Entity\BaseFieldOverride;
+use Drupal\Core\Messenger\MessengerInterface;
+
+
+/**
+ * Update function to alter field definition to include SVG extension.
+ */
+function up1_micro_sites_extends_update_8001(&$sandbox) {
+
+  $field_name = 'favicon';
+  $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('site', $field_name);
+
+  if ($field_storage) {
+    // Get the field storage settings.
+    $settings = $field_storage->getSettings();
+
+    // Modify settings as needed.
+    // For example, add 'svg' to the list of allowed file extensions.
+    if (isset($settings['file_extensions'])) {
+      $settings['file_extensions'] .= ' svg';
+    } else {
+      $settings['file_extensions'] = 'svg';
+    }
+
+    // Save the updated field storage settings.
+    $field_storage->setSettings($settings);
+    $field_storage->save();
+
+    // Clear the cache to apply changes.
+    \Drupal::entityDefinitionUpdateManager()->applyUpdates();
+
+    \Drupal::messenger()->addMessage(t('Field definition updated for @field_name.', [
+      '@field_name' => $field_name
+    ]));
+  }
+}
+
+
+/**
+ * Update function to alter field definition to include SVG extension.
+ */
+/*function up1_micro_sites_extends_update_8003(&$sandbox) {
+  $override = BaseFieldOverride::loadByEntityTypeAndField('sites', 'favicon');
+  \Drupal::logger('p1_micro_sites_extends')->info(!empty($override) ? 'We found the field' : 'Not good at all');
+
+  $override->setSetting('file_extensions', 'png svg jpg jpeg');
+
+  // Save the override.
+  $override->save();
+
+  \Drupal::messenger()->addMessage(t('Field definition updated for favicon.'));
+}
+*/

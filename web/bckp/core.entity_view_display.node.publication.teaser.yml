@@ -1,0 +1,106 @@
+uuid: 145dfb61-58aa-4be5-931c-c349d016c71d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.publication.body
+    - field.field.node.publication.field_author_name
+    - field.field.node.publication.field_authors_list
+    - field.field.node.publication.field_back_cover
+    - field.field.node.publication.field_collection
+    - field.field.node.publication.field_collection_term
+    - field.field.node.publication.field_disable_canonical_url
+    - field.field.node.publication.field_format
+    - field.field.node.publication.field_isbn
+    - field.field.node.publication.field_issn
+    - field.field.node.publication.field_link_title
+    - field.field.node.publication.field_media
+    - field.field.node.publication.field_more
+    - field.field.node.publication.field_nb_pages
+    - field.field.node.publication.field_price
+    - field.field.node.publication.field_pub_year
+    - field.field.node.publication.field_publication_author
+    - field.field.node.publication.field_publication_link
+    - field.field.node.publication.field_publication_topics
+    - field.field.node.publication.field_publication_type
+    - field.field.node.publication.field_publish_master
+    - field.field.node.publication.field_publisher
+    - field.field.node.publication.field_publisher_term
+    - field.field.node.publication.field_publishing_date
+    - field.field.node.publication.field_purchase_link
+    - field.field.node.publication.field_sites
+    - field.field.node.publication.field_sites_all
+    - field.field.node.publication.field_subtitle
+    - field.field.node.publication.field_tags
+    - node.type.publication
+  module:
+    - user
+id: node.publication.teaser
+targetEntityType: node
+bundle: publication
+mode: teaser
+content:
+  field_author_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: exporturl
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_publication_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  body: true
+  field_authors_list: true
+  field_back_cover: true
+  field_collection: true
+  field_collection_term: true
+  field_disable_canonical_url: true
+  field_format: true
+  field_isbn: true
+  field_issn: true
+  field_link_title: true
+  field_more: true
+  field_nb_pages: true
+  field_price: true
+  field_pub_year: true
+  field_publication_author: true
+  field_publication_link: true
+  field_publication_topics: true
+  field_publish_master: true
+  field_publisher: true
+  field_publisher_term: true
+  field_publishing_date: true
+  field_purchase_link: true
+  field_sites: true
+  field_sites_all: true
+  field_tags: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  site_id: true

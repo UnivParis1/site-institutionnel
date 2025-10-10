@@ -1,0 +1,29 @@
+uuid: 2773c77a-077a-4a08-8843-dc60af5e405d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tag
+    - node.type.event
+    - taxonomy.vocabulary.tags
+id: node.event.field_tag
+field_name: field_tag
+entity_type: node
+bundle: event
+label: Étiquette
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'site_default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: 0
+    auto_create_bundle: ''
+field_type: entity_reference

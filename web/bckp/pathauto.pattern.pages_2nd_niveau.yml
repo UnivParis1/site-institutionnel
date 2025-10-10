@@ -1,0 +1,22 @@
+uuid: a7823baf-52c6-4156-8636-624c4c9fc704
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: pages_2nd_niveau
+label: 'Pages 2nd niveau'
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parents:join-path]/[node:title]'
+selection_criteria:
+  a3c5f576-1dfc-42f5-992b-616c8879c401:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: a3c5f576-1dfc-42f5-992b-616c8879c401
+    context_mapping:
+      node: node
+    bundles:
+      second_level_pages: second_level_pages
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,22 @@
+uuid: 9d371d5f-e3df-4118-9e27-821829e7d567
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: sorbone_tv_collection
+label: 'Sorbone TV - Collection'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  b8062b7a-3fe3-4d11-9d03-1b65f39217d3:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: b8062b7a-3fe3-4d11-9d03-1b65f39217d3
+    context_mapping:
+      node: node
+    bundles:
+      page_sorbonne_tv: page_sorbonne_tv
+selection_logic: and
+weight: -5
+relationships: {  }

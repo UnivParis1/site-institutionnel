@@ -1,0 +1,29 @@
+uuid: 772a192d-f024-41f9-afaa-dd06e938b774
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_type
+    - node.type.page_sorbonne_tv
+    - taxonomy.vocabulary.type_sorbonne_tv
+id: node.page_sorbonne_tv.field_video_type
+field_name: field_video_type
+entity_type: node
+bundle: page_sorbonne_tv
+label: 'Vidéo type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'site_default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      type_sorbonne_tv: type_sorbonne_tv
+    sort:
+      field: name
+      direction: asc
+    auto_create: 0
+    auto_create_bundle: ''
+field_type: entity_reference

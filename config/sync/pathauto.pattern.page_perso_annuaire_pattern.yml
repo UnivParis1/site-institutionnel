@@ -1,0 +1,22 @@
+uuid: fe12d7b2-2cf7-4dde-b0cf-1d111ddb02a2
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: page_perso_annuaire_pattern
+label: 'Page Perso new pattern'
+type: 'canonical_entities:node'
+pattern: 'page-perso/[node:usermailtoken]'
+selection_criteria:
+  25c9eb80-06c8-4e76-bcbc-1fd16915be2f:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 25c9eb80-06c8-4e76-bcbc-1fd16915be2f
+    context_mapping:
+      node: node
+    bundles:
+      page_personnelle: page_personnelle
+selection_logic: and
+weight: -5
+relationships: {  }

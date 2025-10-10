@@ -1,0 +1,48 @@
+uuid: 7c409634-027e-4c45-947c-831db0030b07
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.stv_discipline_filters_item.field_sorbonne_tv_color_txt
+    - field.field.paragraph.stv_discipline_filters_item.field_sorbonne_tv_prg_color
+    - field.field.paragraph.stv_discipline_filters_item.field_stv_discipline_filters
+    - field.field.paragraph.stv_discipline_filters_item.field_stv_discipline_picto
+    - field.field.paragraph.stv_discipline_filters_item.field_title
+    - image.style.sorbonne_tv_picto
+    - paragraphs.paragraphs_type.stv_discipline_filters_item
+  module:
+    - field_formatter_class
+    - media
+id: paragraph.stv_discipline_filters_item.default
+targetEntityType: paragraph
+bundle: stv_discipline_filters_item
+mode: default
+content:
+  field_stv_discipline_picto:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: sorbonne_tv_picto
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: item_icon
+    weight: 0
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      field_formatter_class:
+        class: 'filter-item-title item_title'
+    weight: 1
+    region: content
+hidden:
+  field_sorbonne_tv_color_txt: true
+  field_sorbonne_tv_prg_color: true
+  field_stv_discipline_filters: true
+  search_api_excerpt: true

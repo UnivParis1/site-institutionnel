@@ -1,0 +1,306 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > large
+    Par Ebizproduction
+*/
+
+
+/* Ebizproduction : Responsive > Tablette */
+@include breakpoint($xlarge - 1 down) {
+	$rem-base: 10px;
+
+	h1, .h1-style{font-size: rem-calc(48px);}
+	h2, .h2-style{font-size: rem-calc(32px);}
+	h3, .h3-style{font-size: rem-calc(24px);}
+	h4, .h4-style{font-size: rem-calc(16px);}
+	h5, .h5-style{font-size: rem-calc(14px);}
+	h6, .h6-style{font-size: rem-calc(14px);}
+
+	.section-sep{
+		margin-bottom: rem-calc(56px);
+		&.small{margin-bottom: rem-calc(56px);}
+		&.big{margin-bottom: rem-calc(56px);}
+	}
+
+	.padding-all{
+	  &.uneven{
+	    padding: rem-calc(56px 48px);
+	  }
+	}
+
+	.padding-top-bottom{
+	  &.medium{
+	    padding: rem-calc(56px 0);
+	  }
+	  &.big{
+	    padding: rem-calc(56px 0);
+	  }
+	}
+
+	.column-number-2{
+	  column-gap: rem-calc(48px);
+    padding: 0 rem-calc(48px);
+	}
+	.column-number-3{
+	  column-gap: rem-calc(48px);
+	  columns: 2;
+    padding: 0 rem-calc(48px);
+	}
+	.column-number-4{
+    padding: 0 rem-calc(48px);
+    columns: 1;
+	}
+	.column-number-6{
+    padding: 0 rem-calc(48px);
+    columns: 1;
+	}
+
+
+	.accordion{
+	  li{
+	    .accordion-title{
+	      &:before{
+	        content: "\f078";
+	        font: normal normal normal 14px/1 FontAwesome;
+	        margin: 0; top: 50%; transform: translateY(-50%);
+	      }
+	    }
+	    &.is-active{
+	      .accordion-title{
+	        &:before{
+	          content: "\f078";
+	          transform: rotate(180deg);
+	        }
+	      }
+	    }
+	  }
+
+	  .accordion-wrapper &{
+	    .accordion-item{
+	      .accordion-title{
+	        font-size: rem-calc(22px);
+	        padding: rem-calc(24px 32px);
+	        > div {width: calc(100% - 32px);}
+	        &:before{
+	          font-size: rem-calc(22px);
+	          #{$right}: rem-calc(32px);
+	        }
+	      }
+	      .accordion-content{
+	        padding: rem-calc(24px 32px);
+	      }
+	    }//close .accordion-item
+	  }
+	}//close accordion
+
+
+	.paragraph{
+    &.trait.paragraph--type--trait{
+      padding-top: rem-calc(8px);
+      padding-bottom: rem-calc(8px);
+    }
+	  &:not(.paragraph--type--hit-list):not(.paragraph--type--bp-tabs):not(.tiles-full):not(.paragraph--type--rich-content):not(.paragraph--type--tuile-text-wo-image):not(.paragraph--type--tile-wo-image):not(.paragraph--type--key-figure):not(.paragraph--type--presentation):not(.paragraph--type--bp-columns){
+	    //padding-top: rem-calc(32px);
+	    //padding-bottom: rem-calc(32px);
+	  }
+	}
+
+	.site-content-wrapper{
+			.btn, .button--primary,
+			button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon),
+			input[type="submit"].button {
+					//font-size: rem-calc(20px);
+					&.big {
+							font-size: rem-calc(20px);
+					}
+			}//close btn
+	}//close .site-content-wrapper
+
+	.centres-up1-form, .center-wrapper {
+	  .map-centre {
+			.center-form{
+	      width: 100%;
+	    }
+	    .overlay-infos{
+	      .form-item{
+	        flex: 0 0 100%;
+	        max-width: 100%;
+	      }
+	    }
+      .details-centre {
+        flex-direction: column;
+        .centre-up1 {
+          width: 100%;
+        }
+
+        .image-centre {
+          width: 100%;
+        }
+      }
+	  }
+	}
+
+	.txt{
+		&.medium{
+			font-size: rem-calc(20px);
+			p{font-size: rem-calc(20px);}
+		}
+		&.big{
+			font-size: rem-calc(22px);
+		}
+	}
+
+	label, .label-style{
+	  font-size: rem-calc(20px);
+	}
+
+	#tabs-style, .tabs, .accordion {
+		> li{
+		  	> a{
+			  font-size: rem-calc(20px);
+			}
+		}
+	}//close nav-tabs
+
+	.field--type-text-long{
+	  ul, div:not(.visually-hidden), p, img, embed, picture{
+	    ~ ul, ~ div, ~ p, ~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ img, ~ embed, ~ picture{
+	      margin-top: rem-calc(24px);
+	    }
+	  }
+	}
+
+	.overlay-infos{
+	  &.equal-height{
+		  padding: 56px 48px;
+		}
+	  &.with-padding{
+	    padding: rem-calc(56px 56px 80px 56px);
+	  }
+	}
+
+	.key-figures-section {
+	  .chiffre{
+	    line-height: 1.14;
+	  }
+	}//close .key-figures-section
+
+	.paragraph--type--hit-list{
+		.grid-container{
+			padding-left: rem-calc(32px); padding-right: rem-calc(32px);
+		}
+	  .paragraph__column{
+	    .paragraph__column{
+	      font-size: rem-calc(18px);
+	      *{
+	        font-size: rem-calc(18px);
+	      }
+	     }
+	  }
+	}//close .paragraph--type--hit-list
+
+	.paragraph--type--key-figures-section, .paragraph--type--section-presentation, .paragraph--type--hit-list{
+	  h2{
+	    margin-bottom: rem-calc(48px);
+	  }
+	}
+
+	.paragraph--type--section-presentation{
+	  .paragraph--type--presentation{
+	    h3{
+	      font-size: rem-calc(30px);
+	    }
+	  }
+	}//close .paragraph--type--section-presentation
+
+
+	.paragraph--type--tiles.paragraph{
+	  .paragraph__column{
+	    h2{margin-bottom: rem-calc(48px);}
+	  }
+	}//close paragraph--type--tiles
+
+	.footer .footer-wrapper{
+		.two-columns-wrapper .two-columns ul li{
+			margin: 0 rem-calc(8px);
+		}
+		a{
+			font-size: rem-calc(16px);
+		}
+	}
+
+	.overlay-infos{
+	  &.with-padding{
+	    padding: rem-calc(32px);
+	    max-width: 100%;
+	  }
+	}
+
+	.padding-all{
+	  &.uneven{
+	    padding: rem-calc(32px);
+	  }
+	}
+
+	.social-and-calendar {
+		.field-add-to-cal{
+			#{$padding-right}: rem-calc(16px);
+		}
+	}
+	.social-buttons{
+		#{$padding-left}: rem-calc(16px);
+	}
+	.box-style{
+		.box-content{
+			&.social-and-calendar{
+				padding: rem-calc(12px 0);
+			}
+		}
+	}
+
+
+	.main-overlay-infos{
+	  //bottom: rem-calc(32px);
+	}
+
+	#navbar-header{
+	  .navigation-left-region{
+	     ul.menu.large-vertical {
+	      > li {
+	        > a, > span, > .acc-link{
+	          max-width: 40%;
+	        }
+	        &.opens-right{
+	          ul.is-dropdown-submenu{
+	            #{$left}: 45% !important;
+	          }
+	        }
+	      }
+	     }
+	    }
+
+			//=============== menu mini site ==========//
+			.site--type--mini-site &{
+	      .block > ul{
+	        > li{
+	          > a, > span{
+	            font-size: rem-calc(18px);
+	          }
+	          ul{
+	            li{
+	              a{
+	                font-size: rem-calc(18px);
+	              }
+	            }
+	          }
+	        }
+	      }
+	    }
+			//============== fin menu mini site =============//
+	} //close navbar
+
+	//footer
+  .footer{
+  	padding: rem-calc(100px 0);
+  }
+}//close media - xlarge

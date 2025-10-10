@@ -1,0 +1,56 @@
+uuid: e7cf0c11-f473-4d2a-874a-c965e922f6bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.bookmark.bp_link
+    - field.field.paragraph.bookmark.field_bg_color
+    - field.field.paragraph.bookmark.field_fa_icon
+    - field.field.paragraph.bookmark.field_title
+    - paragraphs.paragraphs_type.bookmark
+  module:
+    - fontawesome
+    - link
+    - options
+id: paragraph.bookmark.default
+targetEntityType: paragraph
+bundle: bookmark
+mode: default
+content:
+  bp_link:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_bg_color:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_fa_icon:
+    type: fontawesome_icon_formatter
+    label: visually_hidden
+    settings:
+      layers: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

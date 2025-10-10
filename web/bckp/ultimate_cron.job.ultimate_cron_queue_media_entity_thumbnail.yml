@@ -1,0 +1,20 @@
+uuid: 35c7ee47-fb1a-4725-91bb-37f6532cf581
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media
+title: 'Queue: Téléchargeur de vignette'
+id: ultimate_cron_queue_media_entity_thumbnail
+weight: 10
+module: media
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

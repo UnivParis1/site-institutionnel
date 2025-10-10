@@ -1,0 +1,44 @@
+uuid: 68f51db7-b858-42c3-a400-68326625a287
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media.type.mediatheque_audio
+  module:
+    - content_translation
+    - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: 0
+id: media.mediatheque_audio.thumbnail
+field_name: thumbnail
+entity_type: media
+bundle: mediatheque_audio
+label: Vignette
+description: 'Vignette de cet élément média.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: null
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

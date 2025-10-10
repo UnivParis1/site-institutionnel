@@ -1,0 +1,55 @@
+uuid: e2f12083-f639-4236-b567-b36bc69fb569
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.aap.body
+    - field.field.node.aap.field_applicant_profile
+    - field.field.node.aap.field_candidates_profile
+    - field.field.node.aap.field_eligibility_criteria
+    - field.field.node.aap.field_lead
+    - field.field.node.aap.field_lead_en
+    - field.field.node.aap.field_main_objectives
+    - field.field.node.aap.field_main_objectives_en
+    - node.type.aap
+  module:
+    - text
+    - user
+id: node.aap.search_index
+targetEntityType: node
+bundle: aap
+mode: search_index
+content:
+  field_lead:
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  site_id:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_applicant_profile: true
+  field_candidates_profile: true
+  field_eligibility_criteria: true
+  field_lead_en: true
+  field_main_objectives: true
+  field_main_objectives_en: true
+  langcode: true
+  likes: true
+  search_api_excerpt: true

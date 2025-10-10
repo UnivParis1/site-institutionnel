@@ -1,0 +1,29 @@
+uuid: 1c475faa-5b58-432a-8721-185f8a6b49c6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_stv_discipline_filters
+    - paragraphs.paragraphs_type.stv_discipline_filters_item
+    - taxonomy.vocabulary.discipline_sorbonne_tv
+id: paragraph.stv_discipline_filters_item.field_stv_discipline_filters
+field_name: field_stv_discipline_filters
+entity_type: paragraph
+bundle: stv_discipline_filters_item
+label: Discipline
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      discipline_sorbonne_tv: discipline_sorbonne_tv
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

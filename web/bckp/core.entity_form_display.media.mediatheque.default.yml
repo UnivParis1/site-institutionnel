@@ -1,0 +1,68 @@
+uuid: 11438ace-3bd6-4c0d-ad30-7315ecf08efd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.mediatheque.field_autoplay
+    - field.field.media.mediatheque.field_media_mediatheque
+    - media.type.mediatheque
+  module:
+    - link
+id: media.mediatheque.default
+targetEntityType: media
+bundle: mediatheque
+mode: default
+content:
+  field_autoplay:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_media_mediatheque:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: 'https://mediatheque.univ-paris1.fr/video/XXX'
+      placeholder_title: ''
+    third_party_settings: {  }
+  is_global:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 0
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  publish_on: true
+  publish_state: true
+  site_id: true
+  status: true
+  trombi_students_enable: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true

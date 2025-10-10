@@ -1,0 +1,17 @@
+uuid: 30142ce2-e047-4a20-8928-b39a61277224
+langcode: fr
+status: true
+dependencies:
+  module:
+    - up1_pages_persos
+title: 'Default cron handler'
+id: up1_pages_persos_cron
+weight: 0
+module: up1_pages_persos
+callback: 'up1_pages_persos#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

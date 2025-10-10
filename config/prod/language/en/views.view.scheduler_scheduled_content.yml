@@ -4,6 +4,8 @@ display:
       exposed_form:
         options:
           submit_button: Filter
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
       pager:
         options:
           tags:
@@ -12,13 +14,21 @@ display:
             first: '« first'
             last: 'last »'
       fields:
+        title:
+          label: Titre
+        name:
+          label: Auteur
         status:
           label: Status
           settings:
+            format_custom_true: Publié
             format_custom_false: Unpublished
         operations:
           label: Operations
       filters:
+        title:
+          expose:
+            label: Titre
         type:
           expose:
             label: 'Content type'
@@ -28,6 +38,8 @@ display:
           group_info:
             label: 'Published status'
             group_items:
+              1:
+                title: Publié
               2:
                 title: Unpublished
         langcode:

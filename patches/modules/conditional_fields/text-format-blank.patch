@@ -1,0 +1,34 @@
+From 0de3289331c93a14e5e2a415aa549168c65345a2 Mon Sep 17 00:00:00 2001
+From: Ajaykumar Gudivada <ajgudivada@deloitte.com>
+Date: Thu, 17 Oct 2019 21:58:57 +0530
+Subject: [PATCH] When text field is a dependee, text format left blank.
+
+---
+ js/conditional_fields.js | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/js/conditional_fields.js b/js/conditional_fields.js
+index 5d6ab6de..f29f119b 100644
+--- a/js/conditional_fields.js
++++ b/js/conditional_fields.js
+@@ -57,7 +57,7 @@ $(document).bind('state:visible-fade', function(e) {
+ // Empty/Filled.
+ .bind('state:empty', function(e) {
+   if (e.trigger) {
+-    var fields = $(e.target).find('input, select, textarea');
++    var fields = $(e.target).find('input, select:not(.filter-list.editor), textarea');
+     fields.each(function() {
+       if (typeof $(this).data('conditionalFieldsSavedValue') === 'undefined') {
+         $(this).data('conditionalFieldsSavedValue', $(this).val());
+@@ -78,7 +78,7 @@ $(document).bind('state:visible-fade', function(e) {
+   if (e.trigger) {
+     // Save required property.
+     if (typeof $(e.target).data('conditionalFieldsSavedRequired') === 'undefined') {
+-      var field = $(e.target).find('input, select, textarea');
++      var field = $(e.target).find('input, select:not(.filter-list.editor), textarea');
+       if (field) {
+         $(e.target).data('conditionalFieldsSavedRequired', $(field).attr('required'));
+       }
+-- 
+2.14.2.windows.1
+

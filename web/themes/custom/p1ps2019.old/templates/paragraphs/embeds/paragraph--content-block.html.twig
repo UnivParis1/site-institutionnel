@@ -1,0 +1,86 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph in Bootstrap Paragraphs.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   - id: The paragraph ID.
+ *   - bundle: The type of the paragraph, for example, "image" or "text".
+ *   - authorid: The user ID of the paragraph author.
+ *   - createdtime: Formatted creation date. Preprocess functions can
+ *     reformat it by calling format_date() with the desired parameters on
+ *     $variables['paragraph']->getCreatedTime().
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{# The template default set classes. #}
+{% set items = content.field_content_block %}
+  {%
+    set classes = [
+    'paragraph', 'grid-x',
+    'grid-container',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--id--' ~ paragraph.id.value,
+  ]
+  %}
+  {% if content.bp_background|render %}
+    {% set layout_background = content.bp_background['#items'].getString() %}
+    {% set layout_background_classes = [
+      'paragraph--color',
+      'full',
+      'paris1-bg-soft-grey' == layout_background ? 'paris1-bg-soft-grey',
+      'paris1-bg-blue' == layout_background ? 'paris1-bg-blue',
+      'bg-white' == layout_background ?  'bg-white',
+      'bg-transparent' == layout_background ?  'bg-transparent',
+    ]
+    %}
+  {% endif %}
+  {% set paragTitle %}
+    {{ content.field_title|render }}
+  {% endset %}
+  {# Prints div with classes, and content without Width and Background. #}
+<div class="paragraph-wrapper-full {{ layout_background_classes|join(' ') }}">
+  {% if paragTitle|striptags|trim %}
+    <div class="grid-container">
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12">
+          <h2 class="titre">{{ content.field_title.0 }}</h2>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div{{ attributes.addClass(classes) }}>
+    {# for slider type #}
+    {% for key, item in content.field_content_block|filter((value, key) => key|first != '#') %}
+      <div class="cell small-12">
+        <div class="padding-mobile">
+          {{ item }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

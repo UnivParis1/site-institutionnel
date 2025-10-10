@@ -1,0 +1,42 @@
+uuid: 991f47c5-e7a8-45c1-89da-f5fd5b0f4f07
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - micro_footer
+    - micro_path
+    - micro_site
+  theme:
+    - sorbonne_tv_lmc
+id: sorbonne_tv_lmc_footerblock
+theme: sorbonne_tv_lmc
+region: footer
+weight: -1
+provider: null
+plugin: footer_block
+settings:
+  id: footer_block
+  label: 'Footer block'
+  label_display: '0'
+  provider: micro_footer
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
+  site_type:
+    id: site_type
+    negate: false
+    context_mapping: {  }
+    site_type: {  }
+  site:
+    id: site
+    negate: false
+    context_mapping: {  }
+    sites:
+      126: '126'
+    sites_front_page: 0

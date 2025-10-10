@@ -1,0 +1,24 @@
+uuid: cac01c36-fdb6-4c21-a786-5016fd632b39
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: event_pattern
+label: 'Pages événement'
+type: 'canonical_entities:node'
+pattern: '[node:content-type:name]s/[node:title]'
+selection_criteria:
+  da95365e-1cd7-4007-ba60-48bdc399f751:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: da95365e-1cd7-4007-ba60-48bdc399f751
+    context_mapping:
+      node: node
+    bundles:
+      event: event
+selection_logic: and
+weight: -5
+relationships:
+  'node:langcode:language':
+    label: Langue

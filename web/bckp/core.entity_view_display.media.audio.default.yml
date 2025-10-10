@@ -1,0 +1,35 @@
+uuid: 51fee447-bac4-45a8-96f3-baea7abec122
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.audio.field_media_audio_file
+    - field.field.media.audio.field_transcription_textuelle
+    - media.type.audio
+  module:
+    - file
+id: media.audio.default
+targetEntityType: media
+bundle: audio
+mode: default
+content:
+  field_media_audio_file:
+    type: file_audio
+    label: visually_hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: sources
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_transcription_textuelle: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,51 @@
+.accordion{
+  li{
+    .accordion-title{
+      &:before{
+        content: "\f078";
+        font: normal normal normal 14px/1 FontAwesome;
+        margin: 0; top: rem-calc(26px);
+      }
+    }
+    &.is-active{
+      .accordion-title{
+        &:before{
+          content: "\f078";
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .accordion-wrapper &{
+    .accordion-item{
+      .accordion-title{
+        font-family: $font-main; @include setFont($fontType-medium);
+        font-size: rem-calc(24px); line-height: 1.2;
+        padding: rem-calc(24px 48px);
+        &:hover, &:focus{text-decoration: none;}
+        > div {width: calc(100% - 48px);}
+        &:before{
+          font-size: rem-calc(24px);
+          #{$right}: rem-calc(48px);
+        }
+      }
+      &:last-of-type{margin-bottom: 0;}
+      .accordion-content{
+        padding: rem-calc(24px 48px);
+        /*a{
+          font-family: $font-main;
+          text-decoration: underline;
+          &:hover{text-decoration: none;}
+        }*/
+      }
+    }//close .accordion-item
+  }
+  .grid-container{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .paragraph--type--bp-simple{
+    padding-top: 0 !important; padding-bottom: 0 !important;
+  }
+}//close accordion

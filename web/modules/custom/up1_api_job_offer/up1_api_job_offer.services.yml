@@ -1,0 +1,7 @@
+services:
+  up1_api_job_offer.subscriber:
+    class: Drupal\up1_api_job_offer\EventSubscriber\OffresApiSubscriber
+    arguments: ['@user.auth']
+    tags:
+      - { name: event_subscriber }
+

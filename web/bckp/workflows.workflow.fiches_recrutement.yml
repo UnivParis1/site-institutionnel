@@ -1,0 +1,61 @@
+uuid: 8c13242b-5b29-41cd-b1d9-7116042d6fca
+langcode: fr
+status: true
+dependencies:
+  module:
+    - content_moderation
+id: fiches_recrutement
+label: 'Fiches recrutement'
+type: content_moderation
+type_settings:
+  states:
+    draft:
+      label: Draft
+      weight: -2
+      published: false
+      default_revision: false
+    en_attente_de_validation:
+      label: 'En attente de validation'
+      weight: -1
+      published: false
+      default_revision: true
+    published:
+      label: Published
+      weight: 0
+      published: true
+      default_revision: true
+  transitions:
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+        - published
+      to: draft
+      weight: 0
+    go_live:
+      label: 'Go live'
+      from:
+        - en_attente_de_validation
+      to: published
+      weight: 3
+    publish:
+      label: Publish
+      from:
+        - draft
+        - published
+      to: published
+      weight: 1
+    to_be_reviewed:
+      label: 'To be reviewed'
+      from:
+        - en_attente_de_validation
+      to: draft
+      weight: 4
+    validate:
+      label: Validate
+      from:
+        - draft
+      to: en_attente_de_validation
+      weight: 2
+  entity_types: {  }
+  default_moderation_state: draft

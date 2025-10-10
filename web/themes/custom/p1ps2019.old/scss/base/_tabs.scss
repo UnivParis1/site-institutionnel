@@ -1,0 +1,76 @@
+/* tabs */
+.tabs-content{border: 0;}
+
+#tabs-style, .tabs, .accordion-tabs {
+	border: 0;
+	> li{
+  		width: calc(100% / 4);
+	  	> a{
+			font-family: $font-headings;
+		  font-size: rem-calc(22px); line-height: 1.18;
+		  padding: rem-calc(24px); @extend .hand-cursor;
+		  text-transform: uppercase; text-align: center;
+		  #{$margin-right}: 0; border-radius: 0; border: 0;
+			@include flexDisplay(); @include flexDisplayAlign('center-middle');
+			@include transitionEffect();
+
+			position: relative;
+			&:hover{
+				text-decoration: none;
+				&:after {
+					height: 2px;
+				}
+			}
+			&:after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 0;
+			}
+		}//close a
+		&.is-active > a{
+		  border: 0;
+			text-decoration: none;
+			&:after {
+				height: 2px;
+			}
+		}
+		&.accordion-item{
+			width: 100%;
+			> a{text-align: #{$left};}
+		}
+	}
+}//close nav-tabs
+.tabs{
+	@include flexDisplay();
+	li{
+		display: inline-flex; justify-content: center;
+		a{
+			@include flexDisplay(); @include flexDisplayAlign('center');
+			width: 100%;
+		}
+	}
+}
+.tabs-style-2tabs.paragraph--type--bp-tabs {
+  #tabs-style, .tabs, .accordion-tabs {
+    > li{
+      width: calc(100% / 2);
+    }
+  }
+}
+.tabs-style-3tabs.paragraph--type--bp-tabs {
+  #tabs-style, .tabs, .accordion-tabs {
+    > li{
+      width: calc(100% / 3);
+    }
+  }
+}
+.tabs-style-4tabs.paragraph--type--bp-tabs {
+  #tabs-style, .tabs, .accordion-tabs {
+    > li {
+      width: calc(100% / 4);
+    }
+  }
+}

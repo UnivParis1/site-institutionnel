@@ -1,0 +1,51 @@
+uuid: e0e94f73-3a11-462d-ab25-204c55f89883
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.tiles.bp_width
+    - field.field.paragraph.tiles.field_column_number
+    - field.field.paragraph.tiles.field_tile
+    - field.field.paragraph.tiles.field_title
+    - paragraphs.paragraphs_type.tiles
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.tiles.default
+targetEntityType: paragraph
+bundle: tiles
+mode: default
+content:
+  bp_width:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_column_number:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_tile:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

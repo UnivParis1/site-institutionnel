@@ -1,0 +1,23 @@
+uuid: cab68aab-ddf8-465d-bcdc-d612070c9daf
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_disable_canonical_url
+    - node.type.second_level_pages
+id: node.second_level_pages.field_disable_canonical_url
+field_name: field_disable_canonical_url
+entity_type: node
+bundle: second_level_pages
+label: "Désactiver l'URL canonique du site principal"
+description: "Si vous publiez un contenu sur plusieurs sites, l'url canonique du contenu sera toujours l'url canonique du contenu sur le site principal où il a été publié. Cochez cette option pour désactiver ce comportement d'url canonique unique et le contenu sera alors affiché sur chaque site au lieu d'être redirigé vers le site principal. Soyez prudent avec cette option, cela peut générer du contenu dupliqué."
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

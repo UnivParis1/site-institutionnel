@@ -1,0 +1,50 @@
+uuid: 836bed80-694c-4198-b7cb-9551feba632a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.communique
+    - field.field.media.file.field_extension
+    - field.field.media.file.field_media_file
+    - field.field.media.file.field_size
+    - media.type.file
+  module:
+    - file
+    - up1_global
+id: media.file.communique
+targetEntityType: media
+bundle: file
+mode: communique
+content:
+  field_extension:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media_file:
+    type: file_url_plain
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_size:
+    type: filesize_up1
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: 0
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

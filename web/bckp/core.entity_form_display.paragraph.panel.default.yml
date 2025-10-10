@@ -1,0 +1,70 @@
+uuid: 02335dab-c75f-40bb-924a-396df92665ba
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.panel.field_button_label
+    - field.field.paragraph.panel.field_media_image
+    - field.field.paragraph.panel.field_panel_description
+    - field.field.paragraph.panel.field_panel_link
+    - field.field.paragraph.panel.field_panel_title
+    - paragraphs.paragraphs_type.panel
+  module:
+    - entity_browser
+    - link
+id: paragraph.panel.default
+targetEntityType: paragraph
+bundle: panel
+mode: default
+content:
+  field_button_label:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_media_image:
+    type: entity_browser_entity_reference
+    weight: 3
+    region: content
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: true
+      open: false
+      field_widget_display_settings:
+        view_mode: tile
+      selection_mode: selection_append
+    third_party_settings: {  }
+  field_panel_description:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_panel_link:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_panel_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

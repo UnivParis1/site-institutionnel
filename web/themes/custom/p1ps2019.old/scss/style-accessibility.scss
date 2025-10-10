@@ -1,0 +1,30 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Style - Fichier principal
+    Par Ebizproduction
+*/
+
+.accessibility-mode {
+  /* Ebizproduction : Outils et fonctions */
+  $global-text-direction: ltr;
+
+  @import "tools/toolsAccessibilite";
+  @import "tools/typography";
+  @import "foundation/settings";
+  @import 'foundation';
+  @include foundation-breadcrumbs;
+
+  @import "tools/mixins";
+  @import "base/colors";
+  .mask{
+    @include maskBackground($background-main-color, 0.75);
+  }
+  .breadcrumbs li{float: none;}
+  body{
+    color: $text-black;
+    [class*="paris1-bg"]{
+      color: $text-white;
+      *{color: inherit;}
+    }
+  }
+}

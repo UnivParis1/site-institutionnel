@@ -1,0 +1,33 @@
+uuid: 51fc10ff-163d-487a-8938-e419bc7c574b
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: publication_pattern
+label: publication_pattern
+type: 'canonical_entities:node'
+pattern: '[node:content-type:name]s/[node:title]'
+selection_criteria:
+  4b8d9656-be50-40cd-9b3d-c2b9409582a3:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 4b8d9656-be50-40cd-9b3d-c2b9409582a3
+    context_mapping:
+      node: node
+    bundles:
+      publication: publication
+  8192af33-30b8-4b0f-9c7c-ace612fc6cd1:
+    id: language
+    negate: false
+    uuid: 8192af33-30b8-4b0f-9c7c-ace612fc6cd1
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      fr: fr
+selection_logic: and
+weight: -5
+relationships:
+  'node:langcode:language':
+    label: Langue

@@ -1,0 +1,20 @@
+uuid: 227164a3-2c8d-4f79-aa90-f1d9268e1591
+langcode: fr
+status: true
+dependencies:
+  module:
+    - sorbonne_tv
+title: 'Queue: Sorbonne TV - Synchro des vidéos (API Sorbonne)'
+id: ultimate_cron_queue_sorbonne_tv_sync_multimedia_queue
+weight: 10
+module: sorbonne_tv
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

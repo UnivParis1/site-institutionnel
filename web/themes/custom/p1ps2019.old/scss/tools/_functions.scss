@@ -1,0 +1,31 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > Functions
+    Par Ebizproduction
+*/
+
+/* Ebizproduction : Fonctions > Typographie */
+@function getGutterVal($breakpointVal: xxlarge, $array: $grid-column-responsive-gutter){
+  $gutterVal : map-get($array, $breakpointVal);
+  @if $gutterVal == null {
+     //$gutterVal : map-get($array, medium);
+     $gutterVal : $fgutter;
+  }
+
+  @return $gutterVal;
+}
+
+
+@function calculateRem($size) {
+ $remSize: $size / 16px;
+ @return #{$remSize}rem;
+}
+
+
+@function is_numeric($var) {
+    @if type-of($var) == number {
+        @return unitless($var);
+    } @else {
+        @return false;
+    }
+}

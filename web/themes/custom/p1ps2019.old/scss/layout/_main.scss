@@ -1,0 +1,31 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > Main
+    Par Ebizproduction
+*/
+/* Ebizproduction : Corps de la page */
+
+
+
+.breadcrumbs{
+	li{
+		float: none;
+		display: inline;
+    font-size: rem-calc(15px);
+		a{
+			position:relative;
+			&:before{
+				content: "";
+				height: 1px;
+				width: 100%;
+				position: absolute;
+				#{$left}: 0;
+				bottom: 0.125rem;
+			}
+			&:hover{
+				text-decoration:none;
+				&:before{display:none;}
+			}
+		}
+	}
+}

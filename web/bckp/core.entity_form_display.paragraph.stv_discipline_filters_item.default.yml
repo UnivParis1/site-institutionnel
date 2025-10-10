@@ -1,0 +1,100 @@
+uuid: 2d6d4a8a-3b96-48c3-b5a9-c61d51b5765f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.stv_discipline_filters_item.field_sorbonne_tv_color_txt
+    - field.field.paragraph.stv_discipline_filters_item.field_sorbonne_tv_prg_color
+    - field.field.paragraph.stv_discipline_filters_item.field_stv_discipline_filters
+    - field.field.paragraph.stv_discipline_filters_item.field_stv_discipline_picto
+    - field.field.paragraph.stv_discipline_filters_item.field_title
+    - paragraphs.paragraphs_type.stv_discipline_filters_item
+  module:
+    - entity_browser
+    - jquery_minicolors
+id: paragraph.stv_discipline_filters_item.default
+targetEntityType: paragraph
+bundle: stv_discipline_filters_item
+mode: default
+content:
+  field_sorbonne_tv_color_txt:
+    type: jquery_minicolors_widget
+    weight: 2
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_sorbonne_tv_prg_color:
+    type: jquery_minicolors_widget
+    weight: 1
+    region: content
+    settings:
+      size: '60'
+      placeholder: ''
+      control: hue
+      format: hex
+      opacity: 0
+      swatches: ''
+      position: 'bottom left'
+      theme: default
+      animation_speed: 50
+      animation_easing: swing
+      change_delay: 0
+      letter_case: lowercase
+      show_speed: 100
+      hide_speed: 100
+      keywords: ''
+      inline: 0
+    third_party_settings: {  }
+  field_stv_discipline_filters:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_stv_discipline_picto:
+    type: entity_browser_entity_reference
+    weight: 3
+    region: content
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: true
+      field_widget_display_settings:
+        view_mode: default
+      selection_mode: selection_append
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,22 @@
+uuid: 61fe61c2-2640-4195-b2b2-e180ffc89193
+langcode: fr
+status: true
+dependencies:
+  config:
+    - comment.type.comment
+id: comment.comment.status
+field_name: status
+entity_type: comment
+bundle: comment
+label: Publié
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: 'Drupal\comment\Entity\Comment::getDefaultStatus'
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

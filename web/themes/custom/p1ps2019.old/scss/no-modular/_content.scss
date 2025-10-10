@@ -1,0 +1,490 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > Content
+    Par Ebizproduction
+*/
+
+/* Ebizproduction : content */
+body{
+  &.adminimal-admin-toolbar {
+    #admin-toolbar-search-tab {
+      .form-item.js-form-type-textfield {
+        &:before {
+          background: none !important;
+        }
+        input#admin-toolbar-search-input {
+          height: 2rem !important;
+          font-size: rem-calc(13px) !important;
+          &::-webkit-input-placeholder {
+            font-size: rem-calc(13px);
+          }
+
+          &:-moz-placeholder { /* Firefox 18- */
+            font-size: rem-calc(13px);
+          }
+
+          &::-moz-placeholder { /* Firefox 19+ */
+            font-size: rem-calc(13px);
+          }
+
+          &:-ms-input-placeholder {
+            font-size: rem-calc(13px);
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebar-map{
+  .geolocation-map-container{
+    height: rem-calc(298px) !important;
+    .leaflet-popup-pane{display: none;}
+  }
+}
+
+.infos-entry + .infos-entry{
+  margin-top: rem-calc(8px);
+}
+
+.block-up1-keywords{
+  h2{@extend .field-sep;}
+}
+
+.keywords{
+  color: $text-main-color;
+  .keywords-title{
+    @include font-bold();
+    font-family: $font-main;
+  }
+  *{
+    width: 33%; display: inline-block;
+  }
+  .path-frontpage &{
+    *{width: calc(20% - 4px);}
+  }
+  a{
+    font-size: rem-calc(15px);
+  }
+}
+
+.header-img{
+  img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+}
+
+
+#block-p1ps2019-motsclessaisonniers{
+  @extend .section-sep-top.small;
+}
+.block-local-tasks-block{
+  @include flex(); @include flex-align(center,middle);
+  position: fixed; bottom: 0; width: 100%; z-index: 1000;
+  ul{
+    li{
+      float: left;
+      &:not(:last-of-type){
+        margin-right: rem-calc(16px);
+        &:after{
+          content: "|"; padding-left: rem-calc(16px);
+        }
+      }
+      a{text-decoration: none;}
+    }
+  }
+}
+.event{
+  h1 {
+    font-size: rem-calc(45px);
+  }
+  .fa-map-signs::before{
+    font-size: 1.25rem;
+    padding: rem-calc(0 12px);
+  }
+  .img-container {
+    .field--name-field-media {
+      max-height: 462px;
+      overflow: hidden;
+    }
+  }
+}
+.news, .news2018 {
+  .img-container {
+    .field--name-field-media {
+      max-height: 657px;
+      overflow: hidden;
+    }
+  }
+  h1 {
+    font-size: rem-calc(45px);
+  }
+  &.teaser {
+    .box-content {
+      padding: 2.25rem 1.25rem .5rem;
+      .title {
+        font-size: 1.25rem;
+      }
+      .categ-style {
+        margin: 0;
+      }
+      .txt.medium {
+        font-size: rem-calc(18px);
+        margin: 1.25rem 0rem;
+      }
+    }
+  }
+  .social-and-calendar {
+    @include flexDisplay();
+    @include flexDisplayAlign('center-middle');
+    justify-content: flex-end;
+  }
+  .social-buttons{
+    /*#{$padding-left}: rem-calc(32px);*/
+    @include flexDisplay(); @include flexDisplayAlign('start');
+    @include flexDisplayAlign('vcenter'); width: rem-calc(150px);
+    .social-buttons-title{display: none;}
+    .links {
+      margin: 0;
+      padding-right: 10px;
+      a{
+        background: transparent;
+      }
+    }
+  }
+  .social-buttons-links {
+    @include flexDisplay();
+    li{
+      display: inline-flex; align-items: center;
+      a{
+        width: auto;
+        padding: 0; @include flexDisplay();
+        color: #00386e;
+        &:hover {
+          text-decoration: none;
+        }
+        i {
+          &.fa-facebook {
+            &:before {
+              content: "\f082";
+            }
+          }
+          &:before{font-size: rem-calc(32px);
+          }
+        }
+      }
+      &:not(:last-of-type){
+        #{$margin-right}: rem-calc(16px);
+      }
+    }
+  }
+}
+//============ Offer ============
+//Full
+.offre-emploi {
+  #event-content {
+    ul {
+      margin-top: 0.5rem;
+
+      li::before {
+        font-size: 3em;
+        line-height: 0em;
+        vertical-align: middle;
+        padding-bottom: rem-calc(10px);
+      }
+    }
+    h2, h3 {
+      margin-top: 2rem;
+    }
+    h4 {
+      margin: 1rem 0 2rem;
+    }
+    .field {
+      p {
+        margin-top: 1rem;
+      }
+    }
+  }
+  #event-sidebar {
+    .field--item {
+      font-weight: 800;
+    }
+    .field--label-inline {
+      display: inline-flex;
+
+      .field--label {
+        display: block;
+        width: 100%;
+      }
+
+      .field--item {
+        padding-left: rem-calc(5px);
+      }
+    }
+    .jobinfo, .toapp, .location {
+      text-align: center;
+      padding: 0 rem-calc(10px) rem-calc(10px);
+      border: 2px solid #D1D1D1;
+      font-size: 1.2em;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      margin-top: rem-calc(50px);
+    }
+    .fa, .fas{
+      color: #fff;
+      background-color:#D1D1D1;
+      font-size: 3em;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      text-align: center;
+      margin-top: rem-calc(-45px);
+      padding: rem-calc(15px);
+
+      &::before {
+        font: inherit;
+      }
+    }
+  }
+}
+
+//Teaser
+.offer {
+  .blue-box {
+    .categ-style {
+      border: 1px solid #fff;
+    }
+    .title {
+      color: #fff;
+    }
+  }
+}
+
+article{
+  .paragraph, .paragraph-color {
+    .field--type-text-long {
+      ul{
+        list-style-type: disc;
+        list-style-position:inside;
+      }
+    }
+  }
+}
+
+.node--type-second-level-pages {
+  .paris1-bg-blue {
+    .field--type-text-long {
+      a {
+        color: $text-white;
+      }
+    }
+  }
+}
+
+//Special events : Viva / Soutenances de these
+
+.viva {
+  .box-content {
+    padding: rem-calc(32px 20px);
+    &.blue-box {
+      .texthdr {
+        text-align: center;
+        margin: 0 auto 0.5rem;
+        width: max-content;
+        display: block;
+        padding: 0.2rem 1rem .5rem;
+        border: 2px solid;
+        text-transform: uppercase;
+        position: absolute;
+        top: -20px;
+        left: 40%;
+      }
+    }
+    .top-infos {
+      h3 {
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid;
+        border-top: 1px solid;
+      }
+    }
+    .subtitle {
+      margin-bottom: 1rem;
+    }
+    .board {
+      font-size: 0.9rem;
+      margin: 1rem 0;
+      ul {
+        display: inline;
+        line-height: 1rem;
+        li {
+          display: inline;
+        }
+      }
+    }
+    .event-details {
+      margin-bottom: rem-calc(16px);
+      .date-style {
+        font-size: 100%;
+        font-weight: $regular;
+        margin-bottom: rem-calc(16px);
+        > span {
+          display: flex;
+          align-items: flex-start;
+          &.date-wrapper {
+            margin-bottom: 0;
+            padding: 0;
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/picto-calendar.svg") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
+            }
+          }
+          &.lieu-wrapper {
+            &:before {
+              content: "";
+              background: url("../images/p1ps2022/pointer-icon.svg") no-repeat center center / 100% auto;
+              width: 15px;
+              height: 20px;
+              display: inline-block;
+              margin: 2px 0.75rem 0 0;
+              flex-shrink: 0;
+            }
+          }
+        }
+      }
+    }
+    .categ-style {
+      font-size: 1rem;
+    }
+    .field-add-to-cal {
+      max-width: none;
+      width: 100%;
+    }
+  }
+}
+
+.page-personnelle {
+  a.social-link {
+    &:hover {
+      color: #BE8719;
+      text-decoration: none;
+    }
+  }
+  .resume {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .fa-file-pdf::before {
+    font-size: rem-calc(48px);
+  }
+  .mediafichierlien {
+    width: 95%;
+    display: block;
+    font-size: 1.5em;
+    color: #fff;
+    border-top: 1px solid #FFF;
+    margin-top: 0.9375rem;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 0.9375rem;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+//VIEWS
+.view-annuaire-sites {
+  .view-header-color {
+    margin-bottom: 3rem;
+  }
+  .views-exposed-form {
+    .form-actions {
+      margin-top: 4rem;
+    }
+  }
+  .section-wrapper {
+    .column-item {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+.path-domaines-expertise {
+  .view-skills {
+    .view-header-color {
+      margin-bottom: 3rem;
+    }
+    .section-wrapper {
+      .column-item {
+        margin-bottom: 1.5rem;
+        ul {
+          li {
+            color: #fff;
+            background-color: #00386e;
+            font-family: "Montserrat";
+            text-align: center;
+            font-size: 1.125rem;
+            line-height: 1.2;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            display: inline-block;
+            margin: 1rem 1rem 0 0;
+          }
+        }
+      }
+    }
+  }
+}
+.pager-archives {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  .bold-link {
+    font-weight: bold;
+    margin: 4rem 0 5rem 0;
+  }
+}
+.bef-exposed-form {
+  .chosen-container-single .chosen-single, input[type="text"], .form-date, select.form-select {
+    padding: rem-calc(0 24px 0 40px);
+  }
+}
+.sitemap {
+  display: block;
+  width: calc(100% - 2rem);
+  padding: 1rem;
+  columns: 6 320px;
+  column-gap: 3rem;
+  column-rule-style: double;
+  column-rule-color: #00386e;
+  column-rule-width: thin;
+  .sitemap-item {
+    h2 {
+      font-size: 1.8125rem;
+    }
+    ul {
+      list-style-type: none;
+      li {
+        font-weight: bold;
+        a {
+          text-decoration: underline;
+        }
+        ul {
+          list-style-type: circle;
+          li {
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+}

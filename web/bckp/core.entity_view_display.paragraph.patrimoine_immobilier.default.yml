@@ -1,0 +1,58 @@
+uuid: 3daa7f44-3bbf-4ab5-a322-a09c7bae9643
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.patrimoine_immobilier.bp_link
+    - field.field.paragraph.patrimoine_immobilier.field_thumbnail_patrimoine
+    - field.field.paragraph.patrimoine_immobilier.field_title
+    - field.field.paragraph.patrimoine_immobilier.field_type_patrimoine
+    - image.style.patrimoine_immo_thumbnail
+    - paragraphs.paragraphs_type.patrimoine_immobilier
+  module:
+    - link
+    - media
+id: paragraph.patrimoine_immobilier.default
+targetEntityType: paragraph
+bundle: patrimoine_immobilier
+mode: default
+content:
+  bp_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_thumbnail_patrimoine:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: patrimoine_immo_thumbnail
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_type_patrimoine:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

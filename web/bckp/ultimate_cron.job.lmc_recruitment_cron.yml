@@ -1,0 +1,29 @@
+uuid: 804ac3a1-10fc-436d-98f9-ca0eb4e5adec
+langcode: fr
+status: true
+dependencies:
+  module:
+    - lmc_recruitment
+title: 'Import job offers from Beetween'
+id: lmc_recruitment_cron
+weight: 0
+module: lmc_recruitment
+callback: 'lmc_recruitment#cron'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '0+@ */6 * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

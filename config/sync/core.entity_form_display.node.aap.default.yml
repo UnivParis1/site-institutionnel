@@ -1,0 +1,217 @@
+uuid: be29e4be-67b7-4cc3-a4fb-b2f50c8c7957
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.aap.body
+    - field.field.node.aap.field_applicant_profile
+    - field.field.node.aap.field_candidates_profile
+    - field.field.node.aap.field_eligibility_criteria
+    - field.field.node.aap.field_lead
+    - field.field.node.aap.field_lead_en
+    - field.field.node.aap.field_main_objectives
+    - field.field.node.aap.field_main_objectives_en
+    - node.type.aap
+  module:
+    - content_moderation
+    - field_group
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_language:
+      children:
+        - group_francais
+        - group_english
+      label: Language
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: true
+        direction: vertical
+        width_breakpoint: 640
+    group_francais:
+      children:
+        - title
+        - field_lead
+        - field_eligibility_criteria
+        - field_candidates_profile
+        - field_main_objectives
+      label: Français
+      region: content
+      parent_name: group_language
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: fr
+        label_as_html: false
+        formatter: open
+        description: ''
+        required_fields: true
+        direction: vertical
+        width_breakpoint: 640
+    group_english:
+      children:
+        - field_lead_en
+        - field_main_objectives_en
+        - field_applicant_profile
+      label: English
+      region: content
+      parent_name: group_language
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+        direction: vertical
+        width_breakpoint: 640
+id: node.aap.default
+targetEntityType: node
+bundle: aap
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_applicant_profile:
+    type: options_select
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_candidates_profile:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_eligibility_criteria:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_lead:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_lead_en:
+    type: text_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_main_objectives:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_main_objectives_en:
+    type: options_select
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 0
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  site_id:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true

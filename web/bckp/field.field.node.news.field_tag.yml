@@ -1,0 +1,29 @@
+uuid: 18d55709-22bb-4d46-a5a2-27019ac3961e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tag
+    - node.type.news
+    - taxonomy.vocabulary.tags
+id: node.news.field_tag
+field_name: field_tag
+entity_type: node
+bundle: news
+label: Étiquette
+description: 'Vous ne trouvez pas votre tag ? Établissez une demande à la DIRCOM. '
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'site_default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: 0
+    auto_create_bundle: ''
+field_type: entity_reference

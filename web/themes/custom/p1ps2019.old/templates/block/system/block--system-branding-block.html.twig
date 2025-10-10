@@ -1,0 +1,29 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Default theme implementation for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
+ *
+ * @ingroup templates
+ */
+#}
+{%  if host_url is empty %}
+  {% set host_url = path('<front>') %}
+{% endif %}
+{% block content %}
+  <div class="branding">
+  {% if site_logo %}
+    <a class="logo navbar-btn pull-left"  href="{{ host_url }}" title="{{ 'Université Paris 1 Panthéon-Sorbonne'|t }}" rel="home">
+      {{ source(directory ~ '/logo.svg') }}
+    </a>
+  {% endif %}
+  </div>
+{% endblock %}

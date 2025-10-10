@@ -1,0 +1,207 @@
+.centres-up1-form, .center-wrapper {
+  .map-centre {
+    width: 100%;
+    //min-height: rem-calc(250px);
+    display: flex;
+    flex-direction: row-reverse;
+    .center-form {
+      width: 100%;
+      z-index: 401;
+      #edit_centre_name_chosen {
+        width: 100% !important;
+      }
+      input.circle {
+        font: normal normal normal 20px/1 FontAwesome;
+      }
+      select {
+        margin: 0;
+      }
+      .chosen-container-single {
+        .chosen-single {
+          padding: 0 4.5rem 0 1rem;
+          &:after {
+            font-size: rem-calc(14px);
+          }
+          span{
+            font-size: rem-calc(15px);
+          }
+        }
+        &.chosen-container-active {
+          .chosen-single {
+            border-radius: 50rem;
+          }
+        }
+        .chosen-drop {
+          margin-top: 0;
+          border: none !important;
+          border-radius: 0;
+          padding: 0.5rem 0 0 0;
+          background-color: $white;
+          box-shadow: 0px 20px 25px 0px rgba($background-main-color,0.75);
+          .chosen-search input[type="text"] {
+            margin: 0 0 0.5rem 0;
+            padding: 5px 20px 5px 5px;
+            border: 1px solid $gray2;
+            //background: url(chosen-sprite.png) no-repeat 100% -20px;
+            background: url("../images/p1ps2022/chosen-search.png") no-repeat right center / 19px 13px !important;
+            font-size: 1rem;
+            font-family: $font-main;
+          }
+        }
+      }
+      .overlay-infos {
+
+        > div {
+          display: flex;
+          align-items: center;
+        }
+
+
+
+        a {
+          color: #fff
+        }
+        @include flexDisplay();
+        align-items: flex-end;
+        @include flexDisplayAlign('center');
+        .ajax-progress-throbber  {
+          .throbber {}
+          .message {
+            background: none;
+            &:before {
+              content: "";
+            }
+          }
+        }
+        .form-item{
+          label{
+            @extend .h2-style;
+            margin-bottom: rem-calc(0px);
+            white-space: nowrap;
+          }
+          .chosen-container {
+            margin-left: rem-calc(100px);
+          }
+        }
+        input[type="submit"]{
+          margin: 0 0 rem-calc(8px) rem-calc(16px);
+          &.circle{
+            width: 3.5rem;
+            height: 3.5rem;
+          }
+        }
+      }
+    }
+  }
+  .center-wrapper {
+    background-color: #00386e;
+    @include breakpoint($xlarge) {
+      padding-bottom: rem-calc(32px);
+    }
+  }
+  .details-centre {
+    display: flex;
+    font-size: rem-calc(16px);
+    @extend .grid-container;
+    .image-centre {
+      width: 65%;
+      &:after {
+        background: rgba(0, 50, 110, 0.4);
+      }
+    }
+    .centre-up1 {
+      background: #00386e;
+      width: 35%;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      .centre-up1-info {
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+          color: #fff;
+          font-size: rem-calc(32px);
+        }
+
+        .centre-name {
+          display: flex;
+          align-items: center;
+        }
+
+        .centre-item {
+          display: flex;
+          align-items: center;
+          margin-bottom: rem-calc(8px);
+          @include flexDisplayAlign('space-evenly');
+
+          .fa-phone {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+
+          .fa-building {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+
+          .fa-envelope {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+
+          .fa-info-circle {
+            font-size: 1.5rem;
+            margin: 1rem 1rem 1rem 0;
+          }
+        }
+
+        .centre-email {
+          display: flex;
+          align-items: center;
+          @include flexDisplayAlign('space-evenly');
+        }
+
+        .centre-info {
+          display: flex;
+          align-items: center;
+          @include flexDisplayAlign('space-evenly');
+
+        }
+
+        h4, address, a, .centre-phone, .centre-email, .centre-info {
+          color: #fff;
+        }
+
+        a {
+          &:hover {
+            color: #fff;
+          }
+        }
+
+        .fa-envelope, .fa-info-circle, .fa-map-signs, .fa-phone {
+          margin: 1rem 1rem 1rem 0;
+
+          &:before {
+            font-size: 1.5rem;
+          }
+        }
+
+        address {
+          .come-to-centre {
+            font-size: 1rem;
+            display: inline-block;
+            margin-left: 1rem;
+
+            a {
+              text-decoration: none;
+              margin: 0 .25rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

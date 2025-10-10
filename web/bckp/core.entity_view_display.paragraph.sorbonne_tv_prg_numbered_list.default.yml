@@ -1,0 +1,58 @@
+uuid: f08d426d-810d-47cd-aabf-d5aa4229882e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_prg_linked_title
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_stv_prg_numbered_list_type
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_stv_prg_video
+    - field.field.paragraph.sorbonne_tv_prg_numbered_list.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_prg_numbered_list
+  module:
+    - field_formatter_class
+    - link
+id: paragraph.sorbonne_tv_prg_numbered_list.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_prg_numbered_list
+mode: default
+content:
+  field_prg_linked_title:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      field_formatter_class:
+        class: 'prg_stv_title prg_stv_title_linked'
+    weight: 0
+    region: content
+  field_stv_prg_video:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: sorbonne_tv_numbered_list
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: prg_stv_numbered_list
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      field_formatter_class:
+        class: prg_stv_title
+    weight: 0
+    region: content
+hidden:
+  field_sorbonne_tv_prg_color: true
+  field_stv_prg_numbered_list_type: true
+  search_api_excerpt: true

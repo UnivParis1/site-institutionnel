@@ -1,0 +1,81 @@
+/*
+    Feuille de style SCSS
+    SMACSS : Responsive > Btn
+    Par Ebizproduction
+*/
+/* Ebizproduction : Boutons */
+
+.site-content-wrapper{
+
+    .btn,
+    .button--primary,
+    .button,
+    button:not(.reset-btn):not(.trigger):not(.link-style):not(.icon-container):not(.toolbar-item):not(.toolbar-icon) {
+        @extend .hand-cursor;
+        text-transform: uppercase;
+        //display: block;
+        text-align: center;
+        text-decoration: none;
+        font-family: $font-main;
+        @include setFont($fontType-medium);
+        font-size: rem-calc(14px);
+        line-height: 1.22;
+        padding: rem-calc(12px 24px);
+        margin-top: rem-calc(32px);
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 50rem;
+
+        @extend .transition-effect;
+        &.with-icon{
+            //@extend .icon-after;
+            display: inline-flex; align-items: center;
+            padding: rem-calc(8px 16px);
+            &:before{
+              #{$margin-right} : rem-calc(12px);
+              font-size: rem-calc(20px);
+            }
+        }
+
+        &.btn-secondary{@include transitionEffect();}
+    }//close btn
+}//close .site-content-wrapper
+
+button.semi-oval{
+  border-radius: rem-calc(0 24px 24px 0);
+  font-size: rem-calc(14px); padding: rem-calc(8px 16px);
+  &.flip{
+    border-radius: rem-calc(32px 0 0 32px);
+  }
+  &:focus{outline: none;}
+}
+
+/*.link-style, button.link-style{
+    position: relative;
+    text-decoration: none;
+    @extend .display-flex;
+    @extend .display-flex.valign-center;
+    &:hover{
+      text-decoration: underline;
+    }
+    &.with-arrow{
+        font-size: rem-calc(16px); line-height: 2;
+        @include setFont($fontType-medium);
+        @extend .icon-after;
+        //arrow
+        &:after{
+            content:"\e93b"; display: inline-block;
+            @include responsiveVal(#{$margin-left}, $gutter/2);
+            font-size: rem-calc(16px);
+            position: relative; #{$left}: 0;
+            @extend .transition-effect;
+        }
+
+        &:hover, &:focus{
+            text-decoration: none;
+            &:after{
+                @include responsiveVal(#{$left}, $gutter/2);
+            }
+        }
+    }
+}//close link-style*/

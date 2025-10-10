@@ -1,0 +1,52 @@
+uuid: 6277d62c-1305-4451-9138-e19cda066e95
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.icon_grid.bp_background
+    - field.field.paragraph.icon_grid.field_column_number
+    - field.field.paragraph.icon_grid.field_icon_grid_item
+    - field.field.paragraph.icon_grid.field_title
+    - paragraphs.paragraphs_type.icon_grid
+  module:
+    - paragraphs
+id: paragraph.icon_grid.default
+targetEntityType: paragraph
+bundle: icon_grid
+mode: default
+content:
+  bp_background:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_column_number:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_icon_grid_item:
+    type: entity_reference_paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

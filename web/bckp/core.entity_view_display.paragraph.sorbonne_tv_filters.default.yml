@@ -1,0 +1,86 @@
+uuid: eeb52714-d338-416e-9596-5b0fd02aa9fa
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_filters.field_prg_linked_title
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_disciplines
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_filter_on
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_filter_type
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_prg_bg_color
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_filters.field_sorbonne_tv_videos_types
+    - field.field.paragraph.sorbonne_tv_filters.field_stv_links_filter_ref
+    - field.field.paragraph.sorbonne_tv_filters.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_filters
+  module:
+    - entity_reference_revisions
+    - field_formatter_class
+    - link
+id: paragraph.sorbonne_tv_filters.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_filters
+mode: default
+content:
+  field_prg_linked_title:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      field_formatter_class:
+        class: 'prg_stv_title prg_stv_title_linked'
+    weight: 0
+    region: content
+  field_sorbonne_tv_disciplines:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: 'prg_stv_cta_filters_wrapper prg_stv_cta_filter_disciplines'
+    weight: 4
+    region: content
+  field_sorbonne_tv_videos_types:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: 'prg_stv_cta_filters_wrapper prg_stv_cta_filter_types '
+    weight: 3
+    region: content
+  field_stv_links_filter_ref:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: 'prg_stv_cta_filters_wrapper prg_stv_cta_filter_links_wrapper'
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      field_formatter_class:
+        class: prg_stv_title
+    weight: 1
+    region: content
+hidden:
+  field_sorbonne_tv_filter_on: true
+  field_sorbonne_tv_filter_type: true
+  field_sorbonne_tv_prg_bg_color: true
+  field_sorbonne_tv_prg_color: true
+  search_api_excerpt: true

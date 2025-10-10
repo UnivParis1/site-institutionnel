@@ -1,0 +1,29 @@
+uuid: 36e61f4e-540e-4583-95d5-87946f14bfd0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media
+    - media.type.image
+    - paragraphs.paragraphs_type.footer_partenaires
+id: paragraph.footer_partenaires.field_media
+field_name: field_media
+entity_type: paragraph
+bundle: footer_partenaires
+label: "Image d'illustration"
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

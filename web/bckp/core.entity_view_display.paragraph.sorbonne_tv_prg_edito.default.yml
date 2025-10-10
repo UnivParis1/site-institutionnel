@@ -1,0 +1,51 @@
+uuid: 9a5fdcd7-1839-4b3e-964a-e51b4251afaf
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_sorbonne_tv_prg_color
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_sorbonne_tv_prg_media
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_text
+    - field.field.paragraph.sorbonne_tv_prg_edito.field_title
+    - paragraphs.paragraphs_type.sorbonne_tv_prg_edito
+  module:
+    - field_formatter_class
+    - text
+id: paragraph.sorbonne_tv_prg_edito.default
+targetEntityType: paragraph
+bundle: sorbonne_tv_prg_edito
+mode: default
+content:
+  field_sorbonne_tv_prg_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: sorbonne_tv_edito_blk
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: prg_stv_media
+    weight: 2
+    region: content
+  field_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: 'prg_stv_txt body-field'
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      field_formatter_class:
+        class: prg_stv_title
+    weight: 0
+    region: content
+hidden:
+  field_sorbonne_tv_prg_color: true
+  search_api_excerpt: true

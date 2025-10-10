@@ -1,0 +1,22 @@
+uuid: 00ab4dbe-33ed-441b-8f6d-3165de8fc655
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: presse
+label: Presse
+type: 'canonical_entities:node'
+pattern: 'espace-presse/[node:field_type:entity:name]/[node:title]'
+selection_criteria:
+  d7cf2464-be0f-4b36-a715-308a404a8b55:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: d7cf2464-be0f-4b36-a715-308a404a8b55
+    context_mapping:
+      node: node
+    bundles:
+      press: press
+selection_logic: and
+weight: -5
+relationships: {  }

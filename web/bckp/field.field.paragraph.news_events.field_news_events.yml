@@ -1,0 +1,51 @@
+uuid: 3851288c-c7c2-4e87-919d-c5c81d6aed65
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_news_events
+    - paragraphs.paragraphs_type.news_events
+    - views.view.news_events
+  module:
+    - viewsreference
+id: paragraph.news_events.field_news_events
+field_name: field_news_events
+entity_type: paragraph
+bundle: news_events
+label: 'Actualités & évènements'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    target_uuid: d48fd2a1-e3fe-433c-a73a-0904b5c6092c
+    display_id: news_micro
+    data: null
+    options:
+      title: 0
+      argument: ''
+    argument: null
+    title: 0
+  -
+    target_uuid: d48fd2a1-e3fe-433c-a73a-0904b5c6092c
+    display_id: events_micro
+    data: null
+    options:
+      title: 0
+      argument: ''
+    argument: null
+    title: 0
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+  plugin_types:
+    block: block
+  preselect_views:
+    news_events: news_events
+  enabled_settings:
+    argument: argument
+    title: title
+field_type: viewsreference

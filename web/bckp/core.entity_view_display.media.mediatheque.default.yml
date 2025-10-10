@@ -1,0 +1,40 @@
+uuid: 511a520d-d027-4a88-bc57-d5a4257c527b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.mediatheque.field_autoplay
+    - field.field.media.mediatheque.field_media_mediatheque
+    - media.type.mediatheque
+  module:
+    - up1_mediatheque_source
+id: media.mediatheque.default
+targetEntityType: media
+bundle: mediatheque
+mode: default
+content:
+  field_autoplay:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media_mediatheque:
+    type: mediatheque_embed
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

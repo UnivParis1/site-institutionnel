@@ -1,0 +1,22 @@
+uuid: 2adf1f5d-9dda-41ec-8ddd-cc6ecbb7e755
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: recruitment_pattern
+label: 'Pages recrutement'
+type: 'canonical_entities:node'
+pattern: '[node:content-type:name]/[node:field_offer_type:entity:name]/[node:title]'
+selection_criteria:
+  1b22c05a-a04a-40c5-a0f5-76dd3bf1cbd9:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 1b22c05a-a04a-40c5-a0f5-76dd3bf1cbd9
+    context_mapping:
+      node: node
+    bundles:
+      offer: offer
+selection_logic: and
+weight: -5
+relationships: {  }

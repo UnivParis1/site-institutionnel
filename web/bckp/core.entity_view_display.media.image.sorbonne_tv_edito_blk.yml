@@ -1,0 +1,42 @@
+uuid: 99b81753-e5f4-42c9-bfde-ab1942c710f2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.sorbonne_tv_edito_blk
+    - field.field.media.image.field_credits
+    - field.field.media.image.field_legende
+    - field.field.media.image.field_media_image
+    - image.style.sorbonne_tv_edito_blk
+    - media.type.image
+  module:
+    - field_formatter_class
+    - image
+id: media.image.sorbonne_tv_edito_blk
+targetEntityType: media
+bundle: image
+mode: sorbonne_tv_edito_blk
+content:
+  field_media_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: sorbonne_tv_edito_blk
+      image_loading:
+        attribute: eager
+    third_party_settings:
+      field_formatter_class:
+        class: img-edito
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_credits: true
+  field_legende: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  site_id: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,100 @@
+uuid: 3105c8a3-86bd-43c2-9a26-665fee434009
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.event
+    - node.type.news
+    - node.type.offer
+    - node.type.page
+  module:
+    - content_moderation
+id: publication
+label: Publication
+type: content_moderation
+type_settings:
+  states:
+    archive:
+      label: Archivé
+      weight: 2
+      published: false
+      default_revision: true
+    draft:
+      label: Brouillon
+      weight: -3
+      published: false
+      default_revision: false
+    en_attente_de_publication:
+      label: 'En attente de publication'
+      weight: -1
+      published: false
+      default_revision: false
+    en_relecture:
+      label: 'En relecture'
+      weight: -2
+      published: false
+      default_revision: false
+    published:
+      label: Publié
+      weight: 0
+      published: true
+      default_revision: true
+    unpublished_draft:
+      label: 'Remettre en brouillon'
+      weight: 1
+      published: false
+      default_revision: true
+  transitions:
+    archiver:
+      label: Archiver
+      from:
+        - archive
+        - published
+      to: archive
+      weight: 2
+    create_new_draft:
+      label: 'Enregistrer en brouillon'
+      from:
+        - draft
+      to: draft
+      weight: -3
+    draft_back:
+      label: 'Remettre en brouillon'
+      from:
+        - archive
+        - en_attente_de_publication
+        - en_relecture
+        - published
+      to: unpublished_draft
+      weight: 3
+    mettre_en_relecture:
+      label: 'Mettre en relecture'
+      from:
+        - draft
+        - en_relecture
+        - unpublished_draft
+      to: en_relecture
+      weight: -1
+    programmer_la_publication:
+      label: 'Programmer la publication'
+      from:
+        - en_attente_de_publication
+        - en_relecture
+      to: en_attente_de_publication
+      weight: 0
+    publish:
+      label: Publier
+      from:
+        - archive
+        - en_attente_de_publication
+        - en_relecture
+        - published
+      to: published
+      weight: 1
+  entity_types:
+    node:
+      - event
+      - news
+      - offer
+      - page
+  default_moderation_state: draft
