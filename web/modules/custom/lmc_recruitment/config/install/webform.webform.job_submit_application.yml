@@ -48,20 +48,17 @@ elements: |-
       '#required': true
   file_upload:
     '#type': container
-    jpb_other_document:
+    job_resume:
       '#type': webform_document_file
-      '#title': 'Dépôt Autre document'
-      '#uri_scheme': public
+      '#title': 'Dépôt CV'
       '#file_extensions': 'rtf pdf doc docx '
     job_letter:
       '#type': webform_document_file
       '#title': 'Dépôt Lettre de motivation'
-      '#uri_scheme': public
       '#file_extensions': 'rtf pdf doc docx '
-    job_resume:
+    jpb_other_document:
       '#type': webform_document_file
-      '#title': 'Dépôt CV'
-      '#uri_scheme': public
+      '#title': 'Dépôt Autre document'
       '#file_extensions': 'rtf pdf doc docx '
   job_offer_email:
     '#type': hidden
@@ -275,7 +272,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: _default
-      body: _default
+      body: '<p>Nom : [webform_submission:values:job_name]<br>Prénom : [webform_submission:values:job_firstname]<br>E-mail : [webform_submission:values:job_email:value]<br>Téléphone : [webform_submission:values:job_phone:value]</p>'
       excluded_elements:
         job_offer_email: job_offer_email
       ignore_access: false
@@ -283,7 +280,7 @@ handlers:
       exclude_empty_checkbox: false
       exclude_attachments: false
       html: true
-      attachments: false
+      attachments: true
       twig: false
       theme_name: ''
       parameters: {  }

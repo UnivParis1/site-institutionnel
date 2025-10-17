@@ -80,22 +80,23 @@
   <div class="box-content blue-box same-height">
     <div class="top-infos">
       {{ title_prefix }}
-      <div class="infos-row-wrapper space-between">
-        <div class="categ-wrapper infos-entry">
-          <div class="categ-style"> {{ content.field_job_type }} </div>
-        </div>
-      </div>
+      <div class="infos-row-wrapper" style="justify-content:center;">
+        {% if node is defined and not node.field_job_type.isEmpty() %}
+          <div class="categ-wrapper infos-entry">
+            <div class="categ-style"> {{ content.field_job_type }} </div>
+          </div>
+        {% endif %}
       {{ title_suffix }}
     </div>
     <div class="bottom-infos">
       <h2 class="title semi-infos-sep">
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
-      <p class="offer-service-teaser semi-infos-sep"> {{ content.field_service.0 }} </p>
+      <p class="offer-service-teaser semi-infos-sep text-center"> {{ content.field_service.0 }} </p>
       <p class="offer-type-teaser semi-infos-sep"> {{ content.field_contract_type.0 }} </p>
       {{ content.field_fa_icon }}
-      <div class="node-readmore">
-        <a href="{{ url }}" class="btn outline" title="readmore">{{ "Read more"|t }}</a>
+      <div class="node-readmore text-center">
+        <a href="{{ url }}" class="btn outline" title="readmore" style="color: #ffffff; border-color: #ffffff;">{{ "Read more"|t }}</a>
       </div>
     </div>
   </div>
