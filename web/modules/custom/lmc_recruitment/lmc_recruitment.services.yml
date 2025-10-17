@@ -1,6 +1,6 @@
 services:
   lmc_recruitment.event_subscriber:
     class: Drupal\lmc_recruitment\EventSubscriber\LmcRecruitmentSubscriber
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@plugin.manager.migration']
     tags:
       - { name: event_subscriber }
