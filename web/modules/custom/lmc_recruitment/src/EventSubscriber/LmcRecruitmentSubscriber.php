@@ -7,6 +7,7 @@ namespace Drupal\lmc_recruitment\EventSubscriber;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\migrate\Event\MigrateEvents;
 use Drupal\migrate\Event\MigrateImportEvent;
+use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -15,20 +16,17 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 final class LmcRecruitmentSubscriber implements EventSubscriberInterface {
 
-  /**
-   * The entity type manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
+
   protected $entityTypeManager;
+  protected $migrationPluginManager;
 
-  /**
-   * Constructs the subscriber.
-   */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
-    $this->entityTypeManager = $entityTypeManager;
+  public function __construct(
+    EntityTypeManagerInterface $entity_type_manager,
+    MigrationPluginManagerInterface $migration_plugin_manager
+  ) {
+    $this->entityTypeManager = $entity_type_manager;
+    $this->migrationPluginManager = $migration_plugin_manager;
   }
-
   /**
    * {@inheritdoc}
    */
@@ -37,55 +35,79 @@ final class LmcRecruitmentSubscriber implements EventSubscriberInterface {
     return $events;
   }
 
+
   /**
-   * Reacts to the POST_IMPORT event.
+   * Handle post-import cleanup.
    */
   public function onPostImport(MigrateImportEvent $event) {
     $migration = $event->getMigration();
-
-    // Only act on a specific migration ID. Change 'my_migration' to match yours.
-    if ($migration->id() !== 'recruitment_job') {
+    $migration_id = $migration->id();
+    // Only process specific migrations
+    if ($migration_id !== 'recruitment_job') {
       return;
     }
+    $this->cleanupOrphanedEntities($migration);
+  }
 
-    $id_map = $migration->getIdMap();
-    $id_map->prepareUpdate();
+  /**
+   * Remove entities that no longer exist in source.
+   */
+  protected function cleanupOrphanedEntities($migration) {
+    $destination_config = $migration->getDestinationConfiguration();
 
-    // Clone so that any generators aren't initialized prematurely.
-    $source = clone $migration->getSourcePlugin();
-    $source->rewind();
-    $source_id_values = [];
-
-    while ($source->valid()) {
-      $source_id_values[] = $source->current()->getSourceIdValues();
-      $source->next();
+    // Get destination entity type (e.g., 'node')
+    $entity_type = $destination_config['plugin'] ?? 'node';
+    if (strpos($entity_type, 'entity:') === 0) {
+      $entity_type = substr($entity_type, 7);
     }
-    $id_map->rewind();
 
-    while ($id_map->valid()) {
-      $map_source_id = $id_map->currentSource();
+    $storage = $this->entityTypeManager->getStorage($entity_type);
+    $database = \Drupal::database();
+    $map_table = 'migrate_map_' . $migration->id();
 
-      $destination_ids = $id_map->currentDestination();
+    // Get all destination IDs that are currently in the map
+    $current_dest_ids = $database->select($map_table, 'm')
+      ->fields('m', ['destid1'])
+      ->condition('source_row_status', 0, '>=') // Not failed
+      ->execute()
+      ->fetchCol();
 
-      if (!empty($destination_ids['nid'])) {
-        $storage = $this->entityTypeManager->getStorage('node');
-        $node = $storage->load($destination_ids['nid']);
+    // Get all destination IDs that were EVER migrated by this migration
+    // These are all entities with a record in the map table
+    $all_migrated_ids = $database->select($map_table, 'm')
+      ->fields('m', ['destid1'])
+      ->isNotNull('destid1')
+      ->execute()
+      ->fetchCol();
 
+    // Orphaned = previously migrated but not in current successful imports
+    $orphaned_ids = array_diff($all_migrated_ids, $current_dest_ids);
+
+    if (!empty($orphaned_ids)) {
+      // Delete orphaned entities
+      $entities = $storage->loadMultiple($orphaned_ids);
+
+      foreach ($entities as $node) {
         if ($node instanceof NodeInterface) {
           // Don't do anything if "desync" is check.
           if ($node->field_job_unsync->value !== "1") {
-            if (!in_array($map_source_id, $source_id_values, TRUE)) {
-              $node->setNewRevision(TRUE);
-              $node->setUnpublished();
-              $node->setRevisionTranslationAffected(TRUE);
-              $node->set('moderation_state', 'draft');
-              $node->save();
-            }
+            $node->setNewRevision(TRUE);
+            $node->setUnpublished();
+            $node->setRevisionTranslationAffected(TRUE);
+            $node->set('moderation_state', 'draft');
+            $node->save();
           }
         }
-      }
 
-      $id_map->next();
+        \Drupal::logger('lmc_recruitment')->notice(
+          'Unpublished @count entities from migration @migration: @ids',
+          [
+            '@count' => count($orphaned_ids),
+            '@migration' => $migration->id(),
+            '@ids' => implode(', ', $orphaned_ids),
+          ]
+        );
+      }
     }
   }
 }
