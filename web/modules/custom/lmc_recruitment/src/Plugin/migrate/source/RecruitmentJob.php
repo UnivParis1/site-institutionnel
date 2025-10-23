@@ -53,15 +53,20 @@ final class RecruitmentJob extends Url {
       $node = \Drupal::entityTypeManager()
         ->getStorage('node')
         ->loadRevision($vid);
-      if ($node->field_job_unsync->value === "1") {
-        return FALSE;
-      }
-      $node_last_time = $node->getChangedTime();
-      $beetween_last_time = $row->getSourceProperty('last_modification_date');
-      $beetween_last_time = strtotime($beetween_last_time);
-      if ($beetween_last_time < $node_last_time) {
-        RETURN FALSE;
-      }
+     if ($node) {
+       if ($node->field_job_unsync->value === "1") {
+         return FALSE;
+       }
+       if (\Drupal::config('lmc_recruitment.settings')->get('ignore_date') !== 1) {
+         $node_last_time = $node->getChangedTime();
+         $beetween_last_time = $row->getSourceProperty('last_modification_date');
+         $beetween_last_time = strtotime($beetween_last_time);
+         if ($beetween_last_time < $node_last_time) {
+           return FALSE;
+         }
+       }
+
+     }
     }
 
     $range_min_value = $row->getSourceProperty('rangeMinValue');
