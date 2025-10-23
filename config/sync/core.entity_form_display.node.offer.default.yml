@@ -18,9 +18,11 @@ dependencies:
     - field.field.node.offer.field_id_beetween
     - field.field.node.offer.field_job_application_url
     - field.field.node.offer.field_job_categorie
+    - field.field.node.offer.field_job_contract_type
     - field.field.node.offer.field_job_date
     - field.field.node.offer.field_job_experience
     - field.field.node.offer.field_job_grade
+    - field.field.node.offer.field_job_nature
     - field.field.node.offer.field_job_paris1_site
     - field.field.node.offer.field_job_study_level
     - field.field.node.offer.field_job_title
@@ -40,6 +42,7 @@ dependencies:
     - conditional_fields
     - content_moderation
     - datetime
+    - exif
     - fontawesome
     - geolocation_leaflet
     - link
@@ -54,7 +57,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 17
+    weight: 15
     region: content
     settings:
       rows: 9
@@ -65,7 +68,7 @@ content:
       conditional_fields: {  }
   created:
     type: datetime_timestamp
-    weight: 23
+    weight: 28
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -80,7 +83,7 @@ content:
       conditional_fields: {  }
   field_address_map:
     type: geolocation_leaflet
-    weight: 30
+    weight: 21
     region: content
     settings:
       auto_client_location: ''
@@ -550,43 +553,36 @@ content:
       conditional_fields: {  }
   field_application_deadline:
     type: datetime_default
-    weight: 10
+    weight: 8
     region: content
     settings: {  }
     third_party_settings:
       conditional_fields: {  }
   field_bap:
     type: options_select
-    weight: 12
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_contract_duration:
     type: string_textfield
-    weight: 15
+    weight: 12
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings:
       conditional_fields: {  }
-  field_contract_type:
-    type: options_select
-    weight: 14
-    region: content
-    settings: {  }
-    third_party_settings:
-      conditional_fields: {  }
   field_disable_canonical_url:
     type: boolean_checkbox
-    weight: 32
+    weight: 36
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_email_address:
     type: email_default
-    weight: 7
+    weight: 6
     region: content
     settings:
       placeholder: ''
@@ -595,13 +591,13 @@ content:
       conditional_fields: {  }
   field_fa_icon:
     type: fontawesome_icon_widget
-    weight: 4
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_id_beetween:
     type: string_textfield
-    weight: 40
+    weight: 22
     region: content
     settings:
       size: 60
@@ -609,7 +605,7 @@ content:
     third_party_settings: {  }
   field_job_application_url:
     type: link_default
-    weight: 42
+    weight: 23
     region: content
     settings:
       placeholder_url: ''
@@ -617,35 +613,13 @@ content:
     third_party_settings: {  }
   field_job_categorie:
     type: string_textfield
-    weight: 46
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_job_date:
-    type: datetime_default
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_job_experience:
-    type: string_textfield
-    weight: 39
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_job_grade:
-    type: string_textfield
     weight: 13
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_job_paris1_site:
+  field_job_contract_type:
     type: string_textfield
     weight: 45
     region: content
@@ -653,43 +627,75 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_job_study_level:
-    type: options_select
-    weight: 44
+  field_job_date:
+    type: datetime_default
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_job_title:
+  field_job_experience:
     type: string_textfield
-    weight: 41
+    weight: 18
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_job_type:
+  field_job_grade:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_job_nature:
+    type: string_textfield
+    weight: 46
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_job_paris1_site:
+    type: string_textfield
+    weight: 44
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_job_study_level:
     type: options_select
-    weight: 8
+    weight: 19
     region: content
     settings: {  }
-    third_party_settings:
-      conditional_fields: {  }
+    third_party_settings: {  }
+  field_job_title:
+    type: exif_hidden
+    weight: 43
+    region: content
+    settings:
+      exif_field_separator: ''
+      exif_field: naming_convention
+      image_field: null
+    third_party_settings: {  }
   field_job_unsync:
     type: boolean_checkbox
-    weight: 43
+    weight: 25
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_offer_type:
     type: options_buttons
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   field_position_details:
     type: text_textarea
-    weight: 18
+    weight: 16
     region: content
     settings:
       rows: 5
@@ -698,7 +704,7 @@ content:
       conditional_fields: {  }
   field_profile:
     type: text_textarea
-    weight: 19
+    weight: 17
     region: content
     settings:
       rows: 5
@@ -707,7 +713,7 @@ content:
       conditional_fields: {  }
   field_reference_offer:
     type: string_textfield
-    weight: 6
+    weight: 5
     region: content
     settings:
       size: 60
@@ -716,7 +722,7 @@ content:
       conditional_fields: {  }
   field_salary_range:
     type: string_textfield
-    weight: 16
+    weight: 14
     region: content
     settings:
       size: 60
@@ -725,7 +731,7 @@ content:
       conditional_fields: {  }
   field_service:
     type: string_textfield
-    weight: 5
+    weight: 4
     region: content
     settings:
       size: 60
@@ -733,7 +739,7 @@ content:
     third_party_settings: {  }
   field_sites:
     type: entity_reference_autocomplete
-    weight: 29
+    weight: 34
     region: content
     settings:
       match_operator: CONTAINS
@@ -743,7 +749,7 @@ content:
     third_party_settings: {  }
   field_sites_all:
     type: boolean_checkbox
-    weight: 31
+    weight: 35
     region: content
     settings:
       display_label: true
@@ -757,48 +763,48 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 27
+    weight: 32
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 26
+    weight: 31
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 24
+    weight: 29
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 35
+    weight: 39
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 36
+    weight: 40
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 34
+    weight: 38
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 11
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   site_id:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 24
     region: content
     settings:
       match_operator: CONTAINS
@@ -808,14 +814,14 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 28
+    weight: 33
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 25
+    weight: 30
     region: content
     settings:
       display_label: true
@@ -829,13 +835,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 22
+    weight: 27
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
@@ -845,21 +851,23 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 37
+    weight: 41
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 38
+    weight: 42
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 33
+    weight: 37
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_category: true
+  field_contract_type: true
   field_grade: true
+  field_job_type: true
