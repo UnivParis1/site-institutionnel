@@ -81,9 +81,9 @@
     <div class="top-infos">
       {{ title_prefix }}
       <div class="infos-row-wrapper" style="justify-content:center;">
-        {% if node is defined and not node.field_job_type.isEmpty() %}
+        {% if node is defined and not node.field_job_nature.isEmpty() %}
           <div class="categ-wrapper infos-entry">
-            <div class="categ-style"> {{ content.field_job_type }} </div>
+            <div class="categ-style"> {{ content.field_job_nature.0 }} </div>
           </div>
         {% endif %}
       {{ title_suffix }}
@@ -93,7 +93,7 @@
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
       <p class="offer-service-teaser semi-infos-sep text-center"> {{ content.field_service.0 }} </p>
-      <p class="offer-type-teaser semi-infos-sep"> {{ content.field_contract_type.0 }} </p>
+      <p class="offer-type-teaser semi-infos-sep"> {{ content.field_job_contract_type.0 }} </p>
       {{ content.field_fa_icon }}
       <div class="node-readmore text-center">
         <a href="{{ url }}" class="btn outline" title="readmore" style="color: #ffffff; border-color: #ffffff;">{{ "Read more"|t }}</a>

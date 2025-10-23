@@ -3,6 +3,7 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\migrate\MigrateExecutable;
 use Drupal\migrate\MigrateMessage;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\node\Entity\Node;
 use Drupal\webform\Utility\WebformFormHelper;
 
@@ -48,11 +49,20 @@ function lmc_recruitment_cron() {
   // Get the migration plugin manager service.
   $pluginManagerMigration = \Drupal::service('plugin.manager.migration');
 
-  // Create the migration of your choice.
-  $articleMigration = $pluginManagerMigration->createInstance('recruitment_job');
-  $articleMigration->getIdMap()->prepareUpdate();
-  $articleMigrationExecutable = new MigrateExecutable($articleMigration, new MigrateMessage());
+  /** @var \Drupal\migrate\Plugin\MigrationInterface $offerMigration */
+  $offerMigration = $pluginManagerMigration->createInstance('recruitment_job');
+
+  $status = $offerMigration->getStatus();
+  if ($status == MigrationInterface::STATUS_IDLE) {
+    \Drupal::logger('lmc_recruitment')->info(t('Migration @id is already Idle', ['@id' => $offerMigration->id()]));
+  } else {
+    $offerMigration->setStatus(MigrationInterface::STATUS_IDLE);
+    \Drupal::logger('lmc_recruitment')->info(t('Migration @id reset to Idle', ['@id' => $offerMigration->id()]));
+  }
+
+  $offerMigration->getIdMap()->prepareUpdate();
+  $offerMigrationExecutable = new MigrateExecutable($offerMigration, new MigrateMessage());
 
   // Run the migration.
-  $result = $articleMigrationExecutable->import();
+  $result = $offerMigrationExecutable->import();
 }
