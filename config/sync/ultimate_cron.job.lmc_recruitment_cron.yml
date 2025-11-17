@@ -1,0 +1,17 @@
+uuid: 58931192-656f-49a5-aed6-d2407a82b4d8
+langcode: fr
+status: true
+dependencies:
+  module:
+    - lmc_recruitment
+title: 'Default cron handler'
+id: lmc_recruitment_cron
+weight: 0
+module: lmc_recruitment
+callback: 'lmc_recruitment#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database
