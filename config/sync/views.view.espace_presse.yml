@@ -18,7 +18,6 @@ dependencies:
     - taxonomy
     - text
     - user
-    - views_infinite_scroll
 id: espace_presse
 label: 'Espace presse'
 module: views
@@ -83,15 +82,18 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: infinite_scroll
+        type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 12
           total_pages: null
           id: 0
           tags:
             next: 'Suivant ›'
             previous: '‹ Précédent'
+            first: '« Premier'
+            last: 'Dernier »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -100,10 +102,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          views_infinite_scroll:
-            button_text: 'Load More'
-            automatically_load_content: true
-            initially_load_all_pages: false
+          quantity: 5
       exposed_form:
         type: bef
         options:
@@ -132,8 +131,8 @@ display:
                 advanced:
                   placeholder_text: ''
                   collapsible: false
-                  is_secondary: false
                   collapsible_disable_automatic_open: false
+                  is_secondary: false
               field_type_target_id:
                 plugin_id: default
                 advanced:
@@ -142,14 +141,14 @@ display:
                     filter_rewrite_values: '- Tout -|- Type -'
                     filter_rewrite_values_key: false
                   collapsible: false
-                  is_secondary: false
                   collapsible_disable_automatic_open: false
+                  is_secondary: false
               field_publishing_date_value_1:
                 plugin_id: default
                 advanced:
                   collapsible: false
-                  is_secondary: false
                   collapsible_disable_automatic_open: false
+                  is_secondary: false
       access:
         type: perm
         options:

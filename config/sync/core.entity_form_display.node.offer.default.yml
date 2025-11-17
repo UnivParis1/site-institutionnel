@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.offer.field_email_address
     - field.field.node.offer.field_fa_icon
     - field.field.node.offer.field_grade
+    - field.field.node.offer.field_job_custom_paris1_sites
     - field.field.node.offer.field_job_date
     - field.field.node.offer.field_job_type
     - field.field.node.offer.field_offer_type
@@ -26,6 +27,7 @@ dependencies:
     - field.field.node.offer.field_sites
     - field.field.node.offer.field_sites_all
     - node.type.offer
+    - workflows.workflow.publication
   module:
     - conditional_fields
     - content_moderation
@@ -601,6 +603,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_job_custom_paris1_sites:
+    type: options_select
+    weight: 56
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_job_date:
     type: datetime_default
     weight: 8
@@ -780,6 +788,11 @@ content:
   unpublish_state:
     type: scheduler_moderation
     weight: 55
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
