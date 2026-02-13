@@ -75,187 +75,196 @@
   'clearfix',
 ]
 %}
-{% set year %}
-  {{ content.field_pub_year.0 }}
-{% endset %}
-{% set subtitle %}
-  {{ content.field_subtitle.0 }}
-{% endset %}
-{% set author %}
-  {{ content.field_author_name.0 }}
-{% endset %}
-{% set publisher_term %}
-  {{ content.field_publisher_term }}
-{% endset %}
-{% set collection_term %}
-  {{ content.field_collection_term }}
-{% endset %}
-{% set topics %}
-  {{ content.field_publication_topics }}
-{% endset %}
-{% set isbn %}
-  {{ content.field_isbn.0 }}
-{% endset %}
-{% set issn %}
-  {{ content.field_issn.0 }}
-{% endset %}
-{% set publicationTags %}
-  {{ content.field_tags }}
-{% endset %}
-{% set date %}
-  {{ content.field_publishing_date.0 }}
-{% endset %}
-{% set price %}
-  {{ content.field_price.0 }}
-{% endset %}
-{% set format %}
-  {{ content.field_format.0 }}
-{% endset %}
-{% set link %}
-  {{ content.field_publication_link }}
-{% endset %}
-{% set purchase %}
-  {{ content.field_purchase_link }}
-{% endset %}
-{% set pages %}
-  {{ content.field_nb_pages.0 }}
-{% endset %}
-{% set link_title %}
-  {{ content.field_link_title.0 }}
-{% endset %}
+
+{# ===== VARIABLES PROPRES ===== #}
+{% set year = node.field_pub_year.value ?? '' %}
+{% set subtitle = node.field_subtitle.value ?? '' %}
+{% set author = node.field_author_name.value ?? '' %}
+{% set isbn = node.field_isbn.value ?? '' %}
+{% set issn = node.field_issn.value ?? '' %}
+{% set date = node.field_publishing_date.value ?? '' %}
+{% set price = node.field_price.value ?? '' %}
+{% set format = node.field_format.value ?? '' %}
+{% set pages = node.field_nb_pages.value ?? '' %}
+{% set link = node.field_publication_link.uri ?? '' %}
+{% set purchase = node.field_purchase_link.uri ?? '' %}
 
 <div id="breadcrumbs">
   {{ drupal_block('system_breadcrumb_block') }}
 </div>
+
 <article{{ attributes.addClass(classes) }}>
   <div class="grid-container">
     <div{{ content_attributes.addClass('content grid-x grid-margin-x') }}>
+
       <div class="cell small-12 large-12">
         {{ title_prefix }}
-        <h1 class="h3-style title-sep">
-          {{ label.0 }}
-        </h1>
+        <h1 class="h3-style title-sep">{{ label }}</h1>
         {{ title_suffix }}
-        {% if subtitle|striptags|trim %}
-          <h2 class=" h5-style infos-sep">{{ subtitle }}</h2>
+
+        {% if subtitle %}
+          <h2 class="h5-style infos-sep">{{ subtitle }}</h2>
         {% endif %}
       </div>
+
       <aside class="cell small large-4">
+
         {{ content.field_media }}
+
         <div class="box-style no-shadow auto-height semi-field-sep">
           <div class="box-content">
-            {% if author|striptags|trim or publication_authors %}
+
+            {# ===== AUTHORS ===== #}
+            {% if author or publication_authors %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ "Author(s)"|t }} : </h3>
+                <h3 class="publication-label">{{ "Author(s)"|t }} :</h3>
+
                 {% if publication_authors %}
                   {{ publication_authors|join(', ')|raw }}
                 {% endif %}
-                {% if  author|striptags|trim and publication_authors %}
-                  <span>, </span>
-                {% endif %}
-                {% if author|striptags|trim %}
+
+                {% if author and publication_authors %}, {% endif %}
+
+                {% if author %}
                   <span>{{ author }}</span>
                 {% endif %}
               </div>
             {% endif %}
+
+            {# TYPE #}
             <div class="details txt-second">
-              <h3 class="publication-label">{{ 'Type'|t }} : </h3>
+              <h3 class="publication-label">{{ 'Type'|t }} :</h3>
               <span>{{ content.field_publication_type.0 }}</span>
             </div>
-            {% if year|striptags|trim %}
+
+            {% if year %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ 'Publishing year'|t }} : </h3>
+                <h3 class="publication-label">{{ 'Publishing year'|t }} :</h3>
                 <span>{{ year }}</span>
               </div>
             {% endif %}
-            {% if date|striptags|trim %}
+
+            {% if date %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ 'Publishing date'|t }} : </h3>
+                <h3 class="publication-label">{{ 'Publishing date'|t }} :</h3>
                 <span>{{ date }}</span>
               </div>
             {% endif %}
-            {% if publisher_term|striptags|trim %}
+
+            {# PUBLISHER #}
+            {% if node.field_publisher_term|length %}
               <div class="details txt-second publisher">
-                <h3 class="publication-label">{{ "Publisher"|t }} : </h3>
-                {% for key, aPublisher in content.field_publisher_term|filter((value, key) => key|first != '#') %}
-                  <span> {{ aPublisher }}</span>
+                <h3 class="publication-label">{{ "Publisher"|t }} :</h3>
+
+                {% for item in node.field_publisher_term %}
+                  <span>{{ item.entity.label }}</span>
                 {% endfor %}
+
               </div>
             {% endif %}
-            {% if collection_term|striptags|trim %}
+
+            {# COLLECTION #}
+            {% if node.field_collection_term|length %}
               <div class="details txt-second collection">
-                <h3 class="publication-label">{{ "Collection"|t }} : </h3>
-                {% for key, aCollection in content.field_collection_term|filter((value, key) => key|first != '#') %}
-                  <span> {{ aCollection }}</span>
+                <h3 class="publication-label">{{ "Collection"|t }} :</h3>
+
+                {% for item in node.field_collection_term %}
+                  <span>{{ item.entity.label }}</span>
                 {% endfor %}
+
               </div>
             {% endif %}
-            {% if isbn|striptags|trim %}
+
+            {% if isbn %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ "ISBN"|t }} : </h3>
-                <span> {{ isbn }}</span>
+                <h3 class="publication-label">{{ "ISBN"|t }} :</h3>
+                <span>{{ isbn }}</span>
               </div>
             {% endif %}
-            {% if issn|striptags|trim %}
+
+            {% if issn %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ "ISSN"|t }} : </h3>
-                <span> {{ issn }}</span>
+                <h3 class="publication-label">{{ "ISSN"|t }} :</h3>
+                <span>{{ issn }}</span>
               </div>
             {% endif %}
-            {% if pages|striptags|trim %}
+
+            {% if pages %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ "Number of pages"|t }} : </h3>
-                <span> {{ pages }}</span>
+                <h3 class="publication-label">{{ "Number of pages"|t }} :</h3>
+                <span>{{ pages }}</span>
               </div>
             {% endif %}
-            {% if format|striptags|trim %}
+
+            {% if format %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ "Size"|t }} : </h3>
-                <span> {{ format }}</span>
+                <h3 class="publication-label">{{ "Size"|t }} :</h3>
+                <span>{{ format }}</span>
               </div>
             {% endif %}
-            {% if price|striptags|trim %}
+
+            {% if price %}
               <div class="details txt-second">
-                <h3 class="publication-label">{{ "Price"|t }} : </h3>
+                <h3 class="publication-label">{{ "Price"|t }} :</h3>
                 <span>{{ price }}</span>
               </div>
             {% endif %}
-            {% if publicationTags|striptags|trim %}
+
+            {# TAGS #}
+            {% if node.field_tags|length %}
               <div class="details txt-second">
-                {% for key, item in content.field_tags|filter((value, key) => key|first != '#') %}
-                  <div class="categ-style block-title-sep">{{ item }}</div>
+                {% for tag in node.field_tags %}
+                  <div class="categ-style block-title-sep">
+                    {{ tag.entity.label }}
+                  </div>
                 {% endfor %}
               </div>
             {% endif %}
-            {% if link|striptags|trim or purchase|striptags|trim %}
+
+            {# LINKS #}
+            {% if link or purchase %}
               <div class="details txt-second">
-                <span class="txt-bold">
-                  {% if link %}
-                    <a class="btn btn-primary" href="{{ content.field_publication_link.0['#url'] }}" title="{{ label.0 }}">
-                      {{ "Read this book"|t }}
-                    </a>
-                  {% endif %}
-                  {% if purchase %}
-                    <a class="btn btn-primary" href="{{ content.field_purchase_link.0['#url'] }}" title="{{ label.0 }}">
-                      {{ "Buy this book"|t }}
-                    </a>
-                  {% endif %}
-                </span>
+<span class="txt-bold">
+
+{% if link %}
+  <a class="btn btn-primary" href="{{ link }}" title="{{ label }}">
+{{ "Read this book"|t }}
+</a>
+{% endif %}
+
+  {% if purchase %}
+    <a class="btn btn-primary" href="{{ purchase }}" title="{{ label }}">
+{{ "Buy this book"|t }}
+</a>
+  {% endif %}
+
+</span>
               </div>
             {% endif %}
+
           </div>
         </div>
       </aside>
+
       <section class="cell small-12 large-8 semi-infos-sep-mobile">
-        {% if topics|striptags|trim %}
+
+        {# TOPICS #}
+        {% if node.field_publication_topics|length %}
           <div class="details txt-second">
-            {% for key, topic in content.field_publication_topics|filter((value, key) => key|first != '#') %}
-              <div class="categ-style block-title-sep">{{ topic }}</div>
+            {% for topic in node.field_publication_topics %}
+              <div class="categ-style block-title-sep">
+                {{ topic.entity.label }}
+              </div>
             {% endfor %}
           </div>
         {% endif %}
-        <div class="txt medium">{{ content.body }}</div>
+
+        <div class="txt medium">
+          {{ content.body }}
+        </div>
+
         {{ content.field_more }}
+
       </section>
     </div>
   </div>
