@@ -1,52 +1,58 @@
-uuid: 660a18d7-564b-42f6-944f-9eb9b8d930c3
+uuid: 1365e962-ac86-4390-9838-fc3e39849903
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 13
+uid: 7845
 template: false
-archive: false
-id: 0_festival_quartier_du_livre
-title: '0 - Festival Quartier du Livre'
-description: '<p><span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; display: inline !important; float: none;">se déroulera à l''Université Paris 1 Panthéon-Sorbonne du 2 au 6 juin 2023.</span></p>'
-categories: {  }
+archive: true
+id: 8_inscription_a_la_conference_dr
+title: '8 - Inscription à la conférence "Droit du travail et politique"'
+description: '<p>Formulaire d''inscription à la conférence "Droit du travail et politique" du mercredi 15 octobre 2025.</p>'
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  votre_prenom_:
+  votreprenom:
     '#type': textfield
-    '#title': 'Votre prénom :'
+    '#title': Prénom
+    '#placeholder': Jean
     '#required': true
-    '#required_error': "Merci d'indiquer votre prénom"
-  votre_nom_:
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
     '#type': textfield
-    '#title': 'Votre nom :'
+    '#title': Nom
+    '#placeholder': Dupond
     '#required': true
-    '#required_error': "Merci d'indiquer votre nom"
-  votre_adresse_courriel:
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
     '#type': email
-    '#title': 'Votre adresse courriel :'
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
     '#required': true
-    '#required_error': "Merci d'indiquer votre courriel"
-  vous_souhaitez_assister_a_:
-    '#type': checkboxes
-    '#title': 'Vous souhaitez assister à :'
-    '#options':
-      'la rencontre "Des voyages transformationnels en Afrique", le 2 juin 2023.': 'la rencontre "Des voyages transformationnels en Afrique", le 2 juin 2023.'
-      'la rencontre "De l''exposition au livre "Guernica 1937-Ukraine 2022", le 5 juin 2023.': 'la rencontre "De l''exposition au livre "Guernica 1937-Ukraine 2022", le 5 juin 2023.'
-      'la rencontre "Voyage vers le passé grec: des étrangers à Cléopâtre", le 6 juin 2023.': 'la rencontre "Voyage vers le passé grec: des étrangers à Cléopâtre", le 6 juin 2023.'
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
     '#required': true
-    '#required_error': 'Vous devez sélectionnez à minima une rencontre'
-  collecte_de_donnees_a_caractere_personnel:
-    '#type': checkboxes
-    '#title': 'Collecte de données à caractère personnel'
-    '#options':
-      "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de mon inscription à cet événement, le Festival Quartier du Livre.": "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de mon inscription à cet événement, le Festival Quartier du Livre."
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription au colloque&nbsp;</p>'
     '#required': true
-    '#required_error': 'Vous devez accepter que nous puissions traiter vos données pour pouvoir vous inscrire.'
-  captcha:
-    '#type': captcha
-    '#captcha_description': "Cette question sert à vérifier si vous êtes un visiteur humain ou non afin d'éviter les soumissions de pourriel (spam) automatisées. "
+    '#required_error': "Vous devez accepter les conditions d'inscription."
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -153,8 +159,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Confirmation inscription'
-  confirmation_message: "<p>Vos données ont bien été enregistré pour cet évènement : le Festival Quartier du Livre qui se déroulera à l'Université Paris 1 Panthéon-Sorbonne du 2 au 6 juin 2023.</p>\r\n\r\n<p>Un courriel automatique vous a été envoyé à l'adresse courriel que vous avez saisi.</p>\r\n\r\n<p>Merci et bonne journée.</p>"
+  confirmation_title: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -188,57 +194,75 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   administer:
     roles: {  }
     users:
-      - 5486
-      - 6746
+      - 7792
+      - 9762
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 7792
+      - 9762
     permissions: {  }
   configuration:
     roles: {  }
     users:
-      - 5486
-      - 6746
+      - 7792
+      - 9762
     permissions: {  }
 handlers:
-  email_a_la_personne_qui_s_est_inscrit_:
+  email_au_demandeur:
     id: email
-    handler_id: email_a_la_personne_qui_s_est_inscrit_
-    label: "Email à la personne qui s'est inscrit."
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
@@ -246,7 +270,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -254,51 +278,13 @@ handlers:
       cc_options: {  }
       from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: 'Paris 1 Panthéon-Sorbonne'
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Festival du Quartier du livre - Confirmation inscription'
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre demande d'inscription à l'évènement Festival du Quartier du Livre à l'université Paris 1 Panthéon-Sorbonne a bien été prise en compte.</p>\r\n\r\n<p><strong>Veuillez vous munir de cette confirmation lors de votre venue.</strong></p>\r\n\r\n<p>Vous avez rempli, le formulaire le [webform_submission:created] et voici les valeurs que vous nous avez soumises :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Merci et bonne journée</p>\r\n\r\n<p>L'équipe organisatrice.</p>"
-      excluded_elements:
-        captcha: captcha
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: Laetitia.Chantrait@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:votre_nom_:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Festival du Quartier du livre - nouvelle inscription'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n\r\n<p>Envoyé par : [webform_submission:user]</p>\r\n\r\n<p>Les valeurs soumises sont :</p>\r\n\r\n<p>[webform_submission:values]</p>"
+      subject: 'Inscription à la conférence du 15/10/2025'
+      body: '<p>Bonjour,</p><p>Votre inscription à la conférence "Droit du travail et politique" du mercredi 15 octobre 2025 a bien été validée.</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

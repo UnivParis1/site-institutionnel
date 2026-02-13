@@ -1,0 +1,1893 @@
+uuid: 2b4baef3-2ed7-4a94-82de-bd683d7f92e2
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 74
+template: false
+archive: false
+id: 30_ametys_iaes_25_30
+title: '30 - Amétys IAES 25-30'
+description: '<p>Formulaire de collecte des mises à jour portant sur notre offre de formation</p>'
+categories: {  }
+elements: |-
+  identifiez_vous:
+    '#type': webform_contact
+    '#title': Identifiez-vous
+    '#required': true
+    '#name__title': 'NOM et Prénom'
+    '#name__placeholder': 'NOM et Prénom'
+    '#name__required': true
+    '#company__access': false
+    '#email__placeholder': prenom.nom@univ-paris1.fr
+    '#email__required': true
+    '#phone__access': false
+    '#address__access': false
+    '#address_2__access': false
+    '#city__access': false
+    '#state_province__access': false
+    '#postal_code__access': false
+    '#country__access': false
+  diplome:
+    '#type': fieldset
+    '#title': Diplôme
+    '#description': |-
+      <p>Sélectionnez dans cet ordre</p>
+
+      <ol>
+      	<li>Diplôme</li>
+      	<li>Semestre</li>
+      	<li>Elément pédagogique</li>
+      </ol>
+    '#help': |-
+      <p>Sélectionnez dans cet ordre</p>
+
+      <ol>
+      	<li>Diplôme</li>
+      	<li>Semestre</li>
+      	<li>Elément pédagogique</li>
+      </ol>
+    '#description_display': tooltip
+    '#required': true
+    licence:
+      '#type': details
+      '#title': Licence
+      '#more_title': B
+      '#states':
+        invisible:
+          'details[data-webform-key="master"]':
+            filled: true
+      '#format': fieldset
+      licence_1:
+        '#type': details
+        '#title': 'Licence 1'
+        '#more_title': .
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence_2"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="licence_3"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master"]':
+                filled: true
+        licence_1_semestre_1:
+          '#type': fieldset
+          '#title': 'Licence 1 Semestre 1'
+          l1_s1:
+            '#type': select
+            '#title': 'L1 S1'
+            '#options':
+              "N'exite pas 01": 'L1 - M1020725 - Compétences écrites et orales 1'
+              "N'exite pas 02": "L1 - M1020525 - Découverte de l'environnement universitaire (modules dispensés en pré-rentrées) 1"
+              "N'exite pas 03": 'L1 - M1020125 - Histoire des cultures politiques et économiques en France XIXe-XXIe siècles 1'
+              "N'exite pas 04": 'L1 - M1012314 - Institutions politiques 1'
+              "N'exite pas 05": 'L1 - M1020325 - Introduction à la gestion des organisations 1'
+              "N'exite pas 06": "L1 - M1021325 - Introduction à l'analyse macroéconomique 1"
+              "N'exite pas 07": 'L1 - M1011114 - Introduction générale au droit 1'
+              "N'exite pas 08": 'L1 - M1012522 - Méthodes quantitatives appliquées aux sciences sociales 1'
+              "N'exite pas 09": 'L1 - M1020925 - Renforcement disciplinaire 1'
+              "N'exite pas 10": 'L1 - M1021525 - Sociologie générale 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+        licence_1_semestre_2:
+          '#type': fieldset
+          '#title': 'Licence 1 Semestre 2'
+          '#more_title': .
+          l1_s2:
+            '#type': select
+            '#title': 'L1 S2'
+            '#options':
+              "N'existe pas 11": 'L1 - M1020825 - Approches multidisciplinaires (questions européennes) 2'
+              "N'existe pas 12": 'L1 - M1020225 - Droit des personnes et des biens 2'
+              "N'existe pas 13": 'L1 - M1020425 - Histoire des cultures politiques et économiques en France XIXe - XXIe siècles 2 2'
+              "N'existe pas 14": 'L1 - M1020625 - Introduction à la gestion des entreprises 2'
+              "N'existe pas 15": "L1 - M1021025 - Introduction à l'analyse microéconomique 2"
+              "N'existe pas 16": 'L1 - M1012422 - Méthodes quantitatives appliquées aux sciences sociales 2'
+              "N'existe pas 17": 'L1 - M1021225 - Sociologie de la mobilité sociale 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+      licence_2:
+        '#type': details
+        '#title': 'Licence 2'
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence_1"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="licence_3"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master"]':
+                filled: true
+        licence_2_semestre_1:
+          '#type': fieldset
+          '#title': 'Licence 2 Semestre 1'
+          l2_s1:
+            '#type': select
+            '#title': 'L2 S1'
+            '#options':
+              "N'existe pas 18": 'L2 - M2021725 - Analyse microéconomique approfondie 1'
+              "N'existe pas 19": 'L2 - M2020725 - Comptabilité financière 1'
+              "N'existe pas 20": 'L2 - M2012919 - Culture et outils numériques 1'
+              "N'existe pas 21": 'L2 - M2011114 - Droit administratif 1'
+              "N'existe pas 22": 'L2 - M2020125 - Droit des obligations 1'
+              "N'existe pas 23": 'L2 - M2020925 - Histoire des médias 1'
+              "N'existe pas 24": '"L2 - M20C0525 - Histoire sociale et culturelle de la France des années 1830 aux  années 1930 (sans TD) 1"'
+              "N'existe pas 25": 'L2 - M2020525 - Histoire sociale et culturelle de la France des années 1830 aux années 1930 1'
+              "N'existe pas 26": 'L2 - M2021125 - Management des entreprises 1'
+              "N'existe pas 27": 'L2 - M2021525 - Projet professionnel  1'
+              "N'existe pas 28": 'L2 - M2020325 - Sociologie de la famille et des âges de la vie 1'
+              "N'existe pas 29": 'L2 - M20C0325 - Sociologie de la famille et des âges de la vie (sans TD) 1'
+              "N'existe pas 30": 'L2 - M2021325 - Sociologie de la pauvreté 1'
+              "N'existe pas 31": 'L2 - M202ST25 - Stage : recherche et méthodologie 1'
+              "N'existe pas 32": 'L2 - M2012319 - Théorie et faits économiques 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+        licence_2_semestre_2:
+          '#type': fieldset
+          '#title': 'Licence 2 Semestre 2'
+          l2hhjjjkk:
+            '#type': select
+            '#title': 'L2 S2'
+            '#options':
+              "N'existe pas 33": 'L2 - M2022225 - Analyse macroéconomique approfondie 2'
+              "N'existe pas 34": 'L2 - M2021025 - Approches mutidisciplinaires (développement durable) 2'
+              "N'existe pas 35": 'L2 - M2013019 - Culture et outils numériques  2'
+              "N'existe pas 36": 'L2 - M2011214 - Droit administratif  2'
+              "N'existe pas 37": 'L2 - M2020225 - Droit des obligations  2'
+              "N'existe pas 38": 'L2 - M2021225 - Economie Européenne 2'
+              "N'existe pas 39": 'L2 - M2021625 - Histoire du genre et des femmes 2'
+              "N'existe pas 40": 'L2 - M2020425 - Histoire sociale et culturelle de la France des années 1940 à nos jours 2'
+              "N'existe pas 41": 'L2 - M20C0425 - Histoire sociale et culturelle de la France des années 1940 à nos jours (sans TD) 2'
+              "N'existe pas 42": 'L2 - M2020825 - Initiation à la gestion financière 2'
+              "N'existe pas 43": 'L2 - M2022025 - Projet professionnel  2'
+              "N'existe pas 44": "L2 - M2020625 - Sociologie de l'éducation et de la formation 2"
+              "N'existe pas 45": "L2 - M20C0625 - Sociologie de l'éducation et de la formation (sans TD) 2"
+              "N'existe pas 46": 'L2 - M2021425 - Sociologie du droit et de la déviance 2'
+              "N'existe pas 47": 'L2 - M2021825 - Stratégie des entreprises 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+      licence_3:
+        '#type': details
+        '#title': 'Licence 3'
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence_1"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="licence_2"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master"]':
+                filled: true
+        licence_3_semestre_1:
+          '#type': fieldset
+          '#title': 'Licence 3 Semestre 1'
+          l3_s1:
+            '#type': select
+            '#title': 'L3 S1'
+            '#options':
+              "N'existe pas 48": "L3 - M3030725 - Activité de fin de cycle 1 (regards croisés sur l'actualité ) 1"
+              "N'existe pas 49": 'L3 - M3030925 - Activité de fin de cycle 2 (projet tutoré appliqué à la gestion)  1'
+              "N'existe pas 50": 'L3 - M3014125 - Communication des organisations  1'
+              "N'existe pas 51": 'L3 - M3030525 - Droit des affaires 1'
+              "N'existe pas 52": 'L3 - M3011125 - Droit du travail : relations individuelles 1'
+              "N'existe pas 53": 'L3 - M3012719 - Droit public économique  1'
+              "N'existe pas 54": 'L3 - M3011319 - Economie du travail et de la protection sociale  1'
+              "N'existe pas 55": 'L3 - M3030325 - Enjeux économiques et sociaux des finances publiques 1'
+              "N'existe pas 56": 'L3 - M3013716 - Gestion appliquée 1'
+              "N'existe pas 57": 'L3 - M3013516 - Gestion des ressources humaines  1'
+              "N'existe pas 58": 'L3 - M3013125 - Gestion financière  1'
+              "N'existe pas 59": "L3 - M3030125 - Histoire globale de l'économie et des mondes du travail  1"
+              "N'existe pas 60": "L3 - M30C0125 - Histoire globale de l'économie et des mondes du travail 1 (sans TD) 1"
+              "N'existe pas 61": 'L3 - M3014019 - Méthodes quantitatives appliquées aux sciences sociales 1'
+              "N'existe pas 62": "L3 - M3011525 - Sociologie du travail et de l'emploi 1"
+              "N'existe pas 63": "L3 - M30C2325 - Sociologie du travail et de l'emploi (sans TD) 1"
+              "N'existe pas 64": 'L3 - M303ST25 - Validation du stage 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+        licence_3_semestre_2:
+          '#type': fieldset
+          '#title': 'Licence 3 Semestre 2'
+          l3_s2:
+            '#type': select
+            '#title': 'L3 S2'
+            '#options':
+              "N'existe pas 65": 'L3 - M3031225 - Activité de fin de cycle 3 2'
+              "N'existe pas 66": 'L3 - M3031425 - Activité de fin de cycle 4  2'
+              "N'existe pas 67": 'L3 - M3031625 - Activité de fin de cycle 5  2'
+              "N'existe pas 68": 'L3 - M3014125 - Communication des organisations 2'
+              "N'existe pas 69": 'L3 - M3030625 - Droit des affaires 2'
+              "N'existe pas 70": 'L3 - M3011225 - Droit du travail : relations collectives 2'
+              "N'existe pas 71": 'L3 - M3012816 - Droit public économique 2'
+              "N'existe pas 72": 'L3 - M3011419 - Economie du travail et de la protection sociale 2'
+              "N'existe pas 73": 'L3 - M3012019 - Economie sociale et solidaire 2'
+              "N'existe pas 74": 'L3 - M3013616 - Gestion des ressources humaines  2'
+              "N'existe pas 75": 'L3 - M3031025 - Gestion des ressources humaines appliquée 2'
+              "N'existe pas 76": 'L3 - M3013225 - Gestion financière  2'
+              "N'existe pas 77": "L3 - M3030225 - Histoire globale de l'économie et des mondes du travail 2"
+              "N'existe pas 78": "L3 - M30C0225 - Histoire globale de l'économie et des mondes du travail  (sans TD) 2"
+              "N'existe pas 79": 'L3 - M3014419 - Politiques économiques 2'
+              "N'existe pas 80": 'L3 - M3030425 - Sociologie des relations de pouvoir 2'
+              "N'existe pas 81": 'L3 - M3011625 - Sociologie du travail et du genre 2'
+              "N'existe pas 82": 'L3 - M30C0425 - Sociologie du travail et du genre (sans TD) 2'
+              "N'existe pas 83": 'L3 - M3030825 - Systèmes économiques 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+  masters:
+    '#type': webform_wizard_page
+    '#title': Masters
+    '#prev_button_label': Licence
+    '#next_button_label': 'Envoyer '
+    master:
+      '#type': details
+      '#title': Master
+      '#states':
+        invisible:
+          'details[data-webform-key="licence"]':
+            filled: true
+      master_1:
+        '#type': details
+        '#title': 'Master 1'
+        '#states':
+          invisible:
+            - 'details[data-webform-key="master_2"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="licence"]':
+                filled: true
+        master_1_semestre_1:
+          '#type': fieldset
+          '#title': 'Master 1 Semestre 1'
+          m1_s1:
+            '#type': select
+            '#title': 'M1 S1'
+            '#options':
+              "N'existe pas 84": 'M1 - M4090325 - Analyse des situations de travail (obligatoire pour EOET) 1'
+              "N'existe pas 85": 'M1 - M4080425 - Conférences Développement durable 1'
+              "N'existe pas 86": 'M1 - M4083519 - Droit de la sécurité sociale 1'
+              "N'existe pas 87": 'M1 - M4011119 - Droit du travail 1'
+              "N'existe pas 88": "M1 - M4012719 - Economie de l'entreprise 1"
+              "N'existe pas 89": 'M1 - M4090125 - Ergonomie, santé au travail, développement durable 1'
+              "N'existe pas 90": 'M1 - M4011919 - Formation, qualification et compétences 1'
+              "N'existe pas 91": 'M1 - M4012119 - Gestion des ressources humaines 1'
+              "N'existe pas 92": 'M1 - M4012919 - Histoire  de l’impôt et de la justice sociale 1'
+              "N'existe pas 93": 'M1 - M4011519 - Histoire des relations sociales en Europe 1'
+              "N'existe pas 94": 'M1 - M4080125 - Politiques sociales 1'
+              "N'existe pas 95": 'M1 - M4011719 - Sociologie  des problèmes sociaux 1'
+              "N'existe pas 96": 'M1 - M4083919 - Sociologie des inégalités 1'
+              "N'existe pas 97": 'M1 - M4080525 - Techniques quantitatives  1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+        master_1_semestre_2:
+          '#type': fieldset
+          '#title': 'Master 1 Semestre 2'
+          m1_s2:
+            '#type': select
+            '#title': 'M1 S2'
+            '#options':
+              "N'existe pas 98": 'M1 - M4080425 - Conférences Développement durable 2'
+              "N'existe pas 99": "M1 - M4090225 - Contrôle de gestion sociale et Système d'information de gestion des ressources humaines 2"
+              "N'existe pas 100": 'M1 - M4080625 - Croissance, répartition, inégalités 2'
+              "N'existe pas 101": 'M1 - M4013619 - Droit de la protection sociale complémentaire 2'
+              "N'existe pas 102": 'M1 - M4011219 - Droit du travail 2'
+              "N'existe pas 103": 'M1 - M4084019 - Economie des inégalités et de la redistribution 2'
+              "N'existe pas 104": 'M1 - M4083819 - Economie sociale et solidaire 2'
+              "N'existe pas 105": "M1 - M4012019 - Gestion de l'entreprise 2"
+              "N'existe pas 106": 'M1 - M4012219 - Gestion des ressources humaines 2'
+              "N'existe pas 107": 'M1 - M4011619 - Histoire des relations sociales 2'
+              "N'existe pas 108": "M1 - M4080225 - Politiques de l'emploi 1"
+              "N'existe pas 109": 'M1 - M4011819 - Sociologie des problèmes sociaux 2'
+              "N'existe pas 110": 'M1 - M4013019 - Sociologie des relations professionnelles 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+      master_2:
+        '#type': details
+        '#title': 'Master 2'
+        '#states':
+          invisible:
+            - 'details[data-webform-key="licence"]':
+                filled: true
+            - xor
+            - 'details[data-webform-key="master_1"]':
+                filled: true
+        master_2_agec:
+          '#type': details
+          '#title': 'Master 2 AGEC'
+          '#states':
+            invisible:
+              - 'details[data-webform-key="master_1"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="licence"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_camap"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_cees"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_2_coss"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_geos"]':
+                  filled: true
+          master_2_agec_semestre_1:
+            '#type': fieldset
+            '#title': 'Master 2 AGEC Semestre 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+            m2_agec_s1:
+              '#type': select
+              '#title': 'M2 AGEC S1'
+              '#options':
+                "N'existe pas 111": 'M2 - AGEC - M5P91719 - Accompagnement et intermédiation sur le marché du travail 1'
+                "N'existe pas 112": 'M2 - AGEC - M5P92125 - Ateliers thématiques 1'
+                "N'existe pas 113": "M2 - AGEC - M5P91116 - Droit de l'emploi 1"
+                "N'existe pas 114": "M2 - AGEC - M5P91316 - Economie de l'emploi et des ressources humaines 1"
+                "N'existe pas 115": 'M2 - AGEC - M5P91516 - Management des ressources humaines 1'
+                "N'existe pas 116": 'M2 - AGEC - M5P92321 - Méthodologie et accompagnement professionnel 1'
+                "N'existe pas 117": 'M2 - AGEC - M5P91916 - Modélisations de données et outils quantitatifs 1'
+                "N'existe pas 118": "M2 AGEC - M5P9ST21 - Semaine d'observation du Service Public Emploi"
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s2"]':
+                      filled: true
+          master_2_agec_semestre_2:
+            '#type': fieldset
+            '#title': 'Master 2 AGEC Semestre 2'
+            m2_agec_s2:
+              '#type': select
+              '#title': 'M2 AGEC S2'
+              '#options':
+                "N'existe pas 119": 'M2 - AGEC - M5P9L216 - Anglais des ressources humaines 2'
+                "N'existe pas 120": 'M2 - AGEC - M5P91825 - Ateliers thématiques 2'
+                "N'existe pas 121": "M2 - AGEC - M5P91219 - Gestion anticipée de  l'emploi et des compétences 2"
+                "N'existe pas 122": "M2 - AGEC - M5P9M220 - Mémoire professionnel (alternance ou stage) / mémoire de fin d'études et soutenance 2"
+                "N'existe pas 123": 'M2 - AGEC - M5P92021 - Méthodologie et accompagnement professionnel 2'
+                "N'existe pas 124": 'M2 - AGEC - M5P91419 - Négociations collectives  2'
+                "N'existe pas 125": 'M2 - AGEC - M5P91619 - Politiques de formation  2'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+        m2_camap:
+          '#type': details
+          '#title': 'Master 2 CAMAP'
+          '#states':
+            invisible:
+              - 'details[data-webform-key="licence"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_1"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_2_agec"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_cees"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_2_coss"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_geos"]':
+                  filled: true
+          m2_camap_semestre_1:
+            '#type': fieldset
+            '#title': 'M2 CAMAP Semestre 1'
+            m2_camap_s1:
+              '#type': select
+              '#title': 'M2 CAMAP S1'
+              '#options':
+                "N'existe pas 126": 'M2 CAMAP - T5P72016 - Actuariat 2'
+                "N'existe pas 127": 'M2 CAMAP - T5P71421 - Ateliers de méthodologie 2'
+                "N'existe pas 128": 'M2 CAMAP - T5P71621 - Ateliers de professionnalisation 2'
+                "N'existe pas 129": 'M2 CAMAP - T5P71221 - Comptabilité, contrôle de gestion, analyse financière et contrôle prudentiel des organisations de la PSC 2'
+                "N'existe pas 130": 'M2 CAMAP - T5P71816 - Économie  du risque 2'
+                "N'existe pas 131": 'M2 CAMAP - T5P72416 - Evaluation médico - économique des actions de santé 2'
+                "N'existe pas 132": "M2 CAMAP - T5P71616 - Management et encadrement d'équipes en PSC 2"
+                "N'existe pas 133": 'M2 CAMAP - T5P71416 - Marketing appliqué à la PSC 2'
+                "N'existe pas 134": 'M2 CAMAP - T5P72819 - Retraites et prévoyance 2'
+                "N'existe pas 135": 'M2 CAMAP - T5P73425 - Tutorat (FA, CP) 2'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s2"]':
+                      filled: true
+          m2_camap_semestre_2:
+            '#type': fieldset
+            '#title': 'M2 CAMAP Semestre 2'
+            m2_camap_s2:
+              '#type': select
+              '#title': 'M2 CAMAP S2'
+              '#options':
+                "N'existe pas 136": 'M2 CAMAP - T5P72016 - Actuariat 2'
+                "N'existe pas 137": 'M2 CAMAP - T5P71421 - Ateliers de méthodologie 2'
+                "N'existe pas 138": 'M2 CAMAP - T5P71621 - Ateliers de professionnalisation 2'
+                "N'existe pas 139": 'M2 CAMAP - T5P71221 - Comptabilité, contrôle de gestion, analyse financière et contrôle prudentiel des organisations de la PSC 2'
+                "N'existe pas 140": 'M2 CAMAP - T5P71816 - Économie  du risque 2'
+                "N'existe pas 141": 'M2 CAMAP - T5P72416 - Evaluation médico - économique des actions de santé 2'
+                "N'existe pas 142": "M2 CAMAP - T5P71616 - Management et encadrement d'équipes en PSC 2"
+                "N'existe pas 143": 'M2 CAMAP - T5P71416 - Marketing appliqué à la PSC 2'
+                "N'existe pas 144": 'M2 CAMAP - T5P72819 - Retraites et prévoyance 2'
+                "N'existe pas 145": 'M2 CAMAP - T5P73425 - Tutorat (FA, CP) 2'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s2"]':
+                      filled: true
+        m2_cees:
+          '#type': details
+          '#title': 'Master 2 CEES'
+          '#states':
+            invisible:
+              - 'details[data-webform-key="licence"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_1"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_2_agec"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_camap"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_2_coss"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_geos"]':
+                  filled: true
+          m2_cees_semestre_1:
+            '#type': details
+            '#title': 'M2 CEES Semestre 1'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+            m2_cees_s1:
+              '#type': select
+              '#title': 'M2 CEES S1'
+              '#options':
+                "N'existe pas 146": 'M2 CEES - B5I30125 - Analyses quantitatives  1'
+                "N'existe pas 147": 'M2 CEES - M5I2LA16 - Anglais 1'
+                "N'existe pas 148": 'M2 CEES - B5I31715 - Atelier ""Etude" 1'
+                "N'existe pas 149": 'M2 CEES - B5I30325 - Atelier analyses quantitatives 1'
+                "N'existe pas 150": 'M2 CEES - B5I30915 - Atelier CV et prise de parole 1'
+                "N'existe pas 151": 'M2 CEES - M5I22116 - Conférences animées par des professionnels 1'
+                "N'existe pas 152": 'M2 CEES - B5I30515 - Construction des indicateurs économiques et sociaux 1'
+                "N'existe pas 153": 'M2 CEES - B4021319 - Economie de la santé 1'
+                "N'existe pas 154": 'M2 CEES - B5I31125 - Economie de la ville et du logement  1'
+                "N'existe pas 155": "M2 CEES - B5I30925 - Economie du travail et de l'emploi 1"
+                "N'existe pas 156": 'M2 CEES - B5PJ0815 - Le rôle des collectivités territoriales 1'
+                "N'existe pas 157": "M2 CEES - M5I20125 - L'enquête par questionnaire 1"
+                "N'existe pas 158": 'M2 CEES - B5I30115 - Méthodes qualitatives (observation, entretien) 1'
+                "N'existe pas 159": "M2 CEES - B5I30525 - Répondre à un appel d'offre, projets européens 1"
+                "N'existe pas 160": 'M2 CEES - M5I20525 - Sociologie de la famille et des conditions de vie 1'
+                "N'existe pas 161": "M2 CEES - M5I20325 - Sociologie de la protection et de l'insertion sociale 1"
+                "N'existe pas 162": 'M2 CEES - M5I21116 - Sources de données 1'
+                "N'existe pas 163": "M2 CEES - M5I22316 - Actualité de la recherche en sociologie et en économie du travail, de l'emploi et de la protection sociale 1"
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s2"]':
+                      filled: true
+          m2_cees_semestre_2:
+            '#type': fieldset
+            '#title': 'M2 CEES Semestre 2'
+            '#states':
+              invisible:
+                - ':input[name="l1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="l2_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l2hhjjjkk"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="l3_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m1_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_agec_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_camap_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_cees_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_coss_s2"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s1"]':
+                    filled: true
+                - xor
+                - ':input[name="m2_geos_s2"]':
+                    filled: true
+            m2_cees_s2:
+              '#type': select
+              '#title': 'M2 CEES S2'
+              '#options':
+                "N'existe pas 164": 'M2 CEES - M5I22016 - Conférences animées par des professionnels 2'
+                "N'existe pas 165": 'M2 CEES - M5I20825 - Evaluation des politiques sociales (Famille et conditions de vie) 2'
+                "N'existe pas 166": 'M2 CEES - M5I20425 - Macroéconomie de la protection sociale 2'
+                "N'existe pas 167": 'M2 CEES - M5I22416 - Mémoire de recherche avec séminaire de suivi de mémoire 2'
+                "N'existe pas 168": 'M2 CEES - M5I2ME16 - Mémoire de stage 2'
+                "N'existe pas 169": "M2 CEES - M5I21225 - Séminaire de recherche en sociologie et en économie du travail, de l'emploi et de la protection sociale 2"
+                "N'existe pas 170": 'M2 CEES - M5I20225 - Sociologie de la santé 2'
+                "N'existe pas 171": 'M2 CEES - M5I21025 - Sociologie de la ville et du logement 2'
+                "N'existe pas 172": 'M2 CEES - M5I20625 - Sociologie du travail 2'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s2"]':
+                      filled: true
+        master_2_coss:
+          '#type': details
+          '#title': 'Master 2 COSS'
+          '#states':
+            invisible:
+              - 'details[data-webform-key="licence"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_1"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="master_2_agec"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_camap"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_cees"]':
+                  filled: true
+              - xor
+              - 'details[data-webform-key="m2_geos"]':
+                  filled: true
+          master_2_coss_semestre_1:
+            '#type': fieldset
+            '#title': 'Master 2 COSS Semestre 1'
+            m2_coss_s1:
+              '#type': select
+              '#title': 'M2 COSS S1'
+              '#options':
+                173: 'M2 COSS - M5P84216 - Accompagnement à la préparation des concours sociaux 1'
+                174: 'M2 COSS - M5P83416 - Accompagnement à la recherche de stage 1'
+                175: 'M2 COSS - M5P83616 - Ateliers de professionnalisation (prise de parole, conduite de réunions) 1'
+                176: 'M2 COSS - M5P81719 - Connaissances des publics 1'
+                177: 'M2 COSS - M5P81725 - Gestion de projet 1'
+                178: 'M2 COSS - M5P81325 - Les politiques de retraite et du veillissement 1'
+                179: "M2 COSS - M5P82916 - Les politiques d'emploi 1"
+                180: "M2 COSS - M5P83116 - Les politiques d'insertion et de lutte contre la pauvreté 1"
+                181: 'M2 COSS - M5P83519 - Les politiques du handicap 1'
+                182: 'M2 COSS - M5P81525 - Les politiques du logement 1'
+                183: "M2 COSS - M5P81125 - Les politiques sociales en France et à l'International 1"
+                231: "M2 COSS - M5P83316 - Méthodes d'évaluation des politiques publiques 1"
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s2"]':
+                      filled: true
+          master_2_coss_semestre_2:
+            '#type': fieldset
+            '#title': 'Master 2 COSS Semestre 2'
+            m2_coss_s2:
+              '#type': select
+              '#title': 'M2 COSS S2'
+              '#options':
+                "N'existe pas 184": "M2 COSS - M5P83016 - Action sociale familiale et protection de l'enfance 2"
+                "N'existe pas 185": 'M2 COSS - M5P81916 - Associations, gestion des structures et collectivités locales 2'
+                "N'existe pas 186": "M2 COSS - M5P82319 - Histoire du corps, de l'hygiène et de la santé publique 2"
+                "N'existe pas 187": 'M2 COSS - M5P81625 - La protection sociale complémentaire 2'
+                "N'existe pas 188": 'M2 COSS - M5P8L216 - Langues étrangères appliquées 2'
+                "N'existe pas 189": 'M2 COSS - M5P82416 - Le rôle des collectivités territoriales 2'
+                "N'existe pas 190": 'M2 COSS - M5P82616 - Les politiques de la ville 2'
+                "N'existe pas 191": 'M2 COSS - M5P8M020 - Mémoire professionnel 2'
+                "N'existe pas 192": 'M2 COSS - M5P82025 - Note de stage 2'
+                "N'existe pas 193": 'M2 COSS - M5P81225 - Politiques et système de santé 2'
+                "N'existe pas 194": 'M2 COSS - M5P81425 - Règlementation du système de santé 2'
+                "N'existe pas 195": 'M2 COSS - M5P81825 - Soutenance mémoire professionnel 2'
+                "N'existe pas 196": 'M2 COSS - M5P82016 - Théorie des organisations 2'
+                "N'existe pas 197": 'M2 COSS - M5P84219 - Tutorat 2'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+        m2_geos:
+          '#type': details
+          '#title': 'Master 2 GEOS'
+          '#states':
+            invisible:
+              'details[data-webform-key="licence"]':
+                filled: true
+              'details[data-webform-key="master_1"]':
+                filled: true
+              'details[data-webform-key="master_2_agec"]':
+                filled: true
+              'details[data-webform-key="m2_camap"]':
+                filled: true
+              'details[data-webform-key="m2_cees"]':
+                filled: true
+              'details[data-webform-key="master_2_coss"]':
+                filled: true
+          m2_geos_semestre_1:
+            '#type': fieldset
+            '#title': 'M2 GEOS Semestre 1'
+            '#states':
+              invisible:
+                - 'details[data-webform-key="licence"]':
+                    filled: true
+                - xor
+                - 'details[data-webform-key="master_1"]':
+                    filled: true
+                - xor
+                - 'details[data-webform-key="master_2_agec"]':
+                    filled: true
+            m2_geos_s1:
+              '#type': select
+              '#title': 'M2 GEOS S1'
+              '#options':
+                "N'existe pas 198": 'M2 GEOS - M4U13921 - Communication interne et externe: informer, promouvoir et faire adhérer les populations 3'
+                "N'existe pas 199": 'M2 GEOS - M4U13521 - Conduite de projet appliquée à une extension de couverture et à une digitalisation de la relation client 3'
+                "N'existe pas 200": 'M2 GEOS - M4U12521 - Contexte, enjeux et politiques de sécurité sociale en France 3'
+                "N'existe pas 201": 'M2 GEOS - M4U11721 - Financement de la protection sociale et de son extension 3'
+                "N'existe pas 202": 'M2 GEOS - M4U13721 - La couverture sociale des populations agricoles 3'
+                "N'existe pas 203": "M2 GEOS - M5PA2725 - L'assurance chômage 3"
+                "N'existe pas 204": 'M2 GEOS - M4U12921 - Les conventions internationales 3'
+                "N'existe pas 205": 'M2 GEOS - M5PA2525 - Les politiques familiales et la lutte contre la pauvreté 3'
+                "N'existe pas 206": 'M2 GEOS - M5PA2125 - Les risques professionnels : prévention et réparation 3'
+                "N'existe pas 207": "M2 GEOS - M5PA2325 - L'invalidité 3"
+                "N'existe pas 208": 'M2 GEOS - M4U12321 - MOOC Comprendre la protection sociale 3'
+                "N'existe pas 209": 'M2 GEOS - M4U11321 - MOOC Protection sociale universelle 3'
+                "N'existe pas 210": 'M2 GEOS - M4U11921 - Politiques de santé et assurance maladie 3'
+                "N'existe pas 211": 'M2 GEOS - M4U11121 - Protection sociale dans le monde et extension de la couverture 3'
+                "N'existe pas 212": 'M2 GEOS - M4U11521 - Protection sociale et transition écologique 3'
+                "N'existe pas 213": 'M2 GEOS - M5PA2925 - Recouvrement des cotisations et contrôle 3'
+                "N'existe pas 214": "M2 GEOS - M4U12721 - Systèmes de protection sociale à l'échelle des territoires 3"
+                "N'existe pas 215": 'M2 GEOS - M4U12121 - Systèmes de retraite dans le monde 3'
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s2"]':
+                      filled: true
+          m2_geos_semestre_2:
+            '#type': fieldset
+            '#title': 'M2 GEOS Semestre 2'
+            m2_geos_s2:
+              '#type': select
+              '#title': 'M2 GEOS S2'
+              '#options':
+                "N'existe pas 216": "M2 GEOS - M4U13821 - Analyse et intégration des évolutions de l'environnement de la protection sociale 4"
+                "N'existe pas 217": 'M2 GEOS - M5PA2025 - Animer une formation pour ses collaborateurs 4'
+                "N'existe pas 218": "M2 GEOS - M4U11221 - Bonne gouvernance et pilotage d'un organisme de sécurité sociale 4"
+                "N'existe pas 219": 'M2 GEOS - M4U13421 - Communiquer avec ses collaborateurs et partenaires 4'
+                "N'existe pas 220": 'M2 GEOS - M4U13221 - Conduire et accompagner le changement 4'
+                "N'existe pas 221": "M2 GEOS - M5PA1025 - Continuité de l'activité 4"
+                "N'existe pas 222": 'M2 GEOS - M4U13021 - Développer son leadership 4'
+                "N'existe pas 223": 'M2 GEOS - M4U12221 - Lutte contre la fraude 4'
+                "N'existe pas 224": 'M2 GEOS - M4U12021 - Maîtrise des risques et contrôle interne 4'
+                "N'existe pas 225": 'M2 GEOS - M4U14221 - Méthodologie de recherche appliquée 4'
+                "N'existe pas 226": 'M2 GEOS - M4U13621 - Prise de parole en public 4'
+                "N'existe pas 227": 'M2 GEOS - M4U14021 - Recherche action en pilotage et gestion 4'
+                "N'existe pas 228": 'M2 GEOS - M4U11621 - Relation clients et offre de service 4'
+                "N'existe pas 229": 'M2 GEOS - M4U12421 - Structurer son management, piloter et accompagner les équipes 4'
+                "N'existe pas 230": "M2 GEOS - M4U11421 - Systèmes d'information et enjeux du numérique sur la protection sociale 4"
+              '#states':
+                invisible:
+                  - ':input[name="l1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l2hhjjjkk"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="l3_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m1_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_agec_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_camap_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_cees_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s1"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_coss_s2"]':
+                      filled: true
+                  - xor
+                  - ':input[name="m2_geos_s1"]':
+                      filled: true
+  resume_de_cours:
+    '#type': textarea
+    '#title': 'Résumé de cours'
+    '#multiple': 5
+    '#description': '<p>Pour une meilleure de lisibilité, limitez votre texte à 2000 caractères ou 25 lignes ou 300 mots. Si vous ne souhaitez ne pas remplir cette partie, mettez au moins un caractère de votre choix</p>'
+    '#description_display': tooltip
+    '#maxlength': 2000
+    '#required': true
+  soutez_vous_faire_une_mise_a_jour_de_votre_resume_de_cours:
+    '#type': checkboxes
+    '#title': 'Soutez-vous faire une mise à jour de votre résumé de cours'
+    '#multiple': 2
+    '#options': yes_no
+    '#options__properties': ''
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: modal
+  confirmation_url: ''
+  confirmation_title: 'Confirmation de Réception - Mise à Jour de Cours sur AMETYS'
+  confirmation_message: "<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Nous vous informons par la présente que votre demande de mise à jour de cours sur la plateforme AMETYS a bien été réceptionnée. Nous tenons à exprimer notre gratitude pour votre initiative visant à maintenir nos ressources pédagogiques à jour.</p>\r\n\r\n<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Votre demande est désormais entre les mains de notre équipe technique, qui la traitera avec diligence.</p>\r\n\r\n<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Cordialement,</p>\r\n\r\n<p style=\"border: 0px solid rgb(227, 227, 227); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 1.25em 0px 0px; color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Communication IAES</p>"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: communication.iaes@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: nicolas.fortune@univ-paris1.fr
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -1,18 +1,52 @@
-uuid: 5726c82b-aa70-4da9-aa3d-ab44a27ae43b
+uuid: 97b9c51e-2030-4a30-beca-45c4f988d03c
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 321
+uid: 7845
 template: false
-archive: false
-id: 17_formulaire_je_m_inscris_et_ou
-title: "17 - Formulaire Je m'inscris et/ou Je m'informe"
-description: ''
-categories: {  }
-elements: null
+archive: true
+id: 8_inscription_au_pot_de_depart_d
+title: '8 - Inscription au pot de départ en retraite de Laurence Le Lay'
+description: "<p>Formulaire d'inscription au pot de départ en retraite de Laurence Le Lay le mercredi 22 octobre 2025 à 14h.</p>"
+categories:
+  - 'Inscription à un colloque '
+elements: |-
+  votreprenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': Jean
+    '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Dupond
+    '#required': true
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': 'Administratif, Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre fonction.'
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -25,7 +59,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -120,7 +154,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -154,47 +188,95 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
-handlers: {  }
+handlers:
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription au pot de départ en retraite de Laurence Le Lay'
+      body: '<p>Bonjour,</p><p>Votre inscription au pot de départ en retraite de Laurence Le Lay du mercredi 22 octobre 2025 a bien été validée.</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

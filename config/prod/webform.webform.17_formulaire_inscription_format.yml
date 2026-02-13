@@ -16,6 +16,16 @@ elements: |-
   mes_informations:
     '#type': webform_wizard_page
     '#title': 'Mes informations'
+    civilites:
+      '#type': radios
+      '#title': Civilité
+      '#description': "<p>Donnée personnelle nécessaire dans le cadre de l'établissement de votre convention de formation.</p>"
+      '#options':
+        Madame: Madame
+        Monsieur: Monsieur
+        'Ne souhaite pas répondre ': 'Ne souhaite pas répondre'
+      '#required': true
+      '#options__properties': ''
     nom:
       '#type': textfield
       '#title': 'Nom de naissance'
@@ -43,7 +53,7 @@ elements: |-
       '#state_province__access': false
     courriel:
       '#type': email
-      '#title': Courriel
+      '#title': 'Courriel (Merci de renseigner un courriel valide, que vous consultez)'
       '#required': true
     telephone:
       '#type': webform_telephone
@@ -66,7 +76,7 @@ elements: |-
     '#title': "Formation à laquelle je souhaite m'inscrire"
     intitule_de_la_formation_a_laquelle_je_souhaite_m_inscrire:
       '#type': textfield
-      '#title': "Intitulé complet de la formation à laquelle je souhaite m'inscrire"
+      '#title': "Intitulé complet de la formation courte à laquelle je souhaite m'inscrire"
       '#required': true
     date_s_de_la_session:
       '#type': textfield
@@ -92,10 +102,10 @@ elements: |-
       '#required': true
     y_a_t_il_des_questions_sujets_que_vous_souhaiteriez_voir_traite:
       '#type': textarea
-      '#title': 'Y-a-t-il des questions, sujets que vous souhaiteriez voir traité.es en particulier ?'
+      '#title': 'Y-a-t-il des questions, sujets que vous souhaiteriez voir traités en particulier ?'
     autre_s_informations_que_vous_souhaiteriez_communiquer_a_notre_s:
       '#type': textarea
-      '#title': 'Autre(s) informations que vous souhaiteriez communiquer à notre service (mobilité réduite...)'
+      '#title': 'Autre(s) information(s) que vous souhaiteriez communiquer à notre service (mobilité réduite...)'
   mon_mode_de_financement:
     '#type': webform_wizard_page
     '#title': 'Mode de financement'
@@ -104,7 +114,7 @@ elements: |-
       '#title': 'Mode de financement'
       '#options':
         Individuel: Individuel
-        'Pris en charge par un tiers': 'Pris en charge par un tiers (France Travail région...)'
+        'Pris en charge par un tiers': 'Pris en charge par un tiers (France Travail, région...)'
         Employeur: Employeur
       '#required': true
       '#options__properties': ''
@@ -115,6 +125,7 @@ elements: |-
         visible:
           ':input[name="mode_de_financement[Employeur]"]':
             checked: true
+      '#required': true
     siret:
       '#type': textfield
       '#title': SIRET
@@ -122,6 +133,7 @@ elements: |-
         visible:
           ':input[name="mode_de_financement[Employeur]"]':
             checked: true
+      '#required': true
     code_ape:
       '#type': textfield
       '#title': 'Code APE'
@@ -129,6 +141,7 @@ elements: |-
         visible:
           ':input[name="mode_de_financement[Employeur]"]':
             checked: true
+      '#required': true
     adresse_entreprise:
       '#type': webform_address
       '#title': 'Adresse entreprise'
@@ -138,6 +151,7 @@ elements: |-
             checked: true
       '#address_2__access': false
       '#state_province__access': false
+      '#required': true
     responsable_formation_prenom_nom:
       '#type': textfield
       '#title': 'Responsable formation (Prénom NOM)'
@@ -145,12 +159,32 @@ elements: |-
         visible:
           ':input[name="mode_de_financement[Employeur]"]':
             checked: true
+      '#required': true
     courriel_du_responsable:
       '#type': email
       '#title': 'Courriel du responsable'
       '#states':
         visible:
           ':input[name="mode_de_financement[Employeur]"]':
+            checked: true
+      '#required': true
+    numero_demandeur_d_emploi:
+      '#type': textfield
+      '#title': "Votre numéro de demandeur d'emploi"
+      '#description': "<p>Information demandée afin d'établir un devis adressé à France Travail</p>"
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Pris en charge par un tiers]"]':
+            checked: true
+    code_postal_de_votre_agence_france_travail:
+      '#type': textfield
+      '#title': 'Code postal de votre agence France Travail'
+      '#description': "<p>Information demandée afin d'établir un devis adressé à France Travail</p>"
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Pris en charge par un tiers]"]':
             checked: true
   questionnaire_d_auto_positionnement:
     '#type': webform_wizard_page

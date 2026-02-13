@@ -1,39 +1,43 @@
-uuid: 06b7fd9b-ff32-4188-a732-a33ab0565f5a
+uuid: 85a721d3-f7da-4d8e-be08-27eb809df6de
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 321
+uid: 1101
 template: false
 archive: false
-id: 17_formulaire_test_formations_co
-title: '17 - Formulaire Test Formations courtes'
+id: 54_conference_gram_reconnaissanc
+title: '54 - Conférence Gram - Reconnaissance Palestine'
 description: ''
 categories: {  }
 elements: |-
-  nom_de_famille:
+  nom:
     '#type': textfield
-    '#title': 'Nom de famille'
-    '#placeholder': 'nom de famille'
-    '#autocomplete': 'off'
+    '#title': NOM
+    '#placeholder': DUPONT
     '#required': true
-    '#attributes':
-      style: 'width:80%;'
   prenom:
     '#type': textfield
     '#title': Prénom
-    '#placeholder': Prénom
+    '#placeholder': Jean
     '#required': true
-  votre_demande:
-    '#type': textarea
-    '#title': 'Votre demande'
+  adresse_email:
+    '#type': textfield
+    '#title': 'Adresse email'
+    '#placeholder': Jean.Dupont@univ-paris1.fr
     '#required': true
-  actions:
-    '#type': webform_actions
-    '#title': "Bouton(s) d'envoi"
-    '#submit__label': Valider
+  qualite:
+    '#type': textfield
+    '#title': Qualité
+    '#placeholder': Doctorant/Etudiant...
+    '#required': true
+  institution_de_rattachement:
+    '#type': textfield
+    '#title': 'Institution de rattachement'
+    '#placeholder': 'Université Paris 1/EFB...'
+    '#required': true
 css: ''
 javascript: ''
 settings:
@@ -47,7 +51,7 @@ settings:
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: true
+  form_submit_once: false
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
@@ -138,10 +142,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: inline
+  confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Merci pour votre demande'
-  confirmation_message: ''
+  confirmation_title: 'Merci pour votre inscription.'
+  confirmation_message: "<p>Vous êtes inscrits sur la liste d'attente.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -217,82 +221,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  fabrice:
-    id: email
-    handler_id: fabrice
-    label: Fabrice
-    notes: ''
-    status: true
-    conditions:
-      enabled:
-        ':input[name="votre_demande"]':
-          '': ''
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: fabrice.bouchacourt@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: _default
-      from_options: {  }
-      from_name: _default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: _default
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  magalie:
-    id: email
-    handler_id: magalie
-    label: Magalie
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: magalie.huynh@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: _default
-      from_options: {  }
-      from_name: _default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: _default
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

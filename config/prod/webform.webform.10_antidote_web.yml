@@ -31,7 +31,7 @@ elements: |-
     '#required': true
     '#type__access': false
     '#ext__access': false
-    '#phone__international_initial_country': FR
+    '#phone__international': false
   courriel:
     '#type': email
     '#title': Courriel
@@ -48,14 +48,12 @@ elements: |-
       Doctorat: Doctorat
     '#other__placeholder': Complétez...
     '#required': true
-    '#unique': true
     '#options__properties': ''
   filiere:
     '#type': textfield
     '#title': Filière
     '#placeholder': 'MIASHS, sciences sociales, histoire...'
     '#required': true
-    '#unique': true
   horizontal_rule:
     '#type': webform_horizontal_rule
   je_souhaite:
@@ -85,7 +83,6 @@ elements: |-
       "2 mois : J'écris un mémoire, une thèse": "2 mois : J'écris un mémoire, une thèse"
     '#other__placeholder': 'Je précise la durée et le motif (mémoire, thèse...)'
     '#required': true
-    '#unique': true
     '#options__properties': ''
   sur_un_texte_en:
     '#type': radios
@@ -159,7 +156,7 @@ settings:
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
-  form_previous_submissions: true
+  form_previous_submissions: false
   form_confidential: false
   form_confidential_message: ''
   form_disable_remote_addr: false
@@ -249,7 +246,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande a bien été enregistrée.</p><p>Vous allez recevoir un mail automatique de confirmation sur l'adresse mail renseignée dans le formulaire.</p><p>Merci et à très bientôt !</p><hr><p>Your request has been successfully submitted.</p><p>You will receive an automatic confirmation email at the address provided in the form.</p><p>Thank you and see you soon!</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -325,5 +322,79 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: 'Notification pour le SICOCO'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: pretbu@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "Demande d'emprunt Antidote Web"
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Confirmation de demande pour les usagers'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: nepasrepondre@univ-paris1.fr
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "Confirmation de demande d'emprunt · Licence Antidote Web"
+      body: '<p>Bonjour,</p><p>Votre demande de prêt d''une licence Antidote Web ([webform_submission:created]) a bien été prise en compte par les bibliothèques universitaires de l’université Paris 1 Panthéon-Sorbonne.</p><p>Elle est actuellement en cours de traitement. Vous recevrez prochainement un message vous précisant les modalités d’accès à la licence.</p><p>Pour toute question complémentaire, vous pouvez nous contacter à l’adresse suivante&nbsp;: <a href="mailto:pretbu@univ-paris1.fr" target="_blank">pretbu@univ-paris1.fr</a></p><p>Bien cordialement,</p><p>L''équipe du Service commun de la documentation</p><hr><p>Hello,</p><p>Your request for a loan of an Antidote Web software license ([webform_submission:created]) has been successfully received by the University Library of Université Paris 1 Panthéon-Sorbonne.</p><p>It is currently being processed. You will soon receive a message with the details for accessing the license.</p><p>If you have any further questions, feel free to contact us at: <a href="mailto:pretbu@univ-paris1.fr" target="_blank">pretbu@univ-paris1.fr</a></p><p>Best regards,<br>The Library Team</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

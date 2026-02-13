@@ -39,6 +39,19 @@ elements: |-
     '#description_display': before
     '#placeholder': 'par exemple : L1 MIASHS, M2 Sciences sociales, Doctorat en Histoire, ...'
     '#required': true
+  acceptez_vous_d_etre_contacte_e_par_telephone_pour_prendre_rende:
+    '#type': checkbox
+    '#title': "Acceptez-vous d'être contacté·e par téléphone ?"
+  votre_numero_de_telephone:
+    '#type': tel
+    '#title': 'Votre numéro de téléphone :'
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="acceptez_vous_d_etre_contacte_e_par_telephone_pour_prendre_rende"]':
+          checked: true
+    '#international': true
+    '#international_initial_country': FR
   horizontal_rule_01:
     '#type': webform_horizontal_rule
   formation:
