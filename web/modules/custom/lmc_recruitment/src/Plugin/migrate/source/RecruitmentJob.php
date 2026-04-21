@@ -33,7 +33,7 @@ final class RecruitmentJob extends Url {
     $config = \Drupal::config('lmc_recruitment.settings');
     $xml_uri = $config->get('xml_uri');
     if ($xml_uri === NULL) {
-      $xml_uri = 'https://partners.beetween.com/WeaselWeb/xen/feed/generic?on=custom-connector-6s55g75D9333&opt_custom_connector_uuid=0199519d-64c3-795c-a01d-f29b3a0f2288';
+      $xml_uri = 'https://partners.beetween.com/WeaselWeb/xen/feed/generic?on=custom-connector-6s55g75D9333&opt_custom_connector_uuid=019dabdc-41f0-70dc-9514-596d995db998&opt_tc=5k';
     }
 
     $configuration['urls'][] = $xml_uri;
