@@ -115,6 +115,11 @@ elements: |-
     indiquez_quels_sont_vos_attentes_et_vos_besoins_vis_a_vis_du_dis:
       '#type': textarea
       '#title': 'Avez-vous des attentes et des besoins particuliers à cette étape de la procédure ?'
+    envoyer_un_fichier:
+      '#type': managed_file
+      '#title': 'Envoyer un fichier :'
+      '#file_placeholder': "<p>Vous pouvez décider d'envoyer un fichier avec votre témoignage.&nbsp;</p>"
+      '#max_filesize': '8'
   vous_contacter:
     '#type': webform_section
     '#title': 'VOUS CONTACTER'
@@ -346,7 +351,7 @@ access:
   administer:
     roles: {  }
     users:
-      - 7926
+      - 13
     permissions: {  }
   test:
     roles: {  }
@@ -355,7 +360,7 @@ access:
   configuration:
     roles: {  }
     users:
-      - 7926
+      - 13
     permissions: {  }
 handlers:
   email_aux_organisateurs:

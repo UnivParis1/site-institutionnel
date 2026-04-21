@@ -1,0 +1,341 @@
+uuid: 3f5a23f5-1452-474a-ae96-a86cb0005f64
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 9914
+template: false
+archive: false
+id: 54212_formulaire_d_inscription
+title: "0- Formulaire d'inscription aux formations courtes du Campus des élus "
+description: ''
+categories: {  }
+elements: |-
+  mes_informations:
+    '#type': webform_wizard_page
+    '#title': 'Mes informations '
+    '#open': true
+    civilite:
+      '#type': checkboxes
+      '#title': 'Civilité '
+      '#title_display': before
+      '#options':
+        'Madame ': 'Madame '
+        'Monsieur ': 'Monsieur '
+        'Ne souhaite pas répondre': 'Ne souhaite pas répondre'
+      '#required': true
+      '#required_error': 'Le champ "Civilité" est obligatoire. '
+      '#options__properties': ''
+    nom:
+      '#type': textfield
+      '#title': 'Nom '
+      '#title_display': before
+      '#required': true
+    prenom:
+      '#type': textfield
+      '#title': 'Prénom '
+      '#title_display': before
+      '#required': true
+    courriel:
+      '#type': email
+      '#title': 'Courriel '
+      '#title_display': before
+      '#required': true
+    situation:
+      '#type': checkboxes
+      '#title': 'Situation '
+      '#options':
+        'Maire ': 'Maire '
+        'Adjoint.e au Maire': 'Adjoint.e au Maire'
+        'Conseiller.e municipal.e': 'Conseiller.e municipal.e'
+        'Conseiller.e régional.e': 'Conseiller.e régional.e'
+        'Conseiller.e départemental.e': 'Conseiller.e départemental.e'
+        'Autres ': 'Autres '
+      '#required': true
+      '#options__properties': ''
+    telephone:
+      '#type': tel
+      '#title': Téléphone
+  formation_a_laquelle_je_souhaite_m_inscrire:
+    '#type': webform_wizard_page
+    '#title': "Formation à laquelle je souhaite m'inscrire "
+    '#open': true
+    intitule_exact_de_la_formation:
+      '#type': textfield
+      '#title': 'Intitulé exact de la formation '
+      '#title_display': before
+      '#required': true
+    quelles_sont_vos_attentes_et_besoins_vis_a_vis_de_cette_formatio:
+      '#type': textarea
+      '#title': 'Quelles sont vos attentes et besoins vis-à-vis de cette formation ? '
+      '#required': true
+      '#counter_type': character
+      '#counter_minimum': 10
+      '#counter_maximum': 99
+    dates_de_la_session:
+      '#type': textfield
+      '#title': 'Dates de la session '
+  mode_de_financement:
+    '#type': webform_wizard_page
+    '#title': 'Mode de financement '
+    '#open': true
+    financement:
+      '#type': checkboxes
+      '#title': 'Mode de financement '
+      '#options':
+        'Droit Individuel à la Formation des Elus ': 'Droit Individuel à la Formation des Elus '
+        'Pris en charge par la collectivité ': 'Pris en charge par la collectivité '
+        'Individuel ': 'Individuel '
+      '#options__properties': ''
+      '#required': true
+  questionnaire_d_autopositionnement:
+    '#type': webform_wizard_page
+    '#title': "Questionnaire d'autopositionnement "
+    quel_type_de_mandat_exercez_vous_actuellement:
+      '#type': checkboxes
+      '#title': 'Quel type de mandat exercez-vous actuellement ? '
+      '#options':
+        'Commune (moins de 3 500 habitants) ': 'Commune (moins de 3 500 habitants) '
+        'Commune (3 500 à 30 000 habitants) ': 'Commune (3 500 à 30 000 habitants) '
+        'Commune (plus de 30 000 habitants)': 'Commune (plus de 30 000 habitants)'
+        'Intercommunalité/EPCI ': 'Intercommunalité/EPCI '
+        'Département/Région ': 'Département/Région '
+        'Autre ': 'Autre '
+      '#options__properties': ''
+      '#required': true
+    depuis_combien_de_temps_exercez_vous_un_mandat_electif:
+      '#type': checkboxes
+      '#title': 'Depuis combien de temps exercez-vous un mandat électif '
+      '#options':
+        "Moins d'un an ": "Moins d'un an "
+        'Entre 1 et 3 ans ': 'Entre 1 et 3 ans '
+        'Entre 3 et 6 ans ': 'Entre 3 et 6 ans '
+        'Plus de 6 ans ': 'Plus de 6 ans '
+      '#options__properties': ''
+      '#required': true
+    comment_evaluez_vous_votre_niveau_de_connaissance_sur_le_theme_d:
+      '#type': checkboxes
+      '#title': 'Comment évaluez-vous votre niveau de connaissance sur le thème de cette formation ? '
+      '#options':
+        Débutant(e): 'Débutant(e) -- Je découvre le sujet '
+        'Intermédiaire ': "Intermédiaire  -- J'ai quelques connaissances"
+        Averti(e): 'Averti(e) -- Je maîtrise les bases et je cherche à approfondir '
+        'Expérimenté(e) ': "Expérimenté(e)  -- Je pratique régulièrement et j'ai acquis une vraie expertise "
+      '#options__properties': ''
+      '#required': true
+    avez_vous_deja_suivi_des_formations_sur_cette_thematique_si_oui:
+      '#type': textarea
+      '#title': 'Avez-vous déjà suivi des formations sur cette thématique ? Si oui, précisez ...'
+      '#required': true
+    quel_est_votre_objectif_principal_en_participant_a_cette_formati:
+      '#type': checkboxes
+      '#title': 'Quel est votre objectif principal en participant à cette formation ?'
+      '#options':
+        'Acquérir des bases solides sur le sujet ': 'Acquérir des bases solides sur le sujet '
+        'Approfondir des connaissances existantes ': 'Approfondir des connaissances existantes '
+        'Trouver des outils concrets et directement applicables ': 'Trouver des outils concrets et directement applicables '
+        "Echanger avec d'autres élus sur leurs pratiques ": "Echanger avec d'autres élus sur leurs pratiques "
+        'Autre ': 'Autre '
+      '#options__properties': ''
+      '#required': true
+    y_a_t_il_des_points_specifiques_que_vous_souhaitez_voir_abordes:
+      '#type': textarea
+      '#title': 'Y a-t-il des points spécifiques que vous souhaitez voir abordés, ou des questions que vous souhaitez soumettre aux formateurs ?'
+      '#required': true
+  en_validant_ce_formulaire_vous_consentez_au_traitement_de_vos_do:
+    '#type': checkbox
+    '#title': "En validant ce formulaire, vous consentez au traitement de vos données personnelles par les services de l'université et vous acceptez d'être recontactés. Pour en savoir plus sur l’utilisation de vos données et vos droits, vous pouvez écrire à : dpo@univ-paris1.fr"
+    '#required': true
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "Je m'inscris "
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles:
+      - webmestre_sous_site
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles:
+      - webmestre_sous_site
+    users: {  }
+    permissions: {  }
+handlers: {  }
+variants: {  }

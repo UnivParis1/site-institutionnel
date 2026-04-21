@@ -1,9 +1,9 @@
 uuid: 5a12cdd4-0c0c-400a-9480-cb147bbaf08e
 langcode: fr
-status: scheduled
+status: open
 dependencies: {  }
 weight: 0
-open: '2023-08-28T10:00:00'
+open: null
 close: null
 uid: 7710
 template: false
@@ -26,6 +26,30 @@ elements: |-
     '#last__required': true
     '#suffix__access': false
     '#degree__access': false
+  a_quel_etablissement_etes_vous_rattache_e:
+    '#type': select
+    '#title': 'À quel établissement êtes-vous rattaché·e ?'
+    '#description': "<p>Si vous n'êtes rattaché·e à aucun de ces établissements, votre inscription ne peut pas être enregistrée.</p>"
+    '#options':
+      'CNRS - Centre national de la recherche scientifique': 'CNRS - Centre national de la recherche scientifique'
+      'École nationale des Chartes': 'École nationale des Chartes'
+      'EHESS - École des hautes études en sciences sociales': 'EHESS - École des hautes études en sciences sociales'
+      'EPHE - École pratique des hautes études': 'EPHE - École pratique des hautes études'
+      'ESCP - École supérieure de commerce de Paris': 'ESCP - École supérieure de commerce de Paris'
+      "FMSH - Fondation Maison des Sciences de l'Homme": "FMSH - Fondation Maison des Sciences de l'Homme"
+      'Inalco - Institut national des langues et civilisations orientales': 'Inalco - Institut national des langues et civilisations orientales'
+      "INED - Institut national d'études démographiques": "INED - Institut national d'études démographiques"
+      'Université Paris 1 Panthéon-Sorbonne': 'Université Paris 1 Panthéon-Sorbonne'
+      'Université Paris 8 Vincennes-Saint-Denis': 'Université Paris 8 Vincennes-Saint-Denis'
+      'Université Paris-Nanterre': 'Université Paris-Nanterre'
+      'Université Sorbonne Nouvelle': 'Université Sorbonne Nouvelle'
+      'Université Sorbonne Paris Nord': 'Université Sorbonne Paris Nord'
+    '#required': true
+  je_me_munis_de_mon_justificatif_certificat_de_scolarite_carte_et:
+    '#type': checkbox
+    '#title': 'Je me munis de mon justificatif lors de ma première venue.'
+    '#description': "<p>Le justificatif peut être un certificat de scolarité, une carte étudiante ou professionnelle, une attestation employeur etc. relevant de l'établissement sélectionné.</p>"
+    '#required': true
   adresse_courriel:
     '#type': email
     '#title': 'Adresse courriel'
@@ -55,7 +79,7 @@ settings:
   page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
-  form_open_message: "<p>Les bibliothèques sont fermées du 21 juillet au soir au 28 août au matin. Le formulaire sera de nouveau accessible à partir du lundi 28 août.</p>\r\n\r\n<p>Nous vous souhaitons un bel été !</p>"
+  form_open_message: '<p>Les bibliothèques sont fermées du 21 juillet au soir au 28 août au matin. Le formulaire sera de nouveau accessible à partir du lundi 28 août.</p><p>Nous vous souhaitons un bel été !</p>'
   form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
@@ -148,7 +172,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: 'Accès à la bibliothèque le samedi : confirmation de votre inscription'
-  confirmation_message: "<p>Votre inscription a bien été prise en compte. Même si vous souhaitez accéder à la bibliothèque Colliard, vous devrez récupérer votre carte à la bibliothèque Pierre-Mendès-France.</p><p>Vous allez recevoir un <strong>courriel de confirmation</strong>. Veuillez le <strong>conserver,</strong> car il vous sera demandé à l'entrée du centre PMF.<br>Le jour de l'inscription, merci de vous munir d'une <strong>pièce d'identité en cours de validité</strong> et d'un <strong>justificatif de domicile de moins de 3 mois</strong>.</p><p><strong>Attention</strong>, vous pouvez accéder <strong>uniquement le samedi </strong>aux bibliothèques de Paris 1, <strong>de septembre à juin</strong>.</p><p>Merci de vous munir impérativement de votre <strong>carte de lecteur</strong> pour toute entrée dans nos bibliothèques.</p>"
+  confirmation_message: "<p>Votre inscription a bien été prise en compte. <strong>Même si vous souhaitez accéder à la bibliothèque Colliard</strong>, vous devrez récupérer votre carte à la bibliothèque Pierre-Mendès-France.</p><p>Vous allez recevoir un <strong>courriel de confirmation</strong>. Veuillez le <strong>conserver,</strong> car il vous sera demandé à l'entrée du centre PMF.<br>Le jour de l'inscription, merci de vous munir d'une <strong>pièce d'identité en cours de validité,</strong> d'un <strong>justificatif de domicile de moins de 3 mois</strong> et d'un <strong>justificatif de votre statut ou de votre appartenance à l'établissement partenaire duquel vous êtes membre</strong>.</p><p><strong>Attention</strong>, vous pouvez accéder <strong>uniquement le samedi </strong>aux bibliothèques Jean-Claude-Colliard et Pierre-Mendès-France, <strong>de septembre à juin</strong>.</p><p>Une fois votre inscription effectuée, votre <strong>carte de lecteur</strong> sera indispensable pour toute entrée dans nos bibliothèques.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -230,7 +254,7 @@ handlers:
     handler_id: pretbu
     label: "Confirmation d'envoi du formulaire pour les usagers"
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 0
     settings:
@@ -250,7 +274,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: 'Accès à la bibliothèque PMF - Confirmation'
-      body: "<p>Bonjour,</p><p>Votre demande de rendez-vous a bien été prise en compte.</p><p>Même si vous souhaitez accéder à la bibliothèque Colliard, vous devez récupérer votre carte à la bibliothèque Pierre-Mendès-France.</p><ul><li>Lors de votre venue, présentez ce courriel à l'entrée du centre PMF (accès rue Baudricourt).</li><li>Justificatifs à fournir lors de votre inscription : une <strong>pièce d'identité en cours de validité</strong> et un <strong>justificatif de domicile de moins de 3 mois.</strong></li></ul><p><em>Ceci est un message automatique.</em></p><p>Nos agents restent à votre disposition pour toute demande de renseignement à l'adresse suivante : <a href=\"mailto:pretbu@univ-paris1.fr\">pretbu@univ-paris1.fr</a></p><p>Cordialement,</p>"
+      body: "<p>Bonjour,</p><p>Votre demande de rendez-vous a bien été prise en compte.</p><p><strong>Même si vous souhaitez accéder à la bibliothèque Jean-Claude-Colliard</strong>, vous devez récupérer votre carte à la bibliothèque Pierre-Mendès-France.</p><ul><li>Lors de votre venue, présentez ce courriel à l'entrée du centre PMF (accès rue Baudricourt).</li><li>Justificatifs à fournir lors de votre inscription : une <strong>pièce d'identité en cours de validité</strong>, un <strong>justificatif de domicile de moins de 3 mois </strong>et un<strong> justificatif de votre appartenance à l'un des établissements vous permettant de bénéficier d'une accréditation.*</strong></li></ul><p>* Ce justificatif peut être : certificat de scolarité, attestation employeur, carte étudiante ou professionnelle...</p><p><em>Ceci est un message automatique.</em></p><p>Nos agents restent à votre disposition pour toute demande de renseignement à l'adresse suivante : <a href=\"mailto:pretbu@univ-paris1.fr\">pretbu@univ-paris1.fr</a></p><p>Cordialement,</p>"
       excluded_elements:
         captcha: captcha
       ignore_access: false

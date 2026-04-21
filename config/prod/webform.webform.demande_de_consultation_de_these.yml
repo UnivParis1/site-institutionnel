@@ -9,8 +9,8 @@ uid: 7710
 template: false
 archive: false
 id: demande_de_consultation_de_these
-title: '10 - Demande de consultation de thèse - PMF'
-description: "<p>Arborescence : Menu direction &gt; Bibliothèque Pierre Mendès France<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Bibliothèque Pierre Mendès France</em> &gt; rubrique <em>Conditions d'accès et de prêt</em></p>"
+title: '10 - Demande de consultation de thèse'
+description: "<p>Arborescence : Menu direction &gt; Services<br><br>Lien vers ce formulaire depuis la page <em>Bibliothèque Pierre Mendès France</em> &gt; rubrique <em>Conditions d'accès et de prêt</em></p>"
 categories:
   - Contact
 elements: |-
@@ -37,12 +37,11 @@ elements: |-
       '#type': email
       '#title': Courriel
       '#required': true
-    etes_vous_etudiant_e_a_paris_1:
+    je_ne_suis_pas_etudiant_es_a_l_universite_paris_1_pantheon_sorbo:
       '#type': checkbox
-      '#title': 'Etes-vous étudiant·e à Paris 1'
-      '#title_display': before
-      '#field_prefix': Oui
-      '#field_suffix': Non
+      '#title': "Je ne suis pas étudiant·es à l'université Paris 1 Panthéon-Sorbonne"
+      '#description': '<p>Si vous êtes étudiant·es à l''université Paris 1, <strong>vous n''avez pas besoin</strong> de remplir ce formulaire. Vous pouvez vous présenter à tout moment dans les bibliothèques Hélène-Ahrweiler, Jean-Claude-Colliard ou Pierre-Mendès-France ou passer par <a href="https://theses.fr/?domaine=theses" target="_blank" data-entity-type="external">theses.fr</a> pour les documents électroniques.</p>'
+      '#required': true
   references_de_la_these:
     '#type': webform_section
     '#title': 'Références de la thèse'
@@ -60,10 +59,19 @@ elements: |-
       '#required': true
   date_souhaitee_pour_le_rendez_vous:
     '#type': webform_section
-    '#title': 'Date souhaitée pour le rendez-vous'
+    '#title': 'Modalités de rendez-vous'
+    choisissez_la_bibliotheque_que_vous_souhaitez_frequenter:
+      '#type': select
+      '#title': 'Dans quelle bibliothèque se trouve la thèse qui vous intéresse ?'
+      '#options':
+        'Bibliothèque Hélène-Ahrweiler (SHS)': 'Bibliothèque Hélène-Ahrweiler (SHS)'
+        'Bibliothèque Jean-Claude-Colliard (droit)': 'Bibliothèque Jean-Claude-Colliard (droit)'
+        'Bibliothèque Pierre-Mendès-France (économie)': 'Bibliothèque Pierre-Mendès-France (économie)'
+      '#required': true
+      '#required_error': 'Vous devez choisir une des deux bibliothèque'
     choisir_une_date:
       '#type': date
-      '#title': 'Choisir une date (délai minimum de 48h)'
+      '#title': 'Choisissez une date (délai minimum de 48h)'
       '#required': true
       '#date_days':
         - '1'
@@ -74,7 +82,7 @@ elements: |-
         - '6'
     creneau_souhaite:
       '#type': radios
-      '#title': 'Créneau souhaité'
+      '#title': 'Choisissez le créneau souhaité'
       '#options':
         Matin: Matin
         Après-midi: Après-midi
@@ -304,7 +312,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: 'Votre demande de consultation de thèse'
-      body: "<p>Bonjour,</p><p>Votre demande a bien été prise en compte. Nous préparons votre visite au créneau choisi.</p><ul><li>Lors de votre venue, présentez ce mail à l'entrée du centre PMF (accès rue Baudricourt).</li><li>En remplissant ce formulaire, vous vous engagez à honorer votre rendez-vous ou à nous avertir en cas d'empêchement ou de report de date.&nbsp;</li></ul><p><em>Ceci est un message automatique.</em></p><p>Pour tout renseignement complémentaire, veuillez contacter l'adresse suivante : <a href=\"mailto:pretbu@univ-paris1.fr\">pretbu@univ-paris1.fr</a></p><p>Cordialement,</p><p>&nbsp;</p>"
+      body: "<p>Bonjour,</p><p>Votre demande a bien été prise en compte. Nous préparons votre visite au créneau choisi.</p><ul><li>Lors de votre venue, présentez ce mail à l'entrée des centres La Chapelle, Lourcine ou PMF (accès rue Baudricourt), selon le lieu que vous avez choisi.</li><li>En remplissant ce formulaire, vous vous engagez à honorer votre rendez-vous ou à nous avertir en cas d'empêchement ou de report de date.&nbsp;</li></ul><p><em>Ceci est un message automatique.</em></p><p>Pour tout renseignement complémentaire, veuillez contacter l'adresse suivante : <a href=\"mailto:pretbu@univ-paris1.fr\">pretbu@univ-paris1.fr</a></p><p>Cordialement,</p><p>&nbsp;</p>"
       excluded_elements:
         terms_of_service: terms_of_service
         captcha: captcha
@@ -342,7 +350,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Formulaire Demande de consultation de thèse - PMF - Nouvelle demande'
+      subject: 'Formulaire Demande de consultation de thèse - Nouvelle demande'
       body: _default
       excluded_elements:
         captcha: captcha
