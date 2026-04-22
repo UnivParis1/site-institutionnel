@@ -129,10 +129,8 @@ final class RecruitmentJob extends Url {
     }
     $row->setSourceProperty('service', $service);
 
-    // According to Beetween, "You must add _5k_ just before the @."
-    $email = $row->getSourceProperty('email');
-    $email_suffixed = preg_replace('/@/', '5k@', $email, 1);
-    $row->setSourceProperty('email', $email_suffixed);
+    // LHE - suppr 5k car inclus dans le flux xml.
+    $row->setSourceProperty('email', $row->getSourceProperty('email'));
 
     // Do not rely on Lat/Lon provided by XML file.
     $center = $row->getSourceProperty('cf_sites');
