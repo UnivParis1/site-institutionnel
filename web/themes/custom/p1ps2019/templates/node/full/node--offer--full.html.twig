@@ -82,9 +82,15 @@
       {{ label }}
     </h2>
     {{ title_suffix }}
-    <div class="categ-style semi-infos-sep"> {{ content.field_job_contract_type.0 }} </div>
-    <div class="categ-style semi-infos-sep"> {{ content.field_offer_type }} </div>
-    <div class="categ-style semi-infos-sep"> {{ content.field_service }} </div>
+    {% if content.field_job_contract_type.0 is not empty %}
+      <div class="categ-style semi-infos-sep"> {{ content.field_job_contract_type.0 }} </div>
+    {% endif %}
+    {% if content.field_offer_type.0 is not empty %}
+      <div class="categ-style semi-infos-sep"> {{ content.field_offer_type.0 }} </div>
+    {% endif %}
+    {% if content.field_service.0 is not empty %}
+      <div class="categ-style semi-infos-sep"> {{ content.field_service.0 }} </div>
+    {% endif %}
     <div{{ content_attributes.addClass('content grid-x  grid-margin-x') }}>
       <section id="event-content" class="cell small-12 large-8">
         <h3>{{ "Description of the employer"|t }}</h3>
@@ -98,19 +104,45 @@
         <div class="event-details jobinfo">
           <span class="fas fa-info-circle"></span>
           <h3>{{ "More information"|t }}</h3>
-          {{ content.field_job_category }}
-          {{ content.field_bap }}
-          {{ content.field_job_grade }}
-          {{ content.field_job_title }}
-          {{ content.field_job_experience }}
-          {{ content.field_job_paris1_site }}
-          {{ content.field_job_study_level }}
-          {{ content.field_job_date }}
-          {{ content.field_application_deadline }}
-          {{ content.field_job_nature }}
-          {{ content.field_job_contract_type }}
-          {{ content.field_contract_duration }}
-          {{ content.field_salary_range }}
+          {% if content.field_job_category.0 is not empty %}
+            {{ content.field_job_category }}
+          {% endif %}
+          {% if content.field_bap.0 is not empty %}
+            {{ content.field_bap }}
+          {% endif %}
+          {% if content.field_job_grade.0 is not empty %}
+            {{ content.field_job_grade }}
+          {% endif %}
+          {% if content.field_job_title.0 is not empty %}
+            {{ content.field_job_title }}
+          {% endif %}
+          {% if content.field_job_experience.0 is not empty %}
+            {{ content.field_job_experience }}
+          {% endif %}
+          {% if content.field_job_paris1_site.0 is not empty %}
+            {{ content.field_job_paris1_site }}
+          {% endif %}
+          {% if content.field_job_study_level.0 is not empty %}
+            {{ content.field_job_study_level }}
+          {% endif %}
+          {% if content.field_job_date.0 is not empty %}
+            {{ content.field_job_date }}
+          {% endif %}
+          {% if content.field_application_deadline.0 is not empty %}
+            {{ content.field_application_deadline }}
+          {% endif %}
+          {% if content.field_job_nature.0 is not empty %}
+            {{ content.field_job_nature }}
+          {% endif %}
+          {% if content.field_job_contract_type.0 is not empty %}
+            {{ content.field_job_contract_type }}
+          {% endif %}
+          {% if content.field_contract_duration.0 is not empty %}
+            {{ content.field_contract_duration }}
+          {% endif %}
+          {% if content.field_salary_range.0 is not empty %}
+            {{ content.field_salary_range }}
+          {% endif %}
         </div>
         <div class="event-details toapp">
           <span class="fa fa-envelope"></span>
@@ -122,8 +154,12 @@
         <div class="event-details location">
           <span class="fas fa-map-signs"></span>
           <h3>{{ 'Location'|t }}</h3>
-          {{ content.field_address }}
-          {{ content.field_address_map }}
+          {% if content.field_address.0 is not empty %}
+            {{ content.field_address }}
+          {% endif %}
+          {% if content.field_address_map.0 is not empty %}
+            {{ content.field_address_map }}
+          {% endif %}
         </div>
       </aside>
     </div>

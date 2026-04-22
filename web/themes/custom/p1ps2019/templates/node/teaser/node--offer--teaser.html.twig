@@ -86,6 +86,7 @@
             <div class="categ-style"> {{ content.field_job_nature.0 }} </div>
           </div>
         {% endif %}
+      </div>
       {{ title_suffix }}
     </div>
     <div class="bottom-infos">
@@ -93,8 +94,11 @@
         <a href="{{ url }}" rel="bookmark">{{ label|raw }}</a>
       </h2>
       <p class="offer-service-teaser semi-infos-sep text-center"> {{ content.field_service.0 }} </p>
-      <p class="offer-type-teaser semi-infos-sep"> {{ content.field_job_contract_type.0 }} </p>
-      {{ content.field_fa_icon }}
+      {% if content.field_job_contract_type.0 is not empty %}
+        <p class="offer-type-teaser semi-infos-sep"> {{ content.field_job_contract_type.0 }} </p>
+        {% elseif content.field_contract_duration.0 is not empty %}
+        <p class="offer-type-teaser semi-infos-sep"> {{ content.field_contract_duration.0 }} </p>
+      {% endif %}
       <div class="node-readmore text-center">
         <a href="{{ url }}" class="btn outline" title="readmore" style="color: #ffffff; border-color: #ffffff;">{{ "Read more"|t }}</a>
       </div>
