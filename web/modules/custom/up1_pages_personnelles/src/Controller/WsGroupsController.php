@@ -11,8 +11,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Queue\QueueWorkerManager;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Drupal\Core\Queue\QueueFactory;
+use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Collator;
@@ -991,6 +992,129 @@ class WsGroupsController extends ControllerBase
       return $response->send();
     }
     else return FALSE;
+  }
+
+  public function exportObsia() {
+    $siteId = 114;
+
+    $siteStorage = \Drupal::entityTypeManager()->getStorage('site');
+    $site = $siteStorage->load($siteId);
+
+    if (!$site) {
+      throw new NotFoundHttpException();
+    }
+
+    $group = $site->get('groups')->value;
+    $users = $this->getCachedUsers('faculty', $siteId, $group);
+
+    $headers = [
+      $this->t('login'),
+      $this->t('Nom complet'),
+      $this->t('URL page personnelle'),
+      $this->t('Affiliation principale'),
+      $this->t('Formations'),
+      $this->t('Projets'),
+      $this->t('Biographie'),
+      $this->t('Expertise'),
+    ];
+
+    $rows = [];
+
+    $formatValue = static function ($value) {
+      if (is_array($value)) {
+        return implode(', ', array_filter($value));
+      }
+
+      return $value ?? '';
+    };
+
+    foreach ($users as $user) {
+      $drupal_user = user_load_by_name($user['uid']);
+      if (!empty($drupal_user)) {
+        $pp = \Drupal::entityTypeManager()
+          ->getStorage('node')
+          ->loadByProperties(['uid' => $drupal_user->id(), 'type' => 'page_personnelle']);
+        $page_perso = reset($pp);
+        if ($page_perso) {
+          $user['formations'] = $page_perso->get('field_formations_ia')->value;
+          $user['projets'] = $page_perso->get('field_projects_ia')->value;
+          $user['bio'] = $page_perso->get('field_short_bio')->value;
+          $user['skills'] = $page_perso->get('field_ia_skills')->value;
+        }
+
+        $all_skills = $page_perso->get('field_ia_skills')->getSetting('allowed_values');
+        if (!empty($user['skills'])) {
+          $selected_skills = explode(', ', $user['skills']);
+          $result_skills = [];
+          foreach ($selected_skills as $a_skill) {
+            $result_skills[] = $all_skills[$a_skill];
+          }
+          $skills = implode(', ', $result_skills);
+        }
+
+        $rows[] = [
+          $formatValue($user['uid'] ?? ''),
+          $formatValue($user['supannCivilite'] . ' ' . $user['displayName'] ?? ''),
+          $formatValue($user['labeledURI'] ?? ''),
+          $formatValue($user['supannEntiteAffectation'] ?? ''),
+          $formatValue($user['formations'] ?? ''),
+          $formatValue($user['projets'] ?? ''),
+          $formatValue($user['bio'] ?? ''),
+          $formatValue($skills ?? ''),
+
+        ];
+      }
+    }
+    $request = \Drupal::request();
+
+    if ($request->query->get('export') === 'csv') {
+      $handle = fopen('php://temp', 'r+');
+
+      // BOM UTF-8 pour une meilleure ouverture dans Excel.
+      fwrite($handle, "\xEF\xBB\xBF");
+
+      fputcsv($handle, $headers, ';');
+
+      foreach ($rows as $row) {
+        fputcsv($handle, $row, ';');
+      }
+
+      rewind($handle);
+      $csv = stream_get_contents($handle);
+      fclose($handle);
+
+      $filename = 'export-obsia-' . date('Y-m-d') . '.csv';
+
+      return new Response($csv, 200, [
+        'Content-Type' => 'text/csv; charset=UTF-8',
+        'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+      ]);
+    }
+
+    $route_name = \Drupal::routeMatch()->getRouteName();
+
+    return [
+      'export_button' => [
+        '#type' => 'link',
+        '#title' => $this->t('Exporter en CSV'),
+        '#url' => Url::fromRoute($route_name, [], [
+          'query' => [
+            'export' => 'csv',
+          ],
+        ]),
+        '#attributes' => [
+          'class' => [
+            'button',
+            'button--primary',
+          ],
+        ],
+      ],
+
+      '#type' => 'table',
+      '#header' => $headers,
+      '#rows' => $rows,
+      '#empty' => $this->t('Aucun utilisateur trouvé.'),
+    ];
   }
 }
 
