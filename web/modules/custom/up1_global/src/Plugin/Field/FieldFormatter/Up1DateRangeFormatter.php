@@ -59,32 +59,46 @@ class Up1DateRangeFormatter extends DateTimeCustomFormatter {
         $start_hour = $start_date->format('H\hi');
         $end_hour = $end_date->format('H\hi');
 
-        if ($start_date->format('d-m-Y') !== $end_date->format('d-m-Y')) {
-          $elements[$delta] = [
-            'date' => [
-              '#markup' => "<div class='date-day-entry'><span>" . $this->t('From ') . "</span>" .
-                $start_date->format('j F Y') . "</div><div class='date-day-entry'><span>" . $this->t('to ') . "</span>" .
-                $end_date->format('j F Y') . "</div>",
-            ],
-          ];
-        }
-        elseif ($start_date->getTimestamp() === $end_date->getTimestamp()) {
-          $elements[$delta] = [
-            'date' => [
-              '#markup' => "<div class='date-day-entry'>" . $start_date->format('d/m/Y') . "</div>",
-            ],
-          ];
-        }
-        else {
-          $elements[$delta] = [
-            'date' => [
-              '#markup' => "<div class='date-day-entry'>" . t('Le') ." " . strtolower($start_date->format('l j F Y')) . "</div>
-              <div class='date-hours-wrapper'><span>$start_hour</span>
-              <i class='fa fa-$icon'></i>
-              <span>$end_hour</span></div>",
-            ],
-          ];
-        }
+          $formatter = \Drupal::service('date.formatter');
+          $tz = date_default_timezone_get();
+          $start_str = $formatter->format($start_date->getTimestamp(), 'custom', 'j F Y', $tz);
+          $end_str   = $formatter->format($end_date->getTimestamp(), 'custom', 'j F Y', $tz);
+
+          if ($start_date->format('d-m-Y') !== $end_date->format('d-m-Y')) {
+              $elements[$delta] = [
+                  'date' => [
+                      '#markup' => $this->t(
+                          '<div class="date-day-entry"><span>From</span> @start</div>' .
+                          '<div class="date-day-entry"><span>to</span> @end</div>',
+                          [
+                              '@start' => $start_str,
+                              '@end' => $end_str,
+                          ]
+                      ),
+                  ],
+              ];
+          }
+          elseif ($start_date->getTimestamp() === $end_date->getTimestamp()) {
+              $elements[$delta] = [
+                  'date' => [
+                      '#markup' => $this->t('<div class="date-day-entry">@date</div>', [
+                          '@date' => $formatter->format($start_date->getTimestamp(), 'custom', 'd/m/Y', $tz),
+                      ]),
+                  ],
+              ];
+          }
+          else {
+              $elements[$delta] = [
+                  'date' => [
+                      '#markup' => $this->t('<div class="date-day-entry">Le @date</div><div class="date-hours-wrapper"><span>@start_hour</span><i class="fa fa-@icon"></i><span>@end_hour</span></div>', [
+                          '@date' => $formatter->format($start_date->getTimestamp(), 'custom', 'l j F Y', $tz),
+                          '@start_hour' => $start_hour,
+                          '@end_hour' => $end_hour,
+                          '@icon' => $icon,
+                      ]),
+                  ],
+              ];
+          }
       }
     }
 
