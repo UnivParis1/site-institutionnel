@@ -19,7 +19,8 @@ elements: |-
     '#title': "Éléments d'idendité"
     '#required': true
     '#name__title': 'Nom & prénom'
-    '#company__title': Service
+    '#company__title': 'Service / Diplôme'
+    '#email__title': Courriel
     '#phone__access': false
     '#address__access': false
     '#address_2__access': false
@@ -31,10 +32,9 @@ elements: |-
     '#type': webform_checkboxes_other
     '#title': "À quel personna s'adresse votre initiative ?"
     '#options':
-      Étudiants: Étudiants
+      'Étudiants UP1PS': 'Étudiants UP1PS'
       'Personnels BIATPSS': 'Personnels BIATPSS'
-      'Personnels EC': 'Personnels EC'
-    '#required': true
+      'Personnels enseignants, enseignants-chercheurs et chercheurs': 'Personnels enseignants, enseignants-chercheurs et chercheurs'
     '#options__properties': ''
   quels_supports_de_communications_aimeriez_vous_que_nous_mettions:
     '#type': webform_checkboxes_other
@@ -43,12 +43,16 @@ elements: |-
       'Actualité intranet': 'Actualité intranet'
       'Actualité mini-site DD&RSE': 'Actualité mini-site DD&RSE'
       Mailing: Mailing
-    '#required': true
     '#options__properties': ''
   merci_de_joindre_un_document_presentant_votre_initative:
     '#type': webform_document_file
     '#title': 'Merci de joindre un document présentant votre initative'
     '#multiple': 2
+    '#max_filesize': '5'
+    '#file_extensions': 'txt pdf doc docx odt ppt pptx odp xls xlsx ods'
+    '#sanitize': true
+  captcha:
+    '#type': captcha
 css: ''
 javascript: ''
 settings:

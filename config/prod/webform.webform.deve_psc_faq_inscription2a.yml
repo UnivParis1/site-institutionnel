@@ -1,0 +1,364 @@
+uuid: 7b97b585-ffc8-4b67-af3f-193e8ff8daef
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: null
+template: false
+archive: false
+id: deve_psc_faq_inscription2a
+title: 'DEVE PSC - FAQ-Inscription2a'
+description: '<p>informations supplémentaires pour les extra-comm (frais différenciés)</p>'
+categories:
+  - 'FAQ DEVE IA'
+elements: |-
+  situation_extra_comm:
+    '#type': checkboxes
+    '#title': "En tant qu'étudiant extra-communautaire (= non membre de l'UE), ma situation est la suivante :"
+    '#description': '<p>&nbsp;</p><p><strong>Il est possible de cocher toutes les cases qui s''appliquent à votre situation&nbsp;</strong></p><p>*Retrouvez la <a href="https://www.un.org/development/desa/dpad/wp-content/uploads/sites/45/publication/ldc_list.pdf">liste des pays concernés</a> sur ce lien : <a href="https://www.un.org/ldcportal/fr">https://www.un.org/ldcportal/fr</a></p>'
+    '#help_title': "Cochez ce qui s'applique"
+    '#help': '<p>Cochez autant de cases qui correspondent à votre situation</p>'
+    '#options':
+      "J'ai payé mes impôts en France les 2 dernières années précédant mon année d'inscription": "J'ai payé mes impôts en France les 2 dernières années précédant mon année d'inscription"
+      'Ma première inscription dans le cursus (Licence ou Master) à Paris 1 date de 2025 ou avant, sans interruption': 'Ma première inscription dans le cursus (Licence ou Master) à Paris 1 date de 2025 ou avant, sans interruption'
+      'Je redouble': 'Je redouble'
+      'Je suis en classe préparatoire (CPGE)': 'Je suis en classe préparatoire (CPGE)'
+      "Je m'incris en Doctorat ou en HDR (Habilitation à Diriger des Recherches) à Paris 1": "Je m'incris en Doctorat ou en HDR (Habilitation à Diriger des Recherches) à Paris 1"
+      "Je viens d'un des 44 pays inscrit sur la liste des pays les moins avancés (PMA) définis par l’ONU": "Je viens d'un des 44 pays inscrit sur la liste des pays les moins avancés (PMA) définis par l’ONU*"
+      'Moi (ou au moins un de mes parents directs) a le statut de réfugié ou bénéficie de la protection subsidiaire': 'Moi (ou au moins un de mes parents directs) a le statut de réfugié ou bénéficie de la protection subsidiaire'
+      "Je viens d'un de ces pays : Islande , Liechtenstein, Norvège, Suisse, Andorre, Monaco, Québec": "Je viens d'un de ces pays : Islande , Liechtenstein, Norvège, Suisse, Andorre, Monaco, Québec"
+      "J'ai une Bourse du Gouvernement Français (BGF)": "J'ai une Bourse du Gouvernement Français (BGF)"
+      "J'ai une carte de résident de longue durée": "J'ai une carte de résident de longue durée"
+      "J'ai un titre de séjour d'un an": "J'ai un titre de séjour d'un an"
+      "J'ai une bourse ou un financement de mon pays d'origine (ou autre que la France)": "J'ai une bourse ou un financement de mon pays d'origine (ou autre que la France)"
+      "Je déclare mes impôts depuis l'année dernière": "Je déclare mes impôts depuis l'année dernière"
+      "J'ai obtenu ma Licence à Paris 1, cette année je m'inscris en Master 1": "J'ai obtenu ma Licence à Paris 1, cette année je m'inscris en Master 1"
+    '#options__properties': ''
+  frais_diff_pleins:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        - ':input[name="situation_extra_comm[J''ai payé mes impôts en France les 2 dernières années précédant mon année d''inscription]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Ma première inscription dans le cursus (Licence ou Master) à Paris 1 date de 2025 ou avant, sans interruption]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je redouble]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je suis en classe préparatoire (CPGE)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je m''incris en Doctorat ou en HDR (Habilitation à Diriger des Recherches) à Paris 1]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un des 44 pays inscrit sur la liste des pays les moins avancés (PMA) définis par l’ONU]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Moi (ou au moins un de mes parents directs) a le statut de réfugié ou bénéficie de la protection subsidiaire]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un de ces pays : Islande , Liechtenstein, Norvège, Suisse, Andorre, Monaco, Québec]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une Bourse du Gouvernement Français (BGF)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une carte de résident de longue durée]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai obtenu ma Licence à Paris 1, cette année je m''inscris en Master 1]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[J''ai payé mes impôts en France les 2 dernières années précédant mon année d''inscription]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Ma première inscription dans le cursus (Licence ou Master) à Paris 1 date de 2025 ou avant, sans interruption]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je redouble]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je suis en classe préparatoire (CPGE)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je m''incris en Doctorat ou en HDR (Habilitation à Diriger des Recherches) à Paris 1]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un des 44 pays inscrit sur la liste des pays les moins avancés (PMA) définis par l’ONU]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Moi (ou au moins un de mes parents directs) a le statut de réfugié ou bénéficie de la protection subsidiaire]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un de ces pays : Islande , Liechtenstein, Norvège, Suisse, Andorre, Monaco, Québec]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une Bourse du Gouvernement Français (BGF)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une carte de résident de longue durée]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je déclare mes impôts depuis l''année dernière]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[J''ai payé mes impôts en France les 2 dernières années précédant mon année d''inscription]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Ma première inscription dans le cursus (Licence ou Master) à Paris 1 date de 2025 ou avant, sans interruption]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je redouble]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je suis en classe préparatoire (CPGE)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je m''incris en Doctorat ou en HDR (Habilitation à Diriger des Recherches) à Paris 1]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un des 44 pays inscrit sur la liste des pays les moins avancés (PMA) définis par l’ONU]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Moi (ou au moins un de mes parents directs) a le statut de réfugié ou bénéficie de la protection subsidiaire]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un de ces pays : Islande , Liechtenstein, Norvège, Suisse, Andorre, Monaco, Québec]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une Bourse du Gouvernement Français (BGF)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une carte de résident de longue durée]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une bourse ou un financement de mon pays d''origine (ou autre que la France)]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[J''ai payé mes impôts en France les 2 dernières années précédant mon année d''inscription]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Ma première inscription dans le cursus (Licence ou Master) à Paris 1 date de 2025 ou avant, sans interruption]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je redouble]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je suis en classe préparatoire (CPGE)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je m''incris en Doctorat ou en HDR (Habilitation à Diriger des Recherches) à Paris 1]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un des 44 pays inscrit sur la liste des pays les moins avancés (PMA) définis par l’ONU]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Moi (ou au moins un de mes parents directs) a le statut de réfugié ou bénéficie de la protection subsidiaire]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[Je viens d''un de ces pays : Islande , Liechtenstein, Norvège, Suisse, Andorre, Monaco, Québec]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une Bourse du Gouvernement Français (BGF)]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai une carte de résident de longue durée]"]':
+            unchecked: true
+          ':input[name="situation_extra_comm[J''ai un titre de séjour d''un an]"]':
+            checked: true
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p class="badge text-bg-theme-red">Oui, je devrai bien&nbsp;payer les frais différenciés.</p><hr><p>J''ai trouvé les informations dont j''avais besoin ?</p><ul class="groupeboutonavis"><li data-list-item-id="e64c06c2ed4a2eec88ecdaf6dc82fe629"><a class="boutonavis" href="https://www.pantheonsorbonne.fr/inscription" rel="noopener noreferrer">OUI</a></li><li data-list-item-id="ea810b91556ea682af99d220acba9f7cd"><a class="boutonavis" href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/faq-contact" rel="noopener noreferrer">NON</a></li></ul>'
+  frais_exo_partielle:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        - ':input[name="situation_extra_comm[J''ai payé mes impôts en France les 2 dernières années précédant mon année d''inscription]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[Ma première inscription dans le cursus (Licence ou Master) à Paris 1 date de 2025 ou avant, sans interruption]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[Je redouble]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[Je suis en classe préparatoire (CPGE)]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[Je m''incris en Doctorat ou en HDR (Habilitation à Diriger des Recherches) à Paris 1]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[Je viens d''un des 44 pays inscrit sur la liste des pays les moins avancés (PMA) définis par l’ONU]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[Moi (ou au moins un de mes parents directs) a le statut de réfugié ou bénéficie de la protection subsidiaire]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[Je viens d''un de ces pays : Islande , Liechtenstein, Norvège, Suisse, Andorre, Monaco, Québec]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[J''ai une Bourse du Gouvernement Français (BGF)]"]':
+            checked: true
+        - or
+        - ':input[name="situation_extra_comm[J''ai une carte de résident de longue durée]"]':
+            checked: true
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p class="badge text-bg-theme-red">Non, je n''aurai&nbsp;<strong>pas</strong>&nbsp;à payer les frais différenciés. Je vais donc payer seulement les frais nationaux.</p><hr><p>J''ai trouvé les informations dont j''avais besoin ?</p><ul class="groupeboutonavis"><li data-list-item-id="ea455ea9bfa870dc50b37baff3a439fb3"><a class="boutonavis" href="https://www.pantheonsorbonne.fr/inscription" rel="noopener noreferrer">OUI</a></li><li data-list-item-id="ea66e33ddead33a9def8648282267ee74"><a class="boutonavis" href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/faq-contact" rel="noopener noreferrer">NON</a></li></ul>'
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit_hide': true
+    '#update_hide': true
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }
+variants: {  }

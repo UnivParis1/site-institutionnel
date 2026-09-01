@@ -1,18 +1,64 @@
-uuid: e054ee9b-5459-4e9f-bb34-00d3813e86a4
+uuid: ad5d2a9e-4c67-4d22-8901-ceb84571693d
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 435
+uid: 9762
 template: false
 archive: false
-id: gggggggggggggggg
-title: gggggggggggggggg
-description: '<p>222</p>'
-categories: {  }
-elements: null
+id: inscription_au_colloque_les_80_a
+title: 'Inscription au colloque « Les 80 ans du Préambule de la Constitution de 1946 : que sont devenus les « principes particulièrement nécessaires à notre temps » ? »'
+description: "<p>Formulaire d'inscription au colloque « Les 80 ans du Préambule de la Constitution de 1946 : que sont devenus les « principes particulièrement nécessaires à notre temps » ? »</p>"
+categories:
+  - 'Inscription à un colloque '
+elements: |-
+  votreprenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': Jean
+    '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Dupond
+    '#required': true
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  organisme_:
+    '#type': textfield
+    '#title': Organisme
+    '#placeholder': 'Saisissez votre organisme'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre organisme'
+  organisme:
+    '#type': textfield
+    '#title': 'Fonction '
+    '#placeholder': 'Saisissez votre fonction'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre fonction'
+  conditions_d_inscription:
+    '#type': checkbox
+    '#title': "Conditions d'inscription"
+    '#description': '<p data-pm-slice="1 1 []">En cochant cette case, <strong>vous acceptez de vous munir d’une pièce d’identité le jour de l’événement</strong> et l’utilisation de vos données personnelles pour la constitution de la liste d’inscription.</p>'
+    '#required': true
+    '#required_error': "Vous devez accepter les conditions d'inscription."
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -25,7 +71,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -120,7 +166,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -154,47 +200,106 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
-handlers: {  }
+handlers:
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription au colloque du 14/10/2026'
+      body: '<p>Bonjour,</p><p>Votre inscription au colloque « Les 80 ans du Préambule de la Constitution de 1946 : que sont devenus les « principes particulièrement nécessaires à notre temps » ? » a bien été validée.</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

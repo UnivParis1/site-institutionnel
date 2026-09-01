@@ -1,52 +1,50 @@
-uuid: 5f95f233-9464-4667-89e2-08121d1130d0
+uuid: 54fe813f-abec-408e-858b-76af9d11c944
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7845
+uid: null
 template: false
-archive: true
-id: 8_inscription_au_colloque_la_sec
-title: '8 - Inscription au colloque "La sécurité sociale au-delà des frontières" du 11/06/2026'
-description: '<p>Formulaire d''inscription au colloque "La sécurité sociale au-delà des frontières", troisième acte de "Sécurité sociale : 80 ans dans la cité" du 11/06/2026.</p>'
+archive: false
+id: deve_psc_faq_contact
+title: 'DEVE PSC - FAQ-contact'
+description: ''
 categories:
-  - 'Inscription à un colloque '
+  - 'FAQ DEVE IA'
 elements: |-
-  votreprenom:
-    '#type': textfield
-    '#title': Prénom
-    '#placeholder': Jean
-    '#required': true
-    '#required_error': 'Vous devez saisir votre prénom.'
-  nom2:
-    '#type': textfield
-    '#title': Nom
-    '#placeholder': Dupond
-    '#required': true
-    '#required_error': 'Vous devez saisir votre nom.'
-  votre_adresse_de_messagerie:
-    '#type': email
-    '#title': 'Votre adresse de messagerie'
-    '#placeholder': ' jeandupond@mail.com'
-    '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
-  conditions_d_inscription:
-    '#type': checkbox
-    '#title': "Conditions d'inscription"
-    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription.</p>'
-    '#required': true
-    '#required_error': "Vous devez accepter les conditions d'inscription."
+  je_souhaite:
+    '#type': radios
+    '#title': 'Je souhaite : '
+    '#options':
+      'trouver une autre réponse / poser une autre question ': 'trouver une autre réponse / poser une autre question '
+      "faire un ticket à l'administration de l'université ": "faire un ticket à l'administration de l'université "
+    '#options__properties': ''
+  poserquestion:
+    '#type': webform_markup
+    '#states':
+      visible:
+        ':input[name="je_souhaite"]':
+          value: 'trouver une autre réponse / poser une autre question '
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>vous pouvez revenir <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription"><strong>à la première page de cette foire aux questions</strong></a></p>'
+  faire_ticket:
+    '#type': webform_markup
+    '#states':
+      visible:
+        ':input[name="je_souhaite"]':
+          value: "faire un ticket à l'administration de l'université "
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Pour contacter l''administration de l''université il faut envoyer une demande via &nbsp;<a href="mailto:Inscriptions-Administratives@univ-paris1.fr"><strong>cette adresse de messagerie</strong></a></p>'
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire"
-    '#submit__attributes':
-      class:
-        - form--inline
-        - clearfix
-    '#update_hide': true
+    '#submit_hide': true
 css: ''
 javascript: ''
 settings:
@@ -59,7 +57,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -154,7 +152,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -188,95 +186,47 @@ access:
     roles:
       - anonymous
       - authenticated
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   view_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   update_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   delete_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   purge_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   view_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   update_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   delete_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
-handlers:
-  email_au_demandeur:
-    id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Inscription - Colloque "La sécurité sociale au-delà des frontières" - 11/06/2026'
-      body: '<p>Bonjour,</p><p>Votre inscription au colloque "La sécurité sociale au-delà des frontières" du 11/06/2026 a bien été validée.</p>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

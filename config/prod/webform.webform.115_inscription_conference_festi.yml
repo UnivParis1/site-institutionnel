@@ -1,57 +1,59 @@
-uuid: 5fcb476b-1742-48d1-98c6-198f214cde01
+uuid: 5b11f49e-c200-46e5-8845-bed036c018d9
 langcode: fr
 status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 8860
 template: false
 archive: false
-id: 0_josephine_baker
-title: '0 - Josephine Baker'
+id: 115_inscription_conference_festi
+title: '115 - Inscription conférence Festival Quartier du Livre '
 description: ''
 categories: {  }
 elements: |-
-  nom_:
+  nom:
     '#type': textfield
-    '#title': 'Nom : '
+    '#title': Nom
     '#required': true
-    '#required_error': 'Nom est requis'
-  prenom_:
+    '#required_error': 'Champ obligatoire'
+  prenom:
     '#type': textfield
-    '#title': 'Prénom :'
+    '#title': Prénom
     '#required': true
-    '#required_error': 'Prénom est requis'
-  courriel_:
+    '#required_error': 'Champ obligatoire'
+  adresse_email:
     '#type': email
-    '#title': 'Courriel :'
+    '#title': 'Adresse email'
     '#required': true
-    '#required_error': 'Courriel est requis'
-  souhaitez_vous_participer_au_cocktail_:
-    '#type': radios
-    '#title': 'Souhaitez-vous participer au cocktail ?'
+    '#required_error': 'Champ obligatoire'
+  vous_etes:
+    '#type': checkboxes
+    '#title': 'Vous êtes'
     '#options':
-      OUI: OUI
-      NON: NON
+      'Membre de la communauté Paris 1 (étudiant, enseignant-chercheur, personnel BIATSS)': 'Membre de la communauté Paris 1 (étudiant, enseignant-chercheur, personnel BIATSS)'
+      'Membre d’une autre université': 'Membre d’une autre université'
+      'Habitant du 5e arrondissement de Paris': 'Habitant du 5e arrondissement de Paris'
+      Autre: Autre
     '#required': true
-    '#required_error': 'Souhaitez-vous participer au cocktail ? est requis'
+    '#required_error': 'Champ obligatoire'
+    '#options__properties': ''
+  vous_avez_pris_connaissance_de_l_evenement_par:
+    '#type': checkboxes
+    '#title': 'Vous avez pris connaissance de l’événement par :'
+    '#options':
+      'Le site ou les réseaux sociaux de Paris 1 Panthéon-Sorbonne': 'Le site ou les réseaux sociaux de Paris 1 Panthéon-Sorbonne'
+      'Le site ou les réseaux sociaux du Festival Quartier du Livre': 'Le site ou les réseaux sociaux du Festival Quartier du Livre'
+      'Le site ou les réseaux sociaux de la Mairie du 5e arrondissement': 'Le site ou les réseaux sociaux de la Mairie du 5e arrondissement'
+      'La presse / les médias': 'La presse / les médias'
+      'La plaquette de présentation du Festival Quartier du Livre': 'La plaquette de présentation du Festival Quartier du Livre'
+      'Le bouche-à-oreille': 'Le bouche-à-oreille'
+    '#required': true
+    '#required_error': 'Champ obligatoire'
     '#options__properties': ''
   captcha:
     '#type': captcha
-  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
-    '#type': checkbox
-    '#title': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. '
-    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
-    '#required': true
-    '#required_error': 'J''autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis'
-  markup:
-    '#type': webform_markup
-    '#markup': '&nbsp;'
-  actions:
-    '#type': webform_actions
-    '#title': 'Bouton(s) d''envoi'
-    '#submit__label': ENVOYER
 css: ''
 javascript: ''
 settings:
@@ -67,7 +69,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: 'Le formulaire d&#39;inscription est d&eacute;sormais ferm&eacute;.'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -136,7 +138,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -158,8 +160,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: "Confirmation de l'inscription"
-  confirmation_message: "Votre inscription a bien &eacute;t&eacute; enregistr&eacute;e.<br />\r\nMerci pour votre participation !"
+  confirmation_title: ''
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -235,79 +237,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  email:
-    id: email
-    handler_id: email
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: 50ans@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel_:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom_:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Invitation Hommage à Joséphine Baker'
-      body: "<p>Envoy&eacute; le [webform_submission:created]</p>\r\n\r\n<p>Envoy&eacute; par : [webform_submission:user]</p>\r\n\r\n<p>Les r&eacute;ponses soumises sont :</p>\r\n[webform_submission:values]"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_1:
-    id: email
-    handler_id: email_1
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:courriel_:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: 50ans@univ-paris1.fr
-      from_options: {  }
-      from_name: '[webform_submission:values:nom_:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: "[Réponse automatique ] Confirmation d'inscription Hommage à Joséphine Baker"
-      body: "Envoy&eacute; le [webform_submission:created]<br />\r\nEnvoy&eacute; par : [webform_submission:user]<br />\r\nes r&eacute;ponses soumises sont : [webform_submission:values]"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

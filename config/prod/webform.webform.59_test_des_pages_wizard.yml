@@ -41,15 +41,47 @@ elements: |-
       '#title': 'Votre courriel'
       '#required': true
       '#required_error': 'Votre courriel est obligatoire'
-  your_feedback:
-    '#type': webform_wizard_page
-    '#title': "Qu'est-ce que vous en avez pensé ?"
-    '#open': true
     comments:
       '#type': textarea
       '#title': 'Commentaires à propos de votre vécu :'
       '#title_display': inline
       '#description_display': invisible
+    quel_type_de_captcha_preferez_vous:
+      '#type': radios
+      '#title': 'Quel type de Captcha préférez-vous ?'
+      '#options':
+        reCaptcha: 'reCaptcha -- Celui est simple mais il collecte vos données de navigation'
+        'Defi math': 'Defi math -- Celui vous demande de savoir calculer'
+      '#required': true
+      '#required_error': 'indiquez votre captcha préféré'
+    container_recaptcha:
+      '#type': container
+      '#states':
+        visible:
+          ':input[name="quel_type_de_captcha_preferez_vous"]':
+            value: reCaptcha
+      '#states_clear': false
+      markup:
+        '#type': webform_markup
+        '#markup': '<p>captcha de Google</p>'
+      captcha_01:
+        '#type': captcha
+        '#captcha_type': recaptcha/reCAPTCHA
+        '#captcha_admin_mode': true
+    container_defimath:
+      '#type': container
+      '#states':
+        visible:
+          ':input[name="quel_type_de_captcha_preferez_vous"]':
+            value: 'Defi math'
+      markup_01:
+        '#type': webform_markup
+        '#markup': '<p>Captcha défi mathématique</p>'
+      captcha:
+        '#type': captcha
+        '#captcha_type': captcha/Math
+        '#captcha_title': 'Captcha avec condition'
+        '#captcha_admin_mode': true
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"

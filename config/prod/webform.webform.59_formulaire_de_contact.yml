@@ -15,17 +15,17 @@ categories: {  }
 elements: |-
   votre_nom:
     '#type': textfield
-    '#title': 'Votre nom'
-    '#placeholder': Dupont
+    '#title': 'Votre nom et prénom'
+    '#placeholder': 'Dupont Sarah'
     '#autocomplete': name
     '#required': true
-    '#required_error': 'Champ obligatoire : merci de saisir votre nom'
+    '#required_error': 'Champ obligatoire : merci de saisir votre nom et prénom'
   votre_courriel:
     '#type': email
-    '#title': 'Votre courriel'
+    '#title': 'Votre courriel (email)'
     '#help_title': 'Saisissez votre adresse de messagerie'
     '#help': '<p>Merci de mettre une adresse valide car nous vous répondrons sur cette adresse.</p>'
-    '#placeholder': dupont@gmail.com
+    '#placeholder': sarahdupont@laposte.net
     '#autocomplete': email
     '#required': true
     '#required_error': 'Merci de mettre votre courriel'
@@ -34,36 +34,35 @@ elements: |-
     '#title': 'Votre question'
     '#required': true
     '#required_error': 'Merci de mettre une question'
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': 'Je suis avec ces {termes de service}.'
+  afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de:
+    '#type': radios
+    '#title': "Afin de sécuriser ce formulaire, vous pouvez choisir l'une des deux solutions suivantes :"
+    '#description': "<p>En sélectionnant Google reCAPTCHA, vous consentez à l'utilisation de cette solution et au traitement des données nécessaire à son fonctionnement.</p>"
+    '#options':
+      'Captcha État': 'Captcha État -- une solution souveraine qui ne nécessite pas la transmission de vos données à Google.'
+      'Google reCAPTCHA ': 'Google reCAPTCHA  -- une solution qui implique la transmission de certaines données techniques à Google, conformément à sa politique de confidentialité.'
     '#required': true
-    '#terms_title': 'Traitement des données personnelles'
-    '#terms_content': 'J&#39;accepte ...'
-  captcha:
-    '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-    '#captcha_admin_mode': true
-  info:
-    '#type': webform_message
-    '#message_message': 'Message explicatif'
-  ou_habitez_vous_:
-    '#type': webform_address
-    '#title': 'Où habitez-vous ?'
-    '#address__placeholder': '12 place du panthéon'
-    '#address__required': true
-    '#address_2__access': false
-    '#city__placeholder': Paris
-    '#city__required': true
-    '#state_province__access': false
-    '#postal_code__placeholder': '75005'
-    '#postal_code__required': true
-    '#country__placeholder': France
-    '#choices': true
-  adresse:
-    '#type': textfield
-    '#title': Adresse
-    '#autocomplete': address-line1
+    '#required_error': 'Merci de sélectionner le captcha que vous souhaitez utiliser'
+  containercaptchetat:
+    '#type': container
+    '#states':
+      visible:
+        ':input[name="afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de"]':
+          value: 'Captcha État'
+    captcha_01:
+      '#type': captcha
+      '#captcha_type': captchetat/CaptchEtat
+      '#captcha_admin_mode': true
+  containerrecaptcha:
+    '#type': container
+    '#states':
+      visible:
+        ':input[name="afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de"]':
+          value: 'Google reCAPTCHA '
+    captcha:
+      '#type': captcha
+      '#captcha_type': recaptcha/reCAPTCHA
+      '#captcha_admin_mode': true
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'

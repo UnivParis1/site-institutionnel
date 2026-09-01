@@ -1,4 +1,4 @@
-uuid: 8789a0cd-9e48-4c12-8feb-7ca2fa42d76f
+uuid: 22116940-edf2-49b9-a29a-9f8ded2d4f02
 langcode: fr
 status: closed
 dependencies: {  }
@@ -8,40 +8,65 @@ close: null
 uid: 5486
 template: false
 archive: false
-id: 0_livre_singaravelou
-title: '0 - Livre Singaravelou'
-description: ''
+id: 0_vernissage_de_l_exposition_13
+title: '0 - vernissage de l’exposition 13 novembre 2015 VIP'
+description: '<p><meta charset="utf-8"><span style="background-color:transparent;color:#000000;font-family:Arial,sans-serif;font-size:11pt;font-style:normal;font-variant:normal;font-weight:400;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Vernissage de l’exposition</span><em><span style="background-color:transparent;color:#000000;font-family:Arial,sans-serif;font-size:11pt;font-variant:normal;font-weight:400;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"> 13 novembre 2015 - septembre 2026</span></em></p>'
 categories: {  }
 elements: |-
-  markup_01:
-    '#type': webform_markup
-    '#markup': "<h2>Formulaire d'inscription :</h2>"
-  nom:
+  nom_:
     '#type': textfield
-    '#title': Nom
+    '#title': 'Nom :'
     '#required': true
-  prenom:
+    '#required_error': 'Nom est requis'
+  prenom_:
     '#type': textfield
-    '#title': 'Prénom '
+    '#title': 'Prénom :'
     '#required': true
-  courriel:
+    '#required_error': 'Prénom est requis'
+  veuillez_preciser_:
+    '#type': textfield
+    '#title': 'Fonction :'
+    '#required': true
+  structure:
+    '#type': textfield
+    '#title': 'Structure :'
+    '#required': true
+  courriel_:
     '#type': email
-    '#title': 'Courriel '
+    '#title': 'Courriel :'
     '#required': true
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
-    '#type': checkbox
-    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
+    '#required_error': 'Courriel est requis'
+  souhaitez_vous_participer_au_cocktail_qui_aura_lieu_a_l_issue_de:
+    '#type': radios
+    '#title': 'Je souhaite participer au vernissage de l’exposition 13 novembre 2015 : que dit la science des attentats'
+    '#options':
+      Oui: Oui
+      Non: Non
     '#required': true
+    '#options__properties': ''
+  je_souhaite_assister_a_la_projection_du_documentaire_13_novembre:
+    '#type': radios
+    '#title': 'Je souhaite assister à la projection du documentaire 13 novembre : nos vies en éclats'
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#required': true
+    '#options__properties': ''
+  processed_text_02:
+    '#type': processed_text
+    '#format': full_html
   captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-  markup:
-    '#type': webform_markup
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
+    '#type': checkbox
+    '#title': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. "
+    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
+    '#required': true
+    '#required_error': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis"
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#submit__label': ENVOYER
 css: ''
 javascript: ''
 settings:
@@ -57,7 +82,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Les inscriptions sont closes.</p>'
+  form_close_message: "<p>Le formulaire d'inscription est fermé.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -148,8 +173,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: ''
-  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;<br />\r\nVous allez recevoir un courriel de confirmation.</p>\r\n\r\n<p>Merci de votre participation !</p>"
+  confirmation_title: "Confirmation d'inscription"
+  confirmation_message: '<p>Nous vous remercions pour votre inscription. Vous allez recevoir un mail de confirmation.&nbsp;</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -157,7 +182,7 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: 450
+  limit_total: null
   limit_total_interval: null
   limit_total_message: ''
   limit_total_unique: false
@@ -206,8 +231,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -216,7 +240,8 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
   test:
     roles: {  }
@@ -224,13 +249,14 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
 handlers:
-  email_aux_demandeurs:
+  email:
     id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
+    handler_id: email
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -238,21 +264,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: cabpresi@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: ''
+      cc_mail: evenements@univ-paris1.fr
       cc_options: {  }
-      from_mail: no-reply@univ-paris1.fr
+      from_mail: '[webform_submission:values:courriel_:raw]'
       from_options: {  }
-      from_name: 'Université Paris 1 Panthéon-Sorbonne'
+      from_name: '[webform_submission:values:nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "[Réponse automatique] Confirmation d'inscription à la rencontre autour du livre Colonisations. Notre histoire le 15 septembre 2023"
-      body: "<p>Bonjour,</p>\r\n\r\n<p>Votre inscription à la rencontre autour du livre <em>Colonisations. Notre histoire,</em>&nbsp;en présence de l'auteur <b>Pierre Singaravélou,&nbsp;</b>est confirmée.</p>\r\n\r\n<p>Merci de votre participation.</p>\r\n\r\n<p>&nbsp;</p>"
+      subject: 'Nouvelle inscription à l’événement - 11 septembre / 13 novembre (VIP)'
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les réponses soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -264,10 +290,10 @@ handlers:
       theme_name: ''
       parameters: {  }
       debug: false
-  email_aux_organisateurs:
+  email_1:
     id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
+    handler_id: email_1
+    label: 'Email aux demandeurs'
     notes: ''
     status: true
     conditions: {  }
@@ -275,21 +301,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: web@univ-paris1.fr
+      to_mail: '[webform_submission:values:courriel_:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: evenements@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Sortie du livre de Pierre Singaravélou - nouvelle inscription'
-      body: _default
+      subject: '[Réponse automatique ] VIP - Confirmation de votre inscription à l’événement - 11 septembre / 13 novembre : La science face aux attentats'
+      body: '<div style="background-color:#F4F4F4;display:block;margin:1rem;padding:1rem;width:calc(100% - 2rem);"><div style="margin:0 auto;max-width:600px;width:100%;"><header style="text-align:center;" id="header" role="banner"><p class="text-align-center" style="background-color:transparent;color:rgb(114, 114, 114);font-size:0.8rem;">&nbsp;</p></header><main role="main" id="page-content"><table class="table" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-collapse:collapse;color:rgb(59, 63, 68);font-family:Helvetica;font-size:1rem;font-style:normal;font-weight:400;letter-spacing:normal;max-width:600px;orphans:auto;text-align:left;text-decoration:none;text-transform:none;white-space:normal;widows:auto;width:100%;word-spacing:0px;" cellspacing="0" cellpadding="0" border="0" role="presentation" width="600px"><tbody><tr><td style="border-collapse:collapse;width:100%;" colspan="2" width="100%"><img style="display:block;margin:0 auto;max-width:300px;" src="http://com-web.univ-paris1.fr/logos/Logotype-2024-RVB.svg" alt="Logo Université Paris 1 Panthéon-Sorbonne" width="50%" height="50%"></td></tr><tr><td style="border-collapse:collapse;padding:2rem;" colspan="2"><p>Madame, Monsieur,</p><p>Votre inscription à l''événement est bien prise en compte.</p><p>En cas de désistement, nous vous remercions de bien vouloir adresser un message à l’adresse suivante : <a href="mailto:evenements@univ-paris1.fr">evenements@univ-paris1.fr</a></p><p>Bien cordialement,</p></td></tr></tbody></table></main></div></div>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

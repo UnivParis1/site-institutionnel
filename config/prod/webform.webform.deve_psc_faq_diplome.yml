@@ -1,0 +1,310 @@
+uuid: 8dd0025c-c12d-480b-9ec6-96d624ee63b2
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: null
+template: false
+archive: false
+id: deve_psc_faq_diplome
+title: 'DEVE PSC - FAQ-Diplôme'
+description: "<p>Veuillez choisir la question qui se rapproche le plus de votre cas concernant l'édition des diplômes à l'université Paris 1 Panthéon-Sorbonne.&nbsp;</p>"
+categories:
+  - 'FAQ DEVE IA'
+elements: |-
+  je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer:
+    '#type': radios
+    '#title': 'Je souhaite obtenir des informations sur le point suivant concernant mon diplôme :  '
+    '#options':
+      'Je souhaite venir récupérer mon diplôme ou le recevoir par la poste (ou un duplicata). ': 'Je souhaite venir récupérer mon diplôme ou le recevoir par la poste (ou un duplicata). '
+      'Je souhaite récupérer un diplôme ': 'Je souhaite récupérer un diplôme '
+      "Je souhaite récupérer un diplôme d'avant 1999 ": "Je souhaite récupérer un diplôme d'avant 1999 "
+      'Je souhaite obtenir une attestation de réussite': 'Je souhaite obtenir une attestation de réussite'
+      "J'ai une interrogation vis-à-vis de mon relevé de notes ": "J'ai une interrogation vis-à-vis de mon relevé de notes "
+      "Mon nom d'usage apparaît-il sur mon diplôme ? ": "Mon nom d'usage apparaît-il sur mon diplôme ? "
+      "J'ai un interdit de type \"P\" à mon inscription, qu'est-ce que c'est? ": "J'ai un interdit de type \"P\" à mon inscription, qu'est-ce que c'est? "
+      'Je souhaite changer le nom/prénom sur mon diplôme / diplôme à rééditer ': 'Je souhaite changer le nom/prénom sur mon diplôme / diplôme à rééditer '
+      'Je souhaite faire traduire un diplôme ou relevé de notes ': 'Je souhaite faire traduire un diplôme ou relevé de notes '
+    '#options__properties': ''
+  recupdip:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: 'Je souhaite venir récupérer mon diplôme ou le recevoir par la poste (ou un duplicata). '
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Je peux trouver les réponses à mes questions sur le lien suivant :&nbsp;</p><p><a href="https://www.pantheonsorbonne.fr/formation/delivrance-diplomes" target="_blank" rel="noreferrer noopener">https://www.pantheonsorbonne.fr/formation/delivrance-diplomes</a></p><hr><p>Si j''ai d''autres questions concernant un autre domaine, <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/"><strong>je peux revenir à l''accueil de la foire aux questions</strong></a></p>'
+  recupsondip:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: 'Je souhaite récupérer un diplôme '
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Je peux suivre les recommandations de la page suivante dans l''ENT/intranet :</p><p><a href="https://ent-intranet.pantheonsorbonne.fr/delivrance-de-diplomes" target="_blank" rel="noreferrer noopener">https://ent-intranet.pantheonsorbonne.fr/delivrance-de-diplomes</a></p><p><strong>ATTENTION </strong>;&nbsp;La procédure varie en fonction de mon domaine d''études (tous les détails sont à retrouver sur la page ENT/intranet du lien ci-dessus).&nbsp;</p><hr><p>Si j''ai d''autres questions concernant un autre domaine, <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/"><strong>je peux revenir à l''accueil de la foire aux questions</strong></a></p>'
+  recupdip99:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: "Je souhaite récupérer un diplôme d'avant 1999 "
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Je dois pour cela :</p><ul><li data-list-item-id="ea67bab7999615b79128b565e6dc42062">m''assurer que j''ai bien obtenu mon diplôme à l''université de Paris 1 Panthéon-Sorbonne,</li><li data-list-item-id="eb63ca38cb0e50b410b1b1812342c053b">ensuite, je peux suivre <a href="https://www.pantheonsorbonne.fr/formation/delivrance-diplomes" target="_blank" rel="noreferrer noopener">le lien</a> suivant et respecter les recommandations :&nbsp;<a href="https://www.pantheonsorbonne.fr/formation/delivrance-diplomes" target="_blank" rel="noreferrer noopener">https://www.pantheonsorbonne.fr/formation/delivrance-diplomes</a></li></ul><p>L''édition des diplômes obtenus avant l''année 1999, nécessite l''obtention du procès-verbal attestant de mon admission, auprès de <a href="https://www.pantheonsorbonne.fr/formation/departements" target="_blank" rel="noreferrer noopener">la scolarité</a> ayant eu la charge de ma formation universitaire.<br>Le délai d''obtention du procès-verbal attestant de mon admission, peut rallonger le traitement de ma demande.&nbsp;</p><hr><p>Si j''ai d''autres questions concernant un autre domaine, <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/"><strong>je peux revenir à l''accueil de la foire aux questions</strong></a></p>'
+  attestaion_de_reussite:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: 'Je souhaite obtenir une attestation de réussite'
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Je dois pour cela contacter le<a href="https://www.pantheonsorbonne.fr/formation/departements" target="_blank" rel="noreferrer noopener"> secrétariat pédagogique de mon département</a>.</p><hr><p>Si j''ai d''autres questions concernant un autre domaine, <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/"><strong>je peux revenir à l''accueil de la foire aux questions</strong></a></p>'
+  releve_de_notes:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: "J'ai une interrogation vis-à-vis de mon relevé de notes "
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Pour toute demande d''informations relatives aux notes et aux relevés de notes, c''est le <a href="https://www.pantheonsorbonne.fr/formation/departements" target="_blank" rel="noreferrer noopener"><strong>secrétariat pédagogique de mon département</strong></a> pour ma formation, que je dois contacter.<br>=&gt; Il s''agit du service dans lequel j''ai procédé à mon inscription <strong>pédagogique</strong>.</p><hr><p>Si j''ai d''autres questions concernant un autre domaine, <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/"><strong>je peux revenir à l''accueil de la foire aux questions</strong></a></p>'
+  prenom_usage:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: "Mon nom d'usage apparaît-il sur mon diplôme ? "
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': "<p>Le prénom ou nom d’usage<strong> n’est pas </strong>pris en compte par le logiciel lorsqu’il n’est pas inscrit sur un document officiel (pièce d'identité, acte de naissance, décision juridique...).&nbsp;</p><p>&nbsp;Le nom d’usage enregistré pendant les inscriptions administratives bloque l'édition des diplômes, car ils sont édités selon l'état civil officiel.<br>&nbsp;Afin que mes diplômes soient édités avec le prénom ou le nom d’usage, je dois établir un document officiel et le transmettre par mail au <a href=\"mailto:Inscriptions-Administratives@univ-paris1.fr?subject=Changement%20d&apos;%C3%A9tat-civil&amp;body=N%C2%B0%20%C3%A9tudiant%20%3A%20\">service des inscriptions administratives</a></p><hr><p>Si j'ai d'autres questions concernant un autre domaine, <a href=\"https://www.pantheonsorbonne.fr/inscription/faq-inscription/\"><strong>je peux revenir à l'accueil de la foire aux questions</strong></a></p>"
+  interdit_p:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: "J'ai un interdit de type \"P\" à mon inscription, qu'est-ce que c'est? "
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': "<p>L'interdit de type \"P\" concerne le nom ou prénom d'usage. Lorsque l'étudiant souhaite voir apparaître son nom d'usage dans son dossier étudiant, il doit obligatoirement présenter le ou les documents officiels qui attestent l'association de celui-ci à son identité. Tant que le ou les documents ne sont pas fournis par l'étudiant, le dossier étudiant est mis en attente d'où l'interdit de type \"P\".</p><p>&nbsp;Toutefois, il est possible de procéder à l'édition du diplôme conformément à l’ancien dossier étudiant, sans l'ajout du nom d'usage, en attendant la régularisation.<br>Les conditions sont les suivantes :&nbsp;<br>une fois le dossier régularisé avec l'ajout du nom d'usage, il faudra revenir vers le <a href=\"mailto:diplomes@univ-paris1.fr?subject=(R%C3%A9)%C3%A9dition%20de%20dipl%C3%B4mes%20suite%20%C3%A0%20un%20changement%20d&apos;%C3%A9tat%20civil&amp;body=N%C2%B0%20%C3%A9tudiant%20%3A%20\">service des attestations et délivrance des diplômes</a> pour une réédition de l'ensemble de vos diplômes avec le nom d'usage.</p><p>Il faudra <strong>obligatoirement </strong>retourner l'ensemble des diplômes originaux déjà édités afin que la réédition de votre ou vos diplômes avec le nom d'usage soit effectif.</p><hr><p>Si j'ai d'autres questions concernant un autre domaine, <a href=\"https://www.pantheonsorbonne.fr/inscription/faq-inscription/\"><strong>je peux revenir à l'accueil de la foire aux questions</strong></a></p>"
+  changement_nom:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: 'Je souhaite changer le nom/prénom sur mon diplôme / diplôme à rééditer '
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Je dois adresser par courrier au service de délivrance des diplômes, une demande de réédition de l''ensemble de mes diplômes obtenus à l''Université Paris 1 Panthéon-Sorbonne.<br>Je dois joindre à ma demande :</p><ul><li data-list-item-id="e204cd81fe7387613cb168df72b571fbf">Les justificatifs qui attestent du changement</li><li data-list-item-id="ea31c95555a7888976f846c290ab48576">L''ensemble de mes diplômes originaux</li><li data-list-item-id="ea78a7ac6282290e03038e60dd954ff67">Une enveloppe au format A4 préalablement affranchie mentionnant mon adresse postale, pour une réexpédition de mes diplômes réédités.</li></ul><p>L''adresse est la suivante :</p><p class="text-align-center">DEVE-PSC-UNITÉ DIPLÔME<br>CENTRE PMF<br>90 RUE DE TOLBIAC<br>75013 PARIS</p><p><strong>OU</strong></p><p class="text-align-center">Je peux me rendre au centre Pierre Mendes France (PMF), <strong>31 rue Baudricourt </strong>75013 au Bureau C11-02 ou C11-04 (11ème étage ascenseurs jaunes), à l’unité diplôme,&nbsp;<br>pour récupérer en mains propres mon ou mes diplômes réédités en échange des anciens diplômes,<br>après avoir fourni des copies de l''ensemble des justificatifs attestant du changement.<br>Les bureaux sont ouverts les<strong> lundi, mercredi, jeudi et vendredi de 9h15 à 12h15 et de 13h30 à 16h.&nbsp;</strong><br><span style="color:#f39c12;"><strong>ATTENTION, LES BUREAUX SONT FERMÉS LES MARDIS.</strong></span></p><p class="text-align-center">Avant de vous déplacer veuillez prendre rendez-vous afin de vous éviter de vous retrouver devant des portes closes.</p><hr><p>Si j''ai d''autres questions concernant un autre domaine, <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/"><strong>je peux revenir à l''accueil de la foire aux questions</strong></a></p>'
+  traductions:
+    '#type': webform_markup
+    '#states':
+      visible-slide:
+        ':input[name="je_souhaite_obtenir_des_informations_sur_le_point_suivant_concer"]':
+          value: 'Je souhaite faire traduire un diplôme ou relevé de notes '
+    '#wrapper_attributes':
+      class:
+        - faqtextreponse
+    '#markup': '<p>Pour les traductions de mes diplômes, attestations de réussite, relevés de notes ou certificats, je dois m''adresser à des traducteurs assermentés que je peux trouver sur le lien suivant :&nbsp;<a href="http://cetiecap.com/liste-des-membres/" target="_blank" rel="noreferrer noopener">http://cetiecap.com/liste-des-membres/</a></p><p>Si je souhaite obtenir des informations complémentaires sur les formations concernant les langues :<br>je peux contacter le département des langues au centre PMF, 90 rue de Tolbiac, 75013 Paris, 7ème étage, bureau A702. (entrée par le 31 rue Baudricourt).</p><hr><p>Si j''ai d''autres questions concernant un autre domaine, <a href="https://www.pantheonsorbonne.fr/inscription/faq-inscription/"><strong>je peux revenir à l''accueil de la foire aux questions</strong></a></p>'
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit_hide': true
+    '#update_hide': true
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }
+variants: {  }

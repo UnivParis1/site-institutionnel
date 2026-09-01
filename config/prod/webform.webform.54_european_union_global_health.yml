@@ -1,52 +1,44 @@
-uuid: 5f95f233-9464-4667-89e2-08121d1130d0
+uuid: 3a3f0924-b7b3-4156-afe5-21a930093b2d
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7845
+uid: 2558
 template: false
-archive: true
-id: 8_inscription_au_colloque_la_sec
-title: '8 - Inscription au colloque "La sécurité sociale au-delà des frontières" du 11/06/2026'
-description: '<p>Formulaire d''inscription au colloque "La sécurité sociale au-delà des frontières", troisième acte de "Sécurité sociale : 80 ans dans la cité" du 11/06/2026.</p>'
-categories:
-  - 'Inscription à un colloque '
+archive: false
+id: 54_european_union_global_health
+title: '54-European Union Global Health Law'
+description: ''
+categories: {  }
 elements: |-
-  votreprenom:
+  nom:
+    '#type': textfield
+    '#title': NOM
+    '#required': true
+  prenom:
     '#type': textfield
     '#title': Prénom
-    '#placeholder': Jean
     '#required': true
-    '#required_error': 'Vous devez saisir votre prénom.'
-  nom2:
+  adresse_email:
     '#type': textfield
-    '#title': Nom
-    '#placeholder': Dupond
+    '#title': 'Adresse email'
     '#required': true
-    '#required_error': 'Vous devez saisir votre nom.'
-  votre_adresse_de_messagerie:
-    '#type': email
-    '#title': 'Votre adresse de messagerie'
-    '#placeholder': ' jeandupond@mail.com'
+  qualite:
+    '#type': textfield
+    '#title': Qualité
     '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
-  conditions_d_inscription:
+  institution_de_rattachement:
+    '#type': textfield
+    '#title': 'Institution de rattachement'
+    '#required': true
+  presentiel:
     '#type': checkbox
-    '#title': "Conditions d'inscription"
-    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription.</p>'
-    '#required': true
-    '#required_error': "Vous devez accepter les conditions d'inscription."
-  actions:
-    '#type': webform_actions
-    '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire"
-    '#submit__attributes':
-      class:
-        - form--inline
-        - clearfix
-    '#update_hide': true
+    '#title': Présentiel
+  distanciel:
+    '#type': checkbox
+    '#title': Distanciel
 css: ''
 javascript: ''
 settings:
@@ -59,7 +51,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -154,7 +146,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -188,95 +180,47 @@ access:
     roles:
       - anonymous
       - authenticated
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   view_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   update_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   delete_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   purge_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   view_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   update_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   delete_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
-handlers:
-  email_au_demandeur:
-    id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
-      from_options: {  }
-      from_name: ''
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Inscription - Colloque "La sécurité sociale au-delà des frontières" - 11/06/2026'
-      body: '<p>Bonjour,</p><p>Votre inscription au colloque "La sécurité sociale au-delà des frontières" du 11/06/2026 a bien été validée.</p>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

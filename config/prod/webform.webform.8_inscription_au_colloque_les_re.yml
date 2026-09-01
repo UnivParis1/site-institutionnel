@@ -1,41 +1,52 @@
-uuid: 5f37fe7f-d925-47f1-9c2d-0741b70cb9e0
+uuid: 37ced900-43ef-4042-b664-96fa1fad4fa2
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 2558
+uid: 9762
 template: false
-archive: false
-id: 54_la_cpi_a_l_epreuve_des_sancti
-title: "54-La CPI à l'épreuve des sanctions"
-description: ''
-categories: {  }
+archive: true
+id: 8_inscription_au_colloque_les_re
+title: '8 - Inscription au colloque "Les représentations des assureurs dans la fiction"  des 2-3/06/2026'
+description: '<p>Formulaire d''inscription au colloque "Les représentations des assureurs dans la fiction" des 2-3/06/2026.</p>'
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  nom:
-    '#type': textfield
-    '#title': NOM
-    '#required': true
-  prenom:
+  votreprenom:
     '#type': textfield
     '#title': Prénom
+    '#placeholder': Jean
     '#required': true
-  adresse_email:
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
     '#type': textfield
-    '#title': 'Adresse email'
+    '#title': Nom
+    '#placeholder': Dupond
     '#required': true
-  qualite:
-    '#type': textfield
-    '#title': Qualité
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
+    '#type': email
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
     '#required': true
-  institution_de_rattachement:
-    '#type': textfield
-    '#title': 'Institution de rattachement'
-    '#required': true
-  distanciel:
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  conditions_d_inscription:
     '#type': checkbox
-    '#title': Distanciel
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription.</p>'
+    '#required': true
+    '#required_error': "Vous devez accepter les conditions d'inscription."
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -48,7 +59,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -143,7 +154,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -177,47 +188,106 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
+      - 7845
     permissions: {  }
-handlers: {  }
+handlers:
+  email_au_demandeur:
+    id: email
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: ''
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription au colloque des 2-3/06/2026'
+      body: '<p>Bonjour,</p><p>Votre inscription au colloque "Les représentations des assureurs dans la fiction" des 2-3/06/2026 a bien été validée.</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }

@@ -1,52 +1,30 @@
-uuid: 5f95f233-9464-4667-89e2-08121d1130d0
+uuid: f77ad83f-a0b1-4444-b024-0fc1997029bf
 langcode: fr
-status: open
+status: closed
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7845
+uid: 46
 template: false
-archive: true
-id: 8_inscription_au_colloque_la_sec
-title: '8 - Inscription au colloque "La sécurité sociale au-delà des frontières" du 11/06/2026'
-description: '<p>Formulaire d''inscription au colloque "La sécurité sociale au-delà des frontières", troisième acte de "Sécurité sociale : 80 ans dans la cité" du 11/06/2026.</p>'
+archive: false
+id: 19_concert_i_carbonari
+title: '19 - Concert - I Carbonari'
+description: "<p>Formulaire d'inscription pour le concert au concert de l’association « I Carbonari ».</p>"
 categories:
-  - 'Inscription à un colloque '
+  - 'Inscription événement'
 elements: |-
-  votreprenom:
+  pour_vous_inscrire_merci_de_taper_votre_nom_suivi_de_votre_preno:
     '#type': textfield
-    '#title': Prénom
-    '#placeholder': Jean
+    '#title': 'Votre nom et prénom '
     '#required': true
-    '#required_error': 'Vous devez saisir votre prénom.'
-  nom2:
-    '#type': textfield
-    '#title': Nom
-    '#placeholder': Dupond
-    '#required': true
-    '#required_error': 'Vous devez saisir votre nom.'
-  votre_adresse_de_messagerie:
+    '#required_error': 'Indiquez votre nom et prénom'
+  votre_adresse_courriel:
     '#type': email
-    '#title': 'Votre adresse de messagerie'
-    '#placeholder': ' jeandupond@mail.com'
+    '#title': 'Votre adresse courriel'
+    '#placeholder': Sabine.Saidi@univ-paris1.fr
     '#required': true
-    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
-  conditions_d_inscription:
-    '#type': checkbox
-    '#title': "Conditions d'inscription"
-    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription.</p>'
-    '#required': true
-    '#required_error': "Vous devez accepter les conditions d'inscription."
-  actions:
-    '#type': webform_actions
-    '#title': "Bouton(s) d'envoi"
-    '#submit__label': "S'inscrire"
-    '#submit__attributes':
-      class:
-        - form--inline
-        - clearfix
-    '#update_hide': true
+    '#required_error': 'Veuillez indiquer votre courriel'
 css: ''
 javascript: ''
 settings:
@@ -60,9 +38,9 @@ settings:
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: false
+  form_submit_once: true
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: "<h3>Le nombre limite d'inscriptions étant atteint, les inscriptions sont closes.<br>Merci de votre intérêt pour cet évènement.</h3>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -154,7 +132,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
+  confirmation_message: "<h2>Votre réservation pour le concert de l'association I carbonari est bien enregistrée :</h2><p>Vendredi 29 mai 20h 30 à Académie du climat, 2 Place Baudoyer.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -162,16 +140,16 @@ settings:
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
-  limit_total: null
+  limit_total: 85
   limit_total_interval: null
-  limit_total_message: ''
+  limit_total_message: '<h3>La salle &nbsp;étant limitée en nombre de place, nous ne pouvons malheureusement plus prendre de nouvelles inscriptions.</h3>'
   limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false
-  entity_limit_total: null
-  entity_limit_total_interval: null
+  entity_limit_total: 200
+  entity_limit_total_interval: 15
   entity_limit_user: null
   entity_limit_user_interval: null
   purge: none
@@ -188,64 +166,53 @@ access:
     roles:
       - anonymous
       - authenticated
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   view_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   update_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   delete_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   purge_any:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   view_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   update_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   delete_own:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   administer:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   test:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
   configuration:
     roles: {  }
-    users:
-      - 9762
+    users: {  }
     permissions: {  }
 handlers:
-  email_au_demandeur:
+  email_1:
     id: email
-    handler_id: email_au_demandeur
-    label: 'Email au demandeur'
+    handler_id: email_1
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -253,21 +220,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
+      to_mail: ddl-lab@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_mail: '[webform_submission:values:votre_adresse_courriel:raw]'
       from_options: {  }
-      from_name: ''
+      from_name: '[webform_submission:values:pour_vous_inscrire_merci_de_taper_votre_nom_suivi_de_votre_preno:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Inscription - Colloque "La sécurité sociale au-delà des frontières" - 11/06/2026'
-      body: '<p>Bonjour,</p><p>Votre inscription au colloque "La sécurité sociale au-delà des frontières" du 11/06/2026 a bien été validée.</p>'
+      subject: 'Inscription au concert'
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
