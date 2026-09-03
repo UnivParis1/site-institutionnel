@@ -7,6 +7,7 @@
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -184,8 +185,25 @@ function up1_global_hotfix_author_pages_sorbonnetv() {
  * Implements hook_page_attachments().
  */
 function up1_global_page_attachments(array &$attachments) {
-    if (\Drupal::service('router.admin_context')->isAdminRoute()) {
-        $attachments['#attached']['library'][] = 'up1_global/admin_css';
-    }
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'up1_global/admin_css';
+  }
 }
 
+function up1_global_entity_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() === 'paragraph') {
+    // ⚡ CONTournement : empêcher nouvelle révision
+    $entity->setNewRevision(FALSE);
+    // ⚡ Forcer la révision comme étant la révision par défaut
+    if (method_exists($entity, 'isDefaultRevision')) {
+      $entity->isDefaultRevision(TRUE);
+    }
+  }
+  // Optionnel : faire aussi pour les nodes
+  if ($entity->getEntityTypeId() === 'node') {
+    $entity->setNewRevision(FALSE);
+    if (method_exists($entity, 'isDefaultRevision')) {
+      $entity->isDefaultRevision(TRUE);
+    }
+  }
+}
