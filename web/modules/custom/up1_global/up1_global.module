@@ -130,55 +130,55 @@ function up1_global_node_access(NodeInterface $node, $op, AccountInterface $acco
 }
 
 function invalidate_homepage_agenda_cron() {
-    $request_time = \Drupal::time()->getCurrentTime();
-    $state_service = \Drupal::state();
-    // Invalidate homepage agenda Cache every day.
-    $next_daily_cron = $state_service->get('up1_global.cache_cron_daily', 0);
-    if ($next_daily_cron < $request_time) {
-        $tomorrow = strtotime('tomorrow 0:59:00');
-        $state_service->set('up1_global.cache_cron_daily', $tomorrow);
-        Cache::invalidateTags(['time:daily']);
-    }
+  $request_time = \Drupal::time()->getCurrentTime();
+  $state_service = \Drupal::state();
+  // Invalidate homepage agenda Cache every day.
+  $next_daily_cron = $state_service->get('up1_global.cache_cron_daily', 0);
+  if ($next_daily_cron < $request_time) {
+    $tomorrow = strtotime('tomorrow 0:59:00');
+    $state_service->set('up1_global.cache_cron_daily', $tomorrow);
+    Cache::invalidateTags(['time:daily']);
+  }
 }
 
 /**
  * Cron to attach the good uid to sorbonne_tv nodes
  */
 function up1_global_hotfix_author_pages_sorbonnetv() {
-    $site = Site::load(126);
+  $site = Site::load(126);
 
-    if ($site) {
-        $mail = $site->getEmail();
-        $owner = user_load_by_mail($mail);
-        if ($owner) {
-            $owner_id = $owner->id();
+  if ($site) {
+    $mail = $site->getEmail();
+    $owner = user_load_by_mail($mail);
+    if ($owner) {
+      $owner_id = $owner->id();
 
-            $ids = \Drupal::entityQuery('node')
-                ->condition('type', 'page_sorbonne_tv')
-                ->accessCheck(FALSE)
-                ->execute();
+      $ids = \Drupal::entityQuery('node')
+        ->condition('type', 'page_sorbonne_tv')
+        ->accessCheck(FALSE)
+        ->execute();
 
-            if (!empty($ids)) {
+      if (!empty($ids)) {
 
-                $nodes = Node::loadMultiple($ids);
-                foreach ($nodes as $node) {
-                    if($node->getOwnerId() != $owner_id) {
-                        $node->set('uid', $owner_id);
-                        $node->save();
-                    }
-                }
-            }
-            else {
-                \Drupal::logger('sorbonne_tv_HOTFIX:NODES')->notice('No node found.');
-            }
+        $nodes = Node::loadMultiple($ids);
+        foreach ($nodes as $node) {
+          if($node->getOwnerId() != $owner_id) {
+            $node->set('uid', $owner_id);
+            $node->save();
+          }
         }
-        else {
-            \Drupal::logger('sorbonne_tv_HOTFIX:OWNER')->notice('Site\'s owner not found.');
-        }
+      }
+      else {
+        \Drupal::logger('sorbonne_tv_HOTFIX:NODES')->notice('No node found.');
+      }
     }
     else {
-        \Drupal::logger('sorbonne_tv_HOTFIX:SITE')->notice('Site Sorbonne TV not found.');
+      \Drupal::logger('sorbonne_tv_HOTFIX:OWNER')->notice('Site\'s owner not found.');
     }
+  }
+  else {
+    \Drupal::logger('sorbonne_tv_HOTFIX:SITE')->notice('Site Sorbonne TV not found.');
+  }
 }
 
 /**
