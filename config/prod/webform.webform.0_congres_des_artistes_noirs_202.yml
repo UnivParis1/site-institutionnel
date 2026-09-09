@@ -1,63 +1,54 @@
-uuid: 34d00af0-b000-4367-89ac-ebfb8ad967c6
+uuid: 5710ba7c-3d4e-43d3-8394-35dc20b4595c
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7710
+uid: 5486
 template: false
 archive: false
-id: 10_demander_un_quitus
-title: '10 - Demander un quitus'
-description: "<p>Arborescence : Menu Direction &gt; Services &gt; demander un quitus<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Services </em>(module tuiles : \"Demander un quitus\")<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Nous contacter</em>, rubrique \"Demander un quitus\"<br />\r\n<br />\r\nLien vers ce formulaire depuis les pages de présentation de chaque bibliothèques (module tabs, rubrique \"Nos services\", \"Demander un quitus\") :</p>\r\n\r\n<ul>\r\n\t<li>Bibliothèque Pierre Mendès France</li>\r\n\t<li>Bibliothèque Jean-Claude Colliard</li>\r\n\t<li>Bibliothèque Cuzin</li>\r\n\t<li>Bibliothèque Lagroye</li>\r\n\t<li>Bibliothèque de l'Ecole des arts de la Sorbonne</li>\r\n\t<li>Bibliothèque Lavisse</li>\r\n</ul>"
-categories:
-  - Contact
+id: 0_congres_des_artistes_noirs_202
+title: '0 - Congrès des artistes noirs 2026'
+description: ''
+categories: {  }
 elements: |-
-  numero_d_etudiant:
+  nom_:
     '#type': textfield
-    '#title': "Numéro d'étudiant"
+    '#title': 'Nom :'
     '#required': true
-  nom_prenom:
-    '#type': webform_name
-    '#title': 'Nom, prénom'
+    '#required_error': 'Nom est requis'
+  prenom_:
+    '#type': textfield
+    '#title': 'Prénom :'
     '#required': true
-    '#title__access': false
-    '#first__title': Nom
-    '#first__required': true
-    '#middle__access': false
-    '#last__title': Prénom
-    '#last__required': true
-    '#suffix__access': false
-    '#degree__access': false
-  telephone:
-    '#type': tel
-    '#title': Téléphone
-    '#required': true
-    '#required_error': 'Champ obligatoire'
-  courriel:
+    '#required_error': 'Prénom est requis'
+  courriel_:
     '#type': email
-    '#title': Courriel
+    '#title': 'Courriel :'
     '#required': true
-    '#required_error': 'Champ obligatoire'
-  commentaires:
-    '#type': textarea
-    '#title': Commentaires
-  j_ai_bien_rendu_tous_mes_documents:
+    '#required_error': 'Courriel est requis'
+  vous_etes_:
+    '#type': webform_select_other
+    '#title': 'Vous êtes :'
+    '#options':
+      Étudiant: Étudiant
+      "Enseignant ou personnel de l'université": "Enseignant ou personnel de l'université"
+      'Public extérieur': 'Public extérieur'
+    '#empty_option': Sélectionner
+    '#other__placeholder': 'Entrez autre…'
+    '#required': true
+    '#required_error': 'Le champs "Vous êtes" est obligatoire'
+  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
     '#type': checkbox
-    '#title': "J'ai bien rendu tous mes documents."
+    '#title': "J'autorise ce site à conserver mes données personnelles dans le cadre de ce formulaire. "
+    '#description': '<p>Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des données personnelles</a>.&nbsp;</p>'
     '#required': true
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': "J'accepte les {conditions de service}."
-    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de quitus</span>'
-    '#required': true
+    '#required_error': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis"
   captcha:
     '#type': captcha
-  actions:
-    '#type': webform_actions
-    '#title': 'Submit button(s)'
-    '#submit__label': 'Envoyer la demande'
+  markup:
+    '#type': webform_markup
 css: ''
 javascript: ''
 settings:
@@ -73,7 +64,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: "<p><strong>Ce formulaire est fermé durant les congés d'été.</strong> Il rouvrira le 24 août 2026.<br>Merci de votre compréhension.<br>L'équipe du Service commun de la documentation vous souhaite un bel été !</p>"
+  form_close_message: "<p>Le formulaire d'inscription est désormais clos.</p>"
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -164,8 +155,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Demande enregistrée'
-  confirmation_message: 'Votre demande a &eacute;t&eacute; prise en compte. Notre &eacute;quipe vous fera parvenir votre quitus par courriel dans les meilleurs d&eacute;lais.'
+  confirmation_title: "Confirmation d'inscription"
+  confirmation_message: "<p>Votre inscription a bien été enregistrée.<br />\r\nVous allez recevoir un mail de confirmation.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -231,7 +222,8 @@ access:
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
   test:
     roles: {  }
@@ -239,13 +231,14 @@ access:
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 6746
     permissions: {  }
 handlers:
   email:
     id: email
     handler_id: email
-    label: pretbu@univ-paris1.fr
+    label: 'Email aux organisateurs'
     notes: ''
     status: true
     conditions: {  }
@@ -253,24 +246,59 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: pretbu@univ-paris1.fr
+      to_mail: Florence.Brisset-Foucault@univ-paris1.fr
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_mail: Sophie.Cras@univ-paris1.fr
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: '[webform_submission:values:courriel_:raw]'
       from_options: {  }
-      from_name: '[webform_submission:values:nom_prenom:value]'
+      from_name: '[webform_submission:values:nom_:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Demande de quitus depuis le site internet des bibliothèques'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
-      excluded_elements:
-        terms_of_service: terms_of_service
-        captcha: captcha
+      subject: 'Colloque Dans le sillage de Présence Africaine - Nouvelle inscription'
+      body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les réponses soumises sont :</p><p>[webform_submission:values]</p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email aux demandeurs'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:courriel_:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ne-pas-repondre@univ-paris1.fr
+      from_options: {  }
+      from_name: 'Paris 1 Panthéon-Sorbonne'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "[Réponse automatique] Confirmation d'inscription au colloque Dans le sillage de Présence Africaine - 18 et 19 septembre 2026"
+      body: '<div style="background-color:#F4F4F4;display:block;margin:1rem;padding:1rem;width:calc(100% - 2rem);"><div style="margin:0 auto;max-width:600px;width:100%;"><header style="text-align:center;" id="header" role="banner"><p class="text-align-center" style="background-color:transparent;color:rgb(114, 114, 114);font-size:0.8rem;"><a href="https://com-web.univ-paris1.fr/fileadmin/Service-com/2025/Invitation_demi_finale_CIE_2025.html" target="_blank"><strong>Voir la version en ligne</strong></a></p></header><main role="main" id="page-content"><table class="table" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-collapse:collapse;color:rgb(59, 63, 68);font-family:Helvetica;font-size:1rem;font-style:normal;font-weight:400;letter-spacing:normal;max-width:600px;orphans:auto;text-align:left;text-decoration:none;text-transform:none;white-space:normal;widows:auto;width:100%;word-spacing:0px;" cellspacing="0" cellpadding="0" border="0" role="presentation" width="600px"><tbody><tr><td style="border-collapse:collapse;width:100%;" colspan="2" width="100%"><img style="display:block;margin:0 auto;max-width:300px;" src="http://com-web.univ-paris1.fr/logos/Logotype-2024-RVB.svg" alt="Logo Université Paris 1 Panthéon-Sorbonne" width="50%" height="50%"></td></tr><tr><td style="border-collapse:collapse;padding:2rem;" colspan="2"><p>Bonjour,</p><p>Nous vous confirmons votre inscription au colloque <em>Dans le sillage de Présence Africaine, </em>du 18 au 19 septembre 2026.</p><p>Bien cordialement,</p></td></tr></tbody></table></main></div></div>'
+      excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false

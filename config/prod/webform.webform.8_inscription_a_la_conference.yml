@@ -1,63 +1,58 @@
-uuid: 34d00af0-b000-4367-89ac-ebfb8ad967c6
+uuid: 734b259b-a980-4052-914c-60422cfc57fd
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7710
+uid: 7845
 template: false
 archive: false
-id: 10_demander_un_quitus
-title: '10 - Demander un quitus'
-description: "<p>Arborescence : Menu Direction &gt; Services &gt; demander un quitus<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Services </em>(module tuiles : \"Demander un quitus\")<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Nous contacter</em>, rubrique \"Demander un quitus\"<br />\r\n<br />\r\nLien vers ce formulaire depuis les pages de présentation de chaque bibliothèques (module tabs, rubrique \"Nos services\", \"Demander un quitus\") :</p>\r\n\r\n<ul>\r\n\t<li>Bibliothèque Pierre Mendès France</li>\r\n\t<li>Bibliothèque Jean-Claude Colliard</li>\r\n\t<li>Bibliothèque Cuzin</li>\r\n\t<li>Bibliothèque Lagroye</li>\r\n\t<li>Bibliothèque de l'Ecole des arts de la Sorbonne</li>\r\n\t<li>Bibliothèque Lavisse</li>\r\n</ul>"
+id: 8_inscription_a_la_conference
+title: '8 - Inscription à la conférence de droit pénal européen du 18 septembre 2026'
+description: "<p>Formulaire d'inscription à la conférence de droit pénal européen du 18 septembre 2026.</p>"
 categories:
-  - Contact
+  - 'Inscription à un colloque '
 elements: |-
-  numero_d_etudiant:
+  votreprenom:
     '#type': textfield
-    '#title': "Numéro d'étudiant"
+    '#title': Prénom
+    '#placeholder': Jean
     '#required': true
-  nom_prenom:
-    '#type': webform_name
-    '#title': 'Nom, prénom'
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
+    '#type': textfield
+    '#title': Nom
+    '#placeholder': Dupond
     '#required': true
-    '#title__access': false
-    '#first__title': Nom
-    '#first__required': true
-    '#middle__access': false
-    '#last__title': Prénom
-    '#last__required': true
-    '#suffix__access': false
-    '#degree__access': false
-  telephone:
-    '#type': tel
-    '#title': Téléphone
-    '#required': true
-    '#required_error': 'Champ obligatoire'
-  courriel:
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
     '#type': email
-    '#title': Courriel
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
     '#required': true
-    '#required_error': 'Champ obligatoire'
-  commentaires:
-    '#type': textarea
-    '#title': Commentaires
-  j_ai_bien_rendu_tous_mes_documents:
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
     '#type': checkbox
-    '#title': "J'ai bien rendu tous mes documents."
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription.</p>'
     '#required': true
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': "J'accepte les {conditions de service}."
-    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de quitus</span>'
-    '#required': true
-  captcha:
-    '#type': captcha
+    '#required_error': "Vous devez accepter les conditions d'inscription."
   actions:
     '#type': webform_actions
-    '#title': 'Submit button(s)'
-    '#submit__label': 'Envoyer la demande'
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -73,7 +68,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: "<p><strong>Ce formulaire est fermé durant les congés d'été.</strong> Il rouvrira le 24 août 2026.<br>Merci de votre compréhension.<br>L'équipe du Service commun de la documentation vous souhaite un bel été !</p>"
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -142,7 +137,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -164,8 +159,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Demande enregistrée'
-  confirmation_message: 'Votre demande a &eacute;t&eacute; prise en compte. Notre &eacute;quipe vous fera parvenir votre quitus par courriel dans les meilleurs d&eacute;lais.'
+  confirmation_title: ''
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -199,53 +194,64 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   update_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
 handlers:
-  email:
+  email_au_demandeur:
     id: email
-    handler_id: email
-    label: pretbu@univ-paris1.fr
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
@@ -253,24 +259,22 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: pretbu@univ-paris1.fr
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
+      cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom_prenom:value]'
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Demande de quitus depuis le site internet des bibliothèques'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
-      excluded_elements:
-        terms_of_service: terms_of_service
-        captcha: captcha
+      subject: 'Inscription à la conférence du 18/09/2026'
+      body: '<p>Bonjour,</p><p>Votre inscription à la conférence de droit pénal européen du 18 septembre 2026 a bien été validée.</p>'
+      excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false

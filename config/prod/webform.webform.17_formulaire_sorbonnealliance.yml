@@ -1,0 +1,465 @@
+uuid: 3b36ea1b-44d9-427e-9a75-e15cad4716f1
+langcode: fr
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 321
+template: false
+archive: false
+id: 17_formulaire_sorbonnealliance
+title: '17- Formulaire inscription formation Sorbonne Alliance'
+description: ''
+categories: {  }
+elements: |-
+  mes_informations:
+    '#type': webform_wizard_page
+    '#title': 'Mes informations'
+    civilites:
+      '#type': radios
+      '#title': Civilité
+      '#description': "<p>Donnée personnelle nécessaire dans le cadre de l'établissement de votre convention de formation.</p>"
+      '#options':
+        Madame: Madame
+        Monsieur: Monsieur
+        'Ne souhaite pas répondre ': 'Ne souhaite pas répondre'
+      '#required': true
+      '#options__properties': ''
+    nom:
+      '#type': textfield
+      '#title': 'Nom de naissance'
+      '#required': true
+    nom_d_usage:
+      '#type': textfield
+      '#title': "Nom d'usage"
+    prenom:
+      '#type': textfield
+      '#title': Prénom
+      '#required': true
+    date_de_naissance:
+      '#type': date
+      '#title': 'Date de naissance'
+      '#required': true
+    lieu_de_naissance:
+      '#type': textfield
+      '#title': 'Lieu de naissance'
+      '#required': true
+    adresse:
+      '#type': webform_address
+      '#title': Adresse
+      '#required': true
+      '#address_2__access': false
+      '#state_province__access': false
+    courriel:
+      '#type': email
+      '#title': 'Courriel (Merci de renseigner un courriel valide, que vous consultez)'
+      '#required': true
+    telephone:
+      '#type': webform_telephone
+      '#title': Téléphone
+      '#required': true
+      '#type__access': false
+      '#ext__access': false
+      '#phone__international': false
+    situation:
+      '#type': webform_radios_other
+      '#title': Situation
+      '#options':
+        Salarié: Salarié.e
+        DE: "Demandeur.se d'emploi"
+        étudiant: Étudiant.e
+      '#required': true
+      '#options__properties': ''
+  formation_a_laquelle_je_souhaite_m_inscrire:
+    '#type': webform_wizard_page
+    '#title': 'Géopolitique pour décideurs : analyse des enjeux mondiaux et stratégies de décision'
+    date_s_de_la_session:
+      '#type': textfield
+      '#title': 'Date(s) de la session'
+      '#required': true
+    nombre_d_heures:
+      '#type': textfield
+      '#title': "Nombre d'heures"
+    tarifs:
+      '#type': textfield
+      '#title': Tarifs
+    comment_avez_vous_connu_cette_formation:
+      '#type': webform_checkboxes_other
+      '#title': 'Comment avez-vous connu cette formation'
+      '#options':
+        'Recherche sur internet': 'Recherche sur internet'
+        Linkedin: Linkedin
+        Publicité: Publicité
+      '#options__properties': ''
+    quelles_sont_vos_attentes_et_besoins_vis_a_vis_de_cette_formatio:
+      '#type': textarea
+      '#title': 'Quelles sont vos attentes et besoins vis-à-vis de cette formation ?'
+      '#required': true
+    y_a_t_il_des_questions_sujets_que_vous_souhaiteriez_voir_traite:
+      '#type': textarea
+      '#title': 'Y-a-t-il des questions, sujets que vous souhaiteriez voir traités en particulier ?'
+    autre_s_informations_que_vous_souhaiteriez_communiquer_a_notre_s:
+      '#type': textarea
+      '#title': 'Autre(s) information(s) que vous souhaiteriez communiquer à notre service (mobilité réduite...)'
+  mon_mode_de_financement:
+    '#type': webform_wizard_page
+    '#title': 'Mode de financement'
+    mode_de_financement:
+      '#type': checkboxes
+      '#title': 'Mode de financement'
+      '#options':
+        Individuel: Individuel
+        'Pris en charge par un tiers': 'Pris en charge par un tiers (France Travail, région...)'
+        Employeur: Employeur
+      '#required': true
+      '#options__properties': ''
+    nom_de_l_entreprise:
+      '#type': textfield
+      '#title': "Nom de l'entreprise"
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Employeur]"]':
+            checked: true
+      '#required': true
+    siret:
+      '#type': textfield
+      '#title': SIRET
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Employeur]"]':
+            checked: true
+      '#required': true
+    code_ape:
+      '#type': textfield
+      '#title': 'Code APE'
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Employeur]"]':
+            checked: true
+      '#required': true
+    adresse_entreprise:
+      '#type': webform_address
+      '#title': 'Adresse entreprise'
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Employeur]"]':
+            checked: true
+      '#address_2__access': false
+      '#state_province__access': false
+      '#required': true
+    responsable_formation_prenom_nom:
+      '#type': textfield
+      '#title': 'Responsable formation (Prénom NOM)'
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Employeur]"]':
+            checked: true
+      '#required': true
+    courriel_du_responsable:
+      '#type': email
+      '#title': 'Courriel du responsable'
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Employeur]"]':
+            checked: true
+      '#required': true
+    numero_demandeur_d_emploi:
+      '#type': textfield
+      '#title': "Votre numéro de demandeur d'emploi"
+      '#description': "<p>Information demandée afin d'établir un devis adressé à France Travail</p>"
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Pris en charge par un tiers]"]':
+            checked: true
+    code_postal_de_votre_agence_france_travail:
+      '#type': textfield
+      '#title': 'Code postal de votre agence France Travail'
+      '#description': "<p>Information demandée afin d'établir un devis adressé à France Travail</p>"
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="mode_de_financement[Pris en charge par un tiers]"]':
+            checked: true
+  questionnaire_d_auto_positionnement:
+    '#type': webform_wizard_page
+    '#title': "Questionnaire d'auto-positionnement"
+    comment_evaluez_vous_votre_niveau_d_experience_dans_le_domaine_d:
+      '#type': radios
+      '#title': "Comment évaluez-vous votre niveau d'expérience dans le domaine de la formation concernée par ce questionnaire  ?"
+      '#options':
+        Débutant: "Débutant(e) : Aucune ou très peu d'expérience"
+        Intermédiaire: "Intermédiaire : Des connaissances de base, mais pas encore à l'aise"
+        Avancé: 'Avancé(e) : Des compétences solides et une certaine aisance'
+        Expert: 'Expert(e) : Une maîtrise approfondie'
+      '#required': true
+      '#options__properties': ''
+    depuis_combien_de_temps_exercez_vous_une_activite_professionnell:
+      '#type': radios
+      '#title': 'Depuis combien de temps exercez-vous une activité professionnelle dans le domaine de cette formation ?  '
+      '#options':
+        'moins de 3 ans': 'Moins de 3 ans'
+        'Entre 3 et 5 ans': 'Entre 3 et 5 ans'
+        'Entre 5 et 8 ans': 'Entre 5 et 8 ans'
+        'Plus de 8 ans': 'Plus de 8 ans'
+      '#required': true
+      '#options__properties': ''
+    avez_vous_deja_suivi_des_formations_sur_le_meme_theme_si_oui_veu:
+      '#type': textarea
+      '#title': 'Avez-vous déjà suivi des formations sur le même thème ? Si oui, veuillez les décrire brièvement.'
+      '#required': true
+    en_vous_inscrivant_a_cette_formation_quel_est_votre_objectif_pri:
+      '#type': webform_radios_other
+      '#title': 'En vous inscrivant à cette formation, quel est votre objectif principal ?'
+      '#options':
+        'Acquérir de nouvelles compétences': 'Acquérir de nouvelles compétences'
+        'Progresser dans votre carrière': 'Progresser dans votre carrière'
+        'Changer de domaine professionnel': 'Changer de domaine professionnel'
+        'Obtenir une certification': 'Obtenir une certification'
+      '#required': true
+      '#options__properties': ''
+  confirmation:
+    '#type': webform_wizard_page
+    '#title': Confirmation
+    en_validant_ce_formulaire_je_me_pre_inscris_a_la_formation:
+      '#type': radios
+      '#title': "En validant ce formulaire, je confirme que je souhaite m'inscrire à la formation."
+      '#options':
+        oui: oui
+      '#required': true
+      '#options__properties': ''
+    j_accepte_de_figurer_dans_la_base_de_donnees_de_la_formation_con:
+      '#type': radios
+      '#title': "J'accepte de figurer dans la base de données de la Formation continue Panthéon-Sorbonne (uniquement pour recevoir ponctuellement des informations sur nos formations)"
+      '#options':
+        oui: oui
+        non: non
+      '#required': true
+      '#options__properties': ''
+  actions:
+    '#type': webform_actions
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "Je m'inscris"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: '<p>Votre inscription a bien été enregistrée. Vous recevrez un devis dans les meilleurs délais.</p>'
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: inscriptions-sorbonnealliance@univ-paris1.fr
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: inscriptions-sorbonnealliance@univ-paris1.fr
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: inscriptions-sorbonnealliance@univ-paris1.fr
+      from_options: {  }
+      from_name: inscriptions-sorbonnealliance@univ-paris1.fr
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Inscription formation Sorbonne Alliance'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

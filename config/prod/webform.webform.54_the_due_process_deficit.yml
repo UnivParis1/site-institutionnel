@@ -1,63 +1,44 @@
-uuid: 34d00af0-b000-4367-89ac-ebfb8ad967c6
+uuid: 6fd96841-8919-442d-8277-02dff8115d84
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 7710
+uid: 2558
 template: false
 archive: false
-id: 10_demander_un_quitus
-title: '10 - Demander un quitus'
-description: "<p>Arborescence : Menu Direction &gt; Services &gt; demander un quitus<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Services </em>(module tuiles : \"Demander un quitus\")<br />\r\n<br />\r\nLien vers ce formulaire depuis la page <em>Nous contacter</em>, rubrique \"Demander un quitus\"<br />\r\n<br />\r\nLien vers ce formulaire depuis les pages de présentation de chaque bibliothèques (module tabs, rubrique \"Nos services\", \"Demander un quitus\") :</p>\r\n\r\n<ul>\r\n\t<li>Bibliothèque Pierre Mendès France</li>\r\n\t<li>Bibliothèque Jean-Claude Colliard</li>\r\n\t<li>Bibliothèque Cuzin</li>\r\n\t<li>Bibliothèque Lagroye</li>\r\n\t<li>Bibliothèque de l'Ecole des arts de la Sorbonne</li>\r\n\t<li>Bibliothèque Lavisse</li>\r\n</ul>"
-categories:
-  - Contact
+id: 54_the_due_process_deficit
+title: '54-The Due Process Deficit'
+description: ''
+categories: {  }
 elements: |-
-  numero_d_etudiant:
+  nom:
     '#type': textfield
-    '#title': "Numéro d'étudiant"
+    '#title': NOM
     '#required': true
-  nom_prenom:
-    '#type': webform_name
-    '#title': 'Nom, prénom'
+  prenom:
+    '#type': textfield
+    '#title': Prénom
     '#required': true
-    '#title__access': false
-    '#first__title': Nom
-    '#first__required': true
-    '#middle__access': false
-    '#last__title': Prénom
-    '#last__required': true
-    '#suffix__access': false
-    '#degree__access': false
-  telephone:
-    '#type': tel
-    '#title': Téléphone
+  adresse_email:
+    '#type': textfield
+    '#title': 'Adresse email'
     '#required': true
-    '#required_error': 'Champ obligatoire'
-  courriel:
-    '#type': email
-    '#title': Courriel
+  qualite:
+    '#type': textfield
+    '#title': Qualité
     '#required': true
-    '#required_error': 'Champ obligatoire'
-  commentaires:
-    '#type': textarea
-    '#title': Commentaires
-  j_ai_bien_rendu_tous_mes_documents:
+  institution_de_rattachement:
+    '#type': textfield
+    '#title': 'Institution de rattachement'
+    '#required': true
+  presentiel:
     '#type': checkbox
-    '#title': "J'ai bien rendu tous mes documents."
-    '#required': true
-  terms_of_service:
-    '#type': webform_terms_of_service
-    '#title': "J'accepte les {conditions de service}."
-    '#terms_content': '<span class="field-prefix">En soumettant ce formulaire, j&#39;accepte que les informations saisies soient exploit&eacute;es dans le cadre de ma demande de quitus</span>'
-    '#required': true
-  captcha:
-    '#type': captcha
-  actions:
-    '#type': webform_actions
-    '#title': 'Submit button(s)'
-    '#submit__label': 'Envoyer la demande'
+    '#title': Présentiel
+  distanciel:
+    '#type': checkbox
+    '#title': Distanciel
 css: ''
 javascript: ''
 settings:
@@ -70,10 +51,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
-  form_close_message: "<p><strong>Ce formulaire est fermé durant les congés d'été.</strong> Il rouvrira le 24 août 2026.<br>Merci de votre compréhension.<br>L'équipe du Service commun de la documentation vous souhaite un bel été !</p>"
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -142,7 +123,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -164,8 +145,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: 'Demande enregistrée'
-  confirmation_message: 'Votre demande a &eacute;t&eacute; prise en compte. Notre &eacute;quipe vous fera parvenir votre quitus par courriel dans les meilleurs d&eacute;lais.'
+  confirmation_title: ''
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -241,44 +222,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  email:
-    id: email
-    handler_id: email
-    label: pretbu@univ-paris1.fr
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: pretbu@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: '[webform_submission:values:courriel:raw]'
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom_prenom:value]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Demande de quitus depuis le site internet des bibliothèques'
-      body: "<p>Envoyé le [webform_submission:created]</p>\r\n<p>Les valeurs soumises sont :</p>\r\n[webform_submission:values]"
-      excluded_elements:
-        terms_of_service: terms_of_service
-        captcha: captcha
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }
