@@ -24,18 +24,21 @@ class MicroPublicationsBlock extends BlockBase {
       $site_storage = \Drupal::entityTypeManager()->getStorage('site');
       $site = $site_storage->load($site_id);
 
-      $config = \Drupal::config('micro_publications.settings');
-      $request = $config->get('hostname') . '?wt='. $config->get('wt');
-      $fl =  $site->get('field_request_fields')->getValue();
-      $labStructName = $site->get('field_labstructname_t')->getValue();
-      $list = [];
-      $types = [];
+        $config = \Drupal::config('micro_publications.settings');
+        $request = $config->get('hostname') . '?wt=' . $config->get('wt');
+        $fl = $site->get('field_request_fields')->getValue();
+        $structure = $site->get('field_labstructname_t')->value;
 
-      $params = [
-        'q'     => 'labStructName_t' . $labStructName[0]['value'],
-        'fl'    => $fl[0]['value'],
-        'sort'  => 'producedDate_tdate desc',
-      ];
+        $field = is_numeric($structure) ? 'structId_i' : 'labStructName_t';
+
+        // Protection du nom de structure pour Solr
+        $queryValue = is_numeric($structure) ? $structure : '"' . $structure . '"';
+
+        $params = [
+            'q'    => $field . ':' . $queryValue,
+            'fl'   => $fl[0]['value'],
+            'sort' => 'producedDate_tdate desc',
+        ];
 
       foreach ($site->get('field_doctype')->getValue() as $key => $doctype) {
         $params['fq'] = 'docType_s:' . $doctype['value'];
