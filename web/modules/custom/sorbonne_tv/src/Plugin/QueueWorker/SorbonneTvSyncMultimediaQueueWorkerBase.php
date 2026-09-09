@@ -219,22 +219,25 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
              */
 
             $taxo_tags_ids = [];
-
             $publish = TRUE;
-            if($tags) {
 
-                $tags = str_replace('\/', '', $tags);
-                $tags = str_replace('" "', '~', $tags);
-                $tags = str_replace('"', '~', $tags);
-                $tag_array = explode("~", $tags);
+            if($tags) {
+                if (!is_array($tags)) {
+                    $tags = str_replace('\/', '', $tags);
+                    $tags = str_replace('" "', '~', $tags);
+                    $tags = str_replace('"', '~', $tags);
+                    $tag_array = explode("~", $tags);
+                }
+                else $tag_array = $tags;
 
                 $excludedTags = [
                     'ne pas diffuser',
                 ];
+
                 if(!empty($tag_array)) {
                     foreach ($tag_array as $tag) {
 
-                        if ($tag != ''){
+                        if (trim($tag) != '') {
 
                             $taxo_tags_id = \Drupal::entityQuery('taxonomy_term')
                                 ->condition('vid', 'tag_sorbonne_tv')
