@@ -210,67 +210,50 @@ class SorbonneTvSyncMultimediaQueueWorkerBase extends QueueWorkerBase implements
             }else{
                 $disciplines = [];
             }
-
-
-
-
+            
             /*
              * ADD TAXO TAGS
              */
-
             $taxo_tags_ids = [];
             $publish = TRUE;
 
-            if($tags) {
-                if (!is_array($tags)) {
-                    $tags = str_replace('\/', '', $tags);
-                    $tags = str_replace('" "', '~', $tags);
-                    $tags = str_replace('"', '~', $tags);
-                    $tag_array = explode("~", $tags);
-                }
-                else $tag_array = $tags;
-
+            if(!empty($tags)) {
                 $excludedTags = [
                     'ne pas diffuser',
                 ];
+                foreach ($tags as $tag) {
+                    if (trim($tag) != '') {
+                        $taxo_tags_id = \Drupal::entityQuery('taxonomy_term')
+                            ->condition('vid', 'tag_sorbonne_tv')
+                            ->condition('name', $tag)
+                            ->accessCheck(FALSE)
+                            ->execute();
 
-                if(!empty($tag_array)) {
-                    foreach ($tag_array as $tag) {
+                        if (empty($taxo_tags_id)) {
 
-                        if (trim($tag) != '') {
-
-                            $taxo_tags_id = \Drupal::entityQuery('taxonomy_term')
-                                ->condition('vid', 'tag_sorbonne_tv')
-                                ->condition('name', $tag)
-                                ->accessCheck(FALSE)
-                                ->execute();
-
-                            if (empty($taxo_tags_id)) {
-
-                                $taxo_tags = Term::create([
-                                    'vid' => 'tag_sorbonne_tv',
-                                    'name' => $tag,
-                                    'site_id' => [SORBONNETV_SITE_ID],
-                                ]);
+                            $taxo_tags = Term::create([
+                                'vid' => 'tag_sorbonne_tv',
+                                'name' => $tag,
+                                'site_id' => [SORBONNETV_SITE_ID],
+                            ]);
 
 
-                            } else {
+                        } else {
 
-                                $taxo_tags_id = reset($taxo_tags_id);
-                                $taxo_tags = Term::load($taxo_tags_id);
-                                $taxo_tags->set('site_id', [SORBONNETV_SITE_ID]);
-
-                            }
-                            $taxo_tags->save();
-                            $taxo_tags_ids[] = $taxo_tags->id();
-
-                            if (in_array($tag, $excludedTags)) {
-                                $publish = FALSE;
-                            };
+                            $taxo_tags_id = reset($taxo_tags_id);
+                            $taxo_tags = Term::load($taxo_tags_id);
+                            $taxo_tags->set('site_id', [SORBONNETV_SITE_ID]);
 
                         }
+                        $taxo_tags->save();
+                        $taxo_tags_ids[] = $taxo_tags->id();
+
+                        if (in_array($tag, $excludedTags)) {
+                            $publish = FALSE;
+                        };
 
                     }
+
                 }
             }
 
