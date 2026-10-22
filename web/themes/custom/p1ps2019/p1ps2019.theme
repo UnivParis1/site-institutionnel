@@ -293,24 +293,22 @@ function p1ps2019_preprocess_node(&$variables) {
         if ($node->hasField('field_funder') && !$node->get('field_funder')->isEmpty()) {
             $funder = $node->get('field_funder')->value;
             switch ($funder) {
-                case 'ce':
-                case 'auf':
-                    $bg = 'blue';
-                    $dimension = t('European and international');
-                    break;
                 case 'anr':
                 case 'mesr':
-                case 'fmsh':
-                    $bg = 'red-call';
+                    $bg = 'raspberry-call';
                     $dimension = t('National');
                     break;
                 case 'region_idf':
                 case 'paris':
-                    $bg = 'gold-call';
+                    $bg = 'tangerine-call';
                     $dimension = t('Territorial');
                     break;
+                case 'ce':
+                    $bg = 'mint-call';
+                    $dimension = t('European et international');
+                    break;
                 default:
-                    $bg = 'green-call';
+                    $bg = 'sky-call';
                     $dimension = t('Internal and grouped');
                     break;
             }
