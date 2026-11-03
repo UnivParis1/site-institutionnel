@@ -1,0 +1,171 @@
+up1_pages.settings:
+  path: '/admin/config/up1/pages-personnelles'
+  defaults:
+    _form: '\Drupal\up1_pages\Form\SettingsForm'
+    _title: 'Configuration des pages personnelles'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+# Trombinoscopes des mini-sites.
+up1_pages.page_perso:
+  path: '/page-perso'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\TrombinoscopeController::gotoPagesPersonnelles'
+    _title: 'Pages Personnelles de nos enseignants-Chercheurs, chercheurs et doctorants'
+  requirements:
+    _permission: 'access content'
+
+up1_pages.equipe:
+  path: '/equipe'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\TrombinoscopeController::equipeDispatch'
+    _title_callback: '\Drupal\up1_pages\Controller\TrombinoscopeController::getPageEquipeTitle'
+  requirements:
+    _permission: 'view published site entities'
+
+up1_pages.equipe_faculty:
+  path: '/equipe/enseignant-chercheur/{letter}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\TrombinoscopeController::microFacultyList'
+    _title: 'Nos Enseignants-Chercheurs et chercheurs'
+    letter: 'A'
+  requirements:
+    _permission: 'view published site entities'
+
+up1_pages.equipe_student:
+  path: '/equipe/doctorant/{letter}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\TrombinoscopeController::microStudentList'
+    _title: 'Nos Doctorants'
+    letter: 'A'
+  requirements:
+    _permission: 'view published site entities'
+
+up1_pages.export_obsia:
+  path: '/admin/pages-perso/export-obsia'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\TrombinoscopeController::exportObsia'
+    _title: "Export des parcours de l'Observatoire de l'IA"
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+# Recherche d'une page personnelle.
+up1_pages.autocomplete:
+  path: '/up1-pages/autocomplete/person'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\AutocompleteController::handleAutocomplete'
+  requirements:
+    _permission: 'access content'
+
+# Appelées par Comptex : adresses historiques à conserver.
+up1_pages.comptex_edit:
+  path: '/modifier-ma-page-personnelle/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::editPagePerso'
+  requirements:
+    _permission: 'has labeled URI'
+  options:
+    no_cache: TRUE
+
+up1_pages.comptex_obsia_set:
+  path: '/mon-parcours-obsia/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::setParcoursObsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+up1_pages.comptex_obsia_delete:
+  path: '/supprimer-parcours-obsia/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::deleteParcoursObsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+up1_pages.comptex_obsia_get:
+  path: '/get-parcours-obsia/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::getParcoursObsia'
+    _title: 'Parcours Obsia'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+# API OBSIA (adresses de up1_pages_persos).
+up1_pages.api_obsia_get:
+  path: '/api/obsia/get/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::apiGetObsia'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+up1_pages.api_obsia_update:
+  path: '/api/obsia/update/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::apiUpdateObsia'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+up1_pages.api_obsia_delete:
+  path: '/api/obsia/delete/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::apiDeleteObsia'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+up1_pages.has_page_perso_teacher:
+  path: '/up1-pages-persos/teacher-has-page-perso/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::hasPagePerso'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+up1_pages.has_page_perso_student:
+  path: '/up1-pages-persos/student-has-page-perso/{username}'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\ComptexController::hasPagePerso'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+# Anciennes adresses de synchro, encore appelées par la crontab du serveur.
+up1_pages.legacy_sync_ldap:
+  path: '/pages-persos/sync-ldap'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\SyncController::legacyTrigger'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+up1_pages.legacy_sync_create:
+  path: '/pages-perso/create-ecd-and-page-perso'
+  defaults:
+    _controller: '\Drupal\up1_pages\Controller\SyncController::legacyTrigger'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE

@@ -1,0 +1,134 @@
+<?php
+
+/**
+ * @file
+ * Hooks pour Drupal 10 ; à partir de Drupal 11.1, seuls les attributs
+ * #[Hook] de \Drupal\up1_pages\Hook\PagePersoHooks sont utilisés.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\up1_pages\Hook\PagePersoHooks;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function up1_pages_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(PagePersoHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+#[LegacyHook]
+function up1_pages_entity_base_field_info(EntityTypeInterface $entity_type) {
+  return \Drupal::service(PagePersoHooks::class)->entityBaseFieldInfo($entity_type);
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+#[LegacyHook]
+function up1_pages_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  \Drupal::service(PagePersoHooks::class)->entityBaseFieldInfoAlter($fields, $entity_type);
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+#[LegacyHook]
+function up1_pages_modules_installed($modules, $is_syncing) {
+  \Drupal::service(PagePersoHooks::class)->modulesInstalled($modules, (bool) $is_syncing);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for site_form.
+ */
+#[LegacyHook]
+function up1_pages_form_site_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(PagePersoHooks::class)->formSiteFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_page_personnelle_form.
+ */
+#[LegacyHook]
+function up1_pages_form_node_page_personnelle_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(PagePersoHooks::class)->formPagePersoAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_page_personnelle_edit_form.
+ */
+#[LegacyHook]
+function up1_pages_form_node_page_personnelle_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(PagePersoHooks::class)->formPagePersoAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.
+ */
+#[LegacyHook]
+function up1_pages_preprocess_node(&$variables) {
+  \Drupal::service(PagePersoHooks::class)->preprocessNode($variables);
+}
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function up1_pages_theme() {
+  return \Drupal::service(PagePersoHooks::class)->theme();
+}
+
+/**
+ * Implements hook_cron().
+ */
+#[LegacyHook]
+function up1_pages_cron() {
+  \Drupal::service(PagePersoHooks::class)->cron();
+}
+
+/**
+ * Implements hook_token_info().
+ */
+#[LegacyHook]
+function up1_pages_token_info() {
+  return \Drupal::service(PagePersoHooks::class)->tokenInfo();
+}
+
+/**
+ * Implements hook_tokens().
+ */
+#[LegacyHook]
+function up1_pages_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  return \Drupal::service(PagePersoHooks::class)->tokens($type, $tokens, $data, $options, $bubbleable_metadata);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for node.
+ */
+#[LegacyHook]
+function up1_pages_node_update($node) {
+  \Drupal::service(PagePersoHooks::class)->nodeUpdate($node);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for node.
+ */
+#[LegacyHook]
+function up1_pages_node_insert($node) {
+  \Drupal::service(PagePersoHooks::class)->nodeInsert($node);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for node.
+ */
+#[LegacyHook]
+function up1_pages_node_delete($node) {
+  \Drupal::service(PagePersoHooks::class)->nodeDelete($node);
+}

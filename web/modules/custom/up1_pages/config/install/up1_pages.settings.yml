@@ -1,0 +1,25 @@
+activate_maintenance: false
+url_ws: 'https://wsgroups.univ-paris1.fr/'
+search_user: 'searchUserTrusted?filter_eduPersonEntitlement=urn:mace:univ-paris1.fr:entitlement:wwwHomePage'
+filtre_faculty: '&filter_student=no'
+filtre_student: '&filter_student=only'
+other_filters: ''
+search_user_page: 'searchUserTrusted?filter_eduPersonEntitlement=urn:mace:univ-paris1.fr:entitlement:wwwHomePage'
+url_hal_api: 'https://haltools.archives-ouvertes.fr/Public/afficheRequetePubli.php'
+url_userphoto: 'https://userphoto.univ-paris1.fr/?penpalAffiliation=anonymous&uid='
+ws:
+  wsgroups_enabled: true
+  hal_enabled: true
+  failure_threshold: 3
+  cooldown: 300
+  connect_timeout: 2
+  timeout: 5
+  list_timeout: 15
+  sync_timeout: 120
+  cache_ttl: 3600
+  stale_ttl: 604800
+sync:
+  interval: 86400
+  min_interval: 3600
+hal:
+  refresh_interval: 86400

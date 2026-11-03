@@ -1,0 +1,67 @@
+services:
+  logger.channel.up1_pages:
+    parent: logger.channel_base
+    arguments: ['up1_pages']
+
+  # Accès aux web services : tout appel HTTP passe par WsClient, protégé par
+  # le disjoncteur.
+  Drupal\up1_pages\Http\CircuitBreaker:
+    arguments: ['@keyvalue.expirable', '@config.factory', '@datetime.time', '@logger.channel.up1_pages']
+  Drupal\up1_pages\Http\WsClient:
+    arguments: ['@http_client', '@Drupal\up1_pages\Http\CircuitBreaker', '@config.factory']
+  Drupal\up1_pages\Cache\FallbackCache:
+    arguments: ['@keyvalue.expirable', '@config.factory', '@datetime.time']
+
+  Drupal\up1_pages\Gateway\WsGroupsDirectoryGateway:
+    arguments: ['@Drupal\up1_pages\Http\WsClient', '@config.factory', '@entity_type.manager']
+  Drupal\up1_pages\Manager\ComptexManager:
+    arguments: ['@Drupal\up1_pages\Http\WsClient', '@Drupal\up1_pages\Cache\FallbackCache', '@config.factory', '@entity_type.manager']
+  Drupal\up1_pages\Manager\HalManager:
+    arguments: ['@Drupal\up1_pages\Http\WsClient', '@config.factory', '@transliteration']
+  Drupal\up1_pages\Manager\HalPublications:
+    arguments:
+      - '@Drupal\up1_pages\Manager\HalManager'
+      - '@Drupal\up1_pages\Manager\ComptexManager'
+      - '@keyvalue'
+      - '@keyvalue.expirable'
+      - '@queue'
+      - '@entity_type.manager'
+      - '@cache_tags.invalidator'
+      - '@state'
+      - '@config.factory'
+      - '@datetime.time'
+      - '@logger.channel.up1_pages'
+  Drupal\up1_pages\Manager\PagePersoManager:
+    arguments: ['@entity_type.manager']
+  Drupal\up1_pages\Manager\PagePersoPurger:
+    arguments: ['@database', '@entity_type.manager', '@entity.memory_cache', '@keyvalue', '@datetime.time', '@logger.channel.up1_pages']
+  Drupal\up1_pages\Manager\PagePersoSyncManager:
+    arguments:
+      - '@Drupal\up1_pages\Gateway\WsGroupsDirectoryGateway'
+      - '@Drupal\up1_pages\Http\CircuitBreaker'
+      - '@entity_type.manager'
+      - '@database'
+      - '@queue'
+      - '@cas.user_manager'
+      - '@state'
+      - '@config.factory'
+      - '@datetime.time'
+      - '@logger.channel.up1_pages'
+
+  Drupal\up1_pages\Hook\PagePersoHooks:
+    arguments:
+      - '@Drupal\up1_pages\Manager\ComptexManager'
+      - '@Drupal\up1_pages\Manager\HalPublications'
+      - '@Drupal\up1_pages\Manager\PagePersoSyncManager'
+      - '@config.factory'
+      - '@current_user'
+      - '@state'
+      - '@logger.channel.up1_pages'
+      - '@entity.last_installed_schema.repository'
+      - '@module_handler'
+      - '@Drupal\up1_pages\Manager\PagePersoPurger'
+
+  # Noms courts, pour le thème et les autres modules.
+  up1_pages.comptex: '@Drupal\up1_pages\Manager\ComptexManager'
+  up1_pages.hal: '@Drupal\up1_pages\Manager\HalManager'
+  up1_pages.circuit_breaker: '@Drupal\up1_pages\Http\CircuitBreaker'

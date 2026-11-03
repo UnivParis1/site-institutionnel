@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Installation de up1_pages : reprise des anciens modules, état des WS.
+ */
+
+use Drupal\up1_pages\Hook\LegacyTakeover;
+use Drupal\up1_pages\Http\CircuitBreaker;
+use Drupal\up1_pages\Http\WsClient;
+
+/**
+ * Implements hook_requirements().
+ */
+function up1_pages_requirements($phase) {
+  $requirements = [];
+
+  if ($phase === 'install') {
+    // Le module n'est pas encore installé : ses classes ne sont pas encore
+    // chargeables automatiquement. LegacyTakeover ne dépend que du cœur.
+    if (!class_exists(LegacyTakeover::class)) {
+      require_once __DIR__ . '/src/Hook/LegacyTakeover.php';
+    }
+    foreach (LegacyTakeover::requirements() as $index => $error) {
+      $requirements["up1_pages_legacy_$index"] = [
+        'title' => t('Pages personnelles : reprise des anciens modules'),
+        'description' => $error,
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+  }
+
+  if ($phase === 'runtime') {
+    $breaker = \Drupal::service(CircuitBreaker::class);
+    foreach ([WsClient::WSGROUPS, WsClient::HAL] as $service) {
+      $status = $breaker->status($service);
+      $requirements["up1_pages_ws_$service"] = [
+        'title' => t('Pages personnelles : @service', ['@service' => $service]),
+        'value' => match (TRUE) {
+          !$status['enabled'] => t('Désactivé'),
+          $status['open'] => t('Indisponible, appels suspendus'),
+          default => t('Disponible'),
+        },
+        'description' => $status['reason'] ?: NULL,
+        'severity' => match (TRUE) {
+          !$status['enabled'], $status['open'] => REQUIREMENT_WARNING,
+          default => REQUIREMENT_OK,
+        },
+      ];
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function up1_pages_install($is_syncing) {
+  LegacyTakeover::prepare();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function up1_pages_uninstall($is_syncing) {
+  \Drupal::state()->delete(LegacyTakeover::STATE_FIELDS_CLAIMED);
+  \Drupal::state()->deleteMultiple(['up1_pages.sync.last_plan', 'up1_pages.sync.statistics', 'up1_pages.sync.last_result']);
+  \Drupal::keyValueExpirable('up1_pages.circuit')->deleteAll();
+  \Drupal::keyValueExpirable('up1_pages.ws_data')->deleteAll();
+  \Drupal::keyValueExpirable('up1_pages.hal_pending')->deleteAll();
+  \Drupal::keyValue('up1_pages.hal_publications')->deleteAll();
+  \Drupal::keyValue('up1_pages.unpublished_since')->deleteAll();
+  \Drupal::state()->delete('up1_pages.hal.last_enqueue');
+}
