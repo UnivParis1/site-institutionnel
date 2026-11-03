@@ -1,6 +1,6 @@
 services:
   micro_cas_affiliation.subscriber:
     class: Drupal\micro_cas_affiliation\Subscriber\MicroCasAffiliationSubscriber
-    arguments: ['@config.factory', '@request_stack']
+    arguments: ['@config.factory', '@request_stack', '@?up1_pages.comptex']
     tags:
       - { name: 'event_subscriber' }

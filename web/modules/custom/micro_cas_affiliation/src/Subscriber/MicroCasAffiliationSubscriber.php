@@ -9,7 +9,6 @@ use Drupal\cas\Service\CasHelper;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\up1_pages_personnelles\ComptexManager;
 use Drupal\user\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -36,11 +35,29 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
   protected $requestStack;
 
   /**
+   * Fiche wsgroups (module up1_pages), NULL s'il n'est pas installé.
+   *
+   * @var \Drupal\up1_pages\Manager\ComptexManager|null
+   */
+  protected $comptex;
+
+  /**
    * Constructs a new MicroCasAffiliationSubscriber object.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, RequestStack $request_stack) {
+  public function __construct(ConfigFactoryInterface $config_factory, RequestStack $request_stack, $comptex = NULL) {
     $this->configFactory = $config_factory;
     $this->requestStack = $request_stack;
+    $this->comptex = $comptex;
+  }
+
+  /**
+   * La personne a-t-elle droit à une page personnelle dans wsgroups ?
+   *
+   * Réponse immédiate si wsgroups est indisponible (dernière réponse connue,
+   * à défaut FALSE) : la connexion n'attend jamais le web service.
+   */
+  protected function hasPagePerso(AccountInterface $account): bool {
+    return $this->comptex && $this->comptex->userHasPagePerso($account->getAccountName());
   }
 
   /**
@@ -86,9 +103,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
     }
     else {
       if ($account instanceof AccountInterface) {
-        $comptex = new ComptexManager();
-
-        if (in_array('enseignant_doctorant', $account->getRoles()) && $comptex->userHasPagePerso($account->name->value)) {
+        if (in_array('enseignant_doctorant', $account->getRoles()) && $this->hasPagePerso($account)) {
           return;
         }
 
@@ -181,8 +196,7 @@ class MicroCasAffiliationSubscriber implements EventSubscriberInterface {
       }
     }
     else {
-      $comptex = new ComptexManager();
-      if ($comptex->userHasPagePerso($account->name->value)) {
+      if ($this->hasPagePerso($account)) {
         $account->addRole('enseignant_doctorant');
         $account->save();
       }

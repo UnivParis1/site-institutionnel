@@ -1,11 +1,20 @@
 <?php
 
 use \Drupal\paragraphs\Entity\Paragraph;
-use \Drupal\Core\Form\FormStateInterface;
 use \Drupal\taxonomy\Entity\Term;
 use \Drupal\user\Entity\User;
 use \Drupal\Core\Url;
-use \Drupal\up1_pages_personnelles\ComptexManager;
+
+/**
+ * Fiche wsgroups des pages personnelles (module up1_pages), NULL s'il n'est
+ * pas installé. Ne bloque jamais l'affichage si wsgroups est indisponible.
+ *
+ * @return \Drupal\up1_pages\Manager\ComptexManager|null
+ */
+function p1ps2019_comptex()
+{
+    return \Drupal::hasService('up1_pages.comptex') ? \Drupal::service('up1_pages.comptex') : NULL;
+}
 
 
 /**
@@ -204,11 +213,14 @@ function p1ps2019_preprocess_node(&$variables) {
     if ($node->getType() == 'page_personnelle') {
         $uid = $node->getOwnerId();
         $user = User::load($uid);
-        $comptex = new ComptexManager();
-        $mail = $comptex->getUserEmail($user->getAccountName());
-        $variables['mail'] = $mail;
-        $user->setEmail($mail);
-        $user->save();
+        $comptex = p1ps2019_comptex();
+        $mail = $comptex ? $comptex->getUserEmail($user->getAccountName()) : NULL;
+        // Adresse inconnue (wsgroups indisponible) : on garde celle du compte.
+        if ($mail && $mail !== $user->getEmail()) {
+            $user->setEmail($mail);
+            $user->save();
+        }
+        $variables['mail'] = $mail ?: $user->getEmail();
 
         if ($node->hasField('field_skills')) {
             $skills = $node->get('field_skills')->getValue();
@@ -256,9 +268,12 @@ function p1ps2019_preprocess_node(&$variables) {
             if (!empty($author['second'])) {
                 $user = user_load_by_name($author['second']);
 
-                $comptex = new ComptexManager();
-                $displayName = $comptex->getUserAttribute($author['second'], 'displayName');
-                if (!empty($displayName)) {
+                $comptex = p1ps2019_comptex();
+                $displayName = $comptex ? $comptex->getUserAttribute($author['second'], 'displayName') : FALSE;
+                if (is_array($displayName)) {
+                    $displayName = reset($displayName);
+                }
+                if (!empty($displayName) && $user) {
                     $query = \Drupal::entityTypeManager()
                         ->getStorage('node')
                         ->loadByProperties([
@@ -329,7 +344,7 @@ function p1ps2019_preprocess_node(&$variables) {
             }
         }
     }
-    
+
 }
 
 /**
