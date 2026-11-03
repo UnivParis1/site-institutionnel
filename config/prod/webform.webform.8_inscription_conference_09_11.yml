@@ -1,47 +1,58 @@
-uuid: b49318f6-7d2c-43f5-adb8-ae441eb7665f
+uuid: 7334c01c-9bc0-4f57-8f14-b536ee4875a6
 langcode: fr
-status: closed
+status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 7845
 template: false
-archive: false
-id: 0_ceremonie_de_depart_a_la_retra
-title: '0 - Cérémonie de départ à la retraite'
-description: ''
-categories: {  }
+archive: true
+id: 8_inscription_conference_09_11
+title: '8 - Inscription à la conférence de droit du travail du 9 novembre 2026'
+description: "<p>Formulaire d'inscription à la conférence de droit du travail du 9 novembre 2026.</p>"
+categories:
+  - 'Inscription à un colloque '
 elements: |-
-  markup_01:
-    '#type': webform_markup
-    '#markup': "<h2>Formulaire d'inscription :</h2>"
-  nom:
+  votreprenom:
+    '#type': textfield
+    '#title': Prénom
+    '#placeholder': Jean
+    '#required': true
+    '#required_error': 'Vous devez saisir votre prénom.'
+  nom2:
     '#type': textfield
     '#title': Nom
+    '#placeholder': Dupond
     '#required': true
-  prenom:
-    '#type': textfield
-    '#title': 'Prénom '
-    '#required': true
-  courriel:
+    '#required_error': 'Vous devez saisir votre nom.'
+  votre_adresse_de_messagerie:
     '#type': email
-    '#title': 'Courriel '
+    '#title': 'Votre adresse de messagerie'
+    '#placeholder': ' jeandupond@mail.com'
     '#required': true
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#required_error': 'Vous devez saisir votre adresse de messagerie.'
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#placeholder': 'Étudiant, Enseignant-chercheur, Extérieur à Paris 1'
+    '#required': true
+    '#required_error': 'Vous devez saisir votre fonction.'
+  conditions_d_inscription:
     '#type': checkbox
-    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
+    '#title': "Conditions d'inscription"
+    '#description': '<p>En cochant cette case vous acceptez l’utilisation de ces données personnelles pour la constitution de la liste d’inscription.</p>'
     '#required': true
-  captcha:
-    '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
-  markup:
-    '#type': webform_markup
+    '#required_error': "Vous devez accepter les conditions d'inscription."
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
-    '#submit__label': Soumettre
-    '#update__label': 'Mettre à jour'
+    '#submit__label': "S'inscrire"
+    '#submit__attributes':
+      class:
+        - form--inline
+        - clearfix
+    '#update_hide': true
 css: ''
 javascript: ''
 settings:
@@ -57,7 +68,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Ce formulaire est désormais clos.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -83,6 +94,7 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_file_limit_message: ''
   form_attributes: {  }
   form_method: ''
   form_action: ''
@@ -126,7 +138,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -149,7 +161,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Votre inscription est bien prise en compte.&nbsp;</p>\r\n\r\n<p>Merci de votre participation !</p>"
+  confirmation_message: "<p>Votre demande d'inscription a bien été prise en compte.</p>\r\n\r\n<p>Un mail de confirmation a été envoyé à l'adresse que vous avez saisie.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -183,54 +195,64 @@ access:
     roles:
       - anonymous
       - authenticated
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   view_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
-    users: {  }
+    roles: {  }
+    users:
+      - 9762
     permissions: {  }
   delete_own:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   administer:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   test:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
   configuration:
     roles: {  }
-    users: {  }
+    users:
+      - 9762
     permissions: {  }
 handlers:
-  email_aux_demandeurs:
+  email_au_demandeur:
     id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
+    handler_id: email_au_demandeur
+    label: 'Email au demandeur'
     notes: ''
     status: true
     conditions: {  }
@@ -238,7 +260,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:courriel:raw]'
+      to_mail: '[webform_submission:values:votre_adresse_de_messagerie:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -246,13 +268,13 @@ handlers:
       cc_options: {  }
       from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: 'Cérémonie de départ à la retraite'
+      from_name: ''
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: "[Réponse automatique] Confirmation d'inscription à la cérémonie de départ à la retraite"
-      body: '<img src="/sites/default/files/inline-images/22-098-Bandea-formulaire-.png" data-align="center" data-entity-uuid="41b8eb90-ce8d-4f6b-814a-0188aceb92f0" data-entity-type="file" alt="Bandeau cérémonie de départ à la retraite" width="600" height="144"><p>Bonjour,</p><p>Votre inscription est confirmée.</p><p>Merci de votre participation.</p><p>&nbsp;</p>'
+      subject: 'Inscription à la conférence du 09/11/2026'
+      body: '<p>Bonjour,</p><p>Votre inscription à la conférence de droit du travail du 9 novembre 2026 a bien été validée.</p>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -262,43 +284,7 @@ handlers:
       attachments: false
       twig: false
       theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: claire.nourrisson@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:nom:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Cérémonie de départ à la retraite - Nouvelle inscription'
-      body: _default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
+      langcode: ''
       parameters: {  }
       debug: false
 variants: {  }

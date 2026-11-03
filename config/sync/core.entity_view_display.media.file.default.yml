@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.media.file.field_extension
     - field.field.media.file.field_media_file
+    - field.field.media.file.field_metatags
     - field.field.media.file.field_size
     - media.type.file
   module:
     - file
+    - metatag
     - up1_global
 id: media.file.default
 targetEntityType: media
@@ -29,6 +31,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_metatags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_size:
     type: filesize_up1

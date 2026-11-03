@@ -1,0 +1,33 @@
+uuid: b0e6c07d-9da0-425f-a5c1-520cd5dfd9da
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.news
+  module:
+    - language
+    - node
+id: akhbar_pages
+label: 'akhbar pages'
+type: 'canonical_entities:node'
+pattern: '/akhbar/[node:title]'
+selection_criteria:
+  50f482a4-e865-44b3-8ba1-a8511d40d634:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      news: news
+  8b6dce7b-19fd-4a30-9a35-eb2e1e7802d5:
+    id: language
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      ar: ar
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Langue

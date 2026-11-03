@@ -6,10 +6,18 @@ dependencies:
     - field.field.media.image.field_credits
     - field.field.media.image.field_legende
     - field.field.media.image.field_media_image
+    - field.field.media.image.field_metatags
+    - field.field.media.image.field_photo_camera
+    - field.field.media.image.field_photo_camera_model
+    - field.field.media.image.field_photo_gps_latitude
+    - field.field.media.image.field_photo_gps_longitude
     - image.style.thumbnail
     - media.type.image
   module:
+    - exif
+    - field_formatter_class
     - focal_point
+    - metatag
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -41,6 +49,58 @@ content:
       preview_link: true
       offsets: '50,50'
     third_party_settings: {  }
+  field_metatags:
+    type: metatag_firehose
+    weight: 26
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_photo_camera:
+    type: exif_readonly
+    weight: 9
+    region: content
+    settings:
+      exif_field_separator: ''
+      exif_field: ifd0_make
+      image_field: field_media_image
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+  field_photo_camera_model:
+    type: exif_readonly
+    weight: 26
+    region: content
+    settings:
+      exif_field_separator: ''
+      exif_field: ifd0_model
+      image_field: field_media_image
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+  field_photo_gps_latitude:
+    type: exif_readonly
+    weight: 7
+    region: content
+    settings:
+      exif_field_separator: ''
+      exif_field: gps_gpslatitude
+      image_field: field_media_image
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+  field_photo_gps_longitude:
+    type: exif_readonly
+    weight: 8
+    region: content
+    settings:
+      exif_field_separator: ''
+      exif_field: gps_gpslongitude
+      image_field: field_media_image
+    third_party_settings:
+      field_formatter_class:
+        class: ''
   is_global:
     type: boolean_checkbox
     weight: 6
@@ -70,6 +130,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  exif_inline_data_display: true
   path: true
   publish_on: true
   publish_state: true

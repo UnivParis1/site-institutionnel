@@ -39,8 +39,8 @@ elements: |-
     '#title': "Afin de sécuriser ce formulaire, vous pouvez choisir l'une des deux solutions suivantes :"
     '#description': "<p>En sélectionnant Google reCAPTCHA, vous consentez à l'utilisation de cette solution et au traitement des données nécessaire à son fonctionnement.</p>"
     '#options':
-      'Captcha État': 'Captcha État -- une solution souveraine qui ne nécessite pas la transmission de vos données à Google.'
-      'Google reCAPTCHA ': 'Google reCAPTCHA  -- une solution qui implique la transmission de certaines données techniques à Google, conformément à sa politique de confidentialité.'
+      'Captcha État': 'Captcha État -- Solution conseillée par l’université car elle est respectueuse de vos données personnelles.'
+      'Google reCAPTCHA ': 'Google reCAPTCHA  -- une solution qui implique la transmission de certaines données à Google, conformément à sa politique de confidentialité.'
     '#required': true
     '#required_error': 'Merci de sélectionner le captcha que vous souhaitez utiliser'
   containercaptchetat:
@@ -49,7 +49,7 @@ elements: |-
       visible:
         ':input[name="afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de"]':
           value: 'Captcha État'
-    captcha_01:
+    captchetat:
       '#type': captcha
       '#captcha_type': captchetat/CaptchEtat
       '#captcha_admin_mode': true
@@ -59,7 +59,7 @@ elements: |-
       visible:
         ':input[name="afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de"]':
           value: 'Google reCAPTCHA '
-    captcha:
+    recaptcha:
       '#type': captcha
       '#captcha_type': recaptcha/reCAPTCHA
       '#captcha_admin_mode': true
@@ -297,6 +297,7 @@ handlers:
       attachments: false
       twig: false
       theme_name: ''
+      langcode: ''
       parameters: {  }
       debug: false
   email_1:
@@ -334,6 +335,7 @@ handlers:
       attachments: false
       twig: false
       theme_name: ''
+      langcode: ''
       parameters: {  }
       debug: false
 variants: {  }

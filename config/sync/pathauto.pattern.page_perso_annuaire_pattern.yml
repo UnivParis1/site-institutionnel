@@ -2,17 +2,18 @@ uuid: cd827bf4-7ee5-4733-8102-ef683a74de9b
 langcode: fr
 status: true
 dependencies:
+  config:
+    - node.type.page_personnelle
   module:
     - node
 id: page_perso_annuaire_pattern
 label: 'Page Perso new pattern'
 type: 'canonical_entities:node'
-pattern: 'page-perso/[node:usermailtoken]'
+pattern: '/page-perso/[node:usermailtoken]'
 selection_criteria:
   02c83cff-6352-4d35-a6bc-7d2b602ea11e:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 02c83cff-6352-4d35-a6bc-7d2b602ea11e
     context_mapping:
       node: node
     bundles:

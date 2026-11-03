@@ -1,4 +1,4 @@
-uuid: 22116940-edf2-49b9-a29a-9f8ded2d4f02
+uuid: ed145262-cbfd-418c-b906-320b3e45d53e
 langcode: fr
 status: closed
 dependencies: {  }
@@ -8,64 +8,99 @@ close: null
 uid: 5486
 template: false
 archive: false
-id: 0_vernissage_de_l_exposition_13
-title: '0 - vernissage de l’exposition 13 novembre 2015 VIP'
-description: '<p><meta charset="utf-8"><span style="background-color:transparent;color:#000000;font-family:Arial,sans-serif;font-size:11pt;font-style:normal;font-variant:normal;font-weight:400;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Vernissage de l’exposition</span><em><span style="background-color:transparent;color:#000000;font-family:Arial,sans-serif;font-size:11pt;font-variant:normal;font-weight:400;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"> 13 novembre 2015 - septembre 2026</span></em></p>'
+id: 0_retour_d_experience_faq_scolar
+title: "0 - Retour d'expérience FAQ Scolarité"
+description: ''
 categories: {  }
 elements: |-
-  nom_:
-    '#type': textfield
-    '#title': 'Nom :'
-    '#required': true
-    '#required_error': 'Nom est requis'
-  prenom_:
-    '#type': textfield
-    '#title': 'Prénom :'
-    '#required': true
-    '#required_error': 'Prénom est requis'
-  veuillez_preciser_:
-    '#type': textfield
-    '#title': 'Fonction :'
-    '#required': true
-  structure:
-    '#type': textfield
-    '#title': 'Structure :'
-    '#required': true
-  courriel_:
-    '#type': email
-    '#title': 'Courriel :'
-    '#required': true
-    '#required_error': 'Courriel est requis'
-  souhaitez_vous_participer_au_cocktail_qui_aura_lieu_a_l_issue_de:
+  processed_text_03:
+    '#type': processed_text
+    '#text': '<h3>Contribuez à cette FAQ en donnant votre avis</h3><p><em>(Ce formulaire est anonyme)</em></p>'
+    '#format': full_html
+  souhaitez_vous_ajouter_un_commentaire_vis_a_vis_de_cette_page:
     '#type': radios
-    '#title': 'Je souhaite participer au vernissage de l’exposition 13 novembre 2015 : que dit la science des attentats'
+    '#title': 'Quel type de retour souhaitez-vous faire ?'
     '#options':
-      Oui: Oui
-      Non: Non
+      Complimenter: Complimenter
+      'Faire une suggestion': 'Faire une suggestion'
+      'Signaler un problème sur la FAQ': 'Signaler un problème sur la FAQ'
+    '#options_display': buttons
     '#required': true
+    '#required_error': 'Le champ Quel type de retour souhaitez-vous faire ? est obligatoire'
     '#options__properties': ''
-  je_souhaite_assister_a_la_projection_du_documentaire_13_novembre:
-    '#type': radios
-    '#title': 'Je souhaite assister à la projection du documentaire 13 novembre : nos vies en éclats'
+  vous_pouvez_nous_laisser_un_commentaire_dans_le_champ_ci_dessous:
+    '#type': textarea
+    '#title': 'Vous pouvez nous laisser un commentaire dans le champ ci-dessous :'
+    '#states':
+      visible:
+        ':input[name="souhaitez_vous_ajouter_un_commentaire_vis_a_vis_de_cette_page"]':
+          value: Complimenter
+  indiquez_nous_dans_le_champ_ci_dessous_la_suggestion_que_vous_so:
+    '#type': textarea
+    '#title': 'Indiquez nous dans le champ ci-dessous la suggestion que vous souhaitez nous partager :'
+    '#states':
+      visible:
+        ':input[name="souhaitez_vous_ajouter_un_commentaire_vis_a_vis_de_cette_page"]':
+          value: 'Faire une suggestion'
+    '#required': true
+  precisez_la_raison_du_probleme:
+    '#type': checkboxes
+    '#title': 'Précisez la raison du problème :'
     '#options':
-      Oui: Oui
-      Non: Non
-    '#required': true
+      'Information(s) manquante(s)': 'Information(s) manquante(s)'
+      'Clarté des informations': 'Clarté des informations'
+    '#states':
+      visible:
+        ':input[name="souhaitez_vous_ajouter_un_commentaire_vis_a_vis_de_cette_page"]':
+          value: 'Signaler un problème'
     '#options__properties': ''
+  merci_de_decrire_dans_le_champ_ci_dessous_le_probleme_que_vous_s:
+    '#type': textarea
+    '#title': 'Merci de décrire dans le champ ci-dessous le problème que vous souhaitez nous faire part :'
+    '#required': true
+    '#required_error': 'Le champ "Merci de décrire dans le champ ci-dessous le problème que vous souhaitez nous faire part" est obligatoire'
+    '#states':
+      visible:
+        ':input[name="souhaitez_vous_ajouter_un_commentaire_vis_a_vis_de_cette_page"]':
+          value: 'Signaler un problème'
   processed_text_02:
     '#type': processed_text
     '#format': full_html
-  captcha:
-    '#type': captcha
-  j_autorise_ce_site_a_conserver_mes_donnees_personnelles_transmis:
-    '#type': checkbox
-    '#title': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. "
-    '#description': 'Voir notre <a href="https://www.pantheonsorbonne.fr/mentions-legales" target="_blank">politique de gestion des donn&eacute;es personnelles</a>.&nbsp;'
+  afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de:
+    '#type': radios
+    '#title': "Afin de sécuriser ce formulaire, vous pouvez choisir l'une des deux solutions suivantes :"
+    '#description': "<p>En sélectionnant Google reCAPTCHA, vous consentez à l'utilisation de cette solution et au traitement des données nécessaire à son fonctionnement.</p>"
+    '#options':
+      'Captcha État': 'Captcha État -- Solution conseillée par l’université car elle est respectueuse de vos données personnelles.'
+      'Google reCAPTCHA': 'Google reCAPTCHA -- une solution qui implique la transmission de certaines données à Google, conformément à sa politique de confidentialité.'
     '#required': true
-    '#required_error': "J'autorise ce site à conserver mes données personnelles transmises via ce formulaire. est requis"
+    '#required_error': 'Merci de sélectionner le captcha que vous souhaitez utiliser'
+    '#options__properties': ''
+  container_captcha:
+    '#type': container
+    '#states':
+      visible:
+        ':input[name="afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de"]':
+          value: 'Captcha État'
+    captcha:
+      '#type': captcha
+      '#captcha_type': captchetat/CaptchEtat
+  containerrecaptcha:
+    '#type': container
+    '#states':
+      visible:
+        ':input[name="afin_de_securiser_ce_formulaire_vous_pouvez_choisir_l_une_des_de"]':
+          value: 'Google reCAPTCHA'
+    captcha_01:
+      '#type': captcha
+      '#captcha_type': recaptcha/reCAPTCHA
   actions:
     '#type': webform_actions
     '#title': "Bouton(s) d'envoi"
+    '#states':
+      visible:
+        ':input[name="souhaitez_vous_ajouter_un_commentaire_vis_a_vis_de_cette_page"]':
+          filled: true
     '#submit__label': ENVOYER
 css: ''
 javascript: ''
@@ -108,6 +143,7 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_file_limit_message: ''
   form_attributes: {  }
   form_method: ''
   form_action: ''
@@ -173,8 +209,8 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_url: ''
-  confirmation_title: "Confirmation d'inscription"
-  confirmation_message: '<p>Nous vous remercions pour votre inscription. Vous allez recevoir un mail de confirmation.&nbsp;</p>'
+  confirmation_title: "Confirmation d'envoi"
+  confirmation_message: '<p>Merci de votre participation, votre retour est précieux pour améliorer nos services.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -264,20 +300,20 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: cabpresi@univ-paris1.fr
+      to_mail: 'web@univ-paris1.fr,racinsca@univ-paris1.fr'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      cc_mail: evenements@univ-paris1.fr
+      cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:courriel_:raw]'
+      from_mail: ne-pas-repondre@univ-paris1.fr
       from_options: {  }
-      from_name: '[webform_submission:values:nom_:raw]'
+      from_name: 'Paris 1 Panthéon-Sorbonne'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Nouvelle inscription à l’événement - 11 septembre / 13 novembre (VIP)'
+      subject: 'FAQ scolarité - nouvelle demande'
       body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les réponses soumises sont :</p><p>[webform_submission:values]</p>'
       excluded_elements: {  }
       ignore_access: false
@@ -288,43 +324,7 @@ handlers:
       attachments: false
       twig: false
       theme_name: ''
-      parameters: {  }
-      debug: false
-  email_1:
-    id: email
-    handler_id: email_1
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:courriel_:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: evenements@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Paris 1 Panthéon-Sorbonne'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[Réponse automatique ] VIP - Confirmation de votre inscription à l’événement - 11 septembre / 13 novembre : La science face aux attentats'
-      body: '<div style="background-color:#F4F4F4;display:block;margin:1rem;padding:1rem;width:calc(100% - 2rem);"><div style="margin:0 auto;max-width:600px;width:100%;"><header style="text-align:center;" id="header" role="banner"><p class="text-align-center" style="background-color:transparent;color:rgb(114, 114, 114);font-size:0.8rem;">&nbsp;</p></header><main role="main" id="page-content"><table class="table" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-collapse:collapse;color:rgb(59, 63, 68);font-family:Helvetica;font-size:1rem;font-style:normal;font-weight:400;letter-spacing:normal;max-width:600px;orphans:auto;text-align:left;text-decoration:none;text-transform:none;white-space:normal;widows:auto;width:100%;word-spacing:0px;" cellspacing="0" cellpadding="0" border="0" role="presentation" width="600px"><tbody><tr><td style="border-collapse:collapse;width:100%;" colspan="2" width="100%"><img style="display:block;margin:0 auto;max-width:300px;" src="http://com-web.univ-paris1.fr/logos/Logotype-2024-RVB.svg" alt="Logo Université Paris 1 Panthéon-Sorbonne" width="50%" height="50%"></td></tr><tr><td style="border-collapse:collapse;padding:2rem;" colspan="2"><p>Madame, Monsieur,</p><p>Votre inscription à l''événement est bien prise en compte.</p><p>En cas de désistement, nous vous remercions de bien vouloir adresser un message à l’adresse suivante : <a href="mailto:evenements@univ-paris1.fr">evenements@univ-paris1.fr</a></p><p>Bien cordialement,</p></td></tr></tbody></table></main></div></div>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
+      langcode: ''
       parameters: {  }
       debug: false
 variants: {  }

@@ -1,0 +1,71 @@
+uuid: 5c2a9d22-9768-4e35-9418-fdee2ef2dd7c
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - paragraphs
+    - up1_search_api
+id: all_data
+name: 'Toutes les données'
+description: ''
+read_only: false
+field_settings: {  }
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected:
+        - call
+        - event
+        - news
+        - offer
+        - page
+        - page_personnelle
+        - page_sorbonne_tv
+        - press
+        - second_level_pages
+    languages:
+      default: true
+      selected: {  }
+  'entity:paragraph':
+    bundles:
+      default: false
+      selected:
+        - badge
+        - bookmark
+        - bp_accordion_section
+        - bp_simple
+        - jumbotron
+        - key_figure
+        - panel
+        - partenaire
+        - patrimoine_immobilier
+        - presentation
+        - rich_content
+        - tile
+        - tile_with_text
+        - tile_wo_image
+        - tiles
+        - title_and_subtitle
+        - tuile_text_wo_image
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_dates: {  }
+  aggregated_field: {  }
+  custom_value: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: lifo
+options:
+  cron_limit: 50
+  delete_on_fail: true
+  index_directly: true
+  track_changes_in_references: true
+server: null

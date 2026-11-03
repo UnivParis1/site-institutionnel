@@ -1,79 +1,74 @@
-uuid: d9d28a45-f54c-4afb-9f50-69495de38b50
+uuid: 85f66c47-e51a-4697-8555-80768091f04d
 langcode: fr
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 5486
+uid: 56
 template: false
 archive: false
-id: 0_rugby_2024_partenaires
-title: '0 - Rugby 2024 Partenaires'
-description: ''
-categories: {  }
+id: formulaire_inscript_diplomes_l3
+title: "Formulaire d'inscription à la remise des diplômes 2026 - Licence en droit"
+description: "<p>Formulaire d'inscription à la cérémonie de remise des diplômes 2026 -&nbsp;<br>Licence 3</p>"
+categories:
+  - 'Inscription événement'
 elements: |-
-  processed_text_01:
-    '#type': processed_text
-    '#text': "<h2>Formulaire d'inscription - Cérémonie d’ouverture&nbsp;-<br>Jeudi 10 octobre 2024</h2>"
-    '#format': full_html
-  vous_etes:
-    '#type': radios
-    '#title': 'Vous êtes'
-    '#options':
-      M: M
-      Mme: Mme
-    '#options__properties': ''
-    '#required': true
   nom:
     '#type': textfield
     '#title': Nom
+    '#description': '<p>Nom</p>'
     '#required': true
   prenom:
     '#type': textfield
     '#title': Prénom
     '#required': true
-  email:
+  e_mail:
     '#type': email
-    '#title': Email
-    '#required': true
-  nom_de_votre_organisation_structure_entreprise:
-    '#type': textfield
-    '#title': 'Nom de votre organisation / structure / entreprise '
+    '#title': 'E-mail (Paris 1 Panthéon-Sorbonne)'
+    '#description': '<p>Votre e-mail Université Paris 1 Panthéon-Sorbonne</p>'
+    '#field_suffix': '@etu.univ-paris1.fr'
     '#required': true
   telephone:
     '#type': tel
     '#title': Téléphone
     '#required': true
-  aurez_vous_besoin_d_un_acces_pmr:
-    '#type': radios
-    '#title': 'Aurez-vous besoin d’un accès PMR ?'
+  diplome_obtenu:
+    '#type': select
+    '#title': 'Diplôme obtenu'
     '#options':
-      Oui: Oui
-      Non: Non
+      'Licence de droit': 'Licence de droit'
+    '#required': true
+  je_confirme_ma_participation_a_la_ceremonie_du_vendredi_28_novem:
+    '#type': radios
+    '#title': 'Je confirme ma participation à la cérémonie du vendredi 23 octobre 2026'
+    '#options': yes_no
+    '#required': true
     '#options__properties': ''
+  nombre_d_accompagnateurs_max_2:
+    '#type': webform_mapping
+    '#title': 'Nombre d’accompagnateurs (max. 2)'
     '#required': true
-  markup_01:
-    '#type': webform_markup
-    '#markup': '<h5><style type="text/css"></style>Si oui, merci de bien vouloir nous avertir à l''adresse suivante : <a href="mailto:evenements@univ-paris1.fr">evenements@univ-paris1.fr</a></h5>'
-  j_accepte_que_les_informations_saisies_soient_exploitees_uniquem:
+    '#source':
+      Aucun: Aucun
+      1: '1'
+      2: '2'
+  si_accompagnateurs_merci_d_indiquer_leur_s_nom_s:
+    '#type': textfield
+    '#title': '👉 Si accompagnateur n°1, merci d’indiquer son nom et prénom :'
+    '#multiple': 2
+    '#description': '<p>👉 Si accompagnateurs, merci d’indiquer leur(s) nom(s) :</p>'
+    '#required': true
+  si_accompagnateur_ndeg2_merci_d_indiquer_son_nom_et_prenom:
+    '#type': textfield
+    '#title': '👉 Si accompagnateur n°2, merci d’indiquer son nom et prénom :'
+    '#multiple': 2
+    '#description': '<p>👉 Si accompagnateurs, merci d’indiquer leur(s) nom(s) :</p>'
+    '#required': true
+  information_j_ai_ete_informe_e_que_des_photos_et_ou_videos_pourr:
     '#type': checkbox
-    '#title': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire."
+    '#title': 'Information : J’ai été informé(e) que des photos et/ou vidéos pourront être prises durant la cérémonie et le cocktail, et qu’elles pourront être diffusées sur les supports de communication et réseaux sociaux de l’IED.'
     '#required': true
-    '#required_error': "J'accepte que les informations saisies soient exploitées (uniquement) dans le cadre de ce formulaire est obligatoire"
-  processed_text:
-    '#type': processed_text
-    '#text': '<h5><style></style>Pour toute question, contactez l''équipe organisatrice à l''adresse : <a href="mailto:rugbychallenge@univ-paris1.fr">rugbychallenge@univ-paris1.fr</a></h5>'
-    '#format': full_html
-  captcha:
-    '#type': captcha
-  markup:
-    '#type': webform_markup
-  actions:
-    '#type': webform_actions
-    '#title': "Bouton(s) d'envoi"
-    '#submit__label': 'Soumettre '
-    '#update__label': 'Mettre à jour'
 css: ''
 javascript: ''
 settings:
@@ -86,10 +81,10 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity_webform
+  form_title: both
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>This form is now closed to new submissions.</p>'
+  form_close_message: ''
   form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
@@ -115,6 +110,7 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_file_limit_message: ''
   form_attributes: {  }
   form_method: ''
   form_action: ''
@@ -158,7 +154,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: true
+  wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   wizard_page_type: container
@@ -181,7 +177,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p><style type=\"text/css\"><!--td {border: 1px solid #cccccc;}br {mso-data-placement:same-cell;}-->\r\n</style>&nbsp;Madame, Monsieur,<br>Merci pour votre inscription.<br>Vous allez recevoir un mail de confirmation.</p>"
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -238,8 +234,7 @@ access:
     users: {  }
     permissions: {  }
   update_own:
-    roles:
-      - anonymous
+    roles: {  }
     users: {  }
     permissions: {  }
   delete_own:
@@ -258,79 +253,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  email_aux_demandeurs:
-    id: email
-    handler_id: email_aux_demandeurs
-    label: 'Email aux demandeurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: '[webform_submission:values:email:raw]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: evenements@univ-paris1.fr
-      from_options: {  }
-      from_name: 'Paris 1 Panthéon-Sorbonne'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: "[Réponse automatique] Una Europa Rugby Challenge - Confirmation de votre inscription à la cérémonie d'ouverture"
-      body: "<p>Madame, Monsieur,</p><p>Nous vous remercions pour votre inscription à la cérémonie d’ouverture de l’Una Europa Rugby Challenge, qui se déroulera le jeudi 10 octobre 2024, en Sorbonne.</p><p>Bien cordialement,</p><p><style type=\"text/css\"><!--td {border: 1px solid #cccccc;}br {mso-data-placement:same-cell;}-->\r\n    </style></p>"
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_aux_organisateurs:
-    id: email
-    handler_id: email_aux_organisateurs
-    label: 'Email aux organisateurs'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      states:
-        - completed
-      to_mail: evenements@univ-paris1.fr
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: Lionel.Ruiz@univ-paris1.fr
-      cc_options: {  }
-      from_mail: '[webform_submission:values:courriel:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:courriel:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Una Europa Rugby Challenge - nouvelle inscription'
-      body: '<p>Envoyé le [webform_submission:created]</p><p>Envoyé par : [webform_submission:user]</p><p>Les valeurs soumises sont :</p><p>[webform_submission:values]</p>'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: true
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
+handlers: {  }
 variants: {  }

@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.media.file.field_extension
     - field.field.media.file.field_media_file
+    - field.field.media.file.field_metatags
     - field.field.media.file.field_size
     - media.type.file
   module:
     - file
+    - metatag
 id: media.file.default
 targetEntityType: media
 bundle: file
@@ -28,6 +30,14 @@ content:
     region: content
     settings:
       progress_indicator: throbber
+    third_party_settings: {  }
+  field_metatags:
+    type: metatag_firehose
+    weight: 26
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_size:
     type: number
@@ -65,6 +75,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  exif_inline_data_display: true
   path: true
   publish_on: true
   publish_state: true

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.news.comment
     - field.field.node.news.field_categories
     - field.field.node.news.field_disable_canonical_url
+    - field.field.node.news.field_indexrobots
     - field.field.node.news.field_lead
     - field.field.node.news.field_media
     - field.field.node.news.field_news_date
@@ -25,6 +26,7 @@ dependencies:
     - content_moderation
     - datetime
     - entity_browser
+    - metatag
     - paragraphs
     - paragraphs_ee
     - paragraphs_features
@@ -63,6 +65,14 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_indexrobots:
+    type: metatag_firehose
+    weight: 21
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_lead:
     type: text_textarea

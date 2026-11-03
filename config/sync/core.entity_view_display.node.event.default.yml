@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.event.field_event_address
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_type
+    - field.field.node.event.field_indexrobots
     - field.field.node.event.field_media
     - field.field.node.event.field_publish_master
     - field.field.node.event.field_sites
@@ -25,6 +26,7 @@ dependencies:
     - geolocation
     - ics_field
     - link
+    - metatag
     - text
     - up1_global
     - user
@@ -570,6 +572,13 @@ content:
       link: false
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_indexrobots:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 15
     region: content
   field_media:
     type: entity_reference_entity_view

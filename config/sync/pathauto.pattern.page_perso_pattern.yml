@@ -2,17 +2,18 @@ uuid: acfb352e-c236-4ab5-af55-4a47cb14697a
 langcode: fr
 status: false
 dependencies:
+  config:
+    - node.type.page_personnelle
   module:
     - node
 id: page_perso_pattern
 label: 'Page Perso pattern'
 type: 'canonical_entities:node'
-pattern: 'page-perso/[node:field_uid_ldap]'
+pattern: '/page-perso/[node:field_uid_ldap]'
 selection_criteria:
   441e5860-6e68-4e17-891e-62250f992072:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 441e5860-6e68-4e17-891e-62250f992072
     context_mapping:
       node: node
     bundles:

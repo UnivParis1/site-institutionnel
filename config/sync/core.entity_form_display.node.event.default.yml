@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.event.field_event_address
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_type
+    - field.field.node.event.field_indexrobots
     - field.field.node.event.field_media
     - field.field.node.event.field_publish_master
     - field.field.node.event.field_sites
@@ -28,6 +29,7 @@ dependencies:
     - geolocation_leaflet
     - ics_field
     - link
+    - metatag
     - paragraphs
     - paragraphs_ee
     - paragraphs_features
@@ -589,6 +591,14 @@ content:
     weight: 3
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_indexrobots:
+    type: metatag_firehose
+    weight: 21
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_media:
     type: entity_browser_entity_reference
