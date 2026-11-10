@@ -110,6 +110,14 @@ function up1_pages_tokens($type, $tokens, array $data, array $options, Bubbleabl
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_presave() for node.
+ */
+#[LegacyHook]
+function up1_pages_node_presave($node) {
+  \Drupal::service(PagePersoHooks::class)->nodePresave($node);
+}
+
+/**
  * Implements hook_ENTITY_TYPE_update() for node.
  */
 #[LegacyHook]

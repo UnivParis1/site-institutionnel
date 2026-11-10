@@ -22,6 +22,7 @@ use Drupal\up1_pages\Manager\ComptexManager;
 use Drupal\up1_pages\Manager\HalPublications;
 use Drupal\up1_pages\Manager\PagePersoManager;
 use Drupal\up1_pages\Manager\PagePersoPurger;
+use Drupal\up1_pages\Manager\PagePersoRobots;
 use Drupal\up1_pages\Manager\PagePersoSyncManager;
 use Psr\Log\LoggerInterface;
 
@@ -268,6 +269,15 @@ final class PagePersoHooks {
   /**
    * Recherche HAL modifiée : l'encart est oublié puis recalculé par le cron.
    */
+  /**
+   * Page dépubliée : noindex, nofollow ; republiée : index, follow.
+   */
+  #[Hook('node_presave')]
+  public function nodePresave(NodeInterface $node): void {
+    $original = method_exists($node, 'getOriginal') ? $node->getOriginal() : ($node->original ?? NULL);
+    PagePersoRobots::apply($node, $node->isNew() ? NULL : $original);
+  }
+
   #[Hook('node_update')]
   public function nodeUpdate(NodeInterface $node): void {
     if ($node->bundle() !== PagePersoManager::BUNDLE) {

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Drupal\up1_pages\Drush\Commands;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\MemoryCache\MemoryCacheInterface;
+use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\up1_pages\Exception\SyncAbortedException;
 use Drupal\up1_pages\Exception\WsUnavailableException;
@@ -13,7 +16,9 @@ use Drupal\up1_pages\Http\WsClient;
 use Drupal\up1_pages\Manager\HalPublications;
 use Drupal\up1_pages\Manager\PagePersoManager;
 use Drupal\up1_pages\Manager\PagePersoPurger;
+use Drupal\up1_pages\Manager\PagePersoRobots;
 use Drupal\up1_pages\Manager\PagePersoSyncManager;
+use Drupal\node\NodeInterface;
 use Drupal\up1_pages\StatusReport;
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
@@ -33,6 +38,8 @@ final class PagesCommands extends DrushCommands {
     private readonly MemoryCacheInterface $entityMemoryCache,
     private readonly LoggerInterface $moduleLogger,
     private readonly PagePersoPurger $purger,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly Connection $database,
   ) {
     parent::__construct();
   }
@@ -46,6 +53,8 @@ final class PagesCommands extends DrushCommands {
       $container->get('entity.memory_cache'),
       $container->get('logger.channel.up1_pages'),
       $container->get(PagePersoPurger::class),
+      $container->get('entity_type.manager'),
+      $container->get('database'),
     );
   }
 
@@ -185,6 +194,94 @@ final class PagesCommands extends DrushCommands {
     $this->io()->writeln(sprintf('%d pages supprimées.', $deleted));
 
     return self::EXIT_SUCCESS;
+  }
+
+  /**
+   * Balise robots « noindex, nofollow » sur les pages déjà dépubliées.
+   *
+   * Les pages dépubliées ou republiées ensuite reçoivent la balise à
+   * l'enregistrement : cette commande ne sert qu'au rattrapage. La valeur est
+   * écrite directement dans les tables du champ : enregistrer la page
+   * changerait sa date de modification, dont la purge se sert pour estimer
+   * la date de dépublication.
+   */
+  #[CLI\Command(name: 'up1-pages:robots', aliases: ['pp-robots'])]
+  #[CLI\Option(name: 'dry-run', description: 'Compte les pages à mettre à jour, sans rien modifier.')]
+  #[CLI\Usage(name: 'drush up1-pages:robots --dry-run', description: 'Nombre de pages dépubliées sans noindex, nofollow.')]
+  #[CLI\Usage(name: 'drush up1-pages:robots', description: 'Leur ajoute la balise.')]
+  public function robots(array $options = ['dry-run' => FALSE]): int {
+    $storage = $this->entityTypeManager->getStorage('node');
+    // Une traduction dépubliée suffit.
+    $nids = $storage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', PagePersoManager::BUNDLE)
+      ->condition('status', 0)
+      ->sort('nid')
+      ->execute();
+    $this->io()->writeln(sprintf('%d pages personnelles dépubliées.', count($nids)));
+    if (!$nids) {
+      return self::EXIT_SUCCESS;
+    }
+
+    $updated = 0;
+    $this->io()->progressStart(count($nids));
+    foreach (array_chunk($nids, 50) as $chunk) {
+      foreach ($storage->loadMultiple($chunk) as $node) {
+        // La page comparée à elle-même : seules ses traductions dépubliées
+        // sont touchées.
+        if (!PagePersoRobots::apply($node, $node)) {
+          continue;
+        }
+        $updated++;
+        if (!$options['dry-run']) {
+          $this->writeMetatags($node);
+        }
+      }
+      $this->io()->progressAdvance(count($chunk));
+      $storage->resetCache($chunk);
+      $this->entityMemoryCache->deleteAll();
+    }
+    $this->io()->progressFinish();
+
+    if ($options['dry-run']) {
+      $this->io()->writeln(sprintf('%d pages à mettre à jour (les autres ont déjà la balise, ou le type de contenu n\'a pas de champ metatag).', $updated));
+      return self::EXIT_SUCCESS;
+    }
+    $message = sprintf('Balise robots « noindex, nofollow » ajoutée à %d pages personnelles dépubliées.', $updated);
+    $this->io()->writeln($message);
+    $this->moduleLogger->notice($message);
+
+    return self::EXIT_SUCCESS;
+  }
+
+  /**
+   * Écrit le champ metatag de la révision courante, sans enregistrer la page.
+   */
+  private function writeMetatags(NodeInterface $node): void {
+    $field = PagePersoRobots::field($node);
+    $definition = $node->getFieldDefinition($field)->getFieldStorageDefinition();
+    $mapping = $this->entityTypeManager->getStorage('node')->getTableMapping();
+    $column = $mapping->getFieldColumnName($definition, 'value');
+    $langcodes = $definition->isTranslatable()
+      ? array_keys($node->getTranslationLanguages())
+      : [$node->getUntranslated()->language()->getId()];
+
+    foreach ($langcodes as $langcode) {
+      $value = $node->getTranslation($langcode)->get($field)->value;
+      foreach ([$mapping->getDedicatedDataTableName($definition), $mapping->getDedicatedRevisionTableName($definition)] as $table) {
+        $this->database->merge($table)
+          ->keys([
+            'entity_id' => $node->id(),
+            'revision_id' => $node->getRevisionId(),
+            'langcode' => $langcode,
+            'deleted' => 0,
+            'delta' => 0,
+          ])
+          ->fields(['bundle' => $node->bundle(), $column => $value])
+          ->execute();
+      }
+    }
+    Cache::invalidateTags($node->getCacheTagsToInvalidate());
   }
 
   /**
