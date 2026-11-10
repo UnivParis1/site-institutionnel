@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.page_personnelle.field_hypotheses_link
     - field.field.node.page_personnelle.field_ia_skills
     - field.field.node.page_personnelle.field_id_hal
+    - field.field.node.page_personnelle.field_indexrobots
     - field.field.node.page_personnelle.field_link_to_resume
     - field.field.node.page_personnelle.field_linkedin_link
     - field.field.node.page_personnelle.field_my_hal_publications
@@ -51,6 +52,7 @@ dependencies:
     - entity_browser
     - field_group
     - link
+    - metatag
     - paragraphs
     - path
     - text
@@ -402,6 +404,14 @@ content:
             effect: show
             effect_options: {  }
             selector: ''
+  field_indexrobots:
+    type: metatag_firehose
+    weight: 21
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
   field_link_to_resume:
     type: link_default
     weight: 38
